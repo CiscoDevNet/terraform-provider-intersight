@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -244,11 +244,11 @@ func (o *HyperflexClusterAllOf) GetDnsServers() []string {
 // GetDnsServersOk returns a tuple with the DnsServers field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *HyperflexClusterAllOf) GetDnsServersOk() (*[]string, bool) {
+func (o *HyperflexClusterAllOf) GetDnsServersOk() ([]string, bool) {
 	if o == nil || o.DnsServers == nil {
 		return nil, false
 	}
-	return &o.DnsServers, true
+	return o.DnsServers, true
 }
 
 // HasDnsServers returns a boolean if a field has been set.
@@ -376,11 +376,11 @@ func (o *HyperflexClusterAllOf) GetNtpServers() []string {
 // GetNtpServersOk returns a tuple with the NtpServers field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *HyperflexClusterAllOf) GetNtpServersOk() (*[]string, bool) {
+func (o *HyperflexClusterAllOf) GetNtpServersOk() ([]string, bool) {
 	if o == nil || o.NtpServers == nil {
 		return nil, false
 	}
-	return &o.NtpServers, true
+	return o.NtpServers, true
 }
 
 // HasNtpServers returns a boolean if a field has been set.
@@ -516,11 +516,11 @@ func (o *HyperflexClusterAllOf) GetAlarm() []HyperflexAlarmRelationship {
 // GetAlarmOk returns a tuple with the Alarm field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *HyperflexClusterAllOf) GetAlarmOk() (*[]HyperflexAlarmRelationship, bool) {
+func (o *HyperflexClusterAllOf) GetAlarmOk() ([]HyperflexAlarmRelationship, bool) {
 	if o == nil || o.Alarm == nil {
 		return nil, false
 	}
-	return &o.Alarm, true
+	return o.Alarm, true
 }
 
 // HasAlarm returns a boolean if a field has been set.
@@ -645,11 +645,11 @@ func (o *HyperflexClusterAllOf) GetNodes() []HyperflexNodeRelationship {
 // GetNodesOk returns a tuple with the Nodes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *HyperflexClusterAllOf) GetNodesOk() (*[]HyperflexNodeRelationship, bool) {
+func (o *HyperflexClusterAllOf) GetNodesOk() ([]HyperflexNodeRelationship, bool) {
 	if o == nil || o.Nodes == nil {
 		return nil, false
 	}
-	return &o.Nodes, true
+	return o.Nodes, true
 }
 
 // HasNodes returns a boolean if a field has been set.
@@ -710,11 +710,11 @@ func (o *HyperflexClusterAllOf) GetStorageClientIpPools() []IppoolPoolRelationsh
 // GetStorageClientIpPoolsOk returns a tuple with the StorageClientIpPools field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *HyperflexClusterAllOf) GetStorageClientIpPoolsOk() (*[]IppoolPoolRelationship, bool) {
+func (o *HyperflexClusterAllOf) GetStorageClientIpPoolsOk() ([]IppoolPoolRelationship, bool) {
 	if o == nil || o.StorageClientIpPools == nil {
 		return nil, false
 	}
-	return &o.StorageClientIpPools, true
+	return o.StorageClientIpPools, true
 }
 
 // HasStorageClientIpPools returns a boolean if a field has been set.
@@ -775,11 +775,11 @@ func (o *HyperflexClusterAllOf) GetStorageContainers() []StorageHyperFlexStorage
 // GetStorageContainersOk returns a tuple with the StorageContainers field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *HyperflexClusterAllOf) GetStorageContainersOk() (*[]StorageHyperFlexStorageContainerRelationship, bool) {
+func (o *HyperflexClusterAllOf) GetStorageContainersOk() ([]StorageHyperFlexStorageContainerRelationship, bool) {
 	if o == nil || o.StorageContainers == nil {
 		return nil, false
 	}
-	return &o.StorageContainers, true
+	return o.StorageContainers, true
 }
 
 // HasStorageContainers returns a boolean if a field has been set.
@@ -808,11 +808,11 @@ func (o *HyperflexClusterAllOf) GetVolumes() []StorageHyperFlexVolumeRelationshi
 // GetVolumesOk returns a tuple with the Volumes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *HyperflexClusterAllOf) GetVolumesOk() (*[]StorageHyperFlexVolumeRelationship, bool) {
+func (o *HyperflexClusterAllOf) GetVolumesOk() ([]StorageHyperFlexVolumeRelationship, bool) {
 	if o == nil || o.Volumes == nil {
 		return nil, false
 	}
-	return &o.Volumes, true
+	return o.Volumes, true
 }
 
 // HasVolumes returns a boolean if a field has been set.

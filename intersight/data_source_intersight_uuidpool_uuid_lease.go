@@ -897,7 +897,6 @@ func dataSourceUuidpoolUuidLease() *schema.Resource {
 
 func dataSourceUuidpoolUuidLeaseRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.UuidpoolUuidLease{}
@@ -1381,7 +1380,7 @@ func dataSourceUuidpoolUuidLeaseRead(c context.Context, d *schema.ResourceData, 
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of UuidpoolUuidLease: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of UuidpoolUuidLease: %s", responseErr.Error())
@@ -1398,7 +1397,7 @@ func dataSourceUuidpoolUuidLeaseRead(c context.Context, d *schema.ResourceData, 
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching UuidpoolUuidLease: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching UuidpoolUuidLease: %s", responseErr.Error())

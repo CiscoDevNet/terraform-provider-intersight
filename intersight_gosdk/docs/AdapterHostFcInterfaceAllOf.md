@@ -16,10 +16,12 @@ Name | Type | Description | Notes
 **OriginalWwnn** | Pointer to **string** | The uniquely distinguishable factory default  World Wide Node Name of the Host. | [optional] [readonly] 
 **OriginalWwpn** | Pointer to **string** | The uniquely distinguishable factory default World Wide Port Name of the Host Fibre Channel Interface. | [optional] [readonly] 
 **PeerDn** | Pointer to **string** | PeerPort Dn of Host Fibre Channel Interface. | [optional] [readonly] 
+**PinGroupName** | Pointer to **string** | Name given for San PinGroup. | [optional] 
 **Wwnn** | Pointer to **string** | The uniquely distinguishable user configured World Wide Node Name of the Host. | [optional] [readonly] 
 **Wwpn** | Pointer to **string** | The uniquely distinguishable user configured World Wide Port Name of the Host Fibre Channel Interface. | [optional] [readonly] 
 **AdapterUnit** | Pointer to [**AdapterUnitRelationship**](AdapterUnitRelationship.md) |  | [optional] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**PinnedInterface** | Pointer to [**InventoryInterfaceRelationship**](InventoryInterfaceRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
@@ -341,6 +343,31 @@ SetPeerDn sets PeerDn field to given value.
 
 HasPeerDn returns a boolean if a field has been set.
 
+### GetPinGroupName
+
+`func (o *AdapterHostFcInterfaceAllOf) GetPinGroupName() string`
+
+GetPinGroupName returns the PinGroupName field if non-nil, zero value otherwise.
+
+### GetPinGroupNameOk
+
+`func (o *AdapterHostFcInterfaceAllOf) GetPinGroupNameOk() (*string, bool)`
+
+GetPinGroupNameOk returns a tuple with the PinGroupName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPinGroupName
+
+`func (o *AdapterHostFcInterfaceAllOf) SetPinGroupName(v string)`
+
+SetPinGroupName sets PinGroupName field to given value.
+
+### HasPinGroupName
+
+`func (o *AdapterHostFcInterfaceAllOf) HasPinGroupName() bool`
+
+HasPinGroupName returns a boolean if a field has been set.
+
 ### GetWwnn
 
 `func (o *AdapterHostFcInterfaceAllOf) GetWwnn() string`
@@ -440,6 +467,31 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 `func (o *AdapterHostFcInterfaceAllOf) HasInventoryDeviceInfo() bool`
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
+
+### GetPinnedInterface
+
+`func (o *AdapterHostFcInterfaceAllOf) GetPinnedInterface() InventoryInterfaceRelationship`
+
+GetPinnedInterface returns the PinnedInterface field if non-nil, zero value otherwise.
+
+### GetPinnedInterfaceOk
+
+`func (o *AdapterHostFcInterfaceAllOf) GetPinnedInterfaceOk() (*InventoryInterfaceRelationship, bool)`
+
+GetPinnedInterfaceOk returns a tuple with the PinnedInterface field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPinnedInterface
+
+`func (o *AdapterHostFcInterfaceAllOf) SetPinnedInterface(v InventoryInterfaceRelationship)`
+
+SetPinnedInterface sets PinnedInterface field to given value.
+
+### HasPinnedInterface
+
+`func (o *AdapterHostFcInterfaceAllOf) HasPinnedInterface() bool`
+
+HasPinnedInterface returns a boolean if a field has been set.
 
 ### GetRegisteredDevice
 

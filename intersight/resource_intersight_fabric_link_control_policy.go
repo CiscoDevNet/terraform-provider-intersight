@@ -488,7 +488,6 @@ func resourceFabricLinkControlPolicy() *schema.Resource {
 
 func resourceFabricLinkControlPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewFabricLinkControlPolicyWithDefaults()
@@ -647,7 +646,7 @@ func resourceFabricLinkControlPolicyCreate(c context.Context, d *schema.Resource
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating FabricLinkControlPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating FabricLinkControlPolicy: %s", responseErr.Error())
@@ -659,7 +658,6 @@ func resourceFabricLinkControlPolicyCreate(c context.Context, d *schema.Resource
 
 func resourceFabricLinkControlPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.FabricApi.GetFabricLinkControlPolicyByMoid(conn.ctx, d.Id())
@@ -672,7 +670,7 @@ func resourceFabricLinkControlPolicyRead(c context.Context, d *schema.ResourceDa
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching FabricLinkControlPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching FabricLinkControlPolicy: %s", responseErr.Error())
@@ -761,7 +759,6 @@ func resourceFabricLinkControlPolicyRead(c context.Context, d *schema.ResourceDa
 
 func resourceFabricLinkControlPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.FabricLinkControlPolicy{}
@@ -925,7 +922,7 @@ func resourceFabricLinkControlPolicyUpdate(c context.Context, d *schema.Resource
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating FabricLinkControlPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating FabricLinkControlPolicy: %s", responseErr.Error())
@@ -937,7 +934,6 @@ func resourceFabricLinkControlPolicyUpdate(c context.Context, d *schema.Resource
 
 func resourceFabricLinkControlPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.FabricApi.DeleteFabricLinkControlPolicy(conn.ctx, d.Id())
@@ -949,7 +945,7 @@ func resourceFabricLinkControlPolicyDelete(c context.Context, d *schema.Resource
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting FabricLinkControlPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting FabricLinkControlPolicy object: %s", deleteErr.Error())

@@ -893,7 +893,6 @@ func resourceFabricSwitchProfile() *schema.Resource {
 
 func resourceFabricSwitchProfileCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewFabricSwitchProfileWithDefaults()
@@ -1291,7 +1290,7 @@ func resourceFabricSwitchProfileCreate(c context.Context, d *schema.ResourceData
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating FabricSwitchProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating FabricSwitchProfile: %s", responseErr.Error())
@@ -1309,7 +1308,7 @@ func resourceFabricSwitchProfileCreate(c context.Context, d *schema.ResourceData
 			if responseErr != nil {
 				errorType := fmt.Sprintf("%T", responseErr)
 				if strings.Contains(errorType, "GenericOpenAPIError") {
-					responseErr := responseErr.(models.GenericOpenAPIError)
+					responseErr := responseErr.(*models.GenericOpenAPIError)
 					return diag.Errorf("error occurred while fetching FabricSwitchProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 				}
 				return diag.Errorf("error occurred while fetching FabricSwitchProfile: %s", responseErr.Error())
@@ -1323,7 +1322,7 @@ func resourceFabricSwitchProfileCreate(c context.Context, d *schema.ResourceData
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching FabricSwitchProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching FabricSwitchProfile: %s", responseErr.Error())
@@ -1337,7 +1336,7 @@ func resourceFabricSwitchProfileCreate(c context.Context, d *schema.ResourceData
 			if err != nil {
 				errorType := fmt.Sprintf("%T", err)
 				if strings.Contains(errorType, "GenericOpenAPIError") {
-					err := err.(models.GenericOpenAPIError)
+					err := err.(*models.GenericOpenAPIError)
 					return diag.Errorf("failed while fetching workflow information in FabricSwitchProfile: %s Response from endpoint: %s", err.Error(), string(err.Body()))
 				}
 				return diag.Errorf("failed while fetching workflow information in FabricSwitchProfile: %s", err.Error())
@@ -1352,7 +1351,6 @@ func resourceFabricSwitchProfileCreate(c context.Context, d *schema.ResourceData
 
 func resourceFabricSwitchProfileRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.FabricApi.GetFabricSwitchProfileByMoid(conn.ctx, d.Id())
@@ -1365,7 +1363,7 @@ func resourceFabricSwitchProfileRead(c context.Context, d *schema.ResourceData, 
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching FabricSwitchProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching FabricSwitchProfile: %s", responseErr.Error())
@@ -1498,7 +1496,6 @@ func resourceFabricSwitchProfileRead(c context.Context, d *schema.ResourceData, 
 
 func resourceFabricSwitchProfileUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.FabricSwitchProfile{}
@@ -1904,7 +1901,7 @@ func resourceFabricSwitchProfileUpdate(c context.Context, d *schema.ResourceData
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating FabricSwitchProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating FabricSwitchProfile: %s", responseErr.Error())
@@ -1922,7 +1919,7 @@ func resourceFabricSwitchProfileUpdate(c context.Context, d *schema.ResourceData
 			if responseErr != nil {
 				errorType := fmt.Sprintf("%T", responseErr)
 				if strings.Contains(errorType, "GenericOpenAPIError") {
-					responseErr := responseErr.(models.GenericOpenAPIError)
+					responseErr := responseErr.(*models.GenericOpenAPIError)
 					return diag.Errorf("error occurred while fetching FabricSwitchProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 				}
 				return diag.Errorf("error occurred while fetching FabricSwitchProfile: %s", responseErr.Error())
@@ -1936,7 +1933,7 @@ func resourceFabricSwitchProfileUpdate(c context.Context, d *schema.ResourceData
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching FabricSwitchProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching FabricSwitchProfile: %s", responseErr.Error())
@@ -1950,7 +1947,7 @@ func resourceFabricSwitchProfileUpdate(c context.Context, d *schema.ResourceData
 			if err != nil {
 				errorType := fmt.Sprintf("%T", err)
 				if strings.Contains(errorType, "GenericOpenAPIError") {
-					err := err.(models.GenericOpenAPIError)
+					err := err.(*models.GenericOpenAPIError)
 					return diag.Errorf("failed while fetching workflow information in FabricSwitchProfile: %s Response from endpoint: %s", err.Error(), string(err.Body()))
 				}
 				return diag.Errorf("failed while fetching workflow information in FabricSwitchProfile: %s", err.Error())
@@ -1965,7 +1962,6 @@ func resourceFabricSwitchProfileUpdate(c context.Context, d *schema.ResourceData
 
 func resourceFabricSwitchProfileDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.FabricApi.DeleteFabricSwitchProfile(conn.ctx, d.Id())
@@ -1977,7 +1973,7 @@ func resourceFabricSwitchProfileDelete(c context.Context, d *schema.ResourceData
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting FabricSwitchProfile object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting FabricSwitchProfile object: %s", deleteErr.Error())

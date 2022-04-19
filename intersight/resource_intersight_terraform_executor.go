@@ -222,9 +222,9 @@ func resourceTerraformExecutor() *schema.Resource {
 				Default:     "Create",
 			},
 			"output": {
-				Description:      "Terraform output of the entire execution.",
-				Type:             schema.TypeString,
-				DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
+				Description: "Terraform output of the entire execution.",
+				Type:        schema.TypeString,
+				Optional:    true,
 			},
 			"owners": {
 				Type:       schema.TypeList,
@@ -427,14 +427,14 @@ func resourceTerraformExecutor() *schema.Resource {
 				Optional:    true,
 			},
 			"stderr": {
-				Description:      "Stderr of the terraform execution will be captured here.",
-				Type:             schema.TypeString,
-				DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
+				Description: "Stderr of the terraform execution will be captured here.",
+				Type:        schema.TypeString,
+				Optional:    true,
 			},
 			"stdout": {
-				Description:      "Stdout of the terraform execution will be captured here.",
-				Type:             schema.TypeString,
-				DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
+				Description: "Stdout of the terraform execution will be captured here.",
+				Type:        schema.TypeString,
+				Optional:    true,
 			},
 			"tags": {
 				Type:       schema.TypeList,
@@ -467,9 +467,9 @@ func resourceTerraformExecutor() *schema.Resource {
 				Optional:    true,
 			},
 			"variables": {
-				Description:      "Variables needed by the terraform configuration as a JSON object.",
-				Type:             schema.TypeString,
-				DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
+				Description: "Variables needed by the terraform configuration as a JSON object.",
+				Type:        schema.TypeString,
+				Optional:    true,
 			},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
@@ -662,7 +662,6 @@ func resourceTerraformExecutor() *schema.Resource {
 
 func resourceTerraformExecutorCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewTerraformExecutorWithDefaults()
@@ -786,7 +785,13 @@ func resourceTerraformExecutorCreate(c context.Context, d *schema.ResourceData, 
 	}
 
 	if v, ok := d.GetOk("output"); ok {
-		o.SetOutput(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetOutput(x2)
+		}
 	}
 
 	if v, ok := d.GetOk("platform_type"); ok {
@@ -900,11 +905,23 @@ func resourceTerraformExecutorCreate(c context.Context, d *schema.ResourceData, 
 	}
 
 	if v, ok := d.GetOk("stderr"); ok {
-		o.SetStderr(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetStderr(x2)
+		}
 	}
 
 	if v, ok := d.GetOk("stdout"); ok {
-		o.SetStdout(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetStdout(x2)
+		}
 	}
 
 	if v, ok := d.GetOk("tags"); ok {
@@ -948,7 +965,13 @@ func resourceTerraformExecutorCreate(c context.Context, d *schema.ResourceData, 
 	}
 
 	if v, ok := d.GetOk("variables"); ok {
-		o.SetVariables(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetVariables(x2)
+		}
 	}
 
 	r := conn.ApiClient.TerraformApi.CreateTerraformExecutor(conn.ctx).TerraformExecutor(*o)
@@ -956,7 +979,7 @@ func resourceTerraformExecutorCreate(c context.Context, d *schema.ResourceData, 
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating TerraformExecutor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating TerraformExecutor: %s", responseErr.Error())
@@ -974,7 +997,7 @@ func resourceTerraformExecutorCreate(c context.Context, d *schema.ResourceData, 
 			if responseErr != nil {
 				errorType := fmt.Sprintf("%T", responseErr)
 				if strings.Contains(errorType, "GenericOpenAPIError") {
-					responseErr := responseErr.(models.GenericOpenAPIError)
+					responseErr := responseErr.(*models.GenericOpenAPIError)
 					return diag.Errorf("error occurred while fetching TerraformExecutor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 				}
 				return diag.Errorf("error occurred while fetching TerraformExecutor: %s", responseErr.Error())
@@ -988,7 +1011,7 @@ func resourceTerraformExecutorCreate(c context.Context, d *schema.ResourceData, 
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching TerraformExecutor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching TerraformExecutor: %s", responseErr.Error())
@@ -1002,7 +1025,7 @@ func resourceTerraformExecutorCreate(c context.Context, d *schema.ResourceData, 
 			if err != nil {
 				errorType := fmt.Sprintf("%T", err)
 				if strings.Contains(errorType, "GenericOpenAPIError") {
-					err := err.(models.GenericOpenAPIError)
+					err := err.(*models.GenericOpenAPIError)
 					return diag.Errorf("failed while fetching workflow information in TerraformExecutor: %s Response from endpoint: %s", err.Error(), string(err.Body()))
 				}
 				return diag.Errorf("failed while fetching workflow information in TerraformExecutor: %s", err.Error())
@@ -1017,7 +1040,6 @@ func resourceTerraformExecutorCreate(c context.Context, d *schema.ResourceData, 
 
 func resourceTerraformExecutorRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.TerraformApi.GetTerraformExecutorByMoid(conn.ctx, d.Id())
@@ -1030,7 +1052,7 @@ func resourceTerraformExecutorRead(c context.Context, d *schema.ResourceData, me
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching TerraformExecutor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching TerraformExecutor: %s", responseErr.Error())
@@ -1171,7 +1193,6 @@ func resourceTerraformExecutorRead(c context.Context, d *schema.ResourceData, me
 
 func resourceTerraformExecutorUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.TerraformExecutor{}
@@ -1300,7 +1321,13 @@ func resourceTerraformExecutorUpdate(c context.Context, d *schema.ResourceData, 
 
 	if d.HasChange("output") {
 		v := d.Get("output")
-		o.SetOutput(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetOutput(x2)
+		}
 	}
 
 	if d.HasChange("platform_type") {
@@ -1420,12 +1447,24 @@ func resourceTerraformExecutorUpdate(c context.Context, d *schema.ResourceData, 
 
 	if d.HasChange("stderr") {
 		v := d.Get("stderr")
-		o.SetStderr(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetStderr(x2)
+		}
 	}
 
 	if d.HasChange("stdout") {
 		v := d.Get("stdout")
-		o.SetStdout(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetStdout(x2)
+		}
 	}
 
 	if d.HasChange("tags") {
@@ -1470,7 +1509,13 @@ func resourceTerraformExecutorUpdate(c context.Context, d *schema.ResourceData, 
 
 	if d.HasChange("variables") {
 		v := d.Get("variables")
-		o.SetVariables(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetVariables(x2)
+		}
 	}
 
 	r := conn.ApiClient.TerraformApi.UpdateTerraformExecutor(conn.ctx, d.Id()).TerraformExecutor(*o)
@@ -1478,7 +1523,7 @@ func resourceTerraformExecutorUpdate(c context.Context, d *schema.ResourceData, 
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating TerraformExecutor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating TerraformExecutor: %s", responseErr.Error())
@@ -1496,7 +1541,7 @@ func resourceTerraformExecutorUpdate(c context.Context, d *schema.ResourceData, 
 			if responseErr != nil {
 				errorType := fmt.Sprintf("%T", responseErr)
 				if strings.Contains(errorType, "GenericOpenAPIError") {
-					responseErr := responseErr.(models.GenericOpenAPIError)
+					responseErr := responseErr.(*models.GenericOpenAPIError)
 					return diag.Errorf("error occurred while fetching TerraformExecutor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 				}
 				return diag.Errorf("error occurred while fetching TerraformExecutor: %s", responseErr.Error())
@@ -1510,7 +1555,7 @@ func resourceTerraformExecutorUpdate(c context.Context, d *schema.ResourceData, 
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching TerraformExecutor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching TerraformExecutor: %s", responseErr.Error())
@@ -1524,7 +1569,7 @@ func resourceTerraformExecutorUpdate(c context.Context, d *schema.ResourceData, 
 			if err != nil {
 				errorType := fmt.Sprintf("%T", err)
 				if strings.Contains(errorType, "GenericOpenAPIError") {
-					err := err.(models.GenericOpenAPIError)
+					err := err.(*models.GenericOpenAPIError)
 					return diag.Errorf("failed while fetching workflow information in TerraformExecutor: %s Response from endpoint: %s", err.Error(), string(err.Body()))
 				}
 				return diag.Errorf("failed while fetching workflow information in TerraformExecutor: %s", err.Error())
@@ -1539,7 +1584,6 @@ func resourceTerraformExecutorUpdate(c context.Context, d *schema.ResourceData, 
 
 func resourceTerraformExecutorDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.TerraformApi.DeleteTerraformExecutor(conn.ctx, d.Id())
@@ -1551,7 +1595,7 @@ func resourceTerraformExecutorDelete(c context.Context, d *schema.ResourceData, 
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting TerraformExecutor object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting TerraformExecutor object: %s", deleteErr.Error())

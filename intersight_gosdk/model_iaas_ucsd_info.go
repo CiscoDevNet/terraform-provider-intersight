@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -47,13 +47,17 @@ type IaasUcsdInfo struct {
 	Status *string `json:"Status,omitempty"`
 	// An array of relationships to iaasConnectorPack resources.
 	ConnectorPack []IaasConnectorPackRelationship `json:"ConnectorPack,omitempty"`
+	// An array of relationships to iaasCustomTaskInfo resources.
+	CustomTaskInfo []IaasCustomTaskInfoRelationship `json:"CustomTaskInfo,omitempty"`
 	// An array of relationships to iaasDeviceStatus resources.
 	DeviceStatus []IaasDeviceStatusRelationship `json:"DeviceStatus,omitempty"`
 	LicenseInfo  *IaasLicenseInfoRelationship   `json:"LicenseInfo,omitempty"`
 	// An array of relationships to iaasMostRunTasks resources.
-	MostRunTasks         []IaasMostRunTasksRelationship       `json:"MostRunTasks,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
-	UcsdManagedInfra     *IaasUcsdManagedInfraRelationship    `json:"UcsdManagedInfra,omitempty"`
+	MostRunTasks     []IaasMostRunTasksRelationship       `json:"MostRunTasks,omitempty"`
+	RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	// An array of relationships to iaasSystemTaskInfo resources.
+	SystemTaskInfo       []IaasSystemTaskInfoRelationship  `json:"SystemTaskInfo,omitempty"`
+	UcsdManagedInfra     *IaasUcsdManagedInfraRelationship `json:"UcsdManagedInfra,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -462,11 +466,11 @@ func (o *IaasUcsdInfo) GetConnectorPack() []IaasConnectorPackRelationship {
 // GetConnectorPackOk returns a tuple with the ConnectorPack field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IaasUcsdInfo) GetConnectorPackOk() (*[]IaasConnectorPackRelationship, bool) {
+func (o *IaasUcsdInfo) GetConnectorPackOk() ([]IaasConnectorPackRelationship, bool) {
 	if o == nil || o.ConnectorPack == nil {
 		return nil, false
 	}
-	return &o.ConnectorPack, true
+	return o.ConnectorPack, true
 }
 
 // HasConnectorPack returns a boolean if a field has been set.
@@ -483,6 +487,39 @@ func (o *IaasUcsdInfo) SetConnectorPack(v []IaasConnectorPackRelationship) {
 	o.ConnectorPack = v
 }
 
+// GetCustomTaskInfo returns the CustomTaskInfo field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *IaasUcsdInfo) GetCustomTaskInfo() []IaasCustomTaskInfoRelationship {
+	if o == nil {
+		var ret []IaasCustomTaskInfoRelationship
+		return ret
+	}
+	return o.CustomTaskInfo
+}
+
+// GetCustomTaskInfoOk returns a tuple with the CustomTaskInfo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *IaasUcsdInfo) GetCustomTaskInfoOk() ([]IaasCustomTaskInfoRelationship, bool) {
+	if o == nil || o.CustomTaskInfo == nil {
+		return nil, false
+	}
+	return o.CustomTaskInfo, true
+}
+
+// HasCustomTaskInfo returns a boolean if a field has been set.
+func (o *IaasUcsdInfo) HasCustomTaskInfo() bool {
+	if o != nil && o.CustomTaskInfo != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomTaskInfo gets a reference to the given []IaasCustomTaskInfoRelationship and assigns it to the CustomTaskInfo field.
+func (o *IaasUcsdInfo) SetCustomTaskInfo(v []IaasCustomTaskInfoRelationship) {
+	o.CustomTaskInfo = v
+}
+
 // GetDeviceStatus returns the DeviceStatus field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IaasUcsdInfo) GetDeviceStatus() []IaasDeviceStatusRelationship {
 	if o == nil {
@@ -495,11 +532,11 @@ func (o *IaasUcsdInfo) GetDeviceStatus() []IaasDeviceStatusRelationship {
 // GetDeviceStatusOk returns a tuple with the DeviceStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IaasUcsdInfo) GetDeviceStatusOk() (*[]IaasDeviceStatusRelationship, bool) {
+func (o *IaasUcsdInfo) GetDeviceStatusOk() ([]IaasDeviceStatusRelationship, bool) {
 	if o == nil || o.DeviceStatus == nil {
 		return nil, false
 	}
-	return &o.DeviceStatus, true
+	return o.DeviceStatus, true
 }
 
 // HasDeviceStatus returns a boolean if a field has been set.
@@ -560,11 +597,11 @@ func (o *IaasUcsdInfo) GetMostRunTasks() []IaasMostRunTasksRelationship {
 // GetMostRunTasksOk returns a tuple with the MostRunTasks field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IaasUcsdInfo) GetMostRunTasksOk() (*[]IaasMostRunTasksRelationship, bool) {
+func (o *IaasUcsdInfo) GetMostRunTasksOk() ([]IaasMostRunTasksRelationship, bool) {
 	if o == nil || o.MostRunTasks == nil {
 		return nil, false
 	}
-	return &o.MostRunTasks, true
+	return o.MostRunTasks, true
 }
 
 // HasMostRunTasks returns a boolean if a field has been set.
@@ -611,6 +648,39 @@ func (o *IaasUcsdInfo) HasRegisteredDevice() bool {
 // SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *IaasUcsdInfo) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
 	o.RegisteredDevice = &v
+}
+
+// GetSystemTaskInfo returns the SystemTaskInfo field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *IaasUcsdInfo) GetSystemTaskInfo() []IaasSystemTaskInfoRelationship {
+	if o == nil {
+		var ret []IaasSystemTaskInfoRelationship
+		return ret
+	}
+	return o.SystemTaskInfo
+}
+
+// GetSystemTaskInfoOk returns a tuple with the SystemTaskInfo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *IaasUcsdInfo) GetSystemTaskInfoOk() ([]IaasSystemTaskInfoRelationship, bool) {
+	if o == nil || o.SystemTaskInfo == nil {
+		return nil, false
+	}
+	return o.SystemTaskInfo, true
+}
+
+// HasSystemTaskInfo returns a boolean if a field has been set.
+func (o *IaasUcsdInfo) HasSystemTaskInfo() bool {
+	if o != nil && o.SystemTaskInfo != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSystemTaskInfo gets a reference to the given []IaasSystemTaskInfoRelationship and assigns it to the SystemTaskInfo field.
+func (o *IaasUcsdInfo) SetSystemTaskInfo(v []IaasSystemTaskInfoRelationship) {
+	o.SystemTaskInfo = v
 }
 
 // GetUcsdManagedInfra returns the UcsdManagedInfra field value if set, zero value otherwise.
@@ -694,6 +764,9 @@ func (o IaasUcsdInfo) MarshalJSON() ([]byte, error) {
 	if o.ConnectorPack != nil {
 		toSerialize["ConnectorPack"] = o.ConnectorPack
 	}
+	if o.CustomTaskInfo != nil {
+		toSerialize["CustomTaskInfo"] = o.CustomTaskInfo
+	}
 	if o.DeviceStatus != nil {
 		toSerialize["DeviceStatus"] = o.DeviceStatus
 	}
@@ -705,6 +778,9 @@ func (o IaasUcsdInfo) MarshalJSON() ([]byte, error) {
 	}
 	if o.RegisteredDevice != nil {
 		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	}
+	if o.SystemTaskInfo != nil {
+		toSerialize["SystemTaskInfo"] = o.SystemTaskInfo
 	}
 	if o.UcsdManagedInfra != nil {
 		toSerialize["UcsdManagedInfra"] = o.UcsdManagedInfra
@@ -745,13 +821,17 @@ func (o *IaasUcsdInfo) UnmarshalJSON(bytes []byte) (err error) {
 		Status *string `json:"Status,omitempty"`
 		// An array of relationships to iaasConnectorPack resources.
 		ConnectorPack []IaasConnectorPackRelationship `json:"ConnectorPack,omitempty"`
+		// An array of relationships to iaasCustomTaskInfo resources.
+		CustomTaskInfo []IaasCustomTaskInfoRelationship `json:"CustomTaskInfo,omitempty"`
 		// An array of relationships to iaasDeviceStatus resources.
 		DeviceStatus []IaasDeviceStatusRelationship `json:"DeviceStatus,omitempty"`
 		LicenseInfo  *IaasLicenseInfoRelationship   `json:"LicenseInfo,omitempty"`
 		// An array of relationships to iaasMostRunTasks resources.
 		MostRunTasks     []IaasMostRunTasksRelationship       `json:"MostRunTasks,omitempty"`
 		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
-		UcsdManagedInfra *IaasUcsdManagedInfraRelationship    `json:"UcsdManagedInfra,omitempty"`
+		// An array of relationships to iaasSystemTaskInfo resources.
+		SystemTaskInfo   []IaasSystemTaskInfoRelationship  `json:"SystemTaskInfo,omitempty"`
+		UcsdManagedInfra *IaasUcsdManagedInfraRelationship `json:"UcsdManagedInfra,omitempty"`
 	}
 
 	varIaasUcsdInfoWithoutEmbeddedStruct := IaasUcsdInfoWithoutEmbeddedStruct{}
@@ -772,10 +852,12 @@ func (o *IaasUcsdInfo) UnmarshalJSON(bytes []byte) (err error) {
 		varIaasUcsdInfo.ProductVersion = varIaasUcsdInfoWithoutEmbeddedStruct.ProductVersion
 		varIaasUcsdInfo.Status = varIaasUcsdInfoWithoutEmbeddedStruct.Status
 		varIaasUcsdInfo.ConnectorPack = varIaasUcsdInfoWithoutEmbeddedStruct.ConnectorPack
+		varIaasUcsdInfo.CustomTaskInfo = varIaasUcsdInfoWithoutEmbeddedStruct.CustomTaskInfo
 		varIaasUcsdInfo.DeviceStatus = varIaasUcsdInfoWithoutEmbeddedStruct.DeviceStatus
 		varIaasUcsdInfo.LicenseInfo = varIaasUcsdInfoWithoutEmbeddedStruct.LicenseInfo
 		varIaasUcsdInfo.MostRunTasks = varIaasUcsdInfoWithoutEmbeddedStruct.MostRunTasks
 		varIaasUcsdInfo.RegisteredDevice = varIaasUcsdInfoWithoutEmbeddedStruct.RegisteredDevice
+		varIaasUcsdInfo.SystemTaskInfo = varIaasUcsdInfoWithoutEmbeddedStruct.SystemTaskInfo
 		varIaasUcsdInfo.UcsdManagedInfra = varIaasUcsdInfoWithoutEmbeddedStruct.UcsdManagedInfra
 		*o = IaasUcsdInfo(varIaasUcsdInfo)
 	} else {
@@ -807,10 +889,12 @@ func (o *IaasUcsdInfo) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ProductVersion")
 		delete(additionalProperties, "Status")
 		delete(additionalProperties, "ConnectorPack")
+		delete(additionalProperties, "CustomTaskInfo")
 		delete(additionalProperties, "DeviceStatus")
 		delete(additionalProperties, "LicenseInfo")
 		delete(additionalProperties, "MostRunTasks")
 		delete(additionalProperties, "RegisteredDevice")
+		delete(additionalProperties, "SystemTaskInfo")
 		delete(additionalProperties, "UcsdManagedInfra")
 
 		// remove fields from embedded structs

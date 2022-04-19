@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,23 +13,18 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // IamApiService IamApi service
 type IamApiService service
 
 type ApiCreateIamAccountRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	iamAccount  *IamAccount
 	ifMatch     *string
@@ -54,17 +49,17 @@ func (r ApiCreateIamAccountRequest) IfNoneMatch(ifNoneMatch string) ApiCreateIam
 	return r
 }
 
-func (r ApiCreateIamAccountRequest) Execute() (IamAccount, *_nethttp.Response, error) {
+func (r ApiCreateIamAccountRequest) Execute() (*IamAccount, *http.Response, error) {
 	return r.ApiService.CreateIamAccountExecute(r)
 }
 
 /*
 CreateIamAccount Create a 'iam.Account' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateIamAccountRequest
 */
-func (a *IamApiService) CreateIamAccount(ctx _context.Context) ApiCreateIamAccountRequest {
+func (a *IamApiService) CreateIamAccount(ctx context.Context) ApiCreateIamAccountRequest {
 	return ApiCreateIamAccountRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -73,26 +68,24 @@ func (a *IamApiService) CreateIamAccount(ctx _context.Context) ApiCreateIamAccou
 
 // Execute executes the request
 //  @return IamAccount
-func (a *IamApiService) CreateIamAccountExecute(r ApiCreateIamAccountRequest) (IamAccount, *_nethttp.Response, error) {
+func (a *IamApiService) CreateIamAccountExecute(r ApiCreateIamAccountRequest) (*IamAccount, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamAccount
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamAccount
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.CreateIamAccount")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Accounts"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamAccount == nil {
 		return localVarReturnValue, nil, reportError("iamAccount is required and must be specified")
 	}
@@ -122,7 +115,7 @@ func (a *IamApiService) CreateIamAccountExecute(r ApiCreateIamAccountRequest) (I
 	}
 	// body params
 	localVarPostBody = r.iamAccount
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -132,15 +125,15 @@ func (a *IamApiService) CreateIamAccountExecute(r ApiCreateIamAccountRequest) (I
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -196,7 +189,7 @@ func (a *IamApiService) CreateIamAccountExecute(r ApiCreateIamAccountRequest) (I
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -207,7 +200,7 @@ func (a *IamApiService) CreateIamAccountExecute(r ApiCreateIamAccountRequest) (I
 }
 
 type ApiCreateIamAccountExperienceRequest struct {
-	ctx                  _context.Context
+	ctx                  context.Context
 	ApiService           *IamApiService
 	iamAccountExperience *IamAccountExperience
 	ifMatch              *string
@@ -232,17 +225,17 @@ func (r ApiCreateIamAccountExperienceRequest) IfNoneMatch(ifNoneMatch string) Ap
 	return r
 }
 
-func (r ApiCreateIamAccountExperienceRequest) Execute() (IamAccountExperience, *_nethttp.Response, error) {
+func (r ApiCreateIamAccountExperienceRequest) Execute() (*IamAccountExperience, *http.Response, error) {
 	return r.ApiService.CreateIamAccountExperienceExecute(r)
 }
 
 /*
 CreateIamAccountExperience Create a 'iam.AccountExperience' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateIamAccountExperienceRequest
 */
-func (a *IamApiService) CreateIamAccountExperience(ctx _context.Context) ApiCreateIamAccountExperienceRequest {
+func (a *IamApiService) CreateIamAccountExperience(ctx context.Context) ApiCreateIamAccountExperienceRequest {
 	return ApiCreateIamAccountExperienceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -251,26 +244,24 @@ func (a *IamApiService) CreateIamAccountExperience(ctx _context.Context) ApiCrea
 
 // Execute executes the request
 //  @return IamAccountExperience
-func (a *IamApiService) CreateIamAccountExperienceExecute(r ApiCreateIamAccountExperienceRequest) (IamAccountExperience, *_nethttp.Response, error) {
+func (a *IamApiService) CreateIamAccountExperienceExecute(r ApiCreateIamAccountExperienceRequest) (*IamAccountExperience, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamAccountExperience
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamAccountExperience
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.CreateIamAccountExperience")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/AccountExperiences"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamAccountExperience == nil {
 		return localVarReturnValue, nil, reportError("iamAccountExperience is required and must be specified")
 	}
@@ -300,7 +291,7 @@ func (a *IamApiService) CreateIamAccountExperienceExecute(r ApiCreateIamAccountE
 	}
 	// body params
 	localVarPostBody = r.iamAccountExperience
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -310,15 +301,15 @@ func (a *IamApiService) CreateIamAccountExperienceExecute(r ApiCreateIamAccountE
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -374,7 +365,7 @@ func (a *IamApiService) CreateIamAccountExperienceExecute(r ApiCreateIamAccountE
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -385,7 +376,7 @@ func (a *IamApiService) CreateIamAccountExperienceExecute(r ApiCreateIamAccountE
 }
 
 type ApiCreateIamApiKeyRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	iamApiKey   *IamApiKey
 	ifMatch     *string
@@ -410,17 +401,17 @@ func (r ApiCreateIamApiKeyRequest) IfNoneMatch(ifNoneMatch string) ApiCreateIamA
 	return r
 }
 
-func (r ApiCreateIamApiKeyRequest) Execute() (IamApiKey, *_nethttp.Response, error) {
+func (r ApiCreateIamApiKeyRequest) Execute() (*IamApiKey, *http.Response, error) {
 	return r.ApiService.CreateIamApiKeyExecute(r)
 }
 
 /*
 CreateIamApiKey Create a 'iam.ApiKey' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateIamApiKeyRequest
 */
-func (a *IamApiService) CreateIamApiKey(ctx _context.Context) ApiCreateIamApiKeyRequest {
+func (a *IamApiService) CreateIamApiKey(ctx context.Context) ApiCreateIamApiKeyRequest {
 	return ApiCreateIamApiKeyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -429,26 +420,24 @@ func (a *IamApiService) CreateIamApiKey(ctx _context.Context) ApiCreateIamApiKey
 
 // Execute executes the request
 //  @return IamApiKey
-func (a *IamApiService) CreateIamApiKeyExecute(r ApiCreateIamApiKeyRequest) (IamApiKey, *_nethttp.Response, error) {
+func (a *IamApiService) CreateIamApiKeyExecute(r ApiCreateIamApiKeyRequest) (*IamApiKey, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamApiKey
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamApiKey
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.CreateIamApiKey")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/ApiKeys"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamApiKey == nil {
 		return localVarReturnValue, nil, reportError("iamApiKey is required and must be specified")
 	}
@@ -478,7 +467,7 @@ func (a *IamApiService) CreateIamApiKeyExecute(r ApiCreateIamApiKeyRequest) (Iam
 	}
 	// body params
 	localVarPostBody = r.iamApiKey
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -488,15 +477,15 @@ func (a *IamApiService) CreateIamApiKeyExecute(r ApiCreateIamApiKeyRequest) (Iam
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -552,7 +541,7 @@ func (a *IamApiService) CreateIamApiKeyExecute(r ApiCreateIamApiKeyRequest) (Iam
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -563,7 +552,7 @@ func (a *IamApiService) CreateIamApiKeyExecute(r ApiCreateIamApiKeyRequest) (Iam
 }
 
 type ApiCreateIamAppRegistrationRequest struct {
-	ctx                _context.Context
+	ctx                context.Context
 	ApiService         *IamApiService
 	iamAppRegistration *IamAppRegistration
 	ifMatch            *string
@@ -588,17 +577,17 @@ func (r ApiCreateIamAppRegistrationRequest) IfNoneMatch(ifNoneMatch string) ApiC
 	return r
 }
 
-func (r ApiCreateIamAppRegistrationRequest) Execute() (IamAppRegistration, *_nethttp.Response, error) {
+func (r ApiCreateIamAppRegistrationRequest) Execute() (*IamAppRegistration, *http.Response, error) {
 	return r.ApiService.CreateIamAppRegistrationExecute(r)
 }
 
 /*
 CreateIamAppRegistration Create a 'iam.AppRegistration' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateIamAppRegistrationRequest
 */
-func (a *IamApiService) CreateIamAppRegistration(ctx _context.Context) ApiCreateIamAppRegistrationRequest {
+func (a *IamApiService) CreateIamAppRegistration(ctx context.Context) ApiCreateIamAppRegistrationRequest {
 	return ApiCreateIamAppRegistrationRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -607,26 +596,24 @@ func (a *IamApiService) CreateIamAppRegistration(ctx _context.Context) ApiCreate
 
 // Execute executes the request
 //  @return IamAppRegistration
-func (a *IamApiService) CreateIamAppRegistrationExecute(r ApiCreateIamAppRegistrationRequest) (IamAppRegistration, *_nethttp.Response, error) {
+func (a *IamApiService) CreateIamAppRegistrationExecute(r ApiCreateIamAppRegistrationRequest) (*IamAppRegistration, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamAppRegistration
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamAppRegistration
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.CreateIamAppRegistration")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/AppRegistrations"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamAppRegistration == nil {
 		return localVarReturnValue, nil, reportError("iamAppRegistration is required and must be specified")
 	}
@@ -656,7 +643,7 @@ func (a *IamApiService) CreateIamAppRegistrationExecute(r ApiCreateIamAppRegistr
 	}
 	// body params
 	localVarPostBody = r.iamAppRegistration
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -666,15 +653,15 @@ func (a *IamApiService) CreateIamAppRegistrationExecute(r ApiCreateIamAppRegistr
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -730,7 +717,7 @@ func (a *IamApiService) CreateIamAppRegistrationExecute(r ApiCreateIamAppRegistr
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -741,7 +728,7 @@ func (a *IamApiService) CreateIamAppRegistrationExecute(r ApiCreateIamAppRegistr
 }
 
 type ApiCreateIamCertificateRequest struct {
-	ctx            _context.Context
+	ctx            context.Context
 	ApiService     *IamApiService
 	iamCertificate *IamCertificate
 	ifMatch        *string
@@ -766,17 +753,17 @@ func (r ApiCreateIamCertificateRequest) IfNoneMatch(ifNoneMatch string) ApiCreat
 	return r
 }
 
-func (r ApiCreateIamCertificateRequest) Execute() (IamCertificate, *_nethttp.Response, error) {
+func (r ApiCreateIamCertificateRequest) Execute() (*IamCertificate, *http.Response, error) {
 	return r.ApiService.CreateIamCertificateExecute(r)
 }
 
 /*
 CreateIamCertificate Create a 'iam.Certificate' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateIamCertificateRequest
 */
-func (a *IamApiService) CreateIamCertificate(ctx _context.Context) ApiCreateIamCertificateRequest {
+func (a *IamApiService) CreateIamCertificate(ctx context.Context) ApiCreateIamCertificateRequest {
 	return ApiCreateIamCertificateRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -785,26 +772,24 @@ func (a *IamApiService) CreateIamCertificate(ctx _context.Context) ApiCreateIamC
 
 // Execute executes the request
 //  @return IamCertificate
-func (a *IamApiService) CreateIamCertificateExecute(r ApiCreateIamCertificateRequest) (IamCertificate, *_nethttp.Response, error) {
+func (a *IamApiService) CreateIamCertificateExecute(r ApiCreateIamCertificateRequest) (*IamCertificate, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamCertificate
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamCertificate
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.CreateIamCertificate")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Certificates"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamCertificate == nil {
 		return localVarReturnValue, nil, reportError("iamCertificate is required and must be specified")
 	}
@@ -834,7 +819,7 @@ func (a *IamApiService) CreateIamCertificateExecute(r ApiCreateIamCertificateReq
 	}
 	// body params
 	localVarPostBody = r.iamCertificate
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -844,15 +829,15 @@ func (a *IamApiService) CreateIamCertificateExecute(r ApiCreateIamCertificateReq
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -908,7 +893,7 @@ func (a *IamApiService) CreateIamCertificateExecute(r ApiCreateIamCertificateReq
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -919,7 +904,7 @@ func (a *IamApiService) CreateIamCertificateExecute(r ApiCreateIamCertificateReq
 }
 
 type ApiCreateIamCertificateRequestRequest struct {
-	ctx                   _context.Context
+	ctx                   context.Context
 	ApiService            *IamApiService
 	iamCertificateRequest *IamCertificateRequest
 	ifMatch               *string
@@ -944,17 +929,17 @@ func (r ApiCreateIamCertificateRequestRequest) IfNoneMatch(ifNoneMatch string) A
 	return r
 }
 
-func (r ApiCreateIamCertificateRequestRequest) Execute() (IamCertificateRequest, *_nethttp.Response, error) {
+func (r ApiCreateIamCertificateRequestRequest) Execute() (*IamCertificateRequest, *http.Response, error) {
 	return r.ApiService.CreateIamCertificateRequestExecute(r)
 }
 
 /*
 CreateIamCertificateRequest Create a 'iam.CertificateRequest' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateIamCertificateRequestRequest
 */
-func (a *IamApiService) CreateIamCertificateRequest(ctx _context.Context) ApiCreateIamCertificateRequestRequest {
+func (a *IamApiService) CreateIamCertificateRequest(ctx context.Context) ApiCreateIamCertificateRequestRequest {
 	return ApiCreateIamCertificateRequestRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -963,26 +948,24 @@ func (a *IamApiService) CreateIamCertificateRequest(ctx _context.Context) ApiCre
 
 // Execute executes the request
 //  @return IamCertificateRequest
-func (a *IamApiService) CreateIamCertificateRequestExecute(r ApiCreateIamCertificateRequestRequest) (IamCertificateRequest, *_nethttp.Response, error) {
+func (a *IamApiService) CreateIamCertificateRequestExecute(r ApiCreateIamCertificateRequestRequest) (*IamCertificateRequest, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamCertificateRequest
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamCertificateRequest
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.CreateIamCertificateRequest")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/CertificateRequests"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamCertificateRequest == nil {
 		return localVarReturnValue, nil, reportError("iamCertificateRequest is required and must be specified")
 	}
@@ -1012,7 +995,7 @@ func (a *IamApiService) CreateIamCertificateRequestExecute(r ApiCreateIamCertifi
 	}
 	// body params
 	localVarPostBody = r.iamCertificateRequest
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1022,15 +1005,15 @@ func (a *IamApiService) CreateIamCertificateRequestExecute(r ApiCreateIamCertifi
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1086,7 +1069,183 @@ func (a *IamApiService) CreateIamCertificateRequestExecute(r ApiCreateIamCertifi
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCreateIamDomainNameInfoRequest struct {
+	ctx               context.Context
+	ApiService        *IamApiService
+	iamDomainNameInfo *IamDomainNameInfo
+	ifMatch           *string
+	ifNoneMatch       *string
+}
+
+// The &#39;iam.DomainNameInfo&#39; resource to create.
+func (r ApiCreateIamDomainNameInfoRequest) IamDomainNameInfo(iamDomainNameInfo IamDomainNameInfo) ApiCreateIamDomainNameInfoRequest {
+	r.iamDomainNameInfo = &iamDomainNameInfo
+	return r
+}
+
+// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
+func (r ApiCreateIamDomainNameInfoRequest) IfMatch(ifMatch string) ApiCreateIamDomainNameInfoRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+// For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte.
+func (r ApiCreateIamDomainNameInfoRequest) IfNoneMatch(ifNoneMatch string) ApiCreateIamDomainNameInfoRequest {
+	r.ifNoneMatch = &ifNoneMatch
+	return r
+}
+
+func (r ApiCreateIamDomainNameInfoRequest) Execute() (*IamDomainNameInfo, *http.Response, error) {
+	return r.ApiService.CreateIamDomainNameInfoExecute(r)
+}
+
+/*
+CreateIamDomainNameInfo Create a 'iam.DomainNameInfo' resource.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateIamDomainNameInfoRequest
+*/
+func (a *IamApiService) CreateIamDomainNameInfo(ctx context.Context) ApiCreateIamDomainNameInfoRequest {
+	return ApiCreateIamDomainNameInfoRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//  @return IamDomainNameInfo
+func (a *IamApiService) CreateIamDomainNameInfoExecute(r ApiCreateIamDomainNameInfoRequest) (*IamDomainNameInfo, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamDomainNameInfo
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.CreateIamDomainNameInfo")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/iam/DomainNameInfos"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.iamDomainNameInfo == nil {
+		return localVarReturnValue, nil, reportError("iamDomainNameInfo is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	if r.ifNoneMatch != nil {
+		localVarHeaderParams["If-None-Match"] = parameterToString(*r.ifNoneMatch, "")
+	}
+	// body params
+	localVarPostBody = r.iamDomainNameInfo
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1097,7 +1256,7 @@ func (a *IamApiService) CreateIamCertificateRequestExecute(r ApiCreateIamCertifi
 }
 
 type ApiCreateIamEndPointUserRequest struct {
-	ctx             _context.Context
+	ctx             context.Context
 	ApiService      *IamApiService
 	iamEndPointUser *IamEndPointUser
 	ifMatch         *string
@@ -1122,17 +1281,17 @@ func (r ApiCreateIamEndPointUserRequest) IfNoneMatch(ifNoneMatch string) ApiCrea
 	return r
 }
 
-func (r ApiCreateIamEndPointUserRequest) Execute() (IamEndPointUser, *_nethttp.Response, error) {
+func (r ApiCreateIamEndPointUserRequest) Execute() (*IamEndPointUser, *http.Response, error) {
 	return r.ApiService.CreateIamEndPointUserExecute(r)
 }
 
 /*
 CreateIamEndPointUser Create a 'iam.EndPointUser' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateIamEndPointUserRequest
 */
-func (a *IamApiService) CreateIamEndPointUser(ctx _context.Context) ApiCreateIamEndPointUserRequest {
+func (a *IamApiService) CreateIamEndPointUser(ctx context.Context) ApiCreateIamEndPointUserRequest {
 	return ApiCreateIamEndPointUserRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1141,26 +1300,24 @@ func (a *IamApiService) CreateIamEndPointUser(ctx _context.Context) ApiCreateIam
 
 // Execute executes the request
 //  @return IamEndPointUser
-func (a *IamApiService) CreateIamEndPointUserExecute(r ApiCreateIamEndPointUserRequest) (IamEndPointUser, *_nethttp.Response, error) {
+func (a *IamApiService) CreateIamEndPointUserExecute(r ApiCreateIamEndPointUserRequest) (*IamEndPointUser, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamEndPointUser
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamEndPointUser
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.CreateIamEndPointUser")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/EndPointUsers"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamEndPointUser == nil {
 		return localVarReturnValue, nil, reportError("iamEndPointUser is required and must be specified")
 	}
@@ -1190,7 +1347,7 @@ func (a *IamApiService) CreateIamEndPointUserExecute(r ApiCreateIamEndPointUserR
 	}
 	// body params
 	localVarPostBody = r.iamEndPointUser
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1200,15 +1357,15 @@ func (a *IamApiService) CreateIamEndPointUserExecute(r ApiCreateIamEndPointUserR
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1264,7 +1421,7 @@ func (a *IamApiService) CreateIamEndPointUserExecute(r ApiCreateIamEndPointUserR
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1275,7 +1432,7 @@ func (a *IamApiService) CreateIamEndPointUserExecute(r ApiCreateIamEndPointUserR
 }
 
 type ApiCreateIamEndPointUserPolicyRequest struct {
-	ctx                   _context.Context
+	ctx                   context.Context
 	ApiService            *IamApiService
 	iamEndPointUserPolicy *IamEndPointUserPolicy
 	ifMatch               *string
@@ -1300,17 +1457,17 @@ func (r ApiCreateIamEndPointUserPolicyRequest) IfNoneMatch(ifNoneMatch string) A
 	return r
 }
 
-func (r ApiCreateIamEndPointUserPolicyRequest) Execute() (IamEndPointUserPolicy, *_nethttp.Response, error) {
+func (r ApiCreateIamEndPointUserPolicyRequest) Execute() (*IamEndPointUserPolicy, *http.Response, error) {
 	return r.ApiService.CreateIamEndPointUserPolicyExecute(r)
 }
 
 /*
 CreateIamEndPointUserPolicy Create a 'iam.EndPointUserPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateIamEndPointUserPolicyRequest
 */
-func (a *IamApiService) CreateIamEndPointUserPolicy(ctx _context.Context) ApiCreateIamEndPointUserPolicyRequest {
+func (a *IamApiService) CreateIamEndPointUserPolicy(ctx context.Context) ApiCreateIamEndPointUserPolicyRequest {
 	return ApiCreateIamEndPointUserPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1319,26 +1476,24 @@ func (a *IamApiService) CreateIamEndPointUserPolicy(ctx _context.Context) ApiCre
 
 // Execute executes the request
 //  @return IamEndPointUserPolicy
-func (a *IamApiService) CreateIamEndPointUserPolicyExecute(r ApiCreateIamEndPointUserPolicyRequest) (IamEndPointUserPolicy, *_nethttp.Response, error) {
+func (a *IamApiService) CreateIamEndPointUserPolicyExecute(r ApiCreateIamEndPointUserPolicyRequest) (*IamEndPointUserPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamEndPointUserPolicy
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamEndPointUserPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.CreateIamEndPointUserPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/EndPointUserPolicies"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamEndPointUserPolicy == nil {
 		return localVarReturnValue, nil, reportError("iamEndPointUserPolicy is required and must be specified")
 	}
@@ -1368,7 +1523,7 @@ func (a *IamApiService) CreateIamEndPointUserPolicyExecute(r ApiCreateIamEndPoin
 	}
 	// body params
 	localVarPostBody = r.iamEndPointUserPolicy
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1378,15 +1533,15 @@ func (a *IamApiService) CreateIamEndPointUserPolicyExecute(r ApiCreateIamEndPoin
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1442,7 +1597,7 @@ func (a *IamApiService) CreateIamEndPointUserPolicyExecute(r ApiCreateIamEndPoin
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1453,7 +1608,7 @@ func (a *IamApiService) CreateIamEndPointUserPolicyExecute(r ApiCreateIamEndPoin
 }
 
 type ApiCreateIamEndPointUserRoleRequest struct {
-	ctx                 _context.Context
+	ctx                 context.Context
 	ApiService          *IamApiService
 	iamEndPointUserRole *IamEndPointUserRole
 	ifMatch             *string
@@ -1478,17 +1633,17 @@ func (r ApiCreateIamEndPointUserRoleRequest) IfNoneMatch(ifNoneMatch string) Api
 	return r
 }
 
-func (r ApiCreateIamEndPointUserRoleRequest) Execute() (IamEndPointUserRole, *_nethttp.Response, error) {
+func (r ApiCreateIamEndPointUserRoleRequest) Execute() (*IamEndPointUserRole, *http.Response, error) {
 	return r.ApiService.CreateIamEndPointUserRoleExecute(r)
 }
 
 /*
 CreateIamEndPointUserRole Create a 'iam.EndPointUserRole' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateIamEndPointUserRoleRequest
 */
-func (a *IamApiService) CreateIamEndPointUserRole(ctx _context.Context) ApiCreateIamEndPointUserRoleRequest {
+func (a *IamApiService) CreateIamEndPointUserRole(ctx context.Context) ApiCreateIamEndPointUserRoleRequest {
 	return ApiCreateIamEndPointUserRoleRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1497,26 +1652,24 @@ func (a *IamApiService) CreateIamEndPointUserRole(ctx _context.Context) ApiCreat
 
 // Execute executes the request
 //  @return IamEndPointUserRole
-func (a *IamApiService) CreateIamEndPointUserRoleExecute(r ApiCreateIamEndPointUserRoleRequest) (IamEndPointUserRole, *_nethttp.Response, error) {
+func (a *IamApiService) CreateIamEndPointUserRoleExecute(r ApiCreateIamEndPointUserRoleRequest) (*IamEndPointUserRole, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamEndPointUserRole
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamEndPointUserRole
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.CreateIamEndPointUserRole")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/EndPointUserRoles"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamEndPointUserRole == nil {
 		return localVarReturnValue, nil, reportError("iamEndPointUserRole is required and must be specified")
 	}
@@ -1546,7 +1699,7 @@ func (a *IamApiService) CreateIamEndPointUserRoleExecute(r ApiCreateIamEndPointU
 	}
 	// body params
 	localVarPostBody = r.iamEndPointUserRole
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1556,15 +1709,15 @@ func (a *IamApiService) CreateIamEndPointUserRoleExecute(r ApiCreateIamEndPointU
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1620,7 +1773,7 @@ func (a *IamApiService) CreateIamEndPointUserRoleExecute(r ApiCreateIamEndPointU
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1631,7 +1784,7 @@ func (a *IamApiService) CreateIamEndPointUserRoleExecute(r ApiCreateIamEndPointU
 }
 
 type ApiCreateIamIdpRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	iamIdp      *IamIdp
 	ifMatch     *string
@@ -1656,17 +1809,17 @@ func (r ApiCreateIamIdpRequest) IfNoneMatch(ifNoneMatch string) ApiCreateIamIdpR
 	return r
 }
 
-func (r ApiCreateIamIdpRequest) Execute() (IamIdp, *_nethttp.Response, error) {
+func (r ApiCreateIamIdpRequest) Execute() (*IamIdp, *http.Response, error) {
 	return r.ApiService.CreateIamIdpExecute(r)
 }
 
 /*
 CreateIamIdp Create a 'iam.Idp' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateIamIdpRequest
 */
-func (a *IamApiService) CreateIamIdp(ctx _context.Context) ApiCreateIamIdpRequest {
+func (a *IamApiService) CreateIamIdp(ctx context.Context) ApiCreateIamIdpRequest {
 	return ApiCreateIamIdpRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1675,26 +1828,24 @@ func (a *IamApiService) CreateIamIdp(ctx _context.Context) ApiCreateIamIdpReques
 
 // Execute executes the request
 //  @return IamIdp
-func (a *IamApiService) CreateIamIdpExecute(r ApiCreateIamIdpRequest) (IamIdp, *_nethttp.Response, error) {
+func (a *IamApiService) CreateIamIdpExecute(r ApiCreateIamIdpRequest) (*IamIdp, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamIdp
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamIdp
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.CreateIamIdp")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Idps"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamIdp == nil {
 		return localVarReturnValue, nil, reportError("iamIdp is required and must be specified")
 	}
@@ -1724,7 +1875,7 @@ func (a *IamApiService) CreateIamIdpExecute(r ApiCreateIamIdpRequest) (IamIdp, *
 	}
 	// body params
 	localVarPostBody = r.iamIdp
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1734,15 +1885,15 @@ func (a *IamApiService) CreateIamIdpExecute(r ApiCreateIamIdpRequest) (IamIdp, *
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1798,7 +1949,7 @@ func (a *IamApiService) CreateIamIdpExecute(r ApiCreateIamIdpRequest) (IamIdp, *
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1809,7 +1960,7 @@ func (a *IamApiService) CreateIamIdpExecute(r ApiCreateIamIdpRequest) (IamIdp, *
 }
 
 type ApiCreateIamIpAccessManagementRequest struct {
-	ctx                   _context.Context
+	ctx                   context.Context
 	ApiService            *IamApiService
 	iamIpAccessManagement *IamIpAccessManagement
 	ifMatch               *string
@@ -1834,17 +1985,17 @@ func (r ApiCreateIamIpAccessManagementRequest) IfNoneMatch(ifNoneMatch string) A
 	return r
 }
 
-func (r ApiCreateIamIpAccessManagementRequest) Execute() (IamIpAccessManagement, *_nethttp.Response, error) {
+func (r ApiCreateIamIpAccessManagementRequest) Execute() (*IamIpAccessManagement, *http.Response, error) {
 	return r.ApiService.CreateIamIpAccessManagementExecute(r)
 }
 
 /*
 CreateIamIpAccessManagement Create a 'iam.IpAccessManagement' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateIamIpAccessManagementRequest
 */
-func (a *IamApiService) CreateIamIpAccessManagement(ctx _context.Context) ApiCreateIamIpAccessManagementRequest {
+func (a *IamApiService) CreateIamIpAccessManagement(ctx context.Context) ApiCreateIamIpAccessManagementRequest {
 	return ApiCreateIamIpAccessManagementRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1853,26 +2004,24 @@ func (a *IamApiService) CreateIamIpAccessManagement(ctx _context.Context) ApiCre
 
 // Execute executes the request
 //  @return IamIpAccessManagement
-func (a *IamApiService) CreateIamIpAccessManagementExecute(r ApiCreateIamIpAccessManagementRequest) (IamIpAccessManagement, *_nethttp.Response, error) {
+func (a *IamApiService) CreateIamIpAccessManagementExecute(r ApiCreateIamIpAccessManagementRequest) (*IamIpAccessManagement, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamIpAccessManagement
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamIpAccessManagement
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.CreateIamIpAccessManagement")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/IpAccessManagements"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamIpAccessManagement == nil {
 		return localVarReturnValue, nil, reportError("iamIpAccessManagement is required and must be specified")
 	}
@@ -1902,7 +2051,7 @@ func (a *IamApiService) CreateIamIpAccessManagementExecute(r ApiCreateIamIpAcces
 	}
 	// body params
 	localVarPostBody = r.iamIpAccessManagement
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1912,15 +2061,15 @@ func (a *IamApiService) CreateIamIpAccessManagementExecute(r ApiCreateIamIpAcces
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1976,7 +2125,7 @@ func (a *IamApiService) CreateIamIpAccessManagementExecute(r ApiCreateIamIpAcces
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1987,7 +2136,7 @@ func (a *IamApiService) CreateIamIpAccessManagementExecute(r ApiCreateIamIpAcces
 }
 
 type ApiCreateIamIpAddressRequest struct {
-	ctx          _context.Context
+	ctx          context.Context
 	ApiService   *IamApiService
 	iamIpAddress *IamIpAddress
 	ifMatch      *string
@@ -2012,17 +2161,17 @@ func (r ApiCreateIamIpAddressRequest) IfNoneMatch(ifNoneMatch string) ApiCreateI
 	return r
 }
 
-func (r ApiCreateIamIpAddressRequest) Execute() (IamIpAddress, *_nethttp.Response, error) {
+func (r ApiCreateIamIpAddressRequest) Execute() (*IamIpAddress, *http.Response, error) {
 	return r.ApiService.CreateIamIpAddressExecute(r)
 }
 
 /*
 CreateIamIpAddress Create a 'iam.IpAddress' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateIamIpAddressRequest
 */
-func (a *IamApiService) CreateIamIpAddress(ctx _context.Context) ApiCreateIamIpAddressRequest {
+func (a *IamApiService) CreateIamIpAddress(ctx context.Context) ApiCreateIamIpAddressRequest {
 	return ApiCreateIamIpAddressRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2031,26 +2180,24 @@ func (a *IamApiService) CreateIamIpAddress(ctx _context.Context) ApiCreateIamIpA
 
 // Execute executes the request
 //  @return IamIpAddress
-func (a *IamApiService) CreateIamIpAddressExecute(r ApiCreateIamIpAddressRequest) (IamIpAddress, *_nethttp.Response, error) {
+func (a *IamApiService) CreateIamIpAddressExecute(r ApiCreateIamIpAddressRequest) (*IamIpAddress, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamIpAddress
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamIpAddress
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.CreateIamIpAddress")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/IpAddresses"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamIpAddress == nil {
 		return localVarReturnValue, nil, reportError("iamIpAddress is required and must be specified")
 	}
@@ -2080,7 +2227,7 @@ func (a *IamApiService) CreateIamIpAddressExecute(r ApiCreateIamIpAddressRequest
 	}
 	// body params
 	localVarPostBody = r.iamIpAddress
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2090,15 +2237,15 @@ func (a *IamApiService) CreateIamIpAddressExecute(r ApiCreateIamIpAddressRequest
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2154,7 +2301,7 @@ func (a *IamApiService) CreateIamIpAddressExecute(r ApiCreateIamIpAddressRequest
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2165,7 +2312,7 @@ func (a *IamApiService) CreateIamIpAddressExecute(r ApiCreateIamIpAddressRequest
 }
 
 type ApiCreateIamLdapGroupRequest struct {
-	ctx          _context.Context
+	ctx          context.Context
 	ApiService   *IamApiService
 	iamLdapGroup *IamLdapGroup
 	ifMatch      *string
@@ -2190,17 +2337,17 @@ func (r ApiCreateIamLdapGroupRequest) IfNoneMatch(ifNoneMatch string) ApiCreateI
 	return r
 }
 
-func (r ApiCreateIamLdapGroupRequest) Execute() (IamLdapGroup, *_nethttp.Response, error) {
+func (r ApiCreateIamLdapGroupRequest) Execute() (*IamLdapGroup, *http.Response, error) {
 	return r.ApiService.CreateIamLdapGroupExecute(r)
 }
 
 /*
 CreateIamLdapGroup Create a 'iam.LdapGroup' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateIamLdapGroupRequest
 */
-func (a *IamApiService) CreateIamLdapGroup(ctx _context.Context) ApiCreateIamLdapGroupRequest {
+func (a *IamApiService) CreateIamLdapGroup(ctx context.Context) ApiCreateIamLdapGroupRequest {
 	return ApiCreateIamLdapGroupRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2209,26 +2356,24 @@ func (a *IamApiService) CreateIamLdapGroup(ctx _context.Context) ApiCreateIamLda
 
 // Execute executes the request
 //  @return IamLdapGroup
-func (a *IamApiService) CreateIamLdapGroupExecute(r ApiCreateIamLdapGroupRequest) (IamLdapGroup, *_nethttp.Response, error) {
+func (a *IamApiService) CreateIamLdapGroupExecute(r ApiCreateIamLdapGroupRequest) (*IamLdapGroup, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamLdapGroup
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamLdapGroup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.CreateIamLdapGroup")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/LdapGroups"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamLdapGroup == nil {
 		return localVarReturnValue, nil, reportError("iamLdapGroup is required and must be specified")
 	}
@@ -2258,7 +2403,7 @@ func (a *IamApiService) CreateIamLdapGroupExecute(r ApiCreateIamLdapGroupRequest
 	}
 	// body params
 	localVarPostBody = r.iamLdapGroup
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2268,15 +2413,15 @@ func (a *IamApiService) CreateIamLdapGroupExecute(r ApiCreateIamLdapGroupRequest
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2332,7 +2477,7 @@ func (a *IamApiService) CreateIamLdapGroupExecute(r ApiCreateIamLdapGroupRequest
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2343,7 +2488,7 @@ func (a *IamApiService) CreateIamLdapGroupExecute(r ApiCreateIamLdapGroupRequest
 }
 
 type ApiCreateIamLdapPolicyRequest struct {
-	ctx           _context.Context
+	ctx           context.Context
 	ApiService    *IamApiService
 	iamLdapPolicy *IamLdapPolicy
 	ifMatch       *string
@@ -2368,17 +2513,17 @@ func (r ApiCreateIamLdapPolicyRequest) IfNoneMatch(ifNoneMatch string) ApiCreate
 	return r
 }
 
-func (r ApiCreateIamLdapPolicyRequest) Execute() (IamLdapPolicy, *_nethttp.Response, error) {
+func (r ApiCreateIamLdapPolicyRequest) Execute() (*IamLdapPolicy, *http.Response, error) {
 	return r.ApiService.CreateIamLdapPolicyExecute(r)
 }
 
 /*
 CreateIamLdapPolicy Create a 'iam.LdapPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateIamLdapPolicyRequest
 */
-func (a *IamApiService) CreateIamLdapPolicy(ctx _context.Context) ApiCreateIamLdapPolicyRequest {
+func (a *IamApiService) CreateIamLdapPolicy(ctx context.Context) ApiCreateIamLdapPolicyRequest {
 	return ApiCreateIamLdapPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2387,26 +2532,24 @@ func (a *IamApiService) CreateIamLdapPolicy(ctx _context.Context) ApiCreateIamLd
 
 // Execute executes the request
 //  @return IamLdapPolicy
-func (a *IamApiService) CreateIamLdapPolicyExecute(r ApiCreateIamLdapPolicyRequest) (IamLdapPolicy, *_nethttp.Response, error) {
+func (a *IamApiService) CreateIamLdapPolicyExecute(r ApiCreateIamLdapPolicyRequest) (*IamLdapPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamLdapPolicy
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamLdapPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.CreateIamLdapPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/LdapPolicies"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamLdapPolicy == nil {
 		return localVarReturnValue, nil, reportError("iamLdapPolicy is required and must be specified")
 	}
@@ -2436,7 +2579,7 @@ func (a *IamApiService) CreateIamLdapPolicyExecute(r ApiCreateIamLdapPolicyReque
 	}
 	// body params
 	localVarPostBody = r.iamLdapPolicy
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2446,15 +2589,15 @@ func (a *IamApiService) CreateIamLdapPolicyExecute(r ApiCreateIamLdapPolicyReque
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2510,7 +2653,7 @@ func (a *IamApiService) CreateIamLdapPolicyExecute(r ApiCreateIamLdapPolicyReque
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2521,7 +2664,7 @@ func (a *IamApiService) CreateIamLdapPolicyExecute(r ApiCreateIamLdapPolicyReque
 }
 
 type ApiCreateIamLdapProviderRequest struct {
-	ctx             _context.Context
+	ctx             context.Context
 	ApiService      *IamApiService
 	iamLdapProvider *IamLdapProvider
 	ifMatch         *string
@@ -2546,17 +2689,17 @@ func (r ApiCreateIamLdapProviderRequest) IfNoneMatch(ifNoneMatch string) ApiCrea
 	return r
 }
 
-func (r ApiCreateIamLdapProviderRequest) Execute() (IamLdapProvider, *_nethttp.Response, error) {
+func (r ApiCreateIamLdapProviderRequest) Execute() (*IamLdapProvider, *http.Response, error) {
 	return r.ApiService.CreateIamLdapProviderExecute(r)
 }
 
 /*
 CreateIamLdapProvider Create a 'iam.LdapProvider' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateIamLdapProviderRequest
 */
-func (a *IamApiService) CreateIamLdapProvider(ctx _context.Context) ApiCreateIamLdapProviderRequest {
+func (a *IamApiService) CreateIamLdapProvider(ctx context.Context) ApiCreateIamLdapProviderRequest {
 	return ApiCreateIamLdapProviderRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2565,26 +2708,24 @@ func (a *IamApiService) CreateIamLdapProvider(ctx _context.Context) ApiCreateIam
 
 // Execute executes the request
 //  @return IamLdapProvider
-func (a *IamApiService) CreateIamLdapProviderExecute(r ApiCreateIamLdapProviderRequest) (IamLdapProvider, *_nethttp.Response, error) {
+func (a *IamApiService) CreateIamLdapProviderExecute(r ApiCreateIamLdapProviderRequest) (*IamLdapProvider, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamLdapProvider
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamLdapProvider
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.CreateIamLdapProvider")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/LdapProviders"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamLdapProvider == nil {
 		return localVarReturnValue, nil, reportError("iamLdapProvider is required and must be specified")
 	}
@@ -2614,7 +2755,7 @@ func (a *IamApiService) CreateIamLdapProviderExecute(r ApiCreateIamLdapProviderR
 	}
 	// body params
 	localVarPostBody = r.iamLdapProvider
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2624,15 +2765,15 @@ func (a *IamApiService) CreateIamLdapProviderExecute(r ApiCreateIamLdapProviderR
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2688,7 +2829,7 @@ func (a *IamApiService) CreateIamLdapProviderExecute(r ApiCreateIamLdapProviderR
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2699,7 +2840,7 @@ func (a *IamApiService) CreateIamLdapProviderExecute(r ApiCreateIamLdapProviderR
 }
 
 type ApiCreateIamPermissionRequest struct {
-	ctx           _context.Context
+	ctx           context.Context
 	ApiService    *IamApiService
 	iamPermission *IamPermission
 	ifMatch       *string
@@ -2724,17 +2865,17 @@ func (r ApiCreateIamPermissionRequest) IfNoneMatch(ifNoneMatch string) ApiCreate
 	return r
 }
 
-func (r ApiCreateIamPermissionRequest) Execute() (IamPermission, *_nethttp.Response, error) {
+func (r ApiCreateIamPermissionRequest) Execute() (*IamPermission, *http.Response, error) {
 	return r.ApiService.CreateIamPermissionExecute(r)
 }
 
 /*
 CreateIamPermission Create a 'iam.Permission' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateIamPermissionRequest
 */
-func (a *IamApiService) CreateIamPermission(ctx _context.Context) ApiCreateIamPermissionRequest {
+func (a *IamApiService) CreateIamPermission(ctx context.Context) ApiCreateIamPermissionRequest {
 	return ApiCreateIamPermissionRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2743,26 +2884,24 @@ func (a *IamApiService) CreateIamPermission(ctx _context.Context) ApiCreateIamPe
 
 // Execute executes the request
 //  @return IamPermission
-func (a *IamApiService) CreateIamPermissionExecute(r ApiCreateIamPermissionRequest) (IamPermission, *_nethttp.Response, error) {
+func (a *IamApiService) CreateIamPermissionExecute(r ApiCreateIamPermissionRequest) (*IamPermission, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamPermission
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamPermission
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.CreateIamPermission")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Permissions"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamPermission == nil {
 		return localVarReturnValue, nil, reportError("iamPermission is required and must be specified")
 	}
@@ -2792,7 +2931,7 @@ func (a *IamApiService) CreateIamPermissionExecute(r ApiCreateIamPermissionReque
 	}
 	// body params
 	localVarPostBody = r.iamPermission
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2802,15 +2941,15 @@ func (a *IamApiService) CreateIamPermissionExecute(r ApiCreateIamPermissionReque
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2866,7 +3005,7 @@ func (a *IamApiService) CreateIamPermissionExecute(r ApiCreateIamPermissionReque
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2877,7 +3016,7 @@ func (a *IamApiService) CreateIamPermissionExecute(r ApiCreateIamPermissionReque
 }
 
 type ApiCreateIamPrivateKeySpecRequest struct {
-	ctx               _context.Context
+	ctx               context.Context
 	ApiService        *IamApiService
 	iamPrivateKeySpec *IamPrivateKeySpec
 	ifMatch           *string
@@ -2902,17 +3041,17 @@ func (r ApiCreateIamPrivateKeySpecRequest) IfNoneMatch(ifNoneMatch string) ApiCr
 	return r
 }
 
-func (r ApiCreateIamPrivateKeySpecRequest) Execute() (IamPrivateKeySpec, *_nethttp.Response, error) {
+func (r ApiCreateIamPrivateKeySpecRequest) Execute() (*IamPrivateKeySpec, *http.Response, error) {
 	return r.ApiService.CreateIamPrivateKeySpecExecute(r)
 }
 
 /*
 CreateIamPrivateKeySpec Create a 'iam.PrivateKeySpec' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateIamPrivateKeySpecRequest
 */
-func (a *IamApiService) CreateIamPrivateKeySpec(ctx _context.Context) ApiCreateIamPrivateKeySpecRequest {
+func (a *IamApiService) CreateIamPrivateKeySpec(ctx context.Context) ApiCreateIamPrivateKeySpecRequest {
 	return ApiCreateIamPrivateKeySpecRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2921,26 +3060,24 @@ func (a *IamApiService) CreateIamPrivateKeySpec(ctx _context.Context) ApiCreateI
 
 // Execute executes the request
 //  @return IamPrivateKeySpec
-func (a *IamApiService) CreateIamPrivateKeySpecExecute(r ApiCreateIamPrivateKeySpecRequest) (IamPrivateKeySpec, *_nethttp.Response, error) {
+func (a *IamApiService) CreateIamPrivateKeySpecExecute(r ApiCreateIamPrivateKeySpecRequest) (*IamPrivateKeySpec, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamPrivateKeySpec
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamPrivateKeySpec
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.CreateIamPrivateKeySpec")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/PrivateKeySpecs"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamPrivateKeySpec == nil {
 		return localVarReturnValue, nil, reportError("iamPrivateKeySpec is required and must be specified")
 	}
@@ -2970,7 +3107,7 @@ func (a *IamApiService) CreateIamPrivateKeySpecExecute(r ApiCreateIamPrivateKeyS
 	}
 	// body params
 	localVarPostBody = r.iamPrivateKeySpec
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2980,15 +3117,15 @@ func (a *IamApiService) CreateIamPrivateKeySpecExecute(r ApiCreateIamPrivateKeyS
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3044,7 +3181,7 @@ func (a *IamApiService) CreateIamPrivateKeySpecExecute(r ApiCreateIamPrivateKeyS
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3055,7 +3192,7 @@ func (a *IamApiService) CreateIamPrivateKeySpecExecute(r ApiCreateIamPrivateKeyS
 }
 
 type ApiCreateIamQualifierRequest struct {
-	ctx          _context.Context
+	ctx          context.Context
 	ApiService   *IamApiService
 	iamQualifier *IamQualifier
 	ifMatch      *string
@@ -3080,17 +3217,17 @@ func (r ApiCreateIamQualifierRequest) IfNoneMatch(ifNoneMatch string) ApiCreateI
 	return r
 }
 
-func (r ApiCreateIamQualifierRequest) Execute() (IamQualifier, *_nethttp.Response, error) {
+func (r ApiCreateIamQualifierRequest) Execute() (*IamQualifier, *http.Response, error) {
 	return r.ApiService.CreateIamQualifierExecute(r)
 }
 
 /*
 CreateIamQualifier Create a 'iam.Qualifier' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateIamQualifierRequest
 */
-func (a *IamApiService) CreateIamQualifier(ctx _context.Context) ApiCreateIamQualifierRequest {
+func (a *IamApiService) CreateIamQualifier(ctx context.Context) ApiCreateIamQualifierRequest {
 	return ApiCreateIamQualifierRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3099,26 +3236,24 @@ func (a *IamApiService) CreateIamQualifier(ctx _context.Context) ApiCreateIamQua
 
 // Execute executes the request
 //  @return IamQualifier
-func (a *IamApiService) CreateIamQualifierExecute(r ApiCreateIamQualifierRequest) (IamQualifier, *_nethttp.Response, error) {
+func (a *IamApiService) CreateIamQualifierExecute(r ApiCreateIamQualifierRequest) (*IamQualifier, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamQualifier
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamQualifier
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.CreateIamQualifier")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Qualifiers"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamQualifier == nil {
 		return localVarReturnValue, nil, reportError("iamQualifier is required and must be specified")
 	}
@@ -3148,7 +3283,7 @@ func (a *IamApiService) CreateIamQualifierExecute(r ApiCreateIamQualifierRequest
 	}
 	// body params
 	localVarPostBody = r.iamQualifier
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3158,15 +3293,15 @@ func (a *IamApiService) CreateIamQualifierExecute(r ApiCreateIamQualifierRequest
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3222,7 +3357,7 @@ func (a *IamApiService) CreateIamQualifierExecute(r ApiCreateIamQualifierRequest
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3233,7 +3368,7 @@ func (a *IamApiService) CreateIamQualifierExecute(r ApiCreateIamQualifierRequest
 }
 
 type ApiCreateIamResourceRolesRequest struct {
-	ctx              _context.Context
+	ctx              context.Context
 	ApiService       *IamApiService
 	iamResourceRoles *IamResourceRoles
 	ifMatch          *string
@@ -3258,17 +3393,17 @@ func (r ApiCreateIamResourceRolesRequest) IfNoneMatch(ifNoneMatch string) ApiCre
 	return r
 }
 
-func (r ApiCreateIamResourceRolesRequest) Execute() (IamResourceRoles, *_nethttp.Response, error) {
+func (r ApiCreateIamResourceRolesRequest) Execute() (*IamResourceRoles, *http.Response, error) {
 	return r.ApiService.CreateIamResourceRolesExecute(r)
 }
 
 /*
 CreateIamResourceRoles Create a 'iam.ResourceRoles' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateIamResourceRolesRequest
 */
-func (a *IamApiService) CreateIamResourceRoles(ctx _context.Context) ApiCreateIamResourceRolesRequest {
+func (a *IamApiService) CreateIamResourceRoles(ctx context.Context) ApiCreateIamResourceRolesRequest {
 	return ApiCreateIamResourceRolesRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3277,26 +3412,24 @@ func (a *IamApiService) CreateIamResourceRoles(ctx _context.Context) ApiCreateIa
 
 // Execute executes the request
 //  @return IamResourceRoles
-func (a *IamApiService) CreateIamResourceRolesExecute(r ApiCreateIamResourceRolesRequest) (IamResourceRoles, *_nethttp.Response, error) {
+func (a *IamApiService) CreateIamResourceRolesExecute(r ApiCreateIamResourceRolesRequest) (*IamResourceRoles, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamResourceRoles
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamResourceRoles
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.CreateIamResourceRoles")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/ResourceRoles"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamResourceRoles == nil {
 		return localVarReturnValue, nil, reportError("iamResourceRoles is required and must be specified")
 	}
@@ -3326,7 +3459,7 @@ func (a *IamApiService) CreateIamResourceRolesExecute(r ApiCreateIamResourceRole
 	}
 	// body params
 	localVarPostBody = r.iamResourceRoles
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3336,15 +3469,15 @@ func (a *IamApiService) CreateIamResourceRolesExecute(r ApiCreateIamResourceRole
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3400,7 +3533,7 @@ func (a *IamApiService) CreateIamResourceRolesExecute(r ApiCreateIamResourceRole
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3411,7 +3544,7 @@ func (a *IamApiService) CreateIamResourceRolesExecute(r ApiCreateIamResourceRole
 }
 
 type ApiCreateIamSessionLimitsRequest struct {
-	ctx              _context.Context
+	ctx              context.Context
 	ApiService       *IamApiService
 	iamSessionLimits *IamSessionLimits
 	ifMatch          *string
@@ -3436,17 +3569,17 @@ func (r ApiCreateIamSessionLimitsRequest) IfNoneMatch(ifNoneMatch string) ApiCre
 	return r
 }
 
-func (r ApiCreateIamSessionLimitsRequest) Execute() (IamSessionLimits, *_nethttp.Response, error) {
+func (r ApiCreateIamSessionLimitsRequest) Execute() (*IamSessionLimits, *http.Response, error) {
 	return r.ApiService.CreateIamSessionLimitsExecute(r)
 }
 
 /*
 CreateIamSessionLimits Create a 'iam.SessionLimits' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateIamSessionLimitsRequest
 */
-func (a *IamApiService) CreateIamSessionLimits(ctx _context.Context) ApiCreateIamSessionLimitsRequest {
+func (a *IamApiService) CreateIamSessionLimits(ctx context.Context) ApiCreateIamSessionLimitsRequest {
 	return ApiCreateIamSessionLimitsRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3455,26 +3588,24 @@ func (a *IamApiService) CreateIamSessionLimits(ctx _context.Context) ApiCreateIa
 
 // Execute executes the request
 //  @return IamSessionLimits
-func (a *IamApiService) CreateIamSessionLimitsExecute(r ApiCreateIamSessionLimitsRequest) (IamSessionLimits, *_nethttp.Response, error) {
+func (a *IamApiService) CreateIamSessionLimitsExecute(r ApiCreateIamSessionLimitsRequest) (*IamSessionLimits, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamSessionLimits
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamSessionLimits
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.CreateIamSessionLimits")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/SessionLimits"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamSessionLimits == nil {
 		return localVarReturnValue, nil, reportError("iamSessionLimits is required and must be specified")
 	}
@@ -3504,7 +3635,7 @@ func (a *IamApiService) CreateIamSessionLimitsExecute(r ApiCreateIamSessionLimit
 	}
 	// body params
 	localVarPostBody = r.iamSessionLimits
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3514,15 +3645,15 @@ func (a *IamApiService) CreateIamSessionLimitsExecute(r ApiCreateIamSessionLimit
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3578,7 +3709,7 @@ func (a *IamApiService) CreateIamSessionLimitsExecute(r ApiCreateIamSessionLimit
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3589,7 +3720,7 @@ func (a *IamApiService) CreateIamSessionLimitsExecute(r ApiCreateIamSessionLimit
 }
 
 type ApiCreateIamTrustPointRequest struct {
-	ctx           _context.Context
+	ctx           context.Context
 	ApiService    *IamApiService
 	iamTrustPoint *IamTrustPoint
 	ifMatch       *string
@@ -3614,17 +3745,17 @@ func (r ApiCreateIamTrustPointRequest) IfNoneMatch(ifNoneMatch string) ApiCreate
 	return r
 }
 
-func (r ApiCreateIamTrustPointRequest) Execute() (IamTrustPoint, *_nethttp.Response, error) {
+func (r ApiCreateIamTrustPointRequest) Execute() (*IamTrustPoint, *http.Response, error) {
 	return r.ApiService.CreateIamTrustPointExecute(r)
 }
 
 /*
 CreateIamTrustPoint Create a 'iam.TrustPoint' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateIamTrustPointRequest
 */
-func (a *IamApiService) CreateIamTrustPoint(ctx _context.Context) ApiCreateIamTrustPointRequest {
+func (a *IamApiService) CreateIamTrustPoint(ctx context.Context) ApiCreateIamTrustPointRequest {
 	return ApiCreateIamTrustPointRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3633,26 +3764,24 @@ func (a *IamApiService) CreateIamTrustPoint(ctx _context.Context) ApiCreateIamTr
 
 // Execute executes the request
 //  @return IamTrustPoint
-func (a *IamApiService) CreateIamTrustPointExecute(r ApiCreateIamTrustPointRequest) (IamTrustPoint, *_nethttp.Response, error) {
+func (a *IamApiService) CreateIamTrustPointExecute(r ApiCreateIamTrustPointRequest) (*IamTrustPoint, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamTrustPoint
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamTrustPoint
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.CreateIamTrustPoint")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/TrustPoints"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamTrustPoint == nil {
 		return localVarReturnValue, nil, reportError("iamTrustPoint is required and must be specified")
 	}
@@ -3682,7 +3811,7 @@ func (a *IamApiService) CreateIamTrustPointExecute(r ApiCreateIamTrustPointReque
 	}
 	// body params
 	localVarPostBody = r.iamTrustPoint
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3692,15 +3821,15 @@ func (a *IamApiService) CreateIamTrustPointExecute(r ApiCreateIamTrustPointReque
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3756,7 +3885,7 @@ func (a *IamApiService) CreateIamTrustPointExecute(r ApiCreateIamTrustPointReque
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3767,7 +3896,7 @@ func (a *IamApiService) CreateIamTrustPointExecute(r ApiCreateIamTrustPointReque
 }
 
 type ApiCreateIamUserRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	iamUser     *IamUser
 	ifMatch     *string
@@ -3792,17 +3921,17 @@ func (r ApiCreateIamUserRequest) IfNoneMatch(ifNoneMatch string) ApiCreateIamUse
 	return r
 }
 
-func (r ApiCreateIamUserRequest) Execute() (IamUser, *_nethttp.Response, error) {
+func (r ApiCreateIamUserRequest) Execute() (*IamUser, *http.Response, error) {
 	return r.ApiService.CreateIamUserExecute(r)
 }
 
 /*
 CreateIamUser Create a 'iam.User' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateIamUserRequest
 */
-func (a *IamApiService) CreateIamUser(ctx _context.Context) ApiCreateIamUserRequest {
+func (a *IamApiService) CreateIamUser(ctx context.Context) ApiCreateIamUserRequest {
 	return ApiCreateIamUserRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3811,26 +3940,24 @@ func (a *IamApiService) CreateIamUser(ctx _context.Context) ApiCreateIamUserRequ
 
 // Execute executes the request
 //  @return IamUser
-func (a *IamApiService) CreateIamUserExecute(r ApiCreateIamUserRequest) (IamUser, *_nethttp.Response, error) {
+func (a *IamApiService) CreateIamUserExecute(r ApiCreateIamUserRequest) (*IamUser, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamUser
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamUser
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.CreateIamUser")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Users"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamUser == nil {
 		return localVarReturnValue, nil, reportError("iamUser is required and must be specified")
 	}
@@ -3860,7 +3987,7 @@ func (a *IamApiService) CreateIamUserExecute(r ApiCreateIamUserRequest) (IamUser
 	}
 	// body params
 	localVarPostBody = r.iamUser
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3870,15 +3997,15 @@ func (a *IamApiService) CreateIamUserExecute(r ApiCreateIamUserRequest) (IamUser
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3934,7 +4061,7 @@ func (a *IamApiService) CreateIamUserExecute(r ApiCreateIamUserRequest) (IamUser
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3945,7 +4072,7 @@ func (a *IamApiService) CreateIamUserExecute(r ApiCreateIamUserRequest) (IamUser
 }
 
 type ApiCreateIamUserGroupRequest struct {
-	ctx          _context.Context
+	ctx          context.Context
 	ApiService   *IamApiService
 	iamUserGroup *IamUserGroup
 	ifMatch      *string
@@ -3970,17 +4097,17 @@ func (r ApiCreateIamUserGroupRequest) IfNoneMatch(ifNoneMatch string) ApiCreateI
 	return r
 }
 
-func (r ApiCreateIamUserGroupRequest) Execute() (IamUserGroup, *_nethttp.Response, error) {
+func (r ApiCreateIamUserGroupRequest) Execute() (*IamUserGroup, *http.Response, error) {
 	return r.ApiService.CreateIamUserGroupExecute(r)
 }
 
 /*
 CreateIamUserGroup Create a 'iam.UserGroup' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateIamUserGroupRequest
 */
-func (a *IamApiService) CreateIamUserGroup(ctx _context.Context) ApiCreateIamUserGroupRequest {
+func (a *IamApiService) CreateIamUserGroup(ctx context.Context) ApiCreateIamUserGroupRequest {
 	return ApiCreateIamUserGroupRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3989,26 +4116,24 @@ func (a *IamApiService) CreateIamUserGroup(ctx _context.Context) ApiCreateIamUse
 
 // Execute executes the request
 //  @return IamUserGroup
-func (a *IamApiService) CreateIamUserGroupExecute(r ApiCreateIamUserGroupRequest) (IamUserGroup, *_nethttp.Response, error) {
+func (a *IamApiService) CreateIamUserGroupExecute(r ApiCreateIamUserGroupRequest) (*IamUserGroup, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamUserGroup
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamUserGroup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.CreateIamUserGroup")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/UserGroups"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamUserGroup == nil {
 		return localVarReturnValue, nil, reportError("iamUserGroup is required and must be specified")
 	}
@@ -4038,7 +4163,7 @@ func (a *IamApiService) CreateIamUserGroupExecute(r ApiCreateIamUserGroupRequest
 	}
 	// body params
 	localVarPostBody = r.iamUserGroup
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4048,15 +4173,15 @@ func (a *IamApiService) CreateIamUserGroupExecute(r ApiCreateIamUserGroupRequest
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4112,7 +4237,7 @@ func (a *IamApiService) CreateIamUserGroupExecute(r ApiCreateIamUserGroupRequest
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -4123,23 +4248,23 @@ func (a *IamApiService) CreateIamUserGroupExecute(r ApiCreateIamUserGroupRequest
 }
 
 type ApiDeleteIamAccountRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiDeleteIamAccountRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteIamAccountRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteIamAccountExecute(r)
 }
 
 /*
 DeleteIamAccount Delete a 'iam.Account' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteIamAccountRequest
 */
-func (a *IamApiService) DeleteIamAccount(ctx _context.Context, moid string) ApiDeleteIamAccountRequest {
+func (a *IamApiService) DeleteIamAccount(ctx context.Context, moid string) ApiDeleteIamAccountRequest {
 	return ApiDeleteIamAccountRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4148,26 +4273,24 @@ func (a *IamApiService) DeleteIamAccount(ctx _context.Context, moid string) ApiD
 }
 
 // Execute executes the request
-func (a *IamApiService) DeleteIamAccountExecute(r ApiDeleteIamAccountRequest) (*_nethttp.Response, error) {
+func (a *IamApiService) DeleteIamAccountExecute(r ApiDeleteIamAccountRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.DeleteIamAccount")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Accounts/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -4186,7 +4309,7 @@ func (a *IamApiService) DeleteIamAccountExecute(r ApiDeleteIamAccountRequest) (*
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -4196,15 +4319,15 @@ func (a *IamApiService) DeleteIamAccountExecute(r ApiDeleteIamAccountRequest) (*
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4262,23 +4385,23 @@ func (a *IamApiService) DeleteIamAccountExecute(r ApiDeleteIamAccountRequest) (*
 }
 
 type ApiDeleteIamApiKeyRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiDeleteIamApiKeyRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteIamApiKeyRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteIamApiKeyExecute(r)
 }
 
 /*
 DeleteIamApiKey Delete a 'iam.ApiKey' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteIamApiKeyRequest
 */
-func (a *IamApiService) DeleteIamApiKey(ctx _context.Context, moid string) ApiDeleteIamApiKeyRequest {
+func (a *IamApiService) DeleteIamApiKey(ctx context.Context, moid string) ApiDeleteIamApiKeyRequest {
 	return ApiDeleteIamApiKeyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4287,26 +4410,24 @@ func (a *IamApiService) DeleteIamApiKey(ctx _context.Context, moid string) ApiDe
 }
 
 // Execute executes the request
-func (a *IamApiService) DeleteIamApiKeyExecute(r ApiDeleteIamApiKeyRequest) (*_nethttp.Response, error) {
+func (a *IamApiService) DeleteIamApiKeyExecute(r ApiDeleteIamApiKeyRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.DeleteIamApiKey")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/ApiKeys/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -4325,7 +4446,7 @@ func (a *IamApiService) DeleteIamApiKeyExecute(r ApiDeleteIamApiKeyRequest) (*_n
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -4335,15 +4456,15 @@ func (a *IamApiService) DeleteIamApiKeyExecute(r ApiDeleteIamApiKeyRequest) (*_n
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4401,23 +4522,23 @@ func (a *IamApiService) DeleteIamApiKeyExecute(r ApiDeleteIamApiKeyRequest) (*_n
 }
 
 type ApiDeleteIamAppRegistrationRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiDeleteIamAppRegistrationRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteIamAppRegistrationRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteIamAppRegistrationExecute(r)
 }
 
 /*
 DeleteIamAppRegistration Delete a 'iam.AppRegistration' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteIamAppRegistrationRequest
 */
-func (a *IamApiService) DeleteIamAppRegistration(ctx _context.Context, moid string) ApiDeleteIamAppRegistrationRequest {
+func (a *IamApiService) DeleteIamAppRegistration(ctx context.Context, moid string) ApiDeleteIamAppRegistrationRequest {
 	return ApiDeleteIamAppRegistrationRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4426,26 +4547,24 @@ func (a *IamApiService) DeleteIamAppRegistration(ctx _context.Context, moid stri
 }
 
 // Execute executes the request
-func (a *IamApiService) DeleteIamAppRegistrationExecute(r ApiDeleteIamAppRegistrationRequest) (*_nethttp.Response, error) {
+func (a *IamApiService) DeleteIamAppRegistrationExecute(r ApiDeleteIamAppRegistrationRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.DeleteIamAppRegistration")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/AppRegistrations/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -4464,7 +4583,7 @@ func (a *IamApiService) DeleteIamAppRegistrationExecute(r ApiDeleteIamAppRegistr
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -4474,15 +4593,15 @@ func (a *IamApiService) DeleteIamAppRegistrationExecute(r ApiDeleteIamAppRegistr
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4540,23 +4659,23 @@ func (a *IamApiService) DeleteIamAppRegistrationExecute(r ApiDeleteIamAppRegistr
 }
 
 type ApiDeleteIamCertificateRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiDeleteIamCertificateRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteIamCertificateRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteIamCertificateExecute(r)
 }
 
 /*
 DeleteIamCertificate Delete a 'iam.Certificate' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteIamCertificateRequest
 */
-func (a *IamApiService) DeleteIamCertificate(ctx _context.Context, moid string) ApiDeleteIamCertificateRequest {
+func (a *IamApiService) DeleteIamCertificate(ctx context.Context, moid string) ApiDeleteIamCertificateRequest {
 	return ApiDeleteIamCertificateRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4565,26 +4684,24 @@ func (a *IamApiService) DeleteIamCertificate(ctx _context.Context, moid string) 
 }
 
 // Execute executes the request
-func (a *IamApiService) DeleteIamCertificateExecute(r ApiDeleteIamCertificateRequest) (*_nethttp.Response, error) {
+func (a *IamApiService) DeleteIamCertificateExecute(r ApiDeleteIamCertificateRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.DeleteIamCertificate")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Certificates/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -4603,7 +4720,7 @@ func (a *IamApiService) DeleteIamCertificateExecute(r ApiDeleteIamCertificateReq
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -4613,15 +4730,15 @@ func (a *IamApiService) DeleteIamCertificateExecute(r ApiDeleteIamCertificateReq
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4679,23 +4796,23 @@ func (a *IamApiService) DeleteIamCertificateExecute(r ApiDeleteIamCertificateReq
 }
 
 type ApiDeleteIamCertificateRequestRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiDeleteIamCertificateRequestRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteIamCertificateRequestRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteIamCertificateRequestExecute(r)
 }
 
 /*
 DeleteIamCertificateRequest Delete a 'iam.CertificateRequest' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteIamCertificateRequestRequest
 */
-func (a *IamApiService) DeleteIamCertificateRequest(ctx _context.Context, moid string) ApiDeleteIamCertificateRequestRequest {
+func (a *IamApiService) DeleteIamCertificateRequest(ctx context.Context, moid string) ApiDeleteIamCertificateRequestRequest {
 	return ApiDeleteIamCertificateRequestRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4704,26 +4821,24 @@ func (a *IamApiService) DeleteIamCertificateRequest(ctx _context.Context, moid s
 }
 
 // Execute executes the request
-func (a *IamApiService) DeleteIamCertificateRequestExecute(r ApiDeleteIamCertificateRequestRequest) (*_nethttp.Response, error) {
+func (a *IamApiService) DeleteIamCertificateRequestExecute(r ApiDeleteIamCertificateRequestRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.DeleteIamCertificateRequest")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/CertificateRequests/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -4742,7 +4857,7 @@ func (a *IamApiService) DeleteIamCertificateRequestExecute(r ApiDeleteIamCertifi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -4752,15 +4867,152 @@ func (a *IamApiService) DeleteIamCertificateRequestExecute(r ApiDeleteIamCertifi
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
+type ApiDeleteIamDomainNameInfoRequest struct {
+	ctx        context.Context
+	ApiService *IamApiService
+	moid       string
+}
+
+func (r ApiDeleteIamDomainNameInfoRequest) Execute() (*http.Response, error) {
+	return r.ApiService.DeleteIamDomainNameInfoExecute(r)
+}
+
+/*
+DeleteIamDomainNameInfo Delete a 'iam.DomainNameInfo' resource.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteIamDomainNameInfoRequest
+*/
+func (a *IamApiService) DeleteIamDomainNameInfo(ctx context.Context, moid string) ApiDeleteIamDomainNameInfoRequest {
+	return ApiDeleteIamDomainNameInfoRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+func (a *IamApiService) DeleteIamDomainNameInfoExecute(r ApiDeleteIamDomainNameInfoRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.DeleteIamDomainNameInfo")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/iam/DomainNameInfos/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4818,23 +5070,23 @@ func (a *IamApiService) DeleteIamCertificateRequestExecute(r ApiDeleteIamCertifi
 }
 
 type ApiDeleteIamEndPointUserRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiDeleteIamEndPointUserRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteIamEndPointUserRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteIamEndPointUserExecute(r)
 }
 
 /*
 DeleteIamEndPointUser Delete a 'iam.EndPointUser' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteIamEndPointUserRequest
 */
-func (a *IamApiService) DeleteIamEndPointUser(ctx _context.Context, moid string) ApiDeleteIamEndPointUserRequest {
+func (a *IamApiService) DeleteIamEndPointUser(ctx context.Context, moid string) ApiDeleteIamEndPointUserRequest {
 	return ApiDeleteIamEndPointUserRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4843,26 +5095,24 @@ func (a *IamApiService) DeleteIamEndPointUser(ctx _context.Context, moid string)
 }
 
 // Execute executes the request
-func (a *IamApiService) DeleteIamEndPointUserExecute(r ApiDeleteIamEndPointUserRequest) (*_nethttp.Response, error) {
+func (a *IamApiService) DeleteIamEndPointUserExecute(r ApiDeleteIamEndPointUserRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.DeleteIamEndPointUser")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/EndPointUsers/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -4881,7 +5131,7 @@ func (a *IamApiService) DeleteIamEndPointUserExecute(r ApiDeleteIamEndPointUserR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -4891,15 +5141,15 @@ func (a *IamApiService) DeleteIamEndPointUserExecute(r ApiDeleteIamEndPointUserR
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4957,23 +5207,23 @@ func (a *IamApiService) DeleteIamEndPointUserExecute(r ApiDeleteIamEndPointUserR
 }
 
 type ApiDeleteIamEndPointUserPolicyRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiDeleteIamEndPointUserPolicyRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteIamEndPointUserPolicyRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteIamEndPointUserPolicyExecute(r)
 }
 
 /*
 DeleteIamEndPointUserPolicy Delete a 'iam.EndPointUserPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteIamEndPointUserPolicyRequest
 */
-func (a *IamApiService) DeleteIamEndPointUserPolicy(ctx _context.Context, moid string) ApiDeleteIamEndPointUserPolicyRequest {
+func (a *IamApiService) DeleteIamEndPointUserPolicy(ctx context.Context, moid string) ApiDeleteIamEndPointUserPolicyRequest {
 	return ApiDeleteIamEndPointUserPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4982,26 +5232,24 @@ func (a *IamApiService) DeleteIamEndPointUserPolicy(ctx _context.Context, moid s
 }
 
 // Execute executes the request
-func (a *IamApiService) DeleteIamEndPointUserPolicyExecute(r ApiDeleteIamEndPointUserPolicyRequest) (*_nethttp.Response, error) {
+func (a *IamApiService) DeleteIamEndPointUserPolicyExecute(r ApiDeleteIamEndPointUserPolicyRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.DeleteIamEndPointUserPolicy")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/EndPointUserPolicies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -5020,7 +5268,7 @@ func (a *IamApiService) DeleteIamEndPointUserPolicyExecute(r ApiDeleteIamEndPoin
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -5030,15 +5278,15 @@ func (a *IamApiService) DeleteIamEndPointUserPolicyExecute(r ApiDeleteIamEndPoin
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -5096,23 +5344,23 @@ func (a *IamApiService) DeleteIamEndPointUserPolicyExecute(r ApiDeleteIamEndPoin
 }
 
 type ApiDeleteIamEndPointUserRoleRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiDeleteIamEndPointUserRoleRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteIamEndPointUserRoleRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteIamEndPointUserRoleExecute(r)
 }
 
 /*
 DeleteIamEndPointUserRole Delete a 'iam.EndPointUserRole' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteIamEndPointUserRoleRequest
 */
-func (a *IamApiService) DeleteIamEndPointUserRole(ctx _context.Context, moid string) ApiDeleteIamEndPointUserRoleRequest {
+func (a *IamApiService) DeleteIamEndPointUserRole(ctx context.Context, moid string) ApiDeleteIamEndPointUserRoleRequest {
 	return ApiDeleteIamEndPointUserRoleRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -5121,26 +5369,24 @@ func (a *IamApiService) DeleteIamEndPointUserRole(ctx _context.Context, moid str
 }
 
 // Execute executes the request
-func (a *IamApiService) DeleteIamEndPointUserRoleExecute(r ApiDeleteIamEndPointUserRoleRequest) (*_nethttp.Response, error) {
+func (a *IamApiService) DeleteIamEndPointUserRoleExecute(r ApiDeleteIamEndPointUserRoleRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.DeleteIamEndPointUserRole")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/EndPointUserRoles/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -5159,7 +5405,7 @@ func (a *IamApiService) DeleteIamEndPointUserRoleExecute(r ApiDeleteIamEndPointU
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -5169,15 +5415,15 @@ func (a *IamApiService) DeleteIamEndPointUserRoleExecute(r ApiDeleteIamEndPointU
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -5235,23 +5481,23 @@ func (a *IamApiService) DeleteIamEndPointUserRoleExecute(r ApiDeleteIamEndPointU
 }
 
 type ApiDeleteIamIdpRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiDeleteIamIdpRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteIamIdpRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteIamIdpExecute(r)
 }
 
 /*
 DeleteIamIdp Delete a 'iam.Idp' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteIamIdpRequest
 */
-func (a *IamApiService) DeleteIamIdp(ctx _context.Context, moid string) ApiDeleteIamIdpRequest {
+func (a *IamApiService) DeleteIamIdp(ctx context.Context, moid string) ApiDeleteIamIdpRequest {
 	return ApiDeleteIamIdpRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -5260,26 +5506,24 @@ func (a *IamApiService) DeleteIamIdp(ctx _context.Context, moid string) ApiDelet
 }
 
 // Execute executes the request
-func (a *IamApiService) DeleteIamIdpExecute(r ApiDeleteIamIdpRequest) (*_nethttp.Response, error) {
+func (a *IamApiService) DeleteIamIdpExecute(r ApiDeleteIamIdpRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.DeleteIamIdp")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Idps/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -5298,7 +5542,7 @@ func (a *IamApiService) DeleteIamIdpExecute(r ApiDeleteIamIdpRequest) (*_nethttp
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -5308,15 +5552,15 @@ func (a *IamApiService) DeleteIamIdpExecute(r ApiDeleteIamIdpRequest) (*_nethttp
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -5374,23 +5618,23 @@ func (a *IamApiService) DeleteIamIdpExecute(r ApiDeleteIamIdpRequest) (*_nethttp
 }
 
 type ApiDeleteIamIpAddressRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiDeleteIamIpAddressRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteIamIpAddressRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteIamIpAddressExecute(r)
 }
 
 /*
 DeleteIamIpAddress Delete a 'iam.IpAddress' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteIamIpAddressRequest
 */
-func (a *IamApiService) DeleteIamIpAddress(ctx _context.Context, moid string) ApiDeleteIamIpAddressRequest {
+func (a *IamApiService) DeleteIamIpAddress(ctx context.Context, moid string) ApiDeleteIamIpAddressRequest {
 	return ApiDeleteIamIpAddressRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -5399,26 +5643,24 @@ func (a *IamApiService) DeleteIamIpAddress(ctx _context.Context, moid string) Ap
 }
 
 // Execute executes the request
-func (a *IamApiService) DeleteIamIpAddressExecute(r ApiDeleteIamIpAddressRequest) (*_nethttp.Response, error) {
+func (a *IamApiService) DeleteIamIpAddressExecute(r ApiDeleteIamIpAddressRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.DeleteIamIpAddress")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/IpAddresses/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -5437,7 +5679,7 @@ func (a *IamApiService) DeleteIamIpAddressExecute(r ApiDeleteIamIpAddressRequest
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -5447,15 +5689,15 @@ func (a *IamApiService) DeleteIamIpAddressExecute(r ApiDeleteIamIpAddressRequest
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -5513,23 +5755,23 @@ func (a *IamApiService) DeleteIamIpAddressExecute(r ApiDeleteIamIpAddressRequest
 }
 
 type ApiDeleteIamLdapGroupRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiDeleteIamLdapGroupRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteIamLdapGroupRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteIamLdapGroupExecute(r)
 }
 
 /*
 DeleteIamLdapGroup Delete a 'iam.LdapGroup' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteIamLdapGroupRequest
 */
-func (a *IamApiService) DeleteIamLdapGroup(ctx _context.Context, moid string) ApiDeleteIamLdapGroupRequest {
+func (a *IamApiService) DeleteIamLdapGroup(ctx context.Context, moid string) ApiDeleteIamLdapGroupRequest {
 	return ApiDeleteIamLdapGroupRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -5538,26 +5780,24 @@ func (a *IamApiService) DeleteIamLdapGroup(ctx _context.Context, moid string) Ap
 }
 
 // Execute executes the request
-func (a *IamApiService) DeleteIamLdapGroupExecute(r ApiDeleteIamLdapGroupRequest) (*_nethttp.Response, error) {
+func (a *IamApiService) DeleteIamLdapGroupExecute(r ApiDeleteIamLdapGroupRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.DeleteIamLdapGroup")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/LdapGroups/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -5576,7 +5816,7 @@ func (a *IamApiService) DeleteIamLdapGroupExecute(r ApiDeleteIamLdapGroupRequest
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -5586,15 +5826,15 @@ func (a *IamApiService) DeleteIamLdapGroupExecute(r ApiDeleteIamLdapGroupRequest
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -5652,23 +5892,23 @@ func (a *IamApiService) DeleteIamLdapGroupExecute(r ApiDeleteIamLdapGroupRequest
 }
 
 type ApiDeleteIamLdapPolicyRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiDeleteIamLdapPolicyRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteIamLdapPolicyRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteIamLdapPolicyExecute(r)
 }
 
 /*
 DeleteIamLdapPolicy Delete a 'iam.LdapPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteIamLdapPolicyRequest
 */
-func (a *IamApiService) DeleteIamLdapPolicy(ctx _context.Context, moid string) ApiDeleteIamLdapPolicyRequest {
+func (a *IamApiService) DeleteIamLdapPolicy(ctx context.Context, moid string) ApiDeleteIamLdapPolicyRequest {
 	return ApiDeleteIamLdapPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -5677,26 +5917,24 @@ func (a *IamApiService) DeleteIamLdapPolicy(ctx _context.Context, moid string) A
 }
 
 // Execute executes the request
-func (a *IamApiService) DeleteIamLdapPolicyExecute(r ApiDeleteIamLdapPolicyRequest) (*_nethttp.Response, error) {
+func (a *IamApiService) DeleteIamLdapPolicyExecute(r ApiDeleteIamLdapPolicyRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.DeleteIamLdapPolicy")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/LdapPolicies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -5715,7 +5953,7 @@ func (a *IamApiService) DeleteIamLdapPolicyExecute(r ApiDeleteIamLdapPolicyReque
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -5725,15 +5963,15 @@ func (a *IamApiService) DeleteIamLdapPolicyExecute(r ApiDeleteIamLdapPolicyReque
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -5791,23 +6029,23 @@ func (a *IamApiService) DeleteIamLdapPolicyExecute(r ApiDeleteIamLdapPolicyReque
 }
 
 type ApiDeleteIamLdapProviderRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiDeleteIamLdapProviderRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteIamLdapProviderRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteIamLdapProviderExecute(r)
 }
 
 /*
 DeleteIamLdapProvider Delete a 'iam.LdapProvider' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteIamLdapProviderRequest
 */
-func (a *IamApiService) DeleteIamLdapProvider(ctx _context.Context, moid string) ApiDeleteIamLdapProviderRequest {
+func (a *IamApiService) DeleteIamLdapProvider(ctx context.Context, moid string) ApiDeleteIamLdapProviderRequest {
 	return ApiDeleteIamLdapProviderRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -5816,26 +6054,24 @@ func (a *IamApiService) DeleteIamLdapProvider(ctx _context.Context, moid string)
 }
 
 // Execute executes the request
-func (a *IamApiService) DeleteIamLdapProviderExecute(r ApiDeleteIamLdapProviderRequest) (*_nethttp.Response, error) {
+func (a *IamApiService) DeleteIamLdapProviderExecute(r ApiDeleteIamLdapProviderRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.DeleteIamLdapProvider")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/LdapProviders/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -5854,7 +6090,7 @@ func (a *IamApiService) DeleteIamLdapProviderExecute(r ApiDeleteIamLdapProviderR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -5864,15 +6100,15 @@ func (a *IamApiService) DeleteIamLdapProviderExecute(r ApiDeleteIamLdapProviderR
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -5930,23 +6166,23 @@ func (a *IamApiService) DeleteIamLdapProviderExecute(r ApiDeleteIamLdapProviderR
 }
 
 type ApiDeleteIamOAuthTokenRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiDeleteIamOAuthTokenRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteIamOAuthTokenRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteIamOAuthTokenExecute(r)
 }
 
 /*
 DeleteIamOAuthToken Delete a 'iam.OAuthToken' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteIamOAuthTokenRequest
 */
-func (a *IamApiService) DeleteIamOAuthToken(ctx _context.Context, moid string) ApiDeleteIamOAuthTokenRequest {
+func (a *IamApiService) DeleteIamOAuthToken(ctx context.Context, moid string) ApiDeleteIamOAuthTokenRequest {
 	return ApiDeleteIamOAuthTokenRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -5955,26 +6191,24 @@ func (a *IamApiService) DeleteIamOAuthToken(ctx _context.Context, moid string) A
 }
 
 // Execute executes the request
-func (a *IamApiService) DeleteIamOAuthTokenExecute(r ApiDeleteIamOAuthTokenRequest) (*_nethttp.Response, error) {
+func (a *IamApiService) DeleteIamOAuthTokenExecute(r ApiDeleteIamOAuthTokenRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.DeleteIamOAuthToken")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/OAuthTokens/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -5993,7 +6227,7 @@ func (a *IamApiService) DeleteIamOAuthTokenExecute(r ApiDeleteIamOAuthTokenReque
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -6003,15 +6237,15 @@ func (a *IamApiService) DeleteIamOAuthTokenExecute(r ApiDeleteIamOAuthTokenReque
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -6069,23 +6303,23 @@ func (a *IamApiService) DeleteIamOAuthTokenExecute(r ApiDeleteIamOAuthTokenReque
 }
 
 type ApiDeleteIamPermissionRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiDeleteIamPermissionRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteIamPermissionRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteIamPermissionExecute(r)
 }
 
 /*
 DeleteIamPermission Delete a 'iam.Permission' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteIamPermissionRequest
 */
-func (a *IamApiService) DeleteIamPermission(ctx _context.Context, moid string) ApiDeleteIamPermissionRequest {
+func (a *IamApiService) DeleteIamPermission(ctx context.Context, moid string) ApiDeleteIamPermissionRequest {
 	return ApiDeleteIamPermissionRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -6094,26 +6328,24 @@ func (a *IamApiService) DeleteIamPermission(ctx _context.Context, moid string) A
 }
 
 // Execute executes the request
-func (a *IamApiService) DeleteIamPermissionExecute(r ApiDeleteIamPermissionRequest) (*_nethttp.Response, error) {
+func (a *IamApiService) DeleteIamPermissionExecute(r ApiDeleteIamPermissionRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.DeleteIamPermission")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Permissions/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -6132,7 +6364,7 @@ func (a *IamApiService) DeleteIamPermissionExecute(r ApiDeleteIamPermissionReque
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -6142,15 +6374,15 @@ func (a *IamApiService) DeleteIamPermissionExecute(r ApiDeleteIamPermissionReque
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -6208,23 +6440,23 @@ func (a *IamApiService) DeleteIamPermissionExecute(r ApiDeleteIamPermissionReque
 }
 
 type ApiDeleteIamPrivateKeySpecRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiDeleteIamPrivateKeySpecRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteIamPrivateKeySpecRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteIamPrivateKeySpecExecute(r)
 }
 
 /*
 DeleteIamPrivateKeySpec Delete a 'iam.PrivateKeySpec' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteIamPrivateKeySpecRequest
 */
-func (a *IamApiService) DeleteIamPrivateKeySpec(ctx _context.Context, moid string) ApiDeleteIamPrivateKeySpecRequest {
+func (a *IamApiService) DeleteIamPrivateKeySpec(ctx context.Context, moid string) ApiDeleteIamPrivateKeySpecRequest {
 	return ApiDeleteIamPrivateKeySpecRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -6233,26 +6465,24 @@ func (a *IamApiService) DeleteIamPrivateKeySpec(ctx _context.Context, moid strin
 }
 
 // Execute executes the request
-func (a *IamApiService) DeleteIamPrivateKeySpecExecute(r ApiDeleteIamPrivateKeySpecRequest) (*_nethttp.Response, error) {
+func (a *IamApiService) DeleteIamPrivateKeySpecExecute(r ApiDeleteIamPrivateKeySpecRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.DeleteIamPrivateKeySpec")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/PrivateKeySpecs/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -6271,7 +6501,7 @@ func (a *IamApiService) DeleteIamPrivateKeySpecExecute(r ApiDeleteIamPrivateKeyS
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -6281,15 +6511,15 @@ func (a *IamApiService) DeleteIamPrivateKeySpecExecute(r ApiDeleteIamPrivateKeyS
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -6347,23 +6577,23 @@ func (a *IamApiService) DeleteIamPrivateKeySpecExecute(r ApiDeleteIamPrivateKeyS
 }
 
 type ApiDeleteIamQualifierRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiDeleteIamQualifierRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteIamQualifierRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteIamQualifierExecute(r)
 }
 
 /*
 DeleteIamQualifier Delete a 'iam.Qualifier' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteIamQualifierRequest
 */
-func (a *IamApiService) DeleteIamQualifier(ctx _context.Context, moid string) ApiDeleteIamQualifierRequest {
+func (a *IamApiService) DeleteIamQualifier(ctx context.Context, moid string) ApiDeleteIamQualifierRequest {
 	return ApiDeleteIamQualifierRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -6372,26 +6602,24 @@ func (a *IamApiService) DeleteIamQualifier(ctx _context.Context, moid string) Ap
 }
 
 // Execute executes the request
-func (a *IamApiService) DeleteIamQualifierExecute(r ApiDeleteIamQualifierRequest) (*_nethttp.Response, error) {
+func (a *IamApiService) DeleteIamQualifierExecute(r ApiDeleteIamQualifierRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.DeleteIamQualifier")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Qualifiers/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -6410,7 +6638,7 @@ func (a *IamApiService) DeleteIamQualifierExecute(r ApiDeleteIamQualifierRequest
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -6420,15 +6648,15 @@ func (a *IamApiService) DeleteIamQualifierExecute(r ApiDeleteIamQualifierRequest
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -6486,23 +6714,23 @@ func (a *IamApiService) DeleteIamQualifierExecute(r ApiDeleteIamQualifierRequest
 }
 
 type ApiDeleteIamResourceRolesRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiDeleteIamResourceRolesRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteIamResourceRolesRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteIamResourceRolesExecute(r)
 }
 
 /*
 DeleteIamResourceRoles Delete a 'iam.ResourceRoles' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteIamResourceRolesRequest
 */
-func (a *IamApiService) DeleteIamResourceRoles(ctx _context.Context, moid string) ApiDeleteIamResourceRolesRequest {
+func (a *IamApiService) DeleteIamResourceRoles(ctx context.Context, moid string) ApiDeleteIamResourceRolesRequest {
 	return ApiDeleteIamResourceRolesRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -6511,26 +6739,24 @@ func (a *IamApiService) DeleteIamResourceRoles(ctx _context.Context, moid string
 }
 
 // Execute executes the request
-func (a *IamApiService) DeleteIamResourceRolesExecute(r ApiDeleteIamResourceRolesRequest) (*_nethttp.Response, error) {
+func (a *IamApiService) DeleteIamResourceRolesExecute(r ApiDeleteIamResourceRolesRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.DeleteIamResourceRoles")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/ResourceRoles/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -6549,7 +6775,7 @@ func (a *IamApiService) DeleteIamResourceRolesExecute(r ApiDeleteIamResourceRole
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -6559,15 +6785,15 @@ func (a *IamApiService) DeleteIamResourceRolesExecute(r ApiDeleteIamResourceRole
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -6625,23 +6851,23 @@ func (a *IamApiService) DeleteIamResourceRolesExecute(r ApiDeleteIamResourceRole
 }
 
 type ApiDeleteIamSessionRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiDeleteIamSessionRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteIamSessionRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteIamSessionExecute(r)
 }
 
 /*
 DeleteIamSession Delete a 'iam.Session' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteIamSessionRequest
 */
-func (a *IamApiService) DeleteIamSession(ctx _context.Context, moid string) ApiDeleteIamSessionRequest {
+func (a *IamApiService) DeleteIamSession(ctx context.Context, moid string) ApiDeleteIamSessionRequest {
 	return ApiDeleteIamSessionRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -6650,26 +6876,24 @@ func (a *IamApiService) DeleteIamSession(ctx _context.Context, moid string) ApiD
 }
 
 // Execute executes the request
-func (a *IamApiService) DeleteIamSessionExecute(r ApiDeleteIamSessionRequest) (*_nethttp.Response, error) {
+func (a *IamApiService) DeleteIamSessionExecute(r ApiDeleteIamSessionRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.DeleteIamSession")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Sessions/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -6688,7 +6912,7 @@ func (a *IamApiService) DeleteIamSessionExecute(r ApiDeleteIamSessionRequest) (*
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -6698,15 +6922,15 @@ func (a *IamApiService) DeleteIamSessionExecute(r ApiDeleteIamSessionRequest) (*
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -6764,23 +6988,23 @@ func (a *IamApiService) DeleteIamSessionExecute(r ApiDeleteIamSessionRequest) (*
 }
 
 type ApiDeleteIamSessionLimitsRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiDeleteIamSessionLimitsRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteIamSessionLimitsRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteIamSessionLimitsExecute(r)
 }
 
 /*
 DeleteIamSessionLimits Delete a 'iam.SessionLimits' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteIamSessionLimitsRequest
 */
-func (a *IamApiService) DeleteIamSessionLimits(ctx _context.Context, moid string) ApiDeleteIamSessionLimitsRequest {
+func (a *IamApiService) DeleteIamSessionLimits(ctx context.Context, moid string) ApiDeleteIamSessionLimitsRequest {
 	return ApiDeleteIamSessionLimitsRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -6789,26 +7013,24 @@ func (a *IamApiService) DeleteIamSessionLimits(ctx _context.Context, moid string
 }
 
 // Execute executes the request
-func (a *IamApiService) DeleteIamSessionLimitsExecute(r ApiDeleteIamSessionLimitsRequest) (*_nethttp.Response, error) {
+func (a *IamApiService) DeleteIamSessionLimitsExecute(r ApiDeleteIamSessionLimitsRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.DeleteIamSessionLimits")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/SessionLimits/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -6827,7 +7049,7 @@ func (a *IamApiService) DeleteIamSessionLimitsExecute(r ApiDeleteIamSessionLimit
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -6837,15 +7059,15 @@ func (a *IamApiService) DeleteIamSessionLimitsExecute(r ApiDeleteIamSessionLimit
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -6903,23 +7125,23 @@ func (a *IamApiService) DeleteIamSessionLimitsExecute(r ApiDeleteIamSessionLimit
 }
 
 type ApiDeleteIamTrustPointRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiDeleteIamTrustPointRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteIamTrustPointRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteIamTrustPointExecute(r)
 }
 
 /*
 DeleteIamTrustPoint Delete a 'iam.TrustPoint' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteIamTrustPointRequest
 */
-func (a *IamApiService) DeleteIamTrustPoint(ctx _context.Context, moid string) ApiDeleteIamTrustPointRequest {
+func (a *IamApiService) DeleteIamTrustPoint(ctx context.Context, moid string) ApiDeleteIamTrustPointRequest {
 	return ApiDeleteIamTrustPointRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -6928,26 +7150,24 @@ func (a *IamApiService) DeleteIamTrustPoint(ctx _context.Context, moid string) A
 }
 
 // Execute executes the request
-func (a *IamApiService) DeleteIamTrustPointExecute(r ApiDeleteIamTrustPointRequest) (*_nethttp.Response, error) {
+func (a *IamApiService) DeleteIamTrustPointExecute(r ApiDeleteIamTrustPointRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.DeleteIamTrustPoint")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/TrustPoints/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -6966,7 +7186,7 @@ func (a *IamApiService) DeleteIamTrustPointExecute(r ApiDeleteIamTrustPointReque
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -6976,15 +7196,15 @@ func (a *IamApiService) DeleteIamTrustPointExecute(r ApiDeleteIamTrustPointReque
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -7042,23 +7262,23 @@ func (a *IamApiService) DeleteIamTrustPointExecute(r ApiDeleteIamTrustPointReque
 }
 
 type ApiDeleteIamUserRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiDeleteIamUserRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteIamUserRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteIamUserExecute(r)
 }
 
 /*
 DeleteIamUser Delete a 'iam.User' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteIamUserRequest
 */
-func (a *IamApiService) DeleteIamUser(ctx _context.Context, moid string) ApiDeleteIamUserRequest {
+func (a *IamApiService) DeleteIamUser(ctx context.Context, moid string) ApiDeleteIamUserRequest {
 	return ApiDeleteIamUserRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -7067,26 +7287,24 @@ func (a *IamApiService) DeleteIamUser(ctx _context.Context, moid string) ApiDele
 }
 
 // Execute executes the request
-func (a *IamApiService) DeleteIamUserExecute(r ApiDeleteIamUserRequest) (*_nethttp.Response, error) {
+func (a *IamApiService) DeleteIamUserExecute(r ApiDeleteIamUserRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.DeleteIamUser")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Users/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -7105,7 +7323,7 @@ func (a *IamApiService) DeleteIamUserExecute(r ApiDeleteIamUserRequest) (*_netht
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -7115,15 +7333,15 @@ func (a *IamApiService) DeleteIamUserExecute(r ApiDeleteIamUserRequest) (*_netht
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -7181,23 +7399,23 @@ func (a *IamApiService) DeleteIamUserExecute(r ApiDeleteIamUserRequest) (*_netht
 }
 
 type ApiDeleteIamUserGroupRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiDeleteIamUserGroupRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteIamUserGroupRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteIamUserGroupExecute(r)
 }
 
 /*
 DeleteIamUserGroup Delete a 'iam.UserGroup' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteIamUserGroupRequest
 */
-func (a *IamApiService) DeleteIamUserGroup(ctx _context.Context, moid string) ApiDeleteIamUserGroupRequest {
+func (a *IamApiService) DeleteIamUserGroup(ctx context.Context, moid string) ApiDeleteIamUserGroupRequest {
 	return ApiDeleteIamUserGroupRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -7206,26 +7424,24 @@ func (a *IamApiService) DeleteIamUserGroup(ctx _context.Context, moid string) Ap
 }
 
 // Execute executes the request
-func (a *IamApiService) DeleteIamUserGroupExecute(r ApiDeleteIamUserGroupRequest) (*_nethttp.Response, error) {
+func (a *IamApiService) DeleteIamUserGroupExecute(r ApiDeleteIamUserGroupRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.DeleteIamUserGroup")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/UserGroups/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -7244,7 +7460,7 @@ func (a *IamApiService) DeleteIamUserGroupExecute(r ApiDeleteIamUserGroupRequest
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -7254,15 +7470,15 @@ func (a *IamApiService) DeleteIamUserGroupExecute(r ApiDeleteIamUserGroupRequest
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -7320,23 +7536,23 @@ func (a *IamApiService) DeleteIamUserGroupExecute(r ApiDeleteIamUserGroupRequest
 }
 
 type ApiGetIamAccountByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiGetIamAccountByMoidRequest) Execute() (IamAccount, *_nethttp.Response, error) {
+func (r ApiGetIamAccountByMoidRequest) Execute() (*IamAccount, *http.Response, error) {
 	return r.ApiService.GetIamAccountByMoidExecute(r)
 }
 
 /*
 GetIamAccountByMoid Read a 'iam.Account' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIamAccountByMoidRequest
 */
-func (a *IamApiService) GetIamAccountByMoid(ctx _context.Context, moid string) ApiGetIamAccountByMoidRequest {
+func (a *IamApiService) GetIamAccountByMoid(ctx context.Context, moid string) ApiGetIamAccountByMoidRequest {
 	return ApiGetIamAccountByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -7346,27 +7562,25 @@ func (a *IamApiService) GetIamAccountByMoid(ctx _context.Context, moid string) A
 
 // Execute executes the request
 //  @return IamAccount
-func (a *IamApiService) GetIamAccountByMoidExecute(r ApiGetIamAccountByMoidRequest) (IamAccount, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamAccountByMoidExecute(r ApiGetIamAccountByMoidRequest) (*IamAccount, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamAccount
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamAccount
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamAccountByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Accounts/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -7385,7 +7599,7 @@ func (a *IamApiService) GetIamAccountByMoidExecute(r ApiGetIamAccountByMoidReque
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -7395,15 +7609,15 @@ func (a *IamApiService) GetIamAccountByMoidExecute(r ApiGetIamAccountByMoidReque
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -7459,7 +7673,7 @@ func (a *IamApiService) GetIamAccountByMoidExecute(r ApiGetIamAccountByMoidReque
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -7470,23 +7684,23 @@ func (a *IamApiService) GetIamAccountByMoidExecute(r ApiGetIamAccountByMoidReque
 }
 
 type ApiGetIamAccountExperienceByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiGetIamAccountExperienceByMoidRequest) Execute() (IamAccountExperience, *_nethttp.Response, error) {
+func (r ApiGetIamAccountExperienceByMoidRequest) Execute() (*IamAccountExperience, *http.Response, error) {
 	return r.ApiService.GetIamAccountExperienceByMoidExecute(r)
 }
 
 /*
 GetIamAccountExperienceByMoid Read a 'iam.AccountExperience' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIamAccountExperienceByMoidRequest
 */
-func (a *IamApiService) GetIamAccountExperienceByMoid(ctx _context.Context, moid string) ApiGetIamAccountExperienceByMoidRequest {
+func (a *IamApiService) GetIamAccountExperienceByMoid(ctx context.Context, moid string) ApiGetIamAccountExperienceByMoidRequest {
 	return ApiGetIamAccountExperienceByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -7496,27 +7710,25 @@ func (a *IamApiService) GetIamAccountExperienceByMoid(ctx _context.Context, moid
 
 // Execute executes the request
 //  @return IamAccountExperience
-func (a *IamApiService) GetIamAccountExperienceByMoidExecute(r ApiGetIamAccountExperienceByMoidRequest) (IamAccountExperience, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamAccountExperienceByMoidExecute(r ApiGetIamAccountExperienceByMoidRequest) (*IamAccountExperience, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamAccountExperience
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamAccountExperience
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamAccountExperienceByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/AccountExperiences/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -7535,7 +7747,7 @@ func (a *IamApiService) GetIamAccountExperienceByMoidExecute(r ApiGetIamAccountE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -7545,15 +7757,15 @@ func (a *IamApiService) GetIamAccountExperienceByMoidExecute(r ApiGetIamAccountE
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -7609,7 +7821,7 @@ func (a *IamApiService) GetIamAccountExperienceByMoidExecute(r ApiGetIamAccountE
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -7620,7 +7832,7 @@ func (a *IamApiService) GetIamAccountExperienceByMoidExecute(r ApiGetIamAccountE
 }
 
 type ApiGetIamAccountExperienceListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	filter      *string
 	orderby     *string
@@ -7701,17 +7913,17 @@ func (r ApiGetIamAccountExperienceListRequest) Tags(tags string) ApiGetIamAccoun
 	return r
 }
 
-func (r ApiGetIamAccountExperienceListRequest) Execute() (IamAccountExperienceResponse, *_nethttp.Response, error) {
+func (r ApiGetIamAccountExperienceListRequest) Execute() (*IamAccountExperienceResponse, *http.Response, error) {
 	return r.ApiService.GetIamAccountExperienceListExecute(r)
 }
 
 /*
 GetIamAccountExperienceList Read a 'iam.AccountExperience' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIamAccountExperienceListRequest
 */
-func (a *IamApiService) GetIamAccountExperienceList(ctx _context.Context) ApiGetIamAccountExperienceListRequest {
+func (a *IamApiService) GetIamAccountExperienceList(ctx context.Context) ApiGetIamAccountExperienceListRequest {
 	return ApiGetIamAccountExperienceListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -7720,26 +7932,24 @@ func (a *IamApiService) GetIamAccountExperienceList(ctx _context.Context) ApiGet
 
 // Execute executes the request
 //  @return IamAccountExperienceResponse
-func (a *IamApiService) GetIamAccountExperienceListExecute(r ApiGetIamAccountExperienceListRequest) (IamAccountExperienceResponse, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamAccountExperienceListExecute(r ApiGetIamAccountExperienceListRequest) (*IamAccountExperienceResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamAccountExperienceResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamAccountExperienceResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamAccountExperienceList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/AccountExperiences"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -7791,7 +8001,7 @@ func (a *IamApiService) GetIamAccountExperienceListExecute(r ApiGetIamAccountExp
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -7801,15 +8011,15 @@ func (a *IamApiService) GetIamAccountExperienceListExecute(r ApiGetIamAccountExp
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -7865,7 +8075,7 @@ func (a *IamApiService) GetIamAccountExperienceListExecute(r ApiGetIamAccountExp
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -7876,7 +8086,7 @@ func (a *IamApiService) GetIamAccountExperienceListExecute(r ApiGetIamAccountExp
 }
 
 type ApiGetIamAccountListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	filter      *string
 	orderby     *string
@@ -7957,17 +8167,17 @@ func (r ApiGetIamAccountListRequest) Tags(tags string) ApiGetIamAccountListReque
 	return r
 }
 
-func (r ApiGetIamAccountListRequest) Execute() (IamAccountResponse, *_nethttp.Response, error) {
+func (r ApiGetIamAccountListRequest) Execute() (*IamAccountResponse, *http.Response, error) {
 	return r.ApiService.GetIamAccountListExecute(r)
 }
 
 /*
 GetIamAccountList Read a 'iam.Account' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIamAccountListRequest
 */
-func (a *IamApiService) GetIamAccountList(ctx _context.Context) ApiGetIamAccountListRequest {
+func (a *IamApiService) GetIamAccountList(ctx context.Context) ApiGetIamAccountListRequest {
 	return ApiGetIamAccountListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -7976,26 +8186,24 @@ func (a *IamApiService) GetIamAccountList(ctx _context.Context) ApiGetIamAccount
 
 // Execute executes the request
 //  @return IamAccountResponse
-func (a *IamApiService) GetIamAccountListExecute(r ApiGetIamAccountListRequest) (IamAccountResponse, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamAccountListExecute(r ApiGetIamAccountListRequest) (*IamAccountResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamAccountResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamAccountResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamAccountList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Accounts"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -8047,7 +8255,7 @@ func (a *IamApiService) GetIamAccountListExecute(r ApiGetIamAccountListRequest) 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -8057,15 +8265,15 @@ func (a *IamApiService) GetIamAccountListExecute(r ApiGetIamAccountListRequest) 
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -8121,7 +8329,7 @@ func (a *IamApiService) GetIamAccountListExecute(r ApiGetIamAccountListRequest) 
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -8132,23 +8340,23 @@ func (a *IamApiService) GetIamAccountListExecute(r ApiGetIamAccountListRequest) 
 }
 
 type ApiGetIamApiKeyByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiGetIamApiKeyByMoidRequest) Execute() (IamApiKey, *_nethttp.Response, error) {
+func (r ApiGetIamApiKeyByMoidRequest) Execute() (*IamApiKey, *http.Response, error) {
 	return r.ApiService.GetIamApiKeyByMoidExecute(r)
 }
 
 /*
 GetIamApiKeyByMoid Read a 'iam.ApiKey' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIamApiKeyByMoidRequest
 */
-func (a *IamApiService) GetIamApiKeyByMoid(ctx _context.Context, moid string) ApiGetIamApiKeyByMoidRequest {
+func (a *IamApiService) GetIamApiKeyByMoid(ctx context.Context, moid string) ApiGetIamApiKeyByMoidRequest {
 	return ApiGetIamApiKeyByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -8158,27 +8366,25 @@ func (a *IamApiService) GetIamApiKeyByMoid(ctx _context.Context, moid string) Ap
 
 // Execute executes the request
 //  @return IamApiKey
-func (a *IamApiService) GetIamApiKeyByMoidExecute(r ApiGetIamApiKeyByMoidRequest) (IamApiKey, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamApiKeyByMoidExecute(r ApiGetIamApiKeyByMoidRequest) (*IamApiKey, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamApiKey
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamApiKey
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamApiKeyByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/ApiKeys/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -8197,7 +8403,7 @@ func (a *IamApiService) GetIamApiKeyByMoidExecute(r ApiGetIamApiKeyByMoidRequest
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -8207,15 +8413,15 @@ func (a *IamApiService) GetIamApiKeyByMoidExecute(r ApiGetIamApiKeyByMoidRequest
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -8271,7 +8477,7 @@ func (a *IamApiService) GetIamApiKeyByMoidExecute(r ApiGetIamApiKeyByMoidRequest
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -8282,7 +8488,7 @@ func (a *IamApiService) GetIamApiKeyByMoidExecute(r ApiGetIamApiKeyByMoidRequest
 }
 
 type ApiGetIamApiKeyListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	filter      *string
 	orderby     *string
@@ -8363,17 +8569,17 @@ func (r ApiGetIamApiKeyListRequest) Tags(tags string) ApiGetIamApiKeyListRequest
 	return r
 }
 
-func (r ApiGetIamApiKeyListRequest) Execute() (IamApiKeyResponse, *_nethttp.Response, error) {
+func (r ApiGetIamApiKeyListRequest) Execute() (*IamApiKeyResponse, *http.Response, error) {
 	return r.ApiService.GetIamApiKeyListExecute(r)
 }
 
 /*
 GetIamApiKeyList Read a 'iam.ApiKey' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIamApiKeyListRequest
 */
-func (a *IamApiService) GetIamApiKeyList(ctx _context.Context) ApiGetIamApiKeyListRequest {
+func (a *IamApiService) GetIamApiKeyList(ctx context.Context) ApiGetIamApiKeyListRequest {
 	return ApiGetIamApiKeyListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -8382,26 +8588,24 @@ func (a *IamApiService) GetIamApiKeyList(ctx _context.Context) ApiGetIamApiKeyLi
 
 // Execute executes the request
 //  @return IamApiKeyResponse
-func (a *IamApiService) GetIamApiKeyListExecute(r ApiGetIamApiKeyListRequest) (IamApiKeyResponse, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamApiKeyListExecute(r ApiGetIamApiKeyListRequest) (*IamApiKeyResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamApiKeyResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamApiKeyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamApiKeyList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/ApiKeys"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -8453,7 +8657,7 @@ func (a *IamApiService) GetIamApiKeyListExecute(r ApiGetIamApiKeyListRequest) (I
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -8463,15 +8667,15 @@ func (a *IamApiService) GetIamApiKeyListExecute(r ApiGetIamApiKeyListRequest) (I
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -8527,7 +8731,7 @@ func (a *IamApiService) GetIamApiKeyListExecute(r ApiGetIamApiKeyListRequest) (I
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -8538,23 +8742,23 @@ func (a *IamApiService) GetIamApiKeyListExecute(r ApiGetIamApiKeyListRequest) (I
 }
 
 type ApiGetIamAppRegistrationByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiGetIamAppRegistrationByMoidRequest) Execute() (IamAppRegistration, *_nethttp.Response, error) {
+func (r ApiGetIamAppRegistrationByMoidRequest) Execute() (*IamAppRegistration, *http.Response, error) {
 	return r.ApiService.GetIamAppRegistrationByMoidExecute(r)
 }
 
 /*
 GetIamAppRegistrationByMoid Read a 'iam.AppRegistration' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIamAppRegistrationByMoidRequest
 */
-func (a *IamApiService) GetIamAppRegistrationByMoid(ctx _context.Context, moid string) ApiGetIamAppRegistrationByMoidRequest {
+func (a *IamApiService) GetIamAppRegistrationByMoid(ctx context.Context, moid string) ApiGetIamAppRegistrationByMoidRequest {
 	return ApiGetIamAppRegistrationByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -8564,27 +8768,25 @@ func (a *IamApiService) GetIamAppRegistrationByMoid(ctx _context.Context, moid s
 
 // Execute executes the request
 //  @return IamAppRegistration
-func (a *IamApiService) GetIamAppRegistrationByMoidExecute(r ApiGetIamAppRegistrationByMoidRequest) (IamAppRegistration, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamAppRegistrationByMoidExecute(r ApiGetIamAppRegistrationByMoidRequest) (*IamAppRegistration, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamAppRegistration
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamAppRegistration
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamAppRegistrationByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/AppRegistrations/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -8603,7 +8805,7 @@ func (a *IamApiService) GetIamAppRegistrationByMoidExecute(r ApiGetIamAppRegistr
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -8613,15 +8815,15 @@ func (a *IamApiService) GetIamAppRegistrationByMoidExecute(r ApiGetIamAppRegistr
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -8677,7 +8879,7 @@ func (a *IamApiService) GetIamAppRegistrationByMoidExecute(r ApiGetIamAppRegistr
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -8688,7 +8890,7 @@ func (a *IamApiService) GetIamAppRegistrationByMoidExecute(r ApiGetIamAppRegistr
 }
 
 type ApiGetIamAppRegistrationListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	filter      *string
 	orderby     *string
@@ -8769,17 +8971,17 @@ func (r ApiGetIamAppRegistrationListRequest) Tags(tags string) ApiGetIamAppRegis
 	return r
 }
 
-func (r ApiGetIamAppRegistrationListRequest) Execute() (IamAppRegistrationResponse, *_nethttp.Response, error) {
+func (r ApiGetIamAppRegistrationListRequest) Execute() (*IamAppRegistrationResponse, *http.Response, error) {
 	return r.ApiService.GetIamAppRegistrationListExecute(r)
 }
 
 /*
 GetIamAppRegistrationList Read a 'iam.AppRegistration' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIamAppRegistrationListRequest
 */
-func (a *IamApiService) GetIamAppRegistrationList(ctx _context.Context) ApiGetIamAppRegistrationListRequest {
+func (a *IamApiService) GetIamAppRegistrationList(ctx context.Context) ApiGetIamAppRegistrationListRequest {
 	return ApiGetIamAppRegistrationListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -8788,26 +8990,24 @@ func (a *IamApiService) GetIamAppRegistrationList(ctx _context.Context) ApiGetIa
 
 // Execute executes the request
 //  @return IamAppRegistrationResponse
-func (a *IamApiService) GetIamAppRegistrationListExecute(r ApiGetIamAppRegistrationListRequest) (IamAppRegistrationResponse, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamAppRegistrationListExecute(r ApiGetIamAppRegistrationListRequest) (*IamAppRegistrationResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamAppRegistrationResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamAppRegistrationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamAppRegistrationList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/AppRegistrations"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -8859,7 +9059,7 @@ func (a *IamApiService) GetIamAppRegistrationListExecute(r ApiGetIamAppRegistrat
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -8869,15 +9069,15 @@ func (a *IamApiService) GetIamAppRegistrationListExecute(r ApiGetIamAppRegistrat
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -8933,7 +9133,7 @@ func (a *IamApiService) GetIamAppRegistrationListExecute(r ApiGetIamAppRegistrat
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -8944,23 +9144,23 @@ func (a *IamApiService) GetIamAppRegistrationListExecute(r ApiGetIamAppRegistrat
 }
 
 type ApiGetIamBannerMessageByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiGetIamBannerMessageByMoidRequest) Execute() (IamBannerMessage, *_nethttp.Response, error) {
+func (r ApiGetIamBannerMessageByMoidRequest) Execute() (*IamBannerMessage, *http.Response, error) {
 	return r.ApiService.GetIamBannerMessageByMoidExecute(r)
 }
 
 /*
 GetIamBannerMessageByMoid Read a 'iam.BannerMessage' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIamBannerMessageByMoidRequest
 */
-func (a *IamApiService) GetIamBannerMessageByMoid(ctx _context.Context, moid string) ApiGetIamBannerMessageByMoidRequest {
+func (a *IamApiService) GetIamBannerMessageByMoid(ctx context.Context, moid string) ApiGetIamBannerMessageByMoidRequest {
 	return ApiGetIamBannerMessageByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -8970,27 +9170,25 @@ func (a *IamApiService) GetIamBannerMessageByMoid(ctx _context.Context, moid str
 
 // Execute executes the request
 //  @return IamBannerMessage
-func (a *IamApiService) GetIamBannerMessageByMoidExecute(r ApiGetIamBannerMessageByMoidRequest) (IamBannerMessage, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamBannerMessageByMoidExecute(r ApiGetIamBannerMessageByMoidRequest) (*IamBannerMessage, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamBannerMessage
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamBannerMessage
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamBannerMessageByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/BannerMessages/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -9009,7 +9207,7 @@ func (a *IamApiService) GetIamBannerMessageByMoidExecute(r ApiGetIamBannerMessag
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -9019,15 +9217,15 @@ func (a *IamApiService) GetIamBannerMessageByMoidExecute(r ApiGetIamBannerMessag
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -9083,7 +9281,7 @@ func (a *IamApiService) GetIamBannerMessageByMoidExecute(r ApiGetIamBannerMessag
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -9094,7 +9292,7 @@ func (a *IamApiService) GetIamBannerMessageByMoidExecute(r ApiGetIamBannerMessag
 }
 
 type ApiGetIamBannerMessageListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	filter      *string
 	orderby     *string
@@ -9175,17 +9373,17 @@ func (r ApiGetIamBannerMessageListRequest) Tags(tags string) ApiGetIamBannerMess
 	return r
 }
 
-func (r ApiGetIamBannerMessageListRequest) Execute() (IamBannerMessageResponse, *_nethttp.Response, error) {
+func (r ApiGetIamBannerMessageListRequest) Execute() (*IamBannerMessageResponse, *http.Response, error) {
 	return r.ApiService.GetIamBannerMessageListExecute(r)
 }
 
 /*
 GetIamBannerMessageList Read a 'iam.BannerMessage' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIamBannerMessageListRequest
 */
-func (a *IamApiService) GetIamBannerMessageList(ctx _context.Context) ApiGetIamBannerMessageListRequest {
+func (a *IamApiService) GetIamBannerMessageList(ctx context.Context) ApiGetIamBannerMessageListRequest {
 	return ApiGetIamBannerMessageListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -9194,26 +9392,24 @@ func (a *IamApiService) GetIamBannerMessageList(ctx _context.Context) ApiGetIamB
 
 // Execute executes the request
 //  @return IamBannerMessageResponse
-func (a *IamApiService) GetIamBannerMessageListExecute(r ApiGetIamBannerMessageListRequest) (IamBannerMessageResponse, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamBannerMessageListExecute(r ApiGetIamBannerMessageListRequest) (*IamBannerMessageResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamBannerMessageResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamBannerMessageResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamBannerMessageList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/BannerMessages"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -9265,7 +9461,7 @@ func (a *IamApiService) GetIamBannerMessageListExecute(r ApiGetIamBannerMessageL
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -9275,15 +9471,15 @@ func (a *IamApiService) GetIamBannerMessageListExecute(r ApiGetIamBannerMessageL
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -9339,7 +9535,7 @@ func (a *IamApiService) GetIamBannerMessageListExecute(r ApiGetIamBannerMessageL
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -9350,23 +9546,23 @@ func (a *IamApiService) GetIamBannerMessageListExecute(r ApiGetIamBannerMessageL
 }
 
 type ApiGetIamCertificateByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiGetIamCertificateByMoidRequest) Execute() (IamCertificate, *_nethttp.Response, error) {
+func (r ApiGetIamCertificateByMoidRequest) Execute() (*IamCertificate, *http.Response, error) {
 	return r.ApiService.GetIamCertificateByMoidExecute(r)
 }
 
 /*
 GetIamCertificateByMoid Read a 'iam.Certificate' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIamCertificateByMoidRequest
 */
-func (a *IamApiService) GetIamCertificateByMoid(ctx _context.Context, moid string) ApiGetIamCertificateByMoidRequest {
+func (a *IamApiService) GetIamCertificateByMoid(ctx context.Context, moid string) ApiGetIamCertificateByMoidRequest {
 	return ApiGetIamCertificateByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -9376,27 +9572,25 @@ func (a *IamApiService) GetIamCertificateByMoid(ctx _context.Context, moid strin
 
 // Execute executes the request
 //  @return IamCertificate
-func (a *IamApiService) GetIamCertificateByMoidExecute(r ApiGetIamCertificateByMoidRequest) (IamCertificate, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamCertificateByMoidExecute(r ApiGetIamCertificateByMoidRequest) (*IamCertificate, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamCertificate
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamCertificate
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamCertificateByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Certificates/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -9415,7 +9609,7 @@ func (a *IamApiService) GetIamCertificateByMoidExecute(r ApiGetIamCertificateByM
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -9425,15 +9619,15 @@ func (a *IamApiService) GetIamCertificateByMoidExecute(r ApiGetIamCertificateByM
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -9489,7 +9683,7 @@ func (a *IamApiService) GetIamCertificateByMoidExecute(r ApiGetIamCertificateByM
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -9500,7 +9694,7 @@ func (a *IamApiService) GetIamCertificateByMoidExecute(r ApiGetIamCertificateByM
 }
 
 type ApiGetIamCertificateListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	filter      *string
 	orderby     *string
@@ -9581,17 +9775,17 @@ func (r ApiGetIamCertificateListRequest) Tags(tags string) ApiGetIamCertificateL
 	return r
 }
 
-func (r ApiGetIamCertificateListRequest) Execute() (IamCertificateResponse, *_nethttp.Response, error) {
+func (r ApiGetIamCertificateListRequest) Execute() (*IamCertificateResponse, *http.Response, error) {
 	return r.ApiService.GetIamCertificateListExecute(r)
 }
 
 /*
 GetIamCertificateList Read a 'iam.Certificate' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIamCertificateListRequest
 */
-func (a *IamApiService) GetIamCertificateList(ctx _context.Context) ApiGetIamCertificateListRequest {
+func (a *IamApiService) GetIamCertificateList(ctx context.Context) ApiGetIamCertificateListRequest {
 	return ApiGetIamCertificateListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -9600,26 +9794,24 @@ func (a *IamApiService) GetIamCertificateList(ctx _context.Context) ApiGetIamCer
 
 // Execute executes the request
 //  @return IamCertificateResponse
-func (a *IamApiService) GetIamCertificateListExecute(r ApiGetIamCertificateListRequest) (IamCertificateResponse, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamCertificateListExecute(r ApiGetIamCertificateListRequest) (*IamCertificateResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamCertificateResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamCertificateResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamCertificateList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Certificates"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -9671,7 +9863,7 @@ func (a *IamApiService) GetIamCertificateListExecute(r ApiGetIamCertificateListR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -9681,15 +9873,15 @@ func (a *IamApiService) GetIamCertificateListExecute(r ApiGetIamCertificateListR
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -9745,7 +9937,7 @@ func (a *IamApiService) GetIamCertificateListExecute(r ApiGetIamCertificateListR
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -9756,23 +9948,23 @@ func (a *IamApiService) GetIamCertificateListExecute(r ApiGetIamCertificateListR
 }
 
 type ApiGetIamCertificateRequestByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiGetIamCertificateRequestByMoidRequest) Execute() (IamCertificateRequest, *_nethttp.Response, error) {
+func (r ApiGetIamCertificateRequestByMoidRequest) Execute() (*IamCertificateRequest, *http.Response, error) {
 	return r.ApiService.GetIamCertificateRequestByMoidExecute(r)
 }
 
 /*
 GetIamCertificateRequestByMoid Read a 'iam.CertificateRequest' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIamCertificateRequestByMoidRequest
 */
-func (a *IamApiService) GetIamCertificateRequestByMoid(ctx _context.Context, moid string) ApiGetIamCertificateRequestByMoidRequest {
+func (a *IamApiService) GetIamCertificateRequestByMoid(ctx context.Context, moid string) ApiGetIamCertificateRequestByMoidRequest {
 	return ApiGetIamCertificateRequestByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -9782,27 +9974,25 @@ func (a *IamApiService) GetIamCertificateRequestByMoid(ctx _context.Context, moi
 
 // Execute executes the request
 //  @return IamCertificateRequest
-func (a *IamApiService) GetIamCertificateRequestByMoidExecute(r ApiGetIamCertificateRequestByMoidRequest) (IamCertificateRequest, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamCertificateRequestByMoidExecute(r ApiGetIamCertificateRequestByMoidRequest) (*IamCertificateRequest, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamCertificateRequest
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamCertificateRequest
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamCertificateRequestByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/CertificateRequests/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -9821,7 +10011,7 @@ func (a *IamApiService) GetIamCertificateRequestByMoidExecute(r ApiGetIamCertifi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -9831,15 +10021,15 @@ func (a *IamApiService) GetIamCertificateRequestByMoidExecute(r ApiGetIamCertifi
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -9895,7 +10085,7 @@ func (a *IamApiService) GetIamCertificateRequestByMoidExecute(r ApiGetIamCertifi
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -9906,7 +10096,7 @@ func (a *IamApiService) GetIamCertificateRequestByMoidExecute(r ApiGetIamCertifi
 }
 
 type ApiGetIamCertificateRequestListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	filter      *string
 	orderby     *string
@@ -9987,17 +10177,17 @@ func (r ApiGetIamCertificateRequestListRequest) Tags(tags string) ApiGetIamCerti
 	return r
 }
 
-func (r ApiGetIamCertificateRequestListRequest) Execute() (IamCertificateRequestResponse, *_nethttp.Response, error) {
+func (r ApiGetIamCertificateRequestListRequest) Execute() (*IamCertificateRequestResponse, *http.Response, error) {
 	return r.ApiService.GetIamCertificateRequestListExecute(r)
 }
 
 /*
 GetIamCertificateRequestList Read a 'iam.CertificateRequest' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIamCertificateRequestListRequest
 */
-func (a *IamApiService) GetIamCertificateRequestList(ctx _context.Context) ApiGetIamCertificateRequestListRequest {
+func (a *IamApiService) GetIamCertificateRequestList(ctx context.Context) ApiGetIamCertificateRequestListRequest {
 	return ApiGetIamCertificateRequestListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -10006,26 +10196,24 @@ func (a *IamApiService) GetIamCertificateRequestList(ctx _context.Context) ApiGe
 
 // Execute executes the request
 //  @return IamCertificateRequestResponse
-func (a *IamApiService) GetIamCertificateRequestListExecute(r ApiGetIamCertificateRequestListRequest) (IamCertificateRequestResponse, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamCertificateRequestListExecute(r ApiGetIamCertificateRequestListRequest) (*IamCertificateRequestResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamCertificateRequestResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamCertificateRequestResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamCertificateRequestList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/CertificateRequests"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -10077,7 +10265,7 @@ func (a *IamApiService) GetIamCertificateRequestListExecute(r ApiGetIamCertifica
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -10087,15 +10275,15 @@ func (a *IamApiService) GetIamCertificateRequestListExecute(r ApiGetIamCertifica
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -10151,7 +10339,7 @@ func (a *IamApiService) GetIamCertificateRequestListExecute(r ApiGetIamCertifica
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -10162,23 +10350,23 @@ func (a *IamApiService) GetIamCertificateRequestListExecute(r ApiGetIamCertifica
 }
 
 type ApiGetIamDomainGroupByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiGetIamDomainGroupByMoidRequest) Execute() (IamDomainGroup, *_nethttp.Response, error) {
+func (r ApiGetIamDomainGroupByMoidRequest) Execute() (*IamDomainGroup, *http.Response, error) {
 	return r.ApiService.GetIamDomainGroupByMoidExecute(r)
 }
 
 /*
 GetIamDomainGroupByMoid Read a 'iam.DomainGroup' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIamDomainGroupByMoidRequest
 */
-func (a *IamApiService) GetIamDomainGroupByMoid(ctx _context.Context, moid string) ApiGetIamDomainGroupByMoidRequest {
+func (a *IamApiService) GetIamDomainGroupByMoid(ctx context.Context, moid string) ApiGetIamDomainGroupByMoidRequest {
 	return ApiGetIamDomainGroupByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -10188,27 +10376,25 @@ func (a *IamApiService) GetIamDomainGroupByMoid(ctx _context.Context, moid strin
 
 // Execute executes the request
 //  @return IamDomainGroup
-func (a *IamApiService) GetIamDomainGroupByMoidExecute(r ApiGetIamDomainGroupByMoidRequest) (IamDomainGroup, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamDomainGroupByMoidExecute(r ApiGetIamDomainGroupByMoidRequest) (*IamDomainGroup, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamDomainGroup
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamDomainGroup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamDomainGroupByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/DomainGroups/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -10227,7 +10413,7 @@ func (a *IamApiService) GetIamDomainGroupByMoidExecute(r ApiGetIamDomainGroupByM
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -10237,15 +10423,15 @@ func (a *IamApiService) GetIamDomainGroupByMoidExecute(r ApiGetIamDomainGroupByM
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -10301,7 +10487,7 @@ func (a *IamApiService) GetIamDomainGroupByMoidExecute(r ApiGetIamDomainGroupByM
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -10312,7 +10498,7 @@ func (a *IamApiService) GetIamDomainGroupByMoidExecute(r ApiGetIamDomainGroupByM
 }
 
 type ApiGetIamDomainGroupListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	filter      *string
 	orderby     *string
@@ -10393,17 +10579,17 @@ func (r ApiGetIamDomainGroupListRequest) Tags(tags string) ApiGetIamDomainGroupL
 	return r
 }
 
-func (r ApiGetIamDomainGroupListRequest) Execute() (IamDomainGroupResponse, *_nethttp.Response, error) {
+func (r ApiGetIamDomainGroupListRequest) Execute() (*IamDomainGroupResponse, *http.Response, error) {
 	return r.ApiService.GetIamDomainGroupListExecute(r)
 }
 
 /*
 GetIamDomainGroupList Read a 'iam.DomainGroup' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIamDomainGroupListRequest
 */
-func (a *IamApiService) GetIamDomainGroupList(ctx _context.Context) ApiGetIamDomainGroupListRequest {
+func (a *IamApiService) GetIamDomainGroupList(ctx context.Context) ApiGetIamDomainGroupListRequest {
 	return ApiGetIamDomainGroupListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -10412,26 +10598,24 @@ func (a *IamApiService) GetIamDomainGroupList(ctx _context.Context) ApiGetIamDom
 
 // Execute executes the request
 //  @return IamDomainGroupResponse
-func (a *IamApiService) GetIamDomainGroupListExecute(r ApiGetIamDomainGroupListRequest) (IamDomainGroupResponse, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamDomainGroupListExecute(r ApiGetIamDomainGroupListRequest) (*IamDomainGroupResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamDomainGroupResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamDomainGroupResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamDomainGroupList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/DomainGroups"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -10483,7 +10667,7 @@ func (a *IamApiService) GetIamDomainGroupListExecute(r ApiGetIamDomainGroupListR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -10493,15 +10677,15 @@ func (a *IamApiService) GetIamDomainGroupListExecute(r ApiGetIamDomainGroupListR
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -10557,7 +10741,7 @@ func (a *IamApiService) GetIamDomainGroupListExecute(r ApiGetIamDomainGroupListR
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -10567,25 +10751,25 @@ func (a *IamApiService) GetIamDomainGroupListExecute(r ApiGetIamDomainGroupListR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetIamEndPointPrivilegeByMoidRequest struct {
-	ctx        _context.Context
+type ApiGetIamDomainNameInfoByMoidRequest struct {
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiGetIamEndPointPrivilegeByMoidRequest) Execute() (IamEndPointPrivilege, *_nethttp.Response, error) {
-	return r.ApiService.GetIamEndPointPrivilegeByMoidExecute(r)
+func (r ApiGetIamDomainNameInfoByMoidRequest) Execute() (*IamDomainNameInfo, *http.Response, error) {
+	return r.ApiService.GetIamDomainNameInfoByMoidExecute(r)
 }
 
 /*
-GetIamEndPointPrivilegeByMoid Read a 'iam.EndPointPrivilege' resource.
+GetIamDomainNameInfoByMoid Read a 'iam.DomainNameInfo' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamEndPointPrivilegeByMoidRequest
+ @return ApiGetIamDomainNameInfoByMoidRequest
 */
-func (a *IamApiService) GetIamEndPointPrivilegeByMoid(ctx _context.Context, moid string) ApiGetIamEndPointPrivilegeByMoidRequest {
-	return ApiGetIamEndPointPrivilegeByMoidRequest{
+func (a *IamApiService) GetIamDomainNameInfoByMoid(ctx context.Context, moid string) ApiGetIamDomainNameInfoByMoidRequest {
+	return ApiGetIamDomainNameInfoByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
 		moid:       moid,
@@ -10593,28 +10777,26 @@ func (a *IamApiService) GetIamEndPointPrivilegeByMoid(ctx _context.Context, moid
 }
 
 // Execute executes the request
-//  @return IamEndPointPrivilege
-func (a *IamApiService) GetIamEndPointPrivilegeByMoidExecute(r ApiGetIamEndPointPrivilegeByMoidRequest) (IamEndPointPrivilege, *_nethttp.Response, error) {
+//  @return IamDomainNameInfo
+func (a *IamApiService) GetIamDomainNameInfoByMoidExecute(r ApiGetIamDomainNameInfoByMoidRequest) (*IamDomainNameInfo, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamEndPointPrivilege
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamDomainNameInfo
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamEndPointPrivilegeByMoid")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamDomainNameInfoByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/api/v1/iam/EndPointPrivileges/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath := localBasePath + "/api/v1/iam/DomainNameInfos/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -10633,7 +10815,7 @@ func (a *IamApiService) GetIamEndPointPrivilegeByMoidExecute(r ApiGetIamEndPoint
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -10643,15 +10825,15 @@ func (a *IamApiService) GetIamEndPointPrivilegeByMoidExecute(r ApiGetIamEndPoint
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -10707,7 +10889,409 @@ func (a *IamApiService) GetIamEndPointPrivilegeByMoidExecute(r ApiGetIamEndPoint
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetIamDomainNameInfoListRequest struct {
+	ctx         context.Context
+	ApiService  *IamApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetIamDomainNameInfoListRequest) Filter(filter string) ApiGetIamDomainNameInfoListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetIamDomainNameInfoListRequest) Orderby(orderby string) ApiGetIamDomainNameInfoListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetIamDomainNameInfoListRequest) Top(top int32) ApiGetIamDomainNameInfoListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetIamDomainNameInfoListRequest) Skip(skip int32) ApiGetIamDomainNameInfoListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetIamDomainNameInfoListRequest) Select_(select_ string) ApiGetIamDomainNameInfoListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetIamDomainNameInfoListRequest) Expand(expand string) ApiGetIamDomainNameInfoListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetIamDomainNameInfoListRequest) Apply(apply string) ApiGetIamDomainNameInfoListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetIamDomainNameInfoListRequest) Count(count bool) ApiGetIamDomainNameInfoListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetIamDomainNameInfoListRequest) Inlinecount(inlinecount string) ApiGetIamDomainNameInfoListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetIamDomainNameInfoListRequest) At(at string) ApiGetIamDomainNameInfoListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetIamDomainNameInfoListRequest) Tags(tags string) ApiGetIamDomainNameInfoListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetIamDomainNameInfoListRequest) Execute() (*IamDomainNameInfoResponse, *http.Response, error) {
+	return r.ApiService.GetIamDomainNameInfoListExecute(r)
+}
+
+/*
+GetIamDomainNameInfoList Read a 'iam.DomainNameInfo' resource.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetIamDomainNameInfoListRequest
+*/
+func (a *IamApiService) GetIamDomainNameInfoList(ctx context.Context) ApiGetIamDomainNameInfoListRequest {
+	return ApiGetIamDomainNameInfoListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//  @return IamDomainNameInfoResponse
+func (a *IamApiService) GetIamDomainNameInfoListExecute(r ApiGetIamDomainNameInfoListRequest) (*IamDomainNameInfoResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamDomainNameInfoResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamDomainNameInfoList")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/iam/DomainNameInfos"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetIamEndPointPrivilegeByMoidRequest struct {
+	ctx        context.Context
+	ApiService *IamApiService
+	moid       string
+}
+
+func (r ApiGetIamEndPointPrivilegeByMoidRequest) Execute() (*IamEndPointPrivilege, *http.Response, error) {
+	return r.ApiService.GetIamEndPointPrivilegeByMoidExecute(r)
+}
+
+/*
+GetIamEndPointPrivilegeByMoid Read a 'iam.EndPointPrivilege' resource.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetIamEndPointPrivilegeByMoidRequest
+*/
+func (a *IamApiService) GetIamEndPointPrivilegeByMoid(ctx context.Context, moid string) ApiGetIamEndPointPrivilegeByMoidRequest {
+	return ApiGetIamEndPointPrivilegeByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//  @return IamEndPointPrivilege
+func (a *IamApiService) GetIamEndPointPrivilegeByMoidExecute(r ApiGetIamEndPointPrivilegeByMoidRequest) (*IamEndPointPrivilege, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamEndPointPrivilege
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamEndPointPrivilegeByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/iam/EndPointPrivileges/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -10718,7 +11302,7 @@ func (a *IamApiService) GetIamEndPointPrivilegeByMoidExecute(r ApiGetIamEndPoint
 }
 
 type ApiGetIamEndPointPrivilegeListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	filter      *string
 	orderby     *string
@@ -10799,17 +11383,17 @@ func (r ApiGetIamEndPointPrivilegeListRequest) Tags(tags string) ApiGetIamEndPoi
 	return r
 }
 
-func (r ApiGetIamEndPointPrivilegeListRequest) Execute() (IamEndPointPrivilegeResponse, *_nethttp.Response, error) {
+func (r ApiGetIamEndPointPrivilegeListRequest) Execute() (*IamEndPointPrivilegeResponse, *http.Response, error) {
 	return r.ApiService.GetIamEndPointPrivilegeListExecute(r)
 }
 
 /*
 GetIamEndPointPrivilegeList Read a 'iam.EndPointPrivilege' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIamEndPointPrivilegeListRequest
 */
-func (a *IamApiService) GetIamEndPointPrivilegeList(ctx _context.Context) ApiGetIamEndPointPrivilegeListRequest {
+func (a *IamApiService) GetIamEndPointPrivilegeList(ctx context.Context) ApiGetIamEndPointPrivilegeListRequest {
 	return ApiGetIamEndPointPrivilegeListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -10818,26 +11402,24 @@ func (a *IamApiService) GetIamEndPointPrivilegeList(ctx _context.Context) ApiGet
 
 // Execute executes the request
 //  @return IamEndPointPrivilegeResponse
-func (a *IamApiService) GetIamEndPointPrivilegeListExecute(r ApiGetIamEndPointPrivilegeListRequest) (IamEndPointPrivilegeResponse, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamEndPointPrivilegeListExecute(r ApiGetIamEndPointPrivilegeListRequest) (*IamEndPointPrivilegeResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamEndPointPrivilegeResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamEndPointPrivilegeResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamEndPointPrivilegeList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/EndPointPrivileges"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -10889,7 +11471,7 @@ func (a *IamApiService) GetIamEndPointPrivilegeListExecute(r ApiGetIamEndPointPr
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -10899,15 +11481,15 @@ func (a *IamApiService) GetIamEndPointPrivilegeListExecute(r ApiGetIamEndPointPr
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -10963,7 +11545,7 @@ func (a *IamApiService) GetIamEndPointPrivilegeListExecute(r ApiGetIamEndPointPr
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -10974,23 +11556,23 @@ func (a *IamApiService) GetIamEndPointPrivilegeListExecute(r ApiGetIamEndPointPr
 }
 
 type ApiGetIamEndPointRoleByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiGetIamEndPointRoleByMoidRequest) Execute() (IamEndPointRole, *_nethttp.Response, error) {
+func (r ApiGetIamEndPointRoleByMoidRequest) Execute() (*IamEndPointRole, *http.Response, error) {
 	return r.ApiService.GetIamEndPointRoleByMoidExecute(r)
 }
 
 /*
 GetIamEndPointRoleByMoid Read a 'iam.EndPointRole' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIamEndPointRoleByMoidRequest
 */
-func (a *IamApiService) GetIamEndPointRoleByMoid(ctx _context.Context, moid string) ApiGetIamEndPointRoleByMoidRequest {
+func (a *IamApiService) GetIamEndPointRoleByMoid(ctx context.Context, moid string) ApiGetIamEndPointRoleByMoidRequest {
 	return ApiGetIamEndPointRoleByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -11000,27 +11582,25 @@ func (a *IamApiService) GetIamEndPointRoleByMoid(ctx _context.Context, moid stri
 
 // Execute executes the request
 //  @return IamEndPointRole
-func (a *IamApiService) GetIamEndPointRoleByMoidExecute(r ApiGetIamEndPointRoleByMoidRequest) (IamEndPointRole, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamEndPointRoleByMoidExecute(r ApiGetIamEndPointRoleByMoidRequest) (*IamEndPointRole, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamEndPointRole
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamEndPointRole
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamEndPointRoleByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/EndPointRoles/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -11039,7 +11619,7 @@ func (a *IamApiService) GetIamEndPointRoleByMoidExecute(r ApiGetIamEndPointRoleB
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -11049,15 +11629,15 @@ func (a *IamApiService) GetIamEndPointRoleByMoidExecute(r ApiGetIamEndPointRoleB
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -11113,7 +11693,7 @@ func (a *IamApiService) GetIamEndPointRoleByMoidExecute(r ApiGetIamEndPointRoleB
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -11124,7 +11704,7 @@ func (a *IamApiService) GetIamEndPointRoleByMoidExecute(r ApiGetIamEndPointRoleB
 }
 
 type ApiGetIamEndPointRoleListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	filter      *string
 	orderby     *string
@@ -11205,17 +11785,17 @@ func (r ApiGetIamEndPointRoleListRequest) Tags(tags string) ApiGetIamEndPointRol
 	return r
 }
 
-func (r ApiGetIamEndPointRoleListRequest) Execute() (IamEndPointRoleResponse, *_nethttp.Response, error) {
+func (r ApiGetIamEndPointRoleListRequest) Execute() (*IamEndPointRoleResponse, *http.Response, error) {
 	return r.ApiService.GetIamEndPointRoleListExecute(r)
 }
 
 /*
 GetIamEndPointRoleList Read a 'iam.EndPointRole' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIamEndPointRoleListRequest
 */
-func (a *IamApiService) GetIamEndPointRoleList(ctx _context.Context) ApiGetIamEndPointRoleListRequest {
+func (a *IamApiService) GetIamEndPointRoleList(ctx context.Context) ApiGetIamEndPointRoleListRequest {
 	return ApiGetIamEndPointRoleListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -11224,26 +11804,24 @@ func (a *IamApiService) GetIamEndPointRoleList(ctx _context.Context) ApiGetIamEn
 
 // Execute executes the request
 //  @return IamEndPointRoleResponse
-func (a *IamApiService) GetIamEndPointRoleListExecute(r ApiGetIamEndPointRoleListRequest) (IamEndPointRoleResponse, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamEndPointRoleListExecute(r ApiGetIamEndPointRoleListRequest) (*IamEndPointRoleResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamEndPointRoleResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamEndPointRoleResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamEndPointRoleList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/EndPointRoles"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -11295,7 +11873,7 @@ func (a *IamApiService) GetIamEndPointRoleListExecute(r ApiGetIamEndPointRoleLis
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -11305,15 +11883,15 @@ func (a *IamApiService) GetIamEndPointRoleListExecute(r ApiGetIamEndPointRoleLis
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -11369,7 +11947,7 @@ func (a *IamApiService) GetIamEndPointRoleListExecute(r ApiGetIamEndPointRoleLis
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -11380,23 +11958,23 @@ func (a *IamApiService) GetIamEndPointRoleListExecute(r ApiGetIamEndPointRoleLis
 }
 
 type ApiGetIamEndPointUserByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiGetIamEndPointUserByMoidRequest) Execute() (IamEndPointUser, *_nethttp.Response, error) {
+func (r ApiGetIamEndPointUserByMoidRequest) Execute() (*IamEndPointUser, *http.Response, error) {
 	return r.ApiService.GetIamEndPointUserByMoidExecute(r)
 }
 
 /*
 GetIamEndPointUserByMoid Read a 'iam.EndPointUser' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIamEndPointUserByMoidRequest
 */
-func (a *IamApiService) GetIamEndPointUserByMoid(ctx _context.Context, moid string) ApiGetIamEndPointUserByMoidRequest {
+func (a *IamApiService) GetIamEndPointUserByMoid(ctx context.Context, moid string) ApiGetIamEndPointUserByMoidRequest {
 	return ApiGetIamEndPointUserByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -11406,27 +11984,25 @@ func (a *IamApiService) GetIamEndPointUserByMoid(ctx _context.Context, moid stri
 
 // Execute executes the request
 //  @return IamEndPointUser
-func (a *IamApiService) GetIamEndPointUserByMoidExecute(r ApiGetIamEndPointUserByMoidRequest) (IamEndPointUser, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamEndPointUserByMoidExecute(r ApiGetIamEndPointUserByMoidRequest) (*IamEndPointUser, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamEndPointUser
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamEndPointUser
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamEndPointUserByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/EndPointUsers/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -11445,7 +12021,7 @@ func (a *IamApiService) GetIamEndPointUserByMoidExecute(r ApiGetIamEndPointUserB
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -11455,15 +12031,15 @@ func (a *IamApiService) GetIamEndPointUserByMoidExecute(r ApiGetIamEndPointUserB
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -11519,7 +12095,409 @@ func (a *IamApiService) GetIamEndPointUserByMoidExecute(r ApiGetIamEndPointUserB
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetIamEndPointUserInventoryByMoidRequest struct {
+	ctx        context.Context
+	ApiService *IamApiService
+	moid       string
+}
+
+func (r ApiGetIamEndPointUserInventoryByMoidRequest) Execute() (*IamEndPointUserInventory, *http.Response, error) {
+	return r.ApiService.GetIamEndPointUserInventoryByMoidExecute(r)
+}
+
+/*
+GetIamEndPointUserInventoryByMoid Read a 'iam.EndPointUserInventory' resource.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetIamEndPointUserInventoryByMoidRequest
+*/
+func (a *IamApiService) GetIamEndPointUserInventoryByMoid(ctx context.Context, moid string) ApiGetIamEndPointUserInventoryByMoidRequest {
+	return ApiGetIamEndPointUserInventoryByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//  @return IamEndPointUserInventory
+func (a *IamApiService) GetIamEndPointUserInventoryByMoidExecute(r ApiGetIamEndPointUserInventoryByMoidRequest) (*IamEndPointUserInventory, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamEndPointUserInventory
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamEndPointUserInventoryByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/iam/EndPointUserInventories/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetIamEndPointUserInventoryListRequest struct {
+	ctx         context.Context
+	ApiService  *IamApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetIamEndPointUserInventoryListRequest) Filter(filter string) ApiGetIamEndPointUserInventoryListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetIamEndPointUserInventoryListRequest) Orderby(orderby string) ApiGetIamEndPointUserInventoryListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetIamEndPointUserInventoryListRequest) Top(top int32) ApiGetIamEndPointUserInventoryListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetIamEndPointUserInventoryListRequest) Skip(skip int32) ApiGetIamEndPointUserInventoryListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetIamEndPointUserInventoryListRequest) Select_(select_ string) ApiGetIamEndPointUserInventoryListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetIamEndPointUserInventoryListRequest) Expand(expand string) ApiGetIamEndPointUserInventoryListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetIamEndPointUserInventoryListRequest) Apply(apply string) ApiGetIamEndPointUserInventoryListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetIamEndPointUserInventoryListRequest) Count(count bool) ApiGetIamEndPointUserInventoryListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetIamEndPointUserInventoryListRequest) Inlinecount(inlinecount string) ApiGetIamEndPointUserInventoryListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetIamEndPointUserInventoryListRequest) At(at string) ApiGetIamEndPointUserInventoryListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetIamEndPointUserInventoryListRequest) Tags(tags string) ApiGetIamEndPointUserInventoryListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetIamEndPointUserInventoryListRequest) Execute() (*IamEndPointUserInventoryResponse, *http.Response, error) {
+	return r.ApiService.GetIamEndPointUserInventoryListExecute(r)
+}
+
+/*
+GetIamEndPointUserInventoryList Read a 'iam.EndPointUserInventory' resource.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetIamEndPointUserInventoryListRequest
+*/
+func (a *IamApiService) GetIamEndPointUserInventoryList(ctx context.Context) ApiGetIamEndPointUserInventoryListRequest {
+	return ApiGetIamEndPointUserInventoryListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//  @return IamEndPointUserInventoryResponse
+func (a *IamApiService) GetIamEndPointUserInventoryListExecute(r ApiGetIamEndPointUserInventoryListRequest) (*IamEndPointUserInventoryResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamEndPointUserInventoryResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamEndPointUserInventoryList")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/iam/EndPointUserInventories"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -11530,7 +12508,7 @@ func (a *IamApiService) GetIamEndPointUserByMoidExecute(r ApiGetIamEndPointUserB
 }
 
 type ApiGetIamEndPointUserListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	filter      *string
 	orderby     *string
@@ -11611,17 +12589,17 @@ func (r ApiGetIamEndPointUserListRequest) Tags(tags string) ApiGetIamEndPointUse
 	return r
 }
 
-func (r ApiGetIamEndPointUserListRequest) Execute() (IamEndPointUserResponse, *_nethttp.Response, error) {
+func (r ApiGetIamEndPointUserListRequest) Execute() (*IamEndPointUserResponse, *http.Response, error) {
 	return r.ApiService.GetIamEndPointUserListExecute(r)
 }
 
 /*
 GetIamEndPointUserList Read a 'iam.EndPointUser' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIamEndPointUserListRequest
 */
-func (a *IamApiService) GetIamEndPointUserList(ctx _context.Context) ApiGetIamEndPointUserListRequest {
+func (a *IamApiService) GetIamEndPointUserList(ctx context.Context) ApiGetIamEndPointUserListRequest {
 	return ApiGetIamEndPointUserListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -11630,26 +12608,24 @@ func (a *IamApiService) GetIamEndPointUserList(ctx _context.Context) ApiGetIamEn
 
 // Execute executes the request
 //  @return IamEndPointUserResponse
-func (a *IamApiService) GetIamEndPointUserListExecute(r ApiGetIamEndPointUserListRequest) (IamEndPointUserResponse, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamEndPointUserListExecute(r ApiGetIamEndPointUserListRequest) (*IamEndPointUserResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamEndPointUserResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamEndPointUserResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamEndPointUserList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/EndPointUsers"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -11701,7 +12677,7 @@ func (a *IamApiService) GetIamEndPointUserListExecute(r ApiGetIamEndPointUserLis
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -11711,15 +12687,15 @@ func (a *IamApiService) GetIamEndPointUserListExecute(r ApiGetIamEndPointUserLis
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -11775,7 +12751,7 @@ func (a *IamApiService) GetIamEndPointUserListExecute(r ApiGetIamEndPointUserLis
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -11786,23 +12762,23 @@ func (a *IamApiService) GetIamEndPointUserListExecute(r ApiGetIamEndPointUserLis
 }
 
 type ApiGetIamEndPointUserPolicyByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiGetIamEndPointUserPolicyByMoidRequest) Execute() (IamEndPointUserPolicy, *_nethttp.Response, error) {
+func (r ApiGetIamEndPointUserPolicyByMoidRequest) Execute() (*IamEndPointUserPolicy, *http.Response, error) {
 	return r.ApiService.GetIamEndPointUserPolicyByMoidExecute(r)
 }
 
 /*
 GetIamEndPointUserPolicyByMoid Read a 'iam.EndPointUserPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIamEndPointUserPolicyByMoidRequest
 */
-func (a *IamApiService) GetIamEndPointUserPolicyByMoid(ctx _context.Context, moid string) ApiGetIamEndPointUserPolicyByMoidRequest {
+func (a *IamApiService) GetIamEndPointUserPolicyByMoid(ctx context.Context, moid string) ApiGetIamEndPointUserPolicyByMoidRequest {
 	return ApiGetIamEndPointUserPolicyByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -11812,27 +12788,25 @@ func (a *IamApiService) GetIamEndPointUserPolicyByMoid(ctx _context.Context, moi
 
 // Execute executes the request
 //  @return IamEndPointUserPolicy
-func (a *IamApiService) GetIamEndPointUserPolicyByMoidExecute(r ApiGetIamEndPointUserPolicyByMoidRequest) (IamEndPointUserPolicy, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamEndPointUserPolicyByMoidExecute(r ApiGetIamEndPointUserPolicyByMoidRequest) (*IamEndPointUserPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamEndPointUserPolicy
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamEndPointUserPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamEndPointUserPolicyByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/EndPointUserPolicies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -11851,7 +12825,7 @@ func (a *IamApiService) GetIamEndPointUserPolicyByMoidExecute(r ApiGetIamEndPoin
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -11861,15 +12835,15 @@ func (a *IamApiService) GetIamEndPointUserPolicyByMoidExecute(r ApiGetIamEndPoin
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -11925,7 +12899,409 @@ func (a *IamApiService) GetIamEndPointUserPolicyByMoidExecute(r ApiGetIamEndPoin
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetIamEndPointUserPolicyInventoryByMoidRequest struct {
+	ctx        context.Context
+	ApiService *IamApiService
+	moid       string
+}
+
+func (r ApiGetIamEndPointUserPolicyInventoryByMoidRequest) Execute() (*IamEndPointUserPolicyInventory, *http.Response, error) {
+	return r.ApiService.GetIamEndPointUserPolicyInventoryByMoidExecute(r)
+}
+
+/*
+GetIamEndPointUserPolicyInventoryByMoid Read a 'iam.EndPointUserPolicyInventory' resource.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetIamEndPointUserPolicyInventoryByMoidRequest
+*/
+func (a *IamApiService) GetIamEndPointUserPolicyInventoryByMoid(ctx context.Context, moid string) ApiGetIamEndPointUserPolicyInventoryByMoidRequest {
+	return ApiGetIamEndPointUserPolicyInventoryByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//  @return IamEndPointUserPolicyInventory
+func (a *IamApiService) GetIamEndPointUserPolicyInventoryByMoidExecute(r ApiGetIamEndPointUserPolicyInventoryByMoidRequest) (*IamEndPointUserPolicyInventory, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamEndPointUserPolicyInventory
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamEndPointUserPolicyInventoryByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/iam/EndPointUserPolicyInventories/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetIamEndPointUserPolicyInventoryListRequest struct {
+	ctx         context.Context
+	ApiService  *IamApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetIamEndPointUserPolicyInventoryListRequest) Filter(filter string) ApiGetIamEndPointUserPolicyInventoryListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetIamEndPointUserPolicyInventoryListRequest) Orderby(orderby string) ApiGetIamEndPointUserPolicyInventoryListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetIamEndPointUserPolicyInventoryListRequest) Top(top int32) ApiGetIamEndPointUserPolicyInventoryListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetIamEndPointUserPolicyInventoryListRequest) Skip(skip int32) ApiGetIamEndPointUserPolicyInventoryListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetIamEndPointUserPolicyInventoryListRequest) Select_(select_ string) ApiGetIamEndPointUserPolicyInventoryListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetIamEndPointUserPolicyInventoryListRequest) Expand(expand string) ApiGetIamEndPointUserPolicyInventoryListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetIamEndPointUserPolicyInventoryListRequest) Apply(apply string) ApiGetIamEndPointUserPolicyInventoryListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetIamEndPointUserPolicyInventoryListRequest) Count(count bool) ApiGetIamEndPointUserPolicyInventoryListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetIamEndPointUserPolicyInventoryListRequest) Inlinecount(inlinecount string) ApiGetIamEndPointUserPolicyInventoryListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetIamEndPointUserPolicyInventoryListRequest) At(at string) ApiGetIamEndPointUserPolicyInventoryListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetIamEndPointUserPolicyInventoryListRequest) Tags(tags string) ApiGetIamEndPointUserPolicyInventoryListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetIamEndPointUserPolicyInventoryListRequest) Execute() (*IamEndPointUserPolicyInventoryResponse, *http.Response, error) {
+	return r.ApiService.GetIamEndPointUserPolicyInventoryListExecute(r)
+}
+
+/*
+GetIamEndPointUserPolicyInventoryList Read a 'iam.EndPointUserPolicyInventory' resource.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetIamEndPointUserPolicyInventoryListRequest
+*/
+func (a *IamApiService) GetIamEndPointUserPolicyInventoryList(ctx context.Context) ApiGetIamEndPointUserPolicyInventoryListRequest {
+	return ApiGetIamEndPointUserPolicyInventoryListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//  @return IamEndPointUserPolicyInventoryResponse
+func (a *IamApiService) GetIamEndPointUserPolicyInventoryListExecute(r ApiGetIamEndPointUserPolicyInventoryListRequest) (*IamEndPointUserPolicyInventoryResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamEndPointUserPolicyInventoryResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamEndPointUserPolicyInventoryList")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/iam/EndPointUserPolicyInventories"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -11936,7 +13312,7 @@ func (a *IamApiService) GetIamEndPointUserPolicyByMoidExecute(r ApiGetIamEndPoin
 }
 
 type ApiGetIamEndPointUserPolicyListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	filter      *string
 	orderby     *string
@@ -12017,17 +13393,17 @@ func (r ApiGetIamEndPointUserPolicyListRequest) Tags(tags string) ApiGetIamEndPo
 	return r
 }
 
-func (r ApiGetIamEndPointUserPolicyListRequest) Execute() (IamEndPointUserPolicyResponse, *_nethttp.Response, error) {
+func (r ApiGetIamEndPointUserPolicyListRequest) Execute() (*IamEndPointUserPolicyResponse, *http.Response, error) {
 	return r.ApiService.GetIamEndPointUserPolicyListExecute(r)
 }
 
 /*
 GetIamEndPointUserPolicyList Read a 'iam.EndPointUserPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIamEndPointUserPolicyListRequest
 */
-func (a *IamApiService) GetIamEndPointUserPolicyList(ctx _context.Context) ApiGetIamEndPointUserPolicyListRequest {
+func (a *IamApiService) GetIamEndPointUserPolicyList(ctx context.Context) ApiGetIamEndPointUserPolicyListRequest {
 	return ApiGetIamEndPointUserPolicyListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -12036,26 +13412,24 @@ func (a *IamApiService) GetIamEndPointUserPolicyList(ctx _context.Context) ApiGe
 
 // Execute executes the request
 //  @return IamEndPointUserPolicyResponse
-func (a *IamApiService) GetIamEndPointUserPolicyListExecute(r ApiGetIamEndPointUserPolicyListRequest) (IamEndPointUserPolicyResponse, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamEndPointUserPolicyListExecute(r ApiGetIamEndPointUserPolicyListRequest) (*IamEndPointUserPolicyResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamEndPointUserPolicyResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamEndPointUserPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamEndPointUserPolicyList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/EndPointUserPolicies"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -12107,7 +13481,7 @@ func (a *IamApiService) GetIamEndPointUserPolicyListExecute(r ApiGetIamEndPointU
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -12117,15 +13491,15 @@ func (a *IamApiService) GetIamEndPointUserPolicyListExecute(r ApiGetIamEndPointU
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -12181,7 +13555,7 @@ func (a *IamApiService) GetIamEndPointUserPolicyListExecute(r ApiGetIamEndPointU
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -12192,23 +13566,23 @@ func (a *IamApiService) GetIamEndPointUserPolicyListExecute(r ApiGetIamEndPointU
 }
 
 type ApiGetIamEndPointUserRoleByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiGetIamEndPointUserRoleByMoidRequest) Execute() (IamEndPointUserRole, *_nethttp.Response, error) {
+func (r ApiGetIamEndPointUserRoleByMoidRequest) Execute() (*IamEndPointUserRole, *http.Response, error) {
 	return r.ApiService.GetIamEndPointUserRoleByMoidExecute(r)
 }
 
 /*
 GetIamEndPointUserRoleByMoid Read a 'iam.EndPointUserRole' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIamEndPointUserRoleByMoidRequest
 */
-func (a *IamApiService) GetIamEndPointUserRoleByMoid(ctx _context.Context, moid string) ApiGetIamEndPointUserRoleByMoidRequest {
+func (a *IamApiService) GetIamEndPointUserRoleByMoid(ctx context.Context, moid string) ApiGetIamEndPointUserRoleByMoidRequest {
 	return ApiGetIamEndPointUserRoleByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -12218,27 +13592,25 @@ func (a *IamApiService) GetIamEndPointUserRoleByMoid(ctx _context.Context, moid 
 
 // Execute executes the request
 //  @return IamEndPointUserRole
-func (a *IamApiService) GetIamEndPointUserRoleByMoidExecute(r ApiGetIamEndPointUserRoleByMoidRequest) (IamEndPointUserRole, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamEndPointUserRoleByMoidExecute(r ApiGetIamEndPointUserRoleByMoidRequest) (*IamEndPointUserRole, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamEndPointUserRole
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamEndPointUserRole
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamEndPointUserRoleByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/EndPointUserRoles/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -12257,7 +13629,7 @@ func (a *IamApiService) GetIamEndPointUserRoleByMoidExecute(r ApiGetIamEndPointU
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -12267,15 +13639,15 @@ func (a *IamApiService) GetIamEndPointUserRoleByMoidExecute(r ApiGetIamEndPointU
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -12331,7 +13703,409 @@ func (a *IamApiService) GetIamEndPointUserRoleByMoidExecute(r ApiGetIamEndPointU
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetIamEndPointUserRoleInventoryByMoidRequest struct {
+	ctx        context.Context
+	ApiService *IamApiService
+	moid       string
+}
+
+func (r ApiGetIamEndPointUserRoleInventoryByMoidRequest) Execute() (*IamEndPointUserRoleInventory, *http.Response, error) {
+	return r.ApiService.GetIamEndPointUserRoleInventoryByMoidExecute(r)
+}
+
+/*
+GetIamEndPointUserRoleInventoryByMoid Read a 'iam.EndPointUserRoleInventory' resource.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetIamEndPointUserRoleInventoryByMoidRequest
+*/
+func (a *IamApiService) GetIamEndPointUserRoleInventoryByMoid(ctx context.Context, moid string) ApiGetIamEndPointUserRoleInventoryByMoidRequest {
+	return ApiGetIamEndPointUserRoleInventoryByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//  @return IamEndPointUserRoleInventory
+func (a *IamApiService) GetIamEndPointUserRoleInventoryByMoidExecute(r ApiGetIamEndPointUserRoleInventoryByMoidRequest) (*IamEndPointUserRoleInventory, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamEndPointUserRoleInventory
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamEndPointUserRoleInventoryByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/iam/EndPointUserRoleInventories/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetIamEndPointUserRoleInventoryListRequest struct {
+	ctx         context.Context
+	ApiService  *IamApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetIamEndPointUserRoleInventoryListRequest) Filter(filter string) ApiGetIamEndPointUserRoleInventoryListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetIamEndPointUserRoleInventoryListRequest) Orderby(orderby string) ApiGetIamEndPointUserRoleInventoryListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetIamEndPointUserRoleInventoryListRequest) Top(top int32) ApiGetIamEndPointUserRoleInventoryListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetIamEndPointUserRoleInventoryListRequest) Skip(skip int32) ApiGetIamEndPointUserRoleInventoryListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetIamEndPointUserRoleInventoryListRequest) Select_(select_ string) ApiGetIamEndPointUserRoleInventoryListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetIamEndPointUserRoleInventoryListRequest) Expand(expand string) ApiGetIamEndPointUserRoleInventoryListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetIamEndPointUserRoleInventoryListRequest) Apply(apply string) ApiGetIamEndPointUserRoleInventoryListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetIamEndPointUserRoleInventoryListRequest) Count(count bool) ApiGetIamEndPointUserRoleInventoryListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetIamEndPointUserRoleInventoryListRequest) Inlinecount(inlinecount string) ApiGetIamEndPointUserRoleInventoryListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetIamEndPointUserRoleInventoryListRequest) At(at string) ApiGetIamEndPointUserRoleInventoryListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetIamEndPointUserRoleInventoryListRequest) Tags(tags string) ApiGetIamEndPointUserRoleInventoryListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetIamEndPointUserRoleInventoryListRequest) Execute() (*IamEndPointUserRoleInventoryResponse, *http.Response, error) {
+	return r.ApiService.GetIamEndPointUserRoleInventoryListExecute(r)
+}
+
+/*
+GetIamEndPointUserRoleInventoryList Read a 'iam.EndPointUserRoleInventory' resource.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetIamEndPointUserRoleInventoryListRequest
+*/
+func (a *IamApiService) GetIamEndPointUserRoleInventoryList(ctx context.Context) ApiGetIamEndPointUserRoleInventoryListRequest {
+	return ApiGetIamEndPointUserRoleInventoryListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//  @return IamEndPointUserRoleInventoryResponse
+func (a *IamApiService) GetIamEndPointUserRoleInventoryListExecute(r ApiGetIamEndPointUserRoleInventoryListRequest) (*IamEndPointUserRoleInventoryResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamEndPointUserRoleInventoryResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamEndPointUserRoleInventoryList")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/iam/EndPointUserRoleInventories"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -12342,7 +14116,7 @@ func (a *IamApiService) GetIamEndPointUserRoleByMoidExecute(r ApiGetIamEndPointU
 }
 
 type ApiGetIamEndPointUserRoleListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	filter      *string
 	orderby     *string
@@ -12423,17 +14197,17 @@ func (r ApiGetIamEndPointUserRoleListRequest) Tags(tags string) ApiGetIamEndPoin
 	return r
 }
 
-func (r ApiGetIamEndPointUserRoleListRequest) Execute() (IamEndPointUserRoleResponse, *_nethttp.Response, error) {
+func (r ApiGetIamEndPointUserRoleListRequest) Execute() (*IamEndPointUserRoleResponse, *http.Response, error) {
 	return r.ApiService.GetIamEndPointUserRoleListExecute(r)
 }
 
 /*
 GetIamEndPointUserRoleList Read a 'iam.EndPointUserRole' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIamEndPointUserRoleListRequest
 */
-func (a *IamApiService) GetIamEndPointUserRoleList(ctx _context.Context) ApiGetIamEndPointUserRoleListRequest {
+func (a *IamApiService) GetIamEndPointUserRoleList(ctx context.Context) ApiGetIamEndPointUserRoleListRequest {
 	return ApiGetIamEndPointUserRoleListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -12442,26 +14216,24 @@ func (a *IamApiService) GetIamEndPointUserRoleList(ctx _context.Context) ApiGetI
 
 // Execute executes the request
 //  @return IamEndPointUserRoleResponse
-func (a *IamApiService) GetIamEndPointUserRoleListExecute(r ApiGetIamEndPointUserRoleListRequest) (IamEndPointUserRoleResponse, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamEndPointUserRoleListExecute(r ApiGetIamEndPointUserRoleListRequest) (*IamEndPointUserRoleResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamEndPointUserRoleResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamEndPointUserRoleResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamEndPointUserRoleList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/EndPointUserRoles"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -12513,7 +14285,7 @@ func (a *IamApiService) GetIamEndPointUserRoleListExecute(r ApiGetIamEndPointUse
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -12523,15 +14295,15 @@ func (a *IamApiService) GetIamEndPointUserRoleListExecute(r ApiGetIamEndPointUse
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -12587,7 +14359,7 @@ func (a *IamApiService) GetIamEndPointUserRoleListExecute(r ApiGetIamEndPointUse
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -12598,23 +14370,23 @@ func (a *IamApiService) GetIamEndPointUserRoleListExecute(r ApiGetIamEndPointUse
 }
 
 type ApiGetIamIdpByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiGetIamIdpByMoidRequest) Execute() (IamIdp, *_nethttp.Response, error) {
+func (r ApiGetIamIdpByMoidRequest) Execute() (*IamIdp, *http.Response, error) {
 	return r.ApiService.GetIamIdpByMoidExecute(r)
 }
 
 /*
 GetIamIdpByMoid Read a 'iam.Idp' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIamIdpByMoidRequest
 */
-func (a *IamApiService) GetIamIdpByMoid(ctx _context.Context, moid string) ApiGetIamIdpByMoidRequest {
+func (a *IamApiService) GetIamIdpByMoid(ctx context.Context, moid string) ApiGetIamIdpByMoidRequest {
 	return ApiGetIamIdpByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -12624,27 +14396,25 @@ func (a *IamApiService) GetIamIdpByMoid(ctx _context.Context, moid string) ApiGe
 
 // Execute executes the request
 //  @return IamIdp
-func (a *IamApiService) GetIamIdpByMoidExecute(r ApiGetIamIdpByMoidRequest) (IamIdp, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamIdpByMoidExecute(r ApiGetIamIdpByMoidRequest) (*IamIdp, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamIdp
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamIdp
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamIdpByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Idps/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -12663,7 +14433,7 @@ func (a *IamApiService) GetIamIdpByMoidExecute(r ApiGetIamIdpByMoidRequest) (Iam
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -12673,15 +14443,15 @@ func (a *IamApiService) GetIamIdpByMoidExecute(r ApiGetIamIdpByMoidRequest) (Iam
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -12737,7 +14507,7 @@ func (a *IamApiService) GetIamIdpByMoidExecute(r ApiGetIamIdpByMoidRequest) (Iam
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -12748,7 +14518,7 @@ func (a *IamApiService) GetIamIdpByMoidExecute(r ApiGetIamIdpByMoidRequest) (Iam
 }
 
 type ApiGetIamIdpListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	filter      *string
 	orderby     *string
@@ -12829,17 +14599,17 @@ func (r ApiGetIamIdpListRequest) Tags(tags string) ApiGetIamIdpListRequest {
 	return r
 }
 
-func (r ApiGetIamIdpListRequest) Execute() (IamIdpResponse, *_nethttp.Response, error) {
+func (r ApiGetIamIdpListRequest) Execute() (*IamIdpResponse, *http.Response, error) {
 	return r.ApiService.GetIamIdpListExecute(r)
 }
 
 /*
 GetIamIdpList Read a 'iam.Idp' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIamIdpListRequest
 */
-func (a *IamApiService) GetIamIdpList(ctx _context.Context) ApiGetIamIdpListRequest {
+func (a *IamApiService) GetIamIdpList(ctx context.Context) ApiGetIamIdpListRequest {
 	return ApiGetIamIdpListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -12848,26 +14618,24 @@ func (a *IamApiService) GetIamIdpList(ctx _context.Context) ApiGetIamIdpListRequ
 
 // Execute executes the request
 //  @return IamIdpResponse
-func (a *IamApiService) GetIamIdpListExecute(r ApiGetIamIdpListRequest) (IamIdpResponse, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamIdpListExecute(r ApiGetIamIdpListRequest) (*IamIdpResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamIdpResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamIdpResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamIdpList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Idps"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -12919,7 +14687,7 @@ func (a *IamApiService) GetIamIdpListExecute(r ApiGetIamIdpListRequest) (IamIdpR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -12929,15 +14697,15 @@ func (a *IamApiService) GetIamIdpListExecute(r ApiGetIamIdpListRequest) (IamIdpR
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -12993,7 +14761,7 @@ func (a *IamApiService) GetIamIdpListExecute(r ApiGetIamIdpListRequest) (IamIdpR
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -13004,23 +14772,23 @@ func (a *IamApiService) GetIamIdpListExecute(r ApiGetIamIdpListRequest) (IamIdpR
 }
 
 type ApiGetIamIdpReferenceByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiGetIamIdpReferenceByMoidRequest) Execute() (IamIdpReference, *_nethttp.Response, error) {
+func (r ApiGetIamIdpReferenceByMoidRequest) Execute() (*IamIdpReference, *http.Response, error) {
 	return r.ApiService.GetIamIdpReferenceByMoidExecute(r)
 }
 
 /*
 GetIamIdpReferenceByMoid Read a 'iam.IdpReference' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIamIdpReferenceByMoidRequest
 */
-func (a *IamApiService) GetIamIdpReferenceByMoid(ctx _context.Context, moid string) ApiGetIamIdpReferenceByMoidRequest {
+func (a *IamApiService) GetIamIdpReferenceByMoid(ctx context.Context, moid string) ApiGetIamIdpReferenceByMoidRequest {
 	return ApiGetIamIdpReferenceByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -13030,27 +14798,25 @@ func (a *IamApiService) GetIamIdpReferenceByMoid(ctx _context.Context, moid stri
 
 // Execute executes the request
 //  @return IamIdpReference
-func (a *IamApiService) GetIamIdpReferenceByMoidExecute(r ApiGetIamIdpReferenceByMoidRequest) (IamIdpReference, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamIdpReferenceByMoidExecute(r ApiGetIamIdpReferenceByMoidRequest) (*IamIdpReference, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamIdpReference
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamIdpReference
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamIdpReferenceByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/IdpReferences/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -13069,7 +14835,7 @@ func (a *IamApiService) GetIamIdpReferenceByMoidExecute(r ApiGetIamIdpReferenceB
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -13079,15 +14845,15 @@ func (a *IamApiService) GetIamIdpReferenceByMoidExecute(r ApiGetIamIdpReferenceB
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -13143,7 +14909,7 @@ func (a *IamApiService) GetIamIdpReferenceByMoidExecute(r ApiGetIamIdpReferenceB
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -13154,7 +14920,7 @@ func (a *IamApiService) GetIamIdpReferenceByMoidExecute(r ApiGetIamIdpReferenceB
 }
 
 type ApiGetIamIdpReferenceListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	filter      *string
 	orderby     *string
@@ -13235,17 +15001,17 @@ func (r ApiGetIamIdpReferenceListRequest) Tags(tags string) ApiGetIamIdpReferenc
 	return r
 }
 
-func (r ApiGetIamIdpReferenceListRequest) Execute() (IamIdpReferenceResponse, *_nethttp.Response, error) {
+func (r ApiGetIamIdpReferenceListRequest) Execute() (*IamIdpReferenceResponse, *http.Response, error) {
 	return r.ApiService.GetIamIdpReferenceListExecute(r)
 }
 
 /*
 GetIamIdpReferenceList Read a 'iam.IdpReference' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIamIdpReferenceListRequest
 */
-func (a *IamApiService) GetIamIdpReferenceList(ctx _context.Context) ApiGetIamIdpReferenceListRequest {
+func (a *IamApiService) GetIamIdpReferenceList(ctx context.Context) ApiGetIamIdpReferenceListRequest {
 	return ApiGetIamIdpReferenceListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -13254,26 +15020,24 @@ func (a *IamApiService) GetIamIdpReferenceList(ctx _context.Context) ApiGetIamId
 
 // Execute executes the request
 //  @return IamIdpReferenceResponse
-func (a *IamApiService) GetIamIdpReferenceListExecute(r ApiGetIamIdpReferenceListRequest) (IamIdpReferenceResponse, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamIdpReferenceListExecute(r ApiGetIamIdpReferenceListRequest) (*IamIdpReferenceResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamIdpReferenceResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamIdpReferenceResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamIdpReferenceList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/IdpReferences"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -13325,7 +15089,7 @@ func (a *IamApiService) GetIamIdpReferenceListExecute(r ApiGetIamIdpReferenceLis
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -13335,15 +15099,15 @@ func (a *IamApiService) GetIamIdpReferenceListExecute(r ApiGetIamIdpReferenceLis
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -13399,7 +15163,7 @@ func (a *IamApiService) GetIamIdpReferenceListExecute(r ApiGetIamIdpReferenceLis
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -13410,23 +15174,23 @@ func (a *IamApiService) GetIamIdpReferenceListExecute(r ApiGetIamIdpReferenceLis
 }
 
 type ApiGetIamIpAccessManagementByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiGetIamIpAccessManagementByMoidRequest) Execute() (IamIpAccessManagement, *_nethttp.Response, error) {
+func (r ApiGetIamIpAccessManagementByMoidRequest) Execute() (*IamIpAccessManagement, *http.Response, error) {
 	return r.ApiService.GetIamIpAccessManagementByMoidExecute(r)
 }
 
 /*
 GetIamIpAccessManagementByMoid Read a 'iam.IpAccessManagement' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIamIpAccessManagementByMoidRequest
 */
-func (a *IamApiService) GetIamIpAccessManagementByMoid(ctx _context.Context, moid string) ApiGetIamIpAccessManagementByMoidRequest {
+func (a *IamApiService) GetIamIpAccessManagementByMoid(ctx context.Context, moid string) ApiGetIamIpAccessManagementByMoidRequest {
 	return ApiGetIamIpAccessManagementByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -13436,27 +15200,25 @@ func (a *IamApiService) GetIamIpAccessManagementByMoid(ctx _context.Context, moi
 
 // Execute executes the request
 //  @return IamIpAccessManagement
-func (a *IamApiService) GetIamIpAccessManagementByMoidExecute(r ApiGetIamIpAccessManagementByMoidRequest) (IamIpAccessManagement, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamIpAccessManagementByMoidExecute(r ApiGetIamIpAccessManagementByMoidRequest) (*IamIpAccessManagement, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamIpAccessManagement
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamIpAccessManagement
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamIpAccessManagementByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/IpAccessManagements/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -13475,7 +15237,7 @@ func (a *IamApiService) GetIamIpAccessManagementByMoidExecute(r ApiGetIamIpAcces
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -13485,15 +15247,15 @@ func (a *IamApiService) GetIamIpAccessManagementByMoidExecute(r ApiGetIamIpAcces
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -13549,7 +15311,7 @@ func (a *IamApiService) GetIamIpAccessManagementByMoidExecute(r ApiGetIamIpAcces
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -13560,7 +15322,7 @@ func (a *IamApiService) GetIamIpAccessManagementByMoidExecute(r ApiGetIamIpAcces
 }
 
 type ApiGetIamIpAccessManagementListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	filter      *string
 	orderby     *string
@@ -13641,17 +15403,17 @@ func (r ApiGetIamIpAccessManagementListRequest) Tags(tags string) ApiGetIamIpAcc
 	return r
 }
 
-func (r ApiGetIamIpAccessManagementListRequest) Execute() (IamIpAccessManagementResponse, *_nethttp.Response, error) {
+func (r ApiGetIamIpAccessManagementListRequest) Execute() (*IamIpAccessManagementResponse, *http.Response, error) {
 	return r.ApiService.GetIamIpAccessManagementListExecute(r)
 }
 
 /*
 GetIamIpAccessManagementList Read a 'iam.IpAccessManagement' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIamIpAccessManagementListRequest
 */
-func (a *IamApiService) GetIamIpAccessManagementList(ctx _context.Context) ApiGetIamIpAccessManagementListRequest {
+func (a *IamApiService) GetIamIpAccessManagementList(ctx context.Context) ApiGetIamIpAccessManagementListRequest {
 	return ApiGetIamIpAccessManagementListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -13660,26 +15422,24 @@ func (a *IamApiService) GetIamIpAccessManagementList(ctx _context.Context) ApiGe
 
 // Execute executes the request
 //  @return IamIpAccessManagementResponse
-func (a *IamApiService) GetIamIpAccessManagementListExecute(r ApiGetIamIpAccessManagementListRequest) (IamIpAccessManagementResponse, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamIpAccessManagementListExecute(r ApiGetIamIpAccessManagementListRequest) (*IamIpAccessManagementResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamIpAccessManagementResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamIpAccessManagementResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamIpAccessManagementList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/IpAccessManagements"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -13731,7 +15491,7 @@ func (a *IamApiService) GetIamIpAccessManagementListExecute(r ApiGetIamIpAccessM
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -13741,15 +15501,15 @@ func (a *IamApiService) GetIamIpAccessManagementListExecute(r ApiGetIamIpAccessM
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -13805,7 +15565,7 @@ func (a *IamApiService) GetIamIpAccessManagementListExecute(r ApiGetIamIpAccessM
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -13816,23 +15576,23 @@ func (a *IamApiService) GetIamIpAccessManagementListExecute(r ApiGetIamIpAccessM
 }
 
 type ApiGetIamIpAddressByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiGetIamIpAddressByMoidRequest) Execute() (IamIpAddress, *_nethttp.Response, error) {
+func (r ApiGetIamIpAddressByMoidRequest) Execute() (*IamIpAddress, *http.Response, error) {
 	return r.ApiService.GetIamIpAddressByMoidExecute(r)
 }
 
 /*
 GetIamIpAddressByMoid Read a 'iam.IpAddress' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIamIpAddressByMoidRequest
 */
-func (a *IamApiService) GetIamIpAddressByMoid(ctx _context.Context, moid string) ApiGetIamIpAddressByMoidRequest {
+func (a *IamApiService) GetIamIpAddressByMoid(ctx context.Context, moid string) ApiGetIamIpAddressByMoidRequest {
 	return ApiGetIamIpAddressByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -13842,27 +15602,25 @@ func (a *IamApiService) GetIamIpAddressByMoid(ctx _context.Context, moid string)
 
 // Execute executes the request
 //  @return IamIpAddress
-func (a *IamApiService) GetIamIpAddressByMoidExecute(r ApiGetIamIpAddressByMoidRequest) (IamIpAddress, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamIpAddressByMoidExecute(r ApiGetIamIpAddressByMoidRequest) (*IamIpAddress, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamIpAddress
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamIpAddress
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamIpAddressByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/IpAddresses/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -13881,7 +15639,7 @@ func (a *IamApiService) GetIamIpAddressByMoidExecute(r ApiGetIamIpAddressByMoidR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -13891,15 +15649,15 @@ func (a *IamApiService) GetIamIpAddressByMoidExecute(r ApiGetIamIpAddressByMoidR
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -13955,7 +15713,7 @@ func (a *IamApiService) GetIamIpAddressByMoidExecute(r ApiGetIamIpAddressByMoidR
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -13966,7 +15724,7 @@ func (a *IamApiService) GetIamIpAddressByMoidExecute(r ApiGetIamIpAddressByMoidR
 }
 
 type ApiGetIamIpAddressListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	filter      *string
 	orderby     *string
@@ -14047,17 +15805,17 @@ func (r ApiGetIamIpAddressListRequest) Tags(tags string) ApiGetIamIpAddressListR
 	return r
 }
 
-func (r ApiGetIamIpAddressListRequest) Execute() (IamIpAddressResponse, *_nethttp.Response, error) {
+func (r ApiGetIamIpAddressListRequest) Execute() (*IamIpAddressResponse, *http.Response, error) {
 	return r.ApiService.GetIamIpAddressListExecute(r)
 }
 
 /*
 GetIamIpAddressList Read a 'iam.IpAddress' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIamIpAddressListRequest
 */
-func (a *IamApiService) GetIamIpAddressList(ctx _context.Context) ApiGetIamIpAddressListRequest {
+func (a *IamApiService) GetIamIpAddressList(ctx context.Context) ApiGetIamIpAddressListRequest {
 	return ApiGetIamIpAddressListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -14066,26 +15824,24 @@ func (a *IamApiService) GetIamIpAddressList(ctx _context.Context) ApiGetIamIpAdd
 
 // Execute executes the request
 //  @return IamIpAddressResponse
-func (a *IamApiService) GetIamIpAddressListExecute(r ApiGetIamIpAddressListRequest) (IamIpAddressResponse, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamIpAddressListExecute(r ApiGetIamIpAddressListRequest) (*IamIpAddressResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamIpAddressResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamIpAddressResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamIpAddressList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/IpAddresses"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -14137,7 +15893,7 @@ func (a *IamApiService) GetIamIpAddressListExecute(r ApiGetIamIpAddressListReque
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -14147,15 +15903,15 @@ func (a *IamApiService) GetIamIpAddressListExecute(r ApiGetIamIpAddressListReque
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -14211,7 +15967,7 @@ func (a *IamApiService) GetIamIpAddressListExecute(r ApiGetIamIpAddressListReque
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -14222,23 +15978,23 @@ func (a *IamApiService) GetIamIpAddressListExecute(r ApiGetIamIpAddressListReque
 }
 
 type ApiGetIamLdapGroupByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiGetIamLdapGroupByMoidRequest) Execute() (IamLdapGroup, *_nethttp.Response, error) {
+func (r ApiGetIamLdapGroupByMoidRequest) Execute() (*IamLdapGroup, *http.Response, error) {
 	return r.ApiService.GetIamLdapGroupByMoidExecute(r)
 }
 
 /*
 GetIamLdapGroupByMoid Read a 'iam.LdapGroup' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIamLdapGroupByMoidRequest
 */
-func (a *IamApiService) GetIamLdapGroupByMoid(ctx _context.Context, moid string) ApiGetIamLdapGroupByMoidRequest {
+func (a *IamApiService) GetIamLdapGroupByMoid(ctx context.Context, moid string) ApiGetIamLdapGroupByMoidRequest {
 	return ApiGetIamLdapGroupByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -14248,27 +16004,25 @@ func (a *IamApiService) GetIamLdapGroupByMoid(ctx _context.Context, moid string)
 
 // Execute executes the request
 //  @return IamLdapGroup
-func (a *IamApiService) GetIamLdapGroupByMoidExecute(r ApiGetIamLdapGroupByMoidRequest) (IamLdapGroup, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamLdapGroupByMoidExecute(r ApiGetIamLdapGroupByMoidRequest) (*IamLdapGroup, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamLdapGroup
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamLdapGroup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamLdapGroupByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/LdapGroups/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -14287,7 +16041,7 @@ func (a *IamApiService) GetIamLdapGroupByMoidExecute(r ApiGetIamLdapGroupByMoidR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -14297,15 +16051,15 @@ func (a *IamApiService) GetIamLdapGroupByMoidExecute(r ApiGetIamLdapGroupByMoidR
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -14361,7 +16115,7 @@ func (a *IamApiService) GetIamLdapGroupByMoidExecute(r ApiGetIamLdapGroupByMoidR
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -14372,7 +16126,7 @@ func (a *IamApiService) GetIamLdapGroupByMoidExecute(r ApiGetIamLdapGroupByMoidR
 }
 
 type ApiGetIamLdapGroupListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	filter      *string
 	orderby     *string
@@ -14453,17 +16207,17 @@ func (r ApiGetIamLdapGroupListRequest) Tags(tags string) ApiGetIamLdapGroupListR
 	return r
 }
 
-func (r ApiGetIamLdapGroupListRequest) Execute() (IamLdapGroupResponse, *_nethttp.Response, error) {
+func (r ApiGetIamLdapGroupListRequest) Execute() (*IamLdapGroupResponse, *http.Response, error) {
 	return r.ApiService.GetIamLdapGroupListExecute(r)
 }
 
 /*
 GetIamLdapGroupList Read a 'iam.LdapGroup' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIamLdapGroupListRequest
 */
-func (a *IamApiService) GetIamLdapGroupList(ctx _context.Context) ApiGetIamLdapGroupListRequest {
+func (a *IamApiService) GetIamLdapGroupList(ctx context.Context) ApiGetIamLdapGroupListRequest {
 	return ApiGetIamLdapGroupListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -14472,26 +16226,24 @@ func (a *IamApiService) GetIamLdapGroupList(ctx _context.Context) ApiGetIamLdapG
 
 // Execute executes the request
 //  @return IamLdapGroupResponse
-func (a *IamApiService) GetIamLdapGroupListExecute(r ApiGetIamLdapGroupListRequest) (IamLdapGroupResponse, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamLdapGroupListExecute(r ApiGetIamLdapGroupListRequest) (*IamLdapGroupResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamLdapGroupResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamLdapGroupResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamLdapGroupList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/LdapGroups"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -14543,7 +16295,7 @@ func (a *IamApiService) GetIamLdapGroupListExecute(r ApiGetIamLdapGroupListReque
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -14553,15 +16305,15 @@ func (a *IamApiService) GetIamLdapGroupListExecute(r ApiGetIamLdapGroupListReque
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -14617,7 +16369,7 @@ func (a *IamApiService) GetIamLdapGroupListExecute(r ApiGetIamLdapGroupListReque
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -14628,23 +16380,23 @@ func (a *IamApiService) GetIamLdapGroupListExecute(r ApiGetIamLdapGroupListReque
 }
 
 type ApiGetIamLdapPolicyByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiGetIamLdapPolicyByMoidRequest) Execute() (IamLdapPolicy, *_nethttp.Response, error) {
+func (r ApiGetIamLdapPolicyByMoidRequest) Execute() (*IamLdapPolicy, *http.Response, error) {
 	return r.ApiService.GetIamLdapPolicyByMoidExecute(r)
 }
 
 /*
 GetIamLdapPolicyByMoid Read a 'iam.LdapPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIamLdapPolicyByMoidRequest
 */
-func (a *IamApiService) GetIamLdapPolicyByMoid(ctx _context.Context, moid string) ApiGetIamLdapPolicyByMoidRequest {
+func (a *IamApiService) GetIamLdapPolicyByMoid(ctx context.Context, moid string) ApiGetIamLdapPolicyByMoidRequest {
 	return ApiGetIamLdapPolicyByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -14654,27 +16406,25 @@ func (a *IamApiService) GetIamLdapPolicyByMoid(ctx _context.Context, moid string
 
 // Execute executes the request
 //  @return IamLdapPolicy
-func (a *IamApiService) GetIamLdapPolicyByMoidExecute(r ApiGetIamLdapPolicyByMoidRequest) (IamLdapPolicy, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamLdapPolicyByMoidExecute(r ApiGetIamLdapPolicyByMoidRequest) (*IamLdapPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamLdapPolicy
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamLdapPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamLdapPolicyByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/LdapPolicies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -14693,7 +16443,7 @@ func (a *IamApiService) GetIamLdapPolicyByMoidExecute(r ApiGetIamLdapPolicyByMoi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -14703,15 +16453,15 @@ func (a *IamApiService) GetIamLdapPolicyByMoidExecute(r ApiGetIamLdapPolicyByMoi
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -14767,7 +16517,7 @@ func (a *IamApiService) GetIamLdapPolicyByMoidExecute(r ApiGetIamLdapPolicyByMoi
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -14778,7 +16528,7 @@ func (a *IamApiService) GetIamLdapPolicyByMoidExecute(r ApiGetIamLdapPolicyByMoi
 }
 
 type ApiGetIamLdapPolicyListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	filter      *string
 	orderby     *string
@@ -14859,17 +16609,17 @@ func (r ApiGetIamLdapPolicyListRequest) Tags(tags string) ApiGetIamLdapPolicyLis
 	return r
 }
 
-func (r ApiGetIamLdapPolicyListRequest) Execute() (IamLdapPolicyResponse, *_nethttp.Response, error) {
+func (r ApiGetIamLdapPolicyListRequest) Execute() (*IamLdapPolicyResponse, *http.Response, error) {
 	return r.ApiService.GetIamLdapPolicyListExecute(r)
 }
 
 /*
 GetIamLdapPolicyList Read a 'iam.LdapPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIamLdapPolicyListRequest
 */
-func (a *IamApiService) GetIamLdapPolicyList(ctx _context.Context) ApiGetIamLdapPolicyListRequest {
+func (a *IamApiService) GetIamLdapPolicyList(ctx context.Context) ApiGetIamLdapPolicyListRequest {
 	return ApiGetIamLdapPolicyListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -14878,26 +16628,24 @@ func (a *IamApiService) GetIamLdapPolicyList(ctx _context.Context) ApiGetIamLdap
 
 // Execute executes the request
 //  @return IamLdapPolicyResponse
-func (a *IamApiService) GetIamLdapPolicyListExecute(r ApiGetIamLdapPolicyListRequest) (IamLdapPolicyResponse, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamLdapPolicyListExecute(r ApiGetIamLdapPolicyListRequest) (*IamLdapPolicyResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamLdapPolicyResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamLdapPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamLdapPolicyList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/LdapPolicies"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -14949,7 +16697,7 @@ func (a *IamApiService) GetIamLdapPolicyListExecute(r ApiGetIamLdapPolicyListReq
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -14959,15 +16707,15 @@ func (a *IamApiService) GetIamLdapPolicyListExecute(r ApiGetIamLdapPolicyListReq
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -15023,7 +16771,7 @@ func (a *IamApiService) GetIamLdapPolicyListExecute(r ApiGetIamLdapPolicyListReq
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -15034,23 +16782,23 @@ func (a *IamApiService) GetIamLdapPolicyListExecute(r ApiGetIamLdapPolicyListReq
 }
 
 type ApiGetIamLdapProviderByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiGetIamLdapProviderByMoidRequest) Execute() (IamLdapProvider, *_nethttp.Response, error) {
+func (r ApiGetIamLdapProviderByMoidRequest) Execute() (*IamLdapProvider, *http.Response, error) {
 	return r.ApiService.GetIamLdapProviderByMoidExecute(r)
 }
 
 /*
 GetIamLdapProviderByMoid Read a 'iam.LdapProvider' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIamLdapProviderByMoidRequest
 */
-func (a *IamApiService) GetIamLdapProviderByMoid(ctx _context.Context, moid string) ApiGetIamLdapProviderByMoidRequest {
+func (a *IamApiService) GetIamLdapProviderByMoid(ctx context.Context, moid string) ApiGetIamLdapProviderByMoidRequest {
 	return ApiGetIamLdapProviderByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -15060,27 +16808,25 @@ func (a *IamApiService) GetIamLdapProviderByMoid(ctx _context.Context, moid stri
 
 // Execute executes the request
 //  @return IamLdapProvider
-func (a *IamApiService) GetIamLdapProviderByMoidExecute(r ApiGetIamLdapProviderByMoidRequest) (IamLdapProvider, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamLdapProviderByMoidExecute(r ApiGetIamLdapProviderByMoidRequest) (*IamLdapProvider, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamLdapProvider
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamLdapProvider
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamLdapProviderByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/LdapProviders/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -15099,7 +16845,7 @@ func (a *IamApiService) GetIamLdapProviderByMoidExecute(r ApiGetIamLdapProviderB
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -15109,15 +16855,15 @@ func (a *IamApiService) GetIamLdapProviderByMoidExecute(r ApiGetIamLdapProviderB
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -15173,7 +16919,7 @@ func (a *IamApiService) GetIamLdapProviderByMoidExecute(r ApiGetIamLdapProviderB
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -15184,7 +16930,7 @@ func (a *IamApiService) GetIamLdapProviderByMoidExecute(r ApiGetIamLdapProviderB
 }
 
 type ApiGetIamLdapProviderListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	filter      *string
 	orderby     *string
@@ -15265,17 +17011,17 @@ func (r ApiGetIamLdapProviderListRequest) Tags(tags string) ApiGetIamLdapProvide
 	return r
 }
 
-func (r ApiGetIamLdapProviderListRequest) Execute() (IamLdapProviderResponse, *_nethttp.Response, error) {
+func (r ApiGetIamLdapProviderListRequest) Execute() (*IamLdapProviderResponse, *http.Response, error) {
 	return r.ApiService.GetIamLdapProviderListExecute(r)
 }
 
 /*
 GetIamLdapProviderList Read a 'iam.LdapProvider' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIamLdapProviderListRequest
 */
-func (a *IamApiService) GetIamLdapProviderList(ctx _context.Context) ApiGetIamLdapProviderListRequest {
+func (a *IamApiService) GetIamLdapProviderList(ctx context.Context) ApiGetIamLdapProviderListRequest {
 	return ApiGetIamLdapProviderListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -15284,26 +17030,24 @@ func (a *IamApiService) GetIamLdapProviderList(ctx _context.Context) ApiGetIamLd
 
 // Execute executes the request
 //  @return IamLdapProviderResponse
-func (a *IamApiService) GetIamLdapProviderListExecute(r ApiGetIamLdapProviderListRequest) (IamLdapProviderResponse, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamLdapProviderListExecute(r ApiGetIamLdapProviderListRequest) (*IamLdapProviderResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamLdapProviderResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamLdapProviderResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamLdapProviderList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/LdapProviders"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -15355,7 +17099,7 @@ func (a *IamApiService) GetIamLdapProviderListExecute(r ApiGetIamLdapProviderLis
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -15365,15 +17109,15 @@ func (a *IamApiService) GetIamLdapProviderListExecute(r ApiGetIamLdapProviderLis
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -15429,7 +17173,7 @@ func (a *IamApiService) GetIamLdapProviderListExecute(r ApiGetIamLdapProviderLis
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -15440,23 +17184,23 @@ func (a *IamApiService) GetIamLdapProviderListExecute(r ApiGetIamLdapProviderLis
 }
 
 type ApiGetIamLocalUserPasswordPolicyByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiGetIamLocalUserPasswordPolicyByMoidRequest) Execute() (IamLocalUserPasswordPolicy, *_nethttp.Response, error) {
+func (r ApiGetIamLocalUserPasswordPolicyByMoidRequest) Execute() (*IamLocalUserPasswordPolicy, *http.Response, error) {
 	return r.ApiService.GetIamLocalUserPasswordPolicyByMoidExecute(r)
 }
 
 /*
 GetIamLocalUserPasswordPolicyByMoid Read a 'iam.LocalUserPasswordPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIamLocalUserPasswordPolicyByMoidRequest
 */
-func (a *IamApiService) GetIamLocalUserPasswordPolicyByMoid(ctx _context.Context, moid string) ApiGetIamLocalUserPasswordPolicyByMoidRequest {
+func (a *IamApiService) GetIamLocalUserPasswordPolicyByMoid(ctx context.Context, moid string) ApiGetIamLocalUserPasswordPolicyByMoidRequest {
 	return ApiGetIamLocalUserPasswordPolicyByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -15466,27 +17210,25 @@ func (a *IamApiService) GetIamLocalUserPasswordPolicyByMoid(ctx _context.Context
 
 // Execute executes the request
 //  @return IamLocalUserPasswordPolicy
-func (a *IamApiService) GetIamLocalUserPasswordPolicyByMoidExecute(r ApiGetIamLocalUserPasswordPolicyByMoidRequest) (IamLocalUserPasswordPolicy, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamLocalUserPasswordPolicyByMoidExecute(r ApiGetIamLocalUserPasswordPolicyByMoidRequest) (*IamLocalUserPasswordPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamLocalUserPasswordPolicy
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamLocalUserPasswordPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamLocalUserPasswordPolicyByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/LocalUserPasswordPolicies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -15505,7 +17247,7 @@ func (a *IamApiService) GetIamLocalUserPasswordPolicyByMoidExecute(r ApiGetIamLo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -15515,15 +17257,15 @@ func (a *IamApiService) GetIamLocalUserPasswordPolicyByMoidExecute(r ApiGetIamLo
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -15579,7 +17321,7 @@ func (a *IamApiService) GetIamLocalUserPasswordPolicyByMoidExecute(r ApiGetIamLo
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -15590,7 +17332,7 @@ func (a *IamApiService) GetIamLocalUserPasswordPolicyByMoidExecute(r ApiGetIamLo
 }
 
 type ApiGetIamLocalUserPasswordPolicyListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	filter      *string
 	orderby     *string
@@ -15671,17 +17413,17 @@ func (r ApiGetIamLocalUserPasswordPolicyListRequest) Tags(tags string) ApiGetIam
 	return r
 }
 
-func (r ApiGetIamLocalUserPasswordPolicyListRequest) Execute() (IamLocalUserPasswordPolicyResponse, *_nethttp.Response, error) {
+func (r ApiGetIamLocalUserPasswordPolicyListRequest) Execute() (*IamLocalUserPasswordPolicyResponse, *http.Response, error) {
 	return r.ApiService.GetIamLocalUserPasswordPolicyListExecute(r)
 }
 
 /*
 GetIamLocalUserPasswordPolicyList Read a 'iam.LocalUserPasswordPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIamLocalUserPasswordPolicyListRequest
 */
-func (a *IamApiService) GetIamLocalUserPasswordPolicyList(ctx _context.Context) ApiGetIamLocalUserPasswordPolicyListRequest {
+func (a *IamApiService) GetIamLocalUserPasswordPolicyList(ctx context.Context) ApiGetIamLocalUserPasswordPolicyListRequest {
 	return ApiGetIamLocalUserPasswordPolicyListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -15690,26 +17432,24 @@ func (a *IamApiService) GetIamLocalUserPasswordPolicyList(ctx _context.Context) 
 
 // Execute executes the request
 //  @return IamLocalUserPasswordPolicyResponse
-func (a *IamApiService) GetIamLocalUserPasswordPolicyListExecute(r ApiGetIamLocalUserPasswordPolicyListRequest) (IamLocalUserPasswordPolicyResponse, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamLocalUserPasswordPolicyListExecute(r ApiGetIamLocalUserPasswordPolicyListRequest) (*IamLocalUserPasswordPolicyResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamLocalUserPasswordPolicyResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamLocalUserPasswordPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamLocalUserPasswordPolicyList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/LocalUserPasswordPolicies"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -15761,7 +17501,7 @@ func (a *IamApiService) GetIamLocalUserPasswordPolicyListExecute(r ApiGetIamLoca
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -15771,15 +17511,15 @@ func (a *IamApiService) GetIamLocalUserPasswordPolicyListExecute(r ApiGetIamLoca
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -15835,7 +17575,7 @@ func (a *IamApiService) GetIamLocalUserPasswordPolicyListExecute(r ApiGetIamLoca
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -15846,23 +17586,23 @@ func (a *IamApiService) GetIamLocalUserPasswordPolicyListExecute(r ApiGetIamLoca
 }
 
 type ApiGetIamOAuthTokenByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiGetIamOAuthTokenByMoidRequest) Execute() (IamOAuthToken, *_nethttp.Response, error) {
+func (r ApiGetIamOAuthTokenByMoidRequest) Execute() (*IamOAuthToken, *http.Response, error) {
 	return r.ApiService.GetIamOAuthTokenByMoidExecute(r)
 }
 
 /*
 GetIamOAuthTokenByMoid Read a 'iam.OAuthToken' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIamOAuthTokenByMoidRequest
 */
-func (a *IamApiService) GetIamOAuthTokenByMoid(ctx _context.Context, moid string) ApiGetIamOAuthTokenByMoidRequest {
+func (a *IamApiService) GetIamOAuthTokenByMoid(ctx context.Context, moid string) ApiGetIamOAuthTokenByMoidRequest {
 	return ApiGetIamOAuthTokenByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -15872,27 +17612,25 @@ func (a *IamApiService) GetIamOAuthTokenByMoid(ctx _context.Context, moid string
 
 // Execute executes the request
 //  @return IamOAuthToken
-func (a *IamApiService) GetIamOAuthTokenByMoidExecute(r ApiGetIamOAuthTokenByMoidRequest) (IamOAuthToken, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamOAuthTokenByMoidExecute(r ApiGetIamOAuthTokenByMoidRequest) (*IamOAuthToken, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamOAuthToken
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamOAuthToken
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamOAuthTokenByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/OAuthTokens/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -15911,7 +17649,7 @@ func (a *IamApiService) GetIamOAuthTokenByMoidExecute(r ApiGetIamOAuthTokenByMoi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -15921,15 +17659,15 @@ func (a *IamApiService) GetIamOAuthTokenByMoidExecute(r ApiGetIamOAuthTokenByMoi
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -15985,7 +17723,7 @@ func (a *IamApiService) GetIamOAuthTokenByMoidExecute(r ApiGetIamOAuthTokenByMoi
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -15996,7 +17734,7 @@ func (a *IamApiService) GetIamOAuthTokenByMoidExecute(r ApiGetIamOAuthTokenByMoi
 }
 
 type ApiGetIamOAuthTokenListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	filter      *string
 	orderby     *string
@@ -16077,17 +17815,17 @@ func (r ApiGetIamOAuthTokenListRequest) Tags(tags string) ApiGetIamOAuthTokenLis
 	return r
 }
 
-func (r ApiGetIamOAuthTokenListRequest) Execute() (IamOAuthTokenResponse, *_nethttp.Response, error) {
+func (r ApiGetIamOAuthTokenListRequest) Execute() (*IamOAuthTokenResponse, *http.Response, error) {
 	return r.ApiService.GetIamOAuthTokenListExecute(r)
 }
 
 /*
 GetIamOAuthTokenList Read a 'iam.OAuthToken' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIamOAuthTokenListRequest
 */
-func (a *IamApiService) GetIamOAuthTokenList(ctx _context.Context) ApiGetIamOAuthTokenListRequest {
+func (a *IamApiService) GetIamOAuthTokenList(ctx context.Context) ApiGetIamOAuthTokenListRequest {
 	return ApiGetIamOAuthTokenListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -16096,26 +17834,24 @@ func (a *IamApiService) GetIamOAuthTokenList(ctx _context.Context) ApiGetIamOAut
 
 // Execute executes the request
 //  @return IamOAuthTokenResponse
-func (a *IamApiService) GetIamOAuthTokenListExecute(r ApiGetIamOAuthTokenListRequest) (IamOAuthTokenResponse, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamOAuthTokenListExecute(r ApiGetIamOAuthTokenListRequest) (*IamOAuthTokenResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamOAuthTokenResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamOAuthTokenResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamOAuthTokenList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/OAuthTokens"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -16167,7 +17903,7 @@ func (a *IamApiService) GetIamOAuthTokenListExecute(r ApiGetIamOAuthTokenListReq
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -16177,15 +17913,15 @@ func (a *IamApiService) GetIamOAuthTokenListExecute(r ApiGetIamOAuthTokenListReq
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -16241,7 +17977,7 @@ func (a *IamApiService) GetIamOAuthTokenListExecute(r ApiGetIamOAuthTokenListReq
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -16252,23 +17988,23 @@ func (a *IamApiService) GetIamOAuthTokenListExecute(r ApiGetIamOAuthTokenListReq
 }
 
 type ApiGetIamPermissionByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiGetIamPermissionByMoidRequest) Execute() (IamPermission, *_nethttp.Response, error) {
+func (r ApiGetIamPermissionByMoidRequest) Execute() (*IamPermission, *http.Response, error) {
 	return r.ApiService.GetIamPermissionByMoidExecute(r)
 }
 
 /*
 GetIamPermissionByMoid Read a 'iam.Permission' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIamPermissionByMoidRequest
 */
-func (a *IamApiService) GetIamPermissionByMoid(ctx _context.Context, moid string) ApiGetIamPermissionByMoidRequest {
+func (a *IamApiService) GetIamPermissionByMoid(ctx context.Context, moid string) ApiGetIamPermissionByMoidRequest {
 	return ApiGetIamPermissionByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -16278,27 +18014,25 @@ func (a *IamApiService) GetIamPermissionByMoid(ctx _context.Context, moid string
 
 // Execute executes the request
 //  @return IamPermission
-func (a *IamApiService) GetIamPermissionByMoidExecute(r ApiGetIamPermissionByMoidRequest) (IamPermission, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamPermissionByMoidExecute(r ApiGetIamPermissionByMoidRequest) (*IamPermission, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamPermission
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamPermission
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamPermissionByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Permissions/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -16317,7 +18051,7 @@ func (a *IamApiService) GetIamPermissionByMoidExecute(r ApiGetIamPermissionByMoi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -16327,15 +18061,15 @@ func (a *IamApiService) GetIamPermissionByMoidExecute(r ApiGetIamPermissionByMoi
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -16391,7 +18125,7 @@ func (a *IamApiService) GetIamPermissionByMoidExecute(r ApiGetIamPermissionByMoi
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -16402,7 +18136,7 @@ func (a *IamApiService) GetIamPermissionByMoidExecute(r ApiGetIamPermissionByMoi
 }
 
 type ApiGetIamPermissionListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	filter      *string
 	orderby     *string
@@ -16483,17 +18217,17 @@ func (r ApiGetIamPermissionListRequest) Tags(tags string) ApiGetIamPermissionLis
 	return r
 }
 
-func (r ApiGetIamPermissionListRequest) Execute() (IamPermissionResponse, *_nethttp.Response, error) {
+func (r ApiGetIamPermissionListRequest) Execute() (*IamPermissionResponse, *http.Response, error) {
 	return r.ApiService.GetIamPermissionListExecute(r)
 }
 
 /*
 GetIamPermissionList Read a 'iam.Permission' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIamPermissionListRequest
 */
-func (a *IamApiService) GetIamPermissionList(ctx _context.Context) ApiGetIamPermissionListRequest {
+func (a *IamApiService) GetIamPermissionList(ctx context.Context) ApiGetIamPermissionListRequest {
 	return ApiGetIamPermissionListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -16502,26 +18236,24 @@ func (a *IamApiService) GetIamPermissionList(ctx _context.Context) ApiGetIamPerm
 
 // Execute executes the request
 //  @return IamPermissionResponse
-func (a *IamApiService) GetIamPermissionListExecute(r ApiGetIamPermissionListRequest) (IamPermissionResponse, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamPermissionListExecute(r ApiGetIamPermissionListRequest) (*IamPermissionResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamPermissionResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamPermissionResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamPermissionList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Permissions"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -16573,7 +18305,7 @@ func (a *IamApiService) GetIamPermissionListExecute(r ApiGetIamPermissionListReq
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -16583,15 +18315,15 @@ func (a *IamApiService) GetIamPermissionListExecute(r ApiGetIamPermissionListReq
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -16647,7 +18379,7 @@ func (a *IamApiService) GetIamPermissionListExecute(r ApiGetIamPermissionListReq
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -16658,23 +18390,23 @@ func (a *IamApiService) GetIamPermissionListExecute(r ApiGetIamPermissionListReq
 }
 
 type ApiGetIamPrivateKeySpecByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiGetIamPrivateKeySpecByMoidRequest) Execute() (IamPrivateKeySpec, *_nethttp.Response, error) {
+func (r ApiGetIamPrivateKeySpecByMoidRequest) Execute() (*IamPrivateKeySpec, *http.Response, error) {
 	return r.ApiService.GetIamPrivateKeySpecByMoidExecute(r)
 }
 
 /*
 GetIamPrivateKeySpecByMoid Read a 'iam.PrivateKeySpec' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIamPrivateKeySpecByMoidRequest
 */
-func (a *IamApiService) GetIamPrivateKeySpecByMoid(ctx _context.Context, moid string) ApiGetIamPrivateKeySpecByMoidRequest {
+func (a *IamApiService) GetIamPrivateKeySpecByMoid(ctx context.Context, moid string) ApiGetIamPrivateKeySpecByMoidRequest {
 	return ApiGetIamPrivateKeySpecByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -16684,27 +18416,25 @@ func (a *IamApiService) GetIamPrivateKeySpecByMoid(ctx _context.Context, moid st
 
 // Execute executes the request
 //  @return IamPrivateKeySpec
-func (a *IamApiService) GetIamPrivateKeySpecByMoidExecute(r ApiGetIamPrivateKeySpecByMoidRequest) (IamPrivateKeySpec, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamPrivateKeySpecByMoidExecute(r ApiGetIamPrivateKeySpecByMoidRequest) (*IamPrivateKeySpec, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamPrivateKeySpec
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamPrivateKeySpec
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamPrivateKeySpecByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/PrivateKeySpecs/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -16723,7 +18453,7 @@ func (a *IamApiService) GetIamPrivateKeySpecByMoidExecute(r ApiGetIamPrivateKeyS
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -16733,15 +18463,15 @@ func (a *IamApiService) GetIamPrivateKeySpecByMoidExecute(r ApiGetIamPrivateKeyS
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -16797,7 +18527,7 @@ func (a *IamApiService) GetIamPrivateKeySpecByMoidExecute(r ApiGetIamPrivateKeyS
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -16808,7 +18538,7 @@ func (a *IamApiService) GetIamPrivateKeySpecByMoidExecute(r ApiGetIamPrivateKeyS
 }
 
 type ApiGetIamPrivateKeySpecListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	filter      *string
 	orderby     *string
@@ -16889,17 +18619,17 @@ func (r ApiGetIamPrivateKeySpecListRequest) Tags(tags string) ApiGetIamPrivateKe
 	return r
 }
 
-func (r ApiGetIamPrivateKeySpecListRequest) Execute() (IamPrivateKeySpecResponse, *_nethttp.Response, error) {
+func (r ApiGetIamPrivateKeySpecListRequest) Execute() (*IamPrivateKeySpecResponse, *http.Response, error) {
 	return r.ApiService.GetIamPrivateKeySpecListExecute(r)
 }
 
 /*
 GetIamPrivateKeySpecList Read a 'iam.PrivateKeySpec' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIamPrivateKeySpecListRequest
 */
-func (a *IamApiService) GetIamPrivateKeySpecList(ctx _context.Context) ApiGetIamPrivateKeySpecListRequest {
+func (a *IamApiService) GetIamPrivateKeySpecList(ctx context.Context) ApiGetIamPrivateKeySpecListRequest {
 	return ApiGetIamPrivateKeySpecListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -16908,26 +18638,24 @@ func (a *IamApiService) GetIamPrivateKeySpecList(ctx _context.Context) ApiGetIam
 
 // Execute executes the request
 //  @return IamPrivateKeySpecResponse
-func (a *IamApiService) GetIamPrivateKeySpecListExecute(r ApiGetIamPrivateKeySpecListRequest) (IamPrivateKeySpecResponse, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamPrivateKeySpecListExecute(r ApiGetIamPrivateKeySpecListRequest) (*IamPrivateKeySpecResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamPrivateKeySpecResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamPrivateKeySpecResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamPrivateKeySpecList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/PrivateKeySpecs"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -16979,7 +18707,7 @@ func (a *IamApiService) GetIamPrivateKeySpecListExecute(r ApiGetIamPrivateKeySpe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -16989,15 +18717,15 @@ func (a *IamApiService) GetIamPrivateKeySpecListExecute(r ApiGetIamPrivateKeySpe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -17053,7 +18781,7 @@ func (a *IamApiService) GetIamPrivateKeySpecListExecute(r ApiGetIamPrivateKeySpe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -17064,23 +18792,23 @@ func (a *IamApiService) GetIamPrivateKeySpecListExecute(r ApiGetIamPrivateKeySpe
 }
 
 type ApiGetIamPrivilegeByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiGetIamPrivilegeByMoidRequest) Execute() (IamPrivilege, *_nethttp.Response, error) {
+func (r ApiGetIamPrivilegeByMoidRequest) Execute() (*IamPrivilege, *http.Response, error) {
 	return r.ApiService.GetIamPrivilegeByMoidExecute(r)
 }
 
 /*
 GetIamPrivilegeByMoid Read a 'iam.Privilege' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIamPrivilegeByMoidRequest
 */
-func (a *IamApiService) GetIamPrivilegeByMoid(ctx _context.Context, moid string) ApiGetIamPrivilegeByMoidRequest {
+func (a *IamApiService) GetIamPrivilegeByMoid(ctx context.Context, moid string) ApiGetIamPrivilegeByMoidRequest {
 	return ApiGetIamPrivilegeByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -17090,27 +18818,25 @@ func (a *IamApiService) GetIamPrivilegeByMoid(ctx _context.Context, moid string)
 
 // Execute executes the request
 //  @return IamPrivilege
-func (a *IamApiService) GetIamPrivilegeByMoidExecute(r ApiGetIamPrivilegeByMoidRequest) (IamPrivilege, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamPrivilegeByMoidExecute(r ApiGetIamPrivilegeByMoidRequest) (*IamPrivilege, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamPrivilege
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamPrivilege
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamPrivilegeByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Privileges/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -17129,7 +18855,7 @@ func (a *IamApiService) GetIamPrivilegeByMoidExecute(r ApiGetIamPrivilegeByMoidR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -17139,15 +18865,15 @@ func (a *IamApiService) GetIamPrivilegeByMoidExecute(r ApiGetIamPrivilegeByMoidR
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -17203,7 +18929,7 @@ func (a *IamApiService) GetIamPrivilegeByMoidExecute(r ApiGetIamPrivilegeByMoidR
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -17214,7 +18940,7 @@ func (a *IamApiService) GetIamPrivilegeByMoidExecute(r ApiGetIamPrivilegeByMoidR
 }
 
 type ApiGetIamPrivilegeListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	filter      *string
 	orderby     *string
@@ -17295,17 +19021,17 @@ func (r ApiGetIamPrivilegeListRequest) Tags(tags string) ApiGetIamPrivilegeListR
 	return r
 }
 
-func (r ApiGetIamPrivilegeListRequest) Execute() (IamPrivilegeResponse, *_nethttp.Response, error) {
+func (r ApiGetIamPrivilegeListRequest) Execute() (*IamPrivilegeResponse, *http.Response, error) {
 	return r.ApiService.GetIamPrivilegeListExecute(r)
 }
 
 /*
 GetIamPrivilegeList Read a 'iam.Privilege' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIamPrivilegeListRequest
 */
-func (a *IamApiService) GetIamPrivilegeList(ctx _context.Context) ApiGetIamPrivilegeListRequest {
+func (a *IamApiService) GetIamPrivilegeList(ctx context.Context) ApiGetIamPrivilegeListRequest {
 	return ApiGetIamPrivilegeListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -17314,26 +19040,24 @@ func (a *IamApiService) GetIamPrivilegeList(ctx _context.Context) ApiGetIamPrivi
 
 // Execute executes the request
 //  @return IamPrivilegeResponse
-func (a *IamApiService) GetIamPrivilegeListExecute(r ApiGetIamPrivilegeListRequest) (IamPrivilegeResponse, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamPrivilegeListExecute(r ApiGetIamPrivilegeListRequest) (*IamPrivilegeResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamPrivilegeResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamPrivilegeResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamPrivilegeList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Privileges"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -17385,7 +19109,7 @@ func (a *IamApiService) GetIamPrivilegeListExecute(r ApiGetIamPrivilegeListReque
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -17395,15 +19119,15 @@ func (a *IamApiService) GetIamPrivilegeListExecute(r ApiGetIamPrivilegeListReque
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -17459,7 +19183,7 @@ func (a *IamApiService) GetIamPrivilegeListExecute(r ApiGetIamPrivilegeListReque
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -17470,23 +19194,23 @@ func (a *IamApiService) GetIamPrivilegeListExecute(r ApiGetIamPrivilegeListReque
 }
 
 type ApiGetIamPrivilegeSetByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiGetIamPrivilegeSetByMoidRequest) Execute() (IamPrivilegeSet, *_nethttp.Response, error) {
+func (r ApiGetIamPrivilegeSetByMoidRequest) Execute() (*IamPrivilegeSet, *http.Response, error) {
 	return r.ApiService.GetIamPrivilegeSetByMoidExecute(r)
 }
 
 /*
 GetIamPrivilegeSetByMoid Read a 'iam.PrivilegeSet' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIamPrivilegeSetByMoidRequest
 */
-func (a *IamApiService) GetIamPrivilegeSetByMoid(ctx _context.Context, moid string) ApiGetIamPrivilegeSetByMoidRequest {
+func (a *IamApiService) GetIamPrivilegeSetByMoid(ctx context.Context, moid string) ApiGetIamPrivilegeSetByMoidRequest {
 	return ApiGetIamPrivilegeSetByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -17496,27 +19220,25 @@ func (a *IamApiService) GetIamPrivilegeSetByMoid(ctx _context.Context, moid stri
 
 // Execute executes the request
 //  @return IamPrivilegeSet
-func (a *IamApiService) GetIamPrivilegeSetByMoidExecute(r ApiGetIamPrivilegeSetByMoidRequest) (IamPrivilegeSet, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamPrivilegeSetByMoidExecute(r ApiGetIamPrivilegeSetByMoidRequest) (*IamPrivilegeSet, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamPrivilegeSet
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamPrivilegeSet
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamPrivilegeSetByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/PrivilegeSets/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -17535,7 +19257,7 @@ func (a *IamApiService) GetIamPrivilegeSetByMoidExecute(r ApiGetIamPrivilegeSetB
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -17545,15 +19267,15 @@ func (a *IamApiService) GetIamPrivilegeSetByMoidExecute(r ApiGetIamPrivilegeSetB
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -17609,7 +19331,7 @@ func (a *IamApiService) GetIamPrivilegeSetByMoidExecute(r ApiGetIamPrivilegeSetB
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -17620,7 +19342,7 @@ func (a *IamApiService) GetIamPrivilegeSetByMoidExecute(r ApiGetIamPrivilegeSetB
 }
 
 type ApiGetIamPrivilegeSetListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	filter      *string
 	orderby     *string
@@ -17701,17 +19423,17 @@ func (r ApiGetIamPrivilegeSetListRequest) Tags(tags string) ApiGetIamPrivilegeSe
 	return r
 }
 
-func (r ApiGetIamPrivilegeSetListRequest) Execute() (IamPrivilegeSetResponse, *_nethttp.Response, error) {
+func (r ApiGetIamPrivilegeSetListRequest) Execute() (*IamPrivilegeSetResponse, *http.Response, error) {
 	return r.ApiService.GetIamPrivilegeSetListExecute(r)
 }
 
 /*
 GetIamPrivilegeSetList Read a 'iam.PrivilegeSet' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIamPrivilegeSetListRequest
 */
-func (a *IamApiService) GetIamPrivilegeSetList(ctx _context.Context) ApiGetIamPrivilegeSetListRequest {
+func (a *IamApiService) GetIamPrivilegeSetList(ctx context.Context) ApiGetIamPrivilegeSetListRequest {
 	return ApiGetIamPrivilegeSetListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -17720,26 +19442,24 @@ func (a *IamApiService) GetIamPrivilegeSetList(ctx _context.Context) ApiGetIamPr
 
 // Execute executes the request
 //  @return IamPrivilegeSetResponse
-func (a *IamApiService) GetIamPrivilegeSetListExecute(r ApiGetIamPrivilegeSetListRequest) (IamPrivilegeSetResponse, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamPrivilegeSetListExecute(r ApiGetIamPrivilegeSetListRequest) (*IamPrivilegeSetResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamPrivilegeSetResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamPrivilegeSetResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamPrivilegeSetList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/PrivilegeSets"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -17791,7 +19511,7 @@ func (a *IamApiService) GetIamPrivilegeSetListExecute(r ApiGetIamPrivilegeSetLis
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -17801,15 +19521,15 @@ func (a *IamApiService) GetIamPrivilegeSetListExecute(r ApiGetIamPrivilegeSetLis
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -17865,7 +19585,7 @@ func (a *IamApiService) GetIamPrivilegeSetListExecute(r ApiGetIamPrivilegeSetLis
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -17876,23 +19596,23 @@ func (a *IamApiService) GetIamPrivilegeSetListExecute(r ApiGetIamPrivilegeSetLis
 }
 
 type ApiGetIamQualifierByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiGetIamQualifierByMoidRequest) Execute() (IamQualifier, *_nethttp.Response, error) {
+func (r ApiGetIamQualifierByMoidRequest) Execute() (*IamQualifier, *http.Response, error) {
 	return r.ApiService.GetIamQualifierByMoidExecute(r)
 }
 
 /*
 GetIamQualifierByMoid Read a 'iam.Qualifier' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIamQualifierByMoidRequest
 */
-func (a *IamApiService) GetIamQualifierByMoid(ctx _context.Context, moid string) ApiGetIamQualifierByMoidRequest {
+func (a *IamApiService) GetIamQualifierByMoid(ctx context.Context, moid string) ApiGetIamQualifierByMoidRequest {
 	return ApiGetIamQualifierByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -17902,27 +19622,25 @@ func (a *IamApiService) GetIamQualifierByMoid(ctx _context.Context, moid string)
 
 // Execute executes the request
 //  @return IamQualifier
-func (a *IamApiService) GetIamQualifierByMoidExecute(r ApiGetIamQualifierByMoidRequest) (IamQualifier, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamQualifierByMoidExecute(r ApiGetIamQualifierByMoidRequest) (*IamQualifier, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamQualifier
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamQualifier
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamQualifierByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Qualifiers/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -17941,7 +19659,7 @@ func (a *IamApiService) GetIamQualifierByMoidExecute(r ApiGetIamQualifierByMoidR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -17951,15 +19669,15 @@ func (a *IamApiService) GetIamQualifierByMoidExecute(r ApiGetIamQualifierByMoidR
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -18015,7 +19733,7 @@ func (a *IamApiService) GetIamQualifierByMoidExecute(r ApiGetIamQualifierByMoidR
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -18026,7 +19744,7 @@ func (a *IamApiService) GetIamQualifierByMoidExecute(r ApiGetIamQualifierByMoidR
 }
 
 type ApiGetIamQualifierListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	filter      *string
 	orderby     *string
@@ -18107,17 +19825,17 @@ func (r ApiGetIamQualifierListRequest) Tags(tags string) ApiGetIamQualifierListR
 	return r
 }
 
-func (r ApiGetIamQualifierListRequest) Execute() (IamQualifierResponse, *_nethttp.Response, error) {
+func (r ApiGetIamQualifierListRequest) Execute() (*IamQualifierResponse, *http.Response, error) {
 	return r.ApiService.GetIamQualifierListExecute(r)
 }
 
 /*
 GetIamQualifierList Read a 'iam.Qualifier' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIamQualifierListRequest
 */
-func (a *IamApiService) GetIamQualifierList(ctx _context.Context) ApiGetIamQualifierListRequest {
+func (a *IamApiService) GetIamQualifierList(ctx context.Context) ApiGetIamQualifierListRequest {
 	return ApiGetIamQualifierListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -18126,26 +19844,24 @@ func (a *IamApiService) GetIamQualifierList(ctx _context.Context) ApiGetIamQuali
 
 // Execute executes the request
 //  @return IamQualifierResponse
-func (a *IamApiService) GetIamQualifierListExecute(r ApiGetIamQualifierListRequest) (IamQualifierResponse, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamQualifierListExecute(r ApiGetIamQualifierListRequest) (*IamQualifierResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamQualifierResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamQualifierResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamQualifierList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Qualifiers"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -18197,7 +19913,7 @@ func (a *IamApiService) GetIamQualifierListExecute(r ApiGetIamQualifierListReque
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -18207,15 +19923,15 @@ func (a *IamApiService) GetIamQualifierListExecute(r ApiGetIamQualifierListReque
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -18271,7 +19987,7 @@ func (a *IamApiService) GetIamQualifierListExecute(r ApiGetIamQualifierListReque
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -18282,23 +19998,23 @@ func (a *IamApiService) GetIamQualifierListExecute(r ApiGetIamQualifierListReque
 }
 
 type ApiGetIamResourceLimitsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiGetIamResourceLimitsByMoidRequest) Execute() (IamResourceLimits, *_nethttp.Response, error) {
+func (r ApiGetIamResourceLimitsByMoidRequest) Execute() (*IamResourceLimits, *http.Response, error) {
 	return r.ApiService.GetIamResourceLimitsByMoidExecute(r)
 }
 
 /*
 GetIamResourceLimitsByMoid Read a 'iam.ResourceLimits' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIamResourceLimitsByMoidRequest
 */
-func (a *IamApiService) GetIamResourceLimitsByMoid(ctx _context.Context, moid string) ApiGetIamResourceLimitsByMoidRequest {
+func (a *IamApiService) GetIamResourceLimitsByMoid(ctx context.Context, moid string) ApiGetIamResourceLimitsByMoidRequest {
 	return ApiGetIamResourceLimitsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -18308,27 +20024,25 @@ func (a *IamApiService) GetIamResourceLimitsByMoid(ctx _context.Context, moid st
 
 // Execute executes the request
 //  @return IamResourceLimits
-func (a *IamApiService) GetIamResourceLimitsByMoidExecute(r ApiGetIamResourceLimitsByMoidRequest) (IamResourceLimits, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamResourceLimitsByMoidExecute(r ApiGetIamResourceLimitsByMoidRequest) (*IamResourceLimits, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamResourceLimits
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamResourceLimits
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamResourceLimitsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/ResourceLimits/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -18347,7 +20061,7 @@ func (a *IamApiService) GetIamResourceLimitsByMoidExecute(r ApiGetIamResourceLim
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -18357,15 +20071,15 @@ func (a *IamApiService) GetIamResourceLimitsByMoidExecute(r ApiGetIamResourceLim
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -18421,7 +20135,7 @@ func (a *IamApiService) GetIamResourceLimitsByMoidExecute(r ApiGetIamResourceLim
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -18432,7 +20146,7 @@ func (a *IamApiService) GetIamResourceLimitsByMoidExecute(r ApiGetIamResourceLim
 }
 
 type ApiGetIamResourceLimitsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	filter      *string
 	orderby     *string
@@ -18513,17 +20227,17 @@ func (r ApiGetIamResourceLimitsListRequest) Tags(tags string) ApiGetIamResourceL
 	return r
 }
 
-func (r ApiGetIamResourceLimitsListRequest) Execute() (IamResourceLimitsResponse, *_nethttp.Response, error) {
+func (r ApiGetIamResourceLimitsListRequest) Execute() (*IamResourceLimitsResponse, *http.Response, error) {
 	return r.ApiService.GetIamResourceLimitsListExecute(r)
 }
 
 /*
 GetIamResourceLimitsList Read a 'iam.ResourceLimits' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIamResourceLimitsListRequest
 */
-func (a *IamApiService) GetIamResourceLimitsList(ctx _context.Context) ApiGetIamResourceLimitsListRequest {
+func (a *IamApiService) GetIamResourceLimitsList(ctx context.Context) ApiGetIamResourceLimitsListRequest {
 	return ApiGetIamResourceLimitsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -18532,26 +20246,24 @@ func (a *IamApiService) GetIamResourceLimitsList(ctx _context.Context) ApiGetIam
 
 // Execute executes the request
 //  @return IamResourceLimitsResponse
-func (a *IamApiService) GetIamResourceLimitsListExecute(r ApiGetIamResourceLimitsListRequest) (IamResourceLimitsResponse, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamResourceLimitsListExecute(r ApiGetIamResourceLimitsListRequest) (*IamResourceLimitsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamResourceLimitsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamResourceLimitsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamResourceLimitsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/ResourceLimits"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -18603,7 +20315,7 @@ func (a *IamApiService) GetIamResourceLimitsListExecute(r ApiGetIamResourceLimit
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -18613,15 +20325,15 @@ func (a *IamApiService) GetIamResourceLimitsListExecute(r ApiGetIamResourceLimit
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -18677,7 +20389,7 @@ func (a *IamApiService) GetIamResourceLimitsListExecute(r ApiGetIamResourceLimit
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -18688,23 +20400,23 @@ func (a *IamApiService) GetIamResourceLimitsListExecute(r ApiGetIamResourceLimit
 }
 
 type ApiGetIamResourcePermissionByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiGetIamResourcePermissionByMoidRequest) Execute() (IamResourcePermission, *_nethttp.Response, error) {
+func (r ApiGetIamResourcePermissionByMoidRequest) Execute() (*IamResourcePermission, *http.Response, error) {
 	return r.ApiService.GetIamResourcePermissionByMoidExecute(r)
 }
 
 /*
 GetIamResourcePermissionByMoid Read a 'iam.ResourcePermission' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIamResourcePermissionByMoidRequest
 */
-func (a *IamApiService) GetIamResourcePermissionByMoid(ctx _context.Context, moid string) ApiGetIamResourcePermissionByMoidRequest {
+func (a *IamApiService) GetIamResourcePermissionByMoid(ctx context.Context, moid string) ApiGetIamResourcePermissionByMoidRequest {
 	return ApiGetIamResourcePermissionByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -18714,27 +20426,25 @@ func (a *IamApiService) GetIamResourcePermissionByMoid(ctx _context.Context, moi
 
 // Execute executes the request
 //  @return IamResourcePermission
-func (a *IamApiService) GetIamResourcePermissionByMoidExecute(r ApiGetIamResourcePermissionByMoidRequest) (IamResourcePermission, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamResourcePermissionByMoidExecute(r ApiGetIamResourcePermissionByMoidRequest) (*IamResourcePermission, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamResourcePermission
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamResourcePermission
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamResourcePermissionByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/ResourcePermissions/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -18753,7 +20463,7 @@ func (a *IamApiService) GetIamResourcePermissionByMoidExecute(r ApiGetIamResourc
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -18763,15 +20473,15 @@ func (a *IamApiService) GetIamResourcePermissionByMoidExecute(r ApiGetIamResourc
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -18827,7 +20537,7 @@ func (a *IamApiService) GetIamResourcePermissionByMoidExecute(r ApiGetIamResourc
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -18838,7 +20548,7 @@ func (a *IamApiService) GetIamResourcePermissionByMoidExecute(r ApiGetIamResourc
 }
 
 type ApiGetIamResourcePermissionListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	filter      *string
 	orderby     *string
@@ -18919,17 +20629,17 @@ func (r ApiGetIamResourcePermissionListRequest) Tags(tags string) ApiGetIamResou
 	return r
 }
 
-func (r ApiGetIamResourcePermissionListRequest) Execute() (IamResourcePermissionResponse, *_nethttp.Response, error) {
+func (r ApiGetIamResourcePermissionListRequest) Execute() (*IamResourcePermissionResponse, *http.Response, error) {
 	return r.ApiService.GetIamResourcePermissionListExecute(r)
 }
 
 /*
 GetIamResourcePermissionList Read a 'iam.ResourcePermission' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIamResourcePermissionListRequest
 */
-func (a *IamApiService) GetIamResourcePermissionList(ctx _context.Context) ApiGetIamResourcePermissionListRequest {
+func (a *IamApiService) GetIamResourcePermissionList(ctx context.Context) ApiGetIamResourcePermissionListRequest {
 	return ApiGetIamResourcePermissionListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -18938,26 +20648,24 @@ func (a *IamApiService) GetIamResourcePermissionList(ctx _context.Context) ApiGe
 
 // Execute executes the request
 //  @return IamResourcePermissionResponse
-func (a *IamApiService) GetIamResourcePermissionListExecute(r ApiGetIamResourcePermissionListRequest) (IamResourcePermissionResponse, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamResourcePermissionListExecute(r ApiGetIamResourcePermissionListRequest) (*IamResourcePermissionResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamResourcePermissionResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamResourcePermissionResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamResourcePermissionList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/ResourcePermissions"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -19009,7 +20717,7 @@ func (a *IamApiService) GetIamResourcePermissionListExecute(r ApiGetIamResourceP
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -19019,15 +20727,15 @@ func (a *IamApiService) GetIamResourcePermissionListExecute(r ApiGetIamResourceP
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -19083,7 +20791,7 @@ func (a *IamApiService) GetIamResourcePermissionListExecute(r ApiGetIamResourceP
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -19094,23 +20802,23 @@ func (a *IamApiService) GetIamResourcePermissionListExecute(r ApiGetIamResourceP
 }
 
 type ApiGetIamResourceRolesByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiGetIamResourceRolesByMoidRequest) Execute() (IamResourceRoles, *_nethttp.Response, error) {
+func (r ApiGetIamResourceRolesByMoidRequest) Execute() (*IamResourceRoles, *http.Response, error) {
 	return r.ApiService.GetIamResourceRolesByMoidExecute(r)
 }
 
 /*
 GetIamResourceRolesByMoid Read a 'iam.ResourceRoles' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIamResourceRolesByMoidRequest
 */
-func (a *IamApiService) GetIamResourceRolesByMoid(ctx _context.Context, moid string) ApiGetIamResourceRolesByMoidRequest {
+func (a *IamApiService) GetIamResourceRolesByMoid(ctx context.Context, moid string) ApiGetIamResourceRolesByMoidRequest {
 	return ApiGetIamResourceRolesByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -19120,27 +20828,25 @@ func (a *IamApiService) GetIamResourceRolesByMoid(ctx _context.Context, moid str
 
 // Execute executes the request
 //  @return IamResourceRoles
-func (a *IamApiService) GetIamResourceRolesByMoidExecute(r ApiGetIamResourceRolesByMoidRequest) (IamResourceRoles, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamResourceRolesByMoidExecute(r ApiGetIamResourceRolesByMoidRequest) (*IamResourceRoles, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamResourceRoles
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamResourceRoles
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamResourceRolesByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/ResourceRoles/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -19159,7 +20865,7 @@ func (a *IamApiService) GetIamResourceRolesByMoidExecute(r ApiGetIamResourceRole
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -19169,15 +20875,15 @@ func (a *IamApiService) GetIamResourceRolesByMoidExecute(r ApiGetIamResourceRole
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -19233,7 +20939,7 @@ func (a *IamApiService) GetIamResourceRolesByMoidExecute(r ApiGetIamResourceRole
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -19244,7 +20950,7 @@ func (a *IamApiService) GetIamResourceRolesByMoidExecute(r ApiGetIamResourceRole
 }
 
 type ApiGetIamResourceRolesListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	filter      *string
 	orderby     *string
@@ -19325,17 +21031,17 @@ func (r ApiGetIamResourceRolesListRequest) Tags(tags string) ApiGetIamResourceRo
 	return r
 }
 
-func (r ApiGetIamResourceRolesListRequest) Execute() (IamResourceRolesResponse, *_nethttp.Response, error) {
+func (r ApiGetIamResourceRolesListRequest) Execute() (*IamResourceRolesResponse, *http.Response, error) {
 	return r.ApiService.GetIamResourceRolesListExecute(r)
 }
 
 /*
 GetIamResourceRolesList Read a 'iam.ResourceRoles' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIamResourceRolesListRequest
 */
-func (a *IamApiService) GetIamResourceRolesList(ctx _context.Context) ApiGetIamResourceRolesListRequest {
+func (a *IamApiService) GetIamResourceRolesList(ctx context.Context) ApiGetIamResourceRolesListRequest {
 	return ApiGetIamResourceRolesListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -19344,26 +21050,24 @@ func (a *IamApiService) GetIamResourceRolesList(ctx _context.Context) ApiGetIamR
 
 // Execute executes the request
 //  @return IamResourceRolesResponse
-func (a *IamApiService) GetIamResourceRolesListExecute(r ApiGetIamResourceRolesListRequest) (IamResourceRolesResponse, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamResourceRolesListExecute(r ApiGetIamResourceRolesListRequest) (*IamResourceRolesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamResourceRolesResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamResourceRolesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamResourceRolesList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/ResourceRoles"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -19415,7 +21119,7 @@ func (a *IamApiService) GetIamResourceRolesListExecute(r ApiGetIamResourceRolesL
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -19425,15 +21129,15 @@ func (a *IamApiService) GetIamResourceRolesListExecute(r ApiGetIamResourceRolesL
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -19489,7 +21193,7 @@ func (a *IamApiService) GetIamResourceRolesListExecute(r ApiGetIamResourceRolesL
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -19500,23 +21204,23 @@ func (a *IamApiService) GetIamResourceRolesListExecute(r ApiGetIamResourceRolesL
 }
 
 type ApiGetIamRoleByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiGetIamRoleByMoidRequest) Execute() (IamRole, *_nethttp.Response, error) {
+func (r ApiGetIamRoleByMoidRequest) Execute() (*IamRole, *http.Response, error) {
 	return r.ApiService.GetIamRoleByMoidExecute(r)
 }
 
 /*
 GetIamRoleByMoid Read a 'iam.Role' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIamRoleByMoidRequest
 */
-func (a *IamApiService) GetIamRoleByMoid(ctx _context.Context, moid string) ApiGetIamRoleByMoidRequest {
+func (a *IamApiService) GetIamRoleByMoid(ctx context.Context, moid string) ApiGetIamRoleByMoidRequest {
 	return ApiGetIamRoleByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -19526,27 +21230,25 @@ func (a *IamApiService) GetIamRoleByMoid(ctx _context.Context, moid string) ApiG
 
 // Execute executes the request
 //  @return IamRole
-func (a *IamApiService) GetIamRoleByMoidExecute(r ApiGetIamRoleByMoidRequest) (IamRole, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamRoleByMoidExecute(r ApiGetIamRoleByMoidRequest) (*IamRole, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamRole
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamRole
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamRoleByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Roles/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -19565,7 +21267,7 @@ func (a *IamApiService) GetIamRoleByMoidExecute(r ApiGetIamRoleByMoidRequest) (I
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -19575,15 +21277,15 @@ func (a *IamApiService) GetIamRoleByMoidExecute(r ApiGetIamRoleByMoidRequest) (I
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -19639,7 +21341,7 @@ func (a *IamApiService) GetIamRoleByMoidExecute(r ApiGetIamRoleByMoidRequest) (I
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -19650,7 +21352,7 @@ func (a *IamApiService) GetIamRoleByMoidExecute(r ApiGetIamRoleByMoidRequest) (I
 }
 
 type ApiGetIamRoleListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	filter      *string
 	orderby     *string
@@ -19731,17 +21433,17 @@ func (r ApiGetIamRoleListRequest) Tags(tags string) ApiGetIamRoleListRequest {
 	return r
 }
 
-func (r ApiGetIamRoleListRequest) Execute() (IamRoleResponse, *_nethttp.Response, error) {
+func (r ApiGetIamRoleListRequest) Execute() (*IamRoleResponse, *http.Response, error) {
 	return r.ApiService.GetIamRoleListExecute(r)
 }
 
 /*
 GetIamRoleList Read a 'iam.Role' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIamRoleListRequest
 */
-func (a *IamApiService) GetIamRoleList(ctx _context.Context) ApiGetIamRoleListRequest {
+func (a *IamApiService) GetIamRoleList(ctx context.Context) ApiGetIamRoleListRequest {
 	return ApiGetIamRoleListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -19750,26 +21452,24 @@ func (a *IamApiService) GetIamRoleList(ctx _context.Context) ApiGetIamRoleListRe
 
 // Execute executes the request
 //  @return IamRoleResponse
-func (a *IamApiService) GetIamRoleListExecute(r ApiGetIamRoleListRequest) (IamRoleResponse, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamRoleListExecute(r ApiGetIamRoleListRequest) (*IamRoleResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamRoleResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamRoleResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamRoleList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Roles"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -19821,7 +21521,7 @@ func (a *IamApiService) GetIamRoleListExecute(r ApiGetIamRoleListRequest) (IamRo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -19831,15 +21531,15 @@ func (a *IamApiService) GetIamRoleListExecute(r ApiGetIamRoleListRequest) (IamRo
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -19895,7 +21595,7 @@ func (a *IamApiService) GetIamRoleListExecute(r ApiGetIamRoleListRequest) (IamRo
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -19906,23 +21606,23 @@ func (a *IamApiService) GetIamRoleListExecute(r ApiGetIamRoleListRequest) (IamRo
 }
 
 type ApiGetIamSecurityHolderByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiGetIamSecurityHolderByMoidRequest) Execute() (IamSecurityHolder, *_nethttp.Response, error) {
+func (r ApiGetIamSecurityHolderByMoidRequest) Execute() (*IamSecurityHolder, *http.Response, error) {
 	return r.ApiService.GetIamSecurityHolderByMoidExecute(r)
 }
 
 /*
 GetIamSecurityHolderByMoid Read a 'iam.SecurityHolder' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIamSecurityHolderByMoidRequest
 */
-func (a *IamApiService) GetIamSecurityHolderByMoid(ctx _context.Context, moid string) ApiGetIamSecurityHolderByMoidRequest {
+func (a *IamApiService) GetIamSecurityHolderByMoid(ctx context.Context, moid string) ApiGetIamSecurityHolderByMoidRequest {
 	return ApiGetIamSecurityHolderByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -19932,27 +21632,25 @@ func (a *IamApiService) GetIamSecurityHolderByMoid(ctx _context.Context, moid st
 
 // Execute executes the request
 //  @return IamSecurityHolder
-func (a *IamApiService) GetIamSecurityHolderByMoidExecute(r ApiGetIamSecurityHolderByMoidRequest) (IamSecurityHolder, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamSecurityHolderByMoidExecute(r ApiGetIamSecurityHolderByMoidRequest) (*IamSecurityHolder, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamSecurityHolder
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamSecurityHolder
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamSecurityHolderByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/SecurityHolders/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -19971,7 +21669,7 @@ func (a *IamApiService) GetIamSecurityHolderByMoidExecute(r ApiGetIamSecurityHol
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -19981,15 +21679,15 @@ func (a *IamApiService) GetIamSecurityHolderByMoidExecute(r ApiGetIamSecurityHol
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -20045,7 +21743,7 @@ func (a *IamApiService) GetIamSecurityHolderByMoidExecute(r ApiGetIamSecurityHol
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -20056,7 +21754,7 @@ func (a *IamApiService) GetIamSecurityHolderByMoidExecute(r ApiGetIamSecurityHol
 }
 
 type ApiGetIamSecurityHolderListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	filter      *string
 	orderby     *string
@@ -20137,17 +21835,17 @@ func (r ApiGetIamSecurityHolderListRequest) Tags(tags string) ApiGetIamSecurityH
 	return r
 }
 
-func (r ApiGetIamSecurityHolderListRequest) Execute() (IamSecurityHolderResponse, *_nethttp.Response, error) {
+func (r ApiGetIamSecurityHolderListRequest) Execute() (*IamSecurityHolderResponse, *http.Response, error) {
 	return r.ApiService.GetIamSecurityHolderListExecute(r)
 }
 
 /*
 GetIamSecurityHolderList Read a 'iam.SecurityHolder' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIamSecurityHolderListRequest
 */
-func (a *IamApiService) GetIamSecurityHolderList(ctx _context.Context) ApiGetIamSecurityHolderListRequest {
+func (a *IamApiService) GetIamSecurityHolderList(ctx context.Context) ApiGetIamSecurityHolderListRequest {
 	return ApiGetIamSecurityHolderListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -20156,26 +21854,24 @@ func (a *IamApiService) GetIamSecurityHolderList(ctx _context.Context) ApiGetIam
 
 // Execute executes the request
 //  @return IamSecurityHolderResponse
-func (a *IamApiService) GetIamSecurityHolderListExecute(r ApiGetIamSecurityHolderListRequest) (IamSecurityHolderResponse, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamSecurityHolderListExecute(r ApiGetIamSecurityHolderListRequest) (*IamSecurityHolderResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamSecurityHolderResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamSecurityHolderResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamSecurityHolderList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/SecurityHolders"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -20227,7 +21923,7 @@ func (a *IamApiService) GetIamSecurityHolderListExecute(r ApiGetIamSecurityHolde
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -20237,15 +21933,15 @@ func (a *IamApiService) GetIamSecurityHolderListExecute(r ApiGetIamSecurityHolde
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -20301,7 +21997,7 @@ func (a *IamApiService) GetIamSecurityHolderListExecute(r ApiGetIamSecurityHolde
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -20312,23 +22008,23 @@ func (a *IamApiService) GetIamSecurityHolderListExecute(r ApiGetIamSecurityHolde
 }
 
 type ApiGetIamServiceProviderByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiGetIamServiceProviderByMoidRequest) Execute() (IamServiceProvider, *_nethttp.Response, error) {
+func (r ApiGetIamServiceProviderByMoidRequest) Execute() (*IamServiceProvider, *http.Response, error) {
 	return r.ApiService.GetIamServiceProviderByMoidExecute(r)
 }
 
 /*
 GetIamServiceProviderByMoid Read a 'iam.ServiceProvider' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIamServiceProviderByMoidRequest
 */
-func (a *IamApiService) GetIamServiceProviderByMoid(ctx _context.Context, moid string) ApiGetIamServiceProviderByMoidRequest {
+func (a *IamApiService) GetIamServiceProviderByMoid(ctx context.Context, moid string) ApiGetIamServiceProviderByMoidRequest {
 	return ApiGetIamServiceProviderByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -20338,27 +22034,25 @@ func (a *IamApiService) GetIamServiceProviderByMoid(ctx _context.Context, moid s
 
 // Execute executes the request
 //  @return IamServiceProvider
-func (a *IamApiService) GetIamServiceProviderByMoidExecute(r ApiGetIamServiceProviderByMoidRequest) (IamServiceProvider, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamServiceProviderByMoidExecute(r ApiGetIamServiceProviderByMoidRequest) (*IamServiceProvider, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamServiceProvider
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamServiceProvider
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamServiceProviderByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/ServiceProviders/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -20377,7 +22071,7 @@ func (a *IamApiService) GetIamServiceProviderByMoidExecute(r ApiGetIamServicePro
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -20387,15 +22081,15 @@ func (a *IamApiService) GetIamServiceProviderByMoidExecute(r ApiGetIamServicePro
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -20451,7 +22145,7 @@ func (a *IamApiService) GetIamServiceProviderByMoidExecute(r ApiGetIamServicePro
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -20462,7 +22156,7 @@ func (a *IamApiService) GetIamServiceProviderByMoidExecute(r ApiGetIamServicePro
 }
 
 type ApiGetIamServiceProviderListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	filter      *string
 	orderby     *string
@@ -20543,17 +22237,17 @@ func (r ApiGetIamServiceProviderListRequest) Tags(tags string) ApiGetIamServiceP
 	return r
 }
 
-func (r ApiGetIamServiceProviderListRequest) Execute() (IamServiceProviderResponse, *_nethttp.Response, error) {
+func (r ApiGetIamServiceProviderListRequest) Execute() (*IamServiceProviderResponse, *http.Response, error) {
 	return r.ApiService.GetIamServiceProviderListExecute(r)
 }
 
 /*
 GetIamServiceProviderList Read a 'iam.ServiceProvider' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIamServiceProviderListRequest
 */
-func (a *IamApiService) GetIamServiceProviderList(ctx _context.Context) ApiGetIamServiceProviderListRequest {
+func (a *IamApiService) GetIamServiceProviderList(ctx context.Context) ApiGetIamServiceProviderListRequest {
 	return ApiGetIamServiceProviderListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -20562,26 +22256,24 @@ func (a *IamApiService) GetIamServiceProviderList(ctx _context.Context) ApiGetIa
 
 // Execute executes the request
 //  @return IamServiceProviderResponse
-func (a *IamApiService) GetIamServiceProviderListExecute(r ApiGetIamServiceProviderListRequest) (IamServiceProviderResponse, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamServiceProviderListExecute(r ApiGetIamServiceProviderListRequest) (*IamServiceProviderResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamServiceProviderResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamServiceProviderResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamServiceProviderList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/ServiceProviders"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -20633,7 +22325,7 @@ func (a *IamApiService) GetIamServiceProviderListExecute(r ApiGetIamServiceProvi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -20643,15 +22335,15 @@ func (a *IamApiService) GetIamServiceProviderListExecute(r ApiGetIamServiceProvi
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -20707,7 +22399,7 @@ func (a *IamApiService) GetIamServiceProviderListExecute(r ApiGetIamServiceProvi
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -20718,23 +22410,23 @@ func (a *IamApiService) GetIamServiceProviderListExecute(r ApiGetIamServiceProvi
 }
 
 type ApiGetIamSessionByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiGetIamSessionByMoidRequest) Execute() (IamSession, *_nethttp.Response, error) {
+func (r ApiGetIamSessionByMoidRequest) Execute() (*IamSession, *http.Response, error) {
 	return r.ApiService.GetIamSessionByMoidExecute(r)
 }
 
 /*
 GetIamSessionByMoid Read a 'iam.Session' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIamSessionByMoidRequest
 */
-func (a *IamApiService) GetIamSessionByMoid(ctx _context.Context, moid string) ApiGetIamSessionByMoidRequest {
+func (a *IamApiService) GetIamSessionByMoid(ctx context.Context, moid string) ApiGetIamSessionByMoidRequest {
 	return ApiGetIamSessionByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -20744,27 +22436,25 @@ func (a *IamApiService) GetIamSessionByMoid(ctx _context.Context, moid string) A
 
 // Execute executes the request
 //  @return IamSession
-func (a *IamApiService) GetIamSessionByMoidExecute(r ApiGetIamSessionByMoidRequest) (IamSession, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamSessionByMoidExecute(r ApiGetIamSessionByMoidRequest) (*IamSession, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamSession
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamSession
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamSessionByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Sessions/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -20783,7 +22473,7 @@ func (a *IamApiService) GetIamSessionByMoidExecute(r ApiGetIamSessionByMoidReque
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -20793,15 +22483,15 @@ func (a *IamApiService) GetIamSessionByMoidExecute(r ApiGetIamSessionByMoidReque
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -20857,7 +22547,7 @@ func (a *IamApiService) GetIamSessionByMoidExecute(r ApiGetIamSessionByMoidReque
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -20868,23 +22558,23 @@ func (a *IamApiService) GetIamSessionByMoidExecute(r ApiGetIamSessionByMoidReque
 }
 
 type ApiGetIamSessionLimitsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiGetIamSessionLimitsByMoidRequest) Execute() (IamSessionLimits, *_nethttp.Response, error) {
+func (r ApiGetIamSessionLimitsByMoidRequest) Execute() (*IamSessionLimits, *http.Response, error) {
 	return r.ApiService.GetIamSessionLimitsByMoidExecute(r)
 }
 
 /*
 GetIamSessionLimitsByMoid Read a 'iam.SessionLimits' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIamSessionLimitsByMoidRequest
 */
-func (a *IamApiService) GetIamSessionLimitsByMoid(ctx _context.Context, moid string) ApiGetIamSessionLimitsByMoidRequest {
+func (a *IamApiService) GetIamSessionLimitsByMoid(ctx context.Context, moid string) ApiGetIamSessionLimitsByMoidRequest {
 	return ApiGetIamSessionLimitsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -20894,27 +22584,25 @@ func (a *IamApiService) GetIamSessionLimitsByMoid(ctx _context.Context, moid str
 
 // Execute executes the request
 //  @return IamSessionLimits
-func (a *IamApiService) GetIamSessionLimitsByMoidExecute(r ApiGetIamSessionLimitsByMoidRequest) (IamSessionLimits, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamSessionLimitsByMoidExecute(r ApiGetIamSessionLimitsByMoidRequest) (*IamSessionLimits, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamSessionLimits
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamSessionLimits
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamSessionLimitsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/SessionLimits/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -20933,7 +22621,7 @@ func (a *IamApiService) GetIamSessionLimitsByMoidExecute(r ApiGetIamSessionLimit
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -20943,15 +22631,15 @@ func (a *IamApiService) GetIamSessionLimitsByMoidExecute(r ApiGetIamSessionLimit
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -21007,7 +22695,7 @@ func (a *IamApiService) GetIamSessionLimitsByMoidExecute(r ApiGetIamSessionLimit
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -21018,7 +22706,7 @@ func (a *IamApiService) GetIamSessionLimitsByMoidExecute(r ApiGetIamSessionLimit
 }
 
 type ApiGetIamSessionLimitsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	filter      *string
 	orderby     *string
@@ -21099,17 +22787,17 @@ func (r ApiGetIamSessionLimitsListRequest) Tags(tags string) ApiGetIamSessionLim
 	return r
 }
 
-func (r ApiGetIamSessionLimitsListRequest) Execute() (IamSessionLimitsResponse, *_nethttp.Response, error) {
+func (r ApiGetIamSessionLimitsListRequest) Execute() (*IamSessionLimitsResponse, *http.Response, error) {
 	return r.ApiService.GetIamSessionLimitsListExecute(r)
 }
 
 /*
 GetIamSessionLimitsList Read a 'iam.SessionLimits' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIamSessionLimitsListRequest
 */
-func (a *IamApiService) GetIamSessionLimitsList(ctx _context.Context) ApiGetIamSessionLimitsListRequest {
+func (a *IamApiService) GetIamSessionLimitsList(ctx context.Context) ApiGetIamSessionLimitsListRequest {
 	return ApiGetIamSessionLimitsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -21118,26 +22806,24 @@ func (a *IamApiService) GetIamSessionLimitsList(ctx _context.Context) ApiGetIamS
 
 // Execute executes the request
 //  @return IamSessionLimitsResponse
-func (a *IamApiService) GetIamSessionLimitsListExecute(r ApiGetIamSessionLimitsListRequest) (IamSessionLimitsResponse, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamSessionLimitsListExecute(r ApiGetIamSessionLimitsListRequest) (*IamSessionLimitsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamSessionLimitsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamSessionLimitsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamSessionLimitsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/SessionLimits"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -21189,7 +22875,7 @@ func (a *IamApiService) GetIamSessionLimitsListExecute(r ApiGetIamSessionLimitsL
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -21199,15 +22885,15 @@ func (a *IamApiService) GetIamSessionLimitsListExecute(r ApiGetIamSessionLimitsL
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -21263,7 +22949,7 @@ func (a *IamApiService) GetIamSessionLimitsListExecute(r ApiGetIamSessionLimitsL
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -21274,7 +22960,7 @@ func (a *IamApiService) GetIamSessionLimitsListExecute(r ApiGetIamSessionLimitsL
 }
 
 type ApiGetIamSessionListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	filter      *string
 	orderby     *string
@@ -21355,17 +23041,17 @@ func (r ApiGetIamSessionListRequest) Tags(tags string) ApiGetIamSessionListReque
 	return r
 }
 
-func (r ApiGetIamSessionListRequest) Execute() (IamSessionResponse, *_nethttp.Response, error) {
+func (r ApiGetIamSessionListRequest) Execute() (*IamSessionResponse, *http.Response, error) {
 	return r.ApiService.GetIamSessionListExecute(r)
 }
 
 /*
 GetIamSessionList Read a 'iam.Session' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIamSessionListRequest
 */
-func (a *IamApiService) GetIamSessionList(ctx _context.Context) ApiGetIamSessionListRequest {
+func (a *IamApiService) GetIamSessionList(ctx context.Context) ApiGetIamSessionListRequest {
 	return ApiGetIamSessionListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -21374,26 +23060,24 @@ func (a *IamApiService) GetIamSessionList(ctx _context.Context) ApiGetIamSession
 
 // Execute executes the request
 //  @return IamSessionResponse
-func (a *IamApiService) GetIamSessionListExecute(r ApiGetIamSessionListRequest) (IamSessionResponse, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamSessionListExecute(r ApiGetIamSessionListRequest) (*IamSessionResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamSessionResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamSessionResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamSessionList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Sessions"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -21445,7 +23129,7 @@ func (a *IamApiService) GetIamSessionListExecute(r ApiGetIamSessionListRequest) 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -21455,15 +23139,15 @@ func (a *IamApiService) GetIamSessionListExecute(r ApiGetIamSessionListRequest) 
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -21519,7 +23203,7 @@ func (a *IamApiService) GetIamSessionListExecute(r ApiGetIamSessionListRequest) 
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -21530,23 +23214,23 @@ func (a *IamApiService) GetIamSessionListExecute(r ApiGetIamSessionListRequest) 
 }
 
 type ApiGetIamSystemByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiGetIamSystemByMoidRequest) Execute() (IamSystem, *_nethttp.Response, error) {
+func (r ApiGetIamSystemByMoidRequest) Execute() (*IamSystem, *http.Response, error) {
 	return r.ApiService.GetIamSystemByMoidExecute(r)
 }
 
 /*
 GetIamSystemByMoid Read a 'iam.System' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIamSystemByMoidRequest
 */
-func (a *IamApiService) GetIamSystemByMoid(ctx _context.Context, moid string) ApiGetIamSystemByMoidRequest {
+func (a *IamApiService) GetIamSystemByMoid(ctx context.Context, moid string) ApiGetIamSystemByMoidRequest {
 	return ApiGetIamSystemByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -21556,27 +23240,25 @@ func (a *IamApiService) GetIamSystemByMoid(ctx _context.Context, moid string) Ap
 
 // Execute executes the request
 //  @return IamSystem
-func (a *IamApiService) GetIamSystemByMoidExecute(r ApiGetIamSystemByMoidRequest) (IamSystem, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamSystemByMoidExecute(r ApiGetIamSystemByMoidRequest) (*IamSystem, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamSystem
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamSystem
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamSystemByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Systems/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -21595,7 +23277,7 @@ func (a *IamApiService) GetIamSystemByMoidExecute(r ApiGetIamSystemByMoidRequest
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -21605,15 +23287,15 @@ func (a *IamApiService) GetIamSystemByMoidExecute(r ApiGetIamSystemByMoidRequest
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -21669,7 +23351,7 @@ func (a *IamApiService) GetIamSystemByMoidExecute(r ApiGetIamSystemByMoidRequest
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -21680,7 +23362,7 @@ func (a *IamApiService) GetIamSystemByMoidExecute(r ApiGetIamSystemByMoidRequest
 }
 
 type ApiGetIamSystemListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	filter      *string
 	orderby     *string
@@ -21761,17 +23443,17 @@ func (r ApiGetIamSystemListRequest) Tags(tags string) ApiGetIamSystemListRequest
 	return r
 }
 
-func (r ApiGetIamSystemListRequest) Execute() (IamSystemResponse, *_nethttp.Response, error) {
+func (r ApiGetIamSystemListRequest) Execute() (*IamSystemResponse, *http.Response, error) {
 	return r.ApiService.GetIamSystemListExecute(r)
 }
 
 /*
 GetIamSystemList Read a 'iam.System' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIamSystemListRequest
 */
-func (a *IamApiService) GetIamSystemList(ctx _context.Context) ApiGetIamSystemListRequest {
+func (a *IamApiService) GetIamSystemList(ctx context.Context) ApiGetIamSystemListRequest {
 	return ApiGetIamSystemListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -21780,26 +23462,24 @@ func (a *IamApiService) GetIamSystemList(ctx _context.Context) ApiGetIamSystemLi
 
 // Execute executes the request
 //  @return IamSystemResponse
-func (a *IamApiService) GetIamSystemListExecute(r ApiGetIamSystemListRequest) (IamSystemResponse, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamSystemListExecute(r ApiGetIamSystemListRequest) (*IamSystemResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamSystemResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamSystemResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamSystemList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Systems"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -21851,7 +23531,7 @@ func (a *IamApiService) GetIamSystemListExecute(r ApiGetIamSystemListRequest) (I
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -21861,15 +23541,15 @@ func (a *IamApiService) GetIamSystemListExecute(r ApiGetIamSystemListRequest) (I
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -21925,7 +23605,7 @@ func (a *IamApiService) GetIamSystemListExecute(r ApiGetIamSystemListRequest) (I
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -21936,23 +23616,23 @@ func (a *IamApiService) GetIamSystemListExecute(r ApiGetIamSystemListRequest) (I
 }
 
 type ApiGetIamTrustPointByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiGetIamTrustPointByMoidRequest) Execute() (IamTrustPoint, *_nethttp.Response, error) {
+func (r ApiGetIamTrustPointByMoidRequest) Execute() (*IamTrustPoint, *http.Response, error) {
 	return r.ApiService.GetIamTrustPointByMoidExecute(r)
 }
 
 /*
 GetIamTrustPointByMoid Read a 'iam.TrustPoint' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIamTrustPointByMoidRequest
 */
-func (a *IamApiService) GetIamTrustPointByMoid(ctx _context.Context, moid string) ApiGetIamTrustPointByMoidRequest {
+func (a *IamApiService) GetIamTrustPointByMoid(ctx context.Context, moid string) ApiGetIamTrustPointByMoidRequest {
 	return ApiGetIamTrustPointByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -21962,27 +23642,25 @@ func (a *IamApiService) GetIamTrustPointByMoid(ctx _context.Context, moid string
 
 // Execute executes the request
 //  @return IamTrustPoint
-func (a *IamApiService) GetIamTrustPointByMoidExecute(r ApiGetIamTrustPointByMoidRequest) (IamTrustPoint, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamTrustPointByMoidExecute(r ApiGetIamTrustPointByMoidRequest) (*IamTrustPoint, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamTrustPoint
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamTrustPoint
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamTrustPointByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/TrustPoints/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -22001,7 +23679,7 @@ func (a *IamApiService) GetIamTrustPointByMoidExecute(r ApiGetIamTrustPointByMoi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -22011,15 +23689,15 @@ func (a *IamApiService) GetIamTrustPointByMoidExecute(r ApiGetIamTrustPointByMoi
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -22075,7 +23753,7 @@ func (a *IamApiService) GetIamTrustPointByMoidExecute(r ApiGetIamTrustPointByMoi
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -22086,7 +23764,7 @@ func (a *IamApiService) GetIamTrustPointByMoidExecute(r ApiGetIamTrustPointByMoi
 }
 
 type ApiGetIamTrustPointListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	filter      *string
 	orderby     *string
@@ -22167,17 +23845,17 @@ func (r ApiGetIamTrustPointListRequest) Tags(tags string) ApiGetIamTrustPointLis
 	return r
 }
 
-func (r ApiGetIamTrustPointListRequest) Execute() (IamTrustPointResponse, *_nethttp.Response, error) {
+func (r ApiGetIamTrustPointListRequest) Execute() (*IamTrustPointResponse, *http.Response, error) {
 	return r.ApiService.GetIamTrustPointListExecute(r)
 }
 
 /*
 GetIamTrustPointList Read a 'iam.TrustPoint' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIamTrustPointListRequest
 */
-func (a *IamApiService) GetIamTrustPointList(ctx _context.Context) ApiGetIamTrustPointListRequest {
+func (a *IamApiService) GetIamTrustPointList(ctx context.Context) ApiGetIamTrustPointListRequest {
 	return ApiGetIamTrustPointListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -22186,26 +23864,24 @@ func (a *IamApiService) GetIamTrustPointList(ctx _context.Context) ApiGetIamTrus
 
 // Execute executes the request
 //  @return IamTrustPointResponse
-func (a *IamApiService) GetIamTrustPointListExecute(r ApiGetIamTrustPointListRequest) (IamTrustPointResponse, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamTrustPointListExecute(r ApiGetIamTrustPointListRequest) (*IamTrustPointResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamTrustPointResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamTrustPointResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamTrustPointList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/TrustPoints"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -22257,7 +23933,7 @@ func (a *IamApiService) GetIamTrustPointListExecute(r ApiGetIamTrustPointListReq
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -22267,15 +23943,15 @@ func (a *IamApiService) GetIamTrustPointListExecute(r ApiGetIamTrustPointListReq
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -22331,7 +24007,7 @@ func (a *IamApiService) GetIamTrustPointListExecute(r ApiGetIamTrustPointListReq
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -22342,23 +24018,23 @@ func (a *IamApiService) GetIamTrustPointListExecute(r ApiGetIamTrustPointListReq
 }
 
 type ApiGetIamUserByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiGetIamUserByMoidRequest) Execute() (IamUser, *_nethttp.Response, error) {
+func (r ApiGetIamUserByMoidRequest) Execute() (*IamUser, *http.Response, error) {
 	return r.ApiService.GetIamUserByMoidExecute(r)
 }
 
 /*
 GetIamUserByMoid Read a 'iam.User' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIamUserByMoidRequest
 */
-func (a *IamApiService) GetIamUserByMoid(ctx _context.Context, moid string) ApiGetIamUserByMoidRequest {
+func (a *IamApiService) GetIamUserByMoid(ctx context.Context, moid string) ApiGetIamUserByMoidRequest {
 	return ApiGetIamUserByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -22368,27 +24044,25 @@ func (a *IamApiService) GetIamUserByMoid(ctx _context.Context, moid string) ApiG
 
 // Execute executes the request
 //  @return IamUser
-func (a *IamApiService) GetIamUserByMoidExecute(r ApiGetIamUserByMoidRequest) (IamUser, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamUserByMoidExecute(r ApiGetIamUserByMoidRequest) (*IamUser, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamUser
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamUser
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamUserByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Users/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -22407,7 +24081,7 @@ func (a *IamApiService) GetIamUserByMoidExecute(r ApiGetIamUserByMoidRequest) (I
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -22417,15 +24091,15 @@ func (a *IamApiService) GetIamUserByMoidExecute(r ApiGetIamUserByMoidRequest) (I
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -22481,7 +24155,7 @@ func (a *IamApiService) GetIamUserByMoidExecute(r ApiGetIamUserByMoidRequest) (I
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -22492,23 +24166,23 @@ func (a *IamApiService) GetIamUserByMoidExecute(r ApiGetIamUserByMoidRequest) (I
 }
 
 type ApiGetIamUserGroupByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiGetIamUserGroupByMoidRequest) Execute() (IamUserGroup, *_nethttp.Response, error) {
+func (r ApiGetIamUserGroupByMoidRequest) Execute() (*IamUserGroup, *http.Response, error) {
 	return r.ApiService.GetIamUserGroupByMoidExecute(r)
 }
 
 /*
 GetIamUserGroupByMoid Read a 'iam.UserGroup' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIamUserGroupByMoidRequest
 */
-func (a *IamApiService) GetIamUserGroupByMoid(ctx _context.Context, moid string) ApiGetIamUserGroupByMoidRequest {
+func (a *IamApiService) GetIamUserGroupByMoid(ctx context.Context, moid string) ApiGetIamUserGroupByMoidRequest {
 	return ApiGetIamUserGroupByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -22518,27 +24192,25 @@ func (a *IamApiService) GetIamUserGroupByMoid(ctx _context.Context, moid string)
 
 // Execute executes the request
 //  @return IamUserGroup
-func (a *IamApiService) GetIamUserGroupByMoidExecute(r ApiGetIamUserGroupByMoidRequest) (IamUserGroup, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamUserGroupByMoidExecute(r ApiGetIamUserGroupByMoidRequest) (*IamUserGroup, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamUserGroup
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamUserGroup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamUserGroupByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/UserGroups/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -22557,7 +24229,7 @@ func (a *IamApiService) GetIamUserGroupByMoidExecute(r ApiGetIamUserGroupByMoidR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -22567,15 +24239,15 @@ func (a *IamApiService) GetIamUserGroupByMoidExecute(r ApiGetIamUserGroupByMoidR
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -22631,7 +24303,7 @@ func (a *IamApiService) GetIamUserGroupByMoidExecute(r ApiGetIamUserGroupByMoidR
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -22642,7 +24314,7 @@ func (a *IamApiService) GetIamUserGroupByMoidExecute(r ApiGetIamUserGroupByMoidR
 }
 
 type ApiGetIamUserGroupListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	filter      *string
 	orderby     *string
@@ -22723,17 +24395,17 @@ func (r ApiGetIamUserGroupListRequest) Tags(tags string) ApiGetIamUserGroupListR
 	return r
 }
 
-func (r ApiGetIamUserGroupListRequest) Execute() (IamUserGroupResponse, *_nethttp.Response, error) {
+func (r ApiGetIamUserGroupListRequest) Execute() (*IamUserGroupResponse, *http.Response, error) {
 	return r.ApiService.GetIamUserGroupListExecute(r)
 }
 
 /*
 GetIamUserGroupList Read a 'iam.UserGroup' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIamUserGroupListRequest
 */
-func (a *IamApiService) GetIamUserGroupList(ctx _context.Context) ApiGetIamUserGroupListRequest {
+func (a *IamApiService) GetIamUserGroupList(ctx context.Context) ApiGetIamUserGroupListRequest {
 	return ApiGetIamUserGroupListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -22742,26 +24414,24 @@ func (a *IamApiService) GetIamUserGroupList(ctx _context.Context) ApiGetIamUserG
 
 // Execute executes the request
 //  @return IamUserGroupResponse
-func (a *IamApiService) GetIamUserGroupListExecute(r ApiGetIamUserGroupListRequest) (IamUserGroupResponse, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamUserGroupListExecute(r ApiGetIamUserGroupListRequest) (*IamUserGroupResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamUserGroupResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamUserGroupResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamUserGroupList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/UserGroups"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -22813,7 +24483,7 @@ func (a *IamApiService) GetIamUserGroupListExecute(r ApiGetIamUserGroupListReque
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -22823,15 +24493,15 @@ func (a *IamApiService) GetIamUserGroupListExecute(r ApiGetIamUserGroupListReque
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -22887,7 +24557,7 @@ func (a *IamApiService) GetIamUserGroupListExecute(r ApiGetIamUserGroupListReque
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -22898,7 +24568,7 @@ func (a *IamApiService) GetIamUserGroupListExecute(r ApiGetIamUserGroupListReque
 }
 
 type ApiGetIamUserListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	filter      *string
 	orderby     *string
@@ -22979,17 +24649,17 @@ func (r ApiGetIamUserListRequest) Tags(tags string) ApiGetIamUserListRequest {
 	return r
 }
 
-func (r ApiGetIamUserListRequest) Execute() (IamUserResponse, *_nethttp.Response, error) {
+func (r ApiGetIamUserListRequest) Execute() (*IamUserResponse, *http.Response, error) {
 	return r.ApiService.GetIamUserListExecute(r)
 }
 
 /*
 GetIamUserList Read a 'iam.User' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIamUserListRequest
 */
-func (a *IamApiService) GetIamUserList(ctx _context.Context) ApiGetIamUserListRequest {
+func (a *IamApiService) GetIamUserList(ctx context.Context) ApiGetIamUserListRequest {
 	return ApiGetIamUserListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -22998,26 +24668,24 @@ func (a *IamApiService) GetIamUserList(ctx _context.Context) ApiGetIamUserListRe
 
 // Execute executes the request
 //  @return IamUserResponse
-func (a *IamApiService) GetIamUserListExecute(r ApiGetIamUserListRequest) (IamUserResponse, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamUserListExecute(r ApiGetIamUserListRequest) (*IamUserResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamUserResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamUserResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamUserList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Users"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -23069,7 +24737,7 @@ func (a *IamApiService) GetIamUserListExecute(r ApiGetIamUserListRequest) (IamUs
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -23079,15 +24747,15 @@ func (a *IamApiService) GetIamUserListExecute(r ApiGetIamUserListRequest) (IamUs
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -23143,7 +24811,7 @@ func (a *IamApiService) GetIamUserListExecute(r ApiGetIamUserListRequest) (IamUs
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -23154,23 +24822,23 @@ func (a *IamApiService) GetIamUserListExecute(r ApiGetIamUserListRequest) (IamUs
 }
 
 type ApiGetIamUserPreferenceByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 }
 
-func (r ApiGetIamUserPreferenceByMoidRequest) Execute() (IamUserPreference, *_nethttp.Response, error) {
+func (r ApiGetIamUserPreferenceByMoidRequest) Execute() (*IamUserPreference, *http.Response, error) {
 	return r.ApiService.GetIamUserPreferenceByMoidExecute(r)
 }
 
 /*
 GetIamUserPreferenceByMoid Read a 'iam.UserPreference' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIamUserPreferenceByMoidRequest
 */
-func (a *IamApiService) GetIamUserPreferenceByMoid(ctx _context.Context, moid string) ApiGetIamUserPreferenceByMoidRequest {
+func (a *IamApiService) GetIamUserPreferenceByMoid(ctx context.Context, moid string) ApiGetIamUserPreferenceByMoidRequest {
 	return ApiGetIamUserPreferenceByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -23180,27 +24848,25 @@ func (a *IamApiService) GetIamUserPreferenceByMoid(ctx _context.Context, moid st
 
 // Execute executes the request
 //  @return IamUserPreference
-func (a *IamApiService) GetIamUserPreferenceByMoidExecute(r ApiGetIamUserPreferenceByMoidRequest) (IamUserPreference, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamUserPreferenceByMoidExecute(r ApiGetIamUserPreferenceByMoidRequest) (*IamUserPreference, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamUserPreference
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamUserPreference
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamUserPreferenceByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/UserPreferences/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -23219,7 +24885,7 @@ func (a *IamApiService) GetIamUserPreferenceByMoidExecute(r ApiGetIamUserPrefere
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -23229,15 +24895,15 @@ func (a *IamApiService) GetIamUserPreferenceByMoidExecute(r ApiGetIamUserPrefere
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -23293,7 +24959,7 @@ func (a *IamApiService) GetIamUserPreferenceByMoidExecute(r ApiGetIamUserPrefere
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -23304,7 +24970,7 @@ func (a *IamApiService) GetIamUserPreferenceByMoidExecute(r ApiGetIamUserPrefere
 }
 
 type ApiGetIamUserPreferenceListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IamApiService
 	filter      *string
 	orderby     *string
@@ -23385,17 +25051,17 @@ func (r ApiGetIamUserPreferenceListRequest) Tags(tags string) ApiGetIamUserPrefe
 	return r
 }
 
-func (r ApiGetIamUserPreferenceListRequest) Execute() (IamUserPreferenceResponse, *_nethttp.Response, error) {
+func (r ApiGetIamUserPreferenceListRequest) Execute() (*IamUserPreferenceResponse, *http.Response, error) {
 	return r.ApiService.GetIamUserPreferenceListExecute(r)
 }
 
 /*
 GetIamUserPreferenceList Read a 'iam.UserPreference' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIamUserPreferenceListRequest
 */
-func (a *IamApiService) GetIamUserPreferenceList(ctx _context.Context) ApiGetIamUserPreferenceListRequest {
+func (a *IamApiService) GetIamUserPreferenceList(ctx context.Context) ApiGetIamUserPreferenceListRequest {
 	return ApiGetIamUserPreferenceListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -23404,26 +25070,24 @@ func (a *IamApiService) GetIamUserPreferenceList(ctx _context.Context) ApiGetIam
 
 // Execute executes the request
 //  @return IamUserPreferenceResponse
-func (a *IamApiService) GetIamUserPreferenceListExecute(r ApiGetIamUserPreferenceListRequest) (IamUserPreferenceResponse, *_nethttp.Response, error) {
+func (a *IamApiService) GetIamUserPreferenceListExecute(r ApiGetIamUserPreferenceListRequest) (*IamUserPreferenceResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamUserPreferenceResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamUserPreferenceResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamUserPreferenceList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/UserPreferences"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -23475,7 +25139,7 @@ func (a *IamApiService) GetIamUserPreferenceListExecute(r ApiGetIamUserPreferenc
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -23485,15 +25149,15 @@ func (a *IamApiService) GetIamUserPreferenceListExecute(r ApiGetIamUserPreferenc
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -23549,7 +25213,7 @@ func (a *IamApiService) GetIamUserPreferenceListExecute(r ApiGetIamUserPreferenc
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -23560,7 +25224,7 @@ func (a *IamApiService) GetIamUserPreferenceListExecute(r ApiGetIamUserPreferenc
 }
 
 type ApiPatchIamAccountRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 	iamAccount *IamAccount
@@ -23579,18 +25243,18 @@ func (r ApiPatchIamAccountRequest) IfMatch(ifMatch string) ApiPatchIamAccountReq
 	return r
 }
 
-func (r ApiPatchIamAccountRequest) Execute() (IamAccount, *_nethttp.Response, error) {
+func (r ApiPatchIamAccountRequest) Execute() (*IamAccount, *http.Response, error) {
 	return r.ApiService.PatchIamAccountExecute(r)
 }
 
 /*
 PatchIamAccount Update a 'iam.Account' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchIamAccountRequest
 */
-func (a *IamApiService) PatchIamAccount(ctx _context.Context, moid string) ApiPatchIamAccountRequest {
+func (a *IamApiService) PatchIamAccount(ctx context.Context, moid string) ApiPatchIamAccountRequest {
 	return ApiPatchIamAccountRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -23600,27 +25264,25 @@ func (a *IamApiService) PatchIamAccount(ctx _context.Context, moid string) ApiPa
 
 // Execute executes the request
 //  @return IamAccount
-func (a *IamApiService) PatchIamAccountExecute(r ApiPatchIamAccountRequest) (IamAccount, *_nethttp.Response, error) {
+func (a *IamApiService) PatchIamAccountExecute(r ApiPatchIamAccountRequest) (*IamAccount, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamAccount
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamAccount
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.PatchIamAccount")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Accounts/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamAccount == nil {
 		return localVarReturnValue, nil, reportError("iamAccount is required and must be specified")
 	}
@@ -23647,7 +25309,7 @@ func (a *IamApiService) PatchIamAccountExecute(r ApiPatchIamAccountRequest) (Iam
 	}
 	// body params
 	localVarPostBody = r.iamAccount
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -23657,15 +25319,15 @@ func (a *IamApiService) PatchIamAccountExecute(r ApiPatchIamAccountRequest) (Iam
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -23721,7 +25383,7 @@ func (a *IamApiService) PatchIamAccountExecute(r ApiPatchIamAccountRequest) (Iam
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -23732,7 +25394,7 @@ func (a *IamApiService) PatchIamAccountExecute(r ApiPatchIamAccountRequest) (Iam
 }
 
 type ApiPatchIamAccountExperienceRequest struct {
-	ctx                  _context.Context
+	ctx                  context.Context
 	ApiService           *IamApiService
 	moid                 string
 	iamAccountExperience *IamAccountExperience
@@ -23751,18 +25413,18 @@ func (r ApiPatchIamAccountExperienceRequest) IfMatch(ifMatch string) ApiPatchIam
 	return r
 }
 
-func (r ApiPatchIamAccountExperienceRequest) Execute() (IamAccountExperience, *_nethttp.Response, error) {
+func (r ApiPatchIamAccountExperienceRequest) Execute() (*IamAccountExperience, *http.Response, error) {
 	return r.ApiService.PatchIamAccountExperienceExecute(r)
 }
 
 /*
 PatchIamAccountExperience Update a 'iam.AccountExperience' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchIamAccountExperienceRequest
 */
-func (a *IamApiService) PatchIamAccountExperience(ctx _context.Context, moid string) ApiPatchIamAccountExperienceRequest {
+func (a *IamApiService) PatchIamAccountExperience(ctx context.Context, moid string) ApiPatchIamAccountExperienceRequest {
 	return ApiPatchIamAccountExperienceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -23772,27 +25434,25 @@ func (a *IamApiService) PatchIamAccountExperience(ctx _context.Context, moid str
 
 // Execute executes the request
 //  @return IamAccountExperience
-func (a *IamApiService) PatchIamAccountExperienceExecute(r ApiPatchIamAccountExperienceRequest) (IamAccountExperience, *_nethttp.Response, error) {
+func (a *IamApiService) PatchIamAccountExperienceExecute(r ApiPatchIamAccountExperienceRequest) (*IamAccountExperience, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamAccountExperience
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamAccountExperience
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.PatchIamAccountExperience")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/AccountExperiences/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamAccountExperience == nil {
 		return localVarReturnValue, nil, reportError("iamAccountExperience is required and must be specified")
 	}
@@ -23819,7 +25479,7 @@ func (a *IamApiService) PatchIamAccountExperienceExecute(r ApiPatchIamAccountExp
 	}
 	// body params
 	localVarPostBody = r.iamAccountExperience
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -23829,15 +25489,15 @@ func (a *IamApiService) PatchIamAccountExperienceExecute(r ApiPatchIamAccountExp
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -23893,7 +25553,7 @@ func (a *IamApiService) PatchIamAccountExperienceExecute(r ApiPatchIamAccountExp
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -23904,7 +25564,7 @@ func (a *IamApiService) PatchIamAccountExperienceExecute(r ApiPatchIamAccountExp
 }
 
 type ApiPatchIamApiKeyRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 	iamApiKey  *IamApiKey
@@ -23923,18 +25583,18 @@ func (r ApiPatchIamApiKeyRequest) IfMatch(ifMatch string) ApiPatchIamApiKeyReque
 	return r
 }
 
-func (r ApiPatchIamApiKeyRequest) Execute() (IamApiKey, *_nethttp.Response, error) {
+func (r ApiPatchIamApiKeyRequest) Execute() (*IamApiKey, *http.Response, error) {
 	return r.ApiService.PatchIamApiKeyExecute(r)
 }
 
 /*
 PatchIamApiKey Update a 'iam.ApiKey' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchIamApiKeyRequest
 */
-func (a *IamApiService) PatchIamApiKey(ctx _context.Context, moid string) ApiPatchIamApiKeyRequest {
+func (a *IamApiService) PatchIamApiKey(ctx context.Context, moid string) ApiPatchIamApiKeyRequest {
 	return ApiPatchIamApiKeyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -23944,27 +25604,25 @@ func (a *IamApiService) PatchIamApiKey(ctx _context.Context, moid string) ApiPat
 
 // Execute executes the request
 //  @return IamApiKey
-func (a *IamApiService) PatchIamApiKeyExecute(r ApiPatchIamApiKeyRequest) (IamApiKey, *_nethttp.Response, error) {
+func (a *IamApiService) PatchIamApiKeyExecute(r ApiPatchIamApiKeyRequest) (*IamApiKey, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamApiKey
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamApiKey
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.PatchIamApiKey")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/ApiKeys/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamApiKey == nil {
 		return localVarReturnValue, nil, reportError("iamApiKey is required and must be specified")
 	}
@@ -23991,7 +25649,7 @@ func (a *IamApiService) PatchIamApiKeyExecute(r ApiPatchIamApiKeyRequest) (IamAp
 	}
 	// body params
 	localVarPostBody = r.iamApiKey
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -24001,15 +25659,15 @@ func (a *IamApiService) PatchIamApiKeyExecute(r ApiPatchIamApiKeyRequest) (IamAp
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -24065,7 +25723,7 @@ func (a *IamApiService) PatchIamApiKeyExecute(r ApiPatchIamApiKeyRequest) (IamAp
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -24076,7 +25734,7 @@ func (a *IamApiService) PatchIamApiKeyExecute(r ApiPatchIamApiKeyRequest) (IamAp
 }
 
 type ApiPatchIamAppRegistrationRequest struct {
-	ctx                _context.Context
+	ctx                context.Context
 	ApiService         *IamApiService
 	moid               string
 	iamAppRegistration *IamAppRegistration
@@ -24095,18 +25753,18 @@ func (r ApiPatchIamAppRegistrationRequest) IfMatch(ifMatch string) ApiPatchIamAp
 	return r
 }
 
-func (r ApiPatchIamAppRegistrationRequest) Execute() (IamAppRegistration, *_nethttp.Response, error) {
+func (r ApiPatchIamAppRegistrationRequest) Execute() (*IamAppRegistration, *http.Response, error) {
 	return r.ApiService.PatchIamAppRegistrationExecute(r)
 }
 
 /*
 PatchIamAppRegistration Update a 'iam.AppRegistration' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchIamAppRegistrationRequest
 */
-func (a *IamApiService) PatchIamAppRegistration(ctx _context.Context, moid string) ApiPatchIamAppRegistrationRequest {
+func (a *IamApiService) PatchIamAppRegistration(ctx context.Context, moid string) ApiPatchIamAppRegistrationRequest {
 	return ApiPatchIamAppRegistrationRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -24116,27 +25774,25 @@ func (a *IamApiService) PatchIamAppRegistration(ctx _context.Context, moid strin
 
 // Execute executes the request
 //  @return IamAppRegistration
-func (a *IamApiService) PatchIamAppRegistrationExecute(r ApiPatchIamAppRegistrationRequest) (IamAppRegistration, *_nethttp.Response, error) {
+func (a *IamApiService) PatchIamAppRegistrationExecute(r ApiPatchIamAppRegistrationRequest) (*IamAppRegistration, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamAppRegistration
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamAppRegistration
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.PatchIamAppRegistration")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/AppRegistrations/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamAppRegistration == nil {
 		return localVarReturnValue, nil, reportError("iamAppRegistration is required and must be specified")
 	}
@@ -24163,7 +25819,7 @@ func (a *IamApiService) PatchIamAppRegistrationExecute(r ApiPatchIamAppRegistrat
 	}
 	// body params
 	localVarPostBody = r.iamAppRegistration
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -24173,15 +25829,15 @@ func (a *IamApiService) PatchIamAppRegistrationExecute(r ApiPatchIamAppRegistrat
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -24237,7 +25893,7 @@ func (a *IamApiService) PatchIamAppRegistrationExecute(r ApiPatchIamAppRegistrat
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -24248,7 +25904,7 @@ func (a *IamApiService) PatchIamAppRegistrationExecute(r ApiPatchIamAppRegistrat
 }
 
 type ApiPatchIamBannerMessageRequest struct {
-	ctx              _context.Context
+	ctx              context.Context
 	ApiService       *IamApiService
 	moid             string
 	iamBannerMessage *IamBannerMessage
@@ -24267,18 +25923,18 @@ func (r ApiPatchIamBannerMessageRequest) IfMatch(ifMatch string) ApiPatchIamBann
 	return r
 }
 
-func (r ApiPatchIamBannerMessageRequest) Execute() (IamBannerMessage, *_nethttp.Response, error) {
+func (r ApiPatchIamBannerMessageRequest) Execute() (*IamBannerMessage, *http.Response, error) {
 	return r.ApiService.PatchIamBannerMessageExecute(r)
 }
 
 /*
 PatchIamBannerMessage Update a 'iam.BannerMessage' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchIamBannerMessageRequest
 */
-func (a *IamApiService) PatchIamBannerMessage(ctx _context.Context, moid string) ApiPatchIamBannerMessageRequest {
+func (a *IamApiService) PatchIamBannerMessage(ctx context.Context, moid string) ApiPatchIamBannerMessageRequest {
 	return ApiPatchIamBannerMessageRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -24288,27 +25944,25 @@ func (a *IamApiService) PatchIamBannerMessage(ctx _context.Context, moid string)
 
 // Execute executes the request
 //  @return IamBannerMessage
-func (a *IamApiService) PatchIamBannerMessageExecute(r ApiPatchIamBannerMessageRequest) (IamBannerMessage, *_nethttp.Response, error) {
+func (a *IamApiService) PatchIamBannerMessageExecute(r ApiPatchIamBannerMessageRequest) (*IamBannerMessage, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamBannerMessage
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamBannerMessage
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.PatchIamBannerMessage")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/BannerMessages/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamBannerMessage == nil {
 		return localVarReturnValue, nil, reportError("iamBannerMessage is required and must be specified")
 	}
@@ -24335,7 +25989,7 @@ func (a *IamApiService) PatchIamBannerMessageExecute(r ApiPatchIamBannerMessageR
 	}
 	// body params
 	localVarPostBody = r.iamBannerMessage
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -24345,15 +25999,15 @@ func (a *IamApiService) PatchIamBannerMessageExecute(r ApiPatchIamBannerMessageR
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -24409,7 +26063,7 @@ func (a *IamApiService) PatchIamBannerMessageExecute(r ApiPatchIamBannerMessageR
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -24420,7 +26074,7 @@ func (a *IamApiService) PatchIamBannerMessageExecute(r ApiPatchIamBannerMessageR
 }
 
 type ApiPatchIamCertificateRequest struct {
-	ctx            _context.Context
+	ctx            context.Context
 	ApiService     *IamApiService
 	moid           string
 	iamCertificate *IamCertificate
@@ -24439,18 +26093,18 @@ func (r ApiPatchIamCertificateRequest) IfMatch(ifMatch string) ApiPatchIamCertif
 	return r
 }
 
-func (r ApiPatchIamCertificateRequest) Execute() (IamCertificate, *_nethttp.Response, error) {
+func (r ApiPatchIamCertificateRequest) Execute() (*IamCertificate, *http.Response, error) {
 	return r.ApiService.PatchIamCertificateExecute(r)
 }
 
 /*
 PatchIamCertificate Update a 'iam.Certificate' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchIamCertificateRequest
 */
-func (a *IamApiService) PatchIamCertificate(ctx _context.Context, moid string) ApiPatchIamCertificateRequest {
+func (a *IamApiService) PatchIamCertificate(ctx context.Context, moid string) ApiPatchIamCertificateRequest {
 	return ApiPatchIamCertificateRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -24460,27 +26114,25 @@ func (a *IamApiService) PatchIamCertificate(ctx _context.Context, moid string) A
 
 // Execute executes the request
 //  @return IamCertificate
-func (a *IamApiService) PatchIamCertificateExecute(r ApiPatchIamCertificateRequest) (IamCertificate, *_nethttp.Response, error) {
+func (a *IamApiService) PatchIamCertificateExecute(r ApiPatchIamCertificateRequest) (*IamCertificate, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamCertificate
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamCertificate
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.PatchIamCertificate")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Certificates/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamCertificate == nil {
 		return localVarReturnValue, nil, reportError("iamCertificate is required and must be specified")
 	}
@@ -24507,7 +26159,7 @@ func (a *IamApiService) PatchIamCertificateExecute(r ApiPatchIamCertificateReque
 	}
 	// body params
 	localVarPostBody = r.iamCertificate
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -24517,15 +26169,15 @@ func (a *IamApiService) PatchIamCertificateExecute(r ApiPatchIamCertificateReque
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -24581,7 +26233,7 @@ func (a *IamApiService) PatchIamCertificateExecute(r ApiPatchIamCertificateReque
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -24592,7 +26244,7 @@ func (a *IamApiService) PatchIamCertificateExecute(r ApiPatchIamCertificateReque
 }
 
 type ApiPatchIamCertificateRequestRequest struct {
-	ctx                   _context.Context
+	ctx                   context.Context
 	ApiService            *IamApiService
 	moid                  string
 	iamCertificateRequest *IamCertificateRequest
@@ -24611,18 +26263,18 @@ func (r ApiPatchIamCertificateRequestRequest) IfMatch(ifMatch string) ApiPatchIa
 	return r
 }
 
-func (r ApiPatchIamCertificateRequestRequest) Execute() (IamCertificateRequest, *_nethttp.Response, error) {
+func (r ApiPatchIamCertificateRequestRequest) Execute() (*IamCertificateRequest, *http.Response, error) {
 	return r.ApiService.PatchIamCertificateRequestExecute(r)
 }
 
 /*
 PatchIamCertificateRequest Update a 'iam.CertificateRequest' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchIamCertificateRequestRequest
 */
-func (a *IamApiService) PatchIamCertificateRequest(ctx _context.Context, moid string) ApiPatchIamCertificateRequestRequest {
+func (a *IamApiService) PatchIamCertificateRequest(ctx context.Context, moid string) ApiPatchIamCertificateRequestRequest {
 	return ApiPatchIamCertificateRequestRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -24632,27 +26284,25 @@ func (a *IamApiService) PatchIamCertificateRequest(ctx _context.Context, moid st
 
 // Execute executes the request
 //  @return IamCertificateRequest
-func (a *IamApiService) PatchIamCertificateRequestExecute(r ApiPatchIamCertificateRequestRequest) (IamCertificateRequest, *_nethttp.Response, error) {
+func (a *IamApiService) PatchIamCertificateRequestExecute(r ApiPatchIamCertificateRequestRequest) (*IamCertificateRequest, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamCertificateRequest
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamCertificateRequest
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.PatchIamCertificateRequest")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/CertificateRequests/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamCertificateRequest == nil {
 		return localVarReturnValue, nil, reportError("iamCertificateRequest is required and must be specified")
 	}
@@ -24679,7 +26329,7 @@ func (a *IamApiService) PatchIamCertificateRequestExecute(r ApiPatchIamCertifica
 	}
 	// body params
 	localVarPostBody = r.iamCertificateRequest
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -24689,15 +26339,15 @@ func (a *IamApiService) PatchIamCertificateRequestExecute(r ApiPatchIamCertifica
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -24753,7 +26403,177 @@ func (a *IamApiService) PatchIamCertificateRequestExecute(r ApiPatchIamCertifica
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiPatchIamDomainNameInfoRequest struct {
+	ctx               context.Context
+	ApiService        *IamApiService
+	moid              string
+	iamDomainNameInfo *IamDomainNameInfo
+	ifMatch           *string
+}
+
+// The &#39;iam.DomainNameInfo&#39; resource to update.
+func (r ApiPatchIamDomainNameInfoRequest) IamDomainNameInfo(iamDomainNameInfo IamDomainNameInfo) ApiPatchIamDomainNameInfoRequest {
+	r.iamDomainNameInfo = &iamDomainNameInfo
+	return r
+}
+
+// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
+func (r ApiPatchIamDomainNameInfoRequest) IfMatch(ifMatch string) ApiPatchIamDomainNameInfoRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiPatchIamDomainNameInfoRequest) Execute() (*IamDomainNameInfo, *http.Response, error) {
+	return r.ApiService.PatchIamDomainNameInfoExecute(r)
+}
+
+/*
+PatchIamDomainNameInfo Update a 'iam.DomainNameInfo' resource.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchIamDomainNameInfoRequest
+*/
+func (a *IamApiService) PatchIamDomainNameInfo(ctx context.Context, moid string) ApiPatchIamDomainNameInfoRequest {
+	return ApiPatchIamDomainNameInfoRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//  @return IamDomainNameInfo
+func (a *IamApiService) PatchIamDomainNameInfoExecute(r ApiPatchIamDomainNameInfoRequest) (*IamDomainNameInfo, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamDomainNameInfo
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.PatchIamDomainNameInfo")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/iam/DomainNameInfos/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.iamDomainNameInfo == nil {
+		return localVarReturnValue, nil, reportError("iamDomainNameInfo is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.iamDomainNameInfo
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -24764,7 +26584,7 @@ func (a *IamApiService) PatchIamCertificateRequestExecute(r ApiPatchIamCertifica
 }
 
 type ApiPatchIamEndPointUserRequest struct {
-	ctx             _context.Context
+	ctx             context.Context
 	ApiService      *IamApiService
 	moid            string
 	iamEndPointUser *IamEndPointUser
@@ -24783,18 +26603,18 @@ func (r ApiPatchIamEndPointUserRequest) IfMatch(ifMatch string) ApiPatchIamEndPo
 	return r
 }
 
-func (r ApiPatchIamEndPointUserRequest) Execute() (IamEndPointUser, *_nethttp.Response, error) {
+func (r ApiPatchIamEndPointUserRequest) Execute() (*IamEndPointUser, *http.Response, error) {
 	return r.ApiService.PatchIamEndPointUserExecute(r)
 }
 
 /*
 PatchIamEndPointUser Update a 'iam.EndPointUser' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchIamEndPointUserRequest
 */
-func (a *IamApiService) PatchIamEndPointUser(ctx _context.Context, moid string) ApiPatchIamEndPointUserRequest {
+func (a *IamApiService) PatchIamEndPointUser(ctx context.Context, moid string) ApiPatchIamEndPointUserRequest {
 	return ApiPatchIamEndPointUserRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -24804,27 +26624,25 @@ func (a *IamApiService) PatchIamEndPointUser(ctx _context.Context, moid string) 
 
 // Execute executes the request
 //  @return IamEndPointUser
-func (a *IamApiService) PatchIamEndPointUserExecute(r ApiPatchIamEndPointUserRequest) (IamEndPointUser, *_nethttp.Response, error) {
+func (a *IamApiService) PatchIamEndPointUserExecute(r ApiPatchIamEndPointUserRequest) (*IamEndPointUser, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamEndPointUser
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamEndPointUser
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.PatchIamEndPointUser")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/EndPointUsers/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamEndPointUser == nil {
 		return localVarReturnValue, nil, reportError("iamEndPointUser is required and must be specified")
 	}
@@ -24851,7 +26669,7 @@ func (a *IamApiService) PatchIamEndPointUserExecute(r ApiPatchIamEndPointUserReq
 	}
 	// body params
 	localVarPostBody = r.iamEndPointUser
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -24861,15 +26679,15 @@ func (a *IamApiService) PatchIamEndPointUserExecute(r ApiPatchIamEndPointUserReq
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -24925,7 +26743,7 @@ func (a *IamApiService) PatchIamEndPointUserExecute(r ApiPatchIamEndPointUserReq
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -24936,7 +26754,7 @@ func (a *IamApiService) PatchIamEndPointUserExecute(r ApiPatchIamEndPointUserReq
 }
 
 type ApiPatchIamEndPointUserPolicyRequest struct {
-	ctx                   _context.Context
+	ctx                   context.Context
 	ApiService            *IamApiService
 	moid                  string
 	iamEndPointUserPolicy *IamEndPointUserPolicy
@@ -24955,18 +26773,18 @@ func (r ApiPatchIamEndPointUserPolicyRequest) IfMatch(ifMatch string) ApiPatchIa
 	return r
 }
 
-func (r ApiPatchIamEndPointUserPolicyRequest) Execute() (IamEndPointUserPolicy, *_nethttp.Response, error) {
+func (r ApiPatchIamEndPointUserPolicyRequest) Execute() (*IamEndPointUserPolicy, *http.Response, error) {
 	return r.ApiService.PatchIamEndPointUserPolicyExecute(r)
 }
 
 /*
 PatchIamEndPointUserPolicy Update a 'iam.EndPointUserPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchIamEndPointUserPolicyRequest
 */
-func (a *IamApiService) PatchIamEndPointUserPolicy(ctx _context.Context, moid string) ApiPatchIamEndPointUserPolicyRequest {
+func (a *IamApiService) PatchIamEndPointUserPolicy(ctx context.Context, moid string) ApiPatchIamEndPointUserPolicyRequest {
 	return ApiPatchIamEndPointUserPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -24976,27 +26794,25 @@ func (a *IamApiService) PatchIamEndPointUserPolicy(ctx _context.Context, moid st
 
 // Execute executes the request
 //  @return IamEndPointUserPolicy
-func (a *IamApiService) PatchIamEndPointUserPolicyExecute(r ApiPatchIamEndPointUserPolicyRequest) (IamEndPointUserPolicy, *_nethttp.Response, error) {
+func (a *IamApiService) PatchIamEndPointUserPolicyExecute(r ApiPatchIamEndPointUserPolicyRequest) (*IamEndPointUserPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamEndPointUserPolicy
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamEndPointUserPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.PatchIamEndPointUserPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/EndPointUserPolicies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamEndPointUserPolicy == nil {
 		return localVarReturnValue, nil, reportError("iamEndPointUserPolicy is required and must be specified")
 	}
@@ -25023,7 +26839,7 @@ func (a *IamApiService) PatchIamEndPointUserPolicyExecute(r ApiPatchIamEndPointU
 	}
 	// body params
 	localVarPostBody = r.iamEndPointUserPolicy
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -25033,15 +26849,15 @@ func (a *IamApiService) PatchIamEndPointUserPolicyExecute(r ApiPatchIamEndPointU
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -25097,7 +26913,7 @@ func (a *IamApiService) PatchIamEndPointUserPolicyExecute(r ApiPatchIamEndPointU
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -25108,7 +26924,7 @@ func (a *IamApiService) PatchIamEndPointUserPolicyExecute(r ApiPatchIamEndPointU
 }
 
 type ApiPatchIamEndPointUserRoleRequest struct {
-	ctx                 _context.Context
+	ctx                 context.Context
 	ApiService          *IamApiService
 	moid                string
 	iamEndPointUserRole *IamEndPointUserRole
@@ -25127,18 +26943,18 @@ func (r ApiPatchIamEndPointUserRoleRequest) IfMatch(ifMatch string) ApiPatchIamE
 	return r
 }
 
-func (r ApiPatchIamEndPointUserRoleRequest) Execute() (IamEndPointUserRole, *_nethttp.Response, error) {
+func (r ApiPatchIamEndPointUserRoleRequest) Execute() (*IamEndPointUserRole, *http.Response, error) {
 	return r.ApiService.PatchIamEndPointUserRoleExecute(r)
 }
 
 /*
 PatchIamEndPointUserRole Update a 'iam.EndPointUserRole' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchIamEndPointUserRoleRequest
 */
-func (a *IamApiService) PatchIamEndPointUserRole(ctx _context.Context, moid string) ApiPatchIamEndPointUserRoleRequest {
+func (a *IamApiService) PatchIamEndPointUserRole(ctx context.Context, moid string) ApiPatchIamEndPointUserRoleRequest {
 	return ApiPatchIamEndPointUserRoleRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -25148,27 +26964,25 @@ func (a *IamApiService) PatchIamEndPointUserRole(ctx _context.Context, moid stri
 
 // Execute executes the request
 //  @return IamEndPointUserRole
-func (a *IamApiService) PatchIamEndPointUserRoleExecute(r ApiPatchIamEndPointUserRoleRequest) (IamEndPointUserRole, *_nethttp.Response, error) {
+func (a *IamApiService) PatchIamEndPointUserRoleExecute(r ApiPatchIamEndPointUserRoleRequest) (*IamEndPointUserRole, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamEndPointUserRole
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamEndPointUserRole
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.PatchIamEndPointUserRole")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/EndPointUserRoles/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamEndPointUserRole == nil {
 		return localVarReturnValue, nil, reportError("iamEndPointUserRole is required and must be specified")
 	}
@@ -25195,7 +27009,7 @@ func (a *IamApiService) PatchIamEndPointUserRoleExecute(r ApiPatchIamEndPointUse
 	}
 	// body params
 	localVarPostBody = r.iamEndPointUserRole
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -25205,15 +27019,15 @@ func (a *IamApiService) PatchIamEndPointUserRoleExecute(r ApiPatchIamEndPointUse
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -25269,7 +27083,7 @@ func (a *IamApiService) PatchIamEndPointUserRoleExecute(r ApiPatchIamEndPointUse
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -25280,7 +27094,7 @@ func (a *IamApiService) PatchIamEndPointUserRoleExecute(r ApiPatchIamEndPointUse
 }
 
 type ApiPatchIamIdpRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 	iamIdp     *IamIdp
@@ -25299,18 +27113,18 @@ func (r ApiPatchIamIdpRequest) IfMatch(ifMatch string) ApiPatchIamIdpRequest {
 	return r
 }
 
-func (r ApiPatchIamIdpRequest) Execute() (IamIdp, *_nethttp.Response, error) {
+func (r ApiPatchIamIdpRequest) Execute() (*IamIdp, *http.Response, error) {
 	return r.ApiService.PatchIamIdpExecute(r)
 }
 
 /*
 PatchIamIdp Update a 'iam.Idp' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchIamIdpRequest
 */
-func (a *IamApiService) PatchIamIdp(ctx _context.Context, moid string) ApiPatchIamIdpRequest {
+func (a *IamApiService) PatchIamIdp(ctx context.Context, moid string) ApiPatchIamIdpRequest {
 	return ApiPatchIamIdpRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -25320,27 +27134,25 @@ func (a *IamApiService) PatchIamIdp(ctx _context.Context, moid string) ApiPatchI
 
 // Execute executes the request
 //  @return IamIdp
-func (a *IamApiService) PatchIamIdpExecute(r ApiPatchIamIdpRequest) (IamIdp, *_nethttp.Response, error) {
+func (a *IamApiService) PatchIamIdpExecute(r ApiPatchIamIdpRequest) (*IamIdp, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamIdp
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamIdp
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.PatchIamIdp")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Idps/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamIdp == nil {
 		return localVarReturnValue, nil, reportError("iamIdp is required and must be specified")
 	}
@@ -25367,7 +27179,7 @@ func (a *IamApiService) PatchIamIdpExecute(r ApiPatchIamIdpRequest) (IamIdp, *_n
 	}
 	// body params
 	localVarPostBody = r.iamIdp
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -25377,15 +27189,15 @@ func (a *IamApiService) PatchIamIdpExecute(r ApiPatchIamIdpRequest) (IamIdp, *_n
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -25441,7 +27253,7 @@ func (a *IamApiService) PatchIamIdpExecute(r ApiPatchIamIdpRequest) (IamIdp, *_n
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -25452,7 +27264,7 @@ func (a *IamApiService) PatchIamIdpExecute(r ApiPatchIamIdpRequest) (IamIdp, *_n
 }
 
 type ApiPatchIamIdpReferenceRequest struct {
-	ctx             _context.Context
+	ctx             context.Context
 	ApiService      *IamApiService
 	moid            string
 	iamIdpReference *IamIdpReference
@@ -25471,18 +27283,18 @@ func (r ApiPatchIamIdpReferenceRequest) IfMatch(ifMatch string) ApiPatchIamIdpRe
 	return r
 }
 
-func (r ApiPatchIamIdpReferenceRequest) Execute() (IamIdpReference, *_nethttp.Response, error) {
+func (r ApiPatchIamIdpReferenceRequest) Execute() (*IamIdpReference, *http.Response, error) {
 	return r.ApiService.PatchIamIdpReferenceExecute(r)
 }
 
 /*
 PatchIamIdpReference Update a 'iam.IdpReference' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchIamIdpReferenceRequest
 */
-func (a *IamApiService) PatchIamIdpReference(ctx _context.Context, moid string) ApiPatchIamIdpReferenceRequest {
+func (a *IamApiService) PatchIamIdpReference(ctx context.Context, moid string) ApiPatchIamIdpReferenceRequest {
 	return ApiPatchIamIdpReferenceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -25492,27 +27304,25 @@ func (a *IamApiService) PatchIamIdpReference(ctx _context.Context, moid string) 
 
 // Execute executes the request
 //  @return IamIdpReference
-func (a *IamApiService) PatchIamIdpReferenceExecute(r ApiPatchIamIdpReferenceRequest) (IamIdpReference, *_nethttp.Response, error) {
+func (a *IamApiService) PatchIamIdpReferenceExecute(r ApiPatchIamIdpReferenceRequest) (*IamIdpReference, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamIdpReference
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamIdpReference
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.PatchIamIdpReference")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/IdpReferences/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamIdpReference == nil {
 		return localVarReturnValue, nil, reportError("iamIdpReference is required and must be specified")
 	}
@@ -25539,7 +27349,7 @@ func (a *IamApiService) PatchIamIdpReferenceExecute(r ApiPatchIamIdpReferenceReq
 	}
 	// body params
 	localVarPostBody = r.iamIdpReference
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -25549,15 +27359,15 @@ func (a *IamApiService) PatchIamIdpReferenceExecute(r ApiPatchIamIdpReferenceReq
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -25613,7 +27423,7 @@ func (a *IamApiService) PatchIamIdpReferenceExecute(r ApiPatchIamIdpReferenceReq
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -25624,7 +27434,7 @@ func (a *IamApiService) PatchIamIdpReferenceExecute(r ApiPatchIamIdpReferenceReq
 }
 
 type ApiPatchIamIpAccessManagementRequest struct {
-	ctx                   _context.Context
+	ctx                   context.Context
 	ApiService            *IamApiService
 	moid                  string
 	iamIpAccessManagement *IamIpAccessManagement
@@ -25643,18 +27453,18 @@ func (r ApiPatchIamIpAccessManagementRequest) IfMatch(ifMatch string) ApiPatchIa
 	return r
 }
 
-func (r ApiPatchIamIpAccessManagementRequest) Execute() (IamIpAccessManagement, *_nethttp.Response, error) {
+func (r ApiPatchIamIpAccessManagementRequest) Execute() (*IamIpAccessManagement, *http.Response, error) {
 	return r.ApiService.PatchIamIpAccessManagementExecute(r)
 }
 
 /*
 PatchIamIpAccessManagement Update a 'iam.IpAccessManagement' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchIamIpAccessManagementRequest
 */
-func (a *IamApiService) PatchIamIpAccessManagement(ctx _context.Context, moid string) ApiPatchIamIpAccessManagementRequest {
+func (a *IamApiService) PatchIamIpAccessManagement(ctx context.Context, moid string) ApiPatchIamIpAccessManagementRequest {
 	return ApiPatchIamIpAccessManagementRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -25664,27 +27474,25 @@ func (a *IamApiService) PatchIamIpAccessManagement(ctx _context.Context, moid st
 
 // Execute executes the request
 //  @return IamIpAccessManagement
-func (a *IamApiService) PatchIamIpAccessManagementExecute(r ApiPatchIamIpAccessManagementRequest) (IamIpAccessManagement, *_nethttp.Response, error) {
+func (a *IamApiService) PatchIamIpAccessManagementExecute(r ApiPatchIamIpAccessManagementRequest) (*IamIpAccessManagement, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamIpAccessManagement
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamIpAccessManagement
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.PatchIamIpAccessManagement")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/IpAccessManagements/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamIpAccessManagement == nil {
 		return localVarReturnValue, nil, reportError("iamIpAccessManagement is required and must be specified")
 	}
@@ -25711,7 +27519,7 @@ func (a *IamApiService) PatchIamIpAccessManagementExecute(r ApiPatchIamIpAccessM
 	}
 	// body params
 	localVarPostBody = r.iamIpAccessManagement
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -25721,15 +27529,15 @@ func (a *IamApiService) PatchIamIpAccessManagementExecute(r ApiPatchIamIpAccessM
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -25785,7 +27593,7 @@ func (a *IamApiService) PatchIamIpAccessManagementExecute(r ApiPatchIamIpAccessM
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -25796,7 +27604,7 @@ func (a *IamApiService) PatchIamIpAccessManagementExecute(r ApiPatchIamIpAccessM
 }
 
 type ApiPatchIamIpAddressRequest struct {
-	ctx          _context.Context
+	ctx          context.Context
 	ApiService   *IamApiService
 	moid         string
 	iamIpAddress *IamIpAddress
@@ -25815,18 +27623,18 @@ func (r ApiPatchIamIpAddressRequest) IfMatch(ifMatch string) ApiPatchIamIpAddres
 	return r
 }
 
-func (r ApiPatchIamIpAddressRequest) Execute() (IamIpAddress, *_nethttp.Response, error) {
+func (r ApiPatchIamIpAddressRequest) Execute() (*IamIpAddress, *http.Response, error) {
 	return r.ApiService.PatchIamIpAddressExecute(r)
 }
 
 /*
 PatchIamIpAddress Update a 'iam.IpAddress' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchIamIpAddressRequest
 */
-func (a *IamApiService) PatchIamIpAddress(ctx _context.Context, moid string) ApiPatchIamIpAddressRequest {
+func (a *IamApiService) PatchIamIpAddress(ctx context.Context, moid string) ApiPatchIamIpAddressRequest {
 	return ApiPatchIamIpAddressRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -25836,27 +27644,25 @@ func (a *IamApiService) PatchIamIpAddress(ctx _context.Context, moid string) Api
 
 // Execute executes the request
 //  @return IamIpAddress
-func (a *IamApiService) PatchIamIpAddressExecute(r ApiPatchIamIpAddressRequest) (IamIpAddress, *_nethttp.Response, error) {
+func (a *IamApiService) PatchIamIpAddressExecute(r ApiPatchIamIpAddressRequest) (*IamIpAddress, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamIpAddress
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamIpAddress
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.PatchIamIpAddress")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/IpAddresses/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamIpAddress == nil {
 		return localVarReturnValue, nil, reportError("iamIpAddress is required and must be specified")
 	}
@@ -25883,7 +27689,7 @@ func (a *IamApiService) PatchIamIpAddressExecute(r ApiPatchIamIpAddressRequest) 
 	}
 	// body params
 	localVarPostBody = r.iamIpAddress
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -25893,15 +27699,15 @@ func (a *IamApiService) PatchIamIpAddressExecute(r ApiPatchIamIpAddressRequest) 
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -25957,7 +27763,7 @@ func (a *IamApiService) PatchIamIpAddressExecute(r ApiPatchIamIpAddressRequest) 
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -25968,7 +27774,7 @@ func (a *IamApiService) PatchIamIpAddressExecute(r ApiPatchIamIpAddressRequest) 
 }
 
 type ApiPatchIamLdapGroupRequest struct {
-	ctx          _context.Context
+	ctx          context.Context
 	ApiService   *IamApiService
 	moid         string
 	iamLdapGroup *IamLdapGroup
@@ -25987,18 +27793,18 @@ func (r ApiPatchIamLdapGroupRequest) IfMatch(ifMatch string) ApiPatchIamLdapGrou
 	return r
 }
 
-func (r ApiPatchIamLdapGroupRequest) Execute() (IamLdapGroup, *_nethttp.Response, error) {
+func (r ApiPatchIamLdapGroupRequest) Execute() (*IamLdapGroup, *http.Response, error) {
 	return r.ApiService.PatchIamLdapGroupExecute(r)
 }
 
 /*
 PatchIamLdapGroup Update a 'iam.LdapGroup' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchIamLdapGroupRequest
 */
-func (a *IamApiService) PatchIamLdapGroup(ctx _context.Context, moid string) ApiPatchIamLdapGroupRequest {
+func (a *IamApiService) PatchIamLdapGroup(ctx context.Context, moid string) ApiPatchIamLdapGroupRequest {
 	return ApiPatchIamLdapGroupRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -26008,27 +27814,25 @@ func (a *IamApiService) PatchIamLdapGroup(ctx _context.Context, moid string) Api
 
 // Execute executes the request
 //  @return IamLdapGroup
-func (a *IamApiService) PatchIamLdapGroupExecute(r ApiPatchIamLdapGroupRequest) (IamLdapGroup, *_nethttp.Response, error) {
+func (a *IamApiService) PatchIamLdapGroupExecute(r ApiPatchIamLdapGroupRequest) (*IamLdapGroup, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamLdapGroup
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamLdapGroup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.PatchIamLdapGroup")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/LdapGroups/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamLdapGroup == nil {
 		return localVarReturnValue, nil, reportError("iamLdapGroup is required and must be specified")
 	}
@@ -26055,7 +27859,7 @@ func (a *IamApiService) PatchIamLdapGroupExecute(r ApiPatchIamLdapGroupRequest) 
 	}
 	// body params
 	localVarPostBody = r.iamLdapGroup
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -26065,15 +27869,15 @@ func (a *IamApiService) PatchIamLdapGroupExecute(r ApiPatchIamLdapGroupRequest) 
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -26129,7 +27933,7 @@ func (a *IamApiService) PatchIamLdapGroupExecute(r ApiPatchIamLdapGroupRequest) 
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -26140,7 +27944,7 @@ func (a *IamApiService) PatchIamLdapGroupExecute(r ApiPatchIamLdapGroupRequest) 
 }
 
 type ApiPatchIamLdapPolicyRequest struct {
-	ctx           _context.Context
+	ctx           context.Context
 	ApiService    *IamApiService
 	moid          string
 	iamLdapPolicy *IamLdapPolicy
@@ -26159,18 +27963,18 @@ func (r ApiPatchIamLdapPolicyRequest) IfMatch(ifMatch string) ApiPatchIamLdapPol
 	return r
 }
 
-func (r ApiPatchIamLdapPolicyRequest) Execute() (IamLdapPolicy, *_nethttp.Response, error) {
+func (r ApiPatchIamLdapPolicyRequest) Execute() (*IamLdapPolicy, *http.Response, error) {
 	return r.ApiService.PatchIamLdapPolicyExecute(r)
 }
 
 /*
 PatchIamLdapPolicy Update a 'iam.LdapPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchIamLdapPolicyRequest
 */
-func (a *IamApiService) PatchIamLdapPolicy(ctx _context.Context, moid string) ApiPatchIamLdapPolicyRequest {
+func (a *IamApiService) PatchIamLdapPolicy(ctx context.Context, moid string) ApiPatchIamLdapPolicyRequest {
 	return ApiPatchIamLdapPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -26180,27 +27984,25 @@ func (a *IamApiService) PatchIamLdapPolicy(ctx _context.Context, moid string) Ap
 
 // Execute executes the request
 //  @return IamLdapPolicy
-func (a *IamApiService) PatchIamLdapPolicyExecute(r ApiPatchIamLdapPolicyRequest) (IamLdapPolicy, *_nethttp.Response, error) {
+func (a *IamApiService) PatchIamLdapPolicyExecute(r ApiPatchIamLdapPolicyRequest) (*IamLdapPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamLdapPolicy
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamLdapPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.PatchIamLdapPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/LdapPolicies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamLdapPolicy == nil {
 		return localVarReturnValue, nil, reportError("iamLdapPolicy is required and must be specified")
 	}
@@ -26227,7 +28029,7 @@ func (a *IamApiService) PatchIamLdapPolicyExecute(r ApiPatchIamLdapPolicyRequest
 	}
 	// body params
 	localVarPostBody = r.iamLdapPolicy
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -26237,15 +28039,15 @@ func (a *IamApiService) PatchIamLdapPolicyExecute(r ApiPatchIamLdapPolicyRequest
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -26301,7 +28103,7 @@ func (a *IamApiService) PatchIamLdapPolicyExecute(r ApiPatchIamLdapPolicyRequest
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -26312,7 +28114,7 @@ func (a *IamApiService) PatchIamLdapPolicyExecute(r ApiPatchIamLdapPolicyRequest
 }
 
 type ApiPatchIamLdapProviderRequest struct {
-	ctx             _context.Context
+	ctx             context.Context
 	ApiService      *IamApiService
 	moid            string
 	iamLdapProvider *IamLdapProvider
@@ -26331,18 +28133,18 @@ func (r ApiPatchIamLdapProviderRequest) IfMatch(ifMatch string) ApiPatchIamLdapP
 	return r
 }
 
-func (r ApiPatchIamLdapProviderRequest) Execute() (IamLdapProvider, *_nethttp.Response, error) {
+func (r ApiPatchIamLdapProviderRequest) Execute() (*IamLdapProvider, *http.Response, error) {
 	return r.ApiService.PatchIamLdapProviderExecute(r)
 }
 
 /*
 PatchIamLdapProvider Update a 'iam.LdapProvider' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchIamLdapProviderRequest
 */
-func (a *IamApiService) PatchIamLdapProvider(ctx _context.Context, moid string) ApiPatchIamLdapProviderRequest {
+func (a *IamApiService) PatchIamLdapProvider(ctx context.Context, moid string) ApiPatchIamLdapProviderRequest {
 	return ApiPatchIamLdapProviderRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -26352,27 +28154,25 @@ func (a *IamApiService) PatchIamLdapProvider(ctx _context.Context, moid string) 
 
 // Execute executes the request
 //  @return IamLdapProvider
-func (a *IamApiService) PatchIamLdapProviderExecute(r ApiPatchIamLdapProviderRequest) (IamLdapProvider, *_nethttp.Response, error) {
+func (a *IamApiService) PatchIamLdapProviderExecute(r ApiPatchIamLdapProviderRequest) (*IamLdapProvider, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamLdapProvider
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamLdapProvider
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.PatchIamLdapProvider")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/LdapProviders/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamLdapProvider == nil {
 		return localVarReturnValue, nil, reportError("iamLdapProvider is required and must be specified")
 	}
@@ -26399,7 +28199,7 @@ func (a *IamApiService) PatchIamLdapProviderExecute(r ApiPatchIamLdapProviderReq
 	}
 	// body params
 	localVarPostBody = r.iamLdapProvider
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -26409,15 +28209,15 @@ func (a *IamApiService) PatchIamLdapProviderExecute(r ApiPatchIamLdapProviderReq
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -26473,7 +28273,7 @@ func (a *IamApiService) PatchIamLdapProviderExecute(r ApiPatchIamLdapProviderReq
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -26484,7 +28284,7 @@ func (a *IamApiService) PatchIamLdapProviderExecute(r ApiPatchIamLdapProviderReq
 }
 
 type ApiPatchIamLocalUserPasswordRequest struct {
-	ctx                  _context.Context
+	ctx                  context.Context
 	ApiService           *IamApiService
 	moid                 string
 	iamLocalUserPassword *IamLocalUserPassword
@@ -26503,18 +28303,18 @@ func (r ApiPatchIamLocalUserPasswordRequest) IfMatch(ifMatch string) ApiPatchIam
 	return r
 }
 
-func (r ApiPatchIamLocalUserPasswordRequest) Execute() (IamLocalUserPassword, *_nethttp.Response, error) {
+func (r ApiPatchIamLocalUserPasswordRequest) Execute() (*IamLocalUserPassword, *http.Response, error) {
 	return r.ApiService.PatchIamLocalUserPasswordExecute(r)
 }
 
 /*
 PatchIamLocalUserPassword Update a 'iam.LocalUserPassword' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchIamLocalUserPasswordRequest
 */
-func (a *IamApiService) PatchIamLocalUserPassword(ctx _context.Context, moid string) ApiPatchIamLocalUserPasswordRequest {
+func (a *IamApiService) PatchIamLocalUserPassword(ctx context.Context, moid string) ApiPatchIamLocalUserPasswordRequest {
 	return ApiPatchIamLocalUserPasswordRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -26524,27 +28324,25 @@ func (a *IamApiService) PatchIamLocalUserPassword(ctx _context.Context, moid str
 
 // Execute executes the request
 //  @return IamLocalUserPassword
-func (a *IamApiService) PatchIamLocalUserPasswordExecute(r ApiPatchIamLocalUserPasswordRequest) (IamLocalUserPassword, *_nethttp.Response, error) {
+func (a *IamApiService) PatchIamLocalUserPasswordExecute(r ApiPatchIamLocalUserPasswordRequest) (*IamLocalUserPassword, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamLocalUserPassword
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamLocalUserPassword
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.PatchIamLocalUserPassword")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/LocalUserPasswords/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamLocalUserPassword == nil {
 		return localVarReturnValue, nil, reportError("iamLocalUserPassword is required and must be specified")
 	}
@@ -26571,7 +28369,7 @@ func (a *IamApiService) PatchIamLocalUserPasswordExecute(r ApiPatchIamLocalUserP
 	}
 	// body params
 	localVarPostBody = r.iamLocalUserPassword
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -26581,15 +28379,15 @@ func (a *IamApiService) PatchIamLocalUserPasswordExecute(r ApiPatchIamLocalUserP
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -26645,7 +28443,7 @@ func (a *IamApiService) PatchIamLocalUserPasswordExecute(r ApiPatchIamLocalUserP
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -26656,7 +28454,7 @@ func (a *IamApiService) PatchIamLocalUserPasswordExecute(r ApiPatchIamLocalUserP
 }
 
 type ApiPatchIamLocalUserPasswordPolicyRequest struct {
-	ctx                        _context.Context
+	ctx                        context.Context
 	ApiService                 *IamApiService
 	moid                       string
 	iamLocalUserPasswordPolicy *IamLocalUserPasswordPolicy
@@ -26675,18 +28473,18 @@ func (r ApiPatchIamLocalUserPasswordPolicyRequest) IfMatch(ifMatch string) ApiPa
 	return r
 }
 
-func (r ApiPatchIamLocalUserPasswordPolicyRequest) Execute() (IamLocalUserPasswordPolicy, *_nethttp.Response, error) {
+func (r ApiPatchIamLocalUserPasswordPolicyRequest) Execute() (*IamLocalUserPasswordPolicy, *http.Response, error) {
 	return r.ApiService.PatchIamLocalUserPasswordPolicyExecute(r)
 }
 
 /*
 PatchIamLocalUserPasswordPolicy Update a 'iam.LocalUserPasswordPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchIamLocalUserPasswordPolicyRequest
 */
-func (a *IamApiService) PatchIamLocalUserPasswordPolicy(ctx _context.Context, moid string) ApiPatchIamLocalUserPasswordPolicyRequest {
+func (a *IamApiService) PatchIamLocalUserPasswordPolicy(ctx context.Context, moid string) ApiPatchIamLocalUserPasswordPolicyRequest {
 	return ApiPatchIamLocalUserPasswordPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -26696,27 +28494,25 @@ func (a *IamApiService) PatchIamLocalUserPasswordPolicy(ctx _context.Context, mo
 
 // Execute executes the request
 //  @return IamLocalUserPasswordPolicy
-func (a *IamApiService) PatchIamLocalUserPasswordPolicyExecute(r ApiPatchIamLocalUserPasswordPolicyRequest) (IamLocalUserPasswordPolicy, *_nethttp.Response, error) {
+func (a *IamApiService) PatchIamLocalUserPasswordPolicyExecute(r ApiPatchIamLocalUserPasswordPolicyRequest) (*IamLocalUserPasswordPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamLocalUserPasswordPolicy
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamLocalUserPasswordPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.PatchIamLocalUserPasswordPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/LocalUserPasswordPolicies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamLocalUserPasswordPolicy == nil {
 		return localVarReturnValue, nil, reportError("iamLocalUserPasswordPolicy is required and must be specified")
 	}
@@ -26743,7 +28539,7 @@ func (a *IamApiService) PatchIamLocalUserPasswordPolicyExecute(r ApiPatchIamLoca
 	}
 	// body params
 	localVarPostBody = r.iamLocalUserPasswordPolicy
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -26753,15 +28549,15 @@ func (a *IamApiService) PatchIamLocalUserPasswordPolicyExecute(r ApiPatchIamLoca
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -26817,7 +28613,7 @@ func (a *IamApiService) PatchIamLocalUserPasswordPolicyExecute(r ApiPatchIamLoca
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -26828,7 +28624,7 @@ func (a *IamApiService) PatchIamLocalUserPasswordPolicyExecute(r ApiPatchIamLoca
 }
 
 type ApiPatchIamPermissionRequest struct {
-	ctx           _context.Context
+	ctx           context.Context
 	ApiService    *IamApiService
 	moid          string
 	iamPermission *IamPermission
@@ -26847,18 +28643,18 @@ func (r ApiPatchIamPermissionRequest) IfMatch(ifMatch string) ApiPatchIamPermiss
 	return r
 }
 
-func (r ApiPatchIamPermissionRequest) Execute() (IamPermission, *_nethttp.Response, error) {
+func (r ApiPatchIamPermissionRequest) Execute() (*IamPermission, *http.Response, error) {
 	return r.ApiService.PatchIamPermissionExecute(r)
 }
 
 /*
 PatchIamPermission Update a 'iam.Permission' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchIamPermissionRequest
 */
-func (a *IamApiService) PatchIamPermission(ctx _context.Context, moid string) ApiPatchIamPermissionRequest {
+func (a *IamApiService) PatchIamPermission(ctx context.Context, moid string) ApiPatchIamPermissionRequest {
 	return ApiPatchIamPermissionRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -26868,27 +28664,25 @@ func (a *IamApiService) PatchIamPermission(ctx _context.Context, moid string) Ap
 
 // Execute executes the request
 //  @return IamPermission
-func (a *IamApiService) PatchIamPermissionExecute(r ApiPatchIamPermissionRequest) (IamPermission, *_nethttp.Response, error) {
+func (a *IamApiService) PatchIamPermissionExecute(r ApiPatchIamPermissionRequest) (*IamPermission, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamPermission
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamPermission
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.PatchIamPermission")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Permissions/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamPermission == nil {
 		return localVarReturnValue, nil, reportError("iamPermission is required and must be specified")
 	}
@@ -26915,7 +28709,7 @@ func (a *IamApiService) PatchIamPermissionExecute(r ApiPatchIamPermissionRequest
 	}
 	// body params
 	localVarPostBody = r.iamPermission
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -26925,15 +28719,15 @@ func (a *IamApiService) PatchIamPermissionExecute(r ApiPatchIamPermissionRequest
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -26989,7 +28783,7 @@ func (a *IamApiService) PatchIamPermissionExecute(r ApiPatchIamPermissionRequest
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -27000,7 +28794,7 @@ func (a *IamApiService) PatchIamPermissionExecute(r ApiPatchIamPermissionRequest
 }
 
 type ApiPatchIamPrivateKeySpecRequest struct {
-	ctx               _context.Context
+	ctx               context.Context
 	ApiService        *IamApiService
 	moid              string
 	iamPrivateKeySpec *IamPrivateKeySpec
@@ -27019,18 +28813,18 @@ func (r ApiPatchIamPrivateKeySpecRequest) IfMatch(ifMatch string) ApiPatchIamPri
 	return r
 }
 
-func (r ApiPatchIamPrivateKeySpecRequest) Execute() (IamPrivateKeySpec, *_nethttp.Response, error) {
+func (r ApiPatchIamPrivateKeySpecRequest) Execute() (*IamPrivateKeySpec, *http.Response, error) {
 	return r.ApiService.PatchIamPrivateKeySpecExecute(r)
 }
 
 /*
 PatchIamPrivateKeySpec Update a 'iam.PrivateKeySpec' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchIamPrivateKeySpecRequest
 */
-func (a *IamApiService) PatchIamPrivateKeySpec(ctx _context.Context, moid string) ApiPatchIamPrivateKeySpecRequest {
+func (a *IamApiService) PatchIamPrivateKeySpec(ctx context.Context, moid string) ApiPatchIamPrivateKeySpecRequest {
 	return ApiPatchIamPrivateKeySpecRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -27040,27 +28834,25 @@ func (a *IamApiService) PatchIamPrivateKeySpec(ctx _context.Context, moid string
 
 // Execute executes the request
 //  @return IamPrivateKeySpec
-func (a *IamApiService) PatchIamPrivateKeySpecExecute(r ApiPatchIamPrivateKeySpecRequest) (IamPrivateKeySpec, *_nethttp.Response, error) {
+func (a *IamApiService) PatchIamPrivateKeySpecExecute(r ApiPatchIamPrivateKeySpecRequest) (*IamPrivateKeySpec, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamPrivateKeySpec
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamPrivateKeySpec
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.PatchIamPrivateKeySpec")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/PrivateKeySpecs/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamPrivateKeySpec == nil {
 		return localVarReturnValue, nil, reportError("iamPrivateKeySpec is required and must be specified")
 	}
@@ -27087,7 +28879,7 @@ func (a *IamApiService) PatchIamPrivateKeySpecExecute(r ApiPatchIamPrivateKeySpe
 	}
 	// body params
 	localVarPostBody = r.iamPrivateKeySpec
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -27097,15 +28889,15 @@ func (a *IamApiService) PatchIamPrivateKeySpecExecute(r ApiPatchIamPrivateKeySpe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -27161,7 +28953,7 @@ func (a *IamApiService) PatchIamPrivateKeySpecExecute(r ApiPatchIamPrivateKeySpe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -27172,7 +28964,7 @@ func (a *IamApiService) PatchIamPrivateKeySpecExecute(r ApiPatchIamPrivateKeySpe
 }
 
 type ApiPatchIamQualifierRequest struct {
-	ctx          _context.Context
+	ctx          context.Context
 	ApiService   *IamApiService
 	moid         string
 	iamQualifier *IamQualifier
@@ -27191,18 +28983,18 @@ func (r ApiPatchIamQualifierRequest) IfMatch(ifMatch string) ApiPatchIamQualifie
 	return r
 }
 
-func (r ApiPatchIamQualifierRequest) Execute() (IamQualifier, *_nethttp.Response, error) {
+func (r ApiPatchIamQualifierRequest) Execute() (*IamQualifier, *http.Response, error) {
 	return r.ApiService.PatchIamQualifierExecute(r)
 }
 
 /*
 PatchIamQualifier Update a 'iam.Qualifier' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchIamQualifierRequest
 */
-func (a *IamApiService) PatchIamQualifier(ctx _context.Context, moid string) ApiPatchIamQualifierRequest {
+func (a *IamApiService) PatchIamQualifier(ctx context.Context, moid string) ApiPatchIamQualifierRequest {
 	return ApiPatchIamQualifierRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -27212,27 +29004,25 @@ func (a *IamApiService) PatchIamQualifier(ctx _context.Context, moid string) Api
 
 // Execute executes the request
 //  @return IamQualifier
-func (a *IamApiService) PatchIamQualifierExecute(r ApiPatchIamQualifierRequest) (IamQualifier, *_nethttp.Response, error) {
+func (a *IamApiService) PatchIamQualifierExecute(r ApiPatchIamQualifierRequest) (*IamQualifier, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamQualifier
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamQualifier
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.PatchIamQualifier")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Qualifiers/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamQualifier == nil {
 		return localVarReturnValue, nil, reportError("iamQualifier is required and must be specified")
 	}
@@ -27259,7 +29049,7 @@ func (a *IamApiService) PatchIamQualifierExecute(r ApiPatchIamQualifierRequest) 
 	}
 	// body params
 	localVarPostBody = r.iamQualifier
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -27269,15 +29059,15 @@ func (a *IamApiService) PatchIamQualifierExecute(r ApiPatchIamQualifierRequest) 
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -27333,7 +29123,7 @@ func (a *IamApiService) PatchIamQualifierExecute(r ApiPatchIamQualifierRequest) 
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -27344,7 +29134,7 @@ func (a *IamApiService) PatchIamQualifierExecute(r ApiPatchIamQualifierRequest) 
 }
 
 type ApiPatchIamResourceRolesRequest struct {
-	ctx              _context.Context
+	ctx              context.Context
 	ApiService       *IamApiService
 	moid             string
 	iamResourceRoles *IamResourceRoles
@@ -27363,18 +29153,18 @@ func (r ApiPatchIamResourceRolesRequest) IfMatch(ifMatch string) ApiPatchIamReso
 	return r
 }
 
-func (r ApiPatchIamResourceRolesRequest) Execute() (IamResourceRoles, *_nethttp.Response, error) {
+func (r ApiPatchIamResourceRolesRequest) Execute() (*IamResourceRoles, *http.Response, error) {
 	return r.ApiService.PatchIamResourceRolesExecute(r)
 }
 
 /*
 PatchIamResourceRoles Update a 'iam.ResourceRoles' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchIamResourceRolesRequest
 */
-func (a *IamApiService) PatchIamResourceRoles(ctx _context.Context, moid string) ApiPatchIamResourceRolesRequest {
+func (a *IamApiService) PatchIamResourceRoles(ctx context.Context, moid string) ApiPatchIamResourceRolesRequest {
 	return ApiPatchIamResourceRolesRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -27384,27 +29174,25 @@ func (a *IamApiService) PatchIamResourceRoles(ctx _context.Context, moid string)
 
 // Execute executes the request
 //  @return IamResourceRoles
-func (a *IamApiService) PatchIamResourceRolesExecute(r ApiPatchIamResourceRolesRequest) (IamResourceRoles, *_nethttp.Response, error) {
+func (a *IamApiService) PatchIamResourceRolesExecute(r ApiPatchIamResourceRolesRequest) (*IamResourceRoles, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamResourceRoles
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamResourceRoles
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.PatchIamResourceRoles")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/ResourceRoles/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamResourceRoles == nil {
 		return localVarReturnValue, nil, reportError("iamResourceRoles is required and must be specified")
 	}
@@ -27431,7 +29219,7 @@ func (a *IamApiService) PatchIamResourceRolesExecute(r ApiPatchIamResourceRolesR
 	}
 	// body params
 	localVarPostBody = r.iamResourceRoles
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -27441,15 +29229,15 @@ func (a *IamApiService) PatchIamResourceRolesExecute(r ApiPatchIamResourceRolesR
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -27505,7 +29293,7 @@ func (a *IamApiService) PatchIamResourceRolesExecute(r ApiPatchIamResourceRolesR
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -27516,7 +29304,7 @@ func (a *IamApiService) PatchIamResourceRolesExecute(r ApiPatchIamResourceRolesR
 }
 
 type ApiPatchIamSessionLimitsRequest struct {
-	ctx              _context.Context
+	ctx              context.Context
 	ApiService       *IamApiService
 	moid             string
 	iamSessionLimits *IamSessionLimits
@@ -27535,18 +29323,18 @@ func (r ApiPatchIamSessionLimitsRequest) IfMatch(ifMatch string) ApiPatchIamSess
 	return r
 }
 
-func (r ApiPatchIamSessionLimitsRequest) Execute() (IamSessionLimits, *_nethttp.Response, error) {
+func (r ApiPatchIamSessionLimitsRequest) Execute() (*IamSessionLimits, *http.Response, error) {
 	return r.ApiService.PatchIamSessionLimitsExecute(r)
 }
 
 /*
 PatchIamSessionLimits Update a 'iam.SessionLimits' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchIamSessionLimitsRequest
 */
-func (a *IamApiService) PatchIamSessionLimits(ctx _context.Context, moid string) ApiPatchIamSessionLimitsRequest {
+func (a *IamApiService) PatchIamSessionLimits(ctx context.Context, moid string) ApiPatchIamSessionLimitsRequest {
 	return ApiPatchIamSessionLimitsRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -27556,27 +29344,25 @@ func (a *IamApiService) PatchIamSessionLimits(ctx _context.Context, moid string)
 
 // Execute executes the request
 //  @return IamSessionLimits
-func (a *IamApiService) PatchIamSessionLimitsExecute(r ApiPatchIamSessionLimitsRequest) (IamSessionLimits, *_nethttp.Response, error) {
+func (a *IamApiService) PatchIamSessionLimitsExecute(r ApiPatchIamSessionLimitsRequest) (*IamSessionLimits, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamSessionLimits
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamSessionLimits
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.PatchIamSessionLimits")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/SessionLimits/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamSessionLimits == nil {
 		return localVarReturnValue, nil, reportError("iamSessionLimits is required and must be specified")
 	}
@@ -27603,7 +29389,7 @@ func (a *IamApiService) PatchIamSessionLimitsExecute(r ApiPatchIamSessionLimitsR
 	}
 	// body params
 	localVarPostBody = r.iamSessionLimits
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -27613,15 +29399,15 @@ func (a *IamApiService) PatchIamSessionLimitsExecute(r ApiPatchIamSessionLimitsR
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -27677,7 +29463,7 @@ func (a *IamApiService) PatchIamSessionLimitsExecute(r ApiPatchIamSessionLimitsR
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -27688,7 +29474,7 @@ func (a *IamApiService) PatchIamSessionLimitsExecute(r ApiPatchIamSessionLimitsR
 }
 
 type ApiPatchIamUserRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 	iamUser    *IamUser
@@ -27707,18 +29493,18 @@ func (r ApiPatchIamUserRequest) IfMatch(ifMatch string) ApiPatchIamUserRequest {
 	return r
 }
 
-func (r ApiPatchIamUserRequest) Execute() (IamUser, *_nethttp.Response, error) {
+func (r ApiPatchIamUserRequest) Execute() (*IamUser, *http.Response, error) {
 	return r.ApiService.PatchIamUserExecute(r)
 }
 
 /*
 PatchIamUser Update a 'iam.User' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchIamUserRequest
 */
-func (a *IamApiService) PatchIamUser(ctx _context.Context, moid string) ApiPatchIamUserRequest {
+func (a *IamApiService) PatchIamUser(ctx context.Context, moid string) ApiPatchIamUserRequest {
 	return ApiPatchIamUserRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -27728,27 +29514,25 @@ func (a *IamApiService) PatchIamUser(ctx _context.Context, moid string) ApiPatch
 
 // Execute executes the request
 //  @return IamUser
-func (a *IamApiService) PatchIamUserExecute(r ApiPatchIamUserRequest) (IamUser, *_nethttp.Response, error) {
+func (a *IamApiService) PatchIamUserExecute(r ApiPatchIamUserRequest) (*IamUser, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamUser
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamUser
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.PatchIamUser")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Users/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamUser == nil {
 		return localVarReturnValue, nil, reportError("iamUser is required and must be specified")
 	}
@@ -27775,7 +29559,7 @@ func (a *IamApiService) PatchIamUserExecute(r ApiPatchIamUserRequest) (IamUser, 
 	}
 	// body params
 	localVarPostBody = r.iamUser
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -27785,15 +29569,15 @@ func (a *IamApiService) PatchIamUserExecute(r ApiPatchIamUserRequest) (IamUser, 
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -27849,7 +29633,7 @@ func (a *IamApiService) PatchIamUserExecute(r ApiPatchIamUserRequest) (IamUser, 
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -27860,7 +29644,7 @@ func (a *IamApiService) PatchIamUserExecute(r ApiPatchIamUserRequest) (IamUser, 
 }
 
 type ApiPatchIamUserGroupRequest struct {
-	ctx          _context.Context
+	ctx          context.Context
 	ApiService   *IamApiService
 	moid         string
 	iamUserGroup *IamUserGroup
@@ -27879,18 +29663,18 @@ func (r ApiPatchIamUserGroupRequest) IfMatch(ifMatch string) ApiPatchIamUserGrou
 	return r
 }
 
-func (r ApiPatchIamUserGroupRequest) Execute() (IamUserGroup, *_nethttp.Response, error) {
+func (r ApiPatchIamUserGroupRequest) Execute() (*IamUserGroup, *http.Response, error) {
 	return r.ApiService.PatchIamUserGroupExecute(r)
 }
 
 /*
 PatchIamUserGroup Update a 'iam.UserGroup' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchIamUserGroupRequest
 */
-func (a *IamApiService) PatchIamUserGroup(ctx _context.Context, moid string) ApiPatchIamUserGroupRequest {
+func (a *IamApiService) PatchIamUserGroup(ctx context.Context, moid string) ApiPatchIamUserGroupRequest {
 	return ApiPatchIamUserGroupRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -27900,27 +29684,25 @@ func (a *IamApiService) PatchIamUserGroup(ctx _context.Context, moid string) Api
 
 // Execute executes the request
 //  @return IamUserGroup
-func (a *IamApiService) PatchIamUserGroupExecute(r ApiPatchIamUserGroupRequest) (IamUserGroup, *_nethttp.Response, error) {
+func (a *IamApiService) PatchIamUserGroupExecute(r ApiPatchIamUserGroupRequest) (*IamUserGroup, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamUserGroup
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamUserGroup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.PatchIamUserGroup")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/UserGroups/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamUserGroup == nil {
 		return localVarReturnValue, nil, reportError("iamUserGroup is required and must be specified")
 	}
@@ -27947,7 +29729,7 @@ func (a *IamApiService) PatchIamUserGroupExecute(r ApiPatchIamUserGroupRequest) 
 	}
 	// body params
 	localVarPostBody = r.iamUserGroup
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -27957,15 +29739,15 @@ func (a *IamApiService) PatchIamUserGroupExecute(r ApiPatchIamUserGroupRequest) 
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -28021,7 +29803,7 @@ func (a *IamApiService) PatchIamUserGroupExecute(r ApiPatchIamUserGroupRequest) 
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -28032,7 +29814,7 @@ func (a *IamApiService) PatchIamUserGroupExecute(r ApiPatchIamUserGroupRequest) 
 }
 
 type ApiPatchIamUserPreferenceRequest struct {
-	ctx               _context.Context
+	ctx               context.Context
 	ApiService        *IamApiService
 	moid              string
 	iamUserPreference *IamUserPreference
@@ -28051,18 +29833,18 @@ func (r ApiPatchIamUserPreferenceRequest) IfMatch(ifMatch string) ApiPatchIamUse
 	return r
 }
 
-func (r ApiPatchIamUserPreferenceRequest) Execute() (IamUserPreference, *_nethttp.Response, error) {
+func (r ApiPatchIamUserPreferenceRequest) Execute() (*IamUserPreference, *http.Response, error) {
 	return r.ApiService.PatchIamUserPreferenceExecute(r)
 }
 
 /*
 PatchIamUserPreference Update a 'iam.UserPreference' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchIamUserPreferenceRequest
 */
-func (a *IamApiService) PatchIamUserPreference(ctx _context.Context, moid string) ApiPatchIamUserPreferenceRequest {
+func (a *IamApiService) PatchIamUserPreference(ctx context.Context, moid string) ApiPatchIamUserPreferenceRequest {
 	return ApiPatchIamUserPreferenceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -28072,27 +29854,25 @@ func (a *IamApiService) PatchIamUserPreference(ctx _context.Context, moid string
 
 // Execute executes the request
 //  @return IamUserPreference
-func (a *IamApiService) PatchIamUserPreferenceExecute(r ApiPatchIamUserPreferenceRequest) (IamUserPreference, *_nethttp.Response, error) {
+func (a *IamApiService) PatchIamUserPreferenceExecute(r ApiPatchIamUserPreferenceRequest) (*IamUserPreference, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamUserPreference
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamUserPreference
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.PatchIamUserPreference")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/UserPreferences/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamUserPreference == nil {
 		return localVarReturnValue, nil, reportError("iamUserPreference is required and must be specified")
 	}
@@ -28119,7 +29899,7 @@ func (a *IamApiService) PatchIamUserPreferenceExecute(r ApiPatchIamUserPreferenc
 	}
 	// body params
 	localVarPostBody = r.iamUserPreference
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -28129,15 +29909,15 @@ func (a *IamApiService) PatchIamUserPreferenceExecute(r ApiPatchIamUserPreferenc
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -28193,7 +29973,7 @@ func (a *IamApiService) PatchIamUserPreferenceExecute(r ApiPatchIamUserPreferenc
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -28204,7 +29984,7 @@ func (a *IamApiService) PatchIamUserPreferenceExecute(r ApiPatchIamUserPreferenc
 }
 
 type ApiUpdateIamAccountRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 	iamAccount *IamAccount
@@ -28223,18 +30003,18 @@ func (r ApiUpdateIamAccountRequest) IfMatch(ifMatch string) ApiUpdateIamAccountR
 	return r
 }
 
-func (r ApiUpdateIamAccountRequest) Execute() (IamAccount, *_nethttp.Response, error) {
+func (r ApiUpdateIamAccountRequest) Execute() (*IamAccount, *http.Response, error) {
 	return r.ApiService.UpdateIamAccountExecute(r)
 }
 
 /*
 UpdateIamAccount Update a 'iam.Account' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateIamAccountRequest
 */
-func (a *IamApiService) UpdateIamAccount(ctx _context.Context, moid string) ApiUpdateIamAccountRequest {
+func (a *IamApiService) UpdateIamAccount(ctx context.Context, moid string) ApiUpdateIamAccountRequest {
 	return ApiUpdateIamAccountRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -28244,27 +30024,25 @@ func (a *IamApiService) UpdateIamAccount(ctx _context.Context, moid string) ApiU
 
 // Execute executes the request
 //  @return IamAccount
-func (a *IamApiService) UpdateIamAccountExecute(r ApiUpdateIamAccountRequest) (IamAccount, *_nethttp.Response, error) {
+func (a *IamApiService) UpdateIamAccountExecute(r ApiUpdateIamAccountRequest) (*IamAccount, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamAccount
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamAccount
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.UpdateIamAccount")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Accounts/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamAccount == nil {
 		return localVarReturnValue, nil, reportError("iamAccount is required and must be specified")
 	}
@@ -28291,7 +30069,7 @@ func (a *IamApiService) UpdateIamAccountExecute(r ApiUpdateIamAccountRequest) (I
 	}
 	// body params
 	localVarPostBody = r.iamAccount
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -28301,15 +30079,15 @@ func (a *IamApiService) UpdateIamAccountExecute(r ApiUpdateIamAccountRequest) (I
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -28365,7 +30143,7 @@ func (a *IamApiService) UpdateIamAccountExecute(r ApiUpdateIamAccountRequest) (I
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -28376,7 +30154,7 @@ func (a *IamApiService) UpdateIamAccountExecute(r ApiUpdateIamAccountRequest) (I
 }
 
 type ApiUpdateIamAccountExperienceRequest struct {
-	ctx                  _context.Context
+	ctx                  context.Context
 	ApiService           *IamApiService
 	moid                 string
 	iamAccountExperience *IamAccountExperience
@@ -28395,18 +30173,18 @@ func (r ApiUpdateIamAccountExperienceRequest) IfMatch(ifMatch string) ApiUpdateI
 	return r
 }
 
-func (r ApiUpdateIamAccountExperienceRequest) Execute() (IamAccountExperience, *_nethttp.Response, error) {
+func (r ApiUpdateIamAccountExperienceRequest) Execute() (*IamAccountExperience, *http.Response, error) {
 	return r.ApiService.UpdateIamAccountExperienceExecute(r)
 }
 
 /*
 UpdateIamAccountExperience Update a 'iam.AccountExperience' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateIamAccountExperienceRequest
 */
-func (a *IamApiService) UpdateIamAccountExperience(ctx _context.Context, moid string) ApiUpdateIamAccountExperienceRequest {
+func (a *IamApiService) UpdateIamAccountExperience(ctx context.Context, moid string) ApiUpdateIamAccountExperienceRequest {
 	return ApiUpdateIamAccountExperienceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -28416,27 +30194,25 @@ func (a *IamApiService) UpdateIamAccountExperience(ctx _context.Context, moid st
 
 // Execute executes the request
 //  @return IamAccountExperience
-func (a *IamApiService) UpdateIamAccountExperienceExecute(r ApiUpdateIamAccountExperienceRequest) (IamAccountExperience, *_nethttp.Response, error) {
+func (a *IamApiService) UpdateIamAccountExperienceExecute(r ApiUpdateIamAccountExperienceRequest) (*IamAccountExperience, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamAccountExperience
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamAccountExperience
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.UpdateIamAccountExperience")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/AccountExperiences/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamAccountExperience == nil {
 		return localVarReturnValue, nil, reportError("iamAccountExperience is required and must be specified")
 	}
@@ -28463,7 +30239,7 @@ func (a *IamApiService) UpdateIamAccountExperienceExecute(r ApiUpdateIamAccountE
 	}
 	// body params
 	localVarPostBody = r.iamAccountExperience
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -28473,15 +30249,15 @@ func (a *IamApiService) UpdateIamAccountExperienceExecute(r ApiUpdateIamAccountE
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -28537,7 +30313,7 @@ func (a *IamApiService) UpdateIamAccountExperienceExecute(r ApiUpdateIamAccountE
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -28548,7 +30324,7 @@ func (a *IamApiService) UpdateIamAccountExperienceExecute(r ApiUpdateIamAccountE
 }
 
 type ApiUpdateIamApiKeyRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 	iamApiKey  *IamApiKey
@@ -28567,18 +30343,18 @@ func (r ApiUpdateIamApiKeyRequest) IfMatch(ifMatch string) ApiUpdateIamApiKeyReq
 	return r
 }
 
-func (r ApiUpdateIamApiKeyRequest) Execute() (IamApiKey, *_nethttp.Response, error) {
+func (r ApiUpdateIamApiKeyRequest) Execute() (*IamApiKey, *http.Response, error) {
 	return r.ApiService.UpdateIamApiKeyExecute(r)
 }
 
 /*
 UpdateIamApiKey Update a 'iam.ApiKey' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateIamApiKeyRequest
 */
-func (a *IamApiService) UpdateIamApiKey(ctx _context.Context, moid string) ApiUpdateIamApiKeyRequest {
+func (a *IamApiService) UpdateIamApiKey(ctx context.Context, moid string) ApiUpdateIamApiKeyRequest {
 	return ApiUpdateIamApiKeyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -28588,27 +30364,25 @@ func (a *IamApiService) UpdateIamApiKey(ctx _context.Context, moid string) ApiUp
 
 // Execute executes the request
 //  @return IamApiKey
-func (a *IamApiService) UpdateIamApiKeyExecute(r ApiUpdateIamApiKeyRequest) (IamApiKey, *_nethttp.Response, error) {
+func (a *IamApiService) UpdateIamApiKeyExecute(r ApiUpdateIamApiKeyRequest) (*IamApiKey, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamApiKey
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamApiKey
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.UpdateIamApiKey")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/ApiKeys/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamApiKey == nil {
 		return localVarReturnValue, nil, reportError("iamApiKey is required and must be specified")
 	}
@@ -28635,7 +30409,7 @@ func (a *IamApiService) UpdateIamApiKeyExecute(r ApiUpdateIamApiKeyRequest) (Iam
 	}
 	// body params
 	localVarPostBody = r.iamApiKey
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -28645,15 +30419,15 @@ func (a *IamApiService) UpdateIamApiKeyExecute(r ApiUpdateIamApiKeyRequest) (Iam
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -28709,7 +30483,7 @@ func (a *IamApiService) UpdateIamApiKeyExecute(r ApiUpdateIamApiKeyRequest) (Iam
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -28720,7 +30494,7 @@ func (a *IamApiService) UpdateIamApiKeyExecute(r ApiUpdateIamApiKeyRequest) (Iam
 }
 
 type ApiUpdateIamAppRegistrationRequest struct {
-	ctx                _context.Context
+	ctx                context.Context
 	ApiService         *IamApiService
 	moid               string
 	iamAppRegistration *IamAppRegistration
@@ -28739,18 +30513,18 @@ func (r ApiUpdateIamAppRegistrationRequest) IfMatch(ifMatch string) ApiUpdateIam
 	return r
 }
 
-func (r ApiUpdateIamAppRegistrationRequest) Execute() (IamAppRegistration, *_nethttp.Response, error) {
+func (r ApiUpdateIamAppRegistrationRequest) Execute() (*IamAppRegistration, *http.Response, error) {
 	return r.ApiService.UpdateIamAppRegistrationExecute(r)
 }
 
 /*
 UpdateIamAppRegistration Update a 'iam.AppRegistration' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateIamAppRegistrationRequest
 */
-func (a *IamApiService) UpdateIamAppRegistration(ctx _context.Context, moid string) ApiUpdateIamAppRegistrationRequest {
+func (a *IamApiService) UpdateIamAppRegistration(ctx context.Context, moid string) ApiUpdateIamAppRegistrationRequest {
 	return ApiUpdateIamAppRegistrationRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -28760,27 +30534,25 @@ func (a *IamApiService) UpdateIamAppRegistration(ctx _context.Context, moid stri
 
 // Execute executes the request
 //  @return IamAppRegistration
-func (a *IamApiService) UpdateIamAppRegistrationExecute(r ApiUpdateIamAppRegistrationRequest) (IamAppRegistration, *_nethttp.Response, error) {
+func (a *IamApiService) UpdateIamAppRegistrationExecute(r ApiUpdateIamAppRegistrationRequest) (*IamAppRegistration, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamAppRegistration
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamAppRegistration
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.UpdateIamAppRegistration")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/AppRegistrations/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamAppRegistration == nil {
 		return localVarReturnValue, nil, reportError("iamAppRegistration is required and must be specified")
 	}
@@ -28807,7 +30579,7 @@ func (a *IamApiService) UpdateIamAppRegistrationExecute(r ApiUpdateIamAppRegistr
 	}
 	// body params
 	localVarPostBody = r.iamAppRegistration
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -28817,15 +30589,15 @@ func (a *IamApiService) UpdateIamAppRegistrationExecute(r ApiUpdateIamAppRegistr
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -28881,7 +30653,7 @@ func (a *IamApiService) UpdateIamAppRegistrationExecute(r ApiUpdateIamAppRegistr
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -28892,7 +30664,7 @@ func (a *IamApiService) UpdateIamAppRegistrationExecute(r ApiUpdateIamAppRegistr
 }
 
 type ApiUpdateIamBannerMessageRequest struct {
-	ctx              _context.Context
+	ctx              context.Context
 	ApiService       *IamApiService
 	moid             string
 	iamBannerMessage *IamBannerMessage
@@ -28911,18 +30683,18 @@ func (r ApiUpdateIamBannerMessageRequest) IfMatch(ifMatch string) ApiUpdateIamBa
 	return r
 }
 
-func (r ApiUpdateIamBannerMessageRequest) Execute() (IamBannerMessage, *_nethttp.Response, error) {
+func (r ApiUpdateIamBannerMessageRequest) Execute() (*IamBannerMessage, *http.Response, error) {
 	return r.ApiService.UpdateIamBannerMessageExecute(r)
 }
 
 /*
 UpdateIamBannerMessage Update a 'iam.BannerMessage' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateIamBannerMessageRequest
 */
-func (a *IamApiService) UpdateIamBannerMessage(ctx _context.Context, moid string) ApiUpdateIamBannerMessageRequest {
+func (a *IamApiService) UpdateIamBannerMessage(ctx context.Context, moid string) ApiUpdateIamBannerMessageRequest {
 	return ApiUpdateIamBannerMessageRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -28932,27 +30704,25 @@ func (a *IamApiService) UpdateIamBannerMessage(ctx _context.Context, moid string
 
 // Execute executes the request
 //  @return IamBannerMessage
-func (a *IamApiService) UpdateIamBannerMessageExecute(r ApiUpdateIamBannerMessageRequest) (IamBannerMessage, *_nethttp.Response, error) {
+func (a *IamApiService) UpdateIamBannerMessageExecute(r ApiUpdateIamBannerMessageRequest) (*IamBannerMessage, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamBannerMessage
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamBannerMessage
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.UpdateIamBannerMessage")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/BannerMessages/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamBannerMessage == nil {
 		return localVarReturnValue, nil, reportError("iamBannerMessage is required and must be specified")
 	}
@@ -28979,7 +30749,7 @@ func (a *IamApiService) UpdateIamBannerMessageExecute(r ApiUpdateIamBannerMessag
 	}
 	// body params
 	localVarPostBody = r.iamBannerMessage
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -28989,15 +30759,15 @@ func (a *IamApiService) UpdateIamBannerMessageExecute(r ApiUpdateIamBannerMessag
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -29053,7 +30823,7 @@ func (a *IamApiService) UpdateIamBannerMessageExecute(r ApiUpdateIamBannerMessag
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -29064,7 +30834,7 @@ func (a *IamApiService) UpdateIamBannerMessageExecute(r ApiUpdateIamBannerMessag
 }
 
 type ApiUpdateIamCertificateRequest struct {
-	ctx            _context.Context
+	ctx            context.Context
 	ApiService     *IamApiService
 	moid           string
 	iamCertificate *IamCertificate
@@ -29083,18 +30853,18 @@ func (r ApiUpdateIamCertificateRequest) IfMatch(ifMatch string) ApiUpdateIamCert
 	return r
 }
 
-func (r ApiUpdateIamCertificateRequest) Execute() (IamCertificate, *_nethttp.Response, error) {
+func (r ApiUpdateIamCertificateRequest) Execute() (*IamCertificate, *http.Response, error) {
 	return r.ApiService.UpdateIamCertificateExecute(r)
 }
 
 /*
 UpdateIamCertificate Update a 'iam.Certificate' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateIamCertificateRequest
 */
-func (a *IamApiService) UpdateIamCertificate(ctx _context.Context, moid string) ApiUpdateIamCertificateRequest {
+func (a *IamApiService) UpdateIamCertificate(ctx context.Context, moid string) ApiUpdateIamCertificateRequest {
 	return ApiUpdateIamCertificateRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -29104,27 +30874,25 @@ func (a *IamApiService) UpdateIamCertificate(ctx _context.Context, moid string) 
 
 // Execute executes the request
 //  @return IamCertificate
-func (a *IamApiService) UpdateIamCertificateExecute(r ApiUpdateIamCertificateRequest) (IamCertificate, *_nethttp.Response, error) {
+func (a *IamApiService) UpdateIamCertificateExecute(r ApiUpdateIamCertificateRequest) (*IamCertificate, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamCertificate
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamCertificate
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.UpdateIamCertificate")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Certificates/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamCertificate == nil {
 		return localVarReturnValue, nil, reportError("iamCertificate is required and must be specified")
 	}
@@ -29151,7 +30919,7 @@ func (a *IamApiService) UpdateIamCertificateExecute(r ApiUpdateIamCertificateReq
 	}
 	// body params
 	localVarPostBody = r.iamCertificate
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -29161,15 +30929,15 @@ func (a *IamApiService) UpdateIamCertificateExecute(r ApiUpdateIamCertificateReq
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -29225,7 +30993,7 @@ func (a *IamApiService) UpdateIamCertificateExecute(r ApiUpdateIamCertificateReq
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -29236,7 +31004,7 @@ func (a *IamApiService) UpdateIamCertificateExecute(r ApiUpdateIamCertificateReq
 }
 
 type ApiUpdateIamCertificateRequestRequest struct {
-	ctx                   _context.Context
+	ctx                   context.Context
 	ApiService            *IamApiService
 	moid                  string
 	iamCertificateRequest *IamCertificateRequest
@@ -29255,18 +31023,18 @@ func (r ApiUpdateIamCertificateRequestRequest) IfMatch(ifMatch string) ApiUpdate
 	return r
 }
 
-func (r ApiUpdateIamCertificateRequestRequest) Execute() (IamCertificateRequest, *_nethttp.Response, error) {
+func (r ApiUpdateIamCertificateRequestRequest) Execute() (*IamCertificateRequest, *http.Response, error) {
 	return r.ApiService.UpdateIamCertificateRequestExecute(r)
 }
 
 /*
 UpdateIamCertificateRequest Update a 'iam.CertificateRequest' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateIamCertificateRequestRequest
 */
-func (a *IamApiService) UpdateIamCertificateRequest(ctx _context.Context, moid string) ApiUpdateIamCertificateRequestRequest {
+func (a *IamApiService) UpdateIamCertificateRequest(ctx context.Context, moid string) ApiUpdateIamCertificateRequestRequest {
 	return ApiUpdateIamCertificateRequestRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -29276,27 +31044,25 @@ func (a *IamApiService) UpdateIamCertificateRequest(ctx _context.Context, moid s
 
 // Execute executes the request
 //  @return IamCertificateRequest
-func (a *IamApiService) UpdateIamCertificateRequestExecute(r ApiUpdateIamCertificateRequestRequest) (IamCertificateRequest, *_nethttp.Response, error) {
+func (a *IamApiService) UpdateIamCertificateRequestExecute(r ApiUpdateIamCertificateRequestRequest) (*IamCertificateRequest, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamCertificateRequest
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamCertificateRequest
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.UpdateIamCertificateRequest")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/CertificateRequests/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamCertificateRequest == nil {
 		return localVarReturnValue, nil, reportError("iamCertificateRequest is required and must be specified")
 	}
@@ -29323,7 +31089,7 @@ func (a *IamApiService) UpdateIamCertificateRequestExecute(r ApiUpdateIamCertifi
 	}
 	// body params
 	localVarPostBody = r.iamCertificateRequest
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -29333,15 +31099,15 @@ func (a *IamApiService) UpdateIamCertificateRequestExecute(r ApiUpdateIamCertifi
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -29397,7 +31163,177 @@ func (a *IamApiService) UpdateIamCertificateRequestExecute(r ApiUpdateIamCertifi
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateIamDomainNameInfoRequest struct {
+	ctx               context.Context
+	ApiService        *IamApiService
+	moid              string
+	iamDomainNameInfo *IamDomainNameInfo
+	ifMatch           *string
+}
+
+// The &#39;iam.DomainNameInfo&#39; resource to update.
+func (r ApiUpdateIamDomainNameInfoRequest) IamDomainNameInfo(iamDomainNameInfo IamDomainNameInfo) ApiUpdateIamDomainNameInfoRequest {
+	r.iamDomainNameInfo = &iamDomainNameInfo
+	return r
+}
+
+// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
+func (r ApiUpdateIamDomainNameInfoRequest) IfMatch(ifMatch string) ApiUpdateIamDomainNameInfoRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiUpdateIamDomainNameInfoRequest) Execute() (*IamDomainNameInfo, *http.Response, error) {
+	return r.ApiService.UpdateIamDomainNameInfoExecute(r)
+}
+
+/*
+UpdateIamDomainNameInfo Update a 'iam.DomainNameInfo' resource.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateIamDomainNameInfoRequest
+*/
+func (a *IamApiService) UpdateIamDomainNameInfo(ctx context.Context, moid string) ApiUpdateIamDomainNameInfoRequest {
+	return ApiUpdateIamDomainNameInfoRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//  @return IamDomainNameInfo
+func (a *IamApiService) UpdateIamDomainNameInfoExecute(r ApiUpdateIamDomainNameInfoRequest) (*IamDomainNameInfo, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamDomainNameInfo
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.UpdateIamDomainNameInfo")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/iam/DomainNameInfos/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.iamDomainNameInfo == nil {
+		return localVarReturnValue, nil, reportError("iamDomainNameInfo is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.iamDomainNameInfo
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -29408,7 +31344,7 @@ func (a *IamApiService) UpdateIamCertificateRequestExecute(r ApiUpdateIamCertifi
 }
 
 type ApiUpdateIamEndPointUserRequest struct {
-	ctx             _context.Context
+	ctx             context.Context
 	ApiService      *IamApiService
 	moid            string
 	iamEndPointUser *IamEndPointUser
@@ -29427,18 +31363,18 @@ func (r ApiUpdateIamEndPointUserRequest) IfMatch(ifMatch string) ApiUpdateIamEnd
 	return r
 }
 
-func (r ApiUpdateIamEndPointUserRequest) Execute() (IamEndPointUser, *_nethttp.Response, error) {
+func (r ApiUpdateIamEndPointUserRequest) Execute() (*IamEndPointUser, *http.Response, error) {
 	return r.ApiService.UpdateIamEndPointUserExecute(r)
 }
 
 /*
 UpdateIamEndPointUser Update a 'iam.EndPointUser' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateIamEndPointUserRequest
 */
-func (a *IamApiService) UpdateIamEndPointUser(ctx _context.Context, moid string) ApiUpdateIamEndPointUserRequest {
+func (a *IamApiService) UpdateIamEndPointUser(ctx context.Context, moid string) ApiUpdateIamEndPointUserRequest {
 	return ApiUpdateIamEndPointUserRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -29448,27 +31384,25 @@ func (a *IamApiService) UpdateIamEndPointUser(ctx _context.Context, moid string)
 
 // Execute executes the request
 //  @return IamEndPointUser
-func (a *IamApiService) UpdateIamEndPointUserExecute(r ApiUpdateIamEndPointUserRequest) (IamEndPointUser, *_nethttp.Response, error) {
+func (a *IamApiService) UpdateIamEndPointUserExecute(r ApiUpdateIamEndPointUserRequest) (*IamEndPointUser, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamEndPointUser
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamEndPointUser
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.UpdateIamEndPointUser")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/EndPointUsers/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamEndPointUser == nil {
 		return localVarReturnValue, nil, reportError("iamEndPointUser is required and must be specified")
 	}
@@ -29495,7 +31429,7 @@ func (a *IamApiService) UpdateIamEndPointUserExecute(r ApiUpdateIamEndPointUserR
 	}
 	// body params
 	localVarPostBody = r.iamEndPointUser
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -29505,15 +31439,15 @@ func (a *IamApiService) UpdateIamEndPointUserExecute(r ApiUpdateIamEndPointUserR
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -29569,7 +31503,7 @@ func (a *IamApiService) UpdateIamEndPointUserExecute(r ApiUpdateIamEndPointUserR
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -29580,7 +31514,7 @@ func (a *IamApiService) UpdateIamEndPointUserExecute(r ApiUpdateIamEndPointUserR
 }
 
 type ApiUpdateIamEndPointUserPolicyRequest struct {
-	ctx                   _context.Context
+	ctx                   context.Context
 	ApiService            *IamApiService
 	moid                  string
 	iamEndPointUserPolicy *IamEndPointUserPolicy
@@ -29599,18 +31533,18 @@ func (r ApiUpdateIamEndPointUserPolicyRequest) IfMatch(ifMatch string) ApiUpdate
 	return r
 }
 
-func (r ApiUpdateIamEndPointUserPolicyRequest) Execute() (IamEndPointUserPolicy, *_nethttp.Response, error) {
+func (r ApiUpdateIamEndPointUserPolicyRequest) Execute() (*IamEndPointUserPolicy, *http.Response, error) {
 	return r.ApiService.UpdateIamEndPointUserPolicyExecute(r)
 }
 
 /*
 UpdateIamEndPointUserPolicy Update a 'iam.EndPointUserPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateIamEndPointUserPolicyRequest
 */
-func (a *IamApiService) UpdateIamEndPointUserPolicy(ctx _context.Context, moid string) ApiUpdateIamEndPointUserPolicyRequest {
+func (a *IamApiService) UpdateIamEndPointUserPolicy(ctx context.Context, moid string) ApiUpdateIamEndPointUserPolicyRequest {
 	return ApiUpdateIamEndPointUserPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -29620,27 +31554,25 @@ func (a *IamApiService) UpdateIamEndPointUserPolicy(ctx _context.Context, moid s
 
 // Execute executes the request
 //  @return IamEndPointUserPolicy
-func (a *IamApiService) UpdateIamEndPointUserPolicyExecute(r ApiUpdateIamEndPointUserPolicyRequest) (IamEndPointUserPolicy, *_nethttp.Response, error) {
+func (a *IamApiService) UpdateIamEndPointUserPolicyExecute(r ApiUpdateIamEndPointUserPolicyRequest) (*IamEndPointUserPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamEndPointUserPolicy
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamEndPointUserPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.UpdateIamEndPointUserPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/EndPointUserPolicies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamEndPointUserPolicy == nil {
 		return localVarReturnValue, nil, reportError("iamEndPointUserPolicy is required and must be specified")
 	}
@@ -29667,7 +31599,7 @@ func (a *IamApiService) UpdateIamEndPointUserPolicyExecute(r ApiUpdateIamEndPoin
 	}
 	// body params
 	localVarPostBody = r.iamEndPointUserPolicy
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -29677,15 +31609,15 @@ func (a *IamApiService) UpdateIamEndPointUserPolicyExecute(r ApiUpdateIamEndPoin
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -29741,7 +31673,7 @@ func (a *IamApiService) UpdateIamEndPointUserPolicyExecute(r ApiUpdateIamEndPoin
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -29752,7 +31684,7 @@ func (a *IamApiService) UpdateIamEndPointUserPolicyExecute(r ApiUpdateIamEndPoin
 }
 
 type ApiUpdateIamEndPointUserRoleRequest struct {
-	ctx                 _context.Context
+	ctx                 context.Context
 	ApiService          *IamApiService
 	moid                string
 	iamEndPointUserRole *IamEndPointUserRole
@@ -29771,18 +31703,18 @@ func (r ApiUpdateIamEndPointUserRoleRequest) IfMatch(ifMatch string) ApiUpdateIa
 	return r
 }
 
-func (r ApiUpdateIamEndPointUserRoleRequest) Execute() (IamEndPointUserRole, *_nethttp.Response, error) {
+func (r ApiUpdateIamEndPointUserRoleRequest) Execute() (*IamEndPointUserRole, *http.Response, error) {
 	return r.ApiService.UpdateIamEndPointUserRoleExecute(r)
 }
 
 /*
 UpdateIamEndPointUserRole Update a 'iam.EndPointUserRole' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateIamEndPointUserRoleRequest
 */
-func (a *IamApiService) UpdateIamEndPointUserRole(ctx _context.Context, moid string) ApiUpdateIamEndPointUserRoleRequest {
+func (a *IamApiService) UpdateIamEndPointUserRole(ctx context.Context, moid string) ApiUpdateIamEndPointUserRoleRequest {
 	return ApiUpdateIamEndPointUserRoleRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -29792,27 +31724,25 @@ func (a *IamApiService) UpdateIamEndPointUserRole(ctx _context.Context, moid str
 
 // Execute executes the request
 //  @return IamEndPointUserRole
-func (a *IamApiService) UpdateIamEndPointUserRoleExecute(r ApiUpdateIamEndPointUserRoleRequest) (IamEndPointUserRole, *_nethttp.Response, error) {
+func (a *IamApiService) UpdateIamEndPointUserRoleExecute(r ApiUpdateIamEndPointUserRoleRequest) (*IamEndPointUserRole, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamEndPointUserRole
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamEndPointUserRole
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.UpdateIamEndPointUserRole")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/EndPointUserRoles/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamEndPointUserRole == nil {
 		return localVarReturnValue, nil, reportError("iamEndPointUserRole is required and must be specified")
 	}
@@ -29839,7 +31769,7 @@ func (a *IamApiService) UpdateIamEndPointUserRoleExecute(r ApiUpdateIamEndPointU
 	}
 	// body params
 	localVarPostBody = r.iamEndPointUserRole
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -29849,15 +31779,15 @@ func (a *IamApiService) UpdateIamEndPointUserRoleExecute(r ApiUpdateIamEndPointU
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -29913,7 +31843,7 @@ func (a *IamApiService) UpdateIamEndPointUserRoleExecute(r ApiUpdateIamEndPointU
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -29924,7 +31854,7 @@ func (a *IamApiService) UpdateIamEndPointUserRoleExecute(r ApiUpdateIamEndPointU
 }
 
 type ApiUpdateIamIdpRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 	iamIdp     *IamIdp
@@ -29943,18 +31873,18 @@ func (r ApiUpdateIamIdpRequest) IfMatch(ifMatch string) ApiUpdateIamIdpRequest {
 	return r
 }
 
-func (r ApiUpdateIamIdpRequest) Execute() (IamIdp, *_nethttp.Response, error) {
+func (r ApiUpdateIamIdpRequest) Execute() (*IamIdp, *http.Response, error) {
 	return r.ApiService.UpdateIamIdpExecute(r)
 }
 
 /*
 UpdateIamIdp Update a 'iam.Idp' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateIamIdpRequest
 */
-func (a *IamApiService) UpdateIamIdp(ctx _context.Context, moid string) ApiUpdateIamIdpRequest {
+func (a *IamApiService) UpdateIamIdp(ctx context.Context, moid string) ApiUpdateIamIdpRequest {
 	return ApiUpdateIamIdpRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -29964,27 +31894,25 @@ func (a *IamApiService) UpdateIamIdp(ctx _context.Context, moid string) ApiUpdat
 
 // Execute executes the request
 //  @return IamIdp
-func (a *IamApiService) UpdateIamIdpExecute(r ApiUpdateIamIdpRequest) (IamIdp, *_nethttp.Response, error) {
+func (a *IamApiService) UpdateIamIdpExecute(r ApiUpdateIamIdpRequest) (*IamIdp, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamIdp
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamIdp
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.UpdateIamIdp")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Idps/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamIdp == nil {
 		return localVarReturnValue, nil, reportError("iamIdp is required and must be specified")
 	}
@@ -30011,7 +31939,7 @@ func (a *IamApiService) UpdateIamIdpExecute(r ApiUpdateIamIdpRequest) (IamIdp, *
 	}
 	// body params
 	localVarPostBody = r.iamIdp
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -30021,15 +31949,15 @@ func (a *IamApiService) UpdateIamIdpExecute(r ApiUpdateIamIdpRequest) (IamIdp, *
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -30085,7 +32013,7 @@ func (a *IamApiService) UpdateIamIdpExecute(r ApiUpdateIamIdpRequest) (IamIdp, *
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -30096,7 +32024,7 @@ func (a *IamApiService) UpdateIamIdpExecute(r ApiUpdateIamIdpRequest) (IamIdp, *
 }
 
 type ApiUpdateIamIdpReferenceRequest struct {
-	ctx             _context.Context
+	ctx             context.Context
 	ApiService      *IamApiService
 	moid            string
 	iamIdpReference *IamIdpReference
@@ -30115,18 +32043,18 @@ func (r ApiUpdateIamIdpReferenceRequest) IfMatch(ifMatch string) ApiUpdateIamIdp
 	return r
 }
 
-func (r ApiUpdateIamIdpReferenceRequest) Execute() (IamIdpReference, *_nethttp.Response, error) {
+func (r ApiUpdateIamIdpReferenceRequest) Execute() (*IamIdpReference, *http.Response, error) {
 	return r.ApiService.UpdateIamIdpReferenceExecute(r)
 }
 
 /*
 UpdateIamIdpReference Update a 'iam.IdpReference' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateIamIdpReferenceRequest
 */
-func (a *IamApiService) UpdateIamIdpReference(ctx _context.Context, moid string) ApiUpdateIamIdpReferenceRequest {
+func (a *IamApiService) UpdateIamIdpReference(ctx context.Context, moid string) ApiUpdateIamIdpReferenceRequest {
 	return ApiUpdateIamIdpReferenceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -30136,27 +32064,25 @@ func (a *IamApiService) UpdateIamIdpReference(ctx _context.Context, moid string)
 
 // Execute executes the request
 //  @return IamIdpReference
-func (a *IamApiService) UpdateIamIdpReferenceExecute(r ApiUpdateIamIdpReferenceRequest) (IamIdpReference, *_nethttp.Response, error) {
+func (a *IamApiService) UpdateIamIdpReferenceExecute(r ApiUpdateIamIdpReferenceRequest) (*IamIdpReference, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamIdpReference
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamIdpReference
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.UpdateIamIdpReference")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/IdpReferences/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamIdpReference == nil {
 		return localVarReturnValue, nil, reportError("iamIdpReference is required and must be specified")
 	}
@@ -30183,7 +32109,7 @@ func (a *IamApiService) UpdateIamIdpReferenceExecute(r ApiUpdateIamIdpReferenceR
 	}
 	// body params
 	localVarPostBody = r.iamIdpReference
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -30193,15 +32119,15 @@ func (a *IamApiService) UpdateIamIdpReferenceExecute(r ApiUpdateIamIdpReferenceR
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -30257,7 +32183,7 @@ func (a *IamApiService) UpdateIamIdpReferenceExecute(r ApiUpdateIamIdpReferenceR
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -30268,7 +32194,7 @@ func (a *IamApiService) UpdateIamIdpReferenceExecute(r ApiUpdateIamIdpReferenceR
 }
 
 type ApiUpdateIamIpAccessManagementRequest struct {
-	ctx                   _context.Context
+	ctx                   context.Context
 	ApiService            *IamApiService
 	moid                  string
 	iamIpAccessManagement *IamIpAccessManagement
@@ -30287,18 +32213,18 @@ func (r ApiUpdateIamIpAccessManagementRequest) IfMatch(ifMatch string) ApiUpdate
 	return r
 }
 
-func (r ApiUpdateIamIpAccessManagementRequest) Execute() (IamIpAccessManagement, *_nethttp.Response, error) {
+func (r ApiUpdateIamIpAccessManagementRequest) Execute() (*IamIpAccessManagement, *http.Response, error) {
 	return r.ApiService.UpdateIamIpAccessManagementExecute(r)
 }
 
 /*
 UpdateIamIpAccessManagement Update a 'iam.IpAccessManagement' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateIamIpAccessManagementRequest
 */
-func (a *IamApiService) UpdateIamIpAccessManagement(ctx _context.Context, moid string) ApiUpdateIamIpAccessManagementRequest {
+func (a *IamApiService) UpdateIamIpAccessManagement(ctx context.Context, moid string) ApiUpdateIamIpAccessManagementRequest {
 	return ApiUpdateIamIpAccessManagementRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -30308,27 +32234,25 @@ func (a *IamApiService) UpdateIamIpAccessManagement(ctx _context.Context, moid s
 
 // Execute executes the request
 //  @return IamIpAccessManagement
-func (a *IamApiService) UpdateIamIpAccessManagementExecute(r ApiUpdateIamIpAccessManagementRequest) (IamIpAccessManagement, *_nethttp.Response, error) {
+func (a *IamApiService) UpdateIamIpAccessManagementExecute(r ApiUpdateIamIpAccessManagementRequest) (*IamIpAccessManagement, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamIpAccessManagement
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamIpAccessManagement
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.UpdateIamIpAccessManagement")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/IpAccessManagements/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamIpAccessManagement == nil {
 		return localVarReturnValue, nil, reportError("iamIpAccessManagement is required and must be specified")
 	}
@@ -30355,7 +32279,7 @@ func (a *IamApiService) UpdateIamIpAccessManagementExecute(r ApiUpdateIamIpAcces
 	}
 	// body params
 	localVarPostBody = r.iamIpAccessManagement
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -30365,15 +32289,15 @@ func (a *IamApiService) UpdateIamIpAccessManagementExecute(r ApiUpdateIamIpAcces
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -30429,7 +32353,7 @@ func (a *IamApiService) UpdateIamIpAccessManagementExecute(r ApiUpdateIamIpAcces
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -30440,7 +32364,7 @@ func (a *IamApiService) UpdateIamIpAccessManagementExecute(r ApiUpdateIamIpAcces
 }
 
 type ApiUpdateIamIpAddressRequest struct {
-	ctx          _context.Context
+	ctx          context.Context
 	ApiService   *IamApiService
 	moid         string
 	iamIpAddress *IamIpAddress
@@ -30459,18 +32383,18 @@ func (r ApiUpdateIamIpAddressRequest) IfMatch(ifMatch string) ApiUpdateIamIpAddr
 	return r
 }
 
-func (r ApiUpdateIamIpAddressRequest) Execute() (IamIpAddress, *_nethttp.Response, error) {
+func (r ApiUpdateIamIpAddressRequest) Execute() (*IamIpAddress, *http.Response, error) {
 	return r.ApiService.UpdateIamIpAddressExecute(r)
 }
 
 /*
 UpdateIamIpAddress Update a 'iam.IpAddress' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateIamIpAddressRequest
 */
-func (a *IamApiService) UpdateIamIpAddress(ctx _context.Context, moid string) ApiUpdateIamIpAddressRequest {
+func (a *IamApiService) UpdateIamIpAddress(ctx context.Context, moid string) ApiUpdateIamIpAddressRequest {
 	return ApiUpdateIamIpAddressRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -30480,27 +32404,25 @@ func (a *IamApiService) UpdateIamIpAddress(ctx _context.Context, moid string) Ap
 
 // Execute executes the request
 //  @return IamIpAddress
-func (a *IamApiService) UpdateIamIpAddressExecute(r ApiUpdateIamIpAddressRequest) (IamIpAddress, *_nethttp.Response, error) {
+func (a *IamApiService) UpdateIamIpAddressExecute(r ApiUpdateIamIpAddressRequest) (*IamIpAddress, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamIpAddress
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamIpAddress
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.UpdateIamIpAddress")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/IpAddresses/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamIpAddress == nil {
 		return localVarReturnValue, nil, reportError("iamIpAddress is required and must be specified")
 	}
@@ -30527,7 +32449,7 @@ func (a *IamApiService) UpdateIamIpAddressExecute(r ApiUpdateIamIpAddressRequest
 	}
 	// body params
 	localVarPostBody = r.iamIpAddress
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -30537,15 +32459,15 @@ func (a *IamApiService) UpdateIamIpAddressExecute(r ApiUpdateIamIpAddressRequest
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -30601,7 +32523,7 @@ func (a *IamApiService) UpdateIamIpAddressExecute(r ApiUpdateIamIpAddressRequest
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -30612,7 +32534,7 @@ func (a *IamApiService) UpdateIamIpAddressExecute(r ApiUpdateIamIpAddressRequest
 }
 
 type ApiUpdateIamLdapGroupRequest struct {
-	ctx          _context.Context
+	ctx          context.Context
 	ApiService   *IamApiService
 	moid         string
 	iamLdapGroup *IamLdapGroup
@@ -30631,18 +32553,18 @@ func (r ApiUpdateIamLdapGroupRequest) IfMatch(ifMatch string) ApiUpdateIamLdapGr
 	return r
 }
 
-func (r ApiUpdateIamLdapGroupRequest) Execute() (IamLdapGroup, *_nethttp.Response, error) {
+func (r ApiUpdateIamLdapGroupRequest) Execute() (*IamLdapGroup, *http.Response, error) {
 	return r.ApiService.UpdateIamLdapGroupExecute(r)
 }
 
 /*
 UpdateIamLdapGroup Update a 'iam.LdapGroup' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateIamLdapGroupRequest
 */
-func (a *IamApiService) UpdateIamLdapGroup(ctx _context.Context, moid string) ApiUpdateIamLdapGroupRequest {
+func (a *IamApiService) UpdateIamLdapGroup(ctx context.Context, moid string) ApiUpdateIamLdapGroupRequest {
 	return ApiUpdateIamLdapGroupRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -30652,27 +32574,25 @@ func (a *IamApiService) UpdateIamLdapGroup(ctx _context.Context, moid string) Ap
 
 // Execute executes the request
 //  @return IamLdapGroup
-func (a *IamApiService) UpdateIamLdapGroupExecute(r ApiUpdateIamLdapGroupRequest) (IamLdapGroup, *_nethttp.Response, error) {
+func (a *IamApiService) UpdateIamLdapGroupExecute(r ApiUpdateIamLdapGroupRequest) (*IamLdapGroup, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamLdapGroup
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamLdapGroup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.UpdateIamLdapGroup")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/LdapGroups/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamLdapGroup == nil {
 		return localVarReturnValue, nil, reportError("iamLdapGroup is required and must be specified")
 	}
@@ -30699,7 +32619,7 @@ func (a *IamApiService) UpdateIamLdapGroupExecute(r ApiUpdateIamLdapGroupRequest
 	}
 	// body params
 	localVarPostBody = r.iamLdapGroup
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -30709,15 +32629,15 @@ func (a *IamApiService) UpdateIamLdapGroupExecute(r ApiUpdateIamLdapGroupRequest
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -30773,7 +32693,7 @@ func (a *IamApiService) UpdateIamLdapGroupExecute(r ApiUpdateIamLdapGroupRequest
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -30784,7 +32704,7 @@ func (a *IamApiService) UpdateIamLdapGroupExecute(r ApiUpdateIamLdapGroupRequest
 }
 
 type ApiUpdateIamLdapPolicyRequest struct {
-	ctx           _context.Context
+	ctx           context.Context
 	ApiService    *IamApiService
 	moid          string
 	iamLdapPolicy *IamLdapPolicy
@@ -30803,18 +32723,18 @@ func (r ApiUpdateIamLdapPolicyRequest) IfMatch(ifMatch string) ApiUpdateIamLdapP
 	return r
 }
 
-func (r ApiUpdateIamLdapPolicyRequest) Execute() (IamLdapPolicy, *_nethttp.Response, error) {
+func (r ApiUpdateIamLdapPolicyRequest) Execute() (*IamLdapPolicy, *http.Response, error) {
 	return r.ApiService.UpdateIamLdapPolicyExecute(r)
 }
 
 /*
 UpdateIamLdapPolicy Update a 'iam.LdapPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateIamLdapPolicyRequest
 */
-func (a *IamApiService) UpdateIamLdapPolicy(ctx _context.Context, moid string) ApiUpdateIamLdapPolicyRequest {
+func (a *IamApiService) UpdateIamLdapPolicy(ctx context.Context, moid string) ApiUpdateIamLdapPolicyRequest {
 	return ApiUpdateIamLdapPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -30824,27 +32744,25 @@ func (a *IamApiService) UpdateIamLdapPolicy(ctx _context.Context, moid string) A
 
 // Execute executes the request
 //  @return IamLdapPolicy
-func (a *IamApiService) UpdateIamLdapPolicyExecute(r ApiUpdateIamLdapPolicyRequest) (IamLdapPolicy, *_nethttp.Response, error) {
+func (a *IamApiService) UpdateIamLdapPolicyExecute(r ApiUpdateIamLdapPolicyRequest) (*IamLdapPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamLdapPolicy
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamLdapPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.UpdateIamLdapPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/LdapPolicies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamLdapPolicy == nil {
 		return localVarReturnValue, nil, reportError("iamLdapPolicy is required and must be specified")
 	}
@@ -30871,7 +32789,7 @@ func (a *IamApiService) UpdateIamLdapPolicyExecute(r ApiUpdateIamLdapPolicyReque
 	}
 	// body params
 	localVarPostBody = r.iamLdapPolicy
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -30881,15 +32799,15 @@ func (a *IamApiService) UpdateIamLdapPolicyExecute(r ApiUpdateIamLdapPolicyReque
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -30945,7 +32863,7 @@ func (a *IamApiService) UpdateIamLdapPolicyExecute(r ApiUpdateIamLdapPolicyReque
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -30956,7 +32874,7 @@ func (a *IamApiService) UpdateIamLdapPolicyExecute(r ApiUpdateIamLdapPolicyReque
 }
 
 type ApiUpdateIamLdapProviderRequest struct {
-	ctx             _context.Context
+	ctx             context.Context
 	ApiService      *IamApiService
 	moid            string
 	iamLdapProvider *IamLdapProvider
@@ -30975,18 +32893,18 @@ func (r ApiUpdateIamLdapProviderRequest) IfMatch(ifMatch string) ApiUpdateIamLda
 	return r
 }
 
-func (r ApiUpdateIamLdapProviderRequest) Execute() (IamLdapProvider, *_nethttp.Response, error) {
+func (r ApiUpdateIamLdapProviderRequest) Execute() (*IamLdapProvider, *http.Response, error) {
 	return r.ApiService.UpdateIamLdapProviderExecute(r)
 }
 
 /*
 UpdateIamLdapProvider Update a 'iam.LdapProvider' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateIamLdapProviderRequest
 */
-func (a *IamApiService) UpdateIamLdapProvider(ctx _context.Context, moid string) ApiUpdateIamLdapProviderRequest {
+func (a *IamApiService) UpdateIamLdapProvider(ctx context.Context, moid string) ApiUpdateIamLdapProviderRequest {
 	return ApiUpdateIamLdapProviderRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -30996,27 +32914,25 @@ func (a *IamApiService) UpdateIamLdapProvider(ctx _context.Context, moid string)
 
 // Execute executes the request
 //  @return IamLdapProvider
-func (a *IamApiService) UpdateIamLdapProviderExecute(r ApiUpdateIamLdapProviderRequest) (IamLdapProvider, *_nethttp.Response, error) {
+func (a *IamApiService) UpdateIamLdapProviderExecute(r ApiUpdateIamLdapProviderRequest) (*IamLdapProvider, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamLdapProvider
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamLdapProvider
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.UpdateIamLdapProvider")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/LdapProviders/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamLdapProvider == nil {
 		return localVarReturnValue, nil, reportError("iamLdapProvider is required and must be specified")
 	}
@@ -31043,7 +32959,7 @@ func (a *IamApiService) UpdateIamLdapProviderExecute(r ApiUpdateIamLdapProviderR
 	}
 	// body params
 	localVarPostBody = r.iamLdapProvider
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -31053,15 +32969,15 @@ func (a *IamApiService) UpdateIamLdapProviderExecute(r ApiUpdateIamLdapProviderR
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -31117,7 +33033,7 @@ func (a *IamApiService) UpdateIamLdapProviderExecute(r ApiUpdateIamLdapProviderR
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -31128,7 +33044,7 @@ func (a *IamApiService) UpdateIamLdapProviderExecute(r ApiUpdateIamLdapProviderR
 }
 
 type ApiUpdateIamLocalUserPasswordRequest struct {
-	ctx                  _context.Context
+	ctx                  context.Context
 	ApiService           *IamApiService
 	moid                 string
 	iamLocalUserPassword *IamLocalUserPassword
@@ -31147,18 +33063,18 @@ func (r ApiUpdateIamLocalUserPasswordRequest) IfMatch(ifMatch string) ApiUpdateI
 	return r
 }
 
-func (r ApiUpdateIamLocalUserPasswordRequest) Execute() (IamLocalUserPassword, *_nethttp.Response, error) {
+func (r ApiUpdateIamLocalUserPasswordRequest) Execute() (*IamLocalUserPassword, *http.Response, error) {
 	return r.ApiService.UpdateIamLocalUserPasswordExecute(r)
 }
 
 /*
 UpdateIamLocalUserPassword Update a 'iam.LocalUserPassword' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateIamLocalUserPasswordRequest
 */
-func (a *IamApiService) UpdateIamLocalUserPassword(ctx _context.Context, moid string) ApiUpdateIamLocalUserPasswordRequest {
+func (a *IamApiService) UpdateIamLocalUserPassword(ctx context.Context, moid string) ApiUpdateIamLocalUserPasswordRequest {
 	return ApiUpdateIamLocalUserPasswordRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -31168,27 +33084,25 @@ func (a *IamApiService) UpdateIamLocalUserPassword(ctx _context.Context, moid st
 
 // Execute executes the request
 //  @return IamLocalUserPassword
-func (a *IamApiService) UpdateIamLocalUserPasswordExecute(r ApiUpdateIamLocalUserPasswordRequest) (IamLocalUserPassword, *_nethttp.Response, error) {
+func (a *IamApiService) UpdateIamLocalUserPasswordExecute(r ApiUpdateIamLocalUserPasswordRequest) (*IamLocalUserPassword, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamLocalUserPassword
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamLocalUserPassword
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.UpdateIamLocalUserPassword")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/LocalUserPasswords/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamLocalUserPassword == nil {
 		return localVarReturnValue, nil, reportError("iamLocalUserPassword is required and must be specified")
 	}
@@ -31215,7 +33129,7 @@ func (a *IamApiService) UpdateIamLocalUserPasswordExecute(r ApiUpdateIamLocalUse
 	}
 	// body params
 	localVarPostBody = r.iamLocalUserPassword
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -31225,15 +33139,15 @@ func (a *IamApiService) UpdateIamLocalUserPasswordExecute(r ApiUpdateIamLocalUse
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -31289,7 +33203,7 @@ func (a *IamApiService) UpdateIamLocalUserPasswordExecute(r ApiUpdateIamLocalUse
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -31300,7 +33214,7 @@ func (a *IamApiService) UpdateIamLocalUserPasswordExecute(r ApiUpdateIamLocalUse
 }
 
 type ApiUpdateIamLocalUserPasswordPolicyRequest struct {
-	ctx                        _context.Context
+	ctx                        context.Context
 	ApiService                 *IamApiService
 	moid                       string
 	iamLocalUserPasswordPolicy *IamLocalUserPasswordPolicy
@@ -31319,18 +33233,18 @@ func (r ApiUpdateIamLocalUserPasswordPolicyRequest) IfMatch(ifMatch string) ApiU
 	return r
 }
 
-func (r ApiUpdateIamLocalUserPasswordPolicyRequest) Execute() (IamLocalUserPasswordPolicy, *_nethttp.Response, error) {
+func (r ApiUpdateIamLocalUserPasswordPolicyRequest) Execute() (*IamLocalUserPasswordPolicy, *http.Response, error) {
 	return r.ApiService.UpdateIamLocalUserPasswordPolicyExecute(r)
 }
 
 /*
 UpdateIamLocalUserPasswordPolicy Update a 'iam.LocalUserPasswordPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateIamLocalUserPasswordPolicyRequest
 */
-func (a *IamApiService) UpdateIamLocalUserPasswordPolicy(ctx _context.Context, moid string) ApiUpdateIamLocalUserPasswordPolicyRequest {
+func (a *IamApiService) UpdateIamLocalUserPasswordPolicy(ctx context.Context, moid string) ApiUpdateIamLocalUserPasswordPolicyRequest {
 	return ApiUpdateIamLocalUserPasswordPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -31340,27 +33254,25 @@ func (a *IamApiService) UpdateIamLocalUserPasswordPolicy(ctx _context.Context, m
 
 // Execute executes the request
 //  @return IamLocalUserPasswordPolicy
-func (a *IamApiService) UpdateIamLocalUserPasswordPolicyExecute(r ApiUpdateIamLocalUserPasswordPolicyRequest) (IamLocalUserPasswordPolicy, *_nethttp.Response, error) {
+func (a *IamApiService) UpdateIamLocalUserPasswordPolicyExecute(r ApiUpdateIamLocalUserPasswordPolicyRequest) (*IamLocalUserPasswordPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamLocalUserPasswordPolicy
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamLocalUserPasswordPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.UpdateIamLocalUserPasswordPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/LocalUserPasswordPolicies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamLocalUserPasswordPolicy == nil {
 		return localVarReturnValue, nil, reportError("iamLocalUserPasswordPolicy is required and must be specified")
 	}
@@ -31387,7 +33299,7 @@ func (a *IamApiService) UpdateIamLocalUserPasswordPolicyExecute(r ApiUpdateIamLo
 	}
 	// body params
 	localVarPostBody = r.iamLocalUserPasswordPolicy
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -31397,15 +33309,15 @@ func (a *IamApiService) UpdateIamLocalUserPasswordPolicyExecute(r ApiUpdateIamLo
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -31461,7 +33373,7 @@ func (a *IamApiService) UpdateIamLocalUserPasswordPolicyExecute(r ApiUpdateIamLo
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -31472,7 +33384,7 @@ func (a *IamApiService) UpdateIamLocalUserPasswordPolicyExecute(r ApiUpdateIamLo
 }
 
 type ApiUpdateIamPermissionRequest struct {
-	ctx           _context.Context
+	ctx           context.Context
 	ApiService    *IamApiService
 	moid          string
 	iamPermission *IamPermission
@@ -31491,18 +33403,18 @@ func (r ApiUpdateIamPermissionRequest) IfMatch(ifMatch string) ApiUpdateIamPermi
 	return r
 }
 
-func (r ApiUpdateIamPermissionRequest) Execute() (IamPermission, *_nethttp.Response, error) {
+func (r ApiUpdateIamPermissionRequest) Execute() (*IamPermission, *http.Response, error) {
 	return r.ApiService.UpdateIamPermissionExecute(r)
 }
 
 /*
 UpdateIamPermission Update a 'iam.Permission' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateIamPermissionRequest
 */
-func (a *IamApiService) UpdateIamPermission(ctx _context.Context, moid string) ApiUpdateIamPermissionRequest {
+func (a *IamApiService) UpdateIamPermission(ctx context.Context, moid string) ApiUpdateIamPermissionRequest {
 	return ApiUpdateIamPermissionRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -31512,27 +33424,25 @@ func (a *IamApiService) UpdateIamPermission(ctx _context.Context, moid string) A
 
 // Execute executes the request
 //  @return IamPermission
-func (a *IamApiService) UpdateIamPermissionExecute(r ApiUpdateIamPermissionRequest) (IamPermission, *_nethttp.Response, error) {
+func (a *IamApiService) UpdateIamPermissionExecute(r ApiUpdateIamPermissionRequest) (*IamPermission, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamPermission
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamPermission
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.UpdateIamPermission")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Permissions/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamPermission == nil {
 		return localVarReturnValue, nil, reportError("iamPermission is required and must be specified")
 	}
@@ -31559,7 +33469,7 @@ func (a *IamApiService) UpdateIamPermissionExecute(r ApiUpdateIamPermissionReque
 	}
 	// body params
 	localVarPostBody = r.iamPermission
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -31569,15 +33479,15 @@ func (a *IamApiService) UpdateIamPermissionExecute(r ApiUpdateIamPermissionReque
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -31633,7 +33543,7 @@ func (a *IamApiService) UpdateIamPermissionExecute(r ApiUpdateIamPermissionReque
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -31644,7 +33554,7 @@ func (a *IamApiService) UpdateIamPermissionExecute(r ApiUpdateIamPermissionReque
 }
 
 type ApiUpdateIamPrivateKeySpecRequest struct {
-	ctx               _context.Context
+	ctx               context.Context
 	ApiService        *IamApiService
 	moid              string
 	iamPrivateKeySpec *IamPrivateKeySpec
@@ -31663,18 +33573,18 @@ func (r ApiUpdateIamPrivateKeySpecRequest) IfMatch(ifMatch string) ApiUpdateIamP
 	return r
 }
 
-func (r ApiUpdateIamPrivateKeySpecRequest) Execute() (IamPrivateKeySpec, *_nethttp.Response, error) {
+func (r ApiUpdateIamPrivateKeySpecRequest) Execute() (*IamPrivateKeySpec, *http.Response, error) {
 	return r.ApiService.UpdateIamPrivateKeySpecExecute(r)
 }
 
 /*
 UpdateIamPrivateKeySpec Update a 'iam.PrivateKeySpec' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateIamPrivateKeySpecRequest
 */
-func (a *IamApiService) UpdateIamPrivateKeySpec(ctx _context.Context, moid string) ApiUpdateIamPrivateKeySpecRequest {
+func (a *IamApiService) UpdateIamPrivateKeySpec(ctx context.Context, moid string) ApiUpdateIamPrivateKeySpecRequest {
 	return ApiUpdateIamPrivateKeySpecRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -31684,27 +33594,25 @@ func (a *IamApiService) UpdateIamPrivateKeySpec(ctx _context.Context, moid strin
 
 // Execute executes the request
 //  @return IamPrivateKeySpec
-func (a *IamApiService) UpdateIamPrivateKeySpecExecute(r ApiUpdateIamPrivateKeySpecRequest) (IamPrivateKeySpec, *_nethttp.Response, error) {
+func (a *IamApiService) UpdateIamPrivateKeySpecExecute(r ApiUpdateIamPrivateKeySpecRequest) (*IamPrivateKeySpec, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamPrivateKeySpec
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamPrivateKeySpec
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.UpdateIamPrivateKeySpec")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/PrivateKeySpecs/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamPrivateKeySpec == nil {
 		return localVarReturnValue, nil, reportError("iamPrivateKeySpec is required and must be specified")
 	}
@@ -31731,7 +33639,7 @@ func (a *IamApiService) UpdateIamPrivateKeySpecExecute(r ApiUpdateIamPrivateKeyS
 	}
 	// body params
 	localVarPostBody = r.iamPrivateKeySpec
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -31741,15 +33649,15 @@ func (a *IamApiService) UpdateIamPrivateKeySpecExecute(r ApiUpdateIamPrivateKeyS
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -31805,7 +33713,7 @@ func (a *IamApiService) UpdateIamPrivateKeySpecExecute(r ApiUpdateIamPrivateKeyS
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -31816,7 +33724,7 @@ func (a *IamApiService) UpdateIamPrivateKeySpecExecute(r ApiUpdateIamPrivateKeyS
 }
 
 type ApiUpdateIamQualifierRequest struct {
-	ctx          _context.Context
+	ctx          context.Context
 	ApiService   *IamApiService
 	moid         string
 	iamQualifier *IamQualifier
@@ -31835,18 +33743,18 @@ func (r ApiUpdateIamQualifierRequest) IfMatch(ifMatch string) ApiUpdateIamQualif
 	return r
 }
 
-func (r ApiUpdateIamQualifierRequest) Execute() (IamQualifier, *_nethttp.Response, error) {
+func (r ApiUpdateIamQualifierRequest) Execute() (*IamQualifier, *http.Response, error) {
 	return r.ApiService.UpdateIamQualifierExecute(r)
 }
 
 /*
 UpdateIamQualifier Update a 'iam.Qualifier' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateIamQualifierRequest
 */
-func (a *IamApiService) UpdateIamQualifier(ctx _context.Context, moid string) ApiUpdateIamQualifierRequest {
+func (a *IamApiService) UpdateIamQualifier(ctx context.Context, moid string) ApiUpdateIamQualifierRequest {
 	return ApiUpdateIamQualifierRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -31856,27 +33764,25 @@ func (a *IamApiService) UpdateIamQualifier(ctx _context.Context, moid string) Ap
 
 // Execute executes the request
 //  @return IamQualifier
-func (a *IamApiService) UpdateIamQualifierExecute(r ApiUpdateIamQualifierRequest) (IamQualifier, *_nethttp.Response, error) {
+func (a *IamApiService) UpdateIamQualifierExecute(r ApiUpdateIamQualifierRequest) (*IamQualifier, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamQualifier
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamQualifier
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.UpdateIamQualifier")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Qualifiers/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamQualifier == nil {
 		return localVarReturnValue, nil, reportError("iamQualifier is required and must be specified")
 	}
@@ -31903,7 +33809,7 @@ func (a *IamApiService) UpdateIamQualifierExecute(r ApiUpdateIamQualifierRequest
 	}
 	// body params
 	localVarPostBody = r.iamQualifier
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -31913,15 +33819,15 @@ func (a *IamApiService) UpdateIamQualifierExecute(r ApiUpdateIamQualifierRequest
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -31977,7 +33883,7 @@ func (a *IamApiService) UpdateIamQualifierExecute(r ApiUpdateIamQualifierRequest
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -31988,7 +33894,7 @@ func (a *IamApiService) UpdateIamQualifierExecute(r ApiUpdateIamQualifierRequest
 }
 
 type ApiUpdateIamResourceRolesRequest struct {
-	ctx              _context.Context
+	ctx              context.Context
 	ApiService       *IamApiService
 	moid             string
 	iamResourceRoles *IamResourceRoles
@@ -32007,18 +33913,18 @@ func (r ApiUpdateIamResourceRolesRequest) IfMatch(ifMatch string) ApiUpdateIamRe
 	return r
 }
 
-func (r ApiUpdateIamResourceRolesRequest) Execute() (IamResourceRoles, *_nethttp.Response, error) {
+func (r ApiUpdateIamResourceRolesRequest) Execute() (*IamResourceRoles, *http.Response, error) {
 	return r.ApiService.UpdateIamResourceRolesExecute(r)
 }
 
 /*
 UpdateIamResourceRoles Update a 'iam.ResourceRoles' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateIamResourceRolesRequest
 */
-func (a *IamApiService) UpdateIamResourceRoles(ctx _context.Context, moid string) ApiUpdateIamResourceRolesRequest {
+func (a *IamApiService) UpdateIamResourceRoles(ctx context.Context, moid string) ApiUpdateIamResourceRolesRequest {
 	return ApiUpdateIamResourceRolesRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -32028,27 +33934,25 @@ func (a *IamApiService) UpdateIamResourceRoles(ctx _context.Context, moid string
 
 // Execute executes the request
 //  @return IamResourceRoles
-func (a *IamApiService) UpdateIamResourceRolesExecute(r ApiUpdateIamResourceRolesRequest) (IamResourceRoles, *_nethttp.Response, error) {
+func (a *IamApiService) UpdateIamResourceRolesExecute(r ApiUpdateIamResourceRolesRequest) (*IamResourceRoles, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamResourceRoles
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamResourceRoles
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.UpdateIamResourceRoles")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/ResourceRoles/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamResourceRoles == nil {
 		return localVarReturnValue, nil, reportError("iamResourceRoles is required and must be specified")
 	}
@@ -32075,7 +33979,7 @@ func (a *IamApiService) UpdateIamResourceRolesExecute(r ApiUpdateIamResourceRole
 	}
 	// body params
 	localVarPostBody = r.iamResourceRoles
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -32085,15 +33989,15 @@ func (a *IamApiService) UpdateIamResourceRolesExecute(r ApiUpdateIamResourceRole
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -32149,7 +34053,7 @@ func (a *IamApiService) UpdateIamResourceRolesExecute(r ApiUpdateIamResourceRole
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -32160,7 +34064,7 @@ func (a *IamApiService) UpdateIamResourceRolesExecute(r ApiUpdateIamResourceRole
 }
 
 type ApiUpdateIamSessionLimitsRequest struct {
-	ctx              _context.Context
+	ctx              context.Context
 	ApiService       *IamApiService
 	moid             string
 	iamSessionLimits *IamSessionLimits
@@ -32179,18 +34083,18 @@ func (r ApiUpdateIamSessionLimitsRequest) IfMatch(ifMatch string) ApiUpdateIamSe
 	return r
 }
 
-func (r ApiUpdateIamSessionLimitsRequest) Execute() (IamSessionLimits, *_nethttp.Response, error) {
+func (r ApiUpdateIamSessionLimitsRequest) Execute() (*IamSessionLimits, *http.Response, error) {
 	return r.ApiService.UpdateIamSessionLimitsExecute(r)
 }
 
 /*
 UpdateIamSessionLimits Update a 'iam.SessionLimits' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateIamSessionLimitsRequest
 */
-func (a *IamApiService) UpdateIamSessionLimits(ctx _context.Context, moid string) ApiUpdateIamSessionLimitsRequest {
+func (a *IamApiService) UpdateIamSessionLimits(ctx context.Context, moid string) ApiUpdateIamSessionLimitsRequest {
 	return ApiUpdateIamSessionLimitsRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -32200,27 +34104,25 @@ func (a *IamApiService) UpdateIamSessionLimits(ctx _context.Context, moid string
 
 // Execute executes the request
 //  @return IamSessionLimits
-func (a *IamApiService) UpdateIamSessionLimitsExecute(r ApiUpdateIamSessionLimitsRequest) (IamSessionLimits, *_nethttp.Response, error) {
+func (a *IamApiService) UpdateIamSessionLimitsExecute(r ApiUpdateIamSessionLimitsRequest) (*IamSessionLimits, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamSessionLimits
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamSessionLimits
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.UpdateIamSessionLimits")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/SessionLimits/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamSessionLimits == nil {
 		return localVarReturnValue, nil, reportError("iamSessionLimits is required and must be specified")
 	}
@@ -32247,7 +34149,7 @@ func (a *IamApiService) UpdateIamSessionLimitsExecute(r ApiUpdateIamSessionLimit
 	}
 	// body params
 	localVarPostBody = r.iamSessionLimits
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -32257,15 +34159,15 @@ func (a *IamApiService) UpdateIamSessionLimitsExecute(r ApiUpdateIamSessionLimit
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -32321,7 +34223,7 @@ func (a *IamApiService) UpdateIamSessionLimitsExecute(r ApiUpdateIamSessionLimit
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -32332,7 +34234,7 @@ func (a *IamApiService) UpdateIamSessionLimitsExecute(r ApiUpdateIamSessionLimit
 }
 
 type ApiUpdateIamUserRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IamApiService
 	moid       string
 	iamUser    *IamUser
@@ -32351,18 +34253,18 @@ func (r ApiUpdateIamUserRequest) IfMatch(ifMatch string) ApiUpdateIamUserRequest
 	return r
 }
 
-func (r ApiUpdateIamUserRequest) Execute() (IamUser, *_nethttp.Response, error) {
+func (r ApiUpdateIamUserRequest) Execute() (*IamUser, *http.Response, error) {
 	return r.ApiService.UpdateIamUserExecute(r)
 }
 
 /*
 UpdateIamUser Update a 'iam.User' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateIamUserRequest
 */
-func (a *IamApiService) UpdateIamUser(ctx _context.Context, moid string) ApiUpdateIamUserRequest {
+func (a *IamApiService) UpdateIamUser(ctx context.Context, moid string) ApiUpdateIamUserRequest {
 	return ApiUpdateIamUserRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -32372,27 +34274,25 @@ func (a *IamApiService) UpdateIamUser(ctx _context.Context, moid string) ApiUpda
 
 // Execute executes the request
 //  @return IamUser
-func (a *IamApiService) UpdateIamUserExecute(r ApiUpdateIamUserRequest) (IamUser, *_nethttp.Response, error) {
+func (a *IamApiService) UpdateIamUserExecute(r ApiUpdateIamUserRequest) (*IamUser, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamUser
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamUser
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.UpdateIamUser")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/Users/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamUser == nil {
 		return localVarReturnValue, nil, reportError("iamUser is required and must be specified")
 	}
@@ -32419,7 +34319,7 @@ func (a *IamApiService) UpdateIamUserExecute(r ApiUpdateIamUserRequest) (IamUser
 	}
 	// body params
 	localVarPostBody = r.iamUser
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -32429,15 +34329,15 @@ func (a *IamApiService) UpdateIamUserExecute(r ApiUpdateIamUserRequest) (IamUser
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -32493,7 +34393,7 @@ func (a *IamApiService) UpdateIamUserExecute(r ApiUpdateIamUserRequest) (IamUser
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -32504,7 +34404,7 @@ func (a *IamApiService) UpdateIamUserExecute(r ApiUpdateIamUserRequest) (IamUser
 }
 
 type ApiUpdateIamUserGroupRequest struct {
-	ctx          _context.Context
+	ctx          context.Context
 	ApiService   *IamApiService
 	moid         string
 	iamUserGroup *IamUserGroup
@@ -32523,18 +34423,18 @@ func (r ApiUpdateIamUserGroupRequest) IfMatch(ifMatch string) ApiUpdateIamUserGr
 	return r
 }
 
-func (r ApiUpdateIamUserGroupRequest) Execute() (IamUserGroup, *_nethttp.Response, error) {
+func (r ApiUpdateIamUserGroupRequest) Execute() (*IamUserGroup, *http.Response, error) {
 	return r.ApiService.UpdateIamUserGroupExecute(r)
 }
 
 /*
 UpdateIamUserGroup Update a 'iam.UserGroup' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateIamUserGroupRequest
 */
-func (a *IamApiService) UpdateIamUserGroup(ctx _context.Context, moid string) ApiUpdateIamUserGroupRequest {
+func (a *IamApiService) UpdateIamUserGroup(ctx context.Context, moid string) ApiUpdateIamUserGroupRequest {
 	return ApiUpdateIamUserGroupRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -32544,27 +34444,25 @@ func (a *IamApiService) UpdateIamUserGroup(ctx _context.Context, moid string) Ap
 
 // Execute executes the request
 //  @return IamUserGroup
-func (a *IamApiService) UpdateIamUserGroupExecute(r ApiUpdateIamUserGroupRequest) (IamUserGroup, *_nethttp.Response, error) {
+func (a *IamApiService) UpdateIamUserGroupExecute(r ApiUpdateIamUserGroupRequest) (*IamUserGroup, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamUserGroup
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamUserGroup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.UpdateIamUserGroup")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/UserGroups/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamUserGroup == nil {
 		return localVarReturnValue, nil, reportError("iamUserGroup is required and must be specified")
 	}
@@ -32591,7 +34489,7 @@ func (a *IamApiService) UpdateIamUserGroupExecute(r ApiUpdateIamUserGroupRequest
 	}
 	// body params
 	localVarPostBody = r.iamUserGroup
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -32601,15 +34499,15 @@ func (a *IamApiService) UpdateIamUserGroupExecute(r ApiUpdateIamUserGroupRequest
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -32665,7 +34563,7 @@ func (a *IamApiService) UpdateIamUserGroupExecute(r ApiUpdateIamUserGroupRequest
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -32676,7 +34574,7 @@ func (a *IamApiService) UpdateIamUserGroupExecute(r ApiUpdateIamUserGroupRequest
 }
 
 type ApiUpdateIamUserPreferenceRequest struct {
-	ctx               _context.Context
+	ctx               context.Context
 	ApiService        *IamApiService
 	moid              string
 	iamUserPreference *IamUserPreference
@@ -32695,18 +34593,18 @@ func (r ApiUpdateIamUserPreferenceRequest) IfMatch(ifMatch string) ApiUpdateIamU
 	return r
 }
 
-func (r ApiUpdateIamUserPreferenceRequest) Execute() (IamUserPreference, *_nethttp.Response, error) {
+func (r ApiUpdateIamUserPreferenceRequest) Execute() (*IamUserPreference, *http.Response, error) {
 	return r.ApiService.UpdateIamUserPreferenceExecute(r)
 }
 
 /*
 UpdateIamUserPreference Update a 'iam.UserPreference' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateIamUserPreferenceRequest
 */
-func (a *IamApiService) UpdateIamUserPreference(ctx _context.Context, moid string) ApiUpdateIamUserPreferenceRequest {
+func (a *IamApiService) UpdateIamUserPreference(ctx context.Context, moid string) ApiUpdateIamUserPreferenceRequest {
 	return ApiUpdateIamUserPreferenceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -32716,27 +34614,25 @@ func (a *IamApiService) UpdateIamUserPreference(ctx _context.Context, moid strin
 
 // Execute executes the request
 //  @return IamUserPreference
-func (a *IamApiService) UpdateIamUserPreferenceExecute(r ApiUpdateIamUserPreferenceRequest) (IamUserPreference, *_nethttp.Response, error) {
+func (a *IamApiService) UpdateIamUserPreferenceExecute(r ApiUpdateIamUserPreferenceRequest) (*IamUserPreference, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IamUserPreference
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamUserPreference
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.UpdateIamUserPreference")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/UserPreferences/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iamUserPreference == nil {
 		return localVarReturnValue, nil, reportError("iamUserPreference is required and must be specified")
 	}
@@ -32763,7 +34659,7 @@ func (a *IamApiService) UpdateIamUserPreferenceExecute(r ApiUpdateIamUserPrefere
 	}
 	// body params
 	localVarPostBody = r.iamUserPreference
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -32773,15 +34669,15 @@ func (a *IamApiService) UpdateIamUserPreferenceExecute(r ApiUpdateIamUserPrefere
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -32837,7 +34733,7 @@ func (a *IamApiService) UpdateIamUserPreferenceExecute(r ApiUpdateIamUserPrefere
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

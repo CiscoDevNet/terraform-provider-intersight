@@ -486,7 +486,6 @@ func resourceFabricEthNetworkPolicy() *schema.Resource {
 
 func resourceFabricEthNetworkPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewFabricEthNetworkPolicyWithDefaults()
@@ -644,7 +643,7 @@ func resourceFabricEthNetworkPolicyCreate(c context.Context, d *schema.ResourceD
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating FabricEthNetworkPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating FabricEthNetworkPolicy: %s", responseErr.Error())
@@ -656,7 +655,6 @@ func resourceFabricEthNetworkPolicyCreate(c context.Context, d *schema.ResourceD
 
 func resourceFabricEthNetworkPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.FabricApi.GetFabricEthNetworkPolicyByMoid(conn.ctx, d.Id())
@@ -669,7 +667,7 @@ func resourceFabricEthNetworkPolicyRead(c context.Context, d *schema.ResourceDat
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching FabricEthNetworkPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching FabricEthNetworkPolicy: %s", responseErr.Error())
@@ -758,7 +756,6 @@ func resourceFabricEthNetworkPolicyRead(c context.Context, d *schema.ResourceDat
 
 func resourceFabricEthNetworkPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.FabricEthNetworkPolicy{}
@@ -919,7 +916,7 @@ func resourceFabricEthNetworkPolicyUpdate(c context.Context, d *schema.ResourceD
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating FabricEthNetworkPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating FabricEthNetworkPolicy: %s", responseErr.Error())
@@ -931,7 +928,6 @@ func resourceFabricEthNetworkPolicyUpdate(c context.Context, d *schema.ResourceD
 
 func resourceFabricEthNetworkPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.FabricApi.DeleteFabricEthNetworkPolicy(conn.ctx, d.Id())
@@ -943,7 +939,7 @@ func resourceFabricEthNetworkPolicyDelete(c context.Context, d *schema.ResourceD
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting FabricEthNetworkPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting FabricEthNetworkPolicy object: %s", deleteErr.Error())

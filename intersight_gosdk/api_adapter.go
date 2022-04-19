@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,23 +13,18 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // AdapterApiService AdapterApi service
 type AdapterApiService service
 
 type ApiCreateAdapterConfigPolicyRequest struct {
-	ctx                 _context.Context
+	ctx                 context.Context
 	ApiService          *AdapterApiService
 	adapterConfigPolicy *AdapterConfigPolicy
 	ifMatch             *string
@@ -54,17 +49,17 @@ func (r ApiCreateAdapterConfigPolicyRequest) IfNoneMatch(ifNoneMatch string) Api
 	return r
 }
 
-func (r ApiCreateAdapterConfigPolicyRequest) Execute() (AdapterConfigPolicy, *_nethttp.Response, error) {
+func (r ApiCreateAdapterConfigPolicyRequest) Execute() (*AdapterConfigPolicy, *http.Response, error) {
 	return r.ApiService.CreateAdapterConfigPolicyExecute(r)
 }
 
 /*
 CreateAdapterConfigPolicy Create a 'adapter.ConfigPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateAdapterConfigPolicyRequest
 */
-func (a *AdapterApiService) CreateAdapterConfigPolicy(ctx _context.Context) ApiCreateAdapterConfigPolicyRequest {
+func (a *AdapterApiService) CreateAdapterConfigPolicy(ctx context.Context) ApiCreateAdapterConfigPolicyRequest {
 	return ApiCreateAdapterConfigPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -73,26 +68,24 @@ func (a *AdapterApiService) CreateAdapterConfigPolicy(ctx _context.Context) ApiC
 
 // Execute executes the request
 //  @return AdapterConfigPolicy
-func (a *AdapterApiService) CreateAdapterConfigPolicyExecute(r ApiCreateAdapterConfigPolicyRequest) (AdapterConfigPolicy, *_nethttp.Response, error) {
+func (a *AdapterApiService) CreateAdapterConfigPolicyExecute(r ApiCreateAdapterConfigPolicyRequest) (*AdapterConfigPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AdapterConfigPolicy
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AdapterConfigPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AdapterApiService.CreateAdapterConfigPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/adapter/ConfigPolicies"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.adapterConfigPolicy == nil {
 		return localVarReturnValue, nil, reportError("adapterConfigPolicy is required and must be specified")
 	}
@@ -122,7 +115,7 @@ func (a *AdapterApiService) CreateAdapterConfigPolicyExecute(r ApiCreateAdapterC
 	}
 	// body params
 	localVarPostBody = r.adapterConfigPolicy
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -132,15 +125,15 @@ func (a *AdapterApiService) CreateAdapterConfigPolicyExecute(r ApiCreateAdapterC
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -196,7 +189,7 @@ func (a *AdapterApiService) CreateAdapterConfigPolicyExecute(r ApiCreateAdapterC
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -207,23 +200,23 @@ func (a *AdapterApiService) CreateAdapterConfigPolicyExecute(r ApiCreateAdapterC
 }
 
 type ApiDeleteAdapterConfigPolicyRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *AdapterApiService
 	moid       string
 }
 
-func (r ApiDeleteAdapterConfigPolicyRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteAdapterConfigPolicyRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteAdapterConfigPolicyExecute(r)
 }
 
 /*
 DeleteAdapterConfigPolicy Delete a 'adapter.ConfigPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteAdapterConfigPolicyRequest
 */
-func (a *AdapterApiService) DeleteAdapterConfigPolicy(ctx _context.Context, moid string) ApiDeleteAdapterConfigPolicyRequest {
+func (a *AdapterApiService) DeleteAdapterConfigPolicy(ctx context.Context, moid string) ApiDeleteAdapterConfigPolicyRequest {
 	return ApiDeleteAdapterConfigPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -232,26 +225,24 @@ func (a *AdapterApiService) DeleteAdapterConfigPolicy(ctx _context.Context, moid
 }
 
 // Execute executes the request
-func (a *AdapterApiService) DeleteAdapterConfigPolicyExecute(r ApiDeleteAdapterConfigPolicyRequest) (*_nethttp.Response, error) {
+func (a *AdapterApiService) DeleteAdapterConfigPolicyExecute(r ApiDeleteAdapterConfigPolicyRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AdapterApiService.DeleteAdapterConfigPolicy")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/adapter/ConfigPolicies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -270,7 +261,7 @@ func (a *AdapterApiService) DeleteAdapterConfigPolicyExecute(r ApiDeleteAdapterC
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -280,15 +271,15 @@ func (a *AdapterApiService) DeleteAdapterConfigPolicyExecute(r ApiDeleteAdapterC
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -346,23 +337,23 @@ func (a *AdapterApiService) DeleteAdapterConfigPolicyExecute(r ApiDeleteAdapterC
 }
 
 type ApiGetAdapterConfigPolicyByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *AdapterApiService
 	moid       string
 }
 
-func (r ApiGetAdapterConfigPolicyByMoidRequest) Execute() (AdapterConfigPolicy, *_nethttp.Response, error) {
+func (r ApiGetAdapterConfigPolicyByMoidRequest) Execute() (*AdapterConfigPolicy, *http.Response, error) {
 	return r.ApiService.GetAdapterConfigPolicyByMoidExecute(r)
 }
 
 /*
 GetAdapterConfigPolicyByMoid Read a 'adapter.ConfigPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetAdapterConfigPolicyByMoidRequest
 */
-func (a *AdapterApiService) GetAdapterConfigPolicyByMoid(ctx _context.Context, moid string) ApiGetAdapterConfigPolicyByMoidRequest {
+func (a *AdapterApiService) GetAdapterConfigPolicyByMoid(ctx context.Context, moid string) ApiGetAdapterConfigPolicyByMoidRequest {
 	return ApiGetAdapterConfigPolicyByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -372,27 +363,25 @@ func (a *AdapterApiService) GetAdapterConfigPolicyByMoid(ctx _context.Context, m
 
 // Execute executes the request
 //  @return AdapterConfigPolicy
-func (a *AdapterApiService) GetAdapterConfigPolicyByMoidExecute(r ApiGetAdapterConfigPolicyByMoidRequest) (AdapterConfigPolicy, *_nethttp.Response, error) {
+func (a *AdapterApiService) GetAdapterConfigPolicyByMoidExecute(r ApiGetAdapterConfigPolicyByMoidRequest) (*AdapterConfigPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AdapterConfigPolicy
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AdapterConfigPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AdapterApiService.GetAdapterConfigPolicyByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/adapter/ConfigPolicies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -411,7 +400,7 @@ func (a *AdapterApiService) GetAdapterConfigPolicyByMoidExecute(r ApiGetAdapterC
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -421,15 +410,15 @@ func (a *AdapterApiService) GetAdapterConfigPolicyByMoidExecute(r ApiGetAdapterC
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -485,7 +474,7 @@ func (a *AdapterApiService) GetAdapterConfigPolicyByMoidExecute(r ApiGetAdapterC
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -496,7 +485,7 @@ func (a *AdapterApiService) GetAdapterConfigPolicyByMoidExecute(r ApiGetAdapterC
 }
 
 type ApiGetAdapterConfigPolicyListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *AdapterApiService
 	filter      *string
 	orderby     *string
@@ -577,17 +566,17 @@ func (r ApiGetAdapterConfigPolicyListRequest) Tags(tags string) ApiGetAdapterCon
 	return r
 }
 
-func (r ApiGetAdapterConfigPolicyListRequest) Execute() (AdapterConfigPolicyResponse, *_nethttp.Response, error) {
+func (r ApiGetAdapterConfigPolicyListRequest) Execute() (*AdapterConfigPolicyResponse, *http.Response, error) {
 	return r.ApiService.GetAdapterConfigPolicyListExecute(r)
 }
 
 /*
 GetAdapterConfigPolicyList Read a 'adapter.ConfigPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetAdapterConfigPolicyListRequest
 */
-func (a *AdapterApiService) GetAdapterConfigPolicyList(ctx _context.Context) ApiGetAdapterConfigPolicyListRequest {
+func (a *AdapterApiService) GetAdapterConfigPolicyList(ctx context.Context) ApiGetAdapterConfigPolicyListRequest {
 	return ApiGetAdapterConfigPolicyListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -596,26 +585,24 @@ func (a *AdapterApiService) GetAdapterConfigPolicyList(ctx _context.Context) Api
 
 // Execute executes the request
 //  @return AdapterConfigPolicyResponse
-func (a *AdapterApiService) GetAdapterConfigPolicyListExecute(r ApiGetAdapterConfigPolicyListRequest) (AdapterConfigPolicyResponse, *_nethttp.Response, error) {
+func (a *AdapterApiService) GetAdapterConfigPolicyListExecute(r ApiGetAdapterConfigPolicyListRequest) (*AdapterConfigPolicyResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AdapterConfigPolicyResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AdapterConfigPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AdapterApiService.GetAdapterConfigPolicyList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/adapter/ConfigPolicies"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -667,7 +654,7 @@ func (a *AdapterApiService) GetAdapterConfigPolicyListExecute(r ApiGetAdapterCon
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -677,15 +664,15 @@ func (a *AdapterApiService) GetAdapterConfigPolicyListExecute(r ApiGetAdapterCon
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -741,7 +728,7 @@ func (a *AdapterApiService) GetAdapterConfigPolicyListExecute(r ApiGetAdapterCon
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -752,23 +739,23 @@ func (a *AdapterApiService) GetAdapterConfigPolicyListExecute(r ApiGetAdapterCon
 }
 
 type ApiGetAdapterExtEthInterfaceByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *AdapterApiService
 	moid       string
 }
 
-func (r ApiGetAdapterExtEthInterfaceByMoidRequest) Execute() (AdapterExtEthInterface, *_nethttp.Response, error) {
+func (r ApiGetAdapterExtEthInterfaceByMoidRequest) Execute() (*AdapterExtEthInterface, *http.Response, error) {
 	return r.ApiService.GetAdapterExtEthInterfaceByMoidExecute(r)
 }
 
 /*
 GetAdapterExtEthInterfaceByMoid Read a 'adapter.ExtEthInterface' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetAdapterExtEthInterfaceByMoidRequest
 */
-func (a *AdapterApiService) GetAdapterExtEthInterfaceByMoid(ctx _context.Context, moid string) ApiGetAdapterExtEthInterfaceByMoidRequest {
+func (a *AdapterApiService) GetAdapterExtEthInterfaceByMoid(ctx context.Context, moid string) ApiGetAdapterExtEthInterfaceByMoidRequest {
 	return ApiGetAdapterExtEthInterfaceByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -778,27 +765,25 @@ func (a *AdapterApiService) GetAdapterExtEthInterfaceByMoid(ctx _context.Context
 
 // Execute executes the request
 //  @return AdapterExtEthInterface
-func (a *AdapterApiService) GetAdapterExtEthInterfaceByMoidExecute(r ApiGetAdapterExtEthInterfaceByMoidRequest) (AdapterExtEthInterface, *_nethttp.Response, error) {
+func (a *AdapterApiService) GetAdapterExtEthInterfaceByMoidExecute(r ApiGetAdapterExtEthInterfaceByMoidRequest) (*AdapterExtEthInterface, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AdapterExtEthInterface
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AdapterExtEthInterface
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AdapterApiService.GetAdapterExtEthInterfaceByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/adapter/ExtEthInterfaces/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -817,7 +802,7 @@ func (a *AdapterApiService) GetAdapterExtEthInterfaceByMoidExecute(r ApiGetAdapt
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -827,15 +812,15 @@ func (a *AdapterApiService) GetAdapterExtEthInterfaceByMoidExecute(r ApiGetAdapt
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -891,7 +876,7 @@ func (a *AdapterApiService) GetAdapterExtEthInterfaceByMoidExecute(r ApiGetAdapt
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -902,7 +887,7 @@ func (a *AdapterApiService) GetAdapterExtEthInterfaceByMoidExecute(r ApiGetAdapt
 }
 
 type ApiGetAdapterExtEthInterfaceListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *AdapterApiService
 	filter      *string
 	orderby     *string
@@ -983,17 +968,17 @@ func (r ApiGetAdapterExtEthInterfaceListRequest) Tags(tags string) ApiGetAdapter
 	return r
 }
 
-func (r ApiGetAdapterExtEthInterfaceListRequest) Execute() (AdapterExtEthInterfaceResponse, *_nethttp.Response, error) {
+func (r ApiGetAdapterExtEthInterfaceListRequest) Execute() (*AdapterExtEthInterfaceResponse, *http.Response, error) {
 	return r.ApiService.GetAdapterExtEthInterfaceListExecute(r)
 }
 
 /*
 GetAdapterExtEthInterfaceList Read a 'adapter.ExtEthInterface' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetAdapterExtEthInterfaceListRequest
 */
-func (a *AdapterApiService) GetAdapterExtEthInterfaceList(ctx _context.Context) ApiGetAdapterExtEthInterfaceListRequest {
+func (a *AdapterApiService) GetAdapterExtEthInterfaceList(ctx context.Context) ApiGetAdapterExtEthInterfaceListRequest {
 	return ApiGetAdapterExtEthInterfaceListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1002,26 +987,24 @@ func (a *AdapterApiService) GetAdapterExtEthInterfaceList(ctx _context.Context) 
 
 // Execute executes the request
 //  @return AdapterExtEthInterfaceResponse
-func (a *AdapterApiService) GetAdapterExtEthInterfaceListExecute(r ApiGetAdapterExtEthInterfaceListRequest) (AdapterExtEthInterfaceResponse, *_nethttp.Response, error) {
+func (a *AdapterApiService) GetAdapterExtEthInterfaceListExecute(r ApiGetAdapterExtEthInterfaceListRequest) (*AdapterExtEthInterfaceResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AdapterExtEthInterfaceResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AdapterExtEthInterfaceResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AdapterApiService.GetAdapterExtEthInterfaceList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/adapter/ExtEthInterfaces"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1073,7 +1056,7 @@ func (a *AdapterApiService) GetAdapterExtEthInterfaceListExecute(r ApiGetAdapter
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1083,15 +1066,15 @@ func (a *AdapterApiService) GetAdapterExtEthInterfaceListExecute(r ApiGetAdapter
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1147,7 +1130,7 @@ func (a *AdapterApiService) GetAdapterExtEthInterfaceListExecute(r ApiGetAdapter
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1158,23 +1141,23 @@ func (a *AdapterApiService) GetAdapterExtEthInterfaceListExecute(r ApiGetAdapter
 }
 
 type ApiGetAdapterHostEthInterfaceByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *AdapterApiService
 	moid       string
 }
 
-func (r ApiGetAdapterHostEthInterfaceByMoidRequest) Execute() (AdapterHostEthInterface, *_nethttp.Response, error) {
+func (r ApiGetAdapterHostEthInterfaceByMoidRequest) Execute() (*AdapterHostEthInterface, *http.Response, error) {
 	return r.ApiService.GetAdapterHostEthInterfaceByMoidExecute(r)
 }
 
 /*
 GetAdapterHostEthInterfaceByMoid Read a 'adapter.HostEthInterface' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetAdapterHostEthInterfaceByMoidRequest
 */
-func (a *AdapterApiService) GetAdapterHostEthInterfaceByMoid(ctx _context.Context, moid string) ApiGetAdapterHostEthInterfaceByMoidRequest {
+func (a *AdapterApiService) GetAdapterHostEthInterfaceByMoid(ctx context.Context, moid string) ApiGetAdapterHostEthInterfaceByMoidRequest {
 	return ApiGetAdapterHostEthInterfaceByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1184,27 +1167,25 @@ func (a *AdapterApiService) GetAdapterHostEthInterfaceByMoid(ctx _context.Contex
 
 // Execute executes the request
 //  @return AdapterHostEthInterface
-func (a *AdapterApiService) GetAdapterHostEthInterfaceByMoidExecute(r ApiGetAdapterHostEthInterfaceByMoidRequest) (AdapterHostEthInterface, *_nethttp.Response, error) {
+func (a *AdapterApiService) GetAdapterHostEthInterfaceByMoidExecute(r ApiGetAdapterHostEthInterfaceByMoidRequest) (*AdapterHostEthInterface, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AdapterHostEthInterface
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AdapterHostEthInterface
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AdapterApiService.GetAdapterHostEthInterfaceByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/adapter/HostEthInterfaces/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1223,7 +1204,7 @@ func (a *AdapterApiService) GetAdapterHostEthInterfaceByMoidExecute(r ApiGetAdap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1233,15 +1214,15 @@ func (a *AdapterApiService) GetAdapterHostEthInterfaceByMoidExecute(r ApiGetAdap
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1297,7 +1278,7 @@ func (a *AdapterApiService) GetAdapterHostEthInterfaceByMoidExecute(r ApiGetAdap
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1308,7 +1289,7 @@ func (a *AdapterApiService) GetAdapterHostEthInterfaceByMoidExecute(r ApiGetAdap
 }
 
 type ApiGetAdapterHostEthInterfaceListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *AdapterApiService
 	filter      *string
 	orderby     *string
@@ -1389,17 +1370,17 @@ func (r ApiGetAdapterHostEthInterfaceListRequest) Tags(tags string) ApiGetAdapte
 	return r
 }
 
-func (r ApiGetAdapterHostEthInterfaceListRequest) Execute() (AdapterHostEthInterfaceResponse, *_nethttp.Response, error) {
+func (r ApiGetAdapterHostEthInterfaceListRequest) Execute() (*AdapterHostEthInterfaceResponse, *http.Response, error) {
 	return r.ApiService.GetAdapterHostEthInterfaceListExecute(r)
 }
 
 /*
 GetAdapterHostEthInterfaceList Read a 'adapter.HostEthInterface' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetAdapterHostEthInterfaceListRequest
 */
-func (a *AdapterApiService) GetAdapterHostEthInterfaceList(ctx _context.Context) ApiGetAdapterHostEthInterfaceListRequest {
+func (a *AdapterApiService) GetAdapterHostEthInterfaceList(ctx context.Context) ApiGetAdapterHostEthInterfaceListRequest {
 	return ApiGetAdapterHostEthInterfaceListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1408,26 +1389,24 @@ func (a *AdapterApiService) GetAdapterHostEthInterfaceList(ctx _context.Context)
 
 // Execute executes the request
 //  @return AdapterHostEthInterfaceResponse
-func (a *AdapterApiService) GetAdapterHostEthInterfaceListExecute(r ApiGetAdapterHostEthInterfaceListRequest) (AdapterHostEthInterfaceResponse, *_nethttp.Response, error) {
+func (a *AdapterApiService) GetAdapterHostEthInterfaceListExecute(r ApiGetAdapterHostEthInterfaceListRequest) (*AdapterHostEthInterfaceResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AdapterHostEthInterfaceResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AdapterHostEthInterfaceResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AdapterApiService.GetAdapterHostEthInterfaceList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/adapter/HostEthInterfaces"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1479,7 +1458,7 @@ func (a *AdapterApiService) GetAdapterHostEthInterfaceListExecute(r ApiGetAdapte
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1489,15 +1468,15 @@ func (a *AdapterApiService) GetAdapterHostEthInterfaceListExecute(r ApiGetAdapte
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1553,7 +1532,7 @@ func (a *AdapterApiService) GetAdapterHostEthInterfaceListExecute(r ApiGetAdapte
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1564,23 +1543,23 @@ func (a *AdapterApiService) GetAdapterHostEthInterfaceListExecute(r ApiGetAdapte
 }
 
 type ApiGetAdapterHostFcInterfaceByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *AdapterApiService
 	moid       string
 }
 
-func (r ApiGetAdapterHostFcInterfaceByMoidRequest) Execute() (AdapterHostFcInterface, *_nethttp.Response, error) {
+func (r ApiGetAdapterHostFcInterfaceByMoidRequest) Execute() (*AdapterHostFcInterface, *http.Response, error) {
 	return r.ApiService.GetAdapterHostFcInterfaceByMoidExecute(r)
 }
 
 /*
 GetAdapterHostFcInterfaceByMoid Read a 'adapter.HostFcInterface' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetAdapterHostFcInterfaceByMoidRequest
 */
-func (a *AdapterApiService) GetAdapterHostFcInterfaceByMoid(ctx _context.Context, moid string) ApiGetAdapterHostFcInterfaceByMoidRequest {
+func (a *AdapterApiService) GetAdapterHostFcInterfaceByMoid(ctx context.Context, moid string) ApiGetAdapterHostFcInterfaceByMoidRequest {
 	return ApiGetAdapterHostFcInterfaceByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1590,27 +1569,25 @@ func (a *AdapterApiService) GetAdapterHostFcInterfaceByMoid(ctx _context.Context
 
 // Execute executes the request
 //  @return AdapterHostFcInterface
-func (a *AdapterApiService) GetAdapterHostFcInterfaceByMoidExecute(r ApiGetAdapterHostFcInterfaceByMoidRequest) (AdapterHostFcInterface, *_nethttp.Response, error) {
+func (a *AdapterApiService) GetAdapterHostFcInterfaceByMoidExecute(r ApiGetAdapterHostFcInterfaceByMoidRequest) (*AdapterHostFcInterface, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AdapterHostFcInterface
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AdapterHostFcInterface
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AdapterApiService.GetAdapterHostFcInterfaceByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/adapter/HostFcInterfaces/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1629,7 +1606,7 @@ func (a *AdapterApiService) GetAdapterHostFcInterfaceByMoidExecute(r ApiGetAdapt
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1639,15 +1616,15 @@ func (a *AdapterApiService) GetAdapterHostFcInterfaceByMoidExecute(r ApiGetAdapt
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1703,7 +1680,7 @@ func (a *AdapterApiService) GetAdapterHostFcInterfaceByMoidExecute(r ApiGetAdapt
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1714,7 +1691,7 @@ func (a *AdapterApiService) GetAdapterHostFcInterfaceByMoidExecute(r ApiGetAdapt
 }
 
 type ApiGetAdapterHostFcInterfaceListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *AdapterApiService
 	filter      *string
 	orderby     *string
@@ -1795,17 +1772,17 @@ func (r ApiGetAdapterHostFcInterfaceListRequest) Tags(tags string) ApiGetAdapter
 	return r
 }
 
-func (r ApiGetAdapterHostFcInterfaceListRequest) Execute() (AdapterHostFcInterfaceResponse, *_nethttp.Response, error) {
+func (r ApiGetAdapterHostFcInterfaceListRequest) Execute() (*AdapterHostFcInterfaceResponse, *http.Response, error) {
 	return r.ApiService.GetAdapterHostFcInterfaceListExecute(r)
 }
 
 /*
 GetAdapterHostFcInterfaceList Read a 'adapter.HostFcInterface' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetAdapterHostFcInterfaceListRequest
 */
-func (a *AdapterApiService) GetAdapterHostFcInterfaceList(ctx _context.Context) ApiGetAdapterHostFcInterfaceListRequest {
+func (a *AdapterApiService) GetAdapterHostFcInterfaceList(ctx context.Context) ApiGetAdapterHostFcInterfaceListRequest {
 	return ApiGetAdapterHostFcInterfaceListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1814,26 +1791,24 @@ func (a *AdapterApiService) GetAdapterHostFcInterfaceList(ctx _context.Context) 
 
 // Execute executes the request
 //  @return AdapterHostFcInterfaceResponse
-func (a *AdapterApiService) GetAdapterHostFcInterfaceListExecute(r ApiGetAdapterHostFcInterfaceListRequest) (AdapterHostFcInterfaceResponse, *_nethttp.Response, error) {
+func (a *AdapterApiService) GetAdapterHostFcInterfaceListExecute(r ApiGetAdapterHostFcInterfaceListRequest) (*AdapterHostFcInterfaceResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AdapterHostFcInterfaceResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AdapterHostFcInterfaceResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AdapterApiService.GetAdapterHostFcInterfaceList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/adapter/HostFcInterfaces"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1885,7 +1860,7 @@ func (a *AdapterApiService) GetAdapterHostFcInterfaceListExecute(r ApiGetAdapter
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1895,15 +1870,15 @@ func (a *AdapterApiService) GetAdapterHostFcInterfaceListExecute(r ApiGetAdapter
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1959,7 +1934,7 @@ func (a *AdapterApiService) GetAdapterHostFcInterfaceListExecute(r ApiGetAdapter
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1970,23 +1945,23 @@ func (a *AdapterApiService) GetAdapterHostFcInterfaceListExecute(r ApiGetAdapter
 }
 
 type ApiGetAdapterHostIscsiInterfaceByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *AdapterApiService
 	moid       string
 }
 
-func (r ApiGetAdapterHostIscsiInterfaceByMoidRequest) Execute() (AdapterHostIscsiInterface, *_nethttp.Response, error) {
+func (r ApiGetAdapterHostIscsiInterfaceByMoidRequest) Execute() (*AdapterHostIscsiInterface, *http.Response, error) {
 	return r.ApiService.GetAdapterHostIscsiInterfaceByMoidExecute(r)
 }
 
 /*
 GetAdapterHostIscsiInterfaceByMoid Read a 'adapter.HostIscsiInterface' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetAdapterHostIscsiInterfaceByMoidRequest
 */
-func (a *AdapterApiService) GetAdapterHostIscsiInterfaceByMoid(ctx _context.Context, moid string) ApiGetAdapterHostIscsiInterfaceByMoidRequest {
+func (a *AdapterApiService) GetAdapterHostIscsiInterfaceByMoid(ctx context.Context, moid string) ApiGetAdapterHostIscsiInterfaceByMoidRequest {
 	return ApiGetAdapterHostIscsiInterfaceByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1996,27 +1971,25 @@ func (a *AdapterApiService) GetAdapterHostIscsiInterfaceByMoid(ctx _context.Cont
 
 // Execute executes the request
 //  @return AdapterHostIscsiInterface
-func (a *AdapterApiService) GetAdapterHostIscsiInterfaceByMoidExecute(r ApiGetAdapterHostIscsiInterfaceByMoidRequest) (AdapterHostIscsiInterface, *_nethttp.Response, error) {
+func (a *AdapterApiService) GetAdapterHostIscsiInterfaceByMoidExecute(r ApiGetAdapterHostIscsiInterfaceByMoidRequest) (*AdapterHostIscsiInterface, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AdapterHostIscsiInterface
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AdapterHostIscsiInterface
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AdapterApiService.GetAdapterHostIscsiInterfaceByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/adapter/HostIscsiInterfaces/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2035,7 +2008,7 @@ func (a *AdapterApiService) GetAdapterHostIscsiInterfaceByMoidExecute(r ApiGetAd
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2045,15 +2018,15 @@ func (a *AdapterApiService) GetAdapterHostIscsiInterfaceByMoidExecute(r ApiGetAd
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2109,7 +2082,7 @@ func (a *AdapterApiService) GetAdapterHostIscsiInterfaceByMoidExecute(r ApiGetAd
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2120,7 +2093,7 @@ func (a *AdapterApiService) GetAdapterHostIscsiInterfaceByMoidExecute(r ApiGetAd
 }
 
 type ApiGetAdapterHostIscsiInterfaceListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *AdapterApiService
 	filter      *string
 	orderby     *string
@@ -2201,17 +2174,17 @@ func (r ApiGetAdapterHostIscsiInterfaceListRequest) Tags(tags string) ApiGetAdap
 	return r
 }
 
-func (r ApiGetAdapterHostIscsiInterfaceListRequest) Execute() (AdapterHostIscsiInterfaceResponse, *_nethttp.Response, error) {
+func (r ApiGetAdapterHostIscsiInterfaceListRequest) Execute() (*AdapterHostIscsiInterfaceResponse, *http.Response, error) {
 	return r.ApiService.GetAdapterHostIscsiInterfaceListExecute(r)
 }
 
 /*
 GetAdapterHostIscsiInterfaceList Read a 'adapter.HostIscsiInterface' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetAdapterHostIscsiInterfaceListRequest
 */
-func (a *AdapterApiService) GetAdapterHostIscsiInterfaceList(ctx _context.Context) ApiGetAdapterHostIscsiInterfaceListRequest {
+func (a *AdapterApiService) GetAdapterHostIscsiInterfaceList(ctx context.Context) ApiGetAdapterHostIscsiInterfaceListRequest {
 	return ApiGetAdapterHostIscsiInterfaceListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2220,26 +2193,24 @@ func (a *AdapterApiService) GetAdapterHostIscsiInterfaceList(ctx _context.Contex
 
 // Execute executes the request
 //  @return AdapterHostIscsiInterfaceResponse
-func (a *AdapterApiService) GetAdapterHostIscsiInterfaceListExecute(r ApiGetAdapterHostIscsiInterfaceListRequest) (AdapterHostIscsiInterfaceResponse, *_nethttp.Response, error) {
+func (a *AdapterApiService) GetAdapterHostIscsiInterfaceListExecute(r ApiGetAdapterHostIscsiInterfaceListRequest) (*AdapterHostIscsiInterfaceResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AdapterHostIscsiInterfaceResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AdapterHostIscsiInterfaceResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AdapterApiService.GetAdapterHostIscsiInterfaceList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/adapter/HostIscsiInterfaces"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -2291,7 +2262,7 @@ func (a *AdapterApiService) GetAdapterHostIscsiInterfaceListExecute(r ApiGetAdap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2301,15 +2272,15 @@ func (a *AdapterApiService) GetAdapterHostIscsiInterfaceListExecute(r ApiGetAdap
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2365,7 +2336,7 @@ func (a *AdapterApiService) GetAdapterHostIscsiInterfaceListExecute(r ApiGetAdap
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2376,23 +2347,23 @@ func (a *AdapterApiService) GetAdapterHostIscsiInterfaceListExecute(r ApiGetAdap
 }
 
 type ApiGetAdapterUnitByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *AdapterApiService
 	moid       string
 }
 
-func (r ApiGetAdapterUnitByMoidRequest) Execute() (AdapterUnit, *_nethttp.Response, error) {
+func (r ApiGetAdapterUnitByMoidRequest) Execute() (*AdapterUnit, *http.Response, error) {
 	return r.ApiService.GetAdapterUnitByMoidExecute(r)
 }
 
 /*
 GetAdapterUnitByMoid Read a 'adapter.Unit' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetAdapterUnitByMoidRequest
 */
-func (a *AdapterApiService) GetAdapterUnitByMoid(ctx _context.Context, moid string) ApiGetAdapterUnitByMoidRequest {
+func (a *AdapterApiService) GetAdapterUnitByMoid(ctx context.Context, moid string) ApiGetAdapterUnitByMoidRequest {
 	return ApiGetAdapterUnitByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2402,27 +2373,25 @@ func (a *AdapterApiService) GetAdapterUnitByMoid(ctx _context.Context, moid stri
 
 // Execute executes the request
 //  @return AdapterUnit
-func (a *AdapterApiService) GetAdapterUnitByMoidExecute(r ApiGetAdapterUnitByMoidRequest) (AdapterUnit, *_nethttp.Response, error) {
+func (a *AdapterApiService) GetAdapterUnitByMoidExecute(r ApiGetAdapterUnitByMoidRequest) (*AdapterUnit, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AdapterUnit
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AdapterUnit
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AdapterApiService.GetAdapterUnitByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/adapter/Units/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2441,7 +2410,7 @@ func (a *AdapterApiService) GetAdapterUnitByMoidExecute(r ApiGetAdapterUnitByMoi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2451,15 +2420,15 @@ func (a *AdapterApiService) GetAdapterUnitByMoidExecute(r ApiGetAdapterUnitByMoi
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2515,7 +2484,7 @@ func (a *AdapterApiService) GetAdapterUnitByMoidExecute(r ApiGetAdapterUnitByMoi
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2526,23 +2495,23 @@ func (a *AdapterApiService) GetAdapterUnitByMoidExecute(r ApiGetAdapterUnitByMoi
 }
 
 type ApiGetAdapterUnitExpanderByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *AdapterApiService
 	moid       string
 }
 
-func (r ApiGetAdapterUnitExpanderByMoidRequest) Execute() (AdapterUnitExpander, *_nethttp.Response, error) {
+func (r ApiGetAdapterUnitExpanderByMoidRequest) Execute() (*AdapterUnitExpander, *http.Response, error) {
 	return r.ApiService.GetAdapterUnitExpanderByMoidExecute(r)
 }
 
 /*
 GetAdapterUnitExpanderByMoid Read a 'adapter.UnitExpander' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetAdapterUnitExpanderByMoidRequest
 */
-func (a *AdapterApiService) GetAdapterUnitExpanderByMoid(ctx _context.Context, moid string) ApiGetAdapterUnitExpanderByMoidRequest {
+func (a *AdapterApiService) GetAdapterUnitExpanderByMoid(ctx context.Context, moid string) ApiGetAdapterUnitExpanderByMoidRequest {
 	return ApiGetAdapterUnitExpanderByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2552,27 +2521,25 @@ func (a *AdapterApiService) GetAdapterUnitExpanderByMoid(ctx _context.Context, m
 
 // Execute executes the request
 //  @return AdapterUnitExpander
-func (a *AdapterApiService) GetAdapterUnitExpanderByMoidExecute(r ApiGetAdapterUnitExpanderByMoidRequest) (AdapterUnitExpander, *_nethttp.Response, error) {
+func (a *AdapterApiService) GetAdapterUnitExpanderByMoidExecute(r ApiGetAdapterUnitExpanderByMoidRequest) (*AdapterUnitExpander, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AdapterUnitExpander
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AdapterUnitExpander
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AdapterApiService.GetAdapterUnitExpanderByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/adapter/UnitExpanders/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2591,7 +2558,7 @@ func (a *AdapterApiService) GetAdapterUnitExpanderByMoidExecute(r ApiGetAdapterU
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2601,15 +2568,15 @@ func (a *AdapterApiService) GetAdapterUnitExpanderByMoidExecute(r ApiGetAdapterU
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2665,7 +2632,7 @@ func (a *AdapterApiService) GetAdapterUnitExpanderByMoidExecute(r ApiGetAdapterU
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2676,7 +2643,7 @@ func (a *AdapterApiService) GetAdapterUnitExpanderByMoidExecute(r ApiGetAdapterU
 }
 
 type ApiGetAdapterUnitExpanderListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *AdapterApiService
 	filter      *string
 	orderby     *string
@@ -2757,17 +2724,17 @@ func (r ApiGetAdapterUnitExpanderListRequest) Tags(tags string) ApiGetAdapterUni
 	return r
 }
 
-func (r ApiGetAdapterUnitExpanderListRequest) Execute() (AdapterUnitExpanderResponse, *_nethttp.Response, error) {
+func (r ApiGetAdapterUnitExpanderListRequest) Execute() (*AdapterUnitExpanderResponse, *http.Response, error) {
 	return r.ApiService.GetAdapterUnitExpanderListExecute(r)
 }
 
 /*
 GetAdapterUnitExpanderList Read a 'adapter.UnitExpander' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetAdapterUnitExpanderListRequest
 */
-func (a *AdapterApiService) GetAdapterUnitExpanderList(ctx _context.Context) ApiGetAdapterUnitExpanderListRequest {
+func (a *AdapterApiService) GetAdapterUnitExpanderList(ctx context.Context) ApiGetAdapterUnitExpanderListRequest {
 	return ApiGetAdapterUnitExpanderListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2776,26 +2743,24 @@ func (a *AdapterApiService) GetAdapterUnitExpanderList(ctx _context.Context) Api
 
 // Execute executes the request
 //  @return AdapterUnitExpanderResponse
-func (a *AdapterApiService) GetAdapterUnitExpanderListExecute(r ApiGetAdapterUnitExpanderListRequest) (AdapterUnitExpanderResponse, *_nethttp.Response, error) {
+func (a *AdapterApiService) GetAdapterUnitExpanderListExecute(r ApiGetAdapterUnitExpanderListRequest) (*AdapterUnitExpanderResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AdapterUnitExpanderResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AdapterUnitExpanderResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AdapterApiService.GetAdapterUnitExpanderList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/adapter/UnitExpanders"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -2847,7 +2812,7 @@ func (a *AdapterApiService) GetAdapterUnitExpanderListExecute(r ApiGetAdapterUni
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2857,15 +2822,15 @@ func (a *AdapterApiService) GetAdapterUnitExpanderListExecute(r ApiGetAdapterUni
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2921,7 +2886,7 @@ func (a *AdapterApiService) GetAdapterUnitExpanderListExecute(r ApiGetAdapterUni
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2932,7 +2897,7 @@ func (a *AdapterApiService) GetAdapterUnitExpanderListExecute(r ApiGetAdapterUni
 }
 
 type ApiGetAdapterUnitListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *AdapterApiService
 	filter      *string
 	orderby     *string
@@ -3013,17 +2978,17 @@ func (r ApiGetAdapterUnitListRequest) Tags(tags string) ApiGetAdapterUnitListReq
 	return r
 }
 
-func (r ApiGetAdapterUnitListRequest) Execute() (AdapterUnitResponse, *_nethttp.Response, error) {
+func (r ApiGetAdapterUnitListRequest) Execute() (*AdapterUnitResponse, *http.Response, error) {
 	return r.ApiService.GetAdapterUnitListExecute(r)
 }
 
 /*
 GetAdapterUnitList Read a 'adapter.Unit' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetAdapterUnitListRequest
 */
-func (a *AdapterApiService) GetAdapterUnitList(ctx _context.Context) ApiGetAdapterUnitListRequest {
+func (a *AdapterApiService) GetAdapterUnitList(ctx context.Context) ApiGetAdapterUnitListRequest {
 	return ApiGetAdapterUnitListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3032,26 +2997,24 @@ func (a *AdapterApiService) GetAdapterUnitList(ctx _context.Context) ApiGetAdapt
 
 // Execute executes the request
 //  @return AdapterUnitResponse
-func (a *AdapterApiService) GetAdapterUnitListExecute(r ApiGetAdapterUnitListRequest) (AdapterUnitResponse, *_nethttp.Response, error) {
+func (a *AdapterApiService) GetAdapterUnitListExecute(r ApiGetAdapterUnitListRequest) (*AdapterUnitResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AdapterUnitResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AdapterUnitResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AdapterApiService.GetAdapterUnitList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/adapter/Units"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -3103,7 +3066,7 @@ func (a *AdapterApiService) GetAdapterUnitListExecute(r ApiGetAdapterUnitListReq
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3113,15 +3076,15 @@ func (a *AdapterApiService) GetAdapterUnitListExecute(r ApiGetAdapterUnitListReq
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3177,7 +3140,7 @@ func (a *AdapterApiService) GetAdapterUnitListExecute(r ApiGetAdapterUnitListReq
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3188,7 +3151,7 @@ func (a *AdapterApiService) GetAdapterUnitListExecute(r ApiGetAdapterUnitListReq
 }
 
 type ApiPatchAdapterConfigPolicyRequest struct {
-	ctx                 _context.Context
+	ctx                 context.Context
 	ApiService          *AdapterApiService
 	moid                string
 	adapterConfigPolicy *AdapterConfigPolicy
@@ -3207,18 +3170,18 @@ func (r ApiPatchAdapterConfigPolicyRequest) IfMatch(ifMatch string) ApiPatchAdap
 	return r
 }
 
-func (r ApiPatchAdapterConfigPolicyRequest) Execute() (AdapterConfigPolicy, *_nethttp.Response, error) {
+func (r ApiPatchAdapterConfigPolicyRequest) Execute() (*AdapterConfigPolicy, *http.Response, error) {
 	return r.ApiService.PatchAdapterConfigPolicyExecute(r)
 }
 
 /*
 PatchAdapterConfigPolicy Update a 'adapter.ConfigPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchAdapterConfigPolicyRequest
 */
-func (a *AdapterApiService) PatchAdapterConfigPolicy(ctx _context.Context, moid string) ApiPatchAdapterConfigPolicyRequest {
+func (a *AdapterApiService) PatchAdapterConfigPolicy(ctx context.Context, moid string) ApiPatchAdapterConfigPolicyRequest {
 	return ApiPatchAdapterConfigPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3228,27 +3191,25 @@ func (a *AdapterApiService) PatchAdapterConfigPolicy(ctx _context.Context, moid 
 
 // Execute executes the request
 //  @return AdapterConfigPolicy
-func (a *AdapterApiService) PatchAdapterConfigPolicyExecute(r ApiPatchAdapterConfigPolicyRequest) (AdapterConfigPolicy, *_nethttp.Response, error) {
+func (a *AdapterApiService) PatchAdapterConfigPolicyExecute(r ApiPatchAdapterConfigPolicyRequest) (*AdapterConfigPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AdapterConfigPolicy
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AdapterConfigPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AdapterApiService.PatchAdapterConfigPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/adapter/ConfigPolicies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.adapterConfigPolicy == nil {
 		return localVarReturnValue, nil, reportError("adapterConfigPolicy is required and must be specified")
 	}
@@ -3275,7 +3236,7 @@ func (a *AdapterApiService) PatchAdapterConfigPolicyExecute(r ApiPatchAdapterCon
 	}
 	// body params
 	localVarPostBody = r.adapterConfigPolicy
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3285,15 +3246,15 @@ func (a *AdapterApiService) PatchAdapterConfigPolicyExecute(r ApiPatchAdapterCon
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3349,7 +3310,7 @@ func (a *AdapterApiService) PatchAdapterConfigPolicyExecute(r ApiPatchAdapterCon
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3360,7 +3321,7 @@ func (a *AdapterApiService) PatchAdapterConfigPolicyExecute(r ApiPatchAdapterCon
 }
 
 type ApiUpdateAdapterConfigPolicyRequest struct {
-	ctx                 _context.Context
+	ctx                 context.Context
 	ApiService          *AdapterApiService
 	moid                string
 	adapterConfigPolicy *AdapterConfigPolicy
@@ -3379,18 +3340,18 @@ func (r ApiUpdateAdapterConfigPolicyRequest) IfMatch(ifMatch string) ApiUpdateAd
 	return r
 }
 
-func (r ApiUpdateAdapterConfigPolicyRequest) Execute() (AdapterConfigPolicy, *_nethttp.Response, error) {
+func (r ApiUpdateAdapterConfigPolicyRequest) Execute() (*AdapterConfigPolicy, *http.Response, error) {
 	return r.ApiService.UpdateAdapterConfigPolicyExecute(r)
 }
 
 /*
 UpdateAdapterConfigPolicy Update a 'adapter.ConfigPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateAdapterConfigPolicyRequest
 */
-func (a *AdapterApiService) UpdateAdapterConfigPolicy(ctx _context.Context, moid string) ApiUpdateAdapterConfigPolicyRequest {
+func (a *AdapterApiService) UpdateAdapterConfigPolicy(ctx context.Context, moid string) ApiUpdateAdapterConfigPolicyRequest {
 	return ApiUpdateAdapterConfigPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3400,27 +3361,25 @@ func (a *AdapterApiService) UpdateAdapterConfigPolicy(ctx _context.Context, moid
 
 // Execute executes the request
 //  @return AdapterConfigPolicy
-func (a *AdapterApiService) UpdateAdapterConfigPolicyExecute(r ApiUpdateAdapterConfigPolicyRequest) (AdapterConfigPolicy, *_nethttp.Response, error) {
+func (a *AdapterApiService) UpdateAdapterConfigPolicyExecute(r ApiUpdateAdapterConfigPolicyRequest) (*AdapterConfigPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AdapterConfigPolicy
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AdapterConfigPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AdapterApiService.UpdateAdapterConfigPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/adapter/ConfigPolicies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.adapterConfigPolicy == nil {
 		return localVarReturnValue, nil, reportError("adapterConfigPolicy is required and must be specified")
 	}
@@ -3447,7 +3406,7 @@ func (a *AdapterApiService) UpdateAdapterConfigPolicyExecute(r ApiUpdateAdapterC
 	}
 	// body params
 	localVarPostBody = r.adapterConfigPolicy
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3457,15 +3416,15 @@ func (a *AdapterApiService) UpdateAdapterConfigPolicyExecute(r ApiUpdateAdapterC
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3521,7 +3480,7 @@ func (a *AdapterApiService) UpdateAdapterConfigPolicyExecute(r ApiUpdateAdapterC
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

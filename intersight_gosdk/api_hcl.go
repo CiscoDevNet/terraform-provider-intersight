@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,23 +13,18 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // HclApiService HclApi service
 type HclApiService service
 
 type ApiCreateHclCompatibilityStatusRequest struct {
-	ctx                    _context.Context
+	ctx                    context.Context
 	ApiService             *HclApiService
 	hclCompatibilityStatus *HclCompatibilityStatus
 	ifMatch                *string
@@ -54,17 +49,17 @@ func (r ApiCreateHclCompatibilityStatusRequest) IfNoneMatch(ifNoneMatch string) 
 	return r
 }
 
-func (r ApiCreateHclCompatibilityStatusRequest) Execute() (HclCompatibilityStatus, *_nethttp.Response, error) {
+func (r ApiCreateHclCompatibilityStatusRequest) Execute() (*HclCompatibilityStatus, *http.Response, error) {
 	return r.ApiService.CreateHclCompatibilityStatusExecute(r)
 }
 
 /*
 CreateHclCompatibilityStatus Create a 'hcl.CompatibilityStatus' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateHclCompatibilityStatusRequest
 */
-func (a *HclApiService) CreateHclCompatibilityStatus(ctx _context.Context) ApiCreateHclCompatibilityStatusRequest {
+func (a *HclApiService) CreateHclCompatibilityStatus(ctx context.Context) ApiCreateHclCompatibilityStatusRequest {
 	return ApiCreateHclCompatibilityStatusRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -73,26 +68,24 @@ func (a *HclApiService) CreateHclCompatibilityStatus(ctx _context.Context) ApiCr
 
 // Execute executes the request
 //  @return HclCompatibilityStatus
-func (a *HclApiService) CreateHclCompatibilityStatusExecute(r ApiCreateHclCompatibilityStatusRequest) (HclCompatibilityStatus, *_nethttp.Response, error) {
+func (a *HclApiService) CreateHclCompatibilityStatusExecute(r ApiCreateHclCompatibilityStatusRequest) (*HclCompatibilityStatus, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  HclCompatibilityStatus
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *HclCompatibilityStatus
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HclApiService.CreateHclCompatibilityStatus")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hcl/CompatibilityStatuses"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.hclCompatibilityStatus == nil {
 		return localVarReturnValue, nil, reportError("hclCompatibilityStatus is required and must be specified")
 	}
@@ -122,7 +115,7 @@ func (a *HclApiService) CreateHclCompatibilityStatusExecute(r ApiCreateHclCompat
 	}
 	// body params
 	localVarPostBody = r.hclCompatibilityStatus
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -132,15 +125,15 @@ func (a *HclApiService) CreateHclCompatibilityStatusExecute(r ApiCreateHclCompat
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -196,7 +189,7 @@ func (a *HclApiService) CreateHclCompatibilityStatusExecute(r ApiCreateHclCompat
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -207,7 +200,7 @@ func (a *HclApiService) CreateHclCompatibilityStatusExecute(r ApiCreateHclCompat
 }
 
 type ApiCreateHclHyperflexSoftwareCompatibilityInfoRequest struct {
-	ctx                                   _context.Context
+	ctx                                   context.Context
 	ApiService                            *HclApiService
 	hclHyperflexSoftwareCompatibilityInfo *HclHyperflexSoftwareCompatibilityInfo
 	ifMatch                               *string
@@ -232,17 +225,17 @@ func (r ApiCreateHclHyperflexSoftwareCompatibilityInfoRequest) IfNoneMatch(ifNon
 	return r
 }
 
-func (r ApiCreateHclHyperflexSoftwareCompatibilityInfoRequest) Execute() (HclHyperflexSoftwareCompatibilityInfo, *_nethttp.Response, error) {
+func (r ApiCreateHclHyperflexSoftwareCompatibilityInfoRequest) Execute() (*HclHyperflexSoftwareCompatibilityInfo, *http.Response, error) {
 	return r.ApiService.CreateHclHyperflexSoftwareCompatibilityInfoExecute(r)
 }
 
 /*
 CreateHclHyperflexSoftwareCompatibilityInfo Create a 'hcl.HyperflexSoftwareCompatibilityInfo' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateHclHyperflexSoftwareCompatibilityInfoRequest
 */
-func (a *HclApiService) CreateHclHyperflexSoftwareCompatibilityInfo(ctx _context.Context) ApiCreateHclHyperflexSoftwareCompatibilityInfoRequest {
+func (a *HclApiService) CreateHclHyperflexSoftwareCompatibilityInfo(ctx context.Context) ApiCreateHclHyperflexSoftwareCompatibilityInfoRequest {
 	return ApiCreateHclHyperflexSoftwareCompatibilityInfoRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -251,26 +244,24 @@ func (a *HclApiService) CreateHclHyperflexSoftwareCompatibilityInfo(ctx _context
 
 // Execute executes the request
 //  @return HclHyperflexSoftwareCompatibilityInfo
-func (a *HclApiService) CreateHclHyperflexSoftwareCompatibilityInfoExecute(r ApiCreateHclHyperflexSoftwareCompatibilityInfoRequest) (HclHyperflexSoftwareCompatibilityInfo, *_nethttp.Response, error) {
+func (a *HclApiService) CreateHclHyperflexSoftwareCompatibilityInfoExecute(r ApiCreateHclHyperflexSoftwareCompatibilityInfoRequest) (*HclHyperflexSoftwareCompatibilityInfo, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  HclHyperflexSoftwareCompatibilityInfo
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *HclHyperflexSoftwareCompatibilityInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HclApiService.CreateHclHyperflexSoftwareCompatibilityInfo")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hcl/HyperflexSoftwareCompatibilityInfos"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.hclHyperflexSoftwareCompatibilityInfo == nil {
 		return localVarReturnValue, nil, reportError("hclHyperflexSoftwareCompatibilityInfo is required and must be specified")
 	}
@@ -300,7 +291,7 @@ func (a *HclApiService) CreateHclHyperflexSoftwareCompatibilityInfoExecute(r Api
 	}
 	// body params
 	localVarPostBody = r.hclHyperflexSoftwareCompatibilityInfo
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -310,15 +301,15 @@ func (a *HclApiService) CreateHclHyperflexSoftwareCompatibilityInfoExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -374,7 +365,7 @@ func (a *HclApiService) CreateHclHyperflexSoftwareCompatibilityInfoExecute(r Api
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -385,7 +376,7 @@ func (a *HclApiService) CreateHclHyperflexSoftwareCompatibilityInfoExecute(r Api
 }
 
 type ApiCreateHclSupportedDriverNameRequest struct {
-	ctx                    _context.Context
+	ctx                    context.Context
 	ApiService             *HclApiService
 	hclSupportedDriverName *HclSupportedDriverName
 	ifMatch                *string
@@ -410,17 +401,17 @@ func (r ApiCreateHclSupportedDriverNameRequest) IfNoneMatch(ifNoneMatch string) 
 	return r
 }
 
-func (r ApiCreateHclSupportedDriverNameRequest) Execute() (HclSupportedDriverName, *_nethttp.Response, error) {
+func (r ApiCreateHclSupportedDriverNameRequest) Execute() (*HclSupportedDriverName, *http.Response, error) {
 	return r.ApiService.CreateHclSupportedDriverNameExecute(r)
 }
 
 /*
 CreateHclSupportedDriverName Create a 'hcl.SupportedDriverName' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateHclSupportedDriverNameRequest
 */
-func (a *HclApiService) CreateHclSupportedDriverName(ctx _context.Context) ApiCreateHclSupportedDriverNameRequest {
+func (a *HclApiService) CreateHclSupportedDriverName(ctx context.Context) ApiCreateHclSupportedDriverNameRequest {
 	return ApiCreateHclSupportedDriverNameRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -429,26 +420,24 @@ func (a *HclApiService) CreateHclSupportedDriverName(ctx _context.Context) ApiCr
 
 // Execute executes the request
 //  @return HclSupportedDriverName
-func (a *HclApiService) CreateHclSupportedDriverNameExecute(r ApiCreateHclSupportedDriverNameRequest) (HclSupportedDriverName, *_nethttp.Response, error) {
+func (a *HclApiService) CreateHclSupportedDriverNameExecute(r ApiCreateHclSupportedDriverNameRequest) (*HclSupportedDriverName, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  HclSupportedDriverName
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *HclSupportedDriverName
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HclApiService.CreateHclSupportedDriverName")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hcl/SupportedDriverNames"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.hclSupportedDriverName == nil {
 		return localVarReturnValue, nil, reportError("hclSupportedDriverName is required and must be specified")
 	}
@@ -478,7 +467,7 @@ func (a *HclApiService) CreateHclSupportedDriverNameExecute(r ApiCreateHclSuppor
 	}
 	// body params
 	localVarPostBody = r.hclSupportedDriverName
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -488,15 +477,15 @@ func (a *HclApiService) CreateHclSupportedDriverNameExecute(r ApiCreateHclSuppor
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -552,7 +541,7 @@ func (a *HclApiService) CreateHclSupportedDriverNameExecute(r ApiCreateHclSuppor
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -563,23 +552,23 @@ func (a *HclApiService) CreateHclSupportedDriverNameExecute(r ApiCreateHclSuppor
 }
 
 type ApiDeleteHclHyperflexSoftwareCompatibilityInfoRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *HclApiService
 	moid       string
 }
 
-func (r ApiDeleteHclHyperflexSoftwareCompatibilityInfoRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteHclHyperflexSoftwareCompatibilityInfoRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteHclHyperflexSoftwareCompatibilityInfoExecute(r)
 }
 
 /*
 DeleteHclHyperflexSoftwareCompatibilityInfo Delete a 'hcl.HyperflexSoftwareCompatibilityInfo' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteHclHyperflexSoftwareCompatibilityInfoRequest
 */
-func (a *HclApiService) DeleteHclHyperflexSoftwareCompatibilityInfo(ctx _context.Context, moid string) ApiDeleteHclHyperflexSoftwareCompatibilityInfoRequest {
+func (a *HclApiService) DeleteHclHyperflexSoftwareCompatibilityInfo(ctx context.Context, moid string) ApiDeleteHclHyperflexSoftwareCompatibilityInfoRequest {
 	return ApiDeleteHclHyperflexSoftwareCompatibilityInfoRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -588,26 +577,24 @@ func (a *HclApiService) DeleteHclHyperflexSoftwareCompatibilityInfo(ctx _context
 }
 
 // Execute executes the request
-func (a *HclApiService) DeleteHclHyperflexSoftwareCompatibilityInfoExecute(r ApiDeleteHclHyperflexSoftwareCompatibilityInfoRequest) (*_nethttp.Response, error) {
+func (a *HclApiService) DeleteHclHyperflexSoftwareCompatibilityInfoExecute(r ApiDeleteHclHyperflexSoftwareCompatibilityInfoRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HclApiService.DeleteHclHyperflexSoftwareCompatibilityInfo")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hcl/HyperflexSoftwareCompatibilityInfos/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -626,7 +613,7 @@ func (a *HclApiService) DeleteHclHyperflexSoftwareCompatibilityInfoExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -636,15 +623,15 @@ func (a *HclApiService) DeleteHclHyperflexSoftwareCompatibilityInfoExecute(r Api
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -702,23 +689,23 @@ func (a *HclApiService) DeleteHclHyperflexSoftwareCompatibilityInfoExecute(r Api
 }
 
 type ApiGetHclDriverImageByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *HclApiService
 	moid       string
 }
 
-func (r ApiGetHclDriverImageByMoidRequest) Execute() (HclDriverImage, *_nethttp.Response, error) {
+func (r ApiGetHclDriverImageByMoidRequest) Execute() (*HclDriverImage, *http.Response, error) {
 	return r.ApiService.GetHclDriverImageByMoidExecute(r)
 }
 
 /*
 GetHclDriverImageByMoid Read a 'hcl.DriverImage' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetHclDriverImageByMoidRequest
 */
-func (a *HclApiService) GetHclDriverImageByMoid(ctx _context.Context, moid string) ApiGetHclDriverImageByMoidRequest {
+func (a *HclApiService) GetHclDriverImageByMoid(ctx context.Context, moid string) ApiGetHclDriverImageByMoidRequest {
 	return ApiGetHclDriverImageByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -728,27 +715,25 @@ func (a *HclApiService) GetHclDriverImageByMoid(ctx _context.Context, moid strin
 
 // Execute executes the request
 //  @return HclDriverImage
-func (a *HclApiService) GetHclDriverImageByMoidExecute(r ApiGetHclDriverImageByMoidRequest) (HclDriverImage, *_nethttp.Response, error) {
+func (a *HclApiService) GetHclDriverImageByMoidExecute(r ApiGetHclDriverImageByMoidRequest) (*HclDriverImage, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  HclDriverImage
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *HclDriverImage
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HclApiService.GetHclDriverImageByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hcl/DriverImages/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -767,7 +752,7 @@ func (a *HclApiService) GetHclDriverImageByMoidExecute(r ApiGetHclDriverImageByM
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -777,15 +762,15 @@ func (a *HclApiService) GetHclDriverImageByMoidExecute(r ApiGetHclDriverImageByM
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -841,7 +826,7 @@ func (a *HclApiService) GetHclDriverImageByMoidExecute(r ApiGetHclDriverImageByM
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -852,7 +837,7 @@ func (a *HclApiService) GetHclDriverImageByMoidExecute(r ApiGetHclDriverImageByM
 }
 
 type ApiGetHclDriverImageListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *HclApiService
 	filter      *string
 	orderby     *string
@@ -933,17 +918,17 @@ func (r ApiGetHclDriverImageListRequest) Tags(tags string) ApiGetHclDriverImageL
 	return r
 }
 
-func (r ApiGetHclDriverImageListRequest) Execute() (HclDriverImageResponse, *_nethttp.Response, error) {
+func (r ApiGetHclDriverImageListRequest) Execute() (*HclDriverImageResponse, *http.Response, error) {
 	return r.ApiService.GetHclDriverImageListExecute(r)
 }
 
 /*
 GetHclDriverImageList Read a 'hcl.DriverImage' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetHclDriverImageListRequest
 */
-func (a *HclApiService) GetHclDriverImageList(ctx _context.Context) ApiGetHclDriverImageListRequest {
+func (a *HclApiService) GetHclDriverImageList(ctx context.Context) ApiGetHclDriverImageListRequest {
 	return ApiGetHclDriverImageListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -952,26 +937,24 @@ func (a *HclApiService) GetHclDriverImageList(ctx _context.Context) ApiGetHclDri
 
 // Execute executes the request
 //  @return HclDriverImageResponse
-func (a *HclApiService) GetHclDriverImageListExecute(r ApiGetHclDriverImageListRequest) (HclDriverImageResponse, *_nethttp.Response, error) {
+func (a *HclApiService) GetHclDriverImageListExecute(r ApiGetHclDriverImageListRequest) (*HclDriverImageResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  HclDriverImageResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *HclDriverImageResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HclApiService.GetHclDriverImageList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hcl/DriverImages"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1023,7 +1006,7 @@ func (a *HclApiService) GetHclDriverImageListExecute(r ApiGetHclDriverImageListR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1033,15 +1016,15 @@ func (a *HclApiService) GetHclDriverImageListExecute(r ApiGetHclDriverImageListR
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1097,7 +1080,7 @@ func (a *HclApiService) GetHclDriverImageListExecute(r ApiGetHclDriverImageListR
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1108,23 +1091,23 @@ func (a *HclApiService) GetHclDriverImageListExecute(r ApiGetHclDriverImageListR
 }
 
 type ApiGetHclExemptedCatalogByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *HclApiService
 	moid       string
 }
 
-func (r ApiGetHclExemptedCatalogByMoidRequest) Execute() (HclExemptedCatalog, *_nethttp.Response, error) {
+func (r ApiGetHclExemptedCatalogByMoidRequest) Execute() (*HclExemptedCatalog, *http.Response, error) {
 	return r.ApiService.GetHclExemptedCatalogByMoidExecute(r)
 }
 
 /*
 GetHclExemptedCatalogByMoid Read a 'hcl.ExemptedCatalog' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetHclExemptedCatalogByMoidRequest
 */
-func (a *HclApiService) GetHclExemptedCatalogByMoid(ctx _context.Context, moid string) ApiGetHclExemptedCatalogByMoidRequest {
+func (a *HclApiService) GetHclExemptedCatalogByMoid(ctx context.Context, moid string) ApiGetHclExemptedCatalogByMoidRequest {
 	return ApiGetHclExemptedCatalogByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1134,27 +1117,25 @@ func (a *HclApiService) GetHclExemptedCatalogByMoid(ctx _context.Context, moid s
 
 // Execute executes the request
 //  @return HclExemptedCatalog
-func (a *HclApiService) GetHclExemptedCatalogByMoidExecute(r ApiGetHclExemptedCatalogByMoidRequest) (HclExemptedCatalog, *_nethttp.Response, error) {
+func (a *HclApiService) GetHclExemptedCatalogByMoidExecute(r ApiGetHclExemptedCatalogByMoidRequest) (*HclExemptedCatalog, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  HclExemptedCatalog
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *HclExemptedCatalog
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HclApiService.GetHclExemptedCatalogByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hcl/ExemptedCatalogs/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1173,7 +1154,7 @@ func (a *HclApiService) GetHclExemptedCatalogByMoidExecute(r ApiGetHclExemptedCa
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1183,15 +1164,15 @@ func (a *HclApiService) GetHclExemptedCatalogByMoidExecute(r ApiGetHclExemptedCa
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1247,7 +1228,7 @@ func (a *HclApiService) GetHclExemptedCatalogByMoidExecute(r ApiGetHclExemptedCa
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1258,7 +1239,7 @@ func (a *HclApiService) GetHclExemptedCatalogByMoidExecute(r ApiGetHclExemptedCa
 }
 
 type ApiGetHclExemptedCatalogListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *HclApiService
 	filter      *string
 	orderby     *string
@@ -1339,17 +1320,17 @@ func (r ApiGetHclExemptedCatalogListRequest) Tags(tags string) ApiGetHclExempted
 	return r
 }
 
-func (r ApiGetHclExemptedCatalogListRequest) Execute() (HclExemptedCatalogResponse, *_nethttp.Response, error) {
+func (r ApiGetHclExemptedCatalogListRequest) Execute() (*HclExemptedCatalogResponse, *http.Response, error) {
 	return r.ApiService.GetHclExemptedCatalogListExecute(r)
 }
 
 /*
 GetHclExemptedCatalogList Read a 'hcl.ExemptedCatalog' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetHclExemptedCatalogListRequest
 */
-func (a *HclApiService) GetHclExemptedCatalogList(ctx _context.Context) ApiGetHclExemptedCatalogListRequest {
+func (a *HclApiService) GetHclExemptedCatalogList(ctx context.Context) ApiGetHclExemptedCatalogListRequest {
 	return ApiGetHclExemptedCatalogListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1358,26 +1339,24 @@ func (a *HclApiService) GetHclExemptedCatalogList(ctx _context.Context) ApiGetHc
 
 // Execute executes the request
 //  @return HclExemptedCatalogResponse
-func (a *HclApiService) GetHclExemptedCatalogListExecute(r ApiGetHclExemptedCatalogListRequest) (HclExemptedCatalogResponse, *_nethttp.Response, error) {
+func (a *HclApiService) GetHclExemptedCatalogListExecute(r ApiGetHclExemptedCatalogListRequest) (*HclExemptedCatalogResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  HclExemptedCatalogResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *HclExemptedCatalogResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HclApiService.GetHclExemptedCatalogList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hcl/ExemptedCatalogs"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1429,7 +1408,7 @@ func (a *HclApiService) GetHclExemptedCatalogListExecute(r ApiGetHclExemptedCata
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1439,15 +1418,15 @@ func (a *HclApiService) GetHclExemptedCatalogListExecute(r ApiGetHclExemptedCata
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1503,7 +1482,7 @@ func (a *HclApiService) GetHclExemptedCatalogListExecute(r ApiGetHclExemptedCata
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1514,23 +1493,23 @@ func (a *HclApiService) GetHclExemptedCatalogListExecute(r ApiGetHclExemptedCata
 }
 
 type ApiGetHclHyperflexSoftwareCompatibilityInfoByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *HclApiService
 	moid       string
 }
 
-func (r ApiGetHclHyperflexSoftwareCompatibilityInfoByMoidRequest) Execute() (HclHyperflexSoftwareCompatibilityInfo, *_nethttp.Response, error) {
+func (r ApiGetHclHyperflexSoftwareCompatibilityInfoByMoidRequest) Execute() (*HclHyperflexSoftwareCompatibilityInfo, *http.Response, error) {
 	return r.ApiService.GetHclHyperflexSoftwareCompatibilityInfoByMoidExecute(r)
 }
 
 /*
 GetHclHyperflexSoftwareCompatibilityInfoByMoid Read a 'hcl.HyperflexSoftwareCompatibilityInfo' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetHclHyperflexSoftwareCompatibilityInfoByMoidRequest
 */
-func (a *HclApiService) GetHclHyperflexSoftwareCompatibilityInfoByMoid(ctx _context.Context, moid string) ApiGetHclHyperflexSoftwareCompatibilityInfoByMoidRequest {
+func (a *HclApiService) GetHclHyperflexSoftwareCompatibilityInfoByMoid(ctx context.Context, moid string) ApiGetHclHyperflexSoftwareCompatibilityInfoByMoidRequest {
 	return ApiGetHclHyperflexSoftwareCompatibilityInfoByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1540,27 +1519,25 @@ func (a *HclApiService) GetHclHyperflexSoftwareCompatibilityInfoByMoid(ctx _cont
 
 // Execute executes the request
 //  @return HclHyperflexSoftwareCompatibilityInfo
-func (a *HclApiService) GetHclHyperflexSoftwareCompatibilityInfoByMoidExecute(r ApiGetHclHyperflexSoftwareCompatibilityInfoByMoidRequest) (HclHyperflexSoftwareCompatibilityInfo, *_nethttp.Response, error) {
+func (a *HclApiService) GetHclHyperflexSoftwareCompatibilityInfoByMoidExecute(r ApiGetHclHyperflexSoftwareCompatibilityInfoByMoidRequest) (*HclHyperflexSoftwareCompatibilityInfo, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  HclHyperflexSoftwareCompatibilityInfo
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *HclHyperflexSoftwareCompatibilityInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HclApiService.GetHclHyperflexSoftwareCompatibilityInfoByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hcl/HyperflexSoftwareCompatibilityInfos/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1579,7 +1556,7 @@ func (a *HclApiService) GetHclHyperflexSoftwareCompatibilityInfoByMoidExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1589,15 +1566,15 @@ func (a *HclApiService) GetHclHyperflexSoftwareCompatibilityInfoByMoidExecute(r 
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1653,7 +1630,7 @@ func (a *HclApiService) GetHclHyperflexSoftwareCompatibilityInfoByMoidExecute(r 
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1664,7 +1641,7 @@ func (a *HclApiService) GetHclHyperflexSoftwareCompatibilityInfoByMoidExecute(r 
 }
 
 type ApiGetHclHyperflexSoftwareCompatibilityInfoListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *HclApiService
 	filter      *string
 	orderby     *string
@@ -1745,17 +1722,17 @@ func (r ApiGetHclHyperflexSoftwareCompatibilityInfoListRequest) Tags(tags string
 	return r
 }
 
-func (r ApiGetHclHyperflexSoftwareCompatibilityInfoListRequest) Execute() (HclHyperflexSoftwareCompatibilityInfoResponse, *_nethttp.Response, error) {
+func (r ApiGetHclHyperflexSoftwareCompatibilityInfoListRequest) Execute() (*HclHyperflexSoftwareCompatibilityInfoResponse, *http.Response, error) {
 	return r.ApiService.GetHclHyperflexSoftwareCompatibilityInfoListExecute(r)
 }
 
 /*
 GetHclHyperflexSoftwareCompatibilityInfoList Read a 'hcl.HyperflexSoftwareCompatibilityInfo' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetHclHyperflexSoftwareCompatibilityInfoListRequest
 */
-func (a *HclApiService) GetHclHyperflexSoftwareCompatibilityInfoList(ctx _context.Context) ApiGetHclHyperflexSoftwareCompatibilityInfoListRequest {
+func (a *HclApiService) GetHclHyperflexSoftwareCompatibilityInfoList(ctx context.Context) ApiGetHclHyperflexSoftwareCompatibilityInfoListRequest {
 	return ApiGetHclHyperflexSoftwareCompatibilityInfoListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1764,26 +1741,24 @@ func (a *HclApiService) GetHclHyperflexSoftwareCompatibilityInfoList(ctx _contex
 
 // Execute executes the request
 //  @return HclHyperflexSoftwareCompatibilityInfoResponse
-func (a *HclApiService) GetHclHyperflexSoftwareCompatibilityInfoListExecute(r ApiGetHclHyperflexSoftwareCompatibilityInfoListRequest) (HclHyperflexSoftwareCompatibilityInfoResponse, *_nethttp.Response, error) {
+func (a *HclApiService) GetHclHyperflexSoftwareCompatibilityInfoListExecute(r ApiGetHclHyperflexSoftwareCompatibilityInfoListRequest) (*HclHyperflexSoftwareCompatibilityInfoResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  HclHyperflexSoftwareCompatibilityInfoResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *HclHyperflexSoftwareCompatibilityInfoResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HclApiService.GetHclHyperflexSoftwareCompatibilityInfoList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hcl/HyperflexSoftwareCompatibilityInfos"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1835,7 +1810,7 @@ func (a *HclApiService) GetHclHyperflexSoftwareCompatibilityInfoListExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1845,15 +1820,15 @@ func (a *HclApiService) GetHclHyperflexSoftwareCompatibilityInfoListExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1909,7 +1884,7 @@ func (a *HclApiService) GetHclHyperflexSoftwareCompatibilityInfoListExecute(r Ap
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1920,23 +1895,23 @@ func (a *HclApiService) GetHclHyperflexSoftwareCompatibilityInfoListExecute(r Ap
 }
 
 type ApiGetHclOperatingSystemByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *HclApiService
 	moid       string
 }
 
-func (r ApiGetHclOperatingSystemByMoidRequest) Execute() (HclOperatingSystem, *_nethttp.Response, error) {
+func (r ApiGetHclOperatingSystemByMoidRequest) Execute() (*HclOperatingSystem, *http.Response, error) {
 	return r.ApiService.GetHclOperatingSystemByMoidExecute(r)
 }
 
 /*
 GetHclOperatingSystemByMoid Read a 'hcl.OperatingSystem' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetHclOperatingSystemByMoidRequest
 */
-func (a *HclApiService) GetHclOperatingSystemByMoid(ctx _context.Context, moid string) ApiGetHclOperatingSystemByMoidRequest {
+func (a *HclApiService) GetHclOperatingSystemByMoid(ctx context.Context, moid string) ApiGetHclOperatingSystemByMoidRequest {
 	return ApiGetHclOperatingSystemByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1946,27 +1921,25 @@ func (a *HclApiService) GetHclOperatingSystemByMoid(ctx _context.Context, moid s
 
 // Execute executes the request
 //  @return HclOperatingSystem
-func (a *HclApiService) GetHclOperatingSystemByMoidExecute(r ApiGetHclOperatingSystemByMoidRequest) (HclOperatingSystem, *_nethttp.Response, error) {
+func (a *HclApiService) GetHclOperatingSystemByMoidExecute(r ApiGetHclOperatingSystemByMoidRequest) (*HclOperatingSystem, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  HclOperatingSystem
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *HclOperatingSystem
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HclApiService.GetHclOperatingSystemByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hcl/OperatingSystems/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1985,7 +1958,7 @@ func (a *HclApiService) GetHclOperatingSystemByMoidExecute(r ApiGetHclOperatingS
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1995,15 +1968,15 @@ func (a *HclApiService) GetHclOperatingSystemByMoidExecute(r ApiGetHclOperatingS
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2059,7 +2032,7 @@ func (a *HclApiService) GetHclOperatingSystemByMoidExecute(r ApiGetHclOperatingS
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2070,7 +2043,7 @@ func (a *HclApiService) GetHclOperatingSystemByMoidExecute(r ApiGetHclOperatingS
 }
 
 type ApiGetHclOperatingSystemListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *HclApiService
 	filter      *string
 	orderby     *string
@@ -2151,17 +2124,17 @@ func (r ApiGetHclOperatingSystemListRequest) Tags(tags string) ApiGetHclOperatin
 	return r
 }
 
-func (r ApiGetHclOperatingSystemListRequest) Execute() (HclOperatingSystemResponse, *_nethttp.Response, error) {
+func (r ApiGetHclOperatingSystemListRequest) Execute() (*HclOperatingSystemResponse, *http.Response, error) {
 	return r.ApiService.GetHclOperatingSystemListExecute(r)
 }
 
 /*
 GetHclOperatingSystemList Read a 'hcl.OperatingSystem' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetHclOperatingSystemListRequest
 */
-func (a *HclApiService) GetHclOperatingSystemList(ctx _context.Context) ApiGetHclOperatingSystemListRequest {
+func (a *HclApiService) GetHclOperatingSystemList(ctx context.Context) ApiGetHclOperatingSystemListRequest {
 	return ApiGetHclOperatingSystemListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2170,26 +2143,24 @@ func (a *HclApiService) GetHclOperatingSystemList(ctx _context.Context) ApiGetHc
 
 // Execute executes the request
 //  @return HclOperatingSystemResponse
-func (a *HclApiService) GetHclOperatingSystemListExecute(r ApiGetHclOperatingSystemListRequest) (HclOperatingSystemResponse, *_nethttp.Response, error) {
+func (a *HclApiService) GetHclOperatingSystemListExecute(r ApiGetHclOperatingSystemListRequest) (*HclOperatingSystemResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  HclOperatingSystemResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *HclOperatingSystemResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HclApiService.GetHclOperatingSystemList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hcl/OperatingSystems"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -2241,7 +2212,7 @@ func (a *HclApiService) GetHclOperatingSystemListExecute(r ApiGetHclOperatingSys
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2251,15 +2222,15 @@ func (a *HclApiService) GetHclOperatingSystemListExecute(r ApiGetHclOperatingSys
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2315,7 +2286,7 @@ func (a *HclApiService) GetHclOperatingSystemListExecute(r ApiGetHclOperatingSys
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2326,23 +2297,23 @@ func (a *HclApiService) GetHclOperatingSystemListExecute(r ApiGetHclOperatingSys
 }
 
 type ApiGetHclOperatingSystemVendorByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *HclApiService
 	moid       string
 }
 
-func (r ApiGetHclOperatingSystemVendorByMoidRequest) Execute() (HclOperatingSystemVendor, *_nethttp.Response, error) {
+func (r ApiGetHclOperatingSystemVendorByMoidRequest) Execute() (*HclOperatingSystemVendor, *http.Response, error) {
 	return r.ApiService.GetHclOperatingSystemVendorByMoidExecute(r)
 }
 
 /*
 GetHclOperatingSystemVendorByMoid Read a 'hcl.OperatingSystemVendor' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetHclOperatingSystemVendorByMoidRequest
 */
-func (a *HclApiService) GetHclOperatingSystemVendorByMoid(ctx _context.Context, moid string) ApiGetHclOperatingSystemVendorByMoidRequest {
+func (a *HclApiService) GetHclOperatingSystemVendorByMoid(ctx context.Context, moid string) ApiGetHclOperatingSystemVendorByMoidRequest {
 	return ApiGetHclOperatingSystemVendorByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2352,27 +2323,25 @@ func (a *HclApiService) GetHclOperatingSystemVendorByMoid(ctx _context.Context, 
 
 // Execute executes the request
 //  @return HclOperatingSystemVendor
-func (a *HclApiService) GetHclOperatingSystemVendorByMoidExecute(r ApiGetHclOperatingSystemVendorByMoidRequest) (HclOperatingSystemVendor, *_nethttp.Response, error) {
+func (a *HclApiService) GetHclOperatingSystemVendorByMoidExecute(r ApiGetHclOperatingSystemVendorByMoidRequest) (*HclOperatingSystemVendor, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  HclOperatingSystemVendor
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *HclOperatingSystemVendor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HclApiService.GetHclOperatingSystemVendorByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hcl/OperatingSystemVendors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2391,7 +2360,7 @@ func (a *HclApiService) GetHclOperatingSystemVendorByMoidExecute(r ApiGetHclOper
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2401,15 +2370,15 @@ func (a *HclApiService) GetHclOperatingSystemVendorByMoidExecute(r ApiGetHclOper
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2465,7 +2434,7 @@ func (a *HclApiService) GetHclOperatingSystemVendorByMoidExecute(r ApiGetHclOper
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2476,7 +2445,7 @@ func (a *HclApiService) GetHclOperatingSystemVendorByMoidExecute(r ApiGetHclOper
 }
 
 type ApiGetHclOperatingSystemVendorListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *HclApiService
 	filter      *string
 	orderby     *string
@@ -2557,17 +2526,17 @@ func (r ApiGetHclOperatingSystemVendorListRequest) Tags(tags string) ApiGetHclOp
 	return r
 }
 
-func (r ApiGetHclOperatingSystemVendorListRequest) Execute() (HclOperatingSystemVendorResponse, *_nethttp.Response, error) {
+func (r ApiGetHclOperatingSystemVendorListRequest) Execute() (*HclOperatingSystemVendorResponse, *http.Response, error) {
 	return r.ApiService.GetHclOperatingSystemVendorListExecute(r)
 }
 
 /*
 GetHclOperatingSystemVendorList Read a 'hcl.OperatingSystemVendor' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetHclOperatingSystemVendorListRequest
 */
-func (a *HclApiService) GetHclOperatingSystemVendorList(ctx _context.Context) ApiGetHclOperatingSystemVendorListRequest {
+func (a *HclApiService) GetHclOperatingSystemVendorList(ctx context.Context) ApiGetHclOperatingSystemVendorListRequest {
 	return ApiGetHclOperatingSystemVendorListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2576,26 +2545,24 @@ func (a *HclApiService) GetHclOperatingSystemVendorList(ctx _context.Context) Ap
 
 // Execute executes the request
 //  @return HclOperatingSystemVendorResponse
-func (a *HclApiService) GetHclOperatingSystemVendorListExecute(r ApiGetHclOperatingSystemVendorListRequest) (HclOperatingSystemVendorResponse, *_nethttp.Response, error) {
+func (a *HclApiService) GetHclOperatingSystemVendorListExecute(r ApiGetHclOperatingSystemVendorListRequest) (*HclOperatingSystemVendorResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  HclOperatingSystemVendorResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *HclOperatingSystemVendorResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HclApiService.GetHclOperatingSystemVendorList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hcl/OperatingSystemVendors"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -2647,7 +2614,7 @@ func (a *HclApiService) GetHclOperatingSystemVendorListExecute(r ApiGetHclOperat
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2657,15 +2624,15 @@ func (a *HclApiService) GetHclOperatingSystemVendorListExecute(r ApiGetHclOperat
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2721,7 +2688,7 @@ func (a *HclApiService) GetHclOperatingSystemVendorListExecute(r ApiGetHclOperat
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2732,7 +2699,7 @@ func (a *HclApiService) GetHclOperatingSystemVendorListExecute(r ApiGetHclOperat
 }
 
 type ApiPatchHclHyperflexSoftwareCompatibilityInfoRequest struct {
-	ctx                                   _context.Context
+	ctx                                   context.Context
 	ApiService                            *HclApiService
 	moid                                  string
 	hclHyperflexSoftwareCompatibilityInfo *HclHyperflexSoftwareCompatibilityInfo
@@ -2751,18 +2718,18 @@ func (r ApiPatchHclHyperflexSoftwareCompatibilityInfoRequest) IfMatch(ifMatch st
 	return r
 }
 
-func (r ApiPatchHclHyperflexSoftwareCompatibilityInfoRequest) Execute() (HclHyperflexSoftwareCompatibilityInfo, *_nethttp.Response, error) {
+func (r ApiPatchHclHyperflexSoftwareCompatibilityInfoRequest) Execute() (*HclHyperflexSoftwareCompatibilityInfo, *http.Response, error) {
 	return r.ApiService.PatchHclHyperflexSoftwareCompatibilityInfoExecute(r)
 }
 
 /*
 PatchHclHyperflexSoftwareCompatibilityInfo Update a 'hcl.HyperflexSoftwareCompatibilityInfo' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchHclHyperflexSoftwareCompatibilityInfoRequest
 */
-func (a *HclApiService) PatchHclHyperflexSoftwareCompatibilityInfo(ctx _context.Context, moid string) ApiPatchHclHyperflexSoftwareCompatibilityInfoRequest {
+func (a *HclApiService) PatchHclHyperflexSoftwareCompatibilityInfo(ctx context.Context, moid string) ApiPatchHclHyperflexSoftwareCompatibilityInfoRequest {
 	return ApiPatchHclHyperflexSoftwareCompatibilityInfoRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2772,27 +2739,25 @@ func (a *HclApiService) PatchHclHyperflexSoftwareCompatibilityInfo(ctx _context.
 
 // Execute executes the request
 //  @return HclHyperflexSoftwareCompatibilityInfo
-func (a *HclApiService) PatchHclHyperflexSoftwareCompatibilityInfoExecute(r ApiPatchHclHyperflexSoftwareCompatibilityInfoRequest) (HclHyperflexSoftwareCompatibilityInfo, *_nethttp.Response, error) {
+func (a *HclApiService) PatchHclHyperflexSoftwareCompatibilityInfoExecute(r ApiPatchHclHyperflexSoftwareCompatibilityInfoRequest) (*HclHyperflexSoftwareCompatibilityInfo, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  HclHyperflexSoftwareCompatibilityInfo
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *HclHyperflexSoftwareCompatibilityInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HclApiService.PatchHclHyperflexSoftwareCompatibilityInfo")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hcl/HyperflexSoftwareCompatibilityInfos/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.hclHyperflexSoftwareCompatibilityInfo == nil {
 		return localVarReturnValue, nil, reportError("hclHyperflexSoftwareCompatibilityInfo is required and must be specified")
 	}
@@ -2819,7 +2784,7 @@ func (a *HclApiService) PatchHclHyperflexSoftwareCompatibilityInfoExecute(r ApiP
 	}
 	// body params
 	localVarPostBody = r.hclHyperflexSoftwareCompatibilityInfo
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2829,15 +2794,15 @@ func (a *HclApiService) PatchHclHyperflexSoftwareCompatibilityInfoExecute(r ApiP
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2893,7 +2858,7 @@ func (a *HclApiService) PatchHclHyperflexSoftwareCompatibilityInfoExecute(r ApiP
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2904,7 +2869,7 @@ func (a *HclApiService) PatchHclHyperflexSoftwareCompatibilityInfoExecute(r ApiP
 }
 
 type ApiUpdateHclHyperflexSoftwareCompatibilityInfoRequest struct {
-	ctx                                   _context.Context
+	ctx                                   context.Context
 	ApiService                            *HclApiService
 	moid                                  string
 	hclHyperflexSoftwareCompatibilityInfo *HclHyperflexSoftwareCompatibilityInfo
@@ -2923,18 +2888,18 @@ func (r ApiUpdateHclHyperflexSoftwareCompatibilityInfoRequest) IfMatch(ifMatch s
 	return r
 }
 
-func (r ApiUpdateHclHyperflexSoftwareCompatibilityInfoRequest) Execute() (HclHyperflexSoftwareCompatibilityInfo, *_nethttp.Response, error) {
+func (r ApiUpdateHclHyperflexSoftwareCompatibilityInfoRequest) Execute() (*HclHyperflexSoftwareCompatibilityInfo, *http.Response, error) {
 	return r.ApiService.UpdateHclHyperflexSoftwareCompatibilityInfoExecute(r)
 }
 
 /*
 UpdateHclHyperflexSoftwareCompatibilityInfo Update a 'hcl.HyperflexSoftwareCompatibilityInfo' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateHclHyperflexSoftwareCompatibilityInfoRequest
 */
-func (a *HclApiService) UpdateHclHyperflexSoftwareCompatibilityInfo(ctx _context.Context, moid string) ApiUpdateHclHyperflexSoftwareCompatibilityInfoRequest {
+func (a *HclApiService) UpdateHclHyperflexSoftwareCompatibilityInfo(ctx context.Context, moid string) ApiUpdateHclHyperflexSoftwareCompatibilityInfoRequest {
 	return ApiUpdateHclHyperflexSoftwareCompatibilityInfoRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2944,27 +2909,25 @@ func (a *HclApiService) UpdateHclHyperflexSoftwareCompatibilityInfo(ctx _context
 
 // Execute executes the request
 //  @return HclHyperflexSoftwareCompatibilityInfo
-func (a *HclApiService) UpdateHclHyperflexSoftwareCompatibilityInfoExecute(r ApiUpdateHclHyperflexSoftwareCompatibilityInfoRequest) (HclHyperflexSoftwareCompatibilityInfo, *_nethttp.Response, error) {
+func (a *HclApiService) UpdateHclHyperflexSoftwareCompatibilityInfoExecute(r ApiUpdateHclHyperflexSoftwareCompatibilityInfoRequest) (*HclHyperflexSoftwareCompatibilityInfo, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  HclHyperflexSoftwareCompatibilityInfo
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *HclHyperflexSoftwareCompatibilityInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HclApiService.UpdateHclHyperflexSoftwareCompatibilityInfo")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hcl/HyperflexSoftwareCompatibilityInfos/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.hclHyperflexSoftwareCompatibilityInfo == nil {
 		return localVarReturnValue, nil, reportError("hclHyperflexSoftwareCompatibilityInfo is required and must be specified")
 	}
@@ -2991,7 +2954,7 @@ func (a *HclApiService) UpdateHclHyperflexSoftwareCompatibilityInfoExecute(r Api
 	}
 	// body params
 	localVarPostBody = r.hclHyperflexSoftwareCompatibilityInfo
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3001,15 +2964,15 @@ func (a *HclApiService) UpdateHclHyperflexSoftwareCompatibilityInfoExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3065,7 +3028,7 @@ func (a *HclApiService) UpdateHclHyperflexSoftwareCompatibilityInfoExecute(r Api
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

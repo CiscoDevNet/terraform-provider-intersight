@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,23 +13,18 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // SearchApiService SearchApi service
 type SearchApiService service
 
 type ApiCreateSearchSuggestItemRequest struct {
-	ctx               _context.Context
+	ctx               context.Context
 	ApiService        *SearchApiService
 	searchSuggestItem *SearchSuggestItem
 	ifMatch           *string
@@ -54,17 +49,17 @@ func (r ApiCreateSearchSuggestItemRequest) IfNoneMatch(ifNoneMatch string) ApiCr
 	return r
 }
 
-func (r ApiCreateSearchSuggestItemRequest) Execute() (SearchSuggestItemResponse, *_nethttp.Response, error) {
+func (r ApiCreateSearchSuggestItemRequest) Execute() (*SearchSuggestItemResponse, *http.Response, error) {
 	return r.ApiService.CreateSearchSuggestItemExecute(r)
 }
 
 /*
 CreateSearchSuggestItem Create a 'search.SuggestItem' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateSearchSuggestItemRequest
 */
-func (a *SearchApiService) CreateSearchSuggestItem(ctx _context.Context) ApiCreateSearchSuggestItemRequest {
+func (a *SearchApiService) CreateSearchSuggestItem(ctx context.Context) ApiCreateSearchSuggestItemRequest {
 	return ApiCreateSearchSuggestItemRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -73,26 +68,24 @@ func (a *SearchApiService) CreateSearchSuggestItem(ctx _context.Context) ApiCrea
 
 // Execute executes the request
 //  @return SearchSuggestItemResponse
-func (a *SearchApiService) CreateSearchSuggestItemExecute(r ApiCreateSearchSuggestItemRequest) (SearchSuggestItemResponse, *_nethttp.Response, error) {
+func (a *SearchApiService) CreateSearchSuggestItemExecute(r ApiCreateSearchSuggestItemRequest) (*SearchSuggestItemResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  SearchSuggestItemResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SearchSuggestItemResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SearchApiService.CreateSearchSuggestItem")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/search/SuggestItems"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.searchSuggestItem == nil {
 		return localVarReturnValue, nil, reportError("searchSuggestItem is required and must be specified")
 	}
@@ -122,7 +115,7 @@ func (a *SearchApiService) CreateSearchSuggestItemExecute(r ApiCreateSearchSugge
 	}
 	// body params
 	localVarPostBody = r.searchSuggestItem
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -132,15 +125,15 @@ func (a *SearchApiService) CreateSearchSuggestItemExecute(r ApiCreateSearchSugge
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -196,7 +189,7 @@ func (a *SearchApiService) CreateSearchSuggestItemExecute(r ApiCreateSearchSugge
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -207,23 +200,23 @@ func (a *SearchApiService) CreateSearchSuggestItemExecute(r ApiCreateSearchSugge
 }
 
 type ApiGetSearchSearchItemByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *SearchApiService
 	moid       string
 }
 
-func (r ApiGetSearchSearchItemByMoidRequest) Execute() (SearchSearchItem, *_nethttp.Response, error) {
+func (r ApiGetSearchSearchItemByMoidRequest) Execute() (*SearchSearchItem, *http.Response, error) {
 	return r.ApiService.GetSearchSearchItemByMoidExecute(r)
 }
 
 /*
 GetSearchSearchItemByMoid Read a 'search.SearchItem' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetSearchSearchItemByMoidRequest
 */
-func (a *SearchApiService) GetSearchSearchItemByMoid(ctx _context.Context, moid string) ApiGetSearchSearchItemByMoidRequest {
+func (a *SearchApiService) GetSearchSearchItemByMoid(ctx context.Context, moid string) ApiGetSearchSearchItemByMoidRequest {
 	return ApiGetSearchSearchItemByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -233,27 +226,25 @@ func (a *SearchApiService) GetSearchSearchItemByMoid(ctx _context.Context, moid 
 
 // Execute executes the request
 //  @return SearchSearchItem
-func (a *SearchApiService) GetSearchSearchItemByMoidExecute(r ApiGetSearchSearchItemByMoidRequest) (SearchSearchItem, *_nethttp.Response, error) {
+func (a *SearchApiService) GetSearchSearchItemByMoidExecute(r ApiGetSearchSearchItemByMoidRequest) (*SearchSearchItem, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  SearchSearchItem
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SearchSearchItem
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SearchApiService.GetSearchSearchItemByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/search/SearchItems/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -272,7 +263,7 @@ func (a *SearchApiService) GetSearchSearchItemByMoidExecute(r ApiGetSearchSearch
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -282,15 +273,15 @@ func (a *SearchApiService) GetSearchSearchItemByMoidExecute(r ApiGetSearchSearch
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -346,7 +337,7 @@ func (a *SearchApiService) GetSearchSearchItemByMoidExecute(r ApiGetSearchSearch
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -357,7 +348,7 @@ func (a *SearchApiService) GetSearchSearchItemByMoidExecute(r ApiGetSearchSearch
 }
 
 type ApiGetSearchSearchItemListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *SearchApiService
 	filter      *string
 	orderby     *string
@@ -438,17 +429,17 @@ func (r ApiGetSearchSearchItemListRequest) Tags(tags string) ApiGetSearchSearchI
 	return r
 }
 
-func (r ApiGetSearchSearchItemListRequest) Execute() (SearchSearchItemResponse, *_nethttp.Response, error) {
+func (r ApiGetSearchSearchItemListRequest) Execute() (*SearchSearchItemResponse, *http.Response, error) {
 	return r.ApiService.GetSearchSearchItemListExecute(r)
 }
 
 /*
 GetSearchSearchItemList Read a 'search.SearchItem' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetSearchSearchItemListRequest
 */
-func (a *SearchApiService) GetSearchSearchItemList(ctx _context.Context) ApiGetSearchSearchItemListRequest {
+func (a *SearchApiService) GetSearchSearchItemList(ctx context.Context) ApiGetSearchSearchItemListRequest {
 	return ApiGetSearchSearchItemListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -457,26 +448,24 @@ func (a *SearchApiService) GetSearchSearchItemList(ctx _context.Context) ApiGetS
 
 // Execute executes the request
 //  @return SearchSearchItemResponse
-func (a *SearchApiService) GetSearchSearchItemListExecute(r ApiGetSearchSearchItemListRequest) (SearchSearchItemResponse, *_nethttp.Response, error) {
+func (a *SearchApiService) GetSearchSearchItemListExecute(r ApiGetSearchSearchItemListRequest) (*SearchSearchItemResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  SearchSearchItemResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SearchSearchItemResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SearchApiService.GetSearchSearchItemList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/search/SearchItems"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -528,7 +517,7 @@ func (a *SearchApiService) GetSearchSearchItemListExecute(r ApiGetSearchSearchIt
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -538,15 +527,15 @@ func (a *SearchApiService) GetSearchSearchItemListExecute(r ApiGetSearchSearchIt
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -602,7 +591,7 @@ func (a *SearchApiService) GetSearchSearchItemListExecute(r ApiGetSearchSearchIt
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -613,23 +602,23 @@ func (a *SearchApiService) GetSearchSearchItemListExecute(r ApiGetSearchSearchIt
 }
 
 type ApiGetSearchTagItemByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *SearchApiService
 	moid       string
 }
 
-func (r ApiGetSearchTagItemByMoidRequest) Execute() (SearchTagItem, *_nethttp.Response, error) {
+func (r ApiGetSearchTagItemByMoidRequest) Execute() (*SearchTagItem, *http.Response, error) {
 	return r.ApiService.GetSearchTagItemByMoidExecute(r)
 }
 
 /*
 GetSearchTagItemByMoid Read a 'search.TagItem' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetSearchTagItemByMoidRequest
 */
-func (a *SearchApiService) GetSearchTagItemByMoid(ctx _context.Context, moid string) ApiGetSearchTagItemByMoidRequest {
+func (a *SearchApiService) GetSearchTagItemByMoid(ctx context.Context, moid string) ApiGetSearchTagItemByMoidRequest {
 	return ApiGetSearchTagItemByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -639,27 +628,25 @@ func (a *SearchApiService) GetSearchTagItemByMoid(ctx _context.Context, moid str
 
 // Execute executes the request
 //  @return SearchTagItem
-func (a *SearchApiService) GetSearchTagItemByMoidExecute(r ApiGetSearchTagItemByMoidRequest) (SearchTagItem, *_nethttp.Response, error) {
+func (a *SearchApiService) GetSearchTagItemByMoidExecute(r ApiGetSearchTagItemByMoidRequest) (*SearchTagItem, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  SearchTagItem
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SearchTagItem
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SearchApiService.GetSearchTagItemByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/search/TagItems/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -678,7 +665,7 @@ func (a *SearchApiService) GetSearchTagItemByMoidExecute(r ApiGetSearchTagItemBy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -688,15 +675,15 @@ func (a *SearchApiService) GetSearchTagItemByMoidExecute(r ApiGetSearchTagItemBy
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -752,7 +739,7 @@ func (a *SearchApiService) GetSearchTagItemByMoidExecute(r ApiGetSearchTagItemBy
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -763,7 +750,7 @@ func (a *SearchApiService) GetSearchTagItemByMoidExecute(r ApiGetSearchTagItemBy
 }
 
 type ApiGetSearchTagItemListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *SearchApiService
 	filter      *string
 	orderby     *string
@@ -844,17 +831,17 @@ func (r ApiGetSearchTagItemListRequest) Tags(tags string) ApiGetSearchTagItemLis
 	return r
 }
 
-func (r ApiGetSearchTagItemListRequest) Execute() (SearchTagItemResponse, *_nethttp.Response, error) {
+func (r ApiGetSearchTagItemListRequest) Execute() (*SearchTagItemResponse, *http.Response, error) {
 	return r.ApiService.GetSearchTagItemListExecute(r)
 }
 
 /*
 GetSearchTagItemList Read a 'search.TagItem' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetSearchTagItemListRequest
 */
-func (a *SearchApiService) GetSearchTagItemList(ctx _context.Context) ApiGetSearchTagItemListRequest {
+func (a *SearchApiService) GetSearchTagItemList(ctx context.Context) ApiGetSearchTagItemListRequest {
 	return ApiGetSearchTagItemListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -863,26 +850,24 @@ func (a *SearchApiService) GetSearchTagItemList(ctx _context.Context) ApiGetSear
 
 // Execute executes the request
 //  @return SearchTagItemResponse
-func (a *SearchApiService) GetSearchTagItemListExecute(r ApiGetSearchTagItemListRequest) (SearchTagItemResponse, *_nethttp.Response, error) {
+func (a *SearchApiService) GetSearchTagItemListExecute(r ApiGetSearchTagItemListRequest) (*SearchTagItemResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  SearchTagItemResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SearchTagItemResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SearchApiService.GetSearchTagItemList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/search/TagItems"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -934,7 +919,7 @@ func (a *SearchApiService) GetSearchTagItemListExecute(r ApiGetSearchTagItemList
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -944,15 +929,15 @@ func (a *SearchApiService) GetSearchTagItemListExecute(r ApiGetSearchTagItemList
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1008,7 +993,7 @@ func (a *SearchApiService) GetSearchTagItemListExecute(r ApiGetSearchTagItemList
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

@@ -108,6 +108,7 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
   + `additional_properties`:(JSON as string) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [workflow.ArrayDataType](#workflowArrayDataType)
 [workflow.CustomDataType](#workflowCustomDataType)
+[workflow.DynamicTemplateParserDataType](#workflowDynamicTemplateParserDataType)
 [workflow.MoReferenceDataType](#workflowMoReferenceDataType)
 [workflow.PrimitiveDataType](#workflowPrimitiveDataType)
 [workflow.TargetDataType](#workflowTargetDataType)
@@ -148,6 +149,7 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
   + `additional_properties`:(JSON as string) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [workflow.ArrayDataType](#workflowArrayDataType)
 [workflow.CustomDataType](#workflowCustomDataType)
+[workflow.DynamicTemplateParserDataType](#workflowDynamicTemplateParserDataType)
 [workflow.MoReferenceDataType](#workflowMoReferenceDataType)
 [workflow.PrimitiveDataType](#workflowPrimitiveDataType)
 [workflow.TargetDataType](#workflowTargetDataType)
@@ -188,6 +190,8 @@ This complex property has following sub-properties:
   + `external_meta`:(bool) When set to false the workflow is owned by the system and used for internal services. Such workflows cannot be directly used by external entities. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `retryable`:(bool) When true, this workflow can be retried if has not been modified for more than a period of 2 weeks. 
+  + `rollback_on_cancel`:(bool) When set to true, the changes are automatically rolled back if the workflow execution is cancelled. 
+  + `rollback_on_failure`:(bool) When set to true, the changes are automatically rolled back if the workflow fails to execute. 
   + `support_status`:(string) Supported status of the definition.* `Supported` - The definition is a supported version and there will be no changes to the mandatory inputs or outputs.* `Beta` - The definition is a Beta version and this version can under go changes until the version is marked supported.* `Deprecated` - The version of definition is deprecated and typically there will be a higher version of the same definition that has been added. 
 * `shared_scope`:(string)(ReadOnly) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `tags`:(Array)
@@ -234,6 +238,7 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
   + `additional_properties`:(JSON as string) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [workflow.ArrayDataType](#workflowArrayDataType)
 [workflow.CustomDataType](#workflowCustomDataType)
+[workflow.DynamicTemplateParserDataType](#workflowDynamicTemplateParserDataType)
 [workflow.MoReferenceDataType](#workflowMoReferenceDataType)
 [workflow.PrimitiveDataType](#workflowPrimitiveDataType)
 [workflow.TargetDataType](#workflowTargetDataType)
@@ -301,6 +306,11 @@ This complex property has following sub-properties:
   + `custom_data_type_id`:(string)(ReadOnly) The resolved custom data type definition managed object. 
   + `custom_data_type_name`:(string) Name of the custom data type for this input. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+
+### [workflow.DynamicTemplateParserDataType](#argument-reference)
+Data type to fetch a generic template from given selector and parse it using an api to give an array of secure and non-secure keys for form generation. URL used to fetch the template object is based on the templateType. Final input passed to the workflow using this data type is a JSON containing {'Template':'<template string value>', 'Keys':[{'<key1>':'<val 1>'}], 'SecureKeys':[{'<key2>':'<val2>'}]}.
+* `is_template_secure`:(bool) When set to true, the template is marked as secure and the content is encrypted and stored. 
+* `template_type`:(string) Template type decides on the API to be used to fetch the placeholders present inside the template.* `OsInstall` - This refers to the OS configuration template MO. 
 
 ### [workflow.MoReferenceDataType](#argument-reference)
 Data type to capture an Intersight Managed object reference.
@@ -484,6 +494,11 @@ This complex property has following sub-properties:
   + `custom_data_type_name`:(string) Name of the custom data type for this input. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 
+### [workflow.DynamicTemplateParserDataType](#argument-reference)
+Data type to fetch a generic template from given selector and parse it using an api to give an array of secure and non-secure keys for form generation. URL used to fetch the template object is based on the templateType. Final input passed to the workflow using this data type is a JSON containing {'Template':'<template string value>', 'Keys':[{'<key1>':'<val 1>'}], 'SecureKeys':[{'<key2>':'<val2>'}]}.
+* `is_template_secure`:(bool) When set to true, the template is marked as secure and the content is encrypted and stored. 
+* `template_type`:(string) Template type decides on the API to be used to fetch the placeholders present inside the template.* `OsInstall` - This refers to the OS configuration template MO. 
+
 ### [workflow.MoReferenceDataType](#argument-reference)
 Data type to capture an Intersight Managed object reference.
 * `properties`:(Array)
@@ -574,6 +589,11 @@ This complex property has following sub-properties:
   + `custom_data_type_id`:(string)(ReadOnly) The resolved custom data type definition managed object. 
   + `custom_data_type_name`:(string) Name of the custom data type for this input. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+
+### [workflow.DynamicTemplateParserDataType](#argument-reference)
+Data type to fetch a generic template from given selector and parse it using an api to give an array of secure and non-secure keys for form generation. URL used to fetch the template object is based on the templateType. Final input passed to the workflow using this data type is a JSON containing {'Template':'<template string value>', 'Keys':[{'<key1>':'<val 1>'}], 'SecureKeys':[{'<key2>':'<val2>'}]}.
+* `is_template_secure`:(bool) When set to true, the template is marked as secure and the content is encrypted and stored. 
+* `template_type`:(string) Template type decides on the API to be used to fetch the placeholders present inside the template.* `OsInstall` - This refers to the OS configuration template MO. 
 
 ### [workflow.MoReferenceDataType](#argument-reference)
 Data type to capture an Intersight Managed object reference.

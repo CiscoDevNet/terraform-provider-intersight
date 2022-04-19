@@ -1047,7 +1047,6 @@ func dataSourceVirtualizationVmwareDatastoreCluster() *schema.Resource {
 
 func dataSourceVirtualizationVmwareDatastoreClusterRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.VirtualizationVmwareDatastoreCluster{}
@@ -1599,7 +1598,7 @@ func dataSourceVirtualizationVmwareDatastoreClusterRead(c context.Context, d *sc
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of VirtualizationVmwareDatastoreCluster: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of VirtualizationVmwareDatastoreCluster: %s", responseErr.Error())
@@ -1616,7 +1615,7 @@ func dataSourceVirtualizationVmwareDatastoreClusterRead(c context.Context, d *sc
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching VirtualizationVmwareDatastoreCluster: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching VirtualizationVmwareDatastoreCluster: %s", responseErr.Error())

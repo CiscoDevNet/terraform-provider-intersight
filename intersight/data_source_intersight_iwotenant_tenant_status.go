@@ -697,7 +697,6 @@ func dataSourceIwotenantTenantStatus() *schema.Resource {
 
 func dataSourceIwotenantTenantStatusRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.IwotenantTenantStatus{}
@@ -1057,7 +1056,7 @@ func dataSourceIwotenantTenantStatusRead(c context.Context, d *schema.ResourceDa
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of IwotenantTenantStatus: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of IwotenantTenantStatus: %s", responseErr.Error())
@@ -1074,7 +1073,7 @@ func dataSourceIwotenantTenantStatusRead(c context.Context, d *schema.ResourceDa
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching IwotenantTenantStatus: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching IwotenantTenantStatus: %s", responseErr.Error())

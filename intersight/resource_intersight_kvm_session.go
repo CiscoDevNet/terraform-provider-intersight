@@ -730,7 +730,6 @@ func resourceKvmSession() *schema.Resource {
 
 func resourceKvmSessionCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewKvmSessionWithDefaults()
@@ -904,7 +903,7 @@ func resourceKvmSessionCreate(c context.Context, d *schema.ResourceData, meta in
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating KvmSession: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating KvmSession: %s", responseErr.Error())
@@ -916,7 +915,6 @@ func resourceKvmSessionCreate(c context.Context, d *schema.ResourceData, meta in
 
 func resourceKvmSessionRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.KvmApi.GetKvmSessionByMoid(conn.ctx, d.Id())
@@ -929,7 +927,7 @@ func resourceKvmSessionRead(c context.Context, d *schema.ResourceData, meta inte
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching KvmSession: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching KvmSession: %s", responseErr.Error())
@@ -1070,7 +1068,6 @@ func resourceKvmSessionRead(c context.Context, d *schema.ResourceData, meta inte
 
 func resourceKvmSessionUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.KvmSession{}
@@ -1252,7 +1249,7 @@ func resourceKvmSessionUpdate(c context.Context, d *schema.ResourceData, meta in
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating KvmSession: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating KvmSession: %s", responseErr.Error())
@@ -1264,7 +1261,6 @@ func resourceKvmSessionUpdate(c context.Context, d *schema.ResourceData, meta in
 
 func resourceKvmSessionDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	var warning = diag.Diagnostic{Severity: diag.Warning, Summary: "KvmSession does not allow delete functionality"}
 	de = append(de, warning)

@@ -408,9 +408,9 @@ func resourceOsConfigurationFile() *schema.Resource {
 													Optional:    true,
 												},
 												"value": {
-													Description:      "Default value for the data type. If default value was provided and the input was required the default value will be used as the input.",
-													Type:             schema.TypeString,
-													DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
+													Description: "Default value for the data type. If default value was provided and the input was required the default value will be used as the input.",
+													Type:        schema.TypeString,
+													Optional:    true,
 												},
 											},
 										},
@@ -462,9 +462,9 @@ func resourceOsConfigurationFile() *schema.Resource {
 										},
 									},
 									"input_parameters": {
-										Description:      "JSON formatted mapping from other property of the definition to the current property. Input parameter mapping is supported only for custom data type property in workflow definition and custom data type definition. The format to specify mapping ina workflow definition when source property is of scalar types is '${workflow.input.property}'. The format to specify mapping when the source property is of object reference and mapping needs to be made to the property of the object is '${workflow.input.property.subproperty}'. The format to specify mapping in a custom data type definition is '${datatype.type.property}'. When the current property is of non-scalar type like composite custom data type, then mapping can be provided to the individual property of the custom data type like 'cdt_property:${workflow.input.property}'.",
-										Type:             schema.TypeString,
-										DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
+										Description: "JSON formatted mapping from other property of the definition to the current property. Input parameter mapping is supported only for custom data type property in workflow definition and custom data type definition. The format to specify mapping ina workflow definition when source property is of scalar types is '${workflow.input.property}'. The format to specify mapping when the source property is of object reference and mapping needs to be made to the property of the object is '${workflow.input.property.subproperty}'. The format to specify mapping in a custom data type definition is '${datatype.type.property}'. When the current property is of non-scalar type like composite custom data type, then mapping can be provided to the individual property of the custom data type like 'cdt_property:${workflow.input.property}'.",
+										Type:        schema.TypeString,
+										Optional:    true,
 									},
 									"label": {
 										Description: "Descriptive label for the data type. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), space ( ) or an underscore (_). The first and last character in label must be an alphanumeric character.",
@@ -634,9 +634,9 @@ func resourceOsConfigurationFile() *schema.Resource {
 																			DiffSuppressFunc: SuppressDiffAdditionProps,
 																		},
 																		"body": {
-																			Description:      "Content of the request body to send for POST request.",
-																			Type:             schema.TypeString,
-																			DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
+																			Description: "Content of the request body to send for POST request.",
+																			Type:        schema.TypeString,
+																			Optional:    true,
 																		},
 																		"class_id": {
 																			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
@@ -696,9 +696,9 @@ func resourceOsConfigurationFile() *schema.Resource {
 							},
 						},
 						"value": {
-							Description:      "Value for placeholder provided by user.",
-							Type:             schema.TypeString,
-							DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
+							Description: "Value for placeholder provided by user.",
+							Type:        schema.TypeString,
+							Optional:    true,
 						},
 					},
 				},
@@ -896,7 +896,6 @@ func resourceOsConfigurationFile() *schema.Resource {
 
 func resourceOsConfigurationFileCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewOsConfigurationFileWithDefaults()
@@ -1103,7 +1102,13 @@ func resourceOsConfigurationFileCreate(c context.Context, d *schema.ResourceData
 									}
 									if v, ok := l["value"]; ok {
 										{
-											o.SetValue(v)
+											x := []byte(v.(string))
+											var x1 interface{}
+											err := json.Unmarshal(x, &x1)
+											if err == nil && x1 != nil {
+												x2 := x1.(map[string]interface{})
+												o.SetValue(x2)
+											}
 										}
 									}
 									p = append(p, *o)
@@ -1166,7 +1171,13 @@ func resourceOsConfigurationFileCreate(c context.Context, d *schema.ResourceData
 						}
 						if v, ok := l["input_parameters"]; ok {
 							{
-								o.SetInputParameters(v)
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									x2 := x1.(map[string]interface{})
+									o.SetInputParameters(x2)
+								}
 							}
 						}
 						if v, ok := l["label"]; ok {
@@ -1361,7 +1372,13 @@ func resourceOsConfigurationFileCreate(c context.Context, d *schema.ResourceData
 															}
 															if v, ok := l["body"]; ok {
 																{
-																	o.SetBody(v)
+																	x := []byte(v.(string))
+																	var x1 interface{}
+																	err := json.Unmarshal(x, &x1)
+																	if err == nil && x1 != nil {
+																		x2 := x1.(map[string]interface{})
+																		o.SetBody(x2)
+																	}
 																}
 															}
 															o.SetClassId("")
@@ -1440,7 +1457,13 @@ func resourceOsConfigurationFileCreate(c context.Context, d *schema.ResourceData
 			}
 			if v, ok := l["value"]; ok {
 				{
-					o.SetValue(v)
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						x2 := x1.(map[string]interface{})
+						o.SetValue(x2)
+					}
 				}
 			}
 			x = append(x, *o)
@@ -1490,7 +1513,7 @@ func resourceOsConfigurationFileCreate(c context.Context, d *schema.ResourceData
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating OsConfigurationFile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating OsConfigurationFile: %s", responseErr.Error())
@@ -1502,7 +1525,6 @@ func resourceOsConfigurationFileCreate(c context.Context, d *schema.ResourceData
 
 func resourceOsConfigurationFileRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.OsApi.GetOsConfigurationFileByMoid(conn.ctx, d.Id())
@@ -1515,7 +1537,7 @@ func resourceOsConfigurationFileRead(c context.Context, d *schema.ResourceData, 
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching OsConfigurationFile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching OsConfigurationFile: %s", responseErr.Error())
@@ -1620,7 +1642,6 @@ func resourceOsConfigurationFileRead(c context.Context, d *schema.ResourceData, 
 
 func resourceOsConfigurationFileUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.OsConfigurationFile{}
@@ -1834,7 +1855,13 @@ func resourceOsConfigurationFileUpdate(c context.Context, d *schema.ResourceData
 									}
 									if v, ok := l["value"]; ok {
 										{
-											o.SetValue(v)
+											x := []byte(v.(string))
+											var x1 interface{}
+											err := json.Unmarshal(x, &x1)
+											if err == nil && x1 != nil {
+												x2 := x1.(map[string]interface{})
+												o.SetValue(x2)
+											}
 										}
 									}
 									p = append(p, *o)
@@ -1897,7 +1924,13 @@ func resourceOsConfigurationFileUpdate(c context.Context, d *schema.ResourceData
 						}
 						if v, ok := l["input_parameters"]; ok {
 							{
-								o.SetInputParameters(v)
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									x2 := x1.(map[string]interface{})
+									o.SetInputParameters(x2)
+								}
 							}
 						}
 						if v, ok := l["label"]; ok {
@@ -2092,7 +2125,13 @@ func resourceOsConfigurationFileUpdate(c context.Context, d *schema.ResourceData
 															}
 															if v, ok := l["body"]; ok {
 																{
-																	o.SetBody(v)
+																	x := []byte(v.(string))
+																	var x1 interface{}
+																	err := json.Unmarshal(x, &x1)
+																	if err == nil && x1 != nil {
+																		x2 := x1.(map[string]interface{})
+																		o.SetBody(x2)
+																	}
 																}
 															}
 															o.SetClassId("")
@@ -2171,7 +2210,13 @@ func resourceOsConfigurationFileUpdate(c context.Context, d *schema.ResourceData
 			}
 			if v, ok := l["value"]; ok {
 				{
-					o.SetValue(v)
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						x2 := x1.(map[string]interface{})
+						o.SetValue(x2)
+					}
 				}
 			}
 			x = append(x, *o)
@@ -2218,7 +2263,7 @@ func resourceOsConfigurationFileUpdate(c context.Context, d *schema.ResourceData
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating OsConfigurationFile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating OsConfigurationFile: %s", responseErr.Error())
@@ -2230,7 +2275,6 @@ func resourceOsConfigurationFileUpdate(c context.Context, d *schema.ResourceData
 
 func resourceOsConfigurationFileDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.OsApi.DeleteOsConfigurationFile(conn.ctx, d.Id())
@@ -2242,7 +2286,7 @@ func resourceOsConfigurationFileDelete(c context.Context, d *schema.ResourceData
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting OsConfigurationFile object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting OsConfigurationFile object: %s", deleteErr.Error())

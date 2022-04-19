@@ -629,7 +629,6 @@ func resourceKubernetesContainerRuntimePolicy() *schema.Resource {
 
 func resourceKubernetesContainerRuntimePolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewKubernetesContainerRuntimePolicyWithDefaults()
@@ -927,7 +926,7 @@ func resourceKubernetesContainerRuntimePolicyCreate(c context.Context, d *schema
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating KubernetesContainerRuntimePolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating KubernetesContainerRuntimePolicy: %s", responseErr.Error())
@@ -939,7 +938,6 @@ func resourceKubernetesContainerRuntimePolicyCreate(c context.Context, d *schema
 
 func resourceKubernetesContainerRuntimePolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.KubernetesApi.GetKubernetesContainerRuntimePolicyByMoid(conn.ctx, d.Id())
@@ -952,7 +950,7 @@ func resourceKubernetesContainerRuntimePolicyRead(c context.Context, d *schema.R
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching KubernetesContainerRuntimePolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching KubernetesContainerRuntimePolicy: %s", responseErr.Error())
@@ -1057,7 +1055,6 @@ func resourceKubernetesContainerRuntimePolicyRead(c context.Context, d *schema.R
 
 func resourceKubernetesContainerRuntimePolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.KubernetesContainerRuntimePolicy{}
@@ -1360,7 +1357,7 @@ func resourceKubernetesContainerRuntimePolicyUpdate(c context.Context, d *schema
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating KubernetesContainerRuntimePolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating KubernetesContainerRuntimePolicy: %s", responseErr.Error())
@@ -1372,7 +1369,6 @@ func resourceKubernetesContainerRuntimePolicyUpdate(c context.Context, d *schema
 
 func resourceKubernetesContainerRuntimePolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.KubernetesApi.DeleteKubernetesContainerRuntimePolicy(conn.ctx, d.Id())
@@ -1384,7 +1380,7 @@ func resourceKubernetesContainerRuntimePolicyDelete(c context.Context, d *schema
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting KubernetesContainerRuntimePolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting KubernetesContainerRuntimePolicy object: %s", deleteErr.Error())

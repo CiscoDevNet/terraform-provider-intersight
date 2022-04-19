@@ -501,7 +501,6 @@ func resourceKubernetesTrustedRegistriesPolicy() *schema.Resource {
 
 func resourceKubernetesTrustedRegistriesPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewKubernetesTrustedRegistriesPolicyWithDefaults()
@@ -685,7 +684,7 @@ func resourceKubernetesTrustedRegistriesPolicyCreate(c context.Context, d *schem
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating KubernetesTrustedRegistriesPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating KubernetesTrustedRegistriesPolicy: %s", responseErr.Error())
@@ -697,7 +696,6 @@ func resourceKubernetesTrustedRegistriesPolicyCreate(c context.Context, d *schem
 
 func resourceKubernetesTrustedRegistriesPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.KubernetesApi.GetKubernetesTrustedRegistriesPolicyByMoid(conn.ctx, d.Id())
@@ -710,7 +708,7 @@ func resourceKubernetesTrustedRegistriesPolicyRead(c context.Context, d *schema.
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching KubernetesTrustedRegistriesPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching KubernetesTrustedRegistriesPolicy: %s", responseErr.Error())
@@ -807,7 +805,6 @@ func resourceKubernetesTrustedRegistriesPolicyRead(c context.Context, d *schema.
 
 func resourceKubernetesTrustedRegistriesPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.KubernetesTrustedRegistriesPolicy{}
@@ -992,7 +989,7 @@ func resourceKubernetesTrustedRegistriesPolicyUpdate(c context.Context, d *schem
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating KubernetesTrustedRegistriesPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating KubernetesTrustedRegistriesPolicy: %s", responseErr.Error())
@@ -1004,7 +1001,6 @@ func resourceKubernetesTrustedRegistriesPolicyUpdate(c context.Context, d *schem
 
 func resourceKubernetesTrustedRegistriesPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.KubernetesApi.DeleteKubernetesTrustedRegistriesPolicy(conn.ctx, d.Id())
@@ -1016,7 +1012,7 @@ func resourceKubernetesTrustedRegistriesPolicyDelete(c context.Context, d *schem
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting KubernetesTrustedRegistriesPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting KubernetesTrustedRegistriesPolicy object: %s", deleteErr.Error())

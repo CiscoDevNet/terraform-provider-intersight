@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | **string** | The having filter type. | 
 **Aggregation** | **string** | aggregate metric | 
-**Value** | **float64** | null | 
+**Value** | **float64** |  | 
 
 ## Methods
 

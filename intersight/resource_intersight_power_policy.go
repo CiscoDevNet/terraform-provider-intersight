@@ -528,7 +528,6 @@ func resourcePowerPolicy() *schema.Resource {
 
 func resourcePowerPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewPowerPolicyWithDefaults()
@@ -721,7 +720,7 @@ func resourcePowerPolicyCreate(c context.Context, d *schema.ResourceData, meta i
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating PowerPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating PowerPolicy: %s", responseErr.Error())
@@ -732,7 +731,6 @@ func resourcePowerPolicyCreate(c context.Context, d *schema.ResourceData, meta i
 }
 func detachPowerPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.PowerPolicy{}
@@ -745,7 +743,7 @@ func detachPowerPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Di
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while detaching profile/profiles: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while detaching profile/profiles: %s", responseErr.Error())
@@ -755,7 +753,6 @@ func detachPowerPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Di
 
 func resourcePowerPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.PowerApi.GetPowerPolicyByMoid(conn.ctx, d.Id())
@@ -768,7 +765,7 @@ func resourcePowerPolicyRead(c context.Context, d *schema.ResourceData, meta int
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching PowerPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching PowerPolicy: %s", responseErr.Error())
@@ -885,7 +882,6 @@ func resourcePowerPolicyRead(c context.Context, d *schema.ResourceData, meta int
 
 func resourcePowerPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.PowerPolicy{}
@@ -1088,7 +1084,7 @@ func resourcePowerPolicyUpdate(c context.Context, d *schema.ResourceData, meta i
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating PowerPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating PowerPolicy: %s", responseErr.Error())
@@ -1100,7 +1096,6 @@ func resourcePowerPolicyUpdate(c context.Context, d *schema.ResourceData, meta i
 
 func resourcePowerPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	if p, ok := d.GetOk("profiles"); ok {
@@ -1120,7 +1115,7 @@ func resourcePowerPolicyDelete(c context.Context, d *schema.ResourceData, meta i
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting PowerPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting PowerPolicy object: %s", deleteErr.Error())

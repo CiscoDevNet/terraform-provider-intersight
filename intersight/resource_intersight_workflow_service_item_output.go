@@ -134,9 +134,9 @@ func resourceWorkflowServiceItemOutput() *schema.Resource {
 				Default:     "workflow.ServiceItemOutput",
 			},
 			"output": {
-				Description:      "Service item output for a service item instance and the format is specified by output definition of the service item definition.",
-				Type:             schema.TypeString,
-				DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
+				Description: "Service item output for a service item instance and the format is specified by output definition of the service item definition.",
+				Type:        schema.TypeString,
+				Optional:    true,
 			},
 			"owners": {
 				Type:       schema.TypeList,
@@ -447,7 +447,6 @@ func resourceWorkflowServiceItemOutput() *schema.Resource {
 
 func resourceWorkflowServiceItemOutputCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewWorkflowServiceItemOutputWithDefaults()
@@ -476,7 +475,13 @@ func resourceWorkflowServiceItemOutputCreate(c context.Context, d *schema.Resour
 	o.SetObjectType("workflow.ServiceItemOutput")
 
 	if v, ok := d.GetOk("output"); ok {
-		o.SetOutput(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetOutput(x2)
+		}
 	}
 
 	if v, ok := d.GetOk("service_item_instance"); ok {
@@ -562,7 +567,7 @@ func resourceWorkflowServiceItemOutputCreate(c context.Context, d *schema.Resour
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating WorkflowServiceItemOutput: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating WorkflowServiceItemOutput: %s", responseErr.Error())
@@ -574,7 +579,6 @@ func resourceWorkflowServiceItemOutputCreate(c context.Context, d *schema.Resour
 
 func resourceWorkflowServiceItemOutputRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.WorkflowApi.GetWorkflowServiceItemOutputByMoid(conn.ctx, d.Id())
@@ -587,7 +591,7 @@ func resourceWorkflowServiceItemOutputRead(c context.Context, d *schema.Resource
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching WorkflowServiceItemOutput: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching WorkflowServiceItemOutput: %s", responseErr.Error())
@@ -672,7 +676,6 @@ func resourceWorkflowServiceItemOutputRead(c context.Context, d *schema.Resource
 
 func resourceWorkflowServiceItemOutputUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.WorkflowServiceItemOutput{}
@@ -705,7 +708,13 @@ func resourceWorkflowServiceItemOutputUpdate(c context.Context, d *schema.Resour
 
 	if d.HasChange("output") {
 		v := d.Get("output")
-		o.SetOutput(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetOutput(x2)
+		}
 	}
 
 	if d.HasChange("service_item_instance") {
@@ -791,7 +800,7 @@ func resourceWorkflowServiceItemOutputUpdate(c context.Context, d *schema.Resour
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating WorkflowServiceItemOutput: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating WorkflowServiceItemOutput: %s", responseErr.Error())
@@ -803,7 +812,6 @@ func resourceWorkflowServiceItemOutputUpdate(c context.Context, d *schema.Resour
 
 func resourceWorkflowServiceItemOutputDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.WorkflowApi.DeleteWorkflowServiceItemOutput(conn.ctx, d.Id())
@@ -815,7 +823,7 @@ func resourceWorkflowServiceItemOutputDelete(c context.Context, d *schema.Resour
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting WorkflowServiceItemOutput object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting WorkflowServiceItemOutput object: %s", deleteErr.Error())

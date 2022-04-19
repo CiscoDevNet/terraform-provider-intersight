@@ -6,7 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "server.ConfigResult"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "server.ConfigResult"]
-**Profile** | Pointer to [**ServerProfileRelationship**](ServerProfileRelationship.md) |  | [optional] 
+**AppliedPolicies** | Pointer to [**[]PolicyPolicyStatus**](PolicyPolicyStatus.md) |  | [optional] 
+**Profile** | Pointer to [**ServerBaseProfileRelationship**](ServerBaseProfileRelationship.md) |  | [optional] 
 **ResultEntries** | Pointer to [**[]ServerConfigResultEntryRelationship**](ServerConfigResultEntryRelationship.md) | An array of relationships to serverConfigResultEntry resources. | [optional] 
 
 ## Methods
@@ -68,22 +69,57 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetAppliedPolicies
+
+`func (o *ServerConfigResult) GetAppliedPolicies() []PolicyPolicyStatus`
+
+GetAppliedPolicies returns the AppliedPolicies field if non-nil, zero value otherwise.
+
+### GetAppliedPoliciesOk
+
+`func (o *ServerConfigResult) GetAppliedPoliciesOk() (*[]PolicyPolicyStatus, bool)`
+
+GetAppliedPoliciesOk returns a tuple with the AppliedPolicies field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAppliedPolicies
+
+`func (o *ServerConfigResult) SetAppliedPolicies(v []PolicyPolicyStatus)`
+
+SetAppliedPolicies sets AppliedPolicies field to given value.
+
+### HasAppliedPolicies
+
+`func (o *ServerConfigResult) HasAppliedPolicies() bool`
+
+HasAppliedPolicies returns a boolean if a field has been set.
+
+### SetAppliedPoliciesNil
+
+`func (o *ServerConfigResult) SetAppliedPoliciesNil(b bool)`
+
+ SetAppliedPoliciesNil sets the value for AppliedPolicies to be an explicit nil
+
+### UnsetAppliedPolicies
+`func (o *ServerConfigResult) UnsetAppliedPolicies()`
+
+UnsetAppliedPolicies ensures that no value is present for AppliedPolicies, not even an explicit nil
 ### GetProfile
 
-`func (o *ServerConfigResult) GetProfile() ServerProfileRelationship`
+`func (o *ServerConfigResult) GetProfile() ServerBaseProfileRelationship`
 
 GetProfile returns the Profile field if non-nil, zero value otherwise.
 
 ### GetProfileOk
 
-`func (o *ServerConfigResult) GetProfileOk() (*ServerProfileRelationship, bool)`
+`func (o *ServerConfigResult) GetProfileOk() (*ServerBaseProfileRelationship, bool)`
 
 GetProfileOk returns a tuple with the Profile field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetProfile
 
-`func (o *ServerConfigResult) SetProfile(v ServerProfileRelationship)`
+`func (o *ServerConfigResult) SetProfile(v ServerBaseProfileRelationship)`
 
 SetProfile sets Profile field to given value.
 

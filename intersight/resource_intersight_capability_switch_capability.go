@@ -1219,7 +1219,6 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 
 func resourceCapabilitySwitchCapabilityCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewCapabilitySwitchCapabilityWithDefaults()
@@ -2214,7 +2213,7 @@ func resourceCapabilitySwitchCapabilityCreate(c context.Context, d *schema.Resou
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating CapabilitySwitchCapability: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating CapabilitySwitchCapability: %s", responseErr.Error())
@@ -2226,7 +2225,6 @@ func resourceCapabilitySwitchCapabilityCreate(c context.Context, d *schema.Resou
 
 func resourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.CapabilityApi.GetCapabilitySwitchCapabilityByMoid(conn.ctx, d.Id())
@@ -2239,7 +2237,7 @@ func resourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resourc
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching CapabilitySwitchCapability: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching CapabilitySwitchCapability: %s", responseErr.Error())
@@ -2424,7 +2422,6 @@ func resourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resourc
 
 func resourceCapabilitySwitchCapabilityUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.CapabilitySwitchCapability{}
@@ -3424,7 +3421,7 @@ func resourceCapabilitySwitchCapabilityUpdate(c context.Context, d *schema.Resou
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating CapabilitySwitchCapability: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating CapabilitySwitchCapability: %s", responseErr.Error())
@@ -3436,7 +3433,6 @@ func resourceCapabilitySwitchCapabilityUpdate(c context.Context, d *schema.Resou
 
 func resourceCapabilitySwitchCapabilityDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.CapabilityApi.DeleteCapabilitySwitchCapability(conn.ctx, d.Id())
@@ -3448,7 +3444,7 @@ func resourceCapabilitySwitchCapabilityDelete(c context.Context, d *schema.Resou
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting CapabilitySwitchCapability object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting CapabilitySwitchCapability object: %s", deleteErr.Error())

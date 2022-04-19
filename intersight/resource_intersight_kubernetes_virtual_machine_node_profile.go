@@ -1095,7 +1095,6 @@ func resourceKubernetesVirtualMachineNodeProfile() *schema.Resource {
 
 func resourceKubernetesVirtualMachineNodeProfileCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewKubernetesVirtualMachineNodeProfileWithDefaults()
@@ -1716,7 +1715,7 @@ func resourceKubernetesVirtualMachineNodeProfileCreate(c context.Context, d *sch
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating KubernetesVirtualMachineNodeProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating KubernetesVirtualMachineNodeProfile: %s", responseErr.Error())
@@ -1728,7 +1727,6 @@ func resourceKubernetesVirtualMachineNodeProfileCreate(c context.Context, d *sch
 
 func resourceKubernetesVirtualMachineNodeProfileRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.KubernetesApi.GetKubernetesVirtualMachineNodeProfileByMoid(conn.ctx, d.Id())
@@ -1741,7 +1739,7 @@ func resourceKubernetesVirtualMachineNodeProfileRead(c context.Context, d *schem
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching KubernetesVirtualMachineNodeProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching KubernetesVirtualMachineNodeProfile: %s", responseErr.Error())
@@ -1882,7 +1880,6 @@ func resourceKubernetesVirtualMachineNodeProfileRead(c context.Context, d *schem
 
 func resourceKubernetesVirtualMachineNodeProfileUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.KubernetesVirtualMachineNodeProfile{}
@@ -2510,7 +2507,7 @@ func resourceKubernetesVirtualMachineNodeProfileUpdate(c context.Context, d *sch
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating KubernetesVirtualMachineNodeProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating KubernetesVirtualMachineNodeProfile: %s", responseErr.Error())
@@ -2522,7 +2519,6 @@ func resourceKubernetesVirtualMachineNodeProfileUpdate(c context.Context, d *sch
 
 func resourceKubernetesVirtualMachineNodeProfileDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.KubernetesApi.DeleteKubernetesVirtualMachineNodeProfile(conn.ctx, d.Id())
@@ -2534,7 +2530,7 @@ func resourceKubernetesVirtualMachineNodeProfileDelete(c context.Context, d *sch
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting KubernetesVirtualMachineNodeProfile object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting KubernetesVirtualMachineNodeProfile object: %s", deleteErr.Error())

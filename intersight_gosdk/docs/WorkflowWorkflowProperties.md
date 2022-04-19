@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **EnableDebug** | Pointer to **bool** | Enabling this flag will capture request and response details as debug logs for tasks that are using workflow.BatchApi for implementation. For other tasks in the workflow which are not based on workflow.BatchApi logs will not be generated. | [optional] [default to false]
 **ExternalMeta** | Pointer to **bool** | When set to false the workflow is owned by the system and used for internal services. Such workflows cannot be directly used by external entities. | [optional] [default to false]
 **Retryable** | Pointer to **bool** | When true, this workflow can be retried if has not been modified for more than a period of 2 weeks. | [optional] [default to false]
+**RollbackOnCancel** | Pointer to **bool** | When set to true, the changes are automatically rolled back if the workflow execution is cancelled. | [optional] [default to false]
+**RollbackOnFailure** | Pointer to **bool** | When set to true, the changes are automatically rolled back if the workflow fails to execute. | [optional] [default to false]
 **SupportStatus** | Pointer to **string** | Supported status of the definition. * &#x60;Supported&#x60; - The definition is a supported version and there will be no changes to the mandatory inputs or outputs. * &#x60;Beta&#x60; - The definition is a Beta version and this version can under go changes until the version is marked supported. * &#x60;Deprecated&#x60; - The version of definition is deprecated and typically there will be a higher version of the same definition that has been added. | [optional] [default to "Supported"]
 
 ## Methods
@@ -170,6 +172,56 @@ SetRetryable sets Retryable field to given value.
 `func (o *WorkflowWorkflowProperties) HasRetryable() bool`
 
 HasRetryable returns a boolean if a field has been set.
+
+### GetRollbackOnCancel
+
+`func (o *WorkflowWorkflowProperties) GetRollbackOnCancel() bool`
+
+GetRollbackOnCancel returns the RollbackOnCancel field if non-nil, zero value otherwise.
+
+### GetRollbackOnCancelOk
+
+`func (o *WorkflowWorkflowProperties) GetRollbackOnCancelOk() (*bool, bool)`
+
+GetRollbackOnCancelOk returns a tuple with the RollbackOnCancel field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRollbackOnCancel
+
+`func (o *WorkflowWorkflowProperties) SetRollbackOnCancel(v bool)`
+
+SetRollbackOnCancel sets RollbackOnCancel field to given value.
+
+### HasRollbackOnCancel
+
+`func (o *WorkflowWorkflowProperties) HasRollbackOnCancel() bool`
+
+HasRollbackOnCancel returns a boolean if a field has been set.
+
+### GetRollbackOnFailure
+
+`func (o *WorkflowWorkflowProperties) GetRollbackOnFailure() bool`
+
+GetRollbackOnFailure returns the RollbackOnFailure field if non-nil, zero value otherwise.
+
+### GetRollbackOnFailureOk
+
+`func (o *WorkflowWorkflowProperties) GetRollbackOnFailureOk() (*bool, bool)`
+
+GetRollbackOnFailureOk returns a tuple with the RollbackOnFailure field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRollbackOnFailure
+
+`func (o *WorkflowWorkflowProperties) SetRollbackOnFailure(v bool)`
+
+SetRollbackOnFailure sets RollbackOnFailure field to given value.
+
+### HasRollbackOnFailure
+
+`func (o *WorkflowWorkflowProperties) HasRollbackOnFailure() bool`
+
+HasRollbackOnFailure returns a boolean if a field has been set.
 
 ### GetSupportStatus
 

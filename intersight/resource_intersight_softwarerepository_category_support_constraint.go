@@ -478,7 +478,6 @@ func resourceSoftwarerepositoryCategorySupportConstraint() *schema.Resource {
 
 func resourceSoftwarerepositoryCategorySupportConstraintCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewSoftwarerepositoryCategorySupportConstraintWithDefaults()
@@ -641,7 +640,7 @@ func resourceSoftwarerepositoryCategorySupportConstraintCreate(c context.Context
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating SoftwarerepositoryCategorySupportConstraint: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating SoftwarerepositoryCategorySupportConstraint: %s", responseErr.Error())
@@ -653,7 +652,6 @@ func resourceSoftwarerepositoryCategorySupportConstraintCreate(c context.Context
 
 func resourceSoftwarerepositoryCategorySupportConstraintRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.SoftwarerepositoryApi.GetSoftwarerepositoryCategorySupportConstraintByMoid(conn.ctx, d.Id())
@@ -666,7 +664,7 @@ func resourceSoftwarerepositoryCategorySupportConstraintRead(c context.Context, 
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching SoftwarerepositoryCategorySupportConstraint: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching SoftwarerepositoryCategorySupportConstraint: %s", responseErr.Error())
@@ -767,7 +765,6 @@ func resourceSoftwarerepositoryCategorySupportConstraintRead(c context.Context, 
 
 func resourceSoftwarerepositoryCategorySupportConstraintUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.SoftwarerepositoryCategorySupportConstraint{}
@@ -934,7 +931,7 @@ func resourceSoftwarerepositoryCategorySupportConstraintUpdate(c context.Context
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating SoftwarerepositoryCategorySupportConstraint: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating SoftwarerepositoryCategorySupportConstraint: %s", responseErr.Error())
@@ -946,7 +943,6 @@ func resourceSoftwarerepositoryCategorySupportConstraintUpdate(c context.Context
 
 func resourceSoftwarerepositoryCategorySupportConstraintDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.SoftwarerepositoryApi.DeleteSoftwarerepositoryCategorySupportConstraint(conn.ctx, d.Id())
@@ -958,7 +954,7 @@ func resourceSoftwarerepositoryCategorySupportConstraintDelete(c context.Context
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting SoftwarerepositoryCategorySupportConstraint object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting SoftwarerepositoryCategorySupportConstraint object: %s", deleteErr.Error())

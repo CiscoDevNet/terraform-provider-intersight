@@ -897,7 +897,6 @@ func dataSourceStoragePhysicalDiskUsage() *schema.Resource {
 
 func dataSourceStoragePhysicalDiskUsageRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.StoragePhysicalDiskUsage{}
@@ -1373,7 +1372,7 @@ func dataSourceStoragePhysicalDiskUsageRead(c context.Context, d *schema.Resourc
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of StoragePhysicalDiskUsage: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of StoragePhysicalDiskUsage: %s", responseErr.Error())
@@ -1390,7 +1389,7 @@ func dataSourceStoragePhysicalDiskUsageRead(c context.Context, d *schema.Resourc
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching StoragePhysicalDiskUsage: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching StoragePhysicalDiskUsage: %s", responseErr.Error())

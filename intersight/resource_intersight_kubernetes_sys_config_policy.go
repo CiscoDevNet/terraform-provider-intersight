@@ -512,7 +512,6 @@ func resourceKubernetesSysConfigPolicy() *schema.Resource {
 
 func resourceKubernetesSysConfigPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewKubernetesSysConfigPolicyWithDefaults()
@@ -706,7 +705,7 @@ func resourceKubernetesSysConfigPolicyCreate(c context.Context, d *schema.Resour
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating KubernetesSysConfigPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating KubernetesSysConfigPolicy: %s", responseErr.Error())
@@ -718,7 +717,6 @@ func resourceKubernetesSysConfigPolicyCreate(c context.Context, d *schema.Resour
 
 func resourceKubernetesSysConfigPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.KubernetesApi.GetKubernetesSysConfigPolicyByMoid(conn.ctx, d.Id())
@@ -731,7 +729,7 @@ func resourceKubernetesSysConfigPolicyRead(c context.Context, d *schema.Resource
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching KubernetesSysConfigPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching KubernetesSysConfigPolicy: %s", responseErr.Error())
@@ -836,7 +834,6 @@ func resourceKubernetesSysConfigPolicyRead(c context.Context, d *schema.Resource
 
 func resourceKubernetesSysConfigPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.KubernetesSysConfigPolicy{}
@@ -1033,7 +1030,7 @@ func resourceKubernetesSysConfigPolicyUpdate(c context.Context, d *schema.Resour
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating KubernetesSysConfigPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating KubernetesSysConfigPolicy: %s", responseErr.Error())
@@ -1045,7 +1042,6 @@ func resourceKubernetesSysConfigPolicyUpdate(c context.Context, d *schema.Resour
 
 func resourceKubernetesSysConfigPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.KubernetesApi.DeleteKubernetesSysConfigPolicy(conn.ctx, d.Id())
@@ -1057,7 +1053,7 @@ func resourceKubernetesSysConfigPolicyDelete(c context.Context, d *schema.Resour
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting KubernetesSysConfigPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting KubernetesSysConfigPolicy object: %s", deleteErr.Error())

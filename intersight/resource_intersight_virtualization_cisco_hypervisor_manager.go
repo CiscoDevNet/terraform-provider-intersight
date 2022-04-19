@@ -514,7 +514,6 @@ func resourceVirtualizationCiscoHypervisorManager() *schema.Resource {
 
 func resourceVirtualizationCiscoHypervisorManagerCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewVirtualizationCiscoHypervisorManagerWithDefaults()
@@ -625,7 +624,7 @@ func resourceVirtualizationCiscoHypervisorManagerCreate(c context.Context, d *sc
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating VirtualizationCiscoHypervisorManager: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating VirtualizationCiscoHypervisorManager: %s", responseErr.Error())
@@ -637,7 +636,6 @@ func resourceVirtualizationCiscoHypervisorManagerCreate(c context.Context, d *sc
 
 func resourceVirtualizationCiscoHypervisorManagerRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.VirtualizationApi.GetVirtualizationCiscoHypervisorManagerByMoid(conn.ctx, d.Id())
@@ -650,7 +648,7 @@ func resourceVirtualizationCiscoHypervisorManagerRead(c context.Context, d *sche
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching VirtualizationCiscoHypervisorManager: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching VirtualizationCiscoHypervisorManager: %s", responseErr.Error())
@@ -747,7 +745,6 @@ func resourceVirtualizationCiscoHypervisorManagerRead(c context.Context, d *sche
 
 func resourceVirtualizationCiscoHypervisorManagerUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.VirtualizationCiscoHypervisorManager{}
@@ -861,7 +858,7 @@ func resourceVirtualizationCiscoHypervisorManagerUpdate(c context.Context, d *sc
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating VirtualizationCiscoHypervisorManager: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating VirtualizationCiscoHypervisorManager: %s", responseErr.Error())
@@ -873,7 +870,6 @@ func resourceVirtualizationCiscoHypervisorManagerUpdate(c context.Context, d *sc
 
 func resourceVirtualizationCiscoHypervisorManagerDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	var warning = diag.Diagnostic{Severity: diag.Warning, Summary: "VirtualizationCiscoHypervisorManager does not allow delete functionality"}
 	de = append(de, warning)

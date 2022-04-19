@@ -668,7 +668,6 @@ func resourceVmrcConsole() *schema.Resource {
 
 func resourceVmrcConsoleCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewVmrcConsoleWithDefaults()
@@ -779,7 +778,7 @@ func resourceVmrcConsoleCreate(c context.Context, d *schema.ResourceData, meta i
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating VmrcConsole: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating VmrcConsole: %s", responseErr.Error())
@@ -791,7 +790,6 @@ func resourceVmrcConsoleCreate(c context.Context, d *schema.ResourceData, meta i
 
 func resourceVmrcConsoleRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.VmrcApi.GetVmrcConsoleByMoid(conn.ctx, d.Id())
@@ -804,7 +802,7 @@ func resourceVmrcConsoleRead(c context.Context, d *schema.ResourceData, meta int
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching VmrcConsole: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching VmrcConsole: %s", responseErr.Error())
@@ -925,7 +923,6 @@ func resourceVmrcConsoleRead(c context.Context, d *schema.ResourceData, meta int
 
 func resourceVmrcConsoleUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.VmrcConsole{}
@@ -1039,7 +1036,7 @@ func resourceVmrcConsoleUpdate(c context.Context, d *schema.ResourceData, meta i
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating VmrcConsole: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating VmrcConsole: %s", responseErr.Error())
@@ -1051,7 +1048,6 @@ func resourceVmrcConsoleUpdate(c context.Context, d *schema.ResourceData, meta i
 
 func resourceVmrcConsoleDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	var warning = diag.Diagnostic{Severity: diag.Warning, Summary: "VmrcConsole does not allow delete functionality"}
 	de = append(de, warning)

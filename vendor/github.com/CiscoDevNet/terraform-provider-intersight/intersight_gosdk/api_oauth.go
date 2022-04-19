@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,23 +13,18 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // OauthApiService OauthApi service
 type OauthApiService service
 
 type ApiCreateOauthAuthorizationRequest struct {
-	ctx                _context.Context
+	ctx                context.Context
 	ApiService         *OauthApiService
 	oauthAuthorization *OauthAuthorization
 	ifMatch            *string
@@ -54,17 +49,17 @@ func (r ApiCreateOauthAuthorizationRequest) IfNoneMatch(ifNoneMatch string) ApiC
 	return r
 }
 
-func (r ApiCreateOauthAuthorizationRequest) Execute() (OauthAuthorization, *_nethttp.Response, error) {
+func (r ApiCreateOauthAuthorizationRequest) Execute() (*OauthAuthorization, *http.Response, error) {
 	return r.ApiService.CreateOauthAuthorizationExecute(r)
 }
 
 /*
 CreateOauthAuthorization Create a 'oauth.Authorization' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateOauthAuthorizationRequest
 */
-func (a *OauthApiService) CreateOauthAuthorization(ctx _context.Context) ApiCreateOauthAuthorizationRequest {
+func (a *OauthApiService) CreateOauthAuthorization(ctx context.Context) ApiCreateOauthAuthorizationRequest {
 	return ApiCreateOauthAuthorizationRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -73,26 +68,24 @@ func (a *OauthApiService) CreateOauthAuthorization(ctx _context.Context) ApiCrea
 
 // Execute executes the request
 //  @return OauthAuthorization
-func (a *OauthApiService) CreateOauthAuthorizationExecute(r ApiCreateOauthAuthorizationRequest) (OauthAuthorization, *_nethttp.Response, error) {
+func (a *OauthApiService) CreateOauthAuthorizationExecute(r ApiCreateOauthAuthorizationRequest) (*OauthAuthorization, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  OauthAuthorization
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *OauthAuthorization
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OauthApiService.CreateOauthAuthorization")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/oauth/Authorizations"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.oauthAuthorization == nil {
 		return localVarReturnValue, nil, reportError("oauthAuthorization is required and must be specified")
 	}
@@ -122,7 +115,7 @@ func (a *OauthApiService) CreateOauthAuthorizationExecute(r ApiCreateOauthAuthor
 	}
 	// body params
 	localVarPostBody = r.oauthAuthorization
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -132,15 +125,15 @@ func (a *OauthApiService) CreateOauthAuthorizationExecute(r ApiCreateOauthAuthor
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -196,7 +189,7 @@ func (a *OauthApiService) CreateOauthAuthorizationExecute(r ApiCreateOauthAuthor
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -207,23 +200,23 @@ func (a *OauthApiService) CreateOauthAuthorizationExecute(r ApiCreateOauthAuthor
 }
 
 type ApiDeleteOauthAccessTokenRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *OauthApiService
 	moid       string
 }
 
-func (r ApiDeleteOauthAccessTokenRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteOauthAccessTokenRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteOauthAccessTokenExecute(r)
 }
 
 /*
 DeleteOauthAccessToken Delete a 'oauth.AccessToken' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteOauthAccessTokenRequest
 */
-func (a *OauthApiService) DeleteOauthAccessToken(ctx _context.Context, moid string) ApiDeleteOauthAccessTokenRequest {
+func (a *OauthApiService) DeleteOauthAccessToken(ctx context.Context, moid string) ApiDeleteOauthAccessTokenRequest {
 	return ApiDeleteOauthAccessTokenRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -232,26 +225,24 @@ func (a *OauthApiService) DeleteOauthAccessToken(ctx _context.Context, moid stri
 }
 
 // Execute executes the request
-func (a *OauthApiService) DeleteOauthAccessTokenExecute(r ApiDeleteOauthAccessTokenRequest) (*_nethttp.Response, error) {
+func (a *OauthApiService) DeleteOauthAccessTokenExecute(r ApiDeleteOauthAccessTokenRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OauthApiService.DeleteOauthAccessToken")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/oauth/AccessTokens/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -270,7 +261,7 @@ func (a *OauthApiService) DeleteOauthAccessTokenExecute(r ApiDeleteOauthAccessTo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -280,15 +271,15 @@ func (a *OauthApiService) DeleteOauthAccessTokenExecute(r ApiDeleteOauthAccessTo
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -346,23 +337,23 @@ func (a *OauthApiService) DeleteOauthAccessTokenExecute(r ApiDeleteOauthAccessTo
 }
 
 type ApiGetOauthAccessTokenByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *OauthApiService
 	moid       string
 }
 
-func (r ApiGetOauthAccessTokenByMoidRequest) Execute() (OauthAccessToken, *_nethttp.Response, error) {
+func (r ApiGetOauthAccessTokenByMoidRequest) Execute() (*OauthAccessToken, *http.Response, error) {
 	return r.ApiService.GetOauthAccessTokenByMoidExecute(r)
 }
 
 /*
 GetOauthAccessTokenByMoid Read a 'oauth.AccessToken' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetOauthAccessTokenByMoidRequest
 */
-func (a *OauthApiService) GetOauthAccessTokenByMoid(ctx _context.Context, moid string) ApiGetOauthAccessTokenByMoidRequest {
+func (a *OauthApiService) GetOauthAccessTokenByMoid(ctx context.Context, moid string) ApiGetOauthAccessTokenByMoidRequest {
 	return ApiGetOauthAccessTokenByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -372,27 +363,25 @@ func (a *OauthApiService) GetOauthAccessTokenByMoid(ctx _context.Context, moid s
 
 // Execute executes the request
 //  @return OauthAccessToken
-func (a *OauthApiService) GetOauthAccessTokenByMoidExecute(r ApiGetOauthAccessTokenByMoidRequest) (OauthAccessToken, *_nethttp.Response, error) {
+func (a *OauthApiService) GetOauthAccessTokenByMoidExecute(r ApiGetOauthAccessTokenByMoidRequest) (*OauthAccessToken, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  OauthAccessToken
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *OauthAccessToken
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OauthApiService.GetOauthAccessTokenByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/oauth/AccessTokens/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -411,7 +400,7 @@ func (a *OauthApiService) GetOauthAccessTokenByMoidExecute(r ApiGetOauthAccessTo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -421,15 +410,15 @@ func (a *OauthApiService) GetOauthAccessTokenByMoidExecute(r ApiGetOauthAccessTo
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -485,7 +474,7 @@ func (a *OauthApiService) GetOauthAccessTokenByMoidExecute(r ApiGetOauthAccessTo
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -496,7 +485,7 @@ func (a *OauthApiService) GetOauthAccessTokenByMoidExecute(r ApiGetOauthAccessTo
 }
 
 type ApiGetOauthAccessTokenListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *OauthApiService
 	filter      *string
 	orderby     *string
@@ -577,17 +566,17 @@ func (r ApiGetOauthAccessTokenListRequest) Tags(tags string) ApiGetOauthAccessTo
 	return r
 }
 
-func (r ApiGetOauthAccessTokenListRequest) Execute() (OauthAccessTokenResponse, *_nethttp.Response, error) {
+func (r ApiGetOauthAccessTokenListRequest) Execute() (*OauthAccessTokenResponse, *http.Response, error) {
 	return r.ApiService.GetOauthAccessTokenListExecute(r)
 }
 
 /*
 GetOauthAccessTokenList Read a 'oauth.AccessToken' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetOauthAccessTokenListRequest
 */
-func (a *OauthApiService) GetOauthAccessTokenList(ctx _context.Context) ApiGetOauthAccessTokenListRequest {
+func (a *OauthApiService) GetOauthAccessTokenList(ctx context.Context) ApiGetOauthAccessTokenListRequest {
 	return ApiGetOauthAccessTokenListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -596,26 +585,24 @@ func (a *OauthApiService) GetOauthAccessTokenList(ctx _context.Context) ApiGetOa
 
 // Execute executes the request
 //  @return OauthAccessTokenResponse
-func (a *OauthApiService) GetOauthAccessTokenListExecute(r ApiGetOauthAccessTokenListRequest) (OauthAccessTokenResponse, *_nethttp.Response, error) {
+func (a *OauthApiService) GetOauthAccessTokenListExecute(r ApiGetOauthAccessTokenListRequest) (*OauthAccessTokenResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  OauthAccessTokenResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *OauthAccessTokenResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OauthApiService.GetOauthAccessTokenList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/oauth/AccessTokens"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -667,7 +654,7 @@ func (a *OauthApiService) GetOauthAccessTokenListExecute(r ApiGetOauthAccessToke
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -677,15 +664,15 @@ func (a *OauthApiService) GetOauthAccessTokenListExecute(r ApiGetOauthAccessToke
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -741,7 +728,7 @@ func (a *OauthApiService) GetOauthAccessTokenListExecute(r ApiGetOauthAccessToke
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -752,23 +739,23 @@ func (a *OauthApiService) GetOauthAccessTokenListExecute(r ApiGetOauthAccessToke
 }
 
 type ApiGetOauthAuthorizationByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *OauthApiService
 	moid       string
 }
 
-func (r ApiGetOauthAuthorizationByMoidRequest) Execute() (OauthAuthorization, *_nethttp.Response, error) {
+func (r ApiGetOauthAuthorizationByMoidRequest) Execute() (*OauthAuthorization, *http.Response, error) {
 	return r.ApiService.GetOauthAuthorizationByMoidExecute(r)
 }
 
 /*
 GetOauthAuthorizationByMoid Read a 'oauth.Authorization' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetOauthAuthorizationByMoidRequest
 */
-func (a *OauthApiService) GetOauthAuthorizationByMoid(ctx _context.Context, moid string) ApiGetOauthAuthorizationByMoidRequest {
+func (a *OauthApiService) GetOauthAuthorizationByMoid(ctx context.Context, moid string) ApiGetOauthAuthorizationByMoidRequest {
 	return ApiGetOauthAuthorizationByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -778,27 +765,25 @@ func (a *OauthApiService) GetOauthAuthorizationByMoid(ctx _context.Context, moid
 
 // Execute executes the request
 //  @return OauthAuthorization
-func (a *OauthApiService) GetOauthAuthorizationByMoidExecute(r ApiGetOauthAuthorizationByMoidRequest) (OauthAuthorization, *_nethttp.Response, error) {
+func (a *OauthApiService) GetOauthAuthorizationByMoidExecute(r ApiGetOauthAuthorizationByMoidRequest) (*OauthAuthorization, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  OauthAuthorization
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *OauthAuthorization
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OauthApiService.GetOauthAuthorizationByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/oauth/Authorizations/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -817,7 +802,7 @@ func (a *OauthApiService) GetOauthAuthorizationByMoidExecute(r ApiGetOauthAuthor
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -827,15 +812,15 @@ func (a *OauthApiService) GetOauthAuthorizationByMoidExecute(r ApiGetOauthAuthor
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -891,7 +876,7 @@ func (a *OauthApiService) GetOauthAuthorizationByMoidExecute(r ApiGetOauthAuthor
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -902,7 +887,7 @@ func (a *OauthApiService) GetOauthAuthorizationByMoidExecute(r ApiGetOauthAuthor
 }
 
 type ApiGetOauthAuthorizationListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *OauthApiService
 	filter      *string
 	orderby     *string
@@ -983,17 +968,17 @@ func (r ApiGetOauthAuthorizationListRequest) Tags(tags string) ApiGetOauthAuthor
 	return r
 }
 
-func (r ApiGetOauthAuthorizationListRequest) Execute() (OauthAuthorizationResponse, *_nethttp.Response, error) {
+func (r ApiGetOauthAuthorizationListRequest) Execute() (*OauthAuthorizationResponse, *http.Response, error) {
 	return r.ApiService.GetOauthAuthorizationListExecute(r)
 }
 
 /*
 GetOauthAuthorizationList Read a 'oauth.Authorization' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetOauthAuthorizationListRequest
 */
-func (a *OauthApiService) GetOauthAuthorizationList(ctx _context.Context) ApiGetOauthAuthorizationListRequest {
+func (a *OauthApiService) GetOauthAuthorizationList(ctx context.Context) ApiGetOauthAuthorizationListRequest {
 	return ApiGetOauthAuthorizationListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1002,26 +987,24 @@ func (a *OauthApiService) GetOauthAuthorizationList(ctx _context.Context) ApiGet
 
 // Execute executes the request
 //  @return OauthAuthorizationResponse
-func (a *OauthApiService) GetOauthAuthorizationListExecute(r ApiGetOauthAuthorizationListRequest) (OauthAuthorizationResponse, *_nethttp.Response, error) {
+func (a *OauthApiService) GetOauthAuthorizationListExecute(r ApiGetOauthAuthorizationListRequest) (*OauthAuthorizationResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  OauthAuthorizationResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *OauthAuthorizationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OauthApiService.GetOauthAuthorizationList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/oauth/Authorizations"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1073,7 +1056,7 @@ func (a *OauthApiService) GetOauthAuthorizationListExecute(r ApiGetOauthAuthoriz
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1083,15 +1066,15 @@ func (a *OauthApiService) GetOauthAuthorizationListExecute(r ApiGetOauthAuthoriz
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1147,7 +1130,7 @@ func (a *OauthApiService) GetOauthAuthorizationListExecute(r ApiGetOauthAuthoriz
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1158,7 +1141,7 @@ func (a *OauthApiService) GetOauthAuthorizationListExecute(r ApiGetOauthAuthoriz
 }
 
 type ApiPatchOauthAuthorizationRequest struct {
-	ctx                _context.Context
+	ctx                context.Context
 	ApiService         *OauthApiService
 	moid               string
 	oauthAuthorization *OauthAuthorization
@@ -1177,18 +1160,18 @@ func (r ApiPatchOauthAuthorizationRequest) IfMatch(ifMatch string) ApiPatchOauth
 	return r
 }
 
-func (r ApiPatchOauthAuthorizationRequest) Execute() (OauthAuthorization, *_nethttp.Response, error) {
+func (r ApiPatchOauthAuthorizationRequest) Execute() (*OauthAuthorization, *http.Response, error) {
 	return r.ApiService.PatchOauthAuthorizationExecute(r)
 }
 
 /*
 PatchOauthAuthorization Update a 'oauth.Authorization' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchOauthAuthorizationRequest
 */
-func (a *OauthApiService) PatchOauthAuthorization(ctx _context.Context, moid string) ApiPatchOauthAuthorizationRequest {
+func (a *OauthApiService) PatchOauthAuthorization(ctx context.Context, moid string) ApiPatchOauthAuthorizationRequest {
 	return ApiPatchOauthAuthorizationRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1198,27 +1181,25 @@ func (a *OauthApiService) PatchOauthAuthorization(ctx _context.Context, moid str
 
 // Execute executes the request
 //  @return OauthAuthorization
-func (a *OauthApiService) PatchOauthAuthorizationExecute(r ApiPatchOauthAuthorizationRequest) (OauthAuthorization, *_nethttp.Response, error) {
+func (a *OauthApiService) PatchOauthAuthorizationExecute(r ApiPatchOauthAuthorizationRequest) (*OauthAuthorization, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  OauthAuthorization
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *OauthAuthorization
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OauthApiService.PatchOauthAuthorization")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/oauth/Authorizations/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.oauthAuthorization == nil {
 		return localVarReturnValue, nil, reportError("oauthAuthorization is required and must be specified")
 	}
@@ -1245,7 +1226,7 @@ func (a *OauthApiService) PatchOauthAuthorizationExecute(r ApiPatchOauthAuthoriz
 	}
 	// body params
 	localVarPostBody = r.oauthAuthorization
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1255,15 +1236,15 @@ func (a *OauthApiService) PatchOauthAuthorizationExecute(r ApiPatchOauthAuthoriz
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1319,7 +1300,7 @@ func (a *OauthApiService) PatchOauthAuthorizationExecute(r ApiPatchOauthAuthoriz
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1330,7 +1311,7 @@ func (a *OauthApiService) PatchOauthAuthorizationExecute(r ApiPatchOauthAuthoriz
 }
 
 type ApiUpdateOauthAuthorizationRequest struct {
-	ctx                _context.Context
+	ctx                context.Context
 	ApiService         *OauthApiService
 	moid               string
 	oauthAuthorization *OauthAuthorization
@@ -1349,18 +1330,18 @@ func (r ApiUpdateOauthAuthorizationRequest) IfMatch(ifMatch string) ApiUpdateOau
 	return r
 }
 
-func (r ApiUpdateOauthAuthorizationRequest) Execute() (OauthAuthorization, *_nethttp.Response, error) {
+func (r ApiUpdateOauthAuthorizationRequest) Execute() (*OauthAuthorization, *http.Response, error) {
 	return r.ApiService.UpdateOauthAuthorizationExecute(r)
 }
 
 /*
 UpdateOauthAuthorization Update a 'oauth.Authorization' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateOauthAuthorizationRequest
 */
-func (a *OauthApiService) UpdateOauthAuthorization(ctx _context.Context, moid string) ApiUpdateOauthAuthorizationRequest {
+func (a *OauthApiService) UpdateOauthAuthorization(ctx context.Context, moid string) ApiUpdateOauthAuthorizationRequest {
 	return ApiUpdateOauthAuthorizationRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1370,27 +1351,25 @@ func (a *OauthApiService) UpdateOauthAuthorization(ctx _context.Context, moid st
 
 // Execute executes the request
 //  @return OauthAuthorization
-func (a *OauthApiService) UpdateOauthAuthorizationExecute(r ApiUpdateOauthAuthorizationRequest) (OauthAuthorization, *_nethttp.Response, error) {
+func (a *OauthApiService) UpdateOauthAuthorizationExecute(r ApiUpdateOauthAuthorizationRequest) (*OauthAuthorization, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  OauthAuthorization
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *OauthAuthorization
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OauthApiService.UpdateOauthAuthorization")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/oauth/Authorizations/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.oauthAuthorization == nil {
 		return localVarReturnValue, nil, reportError("oauthAuthorization is required and must be specified")
 	}
@@ -1417,7 +1396,7 @@ func (a *OauthApiService) UpdateOauthAuthorizationExecute(r ApiUpdateOauthAuthor
 	}
 	// body params
 	localVarPostBody = r.oauthAuthorization
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1427,15 +1406,15 @@ func (a *OauthApiService) UpdateOauthAuthorizationExecute(r ApiUpdateOauthAuthor
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1491,7 +1470,7 @@ func (a *OauthApiService) UpdateOauthAuthorizationExecute(r ApiUpdateOauthAuthor
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

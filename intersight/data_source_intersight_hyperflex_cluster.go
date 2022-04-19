@@ -839,10 +839,8 @@ func dataSourceHyperflexCluster() *schema.Resource {
 										Type: schema.TypeString}},
 								"messages_iterator": {
 									Description: "The current message describing the auto-healing process of the cluster.",
-									Type:        schema.TypeMap,
-									Elem: &schema.Schema{
-										Type: schema.TypeString,
-									}, Optional: true,
+									Type:        schema.TypeString,
+									Optional:    true,
 								},
 								"messages_size": {
 									Description: "The number of elements in the messages collection.",
@@ -874,10 +872,8 @@ func dataSourceHyperflexCluster() *schema.Resource {
 					},
 					"resiliency_details": {
 						Description: "The details about the resiliency health of the cluster. Includes information about the cluster healing status and the storage cluster health.",
-						Type:        schema.TypeMap,
-						Elem: &schema.Schema{
-							Type: schema.TypeString,
-						}, Optional: true,
+						Type:        schema.TypeString,
+						Optional:    true,
 					},
 					"resiliency_details_size": {
 						Description: "The number of elements in the resiliency details property.",
@@ -913,10 +909,8 @@ func dataSourceHyperflexCluster() *schema.Resource {
 										Type: schema.TypeString}},
 								"messages_iterator": {
 									Description: "The current message describing the auto-healing process of the cluster.",
-									Type:        schema.TypeMap,
-									Elem: &schema.Schema{
-										Type: schema.TypeString,
-									}, Optional: true,
+									Type:        schema.TypeString,
+									Optional:    true,
 								},
 								"messages_size": {
 									Description: "The number of elements in the messages collection.",
@@ -1989,10 +1983,8 @@ func dataSourceHyperflexCluster() *schema.Resource {
 										Type: schema.TypeString}},
 								"messages_iterator": {
 									Description: "The current message describing the auto-healing process of the cluster.",
-									Type:        schema.TypeMap,
-									Elem: &schema.Schema{
-										Type: schema.TypeString,
-									}, Optional: true,
+									Type:        schema.TypeString,
+									Optional:    true,
 								},
 								"messages_size": {
 									Description: "The number of elements in the messages collection.",
@@ -2024,10 +2016,8 @@ func dataSourceHyperflexCluster() *schema.Resource {
 					},
 					"resiliency_details": {
 						Description: "The details about the resiliency health of the cluster. Includes information about the cluster healing status and the storage cluster health.",
-						Type:        schema.TypeMap,
-						Elem: &schema.Schema{
-							Type: schema.TypeString,
-						}, Optional: true,
+						Type:        schema.TypeString,
+						Optional:    true,
 					},
 					"resiliency_details_size": {
 						Description: "The number of elements in the resiliency details property.",
@@ -2063,10 +2053,8 @@ func dataSourceHyperflexCluster() *schema.Resource {
 										Type: schema.TypeString}},
 								"messages_iterator": {
 									Description: "The current message describing the auto-healing process of the cluster.",
-									Type:        schema.TypeMap,
-									Elem: &schema.Schema{
-										Type: schema.TypeString,
-									}, Optional: true,
+									Type:        schema.TypeString,
+									Optional:    true,
 								},
 								"messages_size": {
 									Description: "The number of elements in the messages collection.",
@@ -2327,7 +2315,6 @@ func dataSourceHyperflexCluster() *schema.Resource {
 
 func dataSourceHyperflexClusterRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.HyperflexCluster{}
@@ -3396,7 +3383,7 @@ func dataSourceHyperflexClusterRead(c context.Context, d *schema.ResourceData, m
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of HyperflexCluster: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of HyperflexCluster: %s", responseErr.Error())
@@ -3413,7 +3400,7 @@ func dataSourceHyperflexClusterRead(c context.Context, d *schema.ResourceData, m
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching HyperflexCluster: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching HyperflexCluster: %s", responseErr.Error())

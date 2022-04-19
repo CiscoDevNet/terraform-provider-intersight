@@ -76,10 +76,8 @@ func dataSourceWorkflowPendingDynamicWorkflowInfo() *schema.Resource {
 		},
 		"input": {
 			Description: "The inputs of the workflow.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
@@ -358,10 +356,8 @@ func dataSourceWorkflowPendingDynamicWorkflowInfo() *schema.Resource {
 					},
 					"tasks": {
 						Description: "The task list that has precedence which dictates how the workflow should be constructed.",
-						Type:        schema.TypeMap,
-						Elem: &schema.Schema{
-							Type: schema.TypeString,
-						}, Optional: true,
+						Type:        schema.TypeString,
+						Optional:    true,
 					},
 				},
 			},
@@ -526,10 +522,8 @@ func dataSourceWorkflowPendingDynamicWorkflowInfo() *schema.Resource {
 		},
 		"workflow_meta": {
 			Description: "The metadata of the workflow.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 	}
 	var model = map[string]*schema.Schema{"account_moid": {
@@ -593,10 +587,8 @@ func dataSourceWorkflowPendingDynamicWorkflowInfo() *schema.Resource {
 		},
 		"input": {
 			Description: "The inputs of the workflow.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
@@ -875,10 +867,8 @@ func dataSourceWorkflowPendingDynamicWorkflowInfo() *schema.Resource {
 					},
 					"tasks": {
 						Description: "The task list that has precedence which dictates how the workflow should be constructed.",
-						Type:        schema.TypeMap,
-						Elem: &schema.Schema{
-							Type: schema.TypeString,
-						}, Optional: true,
+						Type:        schema.TypeString,
+						Optional:    true,
 					},
 				},
 			},
@@ -1043,10 +1033,8 @@ func dataSourceWorkflowPendingDynamicWorkflowInfo() *schema.Resource {
 		},
 		"workflow_meta": {
 			Description: "The metadata of the workflow.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 	}
 	model["results"] = &schema.Schema{
@@ -1061,7 +1049,6 @@ func dataSourceWorkflowPendingDynamicWorkflowInfo() *schema.Resource {
 
 func dataSourceWorkflowPendingDynamicWorkflowInfoRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.WorkflowPendingDynamicWorkflowInfo{}
@@ -1135,7 +1122,13 @@ func dataSourceWorkflowPendingDynamicWorkflowInfoRead(c context.Context, d *sche
 	}
 
 	if v, ok := d.GetOk("input"); ok {
-		o.SetInput(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetInput(x2)
+		}
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
@@ -1421,7 +1414,13 @@ func dataSourceWorkflowPendingDynamicWorkflowInfoRead(c context.Context, d *sche
 			}
 			if v, ok := l["tasks"]; ok {
 				{
-					o.SetTasks(v)
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						x2 := x1.(map[string]interface{})
+						o.SetTasks(x2)
+					}
 				}
 			}
 			x = append(x, *o)
@@ -1626,7 +1625,13 @@ func dataSourceWorkflowPendingDynamicWorkflowInfoRead(c context.Context, d *sche
 	}
 
 	if v, ok := d.GetOk("workflow_meta"); ok {
-		o.SetWorkflowMeta(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetWorkflowMeta(x2)
+		}
 	}
 
 	data, err := o.MarshalJSON()
@@ -1637,7 +1642,7 @@ func dataSourceWorkflowPendingDynamicWorkflowInfoRead(c context.Context, d *sche
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of WorkflowPendingDynamicWorkflowInfo: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of WorkflowPendingDynamicWorkflowInfo: %s", responseErr.Error())
@@ -1654,7 +1659,7 @@ func dataSourceWorkflowPendingDynamicWorkflowInfoRead(c context.Context, d *sche
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching WorkflowPendingDynamicWorkflowInfo: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching WorkflowPendingDynamicWorkflowInfo: %s", responseErr.Error())
@@ -1673,6 +1678,7 @@ func dataSourceWorkflowPendingDynamicWorkflowInfoRead(c context.Context, d *sche
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["input"] = flattenAdditionalProperties(s.GetInput())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
@@ -1699,6 +1705,7 @@ func dataSourceWorkflowPendingDynamicWorkflowInfoRead(c context.Context, d *sche
 
 				temp["workflow_info"] = flattenMapWorkflowWorkflowInfoRelationship(s.GetWorkflowInfo(), d)
 				temp["workflow_key"] = (s.GetWorkflowKey())
+				temp["workflow_meta"] = flattenAdditionalProperties(s.GetWorkflowMeta())
 				workflowPendingDynamicWorkflowInfoResults[j] = temp
 				j += 1
 			}

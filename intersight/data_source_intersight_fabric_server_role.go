@@ -717,7 +717,6 @@ func dataSourceFabricServerRole() *schema.Resource {
 
 func dataSourceFabricServerRoleRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.FabricServerRole{}
@@ -1087,7 +1086,7 @@ func dataSourceFabricServerRoleRead(c context.Context, d *schema.ResourceData, m
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of FabricServerRole: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of FabricServerRole: %s", responseErr.Error())
@@ -1104,7 +1103,7 @@ func dataSourceFabricServerRoleRead(c context.Context, d *schema.ResourceData, m
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching FabricServerRole: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching FabricServerRole: %s", responseErr.Error())

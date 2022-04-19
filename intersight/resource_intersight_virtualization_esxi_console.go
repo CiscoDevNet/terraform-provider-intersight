@@ -668,7 +668,6 @@ func resourceVirtualizationEsxiConsole() *schema.Resource {
 
 func resourceVirtualizationEsxiConsoleCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewVirtualizationEsxiConsoleWithDefaults()
@@ -822,7 +821,7 @@ func resourceVirtualizationEsxiConsoleCreate(c context.Context, d *schema.Resour
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating VirtualizationEsxiConsole: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating VirtualizationEsxiConsole: %s", responseErr.Error())
@@ -834,7 +833,6 @@ func resourceVirtualizationEsxiConsoleCreate(c context.Context, d *schema.Resour
 
 func resourceVirtualizationEsxiConsoleRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.VirtualizationApi.GetVirtualizationEsxiConsoleByMoid(conn.ctx, d.Id())
@@ -847,7 +845,7 @@ func resourceVirtualizationEsxiConsoleRead(c context.Context, d *schema.Resource
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching VirtualizationEsxiConsole: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching VirtualizationEsxiConsole: %s", responseErr.Error())
@@ -968,7 +966,6 @@ func resourceVirtualizationEsxiConsoleRead(c context.Context, d *schema.Resource
 
 func resourceVirtualizationEsxiConsoleUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.VirtualizationEsxiConsole{}
@@ -1126,7 +1123,7 @@ func resourceVirtualizationEsxiConsoleUpdate(c context.Context, d *schema.Resour
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating VirtualizationEsxiConsole: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating VirtualizationEsxiConsole: %s", responseErr.Error())
@@ -1138,7 +1135,6 @@ func resourceVirtualizationEsxiConsoleUpdate(c context.Context, d *schema.Resour
 
 func resourceVirtualizationEsxiConsoleDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	var warning = diag.Diagnostic{Severity: diag.Warning, Summary: "VirtualizationEsxiConsole does not allow delete functionality"}
 	de = append(de, warning)

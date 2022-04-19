@@ -710,7 +710,6 @@ func resourceKubernetesAciCniProfile() *schema.Resource {
 
 func resourceKubernetesAciCniProfileCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewKubernetesAciCniProfileWithDefaults()
@@ -981,7 +980,7 @@ func resourceKubernetesAciCniProfileCreate(c context.Context, d *schema.Resource
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating KubernetesAciCniProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating KubernetesAciCniProfile: %s", responseErr.Error())
@@ -993,7 +992,6 @@ func resourceKubernetesAciCniProfileCreate(c context.Context, d *schema.Resource
 
 func resourceKubernetesAciCniProfileRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.KubernetesApi.GetKubernetesAciCniProfileByMoid(conn.ctx, d.Id())
@@ -1006,7 +1004,7 @@ func resourceKubernetesAciCniProfileRead(c context.Context, d *schema.ResourceDa
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching KubernetesAciCniProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching KubernetesAciCniProfile: %s", responseErr.Error())
@@ -1175,7 +1173,6 @@ func resourceKubernetesAciCniProfileRead(c context.Context, d *schema.ResourceDa
 
 func resourceKubernetesAciCniProfileUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.KubernetesAciCniProfile{}
@@ -1466,7 +1463,7 @@ func resourceKubernetesAciCniProfileUpdate(c context.Context, d *schema.Resource
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating KubernetesAciCniProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating KubernetesAciCniProfile: %s", responseErr.Error())
@@ -1478,7 +1475,6 @@ func resourceKubernetesAciCniProfileUpdate(c context.Context, d *schema.Resource
 
 func resourceKubernetesAciCniProfileDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.KubernetesApi.DeleteKubernetesAciCniProfile(conn.ctx, d.Id())
@@ -1490,7 +1486,7 @@ func resourceKubernetesAciCniProfileDelete(c context.Context, d *schema.Resource
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting KubernetesAciCniProfile object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting KubernetesAciCniProfile object: %s", deleteErr.Error())

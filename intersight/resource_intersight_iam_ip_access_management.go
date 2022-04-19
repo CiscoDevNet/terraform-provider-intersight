@@ -491,7 +491,6 @@ func resourceIamIpAccessManagement() *schema.Resource {
 
 func resourceIamIpAccessManagementCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewIamIpAccessManagementWithDefaults()
@@ -559,7 +558,7 @@ func resourceIamIpAccessManagementCreate(c context.Context, d *schema.ResourceDa
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating IamIpAccessManagement: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating IamIpAccessManagement: %s", responseErr.Error())
@@ -571,7 +570,6 @@ func resourceIamIpAccessManagementCreate(c context.Context, d *schema.ResourceDa
 
 func resourceIamIpAccessManagementRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.IamApi.GetIamIpAccessManagementByMoid(conn.ctx, d.Id())
@@ -584,7 +582,7 @@ func resourceIamIpAccessManagementRead(c context.Context, d *schema.ResourceData
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching IamIpAccessManagement: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching IamIpAccessManagement: %s", responseErr.Error())
@@ -673,7 +671,6 @@ func resourceIamIpAccessManagementRead(c context.Context, d *schema.ResourceData
 
 func resourceIamIpAccessManagementUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.IamIpAccessManagement{}
@@ -743,7 +740,7 @@ func resourceIamIpAccessManagementUpdate(c context.Context, d *schema.ResourceDa
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating IamIpAccessManagement: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating IamIpAccessManagement: %s", responseErr.Error())
@@ -755,7 +752,6 @@ func resourceIamIpAccessManagementUpdate(c context.Context, d *schema.ResourceDa
 
 func resourceIamIpAccessManagementDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	var warning = diag.Diagnostic{Severity: diag.Warning, Summary: "IamIpAccessManagement does not allow delete functionality"}
 	de = append(de, warning)

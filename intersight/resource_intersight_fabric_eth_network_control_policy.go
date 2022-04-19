@@ -551,7 +551,6 @@ func resourceFabricEthNetworkControlPolicy() *schema.Resource {
 
 func resourceFabricEthNetworkControlPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewFabricEthNetworkControlPolicyWithDefaults()
@@ -772,7 +771,7 @@ func resourceFabricEthNetworkControlPolicyCreate(c context.Context, d *schema.Re
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating FabricEthNetworkControlPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating FabricEthNetworkControlPolicy: %s", responseErr.Error())
@@ -784,7 +783,6 @@ func resourceFabricEthNetworkControlPolicyCreate(c context.Context, d *schema.Re
 
 func resourceFabricEthNetworkControlPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.FabricApi.GetFabricEthNetworkControlPolicyByMoid(conn.ctx, d.Id())
@@ -797,7 +795,7 @@ func resourceFabricEthNetworkControlPolicyRead(c context.Context, d *schema.Reso
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching FabricEthNetworkControlPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching FabricEthNetworkControlPolicy: %s", responseErr.Error())
@@ -906,7 +904,6 @@ func resourceFabricEthNetworkControlPolicyRead(c context.Context, d *schema.Reso
 
 func resourceFabricEthNetworkControlPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.FabricEthNetworkControlPolicy{}
@@ -1135,7 +1132,7 @@ func resourceFabricEthNetworkControlPolicyUpdate(c context.Context, d *schema.Re
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating FabricEthNetworkControlPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating FabricEthNetworkControlPolicy: %s", responseErr.Error())
@@ -1147,7 +1144,6 @@ func resourceFabricEthNetworkControlPolicyUpdate(c context.Context, d *schema.Re
 
 func resourceFabricEthNetworkControlPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.FabricApi.DeleteFabricEthNetworkControlPolicy(conn.ctx, d.Id())
@@ -1159,7 +1155,7 @@ func resourceFabricEthNetworkControlPolicyDelete(c context.Context, d *schema.Re
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting FabricEthNetworkControlPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting FabricEthNetworkControlPolicy object: %s", deleteErr.Error())

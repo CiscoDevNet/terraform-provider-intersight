@@ -460,7 +460,6 @@ func resourceCapabilityPsuDescriptor() *schema.Resource {
 
 func resourceCapabilityPsuDescriptorCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewCapabilityPsuDescriptorWithDefaults()
@@ -590,7 +589,7 @@ func resourceCapabilityPsuDescriptorCreate(c context.Context, d *schema.Resource
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating CapabilityPsuDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating CapabilityPsuDescriptor: %s", responseErr.Error())
@@ -602,7 +601,6 @@ func resourceCapabilityPsuDescriptorCreate(c context.Context, d *schema.Resource
 
 func resourceCapabilityPsuDescriptorRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.CapabilityApi.GetCapabilityPsuDescriptorByMoid(conn.ctx, d.Id())
@@ -615,7 +613,7 @@ func resourceCapabilityPsuDescriptorRead(c context.Context, d *schema.ResourceDa
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching CapabilityPsuDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching CapabilityPsuDescriptor: %s", responseErr.Error())
@@ -712,7 +710,6 @@ func resourceCapabilityPsuDescriptorRead(c context.Context, d *schema.ResourceDa
 
 func resourceCapabilityPsuDescriptorUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.CapabilityPsuDescriptor{}
@@ -847,7 +844,7 @@ func resourceCapabilityPsuDescriptorUpdate(c context.Context, d *schema.Resource
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating CapabilityPsuDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating CapabilityPsuDescriptor: %s", responseErr.Error())
@@ -859,7 +856,6 @@ func resourceCapabilityPsuDescriptorUpdate(c context.Context, d *schema.Resource
 
 func resourceCapabilityPsuDescriptorDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.CapabilityApi.DeleteCapabilityPsuDescriptor(conn.ctx, d.Id())
@@ -871,7 +867,7 @@ func resourceCapabilityPsuDescriptorDelete(c context.Context, d *schema.Resource
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting CapabilityPsuDescriptor object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting CapabilityPsuDescriptor object: %s", deleteErr.Error())

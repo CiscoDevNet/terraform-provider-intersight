@@ -623,7 +623,6 @@ func resourceVirtualizationVirtualNetwork() *schema.Resource {
 
 func resourceVirtualizationVirtualNetworkCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewVirtualizationVirtualNetworkWithDefaults()
@@ -820,7 +819,7 @@ func resourceVirtualizationVirtualNetworkCreate(c context.Context, d *schema.Res
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating VirtualizationVirtualNetwork: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating VirtualizationVirtualNetwork: %s", responseErr.Error())
@@ -838,7 +837,7 @@ func resourceVirtualizationVirtualNetworkCreate(c context.Context, d *schema.Res
 			if responseErr != nil {
 				errorType := fmt.Sprintf("%T", responseErr)
 				if strings.Contains(errorType, "GenericOpenAPIError") {
-					responseErr := responseErr.(models.GenericOpenAPIError)
+					responseErr := responseErr.(*models.GenericOpenAPIError)
 					return diag.Errorf("error occurred while fetching VirtualizationVirtualNetwork: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 				}
 				return diag.Errorf("error occurred while fetching VirtualizationVirtualNetwork: %s", responseErr.Error())
@@ -852,7 +851,7 @@ func resourceVirtualizationVirtualNetworkCreate(c context.Context, d *schema.Res
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching VirtualizationVirtualNetwork: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching VirtualizationVirtualNetwork: %s", responseErr.Error())
@@ -866,7 +865,7 @@ func resourceVirtualizationVirtualNetworkCreate(c context.Context, d *schema.Res
 			if err != nil {
 				errorType := fmt.Sprintf("%T", err)
 				if strings.Contains(errorType, "GenericOpenAPIError") {
-					err := err.(models.GenericOpenAPIError)
+					err := err.(*models.GenericOpenAPIError)
 					return diag.Errorf("failed while fetching workflow information in VirtualizationVirtualNetwork: %s Response from endpoint: %s", err.Error(), string(err.Body()))
 				}
 				return diag.Errorf("failed while fetching workflow information in VirtualizationVirtualNetwork: %s", err.Error())
@@ -881,7 +880,6 @@ func resourceVirtualizationVirtualNetworkCreate(c context.Context, d *schema.Res
 
 func resourceVirtualizationVirtualNetworkRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.VirtualizationApi.GetVirtualizationVirtualNetworkByMoid(conn.ctx, d.Id())
@@ -894,7 +892,7 @@ func resourceVirtualizationVirtualNetworkRead(c context.Context, d *schema.Resou
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching VirtualizationVirtualNetwork: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching VirtualizationVirtualNetwork: %s", responseErr.Error())
@@ -1019,7 +1017,6 @@ func resourceVirtualizationVirtualNetworkRead(c context.Context, d *schema.Resou
 
 func resourceVirtualizationVirtualNetworkUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.VirtualizationVirtualNetwork{}
@@ -1225,7 +1222,7 @@ func resourceVirtualizationVirtualNetworkUpdate(c context.Context, d *schema.Res
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating VirtualizationVirtualNetwork: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating VirtualizationVirtualNetwork: %s", responseErr.Error())
@@ -1243,7 +1240,7 @@ func resourceVirtualizationVirtualNetworkUpdate(c context.Context, d *schema.Res
 			if responseErr != nil {
 				errorType := fmt.Sprintf("%T", responseErr)
 				if strings.Contains(errorType, "GenericOpenAPIError") {
-					responseErr := responseErr.(models.GenericOpenAPIError)
+					responseErr := responseErr.(*models.GenericOpenAPIError)
 					return diag.Errorf("error occurred while fetching VirtualizationVirtualNetwork: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 				}
 				return diag.Errorf("error occurred while fetching VirtualizationVirtualNetwork: %s", responseErr.Error())
@@ -1257,7 +1254,7 @@ func resourceVirtualizationVirtualNetworkUpdate(c context.Context, d *schema.Res
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching VirtualizationVirtualNetwork: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching VirtualizationVirtualNetwork: %s", responseErr.Error())
@@ -1271,7 +1268,7 @@ func resourceVirtualizationVirtualNetworkUpdate(c context.Context, d *schema.Res
 			if err != nil {
 				errorType := fmt.Sprintf("%T", err)
 				if strings.Contains(errorType, "GenericOpenAPIError") {
-					err := err.(models.GenericOpenAPIError)
+					err := err.(*models.GenericOpenAPIError)
 					return diag.Errorf("failed while fetching workflow information in VirtualizationVirtualNetwork: %s Response from endpoint: %s", err.Error(), string(err.Body()))
 				}
 				return diag.Errorf("failed while fetching workflow information in VirtualizationVirtualNetwork: %s", err.Error())
@@ -1286,7 +1283,6 @@ func resourceVirtualizationVirtualNetworkUpdate(c context.Context, d *schema.Res
 
 func resourceVirtualizationVirtualNetworkDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.VirtualizationApi.DeleteVirtualizationVirtualNetwork(conn.ctx, d.Id())
@@ -1298,7 +1294,7 @@ func resourceVirtualizationVirtualNetworkDelete(c context.Context, d *schema.Res
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting VirtualizationVirtualNetwork object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting VirtualizationVirtualNetwork object: %s", deleteErr.Error())

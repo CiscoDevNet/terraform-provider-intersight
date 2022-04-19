@@ -823,7 +823,6 @@ func resourceSoftwareHclMeta() *schema.Resource {
 
 func resourceSoftwareHclMetaCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewSoftwareHclMetaWithDefaults()
@@ -1242,7 +1241,7 @@ func resourceSoftwareHclMetaCreate(c context.Context, d *schema.ResourceData, me
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating SoftwareHclMeta: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating SoftwareHclMeta: %s", responseErr.Error())
@@ -1254,7 +1253,6 @@ func resourceSoftwareHclMetaCreate(c context.Context, d *schema.ResourceData, me
 
 func resourceSoftwareHclMetaRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.SoftwareApi.GetSoftwareHclMetaByMoid(conn.ctx, d.Id())
@@ -1267,7 +1265,7 @@ func resourceSoftwareHclMetaRead(c context.Context, d *schema.ResourceData, meta
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching SoftwareHclMeta: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching SoftwareHclMeta: %s", responseErr.Error())
@@ -1464,7 +1462,6 @@ func resourceSoftwareHclMetaRead(c context.Context, d *schema.ResourceData, meta
 
 func resourceSoftwareHclMetaUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.SoftwareHclMeta{}
@@ -1900,7 +1897,7 @@ func resourceSoftwareHclMetaUpdate(c context.Context, d *schema.ResourceData, me
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating SoftwareHclMeta: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating SoftwareHclMeta: %s", responseErr.Error())
@@ -1912,7 +1909,6 @@ func resourceSoftwareHclMetaUpdate(c context.Context, d *schema.ResourceData, me
 
 func resourceSoftwareHclMetaDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.SoftwareApi.DeleteSoftwareHclMeta(conn.ctx, d.Id())
@@ -1924,7 +1920,7 @@ func resourceSoftwareHclMetaDelete(c context.Context, d *schema.ResourceData, me
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting SoftwareHclMeta object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting SoftwareHclMeta object: %s", deleteErr.Error())

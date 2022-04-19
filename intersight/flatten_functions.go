@@ -1483,6 +1483,18 @@ func flattenListFabricEthNetworkGroupPolicyRelationship(p []models.FabricEthNetw
 	}
 	return fabricethnetworkgrouppolicyrelationships
 }
+func flattenListFabricEthNetworkGroupPolicyInventoryRelationship(p []models.FabricEthNetworkGroupPolicyInventoryRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var fabricethnetworkgrouppolicyinventoryrelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		fabricethnetworkgrouppolicyinventoryrelationship := flattenMoMoRef(item)
+		fabricethnetworkgrouppolicyinventoryrelationships = append(fabricethnetworkgrouppolicyinventoryrelationships, fabricethnetworkgrouppolicyinventoryrelationship)
+	}
+	return fabricethnetworkgrouppolicyinventoryrelationships
+}
 func flattenListFabricPortIdentifier(p []models.FabricPortIdentifier, d *schema.ResourceData) []map[string]interface{} {
 	var fabricportidentifiers []map[string]interface{}
 	if len(p) == 0 {
@@ -2902,6 +2914,18 @@ func flattenListIaasConnectorPackRelationship(p []models.IaasConnectorPackRelati
 	}
 	return iaasconnectorpackrelationships
 }
+func flattenListIaasCustomTaskInfoRelationship(p []models.IaasCustomTaskInfoRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var iaascustomtaskinforelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		iaascustomtaskinforelationship := flattenMoMoRef(item)
+		iaascustomtaskinforelationships = append(iaascustomtaskinforelationships, iaascustomtaskinforelationship)
+	}
+	return iaascustomtaskinforelationships
+}
 func flattenListIaasDeviceStatusRelationship(p []models.IaasDeviceStatusRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var iaasdevicestatusrelationships []map[string]interface{}
 	if len(p) == 0 {
@@ -2961,6 +2985,18 @@ func flattenListIaasMostRunTasksRelationship(p []models.IaasMostRunTasksRelation
 		iaasmostruntasksrelationships = append(iaasmostruntasksrelationships, iaasmostruntasksrelationship)
 	}
 	return iaasmostruntasksrelationships
+}
+func flattenListIaasSystemTaskInfoRelationship(p []models.IaasSystemTaskInfoRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var iaassystemtaskinforelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		iaassystemtaskinforelationship := flattenMoMoRef(item)
+		iaassystemtaskinforelationships = append(iaassystemtaskinforelationships, iaassystemtaskinforelationship)
+	}
+	return iaassystemtaskinforelationships
 }
 func flattenListIaasWorkflowSteps(p []models.IaasWorkflowSteps, d *schema.ResourceData) []map[string]interface{} {
 	var iaasworkflowstepss []map[string]interface{}
@@ -3084,6 +3120,18 @@ func flattenListIamEndPointUserRoleRelationship(p []models.IamEndPointUserRoleRe
 		iamendpointuserrolerelationships = append(iamendpointuserrolerelationships, iamendpointuserrolerelationship)
 	}
 	return iamendpointuserrolerelationships
+}
+func flattenListIamEndPointUserRoleInventoryRelationship(p []models.IamEndPointUserRoleInventoryRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var iamendpointuserroleinventoryrelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		iamendpointuserroleinventoryrelationship := flattenMoMoRef(item)
+		iamendpointuserroleinventoryrelationships = append(iamendpointuserroleinventoryrelationships, iamendpointuserroleinventoryrelationship)
+	}
+	return iamendpointuserroleinventoryrelationships
 }
 func flattenListIamFeatureDefinition(p []models.IamFeatureDefinition, d *schema.ResourceData) []map[string]interface{} {
 	var iamfeaturedefinitions []map[string]interface{}
@@ -5157,6 +5205,24 @@ func flattenListPolicyActionParam(p []models.PolicyActionParam, d *schema.Resour
 	}
 	return policyactionparams
 }
+func flattenListPolicyPolicyStatus(p []models.PolicyPolicyStatus, d *schema.ResourceData) []map[string]interface{} {
+	var policypolicystatuss []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		policypolicystatus := make(map[string]interface{})
+		policypolicystatus["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		policypolicystatus["class_id"] = item.GetClassId()
+		policypolicystatus["moid"] = item.GetMoid()
+		policypolicystatus["object_type"] = item.GetObjectType()
+		policypolicystatus["reason"] = item.GetReason()
+		policypolicystatus["status"] = item.GetStatus()
+		policypolicystatus["type"] = item.GetType()
+		policypolicystatuss = append(policypolicystatuss, policypolicystatus)
+	}
+	return policypolicystatuss
+}
 func flattenListPolicyinventoryJobInfo(p []models.PolicyinventoryJobInfo, d *schema.ResourceData) []map[string]interface{} {
 	var policyinventoryjobinfos []map[string]interface{}
 	if len(p) == 0 {
@@ -6734,6 +6800,18 @@ func flattenListVnicEthIfRelationship(p []models.VnicEthIfRelationship, d *schem
 	}
 	return vnicethifrelationships
 }
+func flattenListVnicEthIfInventoryRelationship(p []models.VnicEthIfInventoryRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var vnicethifinventoryrelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		vnicethifinventoryrelationship := flattenMoMoRef(item)
+		vnicethifinventoryrelationships = append(vnicethifinventoryrelationships, vnicethifinventoryrelationship)
+	}
+	return vnicethifinventoryrelationships
+}
 func flattenListVnicEthNetworkPolicyRelationship(p []models.VnicEthNetworkPolicyRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var vnicethnetworkpolicyrelationships []map[string]interface{}
 	if len(p) == 0 {
@@ -6746,6 +6824,18 @@ func flattenListVnicEthNetworkPolicyRelationship(p []models.VnicEthNetworkPolicy
 	}
 	return vnicethnetworkpolicyrelationships
 }
+func flattenListVnicEthNetworkPolicyInventoryRelationship(p []models.VnicEthNetworkPolicyInventoryRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var vnicethnetworkpolicyinventoryrelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		vnicethnetworkpolicyinventoryrelationship := flattenMoMoRef(item)
+		vnicethnetworkpolicyinventoryrelationships = append(vnicethnetworkpolicyinventoryrelationships, vnicethnetworkpolicyinventoryrelationship)
+	}
+	return vnicethnetworkpolicyinventoryrelationships
+}
 func flattenListVnicFcIfRelationship(p []models.VnicFcIfRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var vnicfcifrelationships []map[string]interface{}
 	if len(p) == 0 {
@@ -6757,6 +6847,18 @@ func flattenListVnicFcIfRelationship(p []models.VnicFcIfRelationship, d *schema.
 		vnicfcifrelationships = append(vnicfcifrelationships, vnicfcifrelationship)
 	}
 	return vnicfcifrelationships
+}
+func flattenListVnicFcIfInventoryRelationship(p []models.VnicFcIfInventoryRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var vnicfcifinventoryrelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		vnicfcifinventoryrelationship := flattenMoMoRef(item)
+		vnicfcifinventoryrelationships = append(vnicfcifinventoryrelationships, vnicfcifinventoryrelationship)
+	}
+	return vnicfcifinventoryrelationships
 }
 func flattenListVnicVifStatus(p []models.VnicVifStatus, d *schema.ResourceData) []map[string]interface{} {
 	var vnicvifstatuss []map[string]interface{}
@@ -8424,6 +8526,24 @@ func flattenMapChassisConfigResultRelationship(p models.ChassisConfigResultRelat
 	chassisconfigresultrelationships = append(chassisconfigresultrelationships, chassisconfigresultrelationship)
 	return chassisconfigresultrelationships
 }
+func flattenMapChassisIomProfileRelationship(p models.ChassisIomProfileRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var chassisiomprofilerelationships []map[string]interface{}
+	var ret models.ChassisIomProfileRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	chassisiomprofilerelationship := make(map[string]interface{})
+	chassisiomprofilerelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	chassisiomprofilerelationship["class_id"] = item.GetClassId()
+	chassisiomprofilerelationship["moid"] = item.GetMoid()
+	chassisiomprofilerelationship["object_type"] = item.GetObjectType()
+	chassisiomprofilerelationship["selector"] = item.GetSelector()
+
+	chassisiomprofilerelationships = append(chassisiomprofilerelationships, chassisiomprofilerelationship)
+	return chassisiomprofilerelationships
+}
 func flattenMapChassisProfileRelationship(p models.ChassisProfileRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var chassisprofilerelationships []map[string]interface{}
 	var ret models.ChassisProfileRelationship
@@ -9566,6 +9686,24 @@ func flattenMapEtherPhysicalPortBaseRelationship(p models.EtherPhysicalPortBaseR
 	etherphysicalportbaserelationships = append(etherphysicalportbaserelationships, etherphysicalportbaserelationship)
 	return etherphysicalportbaserelationships
 }
+func flattenMapFabricAbstractInterfaceRoleRelationship(p models.FabricAbstractInterfaceRoleRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var fabricabstractinterfacerolerelationships []map[string]interface{}
+	var ret models.FabricAbstractInterfaceRoleRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	fabricabstractinterfacerolerelationship := make(map[string]interface{})
+	fabricabstractinterfacerolerelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	fabricabstractinterfacerolerelationship["class_id"] = item.GetClassId()
+	fabricabstractinterfacerolerelationship["moid"] = item.GetMoid()
+	fabricabstractinterfacerolerelationship["object_type"] = item.GetObjectType()
+	fabricabstractinterfacerolerelationship["selector"] = item.GetSelector()
+
+	fabricabstractinterfacerolerelationships = append(fabricabstractinterfacerolerelationships, fabricabstractinterfacerolerelationship)
+	return fabricabstractinterfacerolerelationships
+}
 func flattenMapFabricConfigResultRelationship(p models.FabricConfigResultRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var fabricconfigresultrelationships []map[string]interface{}
 	var ret models.FabricConfigResultRelationship
@@ -9601,6 +9739,24 @@ func flattenMapFabricEthNetworkControlPolicyRelationship(p models.FabricEthNetwo
 
 	fabricethnetworkcontrolpolicyrelationships = append(fabricethnetworkcontrolpolicyrelationships, fabricethnetworkcontrolpolicyrelationship)
 	return fabricethnetworkcontrolpolicyrelationships
+}
+func flattenMapFabricEthNetworkControlPolicyInventoryRelationship(p models.FabricEthNetworkControlPolicyInventoryRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var fabricethnetworkcontrolpolicyinventoryrelationships []map[string]interface{}
+	var ret models.FabricEthNetworkControlPolicyInventoryRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	fabricethnetworkcontrolpolicyinventoryrelationship := make(map[string]interface{})
+	fabricethnetworkcontrolpolicyinventoryrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	fabricethnetworkcontrolpolicyinventoryrelationship["class_id"] = item.GetClassId()
+	fabricethnetworkcontrolpolicyinventoryrelationship["moid"] = item.GetMoid()
+	fabricethnetworkcontrolpolicyinventoryrelationship["object_type"] = item.GetObjectType()
+	fabricethnetworkcontrolpolicyinventoryrelationship["selector"] = item.GetSelector()
+
+	fabricethnetworkcontrolpolicyinventoryrelationships = append(fabricethnetworkcontrolpolicyinventoryrelationships, fabricethnetworkcontrolpolicyinventoryrelationship)
+	return fabricethnetworkcontrolpolicyinventoryrelationships
 }
 func flattenMapFabricEthNetworkGroupPolicyRelationship(p models.FabricEthNetworkGroupPolicyRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var fabricethnetworkgrouppolicyrelationships []map[string]interface{}
@@ -12012,6 +12168,24 @@ func flattenMapIamEndPointUserRelationship(p models.IamEndPointUserRelationship,
 	iamendpointuserrelationships = append(iamendpointuserrelationships, iamendpointuserrelationship)
 	return iamendpointuserrelationships
 }
+func flattenMapIamEndPointUserInventoryRelationship(p models.IamEndPointUserInventoryRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var iamendpointuserinventoryrelationships []map[string]interface{}
+	var ret models.IamEndPointUserInventoryRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	iamendpointuserinventoryrelationship := make(map[string]interface{})
+	iamendpointuserinventoryrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	iamendpointuserinventoryrelationship["class_id"] = item.GetClassId()
+	iamendpointuserinventoryrelationship["moid"] = item.GetMoid()
+	iamendpointuserinventoryrelationship["object_type"] = item.GetObjectType()
+	iamendpointuserinventoryrelationship["selector"] = item.GetSelector()
+
+	iamendpointuserinventoryrelationships = append(iamendpointuserinventoryrelationships, iamendpointuserinventoryrelationship)
+	return iamendpointuserinventoryrelationships
+}
 func flattenMapIamEndPointUserPolicyRelationship(p models.IamEndPointUserPolicyRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var iamendpointuserpolicyrelationships []map[string]interface{}
 	var ret models.IamEndPointUserPolicyRelationship
@@ -12029,6 +12203,41 @@ func flattenMapIamEndPointUserPolicyRelationship(p models.IamEndPointUserPolicyR
 
 	iamendpointuserpolicyrelationships = append(iamendpointuserpolicyrelationships, iamendpointuserpolicyrelationship)
 	return iamendpointuserpolicyrelationships
+}
+func flattenMapIamEndPointUserPolicyInventoryRelationship(p models.IamEndPointUserPolicyInventoryRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var iamendpointuserpolicyinventoryrelationships []map[string]interface{}
+	var ret models.IamEndPointUserPolicyInventoryRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	iamendpointuserpolicyinventoryrelationship := make(map[string]interface{})
+	iamendpointuserpolicyinventoryrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	iamendpointuserpolicyinventoryrelationship["class_id"] = item.GetClassId()
+	iamendpointuserpolicyinventoryrelationship["moid"] = item.GetMoid()
+	iamendpointuserpolicyinventoryrelationship["object_type"] = item.GetObjectType()
+	iamendpointuserpolicyinventoryrelationship["selector"] = item.GetSelector()
+
+	iamendpointuserpolicyinventoryrelationships = append(iamendpointuserpolicyinventoryrelationships, iamendpointuserpolicyinventoryrelationship)
+	return iamendpointuserpolicyinventoryrelationships
+}
+func flattenMapIamFailureDetails(p models.IamFailureDetails, d *schema.ResourceData) []map[string]interface{} {
+	var iamfailuredetailss []map[string]interface{}
+	var ret models.IamFailureDetails
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	iamfailuredetails := make(map[string]interface{})
+	iamfailuredetails["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	iamfailuredetails["class_id"] = item.GetClassId()
+	iamfailuredetails["failure_reason"] = item.GetFailureReason()
+	iamfailuredetails["failure_time"] = item.GetFailureTime().String()
+	iamfailuredetails["object_type"] = item.GetObjectType()
+
+	iamfailuredetailss = append(iamfailuredetailss, iamfailuredetails)
+	return iamfailuredetailss
 }
 func flattenMapIamIdpRelationship(p models.IamIdpRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var iamidprelationships []map[string]interface{}
@@ -12457,6 +12666,24 @@ func flattenMapInventoryGenericInventoryHolderRelationship(p models.InventoryGen
 
 	inventorygenericinventoryholderrelationships = append(inventorygenericinventoryholderrelationships, inventorygenericinventoryholderrelationship)
 	return inventorygenericinventoryholderrelationships
+}
+func flattenMapInventoryInterfaceRelationship(p models.InventoryInterfaceRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var inventoryinterfacerelationships []map[string]interface{}
+	var ret models.InventoryInterfaceRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	inventoryinterfacerelationship := make(map[string]interface{})
+	inventoryinterfacerelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	inventoryinterfacerelationship["class_id"] = item.GetClassId()
+	inventoryinterfacerelationship["moid"] = item.GetMoid()
+	inventoryinterfacerelationship["object_type"] = item.GetObjectType()
+	inventoryinterfacerelationship["selector"] = item.GetSelector()
+
+	inventoryinterfacerelationships = append(inventoryinterfacerelationships, inventoryinterfacerelationship)
+	return inventoryinterfacerelationships
 }
 func flattenMapIppoolBlockLeaseRelationship(p models.IppoolBlockLeaseRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var ippoolblockleaserelationships []map[string]interface{}
@@ -14017,6 +14244,24 @@ func flattenMapManagementEntityRelationship(p models.ManagementEntityRelationshi
 	managemententityrelationships = append(managemententityrelationships, managemententityrelationship)
 	return managemententityrelationships
 }
+func flattenMapManagementInterfaceRelationship(p models.ManagementInterfaceRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var managementinterfacerelationships []map[string]interface{}
+	var ret models.ManagementInterfaceRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	managementinterfacerelationship := make(map[string]interface{})
+	managementinterfacerelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	managementinterfacerelationship["class_id"] = item.GetClassId()
+	managementinterfacerelationship["moid"] = item.GetMoid()
+	managementinterfacerelationship["object_type"] = item.GetObjectType()
+	managementinterfacerelationship["selector"] = item.GetSelector()
+
+	managementinterfacerelationships = append(managementinterfacerelationships, managementinterfacerelationship)
+	return managementinterfacerelationships
+}
 func flattenMapMemoryArrayRelationship(p models.MemoryArrayRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var memoryarrayrelationships []map[string]interface{}
 	var ret models.MemoryArrayRelationship
@@ -15235,6 +15480,8 @@ func flattenMapPolicyConfigResultContext(p models.PolicyConfigResultContext, d *
 	policyconfigresultcontext["entity_name"] = item.GetEntityName()
 	policyconfigresultcontext["entity_type"] = item.GetEntityType()
 	policyconfigresultcontext["object_type"] = item.GetObjectType()
+	policyconfigresultcontext["parent_moid"] = item.GetParentMoid()
+	policyconfigresultcontext["parent_type"] = item.GetParentType()
 
 	policyconfigresultcontexts = append(policyconfigresultcontexts, policyconfigresultcontext)
 	return policyconfigresultcontexts
@@ -15625,6 +15872,24 @@ func flattenMapResourcepoolUniverseRelationship(p models.ResourcepoolUniverseRel
 
 	resourcepooluniverserelationships = append(resourcepooluniverserelationships, resourcepooluniverserelationship)
 	return resourcepooluniverserelationships
+}
+func flattenMapServerBaseProfileRelationship(p models.ServerBaseProfileRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var serverbaseprofilerelationships []map[string]interface{}
+	var ret models.ServerBaseProfileRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	serverbaseprofilerelationship := make(map[string]interface{})
+	serverbaseprofilerelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	serverbaseprofilerelationship["class_id"] = item.GetClassId()
+	serverbaseprofilerelationship["moid"] = item.GetMoid()
+	serverbaseprofilerelationship["object_type"] = item.GetObjectType()
+	serverbaseprofilerelationship["selector"] = item.GetSelector()
+
+	serverbaseprofilerelationships = append(serverbaseprofilerelationships, serverbaseprofilerelationship)
+	return serverbaseprofilerelationships
 }
 func flattenMapServerConfigResultRelationship(p models.ServerConfigResultRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var serverconfigresultrelationships []map[string]interface{}
@@ -17926,6 +18191,24 @@ func flattenMapVnicEthAdapterPolicyRelationship(p models.VnicEthAdapterPolicyRel
 	vnicethadapterpolicyrelationships = append(vnicethadapterpolicyrelationships, vnicethadapterpolicyrelationship)
 	return vnicethadapterpolicyrelationships
 }
+func flattenMapVnicEthAdapterPolicyInventoryRelationship(p models.VnicEthAdapterPolicyInventoryRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var vnicethadapterpolicyinventoryrelationships []map[string]interface{}
+	var ret models.VnicEthAdapterPolicyInventoryRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	vnicethadapterpolicyinventoryrelationship := make(map[string]interface{})
+	vnicethadapterpolicyinventoryrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	vnicethadapterpolicyinventoryrelationship["class_id"] = item.GetClassId()
+	vnicethadapterpolicyinventoryrelationship["moid"] = item.GetMoid()
+	vnicethadapterpolicyinventoryrelationship["object_type"] = item.GetObjectType()
+	vnicethadapterpolicyinventoryrelationship["selector"] = item.GetSelector()
+
+	vnicethadapterpolicyinventoryrelationships = append(vnicethadapterpolicyinventoryrelationships, vnicethadapterpolicyinventoryrelationship)
+	return vnicethadapterpolicyinventoryrelationships
+}
 func flattenMapVnicEthIfRelationship(p models.VnicEthIfRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var vnicethifrelationships []map[string]interface{}
 	var ret models.VnicEthIfRelationship
@@ -17943,6 +18226,24 @@ func flattenMapVnicEthIfRelationship(p models.VnicEthIfRelationship, d *schema.R
 
 	vnicethifrelationships = append(vnicethifrelationships, vnicethifrelationship)
 	return vnicethifrelationships
+}
+func flattenMapVnicEthIfInventoryRelationship(p models.VnicEthIfInventoryRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var vnicethifinventoryrelationships []map[string]interface{}
+	var ret models.VnicEthIfInventoryRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	vnicethifinventoryrelationship := make(map[string]interface{})
+	vnicethifinventoryrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	vnicethifinventoryrelationship["class_id"] = item.GetClassId()
+	vnicethifinventoryrelationship["moid"] = item.GetMoid()
+	vnicethifinventoryrelationship["object_type"] = item.GetObjectType()
+	vnicethifinventoryrelationship["selector"] = item.GetSelector()
+
+	vnicethifinventoryrelationships = append(vnicethifinventoryrelationships, vnicethifinventoryrelationship)
+	return vnicethifinventoryrelationships
 }
 func flattenMapVnicEthInterruptSettings(p models.VnicEthInterruptSettings, d *schema.ResourceData) []map[string]interface{} {
 	var vnicethinterruptsettingss []map[string]interface{}
@@ -17981,6 +18282,24 @@ func flattenMapVnicEthNetworkPolicyRelationship(p models.VnicEthNetworkPolicyRel
 	vnicethnetworkpolicyrelationships = append(vnicethnetworkpolicyrelationships, vnicethnetworkpolicyrelationship)
 	return vnicethnetworkpolicyrelationships
 }
+func flattenMapVnicEthNetworkPolicyInventoryRelationship(p models.VnicEthNetworkPolicyInventoryRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var vnicethnetworkpolicyinventoryrelationships []map[string]interface{}
+	var ret models.VnicEthNetworkPolicyInventoryRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	vnicethnetworkpolicyinventoryrelationship := make(map[string]interface{})
+	vnicethnetworkpolicyinventoryrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	vnicethnetworkpolicyinventoryrelationship["class_id"] = item.GetClassId()
+	vnicethnetworkpolicyinventoryrelationship["moid"] = item.GetMoid()
+	vnicethnetworkpolicyinventoryrelationship["object_type"] = item.GetObjectType()
+	vnicethnetworkpolicyinventoryrelationship["selector"] = item.GetSelector()
+
+	vnicethnetworkpolicyinventoryrelationships = append(vnicethnetworkpolicyinventoryrelationships, vnicethnetworkpolicyinventoryrelationship)
+	return vnicethnetworkpolicyinventoryrelationships
+}
 func flattenMapVnicEthQosPolicyRelationship(p models.VnicEthQosPolicyRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var vnicethqospolicyrelationships []map[string]interface{}
 	var ret models.VnicEthQosPolicyRelationship
@@ -17998,6 +18317,24 @@ func flattenMapVnicEthQosPolicyRelationship(p models.VnicEthQosPolicyRelationshi
 
 	vnicethqospolicyrelationships = append(vnicethqospolicyrelationships, vnicethqospolicyrelationship)
 	return vnicethqospolicyrelationships
+}
+func flattenMapVnicEthQosPolicyInventoryRelationship(p models.VnicEthQosPolicyInventoryRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var vnicethqospolicyinventoryrelationships []map[string]interface{}
+	var ret models.VnicEthQosPolicyInventoryRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	vnicethqospolicyinventoryrelationship := make(map[string]interface{})
+	vnicethqospolicyinventoryrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	vnicethqospolicyinventoryrelationship["class_id"] = item.GetClassId()
+	vnicethqospolicyinventoryrelationship["moid"] = item.GetMoid()
+	vnicethqospolicyinventoryrelationship["object_type"] = item.GetObjectType()
+	vnicethqospolicyinventoryrelationship["selector"] = item.GetSelector()
+
+	vnicethqospolicyinventoryrelationships = append(vnicethqospolicyinventoryrelationships, vnicethqospolicyinventoryrelationship)
+	return vnicethqospolicyinventoryrelationships
 }
 func flattenMapVnicEthRxQueueSettings(p models.VnicEthRxQueueSettings, d *schema.ResourceData) []map[string]interface{} {
 	var vnicethrxqueuesettingss []map[string]interface{}
@@ -18051,6 +18388,24 @@ func flattenMapVnicFcAdapterPolicyRelationship(p models.VnicFcAdapterPolicyRelat
 	vnicfcadapterpolicyrelationships = append(vnicfcadapterpolicyrelationships, vnicfcadapterpolicyrelationship)
 	return vnicfcadapterpolicyrelationships
 }
+func flattenMapVnicFcAdapterPolicyInventoryRelationship(p models.VnicFcAdapterPolicyInventoryRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var vnicfcadapterpolicyinventoryrelationships []map[string]interface{}
+	var ret models.VnicFcAdapterPolicyInventoryRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	vnicfcadapterpolicyinventoryrelationship := make(map[string]interface{})
+	vnicfcadapterpolicyinventoryrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	vnicfcadapterpolicyinventoryrelationship["class_id"] = item.GetClassId()
+	vnicfcadapterpolicyinventoryrelationship["moid"] = item.GetMoid()
+	vnicfcadapterpolicyinventoryrelationship["object_type"] = item.GetObjectType()
+	vnicfcadapterpolicyinventoryrelationship["selector"] = item.GetSelector()
+
+	vnicfcadapterpolicyinventoryrelationships = append(vnicfcadapterpolicyinventoryrelationships, vnicfcadapterpolicyinventoryrelationship)
+	return vnicfcadapterpolicyinventoryrelationships
+}
 func flattenMapVnicFcErrorRecoverySettings(p models.VnicFcErrorRecoverySettings, d *schema.ResourceData) []map[string]interface{} {
 	var vnicfcerrorrecoverysettingss []map[string]interface{}
 	var ret models.VnicFcErrorRecoverySettings
@@ -18089,6 +18444,24 @@ func flattenMapVnicFcIfRelationship(p models.VnicFcIfRelationship, d *schema.Res
 	vnicfcifrelationships = append(vnicfcifrelationships, vnicfcifrelationship)
 	return vnicfcifrelationships
 }
+func flattenMapVnicFcIfInventoryRelationship(p models.VnicFcIfInventoryRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var vnicfcifinventoryrelationships []map[string]interface{}
+	var ret models.VnicFcIfInventoryRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	vnicfcifinventoryrelationship := make(map[string]interface{})
+	vnicfcifinventoryrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	vnicfcifinventoryrelationship["class_id"] = item.GetClassId()
+	vnicfcifinventoryrelationship["moid"] = item.GetMoid()
+	vnicfcifinventoryrelationship["object_type"] = item.GetObjectType()
+	vnicfcifinventoryrelationship["selector"] = item.GetSelector()
+
+	vnicfcifinventoryrelationships = append(vnicfcifinventoryrelationships, vnicfcifinventoryrelationship)
+	return vnicfcifinventoryrelationships
+}
 func flattenMapVnicFcInterruptSettings(p models.VnicFcInterruptSettings, d *schema.ResourceData) []map[string]interface{} {
 	var vnicfcinterruptsettingss []map[string]interface{}
 	var ret models.VnicFcInterruptSettings
@@ -18123,6 +18496,24 @@ func flattenMapVnicFcNetworkPolicyRelationship(p models.VnicFcNetworkPolicyRelat
 	vnicfcnetworkpolicyrelationships = append(vnicfcnetworkpolicyrelationships, vnicfcnetworkpolicyrelationship)
 	return vnicfcnetworkpolicyrelationships
 }
+func flattenMapVnicFcNetworkPolicyInventoryRelationship(p models.VnicFcNetworkPolicyInventoryRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var vnicfcnetworkpolicyinventoryrelationships []map[string]interface{}
+	var ret models.VnicFcNetworkPolicyInventoryRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	vnicfcnetworkpolicyinventoryrelationship := make(map[string]interface{})
+	vnicfcnetworkpolicyinventoryrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	vnicfcnetworkpolicyinventoryrelationship["class_id"] = item.GetClassId()
+	vnicfcnetworkpolicyinventoryrelationship["moid"] = item.GetMoid()
+	vnicfcnetworkpolicyinventoryrelationship["object_type"] = item.GetObjectType()
+	vnicfcnetworkpolicyinventoryrelationship["selector"] = item.GetSelector()
+
+	vnicfcnetworkpolicyinventoryrelationships = append(vnicfcnetworkpolicyinventoryrelationships, vnicfcnetworkpolicyinventoryrelationship)
+	return vnicfcnetworkpolicyinventoryrelationships
+}
 func flattenMapVnicFcQosPolicyRelationship(p models.VnicFcQosPolicyRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var vnicfcqospolicyrelationships []map[string]interface{}
 	var ret models.VnicFcQosPolicyRelationship
@@ -18140,6 +18531,24 @@ func flattenMapVnicFcQosPolicyRelationship(p models.VnicFcQosPolicyRelationship,
 
 	vnicfcqospolicyrelationships = append(vnicfcqospolicyrelationships, vnicfcqospolicyrelationship)
 	return vnicfcqospolicyrelationships
+}
+func flattenMapVnicFcQosPolicyInventoryRelationship(p models.VnicFcQosPolicyInventoryRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var vnicfcqospolicyinventoryrelationships []map[string]interface{}
+	var ret models.VnicFcQosPolicyInventoryRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	vnicfcqospolicyinventoryrelationship := make(map[string]interface{})
+	vnicfcqospolicyinventoryrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	vnicfcqospolicyinventoryrelationship["class_id"] = item.GetClassId()
+	vnicfcqospolicyinventoryrelationship["moid"] = item.GetMoid()
+	vnicfcqospolicyinventoryrelationship["object_type"] = item.GetObjectType()
+	vnicfcqospolicyinventoryrelationship["selector"] = item.GetSelector()
+
+	vnicfcqospolicyinventoryrelationships = append(vnicfcqospolicyinventoryrelationships, vnicfcqospolicyinventoryrelationship)
+	return vnicfcqospolicyinventoryrelationships
 }
 func flattenMapVnicFcQueueSettings(p models.VnicFcQueueSettings, d *schema.ResourceData) []map[string]interface{} {
 	var vnicfcqueuesettingss []map[string]interface{}
@@ -18193,6 +18602,24 @@ func flattenMapVnicIscsiAdapterPolicyRelationship(p models.VnicIscsiAdapterPolic
 	vniciscsiadapterpolicyrelationships = append(vniciscsiadapterpolicyrelationships, vniciscsiadapterpolicyrelationship)
 	return vniciscsiadapterpolicyrelationships
 }
+func flattenMapVnicIscsiAdapterPolicyInventoryRelationship(p models.VnicIscsiAdapterPolicyInventoryRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var vniciscsiadapterpolicyinventoryrelationships []map[string]interface{}
+	var ret models.VnicIscsiAdapterPolicyInventoryRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	vniciscsiadapterpolicyinventoryrelationship := make(map[string]interface{})
+	vniciscsiadapterpolicyinventoryrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	vniciscsiadapterpolicyinventoryrelationship["class_id"] = item.GetClassId()
+	vniciscsiadapterpolicyinventoryrelationship["moid"] = item.GetMoid()
+	vniciscsiadapterpolicyinventoryrelationship["object_type"] = item.GetObjectType()
+	vniciscsiadapterpolicyinventoryrelationship["selector"] = item.GetSelector()
+
+	vniciscsiadapterpolicyinventoryrelationships = append(vniciscsiadapterpolicyinventoryrelationships, vniciscsiadapterpolicyinventoryrelationship)
+	return vniciscsiadapterpolicyinventoryrelationships
+}
 func flattenMapVnicIscsiAuthProfile(p models.VnicIscsiAuthProfile, d *schema.ResourceData) []map[string]interface{} {
 	var vniciscsiauthprofiles []map[string]interface{}
 	var ret models.VnicIscsiAuthProfile
@@ -18233,6 +18660,24 @@ func flattenMapVnicIscsiBootPolicyRelationship(p models.VnicIscsiBootPolicyRelat
 	vniciscsibootpolicyrelationships = append(vniciscsibootpolicyrelationships, vniciscsibootpolicyrelationship)
 	return vniciscsibootpolicyrelationships
 }
+func flattenMapVnicIscsiBootPolicyInventoryRelationship(p models.VnicIscsiBootPolicyInventoryRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var vniciscsibootpolicyinventoryrelationships []map[string]interface{}
+	var ret models.VnicIscsiBootPolicyInventoryRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	vniciscsibootpolicyinventoryrelationship := make(map[string]interface{})
+	vniciscsibootpolicyinventoryrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	vniciscsibootpolicyinventoryrelationship["class_id"] = item.GetClassId()
+	vniciscsibootpolicyinventoryrelationship["moid"] = item.GetMoid()
+	vniciscsibootpolicyinventoryrelationship["object_type"] = item.GetObjectType()
+	vniciscsibootpolicyinventoryrelationship["selector"] = item.GetSelector()
+
+	vniciscsibootpolicyinventoryrelationships = append(vniciscsibootpolicyinventoryrelationships, vniciscsibootpolicyinventoryrelationship)
+	return vniciscsibootpolicyinventoryrelationships
+}
 func flattenMapVnicIscsiStaticTargetPolicyRelationship(p models.VnicIscsiStaticTargetPolicyRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var vniciscsistatictargetpolicyrelationships []map[string]interface{}
 	var ret models.VnicIscsiStaticTargetPolicyRelationship
@@ -18251,6 +18696,24 @@ func flattenMapVnicIscsiStaticTargetPolicyRelationship(p models.VnicIscsiStaticT
 	vniciscsistatictargetpolicyrelationships = append(vniciscsistatictargetpolicyrelationships, vniciscsistatictargetpolicyrelationship)
 	return vniciscsistatictargetpolicyrelationships
 }
+func flattenMapVnicIscsiStaticTargetPolicyInventoryRelationship(p models.VnicIscsiStaticTargetPolicyInventoryRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var vniciscsistatictargetpolicyinventoryrelationships []map[string]interface{}
+	var ret models.VnicIscsiStaticTargetPolicyInventoryRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	vniciscsistatictargetpolicyinventoryrelationship := make(map[string]interface{})
+	vniciscsistatictargetpolicyinventoryrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	vniciscsistatictargetpolicyinventoryrelationship["class_id"] = item.GetClassId()
+	vniciscsistatictargetpolicyinventoryrelationship["moid"] = item.GetMoid()
+	vniciscsistatictargetpolicyinventoryrelationship["object_type"] = item.GetObjectType()
+	vniciscsistatictargetpolicyinventoryrelationship["selector"] = item.GetSelector()
+
+	vniciscsistatictargetpolicyinventoryrelationships = append(vniciscsistatictargetpolicyinventoryrelationships, vniciscsistatictargetpolicyinventoryrelationship)
+	return vniciscsistatictargetpolicyinventoryrelationships
+}
 func flattenMapVnicLanConnectivityPolicyRelationship(p models.VnicLanConnectivityPolicyRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var vniclanconnectivitypolicyrelationships []map[string]interface{}
 	var ret models.VnicLanConnectivityPolicyRelationship
@@ -18268,6 +18731,24 @@ func flattenMapVnicLanConnectivityPolicyRelationship(p models.VnicLanConnectivit
 
 	vniclanconnectivitypolicyrelationships = append(vniclanconnectivitypolicyrelationships, vniclanconnectivitypolicyrelationship)
 	return vniclanconnectivitypolicyrelationships
+}
+func flattenMapVnicLanConnectivityPolicyInventoryRelationship(p models.VnicLanConnectivityPolicyInventoryRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var vniclanconnectivitypolicyinventoryrelationships []map[string]interface{}
+	var ret models.VnicLanConnectivityPolicyInventoryRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	vniclanconnectivitypolicyinventoryrelationship := make(map[string]interface{})
+	vniclanconnectivitypolicyinventoryrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	vniclanconnectivitypolicyinventoryrelationship["class_id"] = item.GetClassId()
+	vniclanconnectivitypolicyinventoryrelationship["moid"] = item.GetMoid()
+	vniclanconnectivitypolicyinventoryrelationship["object_type"] = item.GetObjectType()
+	vniclanconnectivitypolicyinventoryrelationship["selector"] = item.GetSelector()
+
+	vniclanconnectivitypolicyinventoryrelationships = append(vniclanconnectivitypolicyinventoryrelationships, vniclanconnectivitypolicyinventoryrelationship)
+	return vniclanconnectivitypolicyinventoryrelationships
 }
 func flattenMapVnicLun(p models.VnicLun, d *schema.ResourceData) []map[string]interface{} {
 	var vnicluns []map[string]interface{}
@@ -18415,6 +18896,24 @@ func flattenMapVnicSanConnectivityPolicyRelationship(p models.VnicSanConnectivit
 
 	vnicsanconnectivitypolicyrelationships = append(vnicsanconnectivitypolicyrelationships, vnicsanconnectivitypolicyrelationship)
 	return vnicsanconnectivitypolicyrelationships
+}
+func flattenMapVnicSanConnectivityPolicyInventoryRelationship(p models.VnicSanConnectivityPolicyInventoryRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var vnicsanconnectivitypolicyinventoryrelationships []map[string]interface{}
+	var ret models.VnicSanConnectivityPolicyInventoryRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	vnicsanconnectivitypolicyinventoryrelationship := make(map[string]interface{})
+	vnicsanconnectivitypolicyinventoryrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	vnicsanconnectivitypolicyinventoryrelationship["class_id"] = item.GetClassId()
+	vnicsanconnectivitypolicyinventoryrelationship["moid"] = item.GetMoid()
+	vnicsanconnectivitypolicyinventoryrelationship["object_type"] = item.GetObjectType()
+	vnicsanconnectivitypolicyinventoryrelationship["selector"] = item.GetSelector()
+
+	vnicsanconnectivitypolicyinventoryrelationships = append(vnicsanconnectivitypolicyinventoryrelationships, vnicsanconnectivitypolicyinventoryrelationship)
+	return vnicsanconnectivitypolicyinventoryrelationships
 }
 func flattenMapVnicScsiQueueSettings(p models.VnicScsiQueueSettings, d *schema.ResourceData) []map[string]interface{} {
 	var vnicscsiqueuesettingss []map[string]interface{}
@@ -19183,6 +19682,8 @@ func flattenMapWorkflowWorkflowInfoProperties(p models.WorkflowWorkflowInfoPrope
 	workflowworkflowinfoproperties["object_type"] = item.GetObjectType()
 	workflowworkflowinfoproperties["retryable"] = item.GetRetryable()
 	workflowworkflowinfoproperties["rollback_action"] = item.GetRollbackAction()
+	workflowworkflowinfoproperties["rollback_on_cancel"] = item.GetRollbackOnCancel()
+	workflowworkflowinfoproperties["rollback_on_failure"] = item.GetRollbackOnFailure()
 
 	workflowworkflowinfopropertiess = append(workflowworkflowinfopropertiess, workflowworkflowinfoproperties)
 	return workflowworkflowinfopropertiess
@@ -19220,6 +19721,8 @@ func flattenMapWorkflowWorkflowProperties(p models.WorkflowWorkflowProperties, d
 	workflowworkflowproperties["external_meta"] = item.GetExternalMeta()
 	workflowworkflowproperties["object_type"] = item.GetObjectType()
 	workflowworkflowproperties["retryable"] = item.GetRetryable()
+	workflowworkflowproperties["rollback_on_cancel"] = item.GetRollbackOnCancel()
+	workflowworkflowproperties["rollback_on_failure"] = item.GetRollbackOnFailure()
 	workflowworkflowproperties["support_status"] = item.GetSupportStatus()
 
 	workflowworkflowpropertiess = append(workflowworkflowpropertiess, workflowworkflowproperties)

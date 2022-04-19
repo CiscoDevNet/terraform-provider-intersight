@@ -587,7 +587,6 @@ func resourceCapabilityAdapterUnitDescriptor() *schema.Resource {
 
 func resourceCapabilityAdapterUnitDescriptorCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewCapabilityAdapterUnitDescriptorWithDefaults()
@@ -861,7 +860,7 @@ func resourceCapabilityAdapterUnitDescriptorCreate(c context.Context, d *schema.
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating CapabilityAdapterUnitDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating CapabilityAdapterUnitDescriptor: %s", responseErr.Error())
@@ -873,7 +872,6 @@ func resourceCapabilityAdapterUnitDescriptorCreate(c context.Context, d *schema.
 
 func resourceCapabilityAdapterUnitDescriptorRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.CapabilityApi.GetCapabilityAdapterUnitDescriptorByMoid(conn.ctx, d.Id())
@@ -886,7 +884,7 @@ func resourceCapabilityAdapterUnitDescriptorRead(c context.Context, d *schema.Re
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching CapabilityAdapterUnitDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching CapabilityAdapterUnitDescriptor: %s", responseErr.Error())
@@ -1035,7 +1033,6 @@ func resourceCapabilityAdapterUnitDescriptorRead(c context.Context, d *schema.Re
 
 func resourceCapabilityAdapterUnitDescriptorUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.CapabilityAdapterUnitDescriptor{}
@@ -1325,7 +1322,7 @@ func resourceCapabilityAdapterUnitDescriptorUpdate(c context.Context, d *schema.
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating CapabilityAdapterUnitDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating CapabilityAdapterUnitDescriptor: %s", responseErr.Error())
@@ -1337,7 +1334,6 @@ func resourceCapabilityAdapterUnitDescriptorUpdate(c context.Context, d *schema.
 
 func resourceCapabilityAdapterUnitDescriptorDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.CapabilityApi.DeleteCapabilityAdapterUnitDescriptor(conn.ctx, d.Id())
@@ -1349,7 +1345,7 @@ func resourceCapabilityAdapterUnitDescriptorDelete(c context.Context, d *schema.
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting CapabilityAdapterUnitDescriptor object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting CapabilityAdapterUnitDescriptor object: %s", deleteErr.Error())

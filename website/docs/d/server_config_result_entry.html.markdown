@@ -3,12 +3,12 @@ subcategory: "server"
 layout: "intersight"
 page_title: "Intersight: intersight_server_config_result_entry"
 description: |-
-        The profile configuration (deploy, validation) results details information.
+        The profile configuration (deploy, validation) results detailed information.
 
 ---
 
 # Data Source: intersight_server_config_result_entry
-The profile configuration (deploy, validation) results details information.
+The profile configuration (deploy, validation) results detailed information.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

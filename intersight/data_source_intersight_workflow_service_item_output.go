@@ -96,10 +96,8 @@ func dataSourceWorkflowServiceItemOutput() *schema.Resource {
 		},
 		"output": {
 			Description: "Service item output for a service item instance and the format is specified by output definition of the service item definition.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"owners": {
 			Type:     schema.TypeList,
@@ -428,10 +426,8 @@ func dataSourceWorkflowServiceItemOutput() *schema.Resource {
 		},
 		"output": {
 			Description: "Service item output for a service item instance and the format is specified by output definition of the service item definition.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"owners": {
 			Type:     schema.TypeList,
@@ -691,7 +687,6 @@ func dataSourceWorkflowServiceItemOutput() *schema.Resource {
 
 func dataSourceWorkflowServiceItemOutputRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.WorkflowServiceItemOutput{}
@@ -785,7 +780,13 @@ func dataSourceWorkflowServiceItemOutputRead(c context.Context, d *schema.Resour
 	}
 
 	if v, ok := d.GetOk("output"); ok {
-		o.SetOutput(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetOutput(x2)
+		}
 	}
 
 	if v, ok := d.GetOk("owners"); ok {
@@ -1045,7 +1046,7 @@ func dataSourceWorkflowServiceItemOutputRead(c context.Context, d *schema.Resour
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of WorkflowServiceItemOutput: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of WorkflowServiceItemOutput: %s", responseErr.Error())
@@ -1062,7 +1063,7 @@ func dataSourceWorkflowServiceItemOutputRead(c context.Context, d *schema.Resour
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching WorkflowServiceItemOutput: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching WorkflowServiceItemOutput: %s", responseErr.Error())
@@ -1086,6 +1087,7 @@ func dataSourceWorkflowServiceItemOutputRead(c context.Context, d *schema.Resour
 				temp["moid"] = (s.GetMoid())
 				temp["name"] = (s.GetName())
 				temp["object_type"] = (s.GetObjectType())
+				temp["output"] = flattenAdditionalProperties(s.GetOutput())
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)

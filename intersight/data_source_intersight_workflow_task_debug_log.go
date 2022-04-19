@@ -198,10 +198,8 @@ func dataSourceWorkflowTaskDebugLog() *schema.Resource {
 		},
 		"task_debug_log_entries": {
 			Description: "Holds information helpful in isolating task failures.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"task_info": {
 			Description: "A reference to a workflowTaskInfo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -570,10 +568,8 @@ func dataSourceWorkflowTaskDebugLog() *schema.Resource {
 		},
 		"task_debug_log_entries": {
 			Description: "Holds information helpful in isolating task failures.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"task_info": {
 			Description: "A reference to a workflowTaskInfo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -771,7 +767,6 @@ func dataSourceWorkflowTaskDebugLog() *schema.Resource {
 
 func dataSourceWorkflowTaskDebugLogRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.WorkflowTaskDebugLog{}
@@ -997,7 +992,13 @@ func dataSourceWorkflowTaskDebugLogRead(c context.Context, d *schema.ResourceDat
 	}
 
 	if v, ok := d.GetOk("task_debug_log_entries"); ok {
-		o.SetTaskDebugLogEntries(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetTaskDebugLogEntries(x2)
+		}
 	}
 
 	if v, ok := d.GetOk("task_info"); ok {
@@ -1173,7 +1174,7 @@ func dataSourceWorkflowTaskDebugLogRead(c context.Context, d *schema.ResourceDat
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of WorkflowTaskDebugLog: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of WorkflowTaskDebugLog: %s", responseErr.Error())
@@ -1190,7 +1191,7 @@ func dataSourceWorkflowTaskDebugLogRead(c context.Context, d *schema.ResourceDat
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching WorkflowTaskDebugLog: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching WorkflowTaskDebugLog: %s", responseErr.Error())
@@ -1222,6 +1223,7 @@ func dataSourceWorkflowTaskDebugLogRead(c context.Context, d *schema.ResourceDat
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["task_debug_log_entries"] = flattenAdditionalProperties(s.GetTaskDebugLogEntries())
 
 				temp["task_info"] = flattenMapWorkflowTaskInfoRelationship(s.GetTaskInfo(), d)
 				temp["task_inst_id"] = (s.GetTaskInstId())

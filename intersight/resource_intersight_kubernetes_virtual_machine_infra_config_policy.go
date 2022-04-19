@@ -683,7 +683,6 @@ func resourceKubernetesVirtualMachineInfraConfigPolicy() *schema.Resource {
 
 func resourceKubernetesVirtualMachineInfraConfigPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewKubernetesVirtualMachineInfraConfigPolicyWithDefaults()
@@ -1065,7 +1064,7 @@ func resourceKubernetesVirtualMachineInfraConfigPolicyCreate(c context.Context, 
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating KubernetesVirtualMachineInfraConfigPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating KubernetesVirtualMachineInfraConfigPolicy: %s", responseErr.Error())
@@ -1077,7 +1076,6 @@ func resourceKubernetesVirtualMachineInfraConfigPolicyCreate(c context.Context, 
 
 func resourceKubernetesVirtualMachineInfraConfigPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.KubernetesApi.GetKubernetesVirtualMachineInfraConfigPolicyByMoid(conn.ctx, d.Id())
@@ -1090,7 +1088,7 @@ func resourceKubernetesVirtualMachineInfraConfigPolicyRead(c context.Context, d 
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching KubernetesVirtualMachineInfraConfigPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching KubernetesVirtualMachineInfraConfigPolicy: %s", responseErr.Error())
@@ -1187,7 +1185,6 @@ func resourceKubernetesVirtualMachineInfraConfigPolicyRead(c context.Context, d 
 
 func resourceKubernetesVirtualMachineInfraConfigPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.KubernetesVirtualMachineInfraConfigPolicy{}
@@ -1574,7 +1571,7 @@ func resourceKubernetesVirtualMachineInfraConfigPolicyUpdate(c context.Context, 
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating KubernetesVirtualMachineInfraConfigPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating KubernetesVirtualMachineInfraConfigPolicy: %s", responseErr.Error())
@@ -1586,7 +1583,6 @@ func resourceKubernetesVirtualMachineInfraConfigPolicyUpdate(c context.Context, 
 
 func resourceKubernetesVirtualMachineInfraConfigPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.KubernetesApi.DeleteKubernetesVirtualMachineInfraConfigPolicy(conn.ctx, d.Id())
@@ -1598,7 +1594,7 @@ func resourceKubernetesVirtualMachineInfraConfigPolicyDelete(c context.Context, 
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting KubernetesVirtualMachineInfraConfigPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting KubernetesVirtualMachineInfraConfigPolicy object: %s", deleteErr.Error())

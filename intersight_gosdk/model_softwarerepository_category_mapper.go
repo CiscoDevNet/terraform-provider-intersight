@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -30,6 +30,8 @@ type SoftwarerepositoryCategoryMapper struct {
 	FileType *string `json:"FileType,omitempty"`
 	// The type of image based on the endpoint it can upgrade. For example, ucs-c420m5-huu-3.2.1a.iso can upgrade standalone servers, so the image type is Standalone Server.
 	ImageType *string `json:"ImageType,omitempty"`
+	// Defines whether NFS firmware upgrade is supported with this image type.
+	IsNfsUpgradeSupported *bool `json:"IsNfsUpgradeSupported,omitempty"`
 	// Cisco software repository image category identifier.
 	MdfId *string `json:"MdfId,omitempty"`
 	// The regex that all images of this category follow.
@@ -222,6 +224,38 @@ func (o *SoftwarerepositoryCategoryMapper) SetImageType(v string) {
 	o.ImageType = &v
 }
 
+// GetIsNfsUpgradeSupported returns the IsNfsUpgradeSupported field value if set, zero value otherwise.
+func (o *SoftwarerepositoryCategoryMapper) GetIsNfsUpgradeSupported() bool {
+	if o == nil || o.IsNfsUpgradeSupported == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsNfsUpgradeSupported
+}
+
+// GetIsNfsUpgradeSupportedOk returns a tuple with the IsNfsUpgradeSupported field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SoftwarerepositoryCategoryMapper) GetIsNfsUpgradeSupportedOk() (*bool, bool) {
+	if o == nil || o.IsNfsUpgradeSupported == nil {
+		return nil, false
+	}
+	return o.IsNfsUpgradeSupported, true
+}
+
+// HasIsNfsUpgradeSupported returns a boolean if a field has been set.
+func (o *SoftwarerepositoryCategoryMapper) HasIsNfsUpgradeSupported() bool {
+	if o != nil && o.IsNfsUpgradeSupported != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsNfsUpgradeSupported gets a reference to the given bool and assigns it to the IsNfsUpgradeSupported field.
+func (o *SoftwarerepositoryCategoryMapper) SetIsNfsUpgradeSupported(v bool) {
+	o.IsNfsUpgradeSupported = &v
+}
+
 // GetMdfId returns the MdfId field value if set, zero value otherwise.
 func (o *SoftwarerepositoryCategoryMapper) GetMdfId() string {
 	if o == nil || o.MdfId == nil {
@@ -330,11 +364,11 @@ func (o *SoftwarerepositoryCategoryMapper) GetSupportedModels() []string {
 // GetSupportedModelsOk returns a tuple with the SupportedModels field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *SoftwarerepositoryCategoryMapper) GetSupportedModelsOk() (*[]string, bool) {
+func (o *SoftwarerepositoryCategoryMapper) GetSupportedModelsOk() ([]string, bool) {
 	if o == nil || o.SupportedModels == nil {
 		return nil, false
 	}
-	return &o.SupportedModels, true
+	return o.SupportedModels, true
 }
 
 // HasSupportedModels returns a boolean if a field has been set.
@@ -395,11 +429,11 @@ func (o *SoftwarerepositoryCategoryMapper) GetTagTypes() []string {
 // GetTagTypesOk returns a tuple with the TagTypes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *SoftwarerepositoryCategoryMapper) GetTagTypesOk() (*[]string, bool) {
+func (o *SoftwarerepositoryCategoryMapper) GetTagTypesOk() ([]string, bool) {
 	if o == nil || o.TagTypes == nil {
 		return nil, false
 	}
-	return &o.TagTypes, true
+	return o.TagTypes, true
 }
 
 // HasTagTypes returns a boolean if a field has been set.
@@ -473,6 +507,9 @@ func (o SoftwarerepositoryCategoryMapper) MarshalJSON() ([]byte, error) {
 	if o.ImageType != nil {
 		toSerialize["ImageType"] = o.ImageType
 	}
+	if o.IsNfsUpgradeSupported != nil {
+		toSerialize["IsNfsUpgradeSupported"] = o.IsNfsUpgradeSupported
+	}
 	if o.MdfId != nil {
 		toSerialize["MdfId"] = o.MdfId
 	}
@@ -514,6 +551,8 @@ func (o *SoftwarerepositoryCategoryMapper) UnmarshalJSON(bytes []byte) (err erro
 		FileType *string `json:"FileType,omitempty"`
 		// The type of image based on the endpoint it can upgrade. For example, ucs-c420m5-huu-3.2.1a.iso can upgrade standalone servers, so the image type is Standalone Server.
 		ImageType *string `json:"ImageType,omitempty"`
+		// Defines whether NFS firmware upgrade is supported with this image type.
+		IsNfsUpgradeSupported *bool `json:"IsNfsUpgradeSupported,omitempty"`
 		// Cisco software repository image category identifier.
 		MdfId *string `json:"MdfId,omitempty"`
 		// The regex that all images of this category follow.
@@ -538,6 +577,7 @@ func (o *SoftwarerepositoryCategoryMapper) UnmarshalJSON(bytes []byte) (err erro
 		varSoftwarerepositoryCategoryMapper.Category = varSoftwarerepositoryCategoryMapperWithoutEmbeddedStruct.Category
 		varSoftwarerepositoryCategoryMapper.FileType = varSoftwarerepositoryCategoryMapperWithoutEmbeddedStruct.FileType
 		varSoftwarerepositoryCategoryMapper.ImageType = varSoftwarerepositoryCategoryMapperWithoutEmbeddedStruct.ImageType
+		varSoftwarerepositoryCategoryMapper.IsNfsUpgradeSupported = varSoftwarerepositoryCategoryMapperWithoutEmbeddedStruct.IsNfsUpgradeSupported
 		varSoftwarerepositoryCategoryMapper.MdfId = varSoftwarerepositoryCategoryMapperWithoutEmbeddedStruct.MdfId
 		varSoftwarerepositoryCategoryMapper.RegexPattern = varSoftwarerepositoryCategoryMapperWithoutEmbeddedStruct.RegexPattern
 		varSoftwarerepositoryCategoryMapper.Source = varSoftwarerepositoryCategoryMapperWithoutEmbeddedStruct.Source
@@ -567,6 +607,7 @@ func (o *SoftwarerepositoryCategoryMapper) UnmarshalJSON(bytes []byte) (err erro
 		delete(additionalProperties, "Category")
 		delete(additionalProperties, "FileType")
 		delete(additionalProperties, "ImageType")
+		delete(additionalProperties, "IsNfsUpgradeSupported")
 		delete(additionalProperties, "MdfId")
 		delete(additionalProperties, "RegexPattern")
 		delete(additionalProperties, "Source")

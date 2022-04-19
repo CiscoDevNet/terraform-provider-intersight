@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -1436,11 +1436,11 @@ func (o *NetworkElement) GetCards() []EquipmentSwitchCardRelationship {
 // GetCardsOk returns a tuple with the Cards field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *NetworkElement) GetCardsOk() (*[]EquipmentSwitchCardRelationship, bool) {
+func (o *NetworkElement) GetCardsOk() ([]EquipmentSwitchCardRelationship, bool) {
 	if o == nil || o.Cards == nil {
 		return nil, false
 	}
-	return &o.Cards, true
+	return o.Cards, true
 }
 
 // HasCards returns a boolean if a field has been set.
@@ -1469,11 +1469,11 @@ func (o *NetworkElement) GetConsole() []ConsoleConsoleConfigRelationship {
 // GetConsoleOk returns a tuple with the Console field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *NetworkElement) GetConsoleOk() (*[]ConsoleConsoleConfigRelationship, bool) {
+func (o *NetworkElement) GetConsoleOk() ([]ConsoleConsoleConfigRelationship, bool) {
 	if o == nil || o.Console == nil {
 		return nil, false
 	}
-	return &o.Console, true
+	return o.Console, true
 }
 
 // HasConsole returns a boolean if a field has been set.
@@ -1502,11 +1502,11 @@ func (o *NetworkElement) GetFanmodules() []EquipmentFanModuleRelationship {
 // GetFanmodulesOk returns a tuple with the Fanmodules field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *NetworkElement) GetFanmodulesOk() (*[]EquipmentFanModuleRelationship, bool) {
+func (o *NetworkElement) GetFanmodulesOk() ([]EquipmentFanModuleRelationship, bool) {
 	if o == nil || o.Fanmodules == nil {
 		return nil, false
 	}
-	return &o.Fanmodules, true
+	return o.Fanmodules, true
 }
 
 // HasFanmodules returns a boolean if a field has been set.
@@ -1535,11 +1535,11 @@ func (o *NetworkElement) GetFeatureControl() []NetworkFeatureControlRelationship
 // GetFeatureControlOk returns a tuple with the FeatureControl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *NetworkElement) GetFeatureControlOk() (*[]NetworkFeatureControlRelationship, bool) {
+func (o *NetworkElement) GetFeatureControlOk() ([]NetworkFeatureControlRelationship, bool) {
 	if o == nil || o.FeatureControl == nil {
 		return nil, false
 	}
-	return &o.FeatureControl, true
+	return o.FeatureControl, true
 }
 
 // HasFeatureControl returns a boolean if a field has been set.
@@ -1568,11 +1568,11 @@ func (o *NetworkElement) GetInterfaceList() []NetworkInterfaceListRelationship {
 // GetInterfaceListOk returns a tuple with the InterfaceList field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *NetworkElement) GetInterfaceListOk() (*[]NetworkInterfaceListRelationship, bool) {
+func (o *NetworkElement) GetInterfaceListOk() ([]NetworkInterfaceListRelationship, bool) {
 	if o == nil || o.InterfaceList == nil {
 		return nil, false
 	}
-	return &o.InterfaceList, true
+	return o.InterfaceList, true
 }
 
 // HasInterfaceList returns a boolean if a field has been set.
@@ -1633,11 +1633,11 @@ func (o *NetworkElement) GetLicenseFile() []NetworkLicenseFileRelationship {
 // GetLicenseFileOk returns a tuple with the LicenseFile field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *NetworkElement) GetLicenseFileOk() (*[]NetworkLicenseFileRelationship, bool) {
+func (o *NetworkElement) GetLicenseFileOk() ([]NetworkLicenseFileRelationship, bool) {
 	if o == nil || o.LicenseFile == nil {
 		return nil, false
 	}
-	return &o.LicenseFile, true
+	return o.LicenseFile, true
 }
 
 // HasLicenseFile returns a boolean if a field has been set.
@@ -1794,11 +1794,11 @@ func (o *NetworkElement) GetPortMacBindings() []PortMacBindingRelationship {
 // GetPortMacBindingsOk returns a tuple with the PortMacBindings field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *NetworkElement) GetPortMacBindingsOk() (*[]PortMacBindingRelationship, bool) {
+func (o *NetworkElement) GetPortMacBindingsOk() ([]PortMacBindingRelationship, bool) {
 	if o == nil || o.PortMacBindings == nil {
 		return nil, false
 	}
-	return &o.PortMacBindings, true
+	return o.PortMacBindings, true
 }
 
 // HasPortMacBindings returns a boolean if a field has been set.
@@ -1827,11 +1827,11 @@ func (o *NetworkElement) GetProcessorUnit() []ProcessorUnitRelationship {
 // GetProcessorUnitOk returns a tuple with the ProcessorUnit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *NetworkElement) GetProcessorUnitOk() (*[]ProcessorUnitRelationship, bool) {
+func (o *NetworkElement) GetProcessorUnitOk() ([]ProcessorUnitRelationship, bool) {
 	if o == nil || o.ProcessorUnit == nil {
 		return nil, false
 	}
-	return &o.ProcessorUnit, true
+	return o.ProcessorUnit, true
 }
 
 // HasProcessorUnit returns a boolean if a field has been set.
@@ -1860,11 +1860,11 @@ func (o *NetworkElement) GetPsus() []EquipmentPsuRelationship {
 // GetPsusOk returns a tuple with the Psus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *NetworkElement) GetPsusOk() (*[]EquipmentPsuRelationship, bool) {
+func (o *NetworkElement) GetPsusOk() ([]EquipmentPsuRelationship, bool) {
 	if o == nil || o.Psus == nil {
 		return nil, false
 	}
-	return &o.Psus, true
+	return o.Psus, true
 }
 
 // HasPsus returns a boolean if a field has been set.
@@ -1925,11 +1925,11 @@ func (o *NetworkElement) GetStorageItems() []StorageItemRelationship {
 // GetStorageItemsOk returns a tuple with the StorageItems field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *NetworkElement) GetStorageItemsOk() (*[]StorageItemRelationship, bool) {
+func (o *NetworkElement) GetStorageItemsOk() ([]StorageItemRelationship, bool) {
 	if o == nil || o.StorageItems == nil {
 		return nil, false
 	}
-	return &o.StorageItems, true
+	return o.StorageItems, true
 }
 
 // HasStorageItems returns a boolean if a field has been set.
@@ -1958,11 +1958,11 @@ func (o *NetworkElement) GetSupervisorCard() []NetworkSupervisorCardRelationship
 // GetSupervisorCardOk returns a tuple with the SupervisorCard field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *NetworkElement) GetSupervisorCardOk() (*[]NetworkSupervisorCardRelationship, bool) {
+func (o *NetworkElement) GetSupervisorCardOk() ([]NetworkSupervisorCardRelationship, bool) {
 	if o == nil || o.SupervisorCard == nil {
 		return nil, false
 	}
-	return &o.SupervisorCard, true
+	return o.SupervisorCard, true
 }
 
 // HasSupervisorCard returns a boolean if a field has been set.
@@ -2055,11 +2055,11 @@ func (o *NetworkElement) GetVrf() []NetworkVrfRelationship {
 // GetVrfOk returns a tuple with the Vrf field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *NetworkElement) GetVrfOk() (*[]NetworkVrfRelationship, bool) {
+func (o *NetworkElement) GetVrfOk() ([]NetworkVrfRelationship, bool) {
 	if o == nil || o.Vrf == nil {
 		return nil, false
 	}
-	return &o.Vrf, true
+	return o.Vrf, true
 }
 
 // HasVrf returns a boolean if a field has been set.

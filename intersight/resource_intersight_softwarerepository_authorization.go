@@ -474,7 +474,6 @@ func resourceSoftwarerepositoryAuthorization() *schema.Resource {
 
 func resourceSoftwarerepositoryAuthorizationCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewSoftwarerepositoryAuthorizationWithDefaults()
@@ -552,7 +551,7 @@ func resourceSoftwarerepositoryAuthorizationCreate(c context.Context, d *schema.
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating SoftwarerepositoryAuthorization: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating SoftwarerepositoryAuthorization: %s", responseErr.Error())
@@ -564,7 +563,6 @@ func resourceSoftwarerepositoryAuthorizationCreate(c context.Context, d *schema.
 
 func resourceSoftwarerepositoryAuthorizationRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.SoftwarerepositoryApi.GetSoftwarerepositoryAuthorizationByMoid(conn.ctx, d.Id())
@@ -577,7 +575,7 @@ func resourceSoftwarerepositoryAuthorizationRead(c context.Context, d *schema.Re
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching SoftwarerepositoryAuthorization: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching SoftwarerepositoryAuthorization: %s", responseErr.Error())
@@ -666,7 +664,6 @@ func resourceSoftwarerepositoryAuthorizationRead(c context.Context, d *schema.Re
 
 func resourceSoftwarerepositoryAuthorizationUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.SoftwarerepositoryAuthorization{}
@@ -748,7 +745,7 @@ func resourceSoftwarerepositoryAuthorizationUpdate(c context.Context, d *schema.
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating SoftwarerepositoryAuthorization: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating SoftwarerepositoryAuthorization: %s", responseErr.Error())
@@ -760,7 +757,6 @@ func resourceSoftwarerepositoryAuthorizationUpdate(c context.Context, d *schema.
 
 func resourceSoftwarerepositoryAuthorizationDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	var warning = diag.Diagnostic{Severity: diag.Warning, Summary: "SoftwarerepositoryAuthorization does not allow delete functionality"}
 	de = append(de, warning)

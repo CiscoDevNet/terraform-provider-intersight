@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -23,7 +23,11 @@ type CloudBaseSku struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property. The enum values provides the list of concrete types that can be instantiated from this abstract type.
-	ObjectType       string                  `json:"ObjectType"`
+	ObjectType string `json:"ObjectType"`
+	// The cost per hour for running a Linux instance for the SKU. Cost can be higher for Windows or other licensed OS.
+	BasePrice *float32 `json:"BasePrice,omitempty"`
+	// The currency code used for the price. For e.g. USD or EUR. * `USD` - The currency code for United states dollar. * `EUR` - The currency code for European Union.
+	Currency         *string                 `json:"Currency,omitempty"`
 	CustomAttributes []CloudCustomAttributes `json:"CustomAttributes,omitempty"`
 	// Any additional description for the instance type.
 	Description *string `json:"Description,omitempty"`
@@ -33,15 +37,20 @@ type CloudBaseSku struct {
 	IsAutoDiscovered *bool `json:"IsAutoDiscovered,omitempty"`
 	// The display name for instance type.
 	Name *string `json:"Name,omitempty"`
-	// The platformType for this SKU. * `` - The device reported an empty or unrecognized platform type. * `APIC` - An Application Policy Infrastructure Controller cluster. * `DCNM` - A Data Center Network Manager instance. Data Center Network Manager (DCNM) is the network management platform for all NX-OS-enabled deployments, spanning new fabric architectures, IP Fabric for Media, and storage networking deployments for the Cisco Nexus-powered data center. * `UCSFI` - A UCS Fabric Interconnect in HA or standalone mode, which is being managed by UCS Manager (UCSM). * `UCSFIISM` - A UCS Fabric Interconnect in HA or standalone mode, managed directly by Intersight. * `IMC` - A standalone UCS Server Integrated Management Controller. * `IMCM4` - A standalone UCS M4 Server. * `IMCM5` - A standalone UCS M5 server. * `IMCRack` - A standalone UCS M6 and above server. * `UCSIOM` - An UCS Chassis IO module. * `HX` - A HyperFlex storage controller. * `HyperFlexAP` - A HyperFlex Application Platform. * `IWE` - An Intersight Workload Engine. * `UCSD` - A UCS Director virtual appliance. Cisco UCS Director automates, orchestrates, and manages Cisco and third-party hardware. * `IntersightAppliance` - A Cisco Intersight Connected Virtual Appliance. * `IntersightAssist` - A Cisco Intersight Assist. * `PureStorageFlashArray` - A Pure Storage FlashArray device. * `NexusDevice` - A generic platform type to support Nexus Network Device. This can also be extended to support all network devices later on. * `MDSDevice` - A platform type to support MDS devices. * `UCSC890` - A standalone Cisco UCSC890 server. * `NetAppOntap` - A NetApp ONTAP storage system. * `NetAppActiveIqUnifiedManager` - A NetApp Active IQ Unified Manager. * `EmcScaleIo` - An EMC ScaleIO storage system. * `EmcVmax` - An EMC VMAX storage system. * `EmcVplex` - An EMC VPLEX storage system. * `EmcXtremIo` - An EMC XtremIO storage system. * `VmwareVcenter` - A VMware vCenter device that manages Virtual Machines. * `MicrosoftHyperV` - A Microsoft Hyper-V system that manages Virtual Machines. * `AppDynamics` - An AppDynamics controller that monitors applications. * `Dynatrace` - A software-intelligence monitoring platform that simplifies enterprise cloud complexity and accelerates digital transformation. * `NewRelic` - A software-intelligence monitoring platform that simplifies enterprise cloud complexity and accelerates digital transformation. * `ServiceNow` - A cloud-based workflow automation platform that enables enterprise organizations to improve operational efficiencies by streamlining and automating routine work tasks. * `ReadHatOpenStack` - An OpenStack target manages Virtual Machines, Physical Machines, Datacenters and Virtual Datacenters using different OpenStack services as administrative endpoints. * `CloudFoundry` - An open source cloud platform on which developers can build, deploy, run and scale applications. * `MicrosoftAzureApplicationInsights` - A feature of Azure Monitor, is an extensible Application Performance Management service for developers and DevOps professionals to monitor their live applications. * `OpenStack` - An OpenStack target manages Virtual Machines, Physical Machines, Datacenters and Virtual Datacenters using different OpenStack services as administrative endpoints. * `MicrosoftSqlServer` - A Microsoft SQL database server. * `MySqlServer` - An instance of either Oracle MySQL Database or the open source MariaDB. * `Kubernetes` - A Kubernetes cluster that runs containerized applications. * `AmazonWebService` - A Amazon web service target that discovers and monitors different services like EC2. It discovers entities like VMs, Volumes, regions etc. and monitors attributes like Mem, CPU, cost. * `AmazonWebServiceBilling` - A Amazon web service billing target to retrieve billing information stored in S3 bucket. * `MicrosoftAzureServicePrincipal` - A Microsoft Azure Service Principal target that discovers all the associated Azure subscriptions. * `MicrosoftAzureEnterpriseAgreement` - A Microsoft Azure Enterprise Agreement target that discovers cost, billing and RIs. * `DellCompellent` - A Dell Compellent storage system. * `HPE3Par` - A HPE 3PAR storage system. * `RedHatEnterpriseVirtualization` - A Red Hat Enterprise Virtualization Hypervisor system that manages Virtual Machines. * `NutanixAcropolis` - A Nutanix Acropolis system that combines servers and storage into a distributed infrastructure platform. * `HPEOneView` - A HPE Oneview management system that manages compute, storage, and networking. * `ServiceEngine` - Cisco Application Services Engine. Cisco Application Services Engine is a platform to deploy and manage applications. * `HitachiVirtualStoragePlatform` - A Hitachi Virtual Storage Platform also referred to as Hitachi VSP. It includes various storage systems designed for data centers. * `IMCBlade` - An Intersight managed UCS Blade Server. * `TerraformCloud` - A Terraform Cloud account. * `TerraformAgent` - A Terraform Cloud Agent that Intersight will deploy in datacenter. The agent will execute Terraform plan for Terraform Cloud workspace configured to use the agent. * `CustomTarget` - An external endpoint added as Target that can be accessed through its HTTP API interface in Intersight Orchestrator automation workflow.Standard HTTP authentication scheme supported: Basic. * `AnsibleEndpoint` - An external endpoint added as Target that can be accessed through Ansible in Intersight Cloud Orchestrator automation workflow. * `HTTPEndpoint` - An external endpoint added as Target that can be accessed through its HTTP API interface in Intersight Orchestrator automation workflow.Standard HTTP authentication scheme supported: Basic, Bearer Token. * `SSHEndpoint` - An external endpoint added as Target that can be accessed through SSH in Intersight Cloud Orchestrator automation workflow. * `CiscoCatalyst` - A Cisco Catalyst networking switch device. * `PowerShellEndpoint` - A Windows machine on which PowerShell scripts can be executed remotely.
+	// The platformType for this SKU. * `` - The device reported an empty or unrecognized platform type. * `APIC` - An Application Policy Infrastructure Controller cluster. * `CAPIC` - An Application Policy Infrastructure Controller cloud instance. * `DCNM` - A Data Center Network Manager instance. Data Center Network Manager (DCNM) is the network management platform for all NX-OS-enabled deployments, spanning new fabric architectures, IP Fabric for Media, and storage networking deployments for the Cisco Nexus-powered data center. * `UCSFI` - A UCS Fabric Interconnect in HA or standalone mode, which is being managed by UCS Manager (UCSM). * `UCSFIISM` - A UCS Fabric Interconnect in HA or standalone mode, managed directly by Intersight. * `IMC` - A standalone UCS Server Integrated Management Controller. * `IMCM4` - A standalone UCS M4 Server. * `IMCM5` - A standalone UCS M5 server. * `IMCRack` - A standalone UCS M6 and above server. * `UCSIOM` - An UCS Chassis IO module. * `HX` - A HyperFlex storage controller. * `HyperFlexAP` - A HyperFlex Application Platform. * `IWE` - An Intersight Workload Engine. * `UCSD` - A UCS Director virtual appliance. Cisco UCS Director automates, orchestrates, and manages Cisco and third-party hardware. * `IntersightAppliance` - A Cisco Intersight Connected Virtual Appliance. * `IntersightAssist` - A Cisco Intersight Assist. * `PureStorageFlashArray` - A Pure Storage FlashArray device. * `NexusDevice` - A generic platform type to support Nexus Network Device. This can also be extended to support all network devices later on. * `ACISwitch` - A platform type to support ACI Switches. * `NexusSwitch` - A platform type to support Cisco Nexus Switches. * `MDSDevice` - A platform type to support MDS devices. * `UCSC890` - A standalone Cisco UCSC890 server. * `NetAppOntap` - A NetApp ONTAP storage system. * `NetAppActiveIqUnifiedManager` - A NetApp Active IQ Unified Manager. * `EmcScaleIo` - An EMC ScaleIO storage system. * `EmcVmax` - An EMC VMAX storage system. * `EmcVplex` - An EMC VPLEX storage system. * `EmcXtremIo` - An EMC XtremIO storage system. * `VmwareVcenter` - A VMware vCenter device that manages Virtual Machines. * `MicrosoftHyperV` - A Microsoft Hyper-V system that manages Virtual Machines. * `AppDynamics` - An AppDynamics controller that monitors applications. * `Dynatrace` - A software-intelligence monitoring platform that simplifies enterprise cloud complexity and accelerates digital transformation. * `NewRelic` - A software-intelligence monitoring platform that simplifies enterprise cloud complexity and accelerates digital transformation. * `ServiceNow` - A cloud-based workflow automation platform that enables enterprise organizations to improve operational efficiencies by streamlining and automating routine work tasks. * `ReadHatOpenStack` - An OpenStack target manages Virtual Machines, Physical Machines, Datacenters and Virtual Datacenters using different OpenStack services as administrative endpoints. * `CloudFoundry` - An open source cloud platform on which developers can build, deploy, run and scale applications. * `MicrosoftAzureApplicationInsights` - A feature of Azure Monitor, is an extensible Application Performance Management service for developers and DevOps professionals to monitor their live applications. * `OpenStack` - An OpenStack target manages Virtual Machines, Physical Machines, Datacenters and Virtual Datacenters using different OpenStack services as administrative endpoints. * `MicrosoftSqlServer` - A Microsoft SQL database server. * `MySqlServer` - An instance of either Oracle MySQL Database or the open source MariaDB. * `Kubernetes` - A Kubernetes cluster that runs containerized applications. * `AmazonWebService` - A Amazon web service target that discovers and monitors different services like EC2. It discovers entities like VMs, Volumes, regions etc. and monitors attributes like Mem, CPU, cost. * `AmazonWebServiceBilling` - A Amazon web service billing target to retrieve billing information stored in S3 bucket. * `MicrosoftAzureServicePrincipal` - A Microsoft Azure Service Principal target that discovers all the associated Azure subscriptions. * `MicrosoftAzureEnterpriseAgreement` - A Microsoft Azure Enterprise Agreement target that discovers cost, billing and RIs. * `DellCompellent` - A Dell Compellent storage system. * `HPE3Par` - A HPE 3PAR storage system. * `RedHatEnterpriseVirtualization` - A Red Hat Enterprise Virtualization Hypervisor system that manages Virtual Machines. * `NutanixAcropolis` - A Nutanix Acropolis system that combines servers and storage into a distributed infrastructure platform. * `HPEOneView` - A HPE Oneview management system that manages compute, storage, and networking. * `ServiceEngine` - Cisco Application Services Engine. Cisco Application Services Engine is a platform to deploy and manage applications. * `HitachiVirtualStoragePlatform` - A Hitachi Virtual Storage Platform also referred to as Hitachi VSP. It includes various storage systems designed for data centers. * `IMCBlade` - An Intersight managed UCS Blade Server. * `TerraformCloud` - A Terraform Cloud account. * `TerraformAgent` - A Terraform Cloud Agent that Intersight will deploy in datacenter. The agent will execute Terraform plan for Terraform Cloud workspace configured to use the agent. * `CustomTarget` - An external endpoint added as Target that can be accessed through its HTTP API interface in Intersight Orchestrator automation workflow.Standard HTTP authentication scheme supported: Basic. * `AnsibleEndpoint` - An external endpoint added as Target that can be accessed through Ansible in Intersight Cloud Orchestrator automation workflow. * `HTTPEndpoint` - An external endpoint added as Target that can be accessed through its HTTP API interface in Intersight Orchestrator automation workflow.Standard HTTP authentication scheme supported: Basic, Bearer Token. * `SSHEndpoint` - An external endpoint added as Target that can be accessed through SSH in Intersight Cloud Orchestrator automation workflow. * `CiscoCatalyst` - A Cisco Catalyst networking switch device. * `PowerShellEndpoint` - A Windows machine on which PowerShell scripts can be executed remotely.
 	PlatformType *string `json:"PlatformType,omitempty"`
+	// The region to which this Sku belongs to.
+	RegionId *string `json:"RegionId,omitempty"`
 	// Indicates if this sku belongs to Compute, Storage, Database or Network category. * `Compute` - Compute service offered by cloud provider. * `Storage` - Storage service offered by cloud provider. * `Database` - Database service offered by cloud provider. * `Network` - Network service offered by cloud provider.
 	ServiceCategory *string `json:"ServiceCategory,omitempty"`
 	// Property to identify the family of service that the sku belongs to.
 	ServiceFamily *string `json:"ServiceFamily,omitempty"`
 	// Any display name for the ServiceCategory if available.
-	ServiceName          *string                  `json:"ServiceName,omitempty"`
-	Target               *AssetTargetRelationship `json:"Target,omitempty"`
+	ServiceName *string `json:"ServiceName,omitempty"`
+	// The pricing associated with this Sku. Can be hourly, per minute.
+	Unit                 *string                   `json:"Unit,omitempty"`
+	Region               *CloudRegionsRelationship `json:"Region,omitempty"`
+	Target               *AssetTargetRelationship  `json:"Target,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -55,6 +64,8 @@ func NewCloudBaseSku(classId string, objectType string) *CloudBaseSku {
 	this := CloudBaseSku{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var currency string = "USD"
+	this.Currency = &currency
 	var isActive bool = true
 	this.IsActive = &isActive
 	var platformType string = ""
@@ -69,6 +80,8 @@ func NewCloudBaseSku(classId string, objectType string) *CloudBaseSku {
 // but it doesn't guarantee that properties required by API are set
 func NewCloudBaseSkuWithDefaults() *CloudBaseSku {
 	this := CloudBaseSku{}
+	var currency string = "USD"
+	this.Currency = &currency
 	var isActive bool = true
 	this.IsActive = &isActive
 	var platformType string = ""
@@ -126,6 +139,70 @@ func (o *CloudBaseSku) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
+// GetBasePrice returns the BasePrice field value if set, zero value otherwise.
+func (o *CloudBaseSku) GetBasePrice() float32 {
+	if o == nil || o.BasePrice == nil {
+		var ret float32
+		return ret
+	}
+	return *o.BasePrice
+}
+
+// GetBasePriceOk returns a tuple with the BasePrice field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CloudBaseSku) GetBasePriceOk() (*float32, bool) {
+	if o == nil || o.BasePrice == nil {
+		return nil, false
+	}
+	return o.BasePrice, true
+}
+
+// HasBasePrice returns a boolean if a field has been set.
+func (o *CloudBaseSku) HasBasePrice() bool {
+	if o != nil && o.BasePrice != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetBasePrice gets a reference to the given float32 and assigns it to the BasePrice field.
+func (o *CloudBaseSku) SetBasePrice(v float32) {
+	o.BasePrice = &v
+}
+
+// GetCurrency returns the Currency field value if set, zero value otherwise.
+func (o *CloudBaseSku) GetCurrency() string {
+	if o == nil || o.Currency == nil {
+		var ret string
+		return ret
+	}
+	return *o.Currency
+}
+
+// GetCurrencyOk returns a tuple with the Currency field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CloudBaseSku) GetCurrencyOk() (*string, bool) {
+	if o == nil || o.Currency == nil {
+		return nil, false
+	}
+	return o.Currency, true
+}
+
+// HasCurrency returns a boolean if a field has been set.
+func (o *CloudBaseSku) HasCurrency() bool {
+	if o != nil && o.Currency != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCurrency gets a reference to the given string and assigns it to the Currency field.
+func (o *CloudBaseSku) SetCurrency(v string) {
+	o.Currency = &v
+}
+
 // GetCustomAttributes returns the CustomAttributes field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CloudBaseSku) GetCustomAttributes() []CloudCustomAttributes {
 	if o == nil {
@@ -138,11 +215,11 @@ func (o *CloudBaseSku) GetCustomAttributes() []CloudCustomAttributes {
 // GetCustomAttributesOk returns a tuple with the CustomAttributes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CloudBaseSku) GetCustomAttributesOk() (*[]CloudCustomAttributes, bool) {
+func (o *CloudBaseSku) GetCustomAttributesOk() ([]CloudCustomAttributes, bool) {
 	if o == nil || o.CustomAttributes == nil {
 		return nil, false
 	}
-	return &o.CustomAttributes, true
+	return o.CustomAttributes, true
 }
 
 // HasCustomAttributes returns a boolean if a field has been set.
@@ -319,6 +396,38 @@ func (o *CloudBaseSku) SetPlatformType(v string) {
 	o.PlatformType = &v
 }
 
+// GetRegionId returns the RegionId field value if set, zero value otherwise.
+func (o *CloudBaseSku) GetRegionId() string {
+	if o == nil || o.RegionId == nil {
+		var ret string
+		return ret
+	}
+	return *o.RegionId
+}
+
+// GetRegionIdOk returns a tuple with the RegionId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CloudBaseSku) GetRegionIdOk() (*string, bool) {
+	if o == nil || o.RegionId == nil {
+		return nil, false
+	}
+	return o.RegionId, true
+}
+
+// HasRegionId returns a boolean if a field has been set.
+func (o *CloudBaseSku) HasRegionId() bool {
+	if o != nil && o.RegionId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRegionId gets a reference to the given string and assigns it to the RegionId field.
+func (o *CloudBaseSku) SetRegionId(v string) {
+	o.RegionId = &v
+}
+
 // GetServiceCategory returns the ServiceCategory field value if set, zero value otherwise.
 func (o *CloudBaseSku) GetServiceCategory() string {
 	if o == nil || o.ServiceCategory == nil {
@@ -415,6 +524,70 @@ func (o *CloudBaseSku) SetServiceName(v string) {
 	o.ServiceName = &v
 }
 
+// GetUnit returns the Unit field value if set, zero value otherwise.
+func (o *CloudBaseSku) GetUnit() string {
+	if o == nil || o.Unit == nil {
+		var ret string
+		return ret
+	}
+	return *o.Unit
+}
+
+// GetUnitOk returns a tuple with the Unit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CloudBaseSku) GetUnitOk() (*string, bool) {
+	if o == nil || o.Unit == nil {
+		return nil, false
+	}
+	return o.Unit, true
+}
+
+// HasUnit returns a boolean if a field has been set.
+func (o *CloudBaseSku) HasUnit() bool {
+	if o != nil && o.Unit != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUnit gets a reference to the given string and assigns it to the Unit field.
+func (o *CloudBaseSku) SetUnit(v string) {
+	o.Unit = &v
+}
+
+// GetRegion returns the Region field value if set, zero value otherwise.
+func (o *CloudBaseSku) GetRegion() CloudRegionsRelationship {
+	if o == nil || o.Region == nil {
+		var ret CloudRegionsRelationship
+		return ret
+	}
+	return *o.Region
+}
+
+// GetRegionOk returns a tuple with the Region field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CloudBaseSku) GetRegionOk() (*CloudRegionsRelationship, bool) {
+	if o == nil || o.Region == nil {
+		return nil, false
+	}
+	return o.Region, true
+}
+
+// HasRegion returns a boolean if a field has been set.
+func (o *CloudBaseSku) HasRegion() bool {
+	if o != nil && o.Region != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRegion gets a reference to the given CloudRegionsRelationship and assigns it to the Region field.
+func (o *CloudBaseSku) SetRegion(v CloudRegionsRelationship) {
+	o.Region = &v
+}
+
 // GetTarget returns the Target field value if set, zero value otherwise.
 func (o *CloudBaseSku) GetTarget() AssetTargetRelationship {
 	if o == nil || o.Target == nil {
@@ -463,6 +636,12 @@ func (o CloudBaseSku) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.BasePrice != nil {
+		toSerialize["BasePrice"] = o.BasePrice
+	}
+	if o.Currency != nil {
+		toSerialize["Currency"] = o.Currency
+	}
 	if o.CustomAttributes != nil {
 		toSerialize["CustomAttributes"] = o.CustomAttributes
 	}
@@ -481,6 +660,9 @@ func (o CloudBaseSku) MarshalJSON() ([]byte, error) {
 	if o.PlatformType != nil {
 		toSerialize["PlatformType"] = o.PlatformType
 	}
+	if o.RegionId != nil {
+		toSerialize["RegionId"] = o.RegionId
+	}
 	if o.ServiceCategory != nil {
 		toSerialize["ServiceCategory"] = o.ServiceCategory
 	}
@@ -489,6 +671,12 @@ func (o CloudBaseSku) MarshalJSON() ([]byte, error) {
 	}
 	if o.ServiceName != nil {
 		toSerialize["ServiceName"] = o.ServiceName
+	}
+	if o.Unit != nil {
+		toSerialize["Unit"] = o.Unit
+	}
+	if o.Region != nil {
+		toSerialize["Region"] = o.Region
 	}
 	if o.Target != nil {
 		toSerialize["Target"] = o.Target
@@ -506,7 +694,11 @@ func (o *CloudBaseSku) UnmarshalJSON(bytes []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property. The enum values provides the list of concrete types that can be instantiated from this abstract type.
-		ObjectType       string                  `json:"ObjectType"`
+		ObjectType string `json:"ObjectType"`
+		// The cost per hour for running a Linux instance for the SKU. Cost can be higher for Windows or other licensed OS.
+		BasePrice *float32 `json:"BasePrice,omitempty"`
+		// The currency code used for the price. For e.g. USD or EUR. * `USD` - The currency code for United states dollar. * `EUR` - The currency code for European Union.
+		Currency         *string                 `json:"Currency,omitempty"`
 		CustomAttributes []CloudCustomAttributes `json:"CustomAttributes,omitempty"`
 		// Any additional description for the instance type.
 		Description *string `json:"Description,omitempty"`
@@ -516,15 +708,20 @@ func (o *CloudBaseSku) UnmarshalJSON(bytes []byte) (err error) {
 		IsAutoDiscovered *bool `json:"IsAutoDiscovered,omitempty"`
 		// The display name for instance type.
 		Name *string `json:"Name,omitempty"`
-		// The platformType for this SKU. * `` - The device reported an empty or unrecognized platform type. * `APIC` - An Application Policy Infrastructure Controller cluster. * `DCNM` - A Data Center Network Manager instance. Data Center Network Manager (DCNM) is the network management platform for all NX-OS-enabled deployments, spanning new fabric architectures, IP Fabric for Media, and storage networking deployments for the Cisco Nexus-powered data center. * `UCSFI` - A UCS Fabric Interconnect in HA or standalone mode, which is being managed by UCS Manager (UCSM). * `UCSFIISM` - A UCS Fabric Interconnect in HA or standalone mode, managed directly by Intersight. * `IMC` - A standalone UCS Server Integrated Management Controller. * `IMCM4` - A standalone UCS M4 Server. * `IMCM5` - A standalone UCS M5 server. * `IMCRack` - A standalone UCS M6 and above server. * `UCSIOM` - An UCS Chassis IO module. * `HX` - A HyperFlex storage controller. * `HyperFlexAP` - A HyperFlex Application Platform. * `IWE` - An Intersight Workload Engine. * `UCSD` - A UCS Director virtual appliance. Cisco UCS Director automates, orchestrates, and manages Cisco and third-party hardware. * `IntersightAppliance` - A Cisco Intersight Connected Virtual Appliance. * `IntersightAssist` - A Cisco Intersight Assist. * `PureStorageFlashArray` - A Pure Storage FlashArray device. * `NexusDevice` - A generic platform type to support Nexus Network Device. This can also be extended to support all network devices later on. * `MDSDevice` - A platform type to support MDS devices. * `UCSC890` - A standalone Cisco UCSC890 server. * `NetAppOntap` - A NetApp ONTAP storage system. * `NetAppActiveIqUnifiedManager` - A NetApp Active IQ Unified Manager. * `EmcScaleIo` - An EMC ScaleIO storage system. * `EmcVmax` - An EMC VMAX storage system. * `EmcVplex` - An EMC VPLEX storage system. * `EmcXtremIo` - An EMC XtremIO storage system. * `VmwareVcenter` - A VMware vCenter device that manages Virtual Machines. * `MicrosoftHyperV` - A Microsoft Hyper-V system that manages Virtual Machines. * `AppDynamics` - An AppDynamics controller that monitors applications. * `Dynatrace` - A software-intelligence monitoring platform that simplifies enterprise cloud complexity and accelerates digital transformation. * `NewRelic` - A software-intelligence monitoring platform that simplifies enterprise cloud complexity and accelerates digital transformation. * `ServiceNow` - A cloud-based workflow automation platform that enables enterprise organizations to improve operational efficiencies by streamlining and automating routine work tasks. * `ReadHatOpenStack` - An OpenStack target manages Virtual Machines, Physical Machines, Datacenters and Virtual Datacenters using different OpenStack services as administrative endpoints. * `CloudFoundry` - An open source cloud platform on which developers can build, deploy, run and scale applications. * `MicrosoftAzureApplicationInsights` - A feature of Azure Monitor, is an extensible Application Performance Management service for developers and DevOps professionals to monitor their live applications. * `OpenStack` - An OpenStack target manages Virtual Machines, Physical Machines, Datacenters and Virtual Datacenters using different OpenStack services as administrative endpoints. * `MicrosoftSqlServer` - A Microsoft SQL database server. * `MySqlServer` - An instance of either Oracle MySQL Database or the open source MariaDB. * `Kubernetes` - A Kubernetes cluster that runs containerized applications. * `AmazonWebService` - A Amazon web service target that discovers and monitors different services like EC2. It discovers entities like VMs, Volumes, regions etc. and monitors attributes like Mem, CPU, cost. * `AmazonWebServiceBilling` - A Amazon web service billing target to retrieve billing information stored in S3 bucket. * `MicrosoftAzureServicePrincipal` - A Microsoft Azure Service Principal target that discovers all the associated Azure subscriptions. * `MicrosoftAzureEnterpriseAgreement` - A Microsoft Azure Enterprise Agreement target that discovers cost, billing and RIs. * `DellCompellent` - A Dell Compellent storage system. * `HPE3Par` - A HPE 3PAR storage system. * `RedHatEnterpriseVirtualization` - A Red Hat Enterprise Virtualization Hypervisor system that manages Virtual Machines. * `NutanixAcropolis` - A Nutanix Acropolis system that combines servers and storage into a distributed infrastructure platform. * `HPEOneView` - A HPE Oneview management system that manages compute, storage, and networking. * `ServiceEngine` - Cisco Application Services Engine. Cisco Application Services Engine is a platform to deploy and manage applications. * `HitachiVirtualStoragePlatform` - A Hitachi Virtual Storage Platform also referred to as Hitachi VSP. It includes various storage systems designed for data centers. * `IMCBlade` - An Intersight managed UCS Blade Server. * `TerraformCloud` - A Terraform Cloud account. * `TerraformAgent` - A Terraform Cloud Agent that Intersight will deploy in datacenter. The agent will execute Terraform plan for Terraform Cloud workspace configured to use the agent. * `CustomTarget` - An external endpoint added as Target that can be accessed through its HTTP API interface in Intersight Orchestrator automation workflow.Standard HTTP authentication scheme supported: Basic. * `AnsibleEndpoint` - An external endpoint added as Target that can be accessed through Ansible in Intersight Cloud Orchestrator automation workflow. * `HTTPEndpoint` - An external endpoint added as Target that can be accessed through its HTTP API interface in Intersight Orchestrator automation workflow.Standard HTTP authentication scheme supported: Basic, Bearer Token. * `SSHEndpoint` - An external endpoint added as Target that can be accessed through SSH in Intersight Cloud Orchestrator automation workflow. * `CiscoCatalyst` - A Cisco Catalyst networking switch device. * `PowerShellEndpoint` - A Windows machine on which PowerShell scripts can be executed remotely.
+		// The platformType for this SKU. * `` - The device reported an empty or unrecognized platform type. * `APIC` - An Application Policy Infrastructure Controller cluster. * `CAPIC` - An Application Policy Infrastructure Controller cloud instance. * `DCNM` - A Data Center Network Manager instance. Data Center Network Manager (DCNM) is the network management platform for all NX-OS-enabled deployments, spanning new fabric architectures, IP Fabric for Media, and storage networking deployments for the Cisco Nexus-powered data center. * `UCSFI` - A UCS Fabric Interconnect in HA or standalone mode, which is being managed by UCS Manager (UCSM). * `UCSFIISM` - A UCS Fabric Interconnect in HA or standalone mode, managed directly by Intersight. * `IMC` - A standalone UCS Server Integrated Management Controller. * `IMCM4` - A standalone UCS M4 Server. * `IMCM5` - A standalone UCS M5 server. * `IMCRack` - A standalone UCS M6 and above server. * `UCSIOM` - An UCS Chassis IO module. * `HX` - A HyperFlex storage controller. * `HyperFlexAP` - A HyperFlex Application Platform. * `IWE` - An Intersight Workload Engine. * `UCSD` - A UCS Director virtual appliance. Cisco UCS Director automates, orchestrates, and manages Cisco and third-party hardware. * `IntersightAppliance` - A Cisco Intersight Connected Virtual Appliance. * `IntersightAssist` - A Cisco Intersight Assist. * `PureStorageFlashArray` - A Pure Storage FlashArray device. * `NexusDevice` - A generic platform type to support Nexus Network Device. This can also be extended to support all network devices later on. * `ACISwitch` - A platform type to support ACI Switches. * `NexusSwitch` - A platform type to support Cisco Nexus Switches. * `MDSDevice` - A platform type to support MDS devices. * `UCSC890` - A standalone Cisco UCSC890 server. * `NetAppOntap` - A NetApp ONTAP storage system. * `NetAppActiveIqUnifiedManager` - A NetApp Active IQ Unified Manager. * `EmcScaleIo` - An EMC ScaleIO storage system. * `EmcVmax` - An EMC VMAX storage system. * `EmcVplex` - An EMC VPLEX storage system. * `EmcXtremIo` - An EMC XtremIO storage system. * `VmwareVcenter` - A VMware vCenter device that manages Virtual Machines. * `MicrosoftHyperV` - A Microsoft Hyper-V system that manages Virtual Machines. * `AppDynamics` - An AppDynamics controller that monitors applications. * `Dynatrace` - A software-intelligence monitoring platform that simplifies enterprise cloud complexity and accelerates digital transformation. * `NewRelic` - A software-intelligence monitoring platform that simplifies enterprise cloud complexity and accelerates digital transformation. * `ServiceNow` - A cloud-based workflow automation platform that enables enterprise organizations to improve operational efficiencies by streamlining and automating routine work tasks. * `ReadHatOpenStack` - An OpenStack target manages Virtual Machines, Physical Machines, Datacenters and Virtual Datacenters using different OpenStack services as administrative endpoints. * `CloudFoundry` - An open source cloud platform on which developers can build, deploy, run and scale applications. * `MicrosoftAzureApplicationInsights` - A feature of Azure Monitor, is an extensible Application Performance Management service for developers and DevOps professionals to monitor their live applications. * `OpenStack` - An OpenStack target manages Virtual Machines, Physical Machines, Datacenters and Virtual Datacenters using different OpenStack services as administrative endpoints. * `MicrosoftSqlServer` - A Microsoft SQL database server. * `MySqlServer` - An instance of either Oracle MySQL Database or the open source MariaDB. * `Kubernetes` - A Kubernetes cluster that runs containerized applications. * `AmazonWebService` - A Amazon web service target that discovers and monitors different services like EC2. It discovers entities like VMs, Volumes, regions etc. and monitors attributes like Mem, CPU, cost. * `AmazonWebServiceBilling` - A Amazon web service billing target to retrieve billing information stored in S3 bucket. * `MicrosoftAzureServicePrincipal` - A Microsoft Azure Service Principal target that discovers all the associated Azure subscriptions. * `MicrosoftAzureEnterpriseAgreement` - A Microsoft Azure Enterprise Agreement target that discovers cost, billing and RIs. * `DellCompellent` - A Dell Compellent storage system. * `HPE3Par` - A HPE 3PAR storage system. * `RedHatEnterpriseVirtualization` - A Red Hat Enterprise Virtualization Hypervisor system that manages Virtual Machines. * `NutanixAcropolis` - A Nutanix Acropolis system that combines servers and storage into a distributed infrastructure platform. * `HPEOneView` - A HPE Oneview management system that manages compute, storage, and networking. * `ServiceEngine` - Cisco Application Services Engine. Cisco Application Services Engine is a platform to deploy and manage applications. * `HitachiVirtualStoragePlatform` - A Hitachi Virtual Storage Platform also referred to as Hitachi VSP. It includes various storage systems designed for data centers. * `IMCBlade` - An Intersight managed UCS Blade Server. * `TerraformCloud` - A Terraform Cloud account. * `TerraformAgent` - A Terraform Cloud Agent that Intersight will deploy in datacenter. The agent will execute Terraform plan for Terraform Cloud workspace configured to use the agent. * `CustomTarget` - An external endpoint added as Target that can be accessed through its HTTP API interface in Intersight Orchestrator automation workflow.Standard HTTP authentication scheme supported: Basic. * `AnsibleEndpoint` - An external endpoint added as Target that can be accessed through Ansible in Intersight Cloud Orchestrator automation workflow. * `HTTPEndpoint` - An external endpoint added as Target that can be accessed through its HTTP API interface in Intersight Orchestrator automation workflow.Standard HTTP authentication scheme supported: Basic, Bearer Token. * `SSHEndpoint` - An external endpoint added as Target that can be accessed through SSH in Intersight Cloud Orchestrator automation workflow. * `CiscoCatalyst` - A Cisco Catalyst networking switch device. * `PowerShellEndpoint` - A Windows machine on which PowerShell scripts can be executed remotely.
 		PlatformType *string `json:"PlatformType,omitempty"`
+		// The region to which this Sku belongs to.
+		RegionId *string `json:"RegionId,omitempty"`
 		// Indicates if this sku belongs to Compute, Storage, Database or Network category. * `Compute` - Compute service offered by cloud provider. * `Storage` - Storage service offered by cloud provider. * `Database` - Database service offered by cloud provider. * `Network` - Network service offered by cloud provider.
 		ServiceCategory *string `json:"ServiceCategory,omitempty"`
 		// Property to identify the family of service that the sku belongs to.
 		ServiceFamily *string `json:"ServiceFamily,omitempty"`
 		// Any display name for the ServiceCategory if available.
-		ServiceName *string                  `json:"ServiceName,omitempty"`
-		Target      *AssetTargetRelationship `json:"Target,omitempty"`
+		ServiceName *string `json:"ServiceName,omitempty"`
+		// The pricing associated with this Sku. Can be hourly, per minute.
+		Unit   *string                   `json:"Unit,omitempty"`
+		Region *CloudRegionsRelationship `json:"Region,omitempty"`
+		Target *AssetTargetRelationship  `json:"Target,omitempty"`
 	}
 
 	varCloudBaseSkuWithoutEmbeddedStruct := CloudBaseSkuWithoutEmbeddedStruct{}
@@ -534,15 +731,20 @@ func (o *CloudBaseSku) UnmarshalJSON(bytes []byte) (err error) {
 		varCloudBaseSku := _CloudBaseSku{}
 		varCloudBaseSku.ClassId = varCloudBaseSkuWithoutEmbeddedStruct.ClassId
 		varCloudBaseSku.ObjectType = varCloudBaseSkuWithoutEmbeddedStruct.ObjectType
+		varCloudBaseSku.BasePrice = varCloudBaseSkuWithoutEmbeddedStruct.BasePrice
+		varCloudBaseSku.Currency = varCloudBaseSkuWithoutEmbeddedStruct.Currency
 		varCloudBaseSku.CustomAttributes = varCloudBaseSkuWithoutEmbeddedStruct.CustomAttributes
 		varCloudBaseSku.Description = varCloudBaseSkuWithoutEmbeddedStruct.Description
 		varCloudBaseSku.IsActive = varCloudBaseSkuWithoutEmbeddedStruct.IsActive
 		varCloudBaseSku.IsAutoDiscovered = varCloudBaseSkuWithoutEmbeddedStruct.IsAutoDiscovered
 		varCloudBaseSku.Name = varCloudBaseSkuWithoutEmbeddedStruct.Name
 		varCloudBaseSku.PlatformType = varCloudBaseSkuWithoutEmbeddedStruct.PlatformType
+		varCloudBaseSku.RegionId = varCloudBaseSkuWithoutEmbeddedStruct.RegionId
 		varCloudBaseSku.ServiceCategory = varCloudBaseSkuWithoutEmbeddedStruct.ServiceCategory
 		varCloudBaseSku.ServiceFamily = varCloudBaseSkuWithoutEmbeddedStruct.ServiceFamily
 		varCloudBaseSku.ServiceName = varCloudBaseSkuWithoutEmbeddedStruct.ServiceName
+		varCloudBaseSku.Unit = varCloudBaseSkuWithoutEmbeddedStruct.Unit
+		varCloudBaseSku.Region = varCloudBaseSkuWithoutEmbeddedStruct.Region
 		varCloudBaseSku.Target = varCloudBaseSkuWithoutEmbeddedStruct.Target
 		*o = CloudBaseSku(varCloudBaseSku)
 	} else {
@@ -563,15 +765,20 @@ func (o *CloudBaseSku) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "BasePrice")
+		delete(additionalProperties, "Currency")
 		delete(additionalProperties, "CustomAttributes")
 		delete(additionalProperties, "Description")
 		delete(additionalProperties, "IsActive")
 		delete(additionalProperties, "IsAutoDiscovered")
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "PlatformType")
+		delete(additionalProperties, "RegionId")
 		delete(additionalProperties, "ServiceCategory")
 		delete(additionalProperties, "ServiceFamily")
 		delete(additionalProperties, "ServiceName")
+		delete(additionalProperties, "Unit")
+		delete(additionalProperties, "Region")
 		delete(additionalProperties, "Target")
 
 		// remove fields from embedded structs

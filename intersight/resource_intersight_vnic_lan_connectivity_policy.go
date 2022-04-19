@@ -594,7 +594,6 @@ func resourceVnicLanConnectivityPolicy() *schema.Resource {
 
 func resourceVnicLanConnectivityPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewVnicLanConnectivityPolicyWithDefaults()
@@ -862,7 +861,7 @@ func resourceVnicLanConnectivityPolicyCreate(c context.Context, d *schema.Resour
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating VnicLanConnectivityPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating VnicLanConnectivityPolicy: %s", responseErr.Error())
@@ -873,7 +872,6 @@ func resourceVnicLanConnectivityPolicyCreate(c context.Context, d *schema.Resour
 }
 func detachVnicLanConnectivityPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.VnicLanConnectivityPolicy{}
@@ -886,7 +884,7 @@ func detachVnicLanConnectivityPolicyProfiles(d *schema.ResourceData, meta interf
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while detaching profile/profiles: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while detaching profile/profiles: %s", responseErr.Error())
@@ -896,7 +894,6 @@ func detachVnicLanConnectivityPolicyProfiles(d *schema.ResourceData, meta interf
 
 func resourceVnicLanConnectivityPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.VnicApi.GetVnicLanConnectivityPolicyByMoid(conn.ctx, d.Id())
@@ -909,7 +906,7 @@ func resourceVnicLanConnectivityPolicyRead(c context.Context, d *schema.Resource
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching VnicLanConnectivityPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching VnicLanConnectivityPolicy: %s", responseErr.Error())
@@ -1026,7 +1023,6 @@ func resourceVnicLanConnectivityPolicyRead(c context.Context, d *schema.Resource
 
 func resourceVnicLanConnectivityPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.VnicLanConnectivityPolicy{}
@@ -1302,7 +1298,7 @@ func resourceVnicLanConnectivityPolicyUpdate(c context.Context, d *schema.Resour
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating VnicLanConnectivityPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating VnicLanConnectivityPolicy: %s", responseErr.Error())
@@ -1314,7 +1310,6 @@ func resourceVnicLanConnectivityPolicyUpdate(c context.Context, d *schema.Resour
 
 func resourceVnicLanConnectivityPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	if p, ok := d.GetOk("profiles"); ok {
@@ -1334,7 +1329,7 @@ func resourceVnicLanConnectivityPolicyDelete(c context.Context, d *schema.Resour
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting VnicLanConnectivityPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting VnicLanConnectivityPolicy object: %s", deleteErr.Error())

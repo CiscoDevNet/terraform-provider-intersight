@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,23 +13,18 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // TerraformApiService TerraformApi service
 type TerraformApiService service
 
 type ApiCreateTerraformExecutorRequest struct {
-	ctx               _context.Context
+	ctx               context.Context
 	ApiService        *TerraformApiService
 	terraformExecutor *TerraformExecutor
 	ifMatch           *string
@@ -54,17 +49,17 @@ func (r ApiCreateTerraformExecutorRequest) IfNoneMatch(ifNoneMatch string) ApiCr
 	return r
 }
 
-func (r ApiCreateTerraformExecutorRequest) Execute() (TerraformExecutor, *_nethttp.Response, error) {
+func (r ApiCreateTerraformExecutorRequest) Execute() (*TerraformExecutor, *http.Response, error) {
 	return r.ApiService.CreateTerraformExecutorExecute(r)
 }
 
 /*
 CreateTerraformExecutor Create a 'terraform.Executor' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateTerraformExecutorRequest
 */
-func (a *TerraformApiService) CreateTerraformExecutor(ctx _context.Context) ApiCreateTerraformExecutorRequest {
+func (a *TerraformApiService) CreateTerraformExecutor(ctx context.Context) ApiCreateTerraformExecutorRequest {
 	return ApiCreateTerraformExecutorRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -73,26 +68,24 @@ func (a *TerraformApiService) CreateTerraformExecutor(ctx _context.Context) ApiC
 
 // Execute executes the request
 //  @return TerraformExecutor
-func (a *TerraformApiService) CreateTerraformExecutorExecute(r ApiCreateTerraformExecutorRequest) (TerraformExecutor, *_nethttp.Response, error) {
+func (a *TerraformApiService) CreateTerraformExecutorExecute(r ApiCreateTerraformExecutorRequest) (*TerraformExecutor, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TerraformExecutor
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TerraformExecutor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TerraformApiService.CreateTerraformExecutor")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/terraform/Executors"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.terraformExecutor == nil {
 		return localVarReturnValue, nil, reportError("terraformExecutor is required and must be specified")
 	}
@@ -122,7 +115,7 @@ func (a *TerraformApiService) CreateTerraformExecutorExecute(r ApiCreateTerrafor
 	}
 	// body params
 	localVarPostBody = r.terraformExecutor
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -132,15 +125,15 @@ func (a *TerraformApiService) CreateTerraformExecutorExecute(r ApiCreateTerrafor
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -196,7 +189,7 @@ func (a *TerraformApiService) CreateTerraformExecutorExecute(r ApiCreateTerrafor
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -207,23 +200,23 @@ func (a *TerraformApiService) CreateTerraformExecutorExecute(r ApiCreateTerrafor
 }
 
 type ApiDeleteTerraformExecutorRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *TerraformApiService
 	moid       string
 }
 
-func (r ApiDeleteTerraformExecutorRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteTerraformExecutorRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteTerraformExecutorExecute(r)
 }
 
 /*
 DeleteTerraformExecutor Delete a 'terraform.Executor' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteTerraformExecutorRequest
 */
-func (a *TerraformApiService) DeleteTerraformExecutor(ctx _context.Context, moid string) ApiDeleteTerraformExecutorRequest {
+func (a *TerraformApiService) DeleteTerraformExecutor(ctx context.Context, moid string) ApiDeleteTerraformExecutorRequest {
 	return ApiDeleteTerraformExecutorRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -232,26 +225,24 @@ func (a *TerraformApiService) DeleteTerraformExecutor(ctx _context.Context, moid
 }
 
 // Execute executes the request
-func (a *TerraformApiService) DeleteTerraformExecutorExecute(r ApiDeleteTerraformExecutorRequest) (*_nethttp.Response, error) {
+func (a *TerraformApiService) DeleteTerraformExecutorExecute(r ApiDeleteTerraformExecutorRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TerraformApiService.DeleteTerraformExecutor")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/terraform/Executors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -270,7 +261,7 @@ func (a *TerraformApiService) DeleteTerraformExecutorExecute(r ApiDeleteTerrafor
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -280,15 +271,15 @@ func (a *TerraformApiService) DeleteTerraformExecutorExecute(r ApiDeleteTerrafor
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -346,23 +337,23 @@ func (a *TerraformApiService) DeleteTerraformExecutorExecute(r ApiDeleteTerrafor
 }
 
 type ApiGetTerraformExecutorByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *TerraformApiService
 	moid       string
 }
 
-func (r ApiGetTerraformExecutorByMoidRequest) Execute() (TerraformExecutor, *_nethttp.Response, error) {
+func (r ApiGetTerraformExecutorByMoidRequest) Execute() (*TerraformExecutor, *http.Response, error) {
 	return r.ApiService.GetTerraformExecutorByMoidExecute(r)
 }
 
 /*
 GetTerraformExecutorByMoid Read a 'terraform.Executor' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetTerraformExecutorByMoidRequest
 */
-func (a *TerraformApiService) GetTerraformExecutorByMoid(ctx _context.Context, moid string) ApiGetTerraformExecutorByMoidRequest {
+func (a *TerraformApiService) GetTerraformExecutorByMoid(ctx context.Context, moid string) ApiGetTerraformExecutorByMoidRequest {
 	return ApiGetTerraformExecutorByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -372,27 +363,25 @@ func (a *TerraformApiService) GetTerraformExecutorByMoid(ctx _context.Context, m
 
 // Execute executes the request
 //  @return TerraformExecutor
-func (a *TerraformApiService) GetTerraformExecutorByMoidExecute(r ApiGetTerraformExecutorByMoidRequest) (TerraformExecutor, *_nethttp.Response, error) {
+func (a *TerraformApiService) GetTerraformExecutorByMoidExecute(r ApiGetTerraformExecutorByMoidRequest) (*TerraformExecutor, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TerraformExecutor
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TerraformExecutor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TerraformApiService.GetTerraformExecutorByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/terraform/Executors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -411,7 +400,7 @@ func (a *TerraformApiService) GetTerraformExecutorByMoidExecute(r ApiGetTerrafor
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -421,15 +410,15 @@ func (a *TerraformApiService) GetTerraformExecutorByMoidExecute(r ApiGetTerrafor
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -485,7 +474,7 @@ func (a *TerraformApiService) GetTerraformExecutorByMoidExecute(r ApiGetTerrafor
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -496,7 +485,7 @@ func (a *TerraformApiService) GetTerraformExecutorByMoidExecute(r ApiGetTerrafor
 }
 
 type ApiGetTerraformExecutorListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *TerraformApiService
 	filter      *string
 	orderby     *string
@@ -577,17 +566,17 @@ func (r ApiGetTerraformExecutorListRequest) Tags(tags string) ApiGetTerraformExe
 	return r
 }
 
-func (r ApiGetTerraformExecutorListRequest) Execute() (TerraformExecutorResponse, *_nethttp.Response, error) {
+func (r ApiGetTerraformExecutorListRequest) Execute() (*TerraformExecutorResponse, *http.Response, error) {
 	return r.ApiService.GetTerraformExecutorListExecute(r)
 }
 
 /*
 GetTerraformExecutorList Read a 'terraform.Executor' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetTerraformExecutorListRequest
 */
-func (a *TerraformApiService) GetTerraformExecutorList(ctx _context.Context) ApiGetTerraformExecutorListRequest {
+func (a *TerraformApiService) GetTerraformExecutorList(ctx context.Context) ApiGetTerraformExecutorListRequest {
 	return ApiGetTerraformExecutorListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -596,26 +585,24 @@ func (a *TerraformApiService) GetTerraformExecutorList(ctx _context.Context) Api
 
 // Execute executes the request
 //  @return TerraformExecutorResponse
-func (a *TerraformApiService) GetTerraformExecutorListExecute(r ApiGetTerraformExecutorListRequest) (TerraformExecutorResponse, *_nethttp.Response, error) {
+func (a *TerraformApiService) GetTerraformExecutorListExecute(r ApiGetTerraformExecutorListRequest) (*TerraformExecutorResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TerraformExecutorResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TerraformExecutorResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TerraformApiService.GetTerraformExecutorList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/terraform/Executors"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -667,7 +654,7 @@ func (a *TerraformApiService) GetTerraformExecutorListExecute(r ApiGetTerraformE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -677,15 +664,15 @@ func (a *TerraformApiService) GetTerraformExecutorListExecute(r ApiGetTerraformE
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -741,7 +728,7 @@ func (a *TerraformApiService) GetTerraformExecutorListExecute(r ApiGetTerraformE
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -752,7 +739,7 @@ func (a *TerraformApiService) GetTerraformExecutorListExecute(r ApiGetTerraformE
 }
 
 type ApiPatchTerraformExecutorRequest struct {
-	ctx               _context.Context
+	ctx               context.Context
 	ApiService        *TerraformApiService
 	moid              string
 	terraformExecutor *TerraformExecutor
@@ -771,18 +758,18 @@ func (r ApiPatchTerraformExecutorRequest) IfMatch(ifMatch string) ApiPatchTerraf
 	return r
 }
 
-func (r ApiPatchTerraformExecutorRequest) Execute() (TerraformExecutor, *_nethttp.Response, error) {
+func (r ApiPatchTerraformExecutorRequest) Execute() (*TerraformExecutor, *http.Response, error) {
 	return r.ApiService.PatchTerraformExecutorExecute(r)
 }
 
 /*
 PatchTerraformExecutor Update a 'terraform.Executor' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchTerraformExecutorRequest
 */
-func (a *TerraformApiService) PatchTerraformExecutor(ctx _context.Context, moid string) ApiPatchTerraformExecutorRequest {
+func (a *TerraformApiService) PatchTerraformExecutor(ctx context.Context, moid string) ApiPatchTerraformExecutorRequest {
 	return ApiPatchTerraformExecutorRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -792,27 +779,25 @@ func (a *TerraformApiService) PatchTerraformExecutor(ctx _context.Context, moid 
 
 // Execute executes the request
 //  @return TerraformExecutor
-func (a *TerraformApiService) PatchTerraformExecutorExecute(r ApiPatchTerraformExecutorRequest) (TerraformExecutor, *_nethttp.Response, error) {
+func (a *TerraformApiService) PatchTerraformExecutorExecute(r ApiPatchTerraformExecutorRequest) (*TerraformExecutor, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TerraformExecutor
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TerraformExecutor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TerraformApiService.PatchTerraformExecutor")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/terraform/Executors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.terraformExecutor == nil {
 		return localVarReturnValue, nil, reportError("terraformExecutor is required and must be specified")
 	}
@@ -839,7 +824,7 @@ func (a *TerraformApiService) PatchTerraformExecutorExecute(r ApiPatchTerraformE
 	}
 	// body params
 	localVarPostBody = r.terraformExecutor
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -849,15 +834,15 @@ func (a *TerraformApiService) PatchTerraformExecutorExecute(r ApiPatchTerraformE
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -913,7 +898,7 @@ func (a *TerraformApiService) PatchTerraformExecutorExecute(r ApiPatchTerraformE
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -924,7 +909,7 @@ func (a *TerraformApiService) PatchTerraformExecutorExecute(r ApiPatchTerraformE
 }
 
 type ApiUpdateTerraformExecutorRequest struct {
-	ctx               _context.Context
+	ctx               context.Context
 	ApiService        *TerraformApiService
 	moid              string
 	terraformExecutor *TerraformExecutor
@@ -943,18 +928,18 @@ func (r ApiUpdateTerraformExecutorRequest) IfMatch(ifMatch string) ApiUpdateTerr
 	return r
 }
 
-func (r ApiUpdateTerraformExecutorRequest) Execute() (TerraformExecutor, *_nethttp.Response, error) {
+func (r ApiUpdateTerraformExecutorRequest) Execute() (*TerraformExecutor, *http.Response, error) {
 	return r.ApiService.UpdateTerraformExecutorExecute(r)
 }
 
 /*
 UpdateTerraformExecutor Update a 'terraform.Executor' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateTerraformExecutorRequest
 */
-func (a *TerraformApiService) UpdateTerraformExecutor(ctx _context.Context, moid string) ApiUpdateTerraformExecutorRequest {
+func (a *TerraformApiService) UpdateTerraformExecutor(ctx context.Context, moid string) ApiUpdateTerraformExecutorRequest {
 	return ApiUpdateTerraformExecutorRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -964,27 +949,25 @@ func (a *TerraformApiService) UpdateTerraformExecutor(ctx _context.Context, moid
 
 // Execute executes the request
 //  @return TerraformExecutor
-func (a *TerraformApiService) UpdateTerraformExecutorExecute(r ApiUpdateTerraformExecutorRequest) (TerraformExecutor, *_nethttp.Response, error) {
+func (a *TerraformApiService) UpdateTerraformExecutorExecute(r ApiUpdateTerraformExecutorRequest) (*TerraformExecutor, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TerraformExecutor
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TerraformExecutor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TerraformApiService.UpdateTerraformExecutor")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/terraform/Executors/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.terraformExecutor == nil {
 		return localVarReturnValue, nil, reportError("terraformExecutor is required and must be specified")
 	}
@@ -1011,7 +994,7 @@ func (a *TerraformApiService) UpdateTerraformExecutorExecute(r ApiUpdateTerrafor
 	}
 	// body params
 	localVarPostBody = r.terraformExecutor
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1021,15 +1004,15 @@ func (a *TerraformApiService) UpdateTerraformExecutorExecute(r ApiUpdateTerrafor
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1085,7 +1068,7 @@ func (a *TerraformApiService) UpdateTerraformExecutorExecute(r ApiUpdateTerrafor
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

@@ -195,10 +195,10 @@ func resourceBulkExport() *schema.Resource {
 				},
 			},
 			"import_order": {
-				Description:      "Contains the list of import order.",
-				Type:             schema.TypeString,
-				DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
-				Computed: true,
+				Description: "Contains the list of import order.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
 					if val != nil {
 						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
@@ -604,7 +604,6 @@ func resourceBulkExport() *schema.Resource {
 
 func resourceBulkExportCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewBulkExportWithDefaults()
@@ -809,7 +808,7 @@ func resourceBulkExportCreate(c context.Context, d *schema.ResourceData, meta in
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating BulkExport: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating BulkExport: %s", responseErr.Error())
@@ -821,7 +820,6 @@ func resourceBulkExportCreate(c context.Context, d *schema.ResourceData, meta in
 
 func resourceBulkExportRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.BulkApi.GetBulkExportByMoid(conn.ctx, d.Id())
@@ -834,7 +832,7 @@ func resourceBulkExportRead(c context.Context, d *schema.ResourceData, meta inte
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching BulkExport: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching BulkExport: %s", responseErr.Error())
@@ -947,7 +945,6 @@ func resourceBulkExportRead(c context.Context, d *schema.ResourceData, meta inte
 
 func resourceBulkExportUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.BulkExport{}
@@ -1155,7 +1152,7 @@ func resourceBulkExportUpdate(c context.Context, d *schema.ResourceData, meta in
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating BulkExport: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating BulkExport: %s", responseErr.Error())
@@ -1167,7 +1164,6 @@ func resourceBulkExportUpdate(c context.Context, d *schema.ResourceData, meta in
 
 func resourceBulkExportDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.BulkApi.DeleteBulkExport(conn.ctx, d.Id())
@@ -1179,7 +1175,7 @@ func resourceBulkExportDelete(c context.Context, d *schema.ResourceData, meta in
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting BulkExport object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting BulkExport object: %s", deleteErr.Error())

@@ -1113,7 +1113,6 @@ func dataSourceCloudAwsSubnet() *schema.Resource {
 
 func dataSourceCloudAwsSubnetRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.CloudAwsSubnet{}
@@ -1672,7 +1671,7 @@ func dataSourceCloudAwsSubnetRead(c context.Context, d *schema.ResourceData, met
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of CloudAwsSubnet: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of CloudAwsSubnet: %s", responseErr.Error())
@@ -1689,7 +1688,7 @@ func dataSourceCloudAwsSubnetRead(c context.Context, d *schema.ResourceData, met
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching CloudAwsSubnet: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching CloudAwsSubnet: %s", responseErr.Error())

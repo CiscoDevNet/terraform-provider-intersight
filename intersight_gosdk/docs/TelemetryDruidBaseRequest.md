@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**QueryType** | **string** | null | 
+**QueryType** | **string** |  | 
 
 ## Methods
 

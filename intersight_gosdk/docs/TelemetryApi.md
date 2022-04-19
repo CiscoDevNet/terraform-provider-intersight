@@ -39,8 +39,8 @@ func main() {
     telemetryDruidDataSourceMetadataRequest := *openapiclient.NewTelemetryDruidDataSourceMetadataRequest("QueryType_example", openapiclient.telemetry.DruidDataSource{TelemetryDruidInlineDataSource: openapiclient.NewTelemetryDruidInlineDataSource("Type_example", []string{"ColumnNames_example"}, [][]string{[]string{"Rows_example"}})}) // TelemetryDruidDataSourceMetadataRequest | The Druid request schema for time series queries.
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.TelemetryApi.QueryTelemetryDatasourceMetadata(context.Background()).TelemetryDruidDataSourceMetadataRequest(telemetryDruidDataSourceMetadataRequest).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.TelemetryApi.QueryTelemetryDatasourceMetadata(context.Background()).TelemetryDruidDataSourceMetadataRequest(telemetryDruidDataSourceMetadataRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TelemetryApi.QueryTelemetryDatasourceMetadata``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -105,8 +105,8 @@ func main() {
     telemetryDruidGroupByRequest := *openapiclient.NewTelemetryDruidGroupByRequest("QueryType_example", openapiclient.telemetry.DruidDataSource{TelemetryDruidInlineDataSource: openapiclient.NewTelemetryDruidInlineDataSource("Type_example", []string{"ColumnNames_example"}, [][]string{[]string{"Rows_example"}})}, []openapiclient.TelemetryDruidDimensionSpec{openapiclient.telemetry.DruidDimensionSpec{TelemetryDruidDefaultDimensionSpec: openapiclient.NewTelemetryDruidDefaultDimensionSpec("Type_example", "Dimension_example", "OutputName_example", "OutputType_example")}}, openapiclient.telemetry.DruidGranularity{TelemetryDruidDurationGranularity: openapiclient.NewTelemetryDruidDurationGranularity("Type_example", int64(123))}, []string{"Intervals_example"}) // TelemetryDruidGroupByRequest | The Druid request schema for time series queries.
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.TelemetryApi.QueryTelemetryGroupBy(context.Background()).TelemetryDruidGroupByRequest(telemetryDruidGroupByRequest).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.TelemetryApi.QueryTelemetryGroupBy(context.Background()).TelemetryDruidGroupByRequest(telemetryDruidGroupByRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TelemetryApi.QueryTelemetryGroupBy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -171,8 +171,8 @@ func main() {
     telemetryDruidScanRequest := *openapiclient.NewTelemetryDruidScanRequest("QueryType_example", openapiclient.telemetry.DruidDataSource{TelemetryDruidInlineDataSource: openapiclient.NewTelemetryDruidInlineDataSource("Type_example", []string{"ColumnNames_example"}, [][]string{[]string{"Rows_example"}})}, []string{"Intervals_example"}) // TelemetryDruidScanRequest | The Druid request schema for time series queries.
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.TelemetryApi.QueryTelemetryScan(context.Background()).TelemetryDruidScanRequest(telemetryDruidScanRequest).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.TelemetryApi.QueryTelemetryScan(context.Background()).TelemetryDruidScanRequest(telemetryDruidScanRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TelemetryApi.QueryTelemetryScan``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -237,8 +237,8 @@ func main() {
     telemetryDruidSearchRequest := *openapiclient.NewTelemetryDruidSearchRequest("QueryType_example", openapiclient.telemetry.DruidDataSource{TelemetryDruidInlineDataSource: openapiclient.NewTelemetryDruidInlineDataSource("Type_example", []string{"ColumnNames_example"}, [][]string{[]string{"Rows_example"}})}, []string{"Intervals_example"}, openapiclient.telemetry.DruidGranularity{TelemetryDruidDurationGranularity: openapiclient.NewTelemetryDruidDurationGranularity("Type_example", int64(123))}) // TelemetryDruidSearchRequest | The Druid request schema for time series queries.
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.TelemetryApi.QueryTelemetrySearch(context.Background()).TelemetryDruidSearchRequest(telemetryDruidSearchRequest).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.TelemetryApi.QueryTelemetrySearch(context.Background()).TelemetryDruidSearchRequest(telemetryDruidSearchRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TelemetryApi.QueryTelemetrySearch``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -303,8 +303,8 @@ func main() {
     telemetryDruidSegmentMetadataRequest := *openapiclient.NewTelemetryDruidSegmentMetadataRequest("QueryType_example", openapiclient.telemetry.DruidDataSource{TelemetryDruidInlineDataSource: openapiclient.NewTelemetryDruidInlineDataSource("Type_example", []string{"ColumnNames_example"}, [][]string{[]string{"Rows_example"}})}) // TelemetryDruidSegmentMetadataRequest | The Druid request schema for time series queries.
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.TelemetryApi.QueryTelemetrySegmentMetadata(context.Background()).TelemetryDruidSegmentMetadataRequest(telemetryDruidSegmentMetadataRequest).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.TelemetryApi.QueryTelemetrySegmentMetadata(context.Background()).TelemetryDruidSegmentMetadataRequest(telemetryDruidSegmentMetadataRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TelemetryApi.QueryTelemetrySegmentMetadata``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -369,8 +369,8 @@ func main() {
     telemetryDruidTimeBoundaryRequest := *openapiclient.NewTelemetryDruidTimeBoundaryRequest("QueryType_example", openapiclient.telemetry.DruidDataSource{TelemetryDruidInlineDataSource: openapiclient.NewTelemetryDruidInlineDataSource("Type_example", []string{"ColumnNames_example"}, [][]string{[]string{"Rows_example"}})}) // TelemetryDruidTimeBoundaryRequest | The Druid request schema for time series queries.
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.TelemetryApi.QueryTelemetryTimeBoundary(context.Background()).TelemetryDruidTimeBoundaryRequest(telemetryDruidTimeBoundaryRequest).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.TelemetryApi.QueryTelemetryTimeBoundary(context.Background()).TelemetryDruidTimeBoundaryRequest(telemetryDruidTimeBoundaryRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TelemetryApi.QueryTelemetryTimeBoundary``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -435,8 +435,8 @@ func main() {
     telemetryDruidTimeSeriesRequest := *openapiclient.NewTelemetryDruidTimeSeriesRequest("QueryType_example", openapiclient.telemetry.DruidDataSource{TelemetryDruidInlineDataSource: openapiclient.NewTelemetryDruidInlineDataSource("Type_example", []string{"ColumnNames_example"}, [][]string{[]string{"Rows_example"}})}, []string{"Intervals_example"}, openapiclient.telemetry.DruidGranularity{TelemetryDruidDurationGranularity: openapiclient.NewTelemetryDruidDurationGranularity("Type_example", int64(123))}) // TelemetryDruidTimeSeriesRequest | The Druid request schema for time series queries.
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.TelemetryApi.QueryTelemetryTimeSeries(context.Background()).TelemetryDruidTimeSeriesRequest(telemetryDruidTimeSeriesRequest).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.TelemetryApi.QueryTelemetryTimeSeries(context.Background()).TelemetryDruidTimeSeriesRequest(telemetryDruidTimeSeriesRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TelemetryApi.QueryTelemetryTimeSeries``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -501,8 +501,8 @@ func main() {
     telemetryDruidTopNRequest := *openapiclient.NewTelemetryDruidTopNRequest("QueryType_example", openapiclient.telemetry.DruidDataSource{TelemetryDruidInlineDataSource: openapiclient.NewTelemetryDruidInlineDataSource("Type_example", []string{"ColumnNames_example"}, [][]string{[]string{"Rows_example"}})}, []string{"Intervals_example"}, openapiclient.telemetry.DruidGranularity{TelemetryDruidDurationGranularity: openapiclient.NewTelemetryDruidDurationGranularity("Type_example", int64(123))}, openapiclient.telemetry.DruidDimensionSpec{TelemetryDruidDefaultDimensionSpec: openapiclient.NewTelemetryDruidDefaultDimensionSpec("Type_example", "Dimension_example", "OutputName_example", "OutputType_example")}, int32(123), openapiclient.telemetry.DruidTopNMetricSpec{TelemetryDruidDimensionTopNMetricSpec: openapiclient.NewTelemetryDruidDimensionTopNMetricSpec("Type_example")}) // TelemetryDruidTopNRequest | The Druid request schema for time series queries.
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.TelemetryApi.QueryTelemetryTopN(context.Background()).TelemetryDruidTopNRequest(telemetryDruidTopNRequest).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.TelemetryApi.QueryTelemetryTopN(context.Background()).TelemetryDruidTopNRequest(telemetryDruidTopNRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TelemetryApi.QueryTelemetryTopN``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)

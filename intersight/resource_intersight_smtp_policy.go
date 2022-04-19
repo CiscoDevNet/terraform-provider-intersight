@@ -634,7 +634,6 @@ func resourceSmtpPolicy() *schema.Resource {
 
 func resourceSmtpPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewSmtpPolicyWithDefaults()
@@ -936,7 +935,7 @@ func resourceSmtpPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating SmtpPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating SmtpPolicy: %s", responseErr.Error())
@@ -947,7 +946,6 @@ func resourceSmtpPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 }
 func detachSmtpPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.SmtpPolicy{}
@@ -960,7 +958,7 @@ func detachSmtpPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Dia
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while detaching profile/profiles: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while detaching profile/profiles: %s", responseErr.Error())
@@ -970,7 +968,6 @@ func detachSmtpPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Dia
 
 func resourceSmtpPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.SmtpApi.GetSmtpPolicyByMoid(conn.ctx, d.Id())
@@ -983,7 +980,7 @@ func resourceSmtpPolicyRead(c context.Context, d *schema.ResourceData, meta inte
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching SmtpPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching SmtpPolicy: %s", responseErr.Error())
@@ -1120,7 +1117,6 @@ func resourceSmtpPolicyRead(c context.Context, d *schema.ResourceData, meta inte
 
 func resourceSmtpPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.SmtpPolicy{}
@@ -1435,7 +1431,7 @@ func resourceSmtpPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating SmtpPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating SmtpPolicy: %s", responseErr.Error())
@@ -1447,7 +1443,6 @@ func resourceSmtpPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 
 func resourceSmtpPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	if p, ok := d.GetOk("profiles"); ok {
@@ -1467,7 +1462,7 @@ func resourceSmtpPolicyDelete(c context.Context, d *schema.ResourceData, meta in
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting SmtpPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting SmtpPolicy object: %s", deleteErr.Error())

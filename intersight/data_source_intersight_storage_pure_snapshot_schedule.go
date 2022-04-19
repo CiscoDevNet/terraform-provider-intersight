@@ -867,7 +867,6 @@ func dataSourceStoragePureSnapshotSchedule() *schema.Resource {
 
 func dataSourceStoragePureSnapshotScheduleRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.StoragePureSnapshotSchedule{}
@@ -1328,7 +1327,7 @@ func dataSourceStoragePureSnapshotScheduleRead(c context.Context, d *schema.Reso
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of StoragePureSnapshotSchedule: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of StoragePureSnapshotSchedule: %s", responseErr.Error())
@@ -1345,7 +1344,7 @@ func dataSourceStoragePureSnapshotScheduleRead(c context.Context, d *schema.Reso
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching StoragePureSnapshotSchedule: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching StoragePureSnapshotSchedule: %s", responseErr.Error())

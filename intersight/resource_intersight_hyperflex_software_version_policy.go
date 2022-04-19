@@ -667,7 +667,6 @@ func resourceHyperflexSoftwareVersionPolicy() *schema.Resource {
 
 func resourceHyperflexSoftwareVersionPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewHyperflexSoftwareVersionPolicyWithDefaults()
@@ -895,7 +894,7 @@ func resourceHyperflexSoftwareVersionPolicyCreate(c context.Context, d *schema.R
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating HyperflexSoftwareVersionPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating HyperflexSoftwareVersionPolicy: %s", responseErr.Error())
@@ -907,7 +906,6 @@ func resourceHyperflexSoftwareVersionPolicyCreate(c context.Context, d *schema.R
 
 func resourceHyperflexSoftwareVersionPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.HyperflexApi.GetHyperflexSoftwareVersionPolicyByMoid(conn.ctx, d.Id())
@@ -920,7 +918,7 @@ func resourceHyperflexSoftwareVersionPolicyRead(c context.Context, d *schema.Res
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching HyperflexSoftwareVersionPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching HyperflexSoftwareVersionPolicy: %s", responseErr.Error())
@@ -1041,7 +1039,6 @@ func resourceHyperflexSoftwareVersionPolicyRead(c context.Context, d *schema.Res
 
 func resourceHyperflexSoftwareVersionPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.HyperflexSoftwareVersionPolicy{}
@@ -1273,7 +1270,7 @@ func resourceHyperflexSoftwareVersionPolicyUpdate(c context.Context, d *schema.R
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating HyperflexSoftwareVersionPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating HyperflexSoftwareVersionPolicy: %s", responseErr.Error())
@@ -1285,7 +1282,6 @@ func resourceHyperflexSoftwareVersionPolicyUpdate(c context.Context, d *schema.R
 
 func resourceHyperflexSoftwareVersionPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.HyperflexApi.DeleteHyperflexSoftwareVersionPolicy(conn.ctx, d.Id())
@@ -1297,7 +1293,7 @@ func resourceHyperflexSoftwareVersionPolicyDelete(c context.Context, d *schema.R
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting HyperflexSoftwareVersionPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting HyperflexSoftwareVersionPolicy object: %s", deleteErr.Error())

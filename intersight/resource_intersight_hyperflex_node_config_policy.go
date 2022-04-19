@@ -835,7 +835,6 @@ func resourceHyperflexNodeConfigPolicy() *schema.Resource {
 
 func resourceHyperflexNodeConfigPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewHyperflexNodeConfigPolicyWithDefaults()
@@ -1390,7 +1389,7 @@ func resourceHyperflexNodeConfigPolicyCreate(c context.Context, d *schema.Resour
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating HyperflexNodeConfigPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating HyperflexNodeConfigPolicy: %s", responseErr.Error())
@@ -1402,7 +1401,6 @@ func resourceHyperflexNodeConfigPolicyCreate(c context.Context, d *schema.Resour
 
 func resourceHyperflexNodeConfigPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.HyperflexApi.GetHyperflexNodeConfigPolicyByMoid(conn.ctx, d.Id())
@@ -1415,7 +1413,7 @@ func resourceHyperflexNodeConfigPolicyRead(c context.Context, d *schema.Resource
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching HyperflexNodeConfigPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching HyperflexNodeConfigPolicy: %s", responseErr.Error())
@@ -1524,7 +1522,6 @@ func resourceHyperflexNodeConfigPolicyRead(c context.Context, d *schema.Resource
 
 func resourceHyperflexNodeConfigPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.HyperflexNodeConfigPolicy{}
@@ -2087,7 +2084,7 @@ func resourceHyperflexNodeConfigPolicyUpdate(c context.Context, d *schema.Resour
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating HyperflexNodeConfigPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating HyperflexNodeConfigPolicy: %s", responseErr.Error())
@@ -2099,7 +2096,6 @@ func resourceHyperflexNodeConfigPolicyUpdate(c context.Context, d *schema.Resour
 
 func resourceHyperflexNodeConfigPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.HyperflexApi.DeleteHyperflexNodeConfigPolicy(conn.ctx, d.Id())
@@ -2111,7 +2107,7 @@ func resourceHyperflexNodeConfigPolicyDelete(c context.Context, d *schema.Resour
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting HyperflexNodeConfigPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting HyperflexNodeConfigPolicy object: %s", deleteErr.Error())

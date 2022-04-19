@@ -867,7 +867,6 @@ func dataSourceSoftwarerepositoryOperatingSystemFile() *schema.Resource {
 
 func dataSourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.SoftwarerepositoryOperatingSystemFile{}
@@ -1318,7 +1317,7 @@ func dataSourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *s
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of SoftwarerepositoryOperatingSystemFile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of SoftwarerepositoryOperatingSystemFile: %s", responseErr.Error())
@@ -1335,7 +1334,7 @@ func dataSourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *s
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching SoftwarerepositoryOperatingSystemFile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching SoftwarerepositoryOperatingSystemFile: %s", responseErr.Error())

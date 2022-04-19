@@ -576,7 +576,6 @@ func resourceRecoveryOnDemandBackup() *schema.Resource {
 
 func resourceRecoveryOnDemandBackupCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewRecoveryOnDemandBackupWithDefaults()
@@ -770,7 +769,7 @@ func resourceRecoveryOnDemandBackupCreate(c context.Context, d *schema.ResourceD
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating RecoveryOnDemandBackup: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating RecoveryOnDemandBackup: %s", responseErr.Error())
@@ -782,7 +781,6 @@ func resourceRecoveryOnDemandBackupCreate(c context.Context, d *schema.ResourceD
 
 func resourceRecoveryOnDemandBackupRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.RecoveryApi.GetRecoveryOnDemandBackupByMoid(conn.ctx, d.Id())
@@ -795,7 +793,7 @@ func resourceRecoveryOnDemandBackupRead(c context.Context, d *schema.ResourceDat
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching RecoveryOnDemandBackup: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching RecoveryOnDemandBackup: %s", responseErr.Error())
@@ -916,7 +914,6 @@ func resourceRecoveryOnDemandBackupRead(c context.Context, d *schema.ResourceDat
 
 func resourceRecoveryOnDemandBackupUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.RecoveryOnDemandBackup{}
@@ -1122,7 +1119,7 @@ func resourceRecoveryOnDemandBackupUpdate(c context.Context, d *schema.ResourceD
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating RecoveryOnDemandBackup: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating RecoveryOnDemandBackup: %s", responseErr.Error())
@@ -1134,7 +1131,6 @@ func resourceRecoveryOnDemandBackupUpdate(c context.Context, d *schema.ResourceD
 
 func resourceRecoveryOnDemandBackupDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.RecoveryApi.DeleteRecoveryOnDemandBackup(conn.ctx, d.Id())
@@ -1146,7 +1142,7 @@ func resourceRecoveryOnDemandBackupDelete(c context.Context, d *schema.ResourceD
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting RecoveryOnDemandBackup object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting RecoveryOnDemandBackup object: %s", deleteErr.Error())

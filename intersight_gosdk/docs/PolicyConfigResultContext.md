@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **EntityMoid** | Pointer to **string** | The Moid of the object present in config result context. | [optional] 
 **EntityName** | Pointer to **string** | The name of the object present in config result context. | [optional] 
 **EntityType** | Pointer to **string** | The type of the object present in config result context. | [optional] 
+**ParentMoid** | Pointer to **string** | The Moid of the parent object present in config result context. | [optional] 
+**ParentType** | Pointer to **string** | The type of the parent object present in config result context. | [optional] 
 
 ## Methods
 
@@ -179,6 +181,56 @@ SetEntityType sets EntityType field to given value.
 `func (o *PolicyConfigResultContext) HasEntityType() bool`
 
 HasEntityType returns a boolean if a field has been set.
+
+### GetParentMoid
+
+`func (o *PolicyConfigResultContext) GetParentMoid() string`
+
+GetParentMoid returns the ParentMoid field if non-nil, zero value otherwise.
+
+### GetParentMoidOk
+
+`func (o *PolicyConfigResultContext) GetParentMoidOk() (*string, bool)`
+
+GetParentMoidOk returns a tuple with the ParentMoid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetParentMoid
+
+`func (o *PolicyConfigResultContext) SetParentMoid(v string)`
+
+SetParentMoid sets ParentMoid field to given value.
+
+### HasParentMoid
+
+`func (o *PolicyConfigResultContext) HasParentMoid() bool`
+
+HasParentMoid returns a boolean if a field has been set.
+
+### GetParentType
+
+`func (o *PolicyConfigResultContext) GetParentType() string`
+
+GetParentType returns the ParentType field if non-nil, zero value otherwise.
+
+### GetParentTypeOk
+
+`func (o *PolicyConfigResultContext) GetParentTypeOk() (*string, bool)`
+
+GetParentTypeOk returns a tuple with the ParentType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetParentType
+
+`func (o *PolicyConfigResultContext) SetParentType(v string)`
+
+SetParentType sets ParentType field to given value.
+
+### HasParentType
+
+`func (o *PolicyConfigResultContext) HasParentType() bool`
+
+HasParentType returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

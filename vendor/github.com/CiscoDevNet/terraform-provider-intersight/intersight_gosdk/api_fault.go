@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,39 +13,34 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // FaultApiService FaultApi service
 type FaultApiService service
 
 type ApiGetFaultInstanceByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *FaultApiService
 	moid       string
 }
 
-func (r ApiGetFaultInstanceByMoidRequest) Execute() (FaultInstance, *_nethttp.Response, error) {
+func (r ApiGetFaultInstanceByMoidRequest) Execute() (*FaultInstance, *http.Response, error) {
 	return r.ApiService.GetFaultInstanceByMoidExecute(r)
 }
 
 /*
 GetFaultInstanceByMoid Read a 'fault.Instance' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetFaultInstanceByMoidRequest
 */
-func (a *FaultApiService) GetFaultInstanceByMoid(ctx _context.Context, moid string) ApiGetFaultInstanceByMoidRequest {
+func (a *FaultApiService) GetFaultInstanceByMoid(ctx context.Context, moid string) ApiGetFaultInstanceByMoidRequest {
 	return ApiGetFaultInstanceByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -55,27 +50,25 @@ func (a *FaultApiService) GetFaultInstanceByMoid(ctx _context.Context, moid stri
 
 // Execute executes the request
 //  @return FaultInstance
-func (a *FaultApiService) GetFaultInstanceByMoidExecute(r ApiGetFaultInstanceByMoidRequest) (FaultInstance, *_nethttp.Response, error) {
+func (a *FaultApiService) GetFaultInstanceByMoidExecute(r ApiGetFaultInstanceByMoidRequest) (*FaultInstance, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  FaultInstance
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *FaultInstance
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FaultApiService.GetFaultInstanceByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/fault/Instances/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -94,7 +87,7 @@ func (a *FaultApiService) GetFaultInstanceByMoidExecute(r ApiGetFaultInstanceByM
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -104,15 +97,15 @@ func (a *FaultApiService) GetFaultInstanceByMoidExecute(r ApiGetFaultInstanceByM
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -168,7 +161,7 @@ func (a *FaultApiService) GetFaultInstanceByMoidExecute(r ApiGetFaultInstanceByM
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -179,7 +172,7 @@ func (a *FaultApiService) GetFaultInstanceByMoidExecute(r ApiGetFaultInstanceByM
 }
 
 type ApiGetFaultInstanceListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *FaultApiService
 	filter      *string
 	orderby     *string
@@ -260,17 +253,17 @@ func (r ApiGetFaultInstanceListRequest) Tags(tags string) ApiGetFaultInstanceLis
 	return r
 }
 
-func (r ApiGetFaultInstanceListRequest) Execute() (FaultInstanceResponse, *_nethttp.Response, error) {
+func (r ApiGetFaultInstanceListRequest) Execute() (*FaultInstanceResponse, *http.Response, error) {
 	return r.ApiService.GetFaultInstanceListExecute(r)
 }
 
 /*
 GetFaultInstanceList Read a 'fault.Instance' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetFaultInstanceListRequest
 */
-func (a *FaultApiService) GetFaultInstanceList(ctx _context.Context) ApiGetFaultInstanceListRequest {
+func (a *FaultApiService) GetFaultInstanceList(ctx context.Context) ApiGetFaultInstanceListRequest {
 	return ApiGetFaultInstanceListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -279,26 +272,24 @@ func (a *FaultApiService) GetFaultInstanceList(ctx _context.Context) ApiGetFault
 
 // Execute executes the request
 //  @return FaultInstanceResponse
-func (a *FaultApiService) GetFaultInstanceListExecute(r ApiGetFaultInstanceListRequest) (FaultInstanceResponse, *_nethttp.Response, error) {
+func (a *FaultApiService) GetFaultInstanceListExecute(r ApiGetFaultInstanceListRequest) (*FaultInstanceResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  FaultInstanceResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *FaultInstanceResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FaultApiService.GetFaultInstanceList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/fault/Instances"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -350,7 +341,7 @@ func (a *FaultApiService) GetFaultInstanceListExecute(r ApiGetFaultInstanceListR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -360,15 +351,15 @@ func (a *FaultApiService) GetFaultInstanceListExecute(r ApiGetFaultInstanceListR
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -424,7 +415,7 @@ func (a *FaultApiService) GetFaultInstanceListExecute(r ApiGetFaultInstanceListR
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -435,7 +426,7 @@ func (a *FaultApiService) GetFaultInstanceListExecute(r ApiGetFaultInstanceListR
 }
 
 type ApiPatchFaultInstanceRequest struct {
-	ctx           _context.Context
+	ctx           context.Context
 	ApiService    *FaultApiService
 	moid          string
 	faultInstance *FaultInstance
@@ -454,18 +445,18 @@ func (r ApiPatchFaultInstanceRequest) IfMatch(ifMatch string) ApiPatchFaultInsta
 	return r
 }
 
-func (r ApiPatchFaultInstanceRequest) Execute() (FaultInstance, *_nethttp.Response, error) {
+func (r ApiPatchFaultInstanceRequest) Execute() (*FaultInstance, *http.Response, error) {
 	return r.ApiService.PatchFaultInstanceExecute(r)
 }
 
 /*
 PatchFaultInstance Update a 'fault.Instance' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchFaultInstanceRequest
 */
-func (a *FaultApiService) PatchFaultInstance(ctx _context.Context, moid string) ApiPatchFaultInstanceRequest {
+func (a *FaultApiService) PatchFaultInstance(ctx context.Context, moid string) ApiPatchFaultInstanceRequest {
 	return ApiPatchFaultInstanceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -475,27 +466,25 @@ func (a *FaultApiService) PatchFaultInstance(ctx _context.Context, moid string) 
 
 // Execute executes the request
 //  @return FaultInstance
-func (a *FaultApiService) PatchFaultInstanceExecute(r ApiPatchFaultInstanceRequest) (FaultInstance, *_nethttp.Response, error) {
+func (a *FaultApiService) PatchFaultInstanceExecute(r ApiPatchFaultInstanceRequest) (*FaultInstance, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  FaultInstance
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *FaultInstance
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FaultApiService.PatchFaultInstance")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/fault/Instances/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.faultInstance == nil {
 		return localVarReturnValue, nil, reportError("faultInstance is required and must be specified")
 	}
@@ -522,7 +511,7 @@ func (a *FaultApiService) PatchFaultInstanceExecute(r ApiPatchFaultInstanceReque
 	}
 	// body params
 	localVarPostBody = r.faultInstance
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -532,15 +521,15 @@ func (a *FaultApiService) PatchFaultInstanceExecute(r ApiPatchFaultInstanceReque
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -596,7 +585,7 @@ func (a *FaultApiService) PatchFaultInstanceExecute(r ApiPatchFaultInstanceReque
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -607,7 +596,7 @@ func (a *FaultApiService) PatchFaultInstanceExecute(r ApiPatchFaultInstanceReque
 }
 
 type ApiUpdateFaultInstanceRequest struct {
-	ctx           _context.Context
+	ctx           context.Context
 	ApiService    *FaultApiService
 	moid          string
 	faultInstance *FaultInstance
@@ -626,18 +615,18 @@ func (r ApiUpdateFaultInstanceRequest) IfMatch(ifMatch string) ApiUpdateFaultIns
 	return r
 }
 
-func (r ApiUpdateFaultInstanceRequest) Execute() (FaultInstance, *_nethttp.Response, error) {
+func (r ApiUpdateFaultInstanceRequest) Execute() (*FaultInstance, *http.Response, error) {
 	return r.ApiService.UpdateFaultInstanceExecute(r)
 }
 
 /*
 UpdateFaultInstance Update a 'fault.Instance' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateFaultInstanceRequest
 */
-func (a *FaultApiService) UpdateFaultInstance(ctx _context.Context, moid string) ApiUpdateFaultInstanceRequest {
+func (a *FaultApiService) UpdateFaultInstance(ctx context.Context, moid string) ApiUpdateFaultInstanceRequest {
 	return ApiUpdateFaultInstanceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -647,27 +636,25 @@ func (a *FaultApiService) UpdateFaultInstance(ctx _context.Context, moid string)
 
 // Execute executes the request
 //  @return FaultInstance
-func (a *FaultApiService) UpdateFaultInstanceExecute(r ApiUpdateFaultInstanceRequest) (FaultInstance, *_nethttp.Response, error) {
+func (a *FaultApiService) UpdateFaultInstanceExecute(r ApiUpdateFaultInstanceRequest) (*FaultInstance, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  FaultInstance
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *FaultInstance
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FaultApiService.UpdateFaultInstance")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/fault/Instances/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.faultInstance == nil {
 		return localVarReturnValue, nil, reportError("faultInstance is required and must be specified")
 	}
@@ -694,7 +681,7 @@ func (a *FaultApiService) UpdateFaultInstanceExecute(r ApiUpdateFaultInstanceReq
 	}
 	// body params
 	localVarPostBody = r.faultInstance
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -704,15 +691,15 @@ func (a *FaultApiService) UpdateFaultInstanceExecute(r ApiUpdateFaultInstanceReq
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -768,7 +755,7 @@ func (a *FaultApiService) UpdateFaultInstanceExecute(r ApiUpdateFaultInstanceReq
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

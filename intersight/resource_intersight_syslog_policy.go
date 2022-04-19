@@ -575,7 +575,6 @@ func resourceSyslogPolicy() *schema.Resource {
 
 func resourceSyslogPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewSyslogPolicyWithDefaults()
@@ -829,7 +828,7 @@ func resourceSyslogPolicyCreate(c context.Context, d *schema.ResourceData, meta 
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating SyslogPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating SyslogPolicy: %s", responseErr.Error())
@@ -840,7 +839,6 @@ func resourceSyslogPolicyCreate(c context.Context, d *schema.ResourceData, meta 
 }
 func detachSyslogPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.SyslogPolicy{}
@@ -853,7 +851,7 @@ func detachSyslogPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.D
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while detaching profile/profiles: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while detaching profile/profiles: %s", responseErr.Error())
@@ -863,7 +861,6 @@ func detachSyslogPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.D
 
 func resourceSyslogPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.SyslogApi.GetSyslogPolicyByMoid(conn.ctx, d.Id())
@@ -876,7 +873,7 @@ func resourceSyslogPolicyRead(c context.Context, d *schema.ResourceData, meta in
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching SyslogPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching SyslogPolicy: %s", responseErr.Error())
@@ -973,7 +970,6 @@ func resourceSyslogPolicyRead(c context.Context, d *schema.ResourceData, meta in
 
 func resourceSyslogPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.SyslogPolicy{}
@@ -1228,7 +1224,7 @@ func resourceSyslogPolicyUpdate(c context.Context, d *schema.ResourceData, meta 
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating SyslogPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating SyslogPolicy: %s", responseErr.Error())
@@ -1240,7 +1236,6 @@ func resourceSyslogPolicyUpdate(c context.Context, d *schema.ResourceData, meta 
 
 func resourceSyslogPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	if p, ok := d.GetOk("profiles"); ok {
@@ -1260,7 +1255,7 @@ func resourceSyslogPolicyDelete(c context.Context, d *schema.ResourceData, meta 
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting SyslogPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting SyslogPolicy object: %s", deleteErr.Error())

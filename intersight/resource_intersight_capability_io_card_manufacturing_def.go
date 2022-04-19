@@ -431,7 +431,6 @@ func resourceCapabilityIoCardManufacturingDef() *schema.Resource {
 
 func resourceCapabilityIoCardManufacturingDefCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewCapabilityIoCardManufacturingDefWithDefaults()
@@ -529,7 +528,7 @@ func resourceCapabilityIoCardManufacturingDefCreate(c context.Context, d *schema
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating CapabilityIoCardManufacturingDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating CapabilityIoCardManufacturingDef: %s", responseErr.Error())
@@ -541,7 +540,6 @@ func resourceCapabilityIoCardManufacturingDefCreate(c context.Context, d *schema
 
 func resourceCapabilityIoCardManufacturingDefRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.CapabilityApi.GetCapabilityIoCardManufacturingDefByMoid(conn.ctx, d.Id())
@@ -554,7 +552,7 @@ func resourceCapabilityIoCardManufacturingDefRead(c context.Context, d *schema.R
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching CapabilityIoCardManufacturingDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching CapabilityIoCardManufacturingDef: %s", responseErr.Error())
@@ -655,7 +653,6 @@ func resourceCapabilityIoCardManufacturingDefRead(c context.Context, d *schema.R
 
 func resourceCapabilityIoCardManufacturingDefUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.CapabilityIoCardManufacturingDef{}
@@ -761,7 +758,7 @@ func resourceCapabilityIoCardManufacturingDefUpdate(c context.Context, d *schema
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating CapabilityIoCardManufacturingDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating CapabilityIoCardManufacturingDef: %s", responseErr.Error())
@@ -773,7 +770,6 @@ func resourceCapabilityIoCardManufacturingDefUpdate(c context.Context, d *schema
 
 func resourceCapabilityIoCardManufacturingDefDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.CapabilityApi.DeleteCapabilityIoCardManufacturingDef(conn.ctx, d.Id())
@@ -785,7 +781,7 @@ func resourceCapabilityIoCardManufacturingDefDelete(c context.Context, d *schema
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting CapabilityIoCardManufacturingDef object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting CapabilityIoCardManufacturingDef object: %s", deleteErr.Error())

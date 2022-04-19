@@ -997,7 +997,6 @@ func dataSourceBootCddDevice() *schema.Resource {
 
 func dataSourceBootCddDeviceRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.BootCddDevice{}
@@ -1531,7 +1530,7 @@ func dataSourceBootCddDeviceRead(c context.Context, d *schema.ResourceData, meta
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of BootCddDevice: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of BootCddDevice: %s", responseErr.Error())
@@ -1548,7 +1547,7 @@ func dataSourceBootCddDeviceRead(c context.Context, d *schema.ResourceData, meta
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching BootCddDevice: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching BootCddDevice: %s", responseErr.Error())

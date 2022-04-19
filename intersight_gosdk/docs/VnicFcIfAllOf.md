@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | Name of the virtual fibre channel interface. | [optional] 
 **Order** | Pointer to **int64** | The order in which the virtual interface is brought up. The order assigned to an interface should be unique for all the Ethernet and Fibre-Channel interfaces on each PCI link on a VIC adapter. The maximum value of PCI order is limited by the number of virtual interfaces (Ethernet and Fibre-Channel) on each PCI link on a VIC adapter. All VIC adapters have a single PCI link except VIC 1385 which has two. | [optional] 
 **PersistentBindings** | Pointer to **bool** | Enables retention of LUN ID associations in memory until they are manually cleared. | [optional] 
+**PinGroupName** | Pointer to **string** | Pingroup name associated to vfc for static pinning. SCP deploy will resolve pingroup name and fetches the correspoding uplink port/port channel to pin the vfc traffic. | [optional] 
 **Placement** | Pointer to [**NullableVnicPlacementSettings**](VnicPlacementSettings.md) |  | [optional] 
 **StaticWwpnAddress** | Pointer to **string** | The WWPN address must be in hexadecimal format xx:xx:xx:xx:xx:xx:xx:xx. Allowed ranges are 20:00:00:00:00:00:00:00 to 20:FF:FF:FF:FF:FF:FF:FF or from 50:00:00:00:00:00:00:00 to 5F:FF:FF:FF:FF:FF:FF:FF. To ensure uniqueness of WWN&#39;s in the SAN fabric, you are strongly encouraged to use the WWN prefix - 20:00:00:25:B5:xx:xx:xx. | [optional] 
 **Type** | Pointer to **string** | VHBA Type configuration for SAN Connectivity Policy. This configuration is supported only on Cisco VIC 14XX series and higher series of adapters. * &#x60;fc-initiator&#x60; - The default value set for vHBA Type Configuration. Fc-initiator specifies vHBA as a consumer of storage. Enables SCSI commands to transfer data and status information between host and target storage systems. * &#x60;fc-nvme-initiator&#x60; - Fc-nvme-initiator specifies vHBA as a consumer of storage. Enables NVMe-based message commands to transfer data and status information between host and target storage systems. * &#x60;fc-nvme-target&#x60; - Fc-nvme-target specifies vHBA as a provider of storage volumes to initiators. Enables NVMe-based message commands to transfer data and status information between host and target storage systems. Currently tech-preview, only enabled with an asynchronous driver. * &#x60;fc-target&#x60; - Fc-target specifies vHBA as a provider of storage volumes to initiators. Enables SCSI commands to transfer data and status information between host and target storage systems. fc-target is enabled only with an asynchronous driver. | [optional] [default to "fc-initiator"]
@@ -158,6 +159,31 @@ SetPersistentBindings sets PersistentBindings field to given value.
 `func (o *VnicFcIfAllOf) HasPersistentBindings() bool`
 
 HasPersistentBindings returns a boolean if a field has been set.
+
+### GetPinGroupName
+
+`func (o *VnicFcIfAllOf) GetPinGroupName() string`
+
+GetPinGroupName returns the PinGroupName field if non-nil, zero value otherwise.
+
+### GetPinGroupNameOk
+
+`func (o *VnicFcIfAllOf) GetPinGroupNameOk() (*string, bool)`
+
+GetPinGroupNameOk returns a tuple with the PinGroupName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPinGroupName
+
+`func (o *VnicFcIfAllOf) SetPinGroupName(v string)`
+
+SetPinGroupName sets PinGroupName field to given value.
+
+### HasPinGroupName
+
+`func (o *VnicFcIfAllOf) HasPinGroupName() bool`
+
+HasPinGroupName returns a boolean if a field has been set.
 
 ### GetPlacement
 

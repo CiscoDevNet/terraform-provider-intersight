@@ -159,11 +159,23 @@ func resourceIppoolPool() *schema.Resource {
 							Description: "Number of identifiers this block can hold.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
+								if new == "0" || new == "0.0" {
+									return true
+								}
+								return false
+							},
 						},
 						"to": {
 							Description: "Last IPv4 address of the block.",
 							Type:        schema.TypeString,
 							Optional:    true,
+							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
+								if new == "" || new == "null" {
+									return true
+								}
+								return false
+							},
 						},
 					},
 				},
@@ -740,7 +752,6 @@ func resourceIppoolPool() *schema.Resource {
 
 func resourceIppoolPoolCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewIppoolPoolWithDefaults()
@@ -1067,7 +1078,7 @@ func resourceIppoolPoolCreate(c context.Context, d *schema.ResourceData, meta in
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating IppoolPool: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating IppoolPool: %s", responseErr.Error())
@@ -1079,7 +1090,6 @@ func resourceIppoolPoolCreate(c context.Context, d *schema.ResourceData, meta in
 
 func resourceIppoolPoolRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.IppoolApi.GetIppoolPoolByMoid(conn.ctx, d.Id())
@@ -1092,7 +1102,7 @@ func resourceIppoolPoolRead(c context.Context, d *schema.ResourceData, meta inte
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching IppoolPool: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching IppoolPool: %s", responseErr.Error())
@@ -1225,7 +1235,6 @@ func resourceIppoolPoolRead(c context.Context, d *schema.ResourceData, meta inte
 
 func resourceIppoolPoolUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.IppoolPool{}
@@ -1557,7 +1566,7 @@ func resourceIppoolPoolUpdate(c context.Context, d *schema.ResourceData, meta in
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating IppoolPool: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating IppoolPool: %s", responseErr.Error())
@@ -1569,7 +1578,6 @@ func resourceIppoolPoolUpdate(c context.Context, d *schema.ResourceData, meta in
 
 func resourceIppoolPoolDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.IppoolApi.DeleteIppoolPool(conn.ctx, d.Id())
@@ -1581,7 +1589,7 @@ func resourceIppoolPoolDelete(c context.Context, d *schema.ResourceData, meta in
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting IppoolPool object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting IppoolPool object: %s", deleteErr.Error())

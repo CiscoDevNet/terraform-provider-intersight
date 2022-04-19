@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -238,11 +238,11 @@ func (o *CapabilitySwitchCapabilityAllOf) GetFcEndHostModeReservedVsans() []Capa
 // GetFcEndHostModeReservedVsansOk returns a tuple with the FcEndHostModeReservedVsans field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CapabilitySwitchCapabilityAllOf) GetFcEndHostModeReservedVsansOk() (*[]CapabilityPortRange, bool) {
+func (o *CapabilitySwitchCapabilityAllOf) GetFcEndHostModeReservedVsansOk() ([]CapabilityPortRange, bool) {
 	if o == nil || o.FcEndHostModeReservedVsans == nil {
 		return nil, false
 	}
-	return &o.FcEndHostModeReservedVsans, true
+	return o.FcEndHostModeReservedVsans, true
 }
 
 // HasFcEndHostModeReservedVsans returns a boolean if a field has been set.
@@ -442,11 +442,11 @@ func (o *CapabilitySwitchCapabilityAllOf) GetPortsSupporting100gSpeed() []Capabi
 // GetPortsSupporting100gSpeedOk returns a tuple with the PortsSupporting100gSpeed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CapabilitySwitchCapabilityAllOf) GetPortsSupporting100gSpeedOk() (*[]CapabilityPortRange, bool) {
+func (o *CapabilitySwitchCapabilityAllOf) GetPortsSupporting100gSpeedOk() ([]CapabilityPortRange, bool) {
 	if o == nil || o.PortsSupporting100gSpeed == nil {
 		return nil, false
 	}
-	return &o.PortsSupporting100gSpeed, true
+	return o.PortsSupporting100gSpeed, true
 }
 
 // HasPortsSupporting100gSpeed returns a boolean if a field has been set.
@@ -475,11 +475,11 @@ func (o *CapabilitySwitchCapabilityAllOf) GetPortsSupporting10gSpeed() []Capabil
 // GetPortsSupporting10gSpeedOk returns a tuple with the PortsSupporting10gSpeed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CapabilitySwitchCapabilityAllOf) GetPortsSupporting10gSpeedOk() (*[]CapabilityPortRange, bool) {
+func (o *CapabilitySwitchCapabilityAllOf) GetPortsSupporting10gSpeedOk() ([]CapabilityPortRange, bool) {
 	if o == nil || o.PortsSupporting10gSpeed == nil {
 		return nil, false
 	}
-	return &o.PortsSupporting10gSpeed, true
+	return o.PortsSupporting10gSpeed, true
 }
 
 // HasPortsSupporting10gSpeed returns a boolean if a field has been set.
@@ -508,11 +508,11 @@ func (o *CapabilitySwitchCapabilityAllOf) GetPortsSupporting1gSpeed() []Capabili
 // GetPortsSupporting1gSpeedOk returns a tuple with the PortsSupporting1gSpeed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CapabilitySwitchCapabilityAllOf) GetPortsSupporting1gSpeedOk() (*[]CapabilityPortRange, bool) {
+func (o *CapabilitySwitchCapabilityAllOf) GetPortsSupporting1gSpeedOk() ([]CapabilityPortRange, bool) {
 	if o == nil || o.PortsSupporting1gSpeed == nil {
 		return nil, false
 	}
-	return &o.PortsSupporting1gSpeed, true
+	return o.PortsSupporting1gSpeed, true
 }
 
 // HasPortsSupporting1gSpeed returns a boolean if a field has been set.
@@ -541,11 +541,11 @@ func (o *CapabilitySwitchCapabilityAllOf) GetPortsSupporting25gSpeed() []Capabil
 // GetPortsSupporting25gSpeedOk returns a tuple with the PortsSupporting25gSpeed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CapabilitySwitchCapabilityAllOf) GetPortsSupporting25gSpeedOk() (*[]CapabilityPortRange, bool) {
+func (o *CapabilitySwitchCapabilityAllOf) GetPortsSupporting25gSpeedOk() ([]CapabilityPortRange, bool) {
 	if o == nil || o.PortsSupporting25gSpeed == nil {
 		return nil, false
 	}
-	return &o.PortsSupporting25gSpeed, true
+	return o.PortsSupporting25gSpeed, true
 }
 
 // HasPortsSupporting25gSpeed returns a boolean if a field has been set.
@@ -574,11 +574,11 @@ func (o *CapabilitySwitchCapabilityAllOf) GetPortsSupporting40gSpeed() []Capabil
 // GetPortsSupporting40gSpeedOk returns a tuple with the PortsSupporting40gSpeed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CapabilitySwitchCapabilityAllOf) GetPortsSupporting40gSpeedOk() (*[]CapabilityPortRange, bool) {
+func (o *CapabilitySwitchCapabilityAllOf) GetPortsSupporting40gSpeedOk() ([]CapabilityPortRange, bool) {
 	if o == nil || o.PortsSupporting40gSpeed == nil {
 		return nil, false
 	}
-	return &o.PortsSupporting40gSpeed, true
+	return o.PortsSupporting40gSpeed, true
 }
 
 // HasPortsSupporting40gSpeed returns a boolean if a field has been set.
@@ -607,11 +607,11 @@ func (o *CapabilitySwitchCapabilityAllOf) GetPortsSupportingBreakout() []Capabil
 // GetPortsSupportingBreakoutOk returns a tuple with the PortsSupportingBreakout field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CapabilitySwitchCapabilityAllOf) GetPortsSupportingBreakoutOk() (*[]CapabilityPortRange, bool) {
+func (o *CapabilitySwitchCapabilityAllOf) GetPortsSupportingBreakoutOk() ([]CapabilityPortRange, bool) {
 	if o == nil || o.PortsSupportingBreakout == nil {
 		return nil, false
 	}
-	return &o.PortsSupportingBreakout, true
+	return o.PortsSupportingBreakout, true
 }
 
 // HasPortsSupportingBreakout returns a boolean if a field has been set.
@@ -640,11 +640,11 @@ func (o *CapabilitySwitchCapabilityAllOf) GetPortsSupportingFcoe() []CapabilityP
 // GetPortsSupportingFcoeOk returns a tuple with the PortsSupportingFcoe field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CapabilitySwitchCapabilityAllOf) GetPortsSupportingFcoeOk() (*[]CapabilityPortRange, bool) {
+func (o *CapabilitySwitchCapabilityAllOf) GetPortsSupportingFcoeOk() ([]CapabilityPortRange, bool) {
 	if o == nil || o.PortsSupportingFcoe == nil {
 		return nil, false
 	}
-	return &o.PortsSupportingFcoe, true
+	return o.PortsSupportingFcoe, true
 }
 
 // HasPortsSupportingFcoe returns a boolean if a field has been set.
@@ -673,11 +673,11 @@ func (o *CapabilitySwitchCapabilityAllOf) GetPortsSupportingServerRole() []Capab
 // GetPortsSupportingServerRoleOk returns a tuple with the PortsSupportingServerRole field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CapabilitySwitchCapabilityAllOf) GetPortsSupportingServerRoleOk() (*[]CapabilityPortRange, bool) {
+func (o *CapabilitySwitchCapabilityAllOf) GetPortsSupportingServerRoleOk() ([]CapabilityPortRange, bool) {
 	if o == nil || o.PortsSupportingServerRole == nil {
 		return nil, false
 	}
-	return &o.PortsSupportingServerRole, true
+	return o.PortsSupportingServerRole, true
 }
 
 // HasPortsSupportingServerRole returns a boolean if a field has been set.
@@ -706,11 +706,11 @@ func (o *CapabilitySwitchCapabilityAllOf) GetReservedVsans() []CapabilityPortRan
 // GetReservedVsansOk returns a tuple with the ReservedVsans field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CapabilitySwitchCapabilityAllOf) GetReservedVsansOk() (*[]CapabilityPortRange, bool) {
+func (o *CapabilitySwitchCapabilityAllOf) GetReservedVsansOk() ([]CapabilityPortRange, bool) {
 	if o == nil || o.ReservedVsans == nil {
 		return nil, false
 	}
-	return &o.ReservedVsans, true
+	return o.ReservedVsans, true
 }
 
 // HasReservedVsans returns a boolean if a field has been set.
@@ -814,11 +814,11 @@ func (o *CapabilitySwitchCapabilityAllOf) GetSwitchingModeCapabilities() []Capab
 // GetSwitchingModeCapabilitiesOk returns a tuple with the SwitchingModeCapabilities field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CapabilitySwitchCapabilityAllOf) GetSwitchingModeCapabilitiesOk() (*[]CapabilitySwitchingModeCapability, bool) {
+func (o *CapabilitySwitchCapabilityAllOf) GetSwitchingModeCapabilitiesOk() ([]CapabilitySwitchingModeCapability, bool) {
 	if o == nil || o.SwitchingModeCapabilities == nil {
 		return nil, false
 	}
-	return &o.SwitchingModeCapabilities, true
+	return o.SwitchingModeCapabilities, true
 }
 
 // HasSwitchingModeCapabilities returns a boolean if a field has been set.
@@ -890,11 +890,11 @@ func (o *CapabilitySwitchCapabilityAllOf) GetUnifiedPorts() []CapabilityPortRang
 // GetUnifiedPortsOk returns a tuple with the UnifiedPorts field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CapabilitySwitchCapabilityAllOf) GetUnifiedPortsOk() (*[]CapabilityPortRange, bool) {
+func (o *CapabilitySwitchCapabilityAllOf) GetUnifiedPortsOk() ([]CapabilityPortRange, bool) {
 	if o == nil || o.UnifiedPorts == nil {
 		return nil, false
 	}
-	return &o.UnifiedPorts, true
+	return o.UnifiedPorts, true
 }
 
 // HasUnifiedPorts returns a boolean if a field has been set.

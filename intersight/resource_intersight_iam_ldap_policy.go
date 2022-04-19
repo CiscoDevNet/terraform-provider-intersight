@@ -769,7 +769,6 @@ func resourceIamLdapPolicy() *schema.Resource {
 
 func resourceIamLdapPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewIamLdapPolicyWithDefaults()
@@ -1221,7 +1220,7 @@ func resourceIamLdapPolicyCreate(c context.Context, d *schema.ResourceData, meta
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating IamLdapPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating IamLdapPolicy: %s", responseErr.Error())
@@ -1232,7 +1231,6 @@ func resourceIamLdapPolicyCreate(c context.Context, d *schema.ResourceData, meta
 }
 func detachIamLdapPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.IamLdapPolicy{}
@@ -1245,7 +1243,7 @@ func detachIamLdapPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while detaching profile/profiles: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while detaching profile/profiles: %s", responseErr.Error())
@@ -1255,7 +1253,6 @@ func detachIamLdapPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.
 
 func resourceIamLdapPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.IamApi.GetIamLdapPolicyByMoid(conn.ctx, d.Id())
@@ -1268,7 +1265,7 @@ func resourceIamLdapPolicyRead(c context.Context, d *schema.ResourceData, meta i
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching IamLdapPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching IamLdapPolicy: %s", responseErr.Error())
@@ -1389,7 +1386,6 @@ func resourceIamLdapPolicyRead(c context.Context, d *schema.ResourceData, meta i
 
 func resourceIamLdapPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.IamLdapPolicy{}
@@ -1848,7 +1844,7 @@ func resourceIamLdapPolicyUpdate(c context.Context, d *schema.ResourceData, meta
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating IamLdapPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating IamLdapPolicy: %s", responseErr.Error())
@@ -1860,7 +1856,6 @@ func resourceIamLdapPolicyUpdate(c context.Context, d *schema.ResourceData, meta
 
 func resourceIamLdapPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	if p, ok := d.GetOk("profiles"); ok {
@@ -1880,7 +1875,7 @@ func resourceIamLdapPolicyDelete(c context.Context, d *schema.ResourceData, meta
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting IamLdapPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting IamLdapPolicy object: %s", deleteErr.Error())

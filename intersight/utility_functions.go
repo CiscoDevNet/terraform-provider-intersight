@@ -148,13 +148,14 @@ func recursiveValueCheck(oldM map[string]interface{}, k string, v interface{}) b
 
 func checkWorkflowStatus(conn *Config, w models.WorkflowWorkflowInfoRelationship) (string, error) {
 	var workflowInfo models.WorkflowWorkflowInfo
-	var responseErr error
 	for { // infinite loop
 		moid := w.MoMoRef.GetMoid()
-		workflowInfo, _, responseErr = conn.ApiClient.WorkflowApi.GetWorkflowWorkflowInfoByMoid(conn.ctx, moid).Execute()
+		// accepting pointer to workflowInfo and assigning to workflowInfo after de-referencing
+		workflowInfoRef, _, responseErr := conn.ApiClient.WorkflowApi.GetWorkflowWorkflowInfoByMoid(conn.ctx, moid).Execute()
 		if responseErr != nil {
 			return "", responseErr
 		}
+		workflowInfo = *workflowInfoRef
 		if endsOfWorkflow[workflowInfo.GetStatus()] {
 			break
 		} else {

@@ -813,7 +813,6 @@ func resourceRecoveryBackupProfile() *schema.Resource {
 
 func resourceRecoveryBackupProfileCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewRecoveryBackupProfileWithDefaults()
@@ -1243,7 +1242,7 @@ func resourceRecoveryBackupProfileCreate(c context.Context, d *schema.ResourceDa
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating RecoveryBackupProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating RecoveryBackupProfile: %s", responseErr.Error())
@@ -1255,7 +1254,6 @@ func resourceRecoveryBackupProfileCreate(c context.Context, d *schema.ResourceDa
 
 func resourceRecoveryBackupProfileRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.RecoveryApi.GetRecoveryBackupProfileByMoid(conn.ctx, d.Id())
@@ -1268,7 +1266,7 @@ func resourceRecoveryBackupProfileRead(c context.Context, d *schema.ResourceData
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching RecoveryBackupProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching RecoveryBackupProfile: %s", responseErr.Error())
@@ -1397,7 +1395,6 @@ func resourceRecoveryBackupProfileRead(c context.Context, d *schema.ResourceData
 
 func resourceRecoveryBackupProfileUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.RecoveryBackupProfile{}
@@ -1837,7 +1834,7 @@ func resourceRecoveryBackupProfileUpdate(c context.Context, d *schema.ResourceDa
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating RecoveryBackupProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating RecoveryBackupProfile: %s", responseErr.Error())
@@ -1849,7 +1846,6 @@ func resourceRecoveryBackupProfileUpdate(c context.Context, d *schema.ResourceDa
 
 func resourceRecoveryBackupProfileDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.RecoveryApi.DeleteRecoveryBackupProfile(conn.ctx, d.Id())
@@ -1861,7 +1857,7 @@ func resourceRecoveryBackupProfileDelete(c context.Context, d *schema.ResourceDa
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting RecoveryBackupProfile object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting RecoveryBackupProfile object: %s", deleteErr.Error())

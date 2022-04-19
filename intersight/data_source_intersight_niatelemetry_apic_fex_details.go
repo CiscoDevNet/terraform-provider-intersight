@@ -757,7 +757,6 @@ func dataSourceNiatelemetryApicFexDetails() *schema.Resource {
 
 func dataSourceNiatelemetryApicFexDetailsRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.NiatelemetryApicFexDetails{}
@@ -1147,7 +1146,7 @@ func dataSourceNiatelemetryApicFexDetailsRead(c context.Context, d *schema.Resou
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of NiatelemetryApicFexDetails: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of NiatelemetryApicFexDetails: %s", responseErr.Error())
@@ -1164,7 +1163,7 @@ func dataSourceNiatelemetryApicFexDetailsRead(c context.Context, d *schema.Resou
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching NiatelemetryApicFexDetails: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching NiatelemetryApicFexDetails: %s", responseErr.Error())

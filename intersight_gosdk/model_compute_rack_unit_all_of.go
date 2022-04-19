@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -249,11 +249,11 @@ func (o *ComputeRackUnitAllOf) GetAdapters() []AdapterUnitRelationship {
 // GetAdaptersOk returns a tuple with the Adapters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ComputeRackUnitAllOf) GetAdaptersOk() (*[]AdapterUnitRelationship, bool) {
+func (o *ComputeRackUnitAllOf) GetAdaptersOk() ([]AdapterUnitRelationship, bool) {
 	if o == nil || o.Adapters == nil {
 		return nil, false
 	}
-	return &o.Adapters, true
+	return o.Adapters, true
 }
 
 // HasAdapters returns a boolean if a field has been set.
@@ -380,11 +380,11 @@ func (o *ComputeRackUnitAllOf) GetBiosunits() []BiosUnitRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 // Deprecated
-func (o *ComputeRackUnitAllOf) GetBiosunitsOk() (*[]BiosUnitRelationship, bool) {
+func (o *ComputeRackUnitAllOf) GetBiosunitsOk() ([]BiosUnitRelationship, bool) {
 	if o == nil || o.Biosunits == nil {
 		return nil, false
 	}
-	return &o.Biosunits, true
+	return o.Biosunits, true
 }
 
 // HasBiosunits returns a boolean if a field has been set.
@@ -510,11 +510,11 @@ func (o *ComputeRackUnitAllOf) GetFanmodules() []EquipmentFanModuleRelationship 
 // GetFanmodulesOk returns a tuple with the Fanmodules field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ComputeRackUnitAllOf) GetFanmodulesOk() (*[]EquipmentFanModuleRelationship, bool) {
+func (o *ComputeRackUnitAllOf) GetFanmodulesOk() ([]EquipmentFanModuleRelationship, bool) {
 	if o == nil || o.Fanmodules == nil {
 		return nil, false
 	}
-	return &o.Fanmodules, true
+	return o.Fanmodules, true
 }
 
 // HasFanmodules returns a boolean if a field has been set.
@@ -543,11 +543,11 @@ func (o *ComputeRackUnitAllOf) GetGenericInventoryHolders() []InventoryGenericIn
 // GetGenericInventoryHoldersOk returns a tuple with the GenericInventoryHolders field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ComputeRackUnitAllOf) GetGenericInventoryHoldersOk() (*[]InventoryGenericInventoryHolderRelationship, bool) {
+func (o *ComputeRackUnitAllOf) GetGenericInventoryHoldersOk() ([]InventoryGenericInventoryHolderRelationship, bool) {
 	if o == nil || o.GenericInventoryHolders == nil {
 		return nil, false
 	}
-	return &o.GenericInventoryHolders, true
+	return o.GenericInventoryHolders, true
 }
 
 // HasGenericInventoryHolders returns a boolean if a field has been set.
@@ -576,11 +576,11 @@ func (o *ComputeRackUnitAllOf) GetGraphicsCards() []GraphicsCardRelationship {
 // GetGraphicsCardsOk returns a tuple with the GraphicsCards field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ComputeRackUnitAllOf) GetGraphicsCardsOk() (*[]GraphicsCardRelationship, bool) {
+func (o *ComputeRackUnitAllOf) GetGraphicsCardsOk() ([]GraphicsCardRelationship, bool) {
 	if o == nil || o.GraphicsCards == nil {
 		return nil, false
 	}
-	return &o.GraphicsCards, true
+	return o.GraphicsCards, true
 }
 
 // HasGraphicsCards returns a boolean if a field has been set.
@@ -673,11 +673,11 @@ func (o *ComputeRackUnitAllOf) GetMemoryArrays() []MemoryArrayRelationship {
 // GetMemoryArraysOk returns a tuple with the MemoryArrays field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ComputeRackUnitAllOf) GetMemoryArraysOk() (*[]MemoryArrayRelationship, bool) {
+func (o *ComputeRackUnitAllOf) GetMemoryArraysOk() ([]MemoryArrayRelationship, bool) {
 	if o == nil || o.MemoryArrays == nil {
 		return nil, false
 	}
-	return &o.MemoryArrays, true
+	return o.MemoryArrays, true
 }
 
 // HasMemoryArrays returns a boolean if a field has been set.
@@ -706,11 +706,11 @@ func (o *ComputeRackUnitAllOf) GetPciDevices() []PciDeviceRelationship {
 // GetPciDevicesOk returns a tuple with the PciDevices field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ComputeRackUnitAllOf) GetPciDevicesOk() (*[]PciDeviceRelationship, bool) {
+func (o *ComputeRackUnitAllOf) GetPciDevicesOk() ([]PciDeviceRelationship, bool) {
 	if o == nil || o.PciDevices == nil {
 		return nil, false
 	}
-	return &o.PciDevices, true
+	return o.PciDevices, true
 }
 
 // HasPciDevices returns a boolean if a field has been set.
@@ -739,11 +739,11 @@ func (o *ComputeRackUnitAllOf) GetProcessors() []ProcessorUnitRelationship {
 // GetProcessorsOk returns a tuple with the Processors field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ComputeRackUnitAllOf) GetProcessorsOk() (*[]ProcessorUnitRelationship, bool) {
+func (o *ComputeRackUnitAllOf) GetProcessorsOk() ([]ProcessorUnitRelationship, bool) {
 	if o == nil || o.Processors == nil {
 		return nil, false
 	}
-	return &o.Processors, true
+	return o.Processors, true
 }
 
 // HasProcessors returns a boolean if a field has been set.
@@ -772,11 +772,11 @@ func (o *ComputeRackUnitAllOf) GetPsus() []EquipmentPsuRelationship {
 // GetPsusOk returns a tuple with the Psus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ComputeRackUnitAllOf) GetPsusOk() (*[]EquipmentPsuRelationship, bool) {
+func (o *ComputeRackUnitAllOf) GetPsusOk() ([]EquipmentPsuRelationship, bool) {
 	if o == nil || o.Psus == nil {
 		return nil, false
 	}
-	return &o.Psus, true
+	return o.Psus, true
 }
 
 // HasPsus returns a boolean if a field has been set.
@@ -869,11 +869,11 @@ func (o *ComputeRackUnitAllOf) GetSasExpanders() []StorageSasExpanderRelationshi
 // GetSasExpandersOk returns a tuple with the SasExpanders field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ComputeRackUnitAllOf) GetSasExpandersOk() (*[]StorageSasExpanderRelationship, bool) {
+func (o *ComputeRackUnitAllOf) GetSasExpandersOk() ([]StorageSasExpanderRelationship, bool) {
 	if o == nil || o.SasExpanders == nil {
 		return nil, false
 	}
-	return &o.SasExpanders, true
+	return o.SasExpanders, true
 }
 
 // HasSasExpanders returns a boolean if a field has been set.
@@ -902,11 +902,11 @@ func (o *ComputeRackUnitAllOf) GetStorageControllers() []StorageControllerRelati
 // GetStorageControllersOk returns a tuple with the StorageControllers field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ComputeRackUnitAllOf) GetStorageControllersOk() (*[]StorageControllerRelationship, bool) {
+func (o *ComputeRackUnitAllOf) GetStorageControllersOk() ([]StorageControllerRelationship, bool) {
 	if o == nil || o.StorageControllers == nil {
 		return nil, false
 	}
-	return &o.StorageControllers, true
+	return o.StorageControllers, true
 }
 
 // HasStorageControllers returns a boolean if a field has been set.
@@ -935,11 +935,11 @@ func (o *ComputeRackUnitAllOf) GetStorageEnclosures() []StorageEnclosureRelation
 // GetStorageEnclosuresOk returns a tuple with the StorageEnclosures field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ComputeRackUnitAllOf) GetStorageEnclosuresOk() (*[]StorageEnclosureRelationship, bool) {
+func (o *ComputeRackUnitAllOf) GetStorageEnclosuresOk() ([]StorageEnclosureRelationship, bool) {
 	if o == nil || o.StorageEnclosures == nil {
 		return nil, false
 	}
-	return &o.StorageEnclosures, true
+	return o.StorageEnclosures, true
 }
 
 // HasStorageEnclosures returns a boolean if a field has been set.
@@ -1000,11 +1000,11 @@ func (o *ComputeRackUnitAllOf) GetUnitPersonality() []RackUnitPersonalityRelatio
 // GetUnitPersonalityOk returns a tuple with the UnitPersonality field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ComputeRackUnitAllOf) GetUnitPersonalityOk() (*[]RackUnitPersonalityRelationship, bool) {
+func (o *ComputeRackUnitAllOf) GetUnitPersonalityOk() ([]RackUnitPersonalityRelationship, bool) {
 	if o == nil || o.UnitPersonality == nil {
 		return nil, false
 	}
-	return &o.UnitPersonality, true
+	return o.UnitPersonality, true
 }
 
 // HasUnitPersonality returns a boolean if a field has been set.

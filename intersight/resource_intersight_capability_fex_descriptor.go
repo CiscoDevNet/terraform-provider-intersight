@@ -460,7 +460,6 @@ func resourceCapabilityFexDescriptor() *schema.Resource {
 
 func resourceCapabilityFexDescriptorCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewCapabilityFexDescriptorWithDefaults()
@@ -590,7 +589,7 @@ func resourceCapabilityFexDescriptorCreate(c context.Context, d *schema.Resource
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating CapabilityFexDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating CapabilityFexDescriptor: %s", responseErr.Error())
@@ -602,7 +601,6 @@ func resourceCapabilityFexDescriptorCreate(c context.Context, d *schema.Resource
 
 func resourceCapabilityFexDescriptorRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.CapabilityApi.GetCapabilityFexDescriptorByMoid(conn.ctx, d.Id())
@@ -615,7 +613,7 @@ func resourceCapabilityFexDescriptorRead(c context.Context, d *schema.ResourceDa
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching CapabilityFexDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching CapabilityFexDescriptor: %s", responseErr.Error())
@@ -712,7 +710,6 @@ func resourceCapabilityFexDescriptorRead(c context.Context, d *schema.ResourceDa
 
 func resourceCapabilityFexDescriptorUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.CapabilityFexDescriptor{}
@@ -847,7 +844,7 @@ func resourceCapabilityFexDescriptorUpdate(c context.Context, d *schema.Resource
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating CapabilityFexDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating CapabilityFexDescriptor: %s", responseErr.Error())
@@ -859,7 +856,6 @@ func resourceCapabilityFexDescriptorUpdate(c context.Context, d *schema.Resource
 
 func resourceCapabilityFexDescriptorDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.CapabilityApi.DeleteCapabilityFexDescriptor(conn.ctx, d.Id())
@@ -871,7 +867,7 @@ func resourceCapabilityFexDescriptorDelete(c context.Context, d *schema.Resource
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting CapabilityFexDescriptor object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting CapabilityFexDescriptor object: %s", deleteErr.Error())

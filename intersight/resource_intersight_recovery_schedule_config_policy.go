@@ -533,7 +533,6 @@ func resourceRecoveryScheduleConfigPolicy() *schema.Resource {
 
 func resourceRecoveryScheduleConfigPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewRecoveryScheduleConfigPolicyWithDefaults()
@@ -740,7 +739,7 @@ func resourceRecoveryScheduleConfigPolicyCreate(c context.Context, d *schema.Res
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating RecoveryScheduleConfigPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating RecoveryScheduleConfigPolicy: %s", responseErr.Error())
@@ -752,7 +751,6 @@ func resourceRecoveryScheduleConfigPolicyCreate(c context.Context, d *schema.Res
 
 func resourceRecoveryScheduleConfigPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.RecoveryApi.GetRecoveryScheduleConfigPolicyByMoid(conn.ctx, d.Id())
@@ -765,7 +763,7 @@ func resourceRecoveryScheduleConfigPolicyRead(c context.Context, d *schema.Resou
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching RecoveryScheduleConfigPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching RecoveryScheduleConfigPolicy: %s", responseErr.Error())
@@ -858,7 +856,6 @@ func resourceRecoveryScheduleConfigPolicyRead(c context.Context, d *schema.Resou
 
 func resourceRecoveryScheduleConfigPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.RecoveryScheduleConfigPolicy{}
@@ -1069,7 +1066,7 @@ func resourceRecoveryScheduleConfigPolicyUpdate(c context.Context, d *schema.Res
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating RecoveryScheduleConfigPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating RecoveryScheduleConfigPolicy: %s", responseErr.Error())
@@ -1081,7 +1078,6 @@ func resourceRecoveryScheduleConfigPolicyUpdate(c context.Context, d *schema.Res
 
 func resourceRecoveryScheduleConfigPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.RecoveryApi.DeleteRecoveryScheduleConfigPolicy(conn.ctx, d.Id())
@@ -1093,7 +1089,7 @@ func resourceRecoveryScheduleConfigPolicyDelete(c context.Context, d *schema.Res
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting RecoveryScheduleConfigPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting RecoveryScheduleConfigPolicy object: %s", deleteErr.Error())

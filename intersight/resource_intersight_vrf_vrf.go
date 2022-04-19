@@ -446,7 +446,6 @@ func resourceVrfVrf() *schema.Resource {
 
 func resourceVrfVrfCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewVrfVrfWithDefaults()
@@ -519,7 +518,7 @@ func resourceVrfVrfCreate(c context.Context, d *schema.ResourceData, meta interf
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating VrfVrf: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating VrfVrf: %s", responseErr.Error())
@@ -531,7 +530,6 @@ func resourceVrfVrfCreate(c context.Context, d *schema.ResourceData, meta interf
 
 func resourceVrfVrfRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.VrfApi.GetVrfVrfByMoid(conn.ctx, d.Id())
@@ -544,7 +542,7 @@ func resourceVrfVrfRead(c context.Context, d *schema.ResourceData, meta interfac
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching VrfVrf: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching VrfVrf: %s", responseErr.Error())
@@ -629,7 +627,6 @@ func resourceVrfVrfRead(c context.Context, d *schema.ResourceData, meta interfac
 
 func resourceVrfVrfUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.VrfVrf{}
@@ -705,7 +702,7 @@ func resourceVrfVrfUpdate(c context.Context, d *schema.ResourceData, meta interf
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating VrfVrf: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating VrfVrf: %s", responseErr.Error())
@@ -717,7 +714,6 @@ func resourceVrfVrfUpdate(c context.Context, d *schema.ResourceData, meta interf
 
 func resourceVrfVrfDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.VrfApi.DeleteVrfVrf(conn.ctx, d.Id())
@@ -729,7 +725,7 @@ func resourceVrfVrfDelete(c context.Context, d *schema.ResourceData, meta interf
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting VrfVrf object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting VrfVrf object: %s", deleteErr.Error())

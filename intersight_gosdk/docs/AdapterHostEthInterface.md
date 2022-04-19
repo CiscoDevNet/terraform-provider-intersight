@@ -17,10 +17,12 @@ Name | Type | Description | Notes
 **OriginalMacAddress** | Pointer to **string** | The factory default Mac address of the Host Ethernet Interface. | [optional] [readonly] 
 **PciAddr** | Pointer to **string** | The PCI address of the Host Ethernet Interface. | [optional] [readonly] 
 **PeerDn** | Pointer to **string** | The distinguished name of the peer endpoint connected to the Host Ethernet interface. | [optional] [readonly] 
+**PinGroupName** | Pointer to **string** | Name given for Lan PinGroup. | [optional] 
 **VirtualizationPreference** | Pointer to **string** | Virtualization Preference of the Host Ethernet Interface indicating if virtualization is enabled or not. | [optional] [readonly] 
 **VnicDn** | Pointer to **string** | The Virtual Ethernet Interface DN connected to the Host Ethernet Interface. | [optional] [readonly] 
 **AdapterUnit** | Pointer to [**AdapterUnitRelationship**](AdapterUnitRelationship.md) |  | [optional] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**PinnedInterface** | Pointer to [**InventoryInterfaceRelationship**](InventoryInterfaceRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
@@ -367,6 +369,31 @@ SetPeerDn sets PeerDn field to given value.
 
 HasPeerDn returns a boolean if a field has been set.
 
+### GetPinGroupName
+
+`func (o *AdapterHostEthInterface) GetPinGroupName() string`
+
+GetPinGroupName returns the PinGroupName field if non-nil, zero value otherwise.
+
+### GetPinGroupNameOk
+
+`func (o *AdapterHostEthInterface) GetPinGroupNameOk() (*string, bool)`
+
+GetPinGroupNameOk returns a tuple with the PinGroupName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPinGroupName
+
+`func (o *AdapterHostEthInterface) SetPinGroupName(v string)`
+
+SetPinGroupName sets PinGroupName field to given value.
+
+### HasPinGroupName
+
+`func (o *AdapterHostEthInterface) HasPinGroupName() bool`
+
+HasPinGroupName returns a boolean if a field has been set.
+
 ### GetVirtualizationPreference
 
 `func (o *AdapterHostEthInterface) GetVirtualizationPreference() string`
@@ -466,6 +493,31 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 `func (o *AdapterHostEthInterface) HasInventoryDeviceInfo() bool`
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
+
+### GetPinnedInterface
+
+`func (o *AdapterHostEthInterface) GetPinnedInterface() InventoryInterfaceRelationship`
+
+GetPinnedInterface returns the PinnedInterface field if non-nil, zero value otherwise.
+
+### GetPinnedInterfaceOk
+
+`func (o *AdapterHostEthInterface) GetPinnedInterfaceOk() (*InventoryInterfaceRelationship, bool)`
+
+GetPinnedInterfaceOk returns a tuple with the PinnedInterface field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPinnedInterface
+
+`func (o *AdapterHostEthInterface) SetPinnedInterface(v InventoryInterfaceRelationship)`
+
+SetPinnedInterface sets PinnedInterface field to given value.
+
+### HasPinnedInterface
+
+`func (o *AdapterHostEthInterface) HasPinnedInterface() bool`
+
+HasPinnedInterface returns a boolean if a field has been set.
 
 ### GetRegisteredDevice
 

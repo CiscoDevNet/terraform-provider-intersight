@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,23 +13,18 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // TamApiService TamApi service
 type TamApiService service
 
 type ApiCreateTamAdvisoryCountRequest struct {
-	ctx              _context.Context
+	ctx              context.Context
 	ApiService       *TamApiService
 	tamAdvisoryCount *TamAdvisoryCount
 	ifMatch          *string
@@ -54,17 +49,17 @@ func (r ApiCreateTamAdvisoryCountRequest) IfNoneMatch(ifNoneMatch string) ApiCre
 	return r
 }
 
-func (r ApiCreateTamAdvisoryCountRequest) Execute() (TamAdvisoryCount, *_nethttp.Response, error) {
+func (r ApiCreateTamAdvisoryCountRequest) Execute() (*TamAdvisoryCount, *http.Response, error) {
 	return r.ApiService.CreateTamAdvisoryCountExecute(r)
 }
 
 /*
 CreateTamAdvisoryCount Create a 'tam.AdvisoryCount' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateTamAdvisoryCountRequest
 */
-func (a *TamApiService) CreateTamAdvisoryCount(ctx _context.Context) ApiCreateTamAdvisoryCountRequest {
+func (a *TamApiService) CreateTamAdvisoryCount(ctx context.Context) ApiCreateTamAdvisoryCountRequest {
 	return ApiCreateTamAdvisoryCountRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -73,26 +68,24 @@ func (a *TamApiService) CreateTamAdvisoryCount(ctx _context.Context) ApiCreateTa
 
 // Execute executes the request
 //  @return TamAdvisoryCount
-func (a *TamApiService) CreateTamAdvisoryCountExecute(r ApiCreateTamAdvisoryCountRequest) (TamAdvisoryCount, *_nethttp.Response, error) {
+func (a *TamApiService) CreateTamAdvisoryCountExecute(r ApiCreateTamAdvisoryCountRequest) (*TamAdvisoryCount, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TamAdvisoryCount
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TamAdvisoryCount
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TamApiService.CreateTamAdvisoryCount")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/tam/AdvisoryCounts"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.tamAdvisoryCount == nil {
 		return localVarReturnValue, nil, reportError("tamAdvisoryCount is required and must be specified")
 	}
@@ -122,7 +115,7 @@ func (a *TamApiService) CreateTamAdvisoryCountExecute(r ApiCreateTamAdvisoryCoun
 	}
 	// body params
 	localVarPostBody = r.tamAdvisoryCount
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -132,15 +125,15 @@ func (a *TamApiService) CreateTamAdvisoryCountExecute(r ApiCreateTamAdvisoryCoun
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -196,7 +189,7 @@ func (a *TamApiService) CreateTamAdvisoryCountExecute(r ApiCreateTamAdvisoryCoun
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -207,7 +200,7 @@ func (a *TamApiService) CreateTamAdvisoryCountExecute(r ApiCreateTamAdvisoryCoun
 }
 
 type ApiCreateTamAdvisoryDefinitionRequest struct {
-	ctx                   _context.Context
+	ctx                   context.Context
 	ApiService            *TamApiService
 	tamAdvisoryDefinition *TamAdvisoryDefinition
 	ifMatch               *string
@@ -232,17 +225,17 @@ func (r ApiCreateTamAdvisoryDefinitionRequest) IfNoneMatch(ifNoneMatch string) A
 	return r
 }
 
-func (r ApiCreateTamAdvisoryDefinitionRequest) Execute() (TamAdvisoryDefinition, *_nethttp.Response, error) {
+func (r ApiCreateTamAdvisoryDefinitionRequest) Execute() (*TamAdvisoryDefinition, *http.Response, error) {
 	return r.ApiService.CreateTamAdvisoryDefinitionExecute(r)
 }
 
 /*
 CreateTamAdvisoryDefinition Create a 'tam.AdvisoryDefinition' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateTamAdvisoryDefinitionRequest
 */
-func (a *TamApiService) CreateTamAdvisoryDefinition(ctx _context.Context) ApiCreateTamAdvisoryDefinitionRequest {
+func (a *TamApiService) CreateTamAdvisoryDefinition(ctx context.Context) ApiCreateTamAdvisoryDefinitionRequest {
 	return ApiCreateTamAdvisoryDefinitionRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -251,26 +244,24 @@ func (a *TamApiService) CreateTamAdvisoryDefinition(ctx _context.Context) ApiCre
 
 // Execute executes the request
 //  @return TamAdvisoryDefinition
-func (a *TamApiService) CreateTamAdvisoryDefinitionExecute(r ApiCreateTamAdvisoryDefinitionRequest) (TamAdvisoryDefinition, *_nethttp.Response, error) {
+func (a *TamApiService) CreateTamAdvisoryDefinitionExecute(r ApiCreateTamAdvisoryDefinitionRequest) (*TamAdvisoryDefinition, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TamAdvisoryDefinition
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TamAdvisoryDefinition
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TamApiService.CreateTamAdvisoryDefinition")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/tam/AdvisoryDefinitions"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.tamAdvisoryDefinition == nil {
 		return localVarReturnValue, nil, reportError("tamAdvisoryDefinition is required and must be specified")
 	}
@@ -300,7 +291,7 @@ func (a *TamApiService) CreateTamAdvisoryDefinitionExecute(r ApiCreateTamAdvisor
 	}
 	// body params
 	localVarPostBody = r.tamAdvisoryDefinition
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -310,15 +301,15 @@ func (a *TamApiService) CreateTamAdvisoryDefinitionExecute(r ApiCreateTamAdvisor
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -374,7 +365,7 @@ func (a *TamApiService) CreateTamAdvisoryDefinitionExecute(r ApiCreateTamAdvisor
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -385,7 +376,7 @@ func (a *TamApiService) CreateTamAdvisoryDefinitionExecute(r ApiCreateTamAdvisor
 }
 
 type ApiCreateTamAdvisoryInfoRequest struct {
-	ctx             _context.Context
+	ctx             context.Context
 	ApiService      *TamApiService
 	tamAdvisoryInfo *TamAdvisoryInfo
 	ifMatch         *string
@@ -410,17 +401,17 @@ func (r ApiCreateTamAdvisoryInfoRequest) IfNoneMatch(ifNoneMatch string) ApiCrea
 	return r
 }
 
-func (r ApiCreateTamAdvisoryInfoRequest) Execute() (TamAdvisoryInfo, *_nethttp.Response, error) {
+func (r ApiCreateTamAdvisoryInfoRequest) Execute() (*TamAdvisoryInfo, *http.Response, error) {
 	return r.ApiService.CreateTamAdvisoryInfoExecute(r)
 }
 
 /*
 CreateTamAdvisoryInfo Create a 'tam.AdvisoryInfo' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateTamAdvisoryInfoRequest
 */
-func (a *TamApiService) CreateTamAdvisoryInfo(ctx _context.Context) ApiCreateTamAdvisoryInfoRequest {
+func (a *TamApiService) CreateTamAdvisoryInfo(ctx context.Context) ApiCreateTamAdvisoryInfoRequest {
 	return ApiCreateTamAdvisoryInfoRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -429,26 +420,24 @@ func (a *TamApiService) CreateTamAdvisoryInfo(ctx _context.Context) ApiCreateTam
 
 // Execute executes the request
 //  @return TamAdvisoryInfo
-func (a *TamApiService) CreateTamAdvisoryInfoExecute(r ApiCreateTamAdvisoryInfoRequest) (TamAdvisoryInfo, *_nethttp.Response, error) {
+func (a *TamApiService) CreateTamAdvisoryInfoExecute(r ApiCreateTamAdvisoryInfoRequest) (*TamAdvisoryInfo, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TamAdvisoryInfo
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TamAdvisoryInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TamApiService.CreateTamAdvisoryInfo")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/tam/AdvisoryInfos"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.tamAdvisoryInfo == nil {
 		return localVarReturnValue, nil, reportError("tamAdvisoryInfo is required and must be specified")
 	}
@@ -478,7 +467,7 @@ func (a *TamApiService) CreateTamAdvisoryInfoExecute(r ApiCreateTamAdvisoryInfoR
 	}
 	// body params
 	localVarPostBody = r.tamAdvisoryInfo
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -488,15 +477,15 @@ func (a *TamApiService) CreateTamAdvisoryInfoExecute(r ApiCreateTamAdvisoryInfoR
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -552,7 +541,7 @@ func (a *TamApiService) CreateTamAdvisoryInfoExecute(r ApiCreateTamAdvisoryInfoR
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -563,7 +552,7 @@ func (a *TamApiService) CreateTamAdvisoryInfoExecute(r ApiCreateTamAdvisoryInfoR
 }
 
 type ApiCreateTamAdvisoryInstanceRequest struct {
-	ctx                 _context.Context
+	ctx                 context.Context
 	ApiService          *TamApiService
 	tamAdvisoryInstance *TamAdvisoryInstance
 	ifMatch             *string
@@ -588,17 +577,17 @@ func (r ApiCreateTamAdvisoryInstanceRequest) IfNoneMatch(ifNoneMatch string) Api
 	return r
 }
 
-func (r ApiCreateTamAdvisoryInstanceRequest) Execute() (TamAdvisoryInstance, *_nethttp.Response, error) {
+func (r ApiCreateTamAdvisoryInstanceRequest) Execute() (*TamAdvisoryInstance, *http.Response, error) {
 	return r.ApiService.CreateTamAdvisoryInstanceExecute(r)
 }
 
 /*
 CreateTamAdvisoryInstance Create a 'tam.AdvisoryInstance' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateTamAdvisoryInstanceRequest
 */
-func (a *TamApiService) CreateTamAdvisoryInstance(ctx _context.Context) ApiCreateTamAdvisoryInstanceRequest {
+func (a *TamApiService) CreateTamAdvisoryInstance(ctx context.Context) ApiCreateTamAdvisoryInstanceRequest {
 	return ApiCreateTamAdvisoryInstanceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -607,26 +596,24 @@ func (a *TamApiService) CreateTamAdvisoryInstance(ctx _context.Context) ApiCreat
 
 // Execute executes the request
 //  @return TamAdvisoryInstance
-func (a *TamApiService) CreateTamAdvisoryInstanceExecute(r ApiCreateTamAdvisoryInstanceRequest) (TamAdvisoryInstance, *_nethttp.Response, error) {
+func (a *TamApiService) CreateTamAdvisoryInstanceExecute(r ApiCreateTamAdvisoryInstanceRequest) (*TamAdvisoryInstance, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TamAdvisoryInstance
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TamAdvisoryInstance
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TamApiService.CreateTamAdvisoryInstance")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/tam/AdvisoryInstances"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.tamAdvisoryInstance == nil {
 		return localVarReturnValue, nil, reportError("tamAdvisoryInstance is required and must be specified")
 	}
@@ -656,7 +643,7 @@ func (a *TamApiService) CreateTamAdvisoryInstanceExecute(r ApiCreateTamAdvisoryI
 	}
 	// body params
 	localVarPostBody = r.tamAdvisoryInstance
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -666,15 +653,15 @@ func (a *TamApiService) CreateTamAdvisoryInstanceExecute(r ApiCreateTamAdvisoryI
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -730,7 +717,7 @@ func (a *TamApiService) CreateTamAdvisoryInstanceExecute(r ApiCreateTamAdvisoryI
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -741,7 +728,7 @@ func (a *TamApiService) CreateTamAdvisoryInstanceExecute(r ApiCreateTamAdvisoryI
 }
 
 type ApiCreateTamSecurityAdvisoryRequest struct {
-	ctx                 _context.Context
+	ctx                 context.Context
 	ApiService          *TamApiService
 	tamSecurityAdvisory *TamSecurityAdvisory
 	ifMatch             *string
@@ -766,17 +753,17 @@ func (r ApiCreateTamSecurityAdvisoryRequest) IfNoneMatch(ifNoneMatch string) Api
 	return r
 }
 
-func (r ApiCreateTamSecurityAdvisoryRequest) Execute() (TamSecurityAdvisory, *_nethttp.Response, error) {
+func (r ApiCreateTamSecurityAdvisoryRequest) Execute() (*TamSecurityAdvisory, *http.Response, error) {
 	return r.ApiService.CreateTamSecurityAdvisoryExecute(r)
 }
 
 /*
 CreateTamSecurityAdvisory Create a 'tam.SecurityAdvisory' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateTamSecurityAdvisoryRequest
 */
-func (a *TamApiService) CreateTamSecurityAdvisory(ctx _context.Context) ApiCreateTamSecurityAdvisoryRequest {
+func (a *TamApiService) CreateTamSecurityAdvisory(ctx context.Context) ApiCreateTamSecurityAdvisoryRequest {
 	return ApiCreateTamSecurityAdvisoryRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -785,26 +772,24 @@ func (a *TamApiService) CreateTamSecurityAdvisory(ctx _context.Context) ApiCreat
 
 // Execute executes the request
 //  @return TamSecurityAdvisory
-func (a *TamApiService) CreateTamSecurityAdvisoryExecute(r ApiCreateTamSecurityAdvisoryRequest) (TamSecurityAdvisory, *_nethttp.Response, error) {
+func (a *TamApiService) CreateTamSecurityAdvisoryExecute(r ApiCreateTamSecurityAdvisoryRequest) (*TamSecurityAdvisory, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TamSecurityAdvisory
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TamSecurityAdvisory
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TamApiService.CreateTamSecurityAdvisory")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/tam/SecurityAdvisories"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.tamSecurityAdvisory == nil {
 		return localVarReturnValue, nil, reportError("tamSecurityAdvisory is required and must be specified")
 	}
@@ -834,7 +819,7 @@ func (a *TamApiService) CreateTamSecurityAdvisoryExecute(r ApiCreateTamSecurityA
 	}
 	// body params
 	localVarPostBody = r.tamSecurityAdvisory
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -844,15 +829,15 @@ func (a *TamApiService) CreateTamSecurityAdvisoryExecute(r ApiCreateTamSecurityA
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -908,7 +893,7 @@ func (a *TamApiService) CreateTamSecurityAdvisoryExecute(r ApiCreateTamSecurityA
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -919,23 +904,23 @@ func (a *TamApiService) CreateTamSecurityAdvisoryExecute(r ApiCreateTamSecurityA
 }
 
 type ApiDeleteTamAdvisoryCountRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *TamApiService
 	moid       string
 }
 
-func (r ApiDeleteTamAdvisoryCountRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteTamAdvisoryCountRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteTamAdvisoryCountExecute(r)
 }
 
 /*
 DeleteTamAdvisoryCount Delete a 'tam.AdvisoryCount' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteTamAdvisoryCountRequest
 */
-func (a *TamApiService) DeleteTamAdvisoryCount(ctx _context.Context, moid string) ApiDeleteTamAdvisoryCountRequest {
+func (a *TamApiService) DeleteTamAdvisoryCount(ctx context.Context, moid string) ApiDeleteTamAdvisoryCountRequest {
 	return ApiDeleteTamAdvisoryCountRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -944,26 +929,24 @@ func (a *TamApiService) DeleteTamAdvisoryCount(ctx _context.Context, moid string
 }
 
 // Execute executes the request
-func (a *TamApiService) DeleteTamAdvisoryCountExecute(r ApiDeleteTamAdvisoryCountRequest) (*_nethttp.Response, error) {
+func (a *TamApiService) DeleteTamAdvisoryCountExecute(r ApiDeleteTamAdvisoryCountRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TamApiService.DeleteTamAdvisoryCount")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/tam/AdvisoryCounts/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -982,7 +965,7 @@ func (a *TamApiService) DeleteTamAdvisoryCountExecute(r ApiDeleteTamAdvisoryCoun
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -992,15 +975,15 @@ func (a *TamApiService) DeleteTamAdvisoryCountExecute(r ApiDeleteTamAdvisoryCoun
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1058,23 +1041,23 @@ func (a *TamApiService) DeleteTamAdvisoryCountExecute(r ApiDeleteTamAdvisoryCoun
 }
 
 type ApiDeleteTamAdvisoryDefinitionRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *TamApiService
 	moid       string
 }
 
-func (r ApiDeleteTamAdvisoryDefinitionRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteTamAdvisoryDefinitionRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteTamAdvisoryDefinitionExecute(r)
 }
 
 /*
 DeleteTamAdvisoryDefinition Delete a 'tam.AdvisoryDefinition' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteTamAdvisoryDefinitionRequest
 */
-func (a *TamApiService) DeleteTamAdvisoryDefinition(ctx _context.Context, moid string) ApiDeleteTamAdvisoryDefinitionRequest {
+func (a *TamApiService) DeleteTamAdvisoryDefinition(ctx context.Context, moid string) ApiDeleteTamAdvisoryDefinitionRequest {
 	return ApiDeleteTamAdvisoryDefinitionRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1083,26 +1066,24 @@ func (a *TamApiService) DeleteTamAdvisoryDefinition(ctx _context.Context, moid s
 }
 
 // Execute executes the request
-func (a *TamApiService) DeleteTamAdvisoryDefinitionExecute(r ApiDeleteTamAdvisoryDefinitionRequest) (*_nethttp.Response, error) {
+func (a *TamApiService) DeleteTamAdvisoryDefinitionExecute(r ApiDeleteTamAdvisoryDefinitionRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TamApiService.DeleteTamAdvisoryDefinition")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/tam/AdvisoryDefinitions/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1121,7 +1102,7 @@ func (a *TamApiService) DeleteTamAdvisoryDefinitionExecute(r ApiDeleteTamAdvisor
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -1131,15 +1112,15 @@ func (a *TamApiService) DeleteTamAdvisoryDefinitionExecute(r ApiDeleteTamAdvisor
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1197,23 +1178,23 @@ func (a *TamApiService) DeleteTamAdvisoryDefinitionExecute(r ApiDeleteTamAdvisor
 }
 
 type ApiDeleteTamAdvisoryInfoRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *TamApiService
 	moid       string
 }
 
-func (r ApiDeleteTamAdvisoryInfoRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteTamAdvisoryInfoRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteTamAdvisoryInfoExecute(r)
 }
 
 /*
 DeleteTamAdvisoryInfo Delete a 'tam.AdvisoryInfo' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteTamAdvisoryInfoRequest
 */
-func (a *TamApiService) DeleteTamAdvisoryInfo(ctx _context.Context, moid string) ApiDeleteTamAdvisoryInfoRequest {
+func (a *TamApiService) DeleteTamAdvisoryInfo(ctx context.Context, moid string) ApiDeleteTamAdvisoryInfoRequest {
 	return ApiDeleteTamAdvisoryInfoRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1222,26 +1203,24 @@ func (a *TamApiService) DeleteTamAdvisoryInfo(ctx _context.Context, moid string)
 }
 
 // Execute executes the request
-func (a *TamApiService) DeleteTamAdvisoryInfoExecute(r ApiDeleteTamAdvisoryInfoRequest) (*_nethttp.Response, error) {
+func (a *TamApiService) DeleteTamAdvisoryInfoExecute(r ApiDeleteTamAdvisoryInfoRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TamApiService.DeleteTamAdvisoryInfo")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/tam/AdvisoryInfos/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1260,7 +1239,7 @@ func (a *TamApiService) DeleteTamAdvisoryInfoExecute(r ApiDeleteTamAdvisoryInfoR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -1270,15 +1249,15 @@ func (a *TamApiService) DeleteTamAdvisoryInfoExecute(r ApiDeleteTamAdvisoryInfoR
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1336,23 +1315,23 @@ func (a *TamApiService) DeleteTamAdvisoryInfoExecute(r ApiDeleteTamAdvisoryInfoR
 }
 
 type ApiDeleteTamAdvisoryInstanceRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *TamApiService
 	moid       string
 }
 
-func (r ApiDeleteTamAdvisoryInstanceRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteTamAdvisoryInstanceRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteTamAdvisoryInstanceExecute(r)
 }
 
 /*
 DeleteTamAdvisoryInstance Delete a 'tam.AdvisoryInstance' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteTamAdvisoryInstanceRequest
 */
-func (a *TamApiService) DeleteTamAdvisoryInstance(ctx _context.Context, moid string) ApiDeleteTamAdvisoryInstanceRequest {
+func (a *TamApiService) DeleteTamAdvisoryInstance(ctx context.Context, moid string) ApiDeleteTamAdvisoryInstanceRequest {
 	return ApiDeleteTamAdvisoryInstanceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1361,26 +1340,24 @@ func (a *TamApiService) DeleteTamAdvisoryInstance(ctx _context.Context, moid str
 }
 
 // Execute executes the request
-func (a *TamApiService) DeleteTamAdvisoryInstanceExecute(r ApiDeleteTamAdvisoryInstanceRequest) (*_nethttp.Response, error) {
+func (a *TamApiService) DeleteTamAdvisoryInstanceExecute(r ApiDeleteTamAdvisoryInstanceRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TamApiService.DeleteTamAdvisoryInstance")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/tam/AdvisoryInstances/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1399,7 +1376,7 @@ func (a *TamApiService) DeleteTamAdvisoryInstanceExecute(r ApiDeleteTamAdvisoryI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -1409,15 +1386,15 @@ func (a *TamApiService) DeleteTamAdvisoryInstanceExecute(r ApiDeleteTamAdvisoryI
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1475,23 +1452,23 @@ func (a *TamApiService) DeleteTamAdvisoryInstanceExecute(r ApiDeleteTamAdvisoryI
 }
 
 type ApiDeleteTamSecurityAdvisoryRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *TamApiService
 	moid       string
 }
 
-func (r ApiDeleteTamSecurityAdvisoryRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteTamSecurityAdvisoryRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteTamSecurityAdvisoryExecute(r)
 }
 
 /*
 DeleteTamSecurityAdvisory Delete a 'tam.SecurityAdvisory' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteTamSecurityAdvisoryRequest
 */
-func (a *TamApiService) DeleteTamSecurityAdvisory(ctx _context.Context, moid string) ApiDeleteTamSecurityAdvisoryRequest {
+func (a *TamApiService) DeleteTamSecurityAdvisory(ctx context.Context, moid string) ApiDeleteTamSecurityAdvisoryRequest {
 	return ApiDeleteTamSecurityAdvisoryRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1500,26 +1477,24 @@ func (a *TamApiService) DeleteTamSecurityAdvisory(ctx _context.Context, moid str
 }
 
 // Execute executes the request
-func (a *TamApiService) DeleteTamSecurityAdvisoryExecute(r ApiDeleteTamSecurityAdvisoryRequest) (*_nethttp.Response, error) {
+func (a *TamApiService) DeleteTamSecurityAdvisoryExecute(r ApiDeleteTamSecurityAdvisoryRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TamApiService.DeleteTamSecurityAdvisory")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/tam/SecurityAdvisories/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1538,7 +1513,7 @@ func (a *TamApiService) DeleteTamSecurityAdvisoryExecute(r ApiDeleteTamSecurityA
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -1548,15 +1523,15 @@ func (a *TamApiService) DeleteTamSecurityAdvisoryExecute(r ApiDeleteTamSecurityA
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1614,23 +1589,23 @@ func (a *TamApiService) DeleteTamSecurityAdvisoryExecute(r ApiDeleteTamSecurityA
 }
 
 type ApiGetTamAdvisoryCountByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *TamApiService
 	moid       string
 }
 
-func (r ApiGetTamAdvisoryCountByMoidRequest) Execute() (TamAdvisoryCount, *_nethttp.Response, error) {
+func (r ApiGetTamAdvisoryCountByMoidRequest) Execute() (*TamAdvisoryCount, *http.Response, error) {
 	return r.ApiService.GetTamAdvisoryCountByMoidExecute(r)
 }
 
 /*
 GetTamAdvisoryCountByMoid Read a 'tam.AdvisoryCount' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetTamAdvisoryCountByMoidRequest
 */
-func (a *TamApiService) GetTamAdvisoryCountByMoid(ctx _context.Context, moid string) ApiGetTamAdvisoryCountByMoidRequest {
+func (a *TamApiService) GetTamAdvisoryCountByMoid(ctx context.Context, moid string) ApiGetTamAdvisoryCountByMoidRequest {
 	return ApiGetTamAdvisoryCountByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1640,27 +1615,25 @@ func (a *TamApiService) GetTamAdvisoryCountByMoid(ctx _context.Context, moid str
 
 // Execute executes the request
 //  @return TamAdvisoryCount
-func (a *TamApiService) GetTamAdvisoryCountByMoidExecute(r ApiGetTamAdvisoryCountByMoidRequest) (TamAdvisoryCount, *_nethttp.Response, error) {
+func (a *TamApiService) GetTamAdvisoryCountByMoidExecute(r ApiGetTamAdvisoryCountByMoidRequest) (*TamAdvisoryCount, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TamAdvisoryCount
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TamAdvisoryCount
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TamApiService.GetTamAdvisoryCountByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/tam/AdvisoryCounts/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1679,7 +1652,7 @@ func (a *TamApiService) GetTamAdvisoryCountByMoidExecute(r ApiGetTamAdvisoryCoun
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1689,15 +1662,15 @@ func (a *TamApiService) GetTamAdvisoryCountByMoidExecute(r ApiGetTamAdvisoryCoun
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1753,7 +1726,7 @@ func (a *TamApiService) GetTamAdvisoryCountByMoidExecute(r ApiGetTamAdvisoryCoun
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1764,7 +1737,7 @@ func (a *TamApiService) GetTamAdvisoryCountByMoidExecute(r ApiGetTamAdvisoryCoun
 }
 
 type ApiGetTamAdvisoryCountListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *TamApiService
 	filter      *string
 	orderby     *string
@@ -1845,17 +1818,17 @@ func (r ApiGetTamAdvisoryCountListRequest) Tags(tags string) ApiGetTamAdvisoryCo
 	return r
 }
 
-func (r ApiGetTamAdvisoryCountListRequest) Execute() (TamAdvisoryCountResponse, *_nethttp.Response, error) {
+func (r ApiGetTamAdvisoryCountListRequest) Execute() (*TamAdvisoryCountResponse, *http.Response, error) {
 	return r.ApiService.GetTamAdvisoryCountListExecute(r)
 }
 
 /*
 GetTamAdvisoryCountList Read a 'tam.AdvisoryCount' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetTamAdvisoryCountListRequest
 */
-func (a *TamApiService) GetTamAdvisoryCountList(ctx _context.Context) ApiGetTamAdvisoryCountListRequest {
+func (a *TamApiService) GetTamAdvisoryCountList(ctx context.Context) ApiGetTamAdvisoryCountListRequest {
 	return ApiGetTamAdvisoryCountListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1864,26 +1837,24 @@ func (a *TamApiService) GetTamAdvisoryCountList(ctx _context.Context) ApiGetTamA
 
 // Execute executes the request
 //  @return TamAdvisoryCountResponse
-func (a *TamApiService) GetTamAdvisoryCountListExecute(r ApiGetTamAdvisoryCountListRequest) (TamAdvisoryCountResponse, *_nethttp.Response, error) {
+func (a *TamApiService) GetTamAdvisoryCountListExecute(r ApiGetTamAdvisoryCountListRequest) (*TamAdvisoryCountResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TamAdvisoryCountResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TamAdvisoryCountResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TamApiService.GetTamAdvisoryCountList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/tam/AdvisoryCounts"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1935,7 +1906,7 @@ func (a *TamApiService) GetTamAdvisoryCountListExecute(r ApiGetTamAdvisoryCountL
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1945,15 +1916,15 @@ func (a *TamApiService) GetTamAdvisoryCountListExecute(r ApiGetTamAdvisoryCountL
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2009,7 +1980,7 @@ func (a *TamApiService) GetTamAdvisoryCountListExecute(r ApiGetTamAdvisoryCountL
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2020,23 +1991,23 @@ func (a *TamApiService) GetTamAdvisoryCountListExecute(r ApiGetTamAdvisoryCountL
 }
 
 type ApiGetTamAdvisoryDefinitionByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *TamApiService
 	moid       string
 }
 
-func (r ApiGetTamAdvisoryDefinitionByMoidRequest) Execute() (TamAdvisoryDefinition, *_nethttp.Response, error) {
+func (r ApiGetTamAdvisoryDefinitionByMoidRequest) Execute() (*TamAdvisoryDefinition, *http.Response, error) {
 	return r.ApiService.GetTamAdvisoryDefinitionByMoidExecute(r)
 }
 
 /*
 GetTamAdvisoryDefinitionByMoid Read a 'tam.AdvisoryDefinition' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetTamAdvisoryDefinitionByMoidRequest
 */
-func (a *TamApiService) GetTamAdvisoryDefinitionByMoid(ctx _context.Context, moid string) ApiGetTamAdvisoryDefinitionByMoidRequest {
+func (a *TamApiService) GetTamAdvisoryDefinitionByMoid(ctx context.Context, moid string) ApiGetTamAdvisoryDefinitionByMoidRequest {
 	return ApiGetTamAdvisoryDefinitionByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2046,27 +2017,25 @@ func (a *TamApiService) GetTamAdvisoryDefinitionByMoid(ctx _context.Context, moi
 
 // Execute executes the request
 //  @return TamAdvisoryDefinition
-func (a *TamApiService) GetTamAdvisoryDefinitionByMoidExecute(r ApiGetTamAdvisoryDefinitionByMoidRequest) (TamAdvisoryDefinition, *_nethttp.Response, error) {
+func (a *TamApiService) GetTamAdvisoryDefinitionByMoidExecute(r ApiGetTamAdvisoryDefinitionByMoidRequest) (*TamAdvisoryDefinition, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TamAdvisoryDefinition
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TamAdvisoryDefinition
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TamApiService.GetTamAdvisoryDefinitionByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/tam/AdvisoryDefinitions/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2085,7 +2054,7 @@ func (a *TamApiService) GetTamAdvisoryDefinitionByMoidExecute(r ApiGetTamAdvisor
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2095,15 +2064,15 @@ func (a *TamApiService) GetTamAdvisoryDefinitionByMoidExecute(r ApiGetTamAdvisor
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2159,7 +2128,7 @@ func (a *TamApiService) GetTamAdvisoryDefinitionByMoidExecute(r ApiGetTamAdvisor
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2170,7 +2139,7 @@ func (a *TamApiService) GetTamAdvisoryDefinitionByMoidExecute(r ApiGetTamAdvisor
 }
 
 type ApiGetTamAdvisoryDefinitionListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *TamApiService
 	filter      *string
 	orderby     *string
@@ -2251,17 +2220,17 @@ func (r ApiGetTamAdvisoryDefinitionListRequest) Tags(tags string) ApiGetTamAdvis
 	return r
 }
 
-func (r ApiGetTamAdvisoryDefinitionListRequest) Execute() (TamAdvisoryDefinitionResponse, *_nethttp.Response, error) {
+func (r ApiGetTamAdvisoryDefinitionListRequest) Execute() (*TamAdvisoryDefinitionResponse, *http.Response, error) {
 	return r.ApiService.GetTamAdvisoryDefinitionListExecute(r)
 }
 
 /*
 GetTamAdvisoryDefinitionList Read a 'tam.AdvisoryDefinition' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetTamAdvisoryDefinitionListRequest
 */
-func (a *TamApiService) GetTamAdvisoryDefinitionList(ctx _context.Context) ApiGetTamAdvisoryDefinitionListRequest {
+func (a *TamApiService) GetTamAdvisoryDefinitionList(ctx context.Context) ApiGetTamAdvisoryDefinitionListRequest {
 	return ApiGetTamAdvisoryDefinitionListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2270,26 +2239,24 @@ func (a *TamApiService) GetTamAdvisoryDefinitionList(ctx _context.Context) ApiGe
 
 // Execute executes the request
 //  @return TamAdvisoryDefinitionResponse
-func (a *TamApiService) GetTamAdvisoryDefinitionListExecute(r ApiGetTamAdvisoryDefinitionListRequest) (TamAdvisoryDefinitionResponse, *_nethttp.Response, error) {
+func (a *TamApiService) GetTamAdvisoryDefinitionListExecute(r ApiGetTamAdvisoryDefinitionListRequest) (*TamAdvisoryDefinitionResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TamAdvisoryDefinitionResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TamAdvisoryDefinitionResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TamApiService.GetTamAdvisoryDefinitionList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/tam/AdvisoryDefinitions"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -2341,7 +2308,7 @@ func (a *TamApiService) GetTamAdvisoryDefinitionListExecute(r ApiGetTamAdvisoryD
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2351,15 +2318,15 @@ func (a *TamApiService) GetTamAdvisoryDefinitionListExecute(r ApiGetTamAdvisoryD
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2415,7 +2382,7 @@ func (a *TamApiService) GetTamAdvisoryDefinitionListExecute(r ApiGetTamAdvisoryD
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2426,23 +2393,23 @@ func (a *TamApiService) GetTamAdvisoryDefinitionListExecute(r ApiGetTamAdvisoryD
 }
 
 type ApiGetTamAdvisoryInfoByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *TamApiService
 	moid       string
 }
 
-func (r ApiGetTamAdvisoryInfoByMoidRequest) Execute() (TamAdvisoryInfo, *_nethttp.Response, error) {
+func (r ApiGetTamAdvisoryInfoByMoidRequest) Execute() (*TamAdvisoryInfo, *http.Response, error) {
 	return r.ApiService.GetTamAdvisoryInfoByMoidExecute(r)
 }
 
 /*
 GetTamAdvisoryInfoByMoid Read a 'tam.AdvisoryInfo' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetTamAdvisoryInfoByMoidRequest
 */
-func (a *TamApiService) GetTamAdvisoryInfoByMoid(ctx _context.Context, moid string) ApiGetTamAdvisoryInfoByMoidRequest {
+func (a *TamApiService) GetTamAdvisoryInfoByMoid(ctx context.Context, moid string) ApiGetTamAdvisoryInfoByMoidRequest {
 	return ApiGetTamAdvisoryInfoByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2452,27 +2419,25 @@ func (a *TamApiService) GetTamAdvisoryInfoByMoid(ctx _context.Context, moid stri
 
 // Execute executes the request
 //  @return TamAdvisoryInfo
-func (a *TamApiService) GetTamAdvisoryInfoByMoidExecute(r ApiGetTamAdvisoryInfoByMoidRequest) (TamAdvisoryInfo, *_nethttp.Response, error) {
+func (a *TamApiService) GetTamAdvisoryInfoByMoidExecute(r ApiGetTamAdvisoryInfoByMoidRequest) (*TamAdvisoryInfo, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TamAdvisoryInfo
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TamAdvisoryInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TamApiService.GetTamAdvisoryInfoByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/tam/AdvisoryInfos/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2491,7 +2456,7 @@ func (a *TamApiService) GetTamAdvisoryInfoByMoidExecute(r ApiGetTamAdvisoryInfoB
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2501,15 +2466,15 @@ func (a *TamApiService) GetTamAdvisoryInfoByMoidExecute(r ApiGetTamAdvisoryInfoB
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2565,7 +2530,7 @@ func (a *TamApiService) GetTamAdvisoryInfoByMoidExecute(r ApiGetTamAdvisoryInfoB
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2576,7 +2541,7 @@ func (a *TamApiService) GetTamAdvisoryInfoByMoidExecute(r ApiGetTamAdvisoryInfoB
 }
 
 type ApiGetTamAdvisoryInfoListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *TamApiService
 	filter      *string
 	orderby     *string
@@ -2657,17 +2622,17 @@ func (r ApiGetTamAdvisoryInfoListRequest) Tags(tags string) ApiGetTamAdvisoryInf
 	return r
 }
 
-func (r ApiGetTamAdvisoryInfoListRequest) Execute() (TamAdvisoryInfoResponse, *_nethttp.Response, error) {
+func (r ApiGetTamAdvisoryInfoListRequest) Execute() (*TamAdvisoryInfoResponse, *http.Response, error) {
 	return r.ApiService.GetTamAdvisoryInfoListExecute(r)
 }
 
 /*
 GetTamAdvisoryInfoList Read a 'tam.AdvisoryInfo' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetTamAdvisoryInfoListRequest
 */
-func (a *TamApiService) GetTamAdvisoryInfoList(ctx _context.Context) ApiGetTamAdvisoryInfoListRequest {
+func (a *TamApiService) GetTamAdvisoryInfoList(ctx context.Context) ApiGetTamAdvisoryInfoListRequest {
 	return ApiGetTamAdvisoryInfoListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2676,26 +2641,24 @@ func (a *TamApiService) GetTamAdvisoryInfoList(ctx _context.Context) ApiGetTamAd
 
 // Execute executes the request
 //  @return TamAdvisoryInfoResponse
-func (a *TamApiService) GetTamAdvisoryInfoListExecute(r ApiGetTamAdvisoryInfoListRequest) (TamAdvisoryInfoResponse, *_nethttp.Response, error) {
+func (a *TamApiService) GetTamAdvisoryInfoListExecute(r ApiGetTamAdvisoryInfoListRequest) (*TamAdvisoryInfoResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TamAdvisoryInfoResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TamAdvisoryInfoResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TamApiService.GetTamAdvisoryInfoList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/tam/AdvisoryInfos"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -2747,7 +2710,7 @@ func (a *TamApiService) GetTamAdvisoryInfoListExecute(r ApiGetTamAdvisoryInfoLis
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2757,15 +2720,15 @@ func (a *TamApiService) GetTamAdvisoryInfoListExecute(r ApiGetTamAdvisoryInfoLis
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2821,7 +2784,7 @@ func (a *TamApiService) GetTamAdvisoryInfoListExecute(r ApiGetTamAdvisoryInfoLis
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2832,23 +2795,23 @@ func (a *TamApiService) GetTamAdvisoryInfoListExecute(r ApiGetTamAdvisoryInfoLis
 }
 
 type ApiGetTamAdvisoryInstanceByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *TamApiService
 	moid       string
 }
 
-func (r ApiGetTamAdvisoryInstanceByMoidRequest) Execute() (TamAdvisoryInstance, *_nethttp.Response, error) {
+func (r ApiGetTamAdvisoryInstanceByMoidRequest) Execute() (*TamAdvisoryInstance, *http.Response, error) {
 	return r.ApiService.GetTamAdvisoryInstanceByMoidExecute(r)
 }
 
 /*
 GetTamAdvisoryInstanceByMoid Read a 'tam.AdvisoryInstance' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetTamAdvisoryInstanceByMoidRequest
 */
-func (a *TamApiService) GetTamAdvisoryInstanceByMoid(ctx _context.Context, moid string) ApiGetTamAdvisoryInstanceByMoidRequest {
+func (a *TamApiService) GetTamAdvisoryInstanceByMoid(ctx context.Context, moid string) ApiGetTamAdvisoryInstanceByMoidRequest {
 	return ApiGetTamAdvisoryInstanceByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2858,27 +2821,25 @@ func (a *TamApiService) GetTamAdvisoryInstanceByMoid(ctx _context.Context, moid 
 
 // Execute executes the request
 //  @return TamAdvisoryInstance
-func (a *TamApiService) GetTamAdvisoryInstanceByMoidExecute(r ApiGetTamAdvisoryInstanceByMoidRequest) (TamAdvisoryInstance, *_nethttp.Response, error) {
+func (a *TamApiService) GetTamAdvisoryInstanceByMoidExecute(r ApiGetTamAdvisoryInstanceByMoidRequest) (*TamAdvisoryInstance, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TamAdvisoryInstance
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TamAdvisoryInstance
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TamApiService.GetTamAdvisoryInstanceByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/tam/AdvisoryInstances/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2897,7 +2858,7 @@ func (a *TamApiService) GetTamAdvisoryInstanceByMoidExecute(r ApiGetTamAdvisoryI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2907,15 +2868,15 @@ func (a *TamApiService) GetTamAdvisoryInstanceByMoidExecute(r ApiGetTamAdvisoryI
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2971,7 +2932,7 @@ func (a *TamApiService) GetTamAdvisoryInstanceByMoidExecute(r ApiGetTamAdvisoryI
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2982,7 +2943,7 @@ func (a *TamApiService) GetTamAdvisoryInstanceByMoidExecute(r ApiGetTamAdvisoryI
 }
 
 type ApiGetTamAdvisoryInstanceListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *TamApiService
 	filter      *string
 	orderby     *string
@@ -3063,17 +3024,17 @@ func (r ApiGetTamAdvisoryInstanceListRequest) Tags(tags string) ApiGetTamAdvisor
 	return r
 }
 
-func (r ApiGetTamAdvisoryInstanceListRequest) Execute() (TamAdvisoryInstanceResponse, *_nethttp.Response, error) {
+func (r ApiGetTamAdvisoryInstanceListRequest) Execute() (*TamAdvisoryInstanceResponse, *http.Response, error) {
 	return r.ApiService.GetTamAdvisoryInstanceListExecute(r)
 }
 
 /*
 GetTamAdvisoryInstanceList Read a 'tam.AdvisoryInstance' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetTamAdvisoryInstanceListRequest
 */
-func (a *TamApiService) GetTamAdvisoryInstanceList(ctx _context.Context) ApiGetTamAdvisoryInstanceListRequest {
+func (a *TamApiService) GetTamAdvisoryInstanceList(ctx context.Context) ApiGetTamAdvisoryInstanceListRequest {
 	return ApiGetTamAdvisoryInstanceListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3082,26 +3043,24 @@ func (a *TamApiService) GetTamAdvisoryInstanceList(ctx _context.Context) ApiGetT
 
 // Execute executes the request
 //  @return TamAdvisoryInstanceResponse
-func (a *TamApiService) GetTamAdvisoryInstanceListExecute(r ApiGetTamAdvisoryInstanceListRequest) (TamAdvisoryInstanceResponse, *_nethttp.Response, error) {
+func (a *TamApiService) GetTamAdvisoryInstanceListExecute(r ApiGetTamAdvisoryInstanceListRequest) (*TamAdvisoryInstanceResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TamAdvisoryInstanceResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TamAdvisoryInstanceResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TamApiService.GetTamAdvisoryInstanceList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/tam/AdvisoryInstances"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -3153,7 +3112,7 @@ func (a *TamApiService) GetTamAdvisoryInstanceListExecute(r ApiGetTamAdvisoryIns
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3163,15 +3122,15 @@ func (a *TamApiService) GetTamAdvisoryInstanceListExecute(r ApiGetTamAdvisoryIns
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3227,7 +3186,7 @@ func (a *TamApiService) GetTamAdvisoryInstanceListExecute(r ApiGetTamAdvisoryIns
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3238,23 +3197,23 @@ func (a *TamApiService) GetTamAdvisoryInstanceListExecute(r ApiGetTamAdvisoryIns
 }
 
 type ApiGetTamSecurityAdvisoryByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *TamApiService
 	moid       string
 }
 
-func (r ApiGetTamSecurityAdvisoryByMoidRequest) Execute() (TamSecurityAdvisory, *_nethttp.Response, error) {
+func (r ApiGetTamSecurityAdvisoryByMoidRequest) Execute() (*TamSecurityAdvisory, *http.Response, error) {
 	return r.ApiService.GetTamSecurityAdvisoryByMoidExecute(r)
 }
 
 /*
 GetTamSecurityAdvisoryByMoid Read a 'tam.SecurityAdvisory' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetTamSecurityAdvisoryByMoidRequest
 */
-func (a *TamApiService) GetTamSecurityAdvisoryByMoid(ctx _context.Context, moid string) ApiGetTamSecurityAdvisoryByMoidRequest {
+func (a *TamApiService) GetTamSecurityAdvisoryByMoid(ctx context.Context, moid string) ApiGetTamSecurityAdvisoryByMoidRequest {
 	return ApiGetTamSecurityAdvisoryByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3264,27 +3223,25 @@ func (a *TamApiService) GetTamSecurityAdvisoryByMoid(ctx _context.Context, moid 
 
 // Execute executes the request
 //  @return TamSecurityAdvisory
-func (a *TamApiService) GetTamSecurityAdvisoryByMoidExecute(r ApiGetTamSecurityAdvisoryByMoidRequest) (TamSecurityAdvisory, *_nethttp.Response, error) {
+func (a *TamApiService) GetTamSecurityAdvisoryByMoidExecute(r ApiGetTamSecurityAdvisoryByMoidRequest) (*TamSecurityAdvisory, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TamSecurityAdvisory
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TamSecurityAdvisory
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TamApiService.GetTamSecurityAdvisoryByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/tam/SecurityAdvisories/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -3303,7 +3260,7 @@ func (a *TamApiService) GetTamSecurityAdvisoryByMoidExecute(r ApiGetTamSecurityA
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3313,15 +3270,15 @@ func (a *TamApiService) GetTamSecurityAdvisoryByMoidExecute(r ApiGetTamSecurityA
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3377,7 +3334,7 @@ func (a *TamApiService) GetTamSecurityAdvisoryByMoidExecute(r ApiGetTamSecurityA
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3388,7 +3345,7 @@ func (a *TamApiService) GetTamSecurityAdvisoryByMoidExecute(r ApiGetTamSecurityA
 }
 
 type ApiGetTamSecurityAdvisoryListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *TamApiService
 	filter      *string
 	orderby     *string
@@ -3469,17 +3426,17 @@ func (r ApiGetTamSecurityAdvisoryListRequest) Tags(tags string) ApiGetTamSecurit
 	return r
 }
 
-func (r ApiGetTamSecurityAdvisoryListRequest) Execute() (TamSecurityAdvisoryResponse, *_nethttp.Response, error) {
+func (r ApiGetTamSecurityAdvisoryListRequest) Execute() (*TamSecurityAdvisoryResponse, *http.Response, error) {
 	return r.ApiService.GetTamSecurityAdvisoryListExecute(r)
 }
 
 /*
 GetTamSecurityAdvisoryList Read a 'tam.SecurityAdvisory' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetTamSecurityAdvisoryListRequest
 */
-func (a *TamApiService) GetTamSecurityAdvisoryList(ctx _context.Context) ApiGetTamSecurityAdvisoryListRequest {
+func (a *TamApiService) GetTamSecurityAdvisoryList(ctx context.Context) ApiGetTamSecurityAdvisoryListRequest {
 	return ApiGetTamSecurityAdvisoryListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3488,26 +3445,24 @@ func (a *TamApiService) GetTamSecurityAdvisoryList(ctx _context.Context) ApiGetT
 
 // Execute executes the request
 //  @return TamSecurityAdvisoryResponse
-func (a *TamApiService) GetTamSecurityAdvisoryListExecute(r ApiGetTamSecurityAdvisoryListRequest) (TamSecurityAdvisoryResponse, *_nethttp.Response, error) {
+func (a *TamApiService) GetTamSecurityAdvisoryListExecute(r ApiGetTamSecurityAdvisoryListRequest) (*TamSecurityAdvisoryResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TamSecurityAdvisoryResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TamSecurityAdvisoryResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TamApiService.GetTamSecurityAdvisoryList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/tam/SecurityAdvisories"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -3559,7 +3514,7 @@ func (a *TamApiService) GetTamSecurityAdvisoryListExecute(r ApiGetTamSecurityAdv
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3569,15 +3524,15 @@ func (a *TamApiService) GetTamSecurityAdvisoryListExecute(r ApiGetTamSecurityAdv
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3633,7 +3588,7 @@ func (a *TamApiService) GetTamSecurityAdvisoryListExecute(r ApiGetTamSecurityAdv
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3644,7 +3599,7 @@ func (a *TamApiService) GetTamSecurityAdvisoryListExecute(r ApiGetTamSecurityAdv
 }
 
 type ApiPatchTamAdvisoryCountRequest struct {
-	ctx              _context.Context
+	ctx              context.Context
 	ApiService       *TamApiService
 	moid             string
 	tamAdvisoryCount *TamAdvisoryCount
@@ -3663,18 +3618,18 @@ func (r ApiPatchTamAdvisoryCountRequest) IfMatch(ifMatch string) ApiPatchTamAdvi
 	return r
 }
 
-func (r ApiPatchTamAdvisoryCountRequest) Execute() (TamAdvisoryCount, *_nethttp.Response, error) {
+func (r ApiPatchTamAdvisoryCountRequest) Execute() (*TamAdvisoryCount, *http.Response, error) {
 	return r.ApiService.PatchTamAdvisoryCountExecute(r)
 }
 
 /*
 PatchTamAdvisoryCount Update a 'tam.AdvisoryCount' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchTamAdvisoryCountRequest
 */
-func (a *TamApiService) PatchTamAdvisoryCount(ctx _context.Context, moid string) ApiPatchTamAdvisoryCountRequest {
+func (a *TamApiService) PatchTamAdvisoryCount(ctx context.Context, moid string) ApiPatchTamAdvisoryCountRequest {
 	return ApiPatchTamAdvisoryCountRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3684,27 +3639,25 @@ func (a *TamApiService) PatchTamAdvisoryCount(ctx _context.Context, moid string)
 
 // Execute executes the request
 //  @return TamAdvisoryCount
-func (a *TamApiService) PatchTamAdvisoryCountExecute(r ApiPatchTamAdvisoryCountRequest) (TamAdvisoryCount, *_nethttp.Response, error) {
+func (a *TamApiService) PatchTamAdvisoryCountExecute(r ApiPatchTamAdvisoryCountRequest) (*TamAdvisoryCount, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TamAdvisoryCount
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TamAdvisoryCount
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TamApiService.PatchTamAdvisoryCount")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/tam/AdvisoryCounts/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.tamAdvisoryCount == nil {
 		return localVarReturnValue, nil, reportError("tamAdvisoryCount is required and must be specified")
 	}
@@ -3731,7 +3684,7 @@ func (a *TamApiService) PatchTamAdvisoryCountExecute(r ApiPatchTamAdvisoryCountR
 	}
 	// body params
 	localVarPostBody = r.tamAdvisoryCount
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3741,15 +3694,15 @@ func (a *TamApiService) PatchTamAdvisoryCountExecute(r ApiPatchTamAdvisoryCountR
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3805,7 +3758,7 @@ func (a *TamApiService) PatchTamAdvisoryCountExecute(r ApiPatchTamAdvisoryCountR
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3816,7 +3769,7 @@ func (a *TamApiService) PatchTamAdvisoryCountExecute(r ApiPatchTamAdvisoryCountR
 }
 
 type ApiPatchTamAdvisoryDefinitionRequest struct {
-	ctx                   _context.Context
+	ctx                   context.Context
 	ApiService            *TamApiService
 	moid                  string
 	tamAdvisoryDefinition *TamAdvisoryDefinition
@@ -3835,18 +3788,18 @@ func (r ApiPatchTamAdvisoryDefinitionRequest) IfMatch(ifMatch string) ApiPatchTa
 	return r
 }
 
-func (r ApiPatchTamAdvisoryDefinitionRequest) Execute() (TamAdvisoryDefinition, *_nethttp.Response, error) {
+func (r ApiPatchTamAdvisoryDefinitionRequest) Execute() (*TamAdvisoryDefinition, *http.Response, error) {
 	return r.ApiService.PatchTamAdvisoryDefinitionExecute(r)
 }
 
 /*
 PatchTamAdvisoryDefinition Update a 'tam.AdvisoryDefinition' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchTamAdvisoryDefinitionRequest
 */
-func (a *TamApiService) PatchTamAdvisoryDefinition(ctx _context.Context, moid string) ApiPatchTamAdvisoryDefinitionRequest {
+func (a *TamApiService) PatchTamAdvisoryDefinition(ctx context.Context, moid string) ApiPatchTamAdvisoryDefinitionRequest {
 	return ApiPatchTamAdvisoryDefinitionRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3856,27 +3809,25 @@ func (a *TamApiService) PatchTamAdvisoryDefinition(ctx _context.Context, moid st
 
 // Execute executes the request
 //  @return TamAdvisoryDefinition
-func (a *TamApiService) PatchTamAdvisoryDefinitionExecute(r ApiPatchTamAdvisoryDefinitionRequest) (TamAdvisoryDefinition, *_nethttp.Response, error) {
+func (a *TamApiService) PatchTamAdvisoryDefinitionExecute(r ApiPatchTamAdvisoryDefinitionRequest) (*TamAdvisoryDefinition, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TamAdvisoryDefinition
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TamAdvisoryDefinition
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TamApiService.PatchTamAdvisoryDefinition")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/tam/AdvisoryDefinitions/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.tamAdvisoryDefinition == nil {
 		return localVarReturnValue, nil, reportError("tamAdvisoryDefinition is required and must be specified")
 	}
@@ -3903,7 +3854,7 @@ func (a *TamApiService) PatchTamAdvisoryDefinitionExecute(r ApiPatchTamAdvisoryD
 	}
 	// body params
 	localVarPostBody = r.tamAdvisoryDefinition
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3913,15 +3864,15 @@ func (a *TamApiService) PatchTamAdvisoryDefinitionExecute(r ApiPatchTamAdvisoryD
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3977,7 +3928,7 @@ func (a *TamApiService) PatchTamAdvisoryDefinitionExecute(r ApiPatchTamAdvisoryD
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3988,7 +3939,7 @@ func (a *TamApiService) PatchTamAdvisoryDefinitionExecute(r ApiPatchTamAdvisoryD
 }
 
 type ApiPatchTamAdvisoryInfoRequest struct {
-	ctx             _context.Context
+	ctx             context.Context
 	ApiService      *TamApiService
 	moid            string
 	tamAdvisoryInfo *TamAdvisoryInfo
@@ -4007,18 +3958,18 @@ func (r ApiPatchTamAdvisoryInfoRequest) IfMatch(ifMatch string) ApiPatchTamAdvis
 	return r
 }
 
-func (r ApiPatchTamAdvisoryInfoRequest) Execute() (TamAdvisoryInfo, *_nethttp.Response, error) {
+func (r ApiPatchTamAdvisoryInfoRequest) Execute() (*TamAdvisoryInfo, *http.Response, error) {
 	return r.ApiService.PatchTamAdvisoryInfoExecute(r)
 }
 
 /*
 PatchTamAdvisoryInfo Update a 'tam.AdvisoryInfo' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchTamAdvisoryInfoRequest
 */
-func (a *TamApiService) PatchTamAdvisoryInfo(ctx _context.Context, moid string) ApiPatchTamAdvisoryInfoRequest {
+func (a *TamApiService) PatchTamAdvisoryInfo(ctx context.Context, moid string) ApiPatchTamAdvisoryInfoRequest {
 	return ApiPatchTamAdvisoryInfoRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4028,27 +3979,25 @@ func (a *TamApiService) PatchTamAdvisoryInfo(ctx _context.Context, moid string) 
 
 // Execute executes the request
 //  @return TamAdvisoryInfo
-func (a *TamApiService) PatchTamAdvisoryInfoExecute(r ApiPatchTamAdvisoryInfoRequest) (TamAdvisoryInfo, *_nethttp.Response, error) {
+func (a *TamApiService) PatchTamAdvisoryInfoExecute(r ApiPatchTamAdvisoryInfoRequest) (*TamAdvisoryInfo, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TamAdvisoryInfo
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TamAdvisoryInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TamApiService.PatchTamAdvisoryInfo")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/tam/AdvisoryInfos/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.tamAdvisoryInfo == nil {
 		return localVarReturnValue, nil, reportError("tamAdvisoryInfo is required and must be specified")
 	}
@@ -4075,7 +4024,7 @@ func (a *TamApiService) PatchTamAdvisoryInfoExecute(r ApiPatchTamAdvisoryInfoReq
 	}
 	// body params
 	localVarPostBody = r.tamAdvisoryInfo
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4085,15 +4034,15 @@ func (a *TamApiService) PatchTamAdvisoryInfoExecute(r ApiPatchTamAdvisoryInfoReq
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4149,7 +4098,7 @@ func (a *TamApiService) PatchTamAdvisoryInfoExecute(r ApiPatchTamAdvisoryInfoReq
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -4160,7 +4109,7 @@ func (a *TamApiService) PatchTamAdvisoryInfoExecute(r ApiPatchTamAdvisoryInfoReq
 }
 
 type ApiPatchTamAdvisoryInstanceRequest struct {
-	ctx                 _context.Context
+	ctx                 context.Context
 	ApiService          *TamApiService
 	moid                string
 	tamAdvisoryInstance *TamAdvisoryInstance
@@ -4179,18 +4128,18 @@ func (r ApiPatchTamAdvisoryInstanceRequest) IfMatch(ifMatch string) ApiPatchTamA
 	return r
 }
 
-func (r ApiPatchTamAdvisoryInstanceRequest) Execute() (TamAdvisoryInstance, *_nethttp.Response, error) {
+func (r ApiPatchTamAdvisoryInstanceRequest) Execute() (*TamAdvisoryInstance, *http.Response, error) {
 	return r.ApiService.PatchTamAdvisoryInstanceExecute(r)
 }
 
 /*
 PatchTamAdvisoryInstance Update a 'tam.AdvisoryInstance' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchTamAdvisoryInstanceRequest
 */
-func (a *TamApiService) PatchTamAdvisoryInstance(ctx _context.Context, moid string) ApiPatchTamAdvisoryInstanceRequest {
+func (a *TamApiService) PatchTamAdvisoryInstance(ctx context.Context, moid string) ApiPatchTamAdvisoryInstanceRequest {
 	return ApiPatchTamAdvisoryInstanceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4200,27 +4149,25 @@ func (a *TamApiService) PatchTamAdvisoryInstance(ctx _context.Context, moid stri
 
 // Execute executes the request
 //  @return TamAdvisoryInstance
-func (a *TamApiService) PatchTamAdvisoryInstanceExecute(r ApiPatchTamAdvisoryInstanceRequest) (TamAdvisoryInstance, *_nethttp.Response, error) {
+func (a *TamApiService) PatchTamAdvisoryInstanceExecute(r ApiPatchTamAdvisoryInstanceRequest) (*TamAdvisoryInstance, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TamAdvisoryInstance
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TamAdvisoryInstance
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TamApiService.PatchTamAdvisoryInstance")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/tam/AdvisoryInstances/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.tamAdvisoryInstance == nil {
 		return localVarReturnValue, nil, reportError("tamAdvisoryInstance is required and must be specified")
 	}
@@ -4247,7 +4194,7 @@ func (a *TamApiService) PatchTamAdvisoryInstanceExecute(r ApiPatchTamAdvisoryIns
 	}
 	// body params
 	localVarPostBody = r.tamAdvisoryInstance
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4257,15 +4204,15 @@ func (a *TamApiService) PatchTamAdvisoryInstanceExecute(r ApiPatchTamAdvisoryIns
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4321,7 +4268,7 @@ func (a *TamApiService) PatchTamAdvisoryInstanceExecute(r ApiPatchTamAdvisoryIns
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -4332,7 +4279,7 @@ func (a *TamApiService) PatchTamAdvisoryInstanceExecute(r ApiPatchTamAdvisoryIns
 }
 
 type ApiPatchTamSecurityAdvisoryRequest struct {
-	ctx                 _context.Context
+	ctx                 context.Context
 	ApiService          *TamApiService
 	moid                string
 	tamSecurityAdvisory *TamSecurityAdvisory
@@ -4351,18 +4298,18 @@ func (r ApiPatchTamSecurityAdvisoryRequest) IfMatch(ifMatch string) ApiPatchTamS
 	return r
 }
 
-func (r ApiPatchTamSecurityAdvisoryRequest) Execute() (TamSecurityAdvisory, *_nethttp.Response, error) {
+func (r ApiPatchTamSecurityAdvisoryRequest) Execute() (*TamSecurityAdvisory, *http.Response, error) {
 	return r.ApiService.PatchTamSecurityAdvisoryExecute(r)
 }
 
 /*
 PatchTamSecurityAdvisory Update a 'tam.SecurityAdvisory' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchTamSecurityAdvisoryRequest
 */
-func (a *TamApiService) PatchTamSecurityAdvisory(ctx _context.Context, moid string) ApiPatchTamSecurityAdvisoryRequest {
+func (a *TamApiService) PatchTamSecurityAdvisory(ctx context.Context, moid string) ApiPatchTamSecurityAdvisoryRequest {
 	return ApiPatchTamSecurityAdvisoryRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4372,27 +4319,25 @@ func (a *TamApiService) PatchTamSecurityAdvisory(ctx _context.Context, moid stri
 
 // Execute executes the request
 //  @return TamSecurityAdvisory
-func (a *TamApiService) PatchTamSecurityAdvisoryExecute(r ApiPatchTamSecurityAdvisoryRequest) (TamSecurityAdvisory, *_nethttp.Response, error) {
+func (a *TamApiService) PatchTamSecurityAdvisoryExecute(r ApiPatchTamSecurityAdvisoryRequest) (*TamSecurityAdvisory, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TamSecurityAdvisory
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TamSecurityAdvisory
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TamApiService.PatchTamSecurityAdvisory")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/tam/SecurityAdvisories/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.tamSecurityAdvisory == nil {
 		return localVarReturnValue, nil, reportError("tamSecurityAdvisory is required and must be specified")
 	}
@@ -4419,7 +4364,7 @@ func (a *TamApiService) PatchTamSecurityAdvisoryExecute(r ApiPatchTamSecurityAdv
 	}
 	// body params
 	localVarPostBody = r.tamSecurityAdvisory
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4429,15 +4374,15 @@ func (a *TamApiService) PatchTamSecurityAdvisoryExecute(r ApiPatchTamSecurityAdv
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4493,7 +4438,7 @@ func (a *TamApiService) PatchTamSecurityAdvisoryExecute(r ApiPatchTamSecurityAdv
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -4504,7 +4449,7 @@ func (a *TamApiService) PatchTamSecurityAdvisoryExecute(r ApiPatchTamSecurityAdv
 }
 
 type ApiUpdateTamAdvisoryCountRequest struct {
-	ctx              _context.Context
+	ctx              context.Context
 	ApiService       *TamApiService
 	moid             string
 	tamAdvisoryCount *TamAdvisoryCount
@@ -4523,18 +4468,18 @@ func (r ApiUpdateTamAdvisoryCountRequest) IfMatch(ifMatch string) ApiUpdateTamAd
 	return r
 }
 
-func (r ApiUpdateTamAdvisoryCountRequest) Execute() (TamAdvisoryCount, *_nethttp.Response, error) {
+func (r ApiUpdateTamAdvisoryCountRequest) Execute() (*TamAdvisoryCount, *http.Response, error) {
 	return r.ApiService.UpdateTamAdvisoryCountExecute(r)
 }
 
 /*
 UpdateTamAdvisoryCount Update a 'tam.AdvisoryCount' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateTamAdvisoryCountRequest
 */
-func (a *TamApiService) UpdateTamAdvisoryCount(ctx _context.Context, moid string) ApiUpdateTamAdvisoryCountRequest {
+func (a *TamApiService) UpdateTamAdvisoryCount(ctx context.Context, moid string) ApiUpdateTamAdvisoryCountRequest {
 	return ApiUpdateTamAdvisoryCountRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4544,27 +4489,25 @@ func (a *TamApiService) UpdateTamAdvisoryCount(ctx _context.Context, moid string
 
 // Execute executes the request
 //  @return TamAdvisoryCount
-func (a *TamApiService) UpdateTamAdvisoryCountExecute(r ApiUpdateTamAdvisoryCountRequest) (TamAdvisoryCount, *_nethttp.Response, error) {
+func (a *TamApiService) UpdateTamAdvisoryCountExecute(r ApiUpdateTamAdvisoryCountRequest) (*TamAdvisoryCount, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TamAdvisoryCount
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TamAdvisoryCount
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TamApiService.UpdateTamAdvisoryCount")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/tam/AdvisoryCounts/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.tamAdvisoryCount == nil {
 		return localVarReturnValue, nil, reportError("tamAdvisoryCount is required and must be specified")
 	}
@@ -4591,7 +4534,7 @@ func (a *TamApiService) UpdateTamAdvisoryCountExecute(r ApiUpdateTamAdvisoryCoun
 	}
 	// body params
 	localVarPostBody = r.tamAdvisoryCount
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4601,15 +4544,15 @@ func (a *TamApiService) UpdateTamAdvisoryCountExecute(r ApiUpdateTamAdvisoryCoun
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4665,7 +4608,7 @@ func (a *TamApiService) UpdateTamAdvisoryCountExecute(r ApiUpdateTamAdvisoryCoun
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -4676,7 +4619,7 @@ func (a *TamApiService) UpdateTamAdvisoryCountExecute(r ApiUpdateTamAdvisoryCoun
 }
 
 type ApiUpdateTamAdvisoryDefinitionRequest struct {
-	ctx                   _context.Context
+	ctx                   context.Context
 	ApiService            *TamApiService
 	moid                  string
 	tamAdvisoryDefinition *TamAdvisoryDefinition
@@ -4695,18 +4638,18 @@ func (r ApiUpdateTamAdvisoryDefinitionRequest) IfMatch(ifMatch string) ApiUpdate
 	return r
 }
 
-func (r ApiUpdateTamAdvisoryDefinitionRequest) Execute() (TamAdvisoryDefinition, *_nethttp.Response, error) {
+func (r ApiUpdateTamAdvisoryDefinitionRequest) Execute() (*TamAdvisoryDefinition, *http.Response, error) {
 	return r.ApiService.UpdateTamAdvisoryDefinitionExecute(r)
 }
 
 /*
 UpdateTamAdvisoryDefinition Update a 'tam.AdvisoryDefinition' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateTamAdvisoryDefinitionRequest
 */
-func (a *TamApiService) UpdateTamAdvisoryDefinition(ctx _context.Context, moid string) ApiUpdateTamAdvisoryDefinitionRequest {
+func (a *TamApiService) UpdateTamAdvisoryDefinition(ctx context.Context, moid string) ApiUpdateTamAdvisoryDefinitionRequest {
 	return ApiUpdateTamAdvisoryDefinitionRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4716,27 +4659,25 @@ func (a *TamApiService) UpdateTamAdvisoryDefinition(ctx _context.Context, moid s
 
 // Execute executes the request
 //  @return TamAdvisoryDefinition
-func (a *TamApiService) UpdateTamAdvisoryDefinitionExecute(r ApiUpdateTamAdvisoryDefinitionRequest) (TamAdvisoryDefinition, *_nethttp.Response, error) {
+func (a *TamApiService) UpdateTamAdvisoryDefinitionExecute(r ApiUpdateTamAdvisoryDefinitionRequest) (*TamAdvisoryDefinition, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TamAdvisoryDefinition
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TamAdvisoryDefinition
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TamApiService.UpdateTamAdvisoryDefinition")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/tam/AdvisoryDefinitions/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.tamAdvisoryDefinition == nil {
 		return localVarReturnValue, nil, reportError("tamAdvisoryDefinition is required and must be specified")
 	}
@@ -4763,7 +4704,7 @@ func (a *TamApiService) UpdateTamAdvisoryDefinitionExecute(r ApiUpdateTamAdvisor
 	}
 	// body params
 	localVarPostBody = r.tamAdvisoryDefinition
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4773,15 +4714,15 @@ func (a *TamApiService) UpdateTamAdvisoryDefinitionExecute(r ApiUpdateTamAdvisor
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4837,7 +4778,7 @@ func (a *TamApiService) UpdateTamAdvisoryDefinitionExecute(r ApiUpdateTamAdvisor
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -4848,7 +4789,7 @@ func (a *TamApiService) UpdateTamAdvisoryDefinitionExecute(r ApiUpdateTamAdvisor
 }
 
 type ApiUpdateTamAdvisoryInfoRequest struct {
-	ctx             _context.Context
+	ctx             context.Context
 	ApiService      *TamApiService
 	moid            string
 	tamAdvisoryInfo *TamAdvisoryInfo
@@ -4867,18 +4808,18 @@ func (r ApiUpdateTamAdvisoryInfoRequest) IfMatch(ifMatch string) ApiUpdateTamAdv
 	return r
 }
 
-func (r ApiUpdateTamAdvisoryInfoRequest) Execute() (TamAdvisoryInfo, *_nethttp.Response, error) {
+func (r ApiUpdateTamAdvisoryInfoRequest) Execute() (*TamAdvisoryInfo, *http.Response, error) {
 	return r.ApiService.UpdateTamAdvisoryInfoExecute(r)
 }
 
 /*
 UpdateTamAdvisoryInfo Update a 'tam.AdvisoryInfo' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateTamAdvisoryInfoRequest
 */
-func (a *TamApiService) UpdateTamAdvisoryInfo(ctx _context.Context, moid string) ApiUpdateTamAdvisoryInfoRequest {
+func (a *TamApiService) UpdateTamAdvisoryInfo(ctx context.Context, moid string) ApiUpdateTamAdvisoryInfoRequest {
 	return ApiUpdateTamAdvisoryInfoRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4888,27 +4829,25 @@ func (a *TamApiService) UpdateTamAdvisoryInfo(ctx _context.Context, moid string)
 
 // Execute executes the request
 //  @return TamAdvisoryInfo
-func (a *TamApiService) UpdateTamAdvisoryInfoExecute(r ApiUpdateTamAdvisoryInfoRequest) (TamAdvisoryInfo, *_nethttp.Response, error) {
+func (a *TamApiService) UpdateTamAdvisoryInfoExecute(r ApiUpdateTamAdvisoryInfoRequest) (*TamAdvisoryInfo, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TamAdvisoryInfo
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TamAdvisoryInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TamApiService.UpdateTamAdvisoryInfo")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/tam/AdvisoryInfos/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.tamAdvisoryInfo == nil {
 		return localVarReturnValue, nil, reportError("tamAdvisoryInfo is required and must be specified")
 	}
@@ -4935,7 +4874,7 @@ func (a *TamApiService) UpdateTamAdvisoryInfoExecute(r ApiUpdateTamAdvisoryInfoR
 	}
 	// body params
 	localVarPostBody = r.tamAdvisoryInfo
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4945,15 +4884,15 @@ func (a *TamApiService) UpdateTamAdvisoryInfoExecute(r ApiUpdateTamAdvisoryInfoR
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -5009,7 +4948,7 @@ func (a *TamApiService) UpdateTamAdvisoryInfoExecute(r ApiUpdateTamAdvisoryInfoR
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -5020,7 +4959,7 @@ func (a *TamApiService) UpdateTamAdvisoryInfoExecute(r ApiUpdateTamAdvisoryInfoR
 }
 
 type ApiUpdateTamAdvisoryInstanceRequest struct {
-	ctx                 _context.Context
+	ctx                 context.Context
 	ApiService          *TamApiService
 	moid                string
 	tamAdvisoryInstance *TamAdvisoryInstance
@@ -5039,18 +4978,18 @@ func (r ApiUpdateTamAdvisoryInstanceRequest) IfMatch(ifMatch string) ApiUpdateTa
 	return r
 }
 
-func (r ApiUpdateTamAdvisoryInstanceRequest) Execute() (TamAdvisoryInstance, *_nethttp.Response, error) {
+func (r ApiUpdateTamAdvisoryInstanceRequest) Execute() (*TamAdvisoryInstance, *http.Response, error) {
 	return r.ApiService.UpdateTamAdvisoryInstanceExecute(r)
 }
 
 /*
 UpdateTamAdvisoryInstance Update a 'tam.AdvisoryInstance' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateTamAdvisoryInstanceRequest
 */
-func (a *TamApiService) UpdateTamAdvisoryInstance(ctx _context.Context, moid string) ApiUpdateTamAdvisoryInstanceRequest {
+func (a *TamApiService) UpdateTamAdvisoryInstance(ctx context.Context, moid string) ApiUpdateTamAdvisoryInstanceRequest {
 	return ApiUpdateTamAdvisoryInstanceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -5060,27 +4999,25 @@ func (a *TamApiService) UpdateTamAdvisoryInstance(ctx _context.Context, moid str
 
 // Execute executes the request
 //  @return TamAdvisoryInstance
-func (a *TamApiService) UpdateTamAdvisoryInstanceExecute(r ApiUpdateTamAdvisoryInstanceRequest) (TamAdvisoryInstance, *_nethttp.Response, error) {
+func (a *TamApiService) UpdateTamAdvisoryInstanceExecute(r ApiUpdateTamAdvisoryInstanceRequest) (*TamAdvisoryInstance, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TamAdvisoryInstance
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TamAdvisoryInstance
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TamApiService.UpdateTamAdvisoryInstance")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/tam/AdvisoryInstances/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.tamAdvisoryInstance == nil {
 		return localVarReturnValue, nil, reportError("tamAdvisoryInstance is required and must be specified")
 	}
@@ -5107,7 +5044,7 @@ func (a *TamApiService) UpdateTamAdvisoryInstanceExecute(r ApiUpdateTamAdvisoryI
 	}
 	// body params
 	localVarPostBody = r.tamAdvisoryInstance
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -5117,15 +5054,15 @@ func (a *TamApiService) UpdateTamAdvisoryInstanceExecute(r ApiUpdateTamAdvisoryI
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -5181,7 +5118,7 @@ func (a *TamApiService) UpdateTamAdvisoryInstanceExecute(r ApiUpdateTamAdvisoryI
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -5192,7 +5129,7 @@ func (a *TamApiService) UpdateTamAdvisoryInstanceExecute(r ApiUpdateTamAdvisoryI
 }
 
 type ApiUpdateTamSecurityAdvisoryRequest struct {
-	ctx                 _context.Context
+	ctx                 context.Context
 	ApiService          *TamApiService
 	moid                string
 	tamSecurityAdvisory *TamSecurityAdvisory
@@ -5211,18 +5148,18 @@ func (r ApiUpdateTamSecurityAdvisoryRequest) IfMatch(ifMatch string) ApiUpdateTa
 	return r
 }
 
-func (r ApiUpdateTamSecurityAdvisoryRequest) Execute() (TamSecurityAdvisory, *_nethttp.Response, error) {
+func (r ApiUpdateTamSecurityAdvisoryRequest) Execute() (*TamSecurityAdvisory, *http.Response, error) {
 	return r.ApiService.UpdateTamSecurityAdvisoryExecute(r)
 }
 
 /*
 UpdateTamSecurityAdvisory Update a 'tam.SecurityAdvisory' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateTamSecurityAdvisoryRequest
 */
-func (a *TamApiService) UpdateTamSecurityAdvisory(ctx _context.Context, moid string) ApiUpdateTamSecurityAdvisoryRequest {
+func (a *TamApiService) UpdateTamSecurityAdvisory(ctx context.Context, moid string) ApiUpdateTamSecurityAdvisoryRequest {
 	return ApiUpdateTamSecurityAdvisoryRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -5232,27 +5169,25 @@ func (a *TamApiService) UpdateTamSecurityAdvisory(ctx _context.Context, moid str
 
 // Execute executes the request
 //  @return TamSecurityAdvisory
-func (a *TamApiService) UpdateTamSecurityAdvisoryExecute(r ApiUpdateTamSecurityAdvisoryRequest) (TamSecurityAdvisory, *_nethttp.Response, error) {
+func (a *TamApiService) UpdateTamSecurityAdvisoryExecute(r ApiUpdateTamSecurityAdvisoryRequest) (*TamSecurityAdvisory, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TamSecurityAdvisory
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TamSecurityAdvisory
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TamApiService.UpdateTamSecurityAdvisory")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/tam/SecurityAdvisories/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.tamSecurityAdvisory == nil {
 		return localVarReturnValue, nil, reportError("tamSecurityAdvisory is required and must be specified")
 	}
@@ -5279,7 +5214,7 @@ func (a *TamApiService) UpdateTamSecurityAdvisoryExecute(r ApiUpdateTamSecurityA
 	}
 	// body params
 	localVarPostBody = r.tamSecurityAdvisory
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -5289,15 +5224,15 @@ func (a *TamApiService) UpdateTamSecurityAdvisoryExecute(r ApiUpdateTamSecurityA
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -5353,7 +5288,7 @@ func (a *TamApiService) UpdateTamSecurityAdvisoryExecute(r ApiUpdateTamSecurityA
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

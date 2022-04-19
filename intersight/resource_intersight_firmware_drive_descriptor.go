@@ -470,7 +470,6 @@ func resourceFirmwareDriveDescriptor() *schema.Resource {
 
 func resourceFirmwareDriveDescriptorCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewFirmwareDriveDescriptorWithDefaults()
@@ -610,7 +609,7 @@ func resourceFirmwareDriveDescriptorCreate(c context.Context, d *schema.Resource
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating FirmwareDriveDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating FirmwareDriveDescriptor: %s", responseErr.Error())
@@ -622,7 +621,6 @@ func resourceFirmwareDriveDescriptorCreate(c context.Context, d *schema.Resource
 
 func resourceFirmwareDriveDescriptorRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.FirmwareApi.GetFirmwareDriveDescriptorByMoid(conn.ctx, d.Id())
@@ -635,7 +633,7 @@ func resourceFirmwareDriveDescriptorRead(c context.Context, d *schema.ResourceDa
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching FirmwareDriveDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching FirmwareDriveDescriptor: %s", responseErr.Error())
@@ -740,7 +738,6 @@ func resourceFirmwareDriveDescriptorRead(c context.Context, d *schema.ResourceDa
 
 func resourceFirmwareDriveDescriptorUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.FirmwareDriveDescriptor{}
@@ -887,7 +884,7 @@ func resourceFirmwareDriveDescriptorUpdate(c context.Context, d *schema.Resource
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating FirmwareDriveDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating FirmwareDriveDescriptor: %s", responseErr.Error())
@@ -899,7 +896,6 @@ func resourceFirmwareDriveDescriptorUpdate(c context.Context, d *schema.Resource
 
 func resourceFirmwareDriveDescriptorDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.FirmwareApi.DeleteFirmwareDriveDescriptor(conn.ctx, d.Id())
@@ -911,7 +907,7 @@ func resourceFirmwareDriveDescriptorDelete(c context.Context, d *schema.Resource
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting FirmwareDriveDescriptor object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting FirmwareDriveDescriptor object: %s", deleteErr.Error())

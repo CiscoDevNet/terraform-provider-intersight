@@ -957,7 +957,6 @@ func dataSourceVirtualizationIweVirtualMachineNetworkInterface() *schema.Resourc
 
 func dataSourceVirtualizationIweVirtualMachineNetworkInterfaceRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.VirtualizationIweVirtualMachineNetworkInterface{}
@@ -1477,7 +1476,7 @@ func dataSourceVirtualizationIweVirtualMachineNetworkInterfaceRead(c context.Con
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of VirtualizationIweVirtualMachineNetworkInterface: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of VirtualizationIweVirtualMachineNetworkInterface: %s", responseErr.Error())
@@ -1494,7 +1493,7 @@ func dataSourceVirtualizationIweVirtualMachineNetworkInterfaceRead(c context.Con
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching VirtualizationIweVirtualMachineNetworkInterface: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching VirtualizationIweVirtualMachineNetworkInterface: %s", responseErr.Error())

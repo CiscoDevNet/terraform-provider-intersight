@@ -457,7 +457,6 @@ func resourceApplianceDiagSetting() *schema.Resource {
 
 func resourceApplianceDiagSettingCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewApplianceDiagSettingWithDefaults()
@@ -572,7 +571,7 @@ func resourceApplianceDiagSettingCreate(c context.Context, d *schema.ResourceDat
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating ApplianceDiagSetting: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating ApplianceDiagSetting: %s", responseErr.Error())
@@ -584,7 +583,6 @@ func resourceApplianceDiagSettingCreate(c context.Context, d *schema.ResourceDat
 
 func resourceApplianceDiagSettingRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.ApplianceApi.GetApplianceDiagSettingByMoid(conn.ctx, d.Id())
@@ -597,7 +595,7 @@ func resourceApplianceDiagSettingRead(c context.Context, d *schema.ResourceData,
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching ApplianceDiagSetting: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching ApplianceDiagSetting: %s", responseErr.Error())
@@ -682,7 +680,6 @@ func resourceApplianceDiagSettingRead(c context.Context, d *schema.ResourceData,
 
 func resourceApplianceDiagSettingUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.ApplianceDiagSetting{}
@@ -801,7 +798,7 @@ func resourceApplianceDiagSettingUpdate(c context.Context, d *schema.ResourceDat
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating ApplianceDiagSetting: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating ApplianceDiagSetting: %s", responseErr.Error())
@@ -813,7 +810,6 @@ func resourceApplianceDiagSettingUpdate(c context.Context, d *schema.ResourceDat
 
 func resourceApplianceDiagSettingDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	var warning = diag.Diagnostic{Severity: diag.Warning, Summary: "ApplianceDiagSetting does not allow delete functionality"}
 	de = append(de, warning)

@@ -121,10 +121,8 @@ func dataSourceWorkflowSolutionActionInstance() *schema.Resource {
 		},
 		"input": {
 			Description: "Inputs for a solution action and the format is specified by input definition of the solution action definition.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"last_action": {
 			Description: "The last action that was issued on the action definition workflows is saved in this property.\n* `None` - No action is set, this is the default value for action field.\n* `Validate` - Validation the action instance inputs and run the validation workflows.\n* `Start` - Start a new execution of the action instance.\n* `Retry` - Retry the solution action instance from the beginning.\n* `RetryFailed` - Retry the workflow that has failed from the failure point.\n* `Cancel` - Cancel the core workflow that is in running or waiting state. This action can be used when the workflows are stuck and not progressing.\n* `Stop` - Stop the action instance which is in progress and didn't complete successfully. Use this action to clear the state and then delete the action instance. A completed action cannot be stopped.",
@@ -658,10 +656,8 @@ func dataSourceWorkflowSolutionActionInstance() *schema.Resource {
 		},
 		"input": {
 			Description: "Inputs for a solution action and the format is specified by input definition of the solution action definition.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"last_action": {
 			Description: "The last action that was issued on the action definition workflows is saved in this property.\n* `None` - No action is set, this is the default value for action field.\n* `Validate` - Validation the action instance inputs and run the validation workflows.\n* `Start` - Start a new execution of the action instance.\n* `Retry` - Retry the solution action instance from the beginning.\n* `RetryFailed` - Retry the workflow that has failed from the failure point.\n* `Cancel` - Cancel the core workflow that is in running or waiting state. This action can be used when the workflows are stuck and not progressing.\n* `Stop` - Stop the action instance which is in progress and didn't complete successfully. Use this action to clear the state and then delete the action instance. A completed action cannot be stopped.",
@@ -1101,7 +1097,6 @@ func dataSourceWorkflowSolutionActionInstance() *schema.Resource {
 
 func dataSourceWorkflowSolutionActionInstanceRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.WorkflowSolutionActionInstance{}
@@ -1228,7 +1223,13 @@ func dataSourceWorkflowSolutionActionInstanceRead(c context.Context, d *schema.R
 	}
 
 	if v, ok := d.GetOk("input"); ok {
-		o.SetInput(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetInput(x2)
+		}
 	}
 
 	if v, ok := d.GetOk("last_action"); ok {
@@ -1700,7 +1701,7 @@ func dataSourceWorkflowSolutionActionInstanceRead(c context.Context, d *schema.R
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of WorkflowSolutionActionInstance: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of WorkflowSolutionActionInstance: %s", responseErr.Error())
@@ -1717,7 +1718,7 @@ func dataSourceWorkflowSolutionActionInstanceRead(c context.Context, d *schema.R
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching WorkflowSolutionActionInstance: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching WorkflowSolutionActionInstance: %s", responseErr.Error())
@@ -1741,6 +1742,7 @@ func dataSourceWorkflowSolutionActionInstanceRead(c context.Context, d *schema.R
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
 				temp["end_time"] = (s.GetEndTime()).String()
+				temp["input"] = flattenAdditionalProperties(s.GetInput())
 				temp["last_action"] = (s.GetLastAction())
 
 				temp["mod_time"] = (s.GetModTime()).String()

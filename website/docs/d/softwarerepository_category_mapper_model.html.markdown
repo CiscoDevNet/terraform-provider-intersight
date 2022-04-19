@@ -20,6 +20,7 @@ The following arguments can be used to get data of already created objects in In
 * `dist_tag`:(string) The distributable tag value of the model series. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `image_type`:(string) The type of image based on the endpoint it can upgrade. For example, ucs-bundle-6400-infra.4.1.2a.bin can upgrade ucs managed fabric interconnects, so the image type is UCS Managed Fabric Interconnect. 
+* `is_nfs_upgrade_supported`:(bool) Defines whether NFS firmware upgrade is supported with this image type. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) An unique identifer for a capability descriptor. 

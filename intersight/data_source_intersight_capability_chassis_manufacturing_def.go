@@ -677,7 +677,6 @@ func dataSourceCapabilityChassisManufacturingDef() *schema.Resource {
 
 func dataSourceCapabilityChassisManufacturingDefRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.CapabilityChassisManufacturingDef{}
@@ -1019,7 +1018,7 @@ func dataSourceCapabilityChassisManufacturingDefRead(c context.Context, d *schem
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of CapabilityChassisManufacturingDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of CapabilityChassisManufacturingDef: %s", responseErr.Error())
@@ -1036,7 +1035,7 @@ func dataSourceCapabilityChassisManufacturingDefRead(c context.Context, d *schem
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching CapabilityChassisManufacturingDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching CapabilityChassisManufacturingDef: %s", responseErr.Error())

@@ -747,7 +747,6 @@ func resourceKubernetesAddonRepository() *schema.Resource {
 
 func resourceKubernetesAddonRepositoryCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewKubernetesAddonRepositoryWithDefaults()
@@ -953,7 +952,7 @@ func resourceKubernetesAddonRepositoryCreate(c context.Context, d *schema.Resour
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating KubernetesAddonRepository: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating KubernetesAddonRepository: %s", responseErr.Error())
@@ -965,7 +964,6 @@ func resourceKubernetesAddonRepositoryCreate(c context.Context, d *schema.Resour
 
 func resourceKubernetesAddonRepositoryRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.KubernetesApi.GetKubernetesAddonRepositoryByMoid(conn.ctx, d.Id())
@@ -978,7 +976,7 @@ func resourceKubernetesAddonRepositoryRead(c context.Context, d *schema.Resource
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching KubernetesAddonRepository: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching KubernetesAddonRepository: %s", responseErr.Error())
@@ -1087,7 +1085,6 @@ func resourceKubernetesAddonRepositoryRead(c context.Context, d *schema.Resource
 
 func resourceKubernetesAddonRepositoryUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.KubernetesAddonRepository{}
@@ -1301,7 +1298,7 @@ func resourceKubernetesAddonRepositoryUpdate(c context.Context, d *schema.Resour
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating KubernetesAddonRepository: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating KubernetesAddonRepository: %s", responseErr.Error())
@@ -1313,7 +1310,6 @@ func resourceKubernetesAddonRepositoryUpdate(c context.Context, d *schema.Resour
 
 func resourceKubernetesAddonRepositoryDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.KubernetesApi.DeleteKubernetesAddonRepository(conn.ctx, d.Id())
@@ -1325,7 +1321,7 @@ func resourceKubernetesAddonRepositoryDelete(c context.Context, d *schema.Resour
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting KubernetesAddonRepository object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting KubernetesAddonRepository object: %s", deleteErr.Error())

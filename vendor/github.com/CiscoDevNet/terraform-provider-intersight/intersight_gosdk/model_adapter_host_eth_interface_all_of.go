@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -42,12 +42,15 @@ type AdapterHostEthInterfaceAllOf struct {
 	PciAddr *string `json:"PciAddr,omitempty"`
 	// The distinguished name of the peer endpoint connected to the Host Ethernet interface.
 	PeerDn *string `json:"PeerDn,omitempty"`
+	// Name given for Lan PinGroup.
+	PinGroupName *string `json:"PinGroupName,omitempty"`
 	// Virtualization Preference of the Host Ethernet Interface indicating if virtualization is enabled or not.
 	VirtualizationPreference *string `json:"VirtualizationPreference,omitempty"`
 	// The Virtual Ethernet Interface DN connected to the Host Ethernet Interface.
 	VnicDn               *string                              `json:"VnicDn,omitempty"`
 	AdapterUnit          *AdapterUnitRelationship             `json:"AdapterUnit,omitempty"`
 	InventoryDeviceInfo  *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+	PinnedInterface      *InventoryInterfaceRelationship      `json:"PinnedInterface,omitempty"`
 	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -329,11 +332,11 @@ func (o *AdapterHostEthInterfaceAllOf) GetOperReason() []string {
 // GetOperReasonOk returns a tuple with the OperReason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AdapterHostEthInterfaceAllOf) GetOperReasonOk() (*[]string, bool) {
+func (o *AdapterHostEthInterfaceAllOf) GetOperReasonOk() ([]string, bool) {
 	if o == nil || o.OperReason == nil {
 		return nil, false
 	}
-	return &o.OperReason, true
+	return o.OperReason, true
 }
 
 // HasOperReason returns a boolean if a field has been set.
@@ -478,6 +481,38 @@ func (o *AdapterHostEthInterfaceAllOf) SetPeerDn(v string) {
 	o.PeerDn = &v
 }
 
+// GetPinGroupName returns the PinGroupName field value if set, zero value otherwise.
+func (o *AdapterHostEthInterfaceAllOf) GetPinGroupName() string {
+	if o == nil || o.PinGroupName == nil {
+		var ret string
+		return ret
+	}
+	return *o.PinGroupName
+}
+
+// GetPinGroupNameOk returns a tuple with the PinGroupName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AdapterHostEthInterfaceAllOf) GetPinGroupNameOk() (*string, bool) {
+	if o == nil || o.PinGroupName == nil {
+		return nil, false
+	}
+	return o.PinGroupName, true
+}
+
+// HasPinGroupName returns a boolean if a field has been set.
+func (o *AdapterHostEthInterfaceAllOf) HasPinGroupName() bool {
+	if o != nil && o.PinGroupName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPinGroupName gets a reference to the given string and assigns it to the PinGroupName field.
+func (o *AdapterHostEthInterfaceAllOf) SetPinGroupName(v string) {
+	o.PinGroupName = &v
+}
+
 // GetVirtualizationPreference returns the VirtualizationPreference field value if set, zero value otherwise.
 func (o *AdapterHostEthInterfaceAllOf) GetVirtualizationPreference() string {
 	if o == nil || o.VirtualizationPreference == nil {
@@ -606,6 +641,38 @@ func (o *AdapterHostEthInterfaceAllOf) SetInventoryDeviceInfo(v InventoryDeviceI
 	o.InventoryDeviceInfo = &v
 }
 
+// GetPinnedInterface returns the PinnedInterface field value if set, zero value otherwise.
+func (o *AdapterHostEthInterfaceAllOf) GetPinnedInterface() InventoryInterfaceRelationship {
+	if o == nil || o.PinnedInterface == nil {
+		var ret InventoryInterfaceRelationship
+		return ret
+	}
+	return *o.PinnedInterface
+}
+
+// GetPinnedInterfaceOk returns a tuple with the PinnedInterface field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AdapterHostEthInterfaceAllOf) GetPinnedInterfaceOk() (*InventoryInterfaceRelationship, bool) {
+	if o == nil || o.PinnedInterface == nil {
+		return nil, false
+	}
+	return o.PinnedInterface, true
+}
+
+// HasPinnedInterface returns a boolean if a field has been set.
+func (o *AdapterHostEthInterfaceAllOf) HasPinnedInterface() bool {
+	if o != nil && o.PinnedInterface != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPinnedInterface gets a reference to the given InventoryInterfaceRelationship and assigns it to the PinnedInterface field.
+func (o *AdapterHostEthInterfaceAllOf) SetPinnedInterface(v InventoryInterfaceRelationship) {
+	o.PinnedInterface = &v
+}
+
 // GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
 func (o *AdapterHostEthInterfaceAllOf) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
 	if o == nil || o.RegisteredDevice == nil {
@@ -679,6 +746,9 @@ func (o AdapterHostEthInterfaceAllOf) MarshalJSON() ([]byte, error) {
 	if o.PeerDn != nil {
 		toSerialize["PeerDn"] = o.PeerDn
 	}
+	if o.PinGroupName != nil {
+		toSerialize["PinGroupName"] = o.PinGroupName
+	}
 	if o.VirtualizationPreference != nil {
 		toSerialize["VirtualizationPreference"] = o.VirtualizationPreference
 	}
@@ -690,6 +760,9 @@ func (o AdapterHostEthInterfaceAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.InventoryDeviceInfo != nil {
 		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
+	}
+	if o.PinnedInterface != nil {
+		toSerialize["PinnedInterface"] = o.PinnedInterface
 	}
 	if o.RegisteredDevice != nil {
 		toSerialize["RegisteredDevice"] = o.RegisteredDevice
@@ -725,10 +798,12 @@ func (o *AdapterHostEthInterfaceAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "OriginalMacAddress")
 		delete(additionalProperties, "PciAddr")
 		delete(additionalProperties, "PeerDn")
+		delete(additionalProperties, "PinGroupName")
 		delete(additionalProperties, "VirtualizationPreference")
 		delete(additionalProperties, "VnicDn")
 		delete(additionalProperties, "AdapterUnit")
 		delete(additionalProperties, "InventoryDeviceInfo")
+		delete(additionalProperties, "PinnedInterface")
 		delete(additionalProperties, "RegisteredDevice")
 		o.AdditionalProperties = additionalProperties
 	}

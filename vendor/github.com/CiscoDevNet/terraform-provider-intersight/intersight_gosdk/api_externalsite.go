@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,23 +13,18 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // ExternalsiteApiService ExternalsiteApi service
 type ExternalsiteApiService service
 
 type ApiCreateExternalsiteAuthorizationRequest struct {
-	ctx                       _context.Context
+	ctx                       context.Context
 	ApiService                *ExternalsiteApiService
 	externalsiteAuthorization *ExternalsiteAuthorization
 	ifMatch                   *string
@@ -54,17 +49,17 @@ func (r ApiCreateExternalsiteAuthorizationRequest) IfNoneMatch(ifNoneMatch strin
 	return r
 }
 
-func (r ApiCreateExternalsiteAuthorizationRequest) Execute() (ExternalsiteAuthorization, *_nethttp.Response, error) {
+func (r ApiCreateExternalsiteAuthorizationRequest) Execute() (*ExternalsiteAuthorization, *http.Response, error) {
 	return r.ApiService.CreateExternalsiteAuthorizationExecute(r)
 }
 
 /*
 CreateExternalsiteAuthorization Create a 'externalsite.Authorization' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateExternalsiteAuthorizationRequest
 */
-func (a *ExternalsiteApiService) CreateExternalsiteAuthorization(ctx _context.Context) ApiCreateExternalsiteAuthorizationRequest {
+func (a *ExternalsiteApiService) CreateExternalsiteAuthorization(ctx context.Context) ApiCreateExternalsiteAuthorizationRequest {
 	return ApiCreateExternalsiteAuthorizationRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -73,26 +68,24 @@ func (a *ExternalsiteApiService) CreateExternalsiteAuthorization(ctx _context.Co
 
 // Execute executes the request
 //  @return ExternalsiteAuthorization
-func (a *ExternalsiteApiService) CreateExternalsiteAuthorizationExecute(r ApiCreateExternalsiteAuthorizationRequest) (ExternalsiteAuthorization, *_nethttp.Response, error) {
+func (a *ExternalsiteApiService) CreateExternalsiteAuthorizationExecute(r ApiCreateExternalsiteAuthorizationRequest) (*ExternalsiteAuthorization, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ExternalsiteAuthorization
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ExternalsiteAuthorization
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExternalsiteApiService.CreateExternalsiteAuthorization")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/externalsite/Authorizations"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.externalsiteAuthorization == nil {
 		return localVarReturnValue, nil, reportError("externalsiteAuthorization is required and must be specified")
 	}
@@ -122,7 +115,7 @@ func (a *ExternalsiteApiService) CreateExternalsiteAuthorizationExecute(r ApiCre
 	}
 	// body params
 	localVarPostBody = r.externalsiteAuthorization
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -132,15 +125,15 @@ func (a *ExternalsiteApiService) CreateExternalsiteAuthorizationExecute(r ApiCre
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -196,7 +189,7 @@ func (a *ExternalsiteApiService) CreateExternalsiteAuthorizationExecute(r ApiCre
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -207,23 +200,23 @@ func (a *ExternalsiteApiService) CreateExternalsiteAuthorizationExecute(r ApiCre
 }
 
 type ApiGetExternalsiteAuthorizationByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ExternalsiteApiService
 	moid       string
 }
 
-func (r ApiGetExternalsiteAuthorizationByMoidRequest) Execute() (ExternalsiteAuthorization, *_nethttp.Response, error) {
+func (r ApiGetExternalsiteAuthorizationByMoidRequest) Execute() (*ExternalsiteAuthorization, *http.Response, error) {
 	return r.ApiService.GetExternalsiteAuthorizationByMoidExecute(r)
 }
 
 /*
 GetExternalsiteAuthorizationByMoid Read a 'externalsite.Authorization' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetExternalsiteAuthorizationByMoidRequest
 */
-func (a *ExternalsiteApiService) GetExternalsiteAuthorizationByMoid(ctx _context.Context, moid string) ApiGetExternalsiteAuthorizationByMoidRequest {
+func (a *ExternalsiteApiService) GetExternalsiteAuthorizationByMoid(ctx context.Context, moid string) ApiGetExternalsiteAuthorizationByMoidRequest {
 	return ApiGetExternalsiteAuthorizationByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -233,27 +226,25 @@ func (a *ExternalsiteApiService) GetExternalsiteAuthorizationByMoid(ctx _context
 
 // Execute executes the request
 //  @return ExternalsiteAuthorization
-func (a *ExternalsiteApiService) GetExternalsiteAuthorizationByMoidExecute(r ApiGetExternalsiteAuthorizationByMoidRequest) (ExternalsiteAuthorization, *_nethttp.Response, error) {
+func (a *ExternalsiteApiService) GetExternalsiteAuthorizationByMoidExecute(r ApiGetExternalsiteAuthorizationByMoidRequest) (*ExternalsiteAuthorization, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ExternalsiteAuthorization
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ExternalsiteAuthorization
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExternalsiteApiService.GetExternalsiteAuthorizationByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/externalsite/Authorizations/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -272,7 +263,7 @@ func (a *ExternalsiteApiService) GetExternalsiteAuthorizationByMoidExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -282,15 +273,15 @@ func (a *ExternalsiteApiService) GetExternalsiteAuthorizationByMoidExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -346,7 +337,7 @@ func (a *ExternalsiteApiService) GetExternalsiteAuthorizationByMoidExecute(r Api
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -357,7 +348,7 @@ func (a *ExternalsiteApiService) GetExternalsiteAuthorizationByMoidExecute(r Api
 }
 
 type ApiGetExternalsiteAuthorizationListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *ExternalsiteApiService
 	filter      *string
 	orderby     *string
@@ -438,17 +429,17 @@ func (r ApiGetExternalsiteAuthorizationListRequest) Tags(tags string) ApiGetExte
 	return r
 }
 
-func (r ApiGetExternalsiteAuthorizationListRequest) Execute() (ExternalsiteAuthorizationResponse, *_nethttp.Response, error) {
+func (r ApiGetExternalsiteAuthorizationListRequest) Execute() (*ExternalsiteAuthorizationResponse, *http.Response, error) {
 	return r.ApiService.GetExternalsiteAuthorizationListExecute(r)
 }
 
 /*
 GetExternalsiteAuthorizationList Read a 'externalsite.Authorization' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetExternalsiteAuthorizationListRequest
 */
-func (a *ExternalsiteApiService) GetExternalsiteAuthorizationList(ctx _context.Context) ApiGetExternalsiteAuthorizationListRequest {
+func (a *ExternalsiteApiService) GetExternalsiteAuthorizationList(ctx context.Context) ApiGetExternalsiteAuthorizationListRequest {
 	return ApiGetExternalsiteAuthorizationListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -457,26 +448,24 @@ func (a *ExternalsiteApiService) GetExternalsiteAuthorizationList(ctx _context.C
 
 // Execute executes the request
 //  @return ExternalsiteAuthorizationResponse
-func (a *ExternalsiteApiService) GetExternalsiteAuthorizationListExecute(r ApiGetExternalsiteAuthorizationListRequest) (ExternalsiteAuthorizationResponse, *_nethttp.Response, error) {
+func (a *ExternalsiteApiService) GetExternalsiteAuthorizationListExecute(r ApiGetExternalsiteAuthorizationListRequest) (*ExternalsiteAuthorizationResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ExternalsiteAuthorizationResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ExternalsiteAuthorizationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExternalsiteApiService.GetExternalsiteAuthorizationList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/externalsite/Authorizations"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -528,7 +517,7 @@ func (a *ExternalsiteApiService) GetExternalsiteAuthorizationListExecute(r ApiGe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -538,15 +527,15 @@ func (a *ExternalsiteApiService) GetExternalsiteAuthorizationListExecute(r ApiGe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -602,7 +591,7 @@ func (a *ExternalsiteApiService) GetExternalsiteAuthorizationListExecute(r ApiGe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -613,7 +602,7 @@ func (a *ExternalsiteApiService) GetExternalsiteAuthorizationListExecute(r ApiGe
 }
 
 type ApiPatchExternalsiteAuthorizationRequest struct {
-	ctx                       _context.Context
+	ctx                       context.Context
 	ApiService                *ExternalsiteApiService
 	moid                      string
 	externalsiteAuthorization *ExternalsiteAuthorization
@@ -632,18 +621,18 @@ func (r ApiPatchExternalsiteAuthorizationRequest) IfMatch(ifMatch string) ApiPat
 	return r
 }
 
-func (r ApiPatchExternalsiteAuthorizationRequest) Execute() (ExternalsiteAuthorization, *_nethttp.Response, error) {
+func (r ApiPatchExternalsiteAuthorizationRequest) Execute() (*ExternalsiteAuthorization, *http.Response, error) {
 	return r.ApiService.PatchExternalsiteAuthorizationExecute(r)
 }
 
 /*
 PatchExternalsiteAuthorization Update a 'externalsite.Authorization' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchExternalsiteAuthorizationRequest
 */
-func (a *ExternalsiteApiService) PatchExternalsiteAuthorization(ctx _context.Context, moid string) ApiPatchExternalsiteAuthorizationRequest {
+func (a *ExternalsiteApiService) PatchExternalsiteAuthorization(ctx context.Context, moid string) ApiPatchExternalsiteAuthorizationRequest {
 	return ApiPatchExternalsiteAuthorizationRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -653,27 +642,25 @@ func (a *ExternalsiteApiService) PatchExternalsiteAuthorization(ctx _context.Con
 
 // Execute executes the request
 //  @return ExternalsiteAuthorization
-func (a *ExternalsiteApiService) PatchExternalsiteAuthorizationExecute(r ApiPatchExternalsiteAuthorizationRequest) (ExternalsiteAuthorization, *_nethttp.Response, error) {
+func (a *ExternalsiteApiService) PatchExternalsiteAuthorizationExecute(r ApiPatchExternalsiteAuthorizationRequest) (*ExternalsiteAuthorization, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ExternalsiteAuthorization
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ExternalsiteAuthorization
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExternalsiteApiService.PatchExternalsiteAuthorization")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/externalsite/Authorizations/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.externalsiteAuthorization == nil {
 		return localVarReturnValue, nil, reportError("externalsiteAuthorization is required and must be specified")
 	}
@@ -700,7 +687,7 @@ func (a *ExternalsiteApiService) PatchExternalsiteAuthorizationExecute(r ApiPatc
 	}
 	// body params
 	localVarPostBody = r.externalsiteAuthorization
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -710,15 +697,15 @@ func (a *ExternalsiteApiService) PatchExternalsiteAuthorizationExecute(r ApiPatc
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -774,7 +761,7 @@ func (a *ExternalsiteApiService) PatchExternalsiteAuthorizationExecute(r ApiPatc
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -785,7 +772,7 @@ func (a *ExternalsiteApiService) PatchExternalsiteAuthorizationExecute(r ApiPatc
 }
 
 type ApiUpdateExternalsiteAuthorizationRequest struct {
-	ctx                       _context.Context
+	ctx                       context.Context
 	ApiService                *ExternalsiteApiService
 	moid                      string
 	externalsiteAuthorization *ExternalsiteAuthorization
@@ -804,18 +791,18 @@ func (r ApiUpdateExternalsiteAuthorizationRequest) IfMatch(ifMatch string) ApiUp
 	return r
 }
 
-func (r ApiUpdateExternalsiteAuthorizationRequest) Execute() (ExternalsiteAuthorization, *_nethttp.Response, error) {
+func (r ApiUpdateExternalsiteAuthorizationRequest) Execute() (*ExternalsiteAuthorization, *http.Response, error) {
 	return r.ApiService.UpdateExternalsiteAuthorizationExecute(r)
 }
 
 /*
 UpdateExternalsiteAuthorization Update a 'externalsite.Authorization' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateExternalsiteAuthorizationRequest
 */
-func (a *ExternalsiteApiService) UpdateExternalsiteAuthorization(ctx _context.Context, moid string) ApiUpdateExternalsiteAuthorizationRequest {
+func (a *ExternalsiteApiService) UpdateExternalsiteAuthorization(ctx context.Context, moid string) ApiUpdateExternalsiteAuthorizationRequest {
 	return ApiUpdateExternalsiteAuthorizationRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -825,27 +812,25 @@ func (a *ExternalsiteApiService) UpdateExternalsiteAuthorization(ctx _context.Co
 
 // Execute executes the request
 //  @return ExternalsiteAuthorization
-func (a *ExternalsiteApiService) UpdateExternalsiteAuthorizationExecute(r ApiUpdateExternalsiteAuthorizationRequest) (ExternalsiteAuthorization, *_nethttp.Response, error) {
+func (a *ExternalsiteApiService) UpdateExternalsiteAuthorizationExecute(r ApiUpdateExternalsiteAuthorizationRequest) (*ExternalsiteAuthorization, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ExternalsiteAuthorization
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ExternalsiteAuthorization
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExternalsiteApiService.UpdateExternalsiteAuthorization")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/externalsite/Authorizations/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.externalsiteAuthorization == nil {
 		return localVarReturnValue, nil, reportError("externalsiteAuthorization is required and must be specified")
 	}
@@ -872,7 +857,7 @@ func (a *ExternalsiteApiService) UpdateExternalsiteAuthorizationExecute(r ApiUpd
 	}
 	// body params
 	localVarPostBody = r.externalsiteAuthorization
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -882,15 +867,15 @@ func (a *ExternalsiteApiService) UpdateExternalsiteAuthorizationExecute(r ApiUpd
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -946,7 +931,7 @@ func (a *ExternalsiteApiService) UpdateExternalsiteAuthorizationExecute(r ApiUpd
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

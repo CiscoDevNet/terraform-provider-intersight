@@ -174,10 +174,8 @@ func dataSourceTerraformExecutor() *schema.Resource {
 		},
 		"output": {
 			Description: "Terraform output of the entire execution.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"owners": {
 			Type:     schema.TypeList,
@@ -353,17 +351,13 @@ func dataSourceTerraformExecutor() *schema.Resource {
 		},
 		"stderr": {
 			Description: "Stderr of the terraform execution will be captured here.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"stdout": {
 			Description: "Stdout of the terraform execution will be captured here.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"tags": {
 			Type:     schema.TypeList,
@@ -395,10 +389,8 @@ func dataSourceTerraformExecutor() *schema.Resource {
 		},
 		"variables": {
 			Description: "Variables needed by the terraform configuration as a JSON object.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
@@ -703,10 +695,8 @@ func dataSourceTerraformExecutor() *schema.Resource {
 		},
 		"output": {
 			Description: "Terraform output of the entire execution.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"owners": {
 			Type:     schema.TypeList,
@@ -882,17 +872,13 @@ func dataSourceTerraformExecutor() *schema.Resource {
 		},
 		"stderr": {
 			Description: "Stderr of the terraform execution will be captured here.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"stdout": {
 			Description: "Stdout of the terraform execution will be captured here.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"tags": {
 			Type:     schema.TypeList,
@@ -924,10 +910,8 @@ func dataSourceTerraformExecutor() *schema.Resource {
 		},
 		"variables": {
 			Description: "Variables needed by the terraform configuration as a JSON object.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
@@ -1085,7 +1069,6 @@ func dataSourceTerraformExecutor() *schema.Resource {
 
 func dataSourceTerraformExecutorRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.TerraformExecutor{}
@@ -1273,7 +1256,13 @@ func dataSourceTerraformExecutorRead(c context.Context, d *schema.ResourceData, 
 	}
 
 	if v, ok := d.GetOk("output"); ok {
-		o.SetOutput(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetOutput(x2)
+		}
 	}
 
 	if v, ok := d.GetOk("owners"); ok {
@@ -1484,11 +1473,23 @@ func dataSourceTerraformExecutorRead(c context.Context, d *schema.ResourceData, 
 	}
 
 	if v, ok := d.GetOk("stderr"); ok {
-		o.SetStderr(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetStderr(x2)
+		}
 	}
 
 	if v, ok := d.GetOk("stdout"); ok {
-		o.SetStdout(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetStdout(x2)
+		}
 	}
 
 	if v, ok := d.GetOk("tags"); ok {
@@ -1530,7 +1531,13 @@ func dataSourceTerraformExecutorRead(c context.Context, d *schema.ResourceData, 
 	}
 
 	if v, ok := d.GetOk("variables"); ok {
-		o.SetVariables(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetVariables(x2)
+		}
 	}
 
 	if v, ok := d.GetOk("version_context"); ok {
@@ -1658,7 +1665,7 @@ func dataSourceTerraformExecutorRead(c context.Context, d *schema.ResourceData, 
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of TerraformExecutor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of TerraformExecutor: %s", responseErr.Error())
@@ -1675,7 +1682,7 @@ func dataSourceTerraformExecutorRead(c context.Context, d *schema.ResourceData, 
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching TerraformExecutor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching TerraformExecutor: %s", responseErr.Error())
@@ -1704,6 +1711,7 @@ func dataSourceTerraformExecutorRead(c context.Context, d *schema.ResourceData, 
 				temp["moid"] = (s.GetMoid())
 				temp["object_type"] = (s.GetObjectType())
 				temp["operation"] = (s.GetOperation())
+				temp["output"] = flattenAdditionalProperties(s.GetOutput())
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
@@ -1719,9 +1727,12 @@ func dataSourceTerraformExecutorRead(c context.Context, d *schema.ResourceData, 
 				temp["source_folder_path"] = (s.GetSourceFolderPath())
 				temp["source_location"] = (s.GetSourceLocation())
 				temp["status"] = (s.GetStatus())
+				temp["stderr"] = flattenAdditionalProperties(s.GetStderr())
+				temp["stdout"] = flattenAdditionalProperties(s.GetStdout())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["task_id"] = (s.GetTaskId())
+				temp["variables"] = flattenAdditionalProperties(s.GetVariables())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 

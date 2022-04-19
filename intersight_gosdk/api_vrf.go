@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,23 +13,18 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // VrfApiService VrfApi service
 type VrfApiService service
 
 type ApiCreateVrfVrfRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *VrfApiService
 	vrfVrf      *VrfVrf
 	ifMatch     *string
@@ -54,17 +49,17 @@ func (r ApiCreateVrfVrfRequest) IfNoneMatch(ifNoneMatch string) ApiCreateVrfVrfR
 	return r
 }
 
-func (r ApiCreateVrfVrfRequest) Execute() (VrfVrf, *_nethttp.Response, error) {
+func (r ApiCreateVrfVrfRequest) Execute() (*VrfVrf, *http.Response, error) {
 	return r.ApiService.CreateVrfVrfExecute(r)
 }
 
 /*
 CreateVrfVrf Create a 'vrf.Vrf' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateVrfVrfRequest
 */
-func (a *VrfApiService) CreateVrfVrf(ctx _context.Context) ApiCreateVrfVrfRequest {
+func (a *VrfApiService) CreateVrfVrf(ctx context.Context) ApiCreateVrfVrfRequest {
 	return ApiCreateVrfVrfRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -73,26 +68,24 @@ func (a *VrfApiService) CreateVrfVrf(ctx _context.Context) ApiCreateVrfVrfReques
 
 // Execute executes the request
 //  @return VrfVrf
-func (a *VrfApiService) CreateVrfVrfExecute(r ApiCreateVrfVrfRequest) (VrfVrf, *_nethttp.Response, error) {
+func (a *VrfApiService) CreateVrfVrfExecute(r ApiCreateVrfVrfRequest) (*VrfVrf, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  VrfVrf
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *VrfVrf
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VrfApiService.CreateVrfVrf")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vrf/Vrves"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.vrfVrf == nil {
 		return localVarReturnValue, nil, reportError("vrfVrf is required and must be specified")
 	}
@@ -122,7 +115,7 @@ func (a *VrfApiService) CreateVrfVrfExecute(r ApiCreateVrfVrfRequest) (VrfVrf, *
 	}
 	// body params
 	localVarPostBody = r.vrfVrf
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -132,15 +125,15 @@ func (a *VrfApiService) CreateVrfVrfExecute(r ApiCreateVrfVrfRequest) (VrfVrf, *
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -196,7 +189,7 @@ func (a *VrfApiService) CreateVrfVrfExecute(r ApiCreateVrfVrfRequest) (VrfVrf, *
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -207,23 +200,23 @@ func (a *VrfApiService) CreateVrfVrfExecute(r ApiCreateVrfVrfRequest) (VrfVrf, *
 }
 
 type ApiDeleteVrfVrfRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *VrfApiService
 	moid       string
 }
 
-func (r ApiDeleteVrfVrfRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteVrfVrfRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteVrfVrfExecute(r)
 }
 
 /*
 DeleteVrfVrf Delete a 'vrf.Vrf' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteVrfVrfRequest
 */
-func (a *VrfApiService) DeleteVrfVrf(ctx _context.Context, moid string) ApiDeleteVrfVrfRequest {
+func (a *VrfApiService) DeleteVrfVrf(ctx context.Context, moid string) ApiDeleteVrfVrfRequest {
 	return ApiDeleteVrfVrfRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -232,26 +225,24 @@ func (a *VrfApiService) DeleteVrfVrf(ctx _context.Context, moid string) ApiDelet
 }
 
 // Execute executes the request
-func (a *VrfApiService) DeleteVrfVrfExecute(r ApiDeleteVrfVrfRequest) (*_nethttp.Response, error) {
+func (a *VrfApiService) DeleteVrfVrfExecute(r ApiDeleteVrfVrfRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VrfApiService.DeleteVrfVrf")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vrf/Vrves/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -270,7 +261,7 @@ func (a *VrfApiService) DeleteVrfVrfExecute(r ApiDeleteVrfVrfRequest) (*_nethttp
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -280,15 +271,15 @@ func (a *VrfApiService) DeleteVrfVrfExecute(r ApiDeleteVrfVrfRequest) (*_nethttp
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -346,23 +337,23 @@ func (a *VrfApiService) DeleteVrfVrfExecute(r ApiDeleteVrfVrfRequest) (*_nethttp
 }
 
 type ApiGetVrfVrfByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *VrfApiService
 	moid       string
 }
 
-func (r ApiGetVrfVrfByMoidRequest) Execute() (VrfVrf, *_nethttp.Response, error) {
+func (r ApiGetVrfVrfByMoidRequest) Execute() (*VrfVrf, *http.Response, error) {
 	return r.ApiService.GetVrfVrfByMoidExecute(r)
 }
 
 /*
 GetVrfVrfByMoid Read a 'vrf.Vrf' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetVrfVrfByMoidRequest
 */
-func (a *VrfApiService) GetVrfVrfByMoid(ctx _context.Context, moid string) ApiGetVrfVrfByMoidRequest {
+func (a *VrfApiService) GetVrfVrfByMoid(ctx context.Context, moid string) ApiGetVrfVrfByMoidRequest {
 	return ApiGetVrfVrfByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -372,27 +363,25 @@ func (a *VrfApiService) GetVrfVrfByMoid(ctx _context.Context, moid string) ApiGe
 
 // Execute executes the request
 //  @return VrfVrf
-func (a *VrfApiService) GetVrfVrfByMoidExecute(r ApiGetVrfVrfByMoidRequest) (VrfVrf, *_nethttp.Response, error) {
+func (a *VrfApiService) GetVrfVrfByMoidExecute(r ApiGetVrfVrfByMoidRequest) (*VrfVrf, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  VrfVrf
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *VrfVrf
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VrfApiService.GetVrfVrfByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vrf/Vrves/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -411,7 +400,7 @@ func (a *VrfApiService) GetVrfVrfByMoidExecute(r ApiGetVrfVrfByMoidRequest) (Vrf
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -421,15 +410,15 @@ func (a *VrfApiService) GetVrfVrfByMoidExecute(r ApiGetVrfVrfByMoidRequest) (Vrf
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -485,7 +474,7 @@ func (a *VrfApiService) GetVrfVrfByMoidExecute(r ApiGetVrfVrfByMoidRequest) (Vrf
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -496,7 +485,7 @@ func (a *VrfApiService) GetVrfVrfByMoidExecute(r ApiGetVrfVrfByMoidRequest) (Vrf
 }
 
 type ApiGetVrfVrfListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *VrfApiService
 	filter      *string
 	orderby     *string
@@ -577,17 +566,17 @@ func (r ApiGetVrfVrfListRequest) Tags(tags string) ApiGetVrfVrfListRequest {
 	return r
 }
 
-func (r ApiGetVrfVrfListRequest) Execute() (VrfVrfResponse, *_nethttp.Response, error) {
+func (r ApiGetVrfVrfListRequest) Execute() (*VrfVrfResponse, *http.Response, error) {
 	return r.ApiService.GetVrfVrfListExecute(r)
 }
 
 /*
 GetVrfVrfList Read a 'vrf.Vrf' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetVrfVrfListRequest
 */
-func (a *VrfApiService) GetVrfVrfList(ctx _context.Context) ApiGetVrfVrfListRequest {
+func (a *VrfApiService) GetVrfVrfList(ctx context.Context) ApiGetVrfVrfListRequest {
 	return ApiGetVrfVrfListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -596,26 +585,24 @@ func (a *VrfApiService) GetVrfVrfList(ctx _context.Context) ApiGetVrfVrfListRequ
 
 // Execute executes the request
 //  @return VrfVrfResponse
-func (a *VrfApiService) GetVrfVrfListExecute(r ApiGetVrfVrfListRequest) (VrfVrfResponse, *_nethttp.Response, error) {
+func (a *VrfApiService) GetVrfVrfListExecute(r ApiGetVrfVrfListRequest) (*VrfVrfResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  VrfVrfResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *VrfVrfResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VrfApiService.GetVrfVrfList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vrf/Vrves"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -667,7 +654,7 @@ func (a *VrfApiService) GetVrfVrfListExecute(r ApiGetVrfVrfListRequest) (VrfVrfR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -677,15 +664,15 @@ func (a *VrfApiService) GetVrfVrfListExecute(r ApiGetVrfVrfListRequest) (VrfVrfR
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -741,7 +728,7 @@ func (a *VrfApiService) GetVrfVrfListExecute(r ApiGetVrfVrfListRequest) (VrfVrfR
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -752,7 +739,7 @@ func (a *VrfApiService) GetVrfVrfListExecute(r ApiGetVrfVrfListRequest) (VrfVrfR
 }
 
 type ApiPatchVrfVrfRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *VrfApiService
 	moid       string
 	vrfVrf     *VrfVrf
@@ -771,18 +758,18 @@ func (r ApiPatchVrfVrfRequest) IfMatch(ifMatch string) ApiPatchVrfVrfRequest {
 	return r
 }
 
-func (r ApiPatchVrfVrfRequest) Execute() (VrfVrf, *_nethttp.Response, error) {
+func (r ApiPatchVrfVrfRequest) Execute() (*VrfVrf, *http.Response, error) {
 	return r.ApiService.PatchVrfVrfExecute(r)
 }
 
 /*
 PatchVrfVrf Update a 'vrf.Vrf' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchVrfVrfRequest
 */
-func (a *VrfApiService) PatchVrfVrf(ctx _context.Context, moid string) ApiPatchVrfVrfRequest {
+func (a *VrfApiService) PatchVrfVrf(ctx context.Context, moid string) ApiPatchVrfVrfRequest {
 	return ApiPatchVrfVrfRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -792,27 +779,25 @@ func (a *VrfApiService) PatchVrfVrf(ctx _context.Context, moid string) ApiPatchV
 
 // Execute executes the request
 //  @return VrfVrf
-func (a *VrfApiService) PatchVrfVrfExecute(r ApiPatchVrfVrfRequest) (VrfVrf, *_nethttp.Response, error) {
+func (a *VrfApiService) PatchVrfVrfExecute(r ApiPatchVrfVrfRequest) (*VrfVrf, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  VrfVrf
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *VrfVrf
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VrfApiService.PatchVrfVrf")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vrf/Vrves/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.vrfVrf == nil {
 		return localVarReturnValue, nil, reportError("vrfVrf is required and must be specified")
 	}
@@ -839,7 +824,7 @@ func (a *VrfApiService) PatchVrfVrfExecute(r ApiPatchVrfVrfRequest) (VrfVrf, *_n
 	}
 	// body params
 	localVarPostBody = r.vrfVrf
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -849,15 +834,15 @@ func (a *VrfApiService) PatchVrfVrfExecute(r ApiPatchVrfVrfRequest) (VrfVrf, *_n
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -913,7 +898,7 @@ func (a *VrfApiService) PatchVrfVrfExecute(r ApiPatchVrfVrfRequest) (VrfVrf, *_n
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -924,7 +909,7 @@ func (a *VrfApiService) PatchVrfVrfExecute(r ApiPatchVrfVrfRequest) (VrfVrf, *_n
 }
 
 type ApiUpdateVrfVrfRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *VrfApiService
 	moid       string
 	vrfVrf     *VrfVrf
@@ -943,18 +928,18 @@ func (r ApiUpdateVrfVrfRequest) IfMatch(ifMatch string) ApiUpdateVrfVrfRequest {
 	return r
 }
 
-func (r ApiUpdateVrfVrfRequest) Execute() (VrfVrf, *_nethttp.Response, error) {
+func (r ApiUpdateVrfVrfRequest) Execute() (*VrfVrf, *http.Response, error) {
 	return r.ApiService.UpdateVrfVrfExecute(r)
 }
 
 /*
 UpdateVrfVrf Update a 'vrf.Vrf' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateVrfVrfRequest
 */
-func (a *VrfApiService) UpdateVrfVrf(ctx _context.Context, moid string) ApiUpdateVrfVrfRequest {
+func (a *VrfApiService) UpdateVrfVrf(ctx context.Context, moid string) ApiUpdateVrfVrfRequest {
 	return ApiUpdateVrfVrfRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -964,27 +949,25 @@ func (a *VrfApiService) UpdateVrfVrf(ctx _context.Context, moid string) ApiUpdat
 
 // Execute executes the request
 //  @return VrfVrf
-func (a *VrfApiService) UpdateVrfVrfExecute(r ApiUpdateVrfVrfRequest) (VrfVrf, *_nethttp.Response, error) {
+func (a *VrfApiService) UpdateVrfVrfExecute(r ApiUpdateVrfVrfRequest) (*VrfVrf, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  VrfVrf
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *VrfVrf
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VrfApiService.UpdateVrfVrf")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vrf/Vrves/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.vrfVrf == nil {
 		return localVarReturnValue, nil, reportError("vrfVrf is required and must be specified")
 	}
@@ -1011,7 +994,7 @@ func (a *VrfApiService) UpdateVrfVrfExecute(r ApiUpdateVrfVrfRequest) (VrfVrf, *
 	}
 	// body params
 	localVarPostBody = r.vrfVrf
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1021,15 +1004,15 @@ func (a *VrfApiService) UpdateVrfVrfExecute(r ApiUpdateVrfVrfRequest) (VrfVrf, *
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1085,7 +1068,7 @@ func (a *VrfApiService) UpdateVrfVrfExecute(r ApiUpdateVrfVrfRequest) (VrfVrf, *
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

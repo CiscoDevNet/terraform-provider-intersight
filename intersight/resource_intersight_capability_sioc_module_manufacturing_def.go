@@ -431,7 +431,6 @@ func resourceCapabilitySiocModuleManufacturingDef() *schema.Resource {
 
 func resourceCapabilitySiocModuleManufacturingDefCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewCapabilitySiocModuleManufacturingDefWithDefaults()
@@ -529,7 +528,7 @@ func resourceCapabilitySiocModuleManufacturingDefCreate(c context.Context, d *sc
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating CapabilitySiocModuleManufacturingDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating CapabilitySiocModuleManufacturingDef: %s", responseErr.Error())
@@ -541,7 +540,6 @@ func resourceCapabilitySiocModuleManufacturingDefCreate(c context.Context, d *sc
 
 func resourceCapabilitySiocModuleManufacturingDefRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.CapabilityApi.GetCapabilitySiocModuleManufacturingDefByMoid(conn.ctx, d.Id())
@@ -554,7 +552,7 @@ func resourceCapabilitySiocModuleManufacturingDefRead(c context.Context, d *sche
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching CapabilitySiocModuleManufacturingDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching CapabilitySiocModuleManufacturingDef: %s", responseErr.Error())
@@ -655,7 +653,6 @@ func resourceCapabilitySiocModuleManufacturingDefRead(c context.Context, d *sche
 
 func resourceCapabilitySiocModuleManufacturingDefUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.CapabilitySiocModuleManufacturingDef{}
@@ -761,7 +758,7 @@ func resourceCapabilitySiocModuleManufacturingDefUpdate(c context.Context, d *sc
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating CapabilitySiocModuleManufacturingDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating CapabilitySiocModuleManufacturingDef: %s", responseErr.Error())
@@ -773,7 +770,6 @@ func resourceCapabilitySiocModuleManufacturingDefUpdate(c context.Context, d *sc
 
 func resourceCapabilitySiocModuleManufacturingDefDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.CapabilityApi.DeleteCapabilitySiocModuleManufacturingDef(conn.ctx, d.Id())
@@ -785,7 +781,7 @@ func resourceCapabilitySiocModuleManufacturingDefDelete(c context.Context, d *sc
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting CapabilitySiocModuleManufacturingDef object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting CapabilitySiocModuleManufacturingDef object: %s", deleteErr.Error())

@@ -468,7 +468,6 @@ func resourceFabricVsan() *schema.Resource {
 
 func resourceFabricVsanCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewFabricVsanWithDefaults()
@@ -604,7 +603,7 @@ func resourceFabricVsanCreate(c context.Context, d *schema.ResourceData, meta in
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating FabricVsan: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating FabricVsan: %s", responseErr.Error())
@@ -616,7 +615,6 @@ func resourceFabricVsanCreate(c context.Context, d *schema.ResourceData, meta in
 
 func resourceFabricVsanRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.FabricApi.GetFabricVsanByMoid(conn.ctx, d.Id())
@@ -629,7 +627,7 @@ func resourceFabricVsanRead(c context.Context, d *schema.ResourceData, meta inte
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching FabricVsan: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching FabricVsan: %s", responseErr.Error())
@@ -730,7 +728,6 @@ func resourceFabricVsanRead(c context.Context, d *schema.ResourceData, meta inte
 
 func resourceFabricVsanUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.FabricVsan{}
@@ -874,7 +871,7 @@ func resourceFabricVsanUpdate(c context.Context, d *schema.ResourceData, meta in
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating FabricVsan: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating FabricVsan: %s", responseErr.Error())
@@ -886,7 +883,6 @@ func resourceFabricVsanUpdate(c context.Context, d *schema.ResourceData, meta in
 
 func resourceFabricVsanDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.FabricApi.DeleteFabricVsan(conn.ctx, d.Id())
@@ -898,7 +894,7 @@ func resourceFabricVsanDelete(c context.Context, d *schema.ResourceData, meta in
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting FabricVsan object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting FabricVsan object: %s", deleteErr.Error())

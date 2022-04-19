@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,23 +13,18 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // AaaApiService AaaApi service
 type AaaApiService service
 
 type ApiCreateAaaRetentionPolicyRequest struct {
-	ctx                _context.Context
+	ctx                context.Context
 	ApiService         *AaaApiService
 	aaaRetentionPolicy *AaaRetentionPolicy
 	ifMatch            *string
@@ -54,17 +49,17 @@ func (r ApiCreateAaaRetentionPolicyRequest) IfNoneMatch(ifNoneMatch string) ApiC
 	return r
 }
 
-func (r ApiCreateAaaRetentionPolicyRequest) Execute() (AaaRetentionPolicy, *_nethttp.Response, error) {
+func (r ApiCreateAaaRetentionPolicyRequest) Execute() (*AaaRetentionPolicy, *http.Response, error) {
 	return r.ApiService.CreateAaaRetentionPolicyExecute(r)
 }
 
 /*
 CreateAaaRetentionPolicy Create a 'aaa.RetentionPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateAaaRetentionPolicyRequest
 */
-func (a *AaaApiService) CreateAaaRetentionPolicy(ctx _context.Context) ApiCreateAaaRetentionPolicyRequest {
+func (a *AaaApiService) CreateAaaRetentionPolicy(ctx context.Context) ApiCreateAaaRetentionPolicyRequest {
 	return ApiCreateAaaRetentionPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -73,26 +68,24 @@ func (a *AaaApiService) CreateAaaRetentionPolicy(ctx _context.Context) ApiCreate
 
 // Execute executes the request
 //  @return AaaRetentionPolicy
-func (a *AaaApiService) CreateAaaRetentionPolicyExecute(r ApiCreateAaaRetentionPolicyRequest) (AaaRetentionPolicy, *_nethttp.Response, error) {
+func (a *AaaApiService) CreateAaaRetentionPolicyExecute(r ApiCreateAaaRetentionPolicyRequest) (*AaaRetentionPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AaaRetentionPolicy
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AaaRetentionPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AaaApiService.CreateAaaRetentionPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/aaa/RetentionPolicies"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.aaaRetentionPolicy == nil {
 		return localVarReturnValue, nil, reportError("aaaRetentionPolicy is required and must be specified")
 	}
@@ -122,7 +115,7 @@ func (a *AaaApiService) CreateAaaRetentionPolicyExecute(r ApiCreateAaaRetentionP
 	}
 	// body params
 	localVarPostBody = r.aaaRetentionPolicy
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -132,15 +125,15 @@ func (a *AaaApiService) CreateAaaRetentionPolicyExecute(r ApiCreateAaaRetentionP
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -196,7 +189,7 @@ func (a *AaaApiService) CreateAaaRetentionPolicyExecute(r ApiCreateAaaRetentionP
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -207,23 +200,23 @@ func (a *AaaApiService) CreateAaaRetentionPolicyExecute(r ApiCreateAaaRetentionP
 }
 
 type ApiGetAaaAuditRecordByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *AaaApiService
 	moid       string
 }
 
-func (r ApiGetAaaAuditRecordByMoidRequest) Execute() (AaaAuditRecord, *_nethttp.Response, error) {
+func (r ApiGetAaaAuditRecordByMoidRequest) Execute() (*AaaAuditRecord, *http.Response, error) {
 	return r.ApiService.GetAaaAuditRecordByMoidExecute(r)
 }
 
 /*
 GetAaaAuditRecordByMoid Read a 'aaa.AuditRecord' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetAaaAuditRecordByMoidRequest
 */
-func (a *AaaApiService) GetAaaAuditRecordByMoid(ctx _context.Context, moid string) ApiGetAaaAuditRecordByMoidRequest {
+func (a *AaaApiService) GetAaaAuditRecordByMoid(ctx context.Context, moid string) ApiGetAaaAuditRecordByMoidRequest {
 	return ApiGetAaaAuditRecordByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -233,27 +226,25 @@ func (a *AaaApiService) GetAaaAuditRecordByMoid(ctx _context.Context, moid strin
 
 // Execute executes the request
 //  @return AaaAuditRecord
-func (a *AaaApiService) GetAaaAuditRecordByMoidExecute(r ApiGetAaaAuditRecordByMoidRequest) (AaaAuditRecord, *_nethttp.Response, error) {
+func (a *AaaApiService) GetAaaAuditRecordByMoidExecute(r ApiGetAaaAuditRecordByMoidRequest) (*AaaAuditRecord, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AaaAuditRecord
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AaaAuditRecord
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AaaApiService.GetAaaAuditRecordByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/aaa/AuditRecords/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -272,7 +263,7 @@ func (a *AaaApiService) GetAaaAuditRecordByMoidExecute(r ApiGetAaaAuditRecordByM
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -282,15 +273,15 @@ func (a *AaaApiService) GetAaaAuditRecordByMoidExecute(r ApiGetAaaAuditRecordByM
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -346,7 +337,7 @@ func (a *AaaApiService) GetAaaAuditRecordByMoidExecute(r ApiGetAaaAuditRecordByM
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -357,7 +348,7 @@ func (a *AaaApiService) GetAaaAuditRecordByMoidExecute(r ApiGetAaaAuditRecordByM
 }
 
 type ApiGetAaaAuditRecordListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *AaaApiService
 	filter      *string
 	orderby     *string
@@ -438,17 +429,17 @@ func (r ApiGetAaaAuditRecordListRequest) Tags(tags string) ApiGetAaaAuditRecordL
 	return r
 }
 
-func (r ApiGetAaaAuditRecordListRequest) Execute() (AaaAuditRecordResponse, *_nethttp.Response, error) {
+func (r ApiGetAaaAuditRecordListRequest) Execute() (*AaaAuditRecordResponse, *http.Response, error) {
 	return r.ApiService.GetAaaAuditRecordListExecute(r)
 }
 
 /*
 GetAaaAuditRecordList Read a 'aaa.AuditRecord' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetAaaAuditRecordListRequest
 */
-func (a *AaaApiService) GetAaaAuditRecordList(ctx _context.Context) ApiGetAaaAuditRecordListRequest {
+func (a *AaaApiService) GetAaaAuditRecordList(ctx context.Context) ApiGetAaaAuditRecordListRequest {
 	return ApiGetAaaAuditRecordListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -457,26 +448,24 @@ func (a *AaaApiService) GetAaaAuditRecordList(ctx _context.Context) ApiGetAaaAud
 
 // Execute executes the request
 //  @return AaaAuditRecordResponse
-func (a *AaaApiService) GetAaaAuditRecordListExecute(r ApiGetAaaAuditRecordListRequest) (AaaAuditRecordResponse, *_nethttp.Response, error) {
+func (a *AaaApiService) GetAaaAuditRecordListExecute(r ApiGetAaaAuditRecordListRequest) (*AaaAuditRecordResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AaaAuditRecordResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AaaAuditRecordResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AaaApiService.GetAaaAuditRecordList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/aaa/AuditRecords"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -528,7 +517,7 @@ func (a *AaaApiService) GetAaaAuditRecordListExecute(r ApiGetAaaAuditRecordListR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -538,15 +527,15 @@ func (a *AaaApiService) GetAaaAuditRecordListExecute(r ApiGetAaaAuditRecordListR
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -602,7 +591,7 @@ func (a *AaaApiService) GetAaaAuditRecordListExecute(r ApiGetAaaAuditRecordListR
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -613,23 +602,23 @@ func (a *AaaApiService) GetAaaAuditRecordListExecute(r ApiGetAaaAuditRecordListR
 }
 
 type ApiGetAaaRetentionConfigByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *AaaApiService
 	moid       string
 }
 
-func (r ApiGetAaaRetentionConfigByMoidRequest) Execute() (AaaRetentionConfig, *_nethttp.Response, error) {
+func (r ApiGetAaaRetentionConfigByMoidRequest) Execute() (*AaaRetentionConfig, *http.Response, error) {
 	return r.ApiService.GetAaaRetentionConfigByMoidExecute(r)
 }
 
 /*
 GetAaaRetentionConfigByMoid Read a 'aaa.RetentionConfig' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetAaaRetentionConfigByMoidRequest
 */
-func (a *AaaApiService) GetAaaRetentionConfigByMoid(ctx _context.Context, moid string) ApiGetAaaRetentionConfigByMoidRequest {
+func (a *AaaApiService) GetAaaRetentionConfigByMoid(ctx context.Context, moid string) ApiGetAaaRetentionConfigByMoidRequest {
 	return ApiGetAaaRetentionConfigByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -639,27 +628,25 @@ func (a *AaaApiService) GetAaaRetentionConfigByMoid(ctx _context.Context, moid s
 
 // Execute executes the request
 //  @return AaaRetentionConfig
-func (a *AaaApiService) GetAaaRetentionConfigByMoidExecute(r ApiGetAaaRetentionConfigByMoidRequest) (AaaRetentionConfig, *_nethttp.Response, error) {
+func (a *AaaApiService) GetAaaRetentionConfigByMoidExecute(r ApiGetAaaRetentionConfigByMoidRequest) (*AaaRetentionConfig, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AaaRetentionConfig
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AaaRetentionConfig
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AaaApiService.GetAaaRetentionConfigByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/aaa/RetentionConfigs/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -678,7 +665,7 @@ func (a *AaaApiService) GetAaaRetentionConfigByMoidExecute(r ApiGetAaaRetentionC
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -688,15 +675,15 @@ func (a *AaaApiService) GetAaaRetentionConfigByMoidExecute(r ApiGetAaaRetentionC
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -752,7 +739,7 @@ func (a *AaaApiService) GetAaaRetentionConfigByMoidExecute(r ApiGetAaaRetentionC
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -763,7 +750,7 @@ func (a *AaaApiService) GetAaaRetentionConfigByMoidExecute(r ApiGetAaaRetentionC
 }
 
 type ApiGetAaaRetentionConfigListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *AaaApiService
 	filter      *string
 	orderby     *string
@@ -844,17 +831,17 @@ func (r ApiGetAaaRetentionConfigListRequest) Tags(tags string) ApiGetAaaRetentio
 	return r
 }
 
-func (r ApiGetAaaRetentionConfigListRequest) Execute() (AaaRetentionConfigResponse, *_nethttp.Response, error) {
+func (r ApiGetAaaRetentionConfigListRequest) Execute() (*AaaRetentionConfigResponse, *http.Response, error) {
 	return r.ApiService.GetAaaRetentionConfigListExecute(r)
 }
 
 /*
 GetAaaRetentionConfigList Read a 'aaa.RetentionConfig' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetAaaRetentionConfigListRequest
 */
-func (a *AaaApiService) GetAaaRetentionConfigList(ctx _context.Context) ApiGetAaaRetentionConfigListRequest {
+func (a *AaaApiService) GetAaaRetentionConfigList(ctx context.Context) ApiGetAaaRetentionConfigListRequest {
 	return ApiGetAaaRetentionConfigListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -863,26 +850,24 @@ func (a *AaaApiService) GetAaaRetentionConfigList(ctx _context.Context) ApiGetAa
 
 // Execute executes the request
 //  @return AaaRetentionConfigResponse
-func (a *AaaApiService) GetAaaRetentionConfigListExecute(r ApiGetAaaRetentionConfigListRequest) (AaaRetentionConfigResponse, *_nethttp.Response, error) {
+func (a *AaaApiService) GetAaaRetentionConfigListExecute(r ApiGetAaaRetentionConfigListRequest) (*AaaRetentionConfigResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AaaRetentionConfigResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AaaRetentionConfigResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AaaApiService.GetAaaRetentionConfigList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/aaa/RetentionConfigs"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -934,7 +919,7 @@ func (a *AaaApiService) GetAaaRetentionConfigListExecute(r ApiGetAaaRetentionCon
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -944,15 +929,15 @@ func (a *AaaApiService) GetAaaRetentionConfigListExecute(r ApiGetAaaRetentionCon
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1008,7 +993,7 @@ func (a *AaaApiService) GetAaaRetentionConfigListExecute(r ApiGetAaaRetentionCon
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1019,23 +1004,23 @@ func (a *AaaApiService) GetAaaRetentionConfigListExecute(r ApiGetAaaRetentionCon
 }
 
 type ApiGetAaaRetentionPolicyByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *AaaApiService
 	moid       string
 }
 
-func (r ApiGetAaaRetentionPolicyByMoidRequest) Execute() (AaaRetentionPolicy, *_nethttp.Response, error) {
+func (r ApiGetAaaRetentionPolicyByMoidRequest) Execute() (*AaaRetentionPolicy, *http.Response, error) {
 	return r.ApiService.GetAaaRetentionPolicyByMoidExecute(r)
 }
 
 /*
 GetAaaRetentionPolicyByMoid Read a 'aaa.RetentionPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetAaaRetentionPolicyByMoidRequest
 */
-func (a *AaaApiService) GetAaaRetentionPolicyByMoid(ctx _context.Context, moid string) ApiGetAaaRetentionPolicyByMoidRequest {
+func (a *AaaApiService) GetAaaRetentionPolicyByMoid(ctx context.Context, moid string) ApiGetAaaRetentionPolicyByMoidRequest {
 	return ApiGetAaaRetentionPolicyByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1045,27 +1030,25 @@ func (a *AaaApiService) GetAaaRetentionPolicyByMoid(ctx _context.Context, moid s
 
 // Execute executes the request
 //  @return AaaRetentionPolicy
-func (a *AaaApiService) GetAaaRetentionPolicyByMoidExecute(r ApiGetAaaRetentionPolicyByMoidRequest) (AaaRetentionPolicy, *_nethttp.Response, error) {
+func (a *AaaApiService) GetAaaRetentionPolicyByMoidExecute(r ApiGetAaaRetentionPolicyByMoidRequest) (*AaaRetentionPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AaaRetentionPolicy
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AaaRetentionPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AaaApiService.GetAaaRetentionPolicyByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/aaa/RetentionPolicies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1084,7 +1067,7 @@ func (a *AaaApiService) GetAaaRetentionPolicyByMoidExecute(r ApiGetAaaRetentionP
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1094,15 +1077,15 @@ func (a *AaaApiService) GetAaaRetentionPolicyByMoidExecute(r ApiGetAaaRetentionP
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1158,7 +1141,7 @@ func (a *AaaApiService) GetAaaRetentionPolicyByMoidExecute(r ApiGetAaaRetentionP
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1169,7 +1152,7 @@ func (a *AaaApiService) GetAaaRetentionPolicyByMoidExecute(r ApiGetAaaRetentionP
 }
 
 type ApiGetAaaRetentionPolicyListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *AaaApiService
 	filter      *string
 	orderby     *string
@@ -1250,17 +1233,17 @@ func (r ApiGetAaaRetentionPolicyListRequest) Tags(tags string) ApiGetAaaRetentio
 	return r
 }
 
-func (r ApiGetAaaRetentionPolicyListRequest) Execute() (AaaRetentionPolicyResponse, *_nethttp.Response, error) {
+func (r ApiGetAaaRetentionPolicyListRequest) Execute() (*AaaRetentionPolicyResponse, *http.Response, error) {
 	return r.ApiService.GetAaaRetentionPolicyListExecute(r)
 }
 
 /*
 GetAaaRetentionPolicyList Read a 'aaa.RetentionPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetAaaRetentionPolicyListRequest
 */
-func (a *AaaApiService) GetAaaRetentionPolicyList(ctx _context.Context) ApiGetAaaRetentionPolicyListRequest {
+func (a *AaaApiService) GetAaaRetentionPolicyList(ctx context.Context) ApiGetAaaRetentionPolicyListRequest {
 	return ApiGetAaaRetentionPolicyListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1269,26 +1252,24 @@ func (a *AaaApiService) GetAaaRetentionPolicyList(ctx _context.Context) ApiGetAa
 
 // Execute executes the request
 //  @return AaaRetentionPolicyResponse
-func (a *AaaApiService) GetAaaRetentionPolicyListExecute(r ApiGetAaaRetentionPolicyListRequest) (AaaRetentionPolicyResponse, *_nethttp.Response, error) {
+func (a *AaaApiService) GetAaaRetentionPolicyListExecute(r ApiGetAaaRetentionPolicyListRequest) (*AaaRetentionPolicyResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AaaRetentionPolicyResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AaaRetentionPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AaaApiService.GetAaaRetentionPolicyList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/aaa/RetentionPolicies"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1340,7 +1321,7 @@ func (a *AaaApiService) GetAaaRetentionPolicyListExecute(r ApiGetAaaRetentionPol
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1350,15 +1331,15 @@ func (a *AaaApiService) GetAaaRetentionPolicyListExecute(r ApiGetAaaRetentionPol
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1414,7 +1395,7 @@ func (a *AaaApiService) GetAaaRetentionPolicyListExecute(r ApiGetAaaRetentionPol
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1425,7 +1406,7 @@ func (a *AaaApiService) GetAaaRetentionPolicyListExecute(r ApiGetAaaRetentionPol
 }
 
 type ApiPatchAaaRetentionPolicyRequest struct {
-	ctx                _context.Context
+	ctx                context.Context
 	ApiService         *AaaApiService
 	moid               string
 	aaaRetentionPolicy *AaaRetentionPolicy
@@ -1444,18 +1425,18 @@ func (r ApiPatchAaaRetentionPolicyRequest) IfMatch(ifMatch string) ApiPatchAaaRe
 	return r
 }
 
-func (r ApiPatchAaaRetentionPolicyRequest) Execute() (AaaRetentionPolicy, *_nethttp.Response, error) {
+func (r ApiPatchAaaRetentionPolicyRequest) Execute() (*AaaRetentionPolicy, *http.Response, error) {
 	return r.ApiService.PatchAaaRetentionPolicyExecute(r)
 }
 
 /*
 PatchAaaRetentionPolicy Update a 'aaa.RetentionPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchAaaRetentionPolicyRequest
 */
-func (a *AaaApiService) PatchAaaRetentionPolicy(ctx _context.Context, moid string) ApiPatchAaaRetentionPolicyRequest {
+func (a *AaaApiService) PatchAaaRetentionPolicy(ctx context.Context, moid string) ApiPatchAaaRetentionPolicyRequest {
 	return ApiPatchAaaRetentionPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1465,27 +1446,25 @@ func (a *AaaApiService) PatchAaaRetentionPolicy(ctx _context.Context, moid strin
 
 // Execute executes the request
 //  @return AaaRetentionPolicy
-func (a *AaaApiService) PatchAaaRetentionPolicyExecute(r ApiPatchAaaRetentionPolicyRequest) (AaaRetentionPolicy, *_nethttp.Response, error) {
+func (a *AaaApiService) PatchAaaRetentionPolicyExecute(r ApiPatchAaaRetentionPolicyRequest) (*AaaRetentionPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AaaRetentionPolicy
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AaaRetentionPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AaaApiService.PatchAaaRetentionPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/aaa/RetentionPolicies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.aaaRetentionPolicy == nil {
 		return localVarReturnValue, nil, reportError("aaaRetentionPolicy is required and must be specified")
 	}
@@ -1512,7 +1491,7 @@ func (a *AaaApiService) PatchAaaRetentionPolicyExecute(r ApiPatchAaaRetentionPol
 	}
 	// body params
 	localVarPostBody = r.aaaRetentionPolicy
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1522,15 +1501,15 @@ func (a *AaaApiService) PatchAaaRetentionPolicyExecute(r ApiPatchAaaRetentionPol
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1586,7 +1565,7 @@ func (a *AaaApiService) PatchAaaRetentionPolicyExecute(r ApiPatchAaaRetentionPol
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1597,7 +1576,7 @@ func (a *AaaApiService) PatchAaaRetentionPolicyExecute(r ApiPatchAaaRetentionPol
 }
 
 type ApiUpdateAaaRetentionPolicyRequest struct {
-	ctx                _context.Context
+	ctx                context.Context
 	ApiService         *AaaApiService
 	moid               string
 	aaaRetentionPolicy *AaaRetentionPolicy
@@ -1616,18 +1595,18 @@ func (r ApiUpdateAaaRetentionPolicyRequest) IfMatch(ifMatch string) ApiUpdateAaa
 	return r
 }
 
-func (r ApiUpdateAaaRetentionPolicyRequest) Execute() (AaaRetentionPolicy, *_nethttp.Response, error) {
+func (r ApiUpdateAaaRetentionPolicyRequest) Execute() (*AaaRetentionPolicy, *http.Response, error) {
 	return r.ApiService.UpdateAaaRetentionPolicyExecute(r)
 }
 
 /*
 UpdateAaaRetentionPolicy Update a 'aaa.RetentionPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateAaaRetentionPolicyRequest
 */
-func (a *AaaApiService) UpdateAaaRetentionPolicy(ctx _context.Context, moid string) ApiUpdateAaaRetentionPolicyRequest {
+func (a *AaaApiService) UpdateAaaRetentionPolicy(ctx context.Context, moid string) ApiUpdateAaaRetentionPolicyRequest {
 	return ApiUpdateAaaRetentionPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1637,27 +1616,25 @@ func (a *AaaApiService) UpdateAaaRetentionPolicy(ctx _context.Context, moid stri
 
 // Execute executes the request
 //  @return AaaRetentionPolicy
-func (a *AaaApiService) UpdateAaaRetentionPolicyExecute(r ApiUpdateAaaRetentionPolicyRequest) (AaaRetentionPolicy, *_nethttp.Response, error) {
+func (a *AaaApiService) UpdateAaaRetentionPolicyExecute(r ApiUpdateAaaRetentionPolicyRequest) (*AaaRetentionPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AaaRetentionPolicy
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AaaRetentionPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AaaApiService.UpdateAaaRetentionPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/aaa/RetentionPolicies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.aaaRetentionPolicy == nil {
 		return localVarReturnValue, nil, reportError("aaaRetentionPolicy is required and must be specified")
 	}
@@ -1684,7 +1661,7 @@ func (a *AaaApiService) UpdateAaaRetentionPolicyExecute(r ApiUpdateAaaRetentionP
 	}
 	// body params
 	localVarPostBody = r.aaaRetentionPolicy
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1694,15 +1671,15 @@ func (a *AaaApiService) UpdateAaaRetentionPolicyExecute(r ApiUpdateAaaRetentionP
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1758,7 +1735,7 @@ func (a *AaaApiService) UpdateAaaRetentionPolicyExecute(r ApiUpdateAaaRetentionP
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

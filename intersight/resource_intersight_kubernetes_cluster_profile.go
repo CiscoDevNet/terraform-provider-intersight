@@ -1292,7 +1292,7 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 				},
 			},
 			"status": {
-				Description: "Status of the Kubernetes cluster and its nodes.\n* `Undeployed` - The cluster is undeployed.\n* `Configuring` - The cluster is being configured.\n* `Deploying` - The cluster is being deployed.\n* `Undeploying` - The cluster is being undeployed.\n* `DeployFailedTerminal` - The cluster deployment failed terminally and can not be recovered.\n* `DeployFailed` - The cluster deployment failed.\n* `Upgrading` - The cluster is being upgraded.\n* `Deleting` - The cluster is being deleted.\n* `DeleteFailed` - The cluster delete failed.\n* `Ready` - The cluster is ready for use.\n* `Active` - The cluster is being active.\n* `Shutdown` - All the nodes in the cluster are powered off.\n* `Terminated` - The cluster is terminated.\n* `Deployed` - The cluster is deployed. The cluster may not yet be ready for use.\n* `UndeployFailed` - The cluster undeploy action failed.\n* `NotReady` - The cluster is created and some nodes are not ready.",
+				Description: "Status of the Kubernetes cluster and its nodes.\n* `Undeployed` - The cluster is undeployed.\n* `Configuring` - The cluster is being configured.\n* `Deploying` - The cluster is being deployed.\n* `Undeploying` - The cluster is being undeployed.\n* `DeployFailedTerminal` - The Cluster Deploy failed creation and can not be recovered, only Delete or Undeploy operations are available for this Cluster.\n* `DeployFailed` - The cluster deployment failed.\n* `Upgrading` - The cluster is being upgraded.\n* `Deleting` - The cluster is being deleted.\n* `DeleteFailed` - The Cluster Delete failed and the Cluster can not be recovered, only Delete or Undeploy operations are available for this Cluster.\n* `Ready` - The cluster is ready for use.\n* `Active` - The cluster is being active.\n* `Shutdown` - All the nodes in the cluster are powered off.\n* `Terminated` - The cluster is terminated.\n* `Deployed` - The cluster is deployed. The cluster may not yet be ready for use.\n* `UndeployFailed` - The cluster undeploy action failed.\n* `NotReady` - The cluster is created and some nodes are not ready.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Default:     "Undeployed",
@@ -1599,7 +1599,6 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 
 func resourceKubernetesClusterProfileCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewKubernetesClusterProfileWithDefaults()
@@ -2686,7 +2685,7 @@ func resourceKubernetesClusterProfileCreate(c context.Context, d *schema.Resourc
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating KubernetesClusterProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating KubernetesClusterProfile: %s", responseErr.Error())
@@ -2704,7 +2703,7 @@ func resourceKubernetesClusterProfileCreate(c context.Context, d *schema.Resourc
 			if responseErr != nil {
 				errorType := fmt.Sprintf("%T", responseErr)
 				if strings.Contains(errorType, "GenericOpenAPIError") {
-					responseErr := responseErr.(models.GenericOpenAPIError)
+					responseErr := responseErr.(*models.GenericOpenAPIError)
 					return diag.Errorf("error occurred while fetching KubernetesClusterProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 				}
 				return diag.Errorf("error occurred while fetching KubernetesClusterProfile: %s", responseErr.Error())
@@ -2718,7 +2717,7 @@ func resourceKubernetesClusterProfileCreate(c context.Context, d *schema.Resourc
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching KubernetesClusterProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching KubernetesClusterProfile: %s", responseErr.Error())
@@ -2732,7 +2731,7 @@ func resourceKubernetesClusterProfileCreate(c context.Context, d *schema.Resourc
 			if err != nil {
 				errorType := fmt.Sprintf("%T", err)
 				if strings.Contains(errorType, "GenericOpenAPIError") {
-					err := err.(models.GenericOpenAPIError)
+					err := err.(*models.GenericOpenAPIError)
 					return diag.Errorf("failed while fetching workflow information in KubernetesClusterProfile: %s Response from endpoint: %s", err.Error(), string(err.Body()))
 				}
 				return diag.Errorf("failed while fetching workflow information in KubernetesClusterProfile: %s", err.Error())
@@ -2747,7 +2746,6 @@ func resourceKubernetesClusterProfileCreate(c context.Context, d *schema.Resourc
 
 func resourceKubernetesClusterProfileRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.KubernetesApi.GetKubernetesClusterProfileByMoid(conn.ctx, d.Id())
@@ -2760,7 +2758,7 @@ func resourceKubernetesClusterProfileRead(c context.Context, d *schema.ResourceD
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching KubernetesClusterProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching KubernetesClusterProfile: %s", responseErr.Error())
@@ -2949,7 +2947,6 @@ func resourceKubernetesClusterProfileRead(c context.Context, d *schema.ResourceD
 
 func resourceKubernetesClusterProfileUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.KubernetesClusterProfile{}
@@ -4047,7 +4044,7 @@ func resourceKubernetesClusterProfileUpdate(c context.Context, d *schema.Resourc
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating KubernetesClusterProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating KubernetesClusterProfile: %s", responseErr.Error())
@@ -4065,7 +4062,7 @@ func resourceKubernetesClusterProfileUpdate(c context.Context, d *schema.Resourc
 			if responseErr != nil {
 				errorType := fmt.Sprintf("%T", responseErr)
 				if strings.Contains(errorType, "GenericOpenAPIError") {
-					responseErr := responseErr.(models.GenericOpenAPIError)
+					responseErr := responseErr.(*models.GenericOpenAPIError)
 					return diag.Errorf("error occurred while fetching KubernetesClusterProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 				}
 				return diag.Errorf("error occurred while fetching KubernetesClusterProfile: %s", responseErr.Error())
@@ -4079,7 +4076,7 @@ func resourceKubernetesClusterProfileUpdate(c context.Context, d *schema.Resourc
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching KubernetesClusterProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching KubernetesClusterProfile: %s", responseErr.Error())
@@ -4093,7 +4090,7 @@ func resourceKubernetesClusterProfileUpdate(c context.Context, d *schema.Resourc
 			if err != nil {
 				errorType := fmt.Sprintf("%T", err)
 				if strings.Contains(errorType, "GenericOpenAPIError") {
-					err := err.(models.GenericOpenAPIError)
+					err := err.(*models.GenericOpenAPIError)
 					return diag.Errorf("failed while fetching workflow information in KubernetesClusterProfile: %s Response from endpoint: %s", err.Error(), string(err.Body()))
 				}
 				return diag.Errorf("failed while fetching workflow information in KubernetesClusterProfile: %s", err.Error())
@@ -4108,7 +4105,6 @@ func resourceKubernetesClusterProfileUpdate(c context.Context, d *schema.Resourc
 
 func resourceKubernetesClusterProfileDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.KubernetesApi.DeleteKubernetesClusterProfile(conn.ctx, d.Id())
@@ -4120,7 +4116,7 @@ func resourceKubernetesClusterProfileDelete(c context.Context, d *schema.Resourc
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting KubernetesClusterProfile object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting KubernetesClusterProfile object: %s", deleteErr.Error())

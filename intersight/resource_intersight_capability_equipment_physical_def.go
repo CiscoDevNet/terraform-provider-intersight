@@ -452,7 +452,6 @@ func resourceCapabilityEquipmentPhysicalDef() *schema.Resource {
 
 func resourceCapabilityEquipmentPhysicalDefCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewCapabilityEquipmentPhysicalDefWithDefaults()
@@ -570,7 +569,7 @@ func resourceCapabilityEquipmentPhysicalDefCreate(c context.Context, d *schema.R
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating CapabilityEquipmentPhysicalDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating CapabilityEquipmentPhysicalDef: %s", responseErr.Error())
@@ -582,7 +581,6 @@ func resourceCapabilityEquipmentPhysicalDefCreate(c context.Context, d *schema.R
 
 func resourceCapabilityEquipmentPhysicalDefRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.CapabilityApi.GetCapabilityEquipmentPhysicalDefByMoid(conn.ctx, d.Id())
@@ -595,7 +593,7 @@ func resourceCapabilityEquipmentPhysicalDefRead(c context.Context, d *schema.Res
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching CapabilityEquipmentPhysicalDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching CapabilityEquipmentPhysicalDef: %s", responseErr.Error())
@@ -712,7 +710,6 @@ func resourceCapabilityEquipmentPhysicalDefRead(c context.Context, d *schema.Res
 
 func resourceCapabilityEquipmentPhysicalDefUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.CapabilityEquipmentPhysicalDef{}
@@ -842,7 +839,7 @@ func resourceCapabilityEquipmentPhysicalDefUpdate(c context.Context, d *schema.R
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating CapabilityEquipmentPhysicalDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating CapabilityEquipmentPhysicalDef: %s", responseErr.Error())
@@ -854,7 +851,6 @@ func resourceCapabilityEquipmentPhysicalDefUpdate(c context.Context, d *schema.R
 
 func resourceCapabilityEquipmentPhysicalDefDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.CapabilityApi.DeleteCapabilityEquipmentPhysicalDef(conn.ctx, d.Id())
@@ -866,7 +862,7 @@ func resourceCapabilityEquipmentPhysicalDefDelete(c context.Context, d *schema.R
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting CapabilityEquipmentPhysicalDef object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting CapabilityEquipmentPhysicalDef object: %s", deleteErr.Error())

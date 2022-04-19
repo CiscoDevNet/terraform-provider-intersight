@@ -497,7 +497,6 @@ func resourceCapabilityEquipmentSlotArray() *schema.Resource {
 
 func resourceCapabilityEquipmentSlotArrayCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewCapabilityEquipmentSlotArrayWithDefaults()
@@ -660,7 +659,7 @@ func resourceCapabilityEquipmentSlotArrayCreate(c context.Context, d *schema.Res
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating CapabilityEquipmentSlotArray: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating CapabilityEquipmentSlotArray: %s", responseErr.Error())
@@ -672,7 +671,6 @@ func resourceCapabilityEquipmentSlotArrayCreate(c context.Context, d *schema.Res
 
 func resourceCapabilityEquipmentSlotArrayRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.CapabilityApi.GetCapabilityEquipmentSlotArrayByMoid(conn.ctx, d.Id())
@@ -685,7 +683,7 @@ func resourceCapabilityEquipmentSlotArrayRead(c context.Context, d *schema.Resou
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching CapabilityEquipmentSlotArray: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching CapabilityEquipmentSlotArray: %s", responseErr.Error())
@@ -838,7 +836,6 @@ func resourceCapabilityEquipmentSlotArrayRead(c context.Context, d *schema.Resou
 
 func resourceCapabilityEquipmentSlotArrayUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.CapabilityEquipmentSlotArray{}
@@ -1022,7 +1019,7 @@ func resourceCapabilityEquipmentSlotArrayUpdate(c context.Context, d *schema.Res
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating CapabilityEquipmentSlotArray: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating CapabilityEquipmentSlotArray: %s", responseErr.Error())
@@ -1034,7 +1031,6 @@ func resourceCapabilityEquipmentSlotArrayUpdate(c context.Context, d *schema.Res
 
 func resourceCapabilityEquipmentSlotArrayDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.CapabilityApi.DeleteCapabilityEquipmentSlotArray(conn.ctx, d.Id())
@@ -1046,7 +1042,7 @@ func resourceCapabilityEquipmentSlotArrayDelete(c context.Context, d *schema.Res
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting CapabilityEquipmentSlotArray object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting CapabilityEquipmentSlotArray object: %s", deleteErr.Error())

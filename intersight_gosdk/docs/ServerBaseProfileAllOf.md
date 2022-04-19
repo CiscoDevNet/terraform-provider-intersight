@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **TargetPlatform** | Pointer to **string** | The platform for which the server profile is applicable. It can either be a server that is operating in standalone mode or which is attached to a Fabric Interconnect managed by Intersight. * &#x60;Standalone&#x60; - Servers which are operating in standalone mode i.e. not connected to a Fabric Interconnected. * &#x60;FIAttached&#x60; - Servers which are connected to a Fabric Interconnect that is managed by Intersight. | [optional] [default to "Standalone"]
 **UuidAddressType** | Pointer to **string** | UUID address allocation type selected to assign an UUID address for the server. * &#x60;NONE&#x60; - The user did not assign any UUID address. * &#x60;STATIC&#x60; - The user assigns a static UUID address. * &#x60;POOL&#x60; - The user selects a pool from which the address will be leased. | [optional] [default to "NONE"]
+**ConfigResult** | Pointer to [**ServerConfigResultRelationship**](ServerConfigResultRelationship.md) |  | [optional] 
 **UuidPool** | Pointer to [**UuidpoolPoolRelationship**](UuidpoolPoolRelationship.md) |  | [optional] 
 
 ## Methods
@@ -118,6 +119,31 @@ SetUuidAddressType sets UuidAddressType field to given value.
 `func (o *ServerBaseProfileAllOf) HasUuidAddressType() bool`
 
 HasUuidAddressType returns a boolean if a field has been set.
+
+### GetConfigResult
+
+`func (o *ServerBaseProfileAllOf) GetConfigResult() ServerConfigResultRelationship`
+
+GetConfigResult returns the ConfigResult field if non-nil, zero value otherwise.
+
+### GetConfigResultOk
+
+`func (o *ServerBaseProfileAllOf) GetConfigResultOk() (*ServerConfigResultRelationship, bool)`
+
+GetConfigResultOk returns a tuple with the ConfigResult field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConfigResult
+
+`func (o *ServerBaseProfileAllOf) SetConfigResult(v ServerConfigResultRelationship)`
+
+SetConfigResult sets ConfigResult field to given value.
+
+### HasConfigResult
+
+`func (o *ServerBaseProfileAllOf) HasConfigResult() bool`
+
+HasConfigResult returns a boolean if a field has been set.
 
 ### GetUuidPool
 

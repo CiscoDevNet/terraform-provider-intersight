@@ -233,9 +233,9 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 				ForceNew:    true,
 			},
 			"input": {
-				Description:      "All the given inputs for the workflow.",
-				Type:             schema.TypeString,
-				DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
+				Description: "All the given inputs for the workflow.",
+				Type:        schema.TypeString,
+				Optional:    true,
 			},
 			"inst_id": {
 				Description: "A workflow instance Id which is the unique identified for the workflow execution.",
@@ -381,10 +381,10 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 				ForceNew: true,
 			},
 			"output": {
-				Description:      "All the generated outputs for the workflow.",
-				Type:             schema.TypeString,
-				DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
-				Computed: true,
+				Description: "All the generated outputs for the workflow.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
 					if val != nil {
 						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
@@ -706,6 +706,28 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 								}
 								return
 							}},
+						"rollback_on_cancel": {
+							Description: "When set to true, the changes are automatically rolled back if the workflow execution is cancelled.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
+						"rollback_on_failure": {
+							Description: "When set to true, the changes are automatically rolled back if the workflow fails to execute.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 					},
 				},
 			},
@@ -874,10 +896,10 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 					return
 				}},
 			"variable": {
-				Description:      "All the generated variables for the workflow. During workflow execution, the variables will be updated as per the variableParameters specified after each task execution.",
-				Type:             schema.TypeString,
-				DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
-				Computed: true,
+				Description: "All the generated variables for the workflow. During workflow execution, the variables will be updated as per the variableParameters specified after each task execution.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
 					if val != nil {
 						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
@@ -1236,7 +1258,6 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 
 func resourceWorkflowWorkflowInfoCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewWorkflowWorkflowInfoWithDefaults()
@@ -1348,7 +1369,13 @@ func resourceWorkflowWorkflowInfoCreate(c context.Context, d *schema.ResourceDat
 	}
 
 	if v, ok := d.GetOk("input"); ok {
-		o.SetInput(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetInput(x2)
+		}
 	}
 
 	if v, ok := d.GetOkExists("internal"); ok {
@@ -1757,7 +1784,7 @@ func resourceWorkflowWorkflowInfoCreate(c context.Context, d *schema.ResourceDat
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating WorkflowWorkflowInfo: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating WorkflowWorkflowInfo: %s", responseErr.Error())
@@ -1769,7 +1796,6 @@ func resourceWorkflowWorkflowInfoCreate(c context.Context, d *schema.ResourceDat
 
 func resourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.WorkflowApi.GetWorkflowWorkflowInfoByMoid(conn.ctx, d.Id())
@@ -1782,7 +1808,7 @@ func resourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceData,
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching WorkflowWorkflowInfo: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching WorkflowWorkflowInfo: %s", responseErr.Error())
@@ -2011,7 +2037,6 @@ func resourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceData,
 
 func resourceWorkflowWorkflowInfoUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.WorkflowWorkflowInfo{}
@@ -2129,7 +2154,13 @@ func resourceWorkflowWorkflowInfoUpdate(c context.Context, d *schema.ResourceDat
 
 	if d.HasChange("input") {
 		v := d.Get("input")
-		o.SetInput(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetInput(x2)
+		}
 	}
 
 	if d.HasChange("internal") {
@@ -2549,7 +2580,7 @@ func resourceWorkflowWorkflowInfoUpdate(c context.Context, d *schema.ResourceDat
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating WorkflowWorkflowInfo: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating WorkflowWorkflowInfo: %s", responseErr.Error())
@@ -2561,7 +2592,6 @@ func resourceWorkflowWorkflowInfoUpdate(c context.Context, d *schema.ResourceDat
 
 func resourceWorkflowWorkflowInfoDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.WorkflowApi.DeleteWorkflowWorkflowInfo(conn.ctx, d.Id())
@@ -2573,7 +2603,7 @@ func resourceWorkflowWorkflowInfoDelete(c context.Context, d *schema.ResourceDat
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting WorkflowWorkflowInfo object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting WorkflowWorkflowInfo object: %s", deleteErr.Error())

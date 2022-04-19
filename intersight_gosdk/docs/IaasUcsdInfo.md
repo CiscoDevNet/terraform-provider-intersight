@@ -17,10 +17,12 @@ Name | Type | Description | Notes
 **ProductVersion** | Pointer to **string** | The UCS Director product/platform version. | [optional] [readonly] 
 **Status** | Pointer to **string** | The UCS Director status. Possible values are Active, Inactive, Unknown. | [optional] [readonly] 
 **ConnectorPack** | Pointer to [**[]IaasConnectorPackRelationship**](IaasConnectorPackRelationship.md) | An array of relationships to iaasConnectorPack resources. | [optional] [readonly] 
+**CustomTaskInfo** | Pointer to [**[]IaasCustomTaskInfoRelationship**](IaasCustomTaskInfoRelationship.md) | An array of relationships to iaasCustomTaskInfo resources. | [optional] [readonly] 
 **DeviceStatus** | Pointer to [**[]IaasDeviceStatusRelationship**](IaasDeviceStatusRelationship.md) | An array of relationships to iaasDeviceStatus resources. | [optional] [readonly] 
 **LicenseInfo** | Pointer to [**IaasLicenseInfoRelationship**](IaasLicenseInfoRelationship.md) |  | [optional] 
 **MostRunTasks** | Pointer to [**[]IaasMostRunTasksRelationship**](IaasMostRunTasksRelationship.md) | An array of relationships to iaasMostRunTasks resources. | [optional] [readonly] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**SystemTaskInfo** | Pointer to [**[]IaasSystemTaskInfoRelationship**](IaasSystemTaskInfoRelationship.md) | An array of relationships to iaasSystemTaskInfo resources. | [optional] [readonly] 
 **UcsdManagedInfra** | Pointer to [**IaasUcsdManagedInfraRelationship**](IaasUcsdManagedInfraRelationship.md) |  | [optional] 
 
 ## Methods
@@ -367,6 +369,41 @@ HasConnectorPack returns a boolean if a field has been set.
 `func (o *IaasUcsdInfo) UnsetConnectorPack()`
 
 UnsetConnectorPack ensures that no value is present for ConnectorPack, not even an explicit nil
+### GetCustomTaskInfo
+
+`func (o *IaasUcsdInfo) GetCustomTaskInfo() []IaasCustomTaskInfoRelationship`
+
+GetCustomTaskInfo returns the CustomTaskInfo field if non-nil, zero value otherwise.
+
+### GetCustomTaskInfoOk
+
+`func (o *IaasUcsdInfo) GetCustomTaskInfoOk() (*[]IaasCustomTaskInfoRelationship, bool)`
+
+GetCustomTaskInfoOk returns a tuple with the CustomTaskInfo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCustomTaskInfo
+
+`func (o *IaasUcsdInfo) SetCustomTaskInfo(v []IaasCustomTaskInfoRelationship)`
+
+SetCustomTaskInfo sets CustomTaskInfo field to given value.
+
+### HasCustomTaskInfo
+
+`func (o *IaasUcsdInfo) HasCustomTaskInfo() bool`
+
+HasCustomTaskInfo returns a boolean if a field has been set.
+
+### SetCustomTaskInfoNil
+
+`func (o *IaasUcsdInfo) SetCustomTaskInfoNil(b bool)`
+
+ SetCustomTaskInfoNil sets the value for CustomTaskInfo to be an explicit nil
+
+### UnsetCustomTaskInfo
+`func (o *IaasUcsdInfo) UnsetCustomTaskInfo()`
+
+UnsetCustomTaskInfo ensures that no value is present for CustomTaskInfo, not even an explicit nil
 ### GetDeviceStatus
 
 `func (o *IaasUcsdInfo) GetDeviceStatus() []IaasDeviceStatusRelationship`
@@ -487,6 +524,41 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### GetSystemTaskInfo
+
+`func (o *IaasUcsdInfo) GetSystemTaskInfo() []IaasSystemTaskInfoRelationship`
+
+GetSystemTaskInfo returns the SystemTaskInfo field if non-nil, zero value otherwise.
+
+### GetSystemTaskInfoOk
+
+`func (o *IaasUcsdInfo) GetSystemTaskInfoOk() (*[]IaasSystemTaskInfoRelationship, bool)`
+
+GetSystemTaskInfoOk returns a tuple with the SystemTaskInfo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSystemTaskInfo
+
+`func (o *IaasUcsdInfo) SetSystemTaskInfo(v []IaasSystemTaskInfoRelationship)`
+
+SetSystemTaskInfo sets SystemTaskInfo field to given value.
+
+### HasSystemTaskInfo
+
+`func (o *IaasUcsdInfo) HasSystemTaskInfo() bool`
+
+HasSystemTaskInfo returns a boolean if a field has been set.
+
+### SetSystemTaskInfoNil
+
+`func (o *IaasUcsdInfo) SetSystemTaskInfoNil(b bool)`
+
+ SetSystemTaskInfoNil sets the value for SystemTaskInfo to be an explicit nil
+
+### UnsetSystemTaskInfo
+`func (o *IaasUcsdInfo) UnsetSystemTaskInfo()`
+
+UnsetSystemTaskInfo ensures that no value is present for SystemTaskInfo, not even an explicit nil
 ### GetUcsdManagedInfra
 
 `func (o *IaasUcsdInfo) GetUcsdManagedInfra() IaasUcsdManagedInfraRelationship`

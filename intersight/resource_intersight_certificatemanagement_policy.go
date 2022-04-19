@@ -763,7 +763,6 @@ func resourceCertificatemanagementPolicy() *schema.Resource {
 
 func resourceCertificatemanagementPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewCertificatemanagementPolicyWithDefaults()
@@ -1001,7 +1000,7 @@ func resourceCertificatemanagementPolicyCreate(c context.Context, d *schema.Reso
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating CertificatemanagementPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating CertificatemanagementPolicy: %s", responseErr.Error())
@@ -1012,7 +1011,6 @@ func resourceCertificatemanagementPolicyCreate(c context.Context, d *schema.Reso
 }
 func detachCertificatemanagementPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.CertificatemanagementPolicy{}
@@ -1025,7 +1023,7 @@ func detachCertificatemanagementPolicyProfiles(d *schema.ResourceData, meta inte
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while detaching profile/profiles: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while detaching profile/profiles: %s", responseErr.Error())
@@ -1035,7 +1033,6 @@ func detachCertificatemanagementPolicyProfiles(d *schema.ResourceData, meta inte
 
 func resourceCertificatemanagementPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.CertificatemanagementApi.GetCertificatemanagementPolicyByMoid(conn.ctx, d.Id())
@@ -1048,7 +1045,7 @@ func resourceCertificatemanagementPolicyRead(c context.Context, d *schema.Resour
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching CertificatemanagementPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching CertificatemanagementPolicy: %s", responseErr.Error())
@@ -1141,7 +1138,6 @@ func resourceCertificatemanagementPolicyRead(c context.Context, d *schema.Resour
 
 func resourceCertificatemanagementPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.CertificatemanagementPolicy{}
@@ -1381,7 +1377,7 @@ func resourceCertificatemanagementPolicyUpdate(c context.Context, d *schema.Reso
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating CertificatemanagementPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating CertificatemanagementPolicy: %s", responseErr.Error())
@@ -1393,7 +1389,6 @@ func resourceCertificatemanagementPolicyUpdate(c context.Context, d *schema.Reso
 
 func resourceCertificatemanagementPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	if p, ok := d.GetOk("profiles"); ok {
@@ -1413,7 +1408,7 @@ func resourceCertificatemanagementPolicyDelete(c context.Context, d *schema.Reso
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting CertificatemanagementPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting CertificatemanagementPolicy object: %s", deleteErr.Error())

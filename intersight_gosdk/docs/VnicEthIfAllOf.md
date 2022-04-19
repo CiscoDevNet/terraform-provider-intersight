@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **MacAddressType** | Pointer to **string** | Type of allocation selected to assign a MAC address for the vnic. * &#x60;POOL&#x60; - The user selects a pool from which the mac/wwn address will be leased for the Virtual Interface. * &#x60;STATIC&#x60; - The user assigns a static mac/wwn address for the Virtual Interface. | [optional] [default to "POOL"]
 **Name** | Pointer to **string** | Name of the virtual ethernet interface. | [optional] 
 **Order** | Pointer to **int64** | The order in which the virtual interface is brought up. The order assigned to an interface should be unique for all the Ethernet and Fibre-Channel interfaces on each PCI link on a VIC adapter. The maximum value of PCI order is limited by the number of virtual interfaces (Ethernet and Fibre-Channel) on each PCI link on a VIC adapter. All VIC adapters have a single PCI link except VIC 1385 which has two. | [optional] 
+**PinGroupName** | Pointer to **string** | Pingroup name associated to vNIC for static pinning. LCP deploy will resolve pingroup name and fetches the correspoding uplink port/port channel to pin the vNIC traffic. | [optional] 
 **Placement** | Pointer to [**NullableVnicPlacementSettings**](VnicPlacementSettings.md) |  | [optional] 
 **StandbyVifId** | Pointer to **int64** | The Standby VIF Id is applicable for failover enabled vNICS. It should be the same as the channel number of the standby vethernet created on switch in order to set up the standby data path. | [optional] [readonly] 
 **StaticMacAddress** | Pointer to **string** | The MAC address must be in hexadecimal format xx:xx:xx:xx:xx:xx. To ensure uniqueness of MACs in the LAN fabric, you are strongly encouraged to use the following MAC prefix 00:25:B5:xx:xx:xx. | [optional] 
@@ -338,6 +339,31 @@ SetOrder sets Order field to given value.
 `func (o *VnicEthIfAllOf) HasOrder() bool`
 
 HasOrder returns a boolean if a field has been set.
+
+### GetPinGroupName
+
+`func (o *VnicEthIfAllOf) GetPinGroupName() string`
+
+GetPinGroupName returns the PinGroupName field if non-nil, zero value otherwise.
+
+### GetPinGroupNameOk
+
+`func (o *VnicEthIfAllOf) GetPinGroupNameOk() (*string, bool)`
+
+GetPinGroupNameOk returns a tuple with the PinGroupName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPinGroupName
+
+`func (o *VnicEthIfAllOf) SetPinGroupName(v string)`
+
+SetPinGroupName sets PinGroupName field to given value.
+
+### HasPinGroupName
+
+`func (o *VnicEthIfAllOf) HasPinGroupName() bool`
+
+HasPinGroupName returns a boolean if a field has been set.
 
 ### GetPlacement
 

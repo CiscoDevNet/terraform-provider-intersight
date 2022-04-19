@@ -142,14 +142,14 @@ func resourceWorkflowSshBatchExecutor() *schema.Resource {
 							Computed:    true,
 						},
 						"outcomes": {
-							Description:      "All the possible outcomes of this API are captured here. Outcomes property\nis a collection property of type workflow.Outcome objects.\nThe outcomes can be mapped to the message to be shown. The outcomes are\nevaluated in the order they are given. At the end of the outcomes list,\nan catchall success/fail outcome can be added with condition as 'true'.\nThis is an optional\nproperty and if not specified the task will be marked as success.",
-							Type:             schema.TypeString,
-							DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
+							Description: "All the possible outcomes of this API are captured here. Outcomes property\nis a collection property of type workflow.Outcome objects.\nThe outcomes can be mapped to the message to be shown. The outcomes are\nevaluated in the order they are given. At the end of the outcomes list,\nan catchall success/fail outcome can be added with condition as 'true'.\nThis is an optional\nproperty and if not specified the task will be marked as success.",
+							Type:        schema.TypeString,
+							Optional:    true,
 						},
 						"response_spec": {
-							Description:      "The optional grammar specification for parsing the response to extract the\nrequired values.\nThe specification should have extraction specification specified for\nall the API output parameters.",
-							Type:             schema.TypeString,
-							DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
+							Description: "The optional grammar specification for parsing the response to extract the\nrequired values.\nThe specification should have extraction specification specified for\nall the API output parameters.",
+							Type:        schema.TypeString,
+							Optional:    true,
 						},
 						"skip_on_condition": {
 							Description: "The skip expression, if provided, allows the batch API executor to skip the\napi execution when the given expression evaluates to true.\nThe expression is given as such a golang template that has to be\nevaluated to a final content true/false. The expression is an optional and in\ncase not provided, the API will always be executed.",
@@ -202,9 +202,9 @@ func resourceWorkflowSshBatchExecutor() *schema.Resource {
 							Default:     "workflow.TaskConstraints",
 						},
 						"target_data_type": {
-							Description:      "List of property constraints that helps to narrow down task implementations based on target device input.",
-							Type:             schema.TypeString,
-							DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
+							Description: "List of property constraints that helps to narrow down task implementations based on target device input.",
+							Type:        schema.TypeString,
+							Optional:    true,
 						},
 					},
 				},
@@ -266,14 +266,14 @@ func resourceWorkflowSshBatchExecutor() *schema.Resource {
 				Default:     "workflow.SshBatchExecutor",
 			},
 			"outcomes": {
-				Description:      "All the possible outcomes of this task are captured here. Outcomes property\nis a collection property of type workflow.Outcome objects.\nThe outcomes can be mapped to the message to be shown. The outcomes are\nevaluated in the order they are given. At the end of the outcomes list,\nan catchall success/fail outcome can be added with condition as 'true'.\nThis is an optional\nproperty and if not specified the task will be marked as success.",
-				Type:             schema.TypeString,
-				DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
+				Description: "All the possible outcomes of this task are captured here. Outcomes property\nis a collection property of type workflow.Outcome objects.\nThe outcomes can be mapped to the message to be shown. The outcomes are\nevaluated in the order they are given. At the end of the outcomes list,\nan catchall success/fail outcome can be added with condition as 'true'.\nThis is an optional\nproperty and if not specified the task will be marked as success.",
+				Type:        schema.TypeString,
+				Optional:    true,
 			},
 			"output": {
-				Description:      "Intersight Orchestrator allows the extraction of required values from API\nresponses using the API response grammar. These extracted values can be mapped\nto task output parameters defined in task definition.\nThe mapping of API output parameters to the task output parameters is provided\nas JSON in this property.",
-				Type:             schema.TypeString,
-				DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
+				Description: "Intersight Orchestrator allows the extraction of required values from API\nresponses using the API response grammar. These extracted values can be mapped\nto task output parameters defined in task definition.\nThe mapping of API output parameters to the task output parameters is provided\nas JSON in this property.",
+				Type:        schema.TypeString,
+				Optional:    true,
 			},
 			"owners": {
 				Type:       schema.TypeList,
@@ -449,9 +449,9 @@ func resourceWorkflowSshBatchExecutor() *schema.Resource {
 				ForceNew: true,
 			},
 			"ui_rendering_data": {
-				Description:      "This will hold the data needed for task to be rendered in the user interface.",
-				Type:             schema.TypeString,
-				DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
+				Description: "This will hold the data needed for task to be rendered in the user interface.",
+				Type:        schema.TypeString,
+				Optional:    true,
 			},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
@@ -599,7 +599,6 @@ func resourceWorkflowSshBatchExecutor() *schema.Resource {
 
 func resourceWorkflowSshBatchExecutorCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewWorkflowSshBatchExecutorWithDefaults()
@@ -674,12 +673,24 @@ func resourceWorkflowSshBatchExecutorCreate(c context.Context, d *schema.Resourc
 			}
 			if v, ok := l["outcomes"]; ok {
 				{
-					o.SetOutcomes(v)
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						x2 := x1.(map[string]interface{})
+						o.SetOutcomes(x2)
+					}
 				}
 			}
 			if v, ok := l["response_spec"]; ok {
 				{
-					o.SetResponseSpec(v)
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						x2 := x1.(map[string]interface{})
+						o.SetResponseSpec(x2)
+					}
 				}
 			}
 			if v, ok := l["skip_on_condition"]; ok {
@@ -734,7 +745,13 @@ func resourceWorkflowSshBatchExecutorCreate(c context.Context, d *schema.Resourc
 			}
 			if v, ok := l["target_data_type"]; ok {
 				{
-					o.SetTargetDataType(v)
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						x2 := x1.(map[string]interface{})
+						o.SetTargetDataType(x2)
+					}
 				}
 			}
 			p = append(p, *o)
@@ -763,11 +780,23 @@ func resourceWorkflowSshBatchExecutorCreate(c context.Context, d *schema.Resourc
 	o.SetObjectType("workflow.SshBatchExecutor")
 
 	if v, ok := d.GetOk("outcomes"); ok {
-		o.SetOutcomes(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetOutcomes(x2)
+		}
 	}
 
 	if v, ok := d.GetOk("output"); ok {
-		o.SetOutput(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetOutput(x2)
+		}
 	}
 
 	if v, ok := d.GetOkExists("retry_from_failed_api"); ok {
@@ -859,7 +888,13 @@ func resourceWorkflowSshBatchExecutorCreate(c context.Context, d *schema.Resourc
 	}
 
 	if v, ok := d.GetOk("ui_rendering_data"); ok {
-		o.SetUiRenderingData(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetUiRenderingData(x2)
+		}
 	}
 
 	r := conn.ApiClient.WorkflowApi.CreateWorkflowSshBatchExecutor(conn.ctx).WorkflowSshBatchExecutor(*o)
@@ -867,7 +902,7 @@ func resourceWorkflowSshBatchExecutorCreate(c context.Context, d *schema.Resourc
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating WorkflowSshBatchExecutor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating WorkflowSshBatchExecutor: %s", responseErr.Error())
@@ -879,7 +914,6 @@ func resourceWorkflowSshBatchExecutorCreate(c context.Context, d *schema.Resourc
 
 func resourceWorkflowSshBatchExecutorRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.WorkflowApi.GetWorkflowSshBatchExecutorByMoid(conn.ctx, d.Id())
@@ -892,7 +926,7 @@ func resourceWorkflowSshBatchExecutorRead(c context.Context, d *schema.ResourceD
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching WorkflowSshBatchExecutor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching WorkflowSshBatchExecutor: %s", responseErr.Error())
@@ -1005,7 +1039,6 @@ func resourceWorkflowSshBatchExecutorRead(c context.Context, d *schema.ResourceD
 
 func resourceWorkflowSshBatchExecutorUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.WorkflowSshBatchExecutor{}
@@ -1082,12 +1115,24 @@ func resourceWorkflowSshBatchExecutorUpdate(c context.Context, d *schema.Resourc
 			}
 			if v, ok := l["outcomes"]; ok {
 				{
-					o.SetOutcomes(v)
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						x2 := x1.(map[string]interface{})
+						o.SetOutcomes(x2)
+					}
 				}
 			}
 			if v, ok := l["response_spec"]; ok {
 				{
-					o.SetResponseSpec(v)
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						x2 := x1.(map[string]interface{})
+						o.SetResponseSpec(x2)
+					}
 				}
 			}
 			if v, ok := l["skip_on_condition"]; ok {
@@ -1141,7 +1186,13 @@ func resourceWorkflowSshBatchExecutorUpdate(c context.Context, d *schema.Resourc
 			}
 			if v, ok := l["target_data_type"]; ok {
 				{
-					o.SetTargetDataType(v)
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						x2 := x1.(map[string]interface{})
+						o.SetTargetDataType(x2)
+					}
 				}
 			}
 			p = append(p, *o)
@@ -1174,12 +1225,24 @@ func resourceWorkflowSshBatchExecutorUpdate(c context.Context, d *schema.Resourc
 
 	if d.HasChange("outcomes") {
 		v := d.Get("outcomes")
-		o.SetOutcomes(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetOutcomes(x2)
+		}
 	}
 
 	if d.HasChange("output") {
 		v := d.Get("output")
-		o.SetOutput(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetOutput(x2)
+		}
 	}
 
 	if d.HasChange("retry_from_failed_api") {
@@ -1274,7 +1337,13 @@ func resourceWorkflowSshBatchExecutorUpdate(c context.Context, d *schema.Resourc
 
 	if d.HasChange("ui_rendering_data") {
 		v := d.Get("ui_rendering_data")
-		o.SetUiRenderingData(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetUiRenderingData(x2)
+		}
 	}
 
 	r := conn.ApiClient.WorkflowApi.UpdateWorkflowSshBatchExecutor(conn.ctx, d.Id()).WorkflowSshBatchExecutor(*o)
@@ -1282,7 +1351,7 @@ func resourceWorkflowSshBatchExecutorUpdate(c context.Context, d *schema.Resourc
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating WorkflowSshBatchExecutor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating WorkflowSshBatchExecutor: %s", responseErr.Error())
@@ -1294,7 +1363,6 @@ func resourceWorkflowSshBatchExecutorUpdate(c context.Context, d *schema.Resourc
 
 func resourceWorkflowSshBatchExecutorDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.WorkflowApi.DeleteWorkflowSshBatchExecutor(conn.ctx, d.Id())
@@ -1306,7 +1374,7 @@ func resourceWorkflowSshBatchExecutorDelete(c context.Context, d *schema.Resourc
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting WorkflowSshBatchExecutor object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting WorkflowSshBatchExecutor object: %s", deleteErr.Error())

@@ -460,7 +460,6 @@ func resourceCapabilitySiocModuleDescriptor() *schema.Resource {
 
 func resourceCapabilitySiocModuleDescriptorCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewCapabilitySiocModuleDescriptorWithDefaults()
@@ -590,7 +589,7 @@ func resourceCapabilitySiocModuleDescriptorCreate(c context.Context, d *schema.R
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating CapabilitySiocModuleDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating CapabilitySiocModuleDescriptor: %s", responseErr.Error())
@@ -602,7 +601,6 @@ func resourceCapabilitySiocModuleDescriptorCreate(c context.Context, d *schema.R
 
 func resourceCapabilitySiocModuleDescriptorRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.CapabilityApi.GetCapabilitySiocModuleDescriptorByMoid(conn.ctx, d.Id())
@@ -615,7 +613,7 @@ func resourceCapabilitySiocModuleDescriptorRead(c context.Context, d *schema.Res
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching CapabilitySiocModuleDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching CapabilitySiocModuleDescriptor: %s", responseErr.Error())
@@ -712,7 +710,6 @@ func resourceCapabilitySiocModuleDescriptorRead(c context.Context, d *schema.Res
 
 func resourceCapabilitySiocModuleDescriptorUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.CapabilitySiocModuleDescriptor{}
@@ -847,7 +844,7 @@ func resourceCapabilitySiocModuleDescriptorUpdate(c context.Context, d *schema.R
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating CapabilitySiocModuleDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating CapabilitySiocModuleDescriptor: %s", responseErr.Error())
@@ -859,7 +856,6 @@ func resourceCapabilitySiocModuleDescriptorUpdate(c context.Context, d *schema.R
 
 func resourceCapabilitySiocModuleDescriptorDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.CapabilityApi.DeleteCapabilitySiocModuleDescriptor(conn.ctx, d.Id())
@@ -871,7 +867,7 @@ func resourceCapabilitySiocModuleDescriptorDelete(c context.Context, d *schema.R
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting CapabilitySiocModuleDescriptor object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting CapabilitySiocModuleDescriptor object: %s", deleteErr.Error())

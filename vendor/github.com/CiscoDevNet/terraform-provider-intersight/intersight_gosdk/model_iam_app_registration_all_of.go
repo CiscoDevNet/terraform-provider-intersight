@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -309,11 +309,11 @@ func (o *IamAppRegistrationAllOf) GetGrantTypes() []string {
 // GetGrantTypesOk returns a tuple with the GrantTypes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IamAppRegistrationAllOf) GetGrantTypesOk() (*[]string, bool) {
+func (o *IamAppRegistrationAllOf) GetGrantTypesOk() ([]string, bool) {
 	if o == nil || o.GrantTypes == nil {
 		return nil, false
 	}
-	return &o.GrantTypes, true
+	return o.GrantTypes, true
 }
 
 // HasGrantTypes returns a boolean if a field has been set.
@@ -342,11 +342,11 @@ func (o *IamAppRegistrationAllOf) GetRedirectUris() []string {
 // GetRedirectUrisOk returns a tuple with the RedirectUris field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IamAppRegistrationAllOf) GetRedirectUrisOk() (*[]string, bool) {
+func (o *IamAppRegistrationAllOf) GetRedirectUrisOk() ([]string, bool) {
 	if o == nil || o.RedirectUris == nil {
 		return nil, false
 	}
-	return &o.RedirectUris, true
+	return o.RedirectUris, true
 }
 
 // HasRedirectUris returns a boolean if a field has been set.
@@ -407,11 +407,11 @@ func (o *IamAppRegistrationAllOf) GetResponseTypes() []string {
 // GetResponseTypesOk returns a tuple with the ResponseTypes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IamAppRegistrationAllOf) GetResponseTypesOk() (*[]string, bool) {
+func (o *IamAppRegistrationAllOf) GetResponseTypesOk() ([]string, bool) {
 	if o == nil || o.ResponseTypes == nil {
 		return nil, false
 	}
-	return &o.ResponseTypes, true
+	return o.ResponseTypes, true
 }
 
 // HasResponseTypes returns a boolean if a field has been set.
@@ -536,11 +536,11 @@ func (o *IamAppRegistrationAllOf) GetOauthTokens() []IamOAuthTokenRelationship {
 // GetOauthTokensOk returns a tuple with the OauthTokens field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IamAppRegistrationAllOf) GetOauthTokensOk() (*[]IamOAuthTokenRelationship, bool) {
+func (o *IamAppRegistrationAllOf) GetOauthTokensOk() ([]IamOAuthTokenRelationship, bool) {
 	if o == nil || o.OauthTokens == nil {
 		return nil, false
 	}
-	return &o.OauthTokens, true
+	return o.OauthTokens, true
 }
 
 // HasOauthTokens returns a boolean if a field has been set.
@@ -603,11 +603,11 @@ func (o *IamAppRegistrationAllOf) GetRoles() []IamRoleRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 // Deprecated
-func (o *IamAppRegistrationAllOf) GetRolesOk() (*[]IamRoleRelationship, bool) {
+func (o *IamAppRegistrationAllOf) GetRolesOk() ([]IamRoleRelationship, bool) {
 	if o == nil || o.Roles == nil {
 		return nil, false
 	}
-	return &o.Roles, true
+	return o.Roles, true
 }
 
 // HasRoles returns a boolean if a field has been set.

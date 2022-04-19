@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,23 +13,18 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // BootApiService BootApi service
 type BootApiService service
 
 type ApiCreateBootPrecisionPolicyRequest struct {
-	ctx                 _context.Context
+	ctx                 context.Context
 	ApiService          *BootApiService
 	bootPrecisionPolicy *BootPrecisionPolicy
 	ifMatch             *string
@@ -54,17 +49,17 @@ func (r ApiCreateBootPrecisionPolicyRequest) IfNoneMatch(ifNoneMatch string) Api
 	return r
 }
 
-func (r ApiCreateBootPrecisionPolicyRequest) Execute() (BootPrecisionPolicy, *_nethttp.Response, error) {
+func (r ApiCreateBootPrecisionPolicyRequest) Execute() (*BootPrecisionPolicy, *http.Response, error) {
 	return r.ApiService.CreateBootPrecisionPolicyExecute(r)
 }
 
 /*
 CreateBootPrecisionPolicy Create a 'boot.PrecisionPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateBootPrecisionPolicyRequest
 */
-func (a *BootApiService) CreateBootPrecisionPolicy(ctx _context.Context) ApiCreateBootPrecisionPolicyRequest {
+func (a *BootApiService) CreateBootPrecisionPolicy(ctx context.Context) ApiCreateBootPrecisionPolicyRequest {
 	return ApiCreateBootPrecisionPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -73,26 +68,24 @@ func (a *BootApiService) CreateBootPrecisionPolicy(ctx _context.Context) ApiCrea
 
 // Execute executes the request
 //  @return BootPrecisionPolicy
-func (a *BootApiService) CreateBootPrecisionPolicyExecute(r ApiCreateBootPrecisionPolicyRequest) (BootPrecisionPolicy, *_nethttp.Response, error) {
+func (a *BootApiService) CreateBootPrecisionPolicyExecute(r ApiCreateBootPrecisionPolicyRequest) (*BootPrecisionPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootPrecisionPolicy
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootPrecisionPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.CreateBootPrecisionPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/PrecisionPolicies"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.bootPrecisionPolicy == nil {
 		return localVarReturnValue, nil, reportError("bootPrecisionPolicy is required and must be specified")
 	}
@@ -122,7 +115,7 @@ func (a *BootApiService) CreateBootPrecisionPolicyExecute(r ApiCreateBootPrecisi
 	}
 	// body params
 	localVarPostBody = r.bootPrecisionPolicy
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -132,15 +125,15 @@ func (a *BootApiService) CreateBootPrecisionPolicyExecute(r ApiCreateBootPrecisi
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -196,7 +189,7 @@ func (a *BootApiService) CreateBootPrecisionPolicyExecute(r ApiCreateBootPrecisi
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -207,23 +200,23 @@ func (a *BootApiService) CreateBootPrecisionPolicyExecute(r ApiCreateBootPrecisi
 }
 
 type ApiDeleteBootPrecisionPolicyRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *BootApiService
 	moid       string
 }
 
-func (r ApiDeleteBootPrecisionPolicyRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteBootPrecisionPolicyRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteBootPrecisionPolicyExecute(r)
 }
 
 /*
 DeleteBootPrecisionPolicy Delete a 'boot.PrecisionPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteBootPrecisionPolicyRequest
 */
-func (a *BootApiService) DeleteBootPrecisionPolicy(ctx _context.Context, moid string) ApiDeleteBootPrecisionPolicyRequest {
+func (a *BootApiService) DeleteBootPrecisionPolicy(ctx context.Context, moid string) ApiDeleteBootPrecisionPolicyRequest {
 	return ApiDeleteBootPrecisionPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -232,26 +225,24 @@ func (a *BootApiService) DeleteBootPrecisionPolicy(ctx _context.Context, moid st
 }
 
 // Execute executes the request
-func (a *BootApiService) DeleteBootPrecisionPolicyExecute(r ApiDeleteBootPrecisionPolicyRequest) (*_nethttp.Response, error) {
+func (a *BootApiService) DeleteBootPrecisionPolicyExecute(r ApiDeleteBootPrecisionPolicyRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.DeleteBootPrecisionPolicy")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/PrecisionPolicies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -270,7 +261,7 @@ func (a *BootApiService) DeleteBootPrecisionPolicyExecute(r ApiDeleteBootPrecisi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -280,15 +271,15 @@ func (a *BootApiService) DeleteBootPrecisionPolicyExecute(r ApiDeleteBootPrecisi
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -346,23 +337,23 @@ func (a *BootApiService) DeleteBootPrecisionPolicyExecute(r ApiDeleteBootPrecisi
 }
 
 type ApiGetBootCddDeviceByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *BootApiService
 	moid       string
 }
 
-func (r ApiGetBootCddDeviceByMoidRequest) Execute() (BootCddDevice, *_nethttp.Response, error) {
+func (r ApiGetBootCddDeviceByMoidRequest) Execute() (*BootCddDevice, *http.Response, error) {
 	return r.ApiService.GetBootCddDeviceByMoidExecute(r)
 }
 
 /*
 GetBootCddDeviceByMoid Read a 'boot.CddDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetBootCddDeviceByMoidRequest
 */
-func (a *BootApiService) GetBootCddDeviceByMoid(ctx _context.Context, moid string) ApiGetBootCddDeviceByMoidRequest {
+func (a *BootApiService) GetBootCddDeviceByMoid(ctx context.Context, moid string) ApiGetBootCddDeviceByMoidRequest {
 	return ApiGetBootCddDeviceByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -372,27 +363,25 @@ func (a *BootApiService) GetBootCddDeviceByMoid(ctx _context.Context, moid strin
 
 // Execute executes the request
 //  @return BootCddDevice
-func (a *BootApiService) GetBootCddDeviceByMoidExecute(r ApiGetBootCddDeviceByMoidRequest) (BootCddDevice, *_nethttp.Response, error) {
+func (a *BootApiService) GetBootCddDeviceByMoidExecute(r ApiGetBootCddDeviceByMoidRequest) (*BootCddDevice, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootCddDevice
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootCddDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.GetBootCddDeviceByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/CddDevices/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -411,7 +400,7 @@ func (a *BootApiService) GetBootCddDeviceByMoidExecute(r ApiGetBootCddDeviceByMo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -421,15 +410,15 @@ func (a *BootApiService) GetBootCddDeviceByMoidExecute(r ApiGetBootCddDeviceByMo
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -485,7 +474,7 @@ func (a *BootApiService) GetBootCddDeviceByMoidExecute(r ApiGetBootCddDeviceByMo
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -496,7 +485,7 @@ func (a *BootApiService) GetBootCddDeviceByMoidExecute(r ApiGetBootCddDeviceByMo
 }
 
 type ApiGetBootCddDeviceListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *BootApiService
 	filter      *string
 	orderby     *string
@@ -577,17 +566,17 @@ func (r ApiGetBootCddDeviceListRequest) Tags(tags string) ApiGetBootCddDeviceLis
 	return r
 }
 
-func (r ApiGetBootCddDeviceListRequest) Execute() (BootCddDeviceResponse, *_nethttp.Response, error) {
+func (r ApiGetBootCddDeviceListRequest) Execute() (*BootCddDeviceResponse, *http.Response, error) {
 	return r.ApiService.GetBootCddDeviceListExecute(r)
 }
 
 /*
 GetBootCddDeviceList Read a 'boot.CddDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetBootCddDeviceListRequest
 */
-func (a *BootApiService) GetBootCddDeviceList(ctx _context.Context) ApiGetBootCddDeviceListRequest {
+func (a *BootApiService) GetBootCddDeviceList(ctx context.Context) ApiGetBootCddDeviceListRequest {
 	return ApiGetBootCddDeviceListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -596,26 +585,24 @@ func (a *BootApiService) GetBootCddDeviceList(ctx _context.Context) ApiGetBootCd
 
 // Execute executes the request
 //  @return BootCddDeviceResponse
-func (a *BootApiService) GetBootCddDeviceListExecute(r ApiGetBootCddDeviceListRequest) (BootCddDeviceResponse, *_nethttp.Response, error) {
+func (a *BootApiService) GetBootCddDeviceListExecute(r ApiGetBootCddDeviceListRequest) (*BootCddDeviceResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootCddDeviceResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootCddDeviceResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.GetBootCddDeviceList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/CddDevices"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -667,7 +654,7 @@ func (a *BootApiService) GetBootCddDeviceListExecute(r ApiGetBootCddDeviceListRe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -677,15 +664,15 @@ func (a *BootApiService) GetBootCddDeviceListExecute(r ApiGetBootCddDeviceListRe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -741,7 +728,7 @@ func (a *BootApiService) GetBootCddDeviceListExecute(r ApiGetBootCddDeviceListRe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -752,23 +739,23 @@ func (a *BootApiService) GetBootCddDeviceListExecute(r ApiGetBootCddDeviceListRe
 }
 
 type ApiGetBootDeviceBootModeByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *BootApiService
 	moid       string
 }
 
-func (r ApiGetBootDeviceBootModeByMoidRequest) Execute() (BootDeviceBootMode, *_nethttp.Response, error) {
+func (r ApiGetBootDeviceBootModeByMoidRequest) Execute() (*BootDeviceBootMode, *http.Response, error) {
 	return r.ApiService.GetBootDeviceBootModeByMoidExecute(r)
 }
 
 /*
 GetBootDeviceBootModeByMoid Read a 'boot.DeviceBootMode' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetBootDeviceBootModeByMoidRequest
 */
-func (a *BootApiService) GetBootDeviceBootModeByMoid(ctx _context.Context, moid string) ApiGetBootDeviceBootModeByMoidRequest {
+func (a *BootApiService) GetBootDeviceBootModeByMoid(ctx context.Context, moid string) ApiGetBootDeviceBootModeByMoidRequest {
 	return ApiGetBootDeviceBootModeByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -778,27 +765,25 @@ func (a *BootApiService) GetBootDeviceBootModeByMoid(ctx _context.Context, moid 
 
 // Execute executes the request
 //  @return BootDeviceBootMode
-func (a *BootApiService) GetBootDeviceBootModeByMoidExecute(r ApiGetBootDeviceBootModeByMoidRequest) (BootDeviceBootMode, *_nethttp.Response, error) {
+func (a *BootApiService) GetBootDeviceBootModeByMoidExecute(r ApiGetBootDeviceBootModeByMoidRequest) (*BootDeviceBootMode, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootDeviceBootMode
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootDeviceBootMode
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.GetBootDeviceBootModeByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/DeviceBootModes/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -817,7 +802,7 @@ func (a *BootApiService) GetBootDeviceBootModeByMoidExecute(r ApiGetBootDeviceBo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -827,15 +812,15 @@ func (a *BootApiService) GetBootDeviceBootModeByMoidExecute(r ApiGetBootDeviceBo
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -891,7 +876,7 @@ func (a *BootApiService) GetBootDeviceBootModeByMoidExecute(r ApiGetBootDeviceBo
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -902,7 +887,7 @@ func (a *BootApiService) GetBootDeviceBootModeByMoidExecute(r ApiGetBootDeviceBo
 }
 
 type ApiGetBootDeviceBootModeListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *BootApiService
 	filter      *string
 	orderby     *string
@@ -983,17 +968,17 @@ func (r ApiGetBootDeviceBootModeListRequest) Tags(tags string) ApiGetBootDeviceB
 	return r
 }
 
-func (r ApiGetBootDeviceBootModeListRequest) Execute() (BootDeviceBootModeResponse, *_nethttp.Response, error) {
+func (r ApiGetBootDeviceBootModeListRequest) Execute() (*BootDeviceBootModeResponse, *http.Response, error) {
 	return r.ApiService.GetBootDeviceBootModeListExecute(r)
 }
 
 /*
 GetBootDeviceBootModeList Read a 'boot.DeviceBootMode' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetBootDeviceBootModeListRequest
 */
-func (a *BootApiService) GetBootDeviceBootModeList(ctx _context.Context) ApiGetBootDeviceBootModeListRequest {
+func (a *BootApiService) GetBootDeviceBootModeList(ctx context.Context) ApiGetBootDeviceBootModeListRequest {
 	return ApiGetBootDeviceBootModeListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1002,26 +987,24 @@ func (a *BootApiService) GetBootDeviceBootModeList(ctx _context.Context) ApiGetB
 
 // Execute executes the request
 //  @return BootDeviceBootModeResponse
-func (a *BootApiService) GetBootDeviceBootModeListExecute(r ApiGetBootDeviceBootModeListRequest) (BootDeviceBootModeResponse, *_nethttp.Response, error) {
+func (a *BootApiService) GetBootDeviceBootModeListExecute(r ApiGetBootDeviceBootModeListRequest) (*BootDeviceBootModeResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootDeviceBootModeResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootDeviceBootModeResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.GetBootDeviceBootModeList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/DeviceBootModes"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1073,7 +1056,7 @@ func (a *BootApiService) GetBootDeviceBootModeListExecute(r ApiGetBootDeviceBoot
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1083,15 +1066,15 @@ func (a *BootApiService) GetBootDeviceBootModeListExecute(r ApiGetBootDeviceBoot
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1147,7 +1130,7 @@ func (a *BootApiService) GetBootDeviceBootModeListExecute(r ApiGetBootDeviceBoot
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1158,23 +1141,23 @@ func (a *BootApiService) GetBootDeviceBootModeListExecute(r ApiGetBootDeviceBoot
 }
 
 type ApiGetBootDeviceBootSecurityByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *BootApiService
 	moid       string
 }
 
-func (r ApiGetBootDeviceBootSecurityByMoidRequest) Execute() (BootDeviceBootSecurity, *_nethttp.Response, error) {
+func (r ApiGetBootDeviceBootSecurityByMoidRequest) Execute() (*BootDeviceBootSecurity, *http.Response, error) {
 	return r.ApiService.GetBootDeviceBootSecurityByMoidExecute(r)
 }
 
 /*
 GetBootDeviceBootSecurityByMoid Read a 'boot.DeviceBootSecurity' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetBootDeviceBootSecurityByMoidRequest
 */
-func (a *BootApiService) GetBootDeviceBootSecurityByMoid(ctx _context.Context, moid string) ApiGetBootDeviceBootSecurityByMoidRequest {
+func (a *BootApiService) GetBootDeviceBootSecurityByMoid(ctx context.Context, moid string) ApiGetBootDeviceBootSecurityByMoidRequest {
 	return ApiGetBootDeviceBootSecurityByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1184,27 +1167,25 @@ func (a *BootApiService) GetBootDeviceBootSecurityByMoid(ctx _context.Context, m
 
 // Execute executes the request
 //  @return BootDeviceBootSecurity
-func (a *BootApiService) GetBootDeviceBootSecurityByMoidExecute(r ApiGetBootDeviceBootSecurityByMoidRequest) (BootDeviceBootSecurity, *_nethttp.Response, error) {
+func (a *BootApiService) GetBootDeviceBootSecurityByMoidExecute(r ApiGetBootDeviceBootSecurityByMoidRequest) (*BootDeviceBootSecurity, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootDeviceBootSecurity
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootDeviceBootSecurity
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.GetBootDeviceBootSecurityByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/DeviceBootSecurities/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1223,7 +1204,7 @@ func (a *BootApiService) GetBootDeviceBootSecurityByMoidExecute(r ApiGetBootDevi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1233,15 +1214,15 @@ func (a *BootApiService) GetBootDeviceBootSecurityByMoidExecute(r ApiGetBootDevi
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1297,7 +1278,7 @@ func (a *BootApiService) GetBootDeviceBootSecurityByMoidExecute(r ApiGetBootDevi
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1308,7 +1289,7 @@ func (a *BootApiService) GetBootDeviceBootSecurityByMoidExecute(r ApiGetBootDevi
 }
 
 type ApiGetBootDeviceBootSecurityListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *BootApiService
 	filter      *string
 	orderby     *string
@@ -1389,17 +1370,17 @@ func (r ApiGetBootDeviceBootSecurityListRequest) Tags(tags string) ApiGetBootDev
 	return r
 }
 
-func (r ApiGetBootDeviceBootSecurityListRequest) Execute() (BootDeviceBootSecurityResponse, *_nethttp.Response, error) {
+func (r ApiGetBootDeviceBootSecurityListRequest) Execute() (*BootDeviceBootSecurityResponse, *http.Response, error) {
 	return r.ApiService.GetBootDeviceBootSecurityListExecute(r)
 }
 
 /*
 GetBootDeviceBootSecurityList Read a 'boot.DeviceBootSecurity' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetBootDeviceBootSecurityListRequest
 */
-func (a *BootApiService) GetBootDeviceBootSecurityList(ctx _context.Context) ApiGetBootDeviceBootSecurityListRequest {
+func (a *BootApiService) GetBootDeviceBootSecurityList(ctx context.Context) ApiGetBootDeviceBootSecurityListRequest {
 	return ApiGetBootDeviceBootSecurityListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1408,26 +1389,24 @@ func (a *BootApiService) GetBootDeviceBootSecurityList(ctx _context.Context) Api
 
 // Execute executes the request
 //  @return BootDeviceBootSecurityResponse
-func (a *BootApiService) GetBootDeviceBootSecurityListExecute(r ApiGetBootDeviceBootSecurityListRequest) (BootDeviceBootSecurityResponse, *_nethttp.Response, error) {
+func (a *BootApiService) GetBootDeviceBootSecurityListExecute(r ApiGetBootDeviceBootSecurityListRequest) (*BootDeviceBootSecurityResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootDeviceBootSecurityResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootDeviceBootSecurityResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.GetBootDeviceBootSecurityList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/DeviceBootSecurities"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1479,7 +1458,7 @@ func (a *BootApiService) GetBootDeviceBootSecurityListExecute(r ApiGetBootDevice
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1489,15 +1468,15 @@ func (a *BootApiService) GetBootDeviceBootSecurityListExecute(r ApiGetBootDevice
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1553,7 +1532,7 @@ func (a *BootApiService) GetBootDeviceBootSecurityListExecute(r ApiGetBootDevice
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1564,23 +1543,23 @@ func (a *BootApiService) GetBootDeviceBootSecurityListExecute(r ApiGetBootDevice
 }
 
 type ApiGetBootHddDeviceByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *BootApiService
 	moid       string
 }
 
-func (r ApiGetBootHddDeviceByMoidRequest) Execute() (BootHddDevice, *_nethttp.Response, error) {
+func (r ApiGetBootHddDeviceByMoidRequest) Execute() (*BootHddDevice, *http.Response, error) {
 	return r.ApiService.GetBootHddDeviceByMoidExecute(r)
 }
 
 /*
 GetBootHddDeviceByMoid Read a 'boot.HddDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetBootHddDeviceByMoidRequest
 */
-func (a *BootApiService) GetBootHddDeviceByMoid(ctx _context.Context, moid string) ApiGetBootHddDeviceByMoidRequest {
+func (a *BootApiService) GetBootHddDeviceByMoid(ctx context.Context, moid string) ApiGetBootHddDeviceByMoidRequest {
 	return ApiGetBootHddDeviceByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1590,27 +1569,25 @@ func (a *BootApiService) GetBootHddDeviceByMoid(ctx _context.Context, moid strin
 
 // Execute executes the request
 //  @return BootHddDevice
-func (a *BootApiService) GetBootHddDeviceByMoidExecute(r ApiGetBootHddDeviceByMoidRequest) (BootHddDevice, *_nethttp.Response, error) {
+func (a *BootApiService) GetBootHddDeviceByMoidExecute(r ApiGetBootHddDeviceByMoidRequest) (*BootHddDevice, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootHddDevice
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootHddDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.GetBootHddDeviceByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/HddDevices/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1629,7 +1606,7 @@ func (a *BootApiService) GetBootHddDeviceByMoidExecute(r ApiGetBootHddDeviceByMo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1639,15 +1616,15 @@ func (a *BootApiService) GetBootHddDeviceByMoidExecute(r ApiGetBootHddDeviceByMo
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1703,7 +1680,7 @@ func (a *BootApiService) GetBootHddDeviceByMoidExecute(r ApiGetBootHddDeviceByMo
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1714,7 +1691,7 @@ func (a *BootApiService) GetBootHddDeviceByMoidExecute(r ApiGetBootHddDeviceByMo
 }
 
 type ApiGetBootHddDeviceListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *BootApiService
 	filter      *string
 	orderby     *string
@@ -1795,17 +1772,17 @@ func (r ApiGetBootHddDeviceListRequest) Tags(tags string) ApiGetBootHddDeviceLis
 	return r
 }
 
-func (r ApiGetBootHddDeviceListRequest) Execute() (BootHddDeviceResponse, *_nethttp.Response, error) {
+func (r ApiGetBootHddDeviceListRequest) Execute() (*BootHddDeviceResponse, *http.Response, error) {
 	return r.ApiService.GetBootHddDeviceListExecute(r)
 }
 
 /*
 GetBootHddDeviceList Read a 'boot.HddDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetBootHddDeviceListRequest
 */
-func (a *BootApiService) GetBootHddDeviceList(ctx _context.Context) ApiGetBootHddDeviceListRequest {
+func (a *BootApiService) GetBootHddDeviceList(ctx context.Context) ApiGetBootHddDeviceListRequest {
 	return ApiGetBootHddDeviceListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1814,26 +1791,24 @@ func (a *BootApiService) GetBootHddDeviceList(ctx _context.Context) ApiGetBootHd
 
 // Execute executes the request
 //  @return BootHddDeviceResponse
-func (a *BootApiService) GetBootHddDeviceListExecute(r ApiGetBootHddDeviceListRequest) (BootHddDeviceResponse, *_nethttp.Response, error) {
+func (a *BootApiService) GetBootHddDeviceListExecute(r ApiGetBootHddDeviceListRequest) (*BootHddDeviceResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootHddDeviceResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootHddDeviceResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.GetBootHddDeviceList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/HddDevices"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1885,7 +1860,7 @@ func (a *BootApiService) GetBootHddDeviceListExecute(r ApiGetBootHddDeviceListRe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1895,15 +1870,15 @@ func (a *BootApiService) GetBootHddDeviceListExecute(r ApiGetBootHddDeviceListRe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1959,7 +1934,7 @@ func (a *BootApiService) GetBootHddDeviceListExecute(r ApiGetBootHddDeviceListRe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1970,23 +1945,23 @@ func (a *BootApiService) GetBootHddDeviceListExecute(r ApiGetBootHddDeviceListRe
 }
 
 type ApiGetBootIscsiDeviceByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *BootApiService
 	moid       string
 }
 
-func (r ApiGetBootIscsiDeviceByMoidRequest) Execute() (BootIscsiDevice, *_nethttp.Response, error) {
+func (r ApiGetBootIscsiDeviceByMoidRequest) Execute() (*BootIscsiDevice, *http.Response, error) {
 	return r.ApiService.GetBootIscsiDeviceByMoidExecute(r)
 }
 
 /*
 GetBootIscsiDeviceByMoid Read a 'boot.IscsiDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetBootIscsiDeviceByMoidRequest
 */
-func (a *BootApiService) GetBootIscsiDeviceByMoid(ctx _context.Context, moid string) ApiGetBootIscsiDeviceByMoidRequest {
+func (a *BootApiService) GetBootIscsiDeviceByMoid(ctx context.Context, moid string) ApiGetBootIscsiDeviceByMoidRequest {
 	return ApiGetBootIscsiDeviceByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1996,27 +1971,25 @@ func (a *BootApiService) GetBootIscsiDeviceByMoid(ctx _context.Context, moid str
 
 // Execute executes the request
 //  @return BootIscsiDevice
-func (a *BootApiService) GetBootIscsiDeviceByMoidExecute(r ApiGetBootIscsiDeviceByMoidRequest) (BootIscsiDevice, *_nethttp.Response, error) {
+func (a *BootApiService) GetBootIscsiDeviceByMoidExecute(r ApiGetBootIscsiDeviceByMoidRequest) (*BootIscsiDevice, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootIscsiDevice
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootIscsiDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.GetBootIscsiDeviceByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/IscsiDevices/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2035,7 +2008,7 @@ func (a *BootApiService) GetBootIscsiDeviceByMoidExecute(r ApiGetBootIscsiDevice
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2045,15 +2018,15 @@ func (a *BootApiService) GetBootIscsiDeviceByMoidExecute(r ApiGetBootIscsiDevice
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2109,7 +2082,7 @@ func (a *BootApiService) GetBootIscsiDeviceByMoidExecute(r ApiGetBootIscsiDevice
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2120,7 +2093,7 @@ func (a *BootApiService) GetBootIscsiDeviceByMoidExecute(r ApiGetBootIscsiDevice
 }
 
 type ApiGetBootIscsiDeviceListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *BootApiService
 	filter      *string
 	orderby     *string
@@ -2201,17 +2174,17 @@ func (r ApiGetBootIscsiDeviceListRequest) Tags(tags string) ApiGetBootIscsiDevic
 	return r
 }
 
-func (r ApiGetBootIscsiDeviceListRequest) Execute() (BootIscsiDeviceResponse, *_nethttp.Response, error) {
+func (r ApiGetBootIscsiDeviceListRequest) Execute() (*BootIscsiDeviceResponse, *http.Response, error) {
 	return r.ApiService.GetBootIscsiDeviceListExecute(r)
 }
 
 /*
 GetBootIscsiDeviceList Read a 'boot.IscsiDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetBootIscsiDeviceListRequest
 */
-func (a *BootApiService) GetBootIscsiDeviceList(ctx _context.Context) ApiGetBootIscsiDeviceListRequest {
+func (a *BootApiService) GetBootIscsiDeviceList(ctx context.Context) ApiGetBootIscsiDeviceListRequest {
 	return ApiGetBootIscsiDeviceListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2220,26 +2193,24 @@ func (a *BootApiService) GetBootIscsiDeviceList(ctx _context.Context) ApiGetBoot
 
 // Execute executes the request
 //  @return BootIscsiDeviceResponse
-func (a *BootApiService) GetBootIscsiDeviceListExecute(r ApiGetBootIscsiDeviceListRequest) (BootIscsiDeviceResponse, *_nethttp.Response, error) {
+func (a *BootApiService) GetBootIscsiDeviceListExecute(r ApiGetBootIscsiDeviceListRequest) (*BootIscsiDeviceResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootIscsiDeviceResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootIscsiDeviceResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.GetBootIscsiDeviceList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/IscsiDevices"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -2291,7 +2262,7 @@ func (a *BootApiService) GetBootIscsiDeviceListExecute(r ApiGetBootIscsiDeviceLi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2301,15 +2272,15 @@ func (a *BootApiService) GetBootIscsiDeviceListExecute(r ApiGetBootIscsiDeviceLi
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2365,7 +2336,7 @@ func (a *BootApiService) GetBootIscsiDeviceListExecute(r ApiGetBootIscsiDeviceLi
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2376,23 +2347,23 @@ func (a *BootApiService) GetBootIscsiDeviceListExecute(r ApiGetBootIscsiDeviceLi
 }
 
 type ApiGetBootNvmeDeviceByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *BootApiService
 	moid       string
 }
 
-func (r ApiGetBootNvmeDeviceByMoidRequest) Execute() (BootNvmeDevice, *_nethttp.Response, error) {
+func (r ApiGetBootNvmeDeviceByMoidRequest) Execute() (*BootNvmeDevice, *http.Response, error) {
 	return r.ApiService.GetBootNvmeDeviceByMoidExecute(r)
 }
 
 /*
 GetBootNvmeDeviceByMoid Read a 'boot.NvmeDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetBootNvmeDeviceByMoidRequest
 */
-func (a *BootApiService) GetBootNvmeDeviceByMoid(ctx _context.Context, moid string) ApiGetBootNvmeDeviceByMoidRequest {
+func (a *BootApiService) GetBootNvmeDeviceByMoid(ctx context.Context, moid string) ApiGetBootNvmeDeviceByMoidRequest {
 	return ApiGetBootNvmeDeviceByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2402,27 +2373,25 @@ func (a *BootApiService) GetBootNvmeDeviceByMoid(ctx _context.Context, moid stri
 
 // Execute executes the request
 //  @return BootNvmeDevice
-func (a *BootApiService) GetBootNvmeDeviceByMoidExecute(r ApiGetBootNvmeDeviceByMoidRequest) (BootNvmeDevice, *_nethttp.Response, error) {
+func (a *BootApiService) GetBootNvmeDeviceByMoidExecute(r ApiGetBootNvmeDeviceByMoidRequest) (*BootNvmeDevice, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootNvmeDevice
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootNvmeDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.GetBootNvmeDeviceByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/NvmeDevices/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2441,7 +2410,7 @@ func (a *BootApiService) GetBootNvmeDeviceByMoidExecute(r ApiGetBootNvmeDeviceBy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2451,15 +2420,15 @@ func (a *BootApiService) GetBootNvmeDeviceByMoidExecute(r ApiGetBootNvmeDeviceBy
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2515,7 +2484,7 @@ func (a *BootApiService) GetBootNvmeDeviceByMoidExecute(r ApiGetBootNvmeDeviceBy
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2526,7 +2495,7 @@ func (a *BootApiService) GetBootNvmeDeviceByMoidExecute(r ApiGetBootNvmeDeviceBy
 }
 
 type ApiGetBootNvmeDeviceListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *BootApiService
 	filter      *string
 	orderby     *string
@@ -2607,17 +2576,17 @@ func (r ApiGetBootNvmeDeviceListRequest) Tags(tags string) ApiGetBootNvmeDeviceL
 	return r
 }
 
-func (r ApiGetBootNvmeDeviceListRequest) Execute() (BootNvmeDeviceResponse, *_nethttp.Response, error) {
+func (r ApiGetBootNvmeDeviceListRequest) Execute() (*BootNvmeDeviceResponse, *http.Response, error) {
 	return r.ApiService.GetBootNvmeDeviceListExecute(r)
 }
 
 /*
 GetBootNvmeDeviceList Read a 'boot.NvmeDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetBootNvmeDeviceListRequest
 */
-func (a *BootApiService) GetBootNvmeDeviceList(ctx _context.Context) ApiGetBootNvmeDeviceListRequest {
+func (a *BootApiService) GetBootNvmeDeviceList(ctx context.Context) ApiGetBootNvmeDeviceListRequest {
 	return ApiGetBootNvmeDeviceListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2626,26 +2595,24 @@ func (a *BootApiService) GetBootNvmeDeviceList(ctx _context.Context) ApiGetBootN
 
 // Execute executes the request
 //  @return BootNvmeDeviceResponse
-func (a *BootApiService) GetBootNvmeDeviceListExecute(r ApiGetBootNvmeDeviceListRequest) (BootNvmeDeviceResponse, *_nethttp.Response, error) {
+func (a *BootApiService) GetBootNvmeDeviceListExecute(r ApiGetBootNvmeDeviceListRequest) (*BootNvmeDeviceResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootNvmeDeviceResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootNvmeDeviceResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.GetBootNvmeDeviceList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/NvmeDevices"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -2697,7 +2664,7 @@ func (a *BootApiService) GetBootNvmeDeviceListExecute(r ApiGetBootNvmeDeviceList
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2707,15 +2674,15 @@ func (a *BootApiService) GetBootNvmeDeviceListExecute(r ApiGetBootNvmeDeviceList
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2771,7 +2738,7 @@ func (a *BootApiService) GetBootNvmeDeviceListExecute(r ApiGetBootNvmeDeviceList
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2782,23 +2749,23 @@ func (a *BootApiService) GetBootNvmeDeviceListExecute(r ApiGetBootNvmeDeviceList
 }
 
 type ApiGetBootPchStorageDeviceByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *BootApiService
 	moid       string
 }
 
-func (r ApiGetBootPchStorageDeviceByMoidRequest) Execute() (BootPchStorageDevice, *_nethttp.Response, error) {
+func (r ApiGetBootPchStorageDeviceByMoidRequest) Execute() (*BootPchStorageDevice, *http.Response, error) {
 	return r.ApiService.GetBootPchStorageDeviceByMoidExecute(r)
 }
 
 /*
 GetBootPchStorageDeviceByMoid Read a 'boot.PchStorageDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetBootPchStorageDeviceByMoidRequest
 */
-func (a *BootApiService) GetBootPchStorageDeviceByMoid(ctx _context.Context, moid string) ApiGetBootPchStorageDeviceByMoidRequest {
+func (a *BootApiService) GetBootPchStorageDeviceByMoid(ctx context.Context, moid string) ApiGetBootPchStorageDeviceByMoidRequest {
 	return ApiGetBootPchStorageDeviceByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2808,27 +2775,25 @@ func (a *BootApiService) GetBootPchStorageDeviceByMoid(ctx _context.Context, moi
 
 // Execute executes the request
 //  @return BootPchStorageDevice
-func (a *BootApiService) GetBootPchStorageDeviceByMoidExecute(r ApiGetBootPchStorageDeviceByMoidRequest) (BootPchStorageDevice, *_nethttp.Response, error) {
+func (a *BootApiService) GetBootPchStorageDeviceByMoidExecute(r ApiGetBootPchStorageDeviceByMoidRequest) (*BootPchStorageDevice, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootPchStorageDevice
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootPchStorageDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.GetBootPchStorageDeviceByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/PchStorageDevices/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2847,7 +2812,7 @@ func (a *BootApiService) GetBootPchStorageDeviceByMoidExecute(r ApiGetBootPchSto
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2857,15 +2822,15 @@ func (a *BootApiService) GetBootPchStorageDeviceByMoidExecute(r ApiGetBootPchSto
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2921,7 +2886,7 @@ func (a *BootApiService) GetBootPchStorageDeviceByMoidExecute(r ApiGetBootPchSto
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2932,7 +2897,7 @@ func (a *BootApiService) GetBootPchStorageDeviceByMoidExecute(r ApiGetBootPchSto
 }
 
 type ApiGetBootPchStorageDeviceListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *BootApiService
 	filter      *string
 	orderby     *string
@@ -3013,17 +2978,17 @@ func (r ApiGetBootPchStorageDeviceListRequest) Tags(tags string) ApiGetBootPchSt
 	return r
 }
 
-func (r ApiGetBootPchStorageDeviceListRequest) Execute() (BootPchStorageDeviceResponse, *_nethttp.Response, error) {
+func (r ApiGetBootPchStorageDeviceListRequest) Execute() (*BootPchStorageDeviceResponse, *http.Response, error) {
 	return r.ApiService.GetBootPchStorageDeviceListExecute(r)
 }
 
 /*
 GetBootPchStorageDeviceList Read a 'boot.PchStorageDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetBootPchStorageDeviceListRequest
 */
-func (a *BootApiService) GetBootPchStorageDeviceList(ctx _context.Context) ApiGetBootPchStorageDeviceListRequest {
+func (a *BootApiService) GetBootPchStorageDeviceList(ctx context.Context) ApiGetBootPchStorageDeviceListRequest {
 	return ApiGetBootPchStorageDeviceListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3032,26 +2997,24 @@ func (a *BootApiService) GetBootPchStorageDeviceList(ctx _context.Context) ApiGe
 
 // Execute executes the request
 //  @return BootPchStorageDeviceResponse
-func (a *BootApiService) GetBootPchStorageDeviceListExecute(r ApiGetBootPchStorageDeviceListRequest) (BootPchStorageDeviceResponse, *_nethttp.Response, error) {
+func (a *BootApiService) GetBootPchStorageDeviceListExecute(r ApiGetBootPchStorageDeviceListRequest) (*BootPchStorageDeviceResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootPchStorageDeviceResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootPchStorageDeviceResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.GetBootPchStorageDeviceList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/PchStorageDevices"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -3103,7 +3066,7 @@ func (a *BootApiService) GetBootPchStorageDeviceListExecute(r ApiGetBootPchStora
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3113,15 +3076,15 @@ func (a *BootApiService) GetBootPchStorageDeviceListExecute(r ApiGetBootPchStora
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3177,7 +3140,7 @@ func (a *BootApiService) GetBootPchStorageDeviceListExecute(r ApiGetBootPchStora
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3188,23 +3151,23 @@ func (a *BootApiService) GetBootPchStorageDeviceListExecute(r ApiGetBootPchStora
 }
 
 type ApiGetBootPrecisionPolicyByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *BootApiService
 	moid       string
 }
 
-func (r ApiGetBootPrecisionPolicyByMoidRequest) Execute() (BootPrecisionPolicy, *_nethttp.Response, error) {
+func (r ApiGetBootPrecisionPolicyByMoidRequest) Execute() (*BootPrecisionPolicy, *http.Response, error) {
 	return r.ApiService.GetBootPrecisionPolicyByMoidExecute(r)
 }
 
 /*
 GetBootPrecisionPolicyByMoid Read a 'boot.PrecisionPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetBootPrecisionPolicyByMoidRequest
 */
-func (a *BootApiService) GetBootPrecisionPolicyByMoid(ctx _context.Context, moid string) ApiGetBootPrecisionPolicyByMoidRequest {
+func (a *BootApiService) GetBootPrecisionPolicyByMoid(ctx context.Context, moid string) ApiGetBootPrecisionPolicyByMoidRequest {
 	return ApiGetBootPrecisionPolicyByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3214,27 +3177,25 @@ func (a *BootApiService) GetBootPrecisionPolicyByMoid(ctx _context.Context, moid
 
 // Execute executes the request
 //  @return BootPrecisionPolicy
-func (a *BootApiService) GetBootPrecisionPolicyByMoidExecute(r ApiGetBootPrecisionPolicyByMoidRequest) (BootPrecisionPolicy, *_nethttp.Response, error) {
+func (a *BootApiService) GetBootPrecisionPolicyByMoidExecute(r ApiGetBootPrecisionPolicyByMoidRequest) (*BootPrecisionPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootPrecisionPolicy
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootPrecisionPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.GetBootPrecisionPolicyByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/PrecisionPolicies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -3253,7 +3214,7 @@ func (a *BootApiService) GetBootPrecisionPolicyByMoidExecute(r ApiGetBootPrecisi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3263,15 +3224,15 @@ func (a *BootApiService) GetBootPrecisionPolicyByMoidExecute(r ApiGetBootPrecisi
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3327,7 +3288,7 @@ func (a *BootApiService) GetBootPrecisionPolicyByMoidExecute(r ApiGetBootPrecisi
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3338,7 +3299,7 @@ func (a *BootApiService) GetBootPrecisionPolicyByMoidExecute(r ApiGetBootPrecisi
 }
 
 type ApiGetBootPrecisionPolicyListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *BootApiService
 	filter      *string
 	orderby     *string
@@ -3419,17 +3380,17 @@ func (r ApiGetBootPrecisionPolicyListRequest) Tags(tags string) ApiGetBootPrecis
 	return r
 }
 
-func (r ApiGetBootPrecisionPolicyListRequest) Execute() (BootPrecisionPolicyResponse, *_nethttp.Response, error) {
+func (r ApiGetBootPrecisionPolicyListRequest) Execute() (*BootPrecisionPolicyResponse, *http.Response, error) {
 	return r.ApiService.GetBootPrecisionPolicyListExecute(r)
 }
 
 /*
 GetBootPrecisionPolicyList Read a 'boot.PrecisionPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetBootPrecisionPolicyListRequest
 */
-func (a *BootApiService) GetBootPrecisionPolicyList(ctx _context.Context) ApiGetBootPrecisionPolicyListRequest {
+func (a *BootApiService) GetBootPrecisionPolicyList(ctx context.Context) ApiGetBootPrecisionPolicyListRequest {
 	return ApiGetBootPrecisionPolicyListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3438,26 +3399,24 @@ func (a *BootApiService) GetBootPrecisionPolicyList(ctx _context.Context) ApiGet
 
 // Execute executes the request
 //  @return BootPrecisionPolicyResponse
-func (a *BootApiService) GetBootPrecisionPolicyListExecute(r ApiGetBootPrecisionPolicyListRequest) (BootPrecisionPolicyResponse, *_nethttp.Response, error) {
+func (a *BootApiService) GetBootPrecisionPolicyListExecute(r ApiGetBootPrecisionPolicyListRequest) (*BootPrecisionPolicyResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootPrecisionPolicyResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootPrecisionPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.GetBootPrecisionPolicyList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/PrecisionPolicies"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -3509,7 +3468,7 @@ func (a *BootApiService) GetBootPrecisionPolicyListExecute(r ApiGetBootPrecision
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3519,15 +3478,15 @@ func (a *BootApiService) GetBootPrecisionPolicyListExecute(r ApiGetBootPrecision
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3583,7 +3542,7 @@ func (a *BootApiService) GetBootPrecisionPolicyListExecute(r ApiGetBootPrecision
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3594,23 +3553,23 @@ func (a *BootApiService) GetBootPrecisionPolicyListExecute(r ApiGetBootPrecision
 }
 
 type ApiGetBootPxeDeviceByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *BootApiService
 	moid       string
 }
 
-func (r ApiGetBootPxeDeviceByMoidRequest) Execute() (BootPxeDevice, *_nethttp.Response, error) {
+func (r ApiGetBootPxeDeviceByMoidRequest) Execute() (*BootPxeDevice, *http.Response, error) {
 	return r.ApiService.GetBootPxeDeviceByMoidExecute(r)
 }
 
 /*
 GetBootPxeDeviceByMoid Read a 'boot.PxeDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetBootPxeDeviceByMoidRequest
 */
-func (a *BootApiService) GetBootPxeDeviceByMoid(ctx _context.Context, moid string) ApiGetBootPxeDeviceByMoidRequest {
+func (a *BootApiService) GetBootPxeDeviceByMoid(ctx context.Context, moid string) ApiGetBootPxeDeviceByMoidRequest {
 	return ApiGetBootPxeDeviceByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3620,27 +3579,25 @@ func (a *BootApiService) GetBootPxeDeviceByMoid(ctx _context.Context, moid strin
 
 // Execute executes the request
 //  @return BootPxeDevice
-func (a *BootApiService) GetBootPxeDeviceByMoidExecute(r ApiGetBootPxeDeviceByMoidRequest) (BootPxeDevice, *_nethttp.Response, error) {
+func (a *BootApiService) GetBootPxeDeviceByMoidExecute(r ApiGetBootPxeDeviceByMoidRequest) (*BootPxeDevice, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootPxeDevice
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootPxeDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.GetBootPxeDeviceByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/PxeDevices/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -3659,7 +3616,7 @@ func (a *BootApiService) GetBootPxeDeviceByMoidExecute(r ApiGetBootPxeDeviceByMo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3669,15 +3626,15 @@ func (a *BootApiService) GetBootPxeDeviceByMoidExecute(r ApiGetBootPxeDeviceByMo
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3733,7 +3690,7 @@ func (a *BootApiService) GetBootPxeDeviceByMoidExecute(r ApiGetBootPxeDeviceByMo
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3744,7 +3701,7 @@ func (a *BootApiService) GetBootPxeDeviceByMoidExecute(r ApiGetBootPxeDeviceByMo
 }
 
 type ApiGetBootPxeDeviceListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *BootApiService
 	filter      *string
 	orderby     *string
@@ -3825,17 +3782,17 @@ func (r ApiGetBootPxeDeviceListRequest) Tags(tags string) ApiGetBootPxeDeviceLis
 	return r
 }
 
-func (r ApiGetBootPxeDeviceListRequest) Execute() (BootPxeDeviceResponse, *_nethttp.Response, error) {
+func (r ApiGetBootPxeDeviceListRequest) Execute() (*BootPxeDeviceResponse, *http.Response, error) {
 	return r.ApiService.GetBootPxeDeviceListExecute(r)
 }
 
 /*
 GetBootPxeDeviceList Read a 'boot.PxeDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetBootPxeDeviceListRequest
 */
-func (a *BootApiService) GetBootPxeDeviceList(ctx _context.Context) ApiGetBootPxeDeviceListRequest {
+func (a *BootApiService) GetBootPxeDeviceList(ctx context.Context) ApiGetBootPxeDeviceListRequest {
 	return ApiGetBootPxeDeviceListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3844,26 +3801,24 @@ func (a *BootApiService) GetBootPxeDeviceList(ctx _context.Context) ApiGetBootPx
 
 // Execute executes the request
 //  @return BootPxeDeviceResponse
-func (a *BootApiService) GetBootPxeDeviceListExecute(r ApiGetBootPxeDeviceListRequest) (BootPxeDeviceResponse, *_nethttp.Response, error) {
+func (a *BootApiService) GetBootPxeDeviceListExecute(r ApiGetBootPxeDeviceListRequest) (*BootPxeDeviceResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootPxeDeviceResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootPxeDeviceResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.GetBootPxeDeviceList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/PxeDevices"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -3915,7 +3870,7 @@ func (a *BootApiService) GetBootPxeDeviceListExecute(r ApiGetBootPxeDeviceListRe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3925,15 +3880,15 @@ func (a *BootApiService) GetBootPxeDeviceListExecute(r ApiGetBootPxeDeviceListRe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3989,7 +3944,7 @@ func (a *BootApiService) GetBootPxeDeviceListExecute(r ApiGetBootPxeDeviceListRe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -4000,23 +3955,23 @@ func (a *BootApiService) GetBootPxeDeviceListExecute(r ApiGetBootPxeDeviceListRe
 }
 
 type ApiGetBootSanDeviceByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *BootApiService
 	moid       string
 }
 
-func (r ApiGetBootSanDeviceByMoidRequest) Execute() (BootSanDevice, *_nethttp.Response, error) {
+func (r ApiGetBootSanDeviceByMoidRequest) Execute() (*BootSanDevice, *http.Response, error) {
 	return r.ApiService.GetBootSanDeviceByMoidExecute(r)
 }
 
 /*
 GetBootSanDeviceByMoid Read a 'boot.SanDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetBootSanDeviceByMoidRequest
 */
-func (a *BootApiService) GetBootSanDeviceByMoid(ctx _context.Context, moid string) ApiGetBootSanDeviceByMoidRequest {
+func (a *BootApiService) GetBootSanDeviceByMoid(ctx context.Context, moid string) ApiGetBootSanDeviceByMoidRequest {
 	return ApiGetBootSanDeviceByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4026,27 +3981,25 @@ func (a *BootApiService) GetBootSanDeviceByMoid(ctx _context.Context, moid strin
 
 // Execute executes the request
 //  @return BootSanDevice
-func (a *BootApiService) GetBootSanDeviceByMoidExecute(r ApiGetBootSanDeviceByMoidRequest) (BootSanDevice, *_nethttp.Response, error) {
+func (a *BootApiService) GetBootSanDeviceByMoidExecute(r ApiGetBootSanDeviceByMoidRequest) (*BootSanDevice, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootSanDevice
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootSanDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.GetBootSanDeviceByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/SanDevices/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -4065,7 +4018,7 @@ func (a *BootApiService) GetBootSanDeviceByMoidExecute(r ApiGetBootSanDeviceByMo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4075,15 +4028,15 @@ func (a *BootApiService) GetBootSanDeviceByMoidExecute(r ApiGetBootSanDeviceByMo
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4139,7 +4092,7 @@ func (a *BootApiService) GetBootSanDeviceByMoidExecute(r ApiGetBootSanDeviceByMo
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -4150,7 +4103,7 @@ func (a *BootApiService) GetBootSanDeviceByMoidExecute(r ApiGetBootSanDeviceByMo
 }
 
 type ApiGetBootSanDeviceListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *BootApiService
 	filter      *string
 	orderby     *string
@@ -4231,17 +4184,17 @@ func (r ApiGetBootSanDeviceListRequest) Tags(tags string) ApiGetBootSanDeviceLis
 	return r
 }
 
-func (r ApiGetBootSanDeviceListRequest) Execute() (BootSanDeviceResponse, *_nethttp.Response, error) {
+func (r ApiGetBootSanDeviceListRequest) Execute() (*BootSanDeviceResponse, *http.Response, error) {
 	return r.ApiService.GetBootSanDeviceListExecute(r)
 }
 
 /*
 GetBootSanDeviceList Read a 'boot.SanDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetBootSanDeviceListRequest
 */
-func (a *BootApiService) GetBootSanDeviceList(ctx _context.Context) ApiGetBootSanDeviceListRequest {
+func (a *BootApiService) GetBootSanDeviceList(ctx context.Context) ApiGetBootSanDeviceListRequest {
 	return ApiGetBootSanDeviceListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4250,26 +4203,24 @@ func (a *BootApiService) GetBootSanDeviceList(ctx _context.Context) ApiGetBootSa
 
 // Execute executes the request
 //  @return BootSanDeviceResponse
-func (a *BootApiService) GetBootSanDeviceListExecute(r ApiGetBootSanDeviceListRequest) (BootSanDeviceResponse, *_nethttp.Response, error) {
+func (a *BootApiService) GetBootSanDeviceListExecute(r ApiGetBootSanDeviceListRequest) (*BootSanDeviceResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootSanDeviceResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootSanDeviceResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.GetBootSanDeviceList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/SanDevices"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -4321,7 +4272,7 @@ func (a *BootApiService) GetBootSanDeviceListExecute(r ApiGetBootSanDeviceListRe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4331,15 +4282,15 @@ func (a *BootApiService) GetBootSanDeviceListExecute(r ApiGetBootSanDeviceListRe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4395,7 +4346,7 @@ func (a *BootApiService) GetBootSanDeviceListExecute(r ApiGetBootSanDeviceListRe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -4406,23 +4357,23 @@ func (a *BootApiService) GetBootSanDeviceListExecute(r ApiGetBootSanDeviceListRe
 }
 
 type ApiGetBootSdDeviceByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *BootApiService
 	moid       string
 }
 
-func (r ApiGetBootSdDeviceByMoidRequest) Execute() (BootSdDevice, *_nethttp.Response, error) {
+func (r ApiGetBootSdDeviceByMoidRequest) Execute() (*BootSdDevice, *http.Response, error) {
 	return r.ApiService.GetBootSdDeviceByMoidExecute(r)
 }
 
 /*
 GetBootSdDeviceByMoid Read a 'boot.SdDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetBootSdDeviceByMoidRequest
 */
-func (a *BootApiService) GetBootSdDeviceByMoid(ctx _context.Context, moid string) ApiGetBootSdDeviceByMoidRequest {
+func (a *BootApiService) GetBootSdDeviceByMoid(ctx context.Context, moid string) ApiGetBootSdDeviceByMoidRequest {
 	return ApiGetBootSdDeviceByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4432,27 +4383,25 @@ func (a *BootApiService) GetBootSdDeviceByMoid(ctx _context.Context, moid string
 
 // Execute executes the request
 //  @return BootSdDevice
-func (a *BootApiService) GetBootSdDeviceByMoidExecute(r ApiGetBootSdDeviceByMoidRequest) (BootSdDevice, *_nethttp.Response, error) {
+func (a *BootApiService) GetBootSdDeviceByMoidExecute(r ApiGetBootSdDeviceByMoidRequest) (*BootSdDevice, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootSdDevice
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootSdDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.GetBootSdDeviceByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/SdDevices/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -4471,7 +4420,7 @@ func (a *BootApiService) GetBootSdDeviceByMoidExecute(r ApiGetBootSdDeviceByMoid
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4481,15 +4430,15 @@ func (a *BootApiService) GetBootSdDeviceByMoidExecute(r ApiGetBootSdDeviceByMoid
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4545,7 +4494,7 @@ func (a *BootApiService) GetBootSdDeviceByMoidExecute(r ApiGetBootSdDeviceByMoid
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -4556,7 +4505,7 @@ func (a *BootApiService) GetBootSdDeviceByMoidExecute(r ApiGetBootSdDeviceByMoid
 }
 
 type ApiGetBootSdDeviceListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *BootApiService
 	filter      *string
 	orderby     *string
@@ -4637,17 +4586,17 @@ func (r ApiGetBootSdDeviceListRequest) Tags(tags string) ApiGetBootSdDeviceListR
 	return r
 }
 
-func (r ApiGetBootSdDeviceListRequest) Execute() (BootSdDeviceResponse, *_nethttp.Response, error) {
+func (r ApiGetBootSdDeviceListRequest) Execute() (*BootSdDeviceResponse, *http.Response, error) {
 	return r.ApiService.GetBootSdDeviceListExecute(r)
 }
 
 /*
 GetBootSdDeviceList Read a 'boot.SdDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetBootSdDeviceListRequest
 */
-func (a *BootApiService) GetBootSdDeviceList(ctx _context.Context) ApiGetBootSdDeviceListRequest {
+func (a *BootApiService) GetBootSdDeviceList(ctx context.Context) ApiGetBootSdDeviceListRequest {
 	return ApiGetBootSdDeviceListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4656,26 +4605,24 @@ func (a *BootApiService) GetBootSdDeviceList(ctx _context.Context) ApiGetBootSdD
 
 // Execute executes the request
 //  @return BootSdDeviceResponse
-func (a *BootApiService) GetBootSdDeviceListExecute(r ApiGetBootSdDeviceListRequest) (BootSdDeviceResponse, *_nethttp.Response, error) {
+func (a *BootApiService) GetBootSdDeviceListExecute(r ApiGetBootSdDeviceListRequest) (*BootSdDeviceResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootSdDeviceResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootSdDeviceResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.GetBootSdDeviceList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/SdDevices"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -4727,7 +4674,7 @@ func (a *BootApiService) GetBootSdDeviceListExecute(r ApiGetBootSdDeviceListRequ
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4737,15 +4684,15 @@ func (a *BootApiService) GetBootSdDeviceListExecute(r ApiGetBootSdDeviceListRequ
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4801,7 +4748,7 @@ func (a *BootApiService) GetBootSdDeviceListExecute(r ApiGetBootSdDeviceListRequ
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -4812,23 +4759,23 @@ func (a *BootApiService) GetBootSdDeviceListExecute(r ApiGetBootSdDeviceListRequ
 }
 
 type ApiGetBootUefiShellDeviceByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *BootApiService
 	moid       string
 }
 
-func (r ApiGetBootUefiShellDeviceByMoidRequest) Execute() (BootUefiShellDevice, *_nethttp.Response, error) {
+func (r ApiGetBootUefiShellDeviceByMoidRequest) Execute() (*BootUefiShellDevice, *http.Response, error) {
 	return r.ApiService.GetBootUefiShellDeviceByMoidExecute(r)
 }
 
 /*
 GetBootUefiShellDeviceByMoid Read a 'boot.UefiShellDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetBootUefiShellDeviceByMoidRequest
 */
-func (a *BootApiService) GetBootUefiShellDeviceByMoid(ctx _context.Context, moid string) ApiGetBootUefiShellDeviceByMoidRequest {
+func (a *BootApiService) GetBootUefiShellDeviceByMoid(ctx context.Context, moid string) ApiGetBootUefiShellDeviceByMoidRequest {
 	return ApiGetBootUefiShellDeviceByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4838,27 +4785,25 @@ func (a *BootApiService) GetBootUefiShellDeviceByMoid(ctx _context.Context, moid
 
 // Execute executes the request
 //  @return BootUefiShellDevice
-func (a *BootApiService) GetBootUefiShellDeviceByMoidExecute(r ApiGetBootUefiShellDeviceByMoidRequest) (BootUefiShellDevice, *_nethttp.Response, error) {
+func (a *BootApiService) GetBootUefiShellDeviceByMoidExecute(r ApiGetBootUefiShellDeviceByMoidRequest) (*BootUefiShellDevice, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootUefiShellDevice
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootUefiShellDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.GetBootUefiShellDeviceByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/UefiShellDevices/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -4877,7 +4822,7 @@ func (a *BootApiService) GetBootUefiShellDeviceByMoidExecute(r ApiGetBootUefiShe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4887,15 +4832,15 @@ func (a *BootApiService) GetBootUefiShellDeviceByMoidExecute(r ApiGetBootUefiShe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4951,7 +4896,7 @@ func (a *BootApiService) GetBootUefiShellDeviceByMoidExecute(r ApiGetBootUefiShe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -4962,7 +4907,7 @@ func (a *BootApiService) GetBootUefiShellDeviceByMoidExecute(r ApiGetBootUefiShe
 }
 
 type ApiGetBootUefiShellDeviceListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *BootApiService
 	filter      *string
 	orderby     *string
@@ -5043,17 +4988,17 @@ func (r ApiGetBootUefiShellDeviceListRequest) Tags(tags string) ApiGetBootUefiSh
 	return r
 }
 
-func (r ApiGetBootUefiShellDeviceListRequest) Execute() (BootUefiShellDeviceResponse, *_nethttp.Response, error) {
+func (r ApiGetBootUefiShellDeviceListRequest) Execute() (*BootUefiShellDeviceResponse, *http.Response, error) {
 	return r.ApiService.GetBootUefiShellDeviceListExecute(r)
 }
 
 /*
 GetBootUefiShellDeviceList Read a 'boot.UefiShellDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetBootUefiShellDeviceListRequest
 */
-func (a *BootApiService) GetBootUefiShellDeviceList(ctx _context.Context) ApiGetBootUefiShellDeviceListRequest {
+func (a *BootApiService) GetBootUefiShellDeviceList(ctx context.Context) ApiGetBootUefiShellDeviceListRequest {
 	return ApiGetBootUefiShellDeviceListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -5062,26 +5007,24 @@ func (a *BootApiService) GetBootUefiShellDeviceList(ctx _context.Context) ApiGet
 
 // Execute executes the request
 //  @return BootUefiShellDeviceResponse
-func (a *BootApiService) GetBootUefiShellDeviceListExecute(r ApiGetBootUefiShellDeviceListRequest) (BootUefiShellDeviceResponse, *_nethttp.Response, error) {
+func (a *BootApiService) GetBootUefiShellDeviceListExecute(r ApiGetBootUefiShellDeviceListRequest) (*BootUefiShellDeviceResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootUefiShellDeviceResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootUefiShellDeviceResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.GetBootUefiShellDeviceList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/UefiShellDevices"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -5133,7 +5076,7 @@ func (a *BootApiService) GetBootUefiShellDeviceListExecute(r ApiGetBootUefiShell
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -5143,15 +5086,15 @@ func (a *BootApiService) GetBootUefiShellDeviceListExecute(r ApiGetBootUefiShell
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -5207,7 +5150,7 @@ func (a *BootApiService) GetBootUefiShellDeviceListExecute(r ApiGetBootUefiShell
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -5218,23 +5161,23 @@ func (a *BootApiService) GetBootUefiShellDeviceListExecute(r ApiGetBootUefiShell
 }
 
 type ApiGetBootUsbDeviceByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *BootApiService
 	moid       string
 }
 
-func (r ApiGetBootUsbDeviceByMoidRequest) Execute() (BootUsbDevice, *_nethttp.Response, error) {
+func (r ApiGetBootUsbDeviceByMoidRequest) Execute() (*BootUsbDevice, *http.Response, error) {
 	return r.ApiService.GetBootUsbDeviceByMoidExecute(r)
 }
 
 /*
 GetBootUsbDeviceByMoid Read a 'boot.UsbDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetBootUsbDeviceByMoidRequest
 */
-func (a *BootApiService) GetBootUsbDeviceByMoid(ctx _context.Context, moid string) ApiGetBootUsbDeviceByMoidRequest {
+func (a *BootApiService) GetBootUsbDeviceByMoid(ctx context.Context, moid string) ApiGetBootUsbDeviceByMoidRequest {
 	return ApiGetBootUsbDeviceByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -5244,27 +5187,25 @@ func (a *BootApiService) GetBootUsbDeviceByMoid(ctx _context.Context, moid strin
 
 // Execute executes the request
 //  @return BootUsbDevice
-func (a *BootApiService) GetBootUsbDeviceByMoidExecute(r ApiGetBootUsbDeviceByMoidRequest) (BootUsbDevice, *_nethttp.Response, error) {
+func (a *BootApiService) GetBootUsbDeviceByMoidExecute(r ApiGetBootUsbDeviceByMoidRequest) (*BootUsbDevice, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootUsbDevice
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootUsbDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.GetBootUsbDeviceByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/UsbDevices/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -5283,7 +5224,7 @@ func (a *BootApiService) GetBootUsbDeviceByMoidExecute(r ApiGetBootUsbDeviceByMo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -5293,15 +5234,15 @@ func (a *BootApiService) GetBootUsbDeviceByMoidExecute(r ApiGetBootUsbDeviceByMo
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -5357,7 +5298,7 @@ func (a *BootApiService) GetBootUsbDeviceByMoidExecute(r ApiGetBootUsbDeviceByMo
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -5368,7 +5309,7 @@ func (a *BootApiService) GetBootUsbDeviceByMoidExecute(r ApiGetBootUsbDeviceByMo
 }
 
 type ApiGetBootUsbDeviceListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *BootApiService
 	filter      *string
 	orderby     *string
@@ -5449,17 +5390,17 @@ func (r ApiGetBootUsbDeviceListRequest) Tags(tags string) ApiGetBootUsbDeviceLis
 	return r
 }
 
-func (r ApiGetBootUsbDeviceListRequest) Execute() (BootUsbDeviceResponse, *_nethttp.Response, error) {
+func (r ApiGetBootUsbDeviceListRequest) Execute() (*BootUsbDeviceResponse, *http.Response, error) {
 	return r.ApiService.GetBootUsbDeviceListExecute(r)
 }
 
 /*
 GetBootUsbDeviceList Read a 'boot.UsbDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetBootUsbDeviceListRequest
 */
-func (a *BootApiService) GetBootUsbDeviceList(ctx _context.Context) ApiGetBootUsbDeviceListRequest {
+func (a *BootApiService) GetBootUsbDeviceList(ctx context.Context) ApiGetBootUsbDeviceListRequest {
 	return ApiGetBootUsbDeviceListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -5468,26 +5409,24 @@ func (a *BootApiService) GetBootUsbDeviceList(ctx _context.Context) ApiGetBootUs
 
 // Execute executes the request
 //  @return BootUsbDeviceResponse
-func (a *BootApiService) GetBootUsbDeviceListExecute(r ApiGetBootUsbDeviceListRequest) (BootUsbDeviceResponse, *_nethttp.Response, error) {
+func (a *BootApiService) GetBootUsbDeviceListExecute(r ApiGetBootUsbDeviceListRequest) (*BootUsbDeviceResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootUsbDeviceResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootUsbDeviceResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.GetBootUsbDeviceList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/UsbDevices"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -5539,7 +5478,7 @@ func (a *BootApiService) GetBootUsbDeviceListExecute(r ApiGetBootUsbDeviceListRe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -5549,15 +5488,15 @@ func (a *BootApiService) GetBootUsbDeviceListExecute(r ApiGetBootUsbDeviceListRe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -5613,7 +5552,7 @@ func (a *BootApiService) GetBootUsbDeviceListExecute(r ApiGetBootUsbDeviceListRe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -5624,23 +5563,23 @@ func (a *BootApiService) GetBootUsbDeviceListExecute(r ApiGetBootUsbDeviceListRe
 }
 
 type ApiGetBootVmediaDeviceByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *BootApiService
 	moid       string
 }
 
-func (r ApiGetBootVmediaDeviceByMoidRequest) Execute() (BootVmediaDevice, *_nethttp.Response, error) {
+func (r ApiGetBootVmediaDeviceByMoidRequest) Execute() (*BootVmediaDevice, *http.Response, error) {
 	return r.ApiService.GetBootVmediaDeviceByMoidExecute(r)
 }
 
 /*
 GetBootVmediaDeviceByMoid Read a 'boot.VmediaDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetBootVmediaDeviceByMoidRequest
 */
-func (a *BootApiService) GetBootVmediaDeviceByMoid(ctx _context.Context, moid string) ApiGetBootVmediaDeviceByMoidRequest {
+func (a *BootApiService) GetBootVmediaDeviceByMoid(ctx context.Context, moid string) ApiGetBootVmediaDeviceByMoidRequest {
 	return ApiGetBootVmediaDeviceByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -5650,27 +5589,25 @@ func (a *BootApiService) GetBootVmediaDeviceByMoid(ctx _context.Context, moid st
 
 // Execute executes the request
 //  @return BootVmediaDevice
-func (a *BootApiService) GetBootVmediaDeviceByMoidExecute(r ApiGetBootVmediaDeviceByMoidRequest) (BootVmediaDevice, *_nethttp.Response, error) {
+func (a *BootApiService) GetBootVmediaDeviceByMoidExecute(r ApiGetBootVmediaDeviceByMoidRequest) (*BootVmediaDevice, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootVmediaDevice
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootVmediaDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.GetBootVmediaDeviceByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/VmediaDevices/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -5689,7 +5626,7 @@ func (a *BootApiService) GetBootVmediaDeviceByMoidExecute(r ApiGetBootVmediaDevi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -5699,15 +5636,15 @@ func (a *BootApiService) GetBootVmediaDeviceByMoidExecute(r ApiGetBootVmediaDevi
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -5763,7 +5700,7 @@ func (a *BootApiService) GetBootVmediaDeviceByMoidExecute(r ApiGetBootVmediaDevi
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -5774,7 +5711,7 @@ func (a *BootApiService) GetBootVmediaDeviceByMoidExecute(r ApiGetBootVmediaDevi
 }
 
 type ApiGetBootVmediaDeviceListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *BootApiService
 	filter      *string
 	orderby     *string
@@ -5855,17 +5792,17 @@ func (r ApiGetBootVmediaDeviceListRequest) Tags(tags string) ApiGetBootVmediaDev
 	return r
 }
 
-func (r ApiGetBootVmediaDeviceListRequest) Execute() (BootVmediaDeviceResponse, *_nethttp.Response, error) {
+func (r ApiGetBootVmediaDeviceListRequest) Execute() (*BootVmediaDeviceResponse, *http.Response, error) {
 	return r.ApiService.GetBootVmediaDeviceListExecute(r)
 }
 
 /*
 GetBootVmediaDeviceList Read a 'boot.VmediaDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetBootVmediaDeviceListRequest
 */
-func (a *BootApiService) GetBootVmediaDeviceList(ctx _context.Context) ApiGetBootVmediaDeviceListRequest {
+func (a *BootApiService) GetBootVmediaDeviceList(ctx context.Context) ApiGetBootVmediaDeviceListRequest {
 	return ApiGetBootVmediaDeviceListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -5874,26 +5811,24 @@ func (a *BootApiService) GetBootVmediaDeviceList(ctx _context.Context) ApiGetBoo
 
 // Execute executes the request
 //  @return BootVmediaDeviceResponse
-func (a *BootApiService) GetBootVmediaDeviceListExecute(r ApiGetBootVmediaDeviceListRequest) (BootVmediaDeviceResponse, *_nethttp.Response, error) {
+func (a *BootApiService) GetBootVmediaDeviceListExecute(r ApiGetBootVmediaDeviceListRequest) (*BootVmediaDeviceResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootVmediaDeviceResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootVmediaDeviceResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.GetBootVmediaDeviceList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/VmediaDevices"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -5945,7 +5880,7 @@ func (a *BootApiService) GetBootVmediaDeviceListExecute(r ApiGetBootVmediaDevice
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -5955,15 +5890,15 @@ func (a *BootApiService) GetBootVmediaDeviceListExecute(r ApiGetBootVmediaDevice
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -6019,7 +5954,7 @@ func (a *BootApiService) GetBootVmediaDeviceListExecute(r ApiGetBootVmediaDevice
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -6030,7 +5965,7 @@ func (a *BootApiService) GetBootVmediaDeviceListExecute(r ApiGetBootVmediaDevice
 }
 
 type ApiPatchBootCddDeviceRequest struct {
-	ctx           _context.Context
+	ctx           context.Context
 	ApiService    *BootApiService
 	moid          string
 	bootCddDevice *BootCddDevice
@@ -6049,18 +5984,18 @@ func (r ApiPatchBootCddDeviceRequest) IfMatch(ifMatch string) ApiPatchBootCddDev
 	return r
 }
 
-func (r ApiPatchBootCddDeviceRequest) Execute() (BootCddDevice, *_nethttp.Response, error) {
+func (r ApiPatchBootCddDeviceRequest) Execute() (*BootCddDevice, *http.Response, error) {
 	return r.ApiService.PatchBootCddDeviceExecute(r)
 }
 
 /*
 PatchBootCddDevice Update a 'boot.CddDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchBootCddDeviceRequest
 */
-func (a *BootApiService) PatchBootCddDevice(ctx _context.Context, moid string) ApiPatchBootCddDeviceRequest {
+func (a *BootApiService) PatchBootCddDevice(ctx context.Context, moid string) ApiPatchBootCddDeviceRequest {
 	return ApiPatchBootCddDeviceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -6070,27 +6005,25 @@ func (a *BootApiService) PatchBootCddDevice(ctx _context.Context, moid string) A
 
 // Execute executes the request
 //  @return BootCddDevice
-func (a *BootApiService) PatchBootCddDeviceExecute(r ApiPatchBootCddDeviceRequest) (BootCddDevice, *_nethttp.Response, error) {
+func (a *BootApiService) PatchBootCddDeviceExecute(r ApiPatchBootCddDeviceRequest) (*BootCddDevice, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootCddDevice
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootCddDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.PatchBootCddDevice")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/CddDevices/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.bootCddDevice == nil {
 		return localVarReturnValue, nil, reportError("bootCddDevice is required and must be specified")
 	}
@@ -6117,7 +6050,7 @@ func (a *BootApiService) PatchBootCddDeviceExecute(r ApiPatchBootCddDeviceReques
 	}
 	// body params
 	localVarPostBody = r.bootCddDevice
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -6127,15 +6060,15 @@ func (a *BootApiService) PatchBootCddDeviceExecute(r ApiPatchBootCddDeviceReques
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -6191,7 +6124,7 @@ func (a *BootApiService) PatchBootCddDeviceExecute(r ApiPatchBootCddDeviceReques
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -6202,7 +6135,7 @@ func (a *BootApiService) PatchBootCddDeviceExecute(r ApiPatchBootCddDeviceReques
 }
 
 type ApiPatchBootDeviceBootModeRequest struct {
-	ctx                _context.Context
+	ctx                context.Context
 	ApiService         *BootApiService
 	moid               string
 	bootDeviceBootMode *BootDeviceBootMode
@@ -6221,18 +6154,18 @@ func (r ApiPatchBootDeviceBootModeRequest) IfMatch(ifMatch string) ApiPatchBootD
 	return r
 }
 
-func (r ApiPatchBootDeviceBootModeRequest) Execute() (BootDeviceBootMode, *_nethttp.Response, error) {
+func (r ApiPatchBootDeviceBootModeRequest) Execute() (*BootDeviceBootMode, *http.Response, error) {
 	return r.ApiService.PatchBootDeviceBootModeExecute(r)
 }
 
 /*
 PatchBootDeviceBootMode Update a 'boot.DeviceBootMode' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchBootDeviceBootModeRequest
 */
-func (a *BootApiService) PatchBootDeviceBootMode(ctx _context.Context, moid string) ApiPatchBootDeviceBootModeRequest {
+func (a *BootApiService) PatchBootDeviceBootMode(ctx context.Context, moid string) ApiPatchBootDeviceBootModeRequest {
 	return ApiPatchBootDeviceBootModeRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -6242,27 +6175,25 @@ func (a *BootApiService) PatchBootDeviceBootMode(ctx _context.Context, moid stri
 
 // Execute executes the request
 //  @return BootDeviceBootMode
-func (a *BootApiService) PatchBootDeviceBootModeExecute(r ApiPatchBootDeviceBootModeRequest) (BootDeviceBootMode, *_nethttp.Response, error) {
+func (a *BootApiService) PatchBootDeviceBootModeExecute(r ApiPatchBootDeviceBootModeRequest) (*BootDeviceBootMode, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootDeviceBootMode
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootDeviceBootMode
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.PatchBootDeviceBootMode")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/DeviceBootModes/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.bootDeviceBootMode == nil {
 		return localVarReturnValue, nil, reportError("bootDeviceBootMode is required and must be specified")
 	}
@@ -6289,7 +6220,7 @@ func (a *BootApiService) PatchBootDeviceBootModeExecute(r ApiPatchBootDeviceBoot
 	}
 	// body params
 	localVarPostBody = r.bootDeviceBootMode
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -6299,15 +6230,15 @@ func (a *BootApiService) PatchBootDeviceBootModeExecute(r ApiPatchBootDeviceBoot
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -6363,7 +6294,7 @@ func (a *BootApiService) PatchBootDeviceBootModeExecute(r ApiPatchBootDeviceBoot
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -6374,7 +6305,7 @@ func (a *BootApiService) PatchBootDeviceBootModeExecute(r ApiPatchBootDeviceBoot
 }
 
 type ApiPatchBootDeviceBootSecurityRequest struct {
-	ctx                    _context.Context
+	ctx                    context.Context
 	ApiService             *BootApiService
 	moid                   string
 	bootDeviceBootSecurity *BootDeviceBootSecurity
@@ -6393,18 +6324,18 @@ func (r ApiPatchBootDeviceBootSecurityRequest) IfMatch(ifMatch string) ApiPatchB
 	return r
 }
 
-func (r ApiPatchBootDeviceBootSecurityRequest) Execute() (BootDeviceBootSecurity, *_nethttp.Response, error) {
+func (r ApiPatchBootDeviceBootSecurityRequest) Execute() (*BootDeviceBootSecurity, *http.Response, error) {
 	return r.ApiService.PatchBootDeviceBootSecurityExecute(r)
 }
 
 /*
 PatchBootDeviceBootSecurity Update a 'boot.DeviceBootSecurity' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchBootDeviceBootSecurityRequest
 */
-func (a *BootApiService) PatchBootDeviceBootSecurity(ctx _context.Context, moid string) ApiPatchBootDeviceBootSecurityRequest {
+func (a *BootApiService) PatchBootDeviceBootSecurity(ctx context.Context, moid string) ApiPatchBootDeviceBootSecurityRequest {
 	return ApiPatchBootDeviceBootSecurityRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -6414,27 +6345,25 @@ func (a *BootApiService) PatchBootDeviceBootSecurity(ctx _context.Context, moid 
 
 // Execute executes the request
 //  @return BootDeviceBootSecurity
-func (a *BootApiService) PatchBootDeviceBootSecurityExecute(r ApiPatchBootDeviceBootSecurityRequest) (BootDeviceBootSecurity, *_nethttp.Response, error) {
+func (a *BootApiService) PatchBootDeviceBootSecurityExecute(r ApiPatchBootDeviceBootSecurityRequest) (*BootDeviceBootSecurity, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootDeviceBootSecurity
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootDeviceBootSecurity
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.PatchBootDeviceBootSecurity")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/DeviceBootSecurities/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.bootDeviceBootSecurity == nil {
 		return localVarReturnValue, nil, reportError("bootDeviceBootSecurity is required and must be specified")
 	}
@@ -6461,7 +6390,7 @@ func (a *BootApiService) PatchBootDeviceBootSecurityExecute(r ApiPatchBootDevice
 	}
 	// body params
 	localVarPostBody = r.bootDeviceBootSecurity
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -6471,15 +6400,15 @@ func (a *BootApiService) PatchBootDeviceBootSecurityExecute(r ApiPatchBootDevice
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -6535,7 +6464,7 @@ func (a *BootApiService) PatchBootDeviceBootSecurityExecute(r ApiPatchBootDevice
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -6546,7 +6475,7 @@ func (a *BootApiService) PatchBootDeviceBootSecurityExecute(r ApiPatchBootDevice
 }
 
 type ApiPatchBootHddDeviceRequest struct {
-	ctx           _context.Context
+	ctx           context.Context
 	ApiService    *BootApiService
 	moid          string
 	bootHddDevice *BootHddDevice
@@ -6565,18 +6494,18 @@ func (r ApiPatchBootHddDeviceRequest) IfMatch(ifMatch string) ApiPatchBootHddDev
 	return r
 }
 
-func (r ApiPatchBootHddDeviceRequest) Execute() (BootHddDevice, *_nethttp.Response, error) {
+func (r ApiPatchBootHddDeviceRequest) Execute() (*BootHddDevice, *http.Response, error) {
 	return r.ApiService.PatchBootHddDeviceExecute(r)
 }
 
 /*
 PatchBootHddDevice Update a 'boot.HddDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchBootHddDeviceRequest
 */
-func (a *BootApiService) PatchBootHddDevice(ctx _context.Context, moid string) ApiPatchBootHddDeviceRequest {
+func (a *BootApiService) PatchBootHddDevice(ctx context.Context, moid string) ApiPatchBootHddDeviceRequest {
 	return ApiPatchBootHddDeviceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -6586,27 +6515,25 @@ func (a *BootApiService) PatchBootHddDevice(ctx _context.Context, moid string) A
 
 // Execute executes the request
 //  @return BootHddDevice
-func (a *BootApiService) PatchBootHddDeviceExecute(r ApiPatchBootHddDeviceRequest) (BootHddDevice, *_nethttp.Response, error) {
+func (a *BootApiService) PatchBootHddDeviceExecute(r ApiPatchBootHddDeviceRequest) (*BootHddDevice, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootHddDevice
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootHddDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.PatchBootHddDevice")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/HddDevices/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.bootHddDevice == nil {
 		return localVarReturnValue, nil, reportError("bootHddDevice is required and must be specified")
 	}
@@ -6633,7 +6560,7 @@ func (a *BootApiService) PatchBootHddDeviceExecute(r ApiPatchBootHddDeviceReques
 	}
 	// body params
 	localVarPostBody = r.bootHddDevice
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -6643,15 +6570,15 @@ func (a *BootApiService) PatchBootHddDeviceExecute(r ApiPatchBootHddDeviceReques
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -6707,7 +6634,7 @@ func (a *BootApiService) PatchBootHddDeviceExecute(r ApiPatchBootHddDeviceReques
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -6718,7 +6645,7 @@ func (a *BootApiService) PatchBootHddDeviceExecute(r ApiPatchBootHddDeviceReques
 }
 
 type ApiPatchBootIscsiDeviceRequest struct {
-	ctx             _context.Context
+	ctx             context.Context
 	ApiService      *BootApiService
 	moid            string
 	bootIscsiDevice *BootIscsiDevice
@@ -6737,18 +6664,18 @@ func (r ApiPatchBootIscsiDeviceRequest) IfMatch(ifMatch string) ApiPatchBootIscs
 	return r
 }
 
-func (r ApiPatchBootIscsiDeviceRequest) Execute() (BootIscsiDevice, *_nethttp.Response, error) {
+func (r ApiPatchBootIscsiDeviceRequest) Execute() (*BootIscsiDevice, *http.Response, error) {
 	return r.ApiService.PatchBootIscsiDeviceExecute(r)
 }
 
 /*
 PatchBootIscsiDevice Update a 'boot.IscsiDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchBootIscsiDeviceRequest
 */
-func (a *BootApiService) PatchBootIscsiDevice(ctx _context.Context, moid string) ApiPatchBootIscsiDeviceRequest {
+func (a *BootApiService) PatchBootIscsiDevice(ctx context.Context, moid string) ApiPatchBootIscsiDeviceRequest {
 	return ApiPatchBootIscsiDeviceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -6758,27 +6685,25 @@ func (a *BootApiService) PatchBootIscsiDevice(ctx _context.Context, moid string)
 
 // Execute executes the request
 //  @return BootIscsiDevice
-func (a *BootApiService) PatchBootIscsiDeviceExecute(r ApiPatchBootIscsiDeviceRequest) (BootIscsiDevice, *_nethttp.Response, error) {
+func (a *BootApiService) PatchBootIscsiDeviceExecute(r ApiPatchBootIscsiDeviceRequest) (*BootIscsiDevice, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootIscsiDevice
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootIscsiDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.PatchBootIscsiDevice")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/IscsiDevices/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.bootIscsiDevice == nil {
 		return localVarReturnValue, nil, reportError("bootIscsiDevice is required and must be specified")
 	}
@@ -6805,7 +6730,7 @@ func (a *BootApiService) PatchBootIscsiDeviceExecute(r ApiPatchBootIscsiDeviceRe
 	}
 	// body params
 	localVarPostBody = r.bootIscsiDevice
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -6815,15 +6740,15 @@ func (a *BootApiService) PatchBootIscsiDeviceExecute(r ApiPatchBootIscsiDeviceRe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -6879,7 +6804,7 @@ func (a *BootApiService) PatchBootIscsiDeviceExecute(r ApiPatchBootIscsiDeviceRe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -6890,7 +6815,7 @@ func (a *BootApiService) PatchBootIscsiDeviceExecute(r ApiPatchBootIscsiDeviceRe
 }
 
 type ApiPatchBootNvmeDeviceRequest struct {
-	ctx            _context.Context
+	ctx            context.Context
 	ApiService     *BootApiService
 	moid           string
 	bootNvmeDevice *BootNvmeDevice
@@ -6909,18 +6834,18 @@ func (r ApiPatchBootNvmeDeviceRequest) IfMatch(ifMatch string) ApiPatchBootNvmeD
 	return r
 }
 
-func (r ApiPatchBootNvmeDeviceRequest) Execute() (BootNvmeDevice, *_nethttp.Response, error) {
+func (r ApiPatchBootNvmeDeviceRequest) Execute() (*BootNvmeDevice, *http.Response, error) {
 	return r.ApiService.PatchBootNvmeDeviceExecute(r)
 }
 
 /*
 PatchBootNvmeDevice Update a 'boot.NvmeDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchBootNvmeDeviceRequest
 */
-func (a *BootApiService) PatchBootNvmeDevice(ctx _context.Context, moid string) ApiPatchBootNvmeDeviceRequest {
+func (a *BootApiService) PatchBootNvmeDevice(ctx context.Context, moid string) ApiPatchBootNvmeDeviceRequest {
 	return ApiPatchBootNvmeDeviceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -6930,27 +6855,25 @@ func (a *BootApiService) PatchBootNvmeDevice(ctx _context.Context, moid string) 
 
 // Execute executes the request
 //  @return BootNvmeDevice
-func (a *BootApiService) PatchBootNvmeDeviceExecute(r ApiPatchBootNvmeDeviceRequest) (BootNvmeDevice, *_nethttp.Response, error) {
+func (a *BootApiService) PatchBootNvmeDeviceExecute(r ApiPatchBootNvmeDeviceRequest) (*BootNvmeDevice, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootNvmeDevice
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootNvmeDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.PatchBootNvmeDevice")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/NvmeDevices/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.bootNvmeDevice == nil {
 		return localVarReturnValue, nil, reportError("bootNvmeDevice is required and must be specified")
 	}
@@ -6977,7 +6900,7 @@ func (a *BootApiService) PatchBootNvmeDeviceExecute(r ApiPatchBootNvmeDeviceRequ
 	}
 	// body params
 	localVarPostBody = r.bootNvmeDevice
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -6987,15 +6910,15 @@ func (a *BootApiService) PatchBootNvmeDeviceExecute(r ApiPatchBootNvmeDeviceRequ
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -7051,7 +6974,7 @@ func (a *BootApiService) PatchBootNvmeDeviceExecute(r ApiPatchBootNvmeDeviceRequ
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -7062,7 +6985,7 @@ func (a *BootApiService) PatchBootNvmeDeviceExecute(r ApiPatchBootNvmeDeviceRequ
 }
 
 type ApiPatchBootPchStorageDeviceRequest struct {
-	ctx                  _context.Context
+	ctx                  context.Context
 	ApiService           *BootApiService
 	moid                 string
 	bootPchStorageDevice *BootPchStorageDevice
@@ -7081,18 +7004,18 @@ func (r ApiPatchBootPchStorageDeviceRequest) IfMatch(ifMatch string) ApiPatchBoo
 	return r
 }
 
-func (r ApiPatchBootPchStorageDeviceRequest) Execute() (BootPchStorageDevice, *_nethttp.Response, error) {
+func (r ApiPatchBootPchStorageDeviceRequest) Execute() (*BootPchStorageDevice, *http.Response, error) {
 	return r.ApiService.PatchBootPchStorageDeviceExecute(r)
 }
 
 /*
 PatchBootPchStorageDevice Update a 'boot.PchStorageDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchBootPchStorageDeviceRequest
 */
-func (a *BootApiService) PatchBootPchStorageDevice(ctx _context.Context, moid string) ApiPatchBootPchStorageDeviceRequest {
+func (a *BootApiService) PatchBootPchStorageDevice(ctx context.Context, moid string) ApiPatchBootPchStorageDeviceRequest {
 	return ApiPatchBootPchStorageDeviceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -7102,27 +7025,25 @@ func (a *BootApiService) PatchBootPchStorageDevice(ctx _context.Context, moid st
 
 // Execute executes the request
 //  @return BootPchStorageDevice
-func (a *BootApiService) PatchBootPchStorageDeviceExecute(r ApiPatchBootPchStorageDeviceRequest) (BootPchStorageDevice, *_nethttp.Response, error) {
+func (a *BootApiService) PatchBootPchStorageDeviceExecute(r ApiPatchBootPchStorageDeviceRequest) (*BootPchStorageDevice, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootPchStorageDevice
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootPchStorageDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.PatchBootPchStorageDevice")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/PchStorageDevices/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.bootPchStorageDevice == nil {
 		return localVarReturnValue, nil, reportError("bootPchStorageDevice is required and must be specified")
 	}
@@ -7149,7 +7070,7 @@ func (a *BootApiService) PatchBootPchStorageDeviceExecute(r ApiPatchBootPchStora
 	}
 	// body params
 	localVarPostBody = r.bootPchStorageDevice
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -7159,15 +7080,15 @@ func (a *BootApiService) PatchBootPchStorageDeviceExecute(r ApiPatchBootPchStora
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -7223,7 +7144,7 @@ func (a *BootApiService) PatchBootPchStorageDeviceExecute(r ApiPatchBootPchStora
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -7234,7 +7155,7 @@ func (a *BootApiService) PatchBootPchStorageDeviceExecute(r ApiPatchBootPchStora
 }
 
 type ApiPatchBootPrecisionPolicyRequest struct {
-	ctx                 _context.Context
+	ctx                 context.Context
 	ApiService          *BootApiService
 	moid                string
 	bootPrecisionPolicy *BootPrecisionPolicy
@@ -7253,18 +7174,18 @@ func (r ApiPatchBootPrecisionPolicyRequest) IfMatch(ifMatch string) ApiPatchBoot
 	return r
 }
 
-func (r ApiPatchBootPrecisionPolicyRequest) Execute() (BootPrecisionPolicy, *_nethttp.Response, error) {
+func (r ApiPatchBootPrecisionPolicyRequest) Execute() (*BootPrecisionPolicy, *http.Response, error) {
 	return r.ApiService.PatchBootPrecisionPolicyExecute(r)
 }
 
 /*
 PatchBootPrecisionPolicy Update a 'boot.PrecisionPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchBootPrecisionPolicyRequest
 */
-func (a *BootApiService) PatchBootPrecisionPolicy(ctx _context.Context, moid string) ApiPatchBootPrecisionPolicyRequest {
+func (a *BootApiService) PatchBootPrecisionPolicy(ctx context.Context, moid string) ApiPatchBootPrecisionPolicyRequest {
 	return ApiPatchBootPrecisionPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -7274,27 +7195,25 @@ func (a *BootApiService) PatchBootPrecisionPolicy(ctx _context.Context, moid str
 
 // Execute executes the request
 //  @return BootPrecisionPolicy
-func (a *BootApiService) PatchBootPrecisionPolicyExecute(r ApiPatchBootPrecisionPolicyRequest) (BootPrecisionPolicy, *_nethttp.Response, error) {
+func (a *BootApiService) PatchBootPrecisionPolicyExecute(r ApiPatchBootPrecisionPolicyRequest) (*BootPrecisionPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootPrecisionPolicy
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootPrecisionPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.PatchBootPrecisionPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/PrecisionPolicies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.bootPrecisionPolicy == nil {
 		return localVarReturnValue, nil, reportError("bootPrecisionPolicy is required and must be specified")
 	}
@@ -7321,7 +7240,7 @@ func (a *BootApiService) PatchBootPrecisionPolicyExecute(r ApiPatchBootPrecision
 	}
 	// body params
 	localVarPostBody = r.bootPrecisionPolicy
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -7331,15 +7250,15 @@ func (a *BootApiService) PatchBootPrecisionPolicyExecute(r ApiPatchBootPrecision
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -7395,7 +7314,7 @@ func (a *BootApiService) PatchBootPrecisionPolicyExecute(r ApiPatchBootPrecision
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -7406,7 +7325,7 @@ func (a *BootApiService) PatchBootPrecisionPolicyExecute(r ApiPatchBootPrecision
 }
 
 type ApiPatchBootPxeDeviceRequest struct {
-	ctx           _context.Context
+	ctx           context.Context
 	ApiService    *BootApiService
 	moid          string
 	bootPxeDevice *BootPxeDevice
@@ -7425,18 +7344,18 @@ func (r ApiPatchBootPxeDeviceRequest) IfMatch(ifMatch string) ApiPatchBootPxeDev
 	return r
 }
 
-func (r ApiPatchBootPxeDeviceRequest) Execute() (BootPxeDevice, *_nethttp.Response, error) {
+func (r ApiPatchBootPxeDeviceRequest) Execute() (*BootPxeDevice, *http.Response, error) {
 	return r.ApiService.PatchBootPxeDeviceExecute(r)
 }
 
 /*
 PatchBootPxeDevice Update a 'boot.PxeDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchBootPxeDeviceRequest
 */
-func (a *BootApiService) PatchBootPxeDevice(ctx _context.Context, moid string) ApiPatchBootPxeDeviceRequest {
+func (a *BootApiService) PatchBootPxeDevice(ctx context.Context, moid string) ApiPatchBootPxeDeviceRequest {
 	return ApiPatchBootPxeDeviceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -7446,27 +7365,25 @@ func (a *BootApiService) PatchBootPxeDevice(ctx _context.Context, moid string) A
 
 // Execute executes the request
 //  @return BootPxeDevice
-func (a *BootApiService) PatchBootPxeDeviceExecute(r ApiPatchBootPxeDeviceRequest) (BootPxeDevice, *_nethttp.Response, error) {
+func (a *BootApiService) PatchBootPxeDeviceExecute(r ApiPatchBootPxeDeviceRequest) (*BootPxeDevice, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootPxeDevice
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootPxeDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.PatchBootPxeDevice")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/PxeDevices/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.bootPxeDevice == nil {
 		return localVarReturnValue, nil, reportError("bootPxeDevice is required and must be specified")
 	}
@@ -7493,7 +7410,7 @@ func (a *BootApiService) PatchBootPxeDeviceExecute(r ApiPatchBootPxeDeviceReques
 	}
 	// body params
 	localVarPostBody = r.bootPxeDevice
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -7503,15 +7420,15 @@ func (a *BootApiService) PatchBootPxeDeviceExecute(r ApiPatchBootPxeDeviceReques
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -7567,7 +7484,7 @@ func (a *BootApiService) PatchBootPxeDeviceExecute(r ApiPatchBootPxeDeviceReques
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -7578,7 +7495,7 @@ func (a *BootApiService) PatchBootPxeDeviceExecute(r ApiPatchBootPxeDeviceReques
 }
 
 type ApiPatchBootSanDeviceRequest struct {
-	ctx           _context.Context
+	ctx           context.Context
 	ApiService    *BootApiService
 	moid          string
 	bootSanDevice *BootSanDevice
@@ -7597,18 +7514,18 @@ func (r ApiPatchBootSanDeviceRequest) IfMatch(ifMatch string) ApiPatchBootSanDev
 	return r
 }
 
-func (r ApiPatchBootSanDeviceRequest) Execute() (BootSanDevice, *_nethttp.Response, error) {
+func (r ApiPatchBootSanDeviceRequest) Execute() (*BootSanDevice, *http.Response, error) {
 	return r.ApiService.PatchBootSanDeviceExecute(r)
 }
 
 /*
 PatchBootSanDevice Update a 'boot.SanDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchBootSanDeviceRequest
 */
-func (a *BootApiService) PatchBootSanDevice(ctx _context.Context, moid string) ApiPatchBootSanDeviceRequest {
+func (a *BootApiService) PatchBootSanDevice(ctx context.Context, moid string) ApiPatchBootSanDeviceRequest {
 	return ApiPatchBootSanDeviceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -7618,27 +7535,25 @@ func (a *BootApiService) PatchBootSanDevice(ctx _context.Context, moid string) A
 
 // Execute executes the request
 //  @return BootSanDevice
-func (a *BootApiService) PatchBootSanDeviceExecute(r ApiPatchBootSanDeviceRequest) (BootSanDevice, *_nethttp.Response, error) {
+func (a *BootApiService) PatchBootSanDeviceExecute(r ApiPatchBootSanDeviceRequest) (*BootSanDevice, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootSanDevice
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootSanDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.PatchBootSanDevice")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/SanDevices/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.bootSanDevice == nil {
 		return localVarReturnValue, nil, reportError("bootSanDevice is required and must be specified")
 	}
@@ -7665,7 +7580,7 @@ func (a *BootApiService) PatchBootSanDeviceExecute(r ApiPatchBootSanDeviceReques
 	}
 	// body params
 	localVarPostBody = r.bootSanDevice
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -7675,15 +7590,15 @@ func (a *BootApiService) PatchBootSanDeviceExecute(r ApiPatchBootSanDeviceReques
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -7739,7 +7654,7 @@ func (a *BootApiService) PatchBootSanDeviceExecute(r ApiPatchBootSanDeviceReques
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -7750,7 +7665,7 @@ func (a *BootApiService) PatchBootSanDeviceExecute(r ApiPatchBootSanDeviceReques
 }
 
 type ApiPatchBootSdDeviceRequest struct {
-	ctx          _context.Context
+	ctx          context.Context
 	ApiService   *BootApiService
 	moid         string
 	bootSdDevice *BootSdDevice
@@ -7769,18 +7684,18 @@ func (r ApiPatchBootSdDeviceRequest) IfMatch(ifMatch string) ApiPatchBootSdDevic
 	return r
 }
 
-func (r ApiPatchBootSdDeviceRequest) Execute() (BootSdDevice, *_nethttp.Response, error) {
+func (r ApiPatchBootSdDeviceRequest) Execute() (*BootSdDevice, *http.Response, error) {
 	return r.ApiService.PatchBootSdDeviceExecute(r)
 }
 
 /*
 PatchBootSdDevice Update a 'boot.SdDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchBootSdDeviceRequest
 */
-func (a *BootApiService) PatchBootSdDevice(ctx _context.Context, moid string) ApiPatchBootSdDeviceRequest {
+func (a *BootApiService) PatchBootSdDevice(ctx context.Context, moid string) ApiPatchBootSdDeviceRequest {
 	return ApiPatchBootSdDeviceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -7790,27 +7705,25 @@ func (a *BootApiService) PatchBootSdDevice(ctx _context.Context, moid string) Ap
 
 // Execute executes the request
 //  @return BootSdDevice
-func (a *BootApiService) PatchBootSdDeviceExecute(r ApiPatchBootSdDeviceRequest) (BootSdDevice, *_nethttp.Response, error) {
+func (a *BootApiService) PatchBootSdDeviceExecute(r ApiPatchBootSdDeviceRequest) (*BootSdDevice, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootSdDevice
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootSdDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.PatchBootSdDevice")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/SdDevices/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.bootSdDevice == nil {
 		return localVarReturnValue, nil, reportError("bootSdDevice is required and must be specified")
 	}
@@ -7837,7 +7750,7 @@ func (a *BootApiService) PatchBootSdDeviceExecute(r ApiPatchBootSdDeviceRequest)
 	}
 	// body params
 	localVarPostBody = r.bootSdDevice
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -7847,15 +7760,15 @@ func (a *BootApiService) PatchBootSdDeviceExecute(r ApiPatchBootSdDeviceRequest)
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -7911,7 +7824,7 @@ func (a *BootApiService) PatchBootSdDeviceExecute(r ApiPatchBootSdDeviceRequest)
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -7922,7 +7835,7 @@ func (a *BootApiService) PatchBootSdDeviceExecute(r ApiPatchBootSdDeviceRequest)
 }
 
 type ApiPatchBootUefiShellDeviceRequest struct {
-	ctx                 _context.Context
+	ctx                 context.Context
 	ApiService          *BootApiService
 	moid                string
 	bootUefiShellDevice *BootUefiShellDevice
@@ -7941,18 +7854,18 @@ func (r ApiPatchBootUefiShellDeviceRequest) IfMatch(ifMatch string) ApiPatchBoot
 	return r
 }
 
-func (r ApiPatchBootUefiShellDeviceRequest) Execute() (BootUefiShellDevice, *_nethttp.Response, error) {
+func (r ApiPatchBootUefiShellDeviceRequest) Execute() (*BootUefiShellDevice, *http.Response, error) {
 	return r.ApiService.PatchBootUefiShellDeviceExecute(r)
 }
 
 /*
 PatchBootUefiShellDevice Update a 'boot.UefiShellDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchBootUefiShellDeviceRequest
 */
-func (a *BootApiService) PatchBootUefiShellDevice(ctx _context.Context, moid string) ApiPatchBootUefiShellDeviceRequest {
+func (a *BootApiService) PatchBootUefiShellDevice(ctx context.Context, moid string) ApiPatchBootUefiShellDeviceRequest {
 	return ApiPatchBootUefiShellDeviceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -7962,27 +7875,25 @@ func (a *BootApiService) PatchBootUefiShellDevice(ctx _context.Context, moid str
 
 // Execute executes the request
 //  @return BootUefiShellDevice
-func (a *BootApiService) PatchBootUefiShellDeviceExecute(r ApiPatchBootUefiShellDeviceRequest) (BootUefiShellDevice, *_nethttp.Response, error) {
+func (a *BootApiService) PatchBootUefiShellDeviceExecute(r ApiPatchBootUefiShellDeviceRequest) (*BootUefiShellDevice, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootUefiShellDevice
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootUefiShellDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.PatchBootUefiShellDevice")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/UefiShellDevices/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.bootUefiShellDevice == nil {
 		return localVarReturnValue, nil, reportError("bootUefiShellDevice is required and must be specified")
 	}
@@ -8009,7 +7920,7 @@ func (a *BootApiService) PatchBootUefiShellDeviceExecute(r ApiPatchBootUefiShell
 	}
 	// body params
 	localVarPostBody = r.bootUefiShellDevice
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -8019,15 +7930,15 @@ func (a *BootApiService) PatchBootUefiShellDeviceExecute(r ApiPatchBootUefiShell
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -8083,7 +7994,7 @@ func (a *BootApiService) PatchBootUefiShellDeviceExecute(r ApiPatchBootUefiShell
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -8094,7 +8005,7 @@ func (a *BootApiService) PatchBootUefiShellDeviceExecute(r ApiPatchBootUefiShell
 }
 
 type ApiPatchBootUsbDeviceRequest struct {
-	ctx           _context.Context
+	ctx           context.Context
 	ApiService    *BootApiService
 	moid          string
 	bootUsbDevice *BootUsbDevice
@@ -8113,18 +8024,18 @@ func (r ApiPatchBootUsbDeviceRequest) IfMatch(ifMatch string) ApiPatchBootUsbDev
 	return r
 }
 
-func (r ApiPatchBootUsbDeviceRequest) Execute() (BootUsbDevice, *_nethttp.Response, error) {
+func (r ApiPatchBootUsbDeviceRequest) Execute() (*BootUsbDevice, *http.Response, error) {
 	return r.ApiService.PatchBootUsbDeviceExecute(r)
 }
 
 /*
 PatchBootUsbDevice Update a 'boot.UsbDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchBootUsbDeviceRequest
 */
-func (a *BootApiService) PatchBootUsbDevice(ctx _context.Context, moid string) ApiPatchBootUsbDeviceRequest {
+func (a *BootApiService) PatchBootUsbDevice(ctx context.Context, moid string) ApiPatchBootUsbDeviceRequest {
 	return ApiPatchBootUsbDeviceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -8134,27 +8045,25 @@ func (a *BootApiService) PatchBootUsbDevice(ctx _context.Context, moid string) A
 
 // Execute executes the request
 //  @return BootUsbDevice
-func (a *BootApiService) PatchBootUsbDeviceExecute(r ApiPatchBootUsbDeviceRequest) (BootUsbDevice, *_nethttp.Response, error) {
+func (a *BootApiService) PatchBootUsbDeviceExecute(r ApiPatchBootUsbDeviceRequest) (*BootUsbDevice, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootUsbDevice
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootUsbDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.PatchBootUsbDevice")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/UsbDevices/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.bootUsbDevice == nil {
 		return localVarReturnValue, nil, reportError("bootUsbDevice is required and must be specified")
 	}
@@ -8181,7 +8090,7 @@ func (a *BootApiService) PatchBootUsbDeviceExecute(r ApiPatchBootUsbDeviceReques
 	}
 	// body params
 	localVarPostBody = r.bootUsbDevice
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -8191,15 +8100,15 @@ func (a *BootApiService) PatchBootUsbDeviceExecute(r ApiPatchBootUsbDeviceReques
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -8255,7 +8164,7 @@ func (a *BootApiService) PatchBootUsbDeviceExecute(r ApiPatchBootUsbDeviceReques
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -8266,7 +8175,7 @@ func (a *BootApiService) PatchBootUsbDeviceExecute(r ApiPatchBootUsbDeviceReques
 }
 
 type ApiPatchBootVmediaDeviceRequest struct {
-	ctx              _context.Context
+	ctx              context.Context
 	ApiService       *BootApiService
 	moid             string
 	bootVmediaDevice *BootVmediaDevice
@@ -8285,18 +8194,18 @@ func (r ApiPatchBootVmediaDeviceRequest) IfMatch(ifMatch string) ApiPatchBootVme
 	return r
 }
 
-func (r ApiPatchBootVmediaDeviceRequest) Execute() (BootVmediaDevice, *_nethttp.Response, error) {
+func (r ApiPatchBootVmediaDeviceRequest) Execute() (*BootVmediaDevice, *http.Response, error) {
 	return r.ApiService.PatchBootVmediaDeviceExecute(r)
 }
 
 /*
 PatchBootVmediaDevice Update a 'boot.VmediaDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchBootVmediaDeviceRequest
 */
-func (a *BootApiService) PatchBootVmediaDevice(ctx _context.Context, moid string) ApiPatchBootVmediaDeviceRequest {
+func (a *BootApiService) PatchBootVmediaDevice(ctx context.Context, moid string) ApiPatchBootVmediaDeviceRequest {
 	return ApiPatchBootVmediaDeviceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -8306,27 +8215,25 @@ func (a *BootApiService) PatchBootVmediaDevice(ctx _context.Context, moid string
 
 // Execute executes the request
 //  @return BootVmediaDevice
-func (a *BootApiService) PatchBootVmediaDeviceExecute(r ApiPatchBootVmediaDeviceRequest) (BootVmediaDevice, *_nethttp.Response, error) {
+func (a *BootApiService) PatchBootVmediaDeviceExecute(r ApiPatchBootVmediaDeviceRequest) (*BootVmediaDevice, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootVmediaDevice
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootVmediaDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.PatchBootVmediaDevice")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/VmediaDevices/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.bootVmediaDevice == nil {
 		return localVarReturnValue, nil, reportError("bootVmediaDevice is required and must be specified")
 	}
@@ -8353,7 +8260,7 @@ func (a *BootApiService) PatchBootVmediaDeviceExecute(r ApiPatchBootVmediaDevice
 	}
 	// body params
 	localVarPostBody = r.bootVmediaDevice
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -8363,15 +8270,15 @@ func (a *BootApiService) PatchBootVmediaDeviceExecute(r ApiPatchBootVmediaDevice
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -8427,7 +8334,7 @@ func (a *BootApiService) PatchBootVmediaDeviceExecute(r ApiPatchBootVmediaDevice
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -8438,7 +8345,7 @@ func (a *BootApiService) PatchBootVmediaDeviceExecute(r ApiPatchBootVmediaDevice
 }
 
 type ApiUpdateBootCddDeviceRequest struct {
-	ctx           _context.Context
+	ctx           context.Context
 	ApiService    *BootApiService
 	moid          string
 	bootCddDevice *BootCddDevice
@@ -8457,18 +8364,18 @@ func (r ApiUpdateBootCddDeviceRequest) IfMatch(ifMatch string) ApiUpdateBootCddD
 	return r
 }
 
-func (r ApiUpdateBootCddDeviceRequest) Execute() (BootCddDevice, *_nethttp.Response, error) {
+func (r ApiUpdateBootCddDeviceRequest) Execute() (*BootCddDevice, *http.Response, error) {
 	return r.ApiService.UpdateBootCddDeviceExecute(r)
 }
 
 /*
 UpdateBootCddDevice Update a 'boot.CddDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateBootCddDeviceRequest
 */
-func (a *BootApiService) UpdateBootCddDevice(ctx _context.Context, moid string) ApiUpdateBootCddDeviceRequest {
+func (a *BootApiService) UpdateBootCddDevice(ctx context.Context, moid string) ApiUpdateBootCddDeviceRequest {
 	return ApiUpdateBootCddDeviceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -8478,27 +8385,25 @@ func (a *BootApiService) UpdateBootCddDevice(ctx _context.Context, moid string) 
 
 // Execute executes the request
 //  @return BootCddDevice
-func (a *BootApiService) UpdateBootCddDeviceExecute(r ApiUpdateBootCddDeviceRequest) (BootCddDevice, *_nethttp.Response, error) {
+func (a *BootApiService) UpdateBootCddDeviceExecute(r ApiUpdateBootCddDeviceRequest) (*BootCddDevice, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootCddDevice
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootCddDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.UpdateBootCddDevice")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/CddDevices/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.bootCddDevice == nil {
 		return localVarReturnValue, nil, reportError("bootCddDevice is required and must be specified")
 	}
@@ -8525,7 +8430,7 @@ func (a *BootApiService) UpdateBootCddDeviceExecute(r ApiUpdateBootCddDeviceRequ
 	}
 	// body params
 	localVarPostBody = r.bootCddDevice
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -8535,15 +8440,15 @@ func (a *BootApiService) UpdateBootCddDeviceExecute(r ApiUpdateBootCddDeviceRequ
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -8599,7 +8504,7 @@ func (a *BootApiService) UpdateBootCddDeviceExecute(r ApiUpdateBootCddDeviceRequ
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -8610,7 +8515,7 @@ func (a *BootApiService) UpdateBootCddDeviceExecute(r ApiUpdateBootCddDeviceRequ
 }
 
 type ApiUpdateBootDeviceBootModeRequest struct {
-	ctx                _context.Context
+	ctx                context.Context
 	ApiService         *BootApiService
 	moid               string
 	bootDeviceBootMode *BootDeviceBootMode
@@ -8629,18 +8534,18 @@ func (r ApiUpdateBootDeviceBootModeRequest) IfMatch(ifMatch string) ApiUpdateBoo
 	return r
 }
 
-func (r ApiUpdateBootDeviceBootModeRequest) Execute() (BootDeviceBootMode, *_nethttp.Response, error) {
+func (r ApiUpdateBootDeviceBootModeRequest) Execute() (*BootDeviceBootMode, *http.Response, error) {
 	return r.ApiService.UpdateBootDeviceBootModeExecute(r)
 }
 
 /*
 UpdateBootDeviceBootMode Update a 'boot.DeviceBootMode' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateBootDeviceBootModeRequest
 */
-func (a *BootApiService) UpdateBootDeviceBootMode(ctx _context.Context, moid string) ApiUpdateBootDeviceBootModeRequest {
+func (a *BootApiService) UpdateBootDeviceBootMode(ctx context.Context, moid string) ApiUpdateBootDeviceBootModeRequest {
 	return ApiUpdateBootDeviceBootModeRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -8650,27 +8555,25 @@ func (a *BootApiService) UpdateBootDeviceBootMode(ctx _context.Context, moid str
 
 // Execute executes the request
 //  @return BootDeviceBootMode
-func (a *BootApiService) UpdateBootDeviceBootModeExecute(r ApiUpdateBootDeviceBootModeRequest) (BootDeviceBootMode, *_nethttp.Response, error) {
+func (a *BootApiService) UpdateBootDeviceBootModeExecute(r ApiUpdateBootDeviceBootModeRequest) (*BootDeviceBootMode, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootDeviceBootMode
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootDeviceBootMode
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.UpdateBootDeviceBootMode")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/DeviceBootModes/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.bootDeviceBootMode == nil {
 		return localVarReturnValue, nil, reportError("bootDeviceBootMode is required and must be specified")
 	}
@@ -8697,7 +8600,7 @@ func (a *BootApiService) UpdateBootDeviceBootModeExecute(r ApiUpdateBootDeviceBo
 	}
 	// body params
 	localVarPostBody = r.bootDeviceBootMode
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -8707,15 +8610,15 @@ func (a *BootApiService) UpdateBootDeviceBootModeExecute(r ApiUpdateBootDeviceBo
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -8771,7 +8674,7 @@ func (a *BootApiService) UpdateBootDeviceBootModeExecute(r ApiUpdateBootDeviceBo
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -8782,7 +8685,7 @@ func (a *BootApiService) UpdateBootDeviceBootModeExecute(r ApiUpdateBootDeviceBo
 }
 
 type ApiUpdateBootDeviceBootSecurityRequest struct {
-	ctx                    _context.Context
+	ctx                    context.Context
 	ApiService             *BootApiService
 	moid                   string
 	bootDeviceBootSecurity *BootDeviceBootSecurity
@@ -8801,18 +8704,18 @@ func (r ApiUpdateBootDeviceBootSecurityRequest) IfMatch(ifMatch string) ApiUpdat
 	return r
 }
 
-func (r ApiUpdateBootDeviceBootSecurityRequest) Execute() (BootDeviceBootSecurity, *_nethttp.Response, error) {
+func (r ApiUpdateBootDeviceBootSecurityRequest) Execute() (*BootDeviceBootSecurity, *http.Response, error) {
 	return r.ApiService.UpdateBootDeviceBootSecurityExecute(r)
 }
 
 /*
 UpdateBootDeviceBootSecurity Update a 'boot.DeviceBootSecurity' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateBootDeviceBootSecurityRequest
 */
-func (a *BootApiService) UpdateBootDeviceBootSecurity(ctx _context.Context, moid string) ApiUpdateBootDeviceBootSecurityRequest {
+func (a *BootApiService) UpdateBootDeviceBootSecurity(ctx context.Context, moid string) ApiUpdateBootDeviceBootSecurityRequest {
 	return ApiUpdateBootDeviceBootSecurityRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -8822,27 +8725,25 @@ func (a *BootApiService) UpdateBootDeviceBootSecurity(ctx _context.Context, moid
 
 // Execute executes the request
 //  @return BootDeviceBootSecurity
-func (a *BootApiService) UpdateBootDeviceBootSecurityExecute(r ApiUpdateBootDeviceBootSecurityRequest) (BootDeviceBootSecurity, *_nethttp.Response, error) {
+func (a *BootApiService) UpdateBootDeviceBootSecurityExecute(r ApiUpdateBootDeviceBootSecurityRequest) (*BootDeviceBootSecurity, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootDeviceBootSecurity
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootDeviceBootSecurity
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.UpdateBootDeviceBootSecurity")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/DeviceBootSecurities/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.bootDeviceBootSecurity == nil {
 		return localVarReturnValue, nil, reportError("bootDeviceBootSecurity is required and must be specified")
 	}
@@ -8869,7 +8770,7 @@ func (a *BootApiService) UpdateBootDeviceBootSecurityExecute(r ApiUpdateBootDevi
 	}
 	// body params
 	localVarPostBody = r.bootDeviceBootSecurity
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -8879,15 +8780,15 @@ func (a *BootApiService) UpdateBootDeviceBootSecurityExecute(r ApiUpdateBootDevi
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -8943,7 +8844,7 @@ func (a *BootApiService) UpdateBootDeviceBootSecurityExecute(r ApiUpdateBootDevi
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -8954,7 +8855,7 @@ func (a *BootApiService) UpdateBootDeviceBootSecurityExecute(r ApiUpdateBootDevi
 }
 
 type ApiUpdateBootHddDeviceRequest struct {
-	ctx           _context.Context
+	ctx           context.Context
 	ApiService    *BootApiService
 	moid          string
 	bootHddDevice *BootHddDevice
@@ -8973,18 +8874,18 @@ func (r ApiUpdateBootHddDeviceRequest) IfMatch(ifMatch string) ApiUpdateBootHddD
 	return r
 }
 
-func (r ApiUpdateBootHddDeviceRequest) Execute() (BootHddDevice, *_nethttp.Response, error) {
+func (r ApiUpdateBootHddDeviceRequest) Execute() (*BootHddDevice, *http.Response, error) {
 	return r.ApiService.UpdateBootHddDeviceExecute(r)
 }
 
 /*
 UpdateBootHddDevice Update a 'boot.HddDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateBootHddDeviceRequest
 */
-func (a *BootApiService) UpdateBootHddDevice(ctx _context.Context, moid string) ApiUpdateBootHddDeviceRequest {
+func (a *BootApiService) UpdateBootHddDevice(ctx context.Context, moid string) ApiUpdateBootHddDeviceRequest {
 	return ApiUpdateBootHddDeviceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -8994,27 +8895,25 @@ func (a *BootApiService) UpdateBootHddDevice(ctx _context.Context, moid string) 
 
 // Execute executes the request
 //  @return BootHddDevice
-func (a *BootApiService) UpdateBootHddDeviceExecute(r ApiUpdateBootHddDeviceRequest) (BootHddDevice, *_nethttp.Response, error) {
+func (a *BootApiService) UpdateBootHddDeviceExecute(r ApiUpdateBootHddDeviceRequest) (*BootHddDevice, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootHddDevice
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootHddDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.UpdateBootHddDevice")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/HddDevices/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.bootHddDevice == nil {
 		return localVarReturnValue, nil, reportError("bootHddDevice is required and must be specified")
 	}
@@ -9041,7 +8940,7 @@ func (a *BootApiService) UpdateBootHddDeviceExecute(r ApiUpdateBootHddDeviceRequ
 	}
 	// body params
 	localVarPostBody = r.bootHddDevice
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -9051,15 +8950,15 @@ func (a *BootApiService) UpdateBootHddDeviceExecute(r ApiUpdateBootHddDeviceRequ
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -9115,7 +9014,7 @@ func (a *BootApiService) UpdateBootHddDeviceExecute(r ApiUpdateBootHddDeviceRequ
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -9126,7 +9025,7 @@ func (a *BootApiService) UpdateBootHddDeviceExecute(r ApiUpdateBootHddDeviceRequ
 }
 
 type ApiUpdateBootIscsiDeviceRequest struct {
-	ctx             _context.Context
+	ctx             context.Context
 	ApiService      *BootApiService
 	moid            string
 	bootIscsiDevice *BootIscsiDevice
@@ -9145,18 +9044,18 @@ func (r ApiUpdateBootIscsiDeviceRequest) IfMatch(ifMatch string) ApiUpdateBootIs
 	return r
 }
 
-func (r ApiUpdateBootIscsiDeviceRequest) Execute() (BootIscsiDevice, *_nethttp.Response, error) {
+func (r ApiUpdateBootIscsiDeviceRequest) Execute() (*BootIscsiDevice, *http.Response, error) {
 	return r.ApiService.UpdateBootIscsiDeviceExecute(r)
 }
 
 /*
 UpdateBootIscsiDevice Update a 'boot.IscsiDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateBootIscsiDeviceRequest
 */
-func (a *BootApiService) UpdateBootIscsiDevice(ctx _context.Context, moid string) ApiUpdateBootIscsiDeviceRequest {
+func (a *BootApiService) UpdateBootIscsiDevice(ctx context.Context, moid string) ApiUpdateBootIscsiDeviceRequest {
 	return ApiUpdateBootIscsiDeviceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -9166,27 +9065,25 @@ func (a *BootApiService) UpdateBootIscsiDevice(ctx _context.Context, moid string
 
 // Execute executes the request
 //  @return BootIscsiDevice
-func (a *BootApiService) UpdateBootIscsiDeviceExecute(r ApiUpdateBootIscsiDeviceRequest) (BootIscsiDevice, *_nethttp.Response, error) {
+func (a *BootApiService) UpdateBootIscsiDeviceExecute(r ApiUpdateBootIscsiDeviceRequest) (*BootIscsiDevice, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootIscsiDevice
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootIscsiDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.UpdateBootIscsiDevice")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/IscsiDevices/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.bootIscsiDevice == nil {
 		return localVarReturnValue, nil, reportError("bootIscsiDevice is required and must be specified")
 	}
@@ -9213,7 +9110,7 @@ func (a *BootApiService) UpdateBootIscsiDeviceExecute(r ApiUpdateBootIscsiDevice
 	}
 	// body params
 	localVarPostBody = r.bootIscsiDevice
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -9223,15 +9120,15 @@ func (a *BootApiService) UpdateBootIscsiDeviceExecute(r ApiUpdateBootIscsiDevice
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -9287,7 +9184,7 @@ func (a *BootApiService) UpdateBootIscsiDeviceExecute(r ApiUpdateBootIscsiDevice
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -9298,7 +9195,7 @@ func (a *BootApiService) UpdateBootIscsiDeviceExecute(r ApiUpdateBootIscsiDevice
 }
 
 type ApiUpdateBootNvmeDeviceRequest struct {
-	ctx            _context.Context
+	ctx            context.Context
 	ApiService     *BootApiService
 	moid           string
 	bootNvmeDevice *BootNvmeDevice
@@ -9317,18 +9214,18 @@ func (r ApiUpdateBootNvmeDeviceRequest) IfMatch(ifMatch string) ApiUpdateBootNvm
 	return r
 }
 
-func (r ApiUpdateBootNvmeDeviceRequest) Execute() (BootNvmeDevice, *_nethttp.Response, error) {
+func (r ApiUpdateBootNvmeDeviceRequest) Execute() (*BootNvmeDevice, *http.Response, error) {
 	return r.ApiService.UpdateBootNvmeDeviceExecute(r)
 }
 
 /*
 UpdateBootNvmeDevice Update a 'boot.NvmeDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateBootNvmeDeviceRequest
 */
-func (a *BootApiService) UpdateBootNvmeDevice(ctx _context.Context, moid string) ApiUpdateBootNvmeDeviceRequest {
+func (a *BootApiService) UpdateBootNvmeDevice(ctx context.Context, moid string) ApiUpdateBootNvmeDeviceRequest {
 	return ApiUpdateBootNvmeDeviceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -9338,27 +9235,25 @@ func (a *BootApiService) UpdateBootNvmeDevice(ctx _context.Context, moid string)
 
 // Execute executes the request
 //  @return BootNvmeDevice
-func (a *BootApiService) UpdateBootNvmeDeviceExecute(r ApiUpdateBootNvmeDeviceRequest) (BootNvmeDevice, *_nethttp.Response, error) {
+func (a *BootApiService) UpdateBootNvmeDeviceExecute(r ApiUpdateBootNvmeDeviceRequest) (*BootNvmeDevice, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootNvmeDevice
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootNvmeDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.UpdateBootNvmeDevice")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/NvmeDevices/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.bootNvmeDevice == nil {
 		return localVarReturnValue, nil, reportError("bootNvmeDevice is required and must be specified")
 	}
@@ -9385,7 +9280,7 @@ func (a *BootApiService) UpdateBootNvmeDeviceExecute(r ApiUpdateBootNvmeDeviceRe
 	}
 	// body params
 	localVarPostBody = r.bootNvmeDevice
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -9395,15 +9290,15 @@ func (a *BootApiService) UpdateBootNvmeDeviceExecute(r ApiUpdateBootNvmeDeviceRe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -9459,7 +9354,7 @@ func (a *BootApiService) UpdateBootNvmeDeviceExecute(r ApiUpdateBootNvmeDeviceRe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -9470,7 +9365,7 @@ func (a *BootApiService) UpdateBootNvmeDeviceExecute(r ApiUpdateBootNvmeDeviceRe
 }
 
 type ApiUpdateBootPchStorageDeviceRequest struct {
-	ctx                  _context.Context
+	ctx                  context.Context
 	ApiService           *BootApiService
 	moid                 string
 	bootPchStorageDevice *BootPchStorageDevice
@@ -9489,18 +9384,18 @@ func (r ApiUpdateBootPchStorageDeviceRequest) IfMatch(ifMatch string) ApiUpdateB
 	return r
 }
 
-func (r ApiUpdateBootPchStorageDeviceRequest) Execute() (BootPchStorageDevice, *_nethttp.Response, error) {
+func (r ApiUpdateBootPchStorageDeviceRequest) Execute() (*BootPchStorageDevice, *http.Response, error) {
 	return r.ApiService.UpdateBootPchStorageDeviceExecute(r)
 }
 
 /*
 UpdateBootPchStorageDevice Update a 'boot.PchStorageDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateBootPchStorageDeviceRequest
 */
-func (a *BootApiService) UpdateBootPchStorageDevice(ctx _context.Context, moid string) ApiUpdateBootPchStorageDeviceRequest {
+func (a *BootApiService) UpdateBootPchStorageDevice(ctx context.Context, moid string) ApiUpdateBootPchStorageDeviceRequest {
 	return ApiUpdateBootPchStorageDeviceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -9510,27 +9405,25 @@ func (a *BootApiService) UpdateBootPchStorageDevice(ctx _context.Context, moid s
 
 // Execute executes the request
 //  @return BootPchStorageDevice
-func (a *BootApiService) UpdateBootPchStorageDeviceExecute(r ApiUpdateBootPchStorageDeviceRequest) (BootPchStorageDevice, *_nethttp.Response, error) {
+func (a *BootApiService) UpdateBootPchStorageDeviceExecute(r ApiUpdateBootPchStorageDeviceRequest) (*BootPchStorageDevice, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootPchStorageDevice
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootPchStorageDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.UpdateBootPchStorageDevice")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/PchStorageDevices/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.bootPchStorageDevice == nil {
 		return localVarReturnValue, nil, reportError("bootPchStorageDevice is required and must be specified")
 	}
@@ -9557,7 +9450,7 @@ func (a *BootApiService) UpdateBootPchStorageDeviceExecute(r ApiUpdateBootPchSto
 	}
 	// body params
 	localVarPostBody = r.bootPchStorageDevice
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -9567,15 +9460,15 @@ func (a *BootApiService) UpdateBootPchStorageDeviceExecute(r ApiUpdateBootPchSto
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -9631,7 +9524,7 @@ func (a *BootApiService) UpdateBootPchStorageDeviceExecute(r ApiUpdateBootPchSto
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -9642,7 +9535,7 @@ func (a *BootApiService) UpdateBootPchStorageDeviceExecute(r ApiUpdateBootPchSto
 }
 
 type ApiUpdateBootPrecisionPolicyRequest struct {
-	ctx                 _context.Context
+	ctx                 context.Context
 	ApiService          *BootApiService
 	moid                string
 	bootPrecisionPolicy *BootPrecisionPolicy
@@ -9661,18 +9554,18 @@ func (r ApiUpdateBootPrecisionPolicyRequest) IfMatch(ifMatch string) ApiUpdateBo
 	return r
 }
 
-func (r ApiUpdateBootPrecisionPolicyRequest) Execute() (BootPrecisionPolicy, *_nethttp.Response, error) {
+func (r ApiUpdateBootPrecisionPolicyRequest) Execute() (*BootPrecisionPolicy, *http.Response, error) {
 	return r.ApiService.UpdateBootPrecisionPolicyExecute(r)
 }
 
 /*
 UpdateBootPrecisionPolicy Update a 'boot.PrecisionPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateBootPrecisionPolicyRequest
 */
-func (a *BootApiService) UpdateBootPrecisionPolicy(ctx _context.Context, moid string) ApiUpdateBootPrecisionPolicyRequest {
+func (a *BootApiService) UpdateBootPrecisionPolicy(ctx context.Context, moid string) ApiUpdateBootPrecisionPolicyRequest {
 	return ApiUpdateBootPrecisionPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -9682,27 +9575,25 @@ func (a *BootApiService) UpdateBootPrecisionPolicy(ctx _context.Context, moid st
 
 // Execute executes the request
 //  @return BootPrecisionPolicy
-func (a *BootApiService) UpdateBootPrecisionPolicyExecute(r ApiUpdateBootPrecisionPolicyRequest) (BootPrecisionPolicy, *_nethttp.Response, error) {
+func (a *BootApiService) UpdateBootPrecisionPolicyExecute(r ApiUpdateBootPrecisionPolicyRequest) (*BootPrecisionPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootPrecisionPolicy
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootPrecisionPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.UpdateBootPrecisionPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/PrecisionPolicies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.bootPrecisionPolicy == nil {
 		return localVarReturnValue, nil, reportError("bootPrecisionPolicy is required and must be specified")
 	}
@@ -9729,7 +9620,7 @@ func (a *BootApiService) UpdateBootPrecisionPolicyExecute(r ApiUpdateBootPrecisi
 	}
 	// body params
 	localVarPostBody = r.bootPrecisionPolicy
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -9739,15 +9630,15 @@ func (a *BootApiService) UpdateBootPrecisionPolicyExecute(r ApiUpdateBootPrecisi
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -9803,7 +9694,7 @@ func (a *BootApiService) UpdateBootPrecisionPolicyExecute(r ApiUpdateBootPrecisi
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -9814,7 +9705,7 @@ func (a *BootApiService) UpdateBootPrecisionPolicyExecute(r ApiUpdateBootPrecisi
 }
 
 type ApiUpdateBootPxeDeviceRequest struct {
-	ctx           _context.Context
+	ctx           context.Context
 	ApiService    *BootApiService
 	moid          string
 	bootPxeDevice *BootPxeDevice
@@ -9833,18 +9724,18 @@ func (r ApiUpdateBootPxeDeviceRequest) IfMatch(ifMatch string) ApiUpdateBootPxeD
 	return r
 }
 
-func (r ApiUpdateBootPxeDeviceRequest) Execute() (BootPxeDevice, *_nethttp.Response, error) {
+func (r ApiUpdateBootPxeDeviceRequest) Execute() (*BootPxeDevice, *http.Response, error) {
 	return r.ApiService.UpdateBootPxeDeviceExecute(r)
 }
 
 /*
 UpdateBootPxeDevice Update a 'boot.PxeDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateBootPxeDeviceRequest
 */
-func (a *BootApiService) UpdateBootPxeDevice(ctx _context.Context, moid string) ApiUpdateBootPxeDeviceRequest {
+func (a *BootApiService) UpdateBootPxeDevice(ctx context.Context, moid string) ApiUpdateBootPxeDeviceRequest {
 	return ApiUpdateBootPxeDeviceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -9854,27 +9745,25 @@ func (a *BootApiService) UpdateBootPxeDevice(ctx _context.Context, moid string) 
 
 // Execute executes the request
 //  @return BootPxeDevice
-func (a *BootApiService) UpdateBootPxeDeviceExecute(r ApiUpdateBootPxeDeviceRequest) (BootPxeDevice, *_nethttp.Response, error) {
+func (a *BootApiService) UpdateBootPxeDeviceExecute(r ApiUpdateBootPxeDeviceRequest) (*BootPxeDevice, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootPxeDevice
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootPxeDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.UpdateBootPxeDevice")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/PxeDevices/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.bootPxeDevice == nil {
 		return localVarReturnValue, nil, reportError("bootPxeDevice is required and must be specified")
 	}
@@ -9901,7 +9790,7 @@ func (a *BootApiService) UpdateBootPxeDeviceExecute(r ApiUpdateBootPxeDeviceRequ
 	}
 	// body params
 	localVarPostBody = r.bootPxeDevice
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -9911,15 +9800,15 @@ func (a *BootApiService) UpdateBootPxeDeviceExecute(r ApiUpdateBootPxeDeviceRequ
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -9975,7 +9864,7 @@ func (a *BootApiService) UpdateBootPxeDeviceExecute(r ApiUpdateBootPxeDeviceRequ
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -9986,7 +9875,7 @@ func (a *BootApiService) UpdateBootPxeDeviceExecute(r ApiUpdateBootPxeDeviceRequ
 }
 
 type ApiUpdateBootSanDeviceRequest struct {
-	ctx           _context.Context
+	ctx           context.Context
 	ApiService    *BootApiService
 	moid          string
 	bootSanDevice *BootSanDevice
@@ -10005,18 +9894,18 @@ func (r ApiUpdateBootSanDeviceRequest) IfMatch(ifMatch string) ApiUpdateBootSanD
 	return r
 }
 
-func (r ApiUpdateBootSanDeviceRequest) Execute() (BootSanDevice, *_nethttp.Response, error) {
+func (r ApiUpdateBootSanDeviceRequest) Execute() (*BootSanDevice, *http.Response, error) {
 	return r.ApiService.UpdateBootSanDeviceExecute(r)
 }
 
 /*
 UpdateBootSanDevice Update a 'boot.SanDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateBootSanDeviceRequest
 */
-func (a *BootApiService) UpdateBootSanDevice(ctx _context.Context, moid string) ApiUpdateBootSanDeviceRequest {
+func (a *BootApiService) UpdateBootSanDevice(ctx context.Context, moid string) ApiUpdateBootSanDeviceRequest {
 	return ApiUpdateBootSanDeviceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -10026,27 +9915,25 @@ func (a *BootApiService) UpdateBootSanDevice(ctx _context.Context, moid string) 
 
 // Execute executes the request
 //  @return BootSanDevice
-func (a *BootApiService) UpdateBootSanDeviceExecute(r ApiUpdateBootSanDeviceRequest) (BootSanDevice, *_nethttp.Response, error) {
+func (a *BootApiService) UpdateBootSanDeviceExecute(r ApiUpdateBootSanDeviceRequest) (*BootSanDevice, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootSanDevice
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootSanDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.UpdateBootSanDevice")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/SanDevices/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.bootSanDevice == nil {
 		return localVarReturnValue, nil, reportError("bootSanDevice is required and must be specified")
 	}
@@ -10073,7 +9960,7 @@ func (a *BootApiService) UpdateBootSanDeviceExecute(r ApiUpdateBootSanDeviceRequ
 	}
 	// body params
 	localVarPostBody = r.bootSanDevice
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -10083,15 +9970,15 @@ func (a *BootApiService) UpdateBootSanDeviceExecute(r ApiUpdateBootSanDeviceRequ
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -10147,7 +10034,7 @@ func (a *BootApiService) UpdateBootSanDeviceExecute(r ApiUpdateBootSanDeviceRequ
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -10158,7 +10045,7 @@ func (a *BootApiService) UpdateBootSanDeviceExecute(r ApiUpdateBootSanDeviceRequ
 }
 
 type ApiUpdateBootSdDeviceRequest struct {
-	ctx          _context.Context
+	ctx          context.Context
 	ApiService   *BootApiService
 	moid         string
 	bootSdDevice *BootSdDevice
@@ -10177,18 +10064,18 @@ func (r ApiUpdateBootSdDeviceRequest) IfMatch(ifMatch string) ApiUpdateBootSdDev
 	return r
 }
 
-func (r ApiUpdateBootSdDeviceRequest) Execute() (BootSdDevice, *_nethttp.Response, error) {
+func (r ApiUpdateBootSdDeviceRequest) Execute() (*BootSdDevice, *http.Response, error) {
 	return r.ApiService.UpdateBootSdDeviceExecute(r)
 }
 
 /*
 UpdateBootSdDevice Update a 'boot.SdDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateBootSdDeviceRequest
 */
-func (a *BootApiService) UpdateBootSdDevice(ctx _context.Context, moid string) ApiUpdateBootSdDeviceRequest {
+func (a *BootApiService) UpdateBootSdDevice(ctx context.Context, moid string) ApiUpdateBootSdDeviceRequest {
 	return ApiUpdateBootSdDeviceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -10198,27 +10085,25 @@ func (a *BootApiService) UpdateBootSdDevice(ctx _context.Context, moid string) A
 
 // Execute executes the request
 //  @return BootSdDevice
-func (a *BootApiService) UpdateBootSdDeviceExecute(r ApiUpdateBootSdDeviceRequest) (BootSdDevice, *_nethttp.Response, error) {
+func (a *BootApiService) UpdateBootSdDeviceExecute(r ApiUpdateBootSdDeviceRequest) (*BootSdDevice, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootSdDevice
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootSdDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.UpdateBootSdDevice")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/SdDevices/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.bootSdDevice == nil {
 		return localVarReturnValue, nil, reportError("bootSdDevice is required and must be specified")
 	}
@@ -10245,7 +10130,7 @@ func (a *BootApiService) UpdateBootSdDeviceExecute(r ApiUpdateBootSdDeviceReques
 	}
 	// body params
 	localVarPostBody = r.bootSdDevice
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -10255,15 +10140,15 @@ func (a *BootApiService) UpdateBootSdDeviceExecute(r ApiUpdateBootSdDeviceReques
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -10319,7 +10204,7 @@ func (a *BootApiService) UpdateBootSdDeviceExecute(r ApiUpdateBootSdDeviceReques
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -10330,7 +10215,7 @@ func (a *BootApiService) UpdateBootSdDeviceExecute(r ApiUpdateBootSdDeviceReques
 }
 
 type ApiUpdateBootUefiShellDeviceRequest struct {
-	ctx                 _context.Context
+	ctx                 context.Context
 	ApiService          *BootApiService
 	moid                string
 	bootUefiShellDevice *BootUefiShellDevice
@@ -10349,18 +10234,18 @@ func (r ApiUpdateBootUefiShellDeviceRequest) IfMatch(ifMatch string) ApiUpdateBo
 	return r
 }
 
-func (r ApiUpdateBootUefiShellDeviceRequest) Execute() (BootUefiShellDevice, *_nethttp.Response, error) {
+func (r ApiUpdateBootUefiShellDeviceRequest) Execute() (*BootUefiShellDevice, *http.Response, error) {
 	return r.ApiService.UpdateBootUefiShellDeviceExecute(r)
 }
 
 /*
 UpdateBootUefiShellDevice Update a 'boot.UefiShellDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateBootUefiShellDeviceRequest
 */
-func (a *BootApiService) UpdateBootUefiShellDevice(ctx _context.Context, moid string) ApiUpdateBootUefiShellDeviceRequest {
+func (a *BootApiService) UpdateBootUefiShellDevice(ctx context.Context, moid string) ApiUpdateBootUefiShellDeviceRequest {
 	return ApiUpdateBootUefiShellDeviceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -10370,27 +10255,25 @@ func (a *BootApiService) UpdateBootUefiShellDevice(ctx _context.Context, moid st
 
 // Execute executes the request
 //  @return BootUefiShellDevice
-func (a *BootApiService) UpdateBootUefiShellDeviceExecute(r ApiUpdateBootUefiShellDeviceRequest) (BootUefiShellDevice, *_nethttp.Response, error) {
+func (a *BootApiService) UpdateBootUefiShellDeviceExecute(r ApiUpdateBootUefiShellDeviceRequest) (*BootUefiShellDevice, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootUefiShellDevice
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootUefiShellDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.UpdateBootUefiShellDevice")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/UefiShellDevices/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.bootUefiShellDevice == nil {
 		return localVarReturnValue, nil, reportError("bootUefiShellDevice is required and must be specified")
 	}
@@ -10417,7 +10300,7 @@ func (a *BootApiService) UpdateBootUefiShellDeviceExecute(r ApiUpdateBootUefiShe
 	}
 	// body params
 	localVarPostBody = r.bootUefiShellDevice
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -10427,15 +10310,15 @@ func (a *BootApiService) UpdateBootUefiShellDeviceExecute(r ApiUpdateBootUefiShe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -10491,7 +10374,7 @@ func (a *BootApiService) UpdateBootUefiShellDeviceExecute(r ApiUpdateBootUefiShe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -10502,7 +10385,7 @@ func (a *BootApiService) UpdateBootUefiShellDeviceExecute(r ApiUpdateBootUefiShe
 }
 
 type ApiUpdateBootUsbDeviceRequest struct {
-	ctx           _context.Context
+	ctx           context.Context
 	ApiService    *BootApiService
 	moid          string
 	bootUsbDevice *BootUsbDevice
@@ -10521,18 +10404,18 @@ func (r ApiUpdateBootUsbDeviceRequest) IfMatch(ifMatch string) ApiUpdateBootUsbD
 	return r
 }
 
-func (r ApiUpdateBootUsbDeviceRequest) Execute() (BootUsbDevice, *_nethttp.Response, error) {
+func (r ApiUpdateBootUsbDeviceRequest) Execute() (*BootUsbDevice, *http.Response, error) {
 	return r.ApiService.UpdateBootUsbDeviceExecute(r)
 }
 
 /*
 UpdateBootUsbDevice Update a 'boot.UsbDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateBootUsbDeviceRequest
 */
-func (a *BootApiService) UpdateBootUsbDevice(ctx _context.Context, moid string) ApiUpdateBootUsbDeviceRequest {
+func (a *BootApiService) UpdateBootUsbDevice(ctx context.Context, moid string) ApiUpdateBootUsbDeviceRequest {
 	return ApiUpdateBootUsbDeviceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -10542,27 +10425,25 @@ func (a *BootApiService) UpdateBootUsbDevice(ctx _context.Context, moid string) 
 
 // Execute executes the request
 //  @return BootUsbDevice
-func (a *BootApiService) UpdateBootUsbDeviceExecute(r ApiUpdateBootUsbDeviceRequest) (BootUsbDevice, *_nethttp.Response, error) {
+func (a *BootApiService) UpdateBootUsbDeviceExecute(r ApiUpdateBootUsbDeviceRequest) (*BootUsbDevice, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootUsbDevice
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootUsbDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.UpdateBootUsbDevice")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/UsbDevices/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.bootUsbDevice == nil {
 		return localVarReturnValue, nil, reportError("bootUsbDevice is required and must be specified")
 	}
@@ -10589,7 +10470,7 @@ func (a *BootApiService) UpdateBootUsbDeviceExecute(r ApiUpdateBootUsbDeviceRequ
 	}
 	// body params
 	localVarPostBody = r.bootUsbDevice
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -10599,15 +10480,15 @@ func (a *BootApiService) UpdateBootUsbDeviceExecute(r ApiUpdateBootUsbDeviceRequ
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -10663,7 +10544,7 @@ func (a *BootApiService) UpdateBootUsbDeviceExecute(r ApiUpdateBootUsbDeviceRequ
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -10674,7 +10555,7 @@ func (a *BootApiService) UpdateBootUsbDeviceExecute(r ApiUpdateBootUsbDeviceRequ
 }
 
 type ApiUpdateBootVmediaDeviceRequest struct {
-	ctx              _context.Context
+	ctx              context.Context
 	ApiService       *BootApiService
 	moid             string
 	bootVmediaDevice *BootVmediaDevice
@@ -10693,18 +10574,18 @@ func (r ApiUpdateBootVmediaDeviceRequest) IfMatch(ifMatch string) ApiUpdateBootV
 	return r
 }
 
-func (r ApiUpdateBootVmediaDeviceRequest) Execute() (BootVmediaDevice, *_nethttp.Response, error) {
+func (r ApiUpdateBootVmediaDeviceRequest) Execute() (*BootVmediaDevice, *http.Response, error) {
 	return r.ApiService.UpdateBootVmediaDeviceExecute(r)
 }
 
 /*
 UpdateBootVmediaDevice Update a 'boot.VmediaDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateBootVmediaDeviceRequest
 */
-func (a *BootApiService) UpdateBootVmediaDevice(ctx _context.Context, moid string) ApiUpdateBootVmediaDeviceRequest {
+func (a *BootApiService) UpdateBootVmediaDevice(ctx context.Context, moid string) ApiUpdateBootVmediaDeviceRequest {
 	return ApiUpdateBootVmediaDeviceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -10714,27 +10595,25 @@ func (a *BootApiService) UpdateBootVmediaDevice(ctx _context.Context, moid strin
 
 // Execute executes the request
 //  @return BootVmediaDevice
-func (a *BootApiService) UpdateBootVmediaDeviceExecute(r ApiUpdateBootVmediaDeviceRequest) (BootVmediaDevice, *_nethttp.Response, error) {
+func (a *BootApiService) UpdateBootVmediaDeviceExecute(r ApiUpdateBootVmediaDeviceRequest) (*BootVmediaDevice, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BootVmediaDevice
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BootVmediaDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BootApiService.UpdateBootVmediaDevice")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/boot/VmediaDevices/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.bootVmediaDevice == nil {
 		return localVarReturnValue, nil, reportError("bootVmediaDevice is required and must be specified")
 	}
@@ -10761,7 +10640,7 @@ func (a *BootApiService) UpdateBootVmediaDeviceExecute(r ApiUpdateBootVmediaDevi
 	}
 	// body params
 	localVarPostBody = r.bootVmediaDevice
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -10771,15 +10650,15 @@ func (a *BootApiService) UpdateBootVmediaDeviceExecute(r ApiUpdateBootVmediaDevi
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -10835,7 +10714,7 @@ func (a *BootApiService) UpdateBootVmediaDeviceExecute(r ApiUpdateBootVmediaDevi
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

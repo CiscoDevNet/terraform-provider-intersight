@@ -676,7 +676,6 @@ func resourceHyperflexHealthCheckDefinition() *schema.Resource {
 
 func resourceHyperflexHealthCheckDefinitionCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewHyperflexHealthCheckDefinitionWithDefaults()
@@ -852,7 +851,7 @@ func resourceHyperflexHealthCheckDefinitionCreate(c context.Context, d *schema.R
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating HyperflexHealthCheckDefinition: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating HyperflexHealthCheckDefinition: %s", responseErr.Error())
@@ -864,7 +863,6 @@ func resourceHyperflexHealthCheckDefinitionCreate(c context.Context, d *schema.R
 
 func resourceHyperflexHealthCheckDefinitionRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.HyperflexApi.GetHyperflexHealthCheckDefinitionByMoid(conn.ctx, d.Id())
@@ -877,7 +875,7 @@ func resourceHyperflexHealthCheckDefinitionRead(c context.Context, d *schema.Res
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching HyperflexHealthCheckDefinition: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching HyperflexHealthCheckDefinition: %s", responseErr.Error())
@@ -1022,7 +1020,6 @@ func resourceHyperflexHealthCheckDefinitionRead(c context.Context, d *schema.Res
 
 func resourceHyperflexHealthCheckDefinitionUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.HyperflexHealthCheckDefinition{}
@@ -1211,7 +1208,7 @@ func resourceHyperflexHealthCheckDefinitionUpdate(c context.Context, d *schema.R
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating HyperflexHealthCheckDefinition: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating HyperflexHealthCheckDefinition: %s", responseErr.Error())
@@ -1223,7 +1220,6 @@ func resourceHyperflexHealthCheckDefinitionUpdate(c context.Context, d *schema.R
 
 func resourceHyperflexHealthCheckDefinitionDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.HyperflexApi.DeleteHyperflexHealthCheckDefinition(conn.ctx, d.Id())
@@ -1235,7 +1231,7 @@ func resourceHyperflexHealthCheckDefinitionDelete(c context.Context, d *schema.R
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting HyperflexHealthCheckDefinition object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting HyperflexHealthCheckDefinition object: %s", deleteErr.Error())

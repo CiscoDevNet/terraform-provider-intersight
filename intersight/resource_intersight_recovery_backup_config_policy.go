@@ -535,7 +535,6 @@ func resourceRecoveryBackupConfigPolicy() *schema.Resource {
 
 func resourceRecoveryBackupConfigPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewRecoveryBackupConfigPolicyWithDefaults()
@@ -728,7 +727,7 @@ func resourceRecoveryBackupConfigPolicyCreate(c context.Context, d *schema.Resou
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating RecoveryBackupConfigPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating RecoveryBackupConfigPolicy: %s", responseErr.Error())
@@ -740,7 +739,6 @@ func resourceRecoveryBackupConfigPolicyCreate(c context.Context, d *schema.Resou
 
 func resourceRecoveryBackupConfigPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.RecoveryApi.GetRecoveryBackupConfigPolicyByMoid(conn.ctx, d.Id())
@@ -753,7 +751,7 @@ func resourceRecoveryBackupConfigPolicyRead(c context.Context, d *schema.Resourc
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching RecoveryBackupConfigPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching RecoveryBackupConfigPolicy: %s", responseErr.Error())
@@ -870,7 +868,6 @@ func resourceRecoveryBackupConfigPolicyRead(c context.Context, d *schema.Resourc
 
 func resourceRecoveryBackupConfigPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.RecoveryBackupConfigPolicy{}
@@ -1073,7 +1070,7 @@ func resourceRecoveryBackupConfigPolicyUpdate(c context.Context, d *schema.Resou
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating RecoveryBackupConfigPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating RecoveryBackupConfigPolicy: %s", responseErr.Error())
@@ -1085,7 +1082,6 @@ func resourceRecoveryBackupConfigPolicyUpdate(c context.Context, d *schema.Resou
 
 func resourceRecoveryBackupConfigPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.RecoveryApi.DeleteRecoveryBackupConfigPolicy(conn.ctx, d.Id())
@@ -1097,7 +1093,7 @@ func resourceRecoveryBackupConfigPolicyDelete(c context.Context, d *schema.Resou
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting RecoveryBackupConfigPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting RecoveryBackupConfigPolicy object: %s", deleteErr.Error())

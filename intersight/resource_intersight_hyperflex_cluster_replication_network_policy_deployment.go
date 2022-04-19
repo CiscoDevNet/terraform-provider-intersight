@@ -693,7 +693,6 @@ func resourceHyperflexClusterReplicationNetworkPolicyDeployment() *schema.Resour
 
 func resourceHyperflexClusterReplicationNetworkPolicyDeploymentCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewHyperflexClusterReplicationNetworkPolicyDeploymentWithDefaults()
@@ -944,7 +943,7 @@ func resourceHyperflexClusterReplicationNetworkPolicyDeploymentCreate(c context.
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating HyperflexClusterReplicationNetworkPolicyDeployment: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating HyperflexClusterReplicationNetworkPolicyDeployment: %s", responseErr.Error())
@@ -956,7 +955,6 @@ func resourceHyperflexClusterReplicationNetworkPolicyDeploymentCreate(c context.
 
 func resourceHyperflexClusterReplicationNetworkPolicyDeploymentRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.HyperflexApi.GetHyperflexClusterReplicationNetworkPolicyDeploymentByMoid(conn.ctx, d.Id())
@@ -969,7 +967,7 @@ func resourceHyperflexClusterReplicationNetworkPolicyDeploymentRead(c context.Co
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching HyperflexClusterReplicationNetworkPolicyDeployment: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching HyperflexClusterReplicationNetworkPolicyDeployment: %s", responseErr.Error())
@@ -1094,7 +1092,6 @@ func resourceHyperflexClusterReplicationNetworkPolicyDeploymentRead(c context.Co
 
 func resourceHyperflexClusterReplicationNetworkPolicyDeploymentUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.HyperflexClusterReplicationNetworkPolicyDeployment{}
@@ -1348,7 +1345,7 @@ func resourceHyperflexClusterReplicationNetworkPolicyDeploymentUpdate(c context.
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating HyperflexClusterReplicationNetworkPolicyDeployment: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating HyperflexClusterReplicationNetworkPolicyDeployment: %s", responseErr.Error())
@@ -1360,7 +1357,6 @@ func resourceHyperflexClusterReplicationNetworkPolicyDeploymentUpdate(c context.
 
 func resourceHyperflexClusterReplicationNetworkPolicyDeploymentDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.HyperflexApi.DeleteHyperflexClusterReplicationNetworkPolicyDeployment(conn.ctx, d.Id())
@@ -1372,7 +1368,7 @@ func resourceHyperflexClusterReplicationNetworkPolicyDeploymentDelete(c context.
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting HyperflexClusterReplicationNetworkPolicyDeployment object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting HyperflexClusterReplicationNetworkPolicyDeployment object: %s", deleteErr.Error())

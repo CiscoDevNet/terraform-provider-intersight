@@ -492,7 +492,6 @@ func resourceDeviceconnectorPolicy() *schema.Resource {
 
 func resourceDeviceconnectorPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewDeviceconnectorPolicyWithDefaults()
@@ -655,7 +654,7 @@ func resourceDeviceconnectorPolicyCreate(c context.Context, d *schema.ResourceDa
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating DeviceconnectorPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating DeviceconnectorPolicy: %s", responseErr.Error())
@@ -666,7 +665,6 @@ func resourceDeviceconnectorPolicyCreate(c context.Context, d *schema.ResourceDa
 }
 func detachDeviceconnectorPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.DeviceconnectorPolicy{}
@@ -679,7 +677,7 @@ func detachDeviceconnectorPolicyProfiles(d *schema.ResourceData, meta interface{
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while detaching profile/profiles: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while detaching profile/profiles: %s", responseErr.Error())
@@ -689,7 +687,6 @@ func detachDeviceconnectorPolicyProfiles(d *schema.ResourceData, meta interface{
 
 func resourceDeviceconnectorPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.DeviceconnectorApi.GetDeviceconnectorPolicyByMoid(conn.ctx, d.Id())
@@ -702,7 +699,7 @@ func resourceDeviceconnectorPolicyRead(c context.Context, d *schema.ResourceData
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching DeviceconnectorPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching DeviceconnectorPolicy: %s", responseErr.Error())
@@ -795,7 +792,6 @@ func resourceDeviceconnectorPolicyRead(c context.Context, d *schema.ResourceData
 
 func resourceDeviceconnectorPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.DeviceconnectorPolicy{}
@@ -962,7 +958,7 @@ func resourceDeviceconnectorPolicyUpdate(c context.Context, d *schema.ResourceDa
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating DeviceconnectorPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating DeviceconnectorPolicy: %s", responseErr.Error())
@@ -974,7 +970,6 @@ func resourceDeviceconnectorPolicyUpdate(c context.Context, d *schema.ResourceDa
 
 func resourceDeviceconnectorPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	if p, ok := d.GetOk("profiles"); ok {
@@ -994,7 +989,7 @@ func resourceDeviceconnectorPolicyDelete(c context.Context, d *schema.ResourceDa
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting DeviceconnectorPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting DeviceconnectorPolicy object: %s", deleteErr.Error())

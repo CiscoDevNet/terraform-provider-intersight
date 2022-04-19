@@ -522,7 +522,6 @@ func resourceKvmPolicy() *schema.Resource {
 
 func resourceKvmPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewKvmPolicyWithDefaults()
@@ -710,7 +709,7 @@ func resourceKvmPolicyCreate(c context.Context, d *schema.ResourceData, meta int
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating KvmPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating KvmPolicy: %s", responseErr.Error())
@@ -721,7 +720,6 @@ func resourceKvmPolicyCreate(c context.Context, d *schema.ResourceData, meta int
 }
 func detachKvmPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.KvmPolicy{}
@@ -734,7 +732,7 @@ func detachKvmPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diag
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while detaching profile/profiles: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while detaching profile/profiles: %s", responseErr.Error())
@@ -744,7 +742,6 @@ func detachKvmPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diag
 
 func resourceKvmPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.KvmApi.GetKvmPolicyByMoid(conn.ctx, d.Id())
@@ -757,7 +754,7 @@ func resourceKvmPolicyRead(c context.Context, d *schema.ResourceData, meta inter
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching KvmPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching KvmPolicy: %s", responseErr.Error())
@@ -870,7 +867,6 @@ func resourceKvmPolicyRead(c context.Context, d *schema.ResourceData, meta inter
 
 func resourceKvmPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.KvmPolicy{}
@@ -1067,7 +1063,7 @@ func resourceKvmPolicyUpdate(c context.Context, d *schema.ResourceData, meta int
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating KvmPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating KvmPolicy: %s", responseErr.Error())
@@ -1079,7 +1075,6 @@ func resourceKvmPolicyUpdate(c context.Context, d *schema.ResourceData, meta int
 
 func resourceKvmPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	if p, ok := d.GetOk("profiles"); ok {
@@ -1099,7 +1094,7 @@ func resourceKvmPolicyDelete(c context.Context, d *schema.ResourceData, meta int
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting KvmPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting KvmPolicy object: %s", deleteErr.Error())

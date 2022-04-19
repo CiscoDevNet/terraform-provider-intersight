@@ -765,7 +765,6 @@ func dataSourceFabricPortPolicy() *schema.Resource {
 
 func dataSourceFabricPortPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.FabricPortPolicy{}
@@ -1165,7 +1164,7 @@ func dataSourceFabricPortPolicyRead(c context.Context, d *schema.ResourceData, m
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of FabricPortPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of FabricPortPolicy: %s", responseErr.Error())
@@ -1182,7 +1181,7 @@ func dataSourceFabricPortPolicyRead(c context.Context, d *schema.ResourceData, m
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching FabricPortPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching FabricPortPolicy: %s", responseErr.Error())

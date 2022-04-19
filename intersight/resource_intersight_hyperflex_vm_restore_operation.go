@@ -648,7 +648,6 @@ func resourceHyperflexVmRestoreOperation() *schema.Resource {
 
 func resourceHyperflexVmRestoreOperationCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewHyperflexVmRestoreOperationWithDefaults()
@@ -898,7 +897,7 @@ func resourceHyperflexVmRestoreOperationCreate(c context.Context, d *schema.Reso
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating HyperflexVmRestoreOperation: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating HyperflexVmRestoreOperation: %s", responseErr.Error())
@@ -910,7 +909,6 @@ func resourceHyperflexVmRestoreOperationCreate(c context.Context, d *schema.Reso
 
 func resourceHyperflexVmRestoreOperationRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.HyperflexApi.GetHyperflexVmRestoreOperationByMoid(conn.ctx, d.Id())
@@ -923,7 +921,7 @@ func resourceHyperflexVmRestoreOperationRead(c context.Context, d *schema.Resour
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching HyperflexVmRestoreOperation: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching HyperflexVmRestoreOperation: %s", responseErr.Error())
@@ -1024,7 +1022,6 @@ func resourceHyperflexVmRestoreOperationRead(c context.Context, d *schema.Resour
 
 func resourceHyperflexVmRestoreOperationDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.HyperflexApi.DeleteHyperflexVmRestoreOperation(conn.ctx, d.Id())
@@ -1036,7 +1033,7 @@ func resourceHyperflexVmRestoreOperationDelete(c context.Context, d *schema.Reso
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting HyperflexVmRestoreOperation object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting HyperflexVmRestoreOperation object: %s", deleteErr.Error())

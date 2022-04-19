@@ -3,12 +3,12 @@ subcategory: "server"
 layout: "intersight"
 page_title: "Intersight: intersight_server_config_result"
 description: |-
-        The profile configuration (deploy, validation) results with the overall state and detailed result messages.
+        The profile configuration (policy attach/detach, deploy, validation) results with the overall state and detailed result messages.
 
 ---
 
 # Data Source: intersight_server_config_result
-The profile configuration (deploy, validation) results with the overall state and detailed result messages.
+The profile configuration (policy attach/detach, deploy, validation) results with the overall state and detailed result messages.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

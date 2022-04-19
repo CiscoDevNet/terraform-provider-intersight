@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -36,6 +36,8 @@ type NiatelemetryInsightGroupDetails struct {
 	EmailSettingsCount *int64 `json:"EmailSettingsCount,omitempty"`
 	// Flow setting count of the Insight group.
 	FlowSettingsCount *int64 `json:"FlowSettingsCount,omitempty"`
+	// Flow setting status of the Insight group.
+	FlowSettingsStatus *string `json:"FlowSettingsStatus,omitempty"`
 	// Name of the Insight group.
 	GroupName    *string             `json:"GroupName,omitempty"`
 	InsightSites []NiatelemetrySites `json:"InsightSites,omitempty"`
@@ -316,6 +318,38 @@ func (o *NiatelemetryInsightGroupDetails) SetFlowSettingsCount(v int64) {
 	o.FlowSettingsCount = &v
 }
 
+// GetFlowSettingsStatus returns the FlowSettingsStatus field value if set, zero value otherwise.
+func (o *NiatelemetryInsightGroupDetails) GetFlowSettingsStatus() string {
+	if o == nil || o.FlowSettingsStatus == nil {
+		var ret string
+		return ret
+	}
+	return *o.FlowSettingsStatus
+}
+
+// GetFlowSettingsStatusOk returns a tuple with the FlowSettingsStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryInsightGroupDetails) GetFlowSettingsStatusOk() (*string, bool) {
+	if o == nil || o.FlowSettingsStatus == nil {
+		return nil, false
+	}
+	return o.FlowSettingsStatus, true
+}
+
+// HasFlowSettingsStatus returns a boolean if a field has been set.
+func (o *NiatelemetryInsightGroupDetails) HasFlowSettingsStatus() bool {
+	if o != nil && o.FlowSettingsStatus != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetFlowSettingsStatus gets a reference to the given string and assigns it to the FlowSettingsStatus field.
+func (o *NiatelemetryInsightGroupDetails) SetFlowSettingsStatus(v string) {
+	o.FlowSettingsStatus = &v
+}
+
 // GetGroupName returns the GroupName field value if set, zero value otherwise.
 func (o *NiatelemetryInsightGroupDetails) GetGroupName() string {
 	if o == nil || o.GroupName == nil {
@@ -360,11 +394,11 @@ func (o *NiatelemetryInsightGroupDetails) GetInsightSites() []NiatelemetrySites 
 // GetInsightSitesOk returns a tuple with the InsightSites field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *NiatelemetryInsightGroupDetails) GetInsightSitesOk() (*[]NiatelemetrySites, bool) {
+func (o *NiatelemetryInsightGroupDetails) GetInsightSitesOk() ([]NiatelemetrySites, bool) {
 	if o == nil || o.InsightSites == nil {
 		return nil, false
 	}
-	return &o.InsightSites, true
+	return o.InsightSites, true
 }
 
 // HasInsightSites returns a boolean if a field has been set.
@@ -575,6 +609,9 @@ func (o NiatelemetryInsightGroupDetails) MarshalJSON() ([]byte, error) {
 	if o.FlowSettingsCount != nil {
 		toSerialize["FlowSettingsCount"] = o.FlowSettingsCount
 	}
+	if o.FlowSettingsStatus != nil {
+		toSerialize["FlowSettingsStatus"] = o.FlowSettingsStatus
+	}
 	if o.GroupName != nil {
 		toSerialize["GroupName"] = o.GroupName
 	}
@@ -622,6 +659,8 @@ func (o *NiatelemetryInsightGroupDetails) UnmarshalJSON(bytes []byte) (err error
 		EmailSettingsCount *int64 `json:"EmailSettingsCount,omitempty"`
 		// Flow setting count of the Insight group.
 		FlowSettingsCount *int64 `json:"FlowSettingsCount,omitempty"`
+		// Flow setting status of the Insight group.
+		FlowSettingsStatus *string `json:"FlowSettingsStatus,omitempty"`
 		// Name of the Insight group.
 		GroupName    *string             `json:"GroupName,omitempty"`
 		InsightSites []NiatelemetrySites `json:"InsightSites,omitempty"`
@@ -649,6 +688,7 @@ func (o *NiatelemetryInsightGroupDetails) UnmarshalJSON(bytes []byte) (err error
 		varNiatelemetryInsightGroupDetails.DeltaAnalysisJobCount = varNiatelemetryInsightGroupDetailsWithoutEmbeddedStruct.DeltaAnalysisJobCount
 		varNiatelemetryInsightGroupDetails.EmailSettingsCount = varNiatelemetryInsightGroupDetailsWithoutEmbeddedStruct.EmailSettingsCount
 		varNiatelemetryInsightGroupDetails.FlowSettingsCount = varNiatelemetryInsightGroupDetailsWithoutEmbeddedStruct.FlowSettingsCount
+		varNiatelemetryInsightGroupDetails.FlowSettingsStatus = varNiatelemetryInsightGroupDetailsWithoutEmbeddedStruct.FlowSettingsStatus
 		varNiatelemetryInsightGroupDetails.GroupName = varNiatelemetryInsightGroupDetailsWithoutEmbeddedStruct.GroupName
 		varNiatelemetryInsightGroupDetails.InsightSites = varNiatelemetryInsightGroupDetailsWithoutEmbeddedStruct.InsightSites
 		varNiatelemetryInsightGroupDetails.KafkaSettingsCount = varNiatelemetryInsightGroupDetailsWithoutEmbeddedStruct.KafkaSettingsCount
@@ -681,6 +721,7 @@ func (o *NiatelemetryInsightGroupDetails) UnmarshalJSON(bytes []byte) (err error
 		delete(additionalProperties, "DeltaAnalysisJobCount")
 		delete(additionalProperties, "EmailSettingsCount")
 		delete(additionalProperties, "FlowSettingsCount")
+		delete(additionalProperties, "FlowSettingsStatus")
 		delete(additionalProperties, "GroupName")
 		delete(additionalProperties, "InsightSites")
 		delete(additionalProperties, "KafkaSettingsCount")

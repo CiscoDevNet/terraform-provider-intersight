@@ -670,7 +670,6 @@ func resourceIamIdp() *schema.Resource {
 
 func resourceIamIdpCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewIamIdpWithDefaults()
@@ -842,7 +841,7 @@ func resourceIamIdpCreate(c context.Context, d *schema.ResourceData, meta interf
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating IamIdp: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating IamIdp: %s", responseErr.Error())
@@ -854,7 +853,6 @@ func resourceIamIdpCreate(c context.Context, d *schema.ResourceData, meta interf
 
 func resourceIamIdpRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.IamApi.GetIamIdpByMoid(conn.ctx, d.Id())
@@ -867,7 +865,7 @@ func resourceIamIdpRead(c context.Context, d *schema.ResourceData, meta interfac
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching IamIdp: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching IamIdp: %s", responseErr.Error())
@@ -988,7 +986,6 @@ func resourceIamIdpRead(c context.Context, d *schema.ResourceData, meta interfac
 
 func resourceIamIdpUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.IamIdp{}
@@ -1164,7 +1161,7 @@ func resourceIamIdpUpdate(c context.Context, d *schema.ResourceData, meta interf
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating IamIdp: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating IamIdp: %s", responseErr.Error())
@@ -1176,7 +1173,6 @@ func resourceIamIdpUpdate(c context.Context, d *schema.ResourceData, meta interf
 
 func resourceIamIdpDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.IamApi.DeleteIamIdp(conn.ctx, d.Id())
@@ -1188,7 +1184,7 @@ func resourceIamIdpDelete(c context.Context, d *schema.ResourceData, meta interf
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting IamIdp object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting IamIdp object: %s", deleteErr.Error())

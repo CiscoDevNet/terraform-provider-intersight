@@ -497,7 +497,6 @@ func resourceHyperflexAutoSupportPolicy() *schema.Resource {
 
 func resourceHyperflexAutoSupportPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewHyperflexAutoSupportPolicyWithDefaults()
@@ -665,7 +664,7 @@ func resourceHyperflexAutoSupportPolicyCreate(c context.Context, d *schema.Resou
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating HyperflexAutoSupportPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating HyperflexAutoSupportPolicy: %s", responseErr.Error())
@@ -677,7 +676,6 @@ func resourceHyperflexAutoSupportPolicyCreate(c context.Context, d *schema.Resou
 
 func resourceHyperflexAutoSupportPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.HyperflexApi.GetHyperflexAutoSupportPolicyByMoid(conn.ctx, d.Id())
@@ -690,7 +688,7 @@ func resourceHyperflexAutoSupportPolicyRead(c context.Context, d *schema.Resourc
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching HyperflexAutoSupportPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching HyperflexAutoSupportPolicy: %s", responseErr.Error())
@@ -787,7 +785,6 @@ func resourceHyperflexAutoSupportPolicyRead(c context.Context, d *schema.Resourc
 
 func resourceHyperflexAutoSupportPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.HyperflexAutoSupportPolicy{}
@@ -960,7 +957,7 @@ func resourceHyperflexAutoSupportPolicyUpdate(c context.Context, d *schema.Resou
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating HyperflexAutoSupportPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating HyperflexAutoSupportPolicy: %s", responseErr.Error())
@@ -972,7 +969,6 @@ func resourceHyperflexAutoSupportPolicyUpdate(c context.Context, d *schema.Resou
 
 func resourceHyperflexAutoSupportPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.HyperflexApi.DeleteHyperflexAutoSupportPolicy(conn.ctx, d.Id())
@@ -984,7 +980,7 @@ func resourceHyperflexAutoSupportPolicyDelete(c context.Context, d *schema.Resou
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting HyperflexAutoSupportPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting HyperflexAutoSupportPolicy object: %s", deleteErr.Error())

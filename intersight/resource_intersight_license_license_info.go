@@ -578,7 +578,6 @@ func resourceLicenseLicenseInfo() *schema.Resource {
 
 func resourceLicenseLicenseInfoCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewLicenseLicenseInfoWithDefaults()
@@ -693,7 +692,7 @@ func resourceLicenseLicenseInfoCreate(c context.Context, d *schema.ResourceData,
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating LicenseLicenseInfo: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating LicenseLicenseInfo: %s", responseErr.Error())
@@ -705,7 +704,6 @@ func resourceLicenseLicenseInfoCreate(c context.Context, d *schema.ResourceData,
 
 func resourceLicenseLicenseInfoRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.LicenseApi.GetLicenseLicenseInfoByMoid(conn.ctx, d.Id())
@@ -718,7 +716,7 @@ func resourceLicenseLicenseInfoRead(c context.Context, d *schema.ResourceData, m
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching LicenseLicenseInfo: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching LicenseLicenseInfo: %s", responseErr.Error())
@@ -851,7 +849,6 @@ func resourceLicenseLicenseInfoRead(c context.Context, d *schema.ResourceData, m
 
 func resourceLicenseLicenseInfoUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.LicenseLicenseInfo{}
@@ -970,7 +967,7 @@ func resourceLicenseLicenseInfoUpdate(c context.Context, d *schema.ResourceData,
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating LicenseLicenseInfo: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating LicenseLicenseInfo: %s", responseErr.Error())
@@ -982,7 +979,6 @@ func resourceLicenseLicenseInfoUpdate(c context.Context, d *schema.ResourceData,
 
 func resourceLicenseLicenseInfoDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	var warning = diag.Diagnostic{Severity: diag.Warning, Summary: "LicenseLicenseInfo does not allow delete functionality"}
 	de = append(de, warning)

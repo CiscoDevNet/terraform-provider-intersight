@@ -69,6 +69,11 @@ func dataSourceNiatelemetrySiteInventory() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"connectivity_analysis_count": {
+			Description: "Returns the total number of connectivity Analysis run for EPs in NDFC Fabrics.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"create_time": {
 			Description: "The time when this managed object was created.",
 			Type:        schema.TypeString,
@@ -434,6 +439,11 @@ func dataSourceNiatelemetrySiteInventory() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"connectivity_analysis_count": {
+			Description: "Returns the total number of connectivity Analysis run for EPs in NDFC Fabrics.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"create_time": {
 			Description: "The time when this managed object was created.",
 			Type:        schema.TypeString,
@@ -757,7 +767,6 @@ func dataSourceNiatelemetrySiteInventory() *schema.Resource {
 
 func dataSourceNiatelemetrySiteInventoryRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.NiatelemetrySiteInventory{}
@@ -829,6 +838,11 @@ func dataSourceNiatelemetrySiteInventoryRead(c context.Context, d *schema.Resour
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
+	}
+
+	if v, ok := d.GetOkExists("connectivity_analysis_count"); ok {
+		x := int64(v.(int))
+		o.SetConnectivityAnalysisCount(x)
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
@@ -1159,7 +1173,7 @@ func dataSourceNiatelemetrySiteInventoryRead(c context.Context, d *schema.Resour
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of NiatelemetrySiteInventory: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of NiatelemetrySiteInventory: %s", responseErr.Error())
@@ -1176,7 +1190,7 @@ func dataSourceNiatelemetrySiteInventoryRead(c context.Context, d *schema.Resour
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching NiatelemetrySiteInventory: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching NiatelemetrySiteInventory: %s", responseErr.Error())
@@ -1193,6 +1207,7 @@ func dataSourceNiatelemetrySiteInventoryRead(c context.Context, d *schema.Resour
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["apps"] = (s.GetApps())
 				temp["class_id"] = (s.GetClassId())
+				temp["connectivity_analysis_count"] = (s.GetConnectivityAnalysisCount())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())

@@ -1549,7 +1549,6 @@ func dataSourceAdapterUnit() *schema.Resource {
 
 func dataSourceAdapterUnitRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.AdapterUnit{}
@@ -2407,7 +2406,7 @@ func dataSourceAdapterUnitRead(c context.Context, d *schema.ResourceData, meta i
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of AdapterUnit: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of AdapterUnit: %s", responseErr.Error())
@@ -2424,7 +2423,7 @@ func dataSourceAdapterUnitRead(c context.Context, d *schema.ResourceData, meta i
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching AdapterUnit: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching AdapterUnit: %s", responseErr.Error())

@@ -647,7 +647,6 @@ func resourceKubernetesClusterAddonProfile() *schema.Resource {
 
 func resourceKubernetesClusterAddonProfileCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewKubernetesClusterAddonProfileWithDefaults()
@@ -986,7 +985,7 @@ func resourceKubernetesClusterAddonProfileCreate(c context.Context, d *schema.Re
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating KubernetesClusterAddonProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating KubernetesClusterAddonProfile: %s", responseErr.Error())
@@ -998,7 +997,6 @@ func resourceKubernetesClusterAddonProfileCreate(c context.Context, d *schema.Re
 
 func resourceKubernetesClusterAddonProfileRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.KubernetesApi.GetKubernetesClusterAddonProfileByMoid(conn.ctx, d.Id())
@@ -1011,7 +1009,7 @@ func resourceKubernetesClusterAddonProfileRead(c context.Context, d *schema.Reso
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching KubernetesClusterAddonProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching KubernetesClusterAddonProfile: %s", responseErr.Error())
@@ -1100,7 +1098,6 @@ func resourceKubernetesClusterAddonProfileRead(c context.Context, d *schema.Reso
 
 func resourceKubernetesClusterAddonProfileUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.KubernetesClusterAddonProfile{}
@@ -1442,7 +1439,7 @@ func resourceKubernetesClusterAddonProfileUpdate(c context.Context, d *schema.Re
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating KubernetesClusterAddonProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating KubernetesClusterAddonProfile: %s", responseErr.Error())
@@ -1454,7 +1451,6 @@ func resourceKubernetesClusterAddonProfileUpdate(c context.Context, d *schema.Re
 
 func resourceKubernetesClusterAddonProfileDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.KubernetesApi.DeleteKubernetesClusterAddonProfile(conn.ctx, d.Id())
@@ -1466,7 +1462,7 @@ func resourceKubernetesClusterAddonProfileDelete(c context.Context, d *schema.Re
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting KubernetesClusterAddonProfile object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting KubernetesClusterAddonProfile object: %s", deleteErr.Error())

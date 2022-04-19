@@ -633,7 +633,6 @@ func resourceHclSupportedDriverName() *schema.Resource {
 
 func resourceHclSupportedDriverNameCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewHclSupportedDriverNameWithDefaults()
@@ -835,7 +834,7 @@ func resourceHclSupportedDriverNameCreate(c context.Context, d *schema.ResourceD
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating HclSupportedDriverName: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating HclSupportedDriverName: %s", responseErr.Error())
@@ -847,7 +846,6 @@ func resourceHclSupportedDriverNameCreate(c context.Context, d *schema.ResourceD
 
 func resourceHclSupportedDriverNameRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	log.Printf("%v", d)
 	var de diag.Diagnostics
 	return de
@@ -855,7 +853,6 @@ func resourceHclSupportedDriverNameRead(c context.Context, d *schema.ResourceDat
 
 func resourceHclSupportedDriverNameDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	var warning = diag.Diagnostic{Severity: diag.Warning, Summary: "HclSupportedDriverName does not allow delete functionality"}
 	de = append(de, warning)

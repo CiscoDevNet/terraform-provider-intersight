@@ -637,7 +637,6 @@ func dataSourceCapabilityPortGroupAggregationDef() *schema.Resource {
 
 func dataSourceCapabilityPortGroupAggregationDefRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.CapabilityPortGroupAggregationDef{}
@@ -959,7 +958,7 @@ func dataSourceCapabilityPortGroupAggregationDefRead(c context.Context, d *schem
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of CapabilityPortGroupAggregationDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of CapabilityPortGroupAggregationDef: %s", responseErr.Error())
@@ -976,7 +975,7 @@ func dataSourceCapabilityPortGroupAggregationDefRead(c context.Context, d *schem
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching CapabilityPortGroupAggregationDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching CapabilityPortGroupAggregationDef: %s", responseErr.Error())

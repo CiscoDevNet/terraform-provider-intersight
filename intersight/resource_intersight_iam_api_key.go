@@ -306,6 +306,12 @@ func resourceIamApiKey() *schema.Resource {
 				Description: "Holds the private key for the API key.",
 				Type:        schema.TypeString,
 				Optional:    true,
+				DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
+					if new == "" || new == "null" {
+						return true
+					}
+					return false
+				},
 			},
 			"purpose": {
 				Description: "The purpose of the API Key.",
@@ -541,7 +547,6 @@ func resourceIamApiKey() *schema.Resource {
 
 func resourceIamApiKeyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewIamApiKeyWithDefaults()
@@ -655,19 +660,23 @@ func resourceIamApiKeyCreate(c context.Context, d *schema.ResourceData, meta int
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating IamApiKey: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating IamApiKey: %s", responseErr.Error())
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return append(de, resourceIamApiKeyRead(c, d, meta)...)
+	de = append(de, resourceIamApiKeyRead(c, d, meta)...)
+	if err := d.Set("private_key", (resultMo.GetPrivateKey())); err != nil {
+		return diag.Errorf("error occurred while setting property PrivateKey in IamApiKey object: %s", err.Error())
+	}
+	de = append(de, diag.Diagnostic{Summary: "Please copy the private_key from the state file or using 'terraform state show' command as this is the only one time that the private key can be viewed. You cannot recover them later. However, you can create new resource at any time.", Severity: diag.Warning})
+	return de
 }
 
 func resourceIamApiKeyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.IamApi.GetIamApiKeyByMoid(conn.ctx, d.Id())
@@ -680,7 +689,7 @@ func resourceIamApiKeyRead(c context.Context, d *schema.ResourceData, meta inter
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching IamApiKey: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching IamApiKey: %s", responseErr.Error())
@@ -781,7 +790,6 @@ func resourceIamApiKeyRead(c context.Context, d *schema.ResourceData, meta inter
 
 func resourceIamApiKeyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.IamApiKey{}
@@ -901,7 +909,7 @@ func resourceIamApiKeyUpdate(c context.Context, d *schema.ResourceData, meta int
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating IamApiKey: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating IamApiKey: %s", responseErr.Error())
@@ -913,7 +921,6 @@ func resourceIamApiKeyUpdate(c context.Context, d *schema.ResourceData, meta int
 
 func resourceIamApiKeyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.IamApi.DeleteIamApiKey(conn.ctx, d.Id())
@@ -925,7 +932,7 @@ func resourceIamApiKeyDelete(c context.Context, d *schema.ResourceData, meta int
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting IamApiKey object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting IamApiKey object: %s", deleteErr.Error())

@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**LastDiscoveryTriggered** | Pointer to **string** | Denotes the type of discovery that was most recently triggered on this server. * &#x60;Unknown&#x60; - The last discovery type is unknown. * &#x60;Deep&#x60; - The last discovery triggered is deep. * &#x60;Shallow&#x60; - The last discovery triggered is shallow. | [optional] [readonly] [default to "Unknown"]
 **PhysicalDeviceRegistration** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
@@ -66,6 +67,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetLastDiscoveryTriggered
+
+`func (o *EquipmentPhysicalIdentity) GetLastDiscoveryTriggered() string`
+
+GetLastDiscoveryTriggered returns the LastDiscoveryTriggered field if non-nil, zero value otherwise.
+
+### GetLastDiscoveryTriggeredOk
+
+`func (o *EquipmentPhysicalIdentity) GetLastDiscoveryTriggeredOk() (*string, bool)`
+
+GetLastDiscoveryTriggeredOk returns a tuple with the LastDiscoveryTriggered field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastDiscoveryTriggered
+
+`func (o *EquipmentPhysicalIdentity) SetLastDiscoveryTriggered(v string)`
+
+SetLastDiscoveryTriggered sets LastDiscoveryTriggered field to given value.
+
+### HasLastDiscoveryTriggered
+
+`func (o *EquipmentPhysicalIdentity) HasLastDiscoveryTriggered() bool`
+
+HasLastDiscoveryTriggered returns a boolean if a field has been set.
 
 ### GetPhysicalDeviceRegistration
 

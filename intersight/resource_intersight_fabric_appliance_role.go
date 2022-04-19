@@ -635,7 +635,6 @@ func resourceFabricApplianceRole() *schema.Resource {
 
 func resourceFabricApplianceRoleCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewFabricApplianceRoleWithDefaults()
@@ -948,7 +947,7 @@ func resourceFabricApplianceRoleCreate(c context.Context, d *schema.ResourceData
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating FabricApplianceRole: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating FabricApplianceRole: %s", responseErr.Error())
@@ -960,7 +959,6 @@ func resourceFabricApplianceRoleCreate(c context.Context, d *schema.ResourceData
 
 func resourceFabricApplianceRoleRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.FabricApi.GetFabricApplianceRoleByMoid(conn.ctx, d.Id())
@@ -973,7 +971,7 @@ func resourceFabricApplianceRoleRead(c context.Context, d *schema.ResourceData, 
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching FabricApplianceRole: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching FabricApplianceRole: %s", responseErr.Error())
@@ -1094,7 +1092,6 @@ func resourceFabricApplianceRoleRead(c context.Context, d *schema.ResourceData, 
 
 func resourceFabricApplianceRoleUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.FabricApplianceRole{}
@@ -1420,7 +1417,7 @@ func resourceFabricApplianceRoleUpdate(c context.Context, d *schema.ResourceData
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating FabricApplianceRole: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating FabricApplianceRole: %s", responseErr.Error())
@@ -1432,7 +1429,6 @@ func resourceFabricApplianceRoleUpdate(c context.Context, d *schema.ResourceData
 
 func resourceFabricApplianceRoleDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.FabricApi.DeleteFabricApplianceRole(conn.ctx, d.Id())
@@ -1444,7 +1440,7 @@ func resourceFabricApplianceRoleDelete(c context.Context, d *schema.ResourceData
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting FabricApplianceRole object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting FabricApplianceRole object: %s", deleteErr.Error())

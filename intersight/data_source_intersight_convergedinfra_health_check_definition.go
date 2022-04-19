@@ -667,7 +667,6 @@ func dataSourceConvergedinfraHealthCheckDefinition() *schema.Resource {
 
 func dataSourceConvergedinfraHealthCheckDefinitionRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.ConvergedinfraHealthCheckDefinition{}
@@ -1004,7 +1003,7 @@ func dataSourceConvergedinfraHealthCheckDefinitionRead(c context.Context, d *sch
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of ConvergedinfraHealthCheckDefinition: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of ConvergedinfraHealthCheckDefinition: %s", responseErr.Error())
@@ -1021,7 +1020,7 @@ func dataSourceConvergedinfraHealthCheckDefinitionRead(c context.Context, d *sch
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching ConvergedinfraHealthCheckDefinition: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching ConvergedinfraHealthCheckDefinition: %s", responseErr.Error())

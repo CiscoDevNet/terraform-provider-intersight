@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -152,11 +152,11 @@ func (o *ApplianceImageBundle) GetAnsiblePackages() []OnpremImagePackage {
 // GetAnsiblePackagesOk returns a tuple with the AnsiblePackages field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ApplianceImageBundle) GetAnsiblePackagesOk() (*[]OnpremImagePackage, bool) {
+func (o *ApplianceImageBundle) GetAnsiblePackagesOk() ([]OnpremImagePackage, bool) {
 	if o == nil || o.AnsiblePackages == nil {
 		return nil, false
 	}
-	return &o.AnsiblePackages, true
+	return o.AnsiblePackages, true
 }
 
 // HasAnsiblePackages returns a boolean if a field has been set.
@@ -217,11 +217,11 @@ func (o *ApplianceImageBundle) GetDcPackages() []OnpremImagePackage {
 // GetDcPackagesOk returns a tuple with the DcPackages field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ApplianceImageBundle) GetDcPackagesOk() (*[]OnpremImagePackage, bool) {
+func (o *ApplianceImageBundle) GetDcPackagesOk() ([]OnpremImagePackage, bool) {
 	if o == nil || o.DcPackages == nil {
 		return nil, false
 	}
-	return &o.DcPackages, true
+	return o.DcPackages, true
 }
 
 // HasDcPackages returns a boolean if a field has been set.
@@ -250,11 +250,11 @@ func (o *ApplianceImageBundle) GetDebugPackages() []OnpremImagePackage {
 // GetDebugPackagesOk returns a tuple with the DebugPackages field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ApplianceImageBundle) GetDebugPackagesOk() (*[]OnpremImagePackage, bool) {
+func (o *ApplianceImageBundle) GetDebugPackagesOk() ([]OnpremImagePackage, bool) {
 	if o == nil || o.DebugPackages == nil {
 		return nil, false
 	}
-	return &o.DebugPackages, true
+	return o.DebugPackages, true
 }
 
 // HasDebugPackages returns a boolean if a field has been set.
@@ -315,11 +315,11 @@ func (o *ApplianceImageBundle) GetEndpointPackages() []OnpremImagePackage {
 // GetEndpointPackagesOk returns a tuple with the EndpointPackages field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ApplianceImageBundle) GetEndpointPackagesOk() (*[]OnpremImagePackage, bool) {
+func (o *ApplianceImageBundle) GetEndpointPackagesOk() ([]OnpremImagePackage, bool) {
 	if o == nil || o.EndpointPackages == nil {
 		return nil, false
 	}
-	return &o.EndpointPackages, true
+	return o.EndpointPackages, true
 }
 
 // HasEndpointPackages returns a boolean if a field has been set.
@@ -412,11 +412,11 @@ func (o *ApplianceImageBundle) GetInfraPackages() []OnpremImagePackage {
 // GetInfraPackagesOk returns a tuple with the InfraPackages field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ApplianceImageBundle) GetInfraPackagesOk() (*[]OnpremImagePackage, bool) {
+func (o *ApplianceImageBundle) GetInfraPackagesOk() ([]OnpremImagePackage, bool) {
 	if o == nil || o.InfraPackages == nil {
 		return nil, false
 	}
-	return &o.InfraPackages, true
+	return o.InfraPackages, true
 }
 
 // HasInfraPackages returns a boolean if a field has been set.
@@ -445,11 +445,11 @@ func (o *ApplianceImageBundle) GetInitPackages() []OnpremImagePackage {
 // GetInitPackagesOk returns a tuple with the InitPackages field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ApplianceImageBundle) GetInitPackagesOk() (*[]OnpremImagePackage, bool) {
+func (o *ApplianceImageBundle) GetInitPackagesOk() ([]OnpremImagePackage, bool) {
 	if o == nil || o.InitPackages == nil {
 		return nil, false
 	}
-	return &o.InitPackages, true
+	return o.InitPackages, true
 }
 
 // HasInitPackages returns a boolean if a field has been set.
@@ -606,11 +606,11 @@ func (o *ApplianceImageBundle) GetServicePackages() []OnpremImagePackage {
 // GetServicePackagesOk returns a tuple with the ServicePackages field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ApplianceImageBundle) GetServicePackagesOk() (*[]OnpremImagePackage, bool) {
+func (o *ApplianceImageBundle) GetServicePackagesOk() ([]OnpremImagePackage, bool) {
 	if o == nil || o.ServicePackages == nil {
 		return nil, false
 	}
-	return &o.ServicePackages, true
+	return o.ServicePackages, true
 }
 
 // HasServicePackages returns a boolean if a field has been set.
@@ -671,11 +671,11 @@ func (o *ApplianceImageBundle) GetSystemPackages() []OnpremImagePackage {
 // GetSystemPackagesOk returns a tuple with the SystemPackages field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ApplianceImageBundle) GetSystemPackagesOk() (*[]OnpremImagePackage, bool) {
+func (o *ApplianceImageBundle) GetSystemPackagesOk() ([]OnpremImagePackage, bool) {
 	if o == nil || o.SystemPackages == nil {
 		return nil, false
 	}
-	return &o.SystemPackages, true
+	return o.SystemPackages, true
 }
 
 // HasSystemPackages returns a boolean if a field has been set.
@@ -704,11 +704,11 @@ func (o *ApplianceImageBundle) GetUiPackages() []OnpremImagePackage {
 // GetUiPackagesOk returns a tuple with the UiPackages field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ApplianceImageBundle) GetUiPackagesOk() (*[]OnpremImagePackage, bool) {
+func (o *ApplianceImageBundle) GetUiPackagesOk() ([]OnpremImagePackage, bool) {
 	if o == nil || o.UiPackages == nil {
 		return nil, false
 	}
-	return &o.UiPackages, true
+	return o.UiPackages, true
 }
 
 // HasUiPackages returns a boolean if a field has been set.

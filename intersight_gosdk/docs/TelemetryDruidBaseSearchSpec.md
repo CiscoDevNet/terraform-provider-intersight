@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | **string** | null | 
+**Type** | **string** |  | 
 
 ## Methods
 

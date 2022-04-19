@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **FabricName** | Pointer to **string** | Returns the value of the Name of a fabric. | [optional] 
 **FabricParent** | Pointer to **string** | Parent of the fabric on DCNM. | [optional] 
 **FabricTechnology** | Pointer to **string** | Fabric Technology details on the fabric. | [optional] 
-**FeaturePtp** | Pointer to **bool** | PTP feature details on the fabric. | [optional] 
+**FeaturePtp** | Pointer to **string** | PTP feature details on the fabric. | [optional] 
 **IsBgwPresent** | Pointer to **bool** | Checks if border gateway is present in the fabric inventory. | [optional] 
 **IsEnableNxapiHttp** | Pointer to **bool** | Check if NXAPI HTTP is enable or not on the fabric. | [optional] 
 **IsEnableRealTimeBackup** | Pointer to **bool** | Check if real time backup is enable or not on the fabric. | [optional] 
@@ -462,20 +462,20 @@ HasFabricTechnology returns a boolean if a field has been set.
 
 ### GetFeaturePtp
 
-`func (o *NiatelemetryNiaInventoryFabricAllOf) GetFeaturePtp() bool`
+`func (o *NiatelemetryNiaInventoryFabricAllOf) GetFeaturePtp() string`
 
 GetFeaturePtp returns the FeaturePtp field if non-nil, zero value otherwise.
 
 ### GetFeaturePtpOk
 
-`func (o *NiatelemetryNiaInventoryFabricAllOf) GetFeaturePtpOk() (*bool, bool)`
+`func (o *NiatelemetryNiaInventoryFabricAllOf) GetFeaturePtpOk() (*string, bool)`
 
 GetFeaturePtpOk returns a tuple with the FeaturePtp field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFeaturePtp
 
-`func (o *NiatelemetryNiaInventoryFabricAllOf) SetFeaturePtp(v bool)`
+`func (o *NiatelemetryNiaInventoryFabricAllOf) SetFeaturePtp(v string)`
 
 SetFeaturePtp sets FeaturePtp field to given value.
 

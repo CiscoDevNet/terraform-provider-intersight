@@ -517,7 +517,6 @@ func resourceHyperflexProxySettingPolicy() *schema.Resource {
 
 func resourceHyperflexProxySettingPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewHyperflexProxySettingPolicyWithDefaults()
@@ -695,7 +694,7 @@ func resourceHyperflexProxySettingPolicyCreate(c context.Context, d *schema.Reso
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating HyperflexProxySettingPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating HyperflexProxySettingPolicy: %s", responseErr.Error())
@@ -707,7 +706,6 @@ func resourceHyperflexProxySettingPolicyCreate(c context.Context, d *schema.Reso
 
 func resourceHyperflexProxySettingPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.HyperflexApi.GetHyperflexProxySettingPolicyByMoid(conn.ctx, d.Id())
@@ -720,7 +718,7 @@ func resourceHyperflexProxySettingPolicyRead(c context.Context, d *schema.Resour
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching HyperflexProxySettingPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching HyperflexProxySettingPolicy: %s", responseErr.Error())
@@ -825,7 +823,6 @@ func resourceHyperflexProxySettingPolicyRead(c context.Context, d *schema.Resour
 
 func resourceHyperflexProxySettingPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.HyperflexProxySettingPolicy{}
@@ -1010,7 +1007,7 @@ func resourceHyperflexProxySettingPolicyUpdate(c context.Context, d *schema.Reso
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating HyperflexProxySettingPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating HyperflexProxySettingPolicy: %s", responseErr.Error())
@@ -1022,7 +1019,6 @@ func resourceHyperflexProxySettingPolicyUpdate(c context.Context, d *schema.Reso
 
 func resourceHyperflexProxySettingPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.HyperflexApi.DeleteHyperflexProxySettingPolicy(conn.ctx, d.Id())
@@ -1034,7 +1030,7 @@ func resourceHyperflexProxySettingPolicyDelete(c context.Context, d *schema.Reso
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting HyperflexProxySettingPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting HyperflexProxySettingPolicy object: %s", deleteErr.Error())

@@ -431,7 +431,6 @@ func resourceCapabilityFanModuleManufacturingDef() *schema.Resource {
 
 func resourceCapabilityFanModuleManufacturingDefCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewCapabilityFanModuleManufacturingDefWithDefaults()
@@ -529,7 +528,7 @@ func resourceCapabilityFanModuleManufacturingDefCreate(c context.Context, d *sch
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating CapabilityFanModuleManufacturingDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating CapabilityFanModuleManufacturingDef: %s", responseErr.Error())
@@ -541,7 +540,6 @@ func resourceCapabilityFanModuleManufacturingDefCreate(c context.Context, d *sch
 
 func resourceCapabilityFanModuleManufacturingDefRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.CapabilityApi.GetCapabilityFanModuleManufacturingDefByMoid(conn.ctx, d.Id())
@@ -554,7 +552,7 @@ func resourceCapabilityFanModuleManufacturingDefRead(c context.Context, d *schem
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching CapabilityFanModuleManufacturingDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching CapabilityFanModuleManufacturingDef: %s", responseErr.Error())
@@ -655,7 +653,6 @@ func resourceCapabilityFanModuleManufacturingDefRead(c context.Context, d *schem
 
 func resourceCapabilityFanModuleManufacturingDefUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.CapabilityFanModuleManufacturingDef{}
@@ -761,7 +758,7 @@ func resourceCapabilityFanModuleManufacturingDefUpdate(c context.Context, d *sch
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating CapabilityFanModuleManufacturingDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating CapabilityFanModuleManufacturingDef: %s", responseErr.Error())
@@ -773,7 +770,6 @@ func resourceCapabilityFanModuleManufacturingDefUpdate(c context.Context, d *sch
 
 func resourceCapabilityFanModuleManufacturingDefDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.CapabilityApi.DeleteCapabilityFanModuleManufacturingDef(conn.ctx, d.Id())
@@ -785,7 +781,7 @@ func resourceCapabilityFanModuleManufacturingDefDelete(c context.Context, d *sch
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting CapabilityFanModuleManufacturingDef object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting CapabilityFanModuleManufacturingDef object: %s", deleteErr.Error())

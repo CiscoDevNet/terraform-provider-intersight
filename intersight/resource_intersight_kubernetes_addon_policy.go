@@ -580,7 +580,6 @@ func resourceKubernetesAddonPolicy() *schema.Resource {
 
 func resourceKubernetesAddonPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewKubernetesAddonPolicyWithDefaults()
@@ -843,7 +842,7 @@ func resourceKubernetesAddonPolicyCreate(c context.Context, d *schema.ResourceDa
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating KubernetesAddonPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating KubernetesAddonPolicy: %s", responseErr.Error())
@@ -855,7 +854,6 @@ func resourceKubernetesAddonPolicyCreate(c context.Context, d *schema.ResourceDa
 
 func resourceKubernetesAddonPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.KubernetesApi.GetKubernetesAddonPolicyByMoid(conn.ctx, d.Id())
@@ -868,7 +866,7 @@ func resourceKubernetesAddonPolicyRead(c context.Context, d *schema.ResourceData
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching KubernetesAddonPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching KubernetesAddonPolicy: %s", responseErr.Error())
@@ -961,7 +959,6 @@ func resourceKubernetesAddonPolicyRead(c context.Context, d *schema.ResourceData
 
 func resourceKubernetesAddonPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.KubernetesAddonPolicy{}
@@ -1230,7 +1227,7 @@ func resourceKubernetesAddonPolicyUpdate(c context.Context, d *schema.ResourceDa
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating KubernetesAddonPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating KubernetesAddonPolicy: %s", responseErr.Error())
@@ -1242,7 +1239,6 @@ func resourceKubernetesAddonPolicyUpdate(c context.Context, d *schema.ResourceDa
 
 func resourceKubernetesAddonPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.KubernetesApi.DeleteKubernetesAddonPolicy(conn.ctx, d.Id())
@@ -1254,7 +1250,7 @@ func resourceKubernetesAddonPolicyDelete(c context.Context, d *schema.ResourceDa
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting KubernetesAddonPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting KubernetesAddonPolicy object: %s", deleteErr.Error())

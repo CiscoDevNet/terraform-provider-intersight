@@ -610,7 +610,6 @@ func resourceChassisConfigImport() *schema.Resource {
 
 func resourceChassisConfigImportCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewChassisConfigImportWithDefaults()
@@ -787,7 +786,7 @@ func resourceChassisConfigImportCreate(c context.Context, d *schema.ResourceData
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating ChassisConfigImport: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating ChassisConfigImport: %s", responseErr.Error())
@@ -799,7 +798,6 @@ func resourceChassisConfigImportCreate(c context.Context, d *schema.ResourceData
 
 func resourceChassisConfigImportRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.ChassisApi.GetChassisConfigImportByMoid(conn.ctx, d.Id())
@@ -812,7 +810,7 @@ func resourceChassisConfigImportRead(c context.Context, d *schema.ResourceData, 
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching ChassisConfigImport: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching ChassisConfigImport: %s", responseErr.Error())
@@ -913,7 +911,6 @@ func resourceChassisConfigImportRead(c context.Context, d *schema.ResourceData, 
 
 func resourceChassisConfigImportDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	var warning = diag.Diagnostic{Severity: diag.Warning, Summary: "ChassisConfigImport does not allow delete functionality"}
 	de = append(de, warning)

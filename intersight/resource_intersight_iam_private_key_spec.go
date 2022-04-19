@@ -478,7 +478,6 @@ func resourceIamPrivateKeySpec() *schema.Resource {
 
 func resourceIamPrivateKeySpecCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewIamPrivateKeySpecWithDefaults()
@@ -615,7 +614,7 @@ func resourceIamPrivateKeySpecCreate(c context.Context, d *schema.ResourceData, 
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating IamPrivateKeySpec: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating IamPrivateKeySpec: %s", responseErr.Error())
@@ -627,7 +626,6 @@ func resourceIamPrivateKeySpecCreate(c context.Context, d *schema.ResourceData, 
 
 func resourceIamPrivateKeySpecRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.IamApi.GetIamPrivateKeySpecByMoid(conn.ctx, d.Id())
@@ -640,7 +638,7 @@ func resourceIamPrivateKeySpecRead(c context.Context, d *schema.ResourceData, me
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching IamPrivateKeySpec: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching IamPrivateKeySpec: %s", responseErr.Error())
@@ -721,7 +719,6 @@ func resourceIamPrivateKeySpecRead(c context.Context, d *schema.ResourceData, me
 
 func resourceIamPrivateKeySpecUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.IamPrivateKeySpec{}
@@ -861,7 +858,7 @@ func resourceIamPrivateKeySpecUpdate(c context.Context, d *schema.ResourceData, 
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating IamPrivateKeySpec: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating IamPrivateKeySpec: %s", responseErr.Error())
@@ -873,7 +870,6 @@ func resourceIamPrivateKeySpecUpdate(c context.Context, d *schema.ResourceData, 
 
 func resourceIamPrivateKeySpecDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.IamApi.DeleteIamPrivateKeySpec(conn.ctx, d.Id())
@@ -885,7 +881,7 @@ func resourceIamPrivateKeySpecDelete(c context.Context, d *schema.ResourceData, 
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting IamPrivateKeySpec object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting IamPrivateKeySpec object: %s", deleteErr.Error())

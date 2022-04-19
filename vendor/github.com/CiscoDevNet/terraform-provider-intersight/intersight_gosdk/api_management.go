@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,39 +13,34 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // ManagementApiService ManagementApi service
 type ManagementApiService service
 
 type ApiGetManagementControllerByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ManagementApiService
 	moid       string
 }
 
-func (r ApiGetManagementControllerByMoidRequest) Execute() (ManagementController, *_nethttp.Response, error) {
+func (r ApiGetManagementControllerByMoidRequest) Execute() (*ManagementController, *http.Response, error) {
 	return r.ApiService.GetManagementControllerByMoidExecute(r)
 }
 
 /*
 GetManagementControllerByMoid Read a 'management.Controller' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetManagementControllerByMoidRequest
 */
-func (a *ManagementApiService) GetManagementControllerByMoid(ctx _context.Context, moid string) ApiGetManagementControllerByMoidRequest {
+func (a *ManagementApiService) GetManagementControllerByMoid(ctx context.Context, moid string) ApiGetManagementControllerByMoidRequest {
 	return ApiGetManagementControllerByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -55,27 +50,25 @@ func (a *ManagementApiService) GetManagementControllerByMoid(ctx _context.Contex
 
 // Execute executes the request
 //  @return ManagementController
-func (a *ManagementApiService) GetManagementControllerByMoidExecute(r ApiGetManagementControllerByMoidRequest) (ManagementController, *_nethttp.Response, error) {
+func (a *ManagementApiService) GetManagementControllerByMoidExecute(r ApiGetManagementControllerByMoidRequest) (*ManagementController, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ManagementController
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ManagementController
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ManagementApiService.GetManagementControllerByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/management/Controllers/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -94,7 +87,7 @@ func (a *ManagementApiService) GetManagementControllerByMoidExecute(r ApiGetMana
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -104,15 +97,15 @@ func (a *ManagementApiService) GetManagementControllerByMoidExecute(r ApiGetMana
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -168,7 +161,7 @@ func (a *ManagementApiService) GetManagementControllerByMoidExecute(r ApiGetMana
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -179,7 +172,7 @@ func (a *ManagementApiService) GetManagementControllerByMoidExecute(r ApiGetMana
 }
 
 type ApiGetManagementControllerListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *ManagementApiService
 	filter      *string
 	orderby     *string
@@ -260,17 +253,17 @@ func (r ApiGetManagementControllerListRequest) Tags(tags string) ApiGetManagemen
 	return r
 }
 
-func (r ApiGetManagementControllerListRequest) Execute() (ManagementControllerResponse, *_nethttp.Response, error) {
+func (r ApiGetManagementControllerListRequest) Execute() (*ManagementControllerResponse, *http.Response, error) {
 	return r.ApiService.GetManagementControllerListExecute(r)
 }
 
 /*
 GetManagementControllerList Read a 'management.Controller' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetManagementControllerListRequest
 */
-func (a *ManagementApiService) GetManagementControllerList(ctx _context.Context) ApiGetManagementControllerListRequest {
+func (a *ManagementApiService) GetManagementControllerList(ctx context.Context) ApiGetManagementControllerListRequest {
 	return ApiGetManagementControllerListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -279,26 +272,24 @@ func (a *ManagementApiService) GetManagementControllerList(ctx _context.Context)
 
 // Execute executes the request
 //  @return ManagementControllerResponse
-func (a *ManagementApiService) GetManagementControllerListExecute(r ApiGetManagementControllerListRequest) (ManagementControllerResponse, *_nethttp.Response, error) {
+func (a *ManagementApiService) GetManagementControllerListExecute(r ApiGetManagementControllerListRequest) (*ManagementControllerResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ManagementControllerResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ManagementControllerResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ManagementApiService.GetManagementControllerList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/management/Controllers"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -350,7 +341,7 @@ func (a *ManagementApiService) GetManagementControllerListExecute(r ApiGetManage
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -360,15 +351,15 @@ func (a *ManagementApiService) GetManagementControllerListExecute(r ApiGetManage
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -424,7 +415,7 @@ func (a *ManagementApiService) GetManagementControllerListExecute(r ApiGetManage
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -435,23 +426,23 @@ func (a *ManagementApiService) GetManagementControllerListExecute(r ApiGetManage
 }
 
 type ApiGetManagementEntityByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ManagementApiService
 	moid       string
 }
 
-func (r ApiGetManagementEntityByMoidRequest) Execute() (ManagementEntity, *_nethttp.Response, error) {
+func (r ApiGetManagementEntityByMoidRequest) Execute() (*ManagementEntity, *http.Response, error) {
 	return r.ApiService.GetManagementEntityByMoidExecute(r)
 }
 
 /*
 GetManagementEntityByMoid Read a 'management.Entity' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetManagementEntityByMoidRequest
 */
-func (a *ManagementApiService) GetManagementEntityByMoid(ctx _context.Context, moid string) ApiGetManagementEntityByMoidRequest {
+func (a *ManagementApiService) GetManagementEntityByMoid(ctx context.Context, moid string) ApiGetManagementEntityByMoidRequest {
 	return ApiGetManagementEntityByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -461,27 +452,25 @@ func (a *ManagementApiService) GetManagementEntityByMoid(ctx _context.Context, m
 
 // Execute executes the request
 //  @return ManagementEntity
-func (a *ManagementApiService) GetManagementEntityByMoidExecute(r ApiGetManagementEntityByMoidRequest) (ManagementEntity, *_nethttp.Response, error) {
+func (a *ManagementApiService) GetManagementEntityByMoidExecute(r ApiGetManagementEntityByMoidRequest) (*ManagementEntity, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ManagementEntity
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ManagementEntity
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ManagementApiService.GetManagementEntityByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/management/Entities/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -500,7 +489,7 @@ func (a *ManagementApiService) GetManagementEntityByMoidExecute(r ApiGetManageme
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -510,15 +499,15 @@ func (a *ManagementApiService) GetManagementEntityByMoidExecute(r ApiGetManageme
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -574,7 +563,7 @@ func (a *ManagementApiService) GetManagementEntityByMoidExecute(r ApiGetManageme
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -585,7 +574,7 @@ func (a *ManagementApiService) GetManagementEntityByMoidExecute(r ApiGetManageme
 }
 
 type ApiGetManagementEntityListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *ManagementApiService
 	filter      *string
 	orderby     *string
@@ -666,17 +655,17 @@ func (r ApiGetManagementEntityListRequest) Tags(tags string) ApiGetManagementEnt
 	return r
 }
 
-func (r ApiGetManagementEntityListRequest) Execute() (ManagementEntityResponse, *_nethttp.Response, error) {
+func (r ApiGetManagementEntityListRequest) Execute() (*ManagementEntityResponse, *http.Response, error) {
 	return r.ApiService.GetManagementEntityListExecute(r)
 }
 
 /*
 GetManagementEntityList Read a 'management.Entity' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetManagementEntityListRequest
 */
-func (a *ManagementApiService) GetManagementEntityList(ctx _context.Context) ApiGetManagementEntityListRequest {
+func (a *ManagementApiService) GetManagementEntityList(ctx context.Context) ApiGetManagementEntityListRequest {
 	return ApiGetManagementEntityListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -685,26 +674,24 @@ func (a *ManagementApiService) GetManagementEntityList(ctx _context.Context) Api
 
 // Execute executes the request
 //  @return ManagementEntityResponse
-func (a *ManagementApiService) GetManagementEntityListExecute(r ApiGetManagementEntityListRequest) (ManagementEntityResponse, *_nethttp.Response, error) {
+func (a *ManagementApiService) GetManagementEntityListExecute(r ApiGetManagementEntityListRequest) (*ManagementEntityResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ManagementEntityResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ManagementEntityResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ManagementApiService.GetManagementEntityList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/management/Entities"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -756,7 +743,7 @@ func (a *ManagementApiService) GetManagementEntityListExecute(r ApiGetManagement
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -766,15 +753,15 @@ func (a *ManagementApiService) GetManagementEntityListExecute(r ApiGetManagement
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -830,7 +817,7 @@ func (a *ManagementApiService) GetManagementEntityListExecute(r ApiGetManagement
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -841,23 +828,23 @@ func (a *ManagementApiService) GetManagementEntityListExecute(r ApiGetManagement
 }
 
 type ApiGetManagementInterfaceByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ManagementApiService
 	moid       string
 }
 
-func (r ApiGetManagementInterfaceByMoidRequest) Execute() (ManagementInterface, *_nethttp.Response, error) {
+func (r ApiGetManagementInterfaceByMoidRequest) Execute() (*ManagementInterface, *http.Response, error) {
 	return r.ApiService.GetManagementInterfaceByMoidExecute(r)
 }
 
 /*
 GetManagementInterfaceByMoid Read a 'management.Interface' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetManagementInterfaceByMoidRequest
 */
-func (a *ManagementApiService) GetManagementInterfaceByMoid(ctx _context.Context, moid string) ApiGetManagementInterfaceByMoidRequest {
+func (a *ManagementApiService) GetManagementInterfaceByMoid(ctx context.Context, moid string) ApiGetManagementInterfaceByMoidRequest {
 	return ApiGetManagementInterfaceByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -867,27 +854,25 @@ func (a *ManagementApiService) GetManagementInterfaceByMoid(ctx _context.Context
 
 // Execute executes the request
 //  @return ManagementInterface
-func (a *ManagementApiService) GetManagementInterfaceByMoidExecute(r ApiGetManagementInterfaceByMoidRequest) (ManagementInterface, *_nethttp.Response, error) {
+func (a *ManagementApiService) GetManagementInterfaceByMoidExecute(r ApiGetManagementInterfaceByMoidRequest) (*ManagementInterface, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ManagementInterface
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ManagementInterface
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ManagementApiService.GetManagementInterfaceByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/management/Interfaces/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -906,7 +891,7 @@ func (a *ManagementApiService) GetManagementInterfaceByMoidExecute(r ApiGetManag
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -916,15 +901,15 @@ func (a *ManagementApiService) GetManagementInterfaceByMoidExecute(r ApiGetManag
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -980,7 +965,7 @@ func (a *ManagementApiService) GetManagementInterfaceByMoidExecute(r ApiGetManag
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -991,7 +976,7 @@ func (a *ManagementApiService) GetManagementInterfaceByMoidExecute(r ApiGetManag
 }
 
 type ApiGetManagementInterfaceListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *ManagementApiService
 	filter      *string
 	orderby     *string
@@ -1072,17 +1057,17 @@ func (r ApiGetManagementInterfaceListRequest) Tags(tags string) ApiGetManagement
 	return r
 }
 
-func (r ApiGetManagementInterfaceListRequest) Execute() (ManagementInterfaceResponse, *_nethttp.Response, error) {
+func (r ApiGetManagementInterfaceListRequest) Execute() (*ManagementInterfaceResponse, *http.Response, error) {
 	return r.ApiService.GetManagementInterfaceListExecute(r)
 }
 
 /*
 GetManagementInterfaceList Read a 'management.Interface' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetManagementInterfaceListRequest
 */
-func (a *ManagementApiService) GetManagementInterfaceList(ctx _context.Context) ApiGetManagementInterfaceListRequest {
+func (a *ManagementApiService) GetManagementInterfaceList(ctx context.Context) ApiGetManagementInterfaceListRequest {
 	return ApiGetManagementInterfaceListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1091,26 +1076,24 @@ func (a *ManagementApiService) GetManagementInterfaceList(ctx _context.Context) 
 
 // Execute executes the request
 //  @return ManagementInterfaceResponse
-func (a *ManagementApiService) GetManagementInterfaceListExecute(r ApiGetManagementInterfaceListRequest) (ManagementInterfaceResponse, *_nethttp.Response, error) {
+func (a *ManagementApiService) GetManagementInterfaceListExecute(r ApiGetManagementInterfaceListRequest) (*ManagementInterfaceResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ManagementInterfaceResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ManagementInterfaceResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ManagementApiService.GetManagementInterfaceList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/management/Interfaces"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1162,7 +1145,7 @@ func (a *ManagementApiService) GetManagementInterfaceListExecute(r ApiGetManagem
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1172,15 +1155,15 @@ func (a *ManagementApiService) GetManagementInterfaceListExecute(r ApiGetManagem
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1236,7 +1219,7 @@ func (a *ManagementApiService) GetManagementInterfaceListExecute(r ApiGetManagem
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1247,7 +1230,7 @@ func (a *ManagementApiService) GetManagementInterfaceListExecute(r ApiGetManagem
 }
 
 type ApiPatchManagementControllerRequest struct {
-	ctx                  _context.Context
+	ctx                  context.Context
 	ApiService           *ManagementApiService
 	moid                 string
 	managementController *ManagementController
@@ -1266,18 +1249,18 @@ func (r ApiPatchManagementControllerRequest) IfMatch(ifMatch string) ApiPatchMan
 	return r
 }
 
-func (r ApiPatchManagementControllerRequest) Execute() (ManagementController, *_nethttp.Response, error) {
+func (r ApiPatchManagementControllerRequest) Execute() (*ManagementController, *http.Response, error) {
 	return r.ApiService.PatchManagementControllerExecute(r)
 }
 
 /*
 PatchManagementController Update a 'management.Controller' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchManagementControllerRequest
 */
-func (a *ManagementApiService) PatchManagementController(ctx _context.Context, moid string) ApiPatchManagementControllerRequest {
+func (a *ManagementApiService) PatchManagementController(ctx context.Context, moid string) ApiPatchManagementControllerRequest {
 	return ApiPatchManagementControllerRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1287,27 +1270,25 @@ func (a *ManagementApiService) PatchManagementController(ctx _context.Context, m
 
 // Execute executes the request
 //  @return ManagementController
-func (a *ManagementApiService) PatchManagementControllerExecute(r ApiPatchManagementControllerRequest) (ManagementController, *_nethttp.Response, error) {
+func (a *ManagementApiService) PatchManagementControllerExecute(r ApiPatchManagementControllerRequest) (*ManagementController, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ManagementController
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ManagementController
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ManagementApiService.PatchManagementController")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/management/Controllers/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.managementController == nil {
 		return localVarReturnValue, nil, reportError("managementController is required and must be specified")
 	}
@@ -1334,7 +1315,7 @@ func (a *ManagementApiService) PatchManagementControllerExecute(r ApiPatchManage
 	}
 	// body params
 	localVarPostBody = r.managementController
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1344,15 +1325,15 @@ func (a *ManagementApiService) PatchManagementControllerExecute(r ApiPatchManage
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1408,7 +1389,7 @@ func (a *ManagementApiService) PatchManagementControllerExecute(r ApiPatchManage
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1419,7 +1400,7 @@ func (a *ManagementApiService) PatchManagementControllerExecute(r ApiPatchManage
 }
 
 type ApiPatchManagementEntityRequest struct {
-	ctx              _context.Context
+	ctx              context.Context
 	ApiService       *ManagementApiService
 	moid             string
 	managementEntity *ManagementEntity
@@ -1438,18 +1419,18 @@ func (r ApiPatchManagementEntityRequest) IfMatch(ifMatch string) ApiPatchManagem
 	return r
 }
 
-func (r ApiPatchManagementEntityRequest) Execute() (ManagementEntity, *_nethttp.Response, error) {
+func (r ApiPatchManagementEntityRequest) Execute() (*ManagementEntity, *http.Response, error) {
 	return r.ApiService.PatchManagementEntityExecute(r)
 }
 
 /*
 PatchManagementEntity Update a 'management.Entity' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchManagementEntityRequest
 */
-func (a *ManagementApiService) PatchManagementEntity(ctx _context.Context, moid string) ApiPatchManagementEntityRequest {
+func (a *ManagementApiService) PatchManagementEntity(ctx context.Context, moid string) ApiPatchManagementEntityRequest {
 	return ApiPatchManagementEntityRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1459,27 +1440,25 @@ func (a *ManagementApiService) PatchManagementEntity(ctx _context.Context, moid 
 
 // Execute executes the request
 //  @return ManagementEntity
-func (a *ManagementApiService) PatchManagementEntityExecute(r ApiPatchManagementEntityRequest) (ManagementEntity, *_nethttp.Response, error) {
+func (a *ManagementApiService) PatchManagementEntityExecute(r ApiPatchManagementEntityRequest) (*ManagementEntity, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ManagementEntity
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ManagementEntity
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ManagementApiService.PatchManagementEntity")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/management/Entities/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.managementEntity == nil {
 		return localVarReturnValue, nil, reportError("managementEntity is required and must be specified")
 	}
@@ -1506,7 +1485,7 @@ func (a *ManagementApiService) PatchManagementEntityExecute(r ApiPatchManagement
 	}
 	// body params
 	localVarPostBody = r.managementEntity
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1516,15 +1495,15 @@ func (a *ManagementApiService) PatchManagementEntityExecute(r ApiPatchManagement
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1580,7 +1559,7 @@ func (a *ManagementApiService) PatchManagementEntityExecute(r ApiPatchManagement
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1591,7 +1570,7 @@ func (a *ManagementApiService) PatchManagementEntityExecute(r ApiPatchManagement
 }
 
 type ApiPatchManagementInterfaceRequest struct {
-	ctx                 _context.Context
+	ctx                 context.Context
 	ApiService          *ManagementApiService
 	moid                string
 	managementInterface *ManagementInterface
@@ -1610,18 +1589,18 @@ func (r ApiPatchManagementInterfaceRequest) IfMatch(ifMatch string) ApiPatchMana
 	return r
 }
 
-func (r ApiPatchManagementInterfaceRequest) Execute() (ManagementInterface, *_nethttp.Response, error) {
+func (r ApiPatchManagementInterfaceRequest) Execute() (*ManagementInterface, *http.Response, error) {
 	return r.ApiService.PatchManagementInterfaceExecute(r)
 }
 
 /*
 PatchManagementInterface Update a 'management.Interface' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchManagementInterfaceRequest
 */
-func (a *ManagementApiService) PatchManagementInterface(ctx _context.Context, moid string) ApiPatchManagementInterfaceRequest {
+func (a *ManagementApiService) PatchManagementInterface(ctx context.Context, moid string) ApiPatchManagementInterfaceRequest {
 	return ApiPatchManagementInterfaceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1631,27 +1610,25 @@ func (a *ManagementApiService) PatchManagementInterface(ctx _context.Context, mo
 
 // Execute executes the request
 //  @return ManagementInterface
-func (a *ManagementApiService) PatchManagementInterfaceExecute(r ApiPatchManagementInterfaceRequest) (ManagementInterface, *_nethttp.Response, error) {
+func (a *ManagementApiService) PatchManagementInterfaceExecute(r ApiPatchManagementInterfaceRequest) (*ManagementInterface, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ManagementInterface
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ManagementInterface
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ManagementApiService.PatchManagementInterface")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/management/Interfaces/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.managementInterface == nil {
 		return localVarReturnValue, nil, reportError("managementInterface is required and must be specified")
 	}
@@ -1678,7 +1655,7 @@ func (a *ManagementApiService) PatchManagementInterfaceExecute(r ApiPatchManagem
 	}
 	// body params
 	localVarPostBody = r.managementInterface
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1688,15 +1665,15 @@ func (a *ManagementApiService) PatchManagementInterfaceExecute(r ApiPatchManagem
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1752,7 +1729,7 @@ func (a *ManagementApiService) PatchManagementInterfaceExecute(r ApiPatchManagem
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1763,7 +1740,7 @@ func (a *ManagementApiService) PatchManagementInterfaceExecute(r ApiPatchManagem
 }
 
 type ApiUpdateManagementControllerRequest struct {
-	ctx                  _context.Context
+	ctx                  context.Context
 	ApiService           *ManagementApiService
 	moid                 string
 	managementController *ManagementController
@@ -1782,18 +1759,18 @@ func (r ApiUpdateManagementControllerRequest) IfMatch(ifMatch string) ApiUpdateM
 	return r
 }
 
-func (r ApiUpdateManagementControllerRequest) Execute() (ManagementController, *_nethttp.Response, error) {
+func (r ApiUpdateManagementControllerRequest) Execute() (*ManagementController, *http.Response, error) {
 	return r.ApiService.UpdateManagementControllerExecute(r)
 }
 
 /*
 UpdateManagementController Update a 'management.Controller' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateManagementControllerRequest
 */
-func (a *ManagementApiService) UpdateManagementController(ctx _context.Context, moid string) ApiUpdateManagementControllerRequest {
+func (a *ManagementApiService) UpdateManagementController(ctx context.Context, moid string) ApiUpdateManagementControllerRequest {
 	return ApiUpdateManagementControllerRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1803,27 +1780,25 @@ func (a *ManagementApiService) UpdateManagementController(ctx _context.Context, 
 
 // Execute executes the request
 //  @return ManagementController
-func (a *ManagementApiService) UpdateManagementControllerExecute(r ApiUpdateManagementControllerRequest) (ManagementController, *_nethttp.Response, error) {
+func (a *ManagementApiService) UpdateManagementControllerExecute(r ApiUpdateManagementControllerRequest) (*ManagementController, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ManagementController
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ManagementController
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ManagementApiService.UpdateManagementController")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/management/Controllers/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.managementController == nil {
 		return localVarReturnValue, nil, reportError("managementController is required and must be specified")
 	}
@@ -1850,7 +1825,7 @@ func (a *ManagementApiService) UpdateManagementControllerExecute(r ApiUpdateMana
 	}
 	// body params
 	localVarPostBody = r.managementController
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1860,15 +1835,15 @@ func (a *ManagementApiService) UpdateManagementControllerExecute(r ApiUpdateMana
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1924,7 +1899,7 @@ func (a *ManagementApiService) UpdateManagementControllerExecute(r ApiUpdateMana
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1935,7 +1910,7 @@ func (a *ManagementApiService) UpdateManagementControllerExecute(r ApiUpdateMana
 }
 
 type ApiUpdateManagementEntityRequest struct {
-	ctx              _context.Context
+	ctx              context.Context
 	ApiService       *ManagementApiService
 	moid             string
 	managementEntity *ManagementEntity
@@ -1954,18 +1929,18 @@ func (r ApiUpdateManagementEntityRequest) IfMatch(ifMatch string) ApiUpdateManag
 	return r
 }
 
-func (r ApiUpdateManagementEntityRequest) Execute() (ManagementEntity, *_nethttp.Response, error) {
+func (r ApiUpdateManagementEntityRequest) Execute() (*ManagementEntity, *http.Response, error) {
 	return r.ApiService.UpdateManagementEntityExecute(r)
 }
 
 /*
 UpdateManagementEntity Update a 'management.Entity' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateManagementEntityRequest
 */
-func (a *ManagementApiService) UpdateManagementEntity(ctx _context.Context, moid string) ApiUpdateManagementEntityRequest {
+func (a *ManagementApiService) UpdateManagementEntity(ctx context.Context, moid string) ApiUpdateManagementEntityRequest {
 	return ApiUpdateManagementEntityRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1975,27 +1950,25 @@ func (a *ManagementApiService) UpdateManagementEntity(ctx _context.Context, moid
 
 // Execute executes the request
 //  @return ManagementEntity
-func (a *ManagementApiService) UpdateManagementEntityExecute(r ApiUpdateManagementEntityRequest) (ManagementEntity, *_nethttp.Response, error) {
+func (a *ManagementApiService) UpdateManagementEntityExecute(r ApiUpdateManagementEntityRequest) (*ManagementEntity, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ManagementEntity
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ManagementEntity
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ManagementApiService.UpdateManagementEntity")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/management/Entities/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.managementEntity == nil {
 		return localVarReturnValue, nil, reportError("managementEntity is required and must be specified")
 	}
@@ -2022,7 +1995,7 @@ func (a *ManagementApiService) UpdateManagementEntityExecute(r ApiUpdateManageme
 	}
 	// body params
 	localVarPostBody = r.managementEntity
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2032,15 +2005,15 @@ func (a *ManagementApiService) UpdateManagementEntityExecute(r ApiUpdateManageme
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2096,7 +2069,7 @@ func (a *ManagementApiService) UpdateManagementEntityExecute(r ApiUpdateManageme
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2107,7 +2080,7 @@ func (a *ManagementApiService) UpdateManagementEntityExecute(r ApiUpdateManageme
 }
 
 type ApiUpdateManagementInterfaceRequest struct {
-	ctx                 _context.Context
+	ctx                 context.Context
 	ApiService          *ManagementApiService
 	moid                string
 	managementInterface *ManagementInterface
@@ -2126,18 +2099,18 @@ func (r ApiUpdateManagementInterfaceRequest) IfMatch(ifMatch string) ApiUpdateMa
 	return r
 }
 
-func (r ApiUpdateManagementInterfaceRequest) Execute() (ManagementInterface, *_nethttp.Response, error) {
+func (r ApiUpdateManagementInterfaceRequest) Execute() (*ManagementInterface, *http.Response, error) {
 	return r.ApiService.UpdateManagementInterfaceExecute(r)
 }
 
 /*
 UpdateManagementInterface Update a 'management.Interface' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateManagementInterfaceRequest
 */
-func (a *ManagementApiService) UpdateManagementInterface(ctx _context.Context, moid string) ApiUpdateManagementInterfaceRequest {
+func (a *ManagementApiService) UpdateManagementInterface(ctx context.Context, moid string) ApiUpdateManagementInterfaceRequest {
 	return ApiUpdateManagementInterfaceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2147,27 +2120,25 @@ func (a *ManagementApiService) UpdateManagementInterface(ctx _context.Context, m
 
 // Execute executes the request
 //  @return ManagementInterface
-func (a *ManagementApiService) UpdateManagementInterfaceExecute(r ApiUpdateManagementInterfaceRequest) (ManagementInterface, *_nethttp.Response, error) {
+func (a *ManagementApiService) UpdateManagementInterfaceExecute(r ApiUpdateManagementInterfaceRequest) (*ManagementInterface, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ManagementInterface
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ManagementInterface
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ManagementApiService.UpdateManagementInterface")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/management/Interfaces/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.managementInterface == nil {
 		return localVarReturnValue, nil, reportError("managementInterface is required and must be specified")
 	}
@@ -2194,7 +2165,7 @@ func (a *ManagementApiService) UpdateManagementInterfaceExecute(r ApiUpdateManag
 	}
 	// body params
 	localVarPostBody = r.managementInterface
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2204,15 +2175,15 @@ func (a *ManagementApiService) UpdateManagementInterfaceExecute(r ApiUpdateManag
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2268,7 +2239,7 @@ func (a *ManagementApiService) UpdateManagementInterfaceExecute(r ApiUpdateManag
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

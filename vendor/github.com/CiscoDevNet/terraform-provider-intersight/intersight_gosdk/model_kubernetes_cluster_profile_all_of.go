@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -29,7 +29,7 @@ type KubernetesClusterProfileAllOf struct {
 	// Management mode for the cluster. In some cases Intersight kubernetes service is not required to provision and manage the management entities and endpoints (for e.g. EKS). In most other cases it will be required to provision and manage these entities and endpoints. * `Provided` - Cluster management entities and endpoints are provided by the infrastructure platform. * `Managed` - Cluster management entities and endpoints are provisioned and managed by Intersight kubernetes service.
 	ManagedMode      *string                                   `json:"ManagedMode,omitempty"`
 	ManagementConfig NullableKubernetesClusterManagementConfig `json:"ManagementConfig,omitempty"`
-	// Status of the Kubernetes cluster and its nodes. * `Undeployed` - The cluster is undeployed. * `Configuring` - The cluster is being configured. * `Deploying` - The cluster is being deployed. * `Undeploying` - The cluster is being undeployed. * `DeployFailedTerminal` - The cluster deployment failed terminally and can not be recovered. * `DeployFailed` - The cluster deployment failed. * `Upgrading` - The cluster is being upgraded. * `Deleting` - The cluster is being deleted. * `DeleteFailed` - The cluster delete failed. * `Ready` - The cluster is ready for use. * `Active` - The cluster is being active. * `Shutdown` - All the nodes in the cluster are powered off. * `Terminated` - The cluster is terminated. * `Deployed` - The cluster is deployed. The cluster may not yet be ready for use. * `UndeployFailed` - The cluster undeploy action failed. * `NotReady` - The cluster is created and some nodes are not ready.
+	// Status of the Kubernetes cluster and its nodes. * `Undeployed` - The cluster is undeployed. * `Configuring` - The cluster is being configured. * `Deploying` - The cluster is being deployed. * `Undeploying` - The cluster is being undeployed. * `DeployFailedTerminal` - The Cluster Deploy failed creation and can not be recovered, only Delete or Undeploy operations are available for this Cluster. * `DeployFailed` - The cluster deployment failed. * `Upgrading` - The cluster is being upgraded. * `Deleting` - The cluster is being deleted. * `DeleteFailed` - The Cluster Delete failed and the Cluster can not be recovered, only Delete or Undeploy operations are available for this Cluster. * `Ready` - The cluster is ready for use. * `Active` - The cluster is being active. * `Shutdown` - All the nodes in the cluster are powered off. * `Terminated` - The cluster is terminated. * `Deployed` - The cluster is deployed. The cluster may not yet be ready for use. * `UndeployFailed` - The cluster undeploy action failed. * `NotReady` - The cluster is created and some nodes are not ready.
 	Status            *string                              `json:"Status,omitempty"`
 	AciCniProfile     *KubernetesAciCniProfileRelationship `json:"AciCniProfile,omitempty"`
 	AssociatedCluster *KubernetesClusterRelationship       `json:"AssociatedCluster,omitempty"`
@@ -234,11 +234,11 @@ func (o *KubernetesClusterProfileAllOf) GetEssentialAddons() []KubernetesEssenti
 // GetEssentialAddonsOk returns a tuple with the EssentialAddons field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *KubernetesClusterProfileAllOf) GetEssentialAddonsOk() (*[]KubernetesEssentialAddon, bool) {
+func (o *KubernetesClusterProfileAllOf) GetEssentialAddonsOk() ([]KubernetesEssentialAddon, bool) {
 	if o == nil || o.EssentialAddons == nil {
 		return nil, false
 	}
-	return &o.EssentialAddons, true
+	return o.EssentialAddons, true
 }
 
 // HasEssentialAddons returns a boolean if a field has been set.
@@ -481,11 +481,11 @@ func (o *KubernetesClusterProfileAllOf) GetClusterIpPools() []IppoolPoolRelation
 // GetClusterIpPoolsOk returns a tuple with the ClusterIpPools field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *KubernetesClusterProfileAllOf) GetClusterIpPoolsOk() (*[]IppoolPoolRelationship, bool) {
+func (o *KubernetesClusterProfileAllOf) GetClusterIpPoolsOk() ([]IppoolPoolRelationship, bool) {
 	if o == nil || o.ClusterIpPools == nil {
 		return nil, false
 	}
-	return &o.ClusterIpPools, true
+	return o.ClusterIpPools, true
 }
 
 // HasClusterIpPools returns a boolean if a field has been set.
@@ -546,11 +546,11 @@ func (o *KubernetesClusterProfileAllOf) GetLoadbalancerBlockIpLeases() []IppoolB
 // GetLoadbalancerBlockIpLeasesOk returns a tuple with the LoadbalancerBlockIpLeases field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *KubernetesClusterProfileAllOf) GetLoadbalancerBlockIpLeasesOk() (*[]IppoolBlockLeaseRelationship, bool) {
+func (o *KubernetesClusterProfileAllOf) GetLoadbalancerBlockIpLeasesOk() ([]IppoolBlockLeaseRelationship, bool) {
 	if o == nil || o.LoadbalancerBlockIpLeases == nil {
 		return nil, false
 	}
-	return &o.LoadbalancerBlockIpLeases, true
+	return o.LoadbalancerBlockIpLeases, true
 }
 
 // HasLoadbalancerBlockIpLeases returns a boolean if a field has been set.
@@ -579,11 +579,11 @@ func (o *KubernetesClusterProfileAllOf) GetLoadbalancerIpLeases() []IppoolIpLeas
 // GetLoadbalancerIpLeasesOk returns a tuple with the LoadbalancerIpLeases field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *KubernetesClusterProfileAllOf) GetLoadbalancerIpLeasesOk() (*[]IppoolIpLeaseRelationship, bool) {
+func (o *KubernetesClusterProfileAllOf) GetLoadbalancerIpLeasesOk() ([]IppoolIpLeaseRelationship, bool) {
 	if o == nil || o.LoadbalancerIpLeases == nil {
 		return nil, false
 	}
-	return &o.LoadbalancerIpLeases, true
+	return o.LoadbalancerIpLeases, true
 }
 
 // HasLoadbalancerIpLeases returns a boolean if a field has been set.
@@ -676,11 +676,11 @@ func (o *KubernetesClusterProfileAllOf) GetNodeGroups() []KubernetesNodeGroupPro
 // GetNodeGroupsOk returns a tuple with the NodeGroups field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *KubernetesClusterProfileAllOf) GetNodeGroupsOk() (*[]KubernetesNodeGroupProfileRelationship, bool) {
+func (o *KubernetesClusterProfileAllOf) GetNodeGroupsOk() ([]KubernetesNodeGroupProfileRelationship, bool) {
 	if o == nil || o.NodeGroups == nil {
 		return nil, false
 	}
-	return &o.NodeGroups, true
+	return o.NodeGroups, true
 }
 
 // HasNodeGroups returns a boolean if a field has been set.

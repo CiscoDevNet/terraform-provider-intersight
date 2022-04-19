@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -26,8 +26,10 @@ type VnicFcIfAllOf struct {
 	// The order in which the virtual interface is brought up. The order assigned to an interface should be unique for all the Ethernet and Fibre-Channel interfaces on each PCI link on a VIC adapter. The maximum value of PCI order is limited by the number of virtual interfaces (Ethernet and Fibre-Channel) on each PCI link on a VIC adapter. All VIC adapters have a single PCI link except VIC 1385 which has two.
 	Order *int64 `json:"Order,omitempty"`
 	// Enables retention of LUN ID associations in memory until they are manually cleared.
-	PersistentBindings *bool                         `json:"PersistentBindings,omitempty"`
-	Placement          NullableVnicPlacementSettings `json:"Placement,omitempty"`
+	PersistentBindings *bool `json:"PersistentBindings,omitempty"`
+	// Pingroup name associated to vfc for static pinning. SCP deploy will resolve pingroup name and fetches the correspoding uplink port/port channel to pin the vfc traffic.
+	PinGroupName *string                       `json:"PinGroupName,omitempty"`
+	Placement    NullableVnicPlacementSettings `json:"Placement,omitempty"`
 	// The WWPN address must be in hexadecimal format xx:xx:xx:xx:xx:xx:xx:xx. Allowed ranges are 20:00:00:00:00:00:00:00 to 20:FF:FF:FF:FF:FF:FF:FF or from 50:00:00:00:00:00:00:00 to 5F:FF:FF:FF:FF:FF:FF:FF. To ensure uniqueness of WWN's in the SAN fabric, you are strongly encouraged to use the WWN prefix - 20:00:00:25:B5:xx:xx:xx.
 	StaticWwpnAddress *string `json:"StaticWwpnAddress,omitempty"`
 	// VHBA Type configuration for SAN Connectivity Policy. This configuration is supported only on Cisco VIC 14XX series and higher series of adapters. * `fc-initiator` - The default value set for vHBA Type Configuration. Fc-initiator specifies vHBA as a consumer of storage. Enables SCSI commands to transfer data and status information between host and target storage systems. * `fc-nvme-initiator` - Fc-nvme-initiator specifies vHBA as a consumer of storage. Enables NVMe-based message commands to transfer data and status information between host and target storage systems. * `fc-nvme-target` - Fc-nvme-target specifies vHBA as a provider of storage volumes to initiators. Enables NVMe-based message commands to transfer data and status information between host and target storage systems. Currently tech-preview, only enabled with an asynchronous driver. * `fc-target` - Fc-target specifies vHBA as a provider of storage volumes to initiators. Enables SCSI commands to transfer data and status information between host and target storage systems. fc-target is enabled only with an asynchronous driver.
@@ -226,6 +228,38 @@ func (o *VnicFcIfAllOf) HasPersistentBindings() bool {
 // SetPersistentBindings gets a reference to the given bool and assigns it to the PersistentBindings field.
 func (o *VnicFcIfAllOf) SetPersistentBindings(v bool) {
 	o.PersistentBindings = &v
+}
+
+// GetPinGroupName returns the PinGroupName field value if set, zero value otherwise.
+func (o *VnicFcIfAllOf) GetPinGroupName() string {
+	if o == nil || o.PinGroupName == nil {
+		var ret string
+		return ret
+	}
+	return *o.PinGroupName
+}
+
+// GetPinGroupNameOk returns a tuple with the PinGroupName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VnicFcIfAllOf) GetPinGroupNameOk() (*string, bool) {
+	if o == nil || o.PinGroupName == nil {
+		return nil, false
+	}
+	return o.PinGroupName, true
+}
+
+// HasPinGroupName returns a boolean if a field has been set.
+func (o *VnicFcIfAllOf) HasPinGroupName() bool {
+	if o != nil && o.PinGroupName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPinGroupName gets a reference to the given string and assigns it to the PinGroupName field.
+func (o *VnicFcIfAllOf) SetPinGroupName(v string) {
+	o.PinGroupName = &v
 }
 
 // GetPlacement returns the Placement field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -635,11 +669,11 @@ func (o *VnicFcIfAllOf) GetSpVhbas() []VnicFcIfRelationship {
 // GetSpVhbasOk returns a tuple with the SpVhbas field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *VnicFcIfAllOf) GetSpVhbasOk() (*[]VnicFcIfRelationship, bool) {
+func (o *VnicFcIfAllOf) GetSpVhbasOk() ([]VnicFcIfRelationship, bool) {
 	if o == nil || o.SpVhbas == nil {
 		return nil, false
 	}
-	return &o.SpVhbas, true
+	return o.SpVhbas, true
 }
 
 // HasSpVhbas returns a boolean if a field has been set.
@@ -737,6 +771,9 @@ func (o VnicFcIfAllOf) MarshalJSON() ([]byte, error) {
 	if o.PersistentBindings != nil {
 		toSerialize["PersistentBindings"] = o.PersistentBindings
 	}
+	if o.PinGroupName != nil {
+		toSerialize["PinGroupName"] = o.PinGroupName
+	}
 	if o.Placement.IsSet() {
 		toSerialize["Placement"] = o.Placement.Get()
 	}
@@ -805,6 +842,7 @@ func (o *VnicFcIfAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "Order")
 		delete(additionalProperties, "PersistentBindings")
+		delete(additionalProperties, "PinGroupName")
 		delete(additionalProperties, "Placement")
 		delete(additionalProperties, "StaticWwpnAddress")
 		delete(additionalProperties, "Type")

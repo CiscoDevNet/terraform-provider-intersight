@@ -23,7 +23,7 @@ resource "intersight_vmedia_policy" "vmedia1" {
     object_type = "organization.Organization"
     moid        = var.organization
   }
-  mappings = [{
+  mappings {
     additional_properties   = ""
     authentication_protocol = "none"
     class_id                = "vmedia.Mapping"
@@ -40,7 +40,7 @@ resource "intersight_vmedia_policy" "vmedia1" {
     sanitized_file_location = "infra-chx.auslab.cisco.com/software/linux/ubuntu-18.04.5-server-amd64.iso"
     username                = ""
     volume_name             = "IMC_DVD"
-  }]
+  }
 }
 
 variable "organization" {
@@ -48,6 +48,7 @@ variable "organization" {
    description = "<value for organization>"
  }
 ```
+
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

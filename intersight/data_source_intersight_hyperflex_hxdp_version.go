@@ -677,7 +677,6 @@ func dataSourceHyperflexHxdpVersion() *schema.Resource {
 
 func dataSourceHyperflexHxdpVersionRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.HyperflexHxdpVersion{}
@@ -1027,7 +1026,7 @@ func dataSourceHyperflexHxdpVersionRead(c context.Context, d *schema.ResourceDat
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of HyperflexHxdpVersion: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of HyperflexHxdpVersion: %s", responseErr.Error())
@@ -1044,7 +1043,7 @@ func dataSourceHyperflexHxdpVersionRead(c context.Context, d *schema.ResourceDat
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching HyperflexHxdpVersion: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching HyperflexHxdpVersion: %s", responseErr.Error())

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,39 +13,34 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // NetworkApiService NetworkApi service
 type NetworkApiService service
 
 type ApiGetNetworkElementByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NetworkApiService
 	moid       string
 }
 
-func (r ApiGetNetworkElementByMoidRequest) Execute() (NetworkElement, *_nethttp.Response, error) {
+func (r ApiGetNetworkElementByMoidRequest) Execute() (*NetworkElement, *http.Response, error) {
 	return r.ApiService.GetNetworkElementByMoidExecute(r)
 }
 
 /*
 GetNetworkElementByMoid Read a 'network.Element' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNetworkElementByMoidRequest
 */
-func (a *NetworkApiService) GetNetworkElementByMoid(ctx _context.Context, moid string) ApiGetNetworkElementByMoidRequest {
+func (a *NetworkApiService) GetNetworkElementByMoid(ctx context.Context, moid string) ApiGetNetworkElementByMoidRequest {
 	return ApiGetNetworkElementByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -55,27 +50,25 @@ func (a *NetworkApiService) GetNetworkElementByMoid(ctx _context.Context, moid s
 
 // Execute executes the request
 //  @return NetworkElement
-func (a *NetworkApiService) GetNetworkElementByMoidExecute(r ApiGetNetworkElementByMoidRequest) (NetworkElement, *_nethttp.Response, error) {
+func (a *NetworkApiService) GetNetworkElementByMoidExecute(r ApiGetNetworkElementByMoidRequest) (*NetworkElement, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NetworkElement
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NetworkElement
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkApiService.GetNetworkElementByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/network/Elements/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -94,7 +87,7 @@ func (a *NetworkApiService) GetNetworkElementByMoidExecute(r ApiGetNetworkElemen
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -104,15 +97,15 @@ func (a *NetworkApiService) GetNetworkElementByMoidExecute(r ApiGetNetworkElemen
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -168,7 +161,7 @@ func (a *NetworkApiService) GetNetworkElementByMoidExecute(r ApiGetNetworkElemen
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -179,7 +172,7 @@ func (a *NetworkApiService) GetNetworkElementByMoidExecute(r ApiGetNetworkElemen
 }
 
 type ApiGetNetworkElementListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NetworkApiService
 	filter      *string
 	orderby     *string
@@ -260,17 +253,17 @@ func (r ApiGetNetworkElementListRequest) Tags(tags string) ApiGetNetworkElementL
 	return r
 }
 
-func (r ApiGetNetworkElementListRequest) Execute() (NetworkElementResponse, *_nethttp.Response, error) {
+func (r ApiGetNetworkElementListRequest) Execute() (*NetworkElementResponse, *http.Response, error) {
 	return r.ApiService.GetNetworkElementListExecute(r)
 }
 
 /*
 GetNetworkElementList Read a 'network.Element' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNetworkElementListRequest
 */
-func (a *NetworkApiService) GetNetworkElementList(ctx _context.Context) ApiGetNetworkElementListRequest {
+func (a *NetworkApiService) GetNetworkElementList(ctx context.Context) ApiGetNetworkElementListRequest {
 	return ApiGetNetworkElementListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -279,26 +272,24 @@ func (a *NetworkApiService) GetNetworkElementList(ctx _context.Context) ApiGetNe
 
 // Execute executes the request
 //  @return NetworkElementResponse
-func (a *NetworkApiService) GetNetworkElementListExecute(r ApiGetNetworkElementListRequest) (NetworkElementResponse, *_nethttp.Response, error) {
+func (a *NetworkApiService) GetNetworkElementListExecute(r ApiGetNetworkElementListRequest) (*NetworkElementResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NetworkElementResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NetworkElementResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkApiService.GetNetworkElementList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/network/Elements"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -350,7 +341,7 @@ func (a *NetworkApiService) GetNetworkElementListExecute(r ApiGetNetworkElementL
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -360,15 +351,15 @@ func (a *NetworkApiService) GetNetworkElementListExecute(r ApiGetNetworkElementL
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -424,7 +415,7 @@ func (a *NetworkApiService) GetNetworkElementListExecute(r ApiGetNetworkElementL
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -435,23 +426,23 @@ func (a *NetworkApiService) GetNetworkElementListExecute(r ApiGetNetworkElementL
 }
 
 type ApiGetNetworkElementSummaryByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NetworkApiService
 	moid       string
 }
 
-func (r ApiGetNetworkElementSummaryByMoidRequest) Execute() (NetworkElementSummary, *_nethttp.Response, error) {
+func (r ApiGetNetworkElementSummaryByMoidRequest) Execute() (*NetworkElementSummary, *http.Response, error) {
 	return r.ApiService.GetNetworkElementSummaryByMoidExecute(r)
 }
 
 /*
 GetNetworkElementSummaryByMoid Read a 'network.ElementSummary' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNetworkElementSummaryByMoidRequest
 */
-func (a *NetworkApiService) GetNetworkElementSummaryByMoid(ctx _context.Context, moid string) ApiGetNetworkElementSummaryByMoidRequest {
+func (a *NetworkApiService) GetNetworkElementSummaryByMoid(ctx context.Context, moid string) ApiGetNetworkElementSummaryByMoidRequest {
 	return ApiGetNetworkElementSummaryByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -461,27 +452,25 @@ func (a *NetworkApiService) GetNetworkElementSummaryByMoid(ctx _context.Context,
 
 // Execute executes the request
 //  @return NetworkElementSummary
-func (a *NetworkApiService) GetNetworkElementSummaryByMoidExecute(r ApiGetNetworkElementSummaryByMoidRequest) (NetworkElementSummary, *_nethttp.Response, error) {
+func (a *NetworkApiService) GetNetworkElementSummaryByMoidExecute(r ApiGetNetworkElementSummaryByMoidRequest) (*NetworkElementSummary, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NetworkElementSummary
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NetworkElementSummary
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkApiService.GetNetworkElementSummaryByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/network/ElementSummaries/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -500,7 +489,7 @@ func (a *NetworkApiService) GetNetworkElementSummaryByMoidExecute(r ApiGetNetwor
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -510,15 +499,15 @@ func (a *NetworkApiService) GetNetworkElementSummaryByMoidExecute(r ApiGetNetwor
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -574,7 +563,7 @@ func (a *NetworkApiService) GetNetworkElementSummaryByMoidExecute(r ApiGetNetwor
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -585,7 +574,7 @@ func (a *NetworkApiService) GetNetworkElementSummaryByMoidExecute(r ApiGetNetwor
 }
 
 type ApiGetNetworkElementSummaryListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NetworkApiService
 	filter      *string
 	orderby     *string
@@ -666,17 +655,17 @@ func (r ApiGetNetworkElementSummaryListRequest) Tags(tags string) ApiGetNetworkE
 	return r
 }
 
-func (r ApiGetNetworkElementSummaryListRequest) Execute() (NetworkElementSummaryResponse, *_nethttp.Response, error) {
+func (r ApiGetNetworkElementSummaryListRequest) Execute() (*NetworkElementSummaryResponse, *http.Response, error) {
 	return r.ApiService.GetNetworkElementSummaryListExecute(r)
 }
 
 /*
 GetNetworkElementSummaryList Read a 'network.ElementSummary' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNetworkElementSummaryListRequest
 */
-func (a *NetworkApiService) GetNetworkElementSummaryList(ctx _context.Context) ApiGetNetworkElementSummaryListRequest {
+func (a *NetworkApiService) GetNetworkElementSummaryList(ctx context.Context) ApiGetNetworkElementSummaryListRequest {
 	return ApiGetNetworkElementSummaryListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -685,26 +674,24 @@ func (a *NetworkApiService) GetNetworkElementSummaryList(ctx _context.Context) A
 
 // Execute executes the request
 //  @return NetworkElementSummaryResponse
-func (a *NetworkApiService) GetNetworkElementSummaryListExecute(r ApiGetNetworkElementSummaryListRequest) (NetworkElementSummaryResponse, *_nethttp.Response, error) {
+func (a *NetworkApiService) GetNetworkElementSummaryListExecute(r ApiGetNetworkElementSummaryListRequest) (*NetworkElementSummaryResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NetworkElementSummaryResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NetworkElementSummaryResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkApiService.GetNetworkElementSummaryList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/network/ElementSummaries"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -756,7 +743,7 @@ func (a *NetworkApiService) GetNetworkElementSummaryListExecute(r ApiGetNetworkE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -766,15 +753,15 @@ func (a *NetworkApiService) GetNetworkElementSummaryListExecute(r ApiGetNetworkE
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -830,7 +817,7 @@ func (a *NetworkApiService) GetNetworkElementSummaryListExecute(r ApiGetNetworkE
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -841,23 +828,23 @@ func (a *NetworkApiService) GetNetworkElementSummaryListExecute(r ApiGetNetworkE
 }
 
 type ApiGetNetworkFcZoneInfoByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NetworkApiService
 	moid       string
 }
 
-func (r ApiGetNetworkFcZoneInfoByMoidRequest) Execute() (NetworkFcZoneInfo, *_nethttp.Response, error) {
+func (r ApiGetNetworkFcZoneInfoByMoidRequest) Execute() (*NetworkFcZoneInfo, *http.Response, error) {
 	return r.ApiService.GetNetworkFcZoneInfoByMoidExecute(r)
 }
 
 /*
 GetNetworkFcZoneInfoByMoid Read a 'network.FcZoneInfo' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNetworkFcZoneInfoByMoidRequest
 */
-func (a *NetworkApiService) GetNetworkFcZoneInfoByMoid(ctx _context.Context, moid string) ApiGetNetworkFcZoneInfoByMoidRequest {
+func (a *NetworkApiService) GetNetworkFcZoneInfoByMoid(ctx context.Context, moid string) ApiGetNetworkFcZoneInfoByMoidRequest {
 	return ApiGetNetworkFcZoneInfoByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -867,27 +854,25 @@ func (a *NetworkApiService) GetNetworkFcZoneInfoByMoid(ctx _context.Context, moi
 
 // Execute executes the request
 //  @return NetworkFcZoneInfo
-func (a *NetworkApiService) GetNetworkFcZoneInfoByMoidExecute(r ApiGetNetworkFcZoneInfoByMoidRequest) (NetworkFcZoneInfo, *_nethttp.Response, error) {
+func (a *NetworkApiService) GetNetworkFcZoneInfoByMoidExecute(r ApiGetNetworkFcZoneInfoByMoidRequest) (*NetworkFcZoneInfo, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NetworkFcZoneInfo
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NetworkFcZoneInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkApiService.GetNetworkFcZoneInfoByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/network/FcZoneInfos/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -906,7 +891,7 @@ func (a *NetworkApiService) GetNetworkFcZoneInfoByMoidExecute(r ApiGetNetworkFcZ
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -916,15 +901,15 @@ func (a *NetworkApiService) GetNetworkFcZoneInfoByMoidExecute(r ApiGetNetworkFcZ
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -980,7 +965,7 @@ func (a *NetworkApiService) GetNetworkFcZoneInfoByMoidExecute(r ApiGetNetworkFcZ
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -991,7 +976,7 @@ func (a *NetworkApiService) GetNetworkFcZoneInfoByMoidExecute(r ApiGetNetworkFcZ
 }
 
 type ApiGetNetworkFcZoneInfoListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NetworkApiService
 	filter      *string
 	orderby     *string
@@ -1072,17 +1057,17 @@ func (r ApiGetNetworkFcZoneInfoListRequest) Tags(tags string) ApiGetNetworkFcZon
 	return r
 }
 
-func (r ApiGetNetworkFcZoneInfoListRequest) Execute() (NetworkFcZoneInfoResponse, *_nethttp.Response, error) {
+func (r ApiGetNetworkFcZoneInfoListRequest) Execute() (*NetworkFcZoneInfoResponse, *http.Response, error) {
 	return r.ApiService.GetNetworkFcZoneInfoListExecute(r)
 }
 
 /*
 GetNetworkFcZoneInfoList Read a 'network.FcZoneInfo' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNetworkFcZoneInfoListRequest
 */
-func (a *NetworkApiService) GetNetworkFcZoneInfoList(ctx _context.Context) ApiGetNetworkFcZoneInfoListRequest {
+func (a *NetworkApiService) GetNetworkFcZoneInfoList(ctx context.Context) ApiGetNetworkFcZoneInfoListRequest {
 	return ApiGetNetworkFcZoneInfoListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1091,26 +1076,24 @@ func (a *NetworkApiService) GetNetworkFcZoneInfoList(ctx _context.Context) ApiGe
 
 // Execute executes the request
 //  @return NetworkFcZoneInfoResponse
-func (a *NetworkApiService) GetNetworkFcZoneInfoListExecute(r ApiGetNetworkFcZoneInfoListRequest) (NetworkFcZoneInfoResponse, *_nethttp.Response, error) {
+func (a *NetworkApiService) GetNetworkFcZoneInfoListExecute(r ApiGetNetworkFcZoneInfoListRequest) (*NetworkFcZoneInfoResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NetworkFcZoneInfoResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NetworkFcZoneInfoResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkApiService.GetNetworkFcZoneInfoList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/network/FcZoneInfos"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1162,7 +1145,7 @@ func (a *NetworkApiService) GetNetworkFcZoneInfoListExecute(r ApiGetNetworkFcZon
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1172,15 +1155,15 @@ func (a *NetworkApiService) GetNetworkFcZoneInfoListExecute(r ApiGetNetworkFcZon
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1236,7 +1219,7 @@ func (a *NetworkApiService) GetNetworkFcZoneInfoListExecute(r ApiGetNetworkFcZon
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1247,23 +1230,23 @@ func (a *NetworkApiService) GetNetworkFcZoneInfoListExecute(r ApiGetNetworkFcZon
 }
 
 type ApiGetNetworkFeatureControlByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NetworkApiService
 	moid       string
 }
 
-func (r ApiGetNetworkFeatureControlByMoidRequest) Execute() (NetworkFeatureControl, *_nethttp.Response, error) {
+func (r ApiGetNetworkFeatureControlByMoidRequest) Execute() (*NetworkFeatureControl, *http.Response, error) {
 	return r.ApiService.GetNetworkFeatureControlByMoidExecute(r)
 }
 
 /*
 GetNetworkFeatureControlByMoid Read a 'network.FeatureControl' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNetworkFeatureControlByMoidRequest
 */
-func (a *NetworkApiService) GetNetworkFeatureControlByMoid(ctx _context.Context, moid string) ApiGetNetworkFeatureControlByMoidRequest {
+func (a *NetworkApiService) GetNetworkFeatureControlByMoid(ctx context.Context, moid string) ApiGetNetworkFeatureControlByMoidRequest {
 	return ApiGetNetworkFeatureControlByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1273,27 +1256,25 @@ func (a *NetworkApiService) GetNetworkFeatureControlByMoid(ctx _context.Context,
 
 // Execute executes the request
 //  @return NetworkFeatureControl
-func (a *NetworkApiService) GetNetworkFeatureControlByMoidExecute(r ApiGetNetworkFeatureControlByMoidRequest) (NetworkFeatureControl, *_nethttp.Response, error) {
+func (a *NetworkApiService) GetNetworkFeatureControlByMoidExecute(r ApiGetNetworkFeatureControlByMoidRequest) (*NetworkFeatureControl, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NetworkFeatureControl
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NetworkFeatureControl
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkApiService.GetNetworkFeatureControlByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/network/FeatureControls/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1312,7 +1293,7 @@ func (a *NetworkApiService) GetNetworkFeatureControlByMoidExecute(r ApiGetNetwor
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1322,15 +1303,15 @@ func (a *NetworkApiService) GetNetworkFeatureControlByMoidExecute(r ApiGetNetwor
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1386,7 +1367,7 @@ func (a *NetworkApiService) GetNetworkFeatureControlByMoidExecute(r ApiGetNetwor
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1397,7 +1378,7 @@ func (a *NetworkApiService) GetNetworkFeatureControlByMoidExecute(r ApiGetNetwor
 }
 
 type ApiGetNetworkFeatureControlListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NetworkApiService
 	filter      *string
 	orderby     *string
@@ -1478,17 +1459,17 @@ func (r ApiGetNetworkFeatureControlListRequest) Tags(tags string) ApiGetNetworkF
 	return r
 }
 
-func (r ApiGetNetworkFeatureControlListRequest) Execute() (NetworkFeatureControlResponse, *_nethttp.Response, error) {
+func (r ApiGetNetworkFeatureControlListRequest) Execute() (*NetworkFeatureControlResponse, *http.Response, error) {
 	return r.ApiService.GetNetworkFeatureControlListExecute(r)
 }
 
 /*
 GetNetworkFeatureControlList Read a 'network.FeatureControl' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNetworkFeatureControlListRequest
 */
-func (a *NetworkApiService) GetNetworkFeatureControlList(ctx _context.Context) ApiGetNetworkFeatureControlListRequest {
+func (a *NetworkApiService) GetNetworkFeatureControlList(ctx context.Context) ApiGetNetworkFeatureControlListRequest {
 	return ApiGetNetworkFeatureControlListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1497,26 +1478,24 @@ func (a *NetworkApiService) GetNetworkFeatureControlList(ctx _context.Context) A
 
 // Execute executes the request
 //  @return NetworkFeatureControlResponse
-func (a *NetworkApiService) GetNetworkFeatureControlListExecute(r ApiGetNetworkFeatureControlListRequest) (NetworkFeatureControlResponse, *_nethttp.Response, error) {
+func (a *NetworkApiService) GetNetworkFeatureControlListExecute(r ApiGetNetworkFeatureControlListRequest) (*NetworkFeatureControlResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NetworkFeatureControlResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NetworkFeatureControlResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkApiService.GetNetworkFeatureControlList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/network/FeatureControls"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1568,7 +1547,7 @@ func (a *NetworkApiService) GetNetworkFeatureControlListExecute(r ApiGetNetworkF
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1578,15 +1557,15 @@ func (a *NetworkApiService) GetNetworkFeatureControlListExecute(r ApiGetNetworkF
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1642,7 +1621,7 @@ func (a *NetworkApiService) GetNetworkFeatureControlListExecute(r ApiGetNetworkF
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1653,23 +1632,23 @@ func (a *NetworkApiService) GetNetworkFeatureControlListExecute(r ApiGetNetworkF
 }
 
 type ApiGetNetworkInterfaceListByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NetworkApiService
 	moid       string
 }
 
-func (r ApiGetNetworkInterfaceListByMoidRequest) Execute() (NetworkInterfaceList, *_nethttp.Response, error) {
+func (r ApiGetNetworkInterfaceListByMoidRequest) Execute() (*NetworkInterfaceList, *http.Response, error) {
 	return r.ApiService.GetNetworkInterfaceListByMoidExecute(r)
 }
 
 /*
 GetNetworkInterfaceListByMoid Read a 'network.InterfaceList' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNetworkInterfaceListByMoidRequest
 */
-func (a *NetworkApiService) GetNetworkInterfaceListByMoid(ctx _context.Context, moid string) ApiGetNetworkInterfaceListByMoidRequest {
+func (a *NetworkApiService) GetNetworkInterfaceListByMoid(ctx context.Context, moid string) ApiGetNetworkInterfaceListByMoidRequest {
 	return ApiGetNetworkInterfaceListByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1679,27 +1658,25 @@ func (a *NetworkApiService) GetNetworkInterfaceListByMoid(ctx _context.Context, 
 
 // Execute executes the request
 //  @return NetworkInterfaceList
-func (a *NetworkApiService) GetNetworkInterfaceListByMoidExecute(r ApiGetNetworkInterfaceListByMoidRequest) (NetworkInterfaceList, *_nethttp.Response, error) {
+func (a *NetworkApiService) GetNetworkInterfaceListByMoidExecute(r ApiGetNetworkInterfaceListByMoidRequest) (*NetworkInterfaceList, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NetworkInterfaceList
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NetworkInterfaceList
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkApiService.GetNetworkInterfaceListByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/network/InterfaceLists/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1718,7 +1695,7 @@ func (a *NetworkApiService) GetNetworkInterfaceListByMoidExecute(r ApiGetNetwork
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1728,15 +1705,15 @@ func (a *NetworkApiService) GetNetworkInterfaceListByMoidExecute(r ApiGetNetwork
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1792,7 +1769,7 @@ func (a *NetworkApiService) GetNetworkInterfaceListByMoidExecute(r ApiGetNetwork
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1803,7 +1780,7 @@ func (a *NetworkApiService) GetNetworkInterfaceListByMoidExecute(r ApiGetNetwork
 }
 
 type ApiGetNetworkInterfaceListListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NetworkApiService
 	filter      *string
 	orderby     *string
@@ -1884,17 +1861,17 @@ func (r ApiGetNetworkInterfaceListListRequest) Tags(tags string) ApiGetNetworkIn
 	return r
 }
 
-func (r ApiGetNetworkInterfaceListListRequest) Execute() (NetworkInterfaceListResponse, *_nethttp.Response, error) {
+func (r ApiGetNetworkInterfaceListListRequest) Execute() (*NetworkInterfaceListResponse, *http.Response, error) {
 	return r.ApiService.GetNetworkInterfaceListListExecute(r)
 }
 
 /*
 GetNetworkInterfaceListList Read a 'network.InterfaceList' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNetworkInterfaceListListRequest
 */
-func (a *NetworkApiService) GetNetworkInterfaceListList(ctx _context.Context) ApiGetNetworkInterfaceListListRequest {
+func (a *NetworkApiService) GetNetworkInterfaceListList(ctx context.Context) ApiGetNetworkInterfaceListListRequest {
 	return ApiGetNetworkInterfaceListListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1903,26 +1880,24 @@ func (a *NetworkApiService) GetNetworkInterfaceListList(ctx _context.Context) Ap
 
 // Execute executes the request
 //  @return NetworkInterfaceListResponse
-func (a *NetworkApiService) GetNetworkInterfaceListListExecute(r ApiGetNetworkInterfaceListListRequest) (NetworkInterfaceListResponse, *_nethttp.Response, error) {
+func (a *NetworkApiService) GetNetworkInterfaceListListExecute(r ApiGetNetworkInterfaceListListRequest) (*NetworkInterfaceListResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NetworkInterfaceListResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NetworkInterfaceListResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkApiService.GetNetworkInterfaceListList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/network/InterfaceLists"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1974,7 +1949,7 @@ func (a *NetworkApiService) GetNetworkInterfaceListListExecute(r ApiGetNetworkIn
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1984,15 +1959,15 @@ func (a *NetworkApiService) GetNetworkInterfaceListListExecute(r ApiGetNetworkIn
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2048,7 +2023,7 @@ func (a *NetworkApiService) GetNetworkInterfaceListListExecute(r ApiGetNetworkIn
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2059,23 +2034,23 @@ func (a *NetworkApiService) GetNetworkInterfaceListListExecute(r ApiGetNetworkIn
 }
 
 type ApiGetNetworkLicenseFileByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NetworkApiService
 	moid       string
 }
 
-func (r ApiGetNetworkLicenseFileByMoidRequest) Execute() (NetworkLicenseFile, *_nethttp.Response, error) {
+func (r ApiGetNetworkLicenseFileByMoidRequest) Execute() (*NetworkLicenseFile, *http.Response, error) {
 	return r.ApiService.GetNetworkLicenseFileByMoidExecute(r)
 }
 
 /*
 GetNetworkLicenseFileByMoid Read a 'network.LicenseFile' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNetworkLicenseFileByMoidRequest
 */
-func (a *NetworkApiService) GetNetworkLicenseFileByMoid(ctx _context.Context, moid string) ApiGetNetworkLicenseFileByMoidRequest {
+func (a *NetworkApiService) GetNetworkLicenseFileByMoid(ctx context.Context, moid string) ApiGetNetworkLicenseFileByMoidRequest {
 	return ApiGetNetworkLicenseFileByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2085,27 +2060,25 @@ func (a *NetworkApiService) GetNetworkLicenseFileByMoid(ctx _context.Context, mo
 
 // Execute executes the request
 //  @return NetworkLicenseFile
-func (a *NetworkApiService) GetNetworkLicenseFileByMoidExecute(r ApiGetNetworkLicenseFileByMoidRequest) (NetworkLicenseFile, *_nethttp.Response, error) {
+func (a *NetworkApiService) GetNetworkLicenseFileByMoidExecute(r ApiGetNetworkLicenseFileByMoidRequest) (*NetworkLicenseFile, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NetworkLicenseFile
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NetworkLicenseFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkApiService.GetNetworkLicenseFileByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/network/LicenseFiles/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2124,7 +2097,7 @@ func (a *NetworkApiService) GetNetworkLicenseFileByMoidExecute(r ApiGetNetworkLi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2134,15 +2107,15 @@ func (a *NetworkApiService) GetNetworkLicenseFileByMoidExecute(r ApiGetNetworkLi
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2198,7 +2171,7 @@ func (a *NetworkApiService) GetNetworkLicenseFileByMoidExecute(r ApiGetNetworkLi
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2209,7 +2182,7 @@ func (a *NetworkApiService) GetNetworkLicenseFileByMoidExecute(r ApiGetNetworkLi
 }
 
 type ApiGetNetworkLicenseFileListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NetworkApiService
 	filter      *string
 	orderby     *string
@@ -2290,17 +2263,17 @@ func (r ApiGetNetworkLicenseFileListRequest) Tags(tags string) ApiGetNetworkLice
 	return r
 }
 
-func (r ApiGetNetworkLicenseFileListRequest) Execute() (NetworkLicenseFileResponse, *_nethttp.Response, error) {
+func (r ApiGetNetworkLicenseFileListRequest) Execute() (*NetworkLicenseFileResponse, *http.Response, error) {
 	return r.ApiService.GetNetworkLicenseFileListExecute(r)
 }
 
 /*
 GetNetworkLicenseFileList Read a 'network.LicenseFile' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNetworkLicenseFileListRequest
 */
-func (a *NetworkApiService) GetNetworkLicenseFileList(ctx _context.Context) ApiGetNetworkLicenseFileListRequest {
+func (a *NetworkApiService) GetNetworkLicenseFileList(ctx context.Context) ApiGetNetworkLicenseFileListRequest {
 	return ApiGetNetworkLicenseFileListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2309,26 +2282,24 @@ func (a *NetworkApiService) GetNetworkLicenseFileList(ctx _context.Context) ApiG
 
 // Execute executes the request
 //  @return NetworkLicenseFileResponse
-func (a *NetworkApiService) GetNetworkLicenseFileListExecute(r ApiGetNetworkLicenseFileListRequest) (NetworkLicenseFileResponse, *_nethttp.Response, error) {
+func (a *NetworkApiService) GetNetworkLicenseFileListExecute(r ApiGetNetworkLicenseFileListRequest) (*NetworkLicenseFileResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NetworkLicenseFileResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NetworkLicenseFileResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkApiService.GetNetworkLicenseFileList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/network/LicenseFiles"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -2380,7 +2351,7 @@ func (a *NetworkApiService) GetNetworkLicenseFileListExecute(r ApiGetNetworkLice
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2390,15 +2361,15 @@ func (a *NetworkApiService) GetNetworkLicenseFileListExecute(r ApiGetNetworkLice
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2454,7 +2425,7 @@ func (a *NetworkApiService) GetNetworkLicenseFileListExecute(r ApiGetNetworkLice
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2465,23 +2436,23 @@ func (a *NetworkApiService) GetNetworkLicenseFileListExecute(r ApiGetNetworkLice
 }
 
 type ApiGetNetworkSupervisorCardByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NetworkApiService
 	moid       string
 }
 
-func (r ApiGetNetworkSupervisorCardByMoidRequest) Execute() (NetworkSupervisorCard, *_nethttp.Response, error) {
+func (r ApiGetNetworkSupervisorCardByMoidRequest) Execute() (*NetworkSupervisorCard, *http.Response, error) {
 	return r.ApiService.GetNetworkSupervisorCardByMoidExecute(r)
 }
 
 /*
 GetNetworkSupervisorCardByMoid Read a 'network.SupervisorCard' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNetworkSupervisorCardByMoidRequest
 */
-func (a *NetworkApiService) GetNetworkSupervisorCardByMoid(ctx _context.Context, moid string) ApiGetNetworkSupervisorCardByMoidRequest {
+func (a *NetworkApiService) GetNetworkSupervisorCardByMoid(ctx context.Context, moid string) ApiGetNetworkSupervisorCardByMoidRequest {
 	return ApiGetNetworkSupervisorCardByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2491,27 +2462,25 @@ func (a *NetworkApiService) GetNetworkSupervisorCardByMoid(ctx _context.Context,
 
 // Execute executes the request
 //  @return NetworkSupervisorCard
-func (a *NetworkApiService) GetNetworkSupervisorCardByMoidExecute(r ApiGetNetworkSupervisorCardByMoidRequest) (NetworkSupervisorCard, *_nethttp.Response, error) {
+func (a *NetworkApiService) GetNetworkSupervisorCardByMoidExecute(r ApiGetNetworkSupervisorCardByMoidRequest) (*NetworkSupervisorCard, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NetworkSupervisorCard
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NetworkSupervisorCard
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkApiService.GetNetworkSupervisorCardByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/network/SupervisorCards/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2530,7 +2499,7 @@ func (a *NetworkApiService) GetNetworkSupervisorCardByMoidExecute(r ApiGetNetwor
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2540,15 +2509,15 @@ func (a *NetworkApiService) GetNetworkSupervisorCardByMoidExecute(r ApiGetNetwor
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2604,7 +2573,7 @@ func (a *NetworkApiService) GetNetworkSupervisorCardByMoidExecute(r ApiGetNetwor
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2615,7 +2584,7 @@ func (a *NetworkApiService) GetNetworkSupervisorCardByMoidExecute(r ApiGetNetwor
 }
 
 type ApiGetNetworkSupervisorCardListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NetworkApiService
 	filter      *string
 	orderby     *string
@@ -2696,17 +2665,17 @@ func (r ApiGetNetworkSupervisorCardListRequest) Tags(tags string) ApiGetNetworkS
 	return r
 }
 
-func (r ApiGetNetworkSupervisorCardListRequest) Execute() (NetworkSupervisorCardResponse, *_nethttp.Response, error) {
+func (r ApiGetNetworkSupervisorCardListRequest) Execute() (*NetworkSupervisorCardResponse, *http.Response, error) {
 	return r.ApiService.GetNetworkSupervisorCardListExecute(r)
 }
 
 /*
 GetNetworkSupervisorCardList Read a 'network.SupervisorCard' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNetworkSupervisorCardListRequest
 */
-func (a *NetworkApiService) GetNetworkSupervisorCardList(ctx _context.Context) ApiGetNetworkSupervisorCardListRequest {
+func (a *NetworkApiService) GetNetworkSupervisorCardList(ctx context.Context) ApiGetNetworkSupervisorCardListRequest {
 	return ApiGetNetworkSupervisorCardListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2715,26 +2684,24 @@ func (a *NetworkApiService) GetNetworkSupervisorCardList(ctx _context.Context) A
 
 // Execute executes the request
 //  @return NetworkSupervisorCardResponse
-func (a *NetworkApiService) GetNetworkSupervisorCardListExecute(r ApiGetNetworkSupervisorCardListRequest) (NetworkSupervisorCardResponse, *_nethttp.Response, error) {
+func (a *NetworkApiService) GetNetworkSupervisorCardListExecute(r ApiGetNetworkSupervisorCardListRequest) (*NetworkSupervisorCardResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NetworkSupervisorCardResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NetworkSupervisorCardResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkApiService.GetNetworkSupervisorCardList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/network/SupervisorCards"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -2786,7 +2753,7 @@ func (a *NetworkApiService) GetNetworkSupervisorCardListExecute(r ApiGetNetworkS
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2796,15 +2763,15 @@ func (a *NetworkApiService) GetNetworkSupervisorCardListExecute(r ApiGetNetworkS
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2860,7 +2827,7 @@ func (a *NetworkApiService) GetNetworkSupervisorCardListExecute(r ApiGetNetworkS
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2871,23 +2838,23 @@ func (a *NetworkApiService) GetNetworkSupervisorCardListExecute(r ApiGetNetworkS
 }
 
 type ApiGetNetworkVlanPortInfoByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NetworkApiService
 	moid       string
 }
 
-func (r ApiGetNetworkVlanPortInfoByMoidRequest) Execute() (NetworkVlanPortInfo, *_nethttp.Response, error) {
+func (r ApiGetNetworkVlanPortInfoByMoidRequest) Execute() (*NetworkVlanPortInfo, *http.Response, error) {
 	return r.ApiService.GetNetworkVlanPortInfoByMoidExecute(r)
 }
 
 /*
 GetNetworkVlanPortInfoByMoid Read a 'network.VlanPortInfo' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNetworkVlanPortInfoByMoidRequest
 */
-func (a *NetworkApiService) GetNetworkVlanPortInfoByMoid(ctx _context.Context, moid string) ApiGetNetworkVlanPortInfoByMoidRequest {
+func (a *NetworkApiService) GetNetworkVlanPortInfoByMoid(ctx context.Context, moid string) ApiGetNetworkVlanPortInfoByMoidRequest {
 	return ApiGetNetworkVlanPortInfoByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2897,27 +2864,25 @@ func (a *NetworkApiService) GetNetworkVlanPortInfoByMoid(ctx _context.Context, m
 
 // Execute executes the request
 //  @return NetworkVlanPortInfo
-func (a *NetworkApiService) GetNetworkVlanPortInfoByMoidExecute(r ApiGetNetworkVlanPortInfoByMoidRequest) (NetworkVlanPortInfo, *_nethttp.Response, error) {
+func (a *NetworkApiService) GetNetworkVlanPortInfoByMoidExecute(r ApiGetNetworkVlanPortInfoByMoidRequest) (*NetworkVlanPortInfo, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NetworkVlanPortInfo
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NetworkVlanPortInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkApiService.GetNetworkVlanPortInfoByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/network/VlanPortInfos/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2936,7 +2901,7 @@ func (a *NetworkApiService) GetNetworkVlanPortInfoByMoidExecute(r ApiGetNetworkV
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2946,15 +2911,15 @@ func (a *NetworkApiService) GetNetworkVlanPortInfoByMoidExecute(r ApiGetNetworkV
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3010,7 +2975,7 @@ func (a *NetworkApiService) GetNetworkVlanPortInfoByMoidExecute(r ApiGetNetworkV
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3021,7 +2986,7 @@ func (a *NetworkApiService) GetNetworkVlanPortInfoByMoidExecute(r ApiGetNetworkV
 }
 
 type ApiGetNetworkVlanPortInfoListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NetworkApiService
 	filter      *string
 	orderby     *string
@@ -3102,17 +3067,17 @@ func (r ApiGetNetworkVlanPortInfoListRequest) Tags(tags string) ApiGetNetworkVla
 	return r
 }
 
-func (r ApiGetNetworkVlanPortInfoListRequest) Execute() (NetworkVlanPortInfoResponse, *_nethttp.Response, error) {
+func (r ApiGetNetworkVlanPortInfoListRequest) Execute() (*NetworkVlanPortInfoResponse, *http.Response, error) {
 	return r.ApiService.GetNetworkVlanPortInfoListExecute(r)
 }
 
 /*
 GetNetworkVlanPortInfoList Read a 'network.VlanPortInfo' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNetworkVlanPortInfoListRequest
 */
-func (a *NetworkApiService) GetNetworkVlanPortInfoList(ctx _context.Context) ApiGetNetworkVlanPortInfoListRequest {
+func (a *NetworkApiService) GetNetworkVlanPortInfoList(ctx context.Context) ApiGetNetworkVlanPortInfoListRequest {
 	return ApiGetNetworkVlanPortInfoListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3121,26 +3086,24 @@ func (a *NetworkApiService) GetNetworkVlanPortInfoList(ctx _context.Context) Api
 
 // Execute executes the request
 //  @return NetworkVlanPortInfoResponse
-func (a *NetworkApiService) GetNetworkVlanPortInfoListExecute(r ApiGetNetworkVlanPortInfoListRequest) (NetworkVlanPortInfoResponse, *_nethttp.Response, error) {
+func (a *NetworkApiService) GetNetworkVlanPortInfoListExecute(r ApiGetNetworkVlanPortInfoListRequest) (*NetworkVlanPortInfoResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NetworkVlanPortInfoResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NetworkVlanPortInfoResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkApiService.GetNetworkVlanPortInfoList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/network/VlanPortInfos"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -3192,7 +3155,7 @@ func (a *NetworkApiService) GetNetworkVlanPortInfoListExecute(r ApiGetNetworkVla
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3202,15 +3165,15 @@ func (a *NetworkApiService) GetNetworkVlanPortInfoListExecute(r ApiGetNetworkVla
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3266,7 +3229,7 @@ func (a *NetworkApiService) GetNetworkVlanPortInfoListExecute(r ApiGetNetworkVla
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3277,23 +3240,23 @@ func (a *NetworkApiService) GetNetworkVlanPortInfoListExecute(r ApiGetNetworkVla
 }
 
 type ApiGetNetworkVrfByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NetworkApiService
 	moid       string
 }
 
-func (r ApiGetNetworkVrfByMoidRequest) Execute() (NetworkVrf, *_nethttp.Response, error) {
+func (r ApiGetNetworkVrfByMoidRequest) Execute() (*NetworkVrf, *http.Response, error) {
 	return r.ApiService.GetNetworkVrfByMoidExecute(r)
 }
 
 /*
 GetNetworkVrfByMoid Read a 'network.Vrf' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNetworkVrfByMoidRequest
 */
-func (a *NetworkApiService) GetNetworkVrfByMoid(ctx _context.Context, moid string) ApiGetNetworkVrfByMoidRequest {
+func (a *NetworkApiService) GetNetworkVrfByMoid(ctx context.Context, moid string) ApiGetNetworkVrfByMoidRequest {
 	return ApiGetNetworkVrfByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3303,27 +3266,25 @@ func (a *NetworkApiService) GetNetworkVrfByMoid(ctx _context.Context, moid strin
 
 // Execute executes the request
 //  @return NetworkVrf
-func (a *NetworkApiService) GetNetworkVrfByMoidExecute(r ApiGetNetworkVrfByMoidRequest) (NetworkVrf, *_nethttp.Response, error) {
+func (a *NetworkApiService) GetNetworkVrfByMoidExecute(r ApiGetNetworkVrfByMoidRequest) (*NetworkVrf, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NetworkVrf
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NetworkVrf
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkApiService.GetNetworkVrfByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/network/Vrves/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -3342,7 +3303,7 @@ func (a *NetworkApiService) GetNetworkVrfByMoidExecute(r ApiGetNetworkVrfByMoidR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3352,15 +3313,15 @@ func (a *NetworkApiService) GetNetworkVrfByMoidExecute(r ApiGetNetworkVrfByMoidR
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3416,7 +3377,7 @@ func (a *NetworkApiService) GetNetworkVrfByMoidExecute(r ApiGetNetworkVrfByMoidR
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3427,7 +3388,7 @@ func (a *NetworkApiService) GetNetworkVrfByMoidExecute(r ApiGetNetworkVrfByMoidR
 }
 
 type ApiGetNetworkVrfListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NetworkApiService
 	filter      *string
 	orderby     *string
@@ -3508,17 +3469,17 @@ func (r ApiGetNetworkVrfListRequest) Tags(tags string) ApiGetNetworkVrfListReque
 	return r
 }
 
-func (r ApiGetNetworkVrfListRequest) Execute() (NetworkVrfResponse, *_nethttp.Response, error) {
+func (r ApiGetNetworkVrfListRequest) Execute() (*NetworkVrfResponse, *http.Response, error) {
 	return r.ApiService.GetNetworkVrfListExecute(r)
 }
 
 /*
 GetNetworkVrfList Read a 'network.Vrf' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNetworkVrfListRequest
 */
-func (a *NetworkApiService) GetNetworkVrfList(ctx _context.Context) ApiGetNetworkVrfListRequest {
+func (a *NetworkApiService) GetNetworkVrfList(ctx context.Context) ApiGetNetworkVrfListRequest {
 	return ApiGetNetworkVrfListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3527,26 +3488,24 @@ func (a *NetworkApiService) GetNetworkVrfList(ctx _context.Context) ApiGetNetwor
 
 // Execute executes the request
 //  @return NetworkVrfResponse
-func (a *NetworkApiService) GetNetworkVrfListExecute(r ApiGetNetworkVrfListRequest) (NetworkVrfResponse, *_nethttp.Response, error) {
+func (a *NetworkApiService) GetNetworkVrfListExecute(r ApiGetNetworkVrfListRequest) (*NetworkVrfResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NetworkVrfResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NetworkVrfResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkApiService.GetNetworkVrfList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/network/Vrves"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -3598,7 +3557,7 @@ func (a *NetworkApiService) GetNetworkVrfListExecute(r ApiGetNetworkVrfListReque
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3608,15 +3567,15 @@ func (a *NetworkApiService) GetNetworkVrfListExecute(r ApiGetNetworkVrfListReque
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3672,7 +3631,7 @@ func (a *NetworkApiService) GetNetworkVrfListExecute(r ApiGetNetworkVrfListReque
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3683,7 +3642,7 @@ func (a *NetworkApiService) GetNetworkVrfListExecute(r ApiGetNetworkVrfListReque
 }
 
 type ApiPatchNetworkElementRequest struct {
-	ctx            _context.Context
+	ctx            context.Context
 	ApiService     *NetworkApiService
 	moid           string
 	networkElement *NetworkElement
@@ -3702,18 +3661,18 @@ func (r ApiPatchNetworkElementRequest) IfMatch(ifMatch string) ApiPatchNetworkEl
 	return r
 }
 
-func (r ApiPatchNetworkElementRequest) Execute() (NetworkElement, *_nethttp.Response, error) {
+func (r ApiPatchNetworkElementRequest) Execute() (*NetworkElement, *http.Response, error) {
 	return r.ApiService.PatchNetworkElementExecute(r)
 }
 
 /*
 PatchNetworkElement Update a 'network.Element' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchNetworkElementRequest
 */
-func (a *NetworkApiService) PatchNetworkElement(ctx _context.Context, moid string) ApiPatchNetworkElementRequest {
+func (a *NetworkApiService) PatchNetworkElement(ctx context.Context, moid string) ApiPatchNetworkElementRequest {
 	return ApiPatchNetworkElementRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3723,27 +3682,25 @@ func (a *NetworkApiService) PatchNetworkElement(ctx _context.Context, moid strin
 
 // Execute executes the request
 //  @return NetworkElement
-func (a *NetworkApiService) PatchNetworkElementExecute(r ApiPatchNetworkElementRequest) (NetworkElement, *_nethttp.Response, error) {
+func (a *NetworkApiService) PatchNetworkElementExecute(r ApiPatchNetworkElementRequest) (*NetworkElement, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NetworkElement
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NetworkElement
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkApiService.PatchNetworkElement")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/network/Elements/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.networkElement == nil {
 		return localVarReturnValue, nil, reportError("networkElement is required and must be specified")
 	}
@@ -3770,7 +3727,7 @@ func (a *NetworkApiService) PatchNetworkElementExecute(r ApiPatchNetworkElementR
 	}
 	// body params
 	localVarPostBody = r.networkElement
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3780,15 +3737,15 @@ func (a *NetworkApiService) PatchNetworkElementExecute(r ApiPatchNetworkElementR
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3844,7 +3801,7 @@ func (a *NetworkApiService) PatchNetworkElementExecute(r ApiPatchNetworkElementR
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3855,7 +3812,7 @@ func (a *NetworkApiService) PatchNetworkElementExecute(r ApiPatchNetworkElementR
 }
 
 type ApiPatchNetworkFcZoneInfoRequest struct {
-	ctx               _context.Context
+	ctx               context.Context
 	ApiService        *NetworkApiService
 	moid              string
 	networkFcZoneInfo *NetworkFcZoneInfo
@@ -3874,18 +3831,18 @@ func (r ApiPatchNetworkFcZoneInfoRequest) IfMatch(ifMatch string) ApiPatchNetwor
 	return r
 }
 
-func (r ApiPatchNetworkFcZoneInfoRequest) Execute() (NetworkFcZoneInfo, *_nethttp.Response, error) {
+func (r ApiPatchNetworkFcZoneInfoRequest) Execute() (*NetworkFcZoneInfo, *http.Response, error) {
 	return r.ApiService.PatchNetworkFcZoneInfoExecute(r)
 }
 
 /*
 PatchNetworkFcZoneInfo Update a 'network.FcZoneInfo' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchNetworkFcZoneInfoRequest
 */
-func (a *NetworkApiService) PatchNetworkFcZoneInfo(ctx _context.Context, moid string) ApiPatchNetworkFcZoneInfoRequest {
+func (a *NetworkApiService) PatchNetworkFcZoneInfo(ctx context.Context, moid string) ApiPatchNetworkFcZoneInfoRequest {
 	return ApiPatchNetworkFcZoneInfoRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3895,27 +3852,25 @@ func (a *NetworkApiService) PatchNetworkFcZoneInfo(ctx _context.Context, moid st
 
 // Execute executes the request
 //  @return NetworkFcZoneInfo
-func (a *NetworkApiService) PatchNetworkFcZoneInfoExecute(r ApiPatchNetworkFcZoneInfoRequest) (NetworkFcZoneInfo, *_nethttp.Response, error) {
+func (a *NetworkApiService) PatchNetworkFcZoneInfoExecute(r ApiPatchNetworkFcZoneInfoRequest) (*NetworkFcZoneInfo, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NetworkFcZoneInfo
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NetworkFcZoneInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkApiService.PatchNetworkFcZoneInfo")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/network/FcZoneInfos/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.networkFcZoneInfo == nil {
 		return localVarReturnValue, nil, reportError("networkFcZoneInfo is required and must be specified")
 	}
@@ -3942,7 +3897,7 @@ func (a *NetworkApiService) PatchNetworkFcZoneInfoExecute(r ApiPatchNetworkFcZon
 	}
 	// body params
 	localVarPostBody = r.networkFcZoneInfo
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3952,15 +3907,15 @@ func (a *NetworkApiService) PatchNetworkFcZoneInfoExecute(r ApiPatchNetworkFcZon
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4016,7 +3971,7 @@ func (a *NetworkApiService) PatchNetworkFcZoneInfoExecute(r ApiPatchNetworkFcZon
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -4027,7 +3982,7 @@ func (a *NetworkApiService) PatchNetworkFcZoneInfoExecute(r ApiPatchNetworkFcZon
 }
 
 type ApiPatchNetworkVlanPortInfoRequest struct {
-	ctx                 _context.Context
+	ctx                 context.Context
 	ApiService          *NetworkApiService
 	moid                string
 	networkVlanPortInfo *NetworkVlanPortInfo
@@ -4046,18 +4001,18 @@ func (r ApiPatchNetworkVlanPortInfoRequest) IfMatch(ifMatch string) ApiPatchNetw
 	return r
 }
 
-func (r ApiPatchNetworkVlanPortInfoRequest) Execute() (NetworkVlanPortInfo, *_nethttp.Response, error) {
+func (r ApiPatchNetworkVlanPortInfoRequest) Execute() (*NetworkVlanPortInfo, *http.Response, error) {
 	return r.ApiService.PatchNetworkVlanPortInfoExecute(r)
 }
 
 /*
 PatchNetworkVlanPortInfo Update a 'network.VlanPortInfo' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchNetworkVlanPortInfoRequest
 */
-func (a *NetworkApiService) PatchNetworkVlanPortInfo(ctx _context.Context, moid string) ApiPatchNetworkVlanPortInfoRequest {
+func (a *NetworkApiService) PatchNetworkVlanPortInfo(ctx context.Context, moid string) ApiPatchNetworkVlanPortInfoRequest {
 	return ApiPatchNetworkVlanPortInfoRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4067,27 +4022,25 @@ func (a *NetworkApiService) PatchNetworkVlanPortInfo(ctx _context.Context, moid 
 
 // Execute executes the request
 //  @return NetworkVlanPortInfo
-func (a *NetworkApiService) PatchNetworkVlanPortInfoExecute(r ApiPatchNetworkVlanPortInfoRequest) (NetworkVlanPortInfo, *_nethttp.Response, error) {
+func (a *NetworkApiService) PatchNetworkVlanPortInfoExecute(r ApiPatchNetworkVlanPortInfoRequest) (*NetworkVlanPortInfo, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NetworkVlanPortInfo
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NetworkVlanPortInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkApiService.PatchNetworkVlanPortInfo")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/network/VlanPortInfos/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.networkVlanPortInfo == nil {
 		return localVarReturnValue, nil, reportError("networkVlanPortInfo is required and must be specified")
 	}
@@ -4114,7 +4067,7 @@ func (a *NetworkApiService) PatchNetworkVlanPortInfoExecute(r ApiPatchNetworkVla
 	}
 	// body params
 	localVarPostBody = r.networkVlanPortInfo
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4124,15 +4077,15 @@ func (a *NetworkApiService) PatchNetworkVlanPortInfoExecute(r ApiPatchNetworkVla
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4188,7 +4141,7 @@ func (a *NetworkApiService) PatchNetworkVlanPortInfoExecute(r ApiPatchNetworkVla
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -4199,7 +4152,7 @@ func (a *NetworkApiService) PatchNetworkVlanPortInfoExecute(r ApiPatchNetworkVla
 }
 
 type ApiUpdateNetworkElementRequest struct {
-	ctx            _context.Context
+	ctx            context.Context
 	ApiService     *NetworkApiService
 	moid           string
 	networkElement *NetworkElement
@@ -4218,18 +4171,18 @@ func (r ApiUpdateNetworkElementRequest) IfMatch(ifMatch string) ApiUpdateNetwork
 	return r
 }
 
-func (r ApiUpdateNetworkElementRequest) Execute() (NetworkElement, *_nethttp.Response, error) {
+func (r ApiUpdateNetworkElementRequest) Execute() (*NetworkElement, *http.Response, error) {
 	return r.ApiService.UpdateNetworkElementExecute(r)
 }
 
 /*
 UpdateNetworkElement Update a 'network.Element' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateNetworkElementRequest
 */
-func (a *NetworkApiService) UpdateNetworkElement(ctx _context.Context, moid string) ApiUpdateNetworkElementRequest {
+func (a *NetworkApiService) UpdateNetworkElement(ctx context.Context, moid string) ApiUpdateNetworkElementRequest {
 	return ApiUpdateNetworkElementRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4239,27 +4192,25 @@ func (a *NetworkApiService) UpdateNetworkElement(ctx _context.Context, moid stri
 
 // Execute executes the request
 //  @return NetworkElement
-func (a *NetworkApiService) UpdateNetworkElementExecute(r ApiUpdateNetworkElementRequest) (NetworkElement, *_nethttp.Response, error) {
+func (a *NetworkApiService) UpdateNetworkElementExecute(r ApiUpdateNetworkElementRequest) (*NetworkElement, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NetworkElement
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NetworkElement
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkApiService.UpdateNetworkElement")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/network/Elements/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.networkElement == nil {
 		return localVarReturnValue, nil, reportError("networkElement is required and must be specified")
 	}
@@ -4286,7 +4237,7 @@ func (a *NetworkApiService) UpdateNetworkElementExecute(r ApiUpdateNetworkElemen
 	}
 	// body params
 	localVarPostBody = r.networkElement
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4296,15 +4247,15 @@ func (a *NetworkApiService) UpdateNetworkElementExecute(r ApiUpdateNetworkElemen
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4360,7 +4311,7 @@ func (a *NetworkApiService) UpdateNetworkElementExecute(r ApiUpdateNetworkElemen
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -4371,7 +4322,7 @@ func (a *NetworkApiService) UpdateNetworkElementExecute(r ApiUpdateNetworkElemen
 }
 
 type ApiUpdateNetworkFcZoneInfoRequest struct {
-	ctx               _context.Context
+	ctx               context.Context
 	ApiService        *NetworkApiService
 	moid              string
 	networkFcZoneInfo *NetworkFcZoneInfo
@@ -4390,18 +4341,18 @@ func (r ApiUpdateNetworkFcZoneInfoRequest) IfMatch(ifMatch string) ApiUpdateNetw
 	return r
 }
 
-func (r ApiUpdateNetworkFcZoneInfoRequest) Execute() (NetworkFcZoneInfo, *_nethttp.Response, error) {
+func (r ApiUpdateNetworkFcZoneInfoRequest) Execute() (*NetworkFcZoneInfo, *http.Response, error) {
 	return r.ApiService.UpdateNetworkFcZoneInfoExecute(r)
 }
 
 /*
 UpdateNetworkFcZoneInfo Update a 'network.FcZoneInfo' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateNetworkFcZoneInfoRequest
 */
-func (a *NetworkApiService) UpdateNetworkFcZoneInfo(ctx _context.Context, moid string) ApiUpdateNetworkFcZoneInfoRequest {
+func (a *NetworkApiService) UpdateNetworkFcZoneInfo(ctx context.Context, moid string) ApiUpdateNetworkFcZoneInfoRequest {
 	return ApiUpdateNetworkFcZoneInfoRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4411,27 +4362,25 @@ func (a *NetworkApiService) UpdateNetworkFcZoneInfo(ctx _context.Context, moid s
 
 // Execute executes the request
 //  @return NetworkFcZoneInfo
-func (a *NetworkApiService) UpdateNetworkFcZoneInfoExecute(r ApiUpdateNetworkFcZoneInfoRequest) (NetworkFcZoneInfo, *_nethttp.Response, error) {
+func (a *NetworkApiService) UpdateNetworkFcZoneInfoExecute(r ApiUpdateNetworkFcZoneInfoRequest) (*NetworkFcZoneInfo, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NetworkFcZoneInfo
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NetworkFcZoneInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkApiService.UpdateNetworkFcZoneInfo")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/network/FcZoneInfos/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.networkFcZoneInfo == nil {
 		return localVarReturnValue, nil, reportError("networkFcZoneInfo is required and must be specified")
 	}
@@ -4458,7 +4407,7 @@ func (a *NetworkApiService) UpdateNetworkFcZoneInfoExecute(r ApiUpdateNetworkFcZ
 	}
 	// body params
 	localVarPostBody = r.networkFcZoneInfo
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4468,15 +4417,15 @@ func (a *NetworkApiService) UpdateNetworkFcZoneInfoExecute(r ApiUpdateNetworkFcZ
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4532,7 +4481,7 @@ func (a *NetworkApiService) UpdateNetworkFcZoneInfoExecute(r ApiUpdateNetworkFcZ
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -4543,7 +4492,7 @@ func (a *NetworkApiService) UpdateNetworkFcZoneInfoExecute(r ApiUpdateNetworkFcZ
 }
 
 type ApiUpdateNetworkVlanPortInfoRequest struct {
-	ctx                 _context.Context
+	ctx                 context.Context
 	ApiService          *NetworkApiService
 	moid                string
 	networkVlanPortInfo *NetworkVlanPortInfo
@@ -4562,18 +4511,18 @@ func (r ApiUpdateNetworkVlanPortInfoRequest) IfMatch(ifMatch string) ApiUpdateNe
 	return r
 }
 
-func (r ApiUpdateNetworkVlanPortInfoRequest) Execute() (NetworkVlanPortInfo, *_nethttp.Response, error) {
+func (r ApiUpdateNetworkVlanPortInfoRequest) Execute() (*NetworkVlanPortInfo, *http.Response, error) {
 	return r.ApiService.UpdateNetworkVlanPortInfoExecute(r)
 }
 
 /*
 UpdateNetworkVlanPortInfo Update a 'network.VlanPortInfo' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateNetworkVlanPortInfoRequest
 */
-func (a *NetworkApiService) UpdateNetworkVlanPortInfo(ctx _context.Context, moid string) ApiUpdateNetworkVlanPortInfoRequest {
+func (a *NetworkApiService) UpdateNetworkVlanPortInfo(ctx context.Context, moid string) ApiUpdateNetworkVlanPortInfoRequest {
 	return ApiUpdateNetworkVlanPortInfoRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4583,27 +4532,25 @@ func (a *NetworkApiService) UpdateNetworkVlanPortInfo(ctx _context.Context, moid
 
 // Execute executes the request
 //  @return NetworkVlanPortInfo
-func (a *NetworkApiService) UpdateNetworkVlanPortInfoExecute(r ApiUpdateNetworkVlanPortInfoRequest) (NetworkVlanPortInfo, *_nethttp.Response, error) {
+func (a *NetworkApiService) UpdateNetworkVlanPortInfoExecute(r ApiUpdateNetworkVlanPortInfoRequest) (*NetworkVlanPortInfo, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NetworkVlanPortInfo
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NetworkVlanPortInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkApiService.UpdateNetworkVlanPortInfo")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/network/VlanPortInfos/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.networkVlanPortInfo == nil {
 		return localVarReturnValue, nil, reportError("networkVlanPortInfo is required and must be specified")
 	}
@@ -4630,7 +4577,7 @@ func (a *NetworkApiService) UpdateNetworkVlanPortInfoExecute(r ApiUpdateNetworkV
 	}
 	// body params
 	localVarPostBody = r.networkVlanPortInfo
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4640,15 +4587,15 @@ func (a *NetworkApiService) UpdateNetworkVlanPortInfoExecute(r ApiUpdateNetworkV
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4704,7 +4651,7 @@ func (a *NetworkApiService) UpdateNetworkVlanPortInfoExecute(r ApiUpdateNetworkV
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

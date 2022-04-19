@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,23 +13,18 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // ConvergedinfraApiService ConvergedinfraApi service
 type ConvergedinfraApiService service
 
 type ApiCreateConvergedinfraHealthCheckDefinitionRequest struct {
-	ctx                                 _context.Context
+	ctx                                 context.Context
 	ApiService                          *ConvergedinfraApiService
 	convergedinfraHealthCheckDefinition *ConvergedinfraHealthCheckDefinition
 	ifMatch                             *string
@@ -54,17 +49,17 @@ func (r ApiCreateConvergedinfraHealthCheckDefinitionRequest) IfNoneMatch(ifNoneM
 	return r
 }
 
-func (r ApiCreateConvergedinfraHealthCheckDefinitionRequest) Execute() (ConvergedinfraHealthCheckDefinition, *_nethttp.Response, error) {
+func (r ApiCreateConvergedinfraHealthCheckDefinitionRequest) Execute() (*ConvergedinfraHealthCheckDefinition, *http.Response, error) {
 	return r.ApiService.CreateConvergedinfraHealthCheckDefinitionExecute(r)
 }
 
 /*
 CreateConvergedinfraHealthCheckDefinition Create a 'convergedinfra.HealthCheckDefinition' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateConvergedinfraHealthCheckDefinitionRequest
 */
-func (a *ConvergedinfraApiService) CreateConvergedinfraHealthCheckDefinition(ctx _context.Context) ApiCreateConvergedinfraHealthCheckDefinitionRequest {
+func (a *ConvergedinfraApiService) CreateConvergedinfraHealthCheckDefinition(ctx context.Context) ApiCreateConvergedinfraHealthCheckDefinitionRequest {
 	return ApiCreateConvergedinfraHealthCheckDefinitionRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -73,26 +68,24 @@ func (a *ConvergedinfraApiService) CreateConvergedinfraHealthCheckDefinition(ctx
 
 // Execute executes the request
 //  @return ConvergedinfraHealthCheckDefinition
-func (a *ConvergedinfraApiService) CreateConvergedinfraHealthCheckDefinitionExecute(r ApiCreateConvergedinfraHealthCheckDefinitionRequest) (ConvergedinfraHealthCheckDefinition, *_nethttp.Response, error) {
+func (a *ConvergedinfraApiService) CreateConvergedinfraHealthCheckDefinitionExecute(r ApiCreateConvergedinfraHealthCheckDefinitionRequest) (*ConvergedinfraHealthCheckDefinition, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ConvergedinfraHealthCheckDefinition
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ConvergedinfraHealthCheckDefinition
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConvergedinfraApiService.CreateConvergedinfraHealthCheckDefinition")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/convergedinfra/HealthCheckDefinitions"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.convergedinfraHealthCheckDefinition == nil {
 		return localVarReturnValue, nil, reportError("convergedinfraHealthCheckDefinition is required and must be specified")
 	}
@@ -122,7 +115,7 @@ func (a *ConvergedinfraApiService) CreateConvergedinfraHealthCheckDefinitionExec
 	}
 	// body params
 	localVarPostBody = r.convergedinfraHealthCheckDefinition
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -132,15 +125,15 @@ func (a *ConvergedinfraApiService) CreateConvergedinfraHealthCheckDefinitionExec
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -196,7 +189,7 @@ func (a *ConvergedinfraApiService) CreateConvergedinfraHealthCheckDefinitionExec
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -207,23 +200,23 @@ func (a *ConvergedinfraApiService) CreateConvergedinfraHealthCheckDefinitionExec
 }
 
 type ApiDeleteConvergedinfraHealthCheckDefinitionRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ConvergedinfraApiService
 	moid       string
 }
 
-func (r ApiDeleteConvergedinfraHealthCheckDefinitionRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteConvergedinfraHealthCheckDefinitionRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteConvergedinfraHealthCheckDefinitionExecute(r)
 }
 
 /*
 DeleteConvergedinfraHealthCheckDefinition Delete a 'convergedinfra.HealthCheckDefinition' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteConvergedinfraHealthCheckDefinitionRequest
 */
-func (a *ConvergedinfraApiService) DeleteConvergedinfraHealthCheckDefinition(ctx _context.Context, moid string) ApiDeleteConvergedinfraHealthCheckDefinitionRequest {
+func (a *ConvergedinfraApiService) DeleteConvergedinfraHealthCheckDefinition(ctx context.Context, moid string) ApiDeleteConvergedinfraHealthCheckDefinitionRequest {
 	return ApiDeleteConvergedinfraHealthCheckDefinitionRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -232,26 +225,24 @@ func (a *ConvergedinfraApiService) DeleteConvergedinfraHealthCheckDefinition(ctx
 }
 
 // Execute executes the request
-func (a *ConvergedinfraApiService) DeleteConvergedinfraHealthCheckDefinitionExecute(r ApiDeleteConvergedinfraHealthCheckDefinitionRequest) (*_nethttp.Response, error) {
+func (a *ConvergedinfraApiService) DeleteConvergedinfraHealthCheckDefinitionExecute(r ApiDeleteConvergedinfraHealthCheckDefinitionRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConvergedinfraApiService.DeleteConvergedinfraHealthCheckDefinition")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/convergedinfra/HealthCheckDefinitions/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -270,7 +261,7 @@ func (a *ConvergedinfraApiService) DeleteConvergedinfraHealthCheckDefinitionExec
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -280,15 +271,15 @@ func (a *ConvergedinfraApiService) DeleteConvergedinfraHealthCheckDefinitionExec
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -346,23 +337,23 @@ func (a *ConvergedinfraApiService) DeleteConvergedinfraHealthCheckDefinitionExec
 }
 
 type ApiGetConvergedinfraHealthCheckDefinitionByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ConvergedinfraApiService
 	moid       string
 }
 
-func (r ApiGetConvergedinfraHealthCheckDefinitionByMoidRequest) Execute() (ConvergedinfraHealthCheckDefinition, *_nethttp.Response, error) {
+func (r ApiGetConvergedinfraHealthCheckDefinitionByMoidRequest) Execute() (*ConvergedinfraHealthCheckDefinition, *http.Response, error) {
 	return r.ApiService.GetConvergedinfraHealthCheckDefinitionByMoidExecute(r)
 }
 
 /*
 GetConvergedinfraHealthCheckDefinitionByMoid Read a 'convergedinfra.HealthCheckDefinition' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetConvergedinfraHealthCheckDefinitionByMoidRequest
 */
-func (a *ConvergedinfraApiService) GetConvergedinfraHealthCheckDefinitionByMoid(ctx _context.Context, moid string) ApiGetConvergedinfraHealthCheckDefinitionByMoidRequest {
+func (a *ConvergedinfraApiService) GetConvergedinfraHealthCheckDefinitionByMoid(ctx context.Context, moid string) ApiGetConvergedinfraHealthCheckDefinitionByMoidRequest {
 	return ApiGetConvergedinfraHealthCheckDefinitionByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -372,27 +363,25 @@ func (a *ConvergedinfraApiService) GetConvergedinfraHealthCheckDefinitionByMoid(
 
 // Execute executes the request
 //  @return ConvergedinfraHealthCheckDefinition
-func (a *ConvergedinfraApiService) GetConvergedinfraHealthCheckDefinitionByMoidExecute(r ApiGetConvergedinfraHealthCheckDefinitionByMoidRequest) (ConvergedinfraHealthCheckDefinition, *_nethttp.Response, error) {
+func (a *ConvergedinfraApiService) GetConvergedinfraHealthCheckDefinitionByMoidExecute(r ApiGetConvergedinfraHealthCheckDefinitionByMoidRequest) (*ConvergedinfraHealthCheckDefinition, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ConvergedinfraHealthCheckDefinition
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ConvergedinfraHealthCheckDefinition
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConvergedinfraApiService.GetConvergedinfraHealthCheckDefinitionByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/convergedinfra/HealthCheckDefinitions/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -411,7 +400,7 @@ func (a *ConvergedinfraApiService) GetConvergedinfraHealthCheckDefinitionByMoidE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -421,15 +410,15 @@ func (a *ConvergedinfraApiService) GetConvergedinfraHealthCheckDefinitionByMoidE
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -485,7 +474,7 @@ func (a *ConvergedinfraApiService) GetConvergedinfraHealthCheckDefinitionByMoidE
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -496,7 +485,7 @@ func (a *ConvergedinfraApiService) GetConvergedinfraHealthCheckDefinitionByMoidE
 }
 
 type ApiGetConvergedinfraHealthCheckDefinitionListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *ConvergedinfraApiService
 	filter      *string
 	orderby     *string
@@ -577,17 +566,17 @@ func (r ApiGetConvergedinfraHealthCheckDefinitionListRequest) Tags(tags string) 
 	return r
 }
 
-func (r ApiGetConvergedinfraHealthCheckDefinitionListRequest) Execute() (ConvergedinfraHealthCheckDefinitionResponse, *_nethttp.Response, error) {
+func (r ApiGetConvergedinfraHealthCheckDefinitionListRequest) Execute() (*ConvergedinfraHealthCheckDefinitionResponse, *http.Response, error) {
 	return r.ApiService.GetConvergedinfraHealthCheckDefinitionListExecute(r)
 }
 
 /*
 GetConvergedinfraHealthCheckDefinitionList Read a 'convergedinfra.HealthCheckDefinition' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetConvergedinfraHealthCheckDefinitionListRequest
 */
-func (a *ConvergedinfraApiService) GetConvergedinfraHealthCheckDefinitionList(ctx _context.Context) ApiGetConvergedinfraHealthCheckDefinitionListRequest {
+func (a *ConvergedinfraApiService) GetConvergedinfraHealthCheckDefinitionList(ctx context.Context) ApiGetConvergedinfraHealthCheckDefinitionListRequest {
 	return ApiGetConvergedinfraHealthCheckDefinitionListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -596,26 +585,24 @@ func (a *ConvergedinfraApiService) GetConvergedinfraHealthCheckDefinitionList(ct
 
 // Execute executes the request
 //  @return ConvergedinfraHealthCheckDefinitionResponse
-func (a *ConvergedinfraApiService) GetConvergedinfraHealthCheckDefinitionListExecute(r ApiGetConvergedinfraHealthCheckDefinitionListRequest) (ConvergedinfraHealthCheckDefinitionResponse, *_nethttp.Response, error) {
+func (a *ConvergedinfraApiService) GetConvergedinfraHealthCheckDefinitionListExecute(r ApiGetConvergedinfraHealthCheckDefinitionListRequest) (*ConvergedinfraHealthCheckDefinitionResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ConvergedinfraHealthCheckDefinitionResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ConvergedinfraHealthCheckDefinitionResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConvergedinfraApiService.GetConvergedinfraHealthCheckDefinitionList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/convergedinfra/HealthCheckDefinitions"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -667,7 +654,7 @@ func (a *ConvergedinfraApiService) GetConvergedinfraHealthCheckDefinitionListExe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -677,15 +664,15 @@ func (a *ConvergedinfraApiService) GetConvergedinfraHealthCheckDefinitionListExe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -741,7 +728,7 @@ func (a *ConvergedinfraApiService) GetConvergedinfraHealthCheckDefinitionListExe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -752,23 +739,23 @@ func (a *ConvergedinfraApiService) GetConvergedinfraHealthCheckDefinitionListExe
 }
 
 type ApiGetConvergedinfraHealthCheckExecutionByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ConvergedinfraApiService
 	moid       string
 }
 
-func (r ApiGetConvergedinfraHealthCheckExecutionByMoidRequest) Execute() (ConvergedinfraHealthCheckExecution, *_nethttp.Response, error) {
+func (r ApiGetConvergedinfraHealthCheckExecutionByMoidRequest) Execute() (*ConvergedinfraHealthCheckExecution, *http.Response, error) {
 	return r.ApiService.GetConvergedinfraHealthCheckExecutionByMoidExecute(r)
 }
 
 /*
 GetConvergedinfraHealthCheckExecutionByMoid Read a 'convergedinfra.HealthCheckExecution' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetConvergedinfraHealthCheckExecutionByMoidRequest
 */
-func (a *ConvergedinfraApiService) GetConvergedinfraHealthCheckExecutionByMoid(ctx _context.Context, moid string) ApiGetConvergedinfraHealthCheckExecutionByMoidRequest {
+func (a *ConvergedinfraApiService) GetConvergedinfraHealthCheckExecutionByMoid(ctx context.Context, moid string) ApiGetConvergedinfraHealthCheckExecutionByMoidRequest {
 	return ApiGetConvergedinfraHealthCheckExecutionByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -778,27 +765,25 @@ func (a *ConvergedinfraApiService) GetConvergedinfraHealthCheckExecutionByMoid(c
 
 // Execute executes the request
 //  @return ConvergedinfraHealthCheckExecution
-func (a *ConvergedinfraApiService) GetConvergedinfraHealthCheckExecutionByMoidExecute(r ApiGetConvergedinfraHealthCheckExecutionByMoidRequest) (ConvergedinfraHealthCheckExecution, *_nethttp.Response, error) {
+func (a *ConvergedinfraApiService) GetConvergedinfraHealthCheckExecutionByMoidExecute(r ApiGetConvergedinfraHealthCheckExecutionByMoidRequest) (*ConvergedinfraHealthCheckExecution, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ConvergedinfraHealthCheckExecution
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ConvergedinfraHealthCheckExecution
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConvergedinfraApiService.GetConvergedinfraHealthCheckExecutionByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/convergedinfra/HealthCheckExecutions/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -817,7 +802,7 @@ func (a *ConvergedinfraApiService) GetConvergedinfraHealthCheckExecutionByMoidEx
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -827,15 +812,15 @@ func (a *ConvergedinfraApiService) GetConvergedinfraHealthCheckExecutionByMoidEx
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -891,7 +876,7 @@ func (a *ConvergedinfraApiService) GetConvergedinfraHealthCheckExecutionByMoidEx
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -902,7 +887,7 @@ func (a *ConvergedinfraApiService) GetConvergedinfraHealthCheckExecutionByMoidEx
 }
 
 type ApiGetConvergedinfraHealthCheckExecutionListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *ConvergedinfraApiService
 	filter      *string
 	orderby     *string
@@ -983,17 +968,17 @@ func (r ApiGetConvergedinfraHealthCheckExecutionListRequest) Tags(tags string) A
 	return r
 }
 
-func (r ApiGetConvergedinfraHealthCheckExecutionListRequest) Execute() (ConvergedinfraHealthCheckExecutionResponse, *_nethttp.Response, error) {
+func (r ApiGetConvergedinfraHealthCheckExecutionListRequest) Execute() (*ConvergedinfraHealthCheckExecutionResponse, *http.Response, error) {
 	return r.ApiService.GetConvergedinfraHealthCheckExecutionListExecute(r)
 }
 
 /*
 GetConvergedinfraHealthCheckExecutionList Read a 'convergedinfra.HealthCheckExecution' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetConvergedinfraHealthCheckExecutionListRequest
 */
-func (a *ConvergedinfraApiService) GetConvergedinfraHealthCheckExecutionList(ctx _context.Context) ApiGetConvergedinfraHealthCheckExecutionListRequest {
+func (a *ConvergedinfraApiService) GetConvergedinfraHealthCheckExecutionList(ctx context.Context) ApiGetConvergedinfraHealthCheckExecutionListRequest {
 	return ApiGetConvergedinfraHealthCheckExecutionListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1002,26 +987,24 @@ func (a *ConvergedinfraApiService) GetConvergedinfraHealthCheckExecutionList(ctx
 
 // Execute executes the request
 //  @return ConvergedinfraHealthCheckExecutionResponse
-func (a *ConvergedinfraApiService) GetConvergedinfraHealthCheckExecutionListExecute(r ApiGetConvergedinfraHealthCheckExecutionListRequest) (ConvergedinfraHealthCheckExecutionResponse, *_nethttp.Response, error) {
+func (a *ConvergedinfraApiService) GetConvergedinfraHealthCheckExecutionListExecute(r ApiGetConvergedinfraHealthCheckExecutionListRequest) (*ConvergedinfraHealthCheckExecutionResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ConvergedinfraHealthCheckExecutionResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ConvergedinfraHealthCheckExecutionResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConvergedinfraApiService.GetConvergedinfraHealthCheckExecutionList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/convergedinfra/HealthCheckExecutions"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1073,7 +1056,7 @@ func (a *ConvergedinfraApiService) GetConvergedinfraHealthCheckExecutionListExec
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1083,15 +1066,15 @@ func (a *ConvergedinfraApiService) GetConvergedinfraHealthCheckExecutionListExec
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1147,7 +1130,7 @@ func (a *ConvergedinfraApiService) GetConvergedinfraHealthCheckExecutionListExec
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1158,23 +1141,23 @@ func (a *ConvergedinfraApiService) GetConvergedinfraHealthCheckExecutionListExec
 }
 
 type ApiGetConvergedinfraPodByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ConvergedinfraApiService
 	moid       string
 }
 
-func (r ApiGetConvergedinfraPodByMoidRequest) Execute() (ConvergedinfraPod, *_nethttp.Response, error) {
+func (r ApiGetConvergedinfraPodByMoidRequest) Execute() (*ConvergedinfraPod, *http.Response, error) {
 	return r.ApiService.GetConvergedinfraPodByMoidExecute(r)
 }
 
 /*
 GetConvergedinfraPodByMoid Read a 'convergedinfra.Pod' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetConvergedinfraPodByMoidRequest
 */
-func (a *ConvergedinfraApiService) GetConvergedinfraPodByMoid(ctx _context.Context, moid string) ApiGetConvergedinfraPodByMoidRequest {
+func (a *ConvergedinfraApiService) GetConvergedinfraPodByMoid(ctx context.Context, moid string) ApiGetConvergedinfraPodByMoidRequest {
 	return ApiGetConvergedinfraPodByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1184,27 +1167,25 @@ func (a *ConvergedinfraApiService) GetConvergedinfraPodByMoid(ctx _context.Conte
 
 // Execute executes the request
 //  @return ConvergedinfraPod
-func (a *ConvergedinfraApiService) GetConvergedinfraPodByMoidExecute(r ApiGetConvergedinfraPodByMoidRequest) (ConvergedinfraPod, *_nethttp.Response, error) {
+func (a *ConvergedinfraApiService) GetConvergedinfraPodByMoidExecute(r ApiGetConvergedinfraPodByMoidRequest) (*ConvergedinfraPod, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ConvergedinfraPod
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ConvergedinfraPod
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConvergedinfraApiService.GetConvergedinfraPodByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/convergedinfra/Pods/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1223,7 +1204,7 @@ func (a *ConvergedinfraApiService) GetConvergedinfraPodByMoidExecute(r ApiGetCon
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1233,15 +1214,15 @@ func (a *ConvergedinfraApiService) GetConvergedinfraPodByMoidExecute(r ApiGetCon
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1297,7 +1278,7 @@ func (a *ConvergedinfraApiService) GetConvergedinfraPodByMoidExecute(r ApiGetCon
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1308,7 +1289,7 @@ func (a *ConvergedinfraApiService) GetConvergedinfraPodByMoidExecute(r ApiGetCon
 }
 
 type ApiGetConvergedinfraPodListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *ConvergedinfraApiService
 	filter      *string
 	orderby     *string
@@ -1389,17 +1370,17 @@ func (r ApiGetConvergedinfraPodListRequest) Tags(tags string) ApiGetConvergedinf
 	return r
 }
 
-func (r ApiGetConvergedinfraPodListRequest) Execute() (ConvergedinfraPodResponse, *_nethttp.Response, error) {
+func (r ApiGetConvergedinfraPodListRequest) Execute() (*ConvergedinfraPodResponse, *http.Response, error) {
 	return r.ApiService.GetConvergedinfraPodListExecute(r)
 }
 
 /*
 GetConvergedinfraPodList Read a 'convergedinfra.Pod' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetConvergedinfraPodListRequest
 */
-func (a *ConvergedinfraApiService) GetConvergedinfraPodList(ctx _context.Context) ApiGetConvergedinfraPodListRequest {
+func (a *ConvergedinfraApiService) GetConvergedinfraPodList(ctx context.Context) ApiGetConvergedinfraPodListRequest {
 	return ApiGetConvergedinfraPodListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1408,26 +1389,24 @@ func (a *ConvergedinfraApiService) GetConvergedinfraPodList(ctx _context.Context
 
 // Execute executes the request
 //  @return ConvergedinfraPodResponse
-func (a *ConvergedinfraApiService) GetConvergedinfraPodListExecute(r ApiGetConvergedinfraPodListRequest) (ConvergedinfraPodResponse, *_nethttp.Response, error) {
+func (a *ConvergedinfraApiService) GetConvergedinfraPodListExecute(r ApiGetConvergedinfraPodListRequest) (*ConvergedinfraPodResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ConvergedinfraPodResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ConvergedinfraPodResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConvergedinfraApiService.GetConvergedinfraPodList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/convergedinfra/Pods"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1479,7 +1458,7 @@ func (a *ConvergedinfraApiService) GetConvergedinfraPodListExecute(r ApiGetConve
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1489,15 +1468,15 @@ func (a *ConvergedinfraApiService) GetConvergedinfraPodListExecute(r ApiGetConve
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1553,7 +1532,7 @@ func (a *ConvergedinfraApiService) GetConvergedinfraPodListExecute(r ApiGetConve
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1564,7 +1543,7 @@ func (a *ConvergedinfraApiService) GetConvergedinfraPodListExecute(r ApiGetConve
 }
 
 type ApiPatchConvergedinfraHealthCheckDefinitionRequest struct {
-	ctx                                 _context.Context
+	ctx                                 context.Context
 	ApiService                          *ConvergedinfraApiService
 	moid                                string
 	convergedinfraHealthCheckDefinition *ConvergedinfraHealthCheckDefinition
@@ -1583,18 +1562,18 @@ func (r ApiPatchConvergedinfraHealthCheckDefinitionRequest) IfMatch(ifMatch stri
 	return r
 }
 
-func (r ApiPatchConvergedinfraHealthCheckDefinitionRequest) Execute() (ConvergedinfraHealthCheckDefinition, *_nethttp.Response, error) {
+func (r ApiPatchConvergedinfraHealthCheckDefinitionRequest) Execute() (*ConvergedinfraHealthCheckDefinition, *http.Response, error) {
 	return r.ApiService.PatchConvergedinfraHealthCheckDefinitionExecute(r)
 }
 
 /*
 PatchConvergedinfraHealthCheckDefinition Update a 'convergedinfra.HealthCheckDefinition' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchConvergedinfraHealthCheckDefinitionRequest
 */
-func (a *ConvergedinfraApiService) PatchConvergedinfraHealthCheckDefinition(ctx _context.Context, moid string) ApiPatchConvergedinfraHealthCheckDefinitionRequest {
+func (a *ConvergedinfraApiService) PatchConvergedinfraHealthCheckDefinition(ctx context.Context, moid string) ApiPatchConvergedinfraHealthCheckDefinitionRequest {
 	return ApiPatchConvergedinfraHealthCheckDefinitionRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1604,27 +1583,25 @@ func (a *ConvergedinfraApiService) PatchConvergedinfraHealthCheckDefinition(ctx 
 
 // Execute executes the request
 //  @return ConvergedinfraHealthCheckDefinition
-func (a *ConvergedinfraApiService) PatchConvergedinfraHealthCheckDefinitionExecute(r ApiPatchConvergedinfraHealthCheckDefinitionRequest) (ConvergedinfraHealthCheckDefinition, *_nethttp.Response, error) {
+func (a *ConvergedinfraApiService) PatchConvergedinfraHealthCheckDefinitionExecute(r ApiPatchConvergedinfraHealthCheckDefinitionRequest) (*ConvergedinfraHealthCheckDefinition, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ConvergedinfraHealthCheckDefinition
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ConvergedinfraHealthCheckDefinition
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConvergedinfraApiService.PatchConvergedinfraHealthCheckDefinition")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/convergedinfra/HealthCheckDefinitions/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.convergedinfraHealthCheckDefinition == nil {
 		return localVarReturnValue, nil, reportError("convergedinfraHealthCheckDefinition is required and must be specified")
 	}
@@ -1651,7 +1628,7 @@ func (a *ConvergedinfraApiService) PatchConvergedinfraHealthCheckDefinitionExecu
 	}
 	// body params
 	localVarPostBody = r.convergedinfraHealthCheckDefinition
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1661,15 +1638,15 @@ func (a *ConvergedinfraApiService) PatchConvergedinfraHealthCheckDefinitionExecu
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1725,7 +1702,7 @@ func (a *ConvergedinfraApiService) PatchConvergedinfraHealthCheckDefinitionExecu
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1736,7 +1713,7 @@ func (a *ConvergedinfraApiService) PatchConvergedinfraHealthCheckDefinitionExecu
 }
 
 type ApiPatchConvergedinfraPodRequest struct {
-	ctx               _context.Context
+	ctx               context.Context
 	ApiService        *ConvergedinfraApiService
 	moid              string
 	convergedinfraPod *ConvergedinfraPod
@@ -1755,18 +1732,18 @@ func (r ApiPatchConvergedinfraPodRequest) IfMatch(ifMatch string) ApiPatchConver
 	return r
 }
 
-func (r ApiPatchConvergedinfraPodRequest) Execute() (ConvergedinfraPod, *_nethttp.Response, error) {
+func (r ApiPatchConvergedinfraPodRequest) Execute() (*ConvergedinfraPod, *http.Response, error) {
 	return r.ApiService.PatchConvergedinfraPodExecute(r)
 }
 
 /*
 PatchConvergedinfraPod Update a 'convergedinfra.Pod' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchConvergedinfraPodRequest
 */
-func (a *ConvergedinfraApiService) PatchConvergedinfraPod(ctx _context.Context, moid string) ApiPatchConvergedinfraPodRequest {
+func (a *ConvergedinfraApiService) PatchConvergedinfraPod(ctx context.Context, moid string) ApiPatchConvergedinfraPodRequest {
 	return ApiPatchConvergedinfraPodRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1776,27 +1753,25 @@ func (a *ConvergedinfraApiService) PatchConvergedinfraPod(ctx _context.Context, 
 
 // Execute executes the request
 //  @return ConvergedinfraPod
-func (a *ConvergedinfraApiService) PatchConvergedinfraPodExecute(r ApiPatchConvergedinfraPodRequest) (ConvergedinfraPod, *_nethttp.Response, error) {
+func (a *ConvergedinfraApiService) PatchConvergedinfraPodExecute(r ApiPatchConvergedinfraPodRequest) (*ConvergedinfraPod, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ConvergedinfraPod
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ConvergedinfraPod
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConvergedinfraApiService.PatchConvergedinfraPod")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/convergedinfra/Pods/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.convergedinfraPod == nil {
 		return localVarReturnValue, nil, reportError("convergedinfraPod is required and must be specified")
 	}
@@ -1823,7 +1798,7 @@ func (a *ConvergedinfraApiService) PatchConvergedinfraPodExecute(r ApiPatchConve
 	}
 	// body params
 	localVarPostBody = r.convergedinfraPod
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1833,15 +1808,15 @@ func (a *ConvergedinfraApiService) PatchConvergedinfraPodExecute(r ApiPatchConve
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1897,7 +1872,7 @@ func (a *ConvergedinfraApiService) PatchConvergedinfraPodExecute(r ApiPatchConve
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1908,7 +1883,7 @@ func (a *ConvergedinfraApiService) PatchConvergedinfraPodExecute(r ApiPatchConve
 }
 
 type ApiUpdateConvergedinfraHealthCheckDefinitionRequest struct {
-	ctx                                 _context.Context
+	ctx                                 context.Context
 	ApiService                          *ConvergedinfraApiService
 	moid                                string
 	convergedinfraHealthCheckDefinition *ConvergedinfraHealthCheckDefinition
@@ -1927,18 +1902,18 @@ func (r ApiUpdateConvergedinfraHealthCheckDefinitionRequest) IfMatch(ifMatch str
 	return r
 }
 
-func (r ApiUpdateConvergedinfraHealthCheckDefinitionRequest) Execute() (ConvergedinfraHealthCheckDefinition, *_nethttp.Response, error) {
+func (r ApiUpdateConvergedinfraHealthCheckDefinitionRequest) Execute() (*ConvergedinfraHealthCheckDefinition, *http.Response, error) {
 	return r.ApiService.UpdateConvergedinfraHealthCheckDefinitionExecute(r)
 }
 
 /*
 UpdateConvergedinfraHealthCheckDefinition Update a 'convergedinfra.HealthCheckDefinition' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateConvergedinfraHealthCheckDefinitionRequest
 */
-func (a *ConvergedinfraApiService) UpdateConvergedinfraHealthCheckDefinition(ctx _context.Context, moid string) ApiUpdateConvergedinfraHealthCheckDefinitionRequest {
+func (a *ConvergedinfraApiService) UpdateConvergedinfraHealthCheckDefinition(ctx context.Context, moid string) ApiUpdateConvergedinfraHealthCheckDefinitionRequest {
 	return ApiUpdateConvergedinfraHealthCheckDefinitionRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1948,27 +1923,25 @@ func (a *ConvergedinfraApiService) UpdateConvergedinfraHealthCheckDefinition(ctx
 
 // Execute executes the request
 //  @return ConvergedinfraHealthCheckDefinition
-func (a *ConvergedinfraApiService) UpdateConvergedinfraHealthCheckDefinitionExecute(r ApiUpdateConvergedinfraHealthCheckDefinitionRequest) (ConvergedinfraHealthCheckDefinition, *_nethttp.Response, error) {
+func (a *ConvergedinfraApiService) UpdateConvergedinfraHealthCheckDefinitionExecute(r ApiUpdateConvergedinfraHealthCheckDefinitionRequest) (*ConvergedinfraHealthCheckDefinition, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ConvergedinfraHealthCheckDefinition
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ConvergedinfraHealthCheckDefinition
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConvergedinfraApiService.UpdateConvergedinfraHealthCheckDefinition")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/convergedinfra/HealthCheckDefinitions/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.convergedinfraHealthCheckDefinition == nil {
 		return localVarReturnValue, nil, reportError("convergedinfraHealthCheckDefinition is required and must be specified")
 	}
@@ -1995,7 +1968,7 @@ func (a *ConvergedinfraApiService) UpdateConvergedinfraHealthCheckDefinitionExec
 	}
 	// body params
 	localVarPostBody = r.convergedinfraHealthCheckDefinition
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2005,15 +1978,15 @@ func (a *ConvergedinfraApiService) UpdateConvergedinfraHealthCheckDefinitionExec
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2069,7 +2042,7 @@ func (a *ConvergedinfraApiService) UpdateConvergedinfraHealthCheckDefinitionExec
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2080,7 +2053,7 @@ func (a *ConvergedinfraApiService) UpdateConvergedinfraHealthCheckDefinitionExec
 }
 
 type ApiUpdateConvergedinfraPodRequest struct {
-	ctx               _context.Context
+	ctx               context.Context
 	ApiService        *ConvergedinfraApiService
 	moid              string
 	convergedinfraPod *ConvergedinfraPod
@@ -2099,18 +2072,18 @@ func (r ApiUpdateConvergedinfraPodRequest) IfMatch(ifMatch string) ApiUpdateConv
 	return r
 }
 
-func (r ApiUpdateConvergedinfraPodRequest) Execute() (ConvergedinfraPod, *_nethttp.Response, error) {
+func (r ApiUpdateConvergedinfraPodRequest) Execute() (*ConvergedinfraPod, *http.Response, error) {
 	return r.ApiService.UpdateConvergedinfraPodExecute(r)
 }
 
 /*
 UpdateConvergedinfraPod Update a 'convergedinfra.Pod' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateConvergedinfraPodRequest
 */
-func (a *ConvergedinfraApiService) UpdateConvergedinfraPod(ctx _context.Context, moid string) ApiUpdateConvergedinfraPodRequest {
+func (a *ConvergedinfraApiService) UpdateConvergedinfraPod(ctx context.Context, moid string) ApiUpdateConvergedinfraPodRequest {
 	return ApiUpdateConvergedinfraPodRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2120,27 +2093,25 @@ func (a *ConvergedinfraApiService) UpdateConvergedinfraPod(ctx _context.Context,
 
 // Execute executes the request
 //  @return ConvergedinfraPod
-func (a *ConvergedinfraApiService) UpdateConvergedinfraPodExecute(r ApiUpdateConvergedinfraPodRequest) (ConvergedinfraPod, *_nethttp.Response, error) {
+func (a *ConvergedinfraApiService) UpdateConvergedinfraPodExecute(r ApiUpdateConvergedinfraPodRequest) (*ConvergedinfraPod, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ConvergedinfraPod
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ConvergedinfraPod
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConvergedinfraApiService.UpdateConvergedinfraPod")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/convergedinfra/Pods/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.convergedinfraPod == nil {
 		return localVarReturnValue, nil, reportError("convergedinfraPod is required and must be specified")
 	}
@@ -2167,7 +2138,7 @@ func (a *ConvergedinfraApiService) UpdateConvergedinfraPodExecute(r ApiUpdateCon
 	}
 	// body params
 	localVarPostBody = r.convergedinfraPod
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2177,15 +2148,15 @@ func (a *ConvergedinfraApiService) UpdateConvergedinfraPodExecute(r ApiUpdateCon
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2241,7 +2212,7 @@ func (a *ConvergedinfraApiService) UpdateConvergedinfraPodExecute(r ApiUpdateCon
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

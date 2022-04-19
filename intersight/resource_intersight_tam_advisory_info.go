@@ -482,7 +482,6 @@ func resourceTamAdvisoryInfo() *schema.Resource {
 
 func resourceTamAdvisoryInfoCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewTamAdvisoryInfoWithDefaults()
@@ -593,7 +592,7 @@ func resourceTamAdvisoryInfoCreate(c context.Context, d *schema.ResourceData, me
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating TamAdvisoryInfo: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating TamAdvisoryInfo: %s", responseErr.Error())
@@ -605,7 +604,6 @@ func resourceTamAdvisoryInfoCreate(c context.Context, d *schema.ResourceData, me
 
 func resourceTamAdvisoryInfoRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.TamApi.GetTamAdvisoryInfoByMoid(conn.ctx, d.Id())
@@ -618,7 +616,7 @@ func resourceTamAdvisoryInfoRead(c context.Context, d *schema.ResourceData, meta
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching TamAdvisoryInfo: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching TamAdvisoryInfo: %s", responseErr.Error())
@@ -703,7 +701,6 @@ func resourceTamAdvisoryInfoRead(c context.Context, d *schema.ResourceData, meta
 
 func resourceTamAdvisoryInfoUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.TamAdvisoryInfo{}
@@ -817,7 +814,7 @@ func resourceTamAdvisoryInfoUpdate(c context.Context, d *schema.ResourceData, me
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating TamAdvisoryInfo: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating TamAdvisoryInfo: %s", responseErr.Error())
@@ -829,7 +826,6 @@ func resourceTamAdvisoryInfoUpdate(c context.Context, d *schema.ResourceData, me
 
 func resourceTamAdvisoryInfoDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.TamApi.DeleteTamAdvisoryInfo(conn.ctx, d.Id())
@@ -841,7 +837,7 @@ func resourceTamAdvisoryInfoDelete(c context.Context, d *schema.ResourceData, me
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting TamAdvisoryInfo object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting TamAdvisoryInfo object: %s", deleteErr.Error())

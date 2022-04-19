@@ -667,7 +667,6 @@ func resourceRecoveryRestore() *schema.Resource {
 
 func resourceRecoveryRestoreCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewRecoveryRestoreWithDefaults()
@@ -890,7 +889,7 @@ func resourceRecoveryRestoreCreate(c context.Context, d *schema.ResourceData, me
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating RecoveryRestore: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating RecoveryRestore: %s", responseErr.Error())
@@ -908,7 +907,7 @@ func resourceRecoveryRestoreCreate(c context.Context, d *schema.ResourceData, me
 			if responseErr != nil {
 				errorType := fmt.Sprintf("%T", responseErr)
 				if strings.Contains(errorType, "GenericOpenAPIError") {
-					responseErr := responseErr.(models.GenericOpenAPIError)
+					responseErr := responseErr.(*models.GenericOpenAPIError)
 					return diag.Errorf("error occurred while fetching RecoveryRestore: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 				}
 				return diag.Errorf("error occurred while fetching RecoveryRestore: %s", responseErr.Error())
@@ -922,7 +921,7 @@ func resourceRecoveryRestoreCreate(c context.Context, d *schema.ResourceData, me
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching RecoveryRestore: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching RecoveryRestore: %s", responseErr.Error())
@@ -936,7 +935,7 @@ func resourceRecoveryRestoreCreate(c context.Context, d *schema.ResourceData, me
 			if err != nil {
 				errorType := fmt.Sprintf("%T", err)
 				if strings.Contains(errorType, "GenericOpenAPIError") {
-					err := err.(models.GenericOpenAPIError)
+					err := err.(*models.GenericOpenAPIError)
 					return diag.Errorf("failed while fetching workflow information in RecoveryRestore: %s Response from endpoint: %s", err.Error(), string(err.Body()))
 				}
 				return diag.Errorf("failed while fetching workflow information in RecoveryRestore: %s", err.Error())
@@ -951,7 +950,6 @@ func resourceRecoveryRestoreCreate(c context.Context, d *schema.ResourceData, me
 
 func resourceRecoveryRestoreRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.RecoveryApi.GetRecoveryRestoreByMoid(conn.ctx, d.Id())
@@ -964,7 +962,7 @@ func resourceRecoveryRestoreRead(c context.Context, d *schema.ResourceData, meta
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching RecoveryRestore: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching RecoveryRestore: %s", responseErr.Error())
@@ -1057,7 +1055,6 @@ func resourceRecoveryRestoreRead(c context.Context, d *schema.ResourceData, meta
 
 func resourceRecoveryRestoreDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.RecoveryApi.DeleteRecoveryRestore(conn.ctx, d.Id())
@@ -1069,7 +1066,7 @@ func resourceRecoveryRestoreDelete(c context.Context, d *schema.ResourceData, me
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting RecoveryRestore object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting RecoveryRestore object: %s", deleteErr.Error())

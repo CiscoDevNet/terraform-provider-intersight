@@ -470,7 +470,6 @@ func resourceFirmwareHbaDescriptor() *schema.Resource {
 
 func resourceFirmwareHbaDescriptorCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewFirmwareHbaDescriptorWithDefaults()
@@ -610,7 +609,7 @@ func resourceFirmwareHbaDescriptorCreate(c context.Context, d *schema.ResourceDa
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating FirmwareHbaDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating FirmwareHbaDescriptor: %s", responseErr.Error())
@@ -622,7 +621,6 @@ func resourceFirmwareHbaDescriptorCreate(c context.Context, d *schema.ResourceDa
 
 func resourceFirmwareHbaDescriptorRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.FirmwareApi.GetFirmwareHbaDescriptorByMoid(conn.ctx, d.Id())
@@ -635,7 +633,7 @@ func resourceFirmwareHbaDescriptorRead(c context.Context, d *schema.ResourceData
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching FirmwareHbaDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching FirmwareHbaDescriptor: %s", responseErr.Error())
@@ -740,7 +738,6 @@ func resourceFirmwareHbaDescriptorRead(c context.Context, d *schema.ResourceData
 
 func resourceFirmwareHbaDescriptorUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.FirmwareHbaDescriptor{}
@@ -887,7 +884,7 @@ func resourceFirmwareHbaDescriptorUpdate(c context.Context, d *schema.ResourceDa
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating FirmwareHbaDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating FirmwareHbaDescriptor: %s", responseErr.Error())
@@ -899,7 +896,6 @@ func resourceFirmwareHbaDescriptorUpdate(c context.Context, d *schema.ResourceDa
 
 func resourceFirmwareHbaDescriptorDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.FirmwareApi.DeleteFirmwareHbaDescriptor(conn.ctx, d.Id())
@@ -911,7 +907,7 @@ func resourceFirmwareHbaDescriptorDelete(c context.Context, d *schema.ResourceDa
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting FirmwareHbaDescriptor object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting FirmwareHbaDescriptor object: %s", deleteErr.Error())

@@ -125,9 +125,9 @@ func resourceWorkflowServiceItemActionDefinition() *schema.Resource {
 							Optional:    true,
 						},
 						"input_parameters": {
-							Description:      "Capture the mapping of ActionDefinition inputDefinition to workflow definition.",
-							Type:             schema.TypeString,
-							DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
+							Description: "Capture the mapping of ActionDefinition inputDefinition to workflow definition.",
+							Type:        schema.TypeString,
+							Optional:    true,
 						},
 						"label": {
 							Description: "A user defined label identifier of the workflow used for UI display.",
@@ -246,9 +246,9 @@ func resourceWorkflowServiceItemActionDefinition() *schema.Resource {
 										Optional:    true,
 									},
 									"value": {
-										Description:      "Default value for the data type. If default value was provided and the input was required the default value will be used as the input.",
-										Type:             schema.TypeString,
-										DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
+										Description: "Default value for the data type. If default value was provided and the input was required the default value will be used as the input.",
+										Type:        schema.TypeString,
+										Optional:    true,
 									},
 								},
 							},
@@ -300,9 +300,9 @@ func resourceWorkflowServiceItemActionDefinition() *schema.Resource {
 							},
 						},
 						"input_parameters": {
-							Description:      "JSON formatted mapping from other property of the definition to the current property. Input parameter mapping is supported only for custom data type property in workflow definition and custom data type definition. The format to specify mapping ina workflow definition when source property is of scalar types is '${workflow.input.property}'. The format to specify mapping when the source property is of object reference and mapping needs to be made to the property of the object is '${workflow.input.property.subproperty}'. The format to specify mapping in a custom data type definition is '${datatype.type.property}'. When the current property is of non-scalar type like composite custom data type, then mapping can be provided to the individual property of the custom data type like 'cdt_property:${workflow.input.property}'.",
-							Type:             schema.TypeString,
-							DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
+							Description: "JSON formatted mapping from other property of the definition to the current property. Input parameter mapping is supported only for custom data type property in workflow definition and custom data type definition. The format to specify mapping ina workflow definition when source property is of scalar types is '${workflow.input.property}'. The format to specify mapping when the source property is of object reference and mapping needs to be made to the property of the object is '${workflow.input.property.subproperty}'. The format to specify mapping in a custom data type definition is '${datatype.type.property}'. When the current property is of non-scalar type like composite custom data type, then mapping can be provided to the individual property of the custom data type like 'cdt_property:${workflow.input.property}'.",
+							Type:        schema.TypeString,
+							Optional:    true,
 						},
 						"label": {
 							Description: "Descriptive label for the data type. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), space ( ) or an underscore (_). The first and last character in label must be an alphanumeric character.",
@@ -364,9 +364,9 @@ func resourceWorkflowServiceItemActionDefinition() *schema.Resource {
 				Default:     "workflow.ServiceItemActionDefinition",
 			},
 			"output_parameters": {
-				Description:      "The output mappings from workflows in the action definition to the service item output definition. Any output from core or post-core workflow can be mapped to service item output definition. The output can be referred using the name of the workflow definition and the output name in the following format '${<ServiceItemActionWorkflowDefinition.Name>.output.<outputName>'.",
-				Type:             schema.TypeString,
-				DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
+				Description: "The output mappings from workflows in the action definition to the service item output definition. Any output from core or post-core workflow can be mapped to service item output definition. The output can be referred using the name of the workflow definition and the output name in the following format '${<ServiceItemActionWorkflowDefinition.Name>.output.<outputName>'.",
+				Type:        schema.TypeString,
+				Optional:    true,
 			},
 			"owners": {
 				Type:       schema.TypeList,
@@ -488,9 +488,9 @@ func resourceWorkflowServiceItemActionDefinition() *schema.Resource {
 							Optional:    true,
 						},
 						"input_parameters": {
-							Description:      "Capture the mapping of ActionDefinition inputDefinition to workflow definition.",
-							Type:             schema.TypeString,
-							DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
+							Description: "Capture the mapping of ActionDefinition inputDefinition to workflow definition.",
+							Type:        schema.TypeString,
+							Optional:    true,
 						},
 						"label": {
 							Description: "A user defined label identifier of the workflow used for UI display.",
@@ -550,9 +550,9 @@ func resourceWorkflowServiceItemActionDefinition() *schema.Resource {
 							Optional:    true,
 						},
 						"input_parameters": {
-							Description:      "Capture the mapping of ActionDefinition inputDefinition to workflow definition.",
-							Type:             schema.TypeString,
-							DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
+							Description: "Capture the mapping of ActionDefinition inputDefinition to workflow definition.",
+							Type:        schema.TypeString,
+							Optional:    true,
 						},
 						"label": {
 							Description: "A user defined label identifier of the workflow used for UI display.",
@@ -664,9 +664,9 @@ func resourceWorkflowServiceItemActionDefinition() *schema.Resource {
 							Optional:    true,
 						},
 						"input_parameters": {
-							Description:      "Capture the mapping of ActionDefinition inputDefinition to workflow definition.",
-							Type:             schema.TypeString,
-							DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
+							Description: "Capture the mapping of ActionDefinition inputDefinition to workflow definition.",
+							Type:        schema.TypeString,
+							Optional:    true,
 						},
 						"label": {
 							Description: "A user defined label identifier of the workflow used for UI display.",
@@ -862,9 +862,9 @@ func resourceWorkflowServiceItemActionDefinition() *schema.Resource {
 							Optional:    true,
 						},
 						"input_parameters": {
-							Description:      "Capture the mapping of ActionDefinition inputDefinition to workflow definition.",
-							Type:             schema.TypeString,
-							DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
+							Description: "Capture the mapping of ActionDefinition inputDefinition to workflow definition.",
+							Type:        schema.TypeString,
+							Optional:    true,
 						},
 						"label": {
 							Description: "A user defined label identifier of the workflow used for UI display.",
@@ -1081,7 +1081,6 @@ func resourceWorkflowServiceItemActionDefinition() *schema.Resource {
 
 func resourceWorkflowServiceItemActionDefinitionCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewWorkflowServiceItemActionDefinitionWithDefaults()
@@ -1146,7 +1145,13 @@ func resourceWorkflowServiceItemActionDefinitionCreate(c context.Context, d *sch
 			}
 			if v, ok := l["input_parameters"]; ok {
 				{
-					o.SetInputParameters(v)
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						x2 := x1.(map[string]interface{})
+						o.SetInputParameters(x2)
+					}
 				}
 			}
 			if v, ok := l["label"]; ok {
@@ -1240,7 +1245,13 @@ func resourceWorkflowServiceItemActionDefinitionCreate(c context.Context, d *sch
 						}
 						if v, ok := l["value"]; ok {
 							{
-								o.SetValue(v)
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									x2 := x1.(map[string]interface{})
+									o.SetValue(x2)
+								}
 							}
 						}
 						p = append(p, *o)
@@ -1303,7 +1314,13 @@ func resourceWorkflowServiceItemActionDefinitionCreate(c context.Context, d *sch
 			}
 			if v, ok := l["input_parameters"]; ok {
 				{
-					o.SetInputParameters(v)
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						x2 := x1.(map[string]interface{})
+						o.SetInputParameters(x2)
+					}
 				}
 			}
 			if v, ok := l["label"]; ok {
@@ -1355,7 +1372,13 @@ func resourceWorkflowServiceItemActionDefinitionCreate(c context.Context, d *sch
 	o.SetObjectType("workflow.ServiceItemActionDefinition")
 
 	if v, ok := d.GetOk("output_parameters"); ok {
-		o.SetOutputParameters(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetOutputParameters(x2)
+		}
 	}
 
 	if v, ok := d.GetOkExists("periodicity"); ok {
@@ -1394,7 +1417,13 @@ func resourceWorkflowServiceItemActionDefinitionCreate(c context.Context, d *sch
 			}
 			if v, ok := l["input_parameters"]; ok {
 				{
-					o.SetInputParameters(v)
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						x2 := x1.(map[string]interface{})
+						o.SetInputParameters(x2)
+					}
 				}
 			}
 			if v, ok := l["label"]; ok {
@@ -1465,7 +1494,13 @@ func resourceWorkflowServiceItemActionDefinitionCreate(c context.Context, d *sch
 			}
 			if v, ok := l["input_parameters"]; ok {
 				{
-					o.SetInputParameters(v)
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						x2 := x1.(map[string]interface{})
+						o.SetInputParameters(x2)
+					}
 				}
 			}
 			if v, ok := l["label"]; ok {
@@ -1579,7 +1614,13 @@ func resourceWorkflowServiceItemActionDefinitionCreate(c context.Context, d *sch
 			}
 			if v, ok := l["input_parameters"]; ok {
 				{
-					o.SetInputParameters(v)
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						x2 := x1.(map[string]interface{})
+						o.SetInputParameters(x2)
+					}
 				}
 			}
 			if v, ok := l["label"]; ok {
@@ -1685,7 +1726,13 @@ func resourceWorkflowServiceItemActionDefinitionCreate(c context.Context, d *sch
 			}
 			if v, ok := l["input_parameters"]; ok {
 				{
-					o.SetInputParameters(v)
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						x2 := x1.(map[string]interface{})
+						o.SetInputParameters(x2)
+					}
 				}
 			}
 			if v, ok := l["label"]; ok {
@@ -1730,7 +1777,7 @@ func resourceWorkflowServiceItemActionDefinitionCreate(c context.Context, d *sch
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating WorkflowServiceItemActionDefinition: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating WorkflowServiceItemActionDefinition: %s", responseErr.Error())
@@ -1742,7 +1789,6 @@ func resourceWorkflowServiceItemActionDefinitionCreate(c context.Context, d *sch
 
 func resourceWorkflowServiceItemActionDefinitionRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.WorkflowApi.GetWorkflowServiceItemActionDefinitionByMoid(conn.ctx, d.Id())
@@ -1755,7 +1801,7 @@ func resourceWorkflowServiceItemActionDefinitionRead(c context.Context, d *schem
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching WorkflowServiceItemActionDefinition: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching WorkflowServiceItemActionDefinition: %s", responseErr.Error())
@@ -1892,7 +1938,6 @@ func resourceWorkflowServiceItemActionDefinitionRead(c context.Context, d *schem
 
 func resourceWorkflowServiceItemActionDefinitionUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.WorkflowServiceItemActionDefinition{}
@@ -1959,7 +2004,13 @@ func resourceWorkflowServiceItemActionDefinitionUpdate(c context.Context, d *sch
 			}
 			if v, ok := l["input_parameters"]; ok {
 				{
-					o.SetInputParameters(v)
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						x2 := x1.(map[string]interface{})
+						o.SetInputParameters(x2)
+					}
 				}
 			}
 			if v, ok := l["label"]; ok {
@@ -2053,7 +2104,13 @@ func resourceWorkflowServiceItemActionDefinitionUpdate(c context.Context, d *sch
 						}
 						if v, ok := l["value"]; ok {
 							{
-								o.SetValue(v)
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									x2 := x1.(map[string]interface{})
+									o.SetValue(x2)
+								}
 							}
 						}
 						p = append(p, *o)
@@ -2116,7 +2173,13 @@ func resourceWorkflowServiceItemActionDefinitionUpdate(c context.Context, d *sch
 			}
 			if v, ok := l["input_parameters"]; ok {
 				{
-					o.SetInputParameters(v)
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						x2 := x1.(map[string]interface{})
+						o.SetInputParameters(x2)
+					}
 				}
 			}
 			if v, ok := l["label"]; ok {
@@ -2170,7 +2233,13 @@ func resourceWorkflowServiceItemActionDefinitionUpdate(c context.Context, d *sch
 
 	if d.HasChange("output_parameters") {
 		v := d.Get("output_parameters")
-		o.SetOutputParameters(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetOutputParameters(x2)
+		}
 	}
 
 	if d.HasChange("periodicity") {
@@ -2211,7 +2280,13 @@ func resourceWorkflowServiceItemActionDefinitionUpdate(c context.Context, d *sch
 			}
 			if v, ok := l["input_parameters"]; ok {
 				{
-					o.SetInputParameters(v)
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						x2 := x1.(map[string]interface{})
+						o.SetInputParameters(x2)
+					}
 				}
 			}
 			if v, ok := l["label"]; ok {
@@ -2281,7 +2356,13 @@ func resourceWorkflowServiceItemActionDefinitionUpdate(c context.Context, d *sch
 			}
 			if v, ok := l["input_parameters"]; ok {
 				{
-					o.SetInputParameters(v)
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						x2 := x1.(map[string]interface{})
+						o.SetInputParameters(x2)
+					}
 				}
 			}
 			if v, ok := l["label"]; ok {
@@ -2395,7 +2476,13 @@ func resourceWorkflowServiceItemActionDefinitionUpdate(c context.Context, d *sch
 			}
 			if v, ok := l["input_parameters"]; ok {
 				{
-					o.SetInputParameters(v)
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						x2 := x1.(map[string]interface{})
+						o.SetInputParameters(x2)
+					}
 				}
 			}
 			if v, ok := l["label"]; ok {
@@ -2499,7 +2586,13 @@ func resourceWorkflowServiceItemActionDefinitionUpdate(c context.Context, d *sch
 			}
 			if v, ok := l["input_parameters"]; ok {
 				{
-					o.SetInputParameters(v)
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						x2 := x1.(map[string]interface{})
+						o.SetInputParameters(x2)
+					}
 				}
 			}
 			if v, ok := l["label"]; ok {
@@ -2542,7 +2635,7 @@ func resourceWorkflowServiceItemActionDefinitionUpdate(c context.Context, d *sch
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating WorkflowServiceItemActionDefinition: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating WorkflowServiceItemActionDefinition: %s", responseErr.Error())
@@ -2554,7 +2647,6 @@ func resourceWorkflowServiceItemActionDefinitionUpdate(c context.Context, d *sch
 
 func resourceWorkflowServiceItemActionDefinitionDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.WorkflowApi.DeleteWorkflowServiceItemActionDefinition(conn.ctx, d.Id())
@@ -2566,7 +2658,7 @@ func resourceWorkflowServiceItemActionDefinitionDelete(c context.Context, d *sch
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting WorkflowServiceItemActionDefinition object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting WorkflowServiceItemActionDefinition object: %s", deleteErr.Error())

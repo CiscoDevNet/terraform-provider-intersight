@@ -89,6 +89,11 @@ func dataSourceSoftwarerepositoryCategoryMapper() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"is_nfs_upgrade_supported": {
+			Description: "Defines whether NFS firmware upgrade is supported with this image type.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"mdf_id": {
 			Description: "Cisco software repository image category identifier.",
 			Type:        schema.TypeString,
@@ -429,6 +434,11 @@ func dataSourceSoftwarerepositoryCategoryMapper() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"is_nfs_upgrade_supported": {
+			Description: "Defines whether NFS firmware upgrade is supported with this image type.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"mdf_id": {
 			Description: "Cisco software repository image category identifier.",
 			Type:        schema.TypeString,
@@ -707,7 +717,6 @@ func dataSourceSoftwarerepositoryCategoryMapper() *schema.Resource {
 
 func dataSourceSoftwarerepositoryCategoryMapperRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.SoftwarerepositoryCategoryMapper{}
@@ -793,6 +802,11 @@ func dataSourceSoftwarerepositoryCategoryMapperRead(c context.Context, d *schema
 	if v, ok := d.GetOk("image_type"); ok {
 		x := (v.(string))
 		o.SetImageType(x)
+	}
+
+	if v, ok := d.GetOkExists("is_nfs_upgrade_supported"); ok {
+		x := (v.(bool))
+		o.SetIsNfsUpgradeSupported(x)
 	}
 
 	if v, ok := d.GetOk("mdf_id"); ok {
@@ -1076,7 +1090,7 @@ func dataSourceSoftwarerepositoryCategoryMapperRead(c context.Context, d *schema
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of SoftwarerepositoryCategoryMapper: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of SoftwarerepositoryCategoryMapper: %s", responseErr.Error())
@@ -1093,7 +1107,7 @@ func dataSourceSoftwarerepositoryCategoryMapperRead(c context.Context, d *schema
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching SoftwarerepositoryCategoryMapper: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching SoftwarerepositoryCategoryMapper: %s", responseErr.Error())
@@ -1115,6 +1129,7 @@ func dataSourceSoftwarerepositoryCategoryMapperRead(c context.Context, d *schema
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["file_type"] = (s.GetFileType())
 				temp["image_type"] = (s.GetImageType())
+				temp["is_nfs_upgrade_supported"] = (s.GetIsNfsUpgradeSupported())
 				temp["mdf_id"] = (s.GetMdfId())
 
 				temp["mod_time"] = (s.GetModTime()).String()

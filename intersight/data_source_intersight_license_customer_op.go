@@ -767,7 +767,6 @@ func dataSourceLicenseCustomerOp() *schema.Resource {
 
 func dataSourceLicenseCustomerOpRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.LicenseCustomerOp{}
@@ -1162,7 +1161,7 @@ func dataSourceLicenseCustomerOpRead(c context.Context, d *schema.ResourceData, 
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of LicenseCustomerOp: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of LicenseCustomerOp: %s", responseErr.Error())
@@ -1179,7 +1178,7 @@ func dataSourceLicenseCustomerOpRead(c context.Context, d *schema.ResourceData, 
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching LicenseCustomerOp: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching LicenseCustomerOp: %s", responseErr.Error())

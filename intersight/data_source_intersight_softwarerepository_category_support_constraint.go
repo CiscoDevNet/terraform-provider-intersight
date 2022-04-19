@@ -743,7 +743,6 @@ func dataSourceSoftwarerepositoryCategorySupportConstraint() *schema.Resource {
 
 func dataSourceSoftwarerepositoryCategorySupportConstraintRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.SoftwarerepositoryCategorySupportConstraint{}
@@ -1141,7 +1140,7 @@ func dataSourceSoftwarerepositoryCategorySupportConstraintRead(c context.Context
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of SoftwarerepositoryCategorySupportConstraint: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of SoftwarerepositoryCategorySupportConstraint: %s", responseErr.Error())
@@ -1158,7 +1157,7 @@ func dataSourceSoftwarerepositoryCategorySupportConstraintRead(c context.Context
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching SoftwarerepositoryCategorySupportConstraint: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching SoftwarerepositoryCategorySupportConstraint: %s", responseErr.Error())

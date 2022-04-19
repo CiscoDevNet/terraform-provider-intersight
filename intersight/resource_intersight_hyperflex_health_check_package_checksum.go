@@ -422,7 +422,6 @@ func resourceHyperflexHealthCheckPackageChecksum() *schema.Resource {
 
 func resourceHyperflexHealthCheckPackageChecksumCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewHyperflexHealthCheckPackageChecksumWithDefaults()
@@ -510,7 +509,7 @@ func resourceHyperflexHealthCheckPackageChecksumCreate(c context.Context, d *sch
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating HyperflexHealthCheckPackageChecksum: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating HyperflexHealthCheckPackageChecksum: %s", responseErr.Error())
@@ -522,7 +521,6 @@ func resourceHyperflexHealthCheckPackageChecksumCreate(c context.Context, d *sch
 
 func resourceHyperflexHealthCheckPackageChecksumRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.HyperflexApi.GetHyperflexHealthCheckPackageChecksumByMoid(conn.ctx, d.Id())
@@ -535,7 +533,7 @@ func resourceHyperflexHealthCheckPackageChecksumRead(c context.Context, d *schem
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching HyperflexHealthCheckPackageChecksum: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching HyperflexHealthCheckPackageChecksum: %s", responseErr.Error())
@@ -628,7 +626,6 @@ func resourceHyperflexHealthCheckPackageChecksumRead(c context.Context, d *schem
 
 func resourceHyperflexHealthCheckPackageChecksumUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.HyperflexHealthCheckPackageChecksum{}
@@ -722,7 +719,7 @@ func resourceHyperflexHealthCheckPackageChecksumUpdate(c context.Context, d *sch
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating HyperflexHealthCheckPackageChecksum: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating HyperflexHealthCheckPackageChecksum: %s", responseErr.Error())
@@ -734,7 +731,6 @@ func resourceHyperflexHealthCheckPackageChecksumUpdate(c context.Context, d *sch
 
 func resourceHyperflexHealthCheckPackageChecksumDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.HyperflexApi.DeleteHyperflexHealthCheckPackageChecksum(conn.ctx, d.Id())
@@ -746,7 +742,7 @@ func resourceHyperflexHealthCheckPackageChecksumDelete(c context.Context, d *sch
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting HyperflexHealthCheckPackageChecksum object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting HyperflexHealthCheckPackageChecksum object: %s", deleteErr.Error())

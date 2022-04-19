@@ -120,6 +120,11 @@ func resourceSoftwarerepositoryCategoryMapperModel() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"is_nfs_upgrade_supported": {
+				Description: "Defines whether NFS firmware upgrade is supported with this image type.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
@@ -434,7 +439,6 @@ func resourceSoftwarerepositoryCategoryMapperModel() *schema.Resource {
 
 func resourceSoftwarerepositoryCategoryMapperModelCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewSoftwarerepositoryCategoryMapperModelWithDefaults()
@@ -463,6 +467,11 @@ func resourceSoftwarerepositoryCategoryMapperModelCreate(c context.Context, d *s
 	if v, ok := d.GetOk("image_type"); ok {
 		x := (v.(string))
 		o.SetImageType(x)
+	}
+
+	if v, ok := d.GetOkExists("is_nfs_upgrade_supported"); ok {
+		x := (v.(bool))
+		o.SetIsNfsUpgradeSupported(x)
 	}
 
 	if v, ok := d.GetOk("moid"); ok {
@@ -540,7 +549,7 @@ func resourceSoftwarerepositoryCategoryMapperModelCreate(c context.Context, d *s
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating SoftwarerepositoryCategoryMapperModel: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating SoftwarerepositoryCategoryMapperModel: %s", responseErr.Error())
@@ -552,7 +561,6 @@ func resourceSoftwarerepositoryCategoryMapperModelCreate(c context.Context, d *s
 
 func resourceSoftwarerepositoryCategoryMapperModelRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.SoftwarerepositoryApi.GetSoftwarerepositoryCategoryMapperModelByMoid(conn.ctx, d.Id())
@@ -565,7 +573,7 @@ func resourceSoftwarerepositoryCategoryMapperModelRead(c context.Context, d *sch
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching SoftwarerepositoryCategoryMapperModel: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching SoftwarerepositoryCategoryMapperModel: %s", responseErr.Error())
@@ -605,6 +613,10 @@ func resourceSoftwarerepositoryCategoryMapperModelRead(c context.Context, d *sch
 
 	if err := d.Set("image_type", (s.GetImageType())); err != nil {
 		return diag.Errorf("error occurred while setting property ImageType in SoftwarerepositoryCategoryMapperModel object: %s", err.Error())
+	}
+
+	if err := d.Set("is_nfs_upgrade_supported", (s.GetIsNfsUpgradeSupported())); err != nil {
+		return diag.Errorf("error occurred while setting property IsNfsUpgradeSupported in SoftwarerepositoryCategoryMapperModel object: %s", err.Error())
 	}
 
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {
@@ -666,7 +678,6 @@ func resourceSoftwarerepositoryCategoryMapperModelRead(c context.Context, d *sch
 
 func resourceSoftwarerepositoryCategoryMapperModelUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.SoftwarerepositoryCategoryMapperModel{}
@@ -699,6 +710,12 @@ func resourceSoftwarerepositoryCategoryMapperModelUpdate(c context.Context, d *s
 		v := d.Get("image_type")
 		x := (v.(string))
 		o.SetImageType(x)
+	}
+
+	if d.HasChange("is_nfs_upgrade_supported") {
+		v := d.Get("is_nfs_upgrade_supported")
+		x := (v.(bool))
+		o.SetIsNfsUpgradeSupported(x)
 	}
 
 	if d.HasChange("moid") {
@@ -778,7 +795,7 @@ func resourceSoftwarerepositoryCategoryMapperModelUpdate(c context.Context, d *s
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating SoftwarerepositoryCategoryMapperModel: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating SoftwarerepositoryCategoryMapperModel: %s", responseErr.Error())
@@ -790,7 +807,6 @@ func resourceSoftwarerepositoryCategoryMapperModelUpdate(c context.Context, d *s
 
 func resourceSoftwarerepositoryCategoryMapperModelDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.SoftwarerepositoryApi.DeleteSoftwarerepositoryCategoryMapperModel(conn.ctx, d.Id())
@@ -802,7 +818,7 @@ func resourceSoftwarerepositoryCategoryMapperModelDelete(c context.Context, d *s
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting SoftwarerepositoryCategoryMapperModel object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting SoftwarerepositoryCategoryMapperModel object: %s", deleteErr.Error())

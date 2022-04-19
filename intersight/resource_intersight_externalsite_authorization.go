@@ -474,7 +474,6 @@ func resourceExternalsiteAuthorization() *schema.Resource {
 
 func resourceExternalsiteAuthorizationCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewExternalsiteAuthorizationWithDefaults()
@@ -552,7 +551,7 @@ func resourceExternalsiteAuthorizationCreate(c context.Context, d *schema.Resour
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating ExternalsiteAuthorization: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating ExternalsiteAuthorization: %s", responseErr.Error())
@@ -564,7 +563,6 @@ func resourceExternalsiteAuthorizationCreate(c context.Context, d *schema.Resour
 
 func resourceExternalsiteAuthorizationRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.ExternalsiteApi.GetExternalsiteAuthorizationByMoid(conn.ctx, d.Id())
@@ -577,7 +575,7 @@ func resourceExternalsiteAuthorizationRead(c context.Context, d *schema.Resource
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching ExternalsiteAuthorization: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching ExternalsiteAuthorization: %s", responseErr.Error())
@@ -666,7 +664,6 @@ func resourceExternalsiteAuthorizationRead(c context.Context, d *schema.Resource
 
 func resourceExternalsiteAuthorizationUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.ExternalsiteAuthorization{}
@@ -748,7 +745,7 @@ func resourceExternalsiteAuthorizationUpdate(c context.Context, d *schema.Resour
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating ExternalsiteAuthorization: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating ExternalsiteAuthorization: %s", responseErr.Error())
@@ -760,7 +757,6 @@ func resourceExternalsiteAuthorizationUpdate(c context.Context, d *schema.Resour
 
 func resourceExternalsiteAuthorizationDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	var warning = diag.Diagnostic{Severity: diag.Warning, Summary: "ExternalsiteAuthorization does not allow delete functionality"}
 	de = append(de, warning)

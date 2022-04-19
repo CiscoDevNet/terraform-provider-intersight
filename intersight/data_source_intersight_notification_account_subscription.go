@@ -156,7 +156,7 @@ func dataSourceNotificationAccountSubscription() *schema.Resource {
 			Optional:    true,
 		},
 		"enabled": {
-			Description: "Subscription can be switched on/off with out necessity to change the subscription\nsettings: notification methods, conditions etc.\nEx.: Subscription MO can be configured, but switched off.",
+			Description: "Subscription can be switched on/off without necessity to change the subscription\nsettings: notification methods, conditions, etc.\nEx.: Subscription MO can be configured, but switched off.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
@@ -281,6 +281,16 @@ func dataSourceNotificationAccountSubscription() *schema.Resource {
 					},
 				},
 			},
+		},
+		"type": {
+			Description: "The chosen subscription type imposes it is own validation rules.\nWhen 'email' type is chosen, actions array can contain only one entry and it is entry should be of can\nbe only notification.SendEmail; conditions can contain only notification.AlarmMoCondition and condition\ntypes should be unique.\nWhen the 'webhook' type is chosen, the actions array can contain only one entry and it is entry should be of can\nbe only notification.TriggerWebhook; conditions can contain up to a limited amount of entries and all of them\nshould be of type notification.MoCondition.\n* `email` - Email type requires usage of notification.SendEmail complex types for actionsand notification.AlarmMoCondition complex types for conditions.\n* `webhook` - Webhook type requires usage of notification.TriggerWebhook complex types for actionsand notification.MoCondition complex types for conditions.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"verify": {
+			Description: "Used to verify the actions of the Subscription MO. For a 'webhook' type Ping event is sent to verify\nthat the webhook server is accessible. For an 'email' type there will be a verification email sent.\n* `none` - No actions will be verified. Default value.\n* `all` - All actions will be re-verified. The previous state of the verification will be preserved.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
@@ -532,7 +542,7 @@ func dataSourceNotificationAccountSubscription() *schema.Resource {
 			Optional:    true,
 		},
 		"enabled": {
-			Description: "Subscription can be switched on/off with out necessity to change the subscription\nsettings: notification methods, conditions etc.\nEx.: Subscription MO can be configured, but switched off.",
+			Description: "Subscription can be switched on/off without necessity to change the subscription\nsettings: notification methods, conditions, etc.\nEx.: Subscription MO can be configured, but switched off.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
@@ -658,6 +668,16 @@ func dataSourceNotificationAccountSubscription() *schema.Resource {
 				},
 			},
 		},
+		"type": {
+			Description: "The chosen subscription type imposes it is own validation rules.\nWhen 'email' type is chosen, actions array can contain only one entry and it is entry should be of can\nbe only notification.SendEmail; conditions can contain only notification.AlarmMoCondition and condition\ntypes should be unique.\nWhen the 'webhook' type is chosen, the actions array can contain only one entry and it is entry should be of can\nbe only notification.TriggerWebhook; conditions can contain up to a limited amount of entries and all of them\nshould be of type notification.MoCondition.\n* `email` - Email type requires usage of notification.SendEmail complex types for actionsand notification.AlarmMoCondition complex types for conditions.\n* `webhook` - Webhook type requires usage of notification.TriggerWebhook complex types for actionsand notification.MoCondition complex types for conditions.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"verify": {
+			Description: "Used to verify the actions of the Subscription MO. For a 'webhook' type Ping event is sent to verify\nthat the webhook server is accessible. For an 'email' type there will be a verification email sent.\n* `none` - No actions will be verified. Default value.\n* `all` - All actions will be re-verified. The previous state of the verification will be preserved.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
 			Type:        schema.TypeList,
@@ -779,7 +799,6 @@ func dataSourceNotificationAccountSubscription() *schema.Resource {
 
 func dataSourceNotificationAccountSubscriptionRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.NotificationAccountSubscription{}
@@ -1108,6 +1127,16 @@ func dataSourceNotificationAccountSubscriptionRead(c context.Context, d *schema.
 		o.SetTags(x)
 	}
 
+	if v, ok := d.GetOk("type"); ok {
+		x := (v.(string))
+		o.SetType(x)
+	}
+
+	if v, ok := d.GetOk("verify"); ok {
+		x := (v.(string))
+		o.SetVerify(x)
+	}
+
 	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
@@ -1190,7 +1219,7 @@ func dataSourceNotificationAccountSubscriptionRead(c context.Context, d *schema.
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of NotificationAccountSubscription: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of NotificationAccountSubscription: %s", responseErr.Error())
@@ -1207,7 +1236,7 @@ func dataSourceNotificationAccountSubscriptionRead(c context.Context, d *schema.
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching NotificationAccountSubscription: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching NotificationAccountSubscription: %s", responseErr.Error())
@@ -1246,6 +1275,8 @@ func dataSourceNotificationAccountSubscriptionRead(c context.Context, d *schema.
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["type"] = (s.GetType())
+				temp["verify"] = (s.GetVerify())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				notificationAccountSubscriptionResults[j] = temp

@@ -594,7 +594,6 @@ func resourceNtpPolicy() *schema.Resource {
 
 func resourceNtpPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewNtpPolicyWithDefaults()
@@ -872,7 +871,7 @@ func resourceNtpPolicyCreate(c context.Context, d *schema.ResourceData, meta int
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating NtpPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating NtpPolicy: %s", responseErr.Error())
@@ -883,7 +882,6 @@ func resourceNtpPolicyCreate(c context.Context, d *schema.ResourceData, meta int
 }
 func detachNtpPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.NtpPolicy{}
@@ -896,7 +894,7 @@ func detachNtpPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diag
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while detaching profile/profiles: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while detaching profile/profiles: %s", responseErr.Error())
@@ -906,7 +904,6 @@ func detachNtpPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diag
 
 func resourceNtpPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.NtpApi.GetNtpPolicyByMoid(conn.ctx, d.Id())
@@ -919,7 +916,7 @@ func resourceNtpPolicyRead(c context.Context, d *schema.ResourceData, meta inter
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching NtpPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching NtpPolicy: %s", responseErr.Error())
@@ -1028,7 +1025,6 @@ func resourceNtpPolicyRead(c context.Context, d *schema.ResourceData, meta inter
 
 func resourceNtpPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.NtpPolicy{}
@@ -1310,7 +1306,7 @@ func resourceNtpPolicyUpdate(c context.Context, d *schema.ResourceData, meta int
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating NtpPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating NtpPolicy: %s", responseErr.Error())
@@ -1322,7 +1318,6 @@ func resourceNtpPolicyUpdate(c context.Context, d *schema.ResourceData, meta int
 
 func resourceNtpPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	if p, ok := d.GetOk("profiles"); ok {
@@ -1342,7 +1337,7 @@ func resourceNtpPolicyDelete(c context.Context, d *schema.ResourceData, meta int
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting NtpPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting NtpPolicy object: %s", deleteErr.Error())

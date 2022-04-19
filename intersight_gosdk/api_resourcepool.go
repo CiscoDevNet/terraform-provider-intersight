@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,23 +13,18 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // ResourcepoolApiService ResourcepoolApi service
 type ResourcepoolApiService service
 
 type ApiCreateResourcepoolPoolRequest struct {
-	ctx              _context.Context
+	ctx              context.Context
 	ApiService       *ResourcepoolApiService
 	resourcepoolPool *ResourcepoolPool
 	ifMatch          *string
@@ -54,17 +49,17 @@ func (r ApiCreateResourcepoolPoolRequest) IfNoneMatch(ifNoneMatch string) ApiCre
 	return r
 }
 
-func (r ApiCreateResourcepoolPoolRequest) Execute() (ResourcepoolPool, *_nethttp.Response, error) {
+func (r ApiCreateResourcepoolPoolRequest) Execute() (*ResourcepoolPool, *http.Response, error) {
 	return r.ApiService.CreateResourcepoolPoolExecute(r)
 }
 
 /*
 CreateResourcepoolPool Create a 'resourcepool.Pool' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateResourcepoolPoolRequest
 */
-func (a *ResourcepoolApiService) CreateResourcepoolPool(ctx _context.Context) ApiCreateResourcepoolPoolRequest {
+func (a *ResourcepoolApiService) CreateResourcepoolPool(ctx context.Context) ApiCreateResourcepoolPoolRequest {
 	return ApiCreateResourcepoolPoolRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -73,26 +68,24 @@ func (a *ResourcepoolApiService) CreateResourcepoolPool(ctx _context.Context) Ap
 
 // Execute executes the request
 //  @return ResourcepoolPool
-func (a *ResourcepoolApiService) CreateResourcepoolPoolExecute(r ApiCreateResourcepoolPoolRequest) (ResourcepoolPool, *_nethttp.Response, error) {
+func (a *ResourcepoolApiService) CreateResourcepoolPoolExecute(r ApiCreateResourcepoolPoolRequest) (*ResourcepoolPool, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ResourcepoolPool
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ResourcepoolPool
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcepoolApiService.CreateResourcepoolPool")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resourcepool/Pools"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.resourcepoolPool == nil {
 		return localVarReturnValue, nil, reportError("resourcepoolPool is required and must be specified")
 	}
@@ -122,7 +115,7 @@ func (a *ResourcepoolApiService) CreateResourcepoolPoolExecute(r ApiCreateResour
 	}
 	// body params
 	localVarPostBody = r.resourcepoolPool
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -132,15 +125,15 @@ func (a *ResourcepoolApiService) CreateResourcepoolPoolExecute(r ApiCreateResour
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -196,7 +189,7 @@ func (a *ResourcepoolApiService) CreateResourcepoolPoolExecute(r ApiCreateResour
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -207,23 +200,23 @@ func (a *ResourcepoolApiService) CreateResourcepoolPoolExecute(r ApiCreateResour
 }
 
 type ApiDeleteResourcepoolLeaseRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ResourcepoolApiService
 	moid       string
 }
 
-func (r ApiDeleteResourcepoolLeaseRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteResourcepoolLeaseRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteResourcepoolLeaseExecute(r)
 }
 
 /*
 DeleteResourcepoolLease Delete a 'resourcepool.Lease' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteResourcepoolLeaseRequest
 */
-func (a *ResourcepoolApiService) DeleteResourcepoolLease(ctx _context.Context, moid string) ApiDeleteResourcepoolLeaseRequest {
+func (a *ResourcepoolApiService) DeleteResourcepoolLease(ctx context.Context, moid string) ApiDeleteResourcepoolLeaseRequest {
 	return ApiDeleteResourcepoolLeaseRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -232,26 +225,24 @@ func (a *ResourcepoolApiService) DeleteResourcepoolLease(ctx _context.Context, m
 }
 
 // Execute executes the request
-func (a *ResourcepoolApiService) DeleteResourcepoolLeaseExecute(r ApiDeleteResourcepoolLeaseRequest) (*_nethttp.Response, error) {
+func (a *ResourcepoolApiService) DeleteResourcepoolLeaseExecute(r ApiDeleteResourcepoolLeaseRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcepoolApiService.DeleteResourcepoolLease")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resourcepool/Leases/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -270,7 +261,7 @@ func (a *ResourcepoolApiService) DeleteResourcepoolLeaseExecute(r ApiDeleteResou
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -280,15 +271,15 @@ func (a *ResourcepoolApiService) DeleteResourcepoolLeaseExecute(r ApiDeleteResou
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -346,23 +337,23 @@ func (a *ResourcepoolApiService) DeleteResourcepoolLeaseExecute(r ApiDeleteResou
 }
 
 type ApiDeleteResourcepoolPoolRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ResourcepoolApiService
 	moid       string
 }
 
-func (r ApiDeleteResourcepoolPoolRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteResourcepoolPoolRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteResourcepoolPoolExecute(r)
 }
 
 /*
 DeleteResourcepoolPool Delete a 'resourcepool.Pool' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteResourcepoolPoolRequest
 */
-func (a *ResourcepoolApiService) DeleteResourcepoolPool(ctx _context.Context, moid string) ApiDeleteResourcepoolPoolRequest {
+func (a *ResourcepoolApiService) DeleteResourcepoolPool(ctx context.Context, moid string) ApiDeleteResourcepoolPoolRequest {
 	return ApiDeleteResourcepoolPoolRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -371,26 +362,24 @@ func (a *ResourcepoolApiService) DeleteResourcepoolPool(ctx _context.Context, mo
 }
 
 // Execute executes the request
-func (a *ResourcepoolApiService) DeleteResourcepoolPoolExecute(r ApiDeleteResourcepoolPoolRequest) (*_nethttp.Response, error) {
+func (a *ResourcepoolApiService) DeleteResourcepoolPoolExecute(r ApiDeleteResourcepoolPoolRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcepoolApiService.DeleteResourcepoolPool")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resourcepool/Pools/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -409,7 +398,7 @@ func (a *ResourcepoolApiService) DeleteResourcepoolPoolExecute(r ApiDeleteResour
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -419,15 +408,15 @@ func (a *ResourcepoolApiService) DeleteResourcepoolPoolExecute(r ApiDeleteResour
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -485,23 +474,23 @@ func (a *ResourcepoolApiService) DeleteResourcepoolPoolExecute(r ApiDeleteResour
 }
 
 type ApiGetResourcepoolLeaseByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ResourcepoolApiService
 	moid       string
 }
 
-func (r ApiGetResourcepoolLeaseByMoidRequest) Execute() (ResourcepoolLease, *_nethttp.Response, error) {
+func (r ApiGetResourcepoolLeaseByMoidRequest) Execute() (*ResourcepoolLease, *http.Response, error) {
 	return r.ApiService.GetResourcepoolLeaseByMoidExecute(r)
 }
 
 /*
 GetResourcepoolLeaseByMoid Read a 'resourcepool.Lease' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetResourcepoolLeaseByMoidRequest
 */
-func (a *ResourcepoolApiService) GetResourcepoolLeaseByMoid(ctx _context.Context, moid string) ApiGetResourcepoolLeaseByMoidRequest {
+func (a *ResourcepoolApiService) GetResourcepoolLeaseByMoid(ctx context.Context, moid string) ApiGetResourcepoolLeaseByMoidRequest {
 	return ApiGetResourcepoolLeaseByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -511,27 +500,25 @@ func (a *ResourcepoolApiService) GetResourcepoolLeaseByMoid(ctx _context.Context
 
 // Execute executes the request
 //  @return ResourcepoolLease
-func (a *ResourcepoolApiService) GetResourcepoolLeaseByMoidExecute(r ApiGetResourcepoolLeaseByMoidRequest) (ResourcepoolLease, *_nethttp.Response, error) {
+func (a *ResourcepoolApiService) GetResourcepoolLeaseByMoidExecute(r ApiGetResourcepoolLeaseByMoidRequest) (*ResourcepoolLease, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ResourcepoolLease
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ResourcepoolLease
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcepoolApiService.GetResourcepoolLeaseByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resourcepool/Leases/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -550,7 +537,7 @@ func (a *ResourcepoolApiService) GetResourcepoolLeaseByMoidExecute(r ApiGetResou
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -560,15 +547,15 @@ func (a *ResourcepoolApiService) GetResourcepoolLeaseByMoidExecute(r ApiGetResou
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -624,7 +611,7 @@ func (a *ResourcepoolApiService) GetResourcepoolLeaseByMoidExecute(r ApiGetResou
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -635,7 +622,7 @@ func (a *ResourcepoolApiService) GetResourcepoolLeaseByMoidExecute(r ApiGetResou
 }
 
 type ApiGetResourcepoolLeaseListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *ResourcepoolApiService
 	filter      *string
 	orderby     *string
@@ -716,17 +703,17 @@ func (r ApiGetResourcepoolLeaseListRequest) Tags(tags string) ApiGetResourcepool
 	return r
 }
 
-func (r ApiGetResourcepoolLeaseListRequest) Execute() (ResourcepoolLeaseResponse, *_nethttp.Response, error) {
+func (r ApiGetResourcepoolLeaseListRequest) Execute() (*ResourcepoolLeaseResponse, *http.Response, error) {
 	return r.ApiService.GetResourcepoolLeaseListExecute(r)
 }
 
 /*
 GetResourcepoolLeaseList Read a 'resourcepool.Lease' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetResourcepoolLeaseListRequest
 */
-func (a *ResourcepoolApiService) GetResourcepoolLeaseList(ctx _context.Context) ApiGetResourcepoolLeaseListRequest {
+func (a *ResourcepoolApiService) GetResourcepoolLeaseList(ctx context.Context) ApiGetResourcepoolLeaseListRequest {
 	return ApiGetResourcepoolLeaseListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -735,26 +722,24 @@ func (a *ResourcepoolApiService) GetResourcepoolLeaseList(ctx _context.Context) 
 
 // Execute executes the request
 //  @return ResourcepoolLeaseResponse
-func (a *ResourcepoolApiService) GetResourcepoolLeaseListExecute(r ApiGetResourcepoolLeaseListRequest) (ResourcepoolLeaseResponse, *_nethttp.Response, error) {
+func (a *ResourcepoolApiService) GetResourcepoolLeaseListExecute(r ApiGetResourcepoolLeaseListRequest) (*ResourcepoolLeaseResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ResourcepoolLeaseResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ResourcepoolLeaseResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcepoolApiService.GetResourcepoolLeaseList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resourcepool/Leases"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -806,7 +791,7 @@ func (a *ResourcepoolApiService) GetResourcepoolLeaseListExecute(r ApiGetResourc
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -816,15 +801,15 @@ func (a *ResourcepoolApiService) GetResourcepoolLeaseListExecute(r ApiGetResourc
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -880,7 +865,7 @@ func (a *ResourcepoolApiService) GetResourcepoolLeaseListExecute(r ApiGetResourc
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -891,23 +876,23 @@ func (a *ResourcepoolApiService) GetResourcepoolLeaseListExecute(r ApiGetResourc
 }
 
 type ApiGetResourcepoolLeaseResourceByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ResourcepoolApiService
 	moid       string
 }
 
-func (r ApiGetResourcepoolLeaseResourceByMoidRequest) Execute() (ResourcepoolLeaseResource, *_nethttp.Response, error) {
+func (r ApiGetResourcepoolLeaseResourceByMoidRequest) Execute() (*ResourcepoolLeaseResource, *http.Response, error) {
 	return r.ApiService.GetResourcepoolLeaseResourceByMoidExecute(r)
 }
 
 /*
 GetResourcepoolLeaseResourceByMoid Read a 'resourcepool.LeaseResource' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetResourcepoolLeaseResourceByMoidRequest
 */
-func (a *ResourcepoolApiService) GetResourcepoolLeaseResourceByMoid(ctx _context.Context, moid string) ApiGetResourcepoolLeaseResourceByMoidRequest {
+func (a *ResourcepoolApiService) GetResourcepoolLeaseResourceByMoid(ctx context.Context, moid string) ApiGetResourcepoolLeaseResourceByMoidRequest {
 	return ApiGetResourcepoolLeaseResourceByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -917,27 +902,25 @@ func (a *ResourcepoolApiService) GetResourcepoolLeaseResourceByMoid(ctx _context
 
 // Execute executes the request
 //  @return ResourcepoolLeaseResource
-func (a *ResourcepoolApiService) GetResourcepoolLeaseResourceByMoidExecute(r ApiGetResourcepoolLeaseResourceByMoidRequest) (ResourcepoolLeaseResource, *_nethttp.Response, error) {
+func (a *ResourcepoolApiService) GetResourcepoolLeaseResourceByMoidExecute(r ApiGetResourcepoolLeaseResourceByMoidRequest) (*ResourcepoolLeaseResource, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ResourcepoolLeaseResource
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ResourcepoolLeaseResource
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcepoolApiService.GetResourcepoolLeaseResourceByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resourcepool/LeaseResources/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -956,7 +939,7 @@ func (a *ResourcepoolApiService) GetResourcepoolLeaseResourceByMoidExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -966,15 +949,15 @@ func (a *ResourcepoolApiService) GetResourcepoolLeaseResourceByMoidExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1030,7 +1013,7 @@ func (a *ResourcepoolApiService) GetResourcepoolLeaseResourceByMoidExecute(r Api
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1041,7 +1024,7 @@ func (a *ResourcepoolApiService) GetResourcepoolLeaseResourceByMoidExecute(r Api
 }
 
 type ApiGetResourcepoolLeaseResourceListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *ResourcepoolApiService
 	filter      *string
 	orderby     *string
@@ -1122,17 +1105,17 @@ func (r ApiGetResourcepoolLeaseResourceListRequest) Tags(tags string) ApiGetReso
 	return r
 }
 
-func (r ApiGetResourcepoolLeaseResourceListRequest) Execute() (ResourcepoolLeaseResourceResponse, *_nethttp.Response, error) {
+func (r ApiGetResourcepoolLeaseResourceListRequest) Execute() (*ResourcepoolLeaseResourceResponse, *http.Response, error) {
 	return r.ApiService.GetResourcepoolLeaseResourceListExecute(r)
 }
 
 /*
 GetResourcepoolLeaseResourceList Read a 'resourcepool.LeaseResource' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetResourcepoolLeaseResourceListRequest
 */
-func (a *ResourcepoolApiService) GetResourcepoolLeaseResourceList(ctx _context.Context) ApiGetResourcepoolLeaseResourceListRequest {
+func (a *ResourcepoolApiService) GetResourcepoolLeaseResourceList(ctx context.Context) ApiGetResourcepoolLeaseResourceListRequest {
 	return ApiGetResourcepoolLeaseResourceListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1141,26 +1124,24 @@ func (a *ResourcepoolApiService) GetResourcepoolLeaseResourceList(ctx _context.C
 
 // Execute executes the request
 //  @return ResourcepoolLeaseResourceResponse
-func (a *ResourcepoolApiService) GetResourcepoolLeaseResourceListExecute(r ApiGetResourcepoolLeaseResourceListRequest) (ResourcepoolLeaseResourceResponse, *_nethttp.Response, error) {
+func (a *ResourcepoolApiService) GetResourcepoolLeaseResourceListExecute(r ApiGetResourcepoolLeaseResourceListRequest) (*ResourcepoolLeaseResourceResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ResourcepoolLeaseResourceResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ResourcepoolLeaseResourceResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcepoolApiService.GetResourcepoolLeaseResourceList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resourcepool/LeaseResources"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1212,7 +1193,7 @@ func (a *ResourcepoolApiService) GetResourcepoolLeaseResourceListExecute(r ApiGe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1222,15 +1203,15 @@ func (a *ResourcepoolApiService) GetResourcepoolLeaseResourceListExecute(r ApiGe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1286,7 +1267,7 @@ func (a *ResourcepoolApiService) GetResourcepoolLeaseResourceListExecute(r ApiGe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1297,23 +1278,23 @@ func (a *ResourcepoolApiService) GetResourcepoolLeaseResourceListExecute(r ApiGe
 }
 
 type ApiGetResourcepoolPoolByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ResourcepoolApiService
 	moid       string
 }
 
-func (r ApiGetResourcepoolPoolByMoidRequest) Execute() (ResourcepoolPool, *_nethttp.Response, error) {
+func (r ApiGetResourcepoolPoolByMoidRequest) Execute() (*ResourcepoolPool, *http.Response, error) {
 	return r.ApiService.GetResourcepoolPoolByMoidExecute(r)
 }
 
 /*
 GetResourcepoolPoolByMoid Read a 'resourcepool.Pool' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetResourcepoolPoolByMoidRequest
 */
-func (a *ResourcepoolApiService) GetResourcepoolPoolByMoid(ctx _context.Context, moid string) ApiGetResourcepoolPoolByMoidRequest {
+func (a *ResourcepoolApiService) GetResourcepoolPoolByMoid(ctx context.Context, moid string) ApiGetResourcepoolPoolByMoidRequest {
 	return ApiGetResourcepoolPoolByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1323,27 +1304,25 @@ func (a *ResourcepoolApiService) GetResourcepoolPoolByMoid(ctx _context.Context,
 
 // Execute executes the request
 //  @return ResourcepoolPool
-func (a *ResourcepoolApiService) GetResourcepoolPoolByMoidExecute(r ApiGetResourcepoolPoolByMoidRequest) (ResourcepoolPool, *_nethttp.Response, error) {
+func (a *ResourcepoolApiService) GetResourcepoolPoolByMoidExecute(r ApiGetResourcepoolPoolByMoidRequest) (*ResourcepoolPool, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ResourcepoolPool
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ResourcepoolPool
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcepoolApiService.GetResourcepoolPoolByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resourcepool/Pools/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1362,7 +1341,7 @@ func (a *ResourcepoolApiService) GetResourcepoolPoolByMoidExecute(r ApiGetResour
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1372,15 +1351,15 @@ func (a *ResourcepoolApiService) GetResourcepoolPoolByMoidExecute(r ApiGetResour
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1436,7 +1415,7 @@ func (a *ResourcepoolApiService) GetResourcepoolPoolByMoidExecute(r ApiGetResour
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1447,7 +1426,7 @@ func (a *ResourcepoolApiService) GetResourcepoolPoolByMoidExecute(r ApiGetResour
 }
 
 type ApiGetResourcepoolPoolListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *ResourcepoolApiService
 	filter      *string
 	orderby     *string
@@ -1528,17 +1507,17 @@ func (r ApiGetResourcepoolPoolListRequest) Tags(tags string) ApiGetResourcepoolP
 	return r
 }
 
-func (r ApiGetResourcepoolPoolListRequest) Execute() (ResourcepoolPoolResponse, *_nethttp.Response, error) {
+func (r ApiGetResourcepoolPoolListRequest) Execute() (*ResourcepoolPoolResponse, *http.Response, error) {
 	return r.ApiService.GetResourcepoolPoolListExecute(r)
 }
 
 /*
 GetResourcepoolPoolList Read a 'resourcepool.Pool' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetResourcepoolPoolListRequest
 */
-func (a *ResourcepoolApiService) GetResourcepoolPoolList(ctx _context.Context) ApiGetResourcepoolPoolListRequest {
+func (a *ResourcepoolApiService) GetResourcepoolPoolList(ctx context.Context) ApiGetResourcepoolPoolListRequest {
 	return ApiGetResourcepoolPoolListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1547,26 +1526,24 @@ func (a *ResourcepoolApiService) GetResourcepoolPoolList(ctx _context.Context) A
 
 // Execute executes the request
 //  @return ResourcepoolPoolResponse
-func (a *ResourcepoolApiService) GetResourcepoolPoolListExecute(r ApiGetResourcepoolPoolListRequest) (ResourcepoolPoolResponse, *_nethttp.Response, error) {
+func (a *ResourcepoolApiService) GetResourcepoolPoolListExecute(r ApiGetResourcepoolPoolListRequest) (*ResourcepoolPoolResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ResourcepoolPoolResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ResourcepoolPoolResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcepoolApiService.GetResourcepoolPoolList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resourcepool/Pools"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1618,7 +1595,7 @@ func (a *ResourcepoolApiService) GetResourcepoolPoolListExecute(r ApiGetResource
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1628,15 +1605,15 @@ func (a *ResourcepoolApiService) GetResourcepoolPoolListExecute(r ApiGetResource
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1692,7 +1669,7 @@ func (a *ResourcepoolApiService) GetResourcepoolPoolListExecute(r ApiGetResource
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1703,23 +1680,23 @@ func (a *ResourcepoolApiService) GetResourcepoolPoolListExecute(r ApiGetResource
 }
 
 type ApiGetResourcepoolPoolMemberByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ResourcepoolApiService
 	moid       string
 }
 
-func (r ApiGetResourcepoolPoolMemberByMoidRequest) Execute() (ResourcepoolPoolMember, *_nethttp.Response, error) {
+func (r ApiGetResourcepoolPoolMemberByMoidRequest) Execute() (*ResourcepoolPoolMember, *http.Response, error) {
 	return r.ApiService.GetResourcepoolPoolMemberByMoidExecute(r)
 }
 
 /*
 GetResourcepoolPoolMemberByMoid Read a 'resourcepool.PoolMember' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetResourcepoolPoolMemberByMoidRequest
 */
-func (a *ResourcepoolApiService) GetResourcepoolPoolMemberByMoid(ctx _context.Context, moid string) ApiGetResourcepoolPoolMemberByMoidRequest {
+func (a *ResourcepoolApiService) GetResourcepoolPoolMemberByMoid(ctx context.Context, moid string) ApiGetResourcepoolPoolMemberByMoidRequest {
 	return ApiGetResourcepoolPoolMemberByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1729,27 +1706,25 @@ func (a *ResourcepoolApiService) GetResourcepoolPoolMemberByMoid(ctx _context.Co
 
 // Execute executes the request
 //  @return ResourcepoolPoolMember
-func (a *ResourcepoolApiService) GetResourcepoolPoolMemberByMoidExecute(r ApiGetResourcepoolPoolMemberByMoidRequest) (ResourcepoolPoolMember, *_nethttp.Response, error) {
+func (a *ResourcepoolApiService) GetResourcepoolPoolMemberByMoidExecute(r ApiGetResourcepoolPoolMemberByMoidRequest) (*ResourcepoolPoolMember, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ResourcepoolPoolMember
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ResourcepoolPoolMember
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcepoolApiService.GetResourcepoolPoolMemberByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resourcepool/PoolMembers/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1768,7 +1743,7 @@ func (a *ResourcepoolApiService) GetResourcepoolPoolMemberByMoidExecute(r ApiGet
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1778,15 +1753,15 @@ func (a *ResourcepoolApiService) GetResourcepoolPoolMemberByMoidExecute(r ApiGet
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1842,7 +1817,7 @@ func (a *ResourcepoolApiService) GetResourcepoolPoolMemberByMoidExecute(r ApiGet
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1853,7 +1828,7 @@ func (a *ResourcepoolApiService) GetResourcepoolPoolMemberByMoidExecute(r ApiGet
 }
 
 type ApiGetResourcepoolPoolMemberListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *ResourcepoolApiService
 	filter      *string
 	orderby     *string
@@ -1934,17 +1909,17 @@ func (r ApiGetResourcepoolPoolMemberListRequest) Tags(tags string) ApiGetResourc
 	return r
 }
 
-func (r ApiGetResourcepoolPoolMemberListRequest) Execute() (ResourcepoolPoolMemberResponse, *_nethttp.Response, error) {
+func (r ApiGetResourcepoolPoolMemberListRequest) Execute() (*ResourcepoolPoolMemberResponse, *http.Response, error) {
 	return r.ApiService.GetResourcepoolPoolMemberListExecute(r)
 }
 
 /*
 GetResourcepoolPoolMemberList Read a 'resourcepool.PoolMember' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetResourcepoolPoolMemberListRequest
 */
-func (a *ResourcepoolApiService) GetResourcepoolPoolMemberList(ctx _context.Context) ApiGetResourcepoolPoolMemberListRequest {
+func (a *ResourcepoolApiService) GetResourcepoolPoolMemberList(ctx context.Context) ApiGetResourcepoolPoolMemberListRequest {
 	return ApiGetResourcepoolPoolMemberListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1953,26 +1928,24 @@ func (a *ResourcepoolApiService) GetResourcepoolPoolMemberList(ctx _context.Cont
 
 // Execute executes the request
 //  @return ResourcepoolPoolMemberResponse
-func (a *ResourcepoolApiService) GetResourcepoolPoolMemberListExecute(r ApiGetResourcepoolPoolMemberListRequest) (ResourcepoolPoolMemberResponse, *_nethttp.Response, error) {
+func (a *ResourcepoolApiService) GetResourcepoolPoolMemberListExecute(r ApiGetResourcepoolPoolMemberListRequest) (*ResourcepoolPoolMemberResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ResourcepoolPoolMemberResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ResourcepoolPoolMemberResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcepoolApiService.GetResourcepoolPoolMemberList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resourcepool/PoolMembers"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -2024,7 +1997,7 @@ func (a *ResourcepoolApiService) GetResourcepoolPoolMemberListExecute(r ApiGetRe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2034,15 +2007,15 @@ func (a *ResourcepoolApiService) GetResourcepoolPoolMemberListExecute(r ApiGetRe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2098,7 +2071,7 @@ func (a *ResourcepoolApiService) GetResourcepoolPoolMemberListExecute(r ApiGetRe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2109,23 +2082,23 @@ func (a *ResourcepoolApiService) GetResourcepoolPoolMemberListExecute(r ApiGetRe
 }
 
 type ApiGetResourcepoolUniverseByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ResourcepoolApiService
 	moid       string
 }
 
-func (r ApiGetResourcepoolUniverseByMoidRequest) Execute() (ResourcepoolUniverse, *_nethttp.Response, error) {
+func (r ApiGetResourcepoolUniverseByMoidRequest) Execute() (*ResourcepoolUniverse, *http.Response, error) {
 	return r.ApiService.GetResourcepoolUniverseByMoidExecute(r)
 }
 
 /*
 GetResourcepoolUniverseByMoid Read a 'resourcepool.Universe' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetResourcepoolUniverseByMoidRequest
 */
-func (a *ResourcepoolApiService) GetResourcepoolUniverseByMoid(ctx _context.Context, moid string) ApiGetResourcepoolUniverseByMoidRequest {
+func (a *ResourcepoolApiService) GetResourcepoolUniverseByMoid(ctx context.Context, moid string) ApiGetResourcepoolUniverseByMoidRequest {
 	return ApiGetResourcepoolUniverseByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2135,27 +2108,25 @@ func (a *ResourcepoolApiService) GetResourcepoolUniverseByMoid(ctx _context.Cont
 
 // Execute executes the request
 //  @return ResourcepoolUniverse
-func (a *ResourcepoolApiService) GetResourcepoolUniverseByMoidExecute(r ApiGetResourcepoolUniverseByMoidRequest) (ResourcepoolUniverse, *_nethttp.Response, error) {
+func (a *ResourcepoolApiService) GetResourcepoolUniverseByMoidExecute(r ApiGetResourcepoolUniverseByMoidRequest) (*ResourcepoolUniverse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ResourcepoolUniverse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ResourcepoolUniverse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcepoolApiService.GetResourcepoolUniverseByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resourcepool/Universes/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2174,7 +2145,7 @@ func (a *ResourcepoolApiService) GetResourcepoolUniverseByMoidExecute(r ApiGetRe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2184,15 +2155,15 @@ func (a *ResourcepoolApiService) GetResourcepoolUniverseByMoidExecute(r ApiGetRe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2248,7 +2219,7 @@ func (a *ResourcepoolApiService) GetResourcepoolUniverseByMoidExecute(r ApiGetRe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2259,7 +2230,7 @@ func (a *ResourcepoolApiService) GetResourcepoolUniverseByMoidExecute(r ApiGetRe
 }
 
 type ApiGetResourcepoolUniverseListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *ResourcepoolApiService
 	filter      *string
 	orderby     *string
@@ -2340,17 +2311,17 @@ func (r ApiGetResourcepoolUniverseListRequest) Tags(tags string) ApiGetResourcep
 	return r
 }
 
-func (r ApiGetResourcepoolUniverseListRequest) Execute() (ResourcepoolUniverseResponse, *_nethttp.Response, error) {
+func (r ApiGetResourcepoolUniverseListRequest) Execute() (*ResourcepoolUniverseResponse, *http.Response, error) {
 	return r.ApiService.GetResourcepoolUniverseListExecute(r)
 }
 
 /*
 GetResourcepoolUniverseList Read a 'resourcepool.Universe' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetResourcepoolUniverseListRequest
 */
-func (a *ResourcepoolApiService) GetResourcepoolUniverseList(ctx _context.Context) ApiGetResourcepoolUniverseListRequest {
+func (a *ResourcepoolApiService) GetResourcepoolUniverseList(ctx context.Context) ApiGetResourcepoolUniverseListRequest {
 	return ApiGetResourcepoolUniverseListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2359,26 +2330,24 @@ func (a *ResourcepoolApiService) GetResourcepoolUniverseList(ctx _context.Contex
 
 // Execute executes the request
 //  @return ResourcepoolUniverseResponse
-func (a *ResourcepoolApiService) GetResourcepoolUniverseListExecute(r ApiGetResourcepoolUniverseListRequest) (ResourcepoolUniverseResponse, *_nethttp.Response, error) {
+func (a *ResourcepoolApiService) GetResourcepoolUniverseListExecute(r ApiGetResourcepoolUniverseListRequest) (*ResourcepoolUniverseResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ResourcepoolUniverseResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ResourcepoolUniverseResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcepoolApiService.GetResourcepoolUniverseList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resourcepool/Universes"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -2430,7 +2399,7 @@ func (a *ResourcepoolApiService) GetResourcepoolUniverseListExecute(r ApiGetReso
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2440,15 +2409,15 @@ func (a *ResourcepoolApiService) GetResourcepoolUniverseListExecute(r ApiGetReso
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2504,7 +2473,7 @@ func (a *ResourcepoolApiService) GetResourcepoolUniverseListExecute(r ApiGetReso
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2515,7 +2484,7 @@ func (a *ResourcepoolApiService) GetResourcepoolUniverseListExecute(r ApiGetReso
 }
 
 type ApiPatchResourcepoolPoolRequest struct {
-	ctx              _context.Context
+	ctx              context.Context
 	ApiService       *ResourcepoolApiService
 	moid             string
 	resourcepoolPool *ResourcepoolPool
@@ -2534,18 +2503,18 @@ func (r ApiPatchResourcepoolPoolRequest) IfMatch(ifMatch string) ApiPatchResourc
 	return r
 }
 
-func (r ApiPatchResourcepoolPoolRequest) Execute() (ResourcepoolPool, *_nethttp.Response, error) {
+func (r ApiPatchResourcepoolPoolRequest) Execute() (*ResourcepoolPool, *http.Response, error) {
 	return r.ApiService.PatchResourcepoolPoolExecute(r)
 }
 
 /*
 PatchResourcepoolPool Update a 'resourcepool.Pool' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchResourcepoolPoolRequest
 */
-func (a *ResourcepoolApiService) PatchResourcepoolPool(ctx _context.Context, moid string) ApiPatchResourcepoolPoolRequest {
+func (a *ResourcepoolApiService) PatchResourcepoolPool(ctx context.Context, moid string) ApiPatchResourcepoolPoolRequest {
 	return ApiPatchResourcepoolPoolRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2555,27 +2524,25 @@ func (a *ResourcepoolApiService) PatchResourcepoolPool(ctx _context.Context, moi
 
 // Execute executes the request
 //  @return ResourcepoolPool
-func (a *ResourcepoolApiService) PatchResourcepoolPoolExecute(r ApiPatchResourcepoolPoolRequest) (ResourcepoolPool, *_nethttp.Response, error) {
+func (a *ResourcepoolApiService) PatchResourcepoolPoolExecute(r ApiPatchResourcepoolPoolRequest) (*ResourcepoolPool, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ResourcepoolPool
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ResourcepoolPool
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcepoolApiService.PatchResourcepoolPool")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resourcepool/Pools/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.resourcepoolPool == nil {
 		return localVarReturnValue, nil, reportError("resourcepoolPool is required and must be specified")
 	}
@@ -2602,7 +2569,7 @@ func (a *ResourcepoolApiService) PatchResourcepoolPoolExecute(r ApiPatchResource
 	}
 	// body params
 	localVarPostBody = r.resourcepoolPool
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2612,15 +2579,15 @@ func (a *ResourcepoolApiService) PatchResourcepoolPoolExecute(r ApiPatchResource
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2676,7 +2643,7 @@ func (a *ResourcepoolApiService) PatchResourcepoolPoolExecute(r ApiPatchResource
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2687,7 +2654,7 @@ func (a *ResourcepoolApiService) PatchResourcepoolPoolExecute(r ApiPatchResource
 }
 
 type ApiUpdateResourcepoolPoolRequest struct {
-	ctx              _context.Context
+	ctx              context.Context
 	ApiService       *ResourcepoolApiService
 	moid             string
 	resourcepoolPool *ResourcepoolPool
@@ -2706,18 +2673,18 @@ func (r ApiUpdateResourcepoolPoolRequest) IfMatch(ifMatch string) ApiUpdateResou
 	return r
 }
 
-func (r ApiUpdateResourcepoolPoolRequest) Execute() (ResourcepoolPool, *_nethttp.Response, error) {
+func (r ApiUpdateResourcepoolPoolRequest) Execute() (*ResourcepoolPool, *http.Response, error) {
 	return r.ApiService.UpdateResourcepoolPoolExecute(r)
 }
 
 /*
 UpdateResourcepoolPool Update a 'resourcepool.Pool' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateResourcepoolPoolRequest
 */
-func (a *ResourcepoolApiService) UpdateResourcepoolPool(ctx _context.Context, moid string) ApiUpdateResourcepoolPoolRequest {
+func (a *ResourcepoolApiService) UpdateResourcepoolPool(ctx context.Context, moid string) ApiUpdateResourcepoolPoolRequest {
 	return ApiUpdateResourcepoolPoolRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2727,27 +2694,25 @@ func (a *ResourcepoolApiService) UpdateResourcepoolPool(ctx _context.Context, mo
 
 // Execute executes the request
 //  @return ResourcepoolPool
-func (a *ResourcepoolApiService) UpdateResourcepoolPoolExecute(r ApiUpdateResourcepoolPoolRequest) (ResourcepoolPool, *_nethttp.Response, error) {
+func (a *ResourcepoolApiService) UpdateResourcepoolPoolExecute(r ApiUpdateResourcepoolPoolRequest) (*ResourcepoolPool, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ResourcepoolPool
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ResourcepoolPool
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcepoolApiService.UpdateResourcepoolPool")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resourcepool/Pools/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.resourcepoolPool == nil {
 		return localVarReturnValue, nil, reportError("resourcepoolPool is required and must be specified")
 	}
@@ -2774,7 +2739,7 @@ func (a *ResourcepoolApiService) UpdateResourcepoolPoolExecute(r ApiUpdateResour
 	}
 	// body params
 	localVarPostBody = r.resourcepoolPool
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2784,15 +2749,15 @@ func (a *ResourcepoolApiService) UpdateResourcepoolPoolExecute(r ApiUpdateResour
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2848,7 +2813,7 @@ func (a *ResourcepoolApiService) UpdateResourcepoolPoolExecute(r ApiUpdateResour
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

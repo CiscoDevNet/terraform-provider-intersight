@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,23 +13,18 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // OprsApiService OprsApi service
 type OprsApiService service
 
 type ApiCreateOprsDeploymentRequest struct {
-	ctx            _context.Context
+	ctx            context.Context
 	ApiService     *OprsApiService
 	oprsDeployment *OprsDeployment
 	ifMatch        *string
@@ -54,17 +49,17 @@ func (r ApiCreateOprsDeploymentRequest) IfNoneMatch(ifNoneMatch string) ApiCreat
 	return r
 }
 
-func (r ApiCreateOprsDeploymentRequest) Execute() (OprsDeployment, *_nethttp.Response, error) {
+func (r ApiCreateOprsDeploymentRequest) Execute() (*OprsDeployment, *http.Response, error) {
 	return r.ApiService.CreateOprsDeploymentExecute(r)
 }
 
 /*
 CreateOprsDeployment Create a 'oprs.Deployment' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateOprsDeploymentRequest
 */
-func (a *OprsApiService) CreateOprsDeployment(ctx _context.Context) ApiCreateOprsDeploymentRequest {
+func (a *OprsApiService) CreateOprsDeployment(ctx context.Context) ApiCreateOprsDeploymentRequest {
 	return ApiCreateOprsDeploymentRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -73,26 +68,24 @@ func (a *OprsApiService) CreateOprsDeployment(ctx _context.Context) ApiCreateOpr
 
 // Execute executes the request
 //  @return OprsDeployment
-func (a *OprsApiService) CreateOprsDeploymentExecute(r ApiCreateOprsDeploymentRequest) (OprsDeployment, *_nethttp.Response, error) {
+func (a *OprsApiService) CreateOprsDeploymentExecute(r ApiCreateOprsDeploymentRequest) (*OprsDeployment, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  OprsDeployment
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *OprsDeployment
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OprsApiService.CreateOprsDeployment")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/oprs/Deployments"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.oprsDeployment == nil {
 		return localVarReturnValue, nil, reportError("oprsDeployment is required and must be specified")
 	}
@@ -122,7 +115,7 @@ func (a *OprsApiService) CreateOprsDeploymentExecute(r ApiCreateOprsDeploymentRe
 	}
 	// body params
 	localVarPostBody = r.oprsDeployment
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -132,15 +125,15 @@ func (a *OprsApiService) CreateOprsDeploymentExecute(r ApiCreateOprsDeploymentRe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -196,7 +189,7 @@ func (a *OprsApiService) CreateOprsDeploymentExecute(r ApiCreateOprsDeploymentRe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -207,7 +200,7 @@ func (a *OprsApiService) CreateOprsDeploymentExecute(r ApiCreateOprsDeploymentRe
 }
 
 type ApiCreateOprsSyncTargetListMessageRequest struct {
-	ctx                       _context.Context
+	ctx                       context.Context
 	ApiService                *OprsApiService
 	oprsSyncTargetListMessage *OprsSyncTargetListMessage
 	ifMatch                   *string
@@ -232,17 +225,17 @@ func (r ApiCreateOprsSyncTargetListMessageRequest) IfNoneMatch(ifNoneMatch strin
 	return r
 }
 
-func (r ApiCreateOprsSyncTargetListMessageRequest) Execute() (OprsSyncTargetListMessage, *_nethttp.Response, error) {
+func (r ApiCreateOprsSyncTargetListMessageRequest) Execute() (*OprsSyncTargetListMessage, *http.Response, error) {
 	return r.ApiService.CreateOprsSyncTargetListMessageExecute(r)
 }
 
 /*
 CreateOprsSyncTargetListMessage Create a 'oprs.SyncTargetListMessage' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateOprsSyncTargetListMessageRequest
 */
-func (a *OprsApiService) CreateOprsSyncTargetListMessage(ctx _context.Context) ApiCreateOprsSyncTargetListMessageRequest {
+func (a *OprsApiService) CreateOprsSyncTargetListMessage(ctx context.Context) ApiCreateOprsSyncTargetListMessageRequest {
 	return ApiCreateOprsSyncTargetListMessageRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -251,26 +244,24 @@ func (a *OprsApiService) CreateOprsSyncTargetListMessage(ctx _context.Context) A
 
 // Execute executes the request
 //  @return OprsSyncTargetListMessage
-func (a *OprsApiService) CreateOprsSyncTargetListMessageExecute(r ApiCreateOprsSyncTargetListMessageRequest) (OprsSyncTargetListMessage, *_nethttp.Response, error) {
+func (a *OprsApiService) CreateOprsSyncTargetListMessageExecute(r ApiCreateOprsSyncTargetListMessageRequest) (*OprsSyncTargetListMessage, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  OprsSyncTargetListMessage
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *OprsSyncTargetListMessage
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OprsApiService.CreateOprsSyncTargetListMessage")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/oprs/SyncTargetListMessages"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.oprsSyncTargetListMessage == nil {
 		return localVarReturnValue, nil, reportError("oprsSyncTargetListMessage is required and must be specified")
 	}
@@ -300,7 +291,7 @@ func (a *OprsApiService) CreateOprsSyncTargetListMessageExecute(r ApiCreateOprsS
 	}
 	// body params
 	localVarPostBody = r.oprsSyncTargetListMessage
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -310,15 +301,15 @@ func (a *OprsApiService) CreateOprsSyncTargetListMessageExecute(r ApiCreateOprsS
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -374,7 +365,7 @@ func (a *OprsApiService) CreateOprsSyncTargetListMessageExecute(r ApiCreateOprsS
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -385,23 +376,23 @@ func (a *OprsApiService) CreateOprsSyncTargetListMessageExecute(r ApiCreateOprsS
 }
 
 type ApiDeleteOprsDeploymentRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *OprsApiService
 	moid       string
 }
 
-func (r ApiDeleteOprsDeploymentRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteOprsDeploymentRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteOprsDeploymentExecute(r)
 }
 
 /*
 DeleteOprsDeployment Delete a 'oprs.Deployment' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteOprsDeploymentRequest
 */
-func (a *OprsApiService) DeleteOprsDeployment(ctx _context.Context, moid string) ApiDeleteOprsDeploymentRequest {
+func (a *OprsApiService) DeleteOprsDeployment(ctx context.Context, moid string) ApiDeleteOprsDeploymentRequest {
 	return ApiDeleteOprsDeploymentRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -410,26 +401,24 @@ func (a *OprsApiService) DeleteOprsDeployment(ctx _context.Context, moid string)
 }
 
 // Execute executes the request
-func (a *OprsApiService) DeleteOprsDeploymentExecute(r ApiDeleteOprsDeploymentRequest) (*_nethttp.Response, error) {
+func (a *OprsApiService) DeleteOprsDeploymentExecute(r ApiDeleteOprsDeploymentRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OprsApiService.DeleteOprsDeployment")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/oprs/Deployments/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -448,7 +437,7 @@ func (a *OprsApiService) DeleteOprsDeploymentExecute(r ApiDeleteOprsDeploymentRe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -458,15 +447,15 @@ func (a *OprsApiService) DeleteOprsDeploymentExecute(r ApiDeleteOprsDeploymentRe
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -524,23 +513,23 @@ func (a *OprsApiService) DeleteOprsDeploymentExecute(r ApiDeleteOprsDeploymentRe
 }
 
 type ApiDeleteOprsSyncTargetListMessageRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *OprsApiService
 	moid       string
 }
 
-func (r ApiDeleteOprsSyncTargetListMessageRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteOprsSyncTargetListMessageRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteOprsSyncTargetListMessageExecute(r)
 }
 
 /*
 DeleteOprsSyncTargetListMessage Delete a 'oprs.SyncTargetListMessage' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteOprsSyncTargetListMessageRequest
 */
-func (a *OprsApiService) DeleteOprsSyncTargetListMessage(ctx _context.Context, moid string) ApiDeleteOprsSyncTargetListMessageRequest {
+func (a *OprsApiService) DeleteOprsSyncTargetListMessage(ctx context.Context, moid string) ApiDeleteOprsSyncTargetListMessageRequest {
 	return ApiDeleteOprsSyncTargetListMessageRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -549,26 +538,24 @@ func (a *OprsApiService) DeleteOprsSyncTargetListMessage(ctx _context.Context, m
 }
 
 // Execute executes the request
-func (a *OprsApiService) DeleteOprsSyncTargetListMessageExecute(r ApiDeleteOprsSyncTargetListMessageRequest) (*_nethttp.Response, error) {
+func (a *OprsApiService) DeleteOprsSyncTargetListMessageExecute(r ApiDeleteOprsSyncTargetListMessageRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OprsApiService.DeleteOprsSyncTargetListMessage")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/oprs/SyncTargetListMessages/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -587,7 +574,7 @@ func (a *OprsApiService) DeleteOprsSyncTargetListMessageExecute(r ApiDeleteOprsS
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -597,15 +584,15 @@ func (a *OprsApiService) DeleteOprsSyncTargetListMessageExecute(r ApiDeleteOprsS
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -663,23 +650,23 @@ func (a *OprsApiService) DeleteOprsSyncTargetListMessageExecute(r ApiDeleteOprsS
 }
 
 type ApiGetOprsDeploymentByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *OprsApiService
 	moid       string
 }
 
-func (r ApiGetOprsDeploymentByMoidRequest) Execute() (OprsDeployment, *_nethttp.Response, error) {
+func (r ApiGetOprsDeploymentByMoidRequest) Execute() (*OprsDeployment, *http.Response, error) {
 	return r.ApiService.GetOprsDeploymentByMoidExecute(r)
 }
 
 /*
 GetOprsDeploymentByMoid Read a 'oprs.Deployment' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetOprsDeploymentByMoidRequest
 */
-func (a *OprsApiService) GetOprsDeploymentByMoid(ctx _context.Context, moid string) ApiGetOprsDeploymentByMoidRequest {
+func (a *OprsApiService) GetOprsDeploymentByMoid(ctx context.Context, moid string) ApiGetOprsDeploymentByMoidRequest {
 	return ApiGetOprsDeploymentByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -689,27 +676,25 @@ func (a *OprsApiService) GetOprsDeploymentByMoid(ctx _context.Context, moid stri
 
 // Execute executes the request
 //  @return OprsDeployment
-func (a *OprsApiService) GetOprsDeploymentByMoidExecute(r ApiGetOprsDeploymentByMoidRequest) (OprsDeployment, *_nethttp.Response, error) {
+func (a *OprsApiService) GetOprsDeploymentByMoidExecute(r ApiGetOprsDeploymentByMoidRequest) (*OprsDeployment, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  OprsDeployment
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *OprsDeployment
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OprsApiService.GetOprsDeploymentByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/oprs/Deployments/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -728,7 +713,7 @@ func (a *OprsApiService) GetOprsDeploymentByMoidExecute(r ApiGetOprsDeploymentBy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -738,15 +723,15 @@ func (a *OprsApiService) GetOprsDeploymentByMoidExecute(r ApiGetOprsDeploymentBy
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -802,7 +787,7 @@ func (a *OprsApiService) GetOprsDeploymentByMoidExecute(r ApiGetOprsDeploymentBy
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -813,7 +798,7 @@ func (a *OprsApiService) GetOprsDeploymentByMoidExecute(r ApiGetOprsDeploymentBy
 }
 
 type ApiGetOprsDeploymentListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *OprsApiService
 	filter      *string
 	orderby     *string
@@ -894,17 +879,17 @@ func (r ApiGetOprsDeploymentListRequest) Tags(tags string) ApiGetOprsDeploymentL
 	return r
 }
 
-func (r ApiGetOprsDeploymentListRequest) Execute() (OprsDeploymentResponse, *_nethttp.Response, error) {
+func (r ApiGetOprsDeploymentListRequest) Execute() (*OprsDeploymentResponse, *http.Response, error) {
 	return r.ApiService.GetOprsDeploymentListExecute(r)
 }
 
 /*
 GetOprsDeploymentList Read a 'oprs.Deployment' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetOprsDeploymentListRequest
 */
-func (a *OprsApiService) GetOprsDeploymentList(ctx _context.Context) ApiGetOprsDeploymentListRequest {
+func (a *OprsApiService) GetOprsDeploymentList(ctx context.Context) ApiGetOprsDeploymentListRequest {
 	return ApiGetOprsDeploymentListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -913,26 +898,24 @@ func (a *OprsApiService) GetOprsDeploymentList(ctx _context.Context) ApiGetOprsD
 
 // Execute executes the request
 //  @return OprsDeploymentResponse
-func (a *OprsApiService) GetOprsDeploymentListExecute(r ApiGetOprsDeploymentListRequest) (OprsDeploymentResponse, *_nethttp.Response, error) {
+func (a *OprsApiService) GetOprsDeploymentListExecute(r ApiGetOprsDeploymentListRequest) (*OprsDeploymentResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  OprsDeploymentResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *OprsDeploymentResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OprsApiService.GetOprsDeploymentList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/oprs/Deployments"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -984,7 +967,7 @@ func (a *OprsApiService) GetOprsDeploymentListExecute(r ApiGetOprsDeploymentList
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -994,15 +977,15 @@ func (a *OprsApiService) GetOprsDeploymentListExecute(r ApiGetOprsDeploymentList
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1058,7 +1041,7 @@ func (a *OprsApiService) GetOprsDeploymentListExecute(r ApiGetOprsDeploymentList
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1069,23 +1052,23 @@ func (a *OprsApiService) GetOprsDeploymentListExecute(r ApiGetOprsDeploymentList
 }
 
 type ApiGetOprsSyncTargetListMessageByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *OprsApiService
 	moid       string
 }
 
-func (r ApiGetOprsSyncTargetListMessageByMoidRequest) Execute() (OprsSyncTargetListMessage, *_nethttp.Response, error) {
+func (r ApiGetOprsSyncTargetListMessageByMoidRequest) Execute() (*OprsSyncTargetListMessage, *http.Response, error) {
 	return r.ApiService.GetOprsSyncTargetListMessageByMoidExecute(r)
 }
 
 /*
 GetOprsSyncTargetListMessageByMoid Read a 'oprs.SyncTargetListMessage' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetOprsSyncTargetListMessageByMoidRequest
 */
-func (a *OprsApiService) GetOprsSyncTargetListMessageByMoid(ctx _context.Context, moid string) ApiGetOprsSyncTargetListMessageByMoidRequest {
+func (a *OprsApiService) GetOprsSyncTargetListMessageByMoid(ctx context.Context, moid string) ApiGetOprsSyncTargetListMessageByMoidRequest {
 	return ApiGetOprsSyncTargetListMessageByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1095,27 +1078,25 @@ func (a *OprsApiService) GetOprsSyncTargetListMessageByMoid(ctx _context.Context
 
 // Execute executes the request
 //  @return OprsSyncTargetListMessage
-func (a *OprsApiService) GetOprsSyncTargetListMessageByMoidExecute(r ApiGetOprsSyncTargetListMessageByMoidRequest) (OprsSyncTargetListMessage, *_nethttp.Response, error) {
+func (a *OprsApiService) GetOprsSyncTargetListMessageByMoidExecute(r ApiGetOprsSyncTargetListMessageByMoidRequest) (*OprsSyncTargetListMessage, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  OprsSyncTargetListMessage
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *OprsSyncTargetListMessage
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OprsApiService.GetOprsSyncTargetListMessageByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/oprs/SyncTargetListMessages/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1134,7 +1115,7 @@ func (a *OprsApiService) GetOprsSyncTargetListMessageByMoidExecute(r ApiGetOprsS
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1144,15 +1125,15 @@ func (a *OprsApiService) GetOprsSyncTargetListMessageByMoidExecute(r ApiGetOprsS
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1208,7 +1189,7 @@ func (a *OprsApiService) GetOprsSyncTargetListMessageByMoidExecute(r ApiGetOprsS
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1219,7 +1200,7 @@ func (a *OprsApiService) GetOprsSyncTargetListMessageByMoidExecute(r ApiGetOprsS
 }
 
 type ApiGetOprsSyncTargetListMessageListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *OprsApiService
 	filter      *string
 	orderby     *string
@@ -1300,17 +1281,17 @@ func (r ApiGetOprsSyncTargetListMessageListRequest) Tags(tags string) ApiGetOprs
 	return r
 }
 
-func (r ApiGetOprsSyncTargetListMessageListRequest) Execute() (OprsSyncTargetListMessageResponse, *_nethttp.Response, error) {
+func (r ApiGetOprsSyncTargetListMessageListRequest) Execute() (*OprsSyncTargetListMessageResponse, *http.Response, error) {
 	return r.ApiService.GetOprsSyncTargetListMessageListExecute(r)
 }
 
 /*
 GetOprsSyncTargetListMessageList Read a 'oprs.SyncTargetListMessage' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetOprsSyncTargetListMessageListRequest
 */
-func (a *OprsApiService) GetOprsSyncTargetListMessageList(ctx _context.Context) ApiGetOprsSyncTargetListMessageListRequest {
+func (a *OprsApiService) GetOprsSyncTargetListMessageList(ctx context.Context) ApiGetOprsSyncTargetListMessageListRequest {
 	return ApiGetOprsSyncTargetListMessageListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1319,26 +1300,24 @@ func (a *OprsApiService) GetOprsSyncTargetListMessageList(ctx _context.Context) 
 
 // Execute executes the request
 //  @return OprsSyncTargetListMessageResponse
-func (a *OprsApiService) GetOprsSyncTargetListMessageListExecute(r ApiGetOprsSyncTargetListMessageListRequest) (OprsSyncTargetListMessageResponse, *_nethttp.Response, error) {
+func (a *OprsApiService) GetOprsSyncTargetListMessageListExecute(r ApiGetOprsSyncTargetListMessageListRequest) (*OprsSyncTargetListMessageResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  OprsSyncTargetListMessageResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *OprsSyncTargetListMessageResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OprsApiService.GetOprsSyncTargetListMessageList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/oprs/SyncTargetListMessages"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1390,7 +1369,7 @@ func (a *OprsApiService) GetOprsSyncTargetListMessageListExecute(r ApiGetOprsSyn
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1400,15 +1379,15 @@ func (a *OprsApiService) GetOprsSyncTargetListMessageListExecute(r ApiGetOprsSyn
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1464,7 +1443,7 @@ func (a *OprsApiService) GetOprsSyncTargetListMessageListExecute(r ApiGetOprsSyn
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1475,7 +1454,7 @@ func (a *OprsApiService) GetOprsSyncTargetListMessageListExecute(r ApiGetOprsSyn
 }
 
 type ApiPatchOprsDeploymentRequest struct {
-	ctx            _context.Context
+	ctx            context.Context
 	ApiService     *OprsApiService
 	moid           string
 	oprsDeployment *OprsDeployment
@@ -1494,18 +1473,18 @@ func (r ApiPatchOprsDeploymentRequest) IfMatch(ifMatch string) ApiPatchOprsDeplo
 	return r
 }
 
-func (r ApiPatchOprsDeploymentRequest) Execute() (OprsDeployment, *_nethttp.Response, error) {
+func (r ApiPatchOprsDeploymentRequest) Execute() (*OprsDeployment, *http.Response, error) {
 	return r.ApiService.PatchOprsDeploymentExecute(r)
 }
 
 /*
 PatchOprsDeployment Update a 'oprs.Deployment' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchOprsDeploymentRequest
 */
-func (a *OprsApiService) PatchOprsDeployment(ctx _context.Context, moid string) ApiPatchOprsDeploymentRequest {
+func (a *OprsApiService) PatchOprsDeployment(ctx context.Context, moid string) ApiPatchOprsDeploymentRequest {
 	return ApiPatchOprsDeploymentRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1515,27 +1494,25 @@ func (a *OprsApiService) PatchOprsDeployment(ctx _context.Context, moid string) 
 
 // Execute executes the request
 //  @return OprsDeployment
-func (a *OprsApiService) PatchOprsDeploymentExecute(r ApiPatchOprsDeploymentRequest) (OprsDeployment, *_nethttp.Response, error) {
+func (a *OprsApiService) PatchOprsDeploymentExecute(r ApiPatchOprsDeploymentRequest) (*OprsDeployment, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  OprsDeployment
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *OprsDeployment
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OprsApiService.PatchOprsDeployment")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/oprs/Deployments/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.oprsDeployment == nil {
 		return localVarReturnValue, nil, reportError("oprsDeployment is required and must be specified")
 	}
@@ -1562,7 +1539,7 @@ func (a *OprsApiService) PatchOprsDeploymentExecute(r ApiPatchOprsDeploymentRequ
 	}
 	// body params
 	localVarPostBody = r.oprsDeployment
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1572,15 +1549,15 @@ func (a *OprsApiService) PatchOprsDeploymentExecute(r ApiPatchOprsDeploymentRequ
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1636,7 +1613,7 @@ func (a *OprsApiService) PatchOprsDeploymentExecute(r ApiPatchOprsDeploymentRequ
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1647,7 +1624,7 @@ func (a *OprsApiService) PatchOprsDeploymentExecute(r ApiPatchOprsDeploymentRequ
 }
 
 type ApiPatchOprsSyncTargetListMessageRequest struct {
-	ctx                       _context.Context
+	ctx                       context.Context
 	ApiService                *OprsApiService
 	moid                      string
 	oprsSyncTargetListMessage *OprsSyncTargetListMessage
@@ -1666,18 +1643,18 @@ func (r ApiPatchOprsSyncTargetListMessageRequest) IfMatch(ifMatch string) ApiPat
 	return r
 }
 
-func (r ApiPatchOprsSyncTargetListMessageRequest) Execute() (OprsSyncTargetListMessage, *_nethttp.Response, error) {
+func (r ApiPatchOprsSyncTargetListMessageRequest) Execute() (*OprsSyncTargetListMessage, *http.Response, error) {
 	return r.ApiService.PatchOprsSyncTargetListMessageExecute(r)
 }
 
 /*
 PatchOprsSyncTargetListMessage Update a 'oprs.SyncTargetListMessage' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchOprsSyncTargetListMessageRequest
 */
-func (a *OprsApiService) PatchOprsSyncTargetListMessage(ctx _context.Context, moid string) ApiPatchOprsSyncTargetListMessageRequest {
+func (a *OprsApiService) PatchOprsSyncTargetListMessage(ctx context.Context, moid string) ApiPatchOprsSyncTargetListMessageRequest {
 	return ApiPatchOprsSyncTargetListMessageRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1687,27 +1664,25 @@ func (a *OprsApiService) PatchOprsSyncTargetListMessage(ctx _context.Context, mo
 
 // Execute executes the request
 //  @return OprsSyncTargetListMessage
-func (a *OprsApiService) PatchOprsSyncTargetListMessageExecute(r ApiPatchOprsSyncTargetListMessageRequest) (OprsSyncTargetListMessage, *_nethttp.Response, error) {
+func (a *OprsApiService) PatchOprsSyncTargetListMessageExecute(r ApiPatchOprsSyncTargetListMessageRequest) (*OprsSyncTargetListMessage, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  OprsSyncTargetListMessage
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *OprsSyncTargetListMessage
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OprsApiService.PatchOprsSyncTargetListMessage")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/oprs/SyncTargetListMessages/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.oprsSyncTargetListMessage == nil {
 		return localVarReturnValue, nil, reportError("oprsSyncTargetListMessage is required and must be specified")
 	}
@@ -1734,7 +1709,7 @@ func (a *OprsApiService) PatchOprsSyncTargetListMessageExecute(r ApiPatchOprsSyn
 	}
 	// body params
 	localVarPostBody = r.oprsSyncTargetListMessage
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1744,15 +1719,15 @@ func (a *OprsApiService) PatchOprsSyncTargetListMessageExecute(r ApiPatchOprsSyn
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1808,7 +1783,7 @@ func (a *OprsApiService) PatchOprsSyncTargetListMessageExecute(r ApiPatchOprsSyn
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1819,7 +1794,7 @@ func (a *OprsApiService) PatchOprsSyncTargetListMessageExecute(r ApiPatchOprsSyn
 }
 
 type ApiUpdateOprsDeploymentRequest struct {
-	ctx            _context.Context
+	ctx            context.Context
 	ApiService     *OprsApiService
 	moid           string
 	oprsDeployment *OprsDeployment
@@ -1838,18 +1813,18 @@ func (r ApiUpdateOprsDeploymentRequest) IfMatch(ifMatch string) ApiUpdateOprsDep
 	return r
 }
 
-func (r ApiUpdateOprsDeploymentRequest) Execute() (OprsDeployment, *_nethttp.Response, error) {
+func (r ApiUpdateOprsDeploymentRequest) Execute() (*OprsDeployment, *http.Response, error) {
 	return r.ApiService.UpdateOprsDeploymentExecute(r)
 }
 
 /*
 UpdateOprsDeployment Update a 'oprs.Deployment' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateOprsDeploymentRequest
 */
-func (a *OprsApiService) UpdateOprsDeployment(ctx _context.Context, moid string) ApiUpdateOprsDeploymentRequest {
+func (a *OprsApiService) UpdateOprsDeployment(ctx context.Context, moid string) ApiUpdateOprsDeploymentRequest {
 	return ApiUpdateOprsDeploymentRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1859,27 +1834,25 @@ func (a *OprsApiService) UpdateOprsDeployment(ctx _context.Context, moid string)
 
 // Execute executes the request
 //  @return OprsDeployment
-func (a *OprsApiService) UpdateOprsDeploymentExecute(r ApiUpdateOprsDeploymentRequest) (OprsDeployment, *_nethttp.Response, error) {
+func (a *OprsApiService) UpdateOprsDeploymentExecute(r ApiUpdateOprsDeploymentRequest) (*OprsDeployment, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  OprsDeployment
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *OprsDeployment
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OprsApiService.UpdateOprsDeployment")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/oprs/Deployments/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.oprsDeployment == nil {
 		return localVarReturnValue, nil, reportError("oprsDeployment is required and must be specified")
 	}
@@ -1906,7 +1879,7 @@ func (a *OprsApiService) UpdateOprsDeploymentExecute(r ApiUpdateOprsDeploymentRe
 	}
 	// body params
 	localVarPostBody = r.oprsDeployment
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1916,15 +1889,15 @@ func (a *OprsApiService) UpdateOprsDeploymentExecute(r ApiUpdateOprsDeploymentRe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1980,7 +1953,7 @@ func (a *OprsApiService) UpdateOprsDeploymentExecute(r ApiUpdateOprsDeploymentRe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1991,7 +1964,7 @@ func (a *OprsApiService) UpdateOprsDeploymentExecute(r ApiUpdateOprsDeploymentRe
 }
 
 type ApiUpdateOprsSyncTargetListMessageRequest struct {
-	ctx                       _context.Context
+	ctx                       context.Context
 	ApiService                *OprsApiService
 	moid                      string
 	oprsSyncTargetListMessage *OprsSyncTargetListMessage
@@ -2010,18 +1983,18 @@ func (r ApiUpdateOprsSyncTargetListMessageRequest) IfMatch(ifMatch string) ApiUp
 	return r
 }
 
-func (r ApiUpdateOprsSyncTargetListMessageRequest) Execute() (OprsSyncTargetListMessage, *_nethttp.Response, error) {
+func (r ApiUpdateOprsSyncTargetListMessageRequest) Execute() (*OprsSyncTargetListMessage, *http.Response, error) {
 	return r.ApiService.UpdateOprsSyncTargetListMessageExecute(r)
 }
 
 /*
 UpdateOprsSyncTargetListMessage Update a 'oprs.SyncTargetListMessage' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateOprsSyncTargetListMessageRequest
 */
-func (a *OprsApiService) UpdateOprsSyncTargetListMessage(ctx _context.Context, moid string) ApiUpdateOprsSyncTargetListMessageRequest {
+func (a *OprsApiService) UpdateOprsSyncTargetListMessage(ctx context.Context, moid string) ApiUpdateOprsSyncTargetListMessageRequest {
 	return ApiUpdateOprsSyncTargetListMessageRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2031,27 +2004,25 @@ func (a *OprsApiService) UpdateOprsSyncTargetListMessage(ctx _context.Context, m
 
 // Execute executes the request
 //  @return OprsSyncTargetListMessage
-func (a *OprsApiService) UpdateOprsSyncTargetListMessageExecute(r ApiUpdateOprsSyncTargetListMessageRequest) (OprsSyncTargetListMessage, *_nethttp.Response, error) {
+func (a *OprsApiService) UpdateOprsSyncTargetListMessageExecute(r ApiUpdateOprsSyncTargetListMessageRequest) (*OprsSyncTargetListMessage, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  OprsSyncTargetListMessage
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *OprsSyncTargetListMessage
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OprsApiService.UpdateOprsSyncTargetListMessage")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/oprs/SyncTargetListMessages/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.oprsSyncTargetListMessage == nil {
 		return localVarReturnValue, nil, reportError("oprsSyncTargetListMessage is required and must be specified")
 	}
@@ -2078,7 +2049,7 @@ func (a *OprsApiService) UpdateOprsSyncTargetListMessageExecute(r ApiUpdateOprsS
 	}
 	// body params
 	localVarPostBody = r.oprsSyncTargetListMessage
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2088,15 +2059,15 @@ func (a *OprsApiService) UpdateOprsSyncTargetListMessageExecute(r ApiUpdateOprsS
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2152,7 +2123,7 @@ func (a *OprsApiService) UpdateOprsSyncTargetListMessageExecute(r ApiUpdateOprsS
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

@@ -1178,7 +1178,6 @@ func resourceFirmwareChassisUpgrade() *schema.Resource {
 
 func resourceFirmwareChassisUpgradeCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewFirmwareChassisUpgradeWithDefaults()
@@ -1715,7 +1714,7 @@ func resourceFirmwareChassisUpgradeCreate(c context.Context, d *schema.ResourceD
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating FirmwareChassisUpgrade: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating FirmwareChassisUpgrade: %s", responseErr.Error())
@@ -1727,7 +1726,6 @@ func resourceFirmwareChassisUpgradeCreate(c context.Context, d *schema.ResourceD
 
 func resourceFirmwareChassisUpgradeRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.FirmwareApi.GetFirmwareChassisUpgradeByMoid(conn.ctx, d.Id())
@@ -1740,7 +1738,7 @@ func resourceFirmwareChassisUpgradeRead(c context.Context, d *schema.ResourceDat
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching FirmwareChassisUpgrade: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching FirmwareChassisUpgrade: %s", responseErr.Error())
@@ -1865,7 +1863,6 @@ func resourceFirmwareChassisUpgradeRead(c context.Context, d *schema.ResourceDat
 
 func resourceFirmwareChassisUpgradeDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.FirmwareApi.DeleteFirmwareChassisUpgrade(conn.ctx, d.Id())
@@ -1877,7 +1874,7 @@ func resourceFirmwareChassisUpgradeDelete(c context.Context, d *schema.ResourceD
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting FirmwareChassisUpgrade object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting FirmwareChassisUpgrade object: %s", deleteErr.Error())

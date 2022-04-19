@@ -939,7 +939,6 @@ func resourceChassisProfile() *schema.Resource {
 
 func resourceChassisProfileCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewChassisProfileWithDefaults()
@@ -1342,7 +1341,7 @@ func resourceChassisProfileCreate(c context.Context, d *schema.ResourceData, met
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating ChassisProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating ChassisProfile: %s", responseErr.Error())
@@ -1360,7 +1359,7 @@ func resourceChassisProfileCreate(c context.Context, d *schema.ResourceData, met
 			if responseErr != nil {
 				errorType := fmt.Sprintf("%T", responseErr)
 				if strings.Contains(errorType, "GenericOpenAPIError") {
-					responseErr := responseErr.(models.GenericOpenAPIError)
+					responseErr := responseErr.(*models.GenericOpenAPIError)
 					return diag.Errorf("error occurred while fetching ChassisProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 				}
 				return diag.Errorf("error occurred while fetching ChassisProfile: %s", responseErr.Error())
@@ -1374,7 +1373,7 @@ func resourceChassisProfileCreate(c context.Context, d *schema.ResourceData, met
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching ChassisProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching ChassisProfile: %s", responseErr.Error())
@@ -1388,7 +1387,7 @@ func resourceChassisProfileCreate(c context.Context, d *schema.ResourceData, met
 			if err != nil {
 				errorType := fmt.Sprintf("%T", err)
 				if strings.Contains(errorType, "GenericOpenAPIError") {
-					err := err.(models.GenericOpenAPIError)
+					err := err.(*models.GenericOpenAPIError)
 					return diag.Errorf("failed while fetching workflow information in ChassisProfile: %s Response from endpoint: %s", err.Error(), string(err.Body()))
 				}
 				return diag.Errorf("failed while fetching workflow information in ChassisProfile: %s", err.Error())
@@ -1403,7 +1402,6 @@ func resourceChassisProfileCreate(c context.Context, d *schema.ResourceData, met
 
 func resourceChassisProfileRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.ChassisApi.GetChassisProfileByMoid(conn.ctx, d.Id())
@@ -1416,7 +1414,7 @@ func resourceChassisProfileRead(c context.Context, d *schema.ResourceData, meta 
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching ChassisProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching ChassisProfile: %s", responseErr.Error())
@@ -1557,7 +1555,6 @@ func resourceChassisProfileRead(c context.Context, d *schema.ResourceData, meta 
 
 func resourceChassisProfileUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.ChassisProfile{}
@@ -1969,7 +1966,7 @@ func resourceChassisProfileUpdate(c context.Context, d *schema.ResourceData, met
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating ChassisProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating ChassisProfile: %s", responseErr.Error())
@@ -1987,7 +1984,7 @@ func resourceChassisProfileUpdate(c context.Context, d *schema.ResourceData, met
 			if responseErr != nil {
 				errorType := fmt.Sprintf("%T", responseErr)
 				if strings.Contains(errorType, "GenericOpenAPIError") {
-					responseErr := responseErr.(models.GenericOpenAPIError)
+					responseErr := responseErr.(*models.GenericOpenAPIError)
 					return diag.Errorf("error occurred while fetching ChassisProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 				}
 				return diag.Errorf("error occurred while fetching ChassisProfile: %s", responseErr.Error())
@@ -2001,7 +1998,7 @@ func resourceChassisProfileUpdate(c context.Context, d *schema.ResourceData, met
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching ChassisProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching ChassisProfile: %s", responseErr.Error())
@@ -2015,7 +2012,7 @@ func resourceChassisProfileUpdate(c context.Context, d *schema.ResourceData, met
 			if err != nil {
 				errorType := fmt.Sprintf("%T", err)
 				if strings.Contains(errorType, "GenericOpenAPIError") {
-					err := err.(models.GenericOpenAPIError)
+					err := err.(*models.GenericOpenAPIError)
 					return diag.Errorf("failed while fetching workflow information in ChassisProfile: %s Response from endpoint: %s", err.Error(), string(err.Body()))
 				}
 				return diag.Errorf("failed while fetching workflow information in ChassisProfile: %s", err.Error())
@@ -2030,7 +2027,6 @@ func resourceChassisProfileUpdate(c context.Context, d *schema.ResourceData, met
 
 func resourceChassisProfileDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.ChassisApi.DeleteChassisProfile(conn.ctx, d.Id())
@@ -2042,7 +2038,7 @@ func resourceChassisProfileDelete(c context.Context, d *schema.ResourceData, met
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting ChassisProfile object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting ChassisProfile object: %s", deleteErr.Error())

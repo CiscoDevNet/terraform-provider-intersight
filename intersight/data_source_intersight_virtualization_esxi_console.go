@@ -1017,7 +1017,6 @@ func dataSourceVirtualizationEsxiConsole() *schema.Resource {
 
 func dataSourceVirtualizationEsxiConsoleRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.VirtualizationEsxiConsole{}
@@ -1569,7 +1568,7 @@ func dataSourceVirtualizationEsxiConsoleRead(c context.Context, d *schema.Resour
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of VirtualizationEsxiConsole: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of VirtualizationEsxiConsole: %s", responseErr.Error())
@@ -1586,7 +1585,7 @@ func dataSourceVirtualizationEsxiConsoleRead(c context.Context, d *schema.Resour
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching VirtualizationEsxiConsole: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching VirtualizationEsxiConsole: %s", responseErr.Error())

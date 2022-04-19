@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **DeltaAnalysisJobCount** | Pointer to **int64** | Delta analysis job count of the Insight group. | [optional] 
 **EmailSettingsCount** | Pointer to **int64** | Email settings count of the Insight group. | [optional] 
 **FlowSettingsCount** | Pointer to **int64** | Flow setting count of the Insight group. | [optional] 
+**FlowSettingsStatus** | Pointer to **string** | Flow setting status of the Insight group. | [optional] 
 **GroupName** | Pointer to **string** | Name of the Insight group. | [optional] 
 **InsightSites** | Pointer to [**[]NiatelemetrySites**](NiatelemetrySites.md) |  | [optional] 
 **KafkaSettingsCount** | Pointer to **int64** | Kafka settings count of the Insight group. | [optional] 
@@ -228,6 +229,31 @@ SetFlowSettingsCount sets FlowSettingsCount field to given value.
 `func (o *NiatelemetryInsightGroupDetailsAllOf) HasFlowSettingsCount() bool`
 
 HasFlowSettingsCount returns a boolean if a field has been set.
+
+### GetFlowSettingsStatus
+
+`func (o *NiatelemetryInsightGroupDetailsAllOf) GetFlowSettingsStatus() string`
+
+GetFlowSettingsStatus returns the FlowSettingsStatus field if non-nil, zero value otherwise.
+
+### GetFlowSettingsStatusOk
+
+`func (o *NiatelemetryInsightGroupDetailsAllOf) GetFlowSettingsStatusOk() (*string, bool)`
+
+GetFlowSettingsStatusOk returns a tuple with the FlowSettingsStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFlowSettingsStatus
+
+`func (o *NiatelemetryInsightGroupDetailsAllOf) SetFlowSettingsStatus(v string)`
+
+SetFlowSettingsStatus sets FlowSettingsStatus field to given value.
+
+### HasFlowSettingsStatus
+
+`func (o *NiatelemetryInsightGroupDetailsAllOf) HasFlowSettingsStatus() bool`
+
+HasFlowSettingsStatus returns a boolean if a field has been set.
 
 ### GetGroupName
 

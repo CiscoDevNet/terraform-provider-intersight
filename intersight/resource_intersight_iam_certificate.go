@@ -676,7 +676,6 @@ func resourceIamCertificate() *schema.Resource {
 
 func resourceIamCertificateCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewIamCertificateWithDefaults()
@@ -819,7 +818,7 @@ func resourceIamCertificateCreate(c context.Context, d *schema.ResourceData, met
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating IamCertificate: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating IamCertificate: %s", responseErr.Error())
@@ -831,7 +830,6 @@ func resourceIamCertificateCreate(c context.Context, d *schema.ResourceData, met
 
 func resourceIamCertificateRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.IamApi.GetIamCertificateByMoid(conn.ctx, d.Id())
@@ -844,7 +842,7 @@ func resourceIamCertificateRead(c context.Context, d *schema.ResourceData, meta 
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching IamCertificate: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching IamCertificate: %s", responseErr.Error())
@@ -929,7 +927,6 @@ func resourceIamCertificateRead(c context.Context, d *schema.ResourceData, meta 
 
 func resourceIamCertificateUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.IamCertificate{}
@@ -1075,7 +1072,7 @@ func resourceIamCertificateUpdate(c context.Context, d *schema.ResourceData, met
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating IamCertificate: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating IamCertificate: %s", responseErr.Error())
@@ -1087,7 +1084,6 @@ func resourceIamCertificateUpdate(c context.Context, d *schema.ResourceData, met
 
 func resourceIamCertificateDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.IamApi.DeleteIamCertificate(conn.ctx, d.Id())
@@ -1099,7 +1095,7 @@ func resourceIamCertificateDelete(c context.Context, d *schema.ResourceData, met
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting IamCertificate object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting IamCertificate object: %s", deleteErr.Error())

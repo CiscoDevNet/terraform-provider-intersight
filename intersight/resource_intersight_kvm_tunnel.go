@@ -800,7 +800,6 @@ func resourceKvmTunnel() *schema.Resource {
 
 func resourceKvmTunnelCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewKvmTunnelWithDefaults()
@@ -954,7 +953,7 @@ func resourceKvmTunnelCreate(c context.Context, d *schema.ResourceData, meta int
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating KvmTunnel: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating KvmTunnel: %s", responseErr.Error())
@@ -966,7 +965,6 @@ func resourceKvmTunnelCreate(c context.Context, d *schema.ResourceData, meta int
 
 func resourceKvmTunnelRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.KvmApi.GetKvmTunnelByMoid(conn.ctx, d.Id())
@@ -979,7 +977,7 @@ func resourceKvmTunnelRead(c context.Context, d *schema.ResourceData, meta inter
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching KvmTunnel: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching KvmTunnel: %s", responseErr.Error())
@@ -1104,7 +1102,6 @@ func resourceKvmTunnelRead(c context.Context, d *schema.ResourceData, meta inter
 
 func resourceKvmTunnelDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	var warning = diag.Diagnostic{Severity: diag.Warning, Summary: "KvmTunnel does not allow delete functionality"}
 	de = append(de, warning)

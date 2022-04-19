@@ -1291,7 +1291,6 @@ func dataSourceVirtualizationVmwareDistributedSwitch() *schema.Resource {
 
 func dataSourceVirtualizationVmwareDistributedSwitchRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.VirtualizationVmwareDistributedSwitch{}
@@ -2018,7 +2017,7 @@ func dataSourceVirtualizationVmwareDistributedSwitchRead(c context.Context, d *s
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of VirtualizationVmwareDistributedSwitch: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of VirtualizationVmwareDistributedSwitch: %s", responseErr.Error())
@@ -2035,7 +2034,7 @@ func dataSourceVirtualizationVmwareDistributedSwitchRead(c context.Context, d *s
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching VirtualizationVmwareDistributedSwitch: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching VirtualizationVmwareDistributedSwitch: %s", responseErr.Error())

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,23 +13,18 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // ChassisApiService ChassisApi service
 type ChassisApiService service
 
 type ApiCreateChassisConfigImportRequest struct {
-	ctx                 _context.Context
+	ctx                 context.Context
 	ApiService          *ChassisApiService
 	chassisConfigImport *ChassisConfigImport
 	ifMatch             *string
@@ -54,17 +49,17 @@ func (r ApiCreateChassisConfigImportRequest) IfNoneMatch(ifNoneMatch string) Api
 	return r
 }
 
-func (r ApiCreateChassisConfigImportRequest) Execute() (ChassisConfigImport, *_nethttp.Response, error) {
+func (r ApiCreateChassisConfigImportRequest) Execute() (*ChassisConfigImport, *http.Response, error) {
 	return r.ApiService.CreateChassisConfigImportExecute(r)
 }
 
 /*
 CreateChassisConfigImport Create a 'chassis.ConfigImport' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateChassisConfigImportRequest
 */
-func (a *ChassisApiService) CreateChassisConfigImport(ctx _context.Context) ApiCreateChassisConfigImportRequest {
+func (a *ChassisApiService) CreateChassisConfigImport(ctx context.Context) ApiCreateChassisConfigImportRequest {
 	return ApiCreateChassisConfigImportRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -73,26 +68,24 @@ func (a *ChassisApiService) CreateChassisConfigImport(ctx _context.Context) ApiC
 
 // Execute executes the request
 //  @return ChassisConfigImport
-func (a *ChassisApiService) CreateChassisConfigImportExecute(r ApiCreateChassisConfigImportRequest) (ChassisConfigImport, *_nethttp.Response, error) {
+func (a *ChassisApiService) CreateChassisConfigImportExecute(r ApiCreateChassisConfigImportRequest) (*ChassisConfigImport, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ChassisConfigImport
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ChassisConfigImport
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChassisApiService.CreateChassisConfigImport")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/chassis/ConfigImports"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.chassisConfigImport == nil {
 		return localVarReturnValue, nil, reportError("chassisConfigImport is required and must be specified")
 	}
@@ -122,7 +115,7 @@ func (a *ChassisApiService) CreateChassisConfigImportExecute(r ApiCreateChassisC
 	}
 	// body params
 	localVarPostBody = r.chassisConfigImport
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -132,15 +125,15 @@ func (a *ChassisApiService) CreateChassisConfigImportExecute(r ApiCreateChassisC
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -196,7 +189,7 @@ func (a *ChassisApiService) CreateChassisConfigImportExecute(r ApiCreateChassisC
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -207,7 +200,7 @@ func (a *ChassisApiService) CreateChassisConfigImportExecute(r ApiCreateChassisC
 }
 
 type ApiCreateChassisProfileRequest struct {
-	ctx            _context.Context
+	ctx            context.Context
 	ApiService     *ChassisApiService
 	chassisProfile *ChassisProfile
 	ifMatch        *string
@@ -232,17 +225,17 @@ func (r ApiCreateChassisProfileRequest) IfNoneMatch(ifNoneMatch string) ApiCreat
 	return r
 }
 
-func (r ApiCreateChassisProfileRequest) Execute() (ChassisProfile, *_nethttp.Response, error) {
+func (r ApiCreateChassisProfileRequest) Execute() (*ChassisProfile, *http.Response, error) {
 	return r.ApiService.CreateChassisProfileExecute(r)
 }
 
 /*
 CreateChassisProfile Create a 'chassis.Profile' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateChassisProfileRequest
 */
-func (a *ChassisApiService) CreateChassisProfile(ctx _context.Context) ApiCreateChassisProfileRequest {
+func (a *ChassisApiService) CreateChassisProfile(ctx context.Context) ApiCreateChassisProfileRequest {
 	return ApiCreateChassisProfileRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -251,26 +244,24 @@ func (a *ChassisApiService) CreateChassisProfile(ctx _context.Context) ApiCreate
 
 // Execute executes the request
 //  @return ChassisProfile
-func (a *ChassisApiService) CreateChassisProfileExecute(r ApiCreateChassisProfileRequest) (ChassisProfile, *_nethttp.Response, error) {
+func (a *ChassisApiService) CreateChassisProfileExecute(r ApiCreateChassisProfileRequest) (*ChassisProfile, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ChassisProfile
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ChassisProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChassisApiService.CreateChassisProfile")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/chassis/Profiles"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.chassisProfile == nil {
 		return localVarReturnValue, nil, reportError("chassisProfile is required and must be specified")
 	}
@@ -300,7 +291,7 @@ func (a *ChassisApiService) CreateChassisProfileExecute(r ApiCreateChassisProfil
 	}
 	// body params
 	localVarPostBody = r.chassisProfile
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -310,15 +301,15 @@ func (a *ChassisApiService) CreateChassisProfileExecute(r ApiCreateChassisProfil
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -374,7 +365,7 @@ func (a *ChassisApiService) CreateChassisProfileExecute(r ApiCreateChassisProfil
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -385,23 +376,23 @@ func (a *ChassisApiService) CreateChassisProfileExecute(r ApiCreateChassisProfil
 }
 
 type ApiDeleteChassisProfileRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ChassisApiService
 	moid       string
 }
 
-func (r ApiDeleteChassisProfileRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteChassisProfileRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteChassisProfileExecute(r)
 }
 
 /*
 DeleteChassisProfile Delete a 'chassis.Profile' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteChassisProfileRequest
 */
-func (a *ChassisApiService) DeleteChassisProfile(ctx _context.Context, moid string) ApiDeleteChassisProfileRequest {
+func (a *ChassisApiService) DeleteChassisProfile(ctx context.Context, moid string) ApiDeleteChassisProfileRequest {
 	return ApiDeleteChassisProfileRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -410,26 +401,24 @@ func (a *ChassisApiService) DeleteChassisProfile(ctx _context.Context, moid stri
 }
 
 // Execute executes the request
-func (a *ChassisApiService) DeleteChassisProfileExecute(r ApiDeleteChassisProfileRequest) (*_nethttp.Response, error) {
+func (a *ChassisApiService) DeleteChassisProfileExecute(r ApiDeleteChassisProfileRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChassisApiService.DeleteChassisProfile")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/chassis/Profiles/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -448,7 +437,7 @@ func (a *ChassisApiService) DeleteChassisProfileExecute(r ApiDeleteChassisProfil
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -458,15 +447,15 @@ func (a *ChassisApiService) DeleteChassisProfileExecute(r ApiDeleteChassisProfil
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -524,23 +513,23 @@ func (a *ChassisApiService) DeleteChassisProfileExecute(r ApiDeleteChassisProfil
 }
 
 type ApiGetChassisConfigChangeDetailByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ChassisApiService
 	moid       string
 }
 
-func (r ApiGetChassisConfigChangeDetailByMoidRequest) Execute() (ChassisConfigChangeDetail, *_nethttp.Response, error) {
+func (r ApiGetChassisConfigChangeDetailByMoidRequest) Execute() (*ChassisConfigChangeDetail, *http.Response, error) {
 	return r.ApiService.GetChassisConfigChangeDetailByMoidExecute(r)
 }
 
 /*
 GetChassisConfigChangeDetailByMoid Read a 'chassis.ConfigChangeDetail' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetChassisConfigChangeDetailByMoidRequest
 */
-func (a *ChassisApiService) GetChassisConfigChangeDetailByMoid(ctx _context.Context, moid string) ApiGetChassisConfigChangeDetailByMoidRequest {
+func (a *ChassisApiService) GetChassisConfigChangeDetailByMoid(ctx context.Context, moid string) ApiGetChassisConfigChangeDetailByMoidRequest {
 	return ApiGetChassisConfigChangeDetailByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -550,27 +539,25 @@ func (a *ChassisApiService) GetChassisConfigChangeDetailByMoid(ctx _context.Cont
 
 // Execute executes the request
 //  @return ChassisConfigChangeDetail
-func (a *ChassisApiService) GetChassisConfigChangeDetailByMoidExecute(r ApiGetChassisConfigChangeDetailByMoidRequest) (ChassisConfigChangeDetail, *_nethttp.Response, error) {
+func (a *ChassisApiService) GetChassisConfigChangeDetailByMoidExecute(r ApiGetChassisConfigChangeDetailByMoidRequest) (*ChassisConfigChangeDetail, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ChassisConfigChangeDetail
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ChassisConfigChangeDetail
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChassisApiService.GetChassisConfigChangeDetailByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/chassis/ConfigChangeDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -589,7 +576,7 @@ func (a *ChassisApiService) GetChassisConfigChangeDetailByMoidExecute(r ApiGetCh
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -599,15 +586,15 @@ func (a *ChassisApiService) GetChassisConfigChangeDetailByMoidExecute(r ApiGetCh
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -663,7 +650,7 @@ func (a *ChassisApiService) GetChassisConfigChangeDetailByMoidExecute(r ApiGetCh
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -674,7 +661,7 @@ func (a *ChassisApiService) GetChassisConfigChangeDetailByMoidExecute(r ApiGetCh
 }
 
 type ApiGetChassisConfigChangeDetailListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *ChassisApiService
 	filter      *string
 	orderby     *string
@@ -755,17 +742,17 @@ func (r ApiGetChassisConfigChangeDetailListRequest) Tags(tags string) ApiGetChas
 	return r
 }
 
-func (r ApiGetChassisConfigChangeDetailListRequest) Execute() (ChassisConfigChangeDetailResponse, *_nethttp.Response, error) {
+func (r ApiGetChassisConfigChangeDetailListRequest) Execute() (*ChassisConfigChangeDetailResponse, *http.Response, error) {
 	return r.ApiService.GetChassisConfigChangeDetailListExecute(r)
 }
 
 /*
 GetChassisConfigChangeDetailList Read a 'chassis.ConfigChangeDetail' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetChassisConfigChangeDetailListRequest
 */
-func (a *ChassisApiService) GetChassisConfigChangeDetailList(ctx _context.Context) ApiGetChassisConfigChangeDetailListRequest {
+func (a *ChassisApiService) GetChassisConfigChangeDetailList(ctx context.Context) ApiGetChassisConfigChangeDetailListRequest {
 	return ApiGetChassisConfigChangeDetailListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -774,26 +761,24 @@ func (a *ChassisApiService) GetChassisConfigChangeDetailList(ctx _context.Contex
 
 // Execute executes the request
 //  @return ChassisConfigChangeDetailResponse
-func (a *ChassisApiService) GetChassisConfigChangeDetailListExecute(r ApiGetChassisConfigChangeDetailListRequest) (ChassisConfigChangeDetailResponse, *_nethttp.Response, error) {
+func (a *ChassisApiService) GetChassisConfigChangeDetailListExecute(r ApiGetChassisConfigChangeDetailListRequest) (*ChassisConfigChangeDetailResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ChassisConfigChangeDetailResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ChassisConfigChangeDetailResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChassisApiService.GetChassisConfigChangeDetailList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/chassis/ConfigChangeDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -845,7 +830,7 @@ func (a *ChassisApiService) GetChassisConfigChangeDetailListExecute(r ApiGetChas
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -855,15 +840,15 @@ func (a *ChassisApiService) GetChassisConfigChangeDetailListExecute(r ApiGetChas
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -919,7 +904,7 @@ func (a *ChassisApiService) GetChassisConfigChangeDetailListExecute(r ApiGetChas
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -930,23 +915,23 @@ func (a *ChassisApiService) GetChassisConfigChangeDetailListExecute(r ApiGetChas
 }
 
 type ApiGetChassisConfigImportByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ChassisApiService
 	moid       string
 }
 
-func (r ApiGetChassisConfigImportByMoidRequest) Execute() (ChassisConfigImport, *_nethttp.Response, error) {
+func (r ApiGetChassisConfigImportByMoidRequest) Execute() (*ChassisConfigImport, *http.Response, error) {
 	return r.ApiService.GetChassisConfigImportByMoidExecute(r)
 }
 
 /*
 GetChassisConfigImportByMoid Read a 'chassis.ConfigImport' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetChassisConfigImportByMoidRequest
 */
-func (a *ChassisApiService) GetChassisConfigImportByMoid(ctx _context.Context, moid string) ApiGetChassisConfigImportByMoidRequest {
+func (a *ChassisApiService) GetChassisConfigImportByMoid(ctx context.Context, moid string) ApiGetChassisConfigImportByMoidRequest {
 	return ApiGetChassisConfigImportByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -956,27 +941,25 @@ func (a *ChassisApiService) GetChassisConfigImportByMoid(ctx _context.Context, m
 
 // Execute executes the request
 //  @return ChassisConfigImport
-func (a *ChassisApiService) GetChassisConfigImportByMoidExecute(r ApiGetChassisConfigImportByMoidRequest) (ChassisConfigImport, *_nethttp.Response, error) {
+func (a *ChassisApiService) GetChassisConfigImportByMoidExecute(r ApiGetChassisConfigImportByMoidRequest) (*ChassisConfigImport, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ChassisConfigImport
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ChassisConfigImport
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChassisApiService.GetChassisConfigImportByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/chassis/ConfigImports/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -995,7 +978,7 @@ func (a *ChassisApiService) GetChassisConfigImportByMoidExecute(r ApiGetChassisC
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1005,15 +988,15 @@ func (a *ChassisApiService) GetChassisConfigImportByMoidExecute(r ApiGetChassisC
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1069,7 +1052,7 @@ func (a *ChassisApiService) GetChassisConfigImportByMoidExecute(r ApiGetChassisC
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1080,7 +1063,7 @@ func (a *ChassisApiService) GetChassisConfigImportByMoidExecute(r ApiGetChassisC
 }
 
 type ApiGetChassisConfigImportListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *ChassisApiService
 	filter      *string
 	orderby     *string
@@ -1161,17 +1144,17 @@ func (r ApiGetChassisConfigImportListRequest) Tags(tags string) ApiGetChassisCon
 	return r
 }
 
-func (r ApiGetChassisConfigImportListRequest) Execute() (ChassisConfigImportResponse, *_nethttp.Response, error) {
+func (r ApiGetChassisConfigImportListRequest) Execute() (*ChassisConfigImportResponse, *http.Response, error) {
 	return r.ApiService.GetChassisConfigImportListExecute(r)
 }
 
 /*
 GetChassisConfigImportList Read a 'chassis.ConfigImport' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetChassisConfigImportListRequest
 */
-func (a *ChassisApiService) GetChassisConfigImportList(ctx _context.Context) ApiGetChassisConfigImportListRequest {
+func (a *ChassisApiService) GetChassisConfigImportList(ctx context.Context) ApiGetChassisConfigImportListRequest {
 	return ApiGetChassisConfigImportListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1180,26 +1163,24 @@ func (a *ChassisApiService) GetChassisConfigImportList(ctx _context.Context) Api
 
 // Execute executes the request
 //  @return ChassisConfigImportResponse
-func (a *ChassisApiService) GetChassisConfigImportListExecute(r ApiGetChassisConfigImportListRequest) (ChassisConfigImportResponse, *_nethttp.Response, error) {
+func (a *ChassisApiService) GetChassisConfigImportListExecute(r ApiGetChassisConfigImportListRequest) (*ChassisConfigImportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ChassisConfigImportResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ChassisConfigImportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChassisApiService.GetChassisConfigImportList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/chassis/ConfigImports"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1251,7 +1232,7 @@ func (a *ChassisApiService) GetChassisConfigImportListExecute(r ApiGetChassisCon
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1261,15 +1242,15 @@ func (a *ChassisApiService) GetChassisConfigImportListExecute(r ApiGetChassisCon
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1325,7 +1306,7 @@ func (a *ChassisApiService) GetChassisConfigImportListExecute(r ApiGetChassisCon
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1336,23 +1317,23 @@ func (a *ChassisApiService) GetChassisConfigImportListExecute(r ApiGetChassisCon
 }
 
 type ApiGetChassisConfigResultByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ChassisApiService
 	moid       string
 }
 
-func (r ApiGetChassisConfigResultByMoidRequest) Execute() (ChassisConfigResult, *_nethttp.Response, error) {
+func (r ApiGetChassisConfigResultByMoidRequest) Execute() (*ChassisConfigResult, *http.Response, error) {
 	return r.ApiService.GetChassisConfigResultByMoidExecute(r)
 }
 
 /*
 GetChassisConfigResultByMoid Read a 'chassis.ConfigResult' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetChassisConfigResultByMoidRequest
 */
-func (a *ChassisApiService) GetChassisConfigResultByMoid(ctx _context.Context, moid string) ApiGetChassisConfigResultByMoidRequest {
+func (a *ChassisApiService) GetChassisConfigResultByMoid(ctx context.Context, moid string) ApiGetChassisConfigResultByMoidRequest {
 	return ApiGetChassisConfigResultByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1362,27 +1343,25 @@ func (a *ChassisApiService) GetChassisConfigResultByMoid(ctx _context.Context, m
 
 // Execute executes the request
 //  @return ChassisConfigResult
-func (a *ChassisApiService) GetChassisConfigResultByMoidExecute(r ApiGetChassisConfigResultByMoidRequest) (ChassisConfigResult, *_nethttp.Response, error) {
+func (a *ChassisApiService) GetChassisConfigResultByMoidExecute(r ApiGetChassisConfigResultByMoidRequest) (*ChassisConfigResult, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ChassisConfigResult
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ChassisConfigResult
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChassisApiService.GetChassisConfigResultByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/chassis/ConfigResults/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1401,7 +1380,7 @@ func (a *ChassisApiService) GetChassisConfigResultByMoidExecute(r ApiGetChassisC
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1411,15 +1390,15 @@ func (a *ChassisApiService) GetChassisConfigResultByMoidExecute(r ApiGetChassisC
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1475,7 +1454,7 @@ func (a *ChassisApiService) GetChassisConfigResultByMoidExecute(r ApiGetChassisC
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1486,23 +1465,23 @@ func (a *ChassisApiService) GetChassisConfigResultByMoidExecute(r ApiGetChassisC
 }
 
 type ApiGetChassisConfigResultEntryByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ChassisApiService
 	moid       string
 }
 
-func (r ApiGetChassisConfigResultEntryByMoidRequest) Execute() (ChassisConfigResultEntry, *_nethttp.Response, error) {
+func (r ApiGetChassisConfigResultEntryByMoidRequest) Execute() (*ChassisConfigResultEntry, *http.Response, error) {
 	return r.ApiService.GetChassisConfigResultEntryByMoidExecute(r)
 }
 
 /*
 GetChassisConfigResultEntryByMoid Read a 'chassis.ConfigResultEntry' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetChassisConfigResultEntryByMoidRequest
 */
-func (a *ChassisApiService) GetChassisConfigResultEntryByMoid(ctx _context.Context, moid string) ApiGetChassisConfigResultEntryByMoidRequest {
+func (a *ChassisApiService) GetChassisConfigResultEntryByMoid(ctx context.Context, moid string) ApiGetChassisConfigResultEntryByMoidRequest {
 	return ApiGetChassisConfigResultEntryByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1512,27 +1491,25 @@ func (a *ChassisApiService) GetChassisConfigResultEntryByMoid(ctx _context.Conte
 
 // Execute executes the request
 //  @return ChassisConfigResultEntry
-func (a *ChassisApiService) GetChassisConfigResultEntryByMoidExecute(r ApiGetChassisConfigResultEntryByMoidRequest) (ChassisConfigResultEntry, *_nethttp.Response, error) {
+func (a *ChassisApiService) GetChassisConfigResultEntryByMoidExecute(r ApiGetChassisConfigResultEntryByMoidRequest) (*ChassisConfigResultEntry, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ChassisConfigResultEntry
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ChassisConfigResultEntry
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChassisApiService.GetChassisConfigResultEntryByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/chassis/ConfigResultEntries/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1551,7 +1528,7 @@ func (a *ChassisApiService) GetChassisConfigResultEntryByMoidExecute(r ApiGetCha
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1561,15 +1538,15 @@ func (a *ChassisApiService) GetChassisConfigResultEntryByMoidExecute(r ApiGetCha
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1625,7 +1602,7 @@ func (a *ChassisApiService) GetChassisConfigResultEntryByMoidExecute(r ApiGetCha
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1636,7 +1613,7 @@ func (a *ChassisApiService) GetChassisConfigResultEntryByMoidExecute(r ApiGetCha
 }
 
 type ApiGetChassisConfigResultEntryListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *ChassisApiService
 	filter      *string
 	orderby     *string
@@ -1717,17 +1694,17 @@ func (r ApiGetChassisConfigResultEntryListRequest) Tags(tags string) ApiGetChass
 	return r
 }
 
-func (r ApiGetChassisConfigResultEntryListRequest) Execute() (ChassisConfigResultEntryResponse, *_nethttp.Response, error) {
+func (r ApiGetChassisConfigResultEntryListRequest) Execute() (*ChassisConfigResultEntryResponse, *http.Response, error) {
 	return r.ApiService.GetChassisConfigResultEntryListExecute(r)
 }
 
 /*
 GetChassisConfigResultEntryList Read a 'chassis.ConfigResultEntry' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetChassisConfigResultEntryListRequest
 */
-func (a *ChassisApiService) GetChassisConfigResultEntryList(ctx _context.Context) ApiGetChassisConfigResultEntryListRequest {
+func (a *ChassisApiService) GetChassisConfigResultEntryList(ctx context.Context) ApiGetChassisConfigResultEntryListRequest {
 	return ApiGetChassisConfigResultEntryListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1736,26 +1713,24 @@ func (a *ChassisApiService) GetChassisConfigResultEntryList(ctx _context.Context
 
 // Execute executes the request
 //  @return ChassisConfigResultEntryResponse
-func (a *ChassisApiService) GetChassisConfigResultEntryListExecute(r ApiGetChassisConfigResultEntryListRequest) (ChassisConfigResultEntryResponse, *_nethttp.Response, error) {
+func (a *ChassisApiService) GetChassisConfigResultEntryListExecute(r ApiGetChassisConfigResultEntryListRequest) (*ChassisConfigResultEntryResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ChassisConfigResultEntryResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ChassisConfigResultEntryResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChassisApiService.GetChassisConfigResultEntryList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/chassis/ConfigResultEntries"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1807,7 +1782,7 @@ func (a *ChassisApiService) GetChassisConfigResultEntryListExecute(r ApiGetChass
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1817,15 +1792,15 @@ func (a *ChassisApiService) GetChassisConfigResultEntryListExecute(r ApiGetChass
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1881,7 +1856,7 @@ func (a *ChassisApiService) GetChassisConfigResultEntryListExecute(r ApiGetChass
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1892,7 +1867,7 @@ func (a *ChassisApiService) GetChassisConfigResultEntryListExecute(r ApiGetChass
 }
 
 type ApiGetChassisConfigResultListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *ChassisApiService
 	filter      *string
 	orderby     *string
@@ -1973,17 +1948,17 @@ func (r ApiGetChassisConfigResultListRequest) Tags(tags string) ApiGetChassisCon
 	return r
 }
 
-func (r ApiGetChassisConfigResultListRequest) Execute() (ChassisConfigResultResponse, *_nethttp.Response, error) {
+func (r ApiGetChassisConfigResultListRequest) Execute() (*ChassisConfigResultResponse, *http.Response, error) {
 	return r.ApiService.GetChassisConfigResultListExecute(r)
 }
 
 /*
 GetChassisConfigResultList Read a 'chassis.ConfigResult' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetChassisConfigResultListRequest
 */
-func (a *ChassisApiService) GetChassisConfigResultList(ctx _context.Context) ApiGetChassisConfigResultListRequest {
+func (a *ChassisApiService) GetChassisConfigResultList(ctx context.Context) ApiGetChassisConfigResultListRequest {
 	return ApiGetChassisConfigResultListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1992,26 +1967,24 @@ func (a *ChassisApiService) GetChassisConfigResultList(ctx _context.Context) Api
 
 // Execute executes the request
 //  @return ChassisConfigResultResponse
-func (a *ChassisApiService) GetChassisConfigResultListExecute(r ApiGetChassisConfigResultListRequest) (ChassisConfigResultResponse, *_nethttp.Response, error) {
+func (a *ChassisApiService) GetChassisConfigResultListExecute(r ApiGetChassisConfigResultListRequest) (*ChassisConfigResultResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ChassisConfigResultResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ChassisConfigResultResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChassisApiService.GetChassisConfigResultList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/chassis/ConfigResults"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -2063,7 +2036,7 @@ func (a *ChassisApiService) GetChassisConfigResultListExecute(r ApiGetChassisCon
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2073,15 +2046,15 @@ func (a *ChassisApiService) GetChassisConfigResultListExecute(r ApiGetChassisCon
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2137,7 +2110,7 @@ func (a *ChassisApiService) GetChassisConfigResultListExecute(r ApiGetChassisCon
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2148,23 +2121,23 @@ func (a *ChassisApiService) GetChassisConfigResultListExecute(r ApiGetChassisCon
 }
 
 type ApiGetChassisIomProfileByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ChassisApiService
 	moid       string
 }
 
-func (r ApiGetChassisIomProfileByMoidRequest) Execute() (ChassisIomProfile, *_nethttp.Response, error) {
+func (r ApiGetChassisIomProfileByMoidRequest) Execute() (*ChassisIomProfile, *http.Response, error) {
 	return r.ApiService.GetChassisIomProfileByMoidExecute(r)
 }
 
 /*
 GetChassisIomProfileByMoid Read a 'chassis.IomProfile' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetChassisIomProfileByMoidRequest
 */
-func (a *ChassisApiService) GetChassisIomProfileByMoid(ctx _context.Context, moid string) ApiGetChassisIomProfileByMoidRequest {
+func (a *ChassisApiService) GetChassisIomProfileByMoid(ctx context.Context, moid string) ApiGetChassisIomProfileByMoidRequest {
 	return ApiGetChassisIomProfileByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2174,27 +2147,25 @@ func (a *ChassisApiService) GetChassisIomProfileByMoid(ctx _context.Context, moi
 
 // Execute executes the request
 //  @return ChassisIomProfile
-func (a *ChassisApiService) GetChassisIomProfileByMoidExecute(r ApiGetChassisIomProfileByMoidRequest) (ChassisIomProfile, *_nethttp.Response, error) {
+func (a *ChassisApiService) GetChassisIomProfileByMoidExecute(r ApiGetChassisIomProfileByMoidRequest) (*ChassisIomProfile, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ChassisIomProfile
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ChassisIomProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChassisApiService.GetChassisIomProfileByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/chassis/IomProfiles/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2213,7 +2184,7 @@ func (a *ChassisApiService) GetChassisIomProfileByMoidExecute(r ApiGetChassisIom
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2223,15 +2194,15 @@ func (a *ChassisApiService) GetChassisIomProfileByMoidExecute(r ApiGetChassisIom
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2287,7 +2258,7 @@ func (a *ChassisApiService) GetChassisIomProfileByMoidExecute(r ApiGetChassisIom
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2298,7 +2269,7 @@ func (a *ChassisApiService) GetChassisIomProfileByMoidExecute(r ApiGetChassisIom
 }
 
 type ApiGetChassisIomProfileListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *ChassisApiService
 	filter      *string
 	orderby     *string
@@ -2379,17 +2350,17 @@ func (r ApiGetChassisIomProfileListRequest) Tags(tags string) ApiGetChassisIomPr
 	return r
 }
 
-func (r ApiGetChassisIomProfileListRequest) Execute() (ChassisIomProfileResponse, *_nethttp.Response, error) {
+func (r ApiGetChassisIomProfileListRequest) Execute() (*ChassisIomProfileResponse, *http.Response, error) {
 	return r.ApiService.GetChassisIomProfileListExecute(r)
 }
 
 /*
 GetChassisIomProfileList Read a 'chassis.IomProfile' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetChassisIomProfileListRequest
 */
-func (a *ChassisApiService) GetChassisIomProfileList(ctx _context.Context) ApiGetChassisIomProfileListRequest {
+func (a *ChassisApiService) GetChassisIomProfileList(ctx context.Context) ApiGetChassisIomProfileListRequest {
 	return ApiGetChassisIomProfileListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2398,26 +2369,24 @@ func (a *ChassisApiService) GetChassisIomProfileList(ctx _context.Context) ApiGe
 
 // Execute executes the request
 //  @return ChassisIomProfileResponse
-func (a *ChassisApiService) GetChassisIomProfileListExecute(r ApiGetChassisIomProfileListRequest) (ChassisIomProfileResponse, *_nethttp.Response, error) {
+func (a *ChassisApiService) GetChassisIomProfileListExecute(r ApiGetChassisIomProfileListRequest) (*ChassisIomProfileResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ChassisIomProfileResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ChassisIomProfileResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChassisApiService.GetChassisIomProfileList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/chassis/IomProfiles"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -2469,7 +2438,7 @@ func (a *ChassisApiService) GetChassisIomProfileListExecute(r ApiGetChassisIomPr
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2479,15 +2448,15 @@ func (a *ChassisApiService) GetChassisIomProfileListExecute(r ApiGetChassisIomPr
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2543,7 +2512,7 @@ func (a *ChassisApiService) GetChassisIomProfileListExecute(r ApiGetChassisIomPr
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2554,23 +2523,23 @@ func (a *ChassisApiService) GetChassisIomProfileListExecute(r ApiGetChassisIomPr
 }
 
 type ApiGetChassisProfileByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ChassisApiService
 	moid       string
 }
 
-func (r ApiGetChassisProfileByMoidRequest) Execute() (ChassisProfile, *_nethttp.Response, error) {
+func (r ApiGetChassisProfileByMoidRequest) Execute() (*ChassisProfile, *http.Response, error) {
 	return r.ApiService.GetChassisProfileByMoidExecute(r)
 }
 
 /*
 GetChassisProfileByMoid Read a 'chassis.Profile' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetChassisProfileByMoidRequest
 */
-func (a *ChassisApiService) GetChassisProfileByMoid(ctx _context.Context, moid string) ApiGetChassisProfileByMoidRequest {
+func (a *ChassisApiService) GetChassisProfileByMoid(ctx context.Context, moid string) ApiGetChassisProfileByMoidRequest {
 	return ApiGetChassisProfileByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2580,27 +2549,25 @@ func (a *ChassisApiService) GetChassisProfileByMoid(ctx _context.Context, moid s
 
 // Execute executes the request
 //  @return ChassisProfile
-func (a *ChassisApiService) GetChassisProfileByMoidExecute(r ApiGetChassisProfileByMoidRequest) (ChassisProfile, *_nethttp.Response, error) {
+func (a *ChassisApiService) GetChassisProfileByMoidExecute(r ApiGetChassisProfileByMoidRequest) (*ChassisProfile, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ChassisProfile
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ChassisProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChassisApiService.GetChassisProfileByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/chassis/Profiles/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2619,7 +2586,7 @@ func (a *ChassisApiService) GetChassisProfileByMoidExecute(r ApiGetChassisProfil
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2629,15 +2596,15 @@ func (a *ChassisApiService) GetChassisProfileByMoidExecute(r ApiGetChassisProfil
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2693,7 +2660,7 @@ func (a *ChassisApiService) GetChassisProfileByMoidExecute(r ApiGetChassisProfil
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2704,7 +2671,7 @@ func (a *ChassisApiService) GetChassisProfileByMoidExecute(r ApiGetChassisProfil
 }
 
 type ApiGetChassisProfileListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *ChassisApiService
 	filter      *string
 	orderby     *string
@@ -2785,17 +2752,17 @@ func (r ApiGetChassisProfileListRequest) Tags(tags string) ApiGetChassisProfileL
 	return r
 }
 
-func (r ApiGetChassisProfileListRequest) Execute() (ChassisProfileResponse, *_nethttp.Response, error) {
+func (r ApiGetChassisProfileListRequest) Execute() (*ChassisProfileResponse, *http.Response, error) {
 	return r.ApiService.GetChassisProfileListExecute(r)
 }
 
 /*
 GetChassisProfileList Read a 'chassis.Profile' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetChassisProfileListRequest
 */
-func (a *ChassisApiService) GetChassisProfileList(ctx _context.Context) ApiGetChassisProfileListRequest {
+func (a *ChassisApiService) GetChassisProfileList(ctx context.Context) ApiGetChassisProfileListRequest {
 	return ApiGetChassisProfileListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2804,26 +2771,24 @@ func (a *ChassisApiService) GetChassisProfileList(ctx _context.Context) ApiGetCh
 
 // Execute executes the request
 //  @return ChassisProfileResponse
-func (a *ChassisApiService) GetChassisProfileListExecute(r ApiGetChassisProfileListRequest) (ChassisProfileResponse, *_nethttp.Response, error) {
+func (a *ChassisApiService) GetChassisProfileListExecute(r ApiGetChassisProfileListRequest) (*ChassisProfileResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ChassisProfileResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ChassisProfileResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChassisApiService.GetChassisProfileList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/chassis/Profiles"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -2875,7 +2840,7 @@ func (a *ChassisApiService) GetChassisProfileListExecute(r ApiGetChassisProfileL
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2885,15 +2850,15 @@ func (a *ChassisApiService) GetChassisProfileListExecute(r ApiGetChassisProfileL
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2949,7 +2914,7 @@ func (a *ChassisApiService) GetChassisProfileListExecute(r ApiGetChassisProfileL
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2960,7 +2925,7 @@ func (a *ChassisApiService) GetChassisProfileListExecute(r ApiGetChassisProfileL
 }
 
 type ApiPatchChassisProfileRequest struct {
-	ctx            _context.Context
+	ctx            context.Context
 	ApiService     *ChassisApiService
 	moid           string
 	chassisProfile *ChassisProfile
@@ -2979,18 +2944,18 @@ func (r ApiPatchChassisProfileRequest) IfMatch(ifMatch string) ApiPatchChassisPr
 	return r
 }
 
-func (r ApiPatchChassisProfileRequest) Execute() (ChassisProfile, *_nethttp.Response, error) {
+func (r ApiPatchChassisProfileRequest) Execute() (*ChassisProfile, *http.Response, error) {
 	return r.ApiService.PatchChassisProfileExecute(r)
 }
 
 /*
 PatchChassisProfile Update a 'chassis.Profile' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchChassisProfileRequest
 */
-func (a *ChassisApiService) PatchChassisProfile(ctx _context.Context, moid string) ApiPatchChassisProfileRequest {
+func (a *ChassisApiService) PatchChassisProfile(ctx context.Context, moid string) ApiPatchChassisProfileRequest {
 	return ApiPatchChassisProfileRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3000,27 +2965,25 @@ func (a *ChassisApiService) PatchChassisProfile(ctx _context.Context, moid strin
 
 // Execute executes the request
 //  @return ChassisProfile
-func (a *ChassisApiService) PatchChassisProfileExecute(r ApiPatchChassisProfileRequest) (ChassisProfile, *_nethttp.Response, error) {
+func (a *ChassisApiService) PatchChassisProfileExecute(r ApiPatchChassisProfileRequest) (*ChassisProfile, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ChassisProfile
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ChassisProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChassisApiService.PatchChassisProfile")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/chassis/Profiles/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.chassisProfile == nil {
 		return localVarReturnValue, nil, reportError("chassisProfile is required and must be specified")
 	}
@@ -3047,7 +3010,7 @@ func (a *ChassisApiService) PatchChassisProfileExecute(r ApiPatchChassisProfileR
 	}
 	// body params
 	localVarPostBody = r.chassisProfile
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3057,15 +3020,15 @@ func (a *ChassisApiService) PatchChassisProfileExecute(r ApiPatchChassisProfileR
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3121,7 +3084,7 @@ func (a *ChassisApiService) PatchChassisProfileExecute(r ApiPatchChassisProfileR
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3132,7 +3095,7 @@ func (a *ChassisApiService) PatchChassisProfileExecute(r ApiPatchChassisProfileR
 }
 
 type ApiUpdateChassisProfileRequest struct {
-	ctx            _context.Context
+	ctx            context.Context
 	ApiService     *ChassisApiService
 	moid           string
 	chassisProfile *ChassisProfile
@@ -3151,18 +3114,18 @@ func (r ApiUpdateChassisProfileRequest) IfMatch(ifMatch string) ApiUpdateChassis
 	return r
 }
 
-func (r ApiUpdateChassisProfileRequest) Execute() (ChassisProfile, *_nethttp.Response, error) {
+func (r ApiUpdateChassisProfileRequest) Execute() (*ChassisProfile, *http.Response, error) {
 	return r.ApiService.UpdateChassisProfileExecute(r)
 }
 
 /*
 UpdateChassisProfile Update a 'chassis.Profile' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateChassisProfileRequest
 */
-func (a *ChassisApiService) UpdateChassisProfile(ctx _context.Context, moid string) ApiUpdateChassisProfileRequest {
+func (a *ChassisApiService) UpdateChassisProfile(ctx context.Context, moid string) ApiUpdateChassisProfileRequest {
 	return ApiUpdateChassisProfileRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3172,27 +3135,25 @@ func (a *ChassisApiService) UpdateChassisProfile(ctx _context.Context, moid stri
 
 // Execute executes the request
 //  @return ChassisProfile
-func (a *ChassisApiService) UpdateChassisProfileExecute(r ApiUpdateChassisProfileRequest) (ChassisProfile, *_nethttp.Response, error) {
+func (a *ChassisApiService) UpdateChassisProfileExecute(r ApiUpdateChassisProfileRequest) (*ChassisProfile, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ChassisProfile
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ChassisProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChassisApiService.UpdateChassisProfile")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/chassis/Profiles/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.chassisProfile == nil {
 		return localVarReturnValue, nil, reportError("chassisProfile is required and must be specified")
 	}
@@ -3219,7 +3180,7 @@ func (a *ChassisApiService) UpdateChassisProfileExecute(r ApiUpdateChassisProfil
 	}
 	// body params
 	localVarPostBody = r.chassisProfile
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3229,15 +3190,15 @@ func (a *ChassisApiService) UpdateChassisProfileExecute(r ApiUpdateChassisProfil
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3293,7 +3254,7 @@ func (a *ChassisApiService) UpdateChassisProfileExecute(r ApiUpdateChassisProfil
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

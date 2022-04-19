@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -22,7 +22,11 @@ type NotificationAccountSubscriptionAllOf struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// The name of the subscription.
-	Name                 *string                 `json:"Name,omitempty"`
+	Name *string `json:"Name,omitempty"`
+	// The chosen subscription type imposes it is own validation rules. When 'email' type is chosen, actions array can contain only one entry and it is entry should be of can be only notification.SendEmail; conditions can contain only notification.AlarmMoCondition and condition types should be unique. When the 'webhook' type is chosen, the actions array can contain only one entry and it is entry should be of can be only notification.TriggerWebhook; conditions can contain up to a limited amount of entries and all of them should be of type notification.MoCondition. * `email` - Email type requires usage of notification.SendEmail complex types for actionsand notification.AlarmMoCondition complex types for conditions. * `webhook` - Webhook type requires usage of notification.TriggerWebhook complex types for actionsand notification.MoCondition complex types for conditions.
+	Type *string `json:"Type,omitempty"`
+	// Used to verify the actions of the Subscription MO. For a 'webhook' type Ping event is sent to verify that the webhook server is accessible. For an 'email' type there will be a verification email sent. * `none` - No actions will be verified. Default value. * `all` - All actions will be re-verified. The previous state of the verification will be preserved.
+	Verify               *string                 `json:"Verify,omitempty"`
 	Account              *IamAccountRelationship `json:"Account,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -37,6 +41,10 @@ func NewNotificationAccountSubscriptionAllOf(classId string, objectType string) 
 	this := NotificationAccountSubscriptionAllOf{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var type_ string = "email"
+	this.Type = &type_
+	var verify string = "none"
+	this.Verify = &verify
 	return &this
 }
 
@@ -49,6 +57,10 @@ func NewNotificationAccountSubscriptionAllOfWithDefaults() *NotificationAccountS
 	this.ClassId = classId
 	var objectType string = "notification.AccountSubscription"
 	this.ObjectType = objectType
+	var type_ string = "email"
+	this.Type = &type_
+	var verify string = "none"
+	this.Verify = &verify
 	return &this
 }
 
@@ -132,6 +144,70 @@ func (o *NotificationAccountSubscriptionAllOf) SetName(v string) {
 	o.Name = &v
 }
 
+// GetType returns the Type field value if set, zero value otherwise.
+func (o *NotificationAccountSubscriptionAllOf) GetType() string {
+	if o == nil || o.Type == nil {
+		var ret string
+		return ret
+	}
+	return *o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NotificationAccountSubscriptionAllOf) GetTypeOk() (*string, bool) {
+	if o == nil || o.Type == nil {
+		return nil, false
+	}
+	return o.Type, true
+}
+
+// HasType returns a boolean if a field has been set.
+func (o *NotificationAccountSubscriptionAllOf) HasType() bool {
+	if o != nil && o.Type != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given string and assigns it to the Type field.
+func (o *NotificationAccountSubscriptionAllOf) SetType(v string) {
+	o.Type = &v
+}
+
+// GetVerify returns the Verify field value if set, zero value otherwise.
+func (o *NotificationAccountSubscriptionAllOf) GetVerify() string {
+	if o == nil || o.Verify == nil {
+		var ret string
+		return ret
+	}
+	return *o.Verify
+}
+
+// GetVerifyOk returns a tuple with the Verify field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NotificationAccountSubscriptionAllOf) GetVerifyOk() (*string, bool) {
+	if o == nil || o.Verify == nil {
+		return nil, false
+	}
+	return o.Verify, true
+}
+
+// HasVerify returns a boolean if a field has been set.
+func (o *NotificationAccountSubscriptionAllOf) HasVerify() bool {
+	if o != nil && o.Verify != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetVerify gets a reference to the given string and assigns it to the Verify field.
+func (o *NotificationAccountSubscriptionAllOf) SetVerify(v string) {
+	o.Verify = &v
+}
+
 // GetAccount returns the Account field value if set, zero value otherwise.
 func (o *NotificationAccountSubscriptionAllOf) GetAccount() IamAccountRelationship {
 	if o == nil || o.Account == nil {
@@ -175,6 +251,12 @@ func (o NotificationAccountSubscriptionAllOf) MarshalJSON() ([]byte, error) {
 	if o.Name != nil {
 		toSerialize["Name"] = o.Name
 	}
+	if o.Type != nil {
+		toSerialize["Type"] = o.Type
+	}
+	if o.Verify != nil {
+		toSerialize["Verify"] = o.Verify
+	}
 	if o.Account != nil {
 		toSerialize["Account"] = o.Account
 	}
@@ -199,6 +281,8 @@ func (o *NotificationAccountSubscriptionAllOf) UnmarshalJSON(bytes []byte) (err 
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Name")
+		delete(additionalProperties, "Type")
+		delete(additionalProperties, "Verify")
 		delete(additionalProperties, "Account")
 		o.AdditionalProperties = additionalProperties
 	}

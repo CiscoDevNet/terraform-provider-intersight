@@ -1137,7 +1137,6 @@ func dataSourceEquipmentFan() *schema.Resource {
 
 func dataSourceEquipmentFanRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.EquipmentFan{}
@@ -1755,7 +1754,7 @@ func dataSourceEquipmentFanRead(c context.Context, d *schema.ResourceData, meta 
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of EquipmentFan: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of EquipmentFan: %s", responseErr.Error())
@@ -1772,7 +1771,7 @@ func dataSourceEquipmentFanRead(c context.Context, d *schema.ResourceData, meta 
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching EquipmentFan: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching EquipmentFan: %s", responseErr.Error())

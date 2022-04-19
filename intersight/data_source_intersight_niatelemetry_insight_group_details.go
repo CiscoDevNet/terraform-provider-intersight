@@ -104,6 +104,11 @@ func dataSourceNiatelemetryInsightGroupDetails() *schema.Resource {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"flow_settings_status": {
+			Description: "Flow setting status of the Insight group.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"group_name": {
 			Description: "Name of the Insight group.",
 			Type:        schema.TypeString,
@@ -517,6 +522,11 @@ func dataSourceNiatelemetryInsightGroupDetails() *schema.Resource {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"flow_settings_status": {
+			Description: "Flow setting status of the Insight group.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"group_name": {
 			Description: "Name of the Insight group.",
 			Type:        schema.TypeString,
@@ -853,7 +863,6 @@ func dataSourceNiatelemetryInsightGroupDetails() *schema.Resource {
 
 func dataSourceNiatelemetryInsightGroupDetailsRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.NiatelemetryInsightGroupDetails{}
@@ -954,6 +963,11 @@ func dataSourceNiatelemetryInsightGroupDetailsRead(c context.Context, d *schema.
 	if v, ok := d.GetOkExists("flow_settings_count"); ok {
 		x := int64(v.(int))
 		o.SetFlowSettingsCount(x)
+	}
+
+	if v, ok := d.GetOk("flow_settings_status"); ok {
+		x := (v.(string))
+		o.SetFlowSettingsStatus(x)
 	}
 
 	if v, ok := d.GetOk("group_name"); ok {
@@ -1299,7 +1313,7 @@ func dataSourceNiatelemetryInsightGroupDetailsRead(c context.Context, d *schema.
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of NiatelemetryInsightGroupDetails: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of NiatelemetryInsightGroupDetails: %s", responseErr.Error())
@@ -1316,7 +1330,7 @@ func dataSourceNiatelemetryInsightGroupDetailsRead(c context.Context, d *schema.
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching NiatelemetryInsightGroupDetails: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching NiatelemetryInsightGroupDetails: %s", responseErr.Error())
@@ -1341,6 +1355,7 @@ func dataSourceNiatelemetryInsightGroupDetailsRead(c context.Context, d *schema.
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["email_settings_count"] = (s.GetEmailSettingsCount())
 				temp["flow_settings_count"] = (s.GetFlowSettingsCount())
+				temp["flow_settings_status"] = (s.GetFlowSettingsStatus())
 				temp["group_name"] = (s.GetGroupName())
 
 				temp["insight_sites"] = flattenListNiatelemetrySites(s.GetInsightSites(), d)

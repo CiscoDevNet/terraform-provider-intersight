@@ -520,7 +520,6 @@ func resourceOprsDeployment() *schema.Resource {
 
 func resourceOprsDeploymentCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewOprsDeploymentWithDefaults()
@@ -703,7 +702,7 @@ func resourceOprsDeploymentCreate(c context.Context, d *schema.ResourceData, met
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating OprsDeployment: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating OprsDeployment: %s", responseErr.Error())
@@ -715,7 +714,6 @@ func resourceOprsDeploymentCreate(c context.Context, d *schema.ResourceData, met
 
 func resourceOprsDeploymentRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.OprsApi.GetOprsDeploymentByMoid(conn.ctx, d.Id())
@@ -728,7 +726,7 @@ func resourceOprsDeploymentRead(c context.Context, d *schema.ResourceData, meta 
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching OprsDeployment: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching OprsDeployment: %s", responseErr.Error())
@@ -841,7 +839,6 @@ func resourceOprsDeploymentRead(c context.Context, d *schema.ResourceData, meta 
 
 func resourceOprsDeploymentUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.OprsDeployment{}
@@ -1032,7 +1029,7 @@ func resourceOprsDeploymentUpdate(c context.Context, d *schema.ResourceData, met
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating OprsDeployment: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating OprsDeployment: %s", responseErr.Error())
@@ -1044,7 +1041,6 @@ func resourceOprsDeploymentUpdate(c context.Context, d *schema.ResourceData, met
 
 func resourceOprsDeploymentDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.OprsApi.DeleteOprsDeployment(conn.ctx, d.Id())
@@ -1056,7 +1052,7 @@ func resourceOprsDeploymentDelete(c context.Context, d *schema.ResourceData, met
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting OprsDeployment object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting OprsDeployment object: %s", deleteErr.Error())

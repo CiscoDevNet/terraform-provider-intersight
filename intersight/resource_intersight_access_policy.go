@@ -739,7 +739,6 @@ func resourceAccessPolicy() *schema.Resource {
 
 func resourceAccessPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewAccessPolicyWithDefaults()
@@ -1160,7 +1159,7 @@ func resourceAccessPolicyCreate(c context.Context, d *schema.ResourceData, meta 
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating AccessPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating AccessPolicy: %s", responseErr.Error())
@@ -1171,7 +1170,6 @@ func resourceAccessPolicyCreate(c context.Context, d *schema.ResourceData, meta 
 }
 func detachAccessPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.AccessPolicy{}
@@ -1184,7 +1182,7 @@ func detachAccessPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.D
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while detaching profile/profiles: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while detaching profile/profiles: %s", responseErr.Error())
@@ -1194,7 +1192,6 @@ func detachAccessPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.D
 
 func resourceAccessPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.AccessApi.GetAccessPolicyByMoid(conn.ctx, d.Id())
@@ -1207,7 +1204,7 @@ func resourceAccessPolicyRead(c context.Context, d *schema.ResourceData, meta in
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching AccessPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching AccessPolicy: %s", responseErr.Error())
@@ -1324,7 +1321,6 @@ func resourceAccessPolicyRead(c context.Context, d *schema.ResourceData, meta in
 
 func resourceAccessPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.AccessPolicy{}
@@ -1755,7 +1751,7 @@ func resourceAccessPolicyUpdate(c context.Context, d *schema.ResourceData, meta 
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating AccessPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating AccessPolicy: %s", responseErr.Error())
@@ -1767,7 +1763,6 @@ func resourceAccessPolicyUpdate(c context.Context, d *schema.ResourceData, meta 
 
 func resourceAccessPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	if p, ok := d.GetOk("profiles"); ok {
@@ -1787,7 +1782,7 @@ func resourceAccessPolicyDelete(c context.Context, d *schema.ResourceData, meta 
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting AccessPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting AccessPolicy object: %s", deleteErr.Error())

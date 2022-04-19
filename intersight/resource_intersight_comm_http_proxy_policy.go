@@ -517,7 +517,6 @@ func resourceCommHttpProxyPolicy() *schema.Resource {
 
 func resourceCommHttpProxyPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewCommHttpProxyPolicyWithDefaults()
@@ -695,7 +694,7 @@ func resourceCommHttpProxyPolicyCreate(c context.Context, d *schema.ResourceData
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating CommHttpProxyPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating CommHttpProxyPolicy: %s", responseErr.Error())
@@ -707,7 +706,6 @@ func resourceCommHttpProxyPolicyCreate(c context.Context, d *schema.ResourceData
 
 func resourceCommHttpProxyPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.CommApi.GetCommHttpProxyPolicyByMoid(conn.ctx, d.Id())
@@ -720,7 +718,7 @@ func resourceCommHttpProxyPolicyRead(c context.Context, d *schema.ResourceData, 
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching CommHttpProxyPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching CommHttpProxyPolicy: %s", responseErr.Error())
@@ -825,7 +823,6 @@ func resourceCommHttpProxyPolicyRead(c context.Context, d *schema.ResourceData, 
 
 func resourceCommHttpProxyPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.CommHttpProxyPolicy{}
@@ -1010,7 +1007,7 @@ func resourceCommHttpProxyPolicyUpdate(c context.Context, d *schema.ResourceData
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating CommHttpProxyPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating CommHttpProxyPolicy: %s", responseErr.Error())
@@ -1022,7 +1019,6 @@ func resourceCommHttpProxyPolicyUpdate(c context.Context, d *schema.ResourceData
 
 func resourceCommHttpProxyPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.CommApi.DeleteCommHttpProxyPolicy(conn.ctx, d.Id())
@@ -1034,7 +1030,7 @@ func resourceCommHttpProxyPolicyDelete(c context.Context, d *schema.ResourceData
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting CommHttpProxyPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting CommHttpProxyPolicy object: %s", deleteErr.Error())

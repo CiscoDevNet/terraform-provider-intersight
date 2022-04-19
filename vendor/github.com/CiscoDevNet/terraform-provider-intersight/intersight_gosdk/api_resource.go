@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,23 +13,18 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // ResourceApiService ResourceApi service
 type ResourceApiService service
 
 type ApiCreateResourceGroupRequest struct {
-	ctx           _context.Context
+	ctx           context.Context
 	ApiService    *ResourceApiService
 	resourceGroup *ResourceGroup
 	ifMatch       *string
@@ -54,17 +49,17 @@ func (r ApiCreateResourceGroupRequest) IfNoneMatch(ifNoneMatch string) ApiCreate
 	return r
 }
 
-func (r ApiCreateResourceGroupRequest) Execute() (ResourceGroup, *_nethttp.Response, error) {
+func (r ApiCreateResourceGroupRequest) Execute() (*ResourceGroup, *http.Response, error) {
 	return r.ApiService.CreateResourceGroupExecute(r)
 }
 
 /*
 CreateResourceGroup Create a 'resource.Group' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateResourceGroupRequest
 */
-func (a *ResourceApiService) CreateResourceGroup(ctx _context.Context) ApiCreateResourceGroupRequest {
+func (a *ResourceApiService) CreateResourceGroup(ctx context.Context) ApiCreateResourceGroupRequest {
 	return ApiCreateResourceGroupRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -73,26 +68,24 @@ func (a *ResourceApiService) CreateResourceGroup(ctx _context.Context) ApiCreate
 
 // Execute executes the request
 //  @return ResourceGroup
-func (a *ResourceApiService) CreateResourceGroupExecute(r ApiCreateResourceGroupRequest) (ResourceGroup, *_nethttp.Response, error) {
+func (a *ResourceApiService) CreateResourceGroupExecute(r ApiCreateResourceGroupRequest) (*ResourceGroup, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ResourceGroup
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ResourceGroup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourceApiService.CreateResourceGroup")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resource/Groups"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.resourceGroup == nil {
 		return localVarReturnValue, nil, reportError("resourceGroup is required and must be specified")
 	}
@@ -122,7 +115,7 @@ func (a *ResourceApiService) CreateResourceGroupExecute(r ApiCreateResourceGroup
 	}
 	// body params
 	localVarPostBody = r.resourceGroup
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -132,15 +125,15 @@ func (a *ResourceApiService) CreateResourceGroupExecute(r ApiCreateResourceGroup
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -196,7 +189,7 @@ func (a *ResourceApiService) CreateResourceGroupExecute(r ApiCreateResourceGroup
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -207,7 +200,7 @@ func (a *ResourceApiService) CreateResourceGroupExecute(r ApiCreateResourceGroup
 }
 
 type ApiCreateResourceReservationRequest struct {
-	ctx                 _context.Context
+	ctx                 context.Context
 	ApiService          *ResourceApiService
 	resourceReservation *ResourceReservation
 	ifMatch             *string
@@ -232,17 +225,17 @@ func (r ApiCreateResourceReservationRequest) IfNoneMatch(ifNoneMatch string) Api
 	return r
 }
 
-func (r ApiCreateResourceReservationRequest) Execute() (ResourceReservation, *_nethttp.Response, error) {
+func (r ApiCreateResourceReservationRequest) Execute() (*ResourceReservation, *http.Response, error) {
 	return r.ApiService.CreateResourceReservationExecute(r)
 }
 
 /*
 CreateResourceReservation Create a 'resource.Reservation' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateResourceReservationRequest
 */
-func (a *ResourceApiService) CreateResourceReservation(ctx _context.Context) ApiCreateResourceReservationRequest {
+func (a *ResourceApiService) CreateResourceReservation(ctx context.Context) ApiCreateResourceReservationRequest {
 	return ApiCreateResourceReservationRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -251,26 +244,24 @@ func (a *ResourceApiService) CreateResourceReservation(ctx _context.Context) Api
 
 // Execute executes the request
 //  @return ResourceReservation
-func (a *ResourceApiService) CreateResourceReservationExecute(r ApiCreateResourceReservationRequest) (ResourceReservation, *_nethttp.Response, error) {
+func (a *ResourceApiService) CreateResourceReservationExecute(r ApiCreateResourceReservationRequest) (*ResourceReservation, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ResourceReservation
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ResourceReservation
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourceApiService.CreateResourceReservation")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resource/Reservations"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.resourceReservation == nil {
 		return localVarReturnValue, nil, reportError("resourceReservation is required and must be specified")
 	}
@@ -300,7 +291,7 @@ func (a *ResourceApiService) CreateResourceReservationExecute(r ApiCreateResourc
 	}
 	// body params
 	localVarPostBody = r.resourceReservation
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -310,15 +301,15 @@ func (a *ResourceApiService) CreateResourceReservationExecute(r ApiCreateResourc
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -374,7 +365,7 @@ func (a *ResourceApiService) CreateResourceReservationExecute(r ApiCreateResourc
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -385,23 +376,23 @@ func (a *ResourceApiService) CreateResourceReservationExecute(r ApiCreateResourc
 }
 
 type ApiDeleteResourceGroupRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ResourceApiService
 	moid       string
 }
 
-func (r ApiDeleteResourceGroupRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteResourceGroupRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteResourceGroupExecute(r)
 }
 
 /*
 DeleteResourceGroup Delete a 'resource.Group' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteResourceGroupRequest
 */
-func (a *ResourceApiService) DeleteResourceGroup(ctx _context.Context, moid string) ApiDeleteResourceGroupRequest {
+func (a *ResourceApiService) DeleteResourceGroup(ctx context.Context, moid string) ApiDeleteResourceGroupRequest {
 	return ApiDeleteResourceGroupRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -410,26 +401,24 @@ func (a *ResourceApiService) DeleteResourceGroup(ctx _context.Context, moid stri
 }
 
 // Execute executes the request
-func (a *ResourceApiService) DeleteResourceGroupExecute(r ApiDeleteResourceGroupRequest) (*_nethttp.Response, error) {
+func (a *ResourceApiService) DeleteResourceGroupExecute(r ApiDeleteResourceGroupRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourceApiService.DeleteResourceGroup")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resource/Groups/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -448,7 +437,7 @@ func (a *ResourceApiService) DeleteResourceGroupExecute(r ApiDeleteResourceGroup
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -458,15 +447,15 @@ func (a *ResourceApiService) DeleteResourceGroupExecute(r ApiDeleteResourceGroup
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -524,23 +513,23 @@ func (a *ResourceApiService) DeleteResourceGroupExecute(r ApiDeleteResourceGroup
 }
 
 type ApiDeleteResourceReservationRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ResourceApiService
 	moid       string
 }
 
-func (r ApiDeleteResourceReservationRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteResourceReservationRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteResourceReservationExecute(r)
 }
 
 /*
 DeleteResourceReservation Delete a 'resource.Reservation' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteResourceReservationRequest
 */
-func (a *ResourceApiService) DeleteResourceReservation(ctx _context.Context, moid string) ApiDeleteResourceReservationRequest {
+func (a *ResourceApiService) DeleteResourceReservation(ctx context.Context, moid string) ApiDeleteResourceReservationRequest {
 	return ApiDeleteResourceReservationRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -549,26 +538,24 @@ func (a *ResourceApiService) DeleteResourceReservation(ctx _context.Context, moi
 }
 
 // Execute executes the request
-func (a *ResourceApiService) DeleteResourceReservationExecute(r ApiDeleteResourceReservationRequest) (*_nethttp.Response, error) {
+func (a *ResourceApiService) DeleteResourceReservationExecute(r ApiDeleteResourceReservationRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourceApiService.DeleteResourceReservation")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resource/Reservations/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -587,7 +574,7 @@ func (a *ResourceApiService) DeleteResourceReservationExecute(r ApiDeleteResourc
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -597,15 +584,15 @@ func (a *ResourceApiService) DeleteResourceReservationExecute(r ApiDeleteResourc
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -663,23 +650,23 @@ func (a *ResourceApiService) DeleteResourceReservationExecute(r ApiDeleteResourc
 }
 
 type ApiGetResourceGroupByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ResourceApiService
 	moid       string
 }
 
-func (r ApiGetResourceGroupByMoidRequest) Execute() (ResourceGroup, *_nethttp.Response, error) {
+func (r ApiGetResourceGroupByMoidRequest) Execute() (*ResourceGroup, *http.Response, error) {
 	return r.ApiService.GetResourceGroupByMoidExecute(r)
 }
 
 /*
 GetResourceGroupByMoid Read a 'resource.Group' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetResourceGroupByMoidRequest
 */
-func (a *ResourceApiService) GetResourceGroupByMoid(ctx _context.Context, moid string) ApiGetResourceGroupByMoidRequest {
+func (a *ResourceApiService) GetResourceGroupByMoid(ctx context.Context, moid string) ApiGetResourceGroupByMoidRequest {
 	return ApiGetResourceGroupByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -689,27 +676,25 @@ func (a *ResourceApiService) GetResourceGroupByMoid(ctx _context.Context, moid s
 
 // Execute executes the request
 //  @return ResourceGroup
-func (a *ResourceApiService) GetResourceGroupByMoidExecute(r ApiGetResourceGroupByMoidRequest) (ResourceGroup, *_nethttp.Response, error) {
+func (a *ResourceApiService) GetResourceGroupByMoidExecute(r ApiGetResourceGroupByMoidRequest) (*ResourceGroup, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ResourceGroup
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ResourceGroup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourceApiService.GetResourceGroupByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resource/Groups/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -728,7 +713,7 @@ func (a *ResourceApiService) GetResourceGroupByMoidExecute(r ApiGetResourceGroup
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -738,15 +723,15 @@ func (a *ResourceApiService) GetResourceGroupByMoidExecute(r ApiGetResourceGroup
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -802,7 +787,7 @@ func (a *ResourceApiService) GetResourceGroupByMoidExecute(r ApiGetResourceGroup
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -813,7 +798,7 @@ func (a *ResourceApiService) GetResourceGroupByMoidExecute(r ApiGetResourceGroup
 }
 
 type ApiGetResourceGroupListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *ResourceApiService
 	filter      *string
 	orderby     *string
@@ -894,17 +879,17 @@ func (r ApiGetResourceGroupListRequest) Tags(tags string) ApiGetResourceGroupLis
 	return r
 }
 
-func (r ApiGetResourceGroupListRequest) Execute() (ResourceGroupResponse, *_nethttp.Response, error) {
+func (r ApiGetResourceGroupListRequest) Execute() (*ResourceGroupResponse, *http.Response, error) {
 	return r.ApiService.GetResourceGroupListExecute(r)
 }
 
 /*
 GetResourceGroupList Read a 'resource.Group' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetResourceGroupListRequest
 */
-func (a *ResourceApiService) GetResourceGroupList(ctx _context.Context) ApiGetResourceGroupListRequest {
+func (a *ResourceApiService) GetResourceGroupList(ctx context.Context) ApiGetResourceGroupListRequest {
 	return ApiGetResourceGroupListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -913,26 +898,24 @@ func (a *ResourceApiService) GetResourceGroupList(ctx _context.Context) ApiGetRe
 
 // Execute executes the request
 //  @return ResourceGroupResponse
-func (a *ResourceApiService) GetResourceGroupListExecute(r ApiGetResourceGroupListRequest) (ResourceGroupResponse, *_nethttp.Response, error) {
+func (a *ResourceApiService) GetResourceGroupListExecute(r ApiGetResourceGroupListRequest) (*ResourceGroupResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ResourceGroupResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ResourceGroupResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourceApiService.GetResourceGroupList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resource/Groups"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -984,7 +967,7 @@ func (a *ResourceApiService) GetResourceGroupListExecute(r ApiGetResourceGroupLi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -994,15 +977,15 @@ func (a *ResourceApiService) GetResourceGroupListExecute(r ApiGetResourceGroupLi
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1058,7 +1041,7 @@ func (a *ResourceApiService) GetResourceGroupListExecute(r ApiGetResourceGroupLi
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1069,23 +1052,23 @@ func (a *ResourceApiService) GetResourceGroupListExecute(r ApiGetResourceGroupLi
 }
 
 type ApiGetResourceGroupMemberByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ResourceApiService
 	moid       string
 }
 
-func (r ApiGetResourceGroupMemberByMoidRequest) Execute() (ResourceGroupMember, *_nethttp.Response, error) {
+func (r ApiGetResourceGroupMemberByMoidRequest) Execute() (*ResourceGroupMember, *http.Response, error) {
 	return r.ApiService.GetResourceGroupMemberByMoidExecute(r)
 }
 
 /*
 GetResourceGroupMemberByMoid Read a 'resource.GroupMember' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetResourceGroupMemberByMoidRequest
 */
-func (a *ResourceApiService) GetResourceGroupMemberByMoid(ctx _context.Context, moid string) ApiGetResourceGroupMemberByMoidRequest {
+func (a *ResourceApiService) GetResourceGroupMemberByMoid(ctx context.Context, moid string) ApiGetResourceGroupMemberByMoidRequest {
 	return ApiGetResourceGroupMemberByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1095,27 +1078,25 @@ func (a *ResourceApiService) GetResourceGroupMemberByMoid(ctx _context.Context, 
 
 // Execute executes the request
 //  @return ResourceGroupMember
-func (a *ResourceApiService) GetResourceGroupMemberByMoidExecute(r ApiGetResourceGroupMemberByMoidRequest) (ResourceGroupMember, *_nethttp.Response, error) {
+func (a *ResourceApiService) GetResourceGroupMemberByMoidExecute(r ApiGetResourceGroupMemberByMoidRequest) (*ResourceGroupMember, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ResourceGroupMember
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ResourceGroupMember
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourceApiService.GetResourceGroupMemberByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resource/GroupMembers/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1134,7 +1115,7 @@ func (a *ResourceApiService) GetResourceGroupMemberByMoidExecute(r ApiGetResourc
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1144,15 +1125,15 @@ func (a *ResourceApiService) GetResourceGroupMemberByMoidExecute(r ApiGetResourc
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1208,7 +1189,7 @@ func (a *ResourceApiService) GetResourceGroupMemberByMoidExecute(r ApiGetResourc
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1219,7 +1200,7 @@ func (a *ResourceApiService) GetResourceGroupMemberByMoidExecute(r ApiGetResourc
 }
 
 type ApiGetResourceGroupMemberListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *ResourceApiService
 	filter      *string
 	orderby     *string
@@ -1300,17 +1281,17 @@ func (r ApiGetResourceGroupMemberListRequest) Tags(tags string) ApiGetResourceGr
 	return r
 }
 
-func (r ApiGetResourceGroupMemberListRequest) Execute() (ResourceGroupMemberResponse, *_nethttp.Response, error) {
+func (r ApiGetResourceGroupMemberListRequest) Execute() (*ResourceGroupMemberResponse, *http.Response, error) {
 	return r.ApiService.GetResourceGroupMemberListExecute(r)
 }
 
 /*
 GetResourceGroupMemberList Read a 'resource.GroupMember' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetResourceGroupMemberListRequest
 */
-func (a *ResourceApiService) GetResourceGroupMemberList(ctx _context.Context) ApiGetResourceGroupMemberListRequest {
+func (a *ResourceApiService) GetResourceGroupMemberList(ctx context.Context) ApiGetResourceGroupMemberListRequest {
 	return ApiGetResourceGroupMemberListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1319,26 +1300,24 @@ func (a *ResourceApiService) GetResourceGroupMemberList(ctx _context.Context) Ap
 
 // Execute executes the request
 //  @return ResourceGroupMemberResponse
-func (a *ResourceApiService) GetResourceGroupMemberListExecute(r ApiGetResourceGroupMemberListRequest) (ResourceGroupMemberResponse, *_nethttp.Response, error) {
+func (a *ResourceApiService) GetResourceGroupMemberListExecute(r ApiGetResourceGroupMemberListRequest) (*ResourceGroupMemberResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ResourceGroupMemberResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ResourceGroupMemberResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourceApiService.GetResourceGroupMemberList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resource/GroupMembers"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1390,7 +1369,7 @@ func (a *ResourceApiService) GetResourceGroupMemberListExecute(r ApiGetResourceG
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1400,15 +1379,15 @@ func (a *ResourceApiService) GetResourceGroupMemberListExecute(r ApiGetResourceG
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1464,7 +1443,7 @@ func (a *ResourceApiService) GetResourceGroupMemberListExecute(r ApiGetResourceG
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1475,23 +1454,23 @@ func (a *ResourceApiService) GetResourceGroupMemberListExecute(r ApiGetResourceG
 }
 
 type ApiGetResourceLicenseResourceCountByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ResourceApiService
 	moid       string
 }
 
-func (r ApiGetResourceLicenseResourceCountByMoidRequest) Execute() (ResourceLicenseResourceCount, *_nethttp.Response, error) {
+func (r ApiGetResourceLicenseResourceCountByMoidRequest) Execute() (*ResourceLicenseResourceCount, *http.Response, error) {
 	return r.ApiService.GetResourceLicenseResourceCountByMoidExecute(r)
 }
 
 /*
 GetResourceLicenseResourceCountByMoid Read a 'resource.LicenseResourceCount' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetResourceLicenseResourceCountByMoidRequest
 */
-func (a *ResourceApiService) GetResourceLicenseResourceCountByMoid(ctx _context.Context, moid string) ApiGetResourceLicenseResourceCountByMoidRequest {
+func (a *ResourceApiService) GetResourceLicenseResourceCountByMoid(ctx context.Context, moid string) ApiGetResourceLicenseResourceCountByMoidRequest {
 	return ApiGetResourceLicenseResourceCountByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1501,27 +1480,25 @@ func (a *ResourceApiService) GetResourceLicenseResourceCountByMoid(ctx _context.
 
 // Execute executes the request
 //  @return ResourceLicenseResourceCount
-func (a *ResourceApiService) GetResourceLicenseResourceCountByMoidExecute(r ApiGetResourceLicenseResourceCountByMoidRequest) (ResourceLicenseResourceCount, *_nethttp.Response, error) {
+func (a *ResourceApiService) GetResourceLicenseResourceCountByMoidExecute(r ApiGetResourceLicenseResourceCountByMoidRequest) (*ResourceLicenseResourceCount, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ResourceLicenseResourceCount
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ResourceLicenseResourceCount
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourceApiService.GetResourceLicenseResourceCountByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resource/LicenseResourceCounts/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1540,7 +1517,7 @@ func (a *ResourceApiService) GetResourceLicenseResourceCountByMoidExecute(r ApiG
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1550,15 +1527,15 @@ func (a *ResourceApiService) GetResourceLicenseResourceCountByMoidExecute(r ApiG
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1614,7 +1591,7 @@ func (a *ResourceApiService) GetResourceLicenseResourceCountByMoidExecute(r ApiG
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1625,7 +1602,7 @@ func (a *ResourceApiService) GetResourceLicenseResourceCountByMoidExecute(r ApiG
 }
 
 type ApiGetResourceLicenseResourceCountListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *ResourceApiService
 	filter      *string
 	orderby     *string
@@ -1706,17 +1683,17 @@ func (r ApiGetResourceLicenseResourceCountListRequest) Tags(tags string) ApiGetR
 	return r
 }
 
-func (r ApiGetResourceLicenseResourceCountListRequest) Execute() (ResourceLicenseResourceCountResponse, *_nethttp.Response, error) {
+func (r ApiGetResourceLicenseResourceCountListRequest) Execute() (*ResourceLicenseResourceCountResponse, *http.Response, error) {
 	return r.ApiService.GetResourceLicenseResourceCountListExecute(r)
 }
 
 /*
 GetResourceLicenseResourceCountList Read a 'resource.LicenseResourceCount' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetResourceLicenseResourceCountListRequest
 */
-func (a *ResourceApiService) GetResourceLicenseResourceCountList(ctx _context.Context) ApiGetResourceLicenseResourceCountListRequest {
+func (a *ResourceApiService) GetResourceLicenseResourceCountList(ctx context.Context) ApiGetResourceLicenseResourceCountListRequest {
 	return ApiGetResourceLicenseResourceCountListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1725,26 +1702,24 @@ func (a *ResourceApiService) GetResourceLicenseResourceCountList(ctx _context.Co
 
 // Execute executes the request
 //  @return ResourceLicenseResourceCountResponse
-func (a *ResourceApiService) GetResourceLicenseResourceCountListExecute(r ApiGetResourceLicenseResourceCountListRequest) (ResourceLicenseResourceCountResponse, *_nethttp.Response, error) {
+func (a *ResourceApiService) GetResourceLicenseResourceCountListExecute(r ApiGetResourceLicenseResourceCountListRequest) (*ResourceLicenseResourceCountResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ResourceLicenseResourceCountResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ResourceLicenseResourceCountResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourceApiService.GetResourceLicenseResourceCountList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resource/LicenseResourceCounts"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1796,7 +1771,7 @@ func (a *ResourceApiService) GetResourceLicenseResourceCountListExecute(r ApiGet
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1806,15 +1781,15 @@ func (a *ResourceApiService) GetResourceLicenseResourceCountListExecute(r ApiGet
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1870,7 +1845,7 @@ func (a *ResourceApiService) GetResourceLicenseResourceCountListExecute(r ApiGet
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1881,23 +1856,23 @@ func (a *ResourceApiService) GetResourceLicenseResourceCountListExecute(r ApiGet
 }
 
 type ApiGetResourceMembershipByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ResourceApiService
 	moid       string
 }
 
-func (r ApiGetResourceMembershipByMoidRequest) Execute() (ResourceMembership, *_nethttp.Response, error) {
+func (r ApiGetResourceMembershipByMoidRequest) Execute() (*ResourceMembership, *http.Response, error) {
 	return r.ApiService.GetResourceMembershipByMoidExecute(r)
 }
 
 /*
 GetResourceMembershipByMoid Read a 'resource.Membership' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetResourceMembershipByMoidRequest
 */
-func (a *ResourceApiService) GetResourceMembershipByMoid(ctx _context.Context, moid string) ApiGetResourceMembershipByMoidRequest {
+func (a *ResourceApiService) GetResourceMembershipByMoid(ctx context.Context, moid string) ApiGetResourceMembershipByMoidRequest {
 	return ApiGetResourceMembershipByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1907,27 +1882,25 @@ func (a *ResourceApiService) GetResourceMembershipByMoid(ctx _context.Context, m
 
 // Execute executes the request
 //  @return ResourceMembership
-func (a *ResourceApiService) GetResourceMembershipByMoidExecute(r ApiGetResourceMembershipByMoidRequest) (ResourceMembership, *_nethttp.Response, error) {
+func (a *ResourceApiService) GetResourceMembershipByMoidExecute(r ApiGetResourceMembershipByMoidRequest) (*ResourceMembership, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ResourceMembership
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ResourceMembership
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourceApiService.GetResourceMembershipByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resource/Memberships/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1946,7 +1919,7 @@ func (a *ResourceApiService) GetResourceMembershipByMoidExecute(r ApiGetResource
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1956,15 +1929,15 @@ func (a *ResourceApiService) GetResourceMembershipByMoidExecute(r ApiGetResource
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2020,7 +1993,7 @@ func (a *ResourceApiService) GetResourceMembershipByMoidExecute(r ApiGetResource
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2031,23 +2004,23 @@ func (a *ResourceApiService) GetResourceMembershipByMoidExecute(r ApiGetResource
 }
 
 type ApiGetResourceMembershipHolderByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ResourceApiService
 	moid       string
 }
 
-func (r ApiGetResourceMembershipHolderByMoidRequest) Execute() (ResourceMembershipHolder, *_nethttp.Response, error) {
+func (r ApiGetResourceMembershipHolderByMoidRequest) Execute() (*ResourceMembershipHolder, *http.Response, error) {
 	return r.ApiService.GetResourceMembershipHolderByMoidExecute(r)
 }
 
 /*
 GetResourceMembershipHolderByMoid Read a 'resource.MembershipHolder' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetResourceMembershipHolderByMoidRequest
 */
-func (a *ResourceApiService) GetResourceMembershipHolderByMoid(ctx _context.Context, moid string) ApiGetResourceMembershipHolderByMoidRequest {
+func (a *ResourceApiService) GetResourceMembershipHolderByMoid(ctx context.Context, moid string) ApiGetResourceMembershipHolderByMoidRequest {
 	return ApiGetResourceMembershipHolderByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2057,27 +2030,25 @@ func (a *ResourceApiService) GetResourceMembershipHolderByMoid(ctx _context.Cont
 
 // Execute executes the request
 //  @return ResourceMembershipHolder
-func (a *ResourceApiService) GetResourceMembershipHolderByMoidExecute(r ApiGetResourceMembershipHolderByMoidRequest) (ResourceMembershipHolder, *_nethttp.Response, error) {
+func (a *ResourceApiService) GetResourceMembershipHolderByMoidExecute(r ApiGetResourceMembershipHolderByMoidRequest) (*ResourceMembershipHolder, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ResourceMembershipHolder
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ResourceMembershipHolder
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourceApiService.GetResourceMembershipHolderByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resource/MembershipHolders/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2096,7 +2067,7 @@ func (a *ResourceApiService) GetResourceMembershipHolderByMoidExecute(r ApiGetRe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2106,15 +2077,15 @@ func (a *ResourceApiService) GetResourceMembershipHolderByMoidExecute(r ApiGetRe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2170,7 +2141,7 @@ func (a *ResourceApiService) GetResourceMembershipHolderByMoidExecute(r ApiGetRe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2181,7 +2152,7 @@ func (a *ResourceApiService) GetResourceMembershipHolderByMoidExecute(r ApiGetRe
 }
 
 type ApiGetResourceMembershipHolderListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *ResourceApiService
 	filter      *string
 	orderby     *string
@@ -2262,17 +2233,17 @@ func (r ApiGetResourceMembershipHolderListRequest) Tags(tags string) ApiGetResou
 	return r
 }
 
-func (r ApiGetResourceMembershipHolderListRequest) Execute() (ResourceMembershipHolderResponse, *_nethttp.Response, error) {
+func (r ApiGetResourceMembershipHolderListRequest) Execute() (*ResourceMembershipHolderResponse, *http.Response, error) {
 	return r.ApiService.GetResourceMembershipHolderListExecute(r)
 }
 
 /*
 GetResourceMembershipHolderList Read a 'resource.MembershipHolder' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetResourceMembershipHolderListRequest
 */
-func (a *ResourceApiService) GetResourceMembershipHolderList(ctx _context.Context) ApiGetResourceMembershipHolderListRequest {
+func (a *ResourceApiService) GetResourceMembershipHolderList(ctx context.Context) ApiGetResourceMembershipHolderListRequest {
 	return ApiGetResourceMembershipHolderListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2281,26 +2252,24 @@ func (a *ResourceApiService) GetResourceMembershipHolderList(ctx _context.Contex
 
 // Execute executes the request
 //  @return ResourceMembershipHolderResponse
-func (a *ResourceApiService) GetResourceMembershipHolderListExecute(r ApiGetResourceMembershipHolderListRequest) (ResourceMembershipHolderResponse, *_nethttp.Response, error) {
+func (a *ResourceApiService) GetResourceMembershipHolderListExecute(r ApiGetResourceMembershipHolderListRequest) (*ResourceMembershipHolderResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ResourceMembershipHolderResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ResourceMembershipHolderResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourceApiService.GetResourceMembershipHolderList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resource/MembershipHolders"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -2352,7 +2321,7 @@ func (a *ResourceApiService) GetResourceMembershipHolderListExecute(r ApiGetReso
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2362,15 +2331,15 @@ func (a *ResourceApiService) GetResourceMembershipHolderListExecute(r ApiGetReso
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2426,7 +2395,7 @@ func (a *ResourceApiService) GetResourceMembershipHolderListExecute(r ApiGetReso
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2437,7 +2406,7 @@ func (a *ResourceApiService) GetResourceMembershipHolderListExecute(r ApiGetReso
 }
 
 type ApiGetResourceMembershipListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *ResourceApiService
 	filter      *string
 	orderby     *string
@@ -2518,17 +2487,17 @@ func (r ApiGetResourceMembershipListRequest) Tags(tags string) ApiGetResourceMem
 	return r
 }
 
-func (r ApiGetResourceMembershipListRequest) Execute() (ResourceMembershipResponse, *_nethttp.Response, error) {
+func (r ApiGetResourceMembershipListRequest) Execute() (*ResourceMembershipResponse, *http.Response, error) {
 	return r.ApiService.GetResourceMembershipListExecute(r)
 }
 
 /*
 GetResourceMembershipList Read a 'resource.Membership' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetResourceMembershipListRequest
 */
-func (a *ResourceApiService) GetResourceMembershipList(ctx _context.Context) ApiGetResourceMembershipListRequest {
+func (a *ResourceApiService) GetResourceMembershipList(ctx context.Context) ApiGetResourceMembershipListRequest {
 	return ApiGetResourceMembershipListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2537,26 +2506,24 @@ func (a *ResourceApiService) GetResourceMembershipList(ctx _context.Context) Api
 
 // Execute executes the request
 //  @return ResourceMembershipResponse
-func (a *ResourceApiService) GetResourceMembershipListExecute(r ApiGetResourceMembershipListRequest) (ResourceMembershipResponse, *_nethttp.Response, error) {
+func (a *ResourceApiService) GetResourceMembershipListExecute(r ApiGetResourceMembershipListRequest) (*ResourceMembershipResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ResourceMembershipResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ResourceMembershipResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourceApiService.GetResourceMembershipList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resource/Memberships"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -2608,7 +2575,7 @@ func (a *ResourceApiService) GetResourceMembershipListExecute(r ApiGetResourceMe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2618,15 +2585,15 @@ func (a *ResourceApiService) GetResourceMembershipListExecute(r ApiGetResourceMe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2682,7 +2649,7 @@ func (a *ResourceApiService) GetResourceMembershipListExecute(r ApiGetResourceMe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2693,23 +2660,23 @@ func (a *ResourceApiService) GetResourceMembershipListExecute(r ApiGetResourceMe
 }
 
 type ApiGetResourceReservationByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ResourceApiService
 	moid       string
 }
 
-func (r ApiGetResourceReservationByMoidRequest) Execute() (ResourceReservation, *_nethttp.Response, error) {
+func (r ApiGetResourceReservationByMoidRequest) Execute() (*ResourceReservation, *http.Response, error) {
 	return r.ApiService.GetResourceReservationByMoidExecute(r)
 }
 
 /*
 GetResourceReservationByMoid Read a 'resource.Reservation' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetResourceReservationByMoidRequest
 */
-func (a *ResourceApiService) GetResourceReservationByMoid(ctx _context.Context, moid string) ApiGetResourceReservationByMoidRequest {
+func (a *ResourceApiService) GetResourceReservationByMoid(ctx context.Context, moid string) ApiGetResourceReservationByMoidRequest {
 	return ApiGetResourceReservationByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2719,27 +2686,25 @@ func (a *ResourceApiService) GetResourceReservationByMoid(ctx _context.Context, 
 
 // Execute executes the request
 //  @return ResourceReservation
-func (a *ResourceApiService) GetResourceReservationByMoidExecute(r ApiGetResourceReservationByMoidRequest) (ResourceReservation, *_nethttp.Response, error) {
+func (a *ResourceApiService) GetResourceReservationByMoidExecute(r ApiGetResourceReservationByMoidRequest) (*ResourceReservation, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ResourceReservation
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ResourceReservation
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourceApiService.GetResourceReservationByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resource/Reservations/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2758,7 +2723,7 @@ func (a *ResourceApiService) GetResourceReservationByMoidExecute(r ApiGetResourc
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2768,15 +2733,15 @@ func (a *ResourceApiService) GetResourceReservationByMoidExecute(r ApiGetResourc
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2832,7 +2797,7 @@ func (a *ResourceApiService) GetResourceReservationByMoidExecute(r ApiGetResourc
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2843,7 +2808,7 @@ func (a *ResourceApiService) GetResourceReservationByMoidExecute(r ApiGetResourc
 }
 
 type ApiGetResourceReservationListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *ResourceApiService
 	filter      *string
 	orderby     *string
@@ -2924,17 +2889,17 @@ func (r ApiGetResourceReservationListRequest) Tags(tags string) ApiGetResourceRe
 	return r
 }
 
-func (r ApiGetResourceReservationListRequest) Execute() (ResourceReservationResponse, *_nethttp.Response, error) {
+func (r ApiGetResourceReservationListRequest) Execute() (*ResourceReservationResponse, *http.Response, error) {
 	return r.ApiService.GetResourceReservationListExecute(r)
 }
 
 /*
 GetResourceReservationList Read a 'resource.Reservation' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetResourceReservationListRequest
 */
-func (a *ResourceApiService) GetResourceReservationList(ctx _context.Context) ApiGetResourceReservationListRequest {
+func (a *ResourceApiService) GetResourceReservationList(ctx context.Context) ApiGetResourceReservationListRequest {
 	return ApiGetResourceReservationListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2943,26 +2908,24 @@ func (a *ResourceApiService) GetResourceReservationList(ctx _context.Context) Ap
 
 // Execute executes the request
 //  @return ResourceReservationResponse
-func (a *ResourceApiService) GetResourceReservationListExecute(r ApiGetResourceReservationListRequest) (ResourceReservationResponse, *_nethttp.Response, error) {
+func (a *ResourceApiService) GetResourceReservationListExecute(r ApiGetResourceReservationListRequest) (*ResourceReservationResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ResourceReservationResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ResourceReservationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourceApiService.GetResourceReservationList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resource/Reservations"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -3014,7 +2977,7 @@ func (a *ResourceApiService) GetResourceReservationListExecute(r ApiGetResourceR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3024,15 +2987,15 @@ func (a *ResourceApiService) GetResourceReservationListExecute(r ApiGetResourceR
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3088,7 +3051,7 @@ func (a *ResourceApiService) GetResourceReservationListExecute(r ApiGetResourceR
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3099,7 +3062,7 @@ func (a *ResourceApiService) GetResourceReservationListExecute(r ApiGetResourceR
 }
 
 type ApiPatchResourceGroupRequest struct {
-	ctx           _context.Context
+	ctx           context.Context
 	ApiService    *ResourceApiService
 	moid          string
 	resourceGroup *ResourceGroup
@@ -3118,18 +3081,18 @@ func (r ApiPatchResourceGroupRequest) IfMatch(ifMatch string) ApiPatchResourceGr
 	return r
 }
 
-func (r ApiPatchResourceGroupRequest) Execute() (ResourceGroup, *_nethttp.Response, error) {
+func (r ApiPatchResourceGroupRequest) Execute() (*ResourceGroup, *http.Response, error) {
 	return r.ApiService.PatchResourceGroupExecute(r)
 }
 
 /*
 PatchResourceGroup Update a 'resource.Group' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchResourceGroupRequest
 */
-func (a *ResourceApiService) PatchResourceGroup(ctx _context.Context, moid string) ApiPatchResourceGroupRequest {
+func (a *ResourceApiService) PatchResourceGroup(ctx context.Context, moid string) ApiPatchResourceGroupRequest {
 	return ApiPatchResourceGroupRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3139,27 +3102,25 @@ func (a *ResourceApiService) PatchResourceGroup(ctx _context.Context, moid strin
 
 // Execute executes the request
 //  @return ResourceGroup
-func (a *ResourceApiService) PatchResourceGroupExecute(r ApiPatchResourceGroupRequest) (ResourceGroup, *_nethttp.Response, error) {
+func (a *ResourceApiService) PatchResourceGroupExecute(r ApiPatchResourceGroupRequest) (*ResourceGroup, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ResourceGroup
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ResourceGroup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourceApiService.PatchResourceGroup")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resource/Groups/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.resourceGroup == nil {
 		return localVarReturnValue, nil, reportError("resourceGroup is required and must be specified")
 	}
@@ -3186,7 +3147,7 @@ func (a *ResourceApiService) PatchResourceGroupExecute(r ApiPatchResourceGroupRe
 	}
 	// body params
 	localVarPostBody = r.resourceGroup
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3196,15 +3157,15 @@ func (a *ResourceApiService) PatchResourceGroupExecute(r ApiPatchResourceGroupRe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3260,7 +3221,7 @@ func (a *ResourceApiService) PatchResourceGroupExecute(r ApiPatchResourceGroupRe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3271,7 +3232,7 @@ func (a *ResourceApiService) PatchResourceGroupExecute(r ApiPatchResourceGroupRe
 }
 
 type ApiPatchResourceReservationRequest struct {
-	ctx                 _context.Context
+	ctx                 context.Context
 	ApiService          *ResourceApiService
 	moid                string
 	resourceReservation *ResourceReservation
@@ -3290,18 +3251,18 @@ func (r ApiPatchResourceReservationRequest) IfMatch(ifMatch string) ApiPatchReso
 	return r
 }
 
-func (r ApiPatchResourceReservationRequest) Execute() (ResourceReservation, *_nethttp.Response, error) {
+func (r ApiPatchResourceReservationRequest) Execute() (*ResourceReservation, *http.Response, error) {
 	return r.ApiService.PatchResourceReservationExecute(r)
 }
 
 /*
 PatchResourceReservation Update a 'resource.Reservation' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchResourceReservationRequest
 */
-func (a *ResourceApiService) PatchResourceReservation(ctx _context.Context, moid string) ApiPatchResourceReservationRequest {
+func (a *ResourceApiService) PatchResourceReservation(ctx context.Context, moid string) ApiPatchResourceReservationRequest {
 	return ApiPatchResourceReservationRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3311,27 +3272,25 @@ func (a *ResourceApiService) PatchResourceReservation(ctx _context.Context, moid
 
 // Execute executes the request
 //  @return ResourceReservation
-func (a *ResourceApiService) PatchResourceReservationExecute(r ApiPatchResourceReservationRequest) (ResourceReservation, *_nethttp.Response, error) {
+func (a *ResourceApiService) PatchResourceReservationExecute(r ApiPatchResourceReservationRequest) (*ResourceReservation, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ResourceReservation
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ResourceReservation
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourceApiService.PatchResourceReservation")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resource/Reservations/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.resourceReservation == nil {
 		return localVarReturnValue, nil, reportError("resourceReservation is required and must be specified")
 	}
@@ -3358,7 +3317,7 @@ func (a *ResourceApiService) PatchResourceReservationExecute(r ApiPatchResourceR
 	}
 	// body params
 	localVarPostBody = r.resourceReservation
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3368,15 +3327,15 @@ func (a *ResourceApiService) PatchResourceReservationExecute(r ApiPatchResourceR
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3432,7 +3391,7 @@ func (a *ResourceApiService) PatchResourceReservationExecute(r ApiPatchResourceR
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3443,7 +3402,7 @@ func (a *ResourceApiService) PatchResourceReservationExecute(r ApiPatchResourceR
 }
 
 type ApiUpdateResourceGroupRequest struct {
-	ctx           _context.Context
+	ctx           context.Context
 	ApiService    *ResourceApiService
 	moid          string
 	resourceGroup *ResourceGroup
@@ -3462,18 +3421,18 @@ func (r ApiUpdateResourceGroupRequest) IfMatch(ifMatch string) ApiUpdateResource
 	return r
 }
 
-func (r ApiUpdateResourceGroupRequest) Execute() (ResourceGroup, *_nethttp.Response, error) {
+func (r ApiUpdateResourceGroupRequest) Execute() (*ResourceGroup, *http.Response, error) {
 	return r.ApiService.UpdateResourceGroupExecute(r)
 }
 
 /*
 UpdateResourceGroup Update a 'resource.Group' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateResourceGroupRequest
 */
-func (a *ResourceApiService) UpdateResourceGroup(ctx _context.Context, moid string) ApiUpdateResourceGroupRequest {
+func (a *ResourceApiService) UpdateResourceGroup(ctx context.Context, moid string) ApiUpdateResourceGroupRequest {
 	return ApiUpdateResourceGroupRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3483,27 +3442,25 @@ func (a *ResourceApiService) UpdateResourceGroup(ctx _context.Context, moid stri
 
 // Execute executes the request
 //  @return ResourceGroup
-func (a *ResourceApiService) UpdateResourceGroupExecute(r ApiUpdateResourceGroupRequest) (ResourceGroup, *_nethttp.Response, error) {
+func (a *ResourceApiService) UpdateResourceGroupExecute(r ApiUpdateResourceGroupRequest) (*ResourceGroup, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ResourceGroup
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ResourceGroup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourceApiService.UpdateResourceGroup")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resource/Groups/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.resourceGroup == nil {
 		return localVarReturnValue, nil, reportError("resourceGroup is required and must be specified")
 	}
@@ -3530,7 +3487,7 @@ func (a *ResourceApiService) UpdateResourceGroupExecute(r ApiUpdateResourceGroup
 	}
 	// body params
 	localVarPostBody = r.resourceGroup
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3540,15 +3497,15 @@ func (a *ResourceApiService) UpdateResourceGroupExecute(r ApiUpdateResourceGroup
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3604,7 +3561,7 @@ func (a *ResourceApiService) UpdateResourceGroupExecute(r ApiUpdateResourceGroup
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3615,7 +3572,7 @@ func (a *ResourceApiService) UpdateResourceGroupExecute(r ApiUpdateResourceGroup
 }
 
 type ApiUpdateResourceReservationRequest struct {
-	ctx                 _context.Context
+	ctx                 context.Context
 	ApiService          *ResourceApiService
 	moid                string
 	resourceReservation *ResourceReservation
@@ -3634,18 +3591,18 @@ func (r ApiUpdateResourceReservationRequest) IfMatch(ifMatch string) ApiUpdateRe
 	return r
 }
 
-func (r ApiUpdateResourceReservationRequest) Execute() (ResourceReservation, *_nethttp.Response, error) {
+func (r ApiUpdateResourceReservationRequest) Execute() (*ResourceReservation, *http.Response, error) {
 	return r.ApiService.UpdateResourceReservationExecute(r)
 }
 
 /*
 UpdateResourceReservation Update a 'resource.Reservation' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateResourceReservationRequest
 */
-func (a *ResourceApiService) UpdateResourceReservation(ctx _context.Context, moid string) ApiUpdateResourceReservationRequest {
+func (a *ResourceApiService) UpdateResourceReservation(ctx context.Context, moid string) ApiUpdateResourceReservationRequest {
 	return ApiUpdateResourceReservationRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3655,27 +3612,25 @@ func (a *ResourceApiService) UpdateResourceReservation(ctx _context.Context, moi
 
 // Execute executes the request
 //  @return ResourceReservation
-func (a *ResourceApiService) UpdateResourceReservationExecute(r ApiUpdateResourceReservationRequest) (ResourceReservation, *_nethttp.Response, error) {
+func (a *ResourceApiService) UpdateResourceReservationExecute(r ApiUpdateResourceReservationRequest) (*ResourceReservation, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ResourceReservation
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ResourceReservation
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourceApiService.UpdateResourceReservation")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resource/Reservations/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.resourceReservation == nil {
 		return localVarReturnValue, nil, reportError("resourceReservation is required and must be specified")
 	}
@@ -3702,7 +3657,7 @@ func (a *ResourceApiService) UpdateResourceReservationExecute(r ApiUpdateResourc
 	}
 	// body params
 	localVarPostBody = r.resourceReservation
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3712,15 +3667,15 @@ func (a *ResourceApiService) UpdateResourceReservationExecute(r ApiUpdateResourc
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3776,7 +3731,7 @@ func (a *ResourceApiService) UpdateResourceReservationExecute(r ApiUpdateResourc
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

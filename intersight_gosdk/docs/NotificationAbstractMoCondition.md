@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | [default to "notification.AlarmMoCondition"]
-**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | [default to "notification.AlarmMoCondition"]
-**Enabled** | Pointer to **bool** | Condition can be switched on/off which out necessity to change the subscription settings: actions, conditions etc. Ex.: Subscription MO can be configured, but switched off. | [optional] 
-**MoType** | Pointer to **string** | MoType for which the condition is created. | [optional] [readonly] 
-**OdataFilter** | Pointer to **string** | Odata filter string managed internally. It is built with specific ObjectType properties. | [optional] [readonly] 
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**Enabled** | Pointer to **bool** | The condition can be switched on/off with out necessity to change the subscription settings: actions, conditions, etc. Ex.: Subscription MO can be configured, but switched off. | [optional] 
+**MoType** | Pointer to **string** | MoType for which the condition is created. | [optional] 
+**Operations** | Pointer to **[]string** |  | [optional] 
 
 ## Methods
 
@@ -119,31 +119,41 @@ SetMoType sets MoType field to given value.
 
 HasMoType returns a boolean if a field has been set.
 
-### GetOdataFilter
+### GetOperations
 
-`func (o *NotificationAbstractMoCondition) GetOdataFilter() string`
+`func (o *NotificationAbstractMoCondition) GetOperations() []string`
 
-GetOdataFilter returns the OdataFilter field if non-nil, zero value otherwise.
+GetOperations returns the Operations field if non-nil, zero value otherwise.
 
-### GetOdataFilterOk
+### GetOperationsOk
 
-`func (o *NotificationAbstractMoCondition) GetOdataFilterOk() (*string, bool)`
+`func (o *NotificationAbstractMoCondition) GetOperationsOk() (*[]string, bool)`
 
-GetOdataFilterOk returns a tuple with the OdataFilter field if it's non-nil, zero value otherwise
+GetOperationsOk returns a tuple with the Operations field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetOdataFilter
+### SetOperations
 
-`func (o *NotificationAbstractMoCondition) SetOdataFilter(v string)`
+`func (o *NotificationAbstractMoCondition) SetOperations(v []string)`
 
-SetOdataFilter sets OdataFilter field to given value.
+SetOperations sets Operations field to given value.
 
-### HasOdataFilter
+### HasOperations
 
-`func (o *NotificationAbstractMoCondition) HasOdataFilter() bool`
+`func (o *NotificationAbstractMoCondition) HasOperations() bool`
 
-HasOdataFilter returns a boolean if a field has been set.
+HasOperations returns a boolean if a field has been set.
 
+### SetOperationsNil
+
+`func (o *NotificationAbstractMoCondition) SetOperationsNil(b bool)`
+
+ SetOperationsNil sets the value for Operations to be an explicit nil
+
+### UnsetOperations
+`func (o *NotificationAbstractMoCondition) UnsetOperations()`
+
+UnsetOperations ensures that no value is present for Operations, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

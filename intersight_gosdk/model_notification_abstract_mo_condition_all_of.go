@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -21,12 +21,11 @@ type NotificationAbstractMoConditionAllOf struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 	ObjectType string `json:"ObjectType"`
-	// Condition can be switched on/off which out necessity to change the subscription settings: actions, conditions etc. Ex.: Subscription MO can be configured, but switched off.
+	// The condition can be switched on/off with out necessity to change the subscription settings: actions, conditions, etc. Ex.: Subscription MO can be configured, but switched off.
 	Enabled *bool `json:"Enabled,omitempty"`
 	// MoType for which the condition is created.
-	MoType *string `json:"MoType,omitempty"`
-	// Odata filter string managed internally. It is built with specific ObjectType properties.
-	OdataFilter          *string `json:"OdataFilter,omitempty"`
+	MoType               *string  `json:"MoType,omitempty"`
+	Operations           []string `json:"Operations,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -48,10 +47,6 @@ func NewNotificationAbstractMoConditionAllOf(classId string, objectType string) 
 // but it doesn't guarantee that properties required by API are set
 func NewNotificationAbstractMoConditionAllOfWithDefaults() *NotificationAbstractMoConditionAllOf {
 	this := NotificationAbstractMoConditionAllOf{}
-	var classId string = "notification.AlarmMoCondition"
-	this.ClassId = classId
-	var objectType string = "notification.AlarmMoCondition"
-	this.ObjectType = objectType
 	return &this
 }
 
@@ -167,36 +162,37 @@ func (o *NotificationAbstractMoConditionAllOf) SetMoType(v string) {
 	o.MoType = &v
 }
 
-// GetOdataFilter returns the OdataFilter field value if set, zero value otherwise.
-func (o *NotificationAbstractMoConditionAllOf) GetOdataFilter() string {
-	if o == nil || o.OdataFilter == nil {
-		var ret string
+// GetOperations returns the Operations field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NotificationAbstractMoConditionAllOf) GetOperations() []string {
+	if o == nil {
+		var ret []string
 		return ret
 	}
-	return *o.OdataFilter
+	return o.Operations
 }
 
-// GetOdataFilterOk returns a tuple with the OdataFilter field value if set, nil otherwise
+// GetOperationsOk returns a tuple with the Operations field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NotificationAbstractMoConditionAllOf) GetOdataFilterOk() (*string, bool) {
-	if o == nil || o.OdataFilter == nil {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *NotificationAbstractMoConditionAllOf) GetOperationsOk() ([]string, bool) {
+	if o == nil || o.Operations == nil {
 		return nil, false
 	}
-	return o.OdataFilter, true
+	return o.Operations, true
 }
 
-// HasOdataFilter returns a boolean if a field has been set.
-func (o *NotificationAbstractMoConditionAllOf) HasOdataFilter() bool {
-	if o != nil && o.OdataFilter != nil {
+// HasOperations returns a boolean if a field has been set.
+func (o *NotificationAbstractMoConditionAllOf) HasOperations() bool {
+	if o != nil && o.Operations != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetOdataFilter gets a reference to the given string and assigns it to the OdataFilter field.
-func (o *NotificationAbstractMoConditionAllOf) SetOdataFilter(v string) {
-	o.OdataFilter = &v
+// SetOperations gets a reference to the given []string and assigns it to the Operations field.
+func (o *NotificationAbstractMoConditionAllOf) SetOperations(v []string) {
+	o.Operations = v
 }
 
 func (o NotificationAbstractMoConditionAllOf) MarshalJSON() ([]byte, error) {
@@ -213,8 +209,8 @@ func (o NotificationAbstractMoConditionAllOf) MarshalJSON() ([]byte, error) {
 	if o.MoType != nil {
 		toSerialize["MoType"] = o.MoType
 	}
-	if o.OdataFilter != nil {
-		toSerialize["OdataFilter"] = o.OdataFilter
+	if o.Operations != nil {
+		toSerialize["Operations"] = o.Operations
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -238,7 +234,7 @@ func (o *NotificationAbstractMoConditionAllOf) UnmarshalJSON(bytes []byte) (err 
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Enabled")
 		delete(additionalProperties, "MoType")
-		delete(additionalProperties, "OdataFilter")
+		delete(additionalProperties, "Operations")
 		o.AdditionalProperties = additionalProperties
 	}
 

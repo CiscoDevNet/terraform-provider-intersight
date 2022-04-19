@@ -817,7 +817,6 @@ func resourceSoftwareApplianceDistributable() *schema.Resource {
 
 func resourceSoftwareApplianceDistributableCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewSoftwareApplianceDistributableWithDefaults()
@@ -1231,7 +1230,7 @@ func resourceSoftwareApplianceDistributableCreate(c context.Context, d *schema.R
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating SoftwareApplianceDistributable: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating SoftwareApplianceDistributable: %s", responseErr.Error())
@@ -1243,7 +1242,6 @@ func resourceSoftwareApplianceDistributableCreate(c context.Context, d *schema.R
 
 func resourceSoftwareApplianceDistributableRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.SoftwareApi.GetSoftwareApplianceDistributableByMoid(conn.ctx, d.Id())
@@ -1256,7 +1254,7 @@ func resourceSoftwareApplianceDistributableRead(c context.Context, d *schema.Res
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching SoftwareApplianceDistributable: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching SoftwareApplianceDistributable: %s", responseErr.Error())
@@ -1449,7 +1447,6 @@ func resourceSoftwareApplianceDistributableRead(c context.Context, d *schema.Res
 
 func resourceSoftwareApplianceDistributableUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.SoftwareApplianceDistributable{}
@@ -1879,7 +1876,7 @@ func resourceSoftwareApplianceDistributableUpdate(c context.Context, d *schema.R
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating SoftwareApplianceDistributable: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating SoftwareApplianceDistributable: %s", responseErr.Error())
@@ -1891,7 +1888,6 @@ func resourceSoftwareApplianceDistributableUpdate(c context.Context, d *schema.R
 
 func resourceSoftwareApplianceDistributableDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.SoftwareApi.DeleteSoftwareApplianceDistributable(conn.ctx, d.Id())
@@ -1903,7 +1899,7 @@ func resourceSoftwareApplianceDistributableDelete(c context.Context, d *schema.R
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting SoftwareApplianceDistributable object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting SoftwareApplianceDistributable object: %s", deleteErr.Error())

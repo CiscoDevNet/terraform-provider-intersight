@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -17,7 +17,6 @@ import (
 
 // TelemetryDruidSearchRequest These types of queries returns dimension values that match the search specification
 type TelemetryDruidSearchRequest struct {
-	// null
 	QueryType  string                   `json:"queryType"`
 	DataSource TelemetryDruidDataSource `json:"dataSource"`
 	// A JSON Object representing ISO-8601 Intervals. This defines the time ranges to run the query over.
@@ -25,9 +24,9 @@ type TelemetryDruidSearchRequest struct {
 	Granularity TelemetryDruidGranularity `json:"granularity"`
 	Filter      *TelemetryDruidFilter     `json:"filter,omitempty"`
 	// Aggregation functions are used to summarize data in buckets. Summarization functions include counting rows, calculating the min/max/sum of metrics and retrieving the first/last value of metrics for each bucket. Additional summarization functions are available with extensions. If no aggregator is provided, the results will be empty for each bucket.
-	Aggregations *[]TelemetryDruidAggregator `json:"aggregations,omitempty"`
+	Aggregations []TelemetryDruidAggregator `json:"aggregations,omitempty"`
 	// The list of dimensions to run the search over. Excluding this means the search is run over all dimensions.
-	SearchDimensions *[]string                          `json:"searchDimensions,omitempty"`
+	SearchDimensions []string                           `json:"searchDimensions,omitempty"`
 	Query            *TelemetryDruidAggregateSearchSpec `json:"query,omitempty"`
 	// An integer that limits the number of results. The default is unlimited.
 	Limit                *int32                      `json:"limit,omitempty"`
@@ -118,11 +117,11 @@ func (o *TelemetryDruidSearchRequest) GetIntervals() []string {
 
 // GetIntervalsOk returns a tuple with the Intervals field value
 // and a boolean to check if the value has been set.
-func (o *TelemetryDruidSearchRequest) GetIntervalsOk() (*[]string, bool) {
+func (o *TelemetryDruidSearchRequest) GetIntervalsOk() ([]string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Intervals, true
+	return o.Intervals, true
 }
 
 // SetIntervals sets field value
@@ -192,12 +191,12 @@ func (o *TelemetryDruidSearchRequest) GetAggregations() []TelemetryDruidAggregat
 		var ret []TelemetryDruidAggregator
 		return ret
 	}
-	return *o.Aggregations
+	return o.Aggregations
 }
 
 // GetAggregationsOk returns a tuple with the Aggregations field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TelemetryDruidSearchRequest) GetAggregationsOk() (*[]TelemetryDruidAggregator, bool) {
+func (o *TelemetryDruidSearchRequest) GetAggregationsOk() ([]TelemetryDruidAggregator, bool) {
 	if o == nil || o.Aggregations == nil {
 		return nil, false
 	}
@@ -215,7 +214,7 @@ func (o *TelemetryDruidSearchRequest) HasAggregations() bool {
 
 // SetAggregations gets a reference to the given []TelemetryDruidAggregator and assigns it to the Aggregations field.
 func (o *TelemetryDruidSearchRequest) SetAggregations(v []TelemetryDruidAggregator) {
-	o.Aggregations = &v
+	o.Aggregations = v
 }
 
 // GetSearchDimensions returns the SearchDimensions field value if set, zero value otherwise.
@@ -224,12 +223,12 @@ func (o *TelemetryDruidSearchRequest) GetSearchDimensions() []string {
 		var ret []string
 		return ret
 	}
-	return *o.SearchDimensions
+	return o.SearchDimensions
 }
 
 // GetSearchDimensionsOk returns a tuple with the SearchDimensions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TelemetryDruidSearchRequest) GetSearchDimensionsOk() (*[]string, bool) {
+func (o *TelemetryDruidSearchRequest) GetSearchDimensionsOk() ([]string, bool) {
 	if o == nil || o.SearchDimensions == nil {
 		return nil, false
 	}
@@ -247,7 +246,7 @@ func (o *TelemetryDruidSearchRequest) HasSearchDimensions() bool {
 
 // SetSearchDimensions gets a reference to the given []string and assigns it to the SearchDimensions field.
 func (o *TelemetryDruidSearchRequest) SetSearchDimensions(v []string) {
-	o.SearchDimensions = &v
+	o.SearchDimensions = v
 }
 
 // GetQuery returns the Query field value if set, zero value otherwise.

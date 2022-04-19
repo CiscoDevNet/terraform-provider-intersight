@@ -531,7 +531,6 @@ func resourceApplianceDataExportPolicy() *schema.Resource {
 
 func resourceApplianceDataExportPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewApplianceDataExportPolicyWithDefaults()
@@ -641,7 +640,7 @@ func resourceApplianceDataExportPolicyCreate(c context.Context, d *schema.Resour
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating ApplianceDataExportPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating ApplianceDataExportPolicy: %s", responseErr.Error())
@@ -653,7 +652,6 @@ func resourceApplianceDataExportPolicyCreate(c context.Context, d *schema.Resour
 
 func resourceApplianceDataExportPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.ApplianceApi.GetApplianceDataExportPolicyByMoid(conn.ctx, d.Id())
@@ -666,7 +664,7 @@ func resourceApplianceDataExportPolicyRead(c context.Context, d *schema.Resource
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching ApplianceDataExportPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching ApplianceDataExportPolicy: %s", responseErr.Error())
@@ -759,7 +757,6 @@ func resourceApplianceDataExportPolicyRead(c context.Context, d *schema.Resource
 
 func resourceApplianceDataExportPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.ApplianceDataExportPolicy{}
@@ -872,7 +869,7 @@ func resourceApplianceDataExportPolicyUpdate(c context.Context, d *schema.Resour
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating ApplianceDataExportPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating ApplianceDataExportPolicy: %s", responseErr.Error())
@@ -884,7 +881,6 @@ func resourceApplianceDataExportPolicyUpdate(c context.Context, d *schema.Resour
 
 func resourceApplianceDataExportPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	var warning = diag.Diagnostic{Severity: diag.Warning, Summary: "ApplianceDataExportPolicy does not allow delete functionality"}
 	de = append(de, warning)
