@@ -14,5 +14,5 @@ resource "intersight_hyperflex_ucsm_config_policy" "hyperflex_ucsm_config_policy
     object_type = "organization.Organization"
     moid        = data.intersight_organization_organization.default.results.0.moid
   }
-  server_firmware_version = data.intersight_hyperflex_server_firmware_version_entry.firmware_version.results[length(data.intersight_hyperflex_server_firmware_version_entry.firmware_version)-1].nr_version
+  server_firmware_version = data.intersight_hyperflex_server_firmware_version_entry.firmware_version.results[length(data.intersight_hyperflex_server_firmware_version_entry.firmware_version.results)-1].nr_version
 }
