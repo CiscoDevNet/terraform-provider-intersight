@@ -13,8 +13,9 @@ resource "intersight_vnic_iscsi_boot_policy" "vnic_iscsi_boot_policy" {
     object_type = "vnic.IscsiAuthProfile"
   }
   mutual_chap {
-    password = "ChangeMeChange1"
-    user_id  = "user_1"
+    password    = "ChangeMeChange1"
+    user_id     = "user_1"
+    object_type = "vnic.IscsiAuthProfile"
   }
   organization {
     object_type = "organization.Organization"

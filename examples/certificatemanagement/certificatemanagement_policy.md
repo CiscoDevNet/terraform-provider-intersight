@@ -12,8 +12,9 @@ resource "intersight_certificatemanagement_policy" "certificate1" {
     certificate {
       pem_certificate = var.pem_certificate1
     }
-    enabled    = true
-    privatekey = var.privatekey
+    enabled     = true
+    object_type = "certificatemanagement.Imc"
+    privatekey  = var.privatekey
   }
 }
 
@@ -22,6 +23,7 @@ variable "privatekey" {
   sensitive   = true
   description = "Private key base64 encoded value"
 }
+
 variable "pem_certificate1" {
   type        = string
   sensitive   = true

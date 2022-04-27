@@ -5,18 +5,20 @@ resource "intersight_kubernetes_container_runtime_policy" "kubernetes_container_
   description = "kubernetes container runtime policy"
   name        = "kubernetes_container_runtime_policy1"
   docker_http_proxy {
-    hostname = "10.1.1.10"
-    password = "ChangeMe"
-    port     = 3001
-    protocol = "http"
-    username = "admin1"
+    hostname    = "10.1.1.10"
+    password    = "ChangeMe"
+    port        = 3001
+    protocol    = "http"
+    username    = "admin1"
+    object_type = "kubernetes.ProxyConfig"
   }
   docker_https_proxy {
-    hostname = "10.1.1.10"
-    password = "ChangeMe"
-    port     = 3001
-    protocol = "https"
-    username = "admin1"
+    hostname    = "10.1.1.10"
+    password    = "ChangeMe"
+    port        = 3001
+    protocol    = "https"
+    username    = "admin1"
+    object_type = "kubernetes.ProxyConfig"
   }
   docker_no_proxy = [
     "*.test.example.com",

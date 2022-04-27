@@ -7,10 +7,12 @@ resource "intersight_fabric_vlan" "fabric_vlan1" {
   name                  = "fabric_vlan1"
   vlan_id               = 10
   eth_network_policy {
-    moid = var.vnic_eth_network
+    moid        = var.vnic_eth_network
+    object_type = "fabric.EthNetworkPolicy"
   }
   multicast_policy {
-    moid = var.fabric_multicast_policy
+    moid        = var.fabric_multicast_policy
+    object_type = "fabric.MulticastPolicy"
   }
 }
 

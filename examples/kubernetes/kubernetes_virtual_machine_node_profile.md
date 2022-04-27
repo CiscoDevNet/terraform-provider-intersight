@@ -9,6 +9,7 @@ resource "intersight_kubernetes_virtual_machine_node_profile" "kubernetes_virtua
   config_context {
     control_action = "Deploy"
     error_state    = "Pre-config-error"
+    object_type    = "policy.ConfigContext"
   }
   cloud_provider = "noProvider"
 }

@@ -18,7 +18,8 @@ resource "intersight_fabric_uplink_pc_role" "fabric_uplink_pc_role1" {
   }
   admin_speed = "Auto"
   port_policy {
-    moid = var.fabric_port_policy
+    moid        = var.fabric_port_policy
+    object_type = "fabric.PortPolicy"
   }
 }
 

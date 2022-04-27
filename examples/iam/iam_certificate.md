@@ -3,8 +3,9 @@
 ```hcl
 resource "intersight_iam_certificate" "iam_certificate1" {
   certificate {
-      pem_certificate = var.pemcertificate1
-	}
+    pem_certificate = var.pemcertificate1
+    object_type     = "x509.Certificate"
+  }
 }
 
 

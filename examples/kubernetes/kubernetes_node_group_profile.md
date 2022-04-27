@@ -9,6 +9,7 @@ resource "intersight_kubernetes_node_group_profile" "kubernetes_node_group_profi
   config_context {
     control_action = "Deploy"
     error_state    = "Pre-config-error"
+    object_type    = "policy.ConfigContext"
   }
   node_type = "Worker"
   cluster_profile {
