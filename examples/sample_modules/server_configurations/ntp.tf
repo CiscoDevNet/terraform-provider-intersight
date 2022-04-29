@@ -7,7 +7,8 @@ resource "intersight_ntp_policy" "tf_ntp1" {
     "time-b-g.nist.gov"
   ]
   organization {
-    moid = data.intersight_organization_organization.default.results.0.moid
+    moid        = data.intersight_organization_organization.default.results.0.moid
+    object_type = "organization.Organization"
   }
 }
 
@@ -21,7 +22,8 @@ resource "intersight_ntp_policy" "tf_ntp2" {
     "10.10.10.13"
   ]
   organization {
-    moid = data.intersight_organization_organization.default.results.0.moid
+    moid        = data.intersight_organization_organization.default.results.0.moid
+    object_type = "organization.Organization"
   }
 }
 

@@ -5,7 +5,8 @@ resource "intersight_ipmioverlan_policy" "tf_ipmi" {
   privilege      = "admin"
   encryption_key = var.encryption_key
   organization {
-    moid = data.intersight_organization_organization.default.results.0.moid
+    moid        = data.intersight_organization_organization.default.results.0.moid
+    object_type = "organization.Organization"
   }
 }
 
