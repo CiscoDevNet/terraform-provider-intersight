@@ -5,7 +5,6 @@ resource "intersight_uuidpool_pool" "uuidpool_pool1" {
   name             = "uuidpool_pool1"
   description      = "uuidpool_pool"
   assignment_order = "default"
-  size             = 774325
   prefix           = "123e4567-e89b-42d3"
   uuid_suffix_blocks = [{
     additional_properties = ""
