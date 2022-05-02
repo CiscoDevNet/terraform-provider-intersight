@@ -65,7 +65,7 @@ resource "intersight_virtualization_virtual_machine" "virtualization_virtual_mac
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 
-* `action`:(string) Action to be performed on a virtual machine (Create, PowerState, Migrate, Clone etc).* `None` - A place holder for the default value.* `PowerState` - Power action is performed on the virtual machine.* `Migrate` - The virtual machine will be migrated from existing node to a different node in cluster. The behavior depends on the underlying hypervisor.* `Create` - The virtual machine will be created on the specified hypervisor. This action is also useful if the virtual machine creation failed during first POST operation on VirtualMachine managed object. User can set this action to retry the virtual machine creation.* `Delete` - The virtual machine will be deleted from the specified hypervisor. User can either set this action or can do a DELETE operation on the VirtualMachine managed object. 
+* `action`:(string) Action to be performed on a virtual machine (Create, PowerState, Migrate, Clone etc).* `None` - A place holder for the default value.* `PowerState` - Power action is performed on the virtual machine.* `Migrate` - The virtual machine will be migrated from existing node to a different node in cluster. The behavior depends on the underlying hypervisor.* `Create` - The virtual machine will be created on the specified hypervisor. This action is also useful if the virtual machine creation failed during first POST operation on VirtualMachine managed object. User can set this action to retry the virtual machine creation.* `Delete` - The virtual machine will be deleted from the specified hypervisor. User can either set this action or can do a DELETE operation on the VirtualMachine managed object.* `Resize` - The virtual machine will be resized to the specified instance type. 
 * `action_info`:(HashMap) -(ReadOnly) Details of an action performed on the virtual machine. Contains name of the action performed, status, failure reason message etc. 
 This complex property has following sub-properties:
   + `failure_reason`:(string)(ReadOnly) Description of reason for failure. Derived from the workflow failure message. 
@@ -101,7 +101,7 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `cluster_esxi`:(string) Cluster where virtual machine is deployed. 
-* `cpu`:(int) Number of vCPUs allocated to virtual machine. 
+* `cpu`:(int) Number of vCPUs to be allocated to virtual machine. The upper limit depends on the hypervisor. 
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `discovered`:(bool)(ReadOnly) Flag to indicate whether the configuration is created from inventory object. 
 * `disk`:(Array)
@@ -165,7 +165,7 @@ This complex property has following sub-properties:
   + `name`:(string)(ReadOnly) Name of the meta property which identifies a specific resource. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `value`:(string)(ReadOnly) Value of the meta property which identifies a specific resource. 
-* `memory`:(int) Virtual machine memory in mebi bytes (one mebibyte, 1MiB, is 1048576 bytes, and 1KiB is 1024 bytes). Input must be a whole number and scientific notation is not acceptable. For example, enter 1730 and not 1.73e03. 
+* `memory`:(int) Virtual machine memory in mebi bytes (one mebibyte 1MiB is 1048576 bytes, and 1KiB is 1024 bytes). Input must be a whole number and scientific notation is not acceptable. For example, enter 1730 and not 1.73e03. The limit of 4177920 translates to 3.9TiB. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Virtual machine name that is unique. Hypervisors enforce platform specific limits and character sets. The name length limit, both min and max, vary among hypervisors. Therefore, the basic limits are set here and proper enforcement is done elsewhere. 

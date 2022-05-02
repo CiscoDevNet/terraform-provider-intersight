@@ -24,6 +24,7 @@ The following arguments can be used to get data of already created objects in In
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `mode`:(string) Mode information N_proxy, F or E associated to the Fibre Channel portchannel. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
+* `name`:(string) Name of the port channel. 
 * `oper_speed`:(string) Operational speed of this port-channel. 
 * `oper_state`:(string) Operational state of this port-channel. 
 * `oper_state_qual`:(string) Reason for this port-channel's Operational state. 

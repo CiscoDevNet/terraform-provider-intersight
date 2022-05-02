@@ -154,6 +154,11 @@ func dataSourceStorageNetAppBaseDisk() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"disk_bay": {
+			Description: "NetApp base disk shelf bay.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"disk_pool": {
 			Description: "An array of relationships to storageNetAppAggregate resources.",
 			Type:        schema.TypeList,
@@ -187,6 +192,26 @@ func dataSourceStorageNetAppBaseDisk() *schema.Resource {
 					},
 				},
 			},
+		},
+		"disk_serial_number": {
+			Description: "NetApp base disk serial number.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"disk_shelf_id": {
+			Description: "NetApp base disk shelf id.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"disk_shelf_model": {
+			Description: "NetApp base disk shelf model.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"disk_shelf_name": {
+			Description: "NetApp base disk shelf name.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"disk_type": {
 			Description: "The type of the NetApp disk.\n* `Unknown` - Default unknown disk type.\n* `SSDNVM` - Solid state disk with Non-Volatile Memory Express protocol enabled.\n* `ATA` - Advanced Technology Attachment is a type of disk drive that integrates the drive controller directly on the drive itself.\n* `FCAL` - For the FC-AL disk connection type, disk shelves are connected to the controller in a loop.\n* `BSAS` - Bridged SAS-SATA disks with added hardware to enable them to be plugged into a SAS-connected storage shelf.\n* `FSAS` - Near Line SAS. NL-SAS drives are enterprise SATA drives with a SAS interface, head, media, and rotational speed of traditional enterprise-class SATA drives with the fully capable SAS interface typical for classic SAS drives.\n* `LUN` - Logical Unit Number refers to a logical disk.\n* `SAS` - Storage disk with serial attached SCSI.\n* `MSATA` - SATA disk in multi-disk carrier storage shelf.\n* `SSD` - Storage disk with Solid state disk.\n* `VMDISK` - Virtual machine Data Disk.",
@@ -762,6 +787,11 @@ func dataSourceStorageNetAppBaseDisk() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"disk_bay": {
+			Description: "NetApp base disk shelf bay.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"disk_pool": {
 			Description: "An array of relationships to storageNetAppAggregate resources.",
 			Type:        schema.TypeList,
@@ -795,6 +825,26 @@ func dataSourceStorageNetAppBaseDisk() *schema.Resource {
 					},
 				},
 			},
+		},
+		"disk_serial_number": {
+			Description: "NetApp base disk serial number.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"disk_shelf_id": {
+			Description: "NetApp base disk shelf id.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"disk_shelf_model": {
+			Description: "NetApp base disk shelf model.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"disk_shelf_name": {
+			Description: "NetApp base disk shelf name.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"disk_type": {
 			Description: "The type of the NetApp disk.\n* `Unknown` - Default unknown disk type.\n* `SSDNVM` - Solid state disk with Non-Volatile Memory Express protocol enabled.\n* `ATA` - Advanced Technology Attachment is a type of disk drive that integrates the drive controller directly on the drive itself.\n* `FCAL` - For the FC-AL disk connection type, disk shelves are connected to the controller in a loop.\n* `BSAS` - Bridged SAS-SATA disks with added hardware to enable them to be plugged into a SAS-connected storage shelf.\n* `FSAS` - Near Line SAS. NL-SAS drives are enterprise SATA drives with a SAS interface, head, media, and rotational speed of traditional enterprise-class SATA drives with the fully capable SAS interface typical for classic SAS drives.\n* `LUN` - Logical Unit Number refers to a logical disk.\n* `SAS` - Storage disk with serial attached SCSI.\n* `MSATA` - SATA disk in multi-disk carrier storage shelf.\n* `SSD` - Storage disk with Solid state disk.\n* `VMDISK` - Virtual machine Data Disk.",
@@ -1411,6 +1461,11 @@ func dataSourceStorageNetAppBaseDiskRead(c context.Context, d *schema.ResourceDa
 		o.SetDeviceMoId(x)
 	}
 
+	if v, ok := d.GetOkExists("disk_bay"); ok {
+		x := int64(v.(int))
+		o.SetDiskBay(x)
+	}
+
 	if v, ok := d.GetOk("disk_pool"); ok {
 		x := make([]models.StorageNetAppAggregateRelationship, 0)
 		s := v.([]interface{})
@@ -1449,6 +1504,26 @@ func dataSourceStorageNetAppBaseDiskRead(c context.Context, d *schema.ResourceDa
 			x = append(x, models.MoMoRefAsStorageNetAppAggregateRelationship(o))
 		}
 		o.SetDiskPool(x)
+	}
+
+	if v, ok := d.GetOk("disk_serial_number"); ok {
+		x := (v.(string))
+		o.SetDiskSerialNumber(x)
+	}
+
+	if v, ok := d.GetOk("disk_shelf_id"); ok {
+		x := (v.(string))
+		o.SetDiskShelfId(x)
+	}
+
+	if v, ok := d.GetOk("disk_shelf_model"); ok {
+		x := (v.(string))
+		o.SetDiskShelfModel(x)
+	}
+
+	if v, ok := d.GetOk("disk_shelf_name"); ok {
+		x := (v.(string))
+		o.SetDiskShelfName(x)
 	}
 
 	if v, ok := d.GetOk("disk_type"); ok {
@@ -1926,8 +2001,13 @@ func dataSourceStorageNetAppBaseDiskRead(c context.Context, d *schema.ResourceDa
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["device_mo_id"] = (s.GetDeviceMoId())
+				temp["disk_bay"] = (s.GetDiskBay())
 
 				temp["disk_pool"] = flattenListStorageNetAppAggregateRelationship(s.GetDiskPool(), d)
+				temp["disk_serial_number"] = (s.GetDiskSerialNumber())
+				temp["disk_shelf_id"] = (s.GetDiskShelfId())
+				temp["disk_shelf_model"] = (s.GetDiskShelfModel())
+				temp["disk_shelf_name"] = (s.GetDiskShelfName())
 				temp["disk_type"] = (s.GetDiskType())
 				temp["dn"] = (s.GetDn())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())

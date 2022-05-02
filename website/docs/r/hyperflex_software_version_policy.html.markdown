@@ -14,7 +14,7 @@ A policy capturing software versions for different HyperFlex Cluster compatible 
 
 ```hcl
 resource "intersight_hyperflex_software_version_policy" "hyperflex_software_version_policy1" {
-  hxdp_version = "4.5(2a)"
+  hxdp_version = "5.0(1b)"
   organization {
     object_type = "organization.Organization"
     moid        = var.organization
@@ -22,6 +22,7 @@ resource "intersight_hyperflex_software_version_policy" "hyperflex_software_vers
   name = "hyperflex_software_version_policy1"
 }
 ```
+
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

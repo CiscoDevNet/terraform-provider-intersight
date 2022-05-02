@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **AdminSpeed** | Pointer to **string** | Administrator configured Speed applied on the port channel. | [optional] 
 **AdminState** | Pointer to **string** | Administratively configured state (enabled/disabled) for this portchannel. | [optional] [readonly] 
 **Mode** | Pointer to **string** | Mode information N_proxy, F or E associated to the Fibre Channel portchannel. | [optional] 
+**Name** | Pointer to **string** | Name of the port channel. | [optional] 
 **OperSpeed** | Pointer to **string** | Operational speed of this port-channel. | [optional] 
 **OperState** | Pointer to **string** | Operational state of this port-channel. | [optional] 
 **OperStateQual** | Pointer to **string** | Reason for this port-channel&#39;s Operational state. | [optional] 
@@ -18,6 +19,7 @@ Name | Type | Description | Notes
 **Vsan** | Pointer to **int64** | Virtual San that is associated to the port-channel. | [optional] 
 **Wwn** | Pointer to **string** | World Wide Name of the port channel. | [optional] [readonly] 
 **EquipmentSwitchCard** | Pointer to [**EquipmentSwitchCardRelationship**](EquipmentSwitchCardRelationship.md) |  | [optional] 
+**NetworkElement** | Pointer to [**NetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
@@ -153,6 +155,31 @@ SetMode sets Mode field to given value.
 `func (o *FcPortChannelAllOf) HasMode() bool`
 
 HasMode returns a boolean if a field has been set.
+
+### GetName
+
+`func (o *FcPortChannelAllOf) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *FcPortChannelAllOf) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *FcPortChannelAllOf) SetName(v string)`
+
+SetName sets Name field to given value.
+
+### HasName
+
+`func (o *FcPortChannelAllOf) HasName() bool`
+
+HasName returns a boolean if a field has been set.
 
 ### GetOperSpeed
 
@@ -378,6 +405,31 @@ SetEquipmentSwitchCard sets EquipmentSwitchCard field to given value.
 `func (o *FcPortChannelAllOf) HasEquipmentSwitchCard() bool`
 
 HasEquipmentSwitchCard returns a boolean if a field has been set.
+
+### GetNetworkElement
+
+`func (o *FcPortChannelAllOf) GetNetworkElement() NetworkElementRelationship`
+
+GetNetworkElement returns the NetworkElement field if non-nil, zero value otherwise.
+
+### GetNetworkElementOk
+
+`func (o *FcPortChannelAllOf) GetNetworkElementOk() (*NetworkElementRelationship, bool)`
+
+GetNetworkElementOk returns a tuple with the NetworkElement field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNetworkElement
+
+`func (o *FcPortChannelAllOf) SetNetworkElement(v NetworkElementRelationship)`
+
+SetNetworkElement sets NetworkElement field to given value.
+
+### HasNetworkElement
+
+`func (o *FcPortChannelAllOf) HasNetworkElement() bool`
+
+HasNetworkElement returns a boolean if a field has been set.
 
 ### GetRegisteredDevice
 

@@ -89,6 +89,49 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"dcnm_fan_details": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"name": {
+						Description: "Name of the fan used in the switch.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"product_id": {
+						Description: "Product ID of the fan used in the switch.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"serial_number": {
+						Description: "Serial number of the fan used in the switch.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"vendor_id": {
+						Description: "Vendor Id of the fan used in the switch.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"dcnm_license_state": {
 			Description: "Returns the License state of the device.",
 			Type:        schema.TypeString,
@@ -1119,6 +1162,49 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 			Description: "Returns the value of the customerDeviceConnector field.",
 			Type:        schema.TypeString,
 			Optional:    true,
+		},
+		"dcnm_fan_details": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"name": {
+						Description: "Name of the fan used in the switch.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"product_id": {
+						Description: "Product ID of the fan used in the switch.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"serial_number": {
+						Description: "Serial number of the fan used in the switch.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"vendor_id": {
+						Description: "Vendor Id of the fan used in the switch.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"dcnm_license_state": {
 			Description: "Returns the License state of the device.",
@@ -2174,6 +2260,58 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 	if v, ok := d.GetOk("customer_device_connector"); ok {
 		x := (v.(string))
 		o.SetCustomerDeviceConnector(x)
+	}
+
+	if v, ok := d.GetOk("dcnm_fan_details"); ok {
+		x := make([]models.NiatelemetryFanDetails, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.NiatelemetryFanDetails{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("niatelemetry.FanDetails")
+			if v, ok := l["name"]; ok {
+				{
+					x := (v.(string))
+					o.SetName(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["product_id"]; ok {
+				{
+					x := (v.(string))
+					o.SetProductId(x)
+				}
+			}
+			if v, ok := l["serial_number"]; ok {
+				{
+					x := (v.(string))
+					o.SetSerialNumber(x)
+				}
+			}
+			if v, ok := l["vendor_id"]; ok {
+				{
+					x := (v.(string))
+					o.SetVendorId(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetDcnmFanDetails(x)
 	}
 
 	if v, ok := d.GetOk("dcnm_license_state"); ok {
@@ -3291,6 +3429,8 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["customer_device_connector"] = (s.GetCustomerDeviceConnector())
+
+				temp["dcnm_fan_details"] = flattenListNiatelemetryFanDetails(s.GetDcnmFanDetails(), d)
 				temp["dcnm_license_state"] = (s.GetDcnmLicenseState())
 				temp["device_discovery"] = (s.GetDeviceDiscovery())
 				temp["device_health"] = (s.GetDeviceHealth())

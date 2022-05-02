@@ -27,6 +27,7 @@ Name | Type | Description | Notes
 **Thermal** | Pointer to **string** | The Thermal status of the fabric interconnect. * &#x60;unknown&#x60; - The default state of the sensor (in case no data is received). * &#x60;ok&#x60; - State of the sensor indicating the sensor&#39;s temperature range is okay. * &#x60;upper-non-recoverable&#x60; - State of the sensor indicating that the temperature is extremely high above normal range. * &#x60;upper-critical&#x60; - State of the sensor indicating that the temperature is above normal range. * &#x60;upper-non-critical&#x60; - State of the sensor indicating that the temperature is a little above the normal range. * &#x60;lower-non-critical&#x60; - State of the sensor indicating that the temperature is a little below the normal range. * &#x60;lower-critical&#x60; - State of the sensor indicating that the temperature is below normal range. * &#x60;lower-non-recoverable&#x60; - State of the sensor indicating that the temperature is extremely below normal range. | [optional] [default to "unknown"]
 **Type** | Pointer to **string** | Type of the switch card based on the capability like 4 Gbps or 2 Gbps type etc. | [optional] 
 **FcPortChannels** | Pointer to [**[]FcPortChannelRelationship**](FcPortChannelRelationship.md) | An array of relationships to fcPortChannel resources. | [optional] 
+**FcPorts** | Pointer to [**[]FcPhysicalPortRelationship**](FcPhysicalPortRelationship.md) | An array of relationships to fcPhysicalPort resources. | [optional] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **NetworkElement** | Pointer to [**NetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
 **PortChannels** | Pointer to [**[]EtherPortChannelRelationship**](EtherPortChannelRelationship.md) | An array of relationships to etherPortChannel resources. | [optional] 
@@ -627,6 +628,41 @@ HasFcPortChannels returns a boolean if a field has been set.
 `func (o *EquipmentSwitchCard) UnsetFcPortChannels()`
 
 UnsetFcPortChannels ensures that no value is present for FcPortChannels, not even an explicit nil
+### GetFcPorts
+
+`func (o *EquipmentSwitchCard) GetFcPorts() []FcPhysicalPortRelationship`
+
+GetFcPorts returns the FcPorts field if non-nil, zero value otherwise.
+
+### GetFcPortsOk
+
+`func (o *EquipmentSwitchCard) GetFcPortsOk() (*[]FcPhysicalPortRelationship, bool)`
+
+GetFcPortsOk returns a tuple with the FcPorts field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFcPorts
+
+`func (o *EquipmentSwitchCard) SetFcPorts(v []FcPhysicalPortRelationship)`
+
+SetFcPorts sets FcPorts field to given value.
+
+### HasFcPorts
+
+`func (o *EquipmentSwitchCard) HasFcPorts() bool`
+
+HasFcPorts returns a boolean if a field has been set.
+
+### SetFcPortsNil
+
+`func (o *EquipmentSwitchCard) SetFcPortsNil(b bool)`
+
+ SetFcPortsNil sets the value for FcPorts to be an explicit nil
+
+### UnsetFcPorts
+`func (o *EquipmentSwitchCard) UnsetFcPorts()`
+
+UnsetFcPorts ensures that no value is present for FcPorts, not even an explicit nil
 ### GetInventoryDeviceInfo
 
 `func (o *EquipmentSwitchCard) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship`

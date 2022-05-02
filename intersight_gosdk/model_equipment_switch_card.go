@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-6207
+API version: 1.0.9-6484
 Contact: intersight@cisco.com
 */
 
@@ -65,7 +65,9 @@ type EquipmentSwitchCard struct {
 	// Type of the switch card based on the capability like 4 Gbps or 2 Gbps type etc.
 	Type *string `json:"Type,omitempty"`
 	// An array of relationships to fcPortChannel resources.
-	FcPortChannels      []FcPortChannelRelationship      `json:"FcPortChannels,omitempty"`
+	FcPortChannels []FcPortChannelRelationship `json:"FcPortChannels,omitempty"`
+	// An array of relationships to fcPhysicalPort resources.
+	FcPorts             []FcPhysicalPortRelationship     `json:"FcPorts,omitempty"`
 	InventoryDeviceInfo *InventoryDeviceInfoRelationship `json:"InventoryDeviceInfo,omitempty"`
 	NetworkElement      *NetworkElementRelationship      `json:"NetworkElement,omitempty"`
 	// An array of relationships to etherPortChannel resources.
@@ -834,6 +836,39 @@ func (o *EquipmentSwitchCard) SetFcPortChannels(v []FcPortChannelRelationship) {
 	o.FcPortChannels = v
 }
 
+// GetFcPorts returns the FcPorts field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *EquipmentSwitchCard) GetFcPorts() []FcPhysicalPortRelationship {
+	if o == nil {
+		var ret []FcPhysicalPortRelationship
+		return ret
+	}
+	return o.FcPorts
+}
+
+// GetFcPortsOk returns a tuple with the FcPorts field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *EquipmentSwitchCard) GetFcPortsOk() ([]FcPhysicalPortRelationship, bool) {
+	if o == nil || o.FcPorts == nil {
+		return nil, false
+	}
+	return o.FcPorts, true
+}
+
+// HasFcPorts returns a boolean if a field has been set.
+func (o *EquipmentSwitchCard) HasFcPorts() bool {
+	if o != nil && o.FcPorts != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetFcPorts gets a reference to the given []FcPhysicalPortRelationship and assigns it to the FcPorts field.
+func (o *EquipmentSwitchCard) SetFcPorts(v []FcPhysicalPortRelationship) {
+	o.FcPorts = v
+}
+
 // GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
 func (o *EquipmentSwitchCard) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
 	if o == nil || o.InventoryDeviceInfo == nil {
@@ -1075,6 +1110,9 @@ func (o EquipmentSwitchCard) MarshalJSON() ([]byte, error) {
 	if o.FcPortChannels != nil {
 		toSerialize["FcPortChannels"] = o.FcPortChannels
 	}
+	if o.FcPorts != nil {
+		toSerialize["FcPorts"] = o.FcPorts
+	}
 	if o.InventoryDeviceInfo != nil {
 		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
 	}
@@ -1145,7 +1183,9 @@ func (o *EquipmentSwitchCard) UnmarshalJSON(bytes []byte) (err error) {
 		// Type of the switch card based on the capability like 4 Gbps or 2 Gbps type etc.
 		Type *string `json:"Type,omitempty"`
 		// An array of relationships to fcPortChannel resources.
-		FcPortChannels      []FcPortChannelRelationship      `json:"FcPortChannels,omitempty"`
+		FcPortChannels []FcPortChannelRelationship `json:"FcPortChannels,omitempty"`
+		// An array of relationships to fcPhysicalPort resources.
+		FcPorts             []FcPhysicalPortRelationship     `json:"FcPorts,omitempty"`
 		InventoryDeviceInfo *InventoryDeviceInfoRelationship `json:"InventoryDeviceInfo,omitempty"`
 		NetworkElement      *NetworkElementRelationship      `json:"NetworkElement,omitempty"`
 		// An array of relationships to etherPortChannel resources.
@@ -1183,6 +1223,7 @@ func (o *EquipmentSwitchCard) UnmarshalJSON(bytes []byte) (err error) {
 		varEquipmentSwitchCard.Thermal = varEquipmentSwitchCardWithoutEmbeddedStruct.Thermal
 		varEquipmentSwitchCard.Type = varEquipmentSwitchCardWithoutEmbeddedStruct.Type
 		varEquipmentSwitchCard.FcPortChannels = varEquipmentSwitchCardWithoutEmbeddedStruct.FcPortChannels
+		varEquipmentSwitchCard.FcPorts = varEquipmentSwitchCardWithoutEmbeddedStruct.FcPorts
 		varEquipmentSwitchCard.InventoryDeviceInfo = varEquipmentSwitchCardWithoutEmbeddedStruct.InventoryDeviceInfo
 		varEquipmentSwitchCard.NetworkElement = varEquipmentSwitchCardWithoutEmbeddedStruct.NetworkElement
 		varEquipmentSwitchCard.PortChannels = varEquipmentSwitchCardWithoutEmbeddedStruct.PortChannels
@@ -1228,6 +1269,7 @@ func (o *EquipmentSwitchCard) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "Thermal")
 		delete(additionalProperties, "Type")
 		delete(additionalProperties, "FcPortChannels")
+		delete(additionalProperties, "FcPorts")
 		delete(additionalProperties, "InventoryDeviceInfo")
 		delete(additionalProperties, "NetworkElement")
 		delete(additionalProperties, "PortChannels")

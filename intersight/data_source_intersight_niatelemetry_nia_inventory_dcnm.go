@@ -182,6 +182,16 @@ func dataSourceNiatelemetryNiaInventoryDcnm() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"ndfc_fabric_name": {
+			Description: "NDFC name information of the setup.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"ndfc_oper_state": {
+			Description: "NDFC status information for the setup.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"network_info": {
 			Description: "Installation type description of controller on DCNM.",
 			Type:        schema.TypeList,
@@ -301,6 +311,11 @@ func dataSourceNiatelemetryNiaInventoryDcnm() *schema.Resource {
 					},
 				},
 			},
+		},
+		"num_dcnm_site": {
+			Description: "Returns the number of DCNM site fabrics.",
+			Type:        schema.TypeInt,
+			Optional:    true,
 		},
 		"num_fabrics": {
 			Description: "Returns total number of fabrics in DCNM set-up.",
@@ -828,6 +843,16 @@ func dataSourceNiatelemetryNiaInventoryDcnm() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"ndfc_fabric_name": {
+			Description: "NDFC name information of the setup.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"ndfc_oper_state": {
+			Description: "NDFC status information for the setup.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"network_info": {
 			Description: "Installation type description of controller on DCNM.",
 			Type:        schema.TypeList,
@@ -947,6 +972,11 @@ func dataSourceNiatelemetryNiaInventoryDcnm() *schema.Resource {
 					},
 				},
 			},
+		},
+		"num_dcnm_site": {
+			Description: "Returns the number of DCNM site fabrics.",
+			Type:        schema.TypeInt,
+			Optional:    true,
 		},
 		"num_fabrics": {
 			Description: "Returns total number of fabrics in DCNM set-up.",
@@ -1507,6 +1537,16 @@ func dataSourceNiatelemetryNiaInventoryDcnmRead(c context.Context, d *schema.Res
 		o.SetMoid(x)
 	}
 
+	if v, ok := d.GetOk("ndfc_fabric_name"); ok {
+		x := (v.(string))
+		o.SetNdfcFabricName(x)
+	}
+
+	if v, ok := d.GetOk("ndfc_oper_state"); ok {
+		x := (v.(string))
+		o.SetNdfcOperState(x)
+	}
+
 	if v, ok := d.GetOk("network_info"); ok {
 		p := make([]models.NiatelemetryNetworkInfo, 0, 1)
 		s := v.([]interface{})
@@ -1654,6 +1694,11 @@ func dataSourceNiatelemetryNiaInventoryDcnmRead(c context.Context, d *schema.Res
 			x := p[0]
 			o.SetNetworkInfo(x)
 		}
+	}
+
+	if v, ok := d.GetOkExists("num_dcnm_site"); ok {
+		x := int64(v.(int))
+		o.SetNumDcnmSite(x)
 	}
 
 	if v, ok := d.GetOkExists("num_fabrics"); ok {
@@ -2086,8 +2131,11 @@ func dataSourceNiatelemetryNiaInventoryDcnmRead(c context.Context, d *schema.Res
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["mode"] = (s.GetMode())
 				temp["moid"] = (s.GetMoid())
+				temp["ndfc_fabric_name"] = (s.GetNdfcFabricName())
+				temp["ndfc_oper_state"] = (s.GetNdfcOperState())
 
 				temp["network_info"] = flattenMapNiatelemetryNetworkInfo(s.GetNetworkInfo(), d)
+				temp["num_dcnm_site"] = (s.GetNumDcnmSite())
 				temp["num_fabrics"] = (s.GetNumFabrics())
 				temp["num_fabrics_in_msd"] = (s.GetNumFabricsInMsd())
 				temp["num_ingress_replication_fabrics"] = (s.GetNumIngressReplicationFabrics())

@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.NetAppCluster"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.NetAppCluster"]
+**AutoSupport** | Pointer to [**NullableStorageNetAppAutoSupport**](StorageNetAppAutoSupport.md) |  | [optional] 
 **AvgPerformanceMetrics** | Pointer to [**StorageNetAppPerformanceMetricsAverage**](StorageNetAppPerformanceMetricsAverage.md) |  | [optional] 
 **ClusterEfficiency** | Pointer to [**NullableStorageNetAppStorageClusterEfficiency**](StorageNetAppStorageClusterEfficiency.md) |  | [optional] 
 **ClusterHealthStatus** | Pointer to **string** | The health status of the cluster. Possible states are ok, ok-with-suppressed, degraded, and unreachable. * &#x60;Unreachable&#x60; - Cluster status is unreachable. * &#x60;OK&#x60; - Cluster status is either ok or ok-with-suppressed. * &#x60;Degraded&#x60; - Cluster status is degraded. | [optional] [readonly] [default to "Unreachable"]
@@ -15,6 +16,7 @@ Name | Type | Description | Notes
 **ManagementAddress** | Pointer to **string** | FQDN or IP Address of Storage Cluster. | [optional] [readonly] 
 **NameServers** | Pointer to **[]string** |  | [optional] 
 **NtpServers** | Pointer to **[]string** |  | [optional] 
+**TelnetEnabled** | Pointer to **bool** | Indicates whether or not telnet is enabled on the cluster. | [optional] [readonly] 
 **Events** | Pointer to [**[]StorageNetAppClusterEventRelationship**](StorageNetAppClusterEventRelationship.md) | An array of relationships to storageNetAppClusterEvent resources. | [optional] [readonly] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
@@ -77,6 +79,41 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetAutoSupport
+
+`func (o *StorageNetAppClusterAllOf) GetAutoSupport() StorageNetAppAutoSupport`
+
+GetAutoSupport returns the AutoSupport field if non-nil, zero value otherwise.
+
+### GetAutoSupportOk
+
+`func (o *StorageNetAppClusterAllOf) GetAutoSupportOk() (*StorageNetAppAutoSupport, bool)`
+
+GetAutoSupportOk returns a tuple with the AutoSupport field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAutoSupport
+
+`func (o *StorageNetAppClusterAllOf) SetAutoSupport(v StorageNetAppAutoSupport)`
+
+SetAutoSupport sets AutoSupport field to given value.
+
+### HasAutoSupport
+
+`func (o *StorageNetAppClusterAllOf) HasAutoSupport() bool`
+
+HasAutoSupport returns a boolean if a field has been set.
+
+### SetAutoSupportNil
+
+`func (o *StorageNetAppClusterAllOf) SetAutoSupportNil(b bool)`
+
+ SetAutoSupportNil sets the value for AutoSupport to be an explicit nil
+
+### UnsetAutoSupport
+`func (o *StorageNetAppClusterAllOf) UnsetAutoSupport()`
+
+UnsetAutoSupport ensures that no value is present for AutoSupport, not even an explicit nil
 ### GetAvgPerformanceMetrics
 
 `func (o *StorageNetAppClusterAllOf) GetAvgPerformanceMetrics() StorageNetAppPerformanceMetricsAverage`
@@ -342,6 +379,31 @@ HasNtpServers returns a boolean if a field has been set.
 `func (o *StorageNetAppClusterAllOf) UnsetNtpServers()`
 
 UnsetNtpServers ensures that no value is present for NtpServers, not even an explicit nil
+### GetTelnetEnabled
+
+`func (o *StorageNetAppClusterAllOf) GetTelnetEnabled() bool`
+
+GetTelnetEnabled returns the TelnetEnabled field if non-nil, zero value otherwise.
+
+### GetTelnetEnabledOk
+
+`func (o *StorageNetAppClusterAllOf) GetTelnetEnabledOk() (*bool, bool)`
+
+GetTelnetEnabledOk returns a tuple with the TelnetEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTelnetEnabled
+
+`func (o *StorageNetAppClusterAllOf) SetTelnetEnabled(v bool)`
+
+SetTelnetEnabled sets TelnetEnabled field to given value.
+
+### HasTelnetEnabled
+
+`func (o *StorageNetAppClusterAllOf) HasTelnetEnabled() bool`
+
+HasTelnetEnabled returns a boolean if a field has been set.
+
 ### GetEvents
 
 `func (o *StorageNetAppClusterAllOf) GetEvents() []StorageNetAppClusterEventRelationship`

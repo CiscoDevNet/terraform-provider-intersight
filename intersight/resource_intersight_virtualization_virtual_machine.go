@@ -34,7 +34,7 @@ func resourceVirtualizationVirtualMachine() *schema.Resource {
 					return
 				}},
 			"action": {
-				Description: "Action to be performed on a virtual machine (Create, PowerState, Migrate, Clone etc).\n* `None` - A place holder for the default value.\n* `PowerState` - Power action is performed on the virtual machine.\n* `Migrate` - The virtual machine will be migrated from existing node to a different node in cluster. The behavior depends on the underlying hypervisor.\n* `Create` - The virtual machine will be created on the specified hypervisor. This action is also useful if the virtual machine creation failed during first POST operation on VirtualMachine managed object. User can set this action to retry the virtual machine creation.\n* `Delete` - The virtual machine will be deleted from the specified hypervisor. User can either set this action or can do a DELETE operation on the VirtualMachine managed object.",
+				Description: "Action to be performed on a virtual machine (Create, PowerState, Migrate, Clone etc).\n* `None` - A place holder for the default value.\n* `PowerState` - Power action is performed on the virtual machine.\n* `Migrate` - The virtual machine will be migrated from existing node to a different node in cluster. The behavior depends on the underlying hypervisor.\n* `Create` - The virtual machine will be created on the specified hypervisor. This action is also useful if the virtual machine creation failed during first POST operation on VirtualMachine managed object. User can set this action to retry the virtual machine creation.\n* `Delete` - The virtual machine will be deleted from the specified hypervisor. User can either set this action or can do a DELETE operation on the VirtualMachine managed object.\n* `Resize` - The virtual machine will be resized to the specified instance type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Default:     "None",
@@ -351,7 +351,7 @@ func resourceVirtualizationVirtualMachine() *schema.Resource {
 				Optional:    true,
 			},
 			"cpu": {
-				Description: "Number of vCPUs allocated to virtual machine.",
+				Description: "Number of vCPUs to be allocated to virtual machine. The upper limit depends on the hypervisor.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
@@ -803,7 +803,7 @@ func resourceVirtualizationVirtualMachine() *schema.Resource {
 				},
 			},
 			"memory": {
-				Description: "Virtual machine memory in mebi bytes (one mebibyte, 1MiB, is 1048576 bytes, and 1KiB is 1024 bytes). Input must be a whole number and scientific notation is not acceptable. For example, enter 1730 and not 1.73e03.",
+				Description: "Virtual machine memory in mebi bytes (one mebibyte 1MiB is 1048576 bytes, and 1KiB is 1024 bytes). Input must be a whole number and scientific notation is not acceptable. For example, enter 1730 and not 1.73e03. The limit of 4177920 translates to 3.9TiB.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},

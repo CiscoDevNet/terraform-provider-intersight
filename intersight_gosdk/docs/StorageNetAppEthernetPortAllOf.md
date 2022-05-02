@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **BroadcastDomainName** | Pointer to **string** | Name of the broadcast domain, scoped to its IPspace. | [optional] [readonly] 
 **Enabled** | Pointer to **string** | Status of port to determine if its enabled or not. | [optional] [readonly] 
 **MacAddress** | Pointer to **string** | MAC address of the port available in storage array. | [optional] [readonly] 
-**Mtu** | Pointer to **string** | Maximum transmission unit of the physical port available in storage array. | [optional] [readonly] 
+**Mtu** | Pointer to **int64** | Maximum transmission unit of the physical port available in storage array. | [optional] [readonly] 
 **Name** | Pointer to **string** | Name of the port available in storage array. | [optional] [readonly] 
 **NetAppEthernetPortLag** | Pointer to [**NullableStorageNetAppEthernetPortLag**](StorageNetAppEthernetPortLag.md) |  | [optional] 
 **NetAppEthernetPortVlan** | Pointer to [**NullableStorageNetAppEthernetPortVlan**](StorageNetAppEthernetPortVlan.md) |  | [optional] 
@@ -156,20 +156,20 @@ HasMacAddress returns a boolean if a field has been set.
 
 ### GetMtu
 
-`func (o *StorageNetAppEthernetPortAllOf) GetMtu() string`
+`func (o *StorageNetAppEthernetPortAllOf) GetMtu() int64`
 
 GetMtu returns the Mtu field if non-nil, zero value otherwise.
 
 ### GetMtuOk
 
-`func (o *StorageNetAppEthernetPortAllOf) GetMtuOk() (*string, bool)`
+`func (o *StorageNetAppEthernetPortAllOf) GetMtuOk() (*int64, bool)`
 
 GetMtuOk returns a tuple with the Mtu field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMtu
 
-`func (o *StorageNetAppEthernetPortAllOf) SetMtu(v string)`
+`func (o *StorageNetAppEthernetPortAllOf) SetMtu(v int64)`
 
 SetMtu sets Mtu field to given value.
 

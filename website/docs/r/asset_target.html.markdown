@@ -123,7 +123,7 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `shared_scope`:(string)(ReadOnly) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
-* `status`:(string)(ReadOnly) Status indicates if Intersight can establish a connection and authenticate with the managed target. Status does not include information about the functional health of the target.* `` - The target details have been persisted but Intersight has not yet attempted to connect to the target.* `Connected` - Intersight is able to establish a connection to the target and initiate management activities.* `NotConnected` - Intersight is unable to establish a connection to the target.* `ClaimInProgress` - Claim of the target is in progress. A connection to the target has not been fully established.* `Unclaimed` - The device was un-claimed from the users account by an Administrator of the device. Also indicates the failure to claim Targets of type HTTP Endpoint in Intersight.* `Claimed` - Target of type HTTP Endpoint is successfully claimed in Intersight. Currently no validation is performed to verify the Target connectivity from Intersight at the time of creation. However invoking API from Intersight Orchestrator fails if this Target is not reachable from Intersight or if Target API credentials are incorrect. 
+* `status`:(string)(ReadOnly) Status indicates if Intersight can establish a connection and authenticate with the managed target. Status does not include information about the functional health of the target.* `` - The target details have been persisted but Intersight has not yet attempted to connect to the target.* `Connected` - Intersight is able to establish a connection to the target and initiate management activities.* `NotConnected` - Intersight is unable to establish a connection to the target.* `ClaimInProgress` - Claim of the target is in progress. A connection to the target has not been fully established.* `UnclaimInProgress` - Unclaim of the target is in progress. Intersight is able to connect to the target and all management operations are supported.* `Unclaimed` - The device was un-claimed from the users account by an Administrator of the device. Also indicates the failure to claim Targets of type HTTP Endpoint in Intersight.* `Claimed` - Target of type HTTP Endpoint is successfully claimed in Intersight. Currently no validation is performed to verify the Target connectivity from Intersight at the time of creation. However invoking API from Intersight Orchestrator fails if this Target is not reachable from Intersight or if Target API credentials are incorrect. 
 * `status_error_reason`:(string)(ReadOnly) StatusErrorReason provides additional context for the Status. 
 * `tags`:(Array)
 This complex property has following sub-properties:
@@ -148,7 +148,15 @@ This complex property has following sub-properties:
   + `timestamp`:(string)(ReadOnly) The time this versioned Managed Object was created. 
   + `nr_version`:(string)(ReadOnly) The version of the Managed Object, e.g. an incrementing number or a hash id. 
   + `version_type`:(string)(ReadOnly) Specifies type of version. Currently the only supported value is \ Configured\ that is used to keep track of snapshots of policies and profiles that are intendedto be configured to target endpoints.* `Modified` - Version created every time an object is modified.* `Configured` - Version created every time an object is configured to the service profile.* `Deployed` - Version created for objects related to a service profile when it is deployed. 
+* `workflow_info`:(HashMap) -(ReadOnly) A reference to a workflowWorkflowInfo resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
+This complex property has following sub-properties:
+  + `moid`:(string) The Moid of the referenced REST resource. 
+  + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+  + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 
+### Custom keywords
+These are
+* `wait_for_completion`:(bool) This model object can trigger workflows. Use this option to wait for all running workflows to reach a complete state. Default value is True i.e. wait.
 
 ## Import
 `intersight_asset_target` can be imported using the Moid of the object, e.g.
@@ -157,18 +165,6 @@ $ terraform import intersight_asset_target.example 1234567890987654321abcde
 ```
 ## Allowed Types in `AdditionalProperties`
  
-### [asset.OrchestrationService](#argument-reference)
-OrchestrationService provides the necessary configuration details to enable Intersight Orchestration on the selected managed target. Subject to licensing.
-
-### [asset.TerraformIntegrationService](#argument-reference)
-TerraformIntegrationService provides the necessary configuration details to enable Intersight Cloud Region on the selected Terraform Cloud.
-
-### [asset.VirtualizationService](#argument-reference)
-The necessary configuration details to enable  Intersight Virtualization features on the selected managed target.
-
-### [asset.WorkloadOptimizerService](#argument-reference)
-WorkloadOptimizerService provides the necessary configuration details to enable Intersight Workflow Optimizer on the selected managed target. Subject to licensing.
-  
 ### [asset.CloudConnection](#argument-reference)
 CloudConnection provides the necessary details for Intersight to connect to and authenticate with a target at a well-known service address. The service address is inferred based upon the target type. For example Amazon Web Services.
 
@@ -192,4 +188,16 @@ ScopedTargetConnection provides the necessary details for Intersight to connect 
 SshConnection provides the necessary details for Intersight to connect and authenticate with a managed target over an SSH connection.
 * `management_address`:(string) The DNS hostname or IP Address, either IPv4 or IPv6, to be used to connect to the managed target. 
 * `port`:(int) The port number to be used to connect to the managed target. Valid values are 1 - 65535. If not provided, a default port of 22 is used to establish the SSH connection to the given target. 
+  
+### [asset.OrchestrationService](#argument-reference)
+OrchestrationService provides the necessary configuration details to enable Intersight Orchestration on the selected managed target. Subject to licensing.
+
+### [asset.TerraformIntegrationService](#argument-reference)
+TerraformIntegrationService provides the necessary configuration details to enable Intersight Cloud Region on the selected Terraform Cloud.
+
+### [asset.VirtualizationService](#argument-reference)
+The necessary configuration details to enable  Intersight Virtualization features on the selected managed target.
+
+### [asset.WorkloadOptimizerService](#argument-reference)
+WorkloadOptimizerService provides the necessary configuration details to enable Intersight Workflow Optimizer on the selected managed target. Subject to licensing.
   

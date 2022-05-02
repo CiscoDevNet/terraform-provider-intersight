@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.NetAppNode"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.NetAppNode"]
 **AvgPerformanceMetrics** | Pointer to [**StorageNetAppPerformanceMetricsAverage**](StorageNetAppPerformanceMetricsAverage.md) |  | [optional] 
+**CdpdEnabled** | Pointer to **string** | Storage node option for cdpd state. * &#x60;unknown&#x60; - The cdpd option is unknown on the node. * &#x60;on&#x60; - The cdpd option is enabled on the node. * &#x60;off&#x60; - The cdpd option is disabled on the node. | [optional] [readonly] [default to "unknown"]
 **Health** | Pointer to **bool** | The health of the NetApp Node. | [optional] [readonly] 
 **HighAvailability** | Pointer to [**NullableStorageNetAppHighAvailability**](StorageNetAppHighAvailability.md) |  | [optional] 
 **Key** | Pointer to **string** | Unique identifier of NetApp Node across data center. | [optional] [readonly] 
@@ -98,6 +99,31 @@ SetAvgPerformanceMetrics sets AvgPerformanceMetrics field to given value.
 `func (o *StorageNetAppNode) HasAvgPerformanceMetrics() bool`
 
 HasAvgPerformanceMetrics returns a boolean if a field has been set.
+
+### GetCdpdEnabled
+
+`func (o *StorageNetAppNode) GetCdpdEnabled() string`
+
+GetCdpdEnabled returns the CdpdEnabled field if non-nil, zero value otherwise.
+
+### GetCdpdEnabledOk
+
+`func (o *StorageNetAppNode) GetCdpdEnabledOk() (*string, bool)`
+
+GetCdpdEnabledOk returns a tuple with the CdpdEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCdpdEnabled
+
+`func (o *StorageNetAppNode) SetCdpdEnabled(v string)`
+
+SetCdpdEnabled sets CdpdEnabled field to given value.
+
+### HasCdpdEnabled
+
+`func (o *StorageNetAppNode) HasCdpdEnabled() bool`
+
+HasCdpdEnabled returns a boolean if a field has been set.
 
 ### GetHealth
 

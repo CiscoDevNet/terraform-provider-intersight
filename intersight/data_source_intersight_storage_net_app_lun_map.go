@@ -118,6 +118,16 @@ func dataSourceStorageNetAppLunMap() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"igroup_uuid": {
+			Description: "UUID of the initiator group.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"lun_uuid": {
+			Description: "Universally unique identifier of the LUN.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -269,11 +279,6 @@ func dataSourceStorageNetAppLunMap() *schema.Resource {
 					},
 				},
 			},
-		},
-		"uuid": {
-			Description: "Universally unique identifier of the LUN.",
-			Type:        schema.TypeString,
-			Optional:    true,
 		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
@@ -527,6 +532,16 @@ func dataSourceStorageNetAppLunMap() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"igroup_uuid": {
+			Description: "UUID of the initiator group.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"lun_uuid": {
+			Description: "Universally unique identifier of the LUN.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -678,11 +693,6 @@ func dataSourceStorageNetAppLunMap() *schema.Resource {
 					},
 				},
 			},
-		},
-		"uuid": {
-			Description: "Universally unique identifier of the LUN.",
-			Type:        schema.TypeString,
-			Optional:    true,
 		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
@@ -967,6 +977,16 @@ func dataSourceStorageNetAppLunMapRead(c context.Context, d *schema.ResourceData
 		o.SetHostName(x)
 	}
 
+	if v, ok := d.GetOk("igroup_uuid"); ok {
+		x := (v.(string))
+		o.SetIgroupUuid(x)
+	}
+
+	if v, ok := d.GetOk("lun_uuid"); ok {
+		x := (v.(string))
+		o.SetLunUuid(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
@@ -1157,11 +1177,6 @@ func dataSourceStorageNetAppLunMapRead(c context.Context, d *schema.ResourceData
 		}
 	}
 
-	if v, ok := d.GetOk("uuid"); ok {
-		x := (v.(string))
-		o.SetUuid(x)
-	}
-
 	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
@@ -1332,6 +1347,8 @@ func dataSourceStorageNetAppLunMapRead(c context.Context, d *schema.ResourceData
 
 				temp["host"] = flattenListStorageNetAppInitiatorGroupRelationship(s.GetHost(), d)
 				temp["host_name"] = (s.GetHostName())
+				temp["igroup_uuid"] = (s.GetIgroupUuid())
+				temp["lun_uuid"] = (s.GetLunUuid())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
@@ -1346,7 +1363,6 @@ func dataSourceStorageNetAppLunMapRead(c context.Context, d *schema.ResourceData
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 
 				temp["tenant"] = flattenMapStorageNetAppStorageVmRelationship(s.GetTenant(), d)
-				temp["uuid"] = (s.GetUuid())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 

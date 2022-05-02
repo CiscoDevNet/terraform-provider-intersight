@@ -46,6 +46,7 @@ Name | Type | Description | Notes
 **Cards** | Pointer to [**[]EquipmentSwitchCardRelationship**](EquipmentSwitchCardRelationship.md) | An array of relationships to equipmentSwitchCard resources. | [optional] [readonly] 
 **Console** | Pointer to [**[]ConsoleConsoleConfigRelationship**](ConsoleConsoleConfigRelationship.md) | An array of relationships to consoleConsoleConfig resources. | [optional] 
 **Fanmodules** | Pointer to [**[]EquipmentFanModuleRelationship**](EquipmentFanModuleRelationship.md) | An array of relationships to equipmentFanModule resources. | [optional] [readonly] 
+**FcPortChannels** | Pointer to [**[]FcPortChannelRelationship**](FcPortChannelRelationship.md) | An array of relationships to fcPortChannel resources. | [optional] 
 **FeatureControl** | Pointer to [**[]NetworkFeatureControlRelationship**](NetworkFeatureControlRelationship.md) | An array of relationships to networkFeatureControl resources. | [optional] 
 **InterfaceList** | Pointer to [**[]NetworkInterfaceListRelationship**](NetworkInterfaceListRelationship.md) | An array of relationships to networkInterfaceList resources. | [optional] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
@@ -1163,6 +1164,41 @@ HasFanmodules returns a boolean if a field has been set.
 `func (o *NetworkElement) UnsetFanmodules()`
 
 UnsetFanmodules ensures that no value is present for Fanmodules, not even an explicit nil
+### GetFcPortChannels
+
+`func (o *NetworkElement) GetFcPortChannels() []FcPortChannelRelationship`
+
+GetFcPortChannels returns the FcPortChannels field if non-nil, zero value otherwise.
+
+### GetFcPortChannelsOk
+
+`func (o *NetworkElement) GetFcPortChannelsOk() (*[]FcPortChannelRelationship, bool)`
+
+GetFcPortChannelsOk returns a tuple with the FcPortChannels field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFcPortChannels
+
+`func (o *NetworkElement) SetFcPortChannels(v []FcPortChannelRelationship)`
+
+SetFcPortChannels sets FcPortChannels field to given value.
+
+### HasFcPortChannels
+
+`func (o *NetworkElement) HasFcPortChannels() bool`
+
+HasFcPortChannels returns a boolean if a field has been set.
+
+### SetFcPortChannelsNil
+
+`func (o *NetworkElement) SetFcPortChannelsNil(b bool)`
+
+ SetFcPortChannelsNil sets the value for FcPortChannels to be an explicit nil
+
+### UnsetFcPortChannels
+`func (o *NetworkElement) UnsetFcPortChannels()`
+
+UnsetFcPortChannels ensures that no value is present for FcPortChannels, not even an explicit nil
 ### GetFeatureControl
 
 `func (o *NetworkElement) GetFeatureControl() []NetworkFeatureControlRelationship`

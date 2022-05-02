@@ -19,7 +19,9 @@ Name | Type | Description | Notes
 **TransceiverType** | Pointer to **string** | Transceiver type of a Fibre Channel port. | [optional] [readonly] 
 **Vsan** | Pointer to **int64** | Virtual San that is associated to the port. | [optional] [readonly] 
 **Wwn** | Pointer to **string** | World Wide Name of a Fibre Channel port. | [optional] [readonly] 
+**EquipmentSwitchCard** | Pointer to [**EquipmentSwitchCardRelationship**](EquipmentSwitchCardRelationship.md) |  | [optional] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**NetworkSupervisorCard** | Pointer to [**NetworkSupervisorCardRelationship**](NetworkSupervisorCardRelationship.md) |  | [optional] 
 **PortGroup** | Pointer to [**PortGroupRelationship**](PortGroupRelationship.md) |  | [optional] 
 **PortSubGroup** | Pointer to [**PortSubGroupRelationship**](PortSubGroupRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
@@ -408,6 +410,31 @@ SetWwn sets Wwn field to given value.
 
 HasWwn returns a boolean if a field has been set.
 
+### GetEquipmentSwitchCard
+
+`func (o *FcPhysicalPort) GetEquipmentSwitchCard() EquipmentSwitchCardRelationship`
+
+GetEquipmentSwitchCard returns the EquipmentSwitchCard field if non-nil, zero value otherwise.
+
+### GetEquipmentSwitchCardOk
+
+`func (o *FcPhysicalPort) GetEquipmentSwitchCardOk() (*EquipmentSwitchCardRelationship, bool)`
+
+GetEquipmentSwitchCardOk returns a tuple with the EquipmentSwitchCard field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEquipmentSwitchCard
+
+`func (o *FcPhysicalPort) SetEquipmentSwitchCard(v EquipmentSwitchCardRelationship)`
+
+SetEquipmentSwitchCard sets EquipmentSwitchCard field to given value.
+
+### HasEquipmentSwitchCard
+
+`func (o *FcPhysicalPort) HasEquipmentSwitchCard() bool`
+
+HasEquipmentSwitchCard returns a boolean if a field has been set.
+
 ### GetInventoryDeviceInfo
 
 `func (o *FcPhysicalPort) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship`
@@ -432,6 +459,31 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 `func (o *FcPhysicalPort) HasInventoryDeviceInfo() bool`
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
+
+### GetNetworkSupervisorCard
+
+`func (o *FcPhysicalPort) GetNetworkSupervisorCard() NetworkSupervisorCardRelationship`
+
+GetNetworkSupervisorCard returns the NetworkSupervisorCard field if non-nil, zero value otherwise.
+
+### GetNetworkSupervisorCardOk
+
+`func (o *FcPhysicalPort) GetNetworkSupervisorCardOk() (*NetworkSupervisorCardRelationship, bool)`
+
+GetNetworkSupervisorCardOk returns a tuple with the NetworkSupervisorCard field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNetworkSupervisorCard
+
+`func (o *FcPhysicalPort) SetNetworkSupervisorCard(v NetworkSupervisorCardRelationship)`
+
+SetNetworkSupervisorCard sets NetworkSupervisorCard field to given value.
+
+### HasNetworkSupervisorCard
+
+`func (o *FcPhysicalPort) HasNetworkSupervisorCard() bool`
+
+HasNetworkSupervisorCard returns a boolean if a field has been set.
 
 ### GetPortGroup
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-6207
+API version: 1.0.9-6484
 Contact: intersight@cisco.com
 */
 
@@ -48,8 +48,14 @@ type NiatelemetryNiaInventoryDcnm struct {
 	// Returns true if the Smart license is enabled and is in use.
 	IsSmartLicenseEnabled *bool `json:"IsSmartLicenseEnabled,omitempty"`
 	// Mode of controller on DCNM.
-	Mode        *string                         `json:"Mode,omitempty"`
-	NetworkInfo NullableNiatelemetryNetworkInfo `json:"NetworkInfo,omitempty"`
+	Mode *string `json:"Mode,omitempty"`
+	// NDFC name information of the setup.
+	NdfcFabricName *string `json:"NdfcFabricName,omitempty"`
+	// NDFC status information for the setup.
+	NdfcOperState *string                         `json:"NdfcOperState,omitempty"`
+	NetworkInfo   NullableNiatelemetryNetworkInfo `json:"NetworkInfo,omitempty"`
+	// Returns the number of DCNM site fabrics.
+	NumDcnmSite *int64 `json:"NumDcnmSite,omitempty"`
 	// Returns total number of fabrics in DCNM set-up.
 	NumFabrics *int64 `json:"NumFabrics,omitempty"`
 	// Returns the number of fabrics in msd.
@@ -575,6 +581,70 @@ func (o *NiatelemetryNiaInventoryDcnm) SetMode(v string) {
 	o.Mode = &v
 }
 
+// GetNdfcFabricName returns the NdfcFabricName field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryDcnm) GetNdfcFabricName() string {
+	if o == nil || o.NdfcFabricName == nil {
+		var ret string
+		return ret
+	}
+	return *o.NdfcFabricName
+}
+
+// GetNdfcFabricNameOk returns a tuple with the NdfcFabricName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryDcnm) GetNdfcFabricNameOk() (*string, bool) {
+	if o == nil || o.NdfcFabricName == nil {
+		return nil, false
+	}
+	return o.NdfcFabricName, true
+}
+
+// HasNdfcFabricName returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryDcnm) HasNdfcFabricName() bool {
+	if o != nil && o.NdfcFabricName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNdfcFabricName gets a reference to the given string and assigns it to the NdfcFabricName field.
+func (o *NiatelemetryNiaInventoryDcnm) SetNdfcFabricName(v string) {
+	o.NdfcFabricName = &v
+}
+
+// GetNdfcOperState returns the NdfcOperState field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryDcnm) GetNdfcOperState() string {
+	if o == nil || o.NdfcOperState == nil {
+		var ret string
+		return ret
+	}
+	return *o.NdfcOperState
+}
+
+// GetNdfcOperStateOk returns a tuple with the NdfcOperState field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryDcnm) GetNdfcOperStateOk() (*string, bool) {
+	if o == nil || o.NdfcOperState == nil {
+		return nil, false
+	}
+	return o.NdfcOperState, true
+}
+
+// HasNdfcOperState returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryDcnm) HasNdfcOperState() bool {
+	if o != nil && o.NdfcOperState != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNdfcOperState gets a reference to the given string and assigns it to the NdfcOperState field.
+func (o *NiatelemetryNiaInventoryDcnm) SetNdfcOperState(v string) {
+	o.NdfcOperState = &v
+}
+
 // GetNetworkInfo returns the NetworkInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NiatelemetryNiaInventoryDcnm) GetNetworkInfo() NiatelemetryNetworkInfo {
 	if o == nil || o.NetworkInfo.Get() == nil {
@@ -616,6 +686,38 @@ func (o *NiatelemetryNiaInventoryDcnm) SetNetworkInfoNil() {
 // UnsetNetworkInfo ensures that no value is present for NetworkInfo, not even an explicit nil
 func (o *NiatelemetryNiaInventoryDcnm) UnsetNetworkInfo() {
 	o.NetworkInfo.Unset()
+}
+
+// GetNumDcnmSite returns the NumDcnmSite field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryDcnm) GetNumDcnmSite() int64 {
+	if o == nil || o.NumDcnmSite == nil {
+		var ret int64
+		return ret
+	}
+	return *o.NumDcnmSite
+}
+
+// GetNumDcnmSiteOk returns a tuple with the NumDcnmSite field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryDcnm) GetNumDcnmSiteOk() (*int64, bool) {
+	if o == nil || o.NumDcnmSite == nil {
+		return nil, false
+	}
+	return o.NumDcnmSite, true
+}
+
+// HasNumDcnmSite returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryDcnm) HasNumDcnmSite() bool {
+	if o != nil && o.NumDcnmSite != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNumDcnmSite gets a reference to the given int64 and assigns it to the NumDcnmSite field.
+func (o *NiatelemetryNiaInventoryDcnm) SetNumDcnmSite(v int64) {
+	o.NumDcnmSite = &v
 }
 
 // GetNumFabrics returns the NumFabrics field value if set, zero value otherwise.
@@ -1218,8 +1320,17 @@ func (o NiatelemetryNiaInventoryDcnm) MarshalJSON() ([]byte, error) {
 	if o.Mode != nil {
 		toSerialize["Mode"] = o.Mode
 	}
+	if o.NdfcFabricName != nil {
+		toSerialize["NdfcFabricName"] = o.NdfcFabricName
+	}
+	if o.NdfcOperState != nil {
+		toSerialize["NdfcOperState"] = o.NdfcOperState
+	}
 	if o.NetworkInfo.IsSet() {
 		toSerialize["NetworkInfo"] = o.NetworkInfo.Get()
+	}
+	if o.NumDcnmSite != nil {
+		toSerialize["NumDcnmSite"] = o.NumDcnmSite
 	}
 	if o.NumFabrics != nil {
 		toSerialize["NumFabrics"] = o.NumFabrics
@@ -1310,8 +1421,14 @@ func (o *NiatelemetryNiaInventoryDcnm) UnmarshalJSON(bytes []byte) (err error) {
 		// Returns true if the Smart license is enabled and is in use.
 		IsSmartLicenseEnabled *bool `json:"IsSmartLicenseEnabled,omitempty"`
 		// Mode of controller on DCNM.
-		Mode        *string                         `json:"Mode,omitempty"`
-		NetworkInfo NullableNiatelemetryNetworkInfo `json:"NetworkInfo,omitempty"`
+		Mode *string `json:"Mode,omitempty"`
+		// NDFC name information of the setup.
+		NdfcFabricName *string `json:"NdfcFabricName,omitempty"`
+		// NDFC status information for the setup.
+		NdfcOperState *string                         `json:"NdfcOperState,omitempty"`
+		NetworkInfo   NullableNiatelemetryNetworkInfo `json:"NetworkInfo,omitempty"`
+		// Returns the number of DCNM site fabrics.
+		NumDcnmSite *int64 `json:"NumDcnmSite,omitempty"`
 		// Returns total number of fabrics in DCNM set-up.
 		NumFabrics *int64 `json:"NumFabrics,omitempty"`
 		// Returns the number of fabrics in msd.
@@ -1366,7 +1483,10 @@ func (o *NiatelemetryNiaInventoryDcnm) UnmarshalJSON(bytes []byte) (err error) {
 		varNiatelemetryNiaInventoryDcnm.IsMediaController = varNiatelemetryNiaInventoryDcnmWithoutEmbeddedStruct.IsMediaController
 		varNiatelemetryNiaInventoryDcnm.IsSmartLicenseEnabled = varNiatelemetryNiaInventoryDcnmWithoutEmbeddedStruct.IsSmartLicenseEnabled
 		varNiatelemetryNiaInventoryDcnm.Mode = varNiatelemetryNiaInventoryDcnmWithoutEmbeddedStruct.Mode
+		varNiatelemetryNiaInventoryDcnm.NdfcFabricName = varNiatelemetryNiaInventoryDcnmWithoutEmbeddedStruct.NdfcFabricName
+		varNiatelemetryNiaInventoryDcnm.NdfcOperState = varNiatelemetryNiaInventoryDcnmWithoutEmbeddedStruct.NdfcOperState
 		varNiatelemetryNiaInventoryDcnm.NetworkInfo = varNiatelemetryNiaInventoryDcnmWithoutEmbeddedStruct.NetworkInfo
+		varNiatelemetryNiaInventoryDcnm.NumDcnmSite = varNiatelemetryNiaInventoryDcnmWithoutEmbeddedStruct.NumDcnmSite
 		varNiatelemetryNiaInventoryDcnm.NumFabrics = varNiatelemetryNiaInventoryDcnmWithoutEmbeddedStruct.NumFabrics
 		varNiatelemetryNiaInventoryDcnm.NumFabricsInMsd = varNiatelemetryNiaInventoryDcnmWithoutEmbeddedStruct.NumFabricsInMsd
 		varNiatelemetryNiaInventoryDcnm.NumIngressReplicationFabrics = varNiatelemetryNiaInventoryDcnmWithoutEmbeddedStruct.NumIngressReplicationFabrics
@@ -1416,7 +1536,10 @@ func (o *NiatelemetryNiaInventoryDcnm) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "IsMediaController")
 		delete(additionalProperties, "IsSmartLicenseEnabled")
 		delete(additionalProperties, "Mode")
+		delete(additionalProperties, "NdfcFabricName")
+		delete(additionalProperties, "NdfcOperState")
 		delete(additionalProperties, "NetworkInfo")
+		delete(additionalProperties, "NumDcnmSite")
 		delete(additionalProperties, "NumFabrics")
 		delete(additionalProperties, "NumFabricsInMsd")
 		delete(additionalProperties, "NumIngressReplicationFabrics")

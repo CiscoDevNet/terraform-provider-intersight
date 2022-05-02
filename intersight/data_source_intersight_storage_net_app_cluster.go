@@ -59,6 +59,51 @@ func dataSourceStorageNetAppCluster() *schema.Resource {
 				},
 			},
 		},
+		"auto_support": {
+			Description: "AutoSupport configuration of the cluster.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"enabled": {
+						Description: "Specifies whether the AutoSupport daemon is enabled. When this setting is disabled, delivery of all AutoSupport messages is turned off.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"from": {
+						Description: "The e-mail address from which the AutoSupport messages are sent.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"proxy_url": {
+						Description: "Proxy server for AutoSupport message delivery via HTTP/S.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"transport": {
+						Description: "The name of the transport protocol used to deliver AutoSupport messages.\n* `none` - Default value of none when nothing is returned.\n* `smtp` - Simple Mail Transfer Protocol.\n* `http` - Hypertext Transfer Protocol.\n* `https` - Hypertext Transfer Protocol Secure.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"avg_performance_metrics": {
 			Description: "Average performance metrics for over a period of time.",
 			Type:        schema.TypeList,
@@ -504,6 +549,11 @@ func dataSourceStorageNetAppCluster() *schema.Resource {
 					},
 				},
 			},
+		},
+		"telnet_enabled": {
+			Description: "Indicates whether or not telnet is enabled on the cluster.",
+			Type:        schema.TypeBool,
+			Optional:    true,
 		},
 		"uuid": {
 			Description: "Unique identity of the device.",
@@ -673,6 +723,51 @@ func dataSourceStorageNetAppCluster() *schema.Resource {
 				},
 			},
 		},
+		"auto_support": {
+			Description: "AutoSupport configuration of the cluster.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"enabled": {
+						Description: "Specifies whether the AutoSupport daemon is enabled. When this setting is disabled, delivery of all AutoSupport messages is turned off.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"from": {
+						Description: "The e-mail address from which the AutoSupport messages are sent.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"proxy_url": {
+						Description: "Proxy server for AutoSupport message delivery via HTTP/S.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"transport": {
+						Description: "The name of the transport protocol used to deliver AutoSupport messages.\n* `none` - Default value of none when nothing is returned.\n* `smtp` - Simple Mail Transfer Protocol.\n* `http` - Hypertext Transfer Protocol.\n* `https` - Hypertext Transfer Protocol Secure.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"avg_performance_metrics": {
 			Description: "Average performance metrics for over a period of time.",
 			Type:        schema.TypeList,
@@ -1118,6 +1213,11 @@ func dataSourceStorageNetAppCluster() *schema.Resource {
 					},
 				},
 			},
+		},
+		"telnet_enabled": {
+			Description: "Indicates whether or not telnet is enabled on the cluster.",
+			Type:        schema.TypeBool,
+			Optional:    true,
 		},
 		"uuid": {
 			Description: "Unique identity of the device.",
@@ -1310,6 +1410,37 @@ func dataSourceStorageNetAppClusterRead(c context.Context, d *schema.ResourceDat
 			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
 		}
 		o.SetAncestors(x)
+	}
+
+	if v, ok := d.GetOk("auto_support"); ok {
+		p := make([]models.StorageNetAppAutoSupport, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.StorageNetAppAutoSupport{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetAutoSupport(x)
+		}
 	}
 
 	if v, ok := d.GetOk("avg_performance_metrics"); ok {
@@ -1786,6 +1917,11 @@ func dataSourceStorageNetAppClusterRead(c context.Context, d *schema.ResourceDat
 		o.SetTags(x)
 	}
 
+	if v, ok := d.GetOkExists("telnet_enabled"); ok {
+		x := (v.(bool))
+		o.SetTelnetEnabled(x)
+	}
+
 	if v, ok := d.GetOk("uuid"); ok {
 		x := (v.(string))
 		o.SetUuid(x)
@@ -1916,6 +2052,8 @@ func dataSourceStorageNetAppClusterRead(c context.Context, d *schema.ResourceDat
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 
+				temp["auto_support"] = flattenMapStorageNetAppAutoSupport(s.GetAutoSupport(), d)
+
 				temp["avg_performance_metrics"] = flattenMapStorageNetAppPerformanceMetricsAverage(s.GetAvgPerformanceMetrics(), d)
 				temp["class_id"] = (s.GetClassId())
 
@@ -1958,6 +2096,7 @@ func dataSourceStorageNetAppClusterRead(c context.Context, d *schema.ResourceDat
 				temp["storage_utilization"] = flattenMapStorageBaseCapacity(s.GetStorageUtilization(), d)
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["telnet_enabled"] = (s.GetTelnetEnabled())
 				temp["uuid"] = (s.GetUuid())
 				temp["vendor"] = (s.GetVendor())
 				temp["nr_version"] = (s.GetVersion())

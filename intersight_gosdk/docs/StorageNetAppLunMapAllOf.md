@@ -6,7 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.NetAppLunMap"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.NetAppLunMap"]
-**Uuid** | Pointer to **string** | Universally unique identifier of the LUN. | [optional] [readonly] 
+**IgroupUuid** | Pointer to **string** | UUID of the initiator group. | [optional] [readonly] 
+**LunUuid** | Pointer to **string** | Universally unique identifier of the LUN. | [optional] [readonly] 
 **Host** | Pointer to [**[]StorageNetAppInitiatorGroupRelationship**](StorageNetAppInitiatorGroupRelationship.md) | An array of relationships to storageNetAppInitiatorGroup resources. | [optional] [readonly] 
 **Tenant** | Pointer to [**StorageNetAppStorageVmRelationship**](StorageNetAppStorageVmRelationship.md) |  | [optional] 
 **Volume** | Pointer to [**StorageNetAppLunRelationship**](StorageNetAppLunRelationship.md) |  | [optional] 
@@ -70,30 +71,55 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
-### GetUuid
+### GetIgroupUuid
 
-`func (o *StorageNetAppLunMapAllOf) GetUuid() string`
+`func (o *StorageNetAppLunMapAllOf) GetIgroupUuid() string`
 
-GetUuid returns the Uuid field if non-nil, zero value otherwise.
+GetIgroupUuid returns the IgroupUuid field if non-nil, zero value otherwise.
 
-### GetUuidOk
+### GetIgroupUuidOk
 
-`func (o *StorageNetAppLunMapAllOf) GetUuidOk() (*string, bool)`
+`func (o *StorageNetAppLunMapAllOf) GetIgroupUuidOk() (*string, bool)`
 
-GetUuidOk returns a tuple with the Uuid field if it's non-nil, zero value otherwise
+GetIgroupUuidOk returns a tuple with the IgroupUuid field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetUuid
+### SetIgroupUuid
 
-`func (o *StorageNetAppLunMapAllOf) SetUuid(v string)`
+`func (o *StorageNetAppLunMapAllOf) SetIgroupUuid(v string)`
 
-SetUuid sets Uuid field to given value.
+SetIgroupUuid sets IgroupUuid field to given value.
 
-### HasUuid
+### HasIgroupUuid
 
-`func (o *StorageNetAppLunMapAllOf) HasUuid() bool`
+`func (o *StorageNetAppLunMapAllOf) HasIgroupUuid() bool`
 
-HasUuid returns a boolean if a field has been set.
+HasIgroupUuid returns a boolean if a field has been set.
+
+### GetLunUuid
+
+`func (o *StorageNetAppLunMapAllOf) GetLunUuid() string`
+
+GetLunUuid returns the LunUuid field if non-nil, zero value otherwise.
+
+### GetLunUuidOk
+
+`func (o *StorageNetAppLunMapAllOf) GetLunUuidOk() (*string, bool)`
+
+GetLunUuidOk returns a tuple with the LunUuid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLunUuid
+
+`func (o *StorageNetAppLunMapAllOf) SetLunUuid(v string)`
+
+SetLunUuid sets LunUuid field to given value.
+
+### HasLunUuid
+
+`func (o *StorageNetAppLunMapAllOf) HasLunUuid() bool`
+
+HasLunUuid returns a boolean if a field has been set.
 
 ### GetHost
 
