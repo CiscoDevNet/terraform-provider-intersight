@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-6207
+API version: 1.0.9-6484
 Contact: intersight@cisco.com
 */
 
@@ -27,14 +27,22 @@ type NetworkInterfaceListAllOf struct {
 	IpAddress *string `json:"IpAddress,omitempty"`
 	// MAC address of the interface list.
 	Mac *string `json:"Mac,omitempty"`
+	// Maximum transmission unit of the interface list.
+	Mtu *int64 `json:"Mtu,omitempty"`
 	// Name of the interface list.
 	Name *string `json:"Name,omitempty"`
 	// Operational state of the interface list.
 	OperState *string `json:"OperState,omitempty"`
+	// Interface types supported in Network device like Subinterfaces, Breakout Interfaces.
+	PortSubType *string `json:"PortSubType,omitempty"`
 	// Port type of interface list.
 	PortType *string `json:"PortType,omitempty"`
 	// Slot id of the interface list.
 	SlotId *string `json:"SlotId,omitempty"`
+	// Port speed of the interface list.
+	Speed *string `json:"Speed,omitempty"`
+	// Speed Group of the interface list.
+	SpeedGroup *string `json:"SpeedGroup,omitempty"`
 	// VLAN of the interface list.
 	Vlan                 *string                              `json:"Vlan,omitempty"`
 	NetworkElement       *NetworkElementRelationship          `json:"NetworkElement,omitempty"`
@@ -211,6 +219,38 @@ func (o *NetworkInterfaceListAllOf) SetMac(v string) {
 	o.Mac = &v
 }
 
+// GetMtu returns the Mtu field value if set, zero value otherwise.
+func (o *NetworkInterfaceListAllOf) GetMtu() int64 {
+	if o == nil || o.Mtu == nil {
+		var ret int64
+		return ret
+	}
+	return *o.Mtu
+}
+
+// GetMtuOk returns a tuple with the Mtu field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkInterfaceListAllOf) GetMtuOk() (*int64, bool) {
+	if o == nil || o.Mtu == nil {
+		return nil, false
+	}
+	return o.Mtu, true
+}
+
+// HasMtu returns a boolean if a field has been set.
+func (o *NetworkInterfaceListAllOf) HasMtu() bool {
+	if o != nil && o.Mtu != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMtu gets a reference to the given int64 and assigns it to the Mtu field.
+func (o *NetworkInterfaceListAllOf) SetMtu(v int64) {
+	o.Mtu = &v
+}
+
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *NetworkInterfaceListAllOf) GetName() string {
 	if o == nil || o.Name == nil {
@@ -275,6 +315,38 @@ func (o *NetworkInterfaceListAllOf) SetOperState(v string) {
 	o.OperState = &v
 }
 
+// GetPortSubType returns the PortSubType field value if set, zero value otherwise.
+func (o *NetworkInterfaceListAllOf) GetPortSubType() string {
+	if o == nil || o.PortSubType == nil {
+		var ret string
+		return ret
+	}
+	return *o.PortSubType
+}
+
+// GetPortSubTypeOk returns a tuple with the PortSubType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkInterfaceListAllOf) GetPortSubTypeOk() (*string, bool) {
+	if o == nil || o.PortSubType == nil {
+		return nil, false
+	}
+	return o.PortSubType, true
+}
+
+// HasPortSubType returns a boolean if a field has been set.
+func (o *NetworkInterfaceListAllOf) HasPortSubType() bool {
+	if o != nil && o.PortSubType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPortSubType gets a reference to the given string and assigns it to the PortSubType field.
+func (o *NetworkInterfaceListAllOf) SetPortSubType(v string) {
+	o.PortSubType = &v
+}
+
 // GetPortType returns the PortType field value if set, zero value otherwise.
 func (o *NetworkInterfaceListAllOf) GetPortType() string {
 	if o == nil || o.PortType == nil {
@@ -337,6 +409,70 @@ func (o *NetworkInterfaceListAllOf) HasSlotId() bool {
 // SetSlotId gets a reference to the given string and assigns it to the SlotId field.
 func (o *NetworkInterfaceListAllOf) SetSlotId(v string) {
 	o.SlotId = &v
+}
+
+// GetSpeed returns the Speed field value if set, zero value otherwise.
+func (o *NetworkInterfaceListAllOf) GetSpeed() string {
+	if o == nil || o.Speed == nil {
+		var ret string
+		return ret
+	}
+	return *o.Speed
+}
+
+// GetSpeedOk returns a tuple with the Speed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkInterfaceListAllOf) GetSpeedOk() (*string, bool) {
+	if o == nil || o.Speed == nil {
+		return nil, false
+	}
+	return o.Speed, true
+}
+
+// HasSpeed returns a boolean if a field has been set.
+func (o *NetworkInterfaceListAllOf) HasSpeed() bool {
+	if o != nil && o.Speed != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSpeed gets a reference to the given string and assigns it to the Speed field.
+func (o *NetworkInterfaceListAllOf) SetSpeed(v string) {
+	o.Speed = &v
+}
+
+// GetSpeedGroup returns the SpeedGroup field value if set, zero value otherwise.
+func (o *NetworkInterfaceListAllOf) GetSpeedGroup() string {
+	if o == nil || o.SpeedGroup == nil {
+		var ret string
+		return ret
+	}
+	return *o.SpeedGroup
+}
+
+// GetSpeedGroupOk returns a tuple with the SpeedGroup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkInterfaceListAllOf) GetSpeedGroupOk() (*string, bool) {
+	if o == nil || o.SpeedGroup == nil {
+		return nil, false
+	}
+	return o.SpeedGroup, true
+}
+
+// HasSpeedGroup returns a boolean if a field has been set.
+func (o *NetworkInterfaceListAllOf) HasSpeedGroup() bool {
+	if o != nil && o.SpeedGroup != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSpeedGroup gets a reference to the given string and assigns it to the SpeedGroup field.
+func (o *NetworkInterfaceListAllOf) SetSpeedGroup(v string) {
+	o.SpeedGroup = &v
 }
 
 // GetVlan returns the Vlan field value if set, zero value otherwise.
@@ -452,17 +588,29 @@ func (o NetworkInterfaceListAllOf) MarshalJSON() ([]byte, error) {
 	if o.Mac != nil {
 		toSerialize["Mac"] = o.Mac
 	}
+	if o.Mtu != nil {
+		toSerialize["Mtu"] = o.Mtu
+	}
 	if o.Name != nil {
 		toSerialize["Name"] = o.Name
 	}
 	if o.OperState != nil {
 		toSerialize["OperState"] = o.OperState
 	}
+	if o.PortSubType != nil {
+		toSerialize["PortSubType"] = o.PortSubType
+	}
 	if o.PortType != nil {
 		toSerialize["PortType"] = o.PortType
 	}
 	if o.SlotId != nil {
 		toSerialize["SlotId"] = o.SlotId
+	}
+	if o.Speed != nil {
+		toSerialize["Speed"] = o.Speed
+	}
+	if o.SpeedGroup != nil {
+		toSerialize["SpeedGroup"] = o.SpeedGroup
 	}
 	if o.Vlan != nil {
 		toSerialize["Vlan"] = o.Vlan
@@ -496,10 +644,14 @@ func (o *NetworkInterfaceListAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "AdminState")
 		delete(additionalProperties, "IpAddress")
 		delete(additionalProperties, "Mac")
+		delete(additionalProperties, "Mtu")
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "OperState")
+		delete(additionalProperties, "PortSubType")
 		delete(additionalProperties, "PortType")
 		delete(additionalProperties, "SlotId")
+		delete(additionalProperties, "Speed")
+		delete(additionalProperties, "SpeedGroup")
 		delete(additionalProperties, "Vlan")
 		delete(additionalProperties, "NetworkElement")
 		delete(additionalProperties, "RegisteredDevice")

@@ -17,6 +17,7 @@ The following arguments can be used to get data of already created objects in In
 * `account_moid`:(string) The Account ID for this managed object. 
 * `anycast_gw_mac`:(string) Returns the aycast gateway mac. 
 * `bgp_established_interface_count`:(int) Counts the number of BGP interfaces that are in established state. 
+* `bgw_count`:(int) Returns number of bgw switches in the fabric. 
 * `bgw_interface_up_count`:(int) Count number of active interfaces on border gateways. 
 * `border_gateway_spine_count`:(int) Count number of border gateway spines in the fabric inventory. 
 * `border_leaf_count`:(int) Count number of border leafs in the fabric inventory. 
@@ -31,14 +32,17 @@ The following arguments can be used to get data of already created objects in In
 * `fabric_name`:(string) Returns the value of the Name of a fabric. 
 * `fabric_parent`:(string) Parent of the fabric on DCNM. 
 * `fabric_technology`:(string) Fabric Technology details on the fabric. 
+* `fabric_type`:(string) Fabric type information string. 
 * `feature_ptp`:(string) PTP feature details on the fabric. 
 * `is_bgw_present`:(bool) Checks if border gateway is present in the fabric inventory. 
-* `is_enable_nxapi_http`:(bool) Check if NXAPI HTTP is enable or not on the fabric. 
-* `is_enable_real_time_backup`:(bool) Check if real time backup is enable or not on the fabric. 
+* `is_enable_nxapi_http`:(bool) Check if NXAPI HTTP is enabled or not on the fabric. 
+* `is_enable_real_time_backup`:(bool) Check if real time backup is enabled or not on the fabric. 
 * `is_ngoam_enabled`:(bool) Returns if ngoam is enabled. 
 * `is_scheduled_back_up_enabled`:(bool) Returns if the scheduled backup is enabled. 
+* `is_trm_enabled`:(bool) Is TRM enabled for the fabric. 
 * `leaf_count`:(int) Returns total number of leafs in the fabric. 
 * `link_state_routing`:(string) Link state routing details on the fabric. 
+* `link_type`:(string) Fabric oper status information. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `network_deployment_count`:(int) No of networks deployed on a fabric. 
@@ -46,6 +50,7 @@ The following arguments can be used to get data of already created objects in In
 * `nxos_vni_bw_sites_count`:(int) Returns the count of vnis between sites. 
 * `nxos_vrf_bw_sites_count`:(int) Returns the count of vrfs between sites. 
 * `nxos_vrf_count`:(int) Returns the value of the nxosVrfCount field. 
+* `oper_status`:(string) Fabric oper status information. 
 * `replication_mode`:(string) Replication mode details on the fabric. 
 * `rp_mode`:(string) RP Mode details on the fabric. 
 * `serial`:(string) Serial number of device being inventoried. The serial number is unique per device. 
@@ -59,4 +64,6 @@ The following arguments can be used to get data of already created objects in In
 * `vlan_vni_mappings`:(string) VLAN to VNI mappings configured in the DCNM. 
 * `vni_ip_count`:(int) Count number of IP addresses configured in the DCNM networks. 
 * `vrf_deployment_count`:(int) No of vrfs deployed on a fabric. 
+* `xsite_network_count`:(int) Returns deployed network count for bgw/bgws switches in the MSD fabric. 
+* `xsite_vrf_count`:(int) Returns deployed vrf count for bgw/bgws switches in the MSD fabric. 
  

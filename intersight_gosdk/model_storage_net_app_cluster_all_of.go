@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-6207
+API version: 1.0.9-6484
 Contact: intersight@cisco.com
 */
 
@@ -21,6 +21,7 @@ type StorageNetAppClusterAllOf struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType            string                                        `json:"ObjectType"`
+	AutoSupport           NullableStorageNetAppAutoSupport              `json:"AutoSupport,omitempty"`
 	AvgPerformanceMetrics *StorageNetAppPerformanceMetricsAverage       `json:"AvgPerformanceMetrics,omitempty"`
 	ClusterEfficiency     NullableStorageNetAppStorageClusterEfficiency `json:"ClusterEfficiency,omitempty"`
 	// The health status of the cluster. Possible states are ok, ok-with-suppressed, degraded, and unreachable. * `Unreachable` - Cluster status is unreachable. * `OK` - Cluster status is either ok or ok-with-suppressed. * `Degraded` - Cluster status is degraded.
@@ -34,6 +35,8 @@ type StorageNetAppClusterAllOf struct {
 	ManagementAddress *string  `json:"ManagementAddress,omitempty"`
 	NameServers       []string `json:"NameServers,omitempty"`
 	NtpServers        []string `json:"NtpServers,omitempty"`
+	// Indicates whether or not telnet is enabled on the cluster.
+	TelnetEnabled *bool `json:"TelnetEnabled,omitempty"`
 	// An array of relationships to storageNetAppClusterEvent resources.
 	Events               []StorageNetAppClusterEventRelationship `json:"Events,omitempty"`
 	RegisteredDevice     *AssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
@@ -111,6 +114,49 @@ func (o *StorageNetAppClusterAllOf) GetObjectTypeOk() (*string, bool) {
 // SetObjectType sets field value
 func (o *StorageNetAppClusterAllOf) SetObjectType(v string) {
 	o.ObjectType = v
+}
+
+// GetAutoSupport returns the AutoSupport field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *StorageNetAppClusterAllOf) GetAutoSupport() StorageNetAppAutoSupport {
+	if o == nil || o.AutoSupport.Get() == nil {
+		var ret StorageNetAppAutoSupport
+		return ret
+	}
+	return *o.AutoSupport.Get()
+}
+
+// GetAutoSupportOk returns a tuple with the AutoSupport field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *StorageNetAppClusterAllOf) GetAutoSupportOk() (*StorageNetAppAutoSupport, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AutoSupport.Get(), o.AutoSupport.IsSet()
+}
+
+// HasAutoSupport returns a boolean if a field has been set.
+func (o *StorageNetAppClusterAllOf) HasAutoSupport() bool {
+	if o != nil && o.AutoSupport.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAutoSupport gets a reference to the given NullableStorageNetAppAutoSupport and assigns it to the AutoSupport field.
+func (o *StorageNetAppClusterAllOf) SetAutoSupport(v StorageNetAppAutoSupport) {
+	o.AutoSupport.Set(&v)
+}
+
+// SetAutoSupportNil sets the value for AutoSupport to be an explicit nil
+func (o *StorageNetAppClusterAllOf) SetAutoSupportNil() {
+	o.AutoSupport.Set(nil)
+}
+
+// UnsetAutoSupport ensures that no value is present for AutoSupport, not even an explicit nil
+func (o *StorageNetAppClusterAllOf) UnsetAutoSupport() {
+	o.AutoSupport.Unset()
 }
 
 // GetAvgPerformanceMetrics returns the AvgPerformanceMetrics field value if set, zero value otherwise.
@@ -415,6 +461,38 @@ func (o *StorageNetAppClusterAllOf) SetNtpServers(v []string) {
 	o.NtpServers = v
 }
 
+// GetTelnetEnabled returns the TelnetEnabled field value if set, zero value otherwise.
+func (o *StorageNetAppClusterAllOf) GetTelnetEnabled() bool {
+	if o == nil || o.TelnetEnabled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.TelnetEnabled
+}
+
+// GetTelnetEnabledOk returns a tuple with the TelnetEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageNetAppClusterAllOf) GetTelnetEnabledOk() (*bool, bool) {
+	if o == nil || o.TelnetEnabled == nil {
+		return nil, false
+	}
+	return o.TelnetEnabled, true
+}
+
+// HasTelnetEnabled returns a boolean if a field has been set.
+func (o *StorageNetAppClusterAllOf) HasTelnetEnabled() bool {
+	if o != nil && o.TelnetEnabled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTelnetEnabled gets a reference to the given bool and assigns it to the TelnetEnabled field.
+func (o *StorageNetAppClusterAllOf) SetTelnetEnabled(v bool) {
+	o.TelnetEnabled = &v
+}
+
 // GetEvents returns the Events field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageNetAppClusterAllOf) GetEvents() []StorageNetAppClusterEventRelationship {
 	if o == nil {
@@ -488,6 +566,9 @@ func (o StorageNetAppClusterAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.AutoSupport.IsSet() {
+		toSerialize["AutoSupport"] = o.AutoSupport.Get()
+	}
 	if o.AvgPerformanceMetrics != nil {
 		toSerialize["AvgPerformanceMetrics"] = o.AvgPerformanceMetrics
 	}
@@ -515,6 +596,9 @@ func (o StorageNetAppClusterAllOf) MarshalJSON() ([]byte, error) {
 	if o.NtpServers != nil {
 		toSerialize["NtpServers"] = o.NtpServers
 	}
+	if o.TelnetEnabled != nil {
+		toSerialize["TelnetEnabled"] = o.TelnetEnabled
+	}
 	if o.Events != nil {
 		toSerialize["Events"] = o.Events
 	}
@@ -541,6 +625,7 @@ func (o *StorageNetAppClusterAllOf) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "AutoSupport")
 		delete(additionalProperties, "AvgPerformanceMetrics")
 		delete(additionalProperties, "ClusterEfficiency")
 		delete(additionalProperties, "ClusterHealthStatus")
@@ -550,6 +635,7 @@ func (o *StorageNetAppClusterAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ManagementAddress")
 		delete(additionalProperties, "NameServers")
 		delete(additionalProperties, "NtpServers")
+		delete(additionalProperties, "TelnetEnabled")
 		delete(additionalProperties, "Events")
 		delete(additionalProperties, "RegisteredDevice")
 		o.AdditionalProperties = additionalProperties

@@ -69,6 +69,11 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"bgw_count": {
+			Description: "Returns number of bgw switches in the fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"bgw_interface_up_count": {
 			Description: "Count number of active interfaces on border gateways.",
 			Type:        schema.TypeInt,
@@ -144,6 +149,11 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"fabric_type": {
+			Description: "Fabric type information string.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"feature_ptp": {
 			Description: "PTP feature details on the fabric.",
 			Type:        schema.TypeString,
@@ -155,12 +165,12 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 			Optional:    true,
 		},
 		"is_enable_nxapi_http": {
-			Description: "Check if NXAPI HTTP is enable or not on the fabric.",
+			Description: "Check if NXAPI HTTP is enabled or not on the fabric.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
 		"is_enable_real_time_backup": {
-			Description: "Check if real time backup is enable or not on the fabric.",
+			Description: "Check if real time backup is enabled or not on the fabric.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
@@ -174,6 +184,11 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
+		"is_trm_enabled": {
+			Description: "Is TRM enabled for the fabric.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"leaf_count": {
 			Description: "Returns total number of leafs in the fabric.",
 			Type:        schema.TypeInt,
@@ -181,6 +196,11 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 		},
 		"link_state_routing": {
 			Description: "Link state routing details on the fabric.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"link_type": {
+			Description: "Fabric oper status information.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -317,6 +337,11 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 		},
 		"object_type": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"oper_status": {
+			Description: "Fabric oper status information.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -700,6 +725,16 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 					},
 				},
 			},
+		},
+		"xsite_network_count": {
+			Description: "Returns deployed network count for bgw/bgws switches in the MSD fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"xsite_vrf_count": {
+			Description: "Returns deployed vrf count for bgw/bgws switches in the MSD fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
 		},
 	}
 	var model = map[string]*schema.Schema{"account_moid": {
@@ -756,6 +791,11 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"bgw_count": {
+			Description: "Returns number of bgw switches in the fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"bgw_interface_up_count": {
 			Description: "Count number of active interfaces on border gateways.",
 			Type:        schema.TypeInt,
@@ -831,6 +871,11 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"fabric_type": {
+			Description: "Fabric type information string.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"feature_ptp": {
 			Description: "PTP feature details on the fabric.",
 			Type:        schema.TypeString,
@@ -842,12 +887,12 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 			Optional:    true,
 		},
 		"is_enable_nxapi_http": {
-			Description: "Check if NXAPI HTTP is enable or not on the fabric.",
+			Description: "Check if NXAPI HTTP is enabled or not on the fabric.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
 		"is_enable_real_time_backup": {
-			Description: "Check if real time backup is enable or not on the fabric.",
+			Description: "Check if real time backup is enabled or not on the fabric.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
@@ -861,6 +906,11 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
+		"is_trm_enabled": {
+			Description: "Is TRM enabled for the fabric.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"leaf_count": {
 			Description: "Returns total number of leafs in the fabric.",
 			Type:        schema.TypeInt,
@@ -868,6 +918,11 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 		},
 		"link_state_routing": {
 			Description: "Link state routing details on the fabric.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"link_type": {
+			Description: "Fabric oper status information.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1004,6 +1059,11 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 		},
 		"object_type": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"oper_status": {
+			Description: "Fabric oper status information.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1387,6 +1447,16 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 					},
 				},
 			},
+		},
+		"xsite_network_count": {
+			Description: "Returns deployed network count for bgw/bgws switches in the MSD fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"xsite_vrf_count": {
+			Description: "Returns deployed vrf count for bgw/bgws switches in the MSD fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
 		},
 	}
 	model["results"] = &schema.Schema{
@@ -1468,6 +1538,11 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 		o.SetBgpEstablishedInterfaceCount(x)
 	}
 
+	if v, ok := d.GetOkExists("bgw_count"); ok {
+		x := int64(v.(int))
+		o.SetBgwCount(x)
+	}
+
 	if v, ok := d.GetOkExists("bgw_interface_up_count"); ok {
 		x := int64(v.(int))
 		o.SetBgwInterfaceUpCount(x)
@@ -1543,6 +1618,11 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 		o.SetFabricTechnology(x)
 	}
 
+	if v, ok := d.GetOk("fabric_type"); ok {
+		x := (v.(string))
+		o.SetFabricType(x)
+	}
+
 	if v, ok := d.GetOk("feature_ptp"); ok {
 		x := (v.(string))
 		o.SetFeaturePtp(x)
@@ -1573,6 +1653,11 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 		o.SetIsScheduledBackUpEnabled(x)
 	}
 
+	if v, ok := d.GetOkExists("is_trm_enabled"); ok {
+		x := (v.(bool))
+		o.SetIsTrmEnabled(x)
+	}
+
 	if v, ok := d.GetOkExists("leaf_count"); ok {
 		x := int64(v.(int))
 		o.SetLeafCount(x)
@@ -1581,6 +1666,11 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 	if v, ok := d.GetOk("link_state_routing"); ok {
 		x := (v.(string))
 		o.SetLinkStateRouting(x)
+	}
+
+	if v, ok := d.GetOk("link_type"); ok {
+		x := (v.(string))
+		o.SetLinkType(x)
 	}
 
 	if v, ok := d.GetOk("logical_links"); ok {
@@ -1737,6 +1827,11 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
+	}
+
+	if v, ok := d.GetOk("oper_status"); ok {
+		x := (v.(string))
+		o.SetOperStatus(x)
 	}
 
 	if v, ok := d.GetOk("owners"); ok {
@@ -2140,6 +2235,16 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 		o.SetVrfDeploymentStatus(x)
 	}
 
+	if v, ok := d.GetOkExists("xsite_network_count"); ok {
+		x := int64(v.(int))
+		o.SetXsiteNetworkCount(x)
+	}
+
+	if v, ok := d.GetOkExists("xsite_vrf_count"); ok {
+		x := int64(v.(int))
+		o.SetXsiteVrfCount(x)
+	}
+
 	data, err := o.MarshalJSON()
 	if err != nil {
 		return diag.Errorf("json marshal of NiatelemetryNiaInventoryFabric object failed with error : %s", err.Error())
@@ -2182,6 +2287,7 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["anycast_gw_mac"] = (s.GetAnycastGwMac())
 				temp["bgp_established_interface_count"] = (s.GetBgpEstablishedInterfaceCount())
+				temp["bgw_count"] = (s.GetBgwCount())
 				temp["bgw_interface_up_count"] = (s.GetBgwInterfaceUpCount())
 				temp["border_gateway_spine_count"] = (s.GetBorderGatewaySpineCount())
 				temp["border_leaf_count"] = (s.GetBorderLeafCount())
@@ -2198,14 +2304,17 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 				temp["fabric_name"] = (s.GetFabricName())
 				temp["fabric_parent"] = (s.GetFabricParent())
 				temp["fabric_technology"] = (s.GetFabricTechnology())
+				temp["fabric_type"] = (s.GetFabricType())
 				temp["feature_ptp"] = (s.GetFeaturePtp())
 				temp["is_bgw_present"] = (s.GetIsBgwPresent())
 				temp["is_enable_nxapi_http"] = (s.GetIsEnableNxapiHttp())
 				temp["is_enable_real_time_backup"] = (s.GetIsEnableRealTimeBackup())
 				temp["is_ngoam_enabled"] = (s.GetIsNgoamEnabled())
 				temp["is_scheduled_back_up_enabled"] = (s.GetIsScheduledBackUpEnabled())
+				temp["is_trm_enabled"] = (s.GetIsTrmEnabled())
 				temp["leaf_count"] = (s.GetLeafCount())
 				temp["link_state_routing"] = (s.GetLinkStateRouting())
+				temp["link_type"] = (s.GetLinkType())
 
 				temp["logical_links"] = flattenListNiatelemetryLogicalLink(s.GetLogicalLinks(), d)
 
@@ -2219,6 +2328,7 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 				temp["nxos_vrf_bw_sites_count"] = (s.GetNxosVrfBwSitesCount())
 				temp["nxos_vrf_count"] = (s.GetNxosVrfCount())
 				temp["object_type"] = (s.GetObjectType())
+				temp["oper_status"] = (s.GetOperStatus())
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
@@ -2247,6 +2357,8 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 				temp["vrf_deployment_count"] = (s.GetVrfDeploymentCount())
 
 				temp["vrf_deployment_status"] = flattenListNiatelemetryDeploymentStatus(s.GetVrfDeploymentStatus(), d)
+				temp["xsite_network_count"] = (s.GetXsiteNetworkCount())
+				temp["xsite_vrf_count"] = (s.GetXsiteVrfCount())
 				niatelemetryNiaInventoryFabricResults[j] = temp
 				j += 1
 			}

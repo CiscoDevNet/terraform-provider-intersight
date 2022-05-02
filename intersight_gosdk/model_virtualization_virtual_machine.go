@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-6207
+API version: 1.0.9-6484
 Contact: intersight@cisco.com
 */
 
@@ -24,7 +24,7 @@ type VirtualizationVirtualMachine struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
-	// Action to be performed on a virtual machine (Create, PowerState, Migrate, Clone etc). * `None` - A place holder for the default value. * `PowerState` - Power action is performed on the virtual machine. * `Migrate` - The virtual machine will be migrated from existing node to a different node in cluster. The behavior depends on the underlying hypervisor. * `Create` - The virtual machine will be created on the specified hypervisor. This action is also useful if the virtual machine creation failed during first POST operation on VirtualMachine managed object. User can set this action to retry the virtual machine creation. * `Delete` - The virtual machine will be deleted from the specified hypervisor. User can either set this action or can do a DELETE operation on the VirtualMachine managed object.
+	// Action to be performed on a virtual machine (Create, PowerState, Migrate, Clone etc). * `None` - A place holder for the default value. * `PowerState` - Power action is performed on the virtual machine. * `Migrate` - The virtual machine will be migrated from existing node to a different node in cluster. The behavior depends on the underlying hypervisor. * `Create` - The virtual machine will be created on the specified hypervisor. This action is also useful if the virtual machine creation failed during first POST operation on VirtualMachine managed object. User can set this action to retry the virtual machine creation. * `Delete` - The virtual machine will be deleted from the specified hypervisor. User can either set this action or can do a DELETE operation on the VirtualMachine managed object. * `Resize` - The virtual machine will be resized to the specified instance type.
 	Action                *string                               `json:"Action,omitempty"`
 	ActionInfo            NullableVirtualizationActionInfo      `json:"ActionInfo,omitempty"`
 	AffinitySelectors     []InfraMetaData                       `json:"AffinitySelectors,omitempty"`
@@ -32,7 +32,7 @@ type VirtualizationVirtualMachine struct {
 	CloudInitConfig       NullableVirtualizationCloudInitConfig `json:"CloudInitConfig,omitempty"`
 	// Cluster where virtual machine is deployed.
 	ClusterEsxi *string `json:"ClusterEsxi,omitempty"`
-	// Number of vCPUs allocated to virtual machine.
+	// Number of vCPUs to be allocated to virtual machine. The upper limit depends on the hypervisor.
 	Cpu *int64 `json:"Cpu,omitempty"`
 	// Flag to indicate whether the configuration is created from inventory object.
 	Discovered *bool                              `json:"Discovered,omitempty"`
@@ -47,7 +47,7 @@ type VirtualizationVirtualMachine struct {
 	HypervisorType *string                          `json:"HypervisorType,omitempty"`
 	Interfaces     []VirtualizationNetworkInterface `json:"Interfaces,omitempty"`
 	Labels         []InfraMetaData                  `json:"Labels,omitempty"`
-	// Virtual machine memory in mebi bytes (one mebibyte, 1MiB, is 1048576 bytes, and 1KiB is 1024 bytes). Input must be a whole number and scientific notation is not acceptable. For example, enter 1730 and not 1.73e03.
+	// Virtual machine memory in mebi bytes (one mebibyte 1MiB is 1048576 bytes, and 1KiB is 1024 bytes). Input must be a whole number and scientific notation is not acceptable. For example, enter 1730 and not 1.73e03. The limit of 4177920 translates to 3.9TiB.
 	Memory *int64 `json:"Memory,omitempty"`
 	// Virtual machine name that is unique. Hypervisors enforce platform specific limits and character sets. The name length limit, both min and max, vary among hypervisors. Therefore, the basic limits are set here and proper enforcement is done elsewhere.
 	Name *string `json:"Name,omitempty"`
@@ -1096,7 +1096,7 @@ func (o *VirtualizationVirtualMachine) UnmarshalJSON(bytes []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
-		// Action to be performed on a virtual machine (Create, PowerState, Migrate, Clone etc). * `None` - A place holder for the default value. * `PowerState` - Power action is performed on the virtual machine. * `Migrate` - The virtual machine will be migrated from existing node to a different node in cluster. The behavior depends on the underlying hypervisor. * `Create` - The virtual machine will be created on the specified hypervisor. This action is also useful if the virtual machine creation failed during first POST operation on VirtualMachine managed object. User can set this action to retry the virtual machine creation. * `Delete` - The virtual machine will be deleted from the specified hypervisor. User can either set this action or can do a DELETE operation on the VirtualMachine managed object.
+		// Action to be performed on a virtual machine (Create, PowerState, Migrate, Clone etc). * `None` - A place holder for the default value. * `PowerState` - Power action is performed on the virtual machine. * `Migrate` - The virtual machine will be migrated from existing node to a different node in cluster. The behavior depends on the underlying hypervisor. * `Create` - The virtual machine will be created on the specified hypervisor. This action is also useful if the virtual machine creation failed during first POST operation on VirtualMachine managed object. User can set this action to retry the virtual machine creation. * `Delete` - The virtual machine will be deleted from the specified hypervisor. User can either set this action or can do a DELETE operation on the VirtualMachine managed object. * `Resize` - The virtual machine will be resized to the specified instance type.
 		Action                *string                               `json:"Action,omitempty"`
 		ActionInfo            NullableVirtualizationActionInfo      `json:"ActionInfo,omitempty"`
 		AffinitySelectors     []InfraMetaData                       `json:"AffinitySelectors,omitempty"`
@@ -1104,7 +1104,7 @@ func (o *VirtualizationVirtualMachine) UnmarshalJSON(bytes []byte) (err error) {
 		CloudInitConfig       NullableVirtualizationCloudInitConfig `json:"CloudInitConfig,omitempty"`
 		// Cluster where virtual machine is deployed.
 		ClusterEsxi *string `json:"ClusterEsxi,omitempty"`
-		// Number of vCPUs allocated to virtual machine.
+		// Number of vCPUs to be allocated to virtual machine. The upper limit depends on the hypervisor.
 		Cpu *int64 `json:"Cpu,omitempty"`
 		// Flag to indicate whether the configuration is created from inventory object.
 		Discovered *bool                              `json:"Discovered,omitempty"`
@@ -1119,7 +1119,7 @@ func (o *VirtualizationVirtualMachine) UnmarshalJSON(bytes []byte) (err error) {
 		HypervisorType *string                          `json:"HypervisorType,omitempty"`
 		Interfaces     []VirtualizationNetworkInterface `json:"Interfaces,omitempty"`
 		Labels         []InfraMetaData                  `json:"Labels,omitempty"`
-		// Virtual machine memory in mebi bytes (one mebibyte, 1MiB, is 1048576 bytes, and 1KiB is 1024 bytes). Input must be a whole number and scientific notation is not acceptable. For example, enter 1730 and not 1.73e03.
+		// Virtual machine memory in mebi bytes (one mebibyte 1MiB is 1048576 bytes, and 1KiB is 1024 bytes). Input must be a whole number and scientific notation is not acceptable. For example, enter 1730 and not 1.73e03. The limit of 4177920 translates to 3.9TiB.
 		Memory *int64 `json:"Memory,omitempty"`
 		// Virtual machine name that is unique. Hypervisors enforce platform specific limits and character sets. The name length limit, both min and max, vary among hypervisors. Therefore, the basic limits are set here and proper enforcement is done elsewhere.
 		Name *string `json:"Name,omitempty"`

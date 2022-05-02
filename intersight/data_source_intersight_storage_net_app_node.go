@@ -139,6 +139,11 @@ func dataSourceStorageNetAppNode() *schema.Resource {
 				},
 			},
 		},
+		"cdpd_enabled": {
+			Description: "Storage node option for cdpd state.\n* `unknown` - The cdpd option is unknown on the node.\n* `on` - The cdpd option is enabled on the node.\n* `off` - The cdpd option is disabled on the node.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 			Type:        schema.TypeString,
@@ -702,6 +707,11 @@ func dataSourceStorageNetAppNode() *schema.Resource {
 					},
 				},
 			},
+		},
+		"cdpd_enabled": {
+			Description: "Storage node option for cdpd state.\n* `unknown` - The cdpd option is unknown on the node.\n* `on` - The cdpd option is enabled on the node.\n* `off` - The cdpd option is disabled on the node.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
@@ -1286,6 +1296,11 @@ func dataSourceStorageNetAppNodeRead(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
+	if v, ok := d.GetOk("cdpd_enabled"); ok {
+		x := (v.(string))
+		o.SetCdpdEnabled(x)
+	}
+
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
@@ -1760,6 +1775,7 @@ func dataSourceStorageNetAppNodeRead(c context.Context, d *schema.ResourceData, 
 				temp["array"] = flattenMapStorageNetAppClusterRelationship(s.GetArray(), d)
 
 				temp["avg_performance_metrics"] = flattenMapStorageNetAppPerformanceMetricsAverage(s.GetAvgPerformanceMetrics(), d)
+				temp["cdpd_enabled"] = (s.GetCdpdEnabled())
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()

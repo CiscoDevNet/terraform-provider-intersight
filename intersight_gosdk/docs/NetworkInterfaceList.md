@@ -9,10 +9,14 @@ Name | Type | Description | Notes
 **AdminState** | Pointer to **string** | Admin state of the interface list. | [optional] 
 **IpAddress** | Pointer to **string** | IP address of the interface list. | [optional] 
 **Mac** | Pointer to **string** | MAC address of the interface list. | [optional] 
+**Mtu** | Pointer to **int64** | Maximum transmission unit of the interface list. | [optional] 
 **Name** | Pointer to **string** | Name of the interface list. | [optional] 
 **OperState** | Pointer to **string** | Operational state of the interface list. | [optional] 
+**PortSubType** | Pointer to **string** | Interface types supported in Network device like Subinterfaces, Breakout Interfaces. | [optional] 
 **PortType** | Pointer to **string** | Port type of interface list. | [optional] 
 **SlotId** | Pointer to **string** | Slot id of the interface list. | [optional] 
+**Speed** | Pointer to **string** | Port speed of the interface list. | [optional] 
+**SpeedGroup** | Pointer to **string** | Speed Group of the interface list. | [optional] 
 **Vlan** | Pointer to **string** | VLAN of the interface list. | [optional] 
 **NetworkElement** | Pointer to [**NetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
@@ -151,6 +155,31 @@ SetMac sets Mac field to given value.
 
 HasMac returns a boolean if a field has been set.
 
+### GetMtu
+
+`func (o *NetworkInterfaceList) GetMtu() int64`
+
+GetMtu returns the Mtu field if non-nil, zero value otherwise.
+
+### GetMtuOk
+
+`func (o *NetworkInterfaceList) GetMtuOk() (*int64, bool)`
+
+GetMtuOk returns a tuple with the Mtu field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMtu
+
+`func (o *NetworkInterfaceList) SetMtu(v int64)`
+
+SetMtu sets Mtu field to given value.
+
+### HasMtu
+
+`func (o *NetworkInterfaceList) HasMtu() bool`
+
+HasMtu returns a boolean if a field has been set.
+
 ### GetName
 
 `func (o *NetworkInterfaceList) GetName() string`
@@ -201,6 +230,31 @@ SetOperState sets OperState field to given value.
 
 HasOperState returns a boolean if a field has been set.
 
+### GetPortSubType
+
+`func (o *NetworkInterfaceList) GetPortSubType() string`
+
+GetPortSubType returns the PortSubType field if non-nil, zero value otherwise.
+
+### GetPortSubTypeOk
+
+`func (o *NetworkInterfaceList) GetPortSubTypeOk() (*string, bool)`
+
+GetPortSubTypeOk returns a tuple with the PortSubType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPortSubType
+
+`func (o *NetworkInterfaceList) SetPortSubType(v string)`
+
+SetPortSubType sets PortSubType field to given value.
+
+### HasPortSubType
+
+`func (o *NetworkInterfaceList) HasPortSubType() bool`
+
+HasPortSubType returns a boolean if a field has been set.
+
 ### GetPortType
 
 `func (o *NetworkInterfaceList) GetPortType() string`
@@ -250,6 +304,56 @@ SetSlotId sets SlotId field to given value.
 `func (o *NetworkInterfaceList) HasSlotId() bool`
 
 HasSlotId returns a boolean if a field has been set.
+
+### GetSpeed
+
+`func (o *NetworkInterfaceList) GetSpeed() string`
+
+GetSpeed returns the Speed field if non-nil, zero value otherwise.
+
+### GetSpeedOk
+
+`func (o *NetworkInterfaceList) GetSpeedOk() (*string, bool)`
+
+GetSpeedOk returns a tuple with the Speed field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSpeed
+
+`func (o *NetworkInterfaceList) SetSpeed(v string)`
+
+SetSpeed sets Speed field to given value.
+
+### HasSpeed
+
+`func (o *NetworkInterfaceList) HasSpeed() bool`
+
+HasSpeed returns a boolean if a field has been set.
+
+### GetSpeedGroup
+
+`func (o *NetworkInterfaceList) GetSpeedGroup() string`
+
+GetSpeedGroup returns the SpeedGroup field if non-nil, zero value otherwise.
+
+### GetSpeedGroupOk
+
+`func (o *NetworkInterfaceList) GetSpeedGroupOk() (*string, bool)`
+
+GetSpeedGroupOk returns a tuple with the SpeedGroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSpeedGroup
+
+`func (o *NetworkInterfaceList) SetSpeedGroup(v string)`
+
+SetSpeedGroup sets SpeedGroup field to given value.
+
+### HasSpeedGroup
+
+`func (o *NetworkInterfaceList) HasSpeedGroup() bool`
+
+HasSpeedGroup returns a boolean if a field has been set.
 
 ### GetVlan
 

@@ -170,7 +170,7 @@ func dataSourceStorageNetAppEthernetPort() *schema.Resource {
 		},
 		"mtu": {
 			Description: "Maximum transmission unit of the physical port available in storage array.",
-			Type:        schema.TypeString,
+			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"name": {
@@ -750,7 +750,7 @@ func dataSourceStorageNetAppEthernetPort() *schema.Resource {
 		},
 		"mtu": {
 			Description: "Maximum transmission unit of the physical port available in storage array.",
-			Type:        schema.TypeString,
+			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"name": {
@@ -1367,8 +1367,8 @@ func dataSourceStorageNetAppEthernetPortRead(c context.Context, d *schema.Resour
 		o.SetMoid(x)
 	}
 
-	if v, ok := d.GetOk("mtu"); ok {
-		x := (v.(string))
+	if v, ok := d.GetOkExists("mtu"); ok {
+		x := int64(v.(int))
 		o.SetMtu(x)
 	}
 

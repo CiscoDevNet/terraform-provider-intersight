@@ -8,10 +8,12 @@ Method | HTTP request | Description
 [**CreateWorkflowBatchApiExecutor**](WorkflowApi.md#CreateWorkflowBatchApiExecutor) | **Post** /api/v1/workflow/BatchApiExecutors | Create a &#39;workflow.BatchApiExecutor&#39; resource.
 [**CreateWorkflowCustomDataTypeDefinition**](WorkflowApi.md#CreateWorkflowCustomDataTypeDefinition) | **Post** /api/v1/workflow/CustomDataTypeDefinitions | Create a &#39;workflow.CustomDataTypeDefinition&#39; resource.
 [**CreateWorkflowErrorResponseHandler**](WorkflowApi.md#CreateWorkflowErrorResponseHandler) | **Post** /api/v1/workflow/ErrorResponseHandlers | Create a &#39;workflow.ErrorResponseHandler&#39; resource.
+[**CreateWorkflowPowerShellBatchApiExecutor**](WorkflowApi.md#CreateWorkflowPowerShellBatchApiExecutor) | **Post** /api/v1/workflow/PowerShellBatchApiExecutors | Create a &#39;workflow.PowerShellBatchApiExecutor&#39; resource.
 [**CreateWorkflowRollbackWorkflow**](WorkflowApi.md#CreateWorkflowRollbackWorkflow) | **Post** /api/v1/workflow/RollbackWorkflows | Create a &#39;workflow.RollbackWorkflow&#39; resource.
 [**CreateWorkflowServiceItemActionDefinition**](WorkflowApi.md#CreateWorkflowServiceItemActionDefinition) | **Post** /api/v1/workflow/ServiceItemActionDefinitions | Create a &#39;workflow.ServiceItemActionDefinition&#39; resource.
 [**CreateWorkflowServiceItemActionInstance**](WorkflowApi.md#CreateWorkflowServiceItemActionInstance) | **Post** /api/v1/workflow/ServiceItemActionInstances | Create a &#39;workflow.ServiceItemActionInstance&#39; resource.
 [**CreateWorkflowServiceItemDefinition**](WorkflowApi.md#CreateWorkflowServiceItemDefinition) | **Post** /api/v1/workflow/ServiceItemDefinitions | Create a &#39;workflow.ServiceItemDefinition&#39; resource.
+[**CreateWorkflowServiceItemHealthCheckDefinition**](WorkflowApi.md#CreateWorkflowServiceItemHealthCheckDefinition) | **Post** /api/v1/workflow/ServiceItemHealthCheckDefinitions | Create a &#39;workflow.ServiceItemHealthCheckDefinition&#39; resource.
 [**CreateWorkflowServiceItemInstance**](WorkflowApi.md#CreateWorkflowServiceItemInstance) | **Post** /api/v1/workflow/ServiceItemInstances | Create a &#39;workflow.ServiceItemInstance&#39; resource.
 [**CreateWorkflowServiceItemOutput**](WorkflowApi.md#CreateWorkflowServiceItemOutput) | **Post** /api/v1/workflow/ServiceItemOutputs | Create a &#39;workflow.ServiceItemOutput&#39; resource.
 [**CreateWorkflowSolutionActionDefinition**](WorkflowApi.md#CreateWorkflowSolutionActionDefinition) | **Post** /api/v1/workflow/SolutionActionDefinitions | Create a &#39;workflow.SolutionActionDefinition&#39; resource.
@@ -28,10 +30,12 @@ Method | HTTP request | Description
 [**DeleteWorkflowBatchApiExecutor**](WorkflowApi.md#DeleteWorkflowBatchApiExecutor) | **Delete** /api/v1/workflow/BatchApiExecutors/{Moid} | Delete a &#39;workflow.BatchApiExecutor&#39; resource.
 [**DeleteWorkflowCustomDataTypeDefinition**](WorkflowApi.md#DeleteWorkflowCustomDataTypeDefinition) | **Delete** /api/v1/workflow/CustomDataTypeDefinitions/{Moid} | Delete a &#39;workflow.CustomDataTypeDefinition&#39; resource.
 [**DeleteWorkflowErrorResponseHandler**](WorkflowApi.md#DeleteWorkflowErrorResponseHandler) | **Delete** /api/v1/workflow/ErrorResponseHandlers/{Moid} | Delete a &#39;workflow.ErrorResponseHandler&#39; resource.
+[**DeleteWorkflowPowerShellBatchApiExecutor**](WorkflowApi.md#DeleteWorkflowPowerShellBatchApiExecutor) | **Delete** /api/v1/workflow/PowerShellBatchApiExecutors/{Moid} | Delete a &#39;workflow.PowerShellBatchApiExecutor&#39; resource.
 [**DeleteWorkflowRollbackWorkflow**](WorkflowApi.md#DeleteWorkflowRollbackWorkflow) | **Delete** /api/v1/workflow/RollbackWorkflows/{Moid} | Delete a &#39;workflow.RollbackWorkflow&#39; resource.
 [**DeleteWorkflowServiceItemActionDefinition**](WorkflowApi.md#DeleteWorkflowServiceItemActionDefinition) | **Delete** /api/v1/workflow/ServiceItemActionDefinitions/{Moid} | Delete a &#39;workflow.ServiceItemActionDefinition&#39; resource.
 [**DeleteWorkflowServiceItemActionInstance**](WorkflowApi.md#DeleteWorkflowServiceItemActionInstance) | **Delete** /api/v1/workflow/ServiceItemActionInstances/{Moid} | Delete a &#39;workflow.ServiceItemActionInstance&#39; resource.
 [**DeleteWorkflowServiceItemDefinition**](WorkflowApi.md#DeleteWorkflowServiceItemDefinition) | **Delete** /api/v1/workflow/ServiceItemDefinitions/{Moid} | Delete a &#39;workflow.ServiceItemDefinition&#39; resource.
+[**DeleteWorkflowServiceItemHealthCheckDefinition**](WorkflowApi.md#DeleteWorkflowServiceItemHealthCheckDefinition) | **Delete** /api/v1/workflow/ServiceItemHealthCheckDefinitions/{Moid} | Delete a &#39;workflow.ServiceItemHealthCheckDefinition&#39; resource.
 [**DeleteWorkflowServiceItemInstance**](WorkflowApi.md#DeleteWorkflowServiceItemInstance) | **Delete** /api/v1/workflow/ServiceItemInstances/{Moid} | Delete a &#39;workflow.ServiceItemInstance&#39; resource.
 [**DeleteWorkflowServiceItemOutput**](WorkflowApi.md#DeleteWorkflowServiceItemOutput) | **Delete** /api/v1/workflow/ServiceItemOutputs/{Moid} | Delete a &#39;workflow.ServiceItemOutput&#39; resource.
 [**DeleteWorkflowSolutionActionDefinition**](WorkflowApi.md#DeleteWorkflowSolutionActionDefinition) | **Delete** /api/v1/workflow/SolutionActionDefinitions/{Moid} | Delete a &#39;workflow.SolutionActionDefinition&#39; resource.
@@ -56,6 +60,8 @@ Method | HTTP request | Description
 [**GetWorkflowErrorResponseHandlerList**](WorkflowApi.md#GetWorkflowErrorResponseHandlerList) | **Get** /api/v1/workflow/ErrorResponseHandlers | Read a &#39;workflow.ErrorResponseHandler&#39; resource.
 [**GetWorkflowPendingDynamicWorkflowInfoByMoid**](WorkflowApi.md#GetWorkflowPendingDynamicWorkflowInfoByMoid) | **Get** /api/v1/workflow/PendingDynamicWorkflowInfos/{Moid} | Read a &#39;workflow.PendingDynamicWorkflowInfo&#39; resource.
 [**GetWorkflowPendingDynamicWorkflowInfoList**](WorkflowApi.md#GetWorkflowPendingDynamicWorkflowInfoList) | **Get** /api/v1/workflow/PendingDynamicWorkflowInfos | Read a &#39;workflow.PendingDynamicWorkflowInfo&#39; resource.
+[**GetWorkflowPowerShellBatchApiExecutorByMoid**](WorkflowApi.md#GetWorkflowPowerShellBatchApiExecutorByMoid) | **Get** /api/v1/workflow/PowerShellBatchApiExecutors/{Moid} | Read a &#39;workflow.PowerShellBatchApiExecutor&#39; resource.
+[**GetWorkflowPowerShellBatchApiExecutorList**](WorkflowApi.md#GetWorkflowPowerShellBatchApiExecutorList) | **Get** /api/v1/workflow/PowerShellBatchApiExecutors | Read a &#39;workflow.PowerShellBatchApiExecutor&#39; resource.
 [**GetWorkflowRollbackWorkflowByMoid**](WorkflowApi.md#GetWorkflowRollbackWorkflowByMoid) | **Get** /api/v1/workflow/RollbackWorkflows/{Moid} | Read a &#39;workflow.RollbackWorkflow&#39; resource.
 [**GetWorkflowRollbackWorkflowList**](WorkflowApi.md#GetWorkflowRollbackWorkflowList) | **Get** /api/v1/workflow/RollbackWorkflows | Read a &#39;workflow.RollbackWorkflow&#39; resource.
 [**GetWorkflowServiceItemActionDefinitionByMoid**](WorkflowApi.md#GetWorkflowServiceItemActionDefinitionByMoid) | **Get** /api/v1/workflow/ServiceItemActionDefinitions/{Moid} | Read a &#39;workflow.ServiceItemActionDefinition&#39; resource.
@@ -64,6 +70,10 @@ Method | HTTP request | Description
 [**GetWorkflowServiceItemActionInstanceList**](WorkflowApi.md#GetWorkflowServiceItemActionInstanceList) | **Get** /api/v1/workflow/ServiceItemActionInstances | Read a &#39;workflow.ServiceItemActionInstance&#39; resource.
 [**GetWorkflowServiceItemDefinitionByMoid**](WorkflowApi.md#GetWorkflowServiceItemDefinitionByMoid) | **Get** /api/v1/workflow/ServiceItemDefinitions/{Moid} | Read a &#39;workflow.ServiceItemDefinition&#39; resource.
 [**GetWorkflowServiceItemDefinitionList**](WorkflowApi.md#GetWorkflowServiceItemDefinitionList) | **Get** /api/v1/workflow/ServiceItemDefinitions | Read a &#39;workflow.ServiceItemDefinition&#39; resource.
+[**GetWorkflowServiceItemHealthCheckDefinitionByMoid**](WorkflowApi.md#GetWorkflowServiceItemHealthCheckDefinitionByMoid) | **Get** /api/v1/workflow/ServiceItemHealthCheckDefinitions/{Moid} | Read a &#39;workflow.ServiceItemHealthCheckDefinition&#39; resource.
+[**GetWorkflowServiceItemHealthCheckDefinitionList**](WorkflowApi.md#GetWorkflowServiceItemHealthCheckDefinitionList) | **Get** /api/v1/workflow/ServiceItemHealthCheckDefinitions | Read a &#39;workflow.ServiceItemHealthCheckDefinition&#39; resource.
+[**GetWorkflowServiceItemHealthCheckExecutionByMoid**](WorkflowApi.md#GetWorkflowServiceItemHealthCheckExecutionByMoid) | **Get** /api/v1/workflow/ServiceItemHealthCheckExecutions/{Moid} | Read a &#39;workflow.ServiceItemHealthCheckExecution&#39; resource.
+[**GetWorkflowServiceItemHealthCheckExecutionList**](WorkflowApi.md#GetWorkflowServiceItemHealthCheckExecutionList) | **Get** /api/v1/workflow/ServiceItemHealthCheckExecutions | Read a &#39;workflow.ServiceItemHealthCheckExecution&#39; resource.
 [**GetWorkflowServiceItemInstanceByMoid**](WorkflowApi.md#GetWorkflowServiceItemInstanceByMoid) | **Get** /api/v1/workflow/ServiceItemInstances/{Moid} | Read a &#39;workflow.ServiceItemInstance&#39; resource.
 [**GetWorkflowServiceItemInstanceList**](WorkflowApi.md#GetWorkflowServiceItemInstanceList) | **Get** /api/v1/workflow/ServiceItemInstances | Read a &#39;workflow.ServiceItemInstance&#39; resource.
 [**GetWorkflowServiceItemOutputByMoid**](WorkflowApi.md#GetWorkflowServiceItemOutputByMoid) | **Get** /api/v1/workflow/ServiceItemOutputs/{Moid} | Read a &#39;workflow.ServiceItemOutput&#39; resource.
@@ -102,10 +112,12 @@ Method | HTTP request | Description
 [**PatchWorkflowBatchApiExecutor**](WorkflowApi.md#PatchWorkflowBatchApiExecutor) | **Patch** /api/v1/workflow/BatchApiExecutors/{Moid} | Update a &#39;workflow.BatchApiExecutor&#39; resource.
 [**PatchWorkflowCustomDataTypeDefinition**](WorkflowApi.md#PatchWorkflowCustomDataTypeDefinition) | **Patch** /api/v1/workflow/CustomDataTypeDefinitions/{Moid} | Update a &#39;workflow.CustomDataTypeDefinition&#39; resource.
 [**PatchWorkflowErrorResponseHandler**](WorkflowApi.md#PatchWorkflowErrorResponseHandler) | **Patch** /api/v1/workflow/ErrorResponseHandlers/{Moid} | Update a &#39;workflow.ErrorResponseHandler&#39; resource.
+[**PatchWorkflowPowerShellBatchApiExecutor**](WorkflowApi.md#PatchWorkflowPowerShellBatchApiExecutor) | **Patch** /api/v1/workflow/PowerShellBatchApiExecutors/{Moid} | Update a &#39;workflow.PowerShellBatchApiExecutor&#39; resource.
 [**PatchWorkflowRollbackWorkflow**](WorkflowApi.md#PatchWorkflowRollbackWorkflow) | **Patch** /api/v1/workflow/RollbackWorkflows/{Moid} | Update a &#39;workflow.RollbackWorkflow&#39; resource.
 [**PatchWorkflowServiceItemActionDefinition**](WorkflowApi.md#PatchWorkflowServiceItemActionDefinition) | **Patch** /api/v1/workflow/ServiceItemActionDefinitions/{Moid} | Update a &#39;workflow.ServiceItemActionDefinition&#39; resource.
 [**PatchWorkflowServiceItemActionInstance**](WorkflowApi.md#PatchWorkflowServiceItemActionInstance) | **Patch** /api/v1/workflow/ServiceItemActionInstances/{Moid} | Update a &#39;workflow.ServiceItemActionInstance&#39; resource.
 [**PatchWorkflowServiceItemDefinition**](WorkflowApi.md#PatchWorkflowServiceItemDefinition) | **Patch** /api/v1/workflow/ServiceItemDefinitions/{Moid} | Update a &#39;workflow.ServiceItemDefinition&#39; resource.
+[**PatchWorkflowServiceItemHealthCheckDefinition**](WorkflowApi.md#PatchWorkflowServiceItemHealthCheckDefinition) | **Patch** /api/v1/workflow/ServiceItemHealthCheckDefinitions/{Moid} | Update a &#39;workflow.ServiceItemHealthCheckDefinition&#39; resource.
 [**PatchWorkflowServiceItemInstance**](WorkflowApi.md#PatchWorkflowServiceItemInstance) | **Patch** /api/v1/workflow/ServiceItemInstances/{Moid} | Update a &#39;workflow.ServiceItemInstance&#39; resource.
 [**PatchWorkflowServiceItemOutput**](WorkflowApi.md#PatchWorkflowServiceItemOutput) | **Patch** /api/v1/workflow/ServiceItemOutputs/{Moid} | Update a &#39;workflow.ServiceItemOutput&#39; resource.
 [**PatchWorkflowSolutionActionDefinition**](WorkflowApi.md#PatchWorkflowSolutionActionDefinition) | **Patch** /api/v1/workflow/SolutionActionDefinitions/{Moid} | Update a &#39;workflow.SolutionActionDefinition&#39; resource.
@@ -119,10 +131,12 @@ Method | HTTP request | Description
 [**UpdateWorkflowBatchApiExecutor**](WorkflowApi.md#UpdateWorkflowBatchApiExecutor) | **Post** /api/v1/workflow/BatchApiExecutors/{Moid} | Update a &#39;workflow.BatchApiExecutor&#39; resource.
 [**UpdateWorkflowCustomDataTypeDefinition**](WorkflowApi.md#UpdateWorkflowCustomDataTypeDefinition) | **Post** /api/v1/workflow/CustomDataTypeDefinitions/{Moid} | Update a &#39;workflow.CustomDataTypeDefinition&#39; resource.
 [**UpdateWorkflowErrorResponseHandler**](WorkflowApi.md#UpdateWorkflowErrorResponseHandler) | **Post** /api/v1/workflow/ErrorResponseHandlers/{Moid} | Update a &#39;workflow.ErrorResponseHandler&#39; resource.
+[**UpdateWorkflowPowerShellBatchApiExecutor**](WorkflowApi.md#UpdateWorkflowPowerShellBatchApiExecutor) | **Post** /api/v1/workflow/PowerShellBatchApiExecutors/{Moid} | Update a &#39;workflow.PowerShellBatchApiExecutor&#39; resource.
 [**UpdateWorkflowRollbackWorkflow**](WorkflowApi.md#UpdateWorkflowRollbackWorkflow) | **Post** /api/v1/workflow/RollbackWorkflows/{Moid} | Update a &#39;workflow.RollbackWorkflow&#39; resource.
 [**UpdateWorkflowServiceItemActionDefinition**](WorkflowApi.md#UpdateWorkflowServiceItemActionDefinition) | **Post** /api/v1/workflow/ServiceItemActionDefinitions/{Moid} | Update a &#39;workflow.ServiceItemActionDefinition&#39; resource.
 [**UpdateWorkflowServiceItemActionInstance**](WorkflowApi.md#UpdateWorkflowServiceItemActionInstance) | **Post** /api/v1/workflow/ServiceItemActionInstances/{Moid} | Update a &#39;workflow.ServiceItemActionInstance&#39; resource.
 [**UpdateWorkflowServiceItemDefinition**](WorkflowApi.md#UpdateWorkflowServiceItemDefinition) | **Post** /api/v1/workflow/ServiceItemDefinitions/{Moid} | Update a &#39;workflow.ServiceItemDefinition&#39; resource.
+[**UpdateWorkflowServiceItemHealthCheckDefinition**](WorkflowApi.md#UpdateWorkflowServiceItemHealthCheckDefinition) | **Post** /api/v1/workflow/ServiceItemHealthCheckDefinitions/{Moid} | Update a &#39;workflow.ServiceItemHealthCheckDefinition&#39; resource.
 [**UpdateWorkflowServiceItemInstance**](WorkflowApi.md#UpdateWorkflowServiceItemInstance) | **Post** /api/v1/workflow/ServiceItemInstances/{Moid} | Update a &#39;workflow.ServiceItemInstance&#39; resource.
 [**UpdateWorkflowServiceItemOutput**](WorkflowApi.md#UpdateWorkflowServiceItemOutput) | **Post** /api/v1/workflow/ServiceItemOutputs/{Moid} | Update a &#39;workflow.ServiceItemOutput&#39; resource.
 [**UpdateWorkflowSolutionActionDefinition**](WorkflowApi.md#UpdateWorkflowSolutionActionDefinition) | **Post** /api/v1/workflow/SolutionActionDefinitions/{Moid} | Update a &#39;workflow.SolutionActionDefinition&#39; resource.
@@ -407,6 +421,74 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## CreateWorkflowPowerShellBatchApiExecutor
+
+> WorkflowPowerShellBatchApiExecutor CreateWorkflowPowerShellBatchApiExecutor(ctx).WorkflowPowerShellBatchApiExecutor(workflowPowerShellBatchApiExecutor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+
+Create a 'workflow.PowerShellBatchApiExecutor' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    workflowPowerShellBatchApiExecutor := *openapiclient.NewWorkflowPowerShellBatchApiExecutor("ClassId_example", "ObjectType_example") // WorkflowPowerShellBatchApiExecutor | The 'workflow.PowerShellBatchApiExecutor' resource to create.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+    ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.WorkflowApi.CreateWorkflowPowerShellBatchApiExecutor(context.Background()).WorkflowPowerShellBatchApiExecutor(workflowPowerShellBatchApiExecutor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.CreateWorkflowPowerShellBatchApiExecutor``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateWorkflowPowerShellBatchApiExecutor`: WorkflowPowerShellBatchApiExecutor
+    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.CreateWorkflowPowerShellBatchApiExecutor`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateWorkflowPowerShellBatchApiExecutorRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **workflowPowerShellBatchApiExecutor** | [**WorkflowPowerShellBatchApiExecutor**](WorkflowPowerShellBatchApiExecutor.md) | The &#39;workflow.PowerShellBatchApiExecutor&#39; resource to create. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+ **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
+
+### Return type
+
+[**WorkflowPowerShellBatchApiExecutor**](WorkflowPowerShellBatchApiExecutor.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## CreateWorkflowRollbackWorkflow
 
 > WorkflowRollbackWorkflow CreateWorkflowRollbackWorkflow(ctx).WorkflowRollbackWorkflow(workflowRollbackWorkflow).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
@@ -664,6 +746,74 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**WorkflowServiceItemDefinition**](WorkflowServiceItemDefinition.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateWorkflowServiceItemHealthCheckDefinition
+
+> WorkflowServiceItemHealthCheckDefinition CreateWorkflowServiceItemHealthCheckDefinition(ctx).WorkflowServiceItemHealthCheckDefinition(workflowServiceItemHealthCheckDefinition).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+
+Create a 'workflow.ServiceItemHealthCheckDefinition' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    workflowServiceItemHealthCheckDefinition := *openapiclient.NewWorkflowServiceItemHealthCheckDefinition("ClassId_example", "ObjectType_example") // WorkflowServiceItemHealthCheckDefinition | The 'workflow.ServiceItemHealthCheckDefinition' resource to create.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+    ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.WorkflowApi.CreateWorkflowServiceItemHealthCheckDefinition(context.Background()).WorkflowServiceItemHealthCheckDefinition(workflowServiceItemHealthCheckDefinition).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.CreateWorkflowServiceItemHealthCheckDefinition``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateWorkflowServiceItemHealthCheckDefinition`: WorkflowServiceItemHealthCheckDefinition
+    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.CreateWorkflowServiceItemHealthCheckDefinition`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateWorkflowServiceItemHealthCheckDefinitionRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **workflowServiceItemHealthCheckDefinition** | [**WorkflowServiceItemHealthCheckDefinition**](WorkflowServiceItemHealthCheckDefinition.md) | The &#39;workflow.ServiceItemHealthCheckDefinition&#39; resource to create. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+ **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
+
+### Return type
+
+[**WorkflowServiceItemHealthCheckDefinition**](WorkflowServiceItemHealthCheckDefinition.md)
 
 ### Authorization
 
@@ -1759,6 +1909,72 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## DeleteWorkflowPowerShellBatchApiExecutor
+
+> DeleteWorkflowPowerShellBatchApiExecutor(ctx, moid).Execute()
+
+Delete a 'workflow.PowerShellBatchApiExecutor' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.WorkflowApi.DeleteWorkflowPowerShellBatchApiExecutor(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.DeleteWorkflowPowerShellBatchApiExecutor``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteWorkflowPowerShellBatchApiExecutorRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## DeleteWorkflowRollbackWorkflow
 
 > DeleteWorkflowRollbackWorkflow(ctx, moid).Execute()
@@ -1999,6 +2215,72 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteWorkflowServiceItemDefinitionRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteWorkflowServiceItemHealthCheckDefinition
+
+> DeleteWorkflowServiceItemHealthCheckDefinition(ctx, moid).Execute()
+
+Delete a 'workflow.ServiceItemHealthCheckDefinition' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.WorkflowApi.DeleteWorkflowServiceItemHealthCheckDefinition(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.DeleteWorkflowServiceItemHealthCheckDefinition``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteWorkflowServiceItemHealthCheckDefinitionRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -3767,6 +4049,158 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetWorkflowPowerShellBatchApiExecutorByMoid
+
+> WorkflowPowerShellBatchApiExecutor GetWorkflowPowerShellBatchApiExecutorByMoid(ctx, moid).Execute()
+
+Read a 'workflow.PowerShellBatchApiExecutor' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.WorkflowApi.GetWorkflowPowerShellBatchApiExecutorByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.GetWorkflowPowerShellBatchApiExecutorByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetWorkflowPowerShellBatchApiExecutorByMoid`: WorkflowPowerShellBatchApiExecutor
+    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.GetWorkflowPowerShellBatchApiExecutorByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetWorkflowPowerShellBatchApiExecutorByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**WorkflowPowerShellBatchApiExecutor**](WorkflowPowerShellBatchApiExecutor.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetWorkflowPowerShellBatchApiExecutorList
+
+> WorkflowPowerShellBatchApiExecutorResponse GetWorkflowPowerShellBatchApiExecutorList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'workflow.PowerShellBatchApiExecutor' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.WorkflowApi.GetWorkflowPowerShellBatchApiExecutorList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.GetWorkflowPowerShellBatchApiExecutorList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetWorkflowPowerShellBatchApiExecutorList`: WorkflowPowerShellBatchApiExecutorResponse
+    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.GetWorkflowPowerShellBatchApiExecutorList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetWorkflowPowerShellBatchApiExecutorListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**WorkflowPowerShellBatchApiExecutorResponse**](WorkflowPowerShellBatchApiExecutorResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetWorkflowRollbackWorkflowByMoid
 
 > WorkflowRollbackWorkflow GetWorkflowRollbackWorkflowByMoid(ctx, moid).Execute()
@@ -4360,6 +4794,310 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**WorkflowServiceItemDefinitionResponse**](WorkflowServiceItemDefinitionResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetWorkflowServiceItemHealthCheckDefinitionByMoid
+
+> WorkflowServiceItemHealthCheckDefinition GetWorkflowServiceItemHealthCheckDefinitionByMoid(ctx, moid).Execute()
+
+Read a 'workflow.ServiceItemHealthCheckDefinition' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.WorkflowApi.GetWorkflowServiceItemHealthCheckDefinitionByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.GetWorkflowServiceItemHealthCheckDefinitionByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetWorkflowServiceItemHealthCheckDefinitionByMoid`: WorkflowServiceItemHealthCheckDefinition
+    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.GetWorkflowServiceItemHealthCheckDefinitionByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetWorkflowServiceItemHealthCheckDefinitionByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**WorkflowServiceItemHealthCheckDefinition**](WorkflowServiceItemHealthCheckDefinition.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetWorkflowServiceItemHealthCheckDefinitionList
+
+> WorkflowServiceItemHealthCheckDefinitionResponse GetWorkflowServiceItemHealthCheckDefinitionList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'workflow.ServiceItemHealthCheckDefinition' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.WorkflowApi.GetWorkflowServiceItemHealthCheckDefinitionList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.GetWorkflowServiceItemHealthCheckDefinitionList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetWorkflowServiceItemHealthCheckDefinitionList`: WorkflowServiceItemHealthCheckDefinitionResponse
+    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.GetWorkflowServiceItemHealthCheckDefinitionList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetWorkflowServiceItemHealthCheckDefinitionListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**WorkflowServiceItemHealthCheckDefinitionResponse**](WorkflowServiceItemHealthCheckDefinitionResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetWorkflowServiceItemHealthCheckExecutionByMoid
+
+> WorkflowServiceItemHealthCheckExecution GetWorkflowServiceItemHealthCheckExecutionByMoid(ctx, moid).Execute()
+
+Read a 'workflow.ServiceItemHealthCheckExecution' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.WorkflowApi.GetWorkflowServiceItemHealthCheckExecutionByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.GetWorkflowServiceItemHealthCheckExecutionByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetWorkflowServiceItemHealthCheckExecutionByMoid`: WorkflowServiceItemHealthCheckExecution
+    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.GetWorkflowServiceItemHealthCheckExecutionByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetWorkflowServiceItemHealthCheckExecutionByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**WorkflowServiceItemHealthCheckExecution**](WorkflowServiceItemHealthCheckExecution.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetWorkflowServiceItemHealthCheckExecutionList
+
+> WorkflowServiceItemHealthCheckExecutionResponse GetWorkflowServiceItemHealthCheckExecutionList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'workflow.ServiceItemHealthCheckExecution' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.WorkflowApi.GetWorkflowServiceItemHealthCheckExecutionList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.GetWorkflowServiceItemHealthCheckExecutionList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetWorkflowServiceItemHealthCheckExecutionList`: WorkflowServiceItemHealthCheckExecutionResponse
+    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.GetWorkflowServiceItemHealthCheckExecutionList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetWorkflowServiceItemHealthCheckExecutionListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**WorkflowServiceItemHealthCheckExecutionResponse**](WorkflowServiceItemHealthCheckExecutionResponse.md)
 
 ### Authorization
 
@@ -7247,6 +7985,78 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## PatchWorkflowPowerShellBatchApiExecutor
+
+> WorkflowPowerShellBatchApiExecutor PatchWorkflowPowerShellBatchApiExecutor(ctx, moid).WorkflowPowerShellBatchApiExecutor(workflowPowerShellBatchApiExecutor).IfMatch(ifMatch).Execute()
+
+Update a 'workflow.PowerShellBatchApiExecutor' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    workflowPowerShellBatchApiExecutor := *openapiclient.NewWorkflowPowerShellBatchApiExecutor("ClassId_example", "ObjectType_example") // WorkflowPowerShellBatchApiExecutor | The 'workflow.PowerShellBatchApiExecutor' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.WorkflowApi.PatchWorkflowPowerShellBatchApiExecutor(context.Background(), moid).WorkflowPowerShellBatchApiExecutor(workflowPowerShellBatchApiExecutor).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.PatchWorkflowPowerShellBatchApiExecutor``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchWorkflowPowerShellBatchApiExecutor`: WorkflowPowerShellBatchApiExecutor
+    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.PatchWorkflowPowerShellBatchApiExecutor`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchWorkflowPowerShellBatchApiExecutorRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **workflowPowerShellBatchApiExecutor** | [**WorkflowPowerShellBatchApiExecutor**](WorkflowPowerShellBatchApiExecutor.md) | The &#39;workflow.PowerShellBatchApiExecutor&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**WorkflowPowerShellBatchApiExecutor**](WorkflowPowerShellBatchApiExecutor.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## PatchWorkflowRollbackWorkflow
 
 > WorkflowRollbackWorkflow PatchWorkflowRollbackWorkflow(ctx, moid).WorkflowRollbackWorkflow(workflowRollbackWorkflow).IfMatch(ifMatch).Execute()
@@ -7520,6 +8330,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**WorkflowServiceItemDefinition**](WorkflowServiceItemDefinition.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PatchWorkflowServiceItemHealthCheckDefinition
+
+> WorkflowServiceItemHealthCheckDefinition PatchWorkflowServiceItemHealthCheckDefinition(ctx, moid).WorkflowServiceItemHealthCheckDefinition(workflowServiceItemHealthCheckDefinition).IfMatch(ifMatch).Execute()
+
+Update a 'workflow.ServiceItemHealthCheckDefinition' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    workflowServiceItemHealthCheckDefinition := *openapiclient.NewWorkflowServiceItemHealthCheckDefinition("ClassId_example", "ObjectType_example") // WorkflowServiceItemHealthCheckDefinition | The 'workflow.ServiceItemHealthCheckDefinition' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.WorkflowApi.PatchWorkflowServiceItemHealthCheckDefinition(context.Background(), moid).WorkflowServiceItemHealthCheckDefinition(workflowServiceItemHealthCheckDefinition).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.PatchWorkflowServiceItemHealthCheckDefinition``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchWorkflowServiceItemHealthCheckDefinition`: WorkflowServiceItemHealthCheckDefinition
+    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.PatchWorkflowServiceItemHealthCheckDefinition`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchWorkflowServiceItemHealthCheckDefinitionRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **workflowServiceItemHealthCheckDefinition** | [**WorkflowServiceItemHealthCheckDefinition**](WorkflowServiceItemHealthCheckDefinition.md) | The &#39;workflow.ServiceItemHealthCheckDefinition&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**WorkflowServiceItemHealthCheckDefinition**](WorkflowServiceItemHealthCheckDefinition.md)
 
 ### Authorization
 
@@ -8471,6 +9353,78 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## UpdateWorkflowPowerShellBatchApiExecutor
+
+> WorkflowPowerShellBatchApiExecutor UpdateWorkflowPowerShellBatchApiExecutor(ctx, moid).WorkflowPowerShellBatchApiExecutor(workflowPowerShellBatchApiExecutor).IfMatch(ifMatch).Execute()
+
+Update a 'workflow.PowerShellBatchApiExecutor' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    workflowPowerShellBatchApiExecutor := *openapiclient.NewWorkflowPowerShellBatchApiExecutor("ClassId_example", "ObjectType_example") // WorkflowPowerShellBatchApiExecutor | The 'workflow.PowerShellBatchApiExecutor' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.WorkflowApi.UpdateWorkflowPowerShellBatchApiExecutor(context.Background(), moid).WorkflowPowerShellBatchApiExecutor(workflowPowerShellBatchApiExecutor).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.UpdateWorkflowPowerShellBatchApiExecutor``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateWorkflowPowerShellBatchApiExecutor`: WorkflowPowerShellBatchApiExecutor
+    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.UpdateWorkflowPowerShellBatchApiExecutor`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateWorkflowPowerShellBatchApiExecutorRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **workflowPowerShellBatchApiExecutor** | [**WorkflowPowerShellBatchApiExecutor**](WorkflowPowerShellBatchApiExecutor.md) | The &#39;workflow.PowerShellBatchApiExecutor&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**WorkflowPowerShellBatchApiExecutor**](WorkflowPowerShellBatchApiExecutor.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## UpdateWorkflowRollbackWorkflow
 
 > WorkflowRollbackWorkflow UpdateWorkflowRollbackWorkflow(ctx, moid).WorkflowRollbackWorkflow(workflowRollbackWorkflow).IfMatch(ifMatch).Execute()
@@ -8744,6 +9698,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**WorkflowServiceItemDefinition**](WorkflowServiceItemDefinition.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateWorkflowServiceItemHealthCheckDefinition
+
+> WorkflowServiceItemHealthCheckDefinition UpdateWorkflowServiceItemHealthCheckDefinition(ctx, moid).WorkflowServiceItemHealthCheckDefinition(workflowServiceItemHealthCheckDefinition).IfMatch(ifMatch).Execute()
+
+Update a 'workflow.ServiceItemHealthCheckDefinition' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    workflowServiceItemHealthCheckDefinition := *openapiclient.NewWorkflowServiceItemHealthCheckDefinition("ClassId_example", "ObjectType_example") // WorkflowServiceItemHealthCheckDefinition | The 'workflow.ServiceItemHealthCheckDefinition' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.WorkflowApi.UpdateWorkflowServiceItemHealthCheckDefinition(context.Background(), moid).WorkflowServiceItemHealthCheckDefinition(workflowServiceItemHealthCheckDefinition).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.UpdateWorkflowServiceItemHealthCheckDefinition``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateWorkflowServiceItemHealthCheckDefinition`: WorkflowServiceItemHealthCheckDefinition
+    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.UpdateWorkflowServiceItemHealthCheckDefinition`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateWorkflowServiceItemHealthCheckDefinitionRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **workflowServiceItemHealthCheckDefinition** | [**WorkflowServiceItemHealthCheckDefinition**](WorkflowServiceItemHealthCheckDefinition.md) | The &#39;workflow.ServiceItemHealthCheckDefinition&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**WorkflowServiceItemHealthCheckDefinition**](WorkflowServiceItemHealthCheckDefinition.md)
 
 ### Authorization
 

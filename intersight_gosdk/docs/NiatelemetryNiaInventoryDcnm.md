@@ -19,7 +19,10 @@ Name | Type | Description | Notes
 **IsMediaController** | Pointer to **bool** | Returns the value of the isMediaController field. | [optional] 
 **IsSmartLicenseEnabled** | Pointer to **bool** | Returns true if the Smart license is enabled and is in use. | [optional] 
 **Mode** | Pointer to **string** | Mode of controller on DCNM. | [optional] 
+**NdfcFabricName** | Pointer to **string** | NDFC name information of the setup. | [optional] 
+**NdfcOperState** | Pointer to **string** | NDFC status information for the setup. | [optional] 
 **NetworkInfo** | Pointer to [**NullableNiatelemetryNetworkInfo**](NiatelemetryNetworkInfo.md) |  | [optional] 
+**NumDcnmSite** | Pointer to **int64** | Returns the number of DCNM site fabrics. | [optional] 
 **NumFabrics** | Pointer to **int64** | Returns total number of fabrics in DCNM set-up. | [optional] 
 **NumFabricsInMsd** | Pointer to **int64** | Returns the number of fabrics in msd. | [optional] 
 **NumIngressReplicationFabrics** | Pointer to **int64** | Returns the number of fabrics that have ingress replication type. | [optional] 
@@ -432,6 +435,56 @@ SetMode sets Mode field to given value.
 
 HasMode returns a boolean if a field has been set.
 
+### GetNdfcFabricName
+
+`func (o *NiatelemetryNiaInventoryDcnm) GetNdfcFabricName() string`
+
+GetNdfcFabricName returns the NdfcFabricName field if non-nil, zero value otherwise.
+
+### GetNdfcFabricNameOk
+
+`func (o *NiatelemetryNiaInventoryDcnm) GetNdfcFabricNameOk() (*string, bool)`
+
+GetNdfcFabricNameOk returns a tuple with the NdfcFabricName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNdfcFabricName
+
+`func (o *NiatelemetryNiaInventoryDcnm) SetNdfcFabricName(v string)`
+
+SetNdfcFabricName sets NdfcFabricName field to given value.
+
+### HasNdfcFabricName
+
+`func (o *NiatelemetryNiaInventoryDcnm) HasNdfcFabricName() bool`
+
+HasNdfcFabricName returns a boolean if a field has been set.
+
+### GetNdfcOperState
+
+`func (o *NiatelemetryNiaInventoryDcnm) GetNdfcOperState() string`
+
+GetNdfcOperState returns the NdfcOperState field if non-nil, zero value otherwise.
+
+### GetNdfcOperStateOk
+
+`func (o *NiatelemetryNiaInventoryDcnm) GetNdfcOperStateOk() (*string, bool)`
+
+GetNdfcOperStateOk returns a tuple with the NdfcOperState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNdfcOperState
+
+`func (o *NiatelemetryNiaInventoryDcnm) SetNdfcOperState(v string)`
+
+SetNdfcOperState sets NdfcOperState field to given value.
+
+### HasNdfcOperState
+
+`func (o *NiatelemetryNiaInventoryDcnm) HasNdfcOperState() bool`
+
+HasNdfcOperState returns a boolean if a field has been set.
+
 ### GetNetworkInfo
 
 `func (o *NiatelemetryNiaInventoryDcnm) GetNetworkInfo() NiatelemetryNetworkInfo`
@@ -467,6 +520,31 @@ HasNetworkInfo returns a boolean if a field has been set.
 `func (o *NiatelemetryNiaInventoryDcnm) UnsetNetworkInfo()`
 
 UnsetNetworkInfo ensures that no value is present for NetworkInfo, not even an explicit nil
+### GetNumDcnmSite
+
+`func (o *NiatelemetryNiaInventoryDcnm) GetNumDcnmSite() int64`
+
+GetNumDcnmSite returns the NumDcnmSite field if non-nil, zero value otherwise.
+
+### GetNumDcnmSiteOk
+
+`func (o *NiatelemetryNiaInventoryDcnm) GetNumDcnmSiteOk() (*int64, bool)`
+
+GetNumDcnmSiteOk returns a tuple with the NumDcnmSite field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNumDcnmSite
+
+`func (o *NiatelemetryNiaInventoryDcnm) SetNumDcnmSite(v int64)`
+
+SetNumDcnmSite sets NumDcnmSite field to given value.
+
+### HasNumDcnmSite
+
+`func (o *NiatelemetryNiaInventoryDcnm) HasNumDcnmSite() bool`
+
+HasNumDcnmSite returns a boolean if a field has been set.
+
 ### GetNumFabrics
 
 `func (o *NiatelemetryNiaInventoryDcnm) GetNumFabrics() int64`

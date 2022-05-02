@@ -30,6 +30,7 @@ This complex property has following sub-properties:
   + `additional_properties`:(JSON as string) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [workflow.AnsiblePlaySession](#workflowAnsiblePlaySession)
 [workflow.CliCommand](#workflowCliCommand)
 [workflow.FileOperations](#workflowFileOperations)
+[workflow.PowerShellApi](#workflowPowerShellApi)
 [workflow.SshSession](#workflowSshSession)
 [workflow.WebApi](#workflowWebApi)
 [workflow.XmlApi](#workflowXmlApi)
@@ -146,6 +147,12 @@ This complex property has following sub-properties:
   + `template_file_path`:(string) Path of the template file on the connected device. 
   + `template_values`:(JSON as string) Input values to render text output file from template file. 
 * `operation_type`:(string) File operation type to be executed on the connected endpoint.* `FileDownload` - The API is executed in a remote device connected to the Intersightthrough its device connector. This operation is to download the filefrom specified storage bucket to the specific path on the device.* `FileTemplatize` - Populates data driven template file with input values to generate textual output.Inputs - the path of the template file on the device and json values to populate.An error will be returned if the file does not exists or if there is an error whileexecuting the template. 
+
+### [workflow.PowerShellApi](#argument-reference)
+This models a single PowerShell script execution that can be sent to a claimed PowerShell target.
+* `depth`:(int) The response of a PowerShell script is an object, since PowerShell is an Object based language.Each object can contain multiple objects as properties, each of which in turn can contain multiple objects and so on and so forth.The depth field specifies how many levels of contained objects are included in the JSON representation. 
+* `operation_timeout`:(string) The timeout in seconds for the execution of the script against the given endpoint. 
+* `power_shell_response_spec`:(JSON as string) The grammar specification to parse the response and extract the required values. 
 
 ### [workflow.SshSession](#argument-reference)
 This models a single SSH session from Intersight connected endpoint to a remote

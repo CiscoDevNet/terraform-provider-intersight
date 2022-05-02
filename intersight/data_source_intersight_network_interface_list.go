@@ -109,6 +109,11 @@ func dataSourceNetworkInterfaceList() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"mtu": {
+			Description: "Maximum transmission unit of the interface list.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"name": {
 			Description: "Name of the interface list.",
 			Type:        schema.TypeString,
@@ -233,6 +238,11 @@ func dataSourceNetworkInterfaceList() *schema.Resource {
 				},
 			},
 		},
+		"port_sub_type": {
+			Description: "Interface types supported in Network device like Subinterfaces, Breakout Interfaces.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"port_type": {
 			Description: "Port type of interface list.",
 			Type:        schema.TypeString,
@@ -285,6 +295,16 @@ func dataSourceNetworkInterfaceList() *schema.Resource {
 		},
 		"slot_id": {
 			Description: "Slot id of the interface list.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"speed": {
+			Description: "Port speed of the interface list.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"speed_group": {
+			Description: "Speed Group of the interface list.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -519,6 +539,11 @@ func dataSourceNetworkInterfaceList() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"mtu": {
+			Description: "Maximum transmission unit of the interface list.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"name": {
 			Description: "Name of the interface list.",
 			Type:        schema.TypeString,
@@ -643,6 +668,11 @@ func dataSourceNetworkInterfaceList() *schema.Resource {
 				},
 			},
 		},
+		"port_sub_type": {
+			Description: "Interface types supported in Network device like Subinterfaces, Breakout Interfaces.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"port_type": {
 			Description: "Port type of interface list.",
 			Type:        schema.TypeString,
@@ -695,6 +725,16 @@ func dataSourceNetworkInterfaceList() *schema.Resource {
 		},
 		"slot_id": {
 			Description: "Slot id of the interface list.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"speed": {
+			Description: "Port speed of the interface list.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"speed_group": {
+			Description: "Speed Group of the interface list.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -954,6 +994,11 @@ func dataSourceNetworkInterfaceListRead(c context.Context, d *schema.ResourceDat
 		o.SetMoid(x)
 	}
 
+	if v, ok := d.GetOkExists("mtu"); ok {
+		x := int64(v.(int))
+		o.SetMtu(x)
+	}
+
 	if v, ok := d.GetOk("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
@@ -1106,6 +1151,11 @@ func dataSourceNetworkInterfaceListRead(c context.Context, d *schema.ResourceDat
 		o.SetPermissionResources(x)
 	}
 
+	if v, ok := d.GetOk("port_sub_type"); ok {
+		x := (v.(string))
+		o.SetPortSubType(x)
+	}
+
 	if v, ok := d.GetOk("port_type"); ok {
 		x := (v.(string))
 		o.SetPortType(x)
@@ -1167,6 +1217,16 @@ func dataSourceNetworkInterfaceListRead(c context.Context, d *schema.ResourceDat
 	if v, ok := d.GetOk("slot_id"); ok {
 		x := (v.(string))
 		o.SetSlotId(x)
+	}
+
+	if v, ok := d.GetOk("speed"); ok {
+		x := (v.(string))
+		o.SetSpeed(x)
+	}
+
+	if v, ok := d.GetOk("speed_group"); ok {
+		x := (v.(string))
+		o.SetSpeedGroup(x)
 	}
 
 	if v, ok := d.GetOk("tags"); ok {
@@ -1333,6 +1393,7 @@ func dataSourceNetworkInterfaceListRead(c context.Context, d *schema.ResourceDat
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
+				temp["mtu"] = (s.GetMtu())
 				temp["name"] = (s.GetName())
 
 				temp["network_element"] = flattenMapNetworkElementRelationship(s.GetNetworkElement(), d)
@@ -1343,12 +1404,15 @@ func dataSourceNetworkInterfaceListRead(c context.Context, d *schema.ResourceDat
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["port_sub_type"] = (s.GetPortSubType())
 				temp["port_type"] = (s.GetPortType())
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
 				temp["rn"] = (s.GetRn())
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["slot_id"] = (s.GetSlotId())
+				temp["speed"] = (s.GetSpeed())
+				temp["speed_group"] = (s.GetSpeedGroup())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 

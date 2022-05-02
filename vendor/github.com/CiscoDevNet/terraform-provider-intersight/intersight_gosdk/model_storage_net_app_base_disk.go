@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-6207
+API version: 1.0.9-6484
 Contact: intersight@cisco.com
 */
 
@@ -28,6 +28,16 @@ type StorageNetAppBaseDisk struct {
 	BaseDiskModel *string `json:"BaseDiskModel,omitempty"`
 	// Supported container type for NetApp disk. * `Unknown` - Default container type is currently unknown. * `Aggregate` - Disk is used as a physical disk in an aggregate. * `Broken` - Disk is in a broken pool. * `Label Maintenance` - Disk is in online label maintenance list. * `Foreign` - Array LUN has been marked foreign. * `Maintenance` - Disk is in maintenance center. * `Mediator` - A mediator disk is a disk used on non-shared HA systems hosted by an external node which is used to communicate the viability of the storage failover between non-shared HA nodes. * `Shared` - Disk is partitioned or in a storage pool. * `Remote` - Disk belongs to a remote cluster. * `Spare` - The disk is a spare disk. * `Unassigned` - Disk ownership has not been assigned. * `Unsupported` - The disk is not supported.
 	ContainerType *string `json:"ContainerType,omitempty"`
+	// NetApp base disk shelf bay.
+	DiskBay *int64 `json:"DiskBay,omitempty"`
+	// NetApp base disk serial number.
+	DiskSerialNumber *string `json:"DiskSerialNumber,omitempty"`
+	// NetApp base disk shelf id.
+	DiskShelfId *string `json:"DiskShelfId,omitempty"`
+	// NetApp base disk shelf model.
+	DiskShelfModel *string `json:"DiskShelfModel,omitempty"`
+	// NetApp base disk shelf name.
+	DiskShelfName *string `json:"DiskShelfName,omitempty"`
 	// The type of the NetApp disk. * `Unknown` - Default unknown disk type. * `SSDNVM` - Solid state disk with Non-Volatile Memory Express protocol enabled. * `ATA` - Advanced Technology Attachment is a type of disk drive that integrates the drive controller directly on the drive itself. * `FCAL` - For the FC-AL disk connection type, disk shelves are connected to the controller in a loop. * `BSAS` - Bridged SAS-SATA disks with added hardware to enable them to be plugged into a SAS-connected storage shelf. * `FSAS` - Near Line SAS. NL-SAS drives are enterprise SATA drives with a SAS interface, head, media, and rotational speed of traditional enterprise-class SATA drives with the fully capable SAS interface typical for classic SAS drives. * `LUN` - Logical Unit Number refers to a logical disk. * `SAS` - Storage disk with serial attached SCSI. * `MSATA` - SATA disk in multi-disk carrier storage shelf. * `SSD` - Storage disk with Solid state disk. * `VMDISK` - Virtual machine Data Disk.
 	DiskType *string `json:"DiskType,omitempty"`
 	// Current state of the NetApp disk. * `Present` - Storage disk state type is present. * `Copy` - Storage disk state type is copy. * `Broken` - Storage disk state type is broken. * `Maintenance` - Storage disk state type is maintenance. * `Partner` - Storage disk state type is partner. * `Pending` - Storage disk state type is pending. * `Reconstructing` - Storage disk state type is reconstructing. * `Removed` - Storage disk state type is removed. * `Spare` - Storage disk state type is spare. * `Unfail` - Storage disk state type is unfail. * `Zeroing` - Storage disk state type is zeroing.
@@ -178,6 +188,166 @@ func (o *StorageNetAppBaseDisk) HasContainerType() bool {
 // SetContainerType gets a reference to the given string and assigns it to the ContainerType field.
 func (o *StorageNetAppBaseDisk) SetContainerType(v string) {
 	o.ContainerType = &v
+}
+
+// GetDiskBay returns the DiskBay field value if set, zero value otherwise.
+func (o *StorageNetAppBaseDisk) GetDiskBay() int64 {
+	if o == nil || o.DiskBay == nil {
+		var ret int64
+		return ret
+	}
+	return *o.DiskBay
+}
+
+// GetDiskBayOk returns a tuple with the DiskBay field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageNetAppBaseDisk) GetDiskBayOk() (*int64, bool) {
+	if o == nil || o.DiskBay == nil {
+		return nil, false
+	}
+	return o.DiskBay, true
+}
+
+// HasDiskBay returns a boolean if a field has been set.
+func (o *StorageNetAppBaseDisk) HasDiskBay() bool {
+	if o != nil && o.DiskBay != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDiskBay gets a reference to the given int64 and assigns it to the DiskBay field.
+func (o *StorageNetAppBaseDisk) SetDiskBay(v int64) {
+	o.DiskBay = &v
+}
+
+// GetDiskSerialNumber returns the DiskSerialNumber field value if set, zero value otherwise.
+func (o *StorageNetAppBaseDisk) GetDiskSerialNumber() string {
+	if o == nil || o.DiskSerialNumber == nil {
+		var ret string
+		return ret
+	}
+	return *o.DiskSerialNumber
+}
+
+// GetDiskSerialNumberOk returns a tuple with the DiskSerialNumber field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageNetAppBaseDisk) GetDiskSerialNumberOk() (*string, bool) {
+	if o == nil || o.DiskSerialNumber == nil {
+		return nil, false
+	}
+	return o.DiskSerialNumber, true
+}
+
+// HasDiskSerialNumber returns a boolean if a field has been set.
+func (o *StorageNetAppBaseDisk) HasDiskSerialNumber() bool {
+	if o != nil && o.DiskSerialNumber != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDiskSerialNumber gets a reference to the given string and assigns it to the DiskSerialNumber field.
+func (o *StorageNetAppBaseDisk) SetDiskSerialNumber(v string) {
+	o.DiskSerialNumber = &v
+}
+
+// GetDiskShelfId returns the DiskShelfId field value if set, zero value otherwise.
+func (o *StorageNetAppBaseDisk) GetDiskShelfId() string {
+	if o == nil || o.DiskShelfId == nil {
+		var ret string
+		return ret
+	}
+	return *o.DiskShelfId
+}
+
+// GetDiskShelfIdOk returns a tuple with the DiskShelfId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageNetAppBaseDisk) GetDiskShelfIdOk() (*string, bool) {
+	if o == nil || o.DiskShelfId == nil {
+		return nil, false
+	}
+	return o.DiskShelfId, true
+}
+
+// HasDiskShelfId returns a boolean if a field has been set.
+func (o *StorageNetAppBaseDisk) HasDiskShelfId() bool {
+	if o != nil && o.DiskShelfId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDiskShelfId gets a reference to the given string and assigns it to the DiskShelfId field.
+func (o *StorageNetAppBaseDisk) SetDiskShelfId(v string) {
+	o.DiskShelfId = &v
+}
+
+// GetDiskShelfModel returns the DiskShelfModel field value if set, zero value otherwise.
+func (o *StorageNetAppBaseDisk) GetDiskShelfModel() string {
+	if o == nil || o.DiskShelfModel == nil {
+		var ret string
+		return ret
+	}
+	return *o.DiskShelfModel
+}
+
+// GetDiskShelfModelOk returns a tuple with the DiskShelfModel field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageNetAppBaseDisk) GetDiskShelfModelOk() (*string, bool) {
+	if o == nil || o.DiskShelfModel == nil {
+		return nil, false
+	}
+	return o.DiskShelfModel, true
+}
+
+// HasDiskShelfModel returns a boolean if a field has been set.
+func (o *StorageNetAppBaseDisk) HasDiskShelfModel() bool {
+	if o != nil && o.DiskShelfModel != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDiskShelfModel gets a reference to the given string and assigns it to the DiskShelfModel field.
+func (o *StorageNetAppBaseDisk) SetDiskShelfModel(v string) {
+	o.DiskShelfModel = &v
+}
+
+// GetDiskShelfName returns the DiskShelfName field value if set, zero value otherwise.
+func (o *StorageNetAppBaseDisk) GetDiskShelfName() string {
+	if o == nil || o.DiskShelfName == nil {
+		var ret string
+		return ret
+	}
+	return *o.DiskShelfName
+}
+
+// GetDiskShelfNameOk returns a tuple with the DiskShelfName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageNetAppBaseDisk) GetDiskShelfNameOk() (*string, bool) {
+	if o == nil || o.DiskShelfName == nil {
+		return nil, false
+	}
+	return o.DiskShelfName, true
+}
+
+// HasDiskShelfName returns a boolean if a field has been set.
+func (o *StorageNetAppBaseDisk) HasDiskShelfName() bool {
+	if o != nil && o.DiskShelfName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDiskShelfName gets a reference to the given string and assigns it to the DiskShelfName field.
+func (o *StorageNetAppBaseDisk) SetDiskShelfName(v string) {
+	o.DiskShelfName = &v
 }
 
 // GetDiskType returns the DiskType field value if set, zero value otherwise.
@@ -428,6 +598,21 @@ func (o StorageNetAppBaseDisk) MarshalJSON() ([]byte, error) {
 	if o.ContainerType != nil {
 		toSerialize["ContainerType"] = o.ContainerType
 	}
+	if o.DiskBay != nil {
+		toSerialize["DiskBay"] = o.DiskBay
+	}
+	if o.DiskSerialNumber != nil {
+		toSerialize["DiskSerialNumber"] = o.DiskSerialNumber
+	}
+	if o.DiskShelfId != nil {
+		toSerialize["DiskShelfId"] = o.DiskShelfId
+	}
+	if o.DiskShelfModel != nil {
+		toSerialize["DiskShelfModel"] = o.DiskShelfModel
+	}
+	if o.DiskShelfName != nil {
+		toSerialize["DiskShelfName"] = o.DiskShelfName
+	}
 	if o.DiskType != nil {
 		toSerialize["DiskType"] = o.DiskType
 	}
@@ -467,6 +652,16 @@ func (o *StorageNetAppBaseDisk) UnmarshalJSON(bytes []byte) (err error) {
 		BaseDiskModel *string `json:"BaseDiskModel,omitempty"`
 		// Supported container type for NetApp disk. * `Unknown` - Default container type is currently unknown. * `Aggregate` - Disk is used as a physical disk in an aggregate. * `Broken` - Disk is in a broken pool. * `Label Maintenance` - Disk is in online label maintenance list. * `Foreign` - Array LUN has been marked foreign. * `Maintenance` - Disk is in maintenance center. * `Mediator` - A mediator disk is a disk used on non-shared HA systems hosted by an external node which is used to communicate the viability of the storage failover between non-shared HA nodes. * `Shared` - Disk is partitioned or in a storage pool. * `Remote` - Disk belongs to a remote cluster. * `Spare` - The disk is a spare disk. * `Unassigned` - Disk ownership has not been assigned. * `Unsupported` - The disk is not supported.
 		ContainerType *string `json:"ContainerType,omitempty"`
+		// NetApp base disk shelf bay.
+		DiskBay *int64 `json:"DiskBay,omitempty"`
+		// NetApp base disk serial number.
+		DiskSerialNumber *string `json:"DiskSerialNumber,omitempty"`
+		// NetApp base disk shelf id.
+		DiskShelfId *string `json:"DiskShelfId,omitempty"`
+		// NetApp base disk shelf model.
+		DiskShelfModel *string `json:"DiskShelfModel,omitempty"`
+		// NetApp base disk shelf name.
+		DiskShelfName *string `json:"DiskShelfName,omitempty"`
 		// The type of the NetApp disk. * `Unknown` - Default unknown disk type. * `SSDNVM` - Solid state disk with Non-Volatile Memory Express protocol enabled. * `ATA` - Advanced Technology Attachment is a type of disk drive that integrates the drive controller directly on the drive itself. * `FCAL` - For the FC-AL disk connection type, disk shelves are connected to the controller in a loop. * `BSAS` - Bridged SAS-SATA disks with added hardware to enable them to be plugged into a SAS-connected storage shelf. * `FSAS` - Near Line SAS. NL-SAS drives are enterprise SATA drives with a SAS interface, head, media, and rotational speed of traditional enterprise-class SATA drives with the fully capable SAS interface typical for classic SAS drives. * `LUN` - Logical Unit Number refers to a logical disk. * `SAS` - Storage disk with serial attached SCSI. * `MSATA` - SATA disk in multi-disk carrier storage shelf. * `SSD` - Storage disk with Solid state disk. * `VMDISK` - Virtual machine Data Disk.
 		DiskType *string `json:"DiskType,omitempty"`
 		// Current state of the NetApp disk. * `Present` - Storage disk state type is present. * `Copy` - Storage disk state type is copy. * `Broken` - Storage disk state type is broken. * `Maintenance` - Storage disk state type is maintenance. * `Partner` - Storage disk state type is partner. * `Pending` - Storage disk state type is pending. * `Reconstructing` - Storage disk state type is reconstructing. * `Removed` - Storage disk state type is removed. * `Spare` - Storage disk state type is spare. * `Unfail` - Storage disk state type is unfail. * `Zeroing` - Storage disk state type is zeroing.
@@ -490,6 +685,11 @@ func (o *StorageNetAppBaseDisk) UnmarshalJSON(bytes []byte) (err error) {
 		varStorageNetAppBaseDisk.ObjectType = varStorageNetAppBaseDiskWithoutEmbeddedStruct.ObjectType
 		varStorageNetAppBaseDisk.BaseDiskModel = varStorageNetAppBaseDiskWithoutEmbeddedStruct.BaseDiskModel
 		varStorageNetAppBaseDisk.ContainerType = varStorageNetAppBaseDiskWithoutEmbeddedStruct.ContainerType
+		varStorageNetAppBaseDisk.DiskBay = varStorageNetAppBaseDiskWithoutEmbeddedStruct.DiskBay
+		varStorageNetAppBaseDisk.DiskSerialNumber = varStorageNetAppBaseDiskWithoutEmbeddedStruct.DiskSerialNumber
+		varStorageNetAppBaseDisk.DiskShelfId = varStorageNetAppBaseDiskWithoutEmbeddedStruct.DiskShelfId
+		varStorageNetAppBaseDisk.DiskShelfModel = varStorageNetAppBaseDiskWithoutEmbeddedStruct.DiskShelfModel
+		varStorageNetAppBaseDisk.DiskShelfName = varStorageNetAppBaseDiskWithoutEmbeddedStruct.DiskShelfName
 		varStorageNetAppBaseDisk.DiskType = varStorageNetAppBaseDiskWithoutEmbeddedStruct.DiskType
 		varStorageNetAppBaseDisk.State = varStorageNetAppBaseDiskWithoutEmbeddedStruct.State
 		varStorageNetAppBaseDisk.Uuid = varStorageNetAppBaseDiskWithoutEmbeddedStruct.Uuid
@@ -518,6 +718,11 @@ func (o *StorageNetAppBaseDisk) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "BaseDiskModel")
 		delete(additionalProperties, "ContainerType")
+		delete(additionalProperties, "DiskBay")
+		delete(additionalProperties, "DiskSerialNumber")
+		delete(additionalProperties, "DiskShelfId")
+		delete(additionalProperties, "DiskShelfModel")
+		delete(additionalProperties, "DiskShelfName")
 		delete(additionalProperties, "DiskType")
 		delete(additionalProperties, "State")
 		delete(additionalProperties, "Uuid")

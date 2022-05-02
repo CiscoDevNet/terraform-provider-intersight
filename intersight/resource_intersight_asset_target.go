@@ -530,7 +530,7 @@ func resourceAssetTarget() *schema.Resource {
 					return
 				}},
 			"status": {
-				Description: "Status indicates if Intersight can establish a connection and authenticate with the managed target. Status does not include information about the functional health of the target.\n* `` - The target details have been persisted but Intersight has not yet attempted to connect to the target.\n* `Connected` - Intersight is able to establish a connection to the target and initiate management activities.\n* `NotConnected` - Intersight is unable to establish a connection to the target.\n* `ClaimInProgress` - Claim of the target is in progress. A connection to the target has not been fully established.\n* `Unclaimed` - The device was un-claimed from the users account by an Administrator of the device. Also indicates the failure to claim Targets of type HTTP Endpoint in Intersight.\n* `Claimed` - Target of type HTTP Endpoint is successfully claimed in Intersight. Currently no validation is performed to verify the Target connectivity from Intersight at the time of creation. However invoking API from Intersight Orchestrator fails if this Target is not reachable from Intersight or if Target API credentials are incorrect.",
+				Description: "Status indicates if Intersight can establish a connection and authenticate with the managed target. Status does not include information about the functional health of the target.\n* `` - The target details have been persisted but Intersight has not yet attempted to connect to the target.\n* `Connected` - Intersight is able to establish a connection to the target and initiate management activities.\n* `NotConnected` - Intersight is unable to establish a connection to the target.\n* `ClaimInProgress` - Claim of the target is in progress. A connection to the target has not been fully established.\n* `UnclaimInProgress` - Unclaim of the target is in progress. Intersight is able to connect to the target and all management operations are supported.\n* `Unclaimed` - The device was un-claimed from the users account by an Administrator of the device. Also indicates the failure to claim Targets of type HTTP Endpoint in Intersight.\n* `Claimed` - Target of type HTTP Endpoint is successfully claimed in Intersight. Currently no validation is performed to verify the Target connectivity from Intersight at the time of creation. However invoking API from Intersight Orchestrator fails if this Target is not reachable from Intersight or if Target API credentials are incorrect.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -729,7 +729,52 @@ func resourceAssetTarget() *schema.Resource {
 					},
 				},
 			},
-		},
+			"workflow_info": {
+				Description: "A reference to a workflowWorkflowInfo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Computed:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "mo.MoRef",
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+					},
+				},
+			},
+			"wait_for_completion": {
+				Description: "This model object can trigger workflows. Use this option to wait for all running workflows to reach a complete state.",
+				Type:        schema.TypeBool,
+				Default:     true,
+				Optional:    true,
+			}},
 	}
 }
 
@@ -1067,6 +1112,55 @@ func resourceAssetTargetCreate(c context.Context, d *schema.ResourceData, meta i
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
+	var waitForCompletion bool
+	if v, ok := d.GetOk("wait_for_completion"); ok {
+		waitForCompletion = v.(bool)
+	}
+	// Check for Workflow Status
+	if waitForCompletion {
+		for i := 0; i < 4; i += 1 {
+			resultMo, _, responseErr = conn.ApiClient.AssetApi.GetAssetTargetByMoid(conn.ctx, resultMo.GetMoid()).Execute()
+			if responseErr != nil {
+				errorType := fmt.Sprintf("%T", responseErr)
+				if strings.Contains(errorType, "GenericOpenAPIError") {
+					responseErr := responseErr.(*models.GenericOpenAPIError)
+					return diag.Errorf("error occurred while fetching AssetTarget: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+				}
+				return diag.Errorf("error occurred while fetching AssetTarget: %s", responseErr.Error())
+			}
+			if _, ok := resultMo.GetWorkflowInfoOk(); ok {
+				log.Println("Workflow details found")
+				break
+			}
+		}
+		resultMo, _, responseErr = conn.ApiClient.AssetApi.GetAssetTargetByMoid(conn.ctx, resultMo.GetMoid()).Execute()
+		if responseErr != nil {
+			errorType := fmt.Sprintf("%T", responseErr)
+			if strings.Contains(errorType, "GenericOpenAPIError") {
+				responseErr := responseErr.(*models.GenericOpenAPIError)
+				return diag.Errorf("error occurred while fetching AssetTarget: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			}
+			return diag.Errorf("error occurred while fetching AssetTarget: %s", responseErr.Error())
+		}
+		var runningWorkflows []models.WorkflowWorkflowInfoRelationship
+		if _, ok := resultMo.GetWorkflowInfoOk(); ok {
+			runningWorkflows = append(runningWorkflows, resultMo.GetWorkflowInfo())
+		}
+		for _, w := range runningWorkflows {
+			warning, err := checkWorkflowStatus(conn, w)
+			if err != nil {
+				errorType := fmt.Sprintf("%T", err)
+				if strings.Contains(errorType, "GenericOpenAPIError") {
+					err := err.(*models.GenericOpenAPIError)
+					return diag.Errorf("failed while fetching workflow information in AssetTarget: %s Response from endpoint: %s", err.Error(), string(err.Body()))
+				}
+				return diag.Errorf("failed while fetching workflow information in AssetTarget: %s", err.Error())
+			}
+			if len(warning) > 0 {
+				de = append(de, diag.Diagnostic{Severity: diag.Warning, Summary: warning})
+			}
+		}
+	}
 	return append(de, resourceAssetTargetRead(c, d, meta)...)
 }
 
@@ -1216,6 +1310,10 @@ func resourceAssetTargetRead(c context.Context, d *schema.ResourceData, meta int
 
 	if err := d.Set("version_context", flattenMapMoVersionContext(s.GetVersionContext(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property VersionContext in AssetTarget object: %s", err.Error())
+	}
+
+	if err := d.Set("workflow_info", flattenMapWorkflowWorkflowInfoRelationship(s.GetWorkflowInfo(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property WorkflowInfo in AssetTarget object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
@@ -1558,6 +1656,55 @@ func resourceAssetTargetUpdate(c context.Context, d *schema.ResourceData, meta i
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
+	var waitForCompletion bool
+	if v, ok := d.GetOk("wait_for_completion"); ok {
+		waitForCompletion = v.(bool)
+	}
+	// Check for Workflow Status
+	if waitForCompletion {
+		for i := 0; i < 4; i += 1 {
+			result, _, responseErr = conn.ApiClient.AssetApi.GetAssetTargetByMoid(conn.ctx, result.GetMoid()).Execute()
+			if responseErr != nil {
+				errorType := fmt.Sprintf("%T", responseErr)
+				if strings.Contains(errorType, "GenericOpenAPIError") {
+					responseErr := responseErr.(*models.GenericOpenAPIError)
+					return diag.Errorf("error occurred while fetching AssetTarget: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+				}
+				return diag.Errorf("error occurred while fetching AssetTarget: %s", responseErr.Error())
+			}
+			if _, ok := result.GetWorkflowInfoOk(); ok {
+				log.Println("Workflow details found")
+				break
+			}
+		}
+		result, _, responseErr = conn.ApiClient.AssetApi.GetAssetTargetByMoid(conn.ctx, result.GetMoid()).Execute()
+		if responseErr != nil {
+			errorType := fmt.Sprintf("%T", responseErr)
+			if strings.Contains(errorType, "GenericOpenAPIError") {
+				responseErr := responseErr.(*models.GenericOpenAPIError)
+				return diag.Errorf("error occurred while fetching AssetTarget: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			}
+			return diag.Errorf("error occurred while fetching AssetTarget: %s", responseErr.Error())
+		}
+		var runningWorkflows []models.WorkflowWorkflowInfoRelationship
+		if _, ok := result.GetWorkflowInfoOk(); ok {
+			runningWorkflows = append(runningWorkflows, result.GetWorkflowInfo())
+		}
+		for _, w := range runningWorkflows {
+			warning, err := checkWorkflowStatus(conn, w)
+			if err != nil {
+				errorType := fmt.Sprintf("%T", err)
+				if strings.Contains(errorType, "GenericOpenAPIError") {
+					err := err.(*models.GenericOpenAPIError)
+					return diag.Errorf("failed while fetching workflow information in AssetTarget: %s Response from endpoint: %s", err.Error(), string(err.Body()))
+				}
+				return diag.Errorf("failed while fetching workflow information in AssetTarget: %s", err.Error())
+			}
+			if len(warning) > 0 {
+				de = append(de, diag.Diagnostic{Severity: diag.Warning, Summary: warning})
+			}
+		}
+	}
 	return append(de, resourceAssetTargetRead(c, d, meta)...)
 }
 

@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **Status** | Pointer to **string** | The status of the supervisor card. | [optional] 
 **SupervisorId** | Pointer to **string** | The identifier for the supervisor card. | [optional] 
 **Type** | Pointer to **string** | The type of the supervisor card. | [optional] 
+**FcPorts** | Pointer to [**[]FcPhysicalPortRelationship**](FcPhysicalPortRelationship.md) | An array of relationships to fcPhysicalPort resources. | [optional] 
 **NetworkElement** | Pointer to [**NetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
@@ -328,6 +329,41 @@ SetType sets Type field to given value.
 
 HasType returns a boolean if a field has been set.
 
+### GetFcPorts
+
+`func (o *NetworkSupervisorCardAllOf) GetFcPorts() []FcPhysicalPortRelationship`
+
+GetFcPorts returns the FcPorts field if non-nil, zero value otherwise.
+
+### GetFcPortsOk
+
+`func (o *NetworkSupervisorCardAllOf) GetFcPortsOk() (*[]FcPhysicalPortRelationship, bool)`
+
+GetFcPortsOk returns a tuple with the FcPorts field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFcPorts
+
+`func (o *NetworkSupervisorCardAllOf) SetFcPorts(v []FcPhysicalPortRelationship)`
+
+SetFcPorts sets FcPorts field to given value.
+
+### HasFcPorts
+
+`func (o *NetworkSupervisorCardAllOf) HasFcPorts() bool`
+
+HasFcPorts returns a boolean if a field has been set.
+
+### SetFcPortsNil
+
+`func (o *NetworkSupervisorCardAllOf) SetFcPortsNil(b bool)`
+
+ SetFcPortsNil sets the value for FcPorts to be an explicit nil
+
+### UnsetFcPorts
+`func (o *NetworkSupervisorCardAllOf) UnsetFcPorts()`
+
+UnsetFcPorts ensures that no value is present for FcPorts, not even an explicit nil
 ### GetNetworkElement
 
 `func (o *NetworkSupervisorCardAllOf) GetNetworkElement() NetworkElementRelationship`

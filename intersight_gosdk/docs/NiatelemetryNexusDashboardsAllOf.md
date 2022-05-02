@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **NumberOfSitesInMso** | Pointer to **int64** | Number of sites in Multi-Site Orchestrator. | [optional] 
 **NumberOfSitesServiced** | Pointer to **int64** | Number of sites serviced by ND. | [optional] 
 **NumberOfTenantsInMso** | Pointer to **int64** | Number of total tenants in Multi-Site Orchestrator. | [optional] 
+**NumberOfVxlanFabricSitesInMso** | Pointer to **int64** | Number of sites with vxLan type fabric in Multi-Site Orchestrator. | [optional] 
 **RecordType** | Pointer to **string** | Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected. | [optional] 
 **TypeOfSiteInMso** | Pointer to **string** | Type of site added to Multi-Site Orchestrator. | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
@@ -468,6 +469,31 @@ SetNumberOfTenantsInMso sets NumberOfTenantsInMso field to given value.
 `func (o *NiatelemetryNexusDashboardsAllOf) HasNumberOfTenantsInMso() bool`
 
 HasNumberOfTenantsInMso returns a boolean if a field has been set.
+
+### GetNumberOfVxlanFabricSitesInMso
+
+`func (o *NiatelemetryNexusDashboardsAllOf) GetNumberOfVxlanFabricSitesInMso() int64`
+
+GetNumberOfVxlanFabricSitesInMso returns the NumberOfVxlanFabricSitesInMso field if non-nil, zero value otherwise.
+
+### GetNumberOfVxlanFabricSitesInMsoOk
+
+`func (o *NiatelemetryNexusDashboardsAllOf) GetNumberOfVxlanFabricSitesInMsoOk() (*int64, bool)`
+
+GetNumberOfVxlanFabricSitesInMsoOk returns a tuple with the NumberOfVxlanFabricSitesInMso field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNumberOfVxlanFabricSitesInMso
+
+`func (o *NiatelemetryNexusDashboardsAllOf) SetNumberOfVxlanFabricSitesInMso(v int64)`
+
+SetNumberOfVxlanFabricSitesInMso sets NumberOfVxlanFabricSitesInMso field to given value.
+
+### HasNumberOfVxlanFabricSitesInMso
+
+`func (o *NiatelemetryNexusDashboardsAllOf) HasNumberOfVxlanFabricSitesInMso() bool`
+
+HasNumberOfVxlanFabricSitesInMso returns a boolean if a field has been set.
 
 ### GetRecordType
 

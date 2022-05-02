@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **Cpu** | Pointer to **float32** | CPU usage of device being inventoried. This determines the percentage of CPU resources used. | [optional] 
 **CrashResetLogs** | Pointer to **string** | Last crash reset reason of device being inventoried. This determines the last reason for a device&#39;s restart due to crash of the system. | [optional] 
 **CustomerDeviceConnector** | Pointer to **string** | Returns the value of the customerDeviceConnector field. | [optional] 
+**DcnmFanDetails** | Pointer to [**[]NiatelemetryFanDetails**](NiatelemetryFanDetails.md) |  | [optional] 
 **DcnmLicenseState** | Pointer to **string** | Returns the License state of the device. | [optional] 
 **DeviceDiscovery** | Pointer to **string** | Returns the value of the deviceDiscovery field. | [optional] 
 **DeviceHealth** | Pointer to **int64** | Returns the device health. | [optional] 
@@ -222,6 +223,41 @@ SetCustomerDeviceConnector sets CustomerDeviceConnector field to given value.
 
 HasCustomerDeviceConnector returns a boolean if a field has been set.
 
+### GetDcnmFanDetails
+
+`func (o *NiatelemetryNiaInventoryAllOf) GetDcnmFanDetails() []NiatelemetryFanDetails`
+
+GetDcnmFanDetails returns the DcnmFanDetails field if non-nil, zero value otherwise.
+
+### GetDcnmFanDetailsOk
+
+`func (o *NiatelemetryNiaInventoryAllOf) GetDcnmFanDetailsOk() (*[]NiatelemetryFanDetails, bool)`
+
+GetDcnmFanDetailsOk returns a tuple with the DcnmFanDetails field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDcnmFanDetails
+
+`func (o *NiatelemetryNiaInventoryAllOf) SetDcnmFanDetails(v []NiatelemetryFanDetails)`
+
+SetDcnmFanDetails sets DcnmFanDetails field to given value.
+
+### HasDcnmFanDetails
+
+`func (o *NiatelemetryNiaInventoryAllOf) HasDcnmFanDetails() bool`
+
+HasDcnmFanDetails returns a boolean if a field has been set.
+
+### SetDcnmFanDetailsNil
+
+`func (o *NiatelemetryNiaInventoryAllOf) SetDcnmFanDetailsNil(b bool)`
+
+ SetDcnmFanDetailsNil sets the value for DcnmFanDetails to be an explicit nil
+
+### UnsetDcnmFanDetails
+`func (o *NiatelemetryNiaInventoryAllOf) UnsetDcnmFanDetails()`
+
+UnsetDcnmFanDetails ensures that no value is present for DcnmFanDetails, not even an explicit nil
 ### GetDcnmLicenseState
 
 `func (o *NiatelemetryNiaInventoryAllOf) GetDcnmLicenseState() string`

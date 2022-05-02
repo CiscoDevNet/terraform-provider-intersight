@@ -192,6 +192,11 @@ func dataSourceNiatelemetryNexusDashboards() *schema.Resource {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"number_of_vxlan_fabric_sites_in_mso": {
+			Description: "Number of sites with vxLan type fabric in Multi-Site Orchestrator.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"object_type": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 			Type:        schema.TypeString,
@@ -627,6 +632,11 @@ func dataSourceNiatelemetryNexusDashboards() *schema.Resource {
 		},
 		"number_of_tenants_in_mso": {
 			Description: "Number of total tenants in Multi-Site Orchestrator.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"number_of_vxlan_fabric_sites_in_mso": {
+			Description: "Number of sites with vxLan type fabric in Multi-Site Orchestrator.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
@@ -1101,6 +1111,11 @@ func dataSourceNiatelemetryNexusDashboardsRead(c context.Context, d *schema.Reso
 		o.SetNumberOfTenantsInMso(x)
 	}
 
+	if v, ok := d.GetOkExists("number_of_vxlan_fabric_sites_in_mso"); ok {
+		x := int64(v.(int))
+		o.SetNumberOfVxlanFabricSitesInMso(x)
+	}
+
 	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
@@ -1428,6 +1443,7 @@ func dataSourceNiatelemetryNexusDashboardsRead(c context.Context, d *schema.Reso
 				temp["number_of_sites_in_mso"] = (s.GetNumberOfSitesInMso())
 				temp["number_of_sites_serviced"] = (s.GetNumberOfSitesServiced())
 				temp["number_of_tenants_in_mso"] = (s.GetNumberOfTenantsInMso())
+				temp["number_of_vxlan_fabric_sites_in_mso"] = (s.GetNumberOfVxlanFabricSitesInMso())
 				temp["object_type"] = (s.GetObjectType())
 				temp["owners"] = (s.GetOwners())
 

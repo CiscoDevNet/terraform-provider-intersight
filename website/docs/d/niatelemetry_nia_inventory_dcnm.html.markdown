@@ -31,6 +31,9 @@ The following arguments can be used to get data of already created objects in In
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `mode`:(string) Mode of controller on DCNM. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
+* `ndfc_fabric_name`:(string) NDFC name information of the setup. 
+* `ndfc_oper_state`:(string) NDFC status information for the setup. 
+* `num_dcnm_site`:(int) Returns the number of DCNM site fabrics. 
 * `num_fabrics`:(int) Returns total number of fabrics in DCNM set-up. 
 * `num_fabrics_in_msd`:(int) Returns the number of fabrics in msd. 
 * `num_ingress_replication_fabrics`:(int) Returns the number of fabrics that have ingress replication type. 
