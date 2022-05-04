@@ -19,13 +19,14 @@ resource "intersight_softwarerepository_operating_system_file" "osf11" {
     object_type = "softwarerepository.CifsServer"
   }
   vendor = "VMware"
-   catalog {
-     moid = var.catalog
-   }
+  catalog {
+    moid        = var.catalog
+    object_type = "softwarerepository.Catalog"
+  }
 }
 
- variable "catalog" {
-   type = string
-   description = "value for moid"
- }
+variable "catalog" {
+  type        = string
+  description = "value for moid"
+}
 ```

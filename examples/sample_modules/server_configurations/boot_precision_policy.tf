@@ -4,7 +4,8 @@ resource "intersight_boot_precision_policy" "tf_boot_precision" {
   configured_boot_mode     = "Legacy"
   enforce_uefi_secure_boot = false
   organization {
-    moid = data.intersight_organization_organization.default.results.0.moid
+    moid        = data.intersight_organization_organization.default.results.0.moid
+    object_type = "organization.Organization"
   }
   boot_devices {
     enabled     = true
@@ -43,7 +44,7 @@ resource "intersight_boot_precision_policy" "tf_boot_precision" {
     })
   }
   tags {
-    key = "source"
+    key   = "source"
     value = "terraform"
   }
 }

@@ -9,6 +9,7 @@ resource "intersight_kubernetes_cluster_profile" "kubernetes_cluster_profile1" {
   config_context {
     control_action = "Deploy"
     error_state    = "Pre-config-error"
+    object_type    = "policy.ConfigContext"
   }
   managed_mode = "Managed"
   status       = "Deploying"

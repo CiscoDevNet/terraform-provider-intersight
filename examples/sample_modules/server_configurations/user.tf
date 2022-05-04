@@ -9,8 +9,10 @@ resource "intersight_iam_end_point_user_policy" "tf_user_policy" {
     password_history         = 5
     notification_period      = 1
     grace_period             = 2
+    object_type              = "iam.EndPointPasswordProperties"
   }
   organization {
-    moid = data.intersight_organization_organization.default.results.0.moid
+    moid        = data.intersight_organization_organization.default.results.0.moid
+    object_type = "organization.Organization"
   }
 }

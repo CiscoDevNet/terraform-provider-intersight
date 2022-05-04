@@ -10,32 +10,23 @@ resource "intersight_recovery_on_demand_backup" "recovery_on_demand_backup1" {
   path             = "path/to/backup"
   protocol         = "SCP"
 
-   organization {
-     object_type = "organization.Organization"
-     moid        = var.organization
-   }
-   backup_config {
-     object_type = "recovery.BackupProfile"
-     moid        = var.recovery_backup_profile
-   }
-   schedule_config {
-     object_type = "recovery.ScheduleConfigPolicies"
-     moid        = var.recovery_schedule_config_policy
-   }
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+  config_result {
+    object_type = "recovery.BackupProfile"
+    moid        = var.recovery_backup_profile
+  }
 }
 
- variable "recovery_backup_profile" {
-   type = string
-   description = "value for recovery backup profile"
- }
+variable "recovery_backup_profile" {
+  type        = string
+  description = "value for recovery backup profile"
+}
 
- variable "organization" {
-   type = string
-   description = "value for organization"
- }
- 
- variable "recovery_schedule_config_policy" {
-   type = string
-   description = "value for recovery schedule config policy"
- }
+variable "organization" {
+  type        = string
+  description = "value for organization"
+}
 ```

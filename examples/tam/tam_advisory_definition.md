@@ -4,23 +4,16 @@
 resource "intersight_tam_advisory_definition" "tam_advisory_definition" {
   name  = "tam_advisory_definition"
   state = "ready"
-  severity = [{
-    object_type           = "tam.SecurityAdvisoryDetails"
-    additional_properties = ""
-    class_id              = ""
-  }]
-  actions = [{
-    additional_properties = ""
-    class_id              = ""
-    operation_type        = "create"
-    name                  = "tam_security_advisories1"
-    queries               = null
-    type                  = "restApi"
-    affected_object_type  = ""
-    identifiers           = null
-    object_type           = "tam.SecurityAdvisoryDetails"
-    alert_type            = "psirt"
-  }]
+  severity {
+    object_type = "tam.SecurityAdvisoryDetails"
+  }
+  actions {
+    operation_type = "create"
+    name           = "tam_security_advisories1"
+    type           = "restApi"
+    object_type    = "tam.SecurityAdvisoryDetails"
+    alert_type     = "psirt"
+  }
   type = "securityAdvisory"
   api_data_sources {
     object_type = "tam.ApiDataSource"
@@ -28,12 +21,11 @@ resource "intersight_tam_advisory_definition" "tam_advisory_definition" {
     type        = "intersightApi"
 
   }
-  advisory_details = [{
-    object_type           = "tam.SecurityAdvisoryDetails"
-    description           = "tam security advisory"
-    additional_properties = ""
-    class_id              = "tam.SecurityAdvisoryDetails"
-  }]
+  advisory_details {
+    object_type = "tam.SecurityAdvisoryDetails"
+    description = "tam security advisory"
+    class_id    = "tam.SecurityAdvisoryDetails"
+  }
 
   organization {
     object_type = "organization.Organization"
@@ -42,7 +34,7 @@ resource "intersight_tam_advisory_definition" "tam_advisory_definition" {
 }
 
 variable "organization" {
-   type = string
-   description = "<value for organization>"
- }
+  type        = string
+  description = "<value for organization>"
+}
 ```

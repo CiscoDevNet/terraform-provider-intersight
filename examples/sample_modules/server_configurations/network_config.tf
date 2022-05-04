@@ -11,7 +11,8 @@ resource "intersight_networkconfig_policy" "tf_network_config1" {
   dynamic_dns_domain       = ""
   enable_ipv4dns_from_dhcp = false
   organization {
-    moid = data.intersight_organization_organization.default.results.0.moid
+    moid        = data.intersight_organization_organization.default.results.0.moid
+    object_type = "organization.Organization"
   }
 }
 
@@ -28,6 +29,7 @@ resource "intersight_networkconfig_policy" "tf_network_config2" {
   alternate_ipv6dns_server = "::"
   preferred_ipv6dns_server = "::"
   organization {
-    moid = data.intersight_organization_organization.default.results.0.moid
+    moid        = data.intersight_organization_organization.default.results.0.moid
+    object_type = "organization.Organization"
   }
 }

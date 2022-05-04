@@ -12,12 +12,13 @@ resource "intersight_firmware_upgrade" "firmware_upgrade1" {
   network_share {
     cifs_server {
       file_location = "10.1.1.1"
-      object_type   = "firmware.NetworkShare"
+      object_type   = "firmware.CifsServer"
       mount_options = "none"
     }
     map_type      = "cifs"
     upgradeoption = "nw_upgrade_full"
     username      = "admin1"
+    object_type   = "firmware.NetworkShare"
   }
   skip_estimate_impact = false
   status               = "SUCCESSFUL"

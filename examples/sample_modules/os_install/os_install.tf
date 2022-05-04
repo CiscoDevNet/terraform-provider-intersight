@@ -2,25 +2,26 @@ resource "intersight_os_install" "os1" {
   name = "InstallTemplatee165"
   server {
     object_type = "compute.RackUnit"
-    moid = var.server_moid
+    moid        = var.server_moid
   }
   image {
     object_type = "softwarerepository.OperatingSystemFile"
-    moid = intersight_softwarerepository_operating_system_file.osf1.moid
+    moid        = intersight_softwarerepository_operating_system_file.osf1.moid
   }
   osdu_image {
-    moid = intersight_firmware_server_configuration_utility_distributable.scu1.moid
+    moid        = intersight_firmware_server_configuration_utility_distributable.scu1.moid
     object_type = "firmware.ServerConfigurationUtilityDistributable"
   }
   answers {
     answer_file = var.answer_file
-    nr_source = "File"
+    nr_source   = "File"
+    object_type = "os.Answers"
   }
-  description = "Install Template 5"
+  description    = "Install Template 5"
   install_method = "vMedia"
   organization {
     object_type = "organization.Organization"
-    moid = var.organization
+    moid        = var.organization
   }
 }
 
