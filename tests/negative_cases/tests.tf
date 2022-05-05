@@ -76,3 +76,6 @@ resource "intersight_iam_end_point_user_role" "match_pattern_max_range"{
 resource "intersight_iam_end_point_user_role" "match_pattern_min_range"{
      password = "~`test"
 }
+
+# Please add new resources above this line. Also, add the new resource added into this file to "resource_list.txt" file. The file will be read for testing each resource separately in Jenkins job
+
