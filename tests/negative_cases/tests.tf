@@ -77,5 +77,15 @@ resource "intersight_iam_end_point_user_role" "match_pattern_min_range"{
      password = "~`test"
 }
 
+#Min items
+resource "intersight_softwarerepository_release" "min_items" {
+  supported_models = []
+}
+
+#Max items
+resource "intersight_ntp_policy" "max_items" {
+  ntp_servers = ["10.10.10.10", "10.10.10.11", "10.10.10.12", "10.10.10.13", "10.10.10.14"]
+}
+
 # Please add new resources above this line. Also, add the new resource added into this file to "resource_list.txt" file. The file will be read for testing each resource separately in Jenkins job
 
