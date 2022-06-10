@@ -1,0 +1,1 @@
+To compile the provider, run make. This will build the providers for Linux, Darwin and Windows 64-bit architecture in the .build. To use locally build providers, run the following commands in the directory where the configurations file reside.
