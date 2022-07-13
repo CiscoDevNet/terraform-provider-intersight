@@ -273,6 +273,11 @@ func dataSourceNetworkFeatureControl() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"status_msg": {
+			Description: "The status message to capture admin state detailed information.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -663,6 +668,11 @@ func dataSourceNetworkFeatureControl() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"status_msg": {
+			Description: "The status message to capture admin state detailed information.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -930,7 +940,7 @@ func dataSourceNetworkFeatureControlRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -994,7 +1004,7 @@ func dataSourceNetworkFeatureControlRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1077,7 +1087,7 @@ func dataSourceNetworkFeatureControlRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1112,6 +1122,11 @@ func dataSourceNetworkFeatureControlRead(c context.Context, d *schema.ResourceDa
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
+	}
+
+	if v, ok := d.GetOk("status_msg"); ok {
+		x := (v.(string))
+		o.SetStatusMsg(x)
 	}
 
 	if v, ok := d.GetOk("tags"); ok {
@@ -1163,7 +1178,7 @@ func dataSourceNetworkFeatureControlRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.VersionContext")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -1225,7 +1240,7 @@ func dataSourceNetworkFeatureControlRead(c context.Context, d *schema.ResourceDa
 	if err != nil {
 		return diag.Errorf("json marshal of NetworkFeatureControl object failed with error : %s", err.Error())
 	}
-	countResponse, _, responseErr := conn.ApiClient.NetworkApi.GetNetworkFeatureControlList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
+	countResponse, _, responseErr := conn.ApiClient.NetworkApi.GetNetworkFeatureControlList(conn.ctx).Filter(getRequestParams(data)).Count(true).Execute()
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
@@ -1234,13 +1249,12 @@ func dataSourceNetworkFeatureControlRead(c context.Context, d *schema.ResourceDa
 		}
 		return diag.Errorf("error occurred while fetching count of NetworkFeatureControl: %s", responseErr.Error())
 	}
-	count := countResponse.NetworkFeatureControlList.GetCount()
+	count := countResponse.MoDocumentCount.GetCount()
 	if count == 0 {
 		return diag.Errorf("your query for NetworkFeatureControl data source did not return any results. Please change your search criteria and try again")
 	}
 	var i int32
-	var networkFeatureControlResults = make([]map[string]interface{}, count, count)
-	var j = 0
+	var networkFeatureControlResults = make([]map[string]interface{}, 0, 0)
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.NetworkApi.GetNetworkFeatureControlList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
@@ -1254,8 +1268,8 @@ func dataSourceNetworkFeatureControlRead(c context.Context, d *schema.ResourceDa
 		results := resMo.NetworkFeatureControlList.GetResults()
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
-			for i := 0; i < len(results); i++ {
-				var s = results[i]
+			for k := 0; k < len(results); k++ {
+				var s = results[k]
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
@@ -1286,12 +1300,12 @@ func dataSourceNetworkFeatureControlRead(c context.Context, d *schema.ResourceDa
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
 				temp["rn"] = (s.GetRn())
 				temp["shared_scope"] = (s.GetSharedScope())
+				temp["status_msg"] = (s.GetStatusMsg())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
-				networkFeatureControlResults[j] = temp
-				j += 1
+				networkFeatureControlResults = append(networkFeatureControlResults, temp)
 			}
 		}
 	}

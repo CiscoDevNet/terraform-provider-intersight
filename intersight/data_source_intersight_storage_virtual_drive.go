@@ -1681,7 +1681,7 @@ func dataSourceStorageVirtualDriveRead(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1749,7 +1749,7 @@ func dataSourceStorageVirtualDriveRead(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1848,7 +1848,7 @@ func dataSourceStorageVirtualDriveRead(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1981,7 +1981,7 @@ func dataSourceStorageVirtualDriveRead(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2029,7 +2029,7 @@ func dataSourceStorageVirtualDriveRead(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2102,7 +2102,7 @@ func dataSourceStorageVirtualDriveRead(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2145,7 +2145,7 @@ func dataSourceStorageVirtualDriveRead(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2286,7 +2286,7 @@ func dataSourceStorageVirtualDriveRead(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.VersionContext")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -2360,7 +2360,7 @@ func dataSourceStorageVirtualDriveRead(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2396,7 +2396,7 @@ func dataSourceStorageVirtualDriveRead(c context.Context, d *schema.ResourceData
 	if err != nil {
 		return diag.Errorf("json marshal of StorageVirtualDrive object failed with error : %s", err.Error())
 	}
-	countResponse, _, responseErr := conn.ApiClient.StorageApi.GetStorageVirtualDriveList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
+	countResponse, _, responseErr := conn.ApiClient.StorageApi.GetStorageVirtualDriveList(conn.ctx).Filter(getRequestParams(data)).Count(true).Execute()
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
@@ -2405,13 +2405,12 @@ func dataSourceStorageVirtualDriveRead(c context.Context, d *schema.ResourceData
 		}
 		return diag.Errorf("error occurred while fetching count of StorageVirtualDrive: %s", responseErr.Error())
 	}
-	count := countResponse.StorageVirtualDriveList.GetCount()
+	count := countResponse.MoDocumentCount.GetCount()
 	if count == 0 {
 		return diag.Errorf("your query for StorageVirtualDrive data source did not return any results. Please change your search criteria and try again")
 	}
 	var i int32
-	var storageVirtualDriveResults = make([]map[string]interface{}, count, count)
-	var j = 0
+	var storageVirtualDriveResults = make([]map[string]interface{}, 0, 0)
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.StorageApi.GetStorageVirtualDriveList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
@@ -2425,8 +2424,8 @@ func dataSourceStorageVirtualDriveRead(c context.Context, d *schema.ResourceData
 		results := resMo.StorageVirtualDriveList.GetResults()
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
-			for i := 0; i < len(results); i++ {
-				var s = results[i]
+			for k := 0; k < len(results); k++ {
+				var s = results[k]
 				var temp = make(map[string]interface{})
 				temp["access_policy"] = (s.GetAccessPolicy())
 				temp["account_moid"] = (s.GetAccountMoid())
@@ -2501,8 +2500,7 @@ func dataSourceStorageVirtualDriveRead(c context.Context, d *schema.ResourceData
 
 				temp["virtual_drive_extension"] = flattenMapStorageVirtualDriveExtensionRelationship(s.GetVirtualDriveExtension(), d)
 				temp["virtual_drive_id"] = (s.GetVirtualDriveId())
-				storageVirtualDriveResults[j] = temp
-				j += 1
+				storageVirtualDriveResults = append(storageVirtualDriveResults, temp)
 			}
 		}
 	}

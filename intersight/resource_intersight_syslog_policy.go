@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceSyslogPolicy() *schema.Resource {
@@ -94,9 +96,10 @@ func resourceSyslogPolicy() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -111,6 +114,7 @@ func resourceSyslogPolicy() *schema.Resource {
 				}},
 			"local_clients": {
 				Type:       schema.TypeList,
+				MinItems:   1,
 				Optional:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Computed:   true,
@@ -128,10 +132,11 @@ func resourceSyslogPolicy() *schema.Resource {
 							Default:     "syslog.LocalFileLoggingClient",
 						},
 						"min_severity": {
-							Description: "Lowest level of messages to be included in the local log.\n* `warning` - Use logging level warning for logs classified as warning.\n* `emergency` - Use logging level emergency for logs classified as emergency.\n* `alert` - Use logging level alert for logs classified as alert.\n* `critical` - Use logging level critical for logs classified as critical.\n* `error` - Use logging level error for logs classified as error.\n* `notice` - Use logging level notice for logs classified as notice.\n* `informational` - Use logging level informational for logs classified as informational.\n* `debug` - Use logging level debug for logs classified as debug.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "warning",
+							Description:  "Lowest level of messages to be included in the local log.\n* `warning` - Use logging level warning for logs classified as warning.\n* `emergency` - Use logging level emergency for logs classified as emergency.\n* `alert` - Use logging level alert for logs classified as alert.\n* `critical` - Use logging level critical for logs classified as critical.\n* `error` - Use logging level error for logs classified as error.\n* `notice` - Use logging level notice for logs classified as notice.\n* `informational` - Use logging level informational for logs classified as informational.\n* `debug` - Use logging level debug for logs classified as debug.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"warning", "emergency", "alert", "critical", "error", "notice", "informational", "debug"}, false),
+							Optional:     true,
+							Default:      "warning",
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
@@ -161,9 +166,10 @@ func resourceSyslogPolicy() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the concrete policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the concrete policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -218,7 +224,8 @@ func resourceSyslogPolicy() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -367,10 +374,11 @@ func resourceSyslogPolicy() *schema.Resource {
 							Optional:    true,
 						},
 						"min_severity": {
-							Description: "Lowest level of messages to be included in the remote log.\n* `warning` - Use logging level warning for logs classified as warning.\n* `emergency` - Use logging level emergency for logs classified as emergency.\n* `alert` - Use logging level alert for logs classified as alert.\n* `critical` - Use logging level critical for logs classified as critical.\n* `error` - Use logging level error for logs classified as error.\n* `notice` - Use logging level notice for logs classified as notice.\n* `informational` - Use logging level informational for logs classified as informational.\n* `debug` - Use logging level debug for logs classified as debug.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "warning",
+							Description:  "Lowest level of messages to be included in the remote log.\n* `warning` - Use logging level warning for logs classified as warning.\n* `emergency` - Use logging level emergency for logs classified as emergency.\n* `alert` - Use logging level alert for logs classified as alert.\n* `critical` - Use logging level critical for logs classified as critical.\n* `error` - Use logging level error for logs classified as error.\n* `notice` - Use logging level notice for logs classified as notice.\n* `informational` - Use logging level informational for logs classified as informational.\n* `debug` - Use logging level debug for logs classified as debug.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"warning", "emergency", "alert", "critical", "error", "notice", "informational", "debug"}, false),
+							Optional:     true,
+							Default:      "warning",
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
@@ -379,16 +387,18 @@ func resourceSyslogPolicy() *schema.Resource {
 							Default:     "syslog.RemoteLoggingClient",
 						},
 						"port": {
-							Description: "Port number used for logging on syslog server.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     514,
+							Description:  "Port number used for logging on syslog server.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(1, 65535),
+							Optional:     true,
+							Default:      514,
 						},
 						"protocol": {
-							Description: "Transport layer protocol for transmission of log messages to syslog server.\n* `udp` - Use User Datagram Protocol (UDP) for syslog remote server connection.\n* `tcp` - Use Transmission Control Protocol (TCP) for syslog remote server connection.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "udp",
+							Description:  "Transport layer protocol for transmission of log messages to syslog server.\n* `udp` - Use User Datagram Protocol (UDP) for syslog remote server connection.\n* `tcp` - Use Transmission Control Protocol (TCP) for syslog remote server connection.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"udp", "tcp"}, false),
+							Optional:     true,
+							Default:      "udp",
 						},
 					},
 				},
@@ -417,14 +427,16 @@ func resourceSyslogPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -659,7 +671,7 @@ func resourceSyslogPolicyCreate(c context.Context, d *schema.ResourceData, meta 
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1058,7 +1070,7 @@ func resourceSyslogPolicyUpdate(c context.Context, d *schema.ResourceData, meta 
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

@@ -6,11 +6,13 @@ import (
 	"fmt"
 	"log"
 	"reflect"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceKubernetesBaremetalNodeProfile() *schema.Resource {
@@ -127,10 +129,11 @@ func resourceKubernetesBaremetalNodeProfile() *schema.Resource {
 				Default:     "kubernetes.BaremetalNodeProfile",
 			},
 			"cloud_provider": {
-				Description: "Cloud provider for this node profile.\n* `noProvider` - Enables the use of no cloud provider.\n* `external` - Out of tree cloud provider, e.g. CPI for vsphere.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "noProvider",
+				Description:  "Cloud provider for this node profile.\n* `noProvider` - Enables the use of no cloud provider.\n* `external` - Out of tree cloud provider, e.g. CPI for vsphere.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"noProvider", "external"}, false),
+				Optional:     true,
+				Default:      "noProvider",
 			},
 			"config_context": {
 				Description: "The configuration state and results of the last configuration operation.",
@@ -256,9 +259,10 @@ func resourceKubernetesBaremetalNodeProfile() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the profile.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the profile.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -295,9 +299,10 @@ func resourceKubernetesBaremetalNodeProfile() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the profile instance or profile template.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the profile instance or profile template.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"network_info": {
 				Description: "The network configuration for this baremetal server.",
@@ -337,7 +342,8 @@ func resourceKubernetesBaremetalNodeProfile() *schema.Resource {
 										ConfigMode: schema.SchemaConfigModeAttr,
 										Computed:   true,
 										Elem: &schema.Schema{
-											Type: schema.TypeString}},
+											Type: schema.TypeString,
+										}},
 									"class_id": {
 										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 										Type:        schema.TypeString,
@@ -368,9 +374,10 @@ func resourceKubernetesBaremetalNodeProfile() *schema.Resource {
 													Default:     "kubernetes.IpV4Config",
 												},
 												"ip": {
-													Description: "IPv4 Address in CIDR format.",
-													Type:        schema.TypeString,
-													Optional:    true,
+													Description:  "IPv4 Address in CIDR format.",
+													Type:         schema.TypeString,
+													ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\/([0-9]|[1-2][0-9]|3[0-2])$"), ""),
+													Optional:     true,
 												},
 												"lease": {
 													Description: "The IP Lease if allocated from a Pool. It can include gateway information.",
@@ -448,10 +455,11 @@ func resourceKubernetesBaremetalNodeProfile() *schema.Resource {
 													Default:     "kubernetes.EthernetMatcher",
 												},
 												"type": {
-													Description: "Which property we should use to find the ethernet interface.\n* `Name` - A network interface name, e.g. eth0, eno9.\n* `MacAddress` - A network interface Mac Address.",
-													Type:        schema.TypeString,
-													Optional:    true,
-													Default:     "Name",
+													Description:  "Which property we should use to find the ethernet interface.\n* `Name` - A network interface name, e.g. eth0, eno9.\n* `MacAddress` - A network interface Mac Address.",
+													Type:         schema.TypeString,
+													ValidateFunc: validation.StringInSlice([]string{"Name", "MacAddress"}, false),
+													Optional:     true,
+													Default:      "Name",
 												},
 												"value": {
 													Description: "The value to match for the property specified by type.",
@@ -507,14 +515,16 @@ func resourceKubernetesBaremetalNodeProfile() *schema.Resource {
 													Default:     "kubernetes.Route",
 												},
 												"to": {
-													Description: "The destination subnet, if set to 0.0.0.0/0 then the Route is considered a default route.",
-													Type:        schema.TypeString,
-													Optional:    true,
+													Description:  "The destination subnet, if set to 0.0.0.0/0 then the Route is considered a default route.",
+													Type:         schema.TypeString,
+													ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\/([0-9]|[1-2][0-9]|3[0-2])$"), ""),
+													Optional:     true,
 												},
 												"via": {
-													Description: "Via is the gateway for traffic destined for the subnet in the To property.",
-													Type:        schema.TypeString,
-													Optional:    true,
+													Description:  "Via is the gateway for traffic destined for the subnet in the To property.",
+													Type:         schema.TypeString,
+													ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
+													Optional:     true,
 												},
 											},
 										},
@@ -546,7 +556,8 @@ func resourceKubernetesBaremetalNodeProfile() *schema.Resource {
 										ConfigMode: schema.SchemaConfigModeAttr,
 										Computed:   true,
 										Elem: &schema.Schema{
-											Type: schema.TypeString}},
+											Type: schema.TypeString,
+										}},
 									"class_id": {
 										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 										Type:        schema.TypeString,
@@ -564,7 +575,8 @@ func resourceKubernetesBaremetalNodeProfile() *schema.Resource {
 										ConfigMode: schema.SchemaConfigModeAttr,
 										Computed:   true,
 										Elem: &schema.Schema{
-											Type: schema.TypeString}},
+											Type: schema.TypeString,
+										}},
 									"ip_v4_configs": {
 										Type:       schema.TypeList,
 										Optional:   true,
@@ -584,9 +596,10 @@ func resourceKubernetesBaremetalNodeProfile() *schema.Resource {
 													Default:     "kubernetes.IpV4Config",
 												},
 												"ip": {
-													Description: "IPv4 Address in CIDR format.",
-													Type:        schema.TypeString,
-													Optional:    true,
+													Description:  "IPv4 Address in CIDR format.",
+													Type:         schema.TypeString,
+													ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\/([0-9]|[1-2][0-9]|3[0-2])$"), ""),
+													Optional:     true,
 												},
 												"lease": {
 													Description: "The IP Lease if allocated from a Pool. It can include gateway information.",
@@ -678,14 +691,16 @@ func resourceKubernetesBaremetalNodeProfile() *schema.Resource {
 													Default:     "kubernetes.Route",
 												},
 												"to": {
-													Description: "The destination subnet, if set to 0.0.0.0/0 then the Route is considered a default route.",
-													Type:        schema.TypeString,
-													Optional:    true,
+													Description:  "The destination subnet, if set to 0.0.0.0/0 then the Route is considered a default route.",
+													Type:         schema.TypeString,
+													ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\/([0-9]|[1-2][0-9]|3[0-2])$"), ""),
+													Optional:     true,
 												},
 												"via": {
-													Description: "Via is the gateway for traffic destined for the subnet in the To property.",
-													Type:        schema.TypeString,
-													Optional:    true,
+													Description:  "Via is the gateway for traffic destined for the subnet in the To property.",
+													Type:         schema.TypeString,
+													ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
+													Optional:     true,
 												},
 											},
 										},
@@ -753,7 +768,8 @@ func resourceKubernetesBaremetalNodeProfile() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -976,14 +992,16 @@ func resourceKubernetesBaremetalNodeProfile() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -1029,10 +1047,11 @@ func resourceKubernetesBaremetalNodeProfile() *schema.Resource {
 				},
 			},
 			"type": {
-				Description: "Defines the type of the profile. Accepted values are instance or template.\n* `instance` - The profile defines the configuration for a specific instance of a target.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "instance",
+				Description:  "Defines the type of the profile. Accepted values are instance or template.\n* `instance` - The profile defines the configuration for a specific instance of a target.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"instance"}, false),
+				Optional:     true,
+				Default:      "instance",
 			},
 			"nr_version": {
 				Description: "A reference to a kubernetesVersion resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -1303,7 +1322,7 @@ func resourceKubernetesBaremetalNodeProfileCreate(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("policy.ConfigContext")
 			if v, ok := l["control_action"]; ok {
 				{
 					x := (v.(string))
@@ -1366,7 +1385,7 @@ func resourceKubernetesBaremetalNodeProfileCreate(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("kubernetes.BaremetalNetworkInfo")
 			if v, ok := l["ethernets"]; ok {
 				{
 					x := make([]models.KubernetesEthernet, 0)
@@ -1459,7 +1478,7 @@ func resourceKubernetesBaremetalNodeProfileCreate(c context.Context, d *schema.R
 											}
 										}
 									}
-									o.SetClassId("")
+									o.SetClassId("kubernetes.EthernetMatcher")
 									if v, ok := l["object_type"]; ok {
 										{
 											x := (v.(string))
@@ -1753,7 +1772,7 @@ func resourceKubernetesBaremetalNodeProfileCreate(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1840,7 +1859,7 @@ func resourceKubernetesBaremetalNodeProfileCreate(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1883,7 +1902,7 @@ func resourceKubernetesBaremetalNodeProfileCreate(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1961,7 +1980,7 @@ func resourceKubernetesBaremetalNodeProfileCreate(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2245,7 +2264,7 @@ func resourceKubernetesBaremetalNodeProfileUpdate(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("policy.ConfigContext")
 			if v, ok := l["control_action"]; ok {
 				{
 					x := (v.(string))
@@ -2313,7 +2332,7 @@ func resourceKubernetesBaremetalNodeProfileUpdate(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("kubernetes.BaremetalNetworkInfo")
 			if v, ok := l["ethernets"]; ok {
 				{
 					x := make([]models.KubernetesEthernet, 0)
@@ -2406,7 +2425,7 @@ func resourceKubernetesBaremetalNodeProfileUpdate(c context.Context, d *schema.R
 											}
 										}
 									}
-									o.SetClassId("")
+									o.SetClassId("kubernetes.EthernetMatcher")
 									if v, ok := l["object_type"]; ok {
 										{
 											x := (v.(string))
@@ -2701,7 +2720,7 @@ func resourceKubernetesBaremetalNodeProfileUpdate(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2788,7 +2807,7 @@ func resourceKubernetesBaremetalNodeProfileUpdate(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2832,7 +2851,7 @@ func resourceKubernetesBaremetalNodeProfileUpdate(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2910,7 +2929,7 @@ func resourceKubernetesBaremetalNodeProfileUpdate(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

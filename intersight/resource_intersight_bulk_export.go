@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceBulkExport() *schema.Resource {
@@ -33,10 +35,11 @@ func resourceBulkExport() *schema.Resource {
 					return
 				}},
 			"action": {
-				Description: "Action to be performed on the export operation.\n* `Start` - Starts the export operation.\n* `Cancel` - Cancels the export operation that is in progress.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "Start",
+				Description:  "Action to be performed on the export operation.\n* `Start` - Starts the export operation.\n* `Cancel` - Cancels the export operation that is in progress.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Start", "Cancel"}, false),
+				Optional:     true,
+				Default:      "Start",
 			},
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -186,10 +189,11 @@ func resourceBulkExport() *schema.Resource {
 							Optional:    true,
 						},
 						"verb": {
-							Description: "The type of operation to be performed.\nOne of - Post (Create), Patch (Update) or Delete (Remove).\nThe value is used to override the top level verb.\n* `POST` - Used to create a REST resource.\n* `PATCH` - Used to update a REST resource.\n* `DELETE` - Used to delete a REST resource.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "POST",
+							Description:  "The type of operation to be performed.\nOne of - Post (Create), Patch (Update) or Delete (Remove).\nThe value is used to override the top level verb.\n* `POST` - Used to create a REST resource.\n* `PATCH` - Used to update a REST resource.\n* `DELETE` - Used to delete a REST resource.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"POST", "PATCH", "DELETE"}, false),
+							Optional:     true,
+							Default:      "POST",
 						},
 					},
 				},
@@ -262,10 +266,11 @@ func resourceBulkExport() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "An identifier for the export instance. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_).",
-				Type:        schema.TypeString,
-				Optional:    true,
-				ForceNew:    true,
+				Description:  "An identifier for the export instance. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_).",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9_-]{1,92}$"), ""),
+				Optional:     true,
+				ForceNew:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -320,7 +325,8 @@ func resourceBulkExport() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -446,14 +452,16 @@ func resourceBulkExport() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -741,7 +749,7 @@ func resourceBulkExportCreate(c context.Context, d *schema.ResourceData, meta in
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1086,7 +1094,7 @@ func resourceBulkExportUpdate(c context.Context, d *schema.ResourceData, meta in
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

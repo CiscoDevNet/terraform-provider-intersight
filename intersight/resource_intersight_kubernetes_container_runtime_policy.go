@@ -6,11 +6,13 @@ import (
 	"fmt"
 	"log"
 	"reflect"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceKubernetesContainerRuntimePolicy() *schema.Resource {
@@ -134,17 +136,19 @@ func resourceKubernetesContainerRuntimePolicy() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"docker_bridge_network_cidr": {
-				Description: "Bridge IP (--bip) including Prefix (e.g., 172.17.0.5/24) that Docker will use for the default bridge network (docker0). Containers will connect to this if no other network is configured, not used by kubernetes pods because their network is managed by CNI. However this address space must not collide with other CIDRs on your networks, including the cluster's Service CIDR, Pod Network CIDR and IP Pools.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Bridge IP (--bip) including Prefix (e.g., 172.17.0.5/24) that Docker will use for the default bridge network (docker0). Containers will connect to this if no other network is configured, not used by kubernetes pods because their network is managed by CNI. However this address space must not collide with other CIDRs on your networks, including the cluster's Service CIDR, Pod Network CIDR and IP Pools.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\/([0-9]|[1-2][0-9]|3[0-2])$"), ""),
+				Optional:     true,
 			},
 			"docker_http_proxy": {
-				Description: "The HTTP proxy configuration for docker. Refer to https://docs.docker.com/network/proxy/ for details.",
+				Description: "The HTTP proxy configuration for docker. Refer to https://docs.docker.com/network/proxy/ for details. Deprecated, assign a HttpProxyPolicy to the ClusterProfile ContainerRuntimeProxyPolicy field instead.",
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
@@ -164,9 +168,10 @@ func resourceKubernetesContainerRuntimePolicy() *schema.Resource {
 							Default:     "kubernetes.ProxyConfig",
 						},
 						"hostname": {
-							Description: "HTTP/HTTPS Proxy server FQDN or IP.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "HTTP/HTTPS Proxy server FQDN or IP.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^[A-Za-z]([A-Za-z0-9-]*[A-Za-z0-9])?$|^[A-Za-z0-9]([A-Za-z0-9-]*[A-Za-z0-9])?(\\.[A-Za-z0-9]([A-Za-z0-9-]*[A-Za-z0-9])?)*(\\.[A-Za-z]([A-Za-z0-9-]*[A-Za-z0-9])?)$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
+							Optional:     true,
 						},
 						"is_password_set": {
 							Description: "Indicates whether the value of the 'password' property has been set.",
@@ -191,9 +196,10 @@ func resourceKubernetesContainerRuntimePolicy() *schema.Resource {
 							Optional:    true,
 						},
 						"port": {
-							Description: "The HTTP Proxy port number.\nThe port number of the HTTP/HTTPS proxy must be between 1 and 65535, inclusive.",
-							Type:        schema.TypeInt,
-							Optional:    true,
+							Description:  "The HTTP Proxy port number.\nThe port number of the HTTP/HTTPS proxy must be between 1 and 65535, inclusive.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(1, 65535),
+							Optional:     true,
 						},
 						"protocol": {
 							Description: "Protocol to use for the HTTP/HTTPS Proxy.",
@@ -209,7 +215,7 @@ func resourceKubernetesContainerRuntimePolicy() *schema.Resource {
 				},
 			},
 			"docker_https_proxy": {
-				Description: "The https proxy configuration for docker. Refer to https://docs.docker.com/network/proxy/ for details.",
+				Description: "The https proxy configuration for docker. Refer to https://docs.docker.com/network/proxy/ for details. Deprecated, assign a HttpProxyPolicy to the ClusterProfile ContainerRuntimeProxyPolicy field instead.",
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
@@ -229,9 +235,10 @@ func resourceKubernetesContainerRuntimePolicy() *schema.Resource {
 							Default:     "kubernetes.ProxyConfig",
 						},
 						"hostname": {
-							Description: "HTTP/HTTPS Proxy server FQDN or IP.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "HTTP/HTTPS Proxy server FQDN or IP.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^[A-Za-z]([A-Za-z0-9-]*[A-Za-z0-9])?$|^[A-Za-z0-9]([A-Za-z0-9-]*[A-Za-z0-9])?(\\.[A-Za-z0-9]([A-Za-z0-9-]*[A-Za-z0-9])?)*(\\.[A-Za-z]([A-Za-z0-9-]*[A-Za-z0-9])?)$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
+							Optional:     true,
 						},
 						"is_password_set": {
 							Description: "Indicates whether the value of the 'password' property has been set.",
@@ -256,9 +263,10 @@ func resourceKubernetesContainerRuntimePolicy() *schema.Resource {
 							Optional:    true,
 						},
 						"port": {
-							Description: "The HTTP Proxy port number.\nThe port number of the HTTP/HTTPS proxy must be between 1 and 65535, inclusive.",
-							Type:        schema.TypeInt,
-							Optional:    true,
+							Description:  "The HTTP Proxy port number.\nThe port number of the HTTP/HTTPS proxy must be between 1 and 65535, inclusive.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(1, 65535),
+							Optional:     true,
 						},
 						"protocol": {
 							Description: "Protocol to use for the HTTP/HTTPS Proxy.",
@@ -279,7 +287,8 @@ func resourceKubernetesContainerRuntimePolicy() *schema.Resource {
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Computed:   true,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
 				Type:        schema.TypeString,
@@ -310,9 +319,10 @@ func resourceKubernetesContainerRuntimePolicy() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the concrete policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the concrete policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -367,7 +377,8 @@ func resourceKubernetesContainerRuntimePolicy() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -471,14 +482,16 @@ func resourceKubernetesContainerRuntimePolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -712,7 +725,7 @@ func resourceKubernetesContainerRuntimePolicyCreate(c context.Context, d *schema
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("kubernetes.ProxyConfig")
 			if v, ok := l["hostname"]; ok {
 				{
 					x := (v.(string))
@@ -773,7 +786,7 @@ func resourceKubernetesContainerRuntimePolicyCreate(c context.Context, d *schema
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("kubernetes.ProxyConfig")
 			if v, ok := l["hostname"]; ok {
 				{
 					x := (v.(string))
@@ -859,7 +872,7 @@ func resourceKubernetesContainerRuntimePolicyCreate(c context.Context, d *schema
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1141,7 +1154,7 @@ func resourceKubernetesContainerRuntimePolicyUpdate(c context.Context, d *schema
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("kubernetes.ProxyConfig")
 			if v, ok := l["hostname"]; ok {
 				{
 					x := (v.(string))
@@ -1203,7 +1216,7 @@ func resourceKubernetesContainerRuntimePolicyUpdate(c context.Context, d *schema
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("kubernetes.ProxyConfig")
 			if v, ok := l["hostname"]; ok {
 				{
 					x := (v.(string))
@@ -1291,7 +1304,7 @@ func resourceKubernetesContainerRuntimePolicyUpdate(c context.Context, d *schema
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

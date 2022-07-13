@@ -15,7 +15,7 @@ All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_fabric_fc_uplink_pc_role.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
-* `admin_speed`:(string) Admin configured speed for the port.* `Auto` - Admin configurable speed AUTO ( default ).* `8Gbps` - Admin configurable speed 8Gbps.* `16Gbps` - Admin configurable speed 16Gbps.* `32Gbps` - Admin configurable speed 32Gbps. 
+* `admin_speed`:(string) Admin configured speed for the port.* `16Gbps` - Admin configurable speed 16Gbps.* `8Gbps` - Admin configurable speed 8Gbps.* `32Gbps` - Admin configurable speed 32Gbps.* `Auto` - Admin configurable speed AUTO ( default ). 
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `fill_pattern`:(string) Fill pattern to differentiate the configs in NPIV.* `Idle` - Fc Fill Pattern type Idle.* `Arbff` - Fc Fill Pattern type Arbff. 

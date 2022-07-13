@@ -1991,7 +1991,7 @@ func dataSourceWorkflowSolutionActionDefinitionRead(c context.Context, d *schema
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("workflow.DefaultValue")
 						if v, ok := l["object_type"]; ok {
 							{
 								x := (v.(string))
@@ -2046,7 +2046,7 @@ func dataSourceWorkflowSolutionActionDefinitionRead(c context.Context, d *schema
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("workflow.DisplayMeta")
 						if v, ok := l["inventory_selector"]; ok {
 							{
 								x := (v.(bool))
@@ -2175,7 +2175,7 @@ func dataSourceWorkflowSolutionActionDefinitionRead(c context.Context, d *schema
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2418,7 +2418,7 @@ func dataSourceWorkflowSolutionActionDefinitionRead(c context.Context, d *schema
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2574,7 +2574,7 @@ func dataSourceWorkflowSolutionActionDefinitionRead(c context.Context, d *schema
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("workflow.ValidationInformation")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -2711,7 +2711,7 @@ func dataSourceWorkflowSolutionActionDefinitionRead(c context.Context, d *schema
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.VersionContext")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -2785,7 +2785,7 @@ func dataSourceWorkflowSolutionActionDefinitionRead(c context.Context, d *schema
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2816,7 +2816,7 @@ func dataSourceWorkflowSolutionActionDefinitionRead(c context.Context, d *schema
 	if err != nil {
 		return diag.Errorf("json marshal of WorkflowSolutionActionDefinition object failed with error : %s", err.Error())
 	}
-	countResponse, _, responseErr := conn.ApiClient.WorkflowApi.GetWorkflowSolutionActionDefinitionList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
+	countResponse, _, responseErr := conn.ApiClient.WorkflowApi.GetWorkflowSolutionActionDefinitionList(conn.ctx).Filter(getRequestParams(data)).Count(true).Execute()
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
@@ -2825,13 +2825,12 @@ func dataSourceWorkflowSolutionActionDefinitionRead(c context.Context, d *schema
 		}
 		return diag.Errorf("error occurred while fetching count of WorkflowSolutionActionDefinition: %s", responseErr.Error())
 	}
-	count := countResponse.WorkflowSolutionActionDefinitionList.GetCount()
+	count := countResponse.MoDocumentCount.GetCount()
 	if count == 0 {
 		return diag.Errorf("your query for WorkflowSolutionActionDefinition data source did not return any results. Please change your search criteria and try again")
 	}
 	var i int32
-	var workflowSolutionActionDefinitionResults = make([]map[string]interface{}, count, count)
-	var j = 0
+	var workflowSolutionActionDefinitionResults = make([]map[string]interface{}, 0, 0)
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.WorkflowApi.GetWorkflowSolutionActionDefinitionList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
@@ -2845,8 +2844,8 @@ func dataSourceWorkflowSolutionActionDefinitionRead(c context.Context, d *schema
 		results := resMo.WorkflowSolutionActionDefinitionList.GetResults()
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
-			for i := 0; i < len(results); i++ {
-				var s = results[i]
+			for k := 0; k < len(results); k++ {
+				var s = results[k]
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["action_type"] = (s.GetActionType())
@@ -2896,8 +2895,7 @@ func dataSourceWorkflowSolutionActionDefinitionRead(c context.Context, d *schema
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 
 				temp["workflow_definition"] = flattenMapWorkflowWorkflowDefinitionRelationship(s.GetWorkflowDefinition(), d)
-				workflowSolutionActionDefinitionResults[j] = temp
-				j += 1
+				workflowSolutionActionDefinitionResults = append(workflowSolutionActionDefinitionResults, temp)
 			}
 		}
 	}

@@ -10,6 +10,7 @@ import (
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceApplianceAutoRmaPolicy() *schema.Resource {
@@ -139,7 +140,8 @@ func resourceApplianceAutoRmaPolicy() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -283,14 +285,16 @@ func resourceApplianceAutoRmaPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -484,7 +488,7 @@ func resourceApplianceAutoRmaPolicyCreate(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -703,7 +707,7 @@ func resourceApplianceAutoRmaPolicyUpdate(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

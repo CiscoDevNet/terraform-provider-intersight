@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **Instance** | Pointer to **int64** | The number of instances of the feature. | [optional] 
 **Name** | Pointer to **string** | The name to identify the feature. | [optional] 
 **OperationalState** | Pointer to **string** | The operational state of the feature. | [optional] 
+**StatusMsg** | Pointer to **string** | The status message to capture admin state detailed information. | [optional] [readonly] 
 **NetworkElement** | Pointer to [**NetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
@@ -171,6 +172,31 @@ SetOperationalState sets OperationalState field to given value.
 `func (o *NetworkFeatureControlAllOf) HasOperationalState() bool`
 
 HasOperationalState returns a boolean if a field has been set.
+
+### GetStatusMsg
+
+`func (o *NetworkFeatureControlAllOf) GetStatusMsg() string`
+
+GetStatusMsg returns the StatusMsg field if non-nil, zero value otherwise.
+
+### GetStatusMsgOk
+
+`func (o *NetworkFeatureControlAllOf) GetStatusMsgOk() (*string, bool)`
+
+GetStatusMsgOk returns a tuple with the StatusMsg field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStatusMsg
+
+`func (o *NetworkFeatureControlAllOf) SetStatusMsg(v string)`
+
+SetStatusMsg sets StatusMsg field to given value.
+
+### HasStatusMsg
+
+`func (o *NetworkFeatureControlAllOf) HasStatusMsg() bool`
+
+HasStatusMsg returns a boolean if a field has been set.
 
 ### GetNetworkElement
 

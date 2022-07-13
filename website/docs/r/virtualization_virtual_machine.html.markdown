@@ -122,6 +122,14 @@ This complex property has following sub-properties:
   + `virtual_disk_reference`:(string) Name of the existing virtual disk to be attached to the Virtual Machine. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
 * `force_delete`:(bool) Normally any virtual machine that is still powered on cannot be deleted. The expected sequence from a user is to first power off the virtual machine and then invoke the delete operation. However, in special circumstances, the owner of the virtual machine may know very well that the virtual machine is no longer needed and just wants to dispose it off. In such situations a delete operation of a virtual machine object is accepted only when this forceDelete attribute is set to true. Under normal circumstances (forceDelete is false), delete operation first confirms that the virtual machine is powered off and then proceeds to delete the virtual machine. 
+* `gpu_configs`:(Array)
+This complex property has following sub-properties:
+  + `additional_properties`:(JSON as string) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [infra.GpuConfiguration](#infraGpuConfiguration)
+[infra.MigGpuConfiguration](#infraMigGpuConfiguration)
+  + `device_id`:(int) The device Id of the GPU device. 
+  + `memory_size`:(int) The amount of memory on the GPU (GBs). 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `vendor_id`:(int) The vendor Id of the GPU device. 
 * `guest_os`:(string) Guest operating system running on virtual machine.* `linux` - A Linux operating system.* `windows` - A Windows operating system. 
 * `host`:(HashMap) - A reference to a virtualizationBaseHost resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
@@ -226,4 +234,13 @@ These are
 `intersight_virtualization_virtual_machine` can be imported using the Moid of the object, e.g.
 ```
 $ terraform import intersight_virtualization_virtual_machine.example 1234567890987654321abcde
-``` 
+```
+## Allowed Types in `AdditionalProperties`
+ 
+### [infra.GpuConfiguration](#argument-reference)
+Generic GPU configuration on a compute resource (BM or VM).
+
+### [infra.MigGpuConfiguration](#argument-reference)
+Nvidia MIG capable GPU configuration on a compute resource (BM or VM).
+* `mig_profile_name`:(string) The predefined MIG profile name, e.g. 1g.5gb, 2g.10gb, etc. 
+  

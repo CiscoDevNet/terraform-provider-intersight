@@ -125,7 +125,7 @@ func dataSourceIamAccountExperience() *schema.Resource {
 						Optional:    true,
 					},
 					"feature": {
-						Description: "The beta feature that will be enabled for specific account.\n* `IWO` - Intersight Workflow Optimizer.\n* `Hitachi` - Support to claim Hitachi Storage arrays using the Intersight Orchestrator framework.\n* `KubernetesExtension` - Extension to the IKS and Adopted Clusters.\n* `NetAppIO` - Support to claim NetApp Storage arrays as IO targets.\n* `IvsPublicCloud` - Enables virtualization service for public clouds.\n* `TerraformCloud` - Enables an ability to create Terraform Cloud.\n* `IWE` - Enables an ability to use Intersight Workload Engine.\n* `WashingtonEFT` - Support for EFT customers to use Washington firmware images for upgrades.\n* `Solutions` - Support for managing solutions.\n* `IksBm` - Enables Intersight Kubernetes Service on Baremetal server.",
+						Description: "The beta feature that will be enabled for specific account.\n* `IWO` - Intersight Workflow Optimizer.\n* `Hitachi` - Support to claim Hitachi Storage arrays using the Intersight Orchestrator framework.\n* `KubernetesExtension` - Extension to the IKS and Adopted Clusters.\n* `NetAppIO` - Support to claim NetApp Storage arrays as IO targets.\n* `IvsPublicCloud` - Enables virtualization service for public clouds.\n* `TerraformCloud` - Enables an ability to create Terraform Cloud.\n* `IWE` - Enables an ability to use Intersight Workload Engine.\n* `WashingtonEFT` - Support for EFT customers to use Washington firmware images for upgrades.\n* `Solutions` - Support for managing solutions.\n* `IksBm` - Enables Intersight Kubernetes Service on Baremetal server.\n* `IksGpu` - Enables GPU support for Intersight Kubernetes Service.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -473,7 +473,7 @@ func dataSourceIamAccountExperience() *schema.Resource {
 						Optional:    true,
 					},
 					"feature": {
-						Description: "The beta feature that will be enabled for specific account.\n* `IWO` - Intersight Workflow Optimizer.\n* `Hitachi` - Support to claim Hitachi Storage arrays using the Intersight Orchestrator framework.\n* `KubernetesExtension` - Extension to the IKS and Adopted Clusters.\n* `NetAppIO` - Support to claim NetApp Storage arrays as IO targets.\n* `IvsPublicCloud` - Enables virtualization service for public clouds.\n* `TerraformCloud` - Enables an ability to create Terraform Cloud.\n* `IWE` - Enables an ability to use Intersight Workload Engine.\n* `WashingtonEFT` - Support for EFT customers to use Washington firmware images for upgrades.\n* `Solutions` - Support for managing solutions.\n* `IksBm` - Enables Intersight Kubernetes Service on Baremetal server.",
+						Description: "The beta feature that will be enabled for specific account.\n* `IWO` - Intersight Workflow Optimizer.\n* `Hitachi` - Support to claim Hitachi Storage arrays using the Intersight Orchestrator framework.\n* `KubernetesExtension` - Extension to the IKS and Adopted Clusters.\n* `NetAppIO` - Support to claim NetApp Storage arrays as IO targets.\n* `IvsPublicCloud` - Enables virtualization service for public clouds.\n* `TerraformCloud` - Enables an ability to create Terraform Cloud.\n* `IWE` - Enables an ability to use Intersight Workload Engine.\n* `WashingtonEFT` - Support for EFT customers to use Washington firmware images for upgrades.\n* `Solutions` - Support for managing solutions.\n* `IksBm` - Enables Intersight Kubernetes Service on Baremetal server.\n* `IksGpu` - Enables GPU support for Intersight Kubernetes Service.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -742,7 +742,7 @@ func dataSourceIamAccountExperienceRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -914,7 +914,7 @@ func dataSourceIamAccountExperienceRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1035,7 +1035,7 @@ func dataSourceIamAccountExperienceRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.VersionContext")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -1097,7 +1097,7 @@ func dataSourceIamAccountExperienceRead(c context.Context, d *schema.ResourceDat
 	if err != nil {
 		return diag.Errorf("json marshal of IamAccountExperience object failed with error : %s", err.Error())
 	}
-	countResponse, _, responseErr := conn.ApiClient.IamApi.GetIamAccountExperienceList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
+	countResponse, _, responseErr := conn.ApiClient.IamApi.GetIamAccountExperienceList(conn.ctx).Filter(getRequestParams(data)).Count(true).Execute()
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
@@ -1106,13 +1106,12 @@ func dataSourceIamAccountExperienceRead(c context.Context, d *schema.ResourceDat
 		}
 		return diag.Errorf("error occurred while fetching count of IamAccountExperience: %s", responseErr.Error())
 	}
-	count := countResponse.IamAccountExperienceList.GetCount()
+	count := countResponse.MoDocumentCount.GetCount()
 	if count == 0 {
 		return diag.Errorf("your query for IamAccountExperience data source did not return any results. Please change your search criteria and try again")
 	}
 	var i int32
-	var iamAccountExperienceResults = make([]map[string]interface{}, count, count)
-	var j = 0
+	var iamAccountExperienceResults = make([]map[string]interface{}, 0, 0)
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.IamApi.GetIamAccountExperienceList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
@@ -1126,8 +1125,8 @@ func dataSourceIamAccountExperienceRead(c context.Context, d *schema.ResourceDat
 		results := resMo.IamAccountExperienceList.GetResults()
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
-			for i := 0; i < len(results); i++ {
-				var s = results[i]
+			for k := 0; k < len(results); k++ {
+				var s = results[k]
 				var temp = make(map[string]interface{})
 
 				temp["account"] = flattenMapIamAccountRelationship(s.GetAccount(), d)
@@ -1155,8 +1154,7 @@ func dataSourceIamAccountExperienceRead(c context.Context, d *schema.ResourceDat
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
-				iamAccountExperienceResults[j] = temp
-				j += 1
+				iamAccountExperienceResults = append(iamAccountExperienceResults, temp)
 			}
 		}
 	}

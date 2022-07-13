@@ -51,6 +51,8 @@ The following arguments can be used to get data of already created objects in In
 * `nxos_vrf_bw_sites_count`:(int) Returns the count of vrfs between sites. 
 * `nxos_vrf_count`:(int) Returns the value of the nxosVrfCount field. 
 * `oper_status`:(string) Fabric oper status information. 
+* `record_type`:(string) Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected. 
+* `record_version`:(string) Version of record being pushed. This determines what was the API version for data available from the device. 
 * `replication_mode`:(string) Replication mode details on the fabric. 
 * `rp_mode`:(string) RP Mode details on the fabric. 
 * `serial`:(string) Serial number of device being inventoried. The serial number is unique per device. 

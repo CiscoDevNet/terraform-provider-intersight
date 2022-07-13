@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceVnicEthNetworkPolicy() *schema.Resource {
@@ -94,9 +96,10 @@ func resourceVnicEthNetworkPolicy() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -128,9 +131,10 @@ func resourceVnicEthNetworkPolicy() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the concrete policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the concrete policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -185,7 +189,8 @@ func resourceVnicEthNetworkPolicy() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -289,23 +294,26 @@ func resourceVnicEthNetworkPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
 			},
 			"target_platform": {
-				Description: "The platform for which the server profile is applicable. It can either be a server that is operating in standalone mode or which is attached to a Fabric Interconnect managed by Intersight.\n* `Standalone` - Servers which are operating in standalone mode i.e. not connected to a Fabric Interconnected.\n* `FIAttached` - Servers which are connected to a Fabric Interconnect that is managed by Intersight.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "Standalone",
+				Description:  "The platform for which the server profile is applicable. It can either be a server that is operating in standalone mode or which is attached to a Fabric Interconnect managed by Intersight.\n* `Standalone` - Servers which are operating in standalone mode i.e. not connected to a Fabric Interconnected.\n* `FIAttached` - Servers which are connected to a Fabric Interconnect that is managed by Intersight.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Standalone", "FIAttached"}, false),
+				Optional:     true,
+				Default:      "Standalone",
 			},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
@@ -462,9 +470,10 @@ func resourceVnicEthNetworkPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"allowed_vlans": {
-							Description: "Allowed VLAN IDs of the virtual interface.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "Allowed VLAN IDs of the virtual interface.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^((\\d+\\-\\d+)|(\\d+))(,((\\d+\\-\\d+)|(\\d+)))*$"), ""),
+							Optional:     true,
 						},
 						"class_id": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
@@ -473,16 +482,18 @@ func resourceVnicEthNetworkPolicy() *schema.Resource {
 							Default:     "vnic.VlanSettings",
 						},
 						"default_vlan": {
-							Description: "Native VLAN ID of the virtual interface or the corresponding vethernet on the peer Fabric Interconnect to which the virtual interface is connected. Setting the ID to 0 will not associate any native VLAN to the traffic on the virtual interface.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     0,
+							Description:  "Native VLAN ID of the virtual interface or the corresponding vethernet on the peer Fabric Interconnect to which the virtual interface is connected. Setting the ID to 0 will not associate any native VLAN to the traffic on the virtual interface.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(0, 4094),
+							Optional:     true,
+							Default:      0,
 						},
 						"mode": {
-							Description: "Option to determine if the port can carry single VLAN (Access) or multiple VLANs (Trunk) traffic.\n* `ACCESS` - An access port carries traffic only for a single VLAN on the interface.\n* `TRUNK` - A trunk port can have two or more VLANs configured on the interface. It can carry traffic for several VLANs simultaneously.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "ACCESS",
+							Description:  "Option to determine if the port can carry single VLAN (Access) or multiple VLANs (Trunk) traffic.\n* `ACCESS` - An access port carries traffic only for a single VLAN on the interface.\n* `TRUNK` - A trunk port can have two or more VLANs configured on the interface. It can carry traffic for several VLANs simultaneously.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"ACCESS", "TRUNK"}, false),
+							Optional:     true,
+							Default:      "ACCESS",
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -547,7 +558,7 @@ func resourceVnicEthNetworkPolicyCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -636,7 +647,7 @@ func resourceVnicEthNetworkPolicyCreate(c context.Context, d *schema.ResourceDat
 					o.SetAllowedVlans(x)
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.VlanSettings")
 			if v, ok := l["default_vlan"]; ok {
 				{
 					x := int64(v.(int))
@@ -838,7 +849,7 @@ func resourceVnicEthNetworkPolicyUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -928,7 +939,7 @@ func resourceVnicEthNetworkPolicyUpdate(c context.Context, d *schema.ResourceDat
 					o.SetAllowedVlans(x)
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.VlanSettings")
 			if v, ok := l["default_vlan"]; ok {
 				{
 					x := int64(v.(int))

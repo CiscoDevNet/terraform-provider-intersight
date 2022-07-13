@@ -10,6 +10,7 @@ import (
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceHyperflexClusterBackupPolicyDeployment() *schema.Resource {
@@ -297,7 +298,8 @@ func resourceHyperflexClusterBackupPolicyDeployment() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -425,10 +427,11 @@ func resourceHyperflexClusterBackupPolicyDeployment() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"backup_interval": {
-							Description: "Time interval between two copies in minutes.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     240,
+							Description:  "Time interval between two copies in minutes.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(5, 10080),
+							Optional:     true,
+							Default:      240,
 						},
 						"class_id": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
@@ -547,14 +550,16 @@ func resourceHyperflexClusterBackupPolicyDeployment() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -761,7 +766,7 @@ func resourceHyperflexClusterBackupPolicyDeploymentCreate(c context.Context, d *
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -818,7 +823,7 @@ func resourceHyperflexClusterBackupPolicyDeploymentCreate(c context.Context, d *
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -861,7 +866,7 @@ func resourceHyperflexClusterBackupPolicyDeploymentCreate(c context.Context, d *
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1154,7 +1159,7 @@ func resourceHyperflexClusterBackupPolicyDeploymentUpdate(c context.Context, d *
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1214,7 +1219,7 @@ func resourceHyperflexClusterBackupPolicyDeploymentUpdate(c context.Context, d *
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1258,7 +1263,7 @@ func resourceHyperflexClusterBackupPolicyDeploymentUpdate(c context.Context, d *
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

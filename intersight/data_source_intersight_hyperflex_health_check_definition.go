@@ -1071,7 +1071,7 @@ func dataSourceHyperflexHealthCheckDefinitionRead(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("hyperflex.HealthCheckScriptInfo")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1186,7 +1186,7 @@ func dataSourceHyperflexHealthCheckDefinitionRead(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1353,7 +1353,7 @@ func dataSourceHyperflexHealthCheckDefinitionRead(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.VersionContext")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -1415,7 +1415,7 @@ func dataSourceHyperflexHealthCheckDefinitionRead(c context.Context, d *schema.R
 	if err != nil {
 		return diag.Errorf("json marshal of HyperflexHealthCheckDefinition object failed with error : %s", err.Error())
 	}
-	countResponse, _, responseErr := conn.ApiClient.HyperflexApi.GetHyperflexHealthCheckDefinitionList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
+	countResponse, _, responseErr := conn.ApiClient.HyperflexApi.GetHyperflexHealthCheckDefinitionList(conn.ctx).Filter(getRequestParams(data)).Count(true).Execute()
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
@@ -1424,13 +1424,12 @@ func dataSourceHyperflexHealthCheckDefinitionRead(c context.Context, d *schema.R
 		}
 		return diag.Errorf("error occurred while fetching count of HyperflexHealthCheckDefinition: %s", responseErr.Error())
 	}
-	count := countResponse.HyperflexHealthCheckDefinitionList.GetCount()
+	count := countResponse.MoDocumentCount.GetCount()
 	if count == 0 {
 		return diag.Errorf("your query for HyperflexHealthCheckDefinition data source did not return any results. Please change your search criteria and try again")
 	}
 	var i int32
-	var hyperflexHealthCheckDefinitionResults = make([]map[string]interface{}, count, count)
-	var j = 0
+	var hyperflexHealthCheckDefinitionResults = make([]map[string]interface{}, 0, 0)
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.HyperflexApi.GetHyperflexHealthCheckDefinitionList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
@@ -1444,8 +1443,8 @@ func dataSourceHyperflexHealthCheckDefinitionRead(c context.Context, d *schema.R
 		results := resMo.HyperflexHealthCheckDefinitionList.GetResults()
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
-			for i := 0; i < len(results); i++ {
-				var s = results[i]
+			for k := 0; k < len(results); k++ {
+				var s = results[k]
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
@@ -1489,8 +1488,7 @@ func dataSourceHyperflexHealthCheckDefinitionRead(c context.Context, d *schema.R
 				temp["unsupported_hyper_flex_versions"] = (s.GetUnsupportedHyperFlexVersions())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
-				hyperflexHealthCheckDefinitionResults[j] = temp
-				j += 1
+				hyperflexHealthCheckDefinitionResults = append(hyperflexHealthCheckDefinitionResults, temp)
 			}
 		}
 	}

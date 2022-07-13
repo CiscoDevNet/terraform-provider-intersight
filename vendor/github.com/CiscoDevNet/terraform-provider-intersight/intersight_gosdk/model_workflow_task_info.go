@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-6484
+API version: 1.0.11-7078
 Contact: intersight@cisco.com
 */
 
@@ -55,13 +55,15 @@ type WorkflowTaskInfo struct {
 	// The time stamp when the task started execution.
 	StartTime *time.Time `json:"StartTime,omitempty"`
 	// The status of the task and this will specify if the task is running or has reached a final state.
-	Status               *string                             `json:"Status,omitempty"`
-	TaskInstIdList       []WorkflowTaskRetryInfo             `json:"TaskInstIdList,omitempty"`
-	TaskLoopInfo         NullableWorkflowTaskLoopInfo        `json:"TaskLoopInfo,omitempty"`
-	SubWorkflowInfo      *WorkflowWorkflowInfoRelationship   `json:"SubWorkflowInfo,omitempty"`
-	TaskDefinition       *WorkflowTaskDefinitionRelationship `json:"TaskDefinition,omitempty"`
-	WorkflowInfo         *WorkflowWorkflowInfoRelationship   `json:"WorkflowInfo,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Status          *string                           `json:"Status,omitempty"`
+	TaskInstIdList  []WorkflowTaskRetryInfo           `json:"TaskInstIdList,omitempty"`
+	TaskLoopInfo    NullableWorkflowTaskLoopInfo      `json:"TaskLoopInfo,omitempty"`
+	SubWorkflowInfo *WorkflowWorkflowInfoRelationship `json:"SubWorkflowInfo,omitempty"`
+	// An array of relationships to workflowWorkflowInfo resources.
+	SubWorkflowRetryHistory []WorkflowWorkflowInfoRelationship  `json:"SubWorkflowRetryHistory,omitempty"`
+	TaskDefinition          *WorkflowTaskDefinitionRelationship `json:"TaskDefinition,omitempty"`
+	WorkflowInfo            *WorkflowWorkflowInfoRelationship   `json:"WorkflowInfo,omitempty"`
+	AdditionalProperties    map[string]interface{}
 }
 
 type _WorkflowTaskInfo WorkflowTaskInfo
@@ -760,6 +762,39 @@ func (o *WorkflowTaskInfo) SetSubWorkflowInfo(v WorkflowWorkflowInfoRelationship
 	o.SubWorkflowInfo = &v
 }
 
+// GetSubWorkflowRetryHistory returns the SubWorkflowRetryHistory field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *WorkflowTaskInfo) GetSubWorkflowRetryHistory() []WorkflowWorkflowInfoRelationship {
+	if o == nil {
+		var ret []WorkflowWorkflowInfoRelationship
+		return ret
+	}
+	return o.SubWorkflowRetryHistory
+}
+
+// GetSubWorkflowRetryHistoryOk returns a tuple with the SubWorkflowRetryHistory field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *WorkflowTaskInfo) GetSubWorkflowRetryHistoryOk() ([]WorkflowWorkflowInfoRelationship, bool) {
+	if o == nil || o.SubWorkflowRetryHistory == nil {
+		return nil, false
+	}
+	return o.SubWorkflowRetryHistory, true
+}
+
+// HasSubWorkflowRetryHistory returns a boolean if a field has been set.
+func (o *WorkflowTaskInfo) HasSubWorkflowRetryHistory() bool {
+	if o != nil && o.SubWorkflowRetryHistory != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSubWorkflowRetryHistory gets a reference to the given []WorkflowWorkflowInfoRelationship and assigns it to the SubWorkflowRetryHistory field.
+func (o *WorkflowTaskInfo) SetSubWorkflowRetryHistory(v []WorkflowWorkflowInfoRelationship) {
+	o.SubWorkflowRetryHistory = v
+}
+
 // GetTaskDefinition returns the TaskDefinition field value if set, zero value otherwise.
 func (o *WorkflowTaskInfo) GetTaskDefinition() WorkflowTaskDefinitionRelationship {
 	if o == nil || o.TaskDefinition == nil {
@@ -897,6 +932,9 @@ func (o WorkflowTaskInfo) MarshalJSON() ([]byte, error) {
 	if o.SubWorkflowInfo != nil {
 		toSerialize["SubWorkflowInfo"] = o.SubWorkflowInfo
 	}
+	if o.SubWorkflowRetryHistory != nil {
+		toSerialize["SubWorkflowRetryHistory"] = o.SubWorkflowRetryHistory
+	}
 	if o.TaskDefinition != nil {
 		toSerialize["TaskDefinition"] = o.TaskDefinition
 	}
@@ -947,12 +985,14 @@ func (o *WorkflowTaskInfo) UnmarshalJSON(bytes []byte) (err error) {
 		// The time stamp when the task started execution.
 		StartTime *time.Time `json:"StartTime,omitempty"`
 		// The status of the task and this will specify if the task is running or has reached a final state.
-		Status          *string                             `json:"Status,omitempty"`
-		TaskInstIdList  []WorkflowTaskRetryInfo             `json:"TaskInstIdList,omitempty"`
-		TaskLoopInfo    NullableWorkflowTaskLoopInfo        `json:"TaskLoopInfo,omitempty"`
-		SubWorkflowInfo *WorkflowWorkflowInfoRelationship   `json:"SubWorkflowInfo,omitempty"`
-		TaskDefinition  *WorkflowTaskDefinitionRelationship `json:"TaskDefinition,omitempty"`
-		WorkflowInfo    *WorkflowWorkflowInfoRelationship   `json:"WorkflowInfo,omitempty"`
+		Status          *string                           `json:"Status,omitempty"`
+		TaskInstIdList  []WorkflowTaskRetryInfo           `json:"TaskInstIdList,omitempty"`
+		TaskLoopInfo    NullableWorkflowTaskLoopInfo      `json:"TaskLoopInfo,omitempty"`
+		SubWorkflowInfo *WorkflowWorkflowInfoRelationship `json:"SubWorkflowInfo,omitempty"`
+		// An array of relationships to workflowWorkflowInfo resources.
+		SubWorkflowRetryHistory []WorkflowWorkflowInfoRelationship  `json:"SubWorkflowRetryHistory,omitempty"`
+		TaskDefinition          *WorkflowTaskDefinitionRelationship `json:"TaskDefinition,omitempty"`
+		WorkflowInfo            *WorkflowWorkflowInfoRelationship   `json:"WorkflowInfo,omitempty"`
 	}
 
 	varWorkflowTaskInfoWithoutEmbeddedStruct := WorkflowTaskInfoWithoutEmbeddedStruct{}
@@ -981,6 +1021,7 @@ func (o *WorkflowTaskInfo) UnmarshalJSON(bytes []byte) (err error) {
 		varWorkflowTaskInfo.TaskInstIdList = varWorkflowTaskInfoWithoutEmbeddedStruct.TaskInstIdList
 		varWorkflowTaskInfo.TaskLoopInfo = varWorkflowTaskInfoWithoutEmbeddedStruct.TaskLoopInfo
 		varWorkflowTaskInfo.SubWorkflowInfo = varWorkflowTaskInfoWithoutEmbeddedStruct.SubWorkflowInfo
+		varWorkflowTaskInfo.SubWorkflowRetryHistory = varWorkflowTaskInfoWithoutEmbeddedStruct.SubWorkflowRetryHistory
 		varWorkflowTaskInfo.TaskDefinition = varWorkflowTaskInfoWithoutEmbeddedStruct.TaskDefinition
 		varWorkflowTaskInfo.WorkflowInfo = varWorkflowTaskInfoWithoutEmbeddedStruct.WorkflowInfo
 		*o = WorkflowTaskInfo(varWorkflowTaskInfo)
@@ -1021,6 +1062,7 @@ func (o *WorkflowTaskInfo) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "TaskInstIdList")
 		delete(additionalProperties, "TaskLoopInfo")
 		delete(additionalProperties, "SubWorkflowInfo")
+		delete(additionalProperties, "SubWorkflowRetryHistory")
 		delete(additionalProperties, "TaskDefinition")
 		delete(additionalProperties, "WorkflowInfo")
 

@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceWorkflowErrorResponseHandler() *schema.Resource {
@@ -169,9 +171,10 @@ func resourceWorkflowErrorResponseHandler() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name for the error response handler.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name for the error response handler.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -185,7 +188,8 @@ func resourceWorkflowErrorResponseHandler() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parameters": {
 				Type:       schema.TypeList,
 				Optional:   true,
@@ -215,15 +219,17 @@ func resourceWorkflowErrorResponseHandler() *schema.Resource {
 							Optional:    true,
 						},
 						"item_type": {
-							Description: "The type of the collection item in case this is a collection parameter.\n* `simple` - The parameter value to be extracted is of the type simple. All the common scalar typessuch as int, bool, string, etc are represented by the simple enum.\n* `string` - The parameter value to be extracted is of the string type.\n* `integer` - The parameter value to be extracted is of the number type.\n* `float` - The parameter value to be extracted is of the float number type.\n* `boolean` - The parameter value to be extracted is of the boolean type.\n* `json` - The parameter values to be extracted is of the generic JSON literal. JSON type is applicable only if the content to be parsed is of JSON type.\n* `complex` - The parameter value to be extracted is a complex parameter that itself isanother collection of simple/complex parameters.\n* `collection` - The parameter value to be extracted is a collection parameter whose item typeshall be either simple type or complex type.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "simple",
+							Description:  "The type of the collection item in case this is a collection parameter.\n* `simple` - The parameter value to be extracted is of the type simple. All the common scalar typessuch as int, bool, string, etc are represented by the simple enum.\n* `string` - The parameter value to be extracted is of the string type.\n* `integer` - The parameter value to be extracted is of the number type.\n* `float` - The parameter value to be extracted is of the float number type.\n* `boolean` - The parameter value to be extracted is of the boolean type.\n* `json` - The parameter values to be extracted is of the generic JSON literal. JSON type is applicable only if the content to be parsed is of JSON type.\n* `complex` - The parameter value to be extracted is a complex parameter that itself isanother collection of simple/complex parameters.\n* `collection` - The parameter value to be extracted is a collection parameter whose item typeshall be either simple type or complex type.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"simple", "string", "integer", "float", "boolean", "json", "complex", "collection"}, false),
+							Optional:     true,
+							Default:      "simple",
 						},
 						"name": {
-							Description: "The name of the parameter.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The name of the parameter.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+							Optional:     true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
@@ -242,10 +248,11 @@ func resourceWorkflowErrorResponseHandler() *schema.Resource {
 							Optional:    true,
 						},
 						"type": {
-							Description: "The type of the parameter. Accepted values are simple, complex,\ncollection.\n* `simple` - The parameter value to be extracted is of the type simple. All the common scalar typessuch as int, bool, string, etc are represented by the simple enum.\n* `string` - The parameter value to be extracted is of the string type.\n* `integer` - The parameter value to be extracted is of the number type.\n* `float` - The parameter value to be extracted is of the float number type.\n* `boolean` - The parameter value to be extracted is of the boolean type.\n* `json` - The parameter values to be extracted is of the generic JSON literal. JSON type is applicable only if the content to be parsed is of JSON type.\n* `complex` - The parameter value to be extracted is a complex parameter that itself isanother collection of simple/complex parameters.\n* `collection` - The parameter value to be extracted is a collection parameter whose item typeshall be either simple type or complex type.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "simple",
+							Description:  "The type of the parameter. Accepted values are simple, complex,\ncollection.\n* `simple` - The parameter value to be extracted is of the type simple. All the common scalar typessuch as int, bool, string, etc are represented by the simple enum.\n* `string` - The parameter value to be extracted is of the string type.\n* `integer` - The parameter value to be extracted is of the number type.\n* `float` - The parameter value to be extracted is of the float number type.\n* `boolean` - The parameter value to be extracted is of the boolean type.\n* `json` - The parameter values to be extracted is of the generic JSON literal. JSON type is applicable only if the content to be parsed is of JSON type.\n* `complex` - The parameter value to be extracted is a complex parameter that itself isanother collection of simple/complex parameters.\n* `collection` - The parameter value to be extracted is a collection parameter whose item typeshall be either simple type or complex type.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"simple", "string", "integer", "float", "boolean", "json", "complex", "collection"}, false),
+							Optional:     true,
+							Default:      "simple",
 						},
 					},
 				},
@@ -330,10 +337,11 @@ func resourceWorkflowErrorResponseHandler() *schema.Resource {
 				},
 			},
 			"platform_type": {
-				Description: "The platform type for which the error response handler is defined.\n* `` - The device reported an empty or unrecognized platform type.\n* `APIC` - An Application Policy Infrastructure Controller cluster.\n* `CAPIC` - An Application Policy Infrastructure Controller cloud instance.\n* `DCNM` - A Data Center Network Manager instance. Data Center Network Manager (DCNM) is the network management platform for all NX-OS-enabled deployments, spanning new fabric architectures, IP Fabric for Media, and storage networking deployments for the Cisco Nexus-powered data center.\n* `UCSFI` - A UCS Fabric Interconnect in HA or standalone mode, which is being managed by UCS Manager (UCSM).\n* `UCSFIISM` - A UCS Fabric Interconnect in HA or standalone mode, managed directly by Intersight.\n* `IMC` - A standalone UCS Server Integrated Management Controller.\n* `IMCM4` - A standalone UCS M4 Server.\n* `IMCM5` - A standalone UCS M5 server.\n* `IMCRack` - A standalone UCS M6 and above server.\n* `UCSIOM` - An UCS Chassis IO module.\n* `HX` - A HyperFlex storage controller.\n* `HyperFlexAP` - A HyperFlex Application Platform.\n* `IWE` - An Intersight Workload Engine.\n* `UCSD` - A UCS Director virtual appliance. Cisco UCS Director automates, orchestrates, and manages Cisco and third-party hardware.\n* `IntersightAppliance` - A Cisco Intersight Connected Virtual Appliance.\n* `IntersightAssist` - A Cisco Intersight Assist.\n* `PureStorageFlashArray` - A Pure Storage FlashArray device.\n* `NexusDevice` - A generic platform type to support Nexus Network Device. This can also be extended to support all network devices later on.\n* `ACISwitch` - A platform type to support ACI Switches.\n* `NexusSwitch` - A platform type to support Cisco Nexus Switches.\n* `MDSDevice` - A platform type to support MDS devices.\n* `UCSC890` - A standalone Cisco UCSC890 server.\n* `NetAppOntap` - A NetApp ONTAP storage system.\n* `NetAppActiveIqUnifiedManager` - A NetApp Active IQ Unified Manager.\n* `EmcScaleIo` - An EMC ScaleIO storage system.\n* `EmcVmax` - An EMC VMAX storage system.\n* `EmcVplex` - An EMC VPLEX storage system.\n* `EmcXtremIo` - An EMC XtremIO storage system.\n* `VmwareVcenter` - A VMware vCenter device that manages Virtual Machines.\n* `MicrosoftHyperV` - A Microsoft Hyper-V system that manages Virtual Machines.\n* `AppDynamics` - An AppDynamics controller that monitors applications.\n* `Dynatrace` - A software-intelligence monitoring platform that simplifies enterprise cloud complexity and accelerates digital transformation.\n* `NewRelic` - A software-intelligence monitoring platform that simplifies enterprise cloud complexity and accelerates digital transformation.\n* `ServiceNow` - A cloud-based workflow automation platform that enables enterprise organizations to improve operational efficiencies by streamlining and automating routine work tasks.\n* `ReadHatOpenStack` - An OpenStack target manages Virtual Machines, Physical Machines, Datacenters and Virtual Datacenters using different OpenStack services as administrative endpoints.\n* `CloudFoundry` - An open source cloud platform on which developers can build, deploy, run and scale applications.\n* `MicrosoftAzureApplicationInsights` - A feature of Azure Monitor, is an extensible Application Performance Management service for developers and DevOps professionals to monitor their live applications.\n* `OpenStack` - An OpenStack target manages Virtual Machines, Physical Machines, Datacenters and Virtual Datacenters using different OpenStack services as administrative endpoints.\n* `MicrosoftSqlServer` - A Microsoft SQL database server.\n* `MySqlServer` - An instance of either Oracle MySQL Database or the open source MariaDB.\n* `Kubernetes` - A Kubernetes cluster that runs containerized applications.\n* `AmazonWebService` - A Amazon web service target that discovers and monitors different services like EC2. It discovers entities like VMs, Volumes, regions etc. and monitors attributes like Mem, CPU, cost.\n* `AmazonWebServiceBilling` - A Amazon web service billing target to retrieve billing information stored in S3 bucket.\n* `MicrosoftAzureServicePrincipal` - A Microsoft Azure Service Principal target that discovers all the associated Azure subscriptions.\n* `MicrosoftAzureEnterpriseAgreement` - A Microsoft Azure Enterprise Agreement target that discovers cost, billing and RIs.\n* `DellCompellent` - A Dell Compellent storage system.\n* `HPE3Par` - A HPE 3PAR storage system.\n* `RedHatEnterpriseVirtualization` - A Red Hat Enterprise Virtualization Hypervisor system that manages Virtual Machines.\n* `NutanixAcropolis` - A Nutanix Acropolis system that combines servers and storage into a distributed infrastructure platform.\n* `HPEOneView` - A HPE Oneview management system that manages compute, storage, and networking.\n* `ServiceEngine` - Cisco Application Services Engine. Cisco Application Services Engine is a platform to deploy and manage applications.\n* `HitachiVirtualStoragePlatform` - A Hitachi Virtual Storage Platform also referred to as Hitachi VSP. It includes various storage systems designed for data centers.\n* `IMCBlade` - An Intersight managed UCS Blade Server.\n* `TerraformCloud` - A Terraform Cloud account.\n* `TerraformAgent` - A Terraform Cloud Agent that Intersight will deploy in datacenter. The agent will execute Terraform plan for Terraform Cloud workspace configured to use the agent.\n* `CustomTarget` - An external endpoint added as Target that can be accessed through its HTTP API interface in Intersight Orchestrator automation workflow.Standard HTTP authentication scheme supported: Basic.\n* `AnsibleEndpoint` - An external endpoint added as Target that can be accessed through Ansible in Intersight Cloud Orchestrator automation workflow.\n* `HTTPEndpoint` - An external endpoint added as Target that can be accessed through its HTTP API interface in Intersight Orchestrator automation workflow.Standard HTTP authentication scheme supported: Basic, Bearer Token.\n* `SSHEndpoint` - An external endpoint added as Target that can be accessed through SSH in Intersight Cloud Orchestrator automation workflow.\n* `CiscoCatalyst` - A Cisco Catalyst networking switch device.\n* `PowerShellEndpoint` - A Windows machine on which PowerShell scripts can be executed remotely.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "",
+				Description:  "The platform type for which the error response handler is defined.\n* `` - The device reported an empty or unrecognized platform type.\n* `APIC` - An Application Policy Infrastructure Controller cluster.\n* `CAPIC` - An Application Policy Infrastructure Controller cloud instance.\n* `DCNM` - A Data Center Network Manager instance. Data Center Network Manager (DCNM) is the network management platform for all NX-OS-enabled deployments, spanning new fabric architectures, IP Fabric for Media, and storage networking deployments for the Cisco Nexus-powered data center.\n* `UCSFI` - A UCS Fabric Interconnect in HA or standalone mode, which is being managed by UCS Manager (UCSM).\n* `UCSFIISM` - A UCS Fabric Interconnect in HA or standalone mode, managed directly by Intersight.\n* `IMC` - A standalone UCS Server Integrated Management Controller.\n* `IMCM4` - A standalone UCS M4 Server.\n* `IMCM5` - A standalone UCS M5 server.\n* `IMCRack` - A standalone UCS M6 and above server.\n* `UCSIOM` - An UCS Chassis IO module.\n* `HX` - A HyperFlex storage controller.\n* `HyperFlexAP` - A HyperFlex Application Platform.\n* `IWE` - An Intersight Workload Engine.\n* `UCSD` - A UCS Director virtual appliance. Cisco UCS Director automates, orchestrates, and manages Cisco and third-party hardware.\n* `IntersightAppliance` - A Cisco Intersight Connected Virtual Appliance.\n* `IntersightAssist` - A Cisco Intersight Assist.\n* `PureStorageFlashArray` - A Pure Storage FlashArray device.\n* `NexusDevice` - A generic platform type to support Nexus Network Device. This can also be extended to support all network devices later on.\n* `ACISwitch` - A platform type to support ACI Switches.\n* `NexusSwitch` - A platform type to support Cisco Nexus Switches.\n* `MDSDevice` - A platform type to support MDS devices.\n* `UCSC890` - A standalone Cisco UCSC890 server.\n* `NetAppOntap` - A NetApp ONTAP storage system.\n* `NetAppActiveIqUnifiedManager` - A NetApp Active IQ Unified Manager.\n* `EmcScaleIo` - An EMC ScaleIO storage system.\n* `EmcVmax` - An EMC VMAX storage system.\n* `EmcVplex` - An EMC VPLEX storage system.\n* `EmcXtremIo` - An EMC XtremIO storage system.\n* `VmwareVcenter` - A VMware vCenter device that manages Virtual Machines.\n* `MicrosoftHyperV` - A Microsoft Hyper-V system that manages Virtual Machines.\n* `AppDynamics` - An AppDynamics controller that monitors applications.\n* `Dynatrace` - A software-intelligence monitoring platform that simplifies enterprise cloud complexity and accelerates digital transformation.\n* `NewRelic` - A software-intelligence monitoring platform that simplifies enterprise cloud complexity and accelerates digital transformation.\n* `ServiceNow` - A cloud-based workflow automation platform that enables enterprise organizations to improve operational efficiencies by streamlining and automating routine work tasks.\n* `ReadHatOpenStack` - An OpenStack target manages Virtual Machines, Physical Machines, Datacenters and Virtual Datacenters using different OpenStack services as administrative endpoints.\n* `CloudFoundry` - An open source cloud platform on which developers can build, deploy, run and scale applications.\n* `MicrosoftAzureApplicationInsights` - A feature of Azure Monitor, is an extensible Application Performance Management service for developers and DevOps professionals to monitor their live applications.\n* `OpenStack` - An OpenStack target manages Virtual Machines, Physical Machines, Datacenters and Virtual Datacenters using different OpenStack services as administrative endpoints.\n* `MicrosoftSqlServer` - A Microsoft SQL database server.\n* `MySqlServer` - An instance of either Oracle MySQL Database or the open source MariaDB.\n* `Kubernetes` - A Kubernetes cluster that runs containerized applications.\n* `AmazonWebService` - An Amazon web service target that discovers and monitors different services like EC2. It discovers entities like VMs, Volumes, regions etc. and monitors attributes like Mem, CPU, cost.\n* `AmazonWebServiceBilling` - An Amazon web service billing target to retrieve billing information stored in S3 bucket.\n* `MicrosoftAzureServicePrincipal` - A Microsoft Azure Service Principal target that discovers all the associated Azure subscriptions.\n* `MicrosoftAzureEnterpriseAgreement` - A Microsoft Azure Enterprise Agreement target that discovers cost, billing and RIs.\n* `DellCompellent` - A Dell Compellent storage system.\n* `HPE3Par` - A HPE 3PAR storage system.\n* `RedHatEnterpriseVirtualization` - A Red Hat Enterprise Virtualization Hypervisor system that manages Virtual Machines.\n* `NutanixAcropolis` - A Nutanix Acropolis system that combines servers and storage into a distributed infrastructure platform.\n* `HPEOneView` - A HPE Oneview management system that manages compute, storage, and networking.\n* `ServiceEngine` - Cisco Application Services Engine. Cisco Application Services Engine is a platform to deploy and manage applications.\n* `HitachiVirtualStoragePlatform` - A Hitachi Virtual Storage Platform also referred to as Hitachi VSP. It includes various storage systems designed for data centers.\n* `IMCBlade` - An Intersight managed UCS Blade Server.\n* `TerraformCloud` - A Terraform Cloud account.\n* `TerraformAgent` - A Terraform Cloud Agent that Intersight will deploy in datacenter. The agent will execute Terraform plan for Terraform Cloud workspace configured to use the agent.\n* `CustomTarget` - An external endpoint added as Target that can be accessed through its HTTP API interface in Intersight Orchestrator automation workflow.Standard HTTP authentication scheme supported: Basic.\n* `AnsibleEndpoint` - An external endpoint added as Target that can be accessed through Ansible in Intersight Cloud Orchestrator automation workflow.\n* `HTTPEndpoint` - An external endpoint added as Target that can be accessed through its HTTP API interface in Intersight Orchestrator automation workflow.Standard HTTP authentication scheme supported: Basic, Bearer Token.\n* `SSHEndpoint` - An external endpoint added as Target that can be accessed through SSH in Intersight Cloud Orchestrator automation workflow.\n* `CiscoCatalyst` - A Cisco Catalyst networking switch device.\n* `PowerShellEndpoint` - A Windows machine on which PowerShell scripts can be executed remotely.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"", "APIC", "CAPIC", "DCNM", "UCSFI", "UCSFIISM", "IMC", "IMCM4", "IMCM5", "IMCRack", "UCSIOM", "HX", "HyperFlexAP", "IWE", "UCSD", "IntersightAppliance", "IntersightAssist", "PureStorageFlashArray", "NexusDevice", "ACISwitch", "NexusSwitch", "MDSDevice", "UCSC890", "NetAppOntap", "NetAppActiveIqUnifiedManager", "EmcScaleIo", "EmcVmax", "EmcVplex", "EmcXtremIo", "VmwareVcenter", "MicrosoftHyperV", "AppDynamics", "Dynatrace", "NewRelic", "ServiceNow", "ReadHatOpenStack", "CloudFoundry", "MicrosoftAzureApplicationInsights", "OpenStack", "MicrosoftSqlServer", "MySqlServer", "Kubernetes", "AmazonWebService", "AmazonWebServiceBilling", "MicrosoftAzureServicePrincipal", "MicrosoftAzureEnterpriseAgreement", "DellCompellent", "HPE3Par", "RedHatEnterpriseVirtualization", "NutanixAcropolis", "HPEOneView", "ServiceEngine", "HitachiVirtualStoragePlatform", "IMCBlade", "TerraformCloud", "TerraformAgent", "CustomTarget", "AnsibleEndpoint", "HTTPEndpoint", "SSHEndpoint", "CiscoCatalyst", "PowerShellEndpoint"}, false),
+				Optional:     true,
+				Default:      "",
 			},
 			"shared_scope": {
 				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
@@ -359,14 +367,16 @@ func resourceWorkflowErrorResponseHandler() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -429,15 +439,17 @@ func resourceWorkflowErrorResponseHandler() *schema.Resource {
 										Optional:    true,
 									},
 									"item_type": {
-										Description: "The type of the collection item in case this is a collection parameter.\n* `simple` - The parameter value to be extracted is of the type simple. All the common scalar typessuch as int, bool, string, etc are represented by the simple enum.\n* `string` - The parameter value to be extracted is of the string type.\n* `integer` - The parameter value to be extracted is of the number type.\n* `float` - The parameter value to be extracted is of the float number type.\n* `boolean` - The parameter value to be extracted is of the boolean type.\n* `json` - The parameter values to be extracted is of the generic JSON literal. JSON type is applicable only if the content to be parsed is of JSON type.\n* `complex` - The parameter value to be extracted is a complex parameter that itself isanother collection of simple/complex parameters.\n* `collection` - The parameter value to be extracted is a collection parameter whose item typeshall be either simple type or complex type.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Default:     "simple",
+										Description:  "The type of the collection item in case this is a collection parameter.\n* `simple` - The parameter value to be extracted is of the type simple. All the common scalar typessuch as int, bool, string, etc are represented by the simple enum.\n* `string` - The parameter value to be extracted is of the string type.\n* `integer` - The parameter value to be extracted is of the number type.\n* `float` - The parameter value to be extracted is of the float number type.\n* `boolean` - The parameter value to be extracted is of the boolean type.\n* `json` - The parameter values to be extracted is of the generic JSON literal. JSON type is applicable only if the content to be parsed is of JSON type.\n* `complex` - The parameter value to be extracted is a complex parameter that itself isanother collection of simple/complex parameters.\n* `collection` - The parameter value to be extracted is a collection parameter whose item typeshall be either simple type or complex type.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringInSlice([]string{"simple", "string", "integer", "float", "boolean", "json", "complex", "collection"}, false),
+										Optional:     true,
+										Default:      "simple",
 									},
 									"name": {
-										Description: "The name of the parameter.",
-										Type:        schema.TypeString,
-										Optional:    true,
+										Description:  "The name of the parameter.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+										Optional:     true,
 									},
 									"object_type": {
 										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
@@ -456,10 +468,11 @@ func resourceWorkflowErrorResponseHandler() *schema.Resource {
 										Optional:    true,
 									},
 									"type": {
-										Description: "The type of the parameter. Accepted values are simple, complex,\ncollection.\n* `simple` - The parameter value to be extracted is of the type simple. All the common scalar typessuch as int, bool, string, etc are represented by the simple enum.\n* `string` - The parameter value to be extracted is of the string type.\n* `integer` - The parameter value to be extracted is of the number type.\n* `float` - The parameter value to be extracted is of the float number type.\n* `boolean` - The parameter value to be extracted is of the boolean type.\n* `json` - The parameter values to be extracted is of the generic JSON literal. JSON type is applicable only if the content to be parsed is of JSON type.\n* `complex` - The parameter value to be extracted is a complex parameter that itself isanother collection of simple/complex parameters.\n* `collection` - The parameter value to be extracted is a collection parameter whose item typeshall be either simple type or complex type.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Default:     "simple",
+										Description:  "The type of the parameter. Accepted values are simple, complex,\ncollection.\n* `simple` - The parameter value to be extracted is of the type simple. All the common scalar typessuch as int, bool, string, etc are represented by the simple enum.\n* `string` - The parameter value to be extracted is of the string type.\n* `integer` - The parameter value to be extracted is of the number type.\n* `float` - The parameter value to be extracted is of the float number type.\n* `boolean` - The parameter value to be extracted is of the boolean type.\n* `json` - The parameter values to be extracted is of the generic JSON literal. JSON type is applicable only if the content to be parsed is of JSON type.\n* `complex` - The parameter value to be extracted is a complex parameter that itself isanother collection of simple/complex parameters.\n* `collection` - The parameter value to be extracted is a collection parameter whose item typeshall be either simple type or complex type.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringInSlice([]string{"simple", "string", "integer", "float", "boolean", "json", "complex", "collection"}, false),
+										Optional:     true,
+										Default:      "simple",
 									},
 								},
 							},
@@ -642,7 +655,7 @@ func resourceWorkflowErrorResponseHandlerCreate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1066,7 +1079,7 @@ func resourceWorkflowErrorResponseHandlerUpdate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

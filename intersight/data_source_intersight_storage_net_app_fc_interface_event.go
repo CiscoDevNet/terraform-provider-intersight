@@ -915,7 +915,7 @@ func dataSourceStorageNetAppFcInterfaceEventRead(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1019,7 +1019,7 @@ func dataSourceStorageNetAppFcInterfaceEventRead(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1155,7 +1155,7 @@ func dataSourceStorageNetAppFcInterfaceEventRead(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.VersionContext")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -1217,7 +1217,7 @@ func dataSourceStorageNetAppFcInterfaceEventRead(c context.Context, d *schema.Re
 	if err != nil {
 		return diag.Errorf("json marshal of StorageNetAppFcInterfaceEvent object failed with error : %s", err.Error())
 	}
-	countResponse, _, responseErr := conn.ApiClient.StorageApi.GetStorageNetAppFcInterfaceEventList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
+	countResponse, _, responseErr := conn.ApiClient.StorageApi.GetStorageNetAppFcInterfaceEventList(conn.ctx).Filter(getRequestParams(data)).Count(true).Execute()
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
@@ -1226,13 +1226,12 @@ func dataSourceStorageNetAppFcInterfaceEventRead(c context.Context, d *schema.Re
 		}
 		return diag.Errorf("error occurred while fetching count of StorageNetAppFcInterfaceEvent: %s", responseErr.Error())
 	}
-	count := countResponse.StorageNetAppFcInterfaceEventList.GetCount()
+	count := countResponse.MoDocumentCount.GetCount()
 	if count == 0 {
 		return diag.Errorf("your query for StorageNetAppFcInterfaceEvent data source did not return any results. Please change your search criteria and try again")
 	}
 	var i int32
-	var storageNetAppFcInterfaceEventResults = make([]map[string]interface{}, count, count)
-	var j = 0
+	var storageNetAppFcInterfaceEventResults = make([]map[string]interface{}, 0, 0)
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.StorageApi.GetStorageNetAppFcInterfaceEventList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
@@ -1246,8 +1245,8 @@ func dataSourceStorageNetAppFcInterfaceEventRead(c context.Context, d *schema.Re
 		results := resMo.StorageNetAppFcInterfaceEventList.GetResults()
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
-			for i := 0; i < len(results); i++ {
-				var s = results[i]
+			for k := 0; k < len(results); k++ {
+				var s = results[k]
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
@@ -1287,8 +1286,7 @@ func dataSourceStorageNetAppFcInterfaceEventRead(c context.Context, d *schema.Re
 				temp["uuid"] = (s.GetUuid())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
-				storageNetAppFcInterfaceEventResults[j] = temp
-				j += 1
+				storageNetAppFcInterfaceEventResults = append(storageNetAppFcInterfaceEventResults, temp)
 			}
 		}
 	}

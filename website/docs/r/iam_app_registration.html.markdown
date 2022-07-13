@@ -42,15 +42,11 @@ resource "intersight_iam_app_registration" "iam_app_registration1" {
   client_type         = "confidential"
   revoke              = true
   renew_client_secret = true
-  roles = [
-    {
-      moid        = var.iam_role
-      object_type = "iam.Role"
-      class_id = "iam.Role"
-      additional_properties = ""
-      selector = ""
-    }
-  ]
+  roles {
+    moid        = var.iam_role
+    object_type = "iam.Role"
+    class_id    = "iam.Role"
+  }
   permission {
     moid        = var.iam_permission
     object_type = "iam.Permission"
@@ -58,12 +54,12 @@ resource "intersight_iam_app_registration" "iam_app_registration1" {
 }
 
 variable "iam_permission" {
-  type = string
+  type        = string
   description = "value for iam_permission"
 }
 
 variable "iam_role" {
-  type = string
+  type        = string
   description = "value for iam_role"
 }
 ```
@@ -126,6 +122,7 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `shared_scope`:(string)(ReadOnly) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
+* `show_consent_screen`:(bool) Set to true if consent screen needs to be shown during the OAuth login process.Applicable only for public AppRegistrations, means only 'authorization_code' grantType.Note that consent screen will be shown on each login. 
 * `tags`:(Array)
 This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 

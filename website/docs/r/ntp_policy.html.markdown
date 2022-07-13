@@ -26,10 +26,12 @@ resource "intersight_ntp_policy" "ntp1" {
     object_type = "organization.Organization"
     moid        = var.organization
   }
-}variable "organization" {
-   type = string
-   description = "value for organization"
- }
+}
+
+variable "organization" {
+  type        = string
+  description = "value for organization"
+}
 ```
 ## Argument Reference
 The following arguments are supported:

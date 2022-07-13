@@ -15,21 +15,16 @@ A group of REST resources, such as a group of compute.Blade MOs. A ResourceGroup
 ```hcl
 resource "intersight_resource_group" "resource_group1" {
   name = "resource_group1"
-  per_type_combined_selector = [{
-    additional_properties = ""
-    class_id              = "resource.PerTypeCombinedSelector"
-    combined_selector     = "( Tags/any(tt/Key eq \"Intersight.LicenseTier\" and t/Value eq Essential) )"
-    empty_filter          = false
-    object_type           = "resource.PerTypeCombinedSelector"
-    selector_object_type  = "compute.Blade"
-  }]
+  per_type_combined_selector {
+    class_id    = "resource.PerTypeCombinedSelector"
+    object_type = "resource.PerTypeCombinedSelector"
+  }
   qualifier = "Allow-Selectors"
-  selectors = [{
-    object_type           = "resource.Selector"
-    additional_properties = ""
-    class_id              = "resource.Selector"
-    selector              = "/api/v1/asset/DeviceRegistrations?$filter=Moid in(\"intersight_asset_device_registrations_registeration1.id\")"
-  }]
+  selectors {
+    object_type = "resource.Selector"
+    class_id    = "resource.Selector"
+    selector    = "/api/v1/asset/DeviceRegistrations?$filter=Moid in(\"intersight_asset_device_registrations_registeration1.id\")"
+  }
   account {
     object_type = "iam.Account"
     moid        = var.account
@@ -40,15 +35,15 @@ resource "intersight_resource_group" "resource_group1" {
   }
 }
 
-variable "account"{
-  type = string
+variable "account" {
+  type        = string
   description = "Moid of iam.Account"
 }
 
- variable "organization" {
-   type = string
-   description = "value for organization"
- }
+variable "organization" {
+  type        = string
+  description = "value for organization"
+}
 ```
 ## Argument Reference
 The following arguments are supported:

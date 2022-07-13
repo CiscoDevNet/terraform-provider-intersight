@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceFabricLinkAggregationPolicy() *schema.Resource {
@@ -94,9 +96,10 @@ func resourceFabricLinkAggregationPolicy() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -110,10 +113,11 @@ func resourceFabricLinkAggregationPolicy() *schema.Resource {
 					return
 				}},
 			"lacp_rate": {
-				Description: "Flag used to indicate whether LACP PDUs are to be sent 'fast', i.e., every 1 second.\n* `normal` - The expanded 4th generation UCS Fabric Interconnect with 108 ports.\n* `fast` - The standard 4th generation UCS Fabric Interconnect with 54 ports.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "normal",
+				Description:  "Flag used to indicate whether LACP PDUs are to be sent 'fast', i.e., every 1 second.\n* `normal` - The expanded 4th generation UCS Fabric Interconnect with 108 ports.\n* `fast` - The standard 4th generation UCS Fabric Interconnect with 54 ports.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"normal", "fast"}, false),
+				Optional:     true,
+				Default:      "normal",
 			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
@@ -134,9 +138,10 @@ func resourceFabricLinkAggregationPolicy() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the concrete policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the concrete policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -191,7 +196,8 @@ func resourceFabricLinkAggregationPolicy() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -300,14 +306,16 @@ func resourceFabricLinkAggregationPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -511,7 +519,7 @@ func resourceFabricLinkAggregationPolicyCreate(c context.Context, d *schema.Reso
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -759,7 +767,7 @@ func resourceFabricLinkAggregationPolicyUpdate(c context.Context, d *schema.Reso
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

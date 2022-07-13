@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceVirtualizationVirtualDisk() *schema.Resource {
@@ -82,10 +84,11 @@ func resourceVirtualizationVirtualDisk() *schema.Resource {
 				Optional:    true,
 			},
 			"capacity": {
-				Description: "Disk capacity to be provided with units example - 10Gi.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				ForceNew:    true,
+				Description:  "Disk capacity to be provided with units example - 10Gi.",
+				Type:         schema.TypeString,
+				ValidateFunc: StringLenMinimum(1),
+				Optional:     true,
+				ForceNew:     true,
 			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
@@ -240,10 +243,11 @@ func resourceVirtualizationVirtualDisk() *schema.Resource {
 					return
 				}},
 			"mode": {
-				Description: "File mode of the disk  example - Filesystem, Block.\n* `Block` - It is a Block virtual disk.\n* `Filesystem` - It is a File system virtual disk.\n* `` - Disk mode is either unknown or not supported.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "Block",
+				Description:  "File mode of the disk  example - Filesystem, Block.\n* `Block` - It is a Block virtual disk.\n* `Filesystem` - It is a File system virtual disk.\n* `` - Disk mode is either unknown or not supported.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Block", "Filesystem", ""}, false),
+				Optional:     true,
+				Default:      "Block",
 			},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
@@ -253,9 +257,10 @@ func resourceVirtualizationVirtualDisk() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the storage disk. Name must be unique within a Datastore.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the storage disk. Name must be unique within a Datastore.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9-]{3,48}$"), ""),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -269,7 +274,8 @@ func resourceVirtualizationVirtualDisk() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -432,14 +438,16 @@ func resourceVirtualizationVirtualDisk() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -800,7 +808,7 @@ func resourceVirtualizationVirtualDiskCreate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -870,7 +878,7 @@ func resourceVirtualizationVirtualDiskCreate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -963,7 +971,7 @@ func resourceVirtualizationVirtualDiskCreate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("cloud.VolumeIopsInfo")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -994,7 +1002,7 @@ func resourceVirtualizationVirtualDiskCreate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("cloud.AvailabilityZone")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1273,7 +1281,7 @@ func resourceVirtualizationVirtualDiskUpdate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1349,7 +1357,7 @@ func resourceVirtualizationVirtualDiskUpdate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1445,7 +1453,7 @@ func resourceVirtualizationVirtualDiskUpdate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("cloud.VolumeIopsInfo")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1477,7 +1485,7 @@ func resourceVirtualizationVirtualDiskUpdate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("cloud.AvailabilityZone")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))

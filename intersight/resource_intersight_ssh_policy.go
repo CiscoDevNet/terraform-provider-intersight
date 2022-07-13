@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceSshPolicy() *schema.Resource {
@@ -94,9 +96,10 @@ func resourceSshPolicy() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -134,9 +137,10 @@ func resourceSshPolicy() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the concrete policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the concrete policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -191,7 +195,8 @@ func resourceSshPolicy() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -272,10 +277,11 @@ func resourceSshPolicy() *schema.Resource {
 				},
 			},
 			"port": {
-				Description: "Port used for secure shell access.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Default:     22,
+				Description:  "Port used for secure shell access.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(1, 65535),
+				Optional:     true,
+				Default:      22,
 			},
 			"profiles": {
 				Description: "An array of relationships to policyAbstractConfigProfile resources.",
@@ -340,23 +346,26 @@ func resourceSshPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
 			},
 			"timeout": {
-				Description: "Number of seconds to wait before the system considers a SSH request to have timed out.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Default:     1800,
+				Description:  "Number of seconds to wait before the system considers a SSH request to have timed out.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(60, 10800),
+				Optional:     true,
+				Default:      1800,
 			},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
@@ -557,7 +566,7 @@ func resourceSshPolicyCreate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -881,7 +890,7 @@ func resourceSshPolicyUpdate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

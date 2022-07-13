@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceVnicFcQosPolicy() *schema.Resource {
@@ -77,10 +79,11 @@ func resourceVnicFcQosPolicy() *schema.Resource {
 				},
 			},
 			"burst": {
-				Description: "The burst traffic, in bytes, allowed on the vHBA.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Default:     10240,
+				Description:  "The burst traffic, in bytes, allowed on the vHBA.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(1, 1000000),
+				Optional:     true,
+				Default:      10240,
 			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
@@ -89,10 +92,11 @@ func resourceVnicFcQosPolicy() *schema.Resource {
 				Default:     "vnic.FcQosPolicy",
 			},
 			"cos": {
-				Description: "Class of Service to be associated to the traffic on the virtual interface.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Default:     3,
+				Description:  "Class of Service to be associated to the traffic on the virtual interface.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(0, 6),
+				Optional:     true,
+				Default:      3,
 			},
 			"create_time": {
 				Description: "The time when this managed object was created.",
@@ -106,9 +110,10 @@ func resourceVnicFcQosPolicy() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -122,10 +127,11 @@ func resourceVnicFcQosPolicy() *schema.Resource {
 					return
 				}},
 			"max_data_field_size": {
-				Description: "The maximum size of the Fibre Channel frame payload bytes that the virtual interface supports.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Default:     2112,
+				Description:  "The maximum size of the Fibre Channel frame payload bytes that the virtual interface supports.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(256, 2112),
+				Optional:     true,
+				Default:      2112,
 			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
@@ -146,9 +152,10 @@ func resourceVnicFcQosPolicy() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the concrete policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the concrete policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -203,7 +210,8 @@ func resourceVnicFcQosPolicy() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -295,10 +303,11 @@ func resourceVnicFcQosPolicy() *schema.Resource {
 					return
 				}},
 			"rate_limit": {
-				Description: "The value in Mbps to use for limiting the data rate on the virtual interface. Setting this to zero will turn rate limiting off.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Default:     0,
+				Description:  "The value in Mbps to use for limiting the data rate on the virtual interface. Setting this to zero will turn rate limiting off.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(0, 100000),
+				Optional:     true,
+				Default:      0,
 			},
 			"shared_scope": {
 				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
@@ -324,14 +333,16 @@ func resourceVnicFcQosPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -545,7 +556,7 @@ func resourceVnicFcQosPolicyCreate(c context.Context, d *schema.ResourceData, me
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -817,7 +828,7 @@ func resourceVnicFcQosPolicyUpdate(c context.Context, d *schema.ResourceData, me
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

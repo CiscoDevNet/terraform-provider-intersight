@@ -10,6 +10,7 @@ import (
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceOprsDeployment() *schema.Resource {
@@ -236,7 +237,8 @@ func resourceOprsDeployment() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -328,10 +330,11 @@ func resourceOprsDeployment() *schema.Resource {
 					return
 				}},
 			"status": {
-				Description: "Status which shows if the resource is healthy or not.\n* `` - An Unknown status indicates that the resource status is not known.\n* `Healthy` - A healthy status indicates that the resource is healthy and running as per spec.\n* `Unhealthy` - An unhealthy status indicates that the resource is down.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "",
+				Description:  "Status which shows if the resource is healthy or not.\n* `` - An Unknown status indicates that the resource status is not known.\n* `Healthy` - A healthy status indicates that the resource is healthy and running as per spec.\n* `Unhealthy` - An unhealthy status indicates that the resource is down.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"", "Healthy", "Unhealthy"}, false),
+				Optional:     true,
+				Default:      "",
 			},
 			"tags": {
 				Type:       schema.TypeList,
@@ -346,14 +349,16 @@ func resourceOprsDeployment() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -549,7 +554,7 @@ func resourceOprsDeploymentCreate(c context.Context, d *schema.ResourceData, met
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -870,7 +875,7 @@ func resourceOprsDeploymentUpdate(c context.Context, d *schema.ResourceData, met
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceUuidpoolPool() *schema.Resource {
@@ -88,10 +90,11 @@ func resourceUuidpoolPool() *schema.Resource {
 					return
 				}},
 			"assignment_order": {
-				Description: "Assignment order decides the order in which the next identifier is allocated.\n* `sequential` - Identifiers are assigned in a sequential order.\n* `default` - Assignment order is decided by the system.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "sequential",
+				Description:  "Assignment order decides the order in which the next identifier is allocated.\n* `sequential` - Identifiers are assigned in a sequential order.\n* `default` - Assignment order is decided by the system.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"sequential", "default"}, false),
+				Optional:     true,
+				Default:      "sequential",
 			},
 			"block_heads": {
 				Description: "An array of relationships to uuidpoolBlock resources.",
@@ -150,9 +153,10 @@ func resourceUuidpoolPool() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -184,9 +188,10 @@ func resourceUuidpoolPool() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the concrete policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the concrete policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -241,7 +246,8 @@ func resourceUuidpoolPool() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -322,9 +328,10 @@ func resourceUuidpoolPool() *schema.Resource {
 				},
 			},
 			"prefix": {
-				Description: "The UUID prefix must be in hexadecimal format xxxxxxxx-xxxx-xxxx.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "The UUID prefix must be in hexadecimal format xxxxxxxx-xxxx-xxxx.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}$"), ""),
+				Optional:     true,
 			},
 			"shared_scope": {
 				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
@@ -361,14 +368,16 @@ func resourceUuidpoolPool() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -392,9 +401,10 @@ func resourceUuidpoolPool() *schema.Resource {
 							Default:     "uuidpool.UuidBlock",
 						},
 						"from": {
-							Description: "Starting UUID suffix of the block must be in hexadecimal format xxxx-xxxxxxxxxxxx.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "Starting UUID suffix of the block must be in hexadecimal format xxxx-xxxxxxxxxxxx.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"), ""),
+							Optional:     true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -403,9 +413,10 @@ func resourceUuidpoolPool() *schema.Resource {
 							Default:     "uuidpool.UuidBlock",
 						},
 						"size": {
-							Description: "Number of identifiers this block can hold.",
-							Type:        schema.TypeInt,
-							Optional:    true,
+							Description:  "Number of identifiers this block can hold.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(1, 1024),
+							Optional:     true,
 							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
 								if new == "0" || new == "0.0" {
 									return true
@@ -414,9 +425,10 @@ func resourceUuidpoolPool() *schema.Resource {
 							},
 						},
 						"to": {
-							Description: "Starting UUID suffix of the block must be in hexadecimal format xxxx-xxxxxxxxxxxx.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "Starting UUID suffix of the block must be in hexadecimal format xxxx-xxxxxxxxxxxx.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"), ""),
+							Optional:     true,
 							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
 								if new == "" || new == "null" {
 									return true
@@ -626,7 +638,7 @@ func resourceUuidpoolPoolCreate(c context.Context, d *schema.ResourceData, meta 
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -938,7 +950,7 @@ func resourceUuidpoolPoolUpdate(c context.Context, d *schema.ResourceData, meta 
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

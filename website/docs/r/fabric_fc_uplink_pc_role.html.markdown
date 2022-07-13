@@ -22,7 +22,7 @@ resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role1" {
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 
-* `admin_speed`:(string) Admin configured speed for the port.* `Auto` - Admin configurable speed AUTO ( default ).* `8Gbps` - Admin configurable speed 8Gbps.* `16Gbps` - Admin configurable speed 16Gbps.* `32Gbps` - Admin configurable speed 32Gbps. 
+* `admin_speed`:(string) Admin configured speed for the port.* `16Gbps` - Admin configurable speed 16Gbps.* `8Gbps` - Admin configurable speed 8Gbps.* `32Gbps` - Admin configurable speed 32Gbps.* `Auto` - Admin configurable speed AUTO ( default ). 
 * `ancestors`:(Array)(ReadOnly) An array of relationships to moBaseMo resources. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 

@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceNotificationAccountSubscription() *schema.Resource {
@@ -222,9 +224,10 @@ func resourceNotificationAccountSubscription() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "The name of the subscription.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "The name of the subscription.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -238,7 +241,8 @@ func resourceNotificationAccountSubscription() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -342,30 +346,34 @@ func resourceNotificationAccountSubscription() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
 			},
 			"type": {
-				Description: "The chosen subscription type imposes it is own validation rules.\nWhen 'email' type is chosen, actions array can contain only one entry and it is entry should be of can\nbe only notification.SendEmail; conditions can contain only notification.AlarmMoCondition and condition\ntypes should be unique.\nWhen the 'webhook' type is chosen, the actions array can contain only one entry and it is entry should be of can\nbe only notification.TriggerWebhook; conditions can contain up to a limited amount of entries and all of them\nshould be of type notification.MoCondition.\n* `email` - Email type requires usage of notification.SendEmail complex types for actionsand notification.AlarmMoCondition complex types for conditions.\n* `webhook` - Webhook type requires usage of notification.TriggerWebhook complex types for actionsand notification.MoCondition complex types for conditions.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "email",
-				ForceNew:    true,
+				Description:  "The chosen subscription type imposes it is own validation rules.\nWhen 'email' type is chosen, actions array can contain only one entry and it is entry should be of can\nbe only notification.SendEmail; conditions can contain only notification.AlarmMoCondition and condition\ntypes should be unique.\nWhen the 'webhook' type is chosen, the actions array can contain only one entry and it is entry should be of can\nbe only notification.TriggerWebhook; conditions can contain up to a limited amount of entries and all of them\nshould be of type notification.MoCondition.\n* `email` - Email type requires usage of notification.SendEmail complex types for actionsand notification.AlarmMoCondition complex types for conditions.\n* `webhook` - Webhook type requires usage of notification.TriggerWebhook complex types for actionsand notification.MoCondition complex types for conditions.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"email", "webhook"}, false),
+				Optional:     true,
+				Default:      "email",
+				ForceNew:     true,
 			},
 			"verify": {
-				Description: "Used to verify the actions of the Subscription MO. For a 'webhook' type Ping event is sent to verify\nthat the webhook server is accessible. For an 'email' type there will be a verification email sent.\n* `none` - No actions will be verified. Default value.\n* `all` - All actions will be re-verified. The previous state of the verification will be preserved.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "none",
+				Description:  "Used to verify the actions of the Subscription MO. For a 'webhook' type Ping event is sent to verify\nthat the webhook server is accessible. For an 'email' type there will be a verification email sent.\n* `none` - No actions will be verified. Default value.\n* `all` - All actions will be re-verified. The previous state of the verification will be preserved.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"none", "all"}, false),
+				Optional:     true,
+				Default:      "none",
 			},
 			"version_context": {
 				Description: "The versioning info for this managed object.",

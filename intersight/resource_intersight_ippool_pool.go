@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceIppoolPool() *schema.Resource {
@@ -88,10 +90,11 @@ func resourceIppoolPool() *schema.Resource {
 					return
 				}},
 			"assignment_order": {
-				Description: "Assignment order decides the order in which the next identifier is allocated.\n* `sequential` - Identifiers are assigned in a sequential order.\n* `default` - Assignment order is decided by the system.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "sequential",
+				Description:  "Assignment order decides the order in which the next identifier is allocated.\n* `sequential` - Identifiers are assigned in a sequential order.\n* `default` - Assignment order is decided by the system.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"sequential", "default"}, false),
+				Optional:     true,
+				Default:      "sequential",
 			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
@@ -111,9 +114,10 @@ func resourceIppoolPool() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -145,9 +149,10 @@ func resourceIppoolPool() *schema.Resource {
 							Default:     "ippool.IpV4Block",
 						},
 						"from": {
-							Description: "First IPv4 address of the block.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "First IPv4 address of the block.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
+							Optional:     true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -156,9 +161,10 @@ func resourceIppoolPool() *schema.Resource {
 							Default:     "ippool.IpV4Block",
 						},
 						"size": {
-							Description: "Number of identifiers this block can hold.",
-							Type:        schema.TypeInt,
-							Optional:    true,
+							Description:  "Number of identifiers this block can hold.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(1, 1024),
+							Optional:     true,
 							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
 								if new == "0" || new == "0.0" {
 									return true
@@ -167,9 +173,10 @@ func resourceIppoolPool() *schema.Resource {
 							},
 						},
 						"to": {
-							Description: "Last IPv4 address of the block.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "Last IPv4 address of the block.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
+							Optional:     true,
 							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
 								if new == "" || new == "null" {
 									return true
@@ -201,14 +208,16 @@ func resourceIppoolPool() *schema.Resource {
 							Default:     "ippool.IpV4Config",
 						},
 						"gateway": {
-							Description: "IP address of the default IPv4 gateway.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "IP address of the default IPv4 gateway.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
+							Optional:     true,
 						},
 						"netmask": {
-							Description: "A subnet mask is a 32-bit number that masks an IP address and divides the IP address into network address and host address.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "A subnet mask is a 32-bit number that masks an IP address and divides the IP address into network address and host address.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^(((255\\.){3}(255|254|252|248|240|224|192|128|0+))|((255\\.){2}(255|254|252|248|240|224|192|128|0+)\\.0)|((255\\.)(255|254|252|248|240|224|192|128|0+)(\\.0+){2})|((255|254|252|248|240|224|192|128|0+)(\\.0+){3}))$"), ""),
+							Optional:     true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -217,14 +226,16 @@ func resourceIppoolPool() *schema.Resource {
 							Default:     "ippool.IpV4Config",
 						},
 						"primary_dns": {
-							Description: "IP Address of the primary Domain Name System (DNS) server.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "IP Address of the primary Domain Name System (DNS) server.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
+							Optional:     true,
 						},
 						"secondary_dns": {
-							Description: "IP Address of the secondary Domain Name System (DNS) server.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "IP Address of the secondary Domain Name System (DNS) server.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
+							Optional:     true,
 						},
 					},
 				},
@@ -248,9 +259,10 @@ func resourceIppoolPool() *schema.Resource {
 							Default:     "ippool.IpV6Block",
 						},
 						"from": {
-							Description: "First IPv6 address of the block.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "First IPv6 address of the block.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^(([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:)$"), ""),
+							Optional:     true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -259,14 +271,16 @@ func resourceIppoolPool() *schema.Resource {
 							Default:     "ippool.IpV6Block",
 						},
 						"size": {
-							Description: "Number of identifiers this block can hold.",
-							Type:        schema.TypeInt,
-							Optional:    true,
+							Description:  "Number of identifiers this block can hold.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(1, 1024),
+							Optional:     true,
 						},
 						"to": {
-							Description: "Last IPv6 address of the block.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "Last IPv6 address of the block.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^(([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:)$"), ""),
+							Optional:     true,
 						},
 					},
 				},
@@ -292,9 +306,10 @@ func resourceIppoolPool() *schema.Resource {
 							Default:     "ippool.IpV6Config",
 						},
 						"gateway": {
-							Description: "IP address of the default IPv6 gateway.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "IP address of the default IPv6 gateway.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^(([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:)$"), ""),
+							Optional:     true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -303,19 +318,22 @@ func resourceIppoolPool() *schema.Resource {
 							Default:     "ippool.IpV6Config",
 						},
 						"prefix": {
-							Description: "A prefix length which masks the  IP address and divides the IP address into network address and host address.",
-							Type:        schema.TypeInt,
-							Optional:    true,
+							Description:  "A prefix length which masks the  IP address and divides the IP address into network address and host address.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(0, 127),
+							Optional:     true,
 						},
 						"primary_dns": {
-							Description: "IP Address of the primary Domain Name System (DNS) server.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "IP Address of the primary Domain Name System (DNS) server.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^(([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:)$"), ""),
+							Optional:     true,
 						},
 						"secondary_dns": {
-							Description: "IP Address of the secondary Domain Name System (DNS) server.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "IP Address of the secondary Domain Name System (DNS) server.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^(([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:)$"), ""),
+							Optional:     true,
 						},
 					},
 				},
@@ -339,9 +357,10 @@ func resourceIppoolPool() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the concrete policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the concrete policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -396,7 +415,8 @@ func resourceIppoolPool() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -550,14 +570,16 @@ func resourceIppoolPool() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -841,7 +863,7 @@ func resourceIppoolPoolCreate(c context.Context, d *schema.ResourceData, meta in
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("ippool.IpV4Config")
 			if v, ok := l["gateway"]; ok {
 				{
 					x := (v.(string))
@@ -944,7 +966,7 @@ func resourceIppoolPoolCreate(c context.Context, d *schema.ResourceData, meta in
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("ippool.IpV6Config")
 			if v, ok := l["gateway"]; ok {
 				{
 					x := (v.(string))
@@ -1011,7 +1033,7 @@ func resourceIppoolPoolCreate(c context.Context, d *schema.ResourceData, meta in
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1327,7 +1349,7 @@ func resourceIppoolPoolUpdate(c context.Context, d *schema.ResourceData, meta in
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("ippool.IpV4Config")
 			if v, ok := l["gateway"]; ok {
 				{
 					x := (v.(string))
@@ -1430,7 +1452,7 @@ func resourceIppoolPoolUpdate(c context.Context, d *schema.ResourceData, meta in
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("ippool.IpV6Config")
 			if v, ok := l["gateway"]; ok {
 				{
 					x := (v.(string))
@@ -1500,7 +1522,7 @@ func resourceIppoolPoolUpdate(c context.Context, d *schema.ResourceData, meta in
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

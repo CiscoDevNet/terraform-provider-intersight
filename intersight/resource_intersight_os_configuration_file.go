@@ -6,11 +6,13 @@ import (
 	"fmt"
 	"log"
 	"reflect"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceOsConfigurationFile() *schema.Resource {
@@ -219,9 +221,10 @@ func resourceOsConfigurationFile() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "The name of the OS ConfigurationFile that uniquely identifies the configuration file.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "The name of the OS ConfigurationFile that uniquely identifies the configuration file.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9\\._\\-]+$"), ""), StringLenMaximum(64)),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -235,7 +238,8 @@ func resourceOsConfigurationFile() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -453,10 +457,11 @@ func resourceOsConfigurationFile() *schema.Resource {
 													Default:     "workflow.DisplayMeta",
 												},
 												"widget_type": {
-													Description: "Specify the widget type for data display.\n* `None` - Display none of the widget types.\n* `Radio` - Display the widget as a radio button.\n* `Dropdown` - Display the widget as a dropdown.\n* `GridSelector` - Display the widget as a selector.\n* `DrawerSelector` - Display the widget as a selector.",
-													Type:        schema.TypeString,
-													Optional:    true,
-													Default:     "None",
+													Description:  "Specify the widget type for data display.\n* `None` - Display none of the widget types.\n* `Radio` - Display the widget as a radio button.\n* `Dropdown` - Display the widget as a dropdown.\n* `GridSelector` - Display the widget as a selector.\n* `DrawerSelector` - Display the widget as a selector.",
+													Type:         schema.TypeString,
+													ValidateFunc: validation.StringInSlice([]string{"None", "Radio", "Dropdown", "GridSelector", "DrawerSelector"}, false),
+													Optional:     true,
+													Default:      "None",
 												},
 											},
 										},
@@ -467,14 +472,16 @@ func resourceOsConfigurationFile() *schema.Resource {
 										Optional:    true,
 									},
 									"label": {
-										Description: "Descriptive label for the data type. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), space ( ) or an underscore (_). The first and last character in label must be an alphanumeric character.",
-										Type:        schema.TypeString,
-										Optional:    true,
+										Description:  "Descriptive label for the data type. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), space ( ) or an underscore (_). The first and last character in label must be an alphanumeric character.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9]+[\\sa-zA-Z0-9_'.:-]{1,92}$"), ""), validation.StringLenBetween(1, 92)),
+										Optional:     true,
 									},
 									"name": {
-										Description: "Descriptive name for the data type. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_). The first and last character in name must be an alphanumeric character.",
-										Type:        schema.TypeString,
-										Optional:    true,
+										Description:  "Descriptive name for the data type. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_). The first and last character in name must be an alphanumeric character.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9]+([a-zA-Z0-9-_]*[a-zA-Z0-9])*$"), ""), validation.StringLenBetween(1, 92)),
+										Optional:     true,
 									},
 									"object_type": {
 										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -541,9 +548,10 @@ func resourceOsConfigurationFile() *schema.Resource {
 																			Default:     "workflow.EnumEntry",
 																		},
 																		"label": {
-																			Description: "Label for the enum value. A user friendly short string to identify the enum value. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), or an underscore (_) and must have an alphanumeric character.",
-																			Type:        schema.TypeString,
-																			Optional:    true,
+																			Description:  "Label for the enum value. A user friendly short string to identify the enum value. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), or an underscore (_) and must have an alphanumeric character.",
+																			Type:         schema.TypeString,
+																			ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9]+[+\\s\\/a-zA-Z0-9_'.:-]{0,92}$"), ""),
+																			Optional:     true,
 																		},
 																		"object_type": {
 																			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -552,9 +560,10 @@ func resourceOsConfigurationFile() *schema.Resource {
 																			Default:     "workflow.EnumEntry",
 																		},
 																		"value": {
-																			Description: "Enum value for this enum entry. Value will be passed to the workflow as string type for execution. Value can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), forward slash (/), or an underscore (_).",
-																			Type:        schema.TypeString,
-																			Optional:    true,
+																			Description:  "Enum value for this enum entry. Value will be passed to the workflow as string type for execution. Value can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), forward slash (/), or an underscore (_).",
+																			Type:         schema.TypeString,
+																			ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]*[+\\s\\/a-zA-Z0-9_.:-]{1,64}$"), ""),
+																			Optional:     true,
 																		},
 																	},
 																},
@@ -603,11 +612,13 @@ func resourceOsConfigurationFile() *schema.Resource {
 															},
 															"display_attributes": {
 																Type:       schema.TypeList,
+																MinItems:   1,
 																Optional:   true,
 																ConfigMode: schema.SchemaConfigModeAttr,
 																Computed:   true,
 																Elem: &schema.Schema{
-																	Type: schema.TypeString}},
+																	Type: schema.TypeString,
+																}},
 															"object_type": {
 																Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 																Type:        schema.TypeString,
@@ -615,9 +626,10 @@ func resourceOsConfigurationFile() *schema.Resource {
 																Default:     "workflow.MoReferenceProperty",
 															},
 															"selector": {
-																Description: "Field to hold an Intersight API along with an optional filter to narrow down the search options.",
-																Type:        schema.TypeString,
-																Optional:    true,
+																Description:  "Field to hold an Intersight API along with an optional filter to narrow down the search options.",
+																Type:         schema.TypeString,
+																ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|/api/v1/.*"), ""),
+																Optional:     true,
 															},
 															"selector_property": {
 																Description: "Selector properties to define HTTP method and 'body' in case of upsert operation.",
@@ -645,10 +657,11 @@ func resourceOsConfigurationFile() *schema.Resource {
 																			Default:     "workflow.SelectorProperty",
 																		},
 																		"method": {
-																			Description: "The HTTP method to be used.\n* `GET` - The HTTP GET method requests a representation of the specified resource.\n* `POST` - The HTTP POST method sends data to the server.",
-																			Type:        schema.TypeString,
-																			Optional:    true,
-																			Default:     "GET",
+																			Description:  "The HTTP method to be used.\n* `GET` - The HTTP GET method requests a representation of the specified resource.\n* `POST` - The HTTP POST method sends data to the server.",
+																			Type:         schema.TypeString,
+																			ValidateFunc: validation.StringInSlice([]string{"GET", "POST"}, false),
+																			Optional:     true,
+																			Default:      "GET",
 																		},
 																		"object_type": {
 																			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -679,10 +692,11 @@ func resourceOsConfigurationFile() *schema.Resource {
 													Optional:    true,
 												},
 												"type": {
-													Description: "Specify the enum type for primitive data type.\n* `string` - Enum to specify a string data type.\n* `integer` - Enum to specify an integer32 data type.\n* `float` - Enum to specify a float64 data type.\n* `boolean` - Enum to specify a boolean data type.\n* `json` - Enum to specify a json data type.\n* `enum` - Enum to specify a enum data type which is a list of pre-defined strings.",
-													Type:        schema.TypeString,
-													Optional:    true,
-													Default:     "string",
+													Description:  "Specify the enum type for primitive data type.\n* `string` - Enum to specify a string data type.\n* `integer` - Enum to specify an integer32 data type.\n* `float` - Enum to specify a float64 data type.\n* `boolean` - Enum to specify a boolean data type.\n* `json` - Enum to specify a json data type.\n* `enum` - Enum to specify a enum data type which is a list of pre-defined strings.",
+													Type:         schema.TypeString,
+													ValidateFunc: validation.StringInSlice([]string{"string", "integer", "float", "boolean", "json", "enum"}, false),
+													Optional:     true,
+													Default:      "string",
 												},
 											},
 										},
@@ -738,14 +752,16 @@ func resourceOsConfigurationFile() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -925,7 +941,7 @@ func resourceOsConfigurationFileCreate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1069,7 +1085,7 @@ func resourceOsConfigurationFileCreate(c context.Context, d *schema.ResourceData
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("workflow.PrimitiveDataType")
 						if v, ok := l["default"]; ok {
 							{
 								p := make([]models.WorkflowDefaultValue, 0, 1)
@@ -1087,7 +1103,7 @@ func resourceOsConfigurationFileCreate(c context.Context, d *schema.ResourceData
 											}
 										}
 									}
-									o.SetClassId("")
+									o.SetClassId("workflow.DefaultValue")
 									if v, ok := l["object_type"]; ok {
 										{
 											x := (v.(string))
@@ -1142,7 +1158,7 @@ func resourceOsConfigurationFileCreate(c context.Context, d *schema.ResourceData
 											}
 										}
 									}
-									o.SetClassId("")
+									o.SetClassId("workflow.DisplayMeta")
 									if v, ok := l["inventory_selector"]; ok {
 										{
 											x := (v.(bool))
@@ -1215,7 +1231,7 @@ func resourceOsConfigurationFileCreate(c context.Context, d *schema.ResourceData
 											}
 										}
 									}
-									o.SetClassId("")
+									o.SetClassId("workflow.PrimitiveDataProperty")
 									if v, ok := l["constraints"]; ok {
 										{
 											p := make([]models.WorkflowConstraints, 0, 1)
@@ -1233,7 +1249,7 @@ func resourceOsConfigurationFileCreate(c context.Context, d *schema.ResourceData
 														}
 													}
 												}
-												o.SetClassId("")
+												o.SetClassId("workflow.Constraints")
 												if v, ok := l["enum_list"]; ok {
 													{
 														x := make([]models.WorkflowEnumEntry, 0)
@@ -1381,7 +1397,7 @@ func resourceOsConfigurationFileCreate(c context.Context, d *schema.ResourceData
 																	}
 																}
 															}
-															o.SetClassId("")
+															o.SetClassId("workflow.SelectorProperty")
 															if v, ok := l["method"]; ok {
 																{
 																	x := (v.(string))
@@ -1673,7 +1689,7 @@ func resourceOsConfigurationFileUpdate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1822,7 +1838,7 @@ func resourceOsConfigurationFileUpdate(c context.Context, d *schema.ResourceData
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("workflow.PrimitiveDataType")
 						if v, ok := l["default"]; ok {
 							{
 								p := make([]models.WorkflowDefaultValue, 0, 1)
@@ -1840,7 +1856,7 @@ func resourceOsConfigurationFileUpdate(c context.Context, d *schema.ResourceData
 											}
 										}
 									}
-									o.SetClassId("")
+									o.SetClassId("workflow.DefaultValue")
 									if v, ok := l["object_type"]; ok {
 										{
 											x := (v.(string))
@@ -1895,7 +1911,7 @@ func resourceOsConfigurationFileUpdate(c context.Context, d *schema.ResourceData
 											}
 										}
 									}
-									o.SetClassId("")
+									o.SetClassId("workflow.DisplayMeta")
 									if v, ok := l["inventory_selector"]; ok {
 										{
 											x := (v.(bool))
@@ -1968,7 +1984,7 @@ func resourceOsConfigurationFileUpdate(c context.Context, d *schema.ResourceData
 											}
 										}
 									}
-									o.SetClassId("")
+									o.SetClassId("workflow.PrimitiveDataProperty")
 									if v, ok := l["constraints"]; ok {
 										{
 											p := make([]models.WorkflowConstraints, 0, 1)
@@ -1986,7 +2002,7 @@ func resourceOsConfigurationFileUpdate(c context.Context, d *schema.ResourceData
 														}
 													}
 												}
-												o.SetClassId("")
+												o.SetClassId("workflow.Constraints")
 												if v, ok := l["enum_list"]; ok {
 													{
 														x := make([]models.WorkflowEnumEntry, 0)
@@ -2134,7 +2150,7 @@ func resourceOsConfigurationFileUpdate(c context.Context, d *schema.ResourceData
 																	}
 																}
 															}
-															o.SetClassId("")
+															o.SetClassId("workflow.SelectorProperty")
 															if v, ok := l["method"]; ok {
 																{
 																	x := (v.(string))

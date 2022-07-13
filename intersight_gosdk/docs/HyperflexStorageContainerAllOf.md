@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.StorageContainer"]
 **AccessibilitySummary** | Pointer to **string** | Storage container accessibility summary. * &#x60;NOT_APPLICABLE&#x60; - The HyperFlex storage container accessibility summary is not applicable. * &#x60;ACCESSIBLE&#x60; - The HyperFlex storage container is accessible. * &#x60;NOT_ACCESSIBLE&#x60; - The HyperFlex storage container is not accessible. * &#x60;PARTIALLY_ACCESSIBLE&#x60; - The HyperFlex storage container is partially accessible. | [optional] [readonly] [default to "NOT_APPLICABLE"]
 **DataBlockSize** | Pointer to **int64** | Storage container data block size in bytes. | [optional] [readonly] 
+**EncryptionEnabled** | Pointer to **bool** | Indicate if encryption is enabled on this storage container. | [optional] [readonly] 
 **HostMountStatus** | Pointer to [**[]StorageStorageContainerHostMountStatus**](StorageStorageContainerHostMountStatus.md) |  | [optional] 
 **InUse** | Pointer to **bool** | Indicates whether the storage container has volumes. | [optional] [readonly] 
 **Kind** | Pointer to **string** | Indicates whether the storage container was user-created, or system-created. * &#x60;UNKNOWN&#x60; - The storage container creator is unknown. * &#x60;USER_CREATED&#x60; - The storage container was created by a user action. * &#x60;INTERNAL&#x60; - The storage container was created by the system. | [optional] [readonly] [default to "UNKNOWN"]
@@ -132,6 +133,31 @@ SetDataBlockSize sets DataBlockSize field to given value.
 `func (o *HyperflexStorageContainerAllOf) HasDataBlockSize() bool`
 
 HasDataBlockSize returns a boolean if a field has been set.
+
+### GetEncryptionEnabled
+
+`func (o *HyperflexStorageContainerAllOf) GetEncryptionEnabled() bool`
+
+GetEncryptionEnabled returns the EncryptionEnabled field if non-nil, zero value otherwise.
+
+### GetEncryptionEnabledOk
+
+`func (o *HyperflexStorageContainerAllOf) GetEncryptionEnabledOk() (*bool, bool)`
+
+GetEncryptionEnabledOk returns a tuple with the EncryptionEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEncryptionEnabled
+
+`func (o *HyperflexStorageContainerAllOf) SetEncryptionEnabled(v bool)`
+
+SetEncryptionEnabled sets EncryptionEnabled field to given value.
+
+### HasEncryptionEnabled
+
+`func (o *HyperflexStorageContainerAllOf) HasEncryptionEnabled() bool`
+
+HasEncryptionEnabled returns a boolean if a field has been set.
 
 ### GetHostMountStatus
 

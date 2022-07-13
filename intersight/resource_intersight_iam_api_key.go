@@ -10,6 +10,7 @@ import (
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceIamApiKey() *schema.Resource {
@@ -105,11 +106,12 @@ func resourceIamApiKey() *schema.Resource {
 					return
 				}},
 			"hash_algorithm": {
-				Description: "The cryptographic hash algorithm to calculate the message digest.\n* `SHA256` - The SHA-256 cryptographic hash, as defined by NIST in FIPS 180-4.\n* `SHA384` - The SHA-384 cryptographic hash, as defined by NIST in FIPS 180-4.\n* `SHA512` - The SHA-512 cryptographic hash, as defined by NIST in FIPS 180-4.\n* `SHA512_224` - The SHA-512/224 cryptographic hash, as defined by NIST in FIPS 180-4.\n* `SHA512_256` - The SHA-512/256 cryptographic hash, as defined by NIST in FIPS 180-4.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "SHA256",
-				ForceNew:    true,
+				Description:  "The cryptographic hash algorithm to calculate the message digest.\n* `SHA256` - The SHA-256 cryptographic hash, as defined by NIST in FIPS 180-4.\n* `SHA384` - The SHA-384 cryptographic hash, as defined by NIST in FIPS 180-4.\n* `SHA512` - The SHA-512 cryptographic hash, as defined by NIST in FIPS 180-4.\n* `SHA512_224` - The SHA-512/224 cryptographic hash, as defined by NIST in FIPS 180-4.\n* `SHA512_256` - The SHA-512/256 cryptographic hash, as defined by NIST in FIPS 180-4.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"SHA256", "SHA384", "SHA512", "SHA512_224", "SHA512_256"}, false),
+				Optional:     true,
+				Default:      "SHA256",
+				ForceNew:     true,
 			},
 			"key_spec": {
 				Description: "The key generation specification provides the algorithm and the parameters required for this algorithm to generate a private key, public key pair. Supported key generation schemes include RSA, ECDSA and Edwards-Curve Digital Signature Algorithm (EdDSA).",
@@ -182,7 +184,8 @@ func resourceIamApiKey() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -330,11 +333,12 @@ func resourceIamApiKey() *schema.Resource {
 					return
 				}},
 			"signing_algorithm": {
-				Description: "The signing algorithm used by the client to authenticate API requests to Intersight.\nThe signing algorithm must be compatible with the key generation specification.\n* `RSASSA-PKCS1-v1_5` - RSASSA-PKCS1-v1_5 is a RSA signature scheme specified in [RFC 8017](https://tools.ietf.org/html/rfc8017).RSASSA-PKCS1-v1_5 is included only for compatibility with existing applications.\n* `RSASSA-PSS` - RSASSA-PSS is a RSA signature scheme specified in [RFC 8017](https://tools.ietf.org/html/rfc8017).It combines the RSASP1 and RSAVP1 primitives with the EMSA-PSS encoding method.In the interest of increased robustness, RSASSA-PSS is required in new applications.\n* `Ed25519` - The Ed25519 signature algorithm, as specified in [RFC 8032](https://tools.ietf.org/html/rfc8032).Ed25519 is a public-key signature system with several attractive features, includingfast single-signature verification, very fast signing, fast key generation and high security level.\n* `Ecdsa` - The Elliptic Curve Digital Signature Standard (ECDSA), as defined by NIST in FIPS 186-4 and ANSI X9.62.The signature is encoded as a ASN.1 DER SEQUENCE with two INTEGERs (r and s), as defined in RFC3279.When using ECDSA signatures, configure the client to use the same signature encoding as specified on the server side.\n* `EcdsaP1363Format` - The Elliptic Curve Digital Signature Standard (ECDSA), as defined by NIST in FIPS 186-4 and ANSI X9.62.The signature is the raw concatenation of r and s, as defined in the ISO/IEC 7816-8 IEEE P.1363 standard.In that format, r and s are represented as unsigned, big endian numbers.Extra padding bytes (of value 0x00) is applied so that both r and s encodings have the same size.When using ECDSA signatures, configure the client to use the same signature encoding as specified on the server side.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "RSASSA-PKCS1-v1_5",
-				ForceNew:    true,
+				Description:  "The signing algorithm used by the client to authenticate API requests to Intersight.\nThe signing algorithm must be compatible with the key generation specification.\n* `RSASSA-PKCS1-v1_5` - RSASSA-PKCS1-v1_5 is a RSA signature scheme specified in [RFC 8017](https://tools.ietf.org/html/rfc8017).RSASSA-PKCS1-v1_5 is included only for compatibility with existing applications.\n* `RSASSA-PSS` - RSASSA-PSS is a RSA signature scheme specified in [RFC 8017](https://tools.ietf.org/html/rfc8017).It combines the RSASP1 and RSAVP1 primitives with the EMSA-PSS encoding method.In the interest of increased robustness, RSASSA-PSS is required in new applications.\n* `Ed25519` - The Ed25519 signature algorithm, as specified in [RFC 8032](https://tools.ietf.org/html/rfc8032).Ed25519 is a public-key signature system with several attractive features, includingfast single-signature verification, very fast signing, fast key generation and high security level.\n* `Ecdsa` - The Elliptic Curve Digital Signature Standard (ECDSA), as defined by NIST in FIPS 186-4 and ANSI X9.62.The signature is encoded as a ASN.1 DER SEQUENCE with two INTEGERs (r and s), as defined in RFC3279.When using ECDSA signatures, configure the client to use the same signature encoding as specified on the server side.\n* `EcdsaP1363Format` - The Elliptic Curve Digital Signature Standard (ECDSA), as defined by NIST in FIPS 186-4 and ANSI X9.62.The signature is the raw concatenation of r and s, as defined in the ISO/IEC 7816-8 IEEE P.1363 standard.In that format, r and s are represented as unsigned, big endian numbers.Extra padding bytes (of value 0x00) is applied so that both r and s encodings have the same size.When using ECDSA signatures, configure the client to use the same signature encoding as specified on the server side.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"RSASSA-PKCS1-v1_5", "RSASSA-PSS", "Ed25519", "Ecdsa", "EcdsaP1363Format"}, false),
+				Optional:     true,
+				Default:      "RSASSA-PKCS1-v1_5",
+				ForceNew:     true,
 			},
 			"tags": {
 				Type:       schema.TypeList,
@@ -349,14 +353,16 @@ func resourceIamApiKey() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -583,7 +589,7 @@ func resourceIamApiKeyCreate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("pkix.KeyGenerationSpec")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -829,7 +835,7 @@ func resourceIamApiKeyUpdate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("pkix.KeyGenerationSpec")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))

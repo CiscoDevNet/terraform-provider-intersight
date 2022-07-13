@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceHyperflexClusterStoragePolicy() *schema.Resource {
@@ -133,9 +135,10 @@ func resourceHyperflexClusterStoragePolicy() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"disk_partition_cleanup": {
 				Description: "If enabled, formats existing disk partitions (destroys all user data).",
@@ -208,9 +211,10 @@ func resourceHyperflexClusterStoragePolicy() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the concrete policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the concrete policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -265,7 +269,8 @@ func resourceHyperflexClusterStoragePolicy() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -369,14 +374,16 @@ func resourceHyperflexClusterStoragePolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -621,7 +628,7 @@ func resourceHyperflexClusterStoragePolicyCreate(c context.Context, d *schema.Re
 					o.SetAutoConfig(x)
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("hyperflex.LogicalAvailabilityZone")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -664,7 +671,7 @@ func resourceHyperflexClusterStoragePolicyCreate(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -953,7 +960,7 @@ func resourceHyperflexClusterStoragePolicyUpdate(c context.Context, d *schema.Re
 					o.SetAutoConfig(x)
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("hyperflex.LogicalAvailabilityZone")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -999,7 +1006,7 @@ func resourceHyperflexClusterStoragePolicyUpdate(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

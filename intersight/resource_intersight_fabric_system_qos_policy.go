@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceFabricSystemQosPolicy() *schema.Resource {
@@ -95,15 +97,17 @@ func resourceFabricSystemQosPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"admin_state": {
-							Description: "Administrative state for this QoS class.\n* `Disabled` - Admin configured Disabled State.\n* `Enabled` - Admin configured Enabled State.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "Disabled",
+							Description:  "Administrative state for this QoS class.\n* `Disabled` - Admin configured Disabled State.\n* `Enabled` - Admin configured Enabled State.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"Disabled", "Enabled"}, false),
+							Optional:     true,
+							Default:      "Disabled",
 						},
 						"bandwidth_percent": {
-							Description: "Percentage of bandwidth received by the traffic tagged with this QoS.",
-							Type:        schema.TypeInt,
-							Optional:    true,
+							Description:  "Percentage of bandwidth received by the traffic tagged with this QoS.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(0, 100),
+							Optional:     true,
 						},
 						"class_id": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
@@ -112,15 +116,17 @@ func resourceFabricSystemQosPolicy() *schema.Resource {
 							Default:     "fabric.QosClass",
 						},
 						"cos": {
-							Description: "Class of service received by the traffic tagged with this QoS.",
-							Type:        schema.TypeInt,
-							Optional:    true,
+							Description:  "Class of service received by the traffic tagged with this QoS.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(0, 255),
+							Optional:     true,
 						},
 						"mtu": {
-							Description: "Maximum transmission unit (MTU) is the largest size packet or frame,\nthat can be sent in a packet- or frame-based network such as the Internet.\nUser can select from the following:\n1. Any value between 1500 and 9216\n2. 'Normal' (default) mapping to a value of 1500.\n3. 'FC' mapping to a value of 2240.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     1500,
+							Description:  "Maximum transmission unit (MTU) is the largest size packet or frame,\nthat can be sent in a packet- or frame-based network such as the Internet.\nUser can select from the following:\n1. Any value between 1500 and 9216\n2. 'Normal' (default) mapping to a value of 1500.\n3. 'FC' mapping to a value of 2240.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(1500, 9216),
+							Optional:     true,
+							Default:      1500,
 						},
 						"multicast_optimize": {
 							Description: "If enabled, this QoS class will be optimized to send multiple packets.",
@@ -129,10 +135,11 @@ func resourceFabricSystemQosPolicy() *schema.Resource {
 							Default:     false,
 						},
 						"name": {
-							Description: "The 'name' of this QoS Class.\n* `Best Effort` - QoS Priority for Best-effort traffic.\n* `FC` - QoS Priority for FC traffic.\n* `Platinum` - QoS Priority for Platinum traffic.\n* `Gold` - QoS Priority for Gold traffic.\n* `Silver` - QoS Priority for Silver traffic.\n* `Bronze` - QoS Priority for Bronze traffic.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "Best Effort",
+							Description:  "The 'name' of this QoS Class.\n* `Best Effort` - QoS Priority for Best-effort traffic.\n* `FC` - QoS Priority for FC traffic.\n* `Platinum` - QoS Priority for Platinum traffic.\n* `Gold` - QoS Priority for Gold traffic.\n* `Silver` - QoS Priority for Silver traffic.\n* `Bronze` - QoS Priority for Bronze traffic.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"Best Effort", "FC", "Platinum", "Gold", "Silver", "Bronze"}, false),
+							Optional:     true,
+							Default:      "Best Effort",
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -147,9 +154,10 @@ func resourceFabricSystemQosPolicy() *schema.Resource {
 							Default:     true,
 						},
 						"weight": {
-							Description: "The weight of the QoS Class controls the distribution of bandwidth between QoS Classes,\nwith the same priority after the Guarantees for the QoS Classes are reached.",
-							Type:        schema.TypeInt,
-							Optional:    true,
+							Description:  "The weight of the QoS Class controls the distribution of bandwidth between QoS Classes,\nwith the same priority after the Guarantees for the QoS Classes are reached.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(0, 10),
+							Optional:     true,
 						},
 					},
 				},
@@ -166,9 +174,10 @@ func resourceFabricSystemQosPolicy() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -200,9 +209,10 @@ func resourceFabricSystemQosPolicy() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the concrete policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the concrete policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -257,7 +267,8 @@ func resourceFabricSystemQosPolicy() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -400,14 +411,16 @@ func resourceFabricSystemQosPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -684,7 +697,7 @@ func resourceFabricSystemQosPolicyCreate(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1040,7 +1053,7 @@ func resourceFabricSystemQosPolicyUpdate(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

@@ -706,7 +706,7 @@ func dataSourceVrfVrfRead(c context.Context, d *schema.ResourceData, meta interf
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -854,7 +854,7 @@ func dataSourceVrfVrfRead(c context.Context, d *schema.ResourceData, meta interf
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -975,7 +975,7 @@ func dataSourceVrfVrfRead(c context.Context, d *schema.ResourceData, meta interf
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.VersionContext")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -1037,7 +1037,7 @@ func dataSourceVrfVrfRead(c context.Context, d *schema.ResourceData, meta interf
 	if err != nil {
 		return diag.Errorf("json marshal of VrfVrf object failed with error : %s", err.Error())
 	}
-	countResponse, _, responseErr := conn.ApiClient.VrfApi.GetVrfVrfList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
+	countResponse, _, responseErr := conn.ApiClient.VrfApi.GetVrfVrfList(conn.ctx).Filter(getRequestParams(data)).Count(true).Execute()
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
@@ -1046,13 +1046,12 @@ func dataSourceVrfVrfRead(c context.Context, d *schema.ResourceData, meta interf
 		}
 		return diag.Errorf("error occurred while fetching count of VrfVrf: %s", responseErr.Error())
 	}
-	count := countResponse.VrfVrfList.GetCount()
+	count := countResponse.MoDocumentCount.GetCount()
 	if count == 0 {
 		return diag.Errorf("your query for VrfVrf data source did not return any results. Please change your search criteria and try again")
 	}
 	var i int32
-	var vrfVrfResults = make([]map[string]interface{}, count, count)
-	var j = 0
+	var vrfVrfResults = make([]map[string]interface{}, 0, 0)
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.VrfApi.GetVrfVrfList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
@@ -1066,8 +1065,8 @@ func dataSourceVrfVrfRead(c context.Context, d *schema.ResourceData, meta interf
 		results := resMo.VrfVrfList.GetResults()
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
-			for i := 0; i < len(results); i++ {
-				var s = results[i]
+			for k := 0; k < len(results); k++ {
+				var s = results[k]
 				var temp = make(map[string]interface{})
 
 				temp["account"] = flattenMapIamAccountRelationship(s.GetAccount(), d)
@@ -1095,8 +1094,7 @@ func dataSourceVrfVrfRead(c context.Context, d *schema.ResourceData, meta interf
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
-				vrfVrfResults[j] = temp
-				j += 1
+				vrfVrfResults = append(vrfVrfResults, temp)
 			}
 		}
 	}

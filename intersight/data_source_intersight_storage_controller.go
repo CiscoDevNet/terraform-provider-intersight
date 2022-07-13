@@ -59,6 +59,41 @@ func dataSourceStorageController() *schema.Resource {
 				},
 			},
 		},
+		"backup_battery_unit": {
+			Description: "A reference to a storageBatteryBackupUnit resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 			Type:        schema.TypeString,
@@ -936,6 +971,41 @@ func dataSourceStorageController() *schema.Resource {
 		"ancestors": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"backup_battery_unit": {
+			Description: "A reference to a storageBatteryBackupUnit resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
 			Optional:    true,
 			Elem: &schema.Resource{
 				Schema: map[string]*schema.Schema{
@@ -1900,6 +1970,49 @@ func dataSourceStorageControllerRead(c context.Context, d *schema.ResourceData, 
 		o.SetAncestors(x)
 	}
 
+	if v, ok := d.GetOk("backup_battery_unit"); ok {
+		p := make([]models.StorageBatteryBackupUnitRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsStorageBatteryBackupUnitRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetBackupBatteryUnit(x)
+		}
+	}
+
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
@@ -1921,7 +2034,7 @@ func dataSourceStorageControllerRead(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1964,7 +2077,7 @@ func dataSourceStorageControllerRead(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2007,7 +2120,7 @@ func dataSourceStorageControllerRead(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2195,7 +2308,7 @@ func dataSourceStorageControllerRead(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2299,7 +2412,7 @@ func dataSourceStorageControllerRead(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2487,7 +2600,7 @@ func dataSourceStorageControllerRead(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2545,7 +2658,7 @@ func dataSourceStorageControllerRead(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2711,7 +2824,7 @@ func dataSourceStorageControllerRead(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.VersionContext")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -2853,7 +2966,7 @@ func dataSourceStorageControllerRead(c context.Context, d *schema.ResourceData, 
 	if err != nil {
 		return diag.Errorf("json marshal of StorageController object failed with error : %s", err.Error())
 	}
-	countResponse, _, responseErr := conn.ApiClient.StorageApi.GetStorageControllerList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
+	countResponse, _, responseErr := conn.ApiClient.StorageApi.GetStorageControllerList(conn.ctx).Filter(getRequestParams(data)).Count(true).Execute()
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
@@ -2862,13 +2975,12 @@ func dataSourceStorageControllerRead(c context.Context, d *schema.ResourceData, 
 		}
 		return diag.Errorf("error occurred while fetching count of StorageController: %s", responseErr.Error())
 	}
-	count := countResponse.StorageControllerList.GetCount()
+	count := countResponse.MoDocumentCount.GetCount()
 	if count == 0 {
 		return diag.Errorf("your query for StorageController data source did not return any results. Please change your search criteria and try again")
 	}
 	var i int32
-	var storageControllerResults = make([]map[string]interface{}, count, count)
-	var j = 0
+	var storageControllerResults = make([]map[string]interface{}, 0, 0)
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.StorageApi.GetStorageControllerList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
@@ -2882,13 +2994,15 @@ func dataSourceStorageControllerRead(c context.Context, d *schema.ResourceData, 
 		results := resMo.StorageControllerList.GetResults()
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
-			for i := 0; i < len(results); i++ {
-				var s = results[i]
+			for k := 0; k < len(results); k++ {
+				var s = results[k]
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
+
+				temp["backup_battery_unit"] = flattenMapStorageBatteryBackupUnitRelationship(s.GetBackupBatteryUnit(), d)
 				temp["class_id"] = (s.GetClassId())
 
 				temp["compute_blade"] = flattenMapComputeBladeRelationship(s.GetComputeBlade(), d)
@@ -2968,8 +3082,7 @@ func dataSourceStorageControllerRead(c context.Context, d *schema.ResourceData, 
 				temp["virtual_drive_extensions"] = flattenListStorageVirtualDriveExtensionRelationship(s.GetVirtualDriveExtensions(), d)
 
 				temp["virtual_drives"] = flattenListStorageVirtualDriveRelationship(s.GetVirtualDrives(), d)
-				storageControllerResults[j] = temp
-				j += 1
+				storageControllerResults = append(storageControllerResults, temp)
 			}
 		}
 	}

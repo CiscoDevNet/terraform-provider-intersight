@@ -10,6 +10,7 @@ import (
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceWorkflowServiceItemActionInstance() *schema.Resource {
@@ -33,10 +34,11 @@ func resourceWorkflowServiceItemActionInstance() *schema.Resource {
 					return
 				}},
 			"action": {
-				Description: "Name of the action that needs to be performed on the service item instance.\n* `None` - No action is set, this is the default value for action field.\n* `Validate` - Validate the action instance inputs and run the validation workflows.\n* `Start` - Start a new execution of the action instance.\n* `Retry` - Retry the service item action instance from the beginning.\n* `RetryFailed` - Retry the workflow that has failed from the failure point.\n* `Cancel` - Cancel the core workflow that is in running or waiting state. This action can be used when the workflows are stuck and not progressing.\n* `Stop` - Stop the action instance which is in progress and didn't complete successfully. Use this action to clear the state and then delete the action instance. A completed action cannot be stopped.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "None",
+				Description:  "Name of the action that needs to be performed on the service item instance.\n* `None` - No action is set, this is the default value for action field.\n* `Validate` - Validate the action instance inputs and run the validation workflows.\n* `Start` - Start a new execution of the action instance.\n* `Retry` - Retry the service item action instance from the beginning.\n* `RetryFailed` - Retry the workflow that has failed from the failure point.\n* `Cancel` - Cancel the core workflow that is in running or waiting state. This action can be used when the workflows are stuck and not progressing.\n* `Stop` - Stop the action instance which is in progress and didn't complete successfully. Use this action to clear the state and then delete the action instance. A completed action cannot be stopped.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"None", "Validate", "Start", "Retry", "RetryFailed", "Cancel", "Stop"}, false),
+				Optional:     true,
+				Default:      "None",
 			},
 			"action_workflow_info": {
 				Description: "A reference to a workflowWorkflowInfo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -218,7 +220,8 @@ func resourceWorkflowServiceItemActionInstance() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -506,14 +509,16 @@ func resourceWorkflowServiceItemActionInstance() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -762,7 +767,7 @@ func resourceWorkflowServiceItemActionInstanceCreate(c context.Context, d *schem
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -805,7 +810,7 @@ func resourceWorkflowServiceItemActionInstanceCreate(c context.Context, d *schem
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1134,7 +1139,7 @@ func resourceWorkflowServiceItemActionInstanceUpdate(c context.Context, d *schem
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1178,7 +1183,7 @@ func resourceWorkflowServiceItemActionInstanceUpdate(c context.Context, d *schem
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

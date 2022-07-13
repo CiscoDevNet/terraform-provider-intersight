@@ -13,6 +13,7 @@ import (
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceFirmwareUpgradeImpact() *schema.Resource {
@@ -144,14 +145,17 @@ func resourceFirmwareUpgradeImpact() *schema.Resource {
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Computed:   true,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}, ForceNew: true,
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"ALL", "ALL,HDD", "Drive-U.2", "Storage", "None", "NXOS", "IOM", "PSU", "CIMC", "BIOS", "PCIE", "Drive", "DIMM", "BoardController", "StorageController", "Storage-Sasexpander", "Storage-U.2", "HBA", "GPU", "SasExpander", "MSwitch", "CMC"}, false),
+				}, ForceNew: true,
 			},
 			"computation_state": {
-				Description: "Captures the status of an upgrade impact calculation. Indicates whether the calculation is complete, in progress or the calculation is impossible due to the absence of the target image on the endpoint.\n* `Inprogress` - Upgrade impact calculation is in progress.\n* `Completed` - Upgrade impact calculation is completed.\n* `Unavailable` - Upgrade impact is not available since image is not present in FI.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "Inprogress",
-				ForceNew:    true,
+				Description:  "Captures the status of an upgrade impact calculation. Indicates whether the calculation is complete, in progress or the calculation is impossible due to the absence of the target image on the endpoint.\n* `Inprogress` - Upgrade impact calculation is in progress.\n* `Completed` - Upgrade impact calculation is completed.\n* `Unavailable` - Upgrade impact is not available since image is not present in FI.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Inprogress", "Completed", "Unavailable"}, false),
+				Optional:     true,
+				Default:      "Inprogress",
+				ForceNew:     true,
 			},
 			"create_time": {
 				Description: "The time when this managed object was created.",
@@ -274,7 +278,9 @@ func resourceFirmwareUpgradeImpact() *schema.Resource {
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Computed:   true,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}, ForceNew: true,
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"ALL", "ALL,HDD", "Drive-U.2", "Storage", "None", "NXOS", "IOM", "PSU", "CIMC", "BIOS", "PCIE", "Drive", "DIMM", "BoardController", "StorageController", "Storage-Sasexpander", "Storage-U.2", "HBA", "GPU", "SasExpander", "MSwitch", "CMC"}, false),
+				}, ForceNew: true,
 			},
 			"impacts": {
 				Type:       schema.TypeList,
@@ -303,11 +309,12 @@ func resourceFirmwareUpgradeImpact() *schema.Resource {
 							ForceNew:    true,
 						},
 						"computation_status_detail": {
-							Description: "The computation status of the estimate operation for a component.\n* `Inprogress` - Upgrade impact calculation is in progress.\n* `Completed` - Upgrade impact calculation is completed.\n* `Unavailable` - Upgrade impact is not available since the image is not present in the Fabric Interconnect.\n* `Failed` - Upgrade impact is not available due to an unknown error.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "Inprogress",
-							ForceNew:    true,
+							Description:  "The computation status of the estimate operation for a component.\n* `Inprogress` - Upgrade impact calculation is in progress.\n* `Completed` - Upgrade impact calculation is completed.\n* `Unavailable` - Upgrade impact is not available since the image is not present in the Fabric Interconnect.\n* `Failed` - Upgrade impact is not available due to an unknown error.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"Inprogress", "Completed", "Unavailable", "Failed"}, false),
+							Optional:     true,
+							Default:      "Inprogress",
+							ForceNew:     true,
 						},
 						"domain_name": {
 							Description: "The endpoint type or name.",
@@ -328,11 +335,12 @@ func resourceFirmwareUpgradeImpact() *schema.Resource {
 							ForceNew:    true,
 						},
 						"impact_type": {
-							Description: "The impact type of the endpoint, whether a reboot is required or not.\n* `NoReboot` - A reboot is not required for the endpoint after upgrade.\n* `Reboot` - A reboot is required to the endpoint after upgrade.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "NoReboot",
-							ForceNew:    true,
+							Description:  "The impact type of the endpoint, whether a reboot is required or not.\n* `NoReboot` - A reboot is not required for the endpoint after upgrade.\n* `Reboot` - A reboot is required to the endpoint after upgrade.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"NoReboot", "Reboot"}, false),
+							Optional:     true,
+							Default:      "NoReboot",
+							ForceNew:     true,
 						},
 						"model": {
 							Description: "The model details of the component.",
@@ -354,11 +362,12 @@ func resourceFirmwareUpgradeImpact() *schema.Resource {
 							ForceNew:    true,
 						},
 						"version_impact": {
-							Description: "The change of version impact for the endpoint.\n* `None` - No change in version for the component.\n* `Upgrade` - The component will be upgraded.\n* `Downgrade` - The component will be downgraded.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "None",
-							ForceNew:    true,
+							Description:  "The change of version impact for the endpoint.\n* `None` - No change in version for the component.\n* `Upgrade` - The component will be upgraded.\n* `Downgrade` - The component will be downgraded.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"None", "Upgrade", "Downgrade"}, false),
+							Optional:     true,
+							Default:      "None",
+							ForceNew:     true,
 						},
 					},
 				},
@@ -441,7 +450,8 @@ func resourceFirmwareUpgradeImpact() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}, ForceNew: true,
+					Type: schema.TypeString,
+				}, ForceNew: true,
 			},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -638,11 +648,12 @@ func resourceFirmwareUpgradeImpact() *schema.Resource {
 				}, ForceNew: true,
 			},
 			"summary": {
-				Description: "The summary on the component or components getting impacted by the upgrade.\n* `Basic` - Summary of a single instance involved in the upgrade operation.\n* `Detail` - Summary of the collection of single instances for a complex component involved in the upgrade operation. For example, in case of a server upgrade, a detailed summary indicates impact of all the single instances which are part of the server, such as storage controller, drives, and BIOS.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "Basic",
-				ForceNew:    true,
+				Description:  "The summary on the component or components getting impacted by the upgrade.\n* `Basic` - Summary of a single instance involved in the upgrade operation.\n* `Detail` - Summary of the collection of single instances for a complex component involved in the upgrade operation. For example, in case of a server upgrade, a detailed summary indicates impact of all the single instances which are part of the server, such as storage controller, drives, and BIOS.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Basic", "Detail"}, false),
+				Optional:     true,
+				Default:      "Basic",
+				ForceNew:     true,
 			},
 			"tags": {
 				Type:       schema.TypeList,
@@ -658,16 +669,18 @@ func resourceFirmwareUpgradeImpact() *schema.Resource {
 							ForceNew:         true,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							ForceNew:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
+							ForceNew:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							ForceNew:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
+							ForceNew:     true,
 						},
 					},
 				},
@@ -929,7 +942,7 @@ func resourceFirmwareUpgradeImpactCreate(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1118,7 +1131,7 @@ func resourceFirmwareUpgradeImpactCreate(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

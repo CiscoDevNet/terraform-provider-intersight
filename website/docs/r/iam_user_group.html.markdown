@@ -16,24 +16,27 @@ User Group provides a way to assign permissions to a group of users based on the
 resource "intersight_iam_user_group" "iam_user_group1" {
   name = "iam_user_group1"
   idp {
-
+    moid = var.idp_moid
+    object_type = "iam.Idp"
   }
-  permissions = [
-    {
-      moid                  = var.iam_permission
-      object_type           = "iam.Permission"
-      class_id              = "iam.Permission"
-      additional_properties = ""
-      selector              = ""
-    }
-  ]
+  permissions {
+    moid        = var.iam_permission
+    object_type = "iam.Permission"
+    class_id    = "iam.Permission"
+  }
 }
 
- variable "iam_permission" {
-   type = string
-   description = "value for iam_permission"
- }
+variable "iam_permission" {
+  type        = string
+  description = "value for iam_permission"
+}
+
+variable "idp_moid" {
+  type        = string
+  description = "value for idp"
+}
 ```
+
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

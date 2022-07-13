@@ -10,6 +10,7 @@ import (
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceConnectorpackConnectorPackUpgrade() *schema.Resource {
@@ -91,11 +92,12 @@ func resourceConnectorpackConnectorPackUpgrade() *schema.Resource {
 				ForceNew:    true,
 			},
 			"connector_pack_op_type": {
-				Description: "The type of operation to be performed on UCS Director.\n* `Install` - Installs the requisite connector packs on UCS Director.\n* `Push` - Pushes the requisite connector packs to UCS Director.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "Install",
-				ForceNew:    true,
+				Description:  "The type of operation to be performed on UCS Director.\n* `Install` - Installs the requisite connector packs on UCS Director.\n* `Push` - Pushes the requisite connector packs to UCS Director.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Install", "Push"}, false),
+				Optional:     true,
+				Default:      "Install",
+				ForceNew:     true,
 			},
 			"create_time": {
 				Description: "The time when this managed object was created.",
@@ -153,7 +155,8 @@ func resourceConnectorpackConnectorPackUpgrade() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}, ForceNew: true,
+					Type: schema.TypeString,
+				}, ForceNew: true,
 			},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -272,16 +275,18 @@ func resourceConnectorpackConnectorPackUpgrade() *schema.Resource {
 							ForceNew:         true,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							ForceNew:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
+							ForceNew:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							ForceNew:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
+							ForceNew:     true,
 						},
 					},
 				},
@@ -627,7 +632,7 @@ func resourceConnectorpackConnectorPackUpgradeCreate(c context.Context, d *schem
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

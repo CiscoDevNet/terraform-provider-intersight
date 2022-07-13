@@ -6,12 +6,14 @@ import (
 	"fmt"
 	"log"
 	"reflect"
+	"regexp"
 	"strings"
 	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceServerProfile() *schema.Resource {
@@ -429,7 +431,8 @@ func resourceServerProfile() *schema.Resource {
 							ConfigMode: schema.SchemaConfigModeAttr,
 							Computed:   true,
 							Elem: &schema.Schema{
-								Type: schema.TypeString}},
+								Type: schema.TypeString,
+							}},
 						"class_id": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
@@ -442,7 +445,8 @@ func resourceServerProfile() *schema.Resource {
 							ConfigMode: schema.SchemaConfigModeAttr,
 							Computed:   true,
 							Elem: &schema.Schema{
-								Type: schema.TypeString}},
+								Type: schema.TypeString,
+							}},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
@@ -576,9 +580,10 @@ func resourceServerProfile() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the profile.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the profile.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -661,9 +666,10 @@ func resourceServerProfile() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the profile instance or profile template.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the profile instance or profile template.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -718,7 +724,8 @@ func resourceServerProfile() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -922,10 +929,11 @@ func resourceServerProfile() *schema.Resource {
 				},
 			},
 			"server_assignment_mode": {
-				Description: "Source of the server assigned to the server profile. Values can be Static, Pool or None. Static is used if a server is attached directly to server profile. Pool is used if a resource pool is attached to server profile. None is used if no server or resource pool is attached to server profile.\n* `None` - No server is assigned to the server profile.\n* `Static` - Server is directly assigned to server profile using assign server.\n* `Pool` - Server is assigned from a resource pool.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "None",
+				Description:  "Source of the server assigned to the server profile. Values can be Static, Pool or None. Static is used if a server is attached directly to server profile. Pool is used if a resource pool is attached to server profile. None is used if no server or resource pool is attached to server profile.\n* `None` - No server is assigned to the server profile.\n* `Static` - Server is directly assigned to server profile using assign server.\n* `Pool` - Server is assigned from a resource pool.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"None", "Static", "Pool"}, false),
+				Optional:     true,
+				Default:      "None",
 			},
 			"server_pool": {
 				Description: "A reference to a resourcepoolPool resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -1019,9 +1027,10 @@ func resourceServerProfile() *schema.Resource {
 				},
 			},
 			"static_uuid_address": {
-				Description: "The UUID address for the server must include UUID prefix xxxxxxxx-xxxx-xxxx along with the UUID suffix of format xxxx-xxxxxxxxxxxx.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "The UUID address for the server must include UUID prefix xxxxxxxx-xxxx-xxxx along with the UUID suffix of format xxxx-xxxxxxxxxxxx.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"), ""),
+				Optional:     true,
 			},
 			"tags": {
 				Type:       schema.TypeList,
@@ -1036,29 +1045,33 @@ func resourceServerProfile() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
 			},
 			"target_platform": {
-				Description: "The platform for which the server profile is applicable. It can either be a server that is operating in standalone mode or which is attached to a Fabric Interconnect managed by Intersight.\n* `Standalone` - Servers which are operating in standalone mode i.e. not connected to a Fabric Interconnected.\n* `FIAttached` - Servers which are connected to a Fabric Interconnect that is managed by Intersight.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "Standalone",
+				Description:  "The platform for which the server profile is applicable. It can either be a server that is operating in standalone mode or which is attached to a Fabric Interconnect managed by Intersight.\n* `Standalone` - Servers which are operating in standalone mode i.e. not connected to a Fabric Interconnected.\n* `FIAttached` - Servers which are connected to a Fabric Interconnect that is managed by Intersight.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Standalone", "FIAttached"}, false),
+				Optional:     true,
+				Default:      "Standalone",
 			},
 			"type": {
-				Description: "Defines the type of the profile. Accepted values are instance or template.\n* `instance` - The profile defines the configuration for a specific instance of a target.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "instance",
+				Description:  "Defines the type of the profile. Accepted values are instance or template.\n* `instance` - The profile defines the configuration for a specific instance of a target.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"instance"}, false),
+				Optional:     true,
+				Default:      "instance",
 			},
 			"uuid": {
 				Description: "The UUID address that is assigned to the server based on the UUID pool.",
@@ -1072,10 +1085,11 @@ func resourceServerProfile() *schema.Resource {
 					return
 				}},
 			"uuid_address_type": {
-				Description: "UUID address allocation type selected to assign an UUID address for the server.\n* `NONE` - The user did not assign any UUID address.\n* `STATIC` - The user assigns a static UUID address.\n* `POOL` - The user selects a pool from which the address will be leased.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "NONE",
+				Description:  "UUID address allocation type selected to assign an UUID address for the server.\n* `NONE` - The user did not assign any UUID address.\n* `STATIC` - The user assigns a static UUID address.\n* `POOL` - The user selects a pool from which the address will be leased.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"NONE", "STATIC", "POOL"}, false),
+				Optional:     true,
+				Default:      "NONE",
 			},
 			"uuid_lease": {
 				Description: "A reference to a uuidpoolUuidLease resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -1384,7 +1398,7 @@ func resourceServerProfileCreate(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1427,7 +1441,7 @@ func resourceServerProfileCreate(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1486,7 +1500,7 @@ func resourceServerProfileCreate(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("policy.ConfigChange")
 			if v, ok := l["disruptions"]; ok {
 				{
 					x := make([]string, 0)
@@ -1531,7 +1545,7 @@ func resourceServerProfileCreate(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("policy.ConfigContext")
 			if v, ok := l["control_action"]; ok {
 				{
 					x := (v.(string))
@@ -1579,7 +1593,7 @@ func resourceServerProfileCreate(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1634,7 +1648,7 @@ func resourceServerProfileCreate(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1729,7 +1743,7 @@ func resourceServerProfileCreate(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1772,7 +1786,7 @@ func resourceServerProfileCreate(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1870,7 +1884,7 @@ func resourceServerProfileCreate(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2260,7 +2274,7 @@ func resourceServerProfileUpdate(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2304,7 +2318,7 @@ func resourceServerProfileUpdate(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2364,7 +2378,7 @@ func resourceServerProfileUpdate(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("policy.ConfigChange")
 			if v, ok := l["disruptions"]; ok {
 				{
 					x := make([]string, 0)
@@ -2410,7 +2424,7 @@ func resourceServerProfileUpdate(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("policy.ConfigContext")
 			if v, ok := l["control_action"]; ok {
 				{
 					x := (v.(string))
@@ -2460,7 +2474,7 @@ func resourceServerProfileUpdate(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2518,7 +2532,7 @@ func resourceServerProfileUpdate(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2615,7 +2629,7 @@ func resourceServerProfileUpdate(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2659,7 +2673,7 @@ func resourceServerProfileUpdate(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2761,7 +2775,7 @@ func resourceServerProfileUpdate(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

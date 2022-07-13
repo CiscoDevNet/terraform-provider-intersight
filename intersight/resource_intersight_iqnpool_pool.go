@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceIqnpoolPool() *schema.Resource {
@@ -88,10 +90,11 @@ func resourceIqnpoolPool() *schema.Resource {
 					return
 				}},
 			"assignment_order": {
-				Description: "Assignment order decides the order in which the next identifier is allocated.\n* `sequential` - Identifiers are assigned in a sequential order.\n* `default` - Assignment order is decided by the system.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "sequential",
+				Description:  "Assignment order decides the order in which the next identifier is allocated.\n* `sequential` - Identifiers are assigned in a sequential order.\n* `default` - Assignment order is decided by the system.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"sequential", "default"}, false),
+				Optional:     true,
+				Default:      "sequential",
 			},
 			"block_heads": {
 				Description: "An array of relationships to iqnpoolBlock resources.",
@@ -150,9 +153,10 @@ func resourceIqnpoolPool() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -184,9 +188,10 @@ func resourceIqnpoolPool() *schema.Resource {
 							Default:     "iqnpool.IqnSuffixBlock",
 						},
 						"from": {
-							Description: "The first suffix number in the block.",
-							Type:        schema.TypeInt,
-							Optional:    true,
+							Description:  "The first suffix number in the block.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntAtLeast(0),
+							Optional:     true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -195,9 +200,10 @@ func resourceIqnpoolPool() *schema.Resource {
 							Default:     "iqnpool.IqnSuffixBlock",
 						},
 						"size": {
-							Description: "Number of identifiers this block can hold.",
-							Type:        schema.TypeInt,
-							Optional:    true,
+							Description:  "Number of identifiers this block can hold.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(1, 1024),
+							Optional:     true,
 						},
 						"suffix": {
 							Description: "The suffix for this block of IQNs.",
@@ -231,9 +237,10 @@ func resourceIqnpoolPool() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the concrete policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the concrete policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -288,7 +295,8 @@ func resourceIqnpoolPool() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -408,14 +416,16 @@ func resourceIqnpoolPool() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -673,7 +683,7 @@ func resourceIqnpoolPoolCreate(c context.Context, d *schema.ResourceData, meta i
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -990,7 +1000,7 @@ func resourceIqnpoolPoolUpdate(c context.Context, d *schema.ResourceData, meta i
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

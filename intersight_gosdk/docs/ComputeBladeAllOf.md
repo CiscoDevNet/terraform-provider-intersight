@@ -25,6 +25,7 @@ Name | Type | Description | Notes
 **LocatorLed** | Pointer to [**EquipmentLocatorLedRelationship**](EquipmentLocatorLedRelationship.md) |  | [optional] 
 **MemoryArrays** | Pointer to [**[]MemoryArrayRelationship**](MemoryArrayRelationship.md) | An array of relationships to memoryArray resources. | [optional] 
 **PciDevices** | Pointer to [**[]PciDeviceRelationship**](PciDeviceRelationship.md) | An array of relationships to pciDevice resources. | [optional] [readonly] 
+**PciNodes** | Pointer to [**[]PciNodeRelationship**](PciNodeRelationship.md) | An array of relationships to pciNode resources. | [optional] [readonly] 
 **Processors** | Pointer to [**[]ProcessorUnitRelationship**](ProcessorUnitRelationship.md) | An array of relationships to processorUnit resources. | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 **StorageControllers** | Pointer to [**[]StorageControllerRelationship**](StorageControllerRelationship.md) | An array of relationships to storageController resources. | [optional] 
@@ -635,6 +636,41 @@ HasPciDevices returns a boolean if a field has been set.
 `func (o *ComputeBladeAllOf) UnsetPciDevices()`
 
 UnsetPciDevices ensures that no value is present for PciDevices, not even an explicit nil
+### GetPciNodes
+
+`func (o *ComputeBladeAllOf) GetPciNodes() []PciNodeRelationship`
+
+GetPciNodes returns the PciNodes field if non-nil, zero value otherwise.
+
+### GetPciNodesOk
+
+`func (o *ComputeBladeAllOf) GetPciNodesOk() (*[]PciNodeRelationship, bool)`
+
+GetPciNodesOk returns a tuple with the PciNodes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPciNodes
+
+`func (o *ComputeBladeAllOf) SetPciNodes(v []PciNodeRelationship)`
+
+SetPciNodes sets PciNodes field to given value.
+
+### HasPciNodes
+
+`func (o *ComputeBladeAllOf) HasPciNodes() bool`
+
+HasPciNodes returns a boolean if a field has been set.
+
+### SetPciNodesNil
+
+`func (o *ComputeBladeAllOf) SetPciNodesNil(b bool)`
+
+ SetPciNodesNil sets the value for PciNodes to be an explicit nil
+
+### UnsetPciNodes
+`func (o *ComputeBladeAllOf) UnsetPciNodes()`
+
+UnsetPciNodes ensures that no value is present for PciNodes, not even an explicit nil
 ### GetProcessors
 
 `func (o *ComputeBladeAllOf) GetProcessors() []ProcessorUnitRelationship`

@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceHyperflexClusterProfile() *schema.Resource {
@@ -266,19 +268,22 @@ func resourceHyperflexClusterProfile() *schema.Resource {
 							Default:     "comm.IpV4Interface",
 						},
 						"gateway": {
-							Description: "The IPv4 address of the default gateway.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The IPv4 address of the default gateway.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
+							Optional:     true,
 						},
 						"ip_address": {
-							Description: "The IPv4 Address, represented in the standard dot-decimal notation, e.g. 192.168.1.3.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The IPv4 Address, represented in the standard dot-decimal notation, e.g. 192.168.1.3.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
+							Optional:     true,
 						},
 						"netmask": {
-							Description: "The IPv4 Netmask, represented in the standard dot-decimal notation, e.g. 255.255.255.0.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The IPv4 Netmask, represented in the standard dot-decimal notation, e.g. 255.255.255.0.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^(((255.){3}(255|254|252|248|240|224|192|128|0+))|((255.){2}(255|254|252|248|240|224|192|128|0+).0)|((255.)(255|254|252|248|240|224|192|128|0+)(.0+){2})|((255|254|252|248|240|224|192|128|0+)(.0+){3}))$"), ""),
+							Optional:     true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -493,9 +498,10 @@ func resourceHyperflexClusterProfile() *schema.Resource {
 					return
 				}},
 			"data_ip_address": {
-				Description: "The storage data IP address for the HyperFlex cluster.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "The storage data IP address for the HyperFlex cluster.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
+				Optional:     true,
 				DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
 					if new == "" || new == "null" {
 						return true
@@ -504,9 +510,10 @@ func resourceHyperflexClusterProfile() *schema.Resource {
 				},
 			},
 			"description": {
-				Description: "Description of the profile.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the profile.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -600,9 +607,10 @@ func resourceHyperflexClusterProfile() *schema.Resource {
 				},
 			},
 			"host_name_prefix": {
-				Description: "The node name prefix that is used to automatically generate the default hostname for each server.\nA dash (-) will be appended to the prefix followed by the node number to form a hostname.\nThis default naming scheme can be manually overridden in the node configuration.\nThe maximum length of a prefix is 60, must only contain alphanumeric characters or dash (-), and must\nstart with an alphanumeric character.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "The node name prefix that is used to automatically generate the default hostname for each server.\nA dash (-) will be appended to the prefix followed by the node number to form a hostname.\nThis default naming scheme can be manually overridden in the node configuration.\nThe maximum length of a prefix is 60, must only contain alphanumeric characters or dash (-), and must\nstart with an alphanumeric character.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9][a-zA-Z0-9-]{1,59}$"), ""),
+				Optional:     true,
 			},
 			"httpproxypolicy": {
 				Description: "A reference to a commHttpProxyPolicy resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -645,15 +653,17 @@ func resourceHyperflexClusterProfile() *schema.Resource {
 				},
 			},
 			"hypervisor_control_ip_address": {
-				Description: "The hypervisor control virtual IP address for the HyperFlex compute cluster that is used for node/pod management.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "The hypervisor control virtual IP address for the HyperFlex compute cluster that is used for node/pod management.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
+				Optional:     true,
 			},
 			"hypervisor_type": {
-				Description: "The hypervisor type for the HyperFlex cluster.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `HyperFlexAp` - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform.\n* `IWE` - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "ESXi",
+				Description:  "The hypervisor type for the HyperFlex cluster.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `HyperFlexAp` - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform.\n* `IWE` - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"ESXi", "HyperFlexAp", "IWE", "Hyper-V", "Unknown"}, false),
+				Optional:     true,
+				Default:      "ESXi",
 			},
 			"local_credential": {
 				Description: "A reference to a hyperflexLocalCredentialPolicy resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -696,21 +706,24 @@ func resourceHyperflexClusterProfile() *schema.Resource {
 				},
 			},
 			"mac_address_prefix": {
-				Description: "The MAC address prefix in the form of 00:25:B5:XX.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "The MAC address prefix in the form of 00:25:B5:XX.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^00:25:B5:[0-9a-fA-F]{2}$"), ""),
+				Optional:     true,
 			},
 			"mgmt_ip_address": {
-				Description: "The management IP address for the HyperFlex cluster.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "The management IP address for the HyperFlex cluster.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
+				Optional:     true,
 			},
 			"mgmt_platform": {
-				Description: "The management platform for the HyperFlex cluster.\n* `FI` - The host servers used in the cluster deployment are managed by a UCS Fabric Interconnect.\n* `EDGE` - The host servers used in the cluster deployment are standalone severs.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "FI",
-				ForceNew:    true,
+				Description:  "The management platform for the HyperFlex cluster.\n* `FI` - The host servers used in the cluster deployment are managed by a UCS Fabric Interconnect.\n* `EDGE` - The host servers used in the cluster deployment are standalone severs.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"FI", "EDGE"}, false),
+				Optional:     true,
+				Default:      "FI",
+				ForceNew:     true,
 			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
@@ -731,9 +744,10 @@ func resourceHyperflexClusterProfile() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the profile instance or profile template.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the profile instance or profile template.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"node_config": {
 				Description: "A reference to a hyperflexNodeConfigPolicy resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -867,7 +881,8 @@ func resourceHyperflexClusterProfile() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -1168,9 +1183,10 @@ func resourceHyperflexClusterProfile() *schema.Resource {
 				},
 			},
 			"storage_client_ip_address": {
-				Description: "The storage data IP address for the HyperFlex cluster.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "The storage data IP address for the HyperFlex cluster.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
+				Optional:     true,
 				DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
 					if new == "" || new == "null" {
 						return true
@@ -1210,9 +1226,10 @@ func resourceHyperflexClusterProfile() *schema.Resource {
 							Default:     "hyperflex.NamedVlan",
 						},
 						"name": {
-							Description: "The name of the VLAN.\nThe name can be from 1 to 32 characters long and can contain a combination of alphanumeric characters, underscores, and hyphens.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The name of the VLAN.\nThe name can be from 1 to 32 characters long and can contain a combination of alphanumeric characters, underscores, and hyphens.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9-_.]{1,32}$"), ""),
+							Optional:     true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -1221,17 +1238,19 @@ func resourceHyperflexClusterProfile() *schema.Resource {
 							Default:     "hyperflex.NamedVlan",
 						},
 						"vlan_id": {
-							Description: "The ID of the named VLAN. An ID of 0 means the traffic is untagged.\nThe ID can be any number between 0 and 4095, inclusive.",
-							Type:        schema.TypeInt,
-							Optional:    true,
+							Description:  "The ID of the named VLAN. An ID of 0 means the traffic is untagged.\nThe ID can be any number between 0 and 4095, inclusive.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(0, 4095),
+							Optional:     true,
 						},
 					},
 				},
 			},
 			"storage_cluster_auxiliary_ip": {
-				Description: "The auxiliary storage IP address for the HyperFlex cluster. For two node clusters, this is the IP address of the auxiliary ZK controller.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "The auxiliary storage IP address for the HyperFlex cluster. For two node clusters, this is the IP address of the auxiliary ZK controller.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
+				Optional:     true,
 			},
 			"storage_data_vlan": {
 				Description: "The VLAN for the HyperFlex storage data traffic.",
@@ -1254,9 +1273,10 @@ func resourceHyperflexClusterProfile() *schema.Resource {
 							Default:     "hyperflex.NamedVlan",
 						},
 						"name": {
-							Description: "The name of the VLAN.\nThe name can be from 1 to 32 characters long and can contain a combination of alphanumeric characters, underscores, and hyphens.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The name of the VLAN.\nThe name can be from 1 to 32 characters long and can contain a combination of alphanumeric characters, underscores, and hyphens.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9-_.]{1,32}$"), ""),
+							Optional:     true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -1265,18 +1285,20 @@ func resourceHyperflexClusterProfile() *schema.Resource {
 							Default:     "hyperflex.NamedVlan",
 						},
 						"vlan_id": {
-							Description: "The ID of the named VLAN. An ID of 0 means the traffic is untagged.\nThe ID can be any number between 0 and 4095, inclusive.",
-							Type:        schema.TypeInt,
-							Optional:    true,
+							Description:  "The ID of the named VLAN. An ID of 0 means the traffic is untagged.\nThe ID can be any number between 0 and 4095, inclusive.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(0, 4095),
+							Optional:     true,
 						},
 					},
 				},
 			},
 			"storage_type": {
-				Description: "The storage type used for the HyperFlex cluster (HyperFlex Storage or 3rd party).\n* `HyperFlexDp` - The type of storage is HyperFlex Data Platform.\n* `ThirdParty` - The type of storage is 3rd Party Storage (PureStorage, etc..).",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "HyperFlexDp",
+				Description:  "The storage type used for the HyperFlex cluster (HyperFlex Storage or 3rd party).\n* `HyperFlexDp` - The type of storage is HyperFlex Data Platform.\n* `ThirdParty` - The type of storage is 3rd Party Storage (PureStorage, etc..).",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"HyperFlexDp", "ThirdParty"}, false),
+				Optional:     true,
+				Default:      "HyperFlexDp",
 			},
 			"sys_config": {
 				Description: "A reference to a hyperflexSysConfigPolicy resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -1331,23 +1353,26 @@ func resourceHyperflexClusterProfile() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
 			},
 			"type": {
-				Description: "Defines the type of the profile. Accepted values are instance or template.\n* `instance` - The profile defines the configuration for a specific instance of a target.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "instance",
+				Description:  "Defines the type of the profile. Accepted values are instance or template.\n* `instance` - The profile defines the configuration for a specific instance of a target.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"instance"}, false),
+				Optional:     true,
+				Default:      "instance",
 			},
 			"ucsm_config": {
 				Description: "A reference to a hyperflexUcsmConfigPolicy resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -1570,9 +1595,10 @@ func resourceHyperflexClusterProfile() *schema.Resource {
 				},
 			},
 			"wwxn_prefix": {
-				Description: "The WWxN prefix in the form of 20:00:00:25:B5:XX.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "The WWxN prefix in the form of 20:00:00:25:B5:XX.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^20:00:00:25:B5:[0-9a-fA-F]{2}$"), ""),
+				Optional:     true,
 			},
 			"wait_for_completion": {
 				Description: "This model object can trigger workflows. Use this option to wait for all running workflows to reach a complete state.",
@@ -1661,7 +1687,7 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1704,7 +1730,7 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1749,7 +1775,7 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("comm.IpV4Interface")
 			if v, ok := l["gateway"]; ok {
 				{
 					x := (v.(string))
@@ -1798,7 +1824,7 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1841,7 +1867,7 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1884,7 +1910,7 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("policy.ConfigContext")
 			if v, ok := l["control_action"]; ok {
 				{
 					x := (v.(string))
@@ -1937,7 +1963,7 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1980,7 +2006,7 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2028,7 +2054,7 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2081,7 +2107,7 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2149,7 +2175,7 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2236,7 +2262,7 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2321,7 +2347,7 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2369,7 +2395,7 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2412,7 +2438,7 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2465,7 +2491,7 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("hyperflex.NamedVlan")
 			if v, ok := l["name"]; ok {
 				{
 					x := (v.(string))
@@ -2513,7 +2539,7 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("hyperflex.NamedVlan")
 			if v, ok := l["name"]; ok {
 				{
 					x := (v.(string))
@@ -2561,7 +2587,7 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2644,7 +2670,7 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2687,7 +2713,7 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3120,7 +3146,7 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3164,7 +3190,7 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3210,7 +3236,7 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("comm.IpV4Interface")
 			if v, ok := l["gateway"]; ok {
 				{
 					x := (v.(string))
@@ -3260,7 +3286,7 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3304,7 +3330,7 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3348,7 +3374,7 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("policy.ConfigContext")
 			if v, ok := l["control_action"]; ok {
 				{
 					x := (v.(string))
@@ -3404,7 +3430,7 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3448,7 +3474,7 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3498,7 +3524,7 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3554,7 +3580,7 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3628,7 +3654,7 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3715,7 +3741,7 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3800,7 +3826,7 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3850,7 +3876,7 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3894,7 +3920,7 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3950,7 +3976,7 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("hyperflex.NamedVlan")
 			if v, ok := l["name"]; ok {
 				{
 					x := (v.(string))
@@ -4000,7 +4026,7 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("hyperflex.NamedVlan")
 			if v, ok := l["name"]; ok {
 				{
 					x := (v.(string))
@@ -4050,7 +4076,7 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -4134,7 +4160,7 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -4178,7 +4204,7 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

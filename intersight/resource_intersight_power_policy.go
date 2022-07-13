@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourcePowerPolicy() *schema.Resource {
@@ -38,10 +40,11 @@ func resourcePowerPolicy() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"allocated_budget": {
-				Description: "Sets the Allocated Power Budget of the System (in Watts). This field is only supported for Cisco UCS X series Chassis.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Default:     0,
+				Description:  "Sets the Allocated Power Budget of the System (in Watts). This field is only supported for Cisco UCS X series Chassis.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(0, 65535),
+				Optional:     true,
+				Default:      0,
 			},
 			"ancestors": {
 				Description: "An array of relationships to moBaseMo resources.",
@@ -100,9 +103,10 @@ func resourcePowerPolicy() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -116,10 +120,11 @@ func resourcePowerPolicy() *schema.Resource {
 					return
 				}},
 			"dynamic_rebalancing": {
-				Description: "Sets the Dynamic Power Rebalancing of the System. This option is only supported for Cisco UCS X series Chassis.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "Enabled",
+				Description:  "Sets the Dynamic Power Rebalancing of the System. This option is only supported for Cisco UCS X series Chassis.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Enabled", "Disabled"}, false),
+				Optional:     true,
+				Default:      "Enabled",
 			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
@@ -140,9 +145,10 @@ func resourcePowerPolicy() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the concrete policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the concrete policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -197,7 +203,8 @@ func resourcePowerPolicy() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -278,28 +285,32 @@ func resourcePowerPolicy() *schema.Resource {
 				},
 			},
 			"power_priority": {
-				Description: "Sets the Power Priority of the System. This field is only supported for Cisco UCS X series servers.\n* `Low` - Set the Power Priority to Low.\n* `Medium` - Set the Power Priority to Medium.\n* `High` - Set the Power Priority to High.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "Low",
+				Description:  "Sets the Power Priority of the System. This field is only supported for Cisco UCS X series servers.\n* `Low` - Set the Power Priority to Low.\n* `Medium` - Set the Power Priority to Medium.\n* `High` - Set the Power Priority to High.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Low", "Medium", "High"}, false),
+				Optional:     true,
+				Default:      "Low",
 			},
 			"power_profiling": {
-				Description: "Sets the Power Profiling of the Server. This field is only supported for Cisco UCS X series servers.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "Enabled",
+				Description:  "Sets the Power Profiling of the Server. This field is only supported for Cisco UCS X series servers.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Enabled", "Disabled"}, false),
+				Optional:     true,
+				Default:      "Enabled",
 			},
 			"power_restore_state": {
-				Description: "Sets the Power Restore State of the Server. This field is only supported for Cisco UCS X series servers.\n* `AlwaysOff` - Set the Power Restore Mode to Off.\n* `AlwaysOn` - Set the Power Restore Mode to On.\n* `LastState` - Set the Power Restore Mode to LastState.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "AlwaysOff",
+				Description:  "Sets the Power Restore State of the Server. This field is only supported for Cisco UCS X series servers.\n* `AlwaysOff` - Set the Power Restore Mode to Off.\n* `AlwaysOn` - Set the Power Restore Mode to On.\n* `LastState` - Set the Power Restore Mode to LastState.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"AlwaysOff", "AlwaysOn", "LastState"}, false),
+				Optional:     true,
+				Default:      "AlwaysOff",
 			},
 			"power_save_mode": {
-				Description: "Sets the Power Save mode of the System. This option is only supported for Cisco UCS X series Chassis.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "Enabled",
+				Description:  "Sets the Power Save mode of the System. This option is only supported for Cisco UCS X series Chassis.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Enabled", "Disabled"}, false),
+				Optional:     true,
+				Default:      "Enabled",
 			},
 			"profiles": {
 				Description: "An array of relationships to policyAbstractConfigProfile resources.",
@@ -341,10 +352,11 @@ func resourcePowerPolicy() *schema.Resource {
 				},
 			},
 			"redundancy_mode": {
-				Description: "Sets the Power Redundancy of the System. N+2 mode is only supported for Cisco UCS X series Chassis.\n* `Grid` - Grid Mode requires two power sources. If one source fails, the surviving PSUs connected to the other source provides power to the chassis.\n* `NotRedundant` - Power Manager turns on the minimum number of PSUs required to support chassis power requirements. No Redundant PSUs are maintained.\n* `N+1` - Power Manager turns on the minimum number of PSUs required to support chassis power requirements plus one additional PSU for redundancy.\n* `N+2` - Power Manager turns on the minimum number of PSUs required to support chassis power requirements plus two additional PSU for redundancy. This Mode is only supported for UCS X series Chassis.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "Grid",
+				Description:  "Sets the Power Redundancy of the System. N+2 mode is only supported for Cisco UCS X series Chassis.\n* `Grid` - Grid Mode requires two power sources. If one source fails, the surviving PSUs connected to the other source provides power to the chassis.\n* `NotRedundant` - Power Manager turns on the minimum number of PSUs required to support chassis power requirements. No Redundant PSUs are maintained.\n* `N+1` - Power Manager turns on the minimum number of PSUs required to support chassis power requirements plus one additional PSU for redundancy.\n* `N+2` - Power Manager turns on the minimum number of PSUs required to support chassis power requirements plus two additional PSU for redundancy. This Mode is only supported for UCS X series Chassis.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Grid", "NotRedundant", "N+1", "N+2"}, false),
+				Optional:     true,
+				Default:      "Grid",
 			},
 			"shared_scope": {
 				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
@@ -370,14 +382,16 @@ func resourcePowerPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -586,7 +600,7 @@ func resourcePowerPolicyCreate(c context.Context, d *schema.ResourceData, meta i
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -947,7 +961,7 @@ func resourcePowerPolicyUpdate(c context.Context, d *schema.ResourceData, meta i
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

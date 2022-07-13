@@ -11,6 +11,7 @@ import (
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceCapabilityAdapterUnitDescriptor() *schema.Resource {
@@ -34,10 +35,11 @@ func resourceCapabilityAdapterUnitDescriptor() *schema.Resource {
 					return
 				}},
 			"adapter_generation": {
-				Description: "Generation of the adapter.\n* `4` - Fourth generation adapters (14xx). The PIDs of these adapters end with the string 04.\n* `2` - Second generation VIC adapters (12xx). The PIDs of these adapters end with the string 02.\n* `3` - Third generation adapters (13xx). The PIDs of these adapters end with the string 03.\n* `5` - Fifth generation adapters (15xx). The PIDs of these adapters contain the V5 string.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Default:     4,
+				Description:  "Generation of the adapter.\n* `4` - Fourth generation adapters (14xx). The PIDs of these adapters end with the string 04.\n* `2` - Second generation VIC adapters (12xx). The PIDs of these adapters end with the string 02.\n* `3` - Third generation adapters (13xx). The PIDs of these adapters end with the string 03.\n* `5` - Fifth generation adapters (15xx). The PIDs of these adapters contain the V5 string.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntInSlice([]int{4, 2, 3, 5}),
+				Optional:     true,
+				Default:      4,
 			},
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -184,10 +186,11 @@ func resourceCapabilityAdapterUnitDescriptor() *schema.Resource {
 							Default:     "capability.FeatureConfig",
 						},
 						"feature_name": {
-							Description: "Name of the feature that identifies the specific adapter configuration.\n* `RoCEv2` - Capability indicator of the RDMA over Converged Ethernet (RoCE) feature version 2.\n* `RoCEv1` - Capability indicator of the RDMA over Converged Ethernet (RoCE) feature version 1.\n* `VMQ` - Capability indicator of the Virtual Machine Queue (VMQ) feature.\n* `VMMQ` - Capability indicator of the Virtual Machine Multi-Queue (VMMQ) feature.\n* `VMQInterrupts` - Capability indicator of the Virtual Machine Queue (VMQ) Interrupts feature.\n* `NVGRE` - Capability indicator of the Network Virtualization using Generic Routing Encapsulation (NVGRE) feature.\n* `ARFS` - Capability indicator of the Accelerated Receive Flow Steering (ARFS) feature.\n* `VXLAN` - Capability indicator of the Virtual Extensible LAN (VXLAN) feature.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "RoCEv2",
+							Description:  "Name of the feature that identifies the specific adapter configuration.\n* `RoCEv2` - Capability indicator of the RDMA over Converged Ethernet (RoCE) feature version 2.\n* `RoCEv1` - Capability indicator of the RDMA over Converged Ethernet (RoCE) feature version 1.\n* `VMQ` - Capability indicator of the Virtual Machine Queue (VMQ) feature.\n* `VMMQ` - Capability indicator of the Virtual Machine Multi-Queue (VMMQ) feature.\n* `VMQInterrupts` - Capability indicator of the Virtual Machine Queue (VMQ) Interrupts feature.\n* `NVGRE` - Capability indicator of the Network Virtualization using Generic Routing Encapsulation (NVGRE) feature.\n* `ARFS` - Capability indicator of the Accelerated Receive Flow Steering (ARFS) feature.\n* `VXLAN` - Capability indicator of the Virtual Extensible LAN (VXLAN) feature.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"RoCEv2", "RoCEv1", "VMQ", "VMMQ", "VMQInterrupts", "NVGRE", "ARFS", "VXLAN"}, false),
+							Optional:     true,
+							Default:      "RoCEv2",
 						},
 						"min_fw_version": {
 							Description: "Firmware version from which support for this feature is available.",
@@ -206,21 +209,25 @@ func resourceCapabilityAdapterUnitDescriptor() *schema.Resource {
 							ConfigMode: schema.SchemaConfigModeAttr,
 							Computed:   true,
 							Elem: &schema.Schema{
-								Type: schema.TypeString}},
+								Type: schema.TypeString,
+							}},
 						"supported_in_adapters": {
 							Type:       schema.TypeList,
 							Optional:   true,
 							ConfigMode: schema.SchemaConfigModeAttr,
 							Computed:   true,
 							Elem: &schema.Schema{
-								Type: schema.TypeString}},
+								Type: schema.TypeString,
+							}},
 						"supported_in_generations": {
 							Type:       schema.TypeList,
 							Optional:   true,
 							ConfigMode: schema.SchemaConfigModeAttr,
 							Computed:   true,
 							Elem: &schema.Schema{
-								Type: schema.TypeInt}},
+								Type:         schema.TypeInt,
+								ValidateFunc: validation.IntInSlice([]int{4, 2, 3, 5}),
+							}},
 					},
 				},
 			},
@@ -304,7 +311,8 @@ func resourceCapabilityAdapterUnitDescriptor() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -419,14 +427,16 @@ func resourceCapabilityAdapterUnitDescriptor() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},

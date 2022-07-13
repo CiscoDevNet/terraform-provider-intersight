@@ -2735,7 +2735,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2778,7 +2778,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2821,7 +2821,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2869,7 +2869,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("comm.IpV4Interface")
 			if v, ok := l["gateway"]; ok {
 				{
 					x := (v.(string))
@@ -2918,7 +2918,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2961,7 +2961,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3004,7 +3004,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("policy.ConfigContext")
 			if v, ok := l["control_action"]; ok {
 				{
 					x := (v.(string))
@@ -3047,7 +3047,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3110,7 +3110,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3153,7 +3153,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3201,7 +3201,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3254,7 +3254,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3327,7 +3327,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3415,7 +3415,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3469,7 +3469,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3592,7 +3592,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3685,7 +3685,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3728,7 +3728,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3781,7 +3781,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("hyperflex.NamedVlan")
 			if v, ok := l["name"]; ok {
 				{
 					x := (v.(string))
@@ -3829,7 +3829,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("hyperflex.NamedVlan")
 			if v, ok := l["name"]; ok {
 				{
 					x := (v.(string))
@@ -3877,7 +3877,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3958,7 +3958,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -4001,7 +4001,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -4044,7 +4044,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.VersionContext")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -4111,7 +4111,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 	if err != nil {
 		return diag.Errorf("json marshal of HyperflexClusterProfile object failed with error : %s", err.Error())
 	}
-	countResponse, _, responseErr := conn.ApiClient.HyperflexApi.GetHyperflexClusterProfileList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
+	countResponse, _, responseErr := conn.ApiClient.HyperflexApi.GetHyperflexClusterProfileList(conn.ctx).Filter(getRequestParams(data)).Count(true).Execute()
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
@@ -4120,13 +4120,12 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 		}
 		return diag.Errorf("error occurred while fetching count of HyperflexClusterProfile: %s", responseErr.Error())
 	}
-	count := countResponse.HyperflexClusterProfileList.GetCount()
+	count := countResponse.MoDocumentCount.GetCount()
 	if count == 0 {
 		return diag.Errorf("your query for HyperflexClusterProfile data source did not return any results. Please change your search criteria and try again")
 	}
 	var i int32
-	var hyperflexClusterProfileResults = make([]map[string]interface{}, count, count)
-	var j = 0
+	var hyperflexClusterProfileResults = make([]map[string]interface{}, 0, 0)
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.HyperflexApi.GetHyperflexClusterProfileList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
@@ -4140,8 +4139,8 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 		results := resMo.HyperflexClusterProfileList.GetResults()
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
-			for i := 0; i < len(results); i++ {
-				var s = results[i]
+			for k := 0; k < len(results); k++ {
+				var s = results[k]
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["action"] = (s.GetAction())
@@ -4234,8 +4233,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				temp["wwxn_prefix"] = (s.GetWwxnPrefix())
-				hyperflexClusterProfileResults[j] = temp
-				j += 1
+				hyperflexClusterProfileResults = append(hyperflexClusterProfileResults, temp)
 			}
 		}
 	}

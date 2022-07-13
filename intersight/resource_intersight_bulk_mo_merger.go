@@ -12,6 +12,7 @@ import (
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceBulkMoMerger() *schema.Resource {
@@ -117,11 +118,12 @@ func resourceBulkMoMerger() *schema.Resource {
 				}, ForceNew: true,
 			},
 			"merge_action": {
-				Description: "The type of merge action to be applied on the target MOs. \n* `Merge` - The null properties/relationships of the source MO will be ignored for the target MO. The non-null properties/relationships of the source will override the target MO properties/relationships.\n* `Replace` - Merge action as described in RFC 7386. The null properties/relationships of the source MO will be deleted on the target MO.The non-null properties/relationships of the source will override the target MO properties/relationships.When source object type is different from target, only the properties common to both source and target  will be affected.Other properties on the target will be ignored.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "Merge",
-				ForceNew:    true,
+				Description:  "The type of merge action to be applied on the target MOs. \n* `Merge` - The null properties/relationships of the source MO will be ignored for the target MO. The non-null properties/relationships of the source will override the target MO properties/relationships.\n* `Replace` - Merge action as described in RFC 7386. The null properties/relationships of the source MO will be deleted on the target MO.The non-null properties/relationships of the source will override the target MO properties/relationships.When source object type is different from target, only the properties common to both source and target  will be affected.Other properties on the target will be ignored.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Merge", "Replace"}, false),
+				Optional:     true,
+				Default:      "Merge",
+				ForceNew:     true,
 			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
@@ -201,7 +203,8 @@ func resourceBulkMoMerger() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}, ForceNew: true,
+					Type: schema.TypeString,
+				}, ForceNew: true,
 			},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -442,7 +445,8 @@ func resourceBulkMoMerger() *schema.Resource {
 										Computed:   true,
 										ConfigMode: schema.SchemaConfigModeAttr,
 										Elem: &schema.Schema{
-											Type: schema.TypeString}, ForceNew: true,
+											Type: schema.TypeString,
+										}, ForceNew: true,
 									},
 									"parent": {
 										Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -561,16 +565,18 @@ func resourceBulkMoMerger() *schema.Resource {
 													ForceNew:         true,
 												},
 												"key": {
-													Description: "The string representation of a tag key.",
-													Type:        schema.TypeString,
-													Optional:    true,
-													ForceNew:    true,
+													Description:  "The string representation of a tag key.",
+													Type:         schema.TypeString,
+													ValidateFunc: validation.StringLenBetween(1, 128),
+													Optional:     true,
+													ForceNew:     true,
 												},
 												"value": {
-													Description: "The string representation of a tag value.",
-													Type:        schema.TypeString,
-													Optional:    true,
-													ForceNew:    true,
+													Description:  "The string representation of a tag value.",
+													Type:         schema.TypeString,
+													ValidateFunc: validation.StringLenBetween(0, 256),
+													Optional:     true,
+													ForceNew:     true,
 												},
 											},
 										},
@@ -926,7 +932,8 @@ func resourceBulkMoMerger() *schema.Resource {
 							Computed:   true,
 							ConfigMode: schema.SchemaConfigModeAttr,
 							Elem: &schema.Schema{
-								Type: schema.TypeString}, ForceNew: true,
+								Type: schema.TypeString,
+							}, ForceNew: true,
 						},
 						"parent": {
 							Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -1045,16 +1052,18 @@ func resourceBulkMoMerger() *schema.Resource {
 										ForceNew:         true,
 									},
 									"key": {
-										Description: "The string representation of a tag key.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										ForceNew:    true,
+										Description:  "The string representation of a tag key.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringLenBetween(1, 128),
+										Optional:     true,
+										ForceNew:     true,
 									},
 									"value": {
-										Description: "The string representation of a tag value.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										ForceNew:    true,
+										Description:  "The string representation of a tag value.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringLenBetween(0, 256),
+										Optional:     true,
+										ForceNew:     true,
 									},
 								},
 							},
@@ -1237,16 +1246,18 @@ func resourceBulkMoMerger() *schema.Resource {
 							ForceNew:         true,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							ForceNew:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
+							ForceNew:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							ForceNew:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
+							ForceNew:     true,
 						},
 					},
 				},
@@ -1387,7 +1398,8 @@ func resourceBulkMoMerger() *schema.Resource {
 							Computed:   true,
 							ConfigMode: schema.SchemaConfigModeAttr,
 							Elem: &schema.Schema{
-								Type: schema.TypeString}, ForceNew: true,
+								Type: schema.TypeString,
+							}, ForceNew: true,
 						},
 						"parent": {
 							Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -1506,16 +1518,18 @@ func resourceBulkMoMerger() *schema.Resource {
 										ForceNew:         true,
 									},
 									"key": {
-										Description: "The string representation of a tag key.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										ForceNew:    true,
+										Description:  "The string representation of a tag key.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringLenBetween(1, 128),
+										Optional:     true,
+										ForceNew:     true,
 									},
 									"value": {
-										Description: "The string representation of a tag value.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										ForceNew:    true,
+										Description:  "The string representation of a tag value.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringLenBetween(0, 256),
+										Optional:     true,
+										ForceNew:     true,
 									},
 								},
 							},
@@ -1817,7 +1831,8 @@ func resourceBulkMoMerger() *schema.Resource {
 							Computed:   true,
 							ConfigMode: schema.SchemaConfigModeAttr,
 							Elem: &schema.Schema{
-								Type: schema.TypeString}, ForceNew: true,
+								Type: schema.TypeString,
+							}, ForceNew: true,
 						},
 						"parent": {
 							Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -1936,16 +1951,18 @@ func resourceBulkMoMerger() *schema.Resource {
 										ForceNew:         true,
 									},
 									"key": {
-										Description: "The string representation of a tag key.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										ForceNew:    true,
+										Description:  "The string representation of a tag key.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringLenBetween(1, 128),
+										Optional:     true,
+										ForceNew:     true,
 									},
 									"value": {
-										Description: "The string representation of a tag value.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										ForceNew:    true,
+										Description:  "The string representation of a tag value.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringLenBetween(0, 256),
+										Optional:     true,
+										ForceNew:     true,
 									},
 								},
 							},
@@ -2322,7 +2339,7 @@ func resourceBulkMoMergerCreate(c context.Context, d *schema.ResourceData, meta 
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2507,7 +2524,7 @@ func resourceBulkMoMergerCreate(c context.Context, d *schema.ResourceData, meta 
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.BaseMo")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

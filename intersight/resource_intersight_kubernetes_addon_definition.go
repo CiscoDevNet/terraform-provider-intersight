@@ -11,6 +11,7 @@ import (
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceKubernetesAddonDefinition() *schema.Resource {
@@ -141,10 +142,11 @@ func resourceKubernetesAddonDefinition() *schema.Resource {
 					return
 				}},
 			"default_install_strategy": {
-				Description: "Default installation strategy for the release.\n* `None` - Unspecified install strategy.\n* `NoAction` - No install action performed.\n* `InstallOnly` - Only install in green field. No action in case of failure or removal.\n* `Always` - Attempt install if chart is not already installed.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "None",
+				Description:  "Default installation strategy for the release.\n* `None` - Unspecified install strategy.\n* `NoAction` - No install action performed.\n* `InstallOnly` - Only install in green field. No action in case of failure or removal.\n* `Always` - Attempt install if chart is not already installed.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"None", "NoAction", "InstallOnly", "Always"}, false),
+				Optional:     true,
+				Default:      "None",
 			},
 			"default_namespace": {
 				Description: "Default namespace to install the release.",
@@ -152,10 +154,11 @@ func resourceKubernetesAddonDefinition() *schema.Resource {
 				Optional:    true,
 			},
 			"default_upgrade_strategy": {
-				Description: "Default upgrade strategy for the release.\n* `None` - Unspecified upgrade strategy.\n* `NoAction` - This choice enables No upgrades to be performed.\n* `UpgradeOnly` - Attempt upgrade if chart or overrides options change, no action on upgrade failure.\n* `ReinstallOnFailure` - Attempt upgrade first. Remove and install on upgrade failure.\n* `AlwaysReinstall` - Always remove older release and reinstall.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "None",
+				Description:  "Default upgrade strategy for the release.\n* `None` - Unspecified upgrade strategy.\n* `NoAction` - This choice enables No upgrades to be performed.\n* `UpgradeOnly` - Attempt upgrade if chart or overrides options change, no action on upgrade failure.\n* `ReinstallOnFailure` - Attempt upgrade first. Remove and install on upgrade failure.\n* `AlwaysReinstall` - Always remove older release and reinstall.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"None", "NoAction", "UpgradeOnly", "ReinstallOnFailure", "AlwaysReinstall"}, false),
+				Optional:     true,
+				Default:      "None",
 			},
 			"description": {
 				Description: "Description of the addon component.",
@@ -189,7 +192,9 @@ func resourceKubernetesAddonDefinition() *schema.Resource {
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Computed:   true,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"Essential", "TechPreview", "CSI", "Deprecated", "EOL"}, false),
+				}},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
@@ -271,7 +276,8 @@ func resourceKubernetesAddonDefinition() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -357,7 +363,9 @@ func resourceKubernetesAddonDefinition() *schema.Resource {
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Computed:   true,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"", "APIC", "CAPIC", "DCNM", "UCSFI", "UCSFIISM", "IMC", "IMCM4", "IMCM5", "IMCRack", "UCSIOM", "HX", "HyperFlexAP", "IWE", "UCSD", "IntersightAppliance", "IntersightAssist", "PureStorageFlashArray", "NexusDevice", "ACISwitch", "NexusSwitch", "MDSDevice", "UCSC890", "NetAppOntap", "NetAppActiveIqUnifiedManager", "EmcScaleIo", "EmcVmax", "EmcVplex", "EmcXtremIo", "VmwareVcenter", "MicrosoftHyperV", "AppDynamics", "Dynatrace", "NewRelic", "ServiceNow", "ReadHatOpenStack", "CloudFoundry", "MicrosoftAzureApplicationInsights", "OpenStack", "MicrosoftSqlServer", "MySqlServer", "Kubernetes", "AmazonWebService", "AmazonWebServiceBilling", "MicrosoftAzureServicePrincipal", "MicrosoftAzureEnterpriseAgreement", "DellCompellent", "HPE3Par", "RedHatEnterpriseVirtualization", "NutanixAcropolis", "HPEOneView", "ServiceEngine", "HitachiVirtualStoragePlatform", "IMCBlade", "TerraformCloud", "TerraformAgent", "CustomTarget", "AnsibleEndpoint", "HTTPEndpoint", "SSHEndpoint", "CiscoCatalyst", "PowerShellEndpoint"}, false),
+				}},
 			"shared_scope": {
 				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 				Type:        schema.TypeString,
@@ -382,14 +390,16 @@ func resourceKubernetesAddonDefinition() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -574,7 +584,7 @@ func resourceKubernetesAddonDefinitionCreate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -679,7 +689,7 @@ func resourceKubernetesAddonDefinitionCreate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -953,7 +963,7 @@ func resourceKubernetesAddonDefinitionUpdate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1067,7 +1077,7 @@ func resourceKubernetesAddonDefinitionUpdate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceVnicIscsiAdapterPolicy() *schema.Resource {
@@ -83,9 +85,10 @@ func resourceVnicIscsiAdapterPolicy() *schema.Resource {
 				Default:     "vnic.IscsiAdapterPolicy",
 			},
 			"connection_time_out": {
-				Description: "The number of seconds to wait until Cisco UCS assumes that the initial login has failed and the iSCSI adapter is unavailable.",
-				Type:        schema.TypeInt,
-				Optional:    true,
+				Description:  "The number of seconds to wait until Cisco UCS assumes that the initial login has failed and the iSCSI adapter is unavailable.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(0, 255),
+				Optional:     true,
 			},
 			"create_time": {
 				Description: "The time when this managed object was created.",
@@ -99,14 +102,16 @@ func resourceVnicIscsiAdapterPolicy() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"dhcp_timeout": {
-				Description: "The number of seconds to wait before the initiator assumes that the DHCP server is unavailable.",
-				Type:        schema.TypeInt,
-				Optional:    true,
+				Description:  "The number of seconds to wait before the initiator assumes that the DHCP server is unavailable.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(60, 300),
+				Optional:     true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -120,9 +125,10 @@ func resourceVnicIscsiAdapterPolicy() *schema.Resource {
 					return
 				}},
 			"lun_busy_retry_count": {
-				Description: "The number of times to retry the connection in case of a failure during iSCSI LUN discovery.",
-				Type:        schema.TypeInt,
-				Optional:    true,
+				Description:  "The number of times to retry the connection in case of a failure during iSCSI LUN discovery.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(0, 60),
+				Optional:     true,
 			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
@@ -143,9 +149,10 @@ func resourceVnicIscsiAdapterPolicy() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the concrete policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the concrete policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -200,7 +207,8 @@ func resourceVnicIscsiAdapterPolicy() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -304,14 +312,16 @@ func resourceVnicIscsiAdapterPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -525,7 +535,7 @@ func resourceVnicIscsiAdapterPolicyCreate(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -784,7 +794,7 @@ func resourceVnicIscsiAdapterPolicyUpdate(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

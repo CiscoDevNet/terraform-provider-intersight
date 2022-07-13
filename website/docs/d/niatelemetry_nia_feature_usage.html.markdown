@@ -18,6 +18,7 @@ The following arguments can be used to get data of already created objects in In
 * `aaa_radius_provider_count`:(int) Returns the total number of AAA Radius Providers. 
 * `aaa_tacacs_provider_count`:(int) Returns the total number of AAA Tacacs Providers. 
 * `account_moid`:(string) The Account ID for this managed object. 
+* `apic_cluster_health`:(string) Cluster health for the APIC controller. 
 * `apic_count`:(int) Number of APIC controllers. This determines the value of controllers for the fabric. 
 * `apic_is_telnet_enabled`:(bool) Returns if telnet is enabled on APIC. 
 * `apic_ntp_count`:(int) Count of NTP servers configured on APIC. 

@@ -1430,7 +1430,7 @@ func dataSourceIamUserRead(c context.Context, d *schema.ResourceData, meta inter
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1473,7 +1473,7 @@ func dataSourceIamUserRead(c context.Context, d *schema.ResourceData, meta inter
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1531,7 +1531,7 @@ func dataSourceIamUserRead(c context.Context, d *schema.ResourceData, meta inter
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1645,7 +1645,7 @@ func dataSourceIamUserRead(c context.Context, d *schema.ResourceData, meta inter
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1861,7 +1861,7 @@ func dataSourceIamUserRead(c context.Context, d *schema.ResourceData, meta inter
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.VersionContext")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -1923,7 +1923,7 @@ func dataSourceIamUserRead(c context.Context, d *schema.ResourceData, meta inter
 	if err != nil {
 		return diag.Errorf("json marshal of IamUser object failed with error : %s", err.Error())
 	}
-	countResponse, _, responseErr := conn.ApiClient.IamApi.GetIamUserList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
+	countResponse, _, responseErr := conn.ApiClient.IamApi.GetIamUserList(conn.ctx).Filter(getRequestParams(data)).Count(true).Execute()
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
@@ -1932,13 +1932,12 @@ func dataSourceIamUserRead(c context.Context, d *schema.ResourceData, meta inter
 		}
 		return diag.Errorf("error occurred while fetching count of IamUser: %s", responseErr.Error())
 	}
-	count := countResponse.IamUserList.GetCount()
+	count := countResponse.MoDocumentCount.GetCount()
 	if count == 0 {
 		return diag.Errorf("your query for IamUser data source did not return any results. Please change your search criteria and try again")
 	}
 	var i int32
-	var iamUserResults = make([]map[string]interface{}, count, count)
-	var j = 0
+	var iamUserResults = make([]map[string]interface{}, 0, 0)
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.IamApi.GetIamUserList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
@@ -1952,8 +1951,8 @@ func dataSourceIamUserRead(c context.Context, d *schema.ResourceData, meta inter
 		results := resMo.IamUserList.GetResults()
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
-			for i := 0; i < len(results); i++ {
-				var s = results[i]
+			for k := 0; k < len(results); k++ {
+				var s = results[k]
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
@@ -2005,8 +2004,7 @@ func dataSourceIamUserRead(c context.Context, d *schema.ResourceData, meta inter
 				temp["user_unique_identifier"] = (s.GetUserUniqueIdentifier())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
-				iamUserResults[j] = temp
-				j += 1
+				iamUserResults = append(iamUserResults, temp)
 			}
 		}
 	}

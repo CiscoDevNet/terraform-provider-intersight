@@ -6,11 +6,13 @@ import (
 	"fmt"
 	"log"
 	"reflect"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceServerConfigImport() *schema.Resource {
@@ -199,7 +201,8 @@ func resourceServerConfigImport() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}, ForceNew: true,
+					Type: schema.TypeString,
+				}, ForceNew: true,
 			},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -293,10 +296,11 @@ func resourceServerConfigImport() *schema.Resource {
 				ForceNew: true,
 			},
 			"policy_prefix": {
-				Description: "Policy prefix for the policies of the imported server profile.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				ForceNew:    true,
+				Description:  "Policy prefix for the policies of the imported server profile.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,32}$"), ""),
+				Optional:     true,
+				ForceNew:     true,
 			},
 			"policy_types": {
 				Type:       schema.TypeList,
@@ -304,13 +308,15 @@ func resourceServerConfigImport() *schema.Resource {
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Computed:   true,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}, ForceNew: true,
+					Type: schema.TypeString,
+				}, ForceNew: true,
 			},
 			"profile_name": {
-				Description: "Profile name for the imported server profile.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				ForceNew:    true,
+				Description:  "Profile name for the imported server profile.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.-]{1,64}$"), ""),
+				Optional:     true,
+				ForceNew:     true,
 			},
 			"server": {
 				Description: "A reference to a computeRackUnit resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -430,16 +436,18 @@ func resourceServerConfigImport() *schema.Resource {
 							ForceNew:         true,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							ForceNew:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
+							ForceNew:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							ForceNew:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
+							ForceNew:     true,
 						},
 					},
 				},
@@ -653,7 +661,7 @@ func resourceServerConfigImportCreate(c context.Context, d *schema.ResourceData,
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -719,7 +727,7 @@ func resourceServerConfigImportCreate(c context.Context, d *schema.ResourceData,
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

@@ -15,8 +15,9 @@ Holds a certificate, signed by a CAcert.
 ```hcl
 resource "intersight_iam_certificate" "iam_certificate1" {
   certificate {
-      pem_certificate = var.pemcertificate1
-	}
+    pem_certificate = var.pemcertificate1
+    object_type     = "x509.Certificate"
+  }
 }
 
 
@@ -26,7 +27,6 @@ variable "pemcertificate1" {
   description = "Pem certificate base64 encoded value"
 }
 ```
-
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

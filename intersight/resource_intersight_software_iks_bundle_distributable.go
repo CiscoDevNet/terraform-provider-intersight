@@ -11,6 +11,7 @@ import (
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceSoftwareIksBundleDistributable() *schema.Resource {
@@ -159,10 +160,11 @@ func resourceSoftwareIksBundleDistributable() *schema.Resource {
 							Optional:    true,
 						},
 						"component_type": {
-							Description: "The type of component image within the distributable.\n* `ALL` - This represents all the components.\n* `ALL,HDD` - This represents all the components plus the HDDs.\n* `Drive-U.2` - This represents the U.2 drives that are SFF/LFF drives (mostly all the drives will fall under this category).\n* `Storage` - This represents the storage controller components.\n* `None` - This represents none of the components.\n* `NXOS` - This represents NXOS components.\n* `IOM` - This represents IOM components.\n* `PSU` - This represents PSU components.\n* `CIMC` - This represents CIMC components.\n* `BIOS` - This represents BIOS components.\n* `PCIE` - This represents PCIE components.\n* `Drive` - This represents Drive components.\n* `DIMM` - This represents DIMM components.\n* `BoardController` - This represents Board Controller components.\n* `StorageController` - This represents Storage Controller components.\n* `Storage-Sasexpander` - This represents Storage Sas-Expander components.\n* `Storage-U.2` - This represents U2 Storage Controller components.\n* `HBA` - This represents HBA components.\n* `GPU` - This represents GPU components.\n* `SasExpander` - This represents SasExpander components.\n* `MSwitch` - This represents mSwitch components.\n* `CMC` - This represents CMC components.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "ALL",
+							Description:  "The type of component image within the distributable.\n* `ALL` - This represents all the components.\n* `ALL,HDD` - This represents all the components plus the HDDs.\n* `Drive-U.2` - This represents the U.2 drives that are SFF/LFF drives (mostly all the drives will fall under this category).\n* `Storage` - This represents the storage controller components.\n* `None` - This represents none of the components.\n* `NXOS` - This represents NXOS components.\n* `IOM` - This represents IOM components.\n* `PSU` - This represents PSU components.\n* `CIMC` - This represents CIMC components.\n* `BIOS` - This represents BIOS components.\n* `PCIE` - This represents PCIE components.\n* `Drive` - This represents Drive components.\n* `DIMM` - This represents DIMM components.\n* `BoardController` - This represents Board Controller components.\n* `StorageController` - This represents Storage Controller components.\n* `Storage-Sasexpander` - This represents Storage Sas-Expander components.\n* `Storage-U.2` - This represents U2 Storage Controller components.\n* `HBA` - This represents HBA components.\n* `GPU` - This represents GPU components.\n* `SasExpander` - This represents SasExpander components.\n* `MSwitch` - This represents mSwitch components.\n* `CMC` - This represents CMC components.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"ALL", "ALL,HDD", "Drive-U.2", "Storage", "None", "NXOS", "IOM", "PSU", "CIMC", "BIOS", "PCIE", "Drive", "DIMM", "BoardController", "StorageController", "Storage-Sasexpander", "Storage-U.2", "HBA", "GPU", "SasExpander", "MSwitch", "CMC"}, false),
+							Optional:     true,
+							Default:      "ALL",
 						},
 						"description": {
 							Description: "This shows the description of component image within the distributable.",
@@ -170,10 +172,11 @@ func resourceSoftwareIksBundleDistributable() *schema.Resource {
 							Optional:    true,
 						},
 						"disruption": {
-							Description: "The type of disruption on each component. For example, host reboot, automatic power cycle, and manual power cycle.\n* `None` - Indicates that the component did not receive a disruption request.\n* `HostReboot` - Indicates that the component received a host reboot request.\n* `EndpointReboot` - Indicates that the component received an end point reboot request.\n* `ManualPowerCycle` - Indicates that the component received a manual power cycle request.\n* `AutomaticPowerCycle` - Indicates that the component received an automatic power cycle request.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "None",
+							Description:  "The type of disruption on each component. For example, host reboot, automatic power cycle, and manual power cycle.\n* `None` - Indicates that the component did not receive a disruption request.\n* `HostReboot` - Indicates that the component received a host reboot request.\n* `EndpointReboot` - Indicates that the component received an end point reboot request.\n* `ManualPowerCycle` - Indicates that the component received a manual power cycle request.\n* `AutomaticPowerCycle` - Indicates that the component received an automatic power cycle request.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"None", "HostReboot", "EndpointReboot", "ManualPowerCycle", "AutomaticPowerCycle"}, false),
+							Optional:     true,
+							Default:      "None",
 						},
 						"image_path": {
 							Description: "This shows the path of component image within the distributable.",
@@ -202,7 +205,9 @@ func resourceSoftwareIksBundleDistributable() *schema.Resource {
 							ConfigMode: schema.SchemaConfigModeAttr,
 							Computed:   true,
 							Elem: &schema.Schema{
-								Type: schema.TypeString}},
+								Type:         schema.TypeString,
+								ValidateFunc: validation.StringInSlice([]string{"None", "Update", "Inventory", "Activate", "Config"}, false),
+							}},
 						"packed_version": {
 							Description: "The image version of components packaged in the distributable.",
 							Type:        schema.TypeString,
@@ -354,10 +359,11 @@ func resourceSoftwareIksBundleDistributable() *schema.Resource {
 				},
 			},
 			"import_action": {
-				Description: "The action to be performed on the imported file. If 'PreCache' is set, the image will be cached in Appliance. Applicable in Intersight appliance deployment. If 'Evict' is set, the cached file will be removed. Applicable in Intersight appliance deployment. If 'GeneratePreSignedUploadUrl' is set, generates pre signed URL (s) for the file to be imported into the repository. Applicable for local machine source. The URL (s) will be populated under LocalMachine file server. If 'CompleteImportProcess' is set, the ImportState is marked as 'Imported'. Applicable for local machine source. If 'Cancel' is set, the ImportState is marked as 'Failed'. Applicable for local machine source.\n* `None` - No action should be taken on the imported file.\n* `GeneratePreSignedUploadUrl` - Generate pre signed URL of file for importing into the repository.\n* `GeneratePreSignedDownloadUrl` - Generate pre signed URL of file in the repository to download.\n* `CompleteImportProcess` - Mark that the import process of the file into the repository is complete.\n* `MarkImportFailed` - Mark to indicate that the import process of the file into the repository failed.\n* `PreCache` - Cache the file into the Intersight Appliance.\n* `Cancel` - The cancel import process for the file into the repository.\n* `Extract` - The action to extract the file in the external repository.\n* `Evict` - Evict the cached file from the Intersight Appliance.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "None",
+				Description:  "The action to be performed on the imported file. If 'PreCache' is set, the image will be cached in Appliance. Applicable in Intersight appliance deployment. If 'Evict' is set, the cached file will be removed. Applicable in Intersight appliance deployment. If 'GeneratePreSignedUploadUrl' is set, generates pre signed URL (s) for the file to be imported into the repository. Applicable for local machine source. The URL (s) will be populated under LocalMachine file server. If 'CompleteImportProcess' is set, the ImportState is marked as 'Imported'. Applicable for local machine source. If 'Cancel' is set, the ImportState is marked as 'Failed'. Applicable for local machine source.\n* `None` - No action should be taken on the imported file.\n* `GeneratePreSignedUploadUrl` - Generate pre signed URL of file for importing into the repository.\n* `GeneratePreSignedDownloadUrl` - Generate pre signed URL of file in the repository to download.\n* `CompleteImportProcess` - Mark that the import process of the file into the repository is complete.\n* `MarkImportFailed` - Mark to indicate that the import process of the file into the repository failed.\n* `PreCache` - Cache the file into the Intersight Appliance.\n* `Cancel` - The cancel import process for the file into the repository.\n* `Extract` - The action to extract the file in the external repository.\n* `Evict` - Evict the cached file from the Intersight Appliance.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"None", "GeneratePreSignedUploadUrl", "GeneratePreSignedDownloadUrl", "CompleteImportProcess", "MarkImportFailed", "PreCache", "Cancel", "Extract", "Evict"}, false),
+				Optional:     true,
+				Default:      "None",
 			},
 			"import_state": {
 				Description: "The state  of this file in the repository or Appliance. The importState is updated during the import operation and as part of the repository monitoring process.\n* `ReadyForImport` - The image is ready to be imported into the repository.\n* `Importing` - The image is being imported into the repository.\n* `Imported` - The image has been extracted and imported into the repository.\n* `PendingExtraction` - Indicates that the image has been imported but not extracted in the repository.\n* `Extracting` - Indicates that the image is being extracted into the repository.\n* `Extracted` - Indicates that the image has been extracted into the repository.\n* `Failed` - The image import from an external source to the repository has failed.\n* `MetaOnly` - The image is present in an external repository.\n* `ReadyForCache` - The image is ready to be cached into the Intersight Appliance.\n* `Caching` - Indicates that the image is being cached into the Intersight Appliance or endpoint cache.\n* `Cached` - Indicates that the image has been cached into the Intersight Appliance or endpoint cache.\n* `CachingFailed` - Indicates that the image caching into the Intersight Appliance failed or endpoint cache.\n* `Corrupted` - Indicates that the image in the local repository (or endpoint cache) has been corrupted after it was cached.\n* `Evicted` - Indicates that the image has been evicted from the Intersight Appliance (or endpoint cache) to reclaim storage space.\n* `Invalid` - Indicates that the corresponding distributable MO has been removed from the backend. This can be due to unpublishing of an image.",
@@ -432,9 +438,10 @@ func resourceSoftwareIksBundleDistributable() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "The name of the file. It is populated as part of the image import operation.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "The name of the file. It is populated as part of the image import operation.",
+				Type:         schema.TypeString,
+				ValidateFunc: StringLenMaximum(128),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -448,7 +455,8 @@ func resourceSoftwareIksBundleDistributable() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -669,11 +677,13 @@ func resourceSoftwareIksBundleDistributable() *schema.Resource {
 			},
 			"supported_models": {
 				Type:       schema.TypeList,
+				MinItems:   1,
 				Optional:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Computed:   true,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"tags": {
 				Type:       schema.TypeList,
 				Optional:   true,
@@ -687,14 +697,16 @@ func resourceSoftwareIksBundleDistributable() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -885,7 +897,7 @@ func resourceSoftwareIksBundleDistributableCreate(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1128,7 +1140,7 @@ func resourceSoftwareIksBundleDistributableCreate(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1191,7 +1203,7 @@ func resourceSoftwareIksBundleDistributableCreate(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("softwarerepository.FileServer")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1521,7 +1533,7 @@ func resourceSoftwareIksBundleDistributableUpdate(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1773,7 +1785,7 @@ func resourceSoftwareIksBundleDistributableUpdate(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1841,7 +1853,7 @@ func resourceSoftwareIksBundleDistributableUpdate(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("softwarerepository.FileServer")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))

@@ -6,11 +6,13 @@ import (
 	"fmt"
 	"log"
 	"reflect"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceWorkflowSolutionActionDefinition() *schema.Resource {
@@ -34,10 +36,11 @@ func resourceWorkflowSolutionActionDefinition() *schema.Resource {
 					return
 				}},
 			"action_type": {
-				Description: "Type of actionDefinition which decides on how to trigger the action.\n* `External` - External actions definition can be triggered by enduser to perform actions on the solution. Once action is completed successfully (eg. create/deploy), user cannot re-trigger that action again.\n* `Internal` - Internal action definition is used to trigger periodic actions on the solution instance.\n* `Repetitive` - Repetitive action definition is an external action that can be triggered by enduser to perform repetitive actions (eg. Edit/Update/Perform health check) on the created solution.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "External",
+				Description:  "Type of actionDefinition which decides on how to trigger the action.\n* `External` - External actions definition can be triggered by enduser to perform actions on the solution. Once action is completed successfully (eg. create/deploy), user cannot re-trigger that action again.\n* `Internal` - Internal action definition is used to trigger periodic actions on the solution instance.\n* `Repetitive` - Repetitive action definition is an external action that can be triggered by enduser to perform repetitive actions (eg. Edit/Update/Perform health check) on the created solution.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"External", "Internal", "Repetitive"}, false),
+				Optional:     true,
+				Default:      "External",
 			},
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -50,7 +53,9 @@ func resourceWorkflowSolutionActionDefinition() *schema.Resource {
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Computed:   true,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"NotCreated", "InProgress", "Failed", "Okay", "Decommissioned"}, false),
+				}},
 			"ancestors": {
 				Description: "An array of relationships to moBaseMo resources.",
 				Type:        schema.TypeList,
@@ -135,9 +140,10 @@ func resourceWorkflowSolutionActionDefinition() *schema.Resource {
 							Optional:    true,
 						},
 						"name": {
-							Description: "The name of the workflow, this name must be unique across all the workflow definition used within the action definitions.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The name of the workflow, this name must be unique across all the workflow definition used within the action definitions.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_:-]{1,64}$"), ""),
+							Optional:     true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -291,10 +297,11 @@ func resourceWorkflowSolutionActionDefinition() *schema.Resource {
 										Default:     "workflow.DisplayMeta",
 									},
 									"widget_type": {
-										Description: "Specify the widget type for data display.\n* `None` - Display none of the widget types.\n* `Radio` - Display the widget as a radio button.\n* `Dropdown` - Display the widget as a dropdown.\n* `GridSelector` - Display the widget as a selector.\n* `DrawerSelector` - Display the widget as a selector.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Default:     "None",
+										Description:  "Specify the widget type for data display.\n* `None` - Display none of the widget types.\n* `Radio` - Display the widget as a radio button.\n* `Dropdown` - Display the widget as a dropdown.\n* `GridSelector` - Display the widget as a selector.\n* `DrawerSelector` - Display the widget as a selector.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringInSlice([]string{"None", "Radio", "Dropdown", "GridSelector", "DrawerSelector"}, false),
+										Optional:     true,
+										Default:      "None",
 									},
 								},
 							},
@@ -305,14 +312,16 @@ func resourceWorkflowSolutionActionDefinition() *schema.Resource {
 							Optional:    true,
 						},
 						"label": {
-							Description: "Descriptive label for the data type. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), space ( ) or an underscore (_). The first and last character in label must be an alphanumeric character.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "Descriptive label for the data type. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), space ( ) or an underscore (_). The first and last character in label must be an alphanumeric character.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9]+[\\sa-zA-Z0-9_'.:-]{1,92}$"), ""), validation.StringLenBetween(1, 92)),
+							Optional:     true,
 						},
 						"name": {
-							Description: "Descriptive name for the data type. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_). The first and last character in name must be an alphanumeric character.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "Descriptive name for the data type. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_). The first and last character in name must be an alphanumeric character.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9]+([a-zA-Z0-9-_]*[a-zA-Z0-9])*$"), ""), validation.StringLenBetween(1, 92)),
+							Optional:     true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
@@ -329,9 +338,10 @@ func resourceWorkflowSolutionActionDefinition() *schema.Resource {
 				},
 			},
 			"label": {
-				Description: "A user friendly short name to identify the action. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ) or an underscore (_).",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "A user friendly short name to identify the action. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ) or an underscore (_).",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9]+[\\sa-zA-Z0-9_.:-]{1,92}$"), ""),
+				Optional:     true,
 			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
@@ -352,10 +362,11 @@ func resourceWorkflowSolutionActionDefinition() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "The name for this action definition. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:) or an underscore (_). Name of the action must be unique within a solution definition.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				ForceNew:    true,
+				Description:  "The name for this action definition. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:) or an underscore (_). Name of the action must be unique within a solution definition.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
+				ForceNew:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -374,7 +385,8 @@ func resourceWorkflowSolutionActionDefinition() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -416,9 +428,10 @@ func resourceWorkflowSolutionActionDefinition() *schema.Resource {
 				},
 			},
 			"periodicity": {
-				Description: "Value in seconds to specify the periodicity of the workflows. A zero value indicate the workflow will not execute periodically. A non-zero value indicate, the workflow will be executed periodically with this periodicity.",
-				Type:        schema.TypeInt,
-				Optional:    true,
+				Description:  "Value in seconds to specify the periodicity of the workflows. A zero value indicate the workflow will not execute periodically. A non-zero value indicate, the workflow will be executed periodically with this periodicity.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(0, 604800),
+				Optional:     true,
 			},
 			"permission_resources": {
 				Description: "An array of relationships to moBaseMo resources.",
@@ -498,9 +511,10 @@ func resourceWorkflowSolutionActionDefinition() *schema.Resource {
 							Optional:    true,
 						},
 						"name": {
-							Description: "The name of the workflow, this name must be unique across all the workflow definition used within the action definitions.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The name of the workflow, this name must be unique across all the workflow definition used within the action definitions.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_:-]{1,64}$"), ""),
+							Optional:     true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -560,9 +574,10 @@ func resourceWorkflowSolutionActionDefinition() *schema.Resource {
 							Optional:    true,
 						},
 						"name": {
-							Description: "The name of the workflow, this name must be unique across all the workflow definition used within the action definitions.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The name of the workflow, this name must be unique across all the workflow definition used within the action definitions.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_:-]{1,64}$"), ""),
+							Optional:     true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -674,9 +689,10 @@ func resourceWorkflowSolutionActionDefinition() *schema.Resource {
 							Optional:    true,
 						},
 						"name": {
-							Description: "The name of the workflow, this name must be unique across all the workflow definition used within the action definitions.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The name of the workflow, this name must be unique across all the workflow definition used within the action definitions.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_:-]{1,64}$"), ""),
+							Optional:     true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -710,14 +726,16 @@ func resourceWorkflowSolutionActionDefinition() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -883,9 +901,10 @@ func resourceWorkflowSolutionActionDefinition() *schema.Resource {
 							Optional:    true,
 						},
 						"name": {
-							Description: "The name of the workflow, this name must be unique across all the workflow definition used within the action definitions.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The name of the workflow, this name must be unique across all the workflow definition used within the action definitions.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_:-]{1,64}$"), ""),
+							Optional:     true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -1241,7 +1260,7 @@ func resourceWorkflowSolutionActionDefinitionCreate(c context.Context, d *schema
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("workflow.DefaultValue")
 						if v, ok := l["object_type"]; ok {
 							{
 								x := (v.(string))
@@ -1296,7 +1315,7 @@ func resourceWorkflowSolutionActionDefinitionCreate(c context.Context, d *schema
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("workflow.DisplayMeta")
 						if v, ok := l["inventory_selector"]; ok {
 							{
 								x := (v.(bool))
@@ -1567,7 +1586,7 @@ func resourceWorkflowSolutionActionDefinitionCreate(c context.Context, d *schema
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2104,7 +2123,7 @@ func resourceWorkflowSolutionActionDefinitionUpdate(c context.Context, d *schema
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("workflow.DefaultValue")
 						if v, ok := l["object_type"]; ok {
 							{
 								x := (v.(string))
@@ -2159,7 +2178,7 @@ func resourceWorkflowSolutionActionDefinitionUpdate(c context.Context, d *schema
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("workflow.DisplayMeta")
 						if v, ok := l["inventory_selector"]; ok {
 							{
 								x := (v.(bool))
@@ -2432,7 +2451,7 @@ func resourceWorkflowSolutionActionDefinitionUpdate(c context.Context, d *schema
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

@@ -1495,6 +1495,36 @@ func flattenListFabricEthNetworkGroupPolicyInventoryRelationship(p []models.Fabr
 	}
 	return fabricethnetworkgrouppolicyinventoryrelationships
 }
+func flattenListFabricFcZoneMember(p []models.FabricFcZoneMember, d *schema.ResourceData) []map[string]interface{} {
+	var fabricfczonemembers []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		fabricfczonemember := make(map[string]interface{})
+		fabricfczonemember["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		fabricfczonemember["class_id"] = item.GetClassId()
+		fabricfczonemember["name"] = item.GetName()
+		fabricfczonemember["object_type"] = item.GetObjectType()
+		fabricfczonemember["switch_id"] = item.GetSwitchId()
+		fabricfczonemember["vsan_id"] = item.GetVsanId()
+		fabricfczonemember["wwpn"] = item.GetWwpn()
+		fabricfczonemembers = append(fabricfczonemembers, fabricfczonemember)
+	}
+	return fabricfczonemembers
+}
+func flattenListFabricFcZonePolicyRelationship(p []models.FabricFcZonePolicyRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var fabricfczonepolicyrelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		fabricfczonepolicyrelationship := flattenMoMoRef(item)
+		fabricfczonepolicyrelationships = append(fabricfczonepolicyrelationships, fabricfczonepolicyrelationship)
+	}
+	return fabricfczonepolicyrelationships
+}
 func flattenListFabricPortIdentifier(p []models.FabricPortIdentifier, d *schema.ResourceData) []map[string]interface{} {
 	var fabricportidentifiers []map[string]interface{}
 	if len(p) == 0 {
@@ -3446,6 +3476,23 @@ func flattenListInfraBaseClusterRelationship(p []models.InfraBaseClusterRelation
 	}
 	return infrabaseclusterrelationships
 }
+func flattenListInfraBaseGpuConfiguration(p []models.InfraBaseGpuConfiguration, d *schema.ResourceData) []map[string]interface{} {
+	var infrabasegpuconfigurations []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		infrabasegpuconfiguration := make(map[string]interface{})
+		infrabasegpuconfiguration["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		infrabasegpuconfiguration["class_id"] = item.GetClassId()
+		infrabasegpuconfiguration["device_id"] = item.GetDeviceId()
+		infrabasegpuconfiguration["memory_size"] = item.GetMemorySize()
+		infrabasegpuconfiguration["object_type"] = item.GetObjectType()
+		infrabasegpuconfiguration["vendor_id"] = item.GetVendorId()
+		infrabasegpuconfigurations = append(infrabasegpuconfigurations, infrabasegpuconfiguration)
+	}
+	return infrabasegpuconfigurations
+}
 func flattenListInfraMetaData(p []models.InfraMetaData, d *schema.ResourceData) []map[string]interface{} {
 	var inframetadatas []map[string]interface{}
 	if len(p) == 0 {
@@ -4434,6 +4481,24 @@ func flattenListNiatelemetryDeploymentStatus(p []models.NiatelemetryDeploymentSt
 	}
 	return niatelemetrydeploymentstatuss
 }
+func flattenListNiatelemetryDigitalOpticalMonitoring(p []models.NiatelemetryDigitalOpticalMonitoring, d *schema.ResourceData) []map[string]interface{} {
+	var niatelemetrydigitalopticalmonitorings []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		niatelemetrydigitalopticalmonitoring := make(map[string]interface{})
+		niatelemetrydigitalopticalmonitoring["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		niatelemetrydigitalopticalmonitoring["alerts"] = item.GetAlerts()
+		niatelemetrydigitalopticalmonitoring["class_id"] = item.GetClassId()
+		niatelemetrydigitalopticalmonitoring["dn"] = item.GetDn()
+		niatelemetrydigitalopticalmonitoring["object_type"] = item.GetObjectType()
+		niatelemetrydigitalopticalmonitoring["rx_los"] = item.GetRxLos()
+		niatelemetrydigitalopticalmonitoring["tx_fault_count"] = item.GetTxFaultCount()
+		niatelemetrydigitalopticalmonitorings = append(niatelemetrydigitalopticalmonitorings, niatelemetrydigitalopticalmonitoring)
+	}
+	return niatelemetrydigitalopticalmonitorings
+}
 func flattenListNiatelemetryFanDetails(p []models.NiatelemetryFanDetails, d *schema.ResourceData) []map[string]interface{} {
 	var niatelemetryfandetailss []map[string]interface{}
 	if len(p) == 0 {
@@ -4540,6 +4605,24 @@ func flattenListNiatelemetrySites(p []models.NiatelemetrySites, d *schema.Resour
 	}
 	return niatelemetrysitess
 }
+func flattenListNiatelemetrySwitchDiskUtilization(p []models.NiatelemetrySwitchDiskUtilization, d *schema.ResourceData) []map[string]interface{} {
+	var niatelemetryswitchdiskutilizations []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		niatelemetryswitchdiskutilization := make(map[string]interface{})
+		niatelemetryswitchdiskutilization["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		niatelemetryswitchdiskutilization["avail"] = item.GetAvail()
+		niatelemetryswitchdiskutilization["class_id"] = item.GetClassId()
+		niatelemetryswitchdiskutilization["name"] = item.GetName()
+		niatelemetryswitchdiskutilization["object_type"] = item.GetObjectType()
+		niatelemetryswitchdiskutilization["path"] = item.GetPath()
+		niatelemetryswitchdiskutilization["used"] = item.GetUsed()
+		niatelemetryswitchdiskutilizations = append(niatelemetryswitchdiskutilizations, niatelemetryswitchdiskutilization)
+	}
+	return niatelemetryswitchdiskutilizations
+}
 func flattenListNiatelemetryVniStatus(p []models.NiatelemetryVniStatus, d *schema.ResourceData) []map[string]interface{} {
 	var niatelemetryvnistatuss []map[string]interface{}
 	if len(p) == 0 {
@@ -4619,6 +4702,18 @@ func flattenListNtpAuthNtpServer(p []models.NtpAuthNtpServer, d *schema.Resource
 		ntpauthntpservers = append(ntpauthntpservers, ntpauthntpserver)
 	}
 	return ntpauthntpservers
+}
+func flattenListNtpNtpServerRelationship(p []models.NtpNtpServerRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var ntpntpserverrelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		ntpntpserverrelationship := flattenMoMoRef(item)
+		ntpntpserverrelationships = append(ntpntpserverrelationships, ntpntpserverrelationship)
+	}
+	return ntpntpserverrelationships
 }
 func flattenListOnpremImagePackage(p []models.OnpremImagePackage, d *schema.ResourceData) []map[string]interface{} {
 	var onpremimagepackages []map[string]interface{}
@@ -5189,6 +5284,18 @@ func flattenListPciLinkRelationship(p []models.PciLinkRelationship, d *schema.Re
 		pcilinkrelationships = append(pcilinkrelationships, pcilinkrelationship)
 	}
 	return pcilinkrelationships
+}
+func flattenListPciNodeRelationship(p []models.PciNodeRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var pcinoderelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		pcinoderelationship := flattenMoMoRef(item)
+		pcinoderelationships = append(pcinoderelationships, pcinoderelationship)
+	}
+	return pcinoderelationships
 }
 func flattenListPciSwitchRelationship(p []models.PciSwitchRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var pciswitchrelationships []map[string]interface{}
@@ -8611,6 +8718,90 @@ func flattenMapCertificatemanagementCertificateBase(p models.Certificatemanageme
 
 	certificatemanagementcertificatebases = append(certificatemanagementcertificatebases, certificatemanagementcertificatebase)
 	return certificatemanagementcertificatebases
+}
+func flattenMapCertificatemanagementImc(p models.CertificatemanagementImc, d *schema.ResourceData) []map[string]interface{} {
+	var certificatemanagementimcs []map[string]interface{}
+	var ret models.CertificatemanagementImc
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	certificatemanagementimc := make(map[string]interface{})
+	certificatemanagementimc["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	certificatemanagementimc["certificate"] = (func(p models.X509Certificate, d *schema.ResourceData) []map[string]interface{} {
+		var x509certificates []map[string]interface{}
+		var ret models.X509Certificate
+		if reflect.DeepEqual(ret, p) {
+			return nil
+		}
+		item := p
+		x509certificate := make(map[string]interface{})
+		x509certificate["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		x509certificate["class_id"] = item.GetClassId()
+		x509certificate["issuer"] = (func(p models.PkixDistinguishedName, d *schema.ResourceData) []map[string]interface{} {
+			var pkixdistinguishednames []map[string]interface{}
+			var ret models.PkixDistinguishedName
+			if reflect.DeepEqual(ret, p) {
+				return nil
+			}
+			item := p
+			pkixdistinguishedname := make(map[string]interface{})
+			pkixdistinguishedname["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			pkixdistinguishedname["class_id"] = item.GetClassId()
+			pkixdistinguishedname["common_name"] = item.GetCommonName()
+			pkixdistinguishedname["country"] = item.GetCountry()
+			pkixdistinguishedname["locality"] = item.GetLocality()
+			pkixdistinguishedname["object_type"] = item.GetObjectType()
+			pkixdistinguishedname["organization"] = item.GetOrganization()
+			pkixdistinguishedname["organizational_unit"] = item.GetOrganizationalUnit()
+			pkixdistinguishedname["state"] = item.GetState()
+
+			pkixdistinguishednames = append(pkixdistinguishednames, pkixdistinguishedname)
+			return pkixdistinguishednames
+		})(item.GetIssuer(), d)
+		x509certificate["not_after"] = item.GetNotAfter().String()
+		x509certificate["not_before"] = item.GetNotBefore().String()
+		x509certificate["object_type"] = item.GetObjectType()
+		x509certificate["pem_certificate"] = item.GetPemCertificate()
+		x509certificate["sha256_fingerprint"] = item.GetSha256Fingerprint()
+		x509certificate["signature_algorithm"] = item.GetSignatureAlgorithm()
+		x509certificate["subject"] = (func(p models.PkixDistinguishedName, d *schema.ResourceData) []map[string]interface{} {
+			var pkixdistinguishednames []map[string]interface{}
+			var ret models.PkixDistinguishedName
+			if reflect.DeepEqual(ret, p) {
+				return nil
+			}
+			item := p
+			pkixdistinguishedname := make(map[string]interface{})
+			pkixdistinguishedname["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			pkixdistinguishedname["class_id"] = item.GetClassId()
+			pkixdistinguishedname["common_name"] = item.GetCommonName()
+			pkixdistinguishedname["country"] = item.GetCountry()
+			pkixdistinguishedname["locality"] = item.GetLocality()
+			pkixdistinguishedname["object_type"] = item.GetObjectType()
+			pkixdistinguishedname["organization"] = item.GetOrganization()
+			pkixdistinguishedname["organizational_unit"] = item.GetOrganizationalUnit()
+			pkixdistinguishedname["state"] = item.GetState()
+
+			pkixdistinguishednames = append(pkixdistinguishednames, pkixdistinguishedname)
+			return pkixdistinguishednames
+		})(item.GetSubject(), d)
+
+		x509certificates = append(x509certificates, x509certificate)
+		return x509certificates
+	})(item.GetCertificate(), d)
+	certificatemanagementimc["class_id"] = item.GetClassId()
+	certificatemanagementimc["enabled"] = item.GetEnabled()
+	certificatemanagementimc["is_privatekey_set"] = item.GetIsPrivatekeySet()
+	certificatemanagementimc["object_type"] = item.GetObjectType()
+	privatekey_x, exists := d.GetOk("certificate")
+	if exists && privatekey_x != nil {
+		privatekey_y := privatekey_x.([]interface{})[0].(map[string]interface{})
+		certificatemanagementimc["privatekey"] = privatekey_y["privatekey"]
+	}
+
+	certificatemanagementimcs = append(certificatemanagementimcs, certificatemanagementimc)
+	return certificatemanagementimcs
 }
 func flattenMapChassisConfigResultRelationship(p models.ChassisConfigResultRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var chassisconfigresultrelationships []map[string]interface{}
@@ -13670,6 +13861,24 @@ func flattenMapKubernetesDeploymentStatus(p models.KubernetesDeploymentStatus, d
 	kubernetesdeploymentstatuss = append(kubernetesdeploymentstatuss, kubernetesdeploymentstatus)
 	return kubernetesdeploymentstatuss
 }
+func flattenMapKubernetesHttpProxyPolicyRelationship(p models.KubernetesHttpProxyPolicyRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var kuberneteshttpproxypolicyrelationships []map[string]interface{}
+	var ret models.KubernetesHttpProxyPolicyRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	kuberneteshttpproxypolicyrelationship := make(map[string]interface{})
+	kuberneteshttpproxypolicyrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	kuberneteshttpproxypolicyrelationship["class_id"] = item.GetClassId()
+	kuberneteshttpproxypolicyrelationship["moid"] = item.GetMoid()
+	kuberneteshttpproxypolicyrelationship["object_type"] = item.GetObjectType()
+	kuberneteshttpproxypolicyrelationship["selector"] = item.GetSelector()
+
+	kuberneteshttpproxypolicyrelationships = append(kuberneteshttpproxypolicyrelationships, kuberneteshttpproxypolicyrelationship)
+	return kuberneteshttpproxypolicyrelationships
+}
 func flattenMapKubernetesIngressStatus(p models.KubernetesIngressStatus, d *schema.ResourceData) []map[string]interface{} {
 	var kubernetesingressstatuss []map[string]interface{}
 	var ret models.KubernetesIngressStatus
@@ -14890,6 +15099,73 @@ func flattenMapNiatelemetryDiskinfo(p models.NiatelemetryDiskinfo, d *schema.Res
 	niatelemetrydiskinfos = append(niatelemetrydiskinfos, niatelemetrydiskinfo)
 	return niatelemetrydiskinfos
 }
+func flattenMapNiatelemetryEqptStorageFirmware(p models.NiatelemetryEqptStorageFirmware, d *schema.ResourceData) []map[string]interface{} {
+	var niatelemetryeqptstoragefirmwares []map[string]interface{}
+	var ret models.NiatelemetryEqptStorageFirmware
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	niatelemetryeqptstoragefirmware := make(map[string]interface{})
+	niatelemetryeqptstoragefirmware["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	niatelemetryeqptstoragefirmware["available"] = item.GetAvailable()
+	niatelemetryeqptstoragefirmware["class_id"] = item.GetClassId()
+	niatelemetryeqptstoragefirmware["object_type"] = item.GetObjectType()
+	niatelemetryeqptstoragefirmware["used"] = item.GetUsed()
+
+	niatelemetryeqptstoragefirmwares = append(niatelemetryeqptstoragefirmwares, niatelemetryeqptstoragefirmware)
+	return niatelemetryeqptstoragefirmwares
+}
+func flattenMapNiatelemetryEqptcapacityPolUsage5min(p models.NiatelemetryEqptcapacityPolUsage5min, d *schema.ResourceData) []map[string]interface{} {
+	var niatelemetryeqptcapacitypolusage5mins []map[string]interface{}
+	var ret models.NiatelemetryEqptcapacityPolUsage5min
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	niatelemetryeqptcapacitypolusage5min := make(map[string]interface{})
+	niatelemetryeqptcapacitypolusage5min["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	niatelemetryeqptcapacitypolusage5min["class_id"] = item.GetClassId()
+	niatelemetryeqptcapacitypolusage5min["object_type"] = item.GetObjectType()
+	niatelemetryeqptcapacitypolusage5min["pol_usage_base"] = item.GetPolUsageBase()
+	niatelemetryeqptcapacitypolusage5min["pol_usage_cap_cum"] = item.GetPolUsageCapCum()
+	niatelemetryeqptcapacitypolusage5min["pol_usage_cum"] = item.GetPolUsageCum()
+
+	niatelemetryeqptcapacitypolusage5mins = append(niatelemetryeqptcapacitypolusage5mins, niatelemetryeqptcapacitypolusage5min)
+	return niatelemetryeqptcapacitypolusage5mins
+}
+func flattenMapNiatelemetryEqptcapacityPrefixEntries15min(p models.NiatelemetryEqptcapacityPrefixEntries15min, d *schema.ResourceData) []map[string]interface{} {
+	var niatelemetryeqptcapacityprefixentries15mins []map[string]interface{}
+	var ret models.NiatelemetryEqptcapacityPrefixEntries15min
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	niatelemetryeqptcapacityprefixentries15min := make(map[string]interface{})
+	niatelemetryeqptcapacityprefixentries15min["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	niatelemetryeqptcapacityprefixentries15min["class_id"] = item.GetClassId()
+	niatelemetryeqptcapacityprefixentries15min["ext_normalized_last"] = item.GetExtNormalizedLast()
+	niatelemetryeqptcapacityprefixentries15min["object_type"] = item.GetObjectType()
+
+	niatelemetryeqptcapacityprefixentries15mins = append(niatelemetryeqptcapacityprefixentries15mins, niatelemetryeqptcapacityprefixentries15min)
+	return niatelemetryeqptcapacityprefixentries15mins
+}
+func flattenMapNiatelemetryEqptcapacityPrefixEntries5min(p models.NiatelemetryEqptcapacityPrefixEntries5min, d *schema.ResourceData) []map[string]interface{} {
+	var niatelemetryeqptcapacityprefixentries5mins []map[string]interface{}
+	var ret models.NiatelemetryEqptcapacityPrefixEntries5min
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	niatelemetryeqptcapacityprefixentries5min := make(map[string]interface{})
+	niatelemetryeqptcapacityprefixentries5min["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	niatelemetryeqptcapacityprefixentries5min["class_id"] = item.GetClassId()
+	niatelemetryeqptcapacityprefixentries5min["ext_normalized_last"] = item.GetExtNormalizedLast()
+	niatelemetryeqptcapacityprefixentries5min["object_type"] = item.GetObjectType()
+
+	niatelemetryeqptcapacityprefixentries5mins = append(niatelemetryeqptcapacityprefixentries5mins, niatelemetryeqptcapacityprefixentries5min)
+	return niatelemetryeqptcapacityprefixentries5mins
+}
 func flattenMapNiatelemetryInterface(p models.NiatelemetryInterface, d *schema.ResourceData) []map[string]interface{} {
 	var niatelemetryinterfaces []map[string]interface{}
 	var ret models.NiatelemetryInterface
@@ -15116,6 +15392,74 @@ func flattenMapNiatelemetryNxosVtp(p models.NiatelemetryNxosVtp, d *schema.Resou
 
 	niatelemetrynxosvtps = append(niatelemetrynxosvtps, niatelemetrynxosvtp)
 	return niatelemetrynxosvtps
+}
+func flattenMapNiatelemetryProcSysCpu15min(p models.NiatelemetryProcSysCpu15min, d *schema.ResourceData) []map[string]interface{} {
+	var niatelemetryprocsyscpu15mins []map[string]interface{}
+	var ret models.NiatelemetryProcSysCpu15min
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	niatelemetryprocsyscpu15min := make(map[string]interface{})
+	niatelemetryprocsyscpu15min["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	niatelemetryprocsyscpu15min["class_id"] = item.GetClassId()
+	niatelemetryprocsyscpu15min["kernal_avg"] = item.GetKernalAvg()
+	niatelemetryprocsyscpu15min["object_type"] = item.GetObjectType()
+	niatelemetryprocsyscpu15min["user_avg"] = item.GetUserAvg()
+
+	niatelemetryprocsyscpu15mins = append(niatelemetryprocsyscpu15mins, niatelemetryprocsyscpu15min)
+	return niatelemetryprocsyscpu15mins
+}
+func flattenMapNiatelemetryProcSysCpu5min(p models.NiatelemetryProcSysCpu5min, d *schema.ResourceData) []map[string]interface{} {
+	var niatelemetryprocsyscpu5mins []map[string]interface{}
+	var ret models.NiatelemetryProcSysCpu5min
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	niatelemetryprocsyscpu5min := make(map[string]interface{})
+	niatelemetryprocsyscpu5min["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	niatelemetryprocsyscpu5min["class_id"] = item.GetClassId()
+	niatelemetryprocsyscpu5min["kernal_avg"] = item.GetKernalAvg()
+	niatelemetryprocsyscpu5min["object_type"] = item.GetObjectType()
+	niatelemetryprocsyscpu5min["user_avg"] = item.GetUserAvg()
+
+	niatelemetryprocsyscpu5mins = append(niatelemetryprocsyscpu5mins, niatelemetryprocsyscpu5min)
+	return niatelemetryprocsyscpu5mins
+}
+func flattenMapNiatelemetryProcSysMem15min(p models.NiatelemetryProcSysMem15min, d *schema.ResourceData) []map[string]interface{} {
+	var niatelemetryprocsysmem15mins []map[string]interface{}
+	var ret models.NiatelemetryProcSysMem15min
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	niatelemetryprocsysmem15min := make(map[string]interface{})
+	niatelemetryprocsysmem15min["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	niatelemetryprocsysmem15min["class_id"] = item.GetClassId()
+	niatelemetryprocsysmem15min["free_avg"] = item.GetFreeAvg()
+	niatelemetryprocsysmem15min["object_type"] = item.GetObjectType()
+	niatelemetryprocsysmem15min["total_avg"] = item.GetTotalAvg()
+
+	niatelemetryprocsysmem15mins = append(niatelemetryprocsysmem15mins, niatelemetryprocsysmem15min)
+	return niatelemetryprocsysmem15mins
+}
+func flattenMapNiatelemetryProcSysMem5min(p models.NiatelemetryProcSysMem5min, d *schema.ResourceData) []map[string]interface{} {
+	var niatelemetryprocsysmem5mins []map[string]interface{}
+	var ret models.NiatelemetryProcSysMem5min
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	niatelemetryprocsysmem5min := make(map[string]interface{})
+	niatelemetryprocsysmem5min["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	niatelemetryprocsysmem5min["class_id"] = item.GetClassId()
+	niatelemetryprocsysmem5min["free_avg"] = item.GetFreeAvg()
+	niatelemetryprocsysmem5min["object_type"] = item.GetObjectType()
+	niatelemetryprocsysmem5min["total_avg"] = item.GetTotalAvg()
+
+	niatelemetryprocsysmem5mins = append(niatelemetryprocsysmem5mins, niatelemetryprocsysmem5min)
+	return niatelemetryprocsysmem5mins
 }
 func flattenMapNiatelemetrySmartLicense(p models.NiatelemetrySmartLicense, d *schema.ResourceData) []map[string]interface{} {
 	var niatelemetrysmartlicenses []map[string]interface{}
@@ -15384,6 +15728,24 @@ func flattenMapPciDeviceRelationship(p models.PciDeviceRelationship, d *schema.R
 
 	pcidevicerelationships = append(pcidevicerelationships, pcidevicerelationship)
 	return pcidevicerelationships
+}
+func flattenMapPciNodeRelationship(p models.PciNodeRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var pcinoderelationships []map[string]interface{}
+	var ret models.PciNodeRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	pcinoderelationship := make(map[string]interface{})
+	pcinoderelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	pcinoderelationship["class_id"] = item.GetClassId()
+	pcinoderelationship["moid"] = item.GetMoid()
+	pcinoderelationship["object_type"] = item.GetObjectType()
+	pcinoderelationship["selector"] = item.GetSelector()
+
+	pcinoderelationships = append(pcinoderelationships, pcinoderelationship)
+	return pcinoderelationships
 }
 func flattenMapPciSwitchRelationship(p models.PciSwitchRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var pciswitchrelationships []map[string]interface{}
@@ -16230,6 +16592,24 @@ func flattenMapStorageBaseClusterRelationship(p models.StorageBaseClusterRelatio
 
 	storagebaseclusterrelationships = append(storagebaseclusterrelationships, storagebaseclusterrelationship)
 	return storagebaseclusterrelationships
+}
+func flattenMapStorageBatteryBackupUnitRelationship(p models.StorageBatteryBackupUnitRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var storagebatterybackupunitrelationships []map[string]interface{}
+	var ret models.StorageBatteryBackupUnitRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	storagebatterybackupunitrelationship := make(map[string]interface{})
+	storagebatterybackupunitrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	storagebatterybackupunitrelationship["class_id"] = item.GetClassId()
+	storagebatterybackupunitrelationship["moid"] = item.GetMoid()
+	storagebatterybackupunitrelationship["object_type"] = item.GetObjectType()
+	storagebatterybackupunitrelationship["selector"] = item.GetSelector()
+
+	storagebatterybackupunitrelationships = append(storagebatterybackupunitrelationships, storagebatterybackupunitrelationship)
+	return storagebatterybackupunitrelationships
 }
 func flattenMapStorageControllerRelationship(p models.StorageControllerRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var storagecontrollerrelationships []map[string]interface{}
@@ -17423,6 +17803,24 @@ func flattenMapVirtualizationBaseHostConfiguration(p models.VirtualizationBaseHo
 
 	virtualizationbasehostconfigurations = append(virtualizationbasehostconfigurations, virtualizationbasehostconfiguration)
 	return virtualizationbasehostconfigurations
+}
+func flattenMapVirtualizationBaseHostPciDeviceRelationship(p models.VirtualizationBaseHostPciDeviceRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var virtualizationbasehostpcidevicerelationships []map[string]interface{}
+	var ret models.VirtualizationBaseHostPciDeviceRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	virtualizationbasehostpcidevicerelationship := make(map[string]interface{})
+	virtualizationbasehostpcidevicerelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	virtualizationbasehostpcidevicerelationship["class_id"] = item.GetClassId()
+	virtualizationbasehostpcidevicerelationship["moid"] = item.GetMoid()
+	virtualizationbasehostpcidevicerelationship["object_type"] = item.GetObjectType()
+	virtualizationbasehostpcidevicerelationship["selector"] = item.GetSelector()
+
+	virtualizationbasehostpcidevicerelationships = append(virtualizationbasehostpcidevicerelationships, virtualizationbasehostpcidevicerelationship)
+	return virtualizationbasehostpcidevicerelationships
 }
 func flattenMapVirtualizationBaseNetworkRelationship(p models.VirtualizationBaseNetworkRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var virtualizationbasenetworkrelationships []map[string]interface{}

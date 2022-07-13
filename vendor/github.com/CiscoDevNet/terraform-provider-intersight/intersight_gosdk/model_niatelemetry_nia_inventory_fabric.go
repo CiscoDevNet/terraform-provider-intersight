@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-6484
+API version: 1.0.11-7078
 Contact: intersight@cisco.com
 */
 
@@ -90,6 +90,10 @@ type NiatelemetryNiaInventoryFabric struct {
 	NxosVrfCount *int64 `json:"NxosVrfCount,omitempty"`
 	// Fabric oper status information.
 	OperStatus *string `json:"OperStatus,omitempty"`
+	// Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected.
+	RecordType *string `json:"RecordType,omitempty"`
+	// Version of record being pushed. This determines what was the API version for data available from the device.
+	RecordVersion *string `json:"RecordVersion,omitempty"`
 	// Replication mode details on the fabric.
 	ReplicationMode *string `json:"ReplicationMode,omitempty"`
 	// RP Mode details on the fabric.
@@ -1287,6 +1291,70 @@ func (o *NiatelemetryNiaInventoryFabric) SetOperStatus(v string) {
 	o.OperStatus = &v
 }
 
+// GetRecordType returns the RecordType field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryFabric) GetRecordType() string {
+	if o == nil || o.RecordType == nil {
+		var ret string
+		return ret
+	}
+	return *o.RecordType
+}
+
+// GetRecordTypeOk returns a tuple with the RecordType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryFabric) GetRecordTypeOk() (*string, bool) {
+	if o == nil || o.RecordType == nil {
+		return nil, false
+	}
+	return o.RecordType, true
+}
+
+// HasRecordType returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryFabric) HasRecordType() bool {
+	if o != nil && o.RecordType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRecordType gets a reference to the given string and assigns it to the RecordType field.
+func (o *NiatelemetryNiaInventoryFabric) SetRecordType(v string) {
+	o.RecordType = &v
+}
+
+// GetRecordVersion returns the RecordVersion field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryFabric) GetRecordVersion() string {
+	if o == nil || o.RecordVersion == nil {
+		var ret string
+		return ret
+	}
+	return *o.RecordVersion
+}
+
+// GetRecordVersionOk returns a tuple with the RecordVersion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryFabric) GetRecordVersionOk() (*string, bool) {
+	if o == nil || o.RecordVersion == nil {
+		return nil, false
+	}
+	return o.RecordVersion, true
+}
+
+// HasRecordVersion returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryFabric) HasRecordVersion() bool {
+	if o != nil && o.RecordVersion != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRecordVersion gets a reference to the given string and assigns it to the RecordVersion field.
+func (o *NiatelemetryNiaInventoryFabric) SetRecordVersion(v string) {
+	o.RecordVersion = &v
+}
+
 // GetReplicationMode returns the ReplicationMode field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetReplicationMode() string {
 	if o == nil || o.ReplicationMode == nil {
@@ -1951,6 +2019,12 @@ func (o NiatelemetryNiaInventoryFabric) MarshalJSON() ([]byte, error) {
 	if o.OperStatus != nil {
 		toSerialize["OperStatus"] = o.OperStatus
 	}
+	if o.RecordType != nil {
+		toSerialize["RecordType"] = o.RecordType
+	}
+	if o.RecordVersion != nil {
+		toSerialize["RecordVersion"] = o.RecordVersion
+	}
 	if o.ReplicationMode != nil {
 		toSerialize["ReplicationMode"] = o.ReplicationMode
 	}
@@ -2082,6 +2156,10 @@ func (o *NiatelemetryNiaInventoryFabric) UnmarshalJSON(bytes []byte) (err error)
 		NxosVrfCount *int64 `json:"NxosVrfCount,omitempty"`
 		// Fabric oper status information.
 		OperStatus *string `json:"OperStatus,omitempty"`
+		// Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected.
+		RecordType *string `json:"RecordType,omitempty"`
+		// Version of record being pushed. This determines what was the API version for data available from the device.
+		RecordVersion *string `json:"RecordVersion,omitempty"`
 		// Replication mode details on the fabric.
 		ReplicationMode *string `json:"ReplicationMode,omitempty"`
 		// RP Mode details on the fabric.
@@ -2156,6 +2234,8 @@ func (o *NiatelemetryNiaInventoryFabric) UnmarshalJSON(bytes []byte) (err error)
 		varNiatelemetryNiaInventoryFabric.NxosVrfBwSitesCount = varNiatelemetryNiaInventoryFabricWithoutEmbeddedStruct.NxosVrfBwSitesCount
 		varNiatelemetryNiaInventoryFabric.NxosVrfCount = varNiatelemetryNiaInventoryFabricWithoutEmbeddedStruct.NxosVrfCount
 		varNiatelemetryNiaInventoryFabric.OperStatus = varNiatelemetryNiaInventoryFabricWithoutEmbeddedStruct.OperStatus
+		varNiatelemetryNiaInventoryFabric.RecordType = varNiatelemetryNiaInventoryFabricWithoutEmbeddedStruct.RecordType
+		varNiatelemetryNiaInventoryFabric.RecordVersion = varNiatelemetryNiaInventoryFabricWithoutEmbeddedStruct.RecordVersion
 		varNiatelemetryNiaInventoryFabric.ReplicationMode = varNiatelemetryNiaInventoryFabricWithoutEmbeddedStruct.ReplicationMode
 		varNiatelemetryNiaInventoryFabric.RpMode = varNiatelemetryNiaInventoryFabricWithoutEmbeddedStruct.RpMode
 		varNiatelemetryNiaInventoryFabric.Serial = varNiatelemetryNiaInventoryFabricWithoutEmbeddedStruct.Serial
@@ -2226,6 +2306,8 @@ func (o *NiatelemetryNiaInventoryFabric) UnmarshalJSON(bytes []byte) (err error)
 		delete(additionalProperties, "NxosVrfBwSitesCount")
 		delete(additionalProperties, "NxosVrfCount")
 		delete(additionalProperties, "OperStatus")
+		delete(additionalProperties, "RecordType")
+		delete(additionalProperties, "RecordVersion")
 		delete(additionalProperties, "ReplicationMode")
 		delete(additionalProperties, "RpMode")
 		delete(additionalProperties, "Serial")

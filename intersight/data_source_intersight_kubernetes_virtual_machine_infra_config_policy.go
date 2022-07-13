@@ -1210,7 +1210,7 @@ func dataSourceKubernetesVirtualMachineInfraConfigPolicyRead(c context.Context, 
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1264,7 +1264,7 @@ func dataSourceKubernetesVirtualMachineInfraConfigPolicyRead(c context.Context, 
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1425,7 +1425,7 @@ func dataSourceKubernetesVirtualMachineInfraConfigPolicyRead(c context.Context, 
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1468,7 +1468,7 @@ func dataSourceKubernetesVirtualMachineInfraConfigPolicyRead(c context.Context, 
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.VersionContext")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -1542,7 +1542,7 @@ func dataSourceKubernetesVirtualMachineInfraConfigPolicyRead(c context.Context, 
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("kubernetes.BaseVirtualMachineInfraConfig")
 			if v, ok := l["interfaces"]; ok {
 				{
 					x := make([]string, 0)
@@ -1659,7 +1659,7 @@ func dataSourceKubernetesVirtualMachineInfraConfigPolicyRead(c context.Context, 
 											}
 										}
 									}
-									o.SetClassId("")
+									o.SetClassId("mo.MoRef")
 									if v, ok := l["moid"]; ok {
 										{
 											x := (v.(string))
@@ -1711,7 +1711,7 @@ func dataSourceKubernetesVirtualMachineInfraConfigPolicyRead(c context.Context, 
 	if err != nil {
 		return diag.Errorf("json marshal of KubernetesVirtualMachineInfraConfigPolicy object failed with error : %s", err.Error())
 	}
-	countResponse, _, responseErr := conn.ApiClient.KubernetesApi.GetKubernetesVirtualMachineInfraConfigPolicyList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
+	countResponse, _, responseErr := conn.ApiClient.KubernetesApi.GetKubernetesVirtualMachineInfraConfigPolicyList(conn.ctx).Filter(getRequestParams(data)).Count(true).Execute()
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
@@ -1720,13 +1720,12 @@ func dataSourceKubernetesVirtualMachineInfraConfigPolicyRead(c context.Context, 
 		}
 		return diag.Errorf("error occurred while fetching count of KubernetesVirtualMachineInfraConfigPolicy: %s", responseErr.Error())
 	}
-	count := countResponse.KubernetesVirtualMachineInfraConfigPolicyList.GetCount()
+	count := countResponse.MoDocumentCount.GetCount()
 	if count == 0 {
 		return diag.Errorf("your query for KubernetesVirtualMachineInfraConfigPolicy data source did not return any results. Please change your search criteria and try again")
 	}
 	var i int32
-	var kubernetesVirtualMachineInfraConfigPolicyResults = make([]map[string]interface{}, count, count)
-	var j = 0
+	var kubernetesVirtualMachineInfraConfigPolicyResults = make([]map[string]interface{}, 0, 0)
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.KubernetesApi.GetKubernetesVirtualMachineInfraConfigPolicyList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
@@ -1740,8 +1739,8 @@ func dataSourceKubernetesVirtualMachineInfraConfigPolicyRead(c context.Context, 
 		results := resMo.KubernetesVirtualMachineInfraConfigPolicyList.GetResults()
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
-			for i := 0; i < len(results); i++ {
-				var s = results[i]
+			for k := 0; k < len(results); k++ {
+				var s = results[k]
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
@@ -1775,8 +1774,7 @@ func dataSourceKubernetesVirtualMachineInfraConfigPolicyRead(c context.Context, 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 
 				temp["vm_config"] = flattenMapKubernetesBaseVirtualMachineInfraConfig(s.GetVmConfig(), d)
-				kubernetesVirtualMachineInfraConfigPolicyResults[j] = temp
-				j += 1
+				kubernetesVirtualMachineInfraConfigPolicyResults = append(kubernetesVirtualMachineInfraConfigPolicyResults, temp)
 			}
 		}
 	}

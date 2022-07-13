@@ -46,6 +46,7 @@ The following arguments can be used to get data of already created objects in In
 * `ssm`:(string) SSM property feature usage. 
 * `ssm_count`:(int) Number of context-level ssm translate policies per tenant. 
 * `tcam_opt_count`:(int) Number of TCAM optimization enabled per tenant. 
+* `tenant_health`:(int) Health of each tenant in the APIC. 
 * `trace_route_ep_count`:(int) Number of ITrace route endpoint per tenant. 
 * `trace_route_ep_ext_count`:(int) Number of ITrace endpoint external routes per tenant. 
 * `trace_route_ext_ep_count`:(int) Number of ITrace external endpoint routes per tenant. 

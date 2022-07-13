@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **Chassis** | Pointer to **string** | Chassis IP of the switch. | [optional] 
 **ConfModTs** | Pointer to **string** | Configuration modified timestamp of the switch. | [optional] 
 **ConfModTsBackup** | Pointer to **string** | Configuration modified backup timestamp of the switch. | [optional] 
+**DefaultDomain** | Pointer to **string** | The default domain name configured on the switch. | [optional] 
 **EthernetMode** | Pointer to **string** | The user configured Ethernet operational mode for this switch (End-Host or Switching). | [optional] [readonly] 
 **EthernetSwitchingMode** | Pointer to **string** | The user configured Ethernet operational mode for this switch (End-Host or Switching). * &#x60;end-host&#x60; - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer. * &#x60;switch&#x60; - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode. | [optional] [readonly] [default to "end-host"]
 **FaultSummary** | Pointer to **int64** | The fault summary of the network Element out-of-band management interface. | [optional] 
@@ -55,6 +56,7 @@ Name | Type | Description | Notes
 **ManagementEntity** | Pointer to [**ManagementEntityRelationship**](ManagementEntityRelationship.md) |  | [optional] 
 **NetworkFcZoneInfo** | Pointer to [**NetworkFcZoneInfoRelationship**](NetworkFcZoneInfoRelationship.md) |  | [optional] 
 **NetworkVlanPortInfo** | Pointer to [**NetworkVlanPortInfoRelationship**](NetworkVlanPortInfoRelationship.md) |  | [optional] 
+**NtpServer** | Pointer to [**[]NtpNtpServerRelationship**](NtpNtpServerRelationship.md) | An array of relationships to ntpNtpServer resources. | [optional] [readonly] 
 **PortMacBindings** | Pointer to [**[]PortMacBindingRelationship**](PortMacBindingRelationship.md) | An array of relationships to portMacBinding resources. | [optional] 
 **ProcessorUnit** | Pointer to [**[]ProcessorUnitRelationship**](ProcessorUnitRelationship.md) | An array of relationships to processorUnit resources. | [optional] 
 **Psus** | Pointer to [**[]EquipmentPsuRelationship**](EquipmentPsuRelationship.md) | An array of relationships to equipmentPsu resources. | [optional] [readonly] 
@@ -308,6 +310,31 @@ SetConfModTsBackup sets ConfModTsBackup field to given value.
 `func (o *NetworkElementAllOf) HasConfModTsBackup() bool`
 
 HasConfModTsBackup returns a boolean if a field has been set.
+
+### GetDefaultDomain
+
+`func (o *NetworkElementAllOf) GetDefaultDomain() string`
+
+GetDefaultDomain returns the DefaultDomain field if non-nil, zero value otherwise.
+
+### GetDefaultDomainOk
+
+`func (o *NetworkElementAllOf) GetDefaultDomainOk() (*string, bool)`
+
+GetDefaultDomainOk returns a tuple with the DefaultDomain field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDefaultDomain
+
+`func (o *NetworkElementAllOf) SetDefaultDomain(v string)`
+
+SetDefaultDomain sets DefaultDomain field to given value.
+
+### HasDefaultDomain
+
+`func (o *NetworkElementAllOf) HasDefaultDomain() bool`
+
+HasDefaultDomain returns a boolean if a field has been set.
 
 ### GetEthernetMode
 
@@ -1429,6 +1456,41 @@ SetNetworkVlanPortInfo sets NetworkVlanPortInfo field to given value.
 
 HasNetworkVlanPortInfo returns a boolean if a field has been set.
 
+### GetNtpServer
+
+`func (o *NetworkElementAllOf) GetNtpServer() []NtpNtpServerRelationship`
+
+GetNtpServer returns the NtpServer field if non-nil, zero value otherwise.
+
+### GetNtpServerOk
+
+`func (o *NetworkElementAllOf) GetNtpServerOk() (*[]NtpNtpServerRelationship, bool)`
+
+GetNtpServerOk returns a tuple with the NtpServer field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNtpServer
+
+`func (o *NetworkElementAllOf) SetNtpServer(v []NtpNtpServerRelationship)`
+
+SetNtpServer sets NtpServer field to given value.
+
+### HasNtpServer
+
+`func (o *NetworkElementAllOf) HasNtpServer() bool`
+
+HasNtpServer returns a boolean if a field has been set.
+
+### SetNtpServerNil
+
+`func (o *NetworkElementAllOf) SetNtpServerNil(b bool)`
+
+ SetNtpServerNil sets the value for NtpServer to be an explicit nil
+
+### UnsetNtpServer
+`func (o *NetworkElementAllOf) UnsetNtpServer()`
+
+UnsetNtpServer ensures that no value is present for NtpServer, not even an explicit nil
 ### GetPortMacBindings
 
 `func (o *NetworkElementAllOf) GetPortMacBindings() []PortMacBindingRelationship`

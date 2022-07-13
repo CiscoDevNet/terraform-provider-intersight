@@ -18,6 +18,7 @@ resource "intersight_hyperflex_cluster_storage_policy" "hyperflex_cluster_storag
   vdi_optimization       = true
   logical_avalability_zone_config {
     auto_config = false
+    object_type = "hyperflex.LogicalAvailabilityZone"
   }
   organization {
     object_type = "organization.Organization"

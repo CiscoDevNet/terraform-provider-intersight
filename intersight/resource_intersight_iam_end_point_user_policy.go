@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceIamEndPointUserPolicy() *schema.Resource {
@@ -94,9 +96,10 @@ func resourceIamEndPointUserPolicy() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -167,9 +170,10 @@ func resourceIamEndPointUserPolicy() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the concrete policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the concrete policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -224,7 +228,8 @@ func resourceIamEndPointUserPolicy() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -304,16 +309,18 @@ func resourceIamEndPointUserPolicy() *schema.Resource {
 							Default:     false,
 						},
 						"grace_period": {
-							Description: "Time period until when you can use the existing password, after it expires.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     0,
+							Description:  "Time period until when you can use the existing password, after it expires.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(0, 5),
+							Optional:     true,
+							Default:      0,
 						},
 						"notification_period": {
-							Description: "The duration after which the password will expire.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     15,
+							Description:  "The duration after which the password will expire.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(0, 15),
+							Optional:     true,
+							Default:      15,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -322,16 +329,18 @@ func resourceIamEndPointUserPolicy() *schema.Resource {
 							Default:     "iam.EndPointPasswordProperties",
 						},
 						"password_expiry_duration": {
-							Description: "Set time period for password expiration. Value should be greater than notification period and grace period.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     90,
+							Description:  "Set time period for password expiration. Value should be greater than notification period and grace period.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(1, 3650),
+							Optional:     true,
+							Default:      90,
 						},
 						"password_history": {
-							Description: "Tracks password change history. Specifies in number of instances, that the new password was already used.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     5,
+							Description:  "Tracks password change history. Specifies in number of instances, that the new password was already used.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(0, 5),
+							Optional:     true,
+							Default:      5,
 						},
 					},
 				},
@@ -438,14 +447,16 @@ func resourceIamEndPointUserPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -686,7 +697,7 @@ func resourceIamEndPointUserPolicyCreate(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -729,7 +740,7 @@ func resourceIamEndPointUserPolicyCreate(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("iam.EndPointPasswordProperties")
 			if v, ok := l["enable_password_expiry"]; ok {
 				{
 					x := (v.(bool))
@@ -1104,7 +1115,7 @@ func resourceIamEndPointUserPolicyUpdate(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1148,7 +1159,7 @@ func resourceIamEndPointUserPolicyUpdate(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("iam.EndPointPasswordProperties")
 			if v, ok := l["enable_password_expiry"]; ok {
 				{
 					x := (v.(bool))

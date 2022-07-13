@@ -762,6 +762,11 @@ func dataSourceVirtualizationVmwareVirtualMachine() *schema.Resource {
 				},
 			},
 		},
+		"passthrough_devices": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeInt}},
 		"permission_resources": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
@@ -1900,6 +1905,11 @@ func dataSourceVirtualizationVmwareVirtualMachine() *schema.Resource {
 				},
 			},
 		},
+		"passthrough_devices": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeInt}},
 		"permission_resources": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
@@ -2386,7 +2396,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("infra.HardwareInfo")
 			if v, ok := l["cpu_cores"]; ok {
 				{
 					x := int64(v.(int))
@@ -2440,7 +2450,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2498,7 +2508,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("virtualization.VmwareVmCpuShareInfo")
 			if v, ok := l["cpu_limit"]; ok {
 				{
 					x := int64(v.(int))
@@ -2553,7 +2563,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("virtualization.VmwareVmCpuSocketInfo")
 			if v, ok := l["cores_per_socket"]; ok {
 				{
 					x := int64(v.(int))
@@ -2623,7 +2633,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2716,7 +2726,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("virtualization.VmwareVmDiskCommitInfo")
 			if v, ok := l["committed_disk"]; ok {
 				{
 					x := int64(v.(int))
@@ -2807,7 +2817,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("virtualization.GuestInfo")
 			if v, ok := l["hostname"]; ok {
 				{
 					x := (v.(string))
@@ -2867,7 +2877,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2962,7 +2972,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("virtualization.VmwareVmMemoryShareInfo")
 			if v, ok := l["mem_limit"]; ok {
 				{
 					x := int64(v.(int))
@@ -3023,7 +3033,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 					o.SetCapacity(x)
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("virtualization.MemoryCapacity")
 			if v, ok := l["free"]; ok {
 				{
 					x := int64(v.(int))
@@ -3152,7 +3162,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3195,7 +3205,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3220,6 +3230,17 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 			x := p[0]
 			o.SetParentFolder(x)
 		}
+	}
+
+	if v, ok := d.GetOk("passthrough_devices"); ok {
+		x := make([]int64, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(int64))
+			}
+		}
+		o.SetPassthroughDevices(x)
 	}
 
 	if v, ok := d.GetOk("permission_resources"); ok {
@@ -3300,7 +3321,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 					o.SetCapacity(x)
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("virtualization.ComputeCapacity")
 			if v, ok := l["free"]; ok {
 				{
 					x := int64(v.(int))
@@ -3353,7 +3374,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3396,7 +3417,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("virtualization.VmwareRemoteDisplayInfo")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -3523,7 +3544,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.VersionContext")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -3642,7 +3663,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 	if err != nil {
 		return diag.Errorf("json marshal of VirtualizationVmwareVirtualMachine object failed with error : %s", err.Error())
 	}
-	countResponse, _, responseErr := conn.ApiClient.VirtualizationApi.GetVirtualizationVmwareVirtualMachineList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
+	countResponse, _, responseErr := conn.ApiClient.VirtualizationApi.GetVirtualizationVmwareVirtualMachineList(conn.ctx).Filter(getRequestParams(data)).Count(true).Execute()
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
@@ -3651,13 +3672,12 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 		}
 		return diag.Errorf("error occurred while fetching count of VirtualizationVmwareVirtualMachine: %s", responseErr.Error())
 	}
-	count := countResponse.VirtualizationVmwareVirtualMachineList.GetCount()
+	count := countResponse.MoDocumentCount.GetCount()
 	if count == 0 {
 		return diag.Errorf("your query for VirtualizationVmwareVirtualMachine data source did not return any results. Please change your search criteria and try again")
 	}
 	var i int32
-	var virtualizationVmwareVirtualMachineResults = make([]map[string]interface{}, count, count)
-	var j = 0
+	var virtualizationVmwareVirtualMachineResults = make([]map[string]interface{}, 0, 0)
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.VirtualizationApi.GetVirtualizationVmwareVirtualMachineList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
@@ -3671,8 +3691,8 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 		results := resMo.VirtualizationVmwareVirtualMachineList.GetResults()
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
-			for i := 0; i < len(results); i++ {
-				var s = results[i]
+			for k := 0; k < len(results); k++ {
+				var s = results[k]
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
@@ -3742,6 +3762,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["parent_folder"] = flattenMapVirtualizationVmwareFolderRelationship(s.GetParentFolder(), d)
+				temp["passthrough_devices"] = (s.GetPassthroughDevices())
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["port_groups"] = (s.GetPortGroups())
@@ -3777,8 +3798,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 				temp["vm_version"] = (s.GetVmVersion())
 				temp["vm_vnic_count"] = (s.GetVmVnicCount())
 				temp["vnic_device_config_id"] = (s.GetVnicDeviceConfigId())
-				virtualizationVmwareVirtualMachineResults[j] = temp
-				j += 1
+				virtualizationVmwareVirtualMachineResults = append(virtualizationVmwareVirtualMachineResults, temp)
 			}
 		}
 	}

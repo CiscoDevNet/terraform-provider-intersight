@@ -16,14 +16,14 @@ Base Schedule config which contains all the required inputs to do schedule on a 
 resource "intersight_recovery_schedule_config_policy" "recovery_schedule_config_policy1" {
   name        = "recovery_schedule_config_policy1"
   description = "recovery_schedule_config_policy"
-   organization {
-     object_type = "organization.Organization"
-     moid        = var.organization
-   }
-   backup_config {
-     object_type = "recovery.BackupProfile"
-     moid        = var.recovery_backup_profile
-   }
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+  backup_profiles {
+    object_type = "recovery.BackupProfile"
+    moid        = var.recovery_backup_profile
+  }
   schedule {
     object_type    = "recovery.BackupSchedule"
     frequency_unit = "Daily"
@@ -31,15 +31,15 @@ resource "intersight_recovery_schedule_config_policy" "recovery_schedule_config_
   }
 }
 
- variable "organization" {
-   type = string
-   description = "value for organization"
- }
+variable "organization" {
+  type        = string
+  description = "value for organization"
+}
 
- variable "recovery_backup_profile" {
-   type = string
-   description = "value recovery backup profile" 
- }
+variable "recovery_backup_profile" {
+  type        = string
+  description = "value recovery backup profile"
+}
 ```
 ## Argument Reference
 The following arguments are supported:

@@ -401,6 +401,41 @@ func dataSourceKubernetesClusterProfile() *schema.Resource {
 				},
 			},
 		},
+		"container_runtime_proxy_policy": {
+			Description: "A reference to a kubernetesHttpProxyPolicy resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"create_time": {
 			Description: "The time when this managed object was created.",
 			Type:        schema.TypeString,
@@ -410,6 +445,41 @@ func dataSourceKubernetesClusterProfile() *schema.Resource {
 			Description: "Description of the profile.",
 			Type:        schema.TypeString,
 			Optional:    true,
+		},
+		"device_connector_proxy_policy": {
+			Description: "A reference to a kubernetesHttpProxyPolicy resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
@@ -1700,6 +1770,41 @@ func dataSourceKubernetesClusterProfile() *schema.Resource {
 				},
 			},
 		},
+		"container_runtime_proxy_policy": {
+			Description: "A reference to a kubernetesHttpProxyPolicy resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"create_time": {
 			Description: "The time when this managed object was created.",
 			Type:        schema.TypeString,
@@ -1709,6 +1814,41 @@ func dataSourceKubernetesClusterProfile() *schema.Resource {
 			Description: "Description of the profile.",
 			Type:        schema.TypeString,
 			Optional:    true,
+		},
+		"device_connector_proxy_policy": {
+			Description: "A reference to a kubernetesHttpProxyPolicy resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
@@ -2649,7 +2789,7 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2697,7 +2837,7 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("kubernetes.ActionInfo")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -2823,7 +2963,7 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2878,7 +3018,7 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 					o.SetCaKey(x)
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("kubernetes.ClusterCertificateConfiguration")
 			if v, ok := l["etcd_cert"]; ok {
 				{
 					x := (v.(string))
@@ -3004,7 +3144,7 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("policy.ConfigContext")
 			if v, ok := l["control_action"]; ok {
 				{
 					x := (v.(string))
@@ -3047,7 +3187,7 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3074,6 +3214,49 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 		}
 	}
 
+	if v, ok := d.GetOk("container_runtime_proxy_policy"); ok {
+		p := make([]models.KubernetesHttpProxyPolicyRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsKubernetesHttpProxyPolicyRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetContainerRuntimeProxyPolicy(x)
+		}
+	}
+
 	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
@@ -3082,6 +3265,49 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
+	}
+
+	if v, ok := d.GetOk("device_connector_proxy_policy"); ok {
+		p := make([]models.KubernetesHttpProxyPolicyRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsKubernetesHttpProxyPolicyRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetDeviceConnectorProxyPolicy(x)
+		}
 	}
 
 	if v, ok := d.GetOk("domain_group_moid"); ok {
@@ -3122,7 +3348,7 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("kubernetes.AddonConfiguration")
 						if v, ok := l["install_strategy"]; ok {
 							{
 								x := (v.(string))
@@ -3227,7 +3453,7 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("mo.MoRef")
 						if v, ok := l["moid"]; ok {
 							{
 								x := (v.(string))
@@ -3288,7 +3514,13 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("kubernetes.Configuration")
+			if v, ok := l["kube_config"]; ok {
+				{
+					x := (v.(string))
+					o.SetKubeConfig(x)
+				}
+			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -3404,7 +3636,7 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("kubernetes.ClusterManagementConfig")
 			if v, ok := l["load_balancer_count"]; ok {
 				{
 					x := int64(v.(int))
@@ -3481,7 +3713,7 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3539,7 +3771,7 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3627,7 +3859,7 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3681,7 +3913,7 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3724,7 +3956,7 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3852,7 +4084,7 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3900,7 +4132,7 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3976,7 +4208,7 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -4024,7 +4256,7 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.VersionContext")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -4098,7 +4330,7 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -4129,7 +4361,7 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 	if err != nil {
 		return diag.Errorf("json marshal of KubernetesClusterProfile object failed with error : %s", err.Error())
 	}
-	countResponse, _, responseErr := conn.ApiClient.KubernetesApi.GetKubernetesClusterProfileList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
+	countResponse, _, responseErr := conn.ApiClient.KubernetesApi.GetKubernetesClusterProfileList(conn.ctx).Filter(getRequestParams(data)).Count(true).Execute()
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
@@ -4138,13 +4370,12 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 		}
 		return diag.Errorf("error occurred while fetching count of KubernetesClusterProfile: %s", responseErr.Error())
 	}
-	count := countResponse.KubernetesClusterProfileList.GetCount()
+	count := countResponse.MoDocumentCount.GetCount()
 	if count == 0 {
 		return diag.Errorf("your query for KubernetesClusterProfile data source did not return any results. Please change your search criteria and try again")
 	}
 	var i int32
-	var kubernetesClusterProfileResults = make([]map[string]interface{}, count, count)
-	var j = 0
+	var kubernetesClusterProfileResults = make([]map[string]interface{}, 0, 0)
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.KubernetesApi.GetKubernetesClusterProfileList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
@@ -4158,8 +4389,8 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 		results := resMo.KubernetesClusterProfileList.GetResults()
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
-			for i := 0; i < len(results); i++ {
-				var s = results[i]
+			for k := 0; k < len(results); k++ {
+				var s = results[k]
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
 
@@ -4184,8 +4415,12 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 
 				temp["container_runtime_config"] = flattenMapKubernetesContainerRuntimePolicyRelationship(s.GetContainerRuntimeConfig(), d)
 
+				temp["container_runtime_proxy_policy"] = flattenMapKubernetesHttpProxyPolicyRelationship(s.GetContainerRuntimeProxyPolicy(), d)
+
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["description"] = (s.GetDescription())
+
+				temp["device_connector_proxy_policy"] = flattenMapKubernetesHttpProxyPolicyRelationship(s.GetDeviceConnectorProxyPolicy(), d)
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
 				temp["essential_addons"] = flattenListKubernetesEssentialAddon(s.GetEssentialAddons(), d)
@@ -4235,8 +4470,7 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 
 				temp["workflow_info"] = flattenMapWorkflowWorkflowInfoRelationship(s.GetWorkflowInfo(), d)
-				kubernetesClusterProfileResults[j] = temp
-				j += 1
+				kubernetesClusterProfileResults = append(kubernetesClusterProfileResults, temp)
 			}
 		}
 	}

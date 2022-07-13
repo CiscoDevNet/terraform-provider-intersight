@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **ResponseTypes** | Pointer to **[]string** |  | [optional] 
 **RevocationTimestamp** | Pointer to **time.Time** | Used to perform revocation for tokens of AppRegistration. Updated only internally is case Revoke property come from UI with value true. On each request with OAuth2 access token the CreationTime of the OAuth2 token will be compared to RevokationTimestamp of the corresponding App Registration. | [optional] [readonly] 
 **Revoke** | Pointer to **bool** | Used to trigger update the revocationTimestamp value. If UI sent updating request with the Revoke value is true, then update RevocationTimestamp. | [optional] [default to false]
+**ShowConsentScreen** | Pointer to **bool** | Set to true if consent screen needs to be shown during the OAuth login process. Applicable only for public AppRegistrations, means only &#39;authorization_code&#39; grantType. Note that consent screen will be shown on each login. | [optional] [default to false]
 **Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 **OauthTokens** | Pointer to [**[]IamOAuthTokenRelationship**](IamOAuthTokenRelationship.md) | An array of relationships to iamOAuthToken resources. | [optional] [readonly] 
 **Permission** | Pointer to [**IamPermissionRelationship**](IamPermissionRelationship.md) |  | [optional] 
@@ -386,6 +387,31 @@ SetRevoke sets Revoke field to given value.
 `func (o *IamAppRegistrationAllOf) HasRevoke() bool`
 
 HasRevoke returns a boolean if a field has been set.
+
+### GetShowConsentScreen
+
+`func (o *IamAppRegistrationAllOf) GetShowConsentScreen() bool`
+
+GetShowConsentScreen returns the ShowConsentScreen field if non-nil, zero value otherwise.
+
+### GetShowConsentScreenOk
+
+`func (o *IamAppRegistrationAllOf) GetShowConsentScreenOk() (*bool, bool)`
+
+GetShowConsentScreenOk returns a tuple with the ShowConsentScreen field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetShowConsentScreen
+
+`func (o *IamAppRegistrationAllOf) SetShowConsentScreen(v bool)`
+
+SetShowConsentScreen sets ShowConsentScreen field to given value.
+
+### HasShowConsentScreen
+
+`func (o *IamAppRegistrationAllOf) HasShowConsentScreen() bool`
+
+HasShowConsentScreen returns a boolean if a field has been set.
 
 ### GetAccount
 

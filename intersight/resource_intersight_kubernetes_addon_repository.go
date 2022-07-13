@@ -10,6 +10,7 @@ import (
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceKubernetesAddonRepository() *schema.Resource {
@@ -133,14 +134,16 @@ func resourceKubernetesAddonRepository() *schema.Resource {
 										ConfigMode: schema.SchemaConfigModeAttr,
 										Computed:   true,
 										Elem: &schema.Schema{
-											Type: schema.TypeString}},
+											Type: schema.TypeString,
+										}},
 									"locality": {
 										Type:       schema.TypeList,
 										Optional:   true,
 										ConfigMode: schema.SchemaConfigModeAttr,
 										Computed:   true,
 										Elem: &schema.Schema{
-											Type: schema.TypeString}},
+											Type: schema.TypeString,
+										}},
 									"object_type": {
 										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 										Type:        schema.TypeString,
@@ -153,21 +156,24 @@ func resourceKubernetesAddonRepository() *schema.Resource {
 										ConfigMode: schema.SchemaConfigModeAttr,
 										Computed:   true,
 										Elem: &schema.Schema{
-											Type: schema.TypeString}},
+											Type: schema.TypeString,
+										}},
 									"organizational_unit": {
 										Type:       schema.TypeList,
 										Optional:   true,
 										ConfigMode: schema.SchemaConfigModeAttr,
 										Computed:   true,
 										Elem: &schema.Schema{
-											Type: schema.TypeString}},
+											Type: schema.TypeString,
+										}},
 									"state": {
 										Type:       schema.TypeList,
 										Optional:   true,
 										ConfigMode: schema.SchemaConfigModeAttr,
 										Computed:   true,
 										Elem: &schema.Schema{
-											Type: schema.TypeString}},
+											Type: schema.TypeString,
+										}},
 								},
 							},
 						},
@@ -263,14 +269,16 @@ func resourceKubernetesAddonRepository() *schema.Resource {
 										ConfigMode: schema.SchemaConfigModeAttr,
 										Computed:   true,
 										Elem: &schema.Schema{
-											Type: schema.TypeString}},
+											Type: schema.TypeString,
+										}},
 									"locality": {
 										Type:       schema.TypeList,
 										Optional:   true,
 										ConfigMode: schema.SchemaConfigModeAttr,
 										Computed:   true,
 										Elem: &schema.Schema{
-											Type: schema.TypeString}},
+											Type: schema.TypeString,
+										}},
 									"object_type": {
 										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 										Type:        schema.TypeString,
@@ -283,21 +291,24 @@ func resourceKubernetesAddonRepository() *schema.Resource {
 										ConfigMode: schema.SchemaConfigModeAttr,
 										Computed:   true,
 										Elem: &schema.Schema{
-											Type: schema.TypeString}},
+											Type: schema.TypeString,
+										}},
 									"organizational_unit": {
 										Type:       schema.TypeList,
 										Optional:   true,
 										ConfigMode: schema.SchemaConfigModeAttr,
 										Computed:   true,
 										Elem: &schema.Schema{
-											Type: schema.TypeString}},
+											Type: schema.TypeString,
+										}},
 									"state": {
 										Type:       schema.TypeList,
 										Optional:   true,
 										ConfigMode: schema.SchemaConfigModeAttr,
 										Computed:   true,
 										Elem: &schema.Schema{
-											Type: schema.TypeString}},
+											Type: schema.TypeString,
+										}},
 								},
 							},
 						},
@@ -435,7 +446,8 @@ func resourceKubernetesAddonRepository() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -584,14 +596,16 @@ func resourceKubernetesAddonRepository() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -776,7 +790,7 @@ func resourceKubernetesAddonRepositoryCreate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("x509.Certificate")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -813,7 +827,7 @@ func resourceKubernetesAddonRepositoryCreate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -875,7 +889,7 @@ func resourceKubernetesAddonRepositoryCreate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1116,7 +1130,7 @@ func resourceKubernetesAddonRepositoryUpdate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("x509.Certificate")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1154,7 +1168,7 @@ func resourceKubernetesAddonRepositoryUpdate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1220,7 +1234,7 @@ func resourceKubernetesAddonRepositoryUpdate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

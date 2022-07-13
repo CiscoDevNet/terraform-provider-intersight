@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceFabricLinkControlPolicy() *schema.Resource {
@@ -94,9 +96,10 @@ func resourceFabricLinkControlPolicy() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -128,9 +131,10 @@ func resourceFabricLinkControlPolicy() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the concrete policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the concrete policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -185,7 +189,8 @@ func resourceFabricLinkControlPolicy() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -289,14 +294,16 @@ func resourceFabricLinkControlPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -316,10 +323,11 @@ func resourceFabricLinkControlPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"admin_state": {
-							Description: "Admin configured UDLD State for this port.\n* `Disabled` - Admin configured Disabled State.\n* `Enabled` - Admin configured Enabled State.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "Disabled",
+							Description:  "Admin configured UDLD State for this port.\n* `Disabled` - Admin configured Disabled State.\n* `Enabled` - Admin configured Enabled State.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"Disabled", "Enabled"}, false),
+							Optional:     true,
+							Default:      "Disabled",
 						},
 						"class_id": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
@@ -328,10 +336,11 @@ func resourceFabricLinkControlPolicy() *schema.Resource {
 							Default:     "fabric.UdldSettings",
 						},
 						"mode": {
-							Description: "Admin configured UDLD Mode for this port.\n* `normal` - Admin configured 'normal' UDLD mode.\n* `aggressive` - Admin configured 'aggressive' UDLD mode.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "normal",
+							Description:  "Admin configured UDLD Mode for this port.\n* `normal` - Admin configured 'normal' UDLD mode.\n* `aggressive` - Admin configured 'aggressive' UDLD mode.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"normal", "aggressive"}, false),
+							Optional:     true,
+							Default:      "normal",
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -536,7 +545,7 @@ func resourceFabricLinkControlPolicyCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -620,7 +629,7 @@ func resourceFabricLinkControlPolicyCreate(c context.Context, d *schema.Resource
 					o.SetAdminState(x)
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("fabric.UdldSettings")
 			if v, ok := l["mode"]; ok {
 				{
 					x := (v.(string))
@@ -812,7 +821,7 @@ func resourceFabricLinkControlPolicyUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -896,7 +905,7 @@ func resourceFabricLinkControlPolicyUpdate(c context.Context, d *schema.Resource
 					o.SetAdminState(x)
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("fabric.UdldSettings")
 			if v, ok := l["mode"]; ok {
 				{
 					x := (v.(string))

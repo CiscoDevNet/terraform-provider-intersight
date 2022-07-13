@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fabric.FcStorageRole"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.FcStorageRole"]
-**AdminSpeed** | Pointer to **string** | Admin configured speed for the port. * &#x60;Auto&#x60; - Admin configurable speed AUTO ( default ). * &#x60;8Gbps&#x60; - Admin configurable speed 8Gbps. * &#x60;16Gbps&#x60; - Admin configurable speed 16Gbps. * &#x60;32Gbps&#x60; - Admin configurable speed 32Gbps. | [optional] [default to "Auto"]
+**AdminSpeed** | Pointer to **string** | Admin configured speed for the port. * &#x60;16Gbps&#x60; - Admin configurable speed 16Gbps. * &#x60;8Gbps&#x60; - Admin configurable speed 8Gbps. * &#x60;32Gbps&#x60; - Admin configurable speed 32Gbps. * &#x60;Auto&#x60; - Admin configurable speed AUTO ( default ). | [optional] [default to "16Gbps"]
 **VsanId** | Pointer to **int64** | Virtual San Identifier associated to the FC port. | [optional] 
 
 ## Methods

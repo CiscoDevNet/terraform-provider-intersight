@@ -17,9 +17,10 @@ resource "intersight_vnic_fc_if" "fc1" {
   name  = "fc0"
   order = 1
   placement {
-    id       = "1"
-    pci_link = 0
-    uplink   = 0
+    id          = "1"
+    pci_link    = 0
+    uplink      = 0
+    object_type = "vnic.PlacementSettings"
   }
   persistent_bindings = true
   san_connectivity_policy {
@@ -27,33 +28,36 @@ resource "intersight_vnic_fc_if" "fc1" {
     object_type = "vnic.SanConnectivityPolicy"
   }
   fc_network_policy {
-    moid = var.v_fc_network1
+    moid        = var.v_fc_network1
+    object_type = "vnic.FcNetworkPolicy"
   }
   fc_adapter_policy {
-    moid = var.v_fc_adapter1
+    moid        = var.v_fc_adapter1
+    object_type = "vnic.FcAdapterPolicy"
   }
   fc_qos_policy {
-    moid = var.v_fc_qos1
+    moid        = var.v_fc_qos1
+    object_type = "vnic.FcQosPolicy"
   }
 }
 
-variable "vnic_san1"{
-  type = string
+variable "vnic_san1" {
+  type        = string
   description = "Moid of vnic.SanConnectivityPolicy"
 }
 
-variable "v_fc_network1"{
-  type = string
+variable "v_fc_network1" {
+  type        = string
   description = "Moid of vnic.FcNetworkPolicy"
 }
 
-variable "v_fc_adapter1"{
-  type = string
+variable "v_fc_adapter1" {
+  type        = string
   description = "Moid of vnic.FcAdapterPolicy"
 }
 
-variable "v_fc_qos1"{
-  type = string
+variable "v_fc_qos1" {
+  type        = string
   description = "Moid of vnic.FcQosPolicy"
 }
 ```
@@ -78,6 +82,11 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `fc_qos_policy`:(HashMap) - A reference to a vnicFcQosPolicy resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
+This complex property has following sub-properties:
+  + `moid`:(string) The Moid of the referenced REST resource. 
+  + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+  + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `fc_zone_policies`:(Array) An array of relationships to fabricFcZonePolicy resources. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 

@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceVnicEthQosPolicy() *schema.Resource {
@@ -77,10 +79,11 @@ func resourceVnicEthQosPolicy() *schema.Resource {
 				},
 			},
 			"burst": {
-				Description: "The burst traffic, in bytes, allowed on the vNIC.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Default:     10240,
+				Description:  "The burst traffic, in bytes, allowed on the vNIC.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(1, 1000000),
+				Optional:     true,
+				Default:      10240,
 			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
@@ -89,10 +92,11 @@ func resourceVnicEthQosPolicy() *schema.Resource {
 				Default:     "vnic.EthQosPolicy",
 			},
 			"cos": {
-				Description: "Class of Service to be associated to the traffic on the virtual interface.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Default:     0,
+				Description:  "Class of Service to be associated to the traffic on the virtual interface.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(0, 6),
+				Optional:     true,
+				Default:      0,
 			},
 			"create_time": {
 				Description: "The time when this managed object was created.",
@@ -106,9 +110,10 @@ func resourceVnicEthQosPolicy() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -140,15 +145,17 @@ func resourceVnicEthQosPolicy() *schema.Resource {
 				ForceNew:    true,
 			},
 			"mtu": {
-				Description: "The Maximum Transmission Unit (MTU) or packet size that the virtual interface accepts.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Default:     1500,
+				Description:  "The Maximum Transmission Unit (MTU) or packet size that the virtual interface accepts.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(1500, 9000),
+				Optional:     true,
+				Default:      1500,
 			},
 			"name": {
-				Description: "Name of the concrete policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the concrete policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -203,7 +210,8 @@ func resourceVnicEthQosPolicy() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -284,16 +292,18 @@ func resourceVnicEthQosPolicy() *schema.Resource {
 				},
 			},
 			"priority": {
-				Description: "The priortity matching the System QoS specified in the fabric profile.\n* `Best Effort` - QoS Priority for Best-effort traffic.\n* `FC` - QoS Priority for FC traffic.\n* `Platinum` - QoS Priority for Platinum traffic.\n* `Gold` - QoS Priority for Gold traffic.\n* `Silver` - QoS Priority for Silver traffic.\n* `Bronze` - QoS Priority for Bronze traffic.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "Best Effort",
+				Description:  "The priortity matching the System QoS specified in the fabric profile.\n* `Best Effort` - QoS Priority for Best-effort traffic.\n* `FC` - QoS Priority for FC traffic.\n* `Platinum` - QoS Priority for Platinum traffic.\n* `Gold` - QoS Priority for Gold traffic.\n* `Silver` - QoS Priority for Silver traffic.\n* `Bronze` - QoS Priority for Bronze traffic.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Best Effort", "FC", "Platinum", "Gold", "Silver", "Bronze"}, false),
+				Optional:     true,
+				Default:      "Best Effort",
 			},
 			"rate_limit": {
-				Description: "The value in Mbps (0-10G/40G/100G depending on Adapter Model) to use for limiting the data rate on the virtual interface. Setting this to zero will turn rate limiting off.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Default:     0,
+				Description:  "The value in Mbps (0-10G/40G/100G depending on Adapter Model) to use for limiting the data rate on the virtual interface. Setting this to zero will turn rate limiting off.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(0, 100000),
+				Optional:     true,
+				Default:      0,
 			},
 			"shared_scope": {
 				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
@@ -319,14 +329,16 @@ func resourceVnicEthQosPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -546,7 +558,7 @@ func resourceVnicEthQosPolicyCreate(c context.Context, d *schema.ResourceData, m
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -832,7 +844,7 @@ func resourceVnicEthQosPolicyUpdate(c context.Context, d *schema.ResourceData, m
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

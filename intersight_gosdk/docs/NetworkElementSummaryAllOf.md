@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **Chassis** | Pointer to **string** | Chassis IP of the switch. | [optional] [readonly] 
 **ConfModTs** | Pointer to **string** | Configuration modified timestamp of the switch. | [optional] [readonly] 
 **ConfModTsBackup** | Pointer to **string** | Configuration modified backup timestamp of the switch. | [optional] [readonly] 
+**DefaultDomain** | Pointer to **string** | The default domain name configured on the switch. | [optional] [readonly] 
 **DeviceMoId** | Pointer to **string** | The database identifier of the registered device of an object. | [optional] [readonly] 
 **Dn** | Pointer to **string** | The Distinguished Name unambiguously identifies an object in the system. | [optional] [readonly] 
 **EthernetMode** | Pointer to **string** | The user configured Ethernet operational mode for this switch (End-Host or Switching). | [optional] [readonly] 
@@ -307,6 +308,31 @@ SetConfModTsBackup sets ConfModTsBackup field to given value.
 `func (o *NetworkElementSummaryAllOf) HasConfModTsBackup() bool`
 
 HasConfModTsBackup returns a boolean if a field has been set.
+
+### GetDefaultDomain
+
+`func (o *NetworkElementSummaryAllOf) GetDefaultDomain() string`
+
+GetDefaultDomain returns the DefaultDomain field if non-nil, zero value otherwise.
+
+### GetDefaultDomainOk
+
+`func (o *NetworkElementSummaryAllOf) GetDefaultDomainOk() (*string, bool)`
+
+GetDefaultDomainOk returns a tuple with the DefaultDomain field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDefaultDomain
+
+`func (o *NetworkElementSummaryAllOf) SetDefaultDomain(v string)`
+
+SetDefaultDomain sets DefaultDomain field to given value.
+
+### HasDefaultDomain
+
+`func (o *NetworkElementSummaryAllOf) HasDefaultDomain() bool`
+
+HasDefaultDomain returns a boolean if a field has been set.
 
 ### GetDeviceMoId
 

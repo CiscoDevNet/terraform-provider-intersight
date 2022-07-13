@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceKubernetesAciCniProfile() *schema.Resource {
@@ -22,9 +24,10 @@ func resourceKubernetesAciCniProfile() *schema.Resource {
 		CustomizeDiff: CustomizeTagDiff,
 		Schema: map[string]*schema.Schema{
 			"aaep_name": {
-				Description: "Name of ACI AAEP (Attachable Access Entity Profile) to be used for all Kubernetes clusters using this policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of ACI AAEP (Attachable Access Entity Profile) to be used for all Kubernetes clusters using this policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9][a-zA-Z0-9-_]*[a-zA-Z0-9]$"), ""),
+				Optional:     true,
 			},
 			"account_moid": {
 				Description: "The Account ID for this managed object.",
@@ -177,9 +180,10 @@ func resourceKubernetesAciCniProfile() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the profile.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the profile.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -193,14 +197,16 @@ func resourceKubernetesAciCniProfile() *schema.Resource {
 					return
 				}},
 			"ext_svc_dyn_subnet_start": {
-				Description: "Start of range of IP subnets for external services with dynamic IP allocation for use by Kubernetes clusters using this ACI CNI policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Start of range of IP subnets for external services with dynamic IP allocation for use by Kubernetes clusters using this ACI CNI policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\/([0-9]|[1-2][0-9]|3[0-2])$"), ""),
+				Optional:     true,
 			},
 			"ext_svc_static_subnet_start": {
-				Description: "Start of range of IP subnets for external services with static IP allocation for use by Kubernetes clusters using this ACI CNI policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Start of range of IP subnets for external services with static IP allocation for use by Kubernetes clusters using this ACI CNI policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\/([0-9]|[1-2][0-9]|3[0-2])$"), ""),
+				Optional:     true,
 			},
 			"infra_vlan_id": {
 				Description: "Value of ACI infrastructuere VLAN ID for the ACI fabric.",
@@ -214,19 +220,22 @@ func resourceKubernetesAciCniProfile() *schema.Resource {
 					return
 				}},
 			"l3_out_network_name": {
-				Description: "Name of ACI L3Out network to be used for all Kubernetes clusters using this policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of ACI L3Out network to be used for all Kubernetes clusters using this policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9][a-zA-Z0-9-_]*[a-zA-Z0-9]$"), ""),
+				Optional:     true,
 			},
 			"l3_out_policy_name": {
-				Description: "Name of ACI L3Out policy to be used for all Kubernetes clusters using this policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of ACI L3Out policy to be used for all Kubernetes clusters using this policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9][a-zA-Z0-9-_]*[a-zA-Z0-9]$"), ""),
+				Optional:     true,
 			},
 			"l3_out_tenant": {
-				Description: "Tenant in ACI used by this L3Out and Common VRF.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Tenant in ACI used by this L3Out and Common VRF.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9][a-zA-Z0-9-_]*[a-zA-Z0-9]$"), ""),
+				Optional:     true,
 			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
@@ -247,19 +256,22 @@ func resourceKubernetesAciCniProfile() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the profile instance or profile template.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the profile instance or profile template.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"nested_vmm_domain": {
-				Description: "VMM domain within which Kubernetes clusters using this policy are nested.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "VMM domain within which Kubernetes clusters using this policy are nested.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9][a-zA-Z0-9-_]*[a-zA-Z0-9]$"), ""),
+				Optional:     true,
 			},
 			"node_svc_subnet_start": {
-				Description: "Start of range of ACI Node Service IP subnets to use by Kubernetes clusters using this ACI CNI policy This is used for the service graph which is used for ACI PBR based load balancing.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Start of range of ACI Node Service IP subnets to use by Kubernetes clusters using this ACI CNI policy This is used for the service graph which is used for ACI PBR based load balancing.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\/([0-9]|[1-2][0-9]|3[0-2])$"), ""),
+				Optional:     true,
 			},
 			"node_vlan_range_end": {
 				Description: "Ending value of VLAN range used to assign Node VLAN Ids for each Kubernetes cluster using this policy.",
@@ -289,9 +301,10 @@ func resourceKubernetesAciCniProfile() *schema.Resource {
 				Default:     "kubernetes.AciCniProfile",
 			},
 			"opflex_multicast_address_range": {
-				Description: "Range of IP Multicast addresses to be used by the Opflex protocol for Kubernetes clusters using this policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Range of IP Multicast addresses to be used by the Opflex protocol for Kubernetes clusters using this policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\/([0-9]|[1-2][0-9]|3[0-2])$"), ""),
+				Optional:     true,
 			},
 			"organization": {
 				Description: "A reference to a organizationOrganization resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -340,7 +353,8 @@ func resourceKubernetesAciCniProfile() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -421,9 +435,10 @@ func resourceKubernetesAciCniProfile() *schema.Resource {
 				},
 			},
 			"pod_subnet_start": {
-				Description: "Start of range of Kubernetes pod IP subnets to use by Kubernetes clusters using this ACI CNI policy This should be a /8 IP subnet so that multiple /16 subnets can be assigned for pod subnets of Kubernetes clusters using this profile.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Start of range of Kubernetes pod IP subnets to use by Kubernetes clusters using this ACI CNI policy This should be a /8 IP subnet so that multiple /16 subnets can be assigned for pod subnets of Kubernetes clusters using this profile.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\/([0-9]|[1-2][0-9]|3[0-2])$"), ""),
+				Optional:     true,
 			},
 			"registered_device": {
 				Description: "A reference to a assetDeviceRegistration resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -541,23 +556,26 @@ func resourceKubernetesAciCniProfile() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
 			},
 			"type": {
-				Description: "Defines the type of the profile. Accepted values are instance or template.\n* `instance` - The profile defines the configuration for a specific instance of a target.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "instance",
+				Description:  "Defines the type of the profile. Accepted values are instance or template.\n* `instance` - The profile defines the configuration for a specific instance of a target.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"instance"}, false),
+				Optional:     true,
+				Default:      "instance",
 			},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
@@ -700,9 +718,10 @@ func resourceKubernetesAciCniProfile() *schema.Resource {
 				},
 			},
 			"vrf": {
-				Description: "VRF (Virtual Routing and Forwarding) domain to be used within ACI fabric by all k8s clusters using this policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "VRF (Virtual Routing and Forwarding) domain to be used within ACI fabric by all k8s clusters using this policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9][a-zA-Z0-9-_]*[a-zA-Z0-9]$"), ""),
+				Optional:     true,
 			},
 		},
 	}
@@ -812,7 +831,7 @@ func resourceKubernetesAciCniProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -860,7 +879,7 @@ func resourceKubernetesAciCniProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -903,7 +922,7 @@ func resourceKubernetesAciCniProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1291,7 +1310,7 @@ func resourceKubernetesAciCniProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1341,7 +1360,7 @@ func resourceKubernetesAciCniProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1385,7 +1404,7 @@ func resourceKubernetesAciCniProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceVnicFcAdapterPolicy() *schema.Resource {
@@ -94,9 +96,10 @@ func resourceVnicFcAdapterPolicy() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -110,10 +113,11 @@ func resourceVnicFcAdapterPolicy() *schema.Resource {
 					return
 				}},
 			"error_detection_timeout": {
-				Description: "Error Detection Timeout, also referred to as EDTOV, is the number of milliseconds to wait before the system assumes that an error has occurred.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Default:     2000,
+				Description:  "Error Detection Timeout, also referred to as EDTOV, is the number of milliseconds to wait before the system assumes that an error has occurred.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(1000, 100000),
+				Optional:     true,
+				Default:      2000,
 			},
 			"error_recovery_settings": {
 				Description: "Fibre Channel Error Recovery Settings.",
@@ -141,22 +145,25 @@ func resourceVnicFcAdapterPolicy() *schema.Resource {
 							Optional:    true,
 						},
 						"io_retry_count": {
-							Description: "The number of times an I/O request to a port is retried because the port is busy before the system decides the port is unavailable.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     8,
+							Description:  "The number of times an I/O request to a port is retried because the port is busy before the system decides the port is unavailable.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(0, 255),
+							Optional:     true,
+							Default:      8,
 						},
 						"io_retry_timeout": {
-							Description: "The number of seconds the adapter waits before aborting the pending command and resending the same IO request.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     5,
+							Description:  "The number of seconds the adapter waits before aborting the pending command and resending the same IO request.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(1, 59),
+							Optional:     true,
+							Default:      5,
 						},
 						"link_down_timeout": {
-							Description: "The number of milliseconds the port should actually be down before it is marked down and fabric connectivity is lost.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     30000,
+							Description:  "The number of milliseconds the port should actually be down before it is marked down and fabric connectivity is lost.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(0, 240000),
+							Optional:     true,
+							Default:      30000,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -165,10 +172,11 @@ func resourceVnicFcAdapterPolicy() *schema.Resource {
 							Default:     "vnic.FcErrorRecoverySettings",
 						},
 						"port_down_timeout": {
-							Description: "The number of milliseconds a remote Fibre Channel port should be offline before informing the SCSI upper layer that the port is unavailable. For a server with a VIC adapter running ESXi, the recommended value is 10000. For a server with a port used to boot a Windows OS from the SAN, the recommended value is 5000 milliseconds.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     10000,
+							Description:  "The number of milliseconds a remote Fibre Channel port should be offline before informing the SCSI upper layer that the port is unavailable. For a server with a VIC adapter running ESXi, the recommended value is 10000. For a server with a port used to boot a Windows OS from the SAN, the recommended value is 5000 milliseconds.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(0, 240000),
+							Optional:     true,
+							Default:      10000,
 						},
 					},
 				},
@@ -200,16 +208,18 @@ func resourceVnicFcAdapterPolicy() *schema.Resource {
 							Default:     "vnic.FlogiSettings",
 						},
 						"retries": {
-							Description: "The number of times that the system tries to log in to the fabric after the first failure. Allowed range is 0-4294967295.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     8,
+							Description:  "The number of times that the system tries to log in to the fabric after the first failure. Allowed range is 0-4294967295.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntAtLeast(0),
+							Optional:     true,
+							Default:      8,
 						},
 						"timeout": {
-							Description: "The number of milliseconds that the system waits before it tries to log in again.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     4000,
+							Description:  "The number of milliseconds that the system waits before it tries to log in again.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(1000, 255000),
+							Optional:     true,
+							Default:      4000,
 						},
 					},
 				},
@@ -235,10 +245,11 @@ func resourceVnicFcAdapterPolicy() *schema.Resource {
 							Default:     "vnic.FcInterruptSettings",
 						},
 						"mode": {
-							Description: "The preferred driver interrupt mode. This can be one of the following:- MSIx - Message Signaled Interrupts (MSI) with the optional extension. MSI  - MSI only. INTx - PCI INTx interrupts. MSIx is the recommended option.\n* `MSIx` - Message Signaled Interrupt (MSI) mechanism with the optional extension (MSIx). MSIx is the recommended and default option.\n* `MSI` - Message Signaled Interrupt (MSI) mechanism that treats messages as interrupts.\n* `INTx` - Line-based interrupt (INTx) mechanism similar to the one used in Legacy systems.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "MSIx",
+							Description:  "The preferred driver interrupt mode. This can be one of the following:- MSIx - Message Signaled Interrupts (MSI) with the optional extension. MSI  - MSI only. INTx - PCI INTx interrupts. MSIx is the recommended option.\n* `MSIx` - Message Signaled Interrupt (MSI) mechanism with the optional extension (MSIx). MSIx is the recommended and default option.\n* `MSI` - Message Signaled Interrupt (MSI) mechanism that treats messages as interrupts.\n* `INTx` - Line-based interrupt (INTx) mechanism similar to the one used in Legacy systems.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"MSIx", "MSI", "INTx"}, false),
+							Optional:     true,
+							Default:      "MSIx",
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -250,22 +261,25 @@ func resourceVnicFcAdapterPolicy() *schema.Resource {
 				},
 			},
 			"io_throttle_count": {
-				Description: "The maximum number of data or control I/O operations that can be pending for the virtual interface at one time. If this value is exceeded, the additional I/O operations wait in the queue until the number of pending I/O operations decreases and the additional operations can be processed.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Default:     512,
+				Description:  "The maximum number of data or control I/O operations that can be pending for the virtual interface at one time. If this value is exceeded, the additional I/O operations wait in the queue until the number of pending I/O operations decreases and the additional operations can be processed.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(1, 1024),
+				Optional:     true,
+				Default:      512,
 			},
 			"lun_count": {
-				Description: "The maximum number of LUNs that the Fibre Channel driver will export or show. The maximum number of LUNs is usually controlled by the operating system running on the server.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Default:     1024,
+				Description:  "The maximum number of LUNs that the Fibre Channel driver will export or show. The maximum number of LUNs is usually controlled by the operating system running on the server.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(1, 1024),
+				Optional:     true,
+				Default:      1024,
 			},
 			"lun_queue_depth": {
-				Description: "The number of commands that the HBA can send and receive in a single transmission per LUN.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Default:     20,
+				Description:  "The number of commands that the HBA can send and receive in a single transmission per LUN.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(1, 254),
+				Optional:     true,
+				Default:      20,
 			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
@@ -286,9 +300,10 @@ func resourceVnicFcAdapterPolicy() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the concrete policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the concrete policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -343,7 +358,8 @@ func resourceVnicFcAdapterPolicy() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -450,25 +466,28 @@ func resourceVnicFcAdapterPolicy() *schema.Resource {
 							Default:     "vnic.PlogiSettings",
 						},
 						"retries": {
-							Description: "The number of times that the system tries to log in to a port after the first failure.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     8,
+							Description:  "The number of times that the system tries to log in to a port after the first failure.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(0, 255),
+							Optional:     true,
+							Default:      8,
 						},
 						"timeout": {
-							Description: "The number of milliseconds that the system waits before it tries to log in again.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     20000,
+							Description:  "The number of milliseconds that the system waits before it tries to log in again.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(1000, 255000),
+							Optional:     true,
+							Default:      20000,
 						},
 					},
 				},
 			},
 			"resource_allocation_timeout": {
-				Description: "Resource Allocation Timeout, also referred to as RATOV, is the number of milliseconds to wait before the system assumes that a resource cannot be properly allocated.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Default:     10000,
+				Description:  "Resource Allocation Timeout, also referred to as RATOV, is the number of milliseconds to wait before the system assumes that a resource cannot be properly allocated.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(5000, 100000),
+				Optional:     true,
+				Default:      10000,
 			},
 			"rx_queue_settings": {
 				Description: "Fibre Channel Receive Queue Settings.",
@@ -508,10 +527,11 @@ func resourceVnicFcAdapterPolicy() *schema.Resource {
 							Default:     "vnic.FcQueueSettings",
 						},
 						"ring_size": {
-							Description: "The number of descriptors in each queue.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     64,
+							Description:  "The number of descriptors in each queue.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntAtLeast(64),
+							Optional:     true,
+							Default:      64,
 						},
 					},
 				},
@@ -537,10 +557,11 @@ func resourceVnicFcAdapterPolicy() *schema.Resource {
 							Default:     "vnic.ScsiQueueSettings",
 						},
 						"nr_count": {
-							Description: "The number of SCSI I/O queue resources the system should allocate.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     1,
+							Description:  "The number of SCSI I/O queue resources the system should allocate.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(1, 245),
+							Optional:     true,
+							Default:      1,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -549,10 +570,11 @@ func resourceVnicFcAdapterPolicy() *schema.Resource {
 							Default:     "vnic.ScsiQueueSettings",
 						},
 						"ring_size": {
-							Description: "The number of descriptors in each SCSI I/O queue.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     512,
+							Description:  "The number of descriptors in each SCSI I/O queue.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(64, 512),
+							Optional:     true,
+							Default:      512,
 						},
 					},
 				},
@@ -581,14 +603,16 @@ func resourceVnicFcAdapterPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -631,10 +655,11 @@ func resourceVnicFcAdapterPolicy() *schema.Resource {
 							Default:     "vnic.FcQueueSettings",
 						},
 						"ring_size": {
-							Description: "The number of descriptors in each queue.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     64,
+							Description:  "The number of descriptors in each queue.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntAtLeast(64),
+							Optional:     true,
+							Default:      64,
 						},
 					},
 				},
@@ -826,7 +851,7 @@ func resourceVnicFcAdapterPolicyCreate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.FcErrorRecoverySettings")
 			if v, ok := l["enabled"]; ok {
 				{
 					x := (v.(bool))
@@ -887,7 +912,7 @@ func resourceVnicFcAdapterPolicyCreate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.FlogiSettings")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -930,7 +955,7 @@ func resourceVnicFcAdapterPolicyCreate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.FcInterruptSettings")
 			if v, ok := l["mode"]; ok {
 				{
 					x := (v.(string))
@@ -994,7 +1019,7 @@ func resourceVnicFcAdapterPolicyCreate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1037,7 +1062,7 @@ func resourceVnicFcAdapterPolicyCreate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.PlogiSettings")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1085,7 +1110,7 @@ func resourceVnicFcAdapterPolicyCreate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.FcQueueSettings")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1122,7 +1147,7 @@ func resourceVnicFcAdapterPolicyCreate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.ScsiQueueSettings")
 			if v, ok := l["nr_count"]; ok {
 				{
 					x := int64(v.(int))
@@ -1200,7 +1225,7 @@ func resourceVnicFcAdapterPolicyCreate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.FcQueueSettings")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1428,7 +1453,7 @@ func resourceVnicFcAdapterPolicyUpdate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.FcErrorRecoverySettings")
 			if v, ok := l["enabled"]; ok {
 				{
 					x := (v.(bool))
@@ -1490,7 +1515,7 @@ func resourceVnicFcAdapterPolicyUpdate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.FlogiSettings")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1534,7 +1559,7 @@ func resourceVnicFcAdapterPolicyUpdate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.FcInterruptSettings")
 			if v, ok := l["mode"]; ok {
 				{
 					x := (v.(string))
@@ -1604,7 +1629,7 @@ func resourceVnicFcAdapterPolicyUpdate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1648,7 +1673,7 @@ func resourceVnicFcAdapterPolicyUpdate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.PlogiSettings")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1698,7 +1723,7 @@ func resourceVnicFcAdapterPolicyUpdate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.FcQueueSettings")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1736,7 +1761,7 @@ func resourceVnicFcAdapterPolicyUpdate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.ScsiQueueSettings")
 			if v, ok := l["nr_count"]; ok {
 				{
 					x := int64(v.(int))
@@ -1814,7 +1839,7 @@ func resourceVnicFcAdapterPolicyUpdate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.FcQueueSettings")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))

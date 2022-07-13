@@ -11,6 +11,7 @@ import (
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceSoftwarerepositoryRelease() *schema.Resource {
@@ -175,7 +176,8 @@ func resourceSoftwarerepositoryRelease() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -284,11 +286,13 @@ func resourceSoftwarerepositoryRelease() *schema.Resource {
 				}},
 			"supported_models": {
 				Type:       schema.TypeList,
+				MinItems:   1,
 				Optional:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Computed:   true,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"tags": {
 				Type:       schema.TypeList,
 				Optional:   true,
@@ -302,23 +306,26 @@ func resourceSoftwarerepositoryRelease() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
 			},
 			"type": {
-				Description: "The platform type for which the images are released. This can be a Fabric Interconnect or compute server hardware.\n* `FabricSwitch` - The images in a release that correspond to Fabric Interconnect switches.\n* `ComputeSystem` - The images in a release that correspond to servers.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "FabricSwitch",
+				Description:  "The platform type for which the images are released. This can be a Fabric Interconnect or compute server hardware.\n* `FabricSwitch` - The images in a release that correspond to Fabric Interconnect switches.\n* `ComputeSystem` - The images in a release that correspond to servers.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"FabricSwitch", "ComputeSystem"}, false),
+				Optional:     true,
+				Default:      "FabricSwitch",
 			},
 			"nr_version": {
 				Description: "Cisco provided release version.",
@@ -500,7 +507,7 @@ func resourceSoftwarerepositoryReleaseCreate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -756,7 +763,7 @@ func resourceSoftwarerepositoryReleaseUpdate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

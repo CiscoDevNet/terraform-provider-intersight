@@ -20,6 +20,7 @@ The following arguments can be used to get data of already created objects in In
 * `created_time`:(string) Storage container's creation time. 
 * `data_block_size`:(int) Storage container data block size in bytes. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
+* `encryption_enabled`:(bool) Indicate if encryption is enabled on this storage container. 
 * `in_use`:(bool) Indicates whether the storage container has volumes. 
 * `kind`:(string) Indicates whether the storage container was user-created, or system-created.* `UNKNOWN` - The storage container creator is unknown.* `USER_CREATED` - The storage container was created by a user action.* `INTERNAL` - The storage container was created by the system. 
 * `last_access_time`:(string) Storage container's last access time. 

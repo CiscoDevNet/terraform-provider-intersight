@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceStorageDriveGroup() *schema.Resource {
@@ -97,15 +99,17 @@ func resourceStorageDriveGroup() *schema.Resource {
 							Default:     "storage.AutomaticDriveGroup",
 						},
 						"drive_type": {
-							Description: "Type of drive that should be used for this RAID group.\n* `Any` - Any type of drive can be used for virtual drive creation.\n* `HDD` - Hard disk drives should be used for virtual drive creation.\n* `SSD` - Solid state drives should be used for virtual drive creation.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "Any",
+							Description:  "Type of drive that should be used for this RAID group.\n* `Any` - Any type of drive can be used for virtual drive creation.\n* `HDD` - Hard disk drives should be used for virtual drive creation.\n* `SSD` - Solid state drives should be used for virtual drive creation.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"Any", "HDD", "SSD"}, false),
+							Optional:     true,
+							Default:      "Any",
 						},
 						"drives_per_span": {
-							Description: "Number of drives within this span group. The minimum number of disks needed in a span group varies based on RAID level. RAID0 requires at least one disk. RAID1 and RAID10 requires at least 2 and in multiples of . RAID5 and RAID50 require at least 3 disks in a span group. RAID6 and RAID60 require atleast 4 disks in a span.",
-							Type:        schema.TypeInt,
-							Optional:    true,
+							Description:  "Number of drives within this span group. The minimum number of disks needed in a span group varies based on RAID level. RAID0 requires at least one disk. RAID1 and RAID10 requires at least 2 and in multiples of . RAID5 and RAID50 require at least 3 disks in a span group. RAID6 and RAID60 require atleast 4 disks in a span.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(1, 100),
+							Optional:     true,
 						},
 						"minimum_drive_size": {
 							Description: "Minimum size of the drive to be used for creating this RAID group.",
@@ -113,15 +117,17 @@ func resourceStorageDriveGroup() *schema.Resource {
 							Optional:    true,
 						},
 						"num_dedicated_hot_spares": {
-							Description: "Number of dedicated hot spare disks for this RAID group. Allowed value is a comma or hyphen separated number range.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "Number of dedicated hot spare disks for this RAID group. Allowed value is a comma or hyphen separated number range.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^((\\d+\\-\\d+)|(\\d+))(,((\\d+\\-\\d+)|(\\d+)))*$"), ""),
+							Optional:     true,
 						},
 						"number_of_spans": {
-							Description: "Number of span groups to be created for this RAID group. Non-nested RAID levels have a single span.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     0,
+							Description:  "Number of span groups to be created for this RAID group. Non-nested RAID levels have a single span.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(0, 8),
+							Optional:     true,
+							Default:      0,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -186,9 +192,10 @@ func resourceStorageDriveGroup() *schema.Resource {
 							Default:     "storage.ManualDriveGroup",
 						},
 						"dedicated_hot_spares": {
-							Description: "A collection of drives to be used as hot spares for this Drive Group.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "A collection of drives to be used as hot spares for this Drive Group.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^((\\d+\\-\\d+)|(\\d+))(,((\\d+\\-\\d+)|(\\d+)))*$"), ""),
+							Optional:     true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -221,9 +228,10 @@ func resourceStorageDriveGroup() *schema.Resource {
 										Default:     "storage.SpanDrives",
 									},
 									"slots": {
-										Description: "Collection of local disks that are part of this span group. Allowed value is a comma or hyphen separated number range. The minimum number of disks needed in a span group varies based on RAID level. RAID0 requires at least one disk, RAID1 and RAID10 requires at least 2 and in multiples of 2, RAID5 RAID50 RAID6 and RAID60 require at least 3 disks in a span group.",
-										Type:        schema.TypeString,
-										Optional:    true,
+										Description:  "Collection of local disks that are part of this span group. Allowed value is a comma or hyphen separated number range. The minimum number of disks needed in a span group varies based on RAID level. RAID0 requires at least one disk, RAID1 and RAID10 requires at least 2 and in multiples of 2, RAID5 RAID50 RAID6 and RAID60 require at least 3 disks in a span group.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^((\\d+\\-\\d+)|(\\d+))(,((\\d+\\-\\d+)|(\\d+)))*$"), ""),
+										Optional:     true,
 									},
 								},
 							},
@@ -250,10 +258,11 @@ func resourceStorageDriveGroup() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "The name of the drive group. The name can be between 1 and 64 alphanumeric characters. Spaces or any special characters other than - (hyphen), _ (underscore), : (colon), and . (period) are not allowed.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				ForceNew:    true,
+				Description:  "The name of the drive group. The name can be between 1 and 64 alphanumeric characters. Spaces or any special characters other than - (hyphen), _ (underscore), : (colon), and . (period) are not allowed.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
+				ForceNew:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -267,7 +276,8 @@ func resourceStorageDriveGroup() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -348,10 +358,11 @@ func resourceStorageDriveGroup() *schema.Resource {
 				},
 			},
 			"raid_level": {
-				Description: "The supported RAID level for the disk group.\n* `Raid0` - RAID 0 Stripe Raid Level.\n* `Raid1` - RAID 1 Mirror Raid Level.\n* `Raid5` - RAID 5 Mirror Raid Level.\n* `Raid6` - RAID 6 Mirror Raid Level.\n* `Raid10` - RAID 10 Mirror Raid Level.\n* `Raid50` - RAID 50 Mirror Raid Level.\n* `Raid60` - RAID 60 Mirror Raid Level.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "Raid0",
+				Description:  "The supported RAID level for the disk group.\n* `Raid0` - RAID 0 Stripe Raid Level.\n* `Raid1` - RAID 1 Mirror Raid Level.\n* `Raid5` - RAID 5 Mirror Raid Level.\n* `Raid6` - RAID 6 Mirror Raid Level.\n* `Raid10` - RAID 10 Mirror Raid Level.\n* `Raid50` - RAID 50 Mirror Raid Level.\n* `Raid60` - RAID 60 Mirror Raid Level.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Raid0", "Raid1", "Raid5", "Raid6", "Raid10", "Raid50", "Raid60"}, false),
+				Optional:     true,
+				Default:      "Raid0",
 			},
 			"shared_scope": {
 				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
@@ -417,14 +428,16 @@ func resourceStorageDriveGroup() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -609,9 +622,10 @@ func resourceStorageDriveGroup() *schema.Resource {
 							Optional:    true,
 						},
 						"name": {
-							Description: "The name of the virtual drive. The name can be between 1 and 15 alphanumeric characters. Spaces or any special characters other than - (hyphen), _ (underscore), : (colon), and . (period) are not allowed.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The name of the virtual drive. The name can be between 1 and 15 alphanumeric characters. Spaces or any special characters other than - (hyphen), _ (underscore), : (colon), and . (period) are not allowed.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9\\-\\._:]*$"), ""), StringLenMaximum(15)),
+							Optional:     true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -620,9 +634,10 @@ func resourceStorageDriveGroup() *schema.Resource {
 							Default:     "storage.VirtualDriveConfiguration",
 						},
 						"size": {
-							Description: "Virtual drive size in MebiBytes. Size is mandatory field except when the Expand to Available option is enabled.",
-							Type:        schema.TypeInt,
-							Optional:    true,
+							Description:  "Virtual drive size in MebiBytes. Size is mandatory field except when the Expand to Available option is enabled.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntAtLeast(0),
+							Optional:     true,
 						},
 						"virtual_drive_policy": {
 							Description: "This defines the characteristics of a specific virtual drive.",
@@ -634,10 +649,11 @@ func resourceStorageDriveGroup() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"access_policy": {
-										Description: "Access policy that host has on this virtual drive.\n* `Default` - Use platform default access mode.\n* `ReadWrite` - Enables host to perform read-write on the VD.\n* `ReadOnly` - Host can only read from the VD.\n* `Blocked` - Host can neither read nor write to the VD.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Default:     "Default",
+										Description:  "Access policy that host has on this virtual drive.\n* `Default` - Use platform default access mode.\n* `ReadWrite` - Enables host to perform read-write on the VD.\n* `ReadOnly` - Host can only read from the VD.\n* `Blocked` - Host can neither read nor write to the VD.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringInSlice([]string{"Default", "ReadWrite", "ReadOnly", "Blocked"}, false),
+										Optional:     true,
+										Default:      "Default",
 									},
 									"additional_properties": {
 										Type:             schema.TypeString,
@@ -651,10 +667,11 @@ func resourceStorageDriveGroup() *schema.Resource {
 										Default:     "storage.VirtualDrivePolicy",
 									},
 									"drive_cache": {
-										Description: "Disk cache policy for the virtual drive.\n* `Default` - Use platform default drive cache mode.\n* `NoChange` - Drive cache policy is unchanged.\n* `Enable` - Enables IO caching on the drive.\n* `Disable` - Disables IO caching on the drive.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Default:     "Default",
+										Description:  "Disk cache policy for the virtual drive.\n* `Default` - Use platform default drive cache mode.\n* `NoChange` - Drive cache policy is unchanged.\n* `Enable` - Enables IO caching on the drive.\n* `Disable` - Disables IO caching on the drive.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringInSlice([]string{"Default", "NoChange", "Enable", "Disable"}, false),
+										Optional:     true,
+										Default:      "Default",
 									},
 									"object_type": {
 										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -663,22 +680,25 @@ func resourceStorageDriveGroup() *schema.Resource {
 										Default:     "storage.VirtualDrivePolicy",
 									},
 									"read_policy": {
-										Description: "Read ahead mode to be used to read data from this virtual drive.\n* `Default` - Use platform default read ahead mode.\n* `ReadAhead` - Use read ahead mode for the policy.\n* `NoReadAhead` - Do not use read ahead mode for the policy.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Default:     "Default",
+										Description:  "Read ahead mode to be used to read data from this virtual drive.\n* `Default` - Use platform default read ahead mode.\n* `ReadAhead` - Use read ahead mode for the policy.\n* `NoReadAhead` - Do not use read ahead mode for the policy.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringInSlice([]string{"Default", "ReadAhead", "NoReadAhead"}, false),
+										Optional:     true,
+										Default:      "Default",
 									},
 									"strip_size": {
-										Description: "Desired strip size - Allowed values are 64KiB, 128KiB, 256KiB, 512KiB, 1024KiB.\n* `64` - Number of bytes in a strip is 64 Kibibytes.\n* `128` - Number of bytes in a strip is 128 Kibibytes.\n* `256` - Number of bytes in a strip is 256 Kibibytes.\n* `512` - Number of bytes in a strip is 512 Kibibytes.\n* `1024` - Number of bytes in a strip is 1024 Kibibytes or 1 Mebibyte.",
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Default:     64,
+										Description:  "Desired strip size - Allowed values are 64KiB, 128KiB, 256KiB, 512KiB, 1024KiB.\n* `64` - Number of bytes in a strip is 64 Kibibytes.\n* `128` - Number of bytes in a strip is 128 Kibibytes.\n* `256` - Number of bytes in a strip is 256 Kibibytes.\n* `512` - Number of bytes in a strip is 512 Kibibytes.\n* `1024` - Number of bytes in a strip is 1024 Kibibytes or 1 Mebibyte.",
+										Type:         schema.TypeInt,
+										ValidateFunc: validation.IntInSlice([]int{64, 128, 256, 512, 1024}),
+										Optional:     true,
+										Default:      64,
 									},
 									"write_policy": {
-										Description: "Write mode to be used to write data to this virtual drive.\n* `Default` - Use platform default write mode.\n* `WriteThrough` - Data is written through the cache and to the physical drives. Performance is improved, because subsequent reads of that data can be satisfied from the cache.\n* `WriteBackGoodBbu` - Data is stored in the cache, and is only written to the physical drives when space in the cache is needed. Virtual drives requesting this policy fall back to Write Through caching when the battery backup unit (BBU) cannot guarantee the safety of the cache in the event of a power failure.\n* `AlwaysWriteBack` - With this policy, write caching remains Write Back even if the battery backup unit is defective or discharged.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Default:     "Default",
+										Description:  "Write mode to be used to write data to this virtual drive.\n* `Default` - Use platform default write mode.\n* `WriteThrough` - Data is written through the cache and to the physical drives. Performance is improved, because subsequent reads of that data can be satisfied from the cache.\n* `WriteBackGoodBbu` - Data is stored in the cache, and is only written to the physical drives when space in the cache is needed. Virtual drives requesting this policy fall back to Write Through caching when the battery backup unit (BBU) cannot guarantee the safety of the cache in the event of a power failure.\n* `AlwaysWriteBack` - With this policy, write caching remains Write Back even if the battery backup unit is defective or discharged.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringInSlice([]string{"Default", "WriteThrough", "WriteBackGoodBbu", "AlwaysWriteBack"}, false),
+										Optional:     true,
+										Default:      "Default",
 									},
 								},
 							},
@@ -721,7 +741,7 @@ func resourceStorageDriveGroupCreate(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("storage.AutomaticDriveGroup")
 			if v, ok := l["drive_type"]; ok {
 				{
 					x := (v.(string))
@@ -790,7 +810,7 @@ func resourceStorageDriveGroupCreate(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("storage.ManualDriveGroup")
 			if v, ok := l["dedicated_hot_spares"]; ok {
 				{
 					x := (v.(string))
@@ -881,7 +901,7 @@ func resourceStorageDriveGroupCreate(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1013,7 +1033,7 @@ func resourceStorageDriveGroupCreate(c context.Context, d *schema.ResourceData, 
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("storage.VirtualDrivePolicy")
 						if v, ok := l["drive_cache"]; ok {
 							{
 								x := (v.(string))
@@ -1220,7 +1240,7 @@ func resourceStorageDriveGroupUpdate(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("storage.AutomaticDriveGroup")
 			if v, ok := l["drive_type"]; ok {
 				{
 					x := (v.(string))
@@ -1290,7 +1310,7 @@ func resourceStorageDriveGroupUpdate(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("storage.ManualDriveGroup")
 			if v, ok := l["dedicated_hot_spares"]; ok {
 				{
 					x := (v.(string))
@@ -1385,7 +1405,7 @@ func resourceStorageDriveGroupUpdate(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1517,7 +1537,7 @@ func resourceStorageDriveGroupUpdate(c context.Context, d *schema.ResourceData, 
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("storage.VirtualDrivePolicy")
 						if v, ok := l["drive_cache"]; ok {
 							{
 								x := (v.(string))

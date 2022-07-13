@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceVnicIscsiBootPolicy() *schema.Resource {
@@ -119,14 +121,16 @@ func resourceVnicIscsiBootPolicy() *schema.Resource {
 							Default:     "vnic.IscsiAuthProfile",
 						},
 						"password": {
-							Description: "Password of Initiator/Target Interface. Enter between 12 and 16 characters, including special characters except spaces, tabs, line breaks.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "Password of Initiator/Target Interface. Enter between 12 and 16 characters, including special characters except spaces, tabs, line breaks.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[\\S+]{12,16}$"), ""),
+							Optional:     true,
 						},
 						"user_id": {
-							Description: "User Id of Initiator/Target Interface. Enter between 1 and 128 characters, spaces, or special characters.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "User Id of Initiator/Target Interface. Enter between 1 and 128 characters, spaces, or special characters.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^.{1,128}$"), ""),
+							Optional:     true,
 						},
 					},
 				},
@@ -149,9 +153,10 @@ func resourceVnicIscsiBootPolicy() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -205,15 +210,17 @@ func resourceVnicIscsiBootPolicy() *schema.Resource {
 				},
 			},
 			"initiator_ip_source": {
-				Description: "Source Type of Initiator IP Address - Auto/Static/Pool.\n* `DHCP` - The IP address is assigned using DHCP, if available.\n* `Static` - Static IPv4 address is assigned to the iSCSI boot interface based on the information entered in this area.\n* `Pool` - An IPv4 address is assigned to the iSCSI boot interface from the management IP address pool.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "DHCP",
+				Description:  "Source Type of Initiator IP Address - Auto/Static/Pool.\n* `DHCP` - The IP address is assigned using DHCP, if available.\n* `Static` - Static IPv4 address is assigned to the iSCSI boot interface based on the information entered in this area.\n* `Pool` - An IPv4 address is assigned to the iSCSI boot interface from the management IP address pool.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"DHCP", "Static", "Pool"}, false),
+				Optional:     true,
+				Default:      "DHCP",
 			},
 			"initiator_static_ip_v4_address": {
-				Description: "Static IP address provided for iSCSI Initiator.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Static IP address provided for iSCSI Initiator.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
+				Optional:     true,
 			},
 			"initiator_static_ip_v4_config": {
 				Description: "IPV4 configurations such as Netmask, Gateway and DNS for iSCSI Initiator.",
@@ -236,14 +243,16 @@ func resourceVnicIscsiBootPolicy() *schema.Resource {
 							Default:     "ippool.IpV4Config",
 						},
 						"gateway": {
-							Description: "IP address of the default IPv4 gateway.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "IP address of the default IPv4 gateway.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
+							Optional:     true,
 						},
 						"netmask": {
-							Description: "A subnet mask is a 32-bit number that masks an IP address and divides the IP address into network address and host address.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "A subnet mask is a 32-bit number that masks an IP address and divides the IP address into network address and host address.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^(((255\\.){3}(255|254|252|248|240|224|192|128|0+))|((255\\.){2}(255|254|252|248|240|224|192|128|0+)\\.0)|((255\\.)(255|254|252|248|240|224|192|128|0+)(\\.0+){2})|((255|254|252|248|240|224|192|128|0+)(\\.0+){3}))$"), ""),
+							Optional:     true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -252,14 +261,16 @@ func resourceVnicIscsiBootPolicy() *schema.Resource {
 							Default:     "ippool.IpV4Config",
 						},
 						"primary_dns": {
-							Description: "IP Address of the primary Domain Name System (DNS) server.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "IP Address of the primary Domain Name System (DNS) server.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
+							Optional:     true,
 						},
 						"secondary_dns": {
-							Description: "IP Address of the secondary Domain Name System (DNS) server.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "IP Address of the secondary Domain Name System (DNS) server.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
+							Optional:     true,
 						},
 					},
 				},
@@ -360,22 +371,25 @@ func resourceVnicIscsiBootPolicy() *schema.Resource {
 							Default:     "vnic.IscsiAuthProfile",
 						},
 						"password": {
-							Description: "Password of Initiator/Target Interface. Enter between 12 and 16 characters, including special characters except spaces, tabs, line breaks.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "Password of Initiator/Target Interface. Enter between 12 and 16 characters, including special characters except spaces, tabs, line breaks.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[\\S+]{12,16}$"), ""),
+							Optional:     true,
 						},
 						"user_id": {
-							Description: "User Id of Initiator/Target Interface. Enter between 1 and 128 characters, spaces, or special characters.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "User Id of Initiator/Target Interface. Enter between 1 and 128 characters, spaces, or special characters.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^.{1,128}$"), ""),
+							Optional:     true,
 						},
 					},
 				},
 			},
 			"name": {
-				Description: "Name of the concrete policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the concrete policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -430,7 +444,8 @@ func resourceVnicIscsiBootPolicy() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -614,23 +629,26 @@ func resourceVnicIscsiBootPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
 			},
 			"target_source_type": {
-				Description: "Source Type of Targets - Auto/Static.\n* `Static` - Type indicates that static target interface is assigned to iSCSI boot.\n* `Auto` - Type indicates that the system selects the target interface automatically during iSCSI boot.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "Static",
+				Description:  "Source Type of Targets - Auto/Static.\n* `Static` - Type indicates that static target interface is assigned to iSCSI boot.\n* `Auto` - Type indicates that the system selects the target interface automatically during iSCSI boot.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Static", "Auto"}, false),
+				Optional:     true,
+				Default:      "Static",
 			},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
@@ -812,7 +830,7 @@ func resourceVnicIscsiBootPolicyCreate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.IscsiAuthProfile")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -862,7 +880,7 @@ func resourceVnicIscsiBootPolicyCreate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -915,7 +933,7 @@ func resourceVnicIscsiBootPolicyCreate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("ippool.IpV4Config")
 			if v, ok := l["gateway"]; ok {
 				{
 					x := (v.(string))
@@ -970,7 +988,7 @@ func resourceVnicIscsiBootPolicyCreate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1018,7 +1036,7 @@ func resourceVnicIscsiBootPolicyCreate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.IscsiAuthProfile")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1068,7 +1086,7 @@ func resourceVnicIscsiBootPolicyCreate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1111,7 +1129,7 @@ func resourceVnicIscsiBootPolicyCreate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1154,7 +1172,7 @@ func resourceVnicIscsiBootPolicyCreate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1416,7 +1434,7 @@ func resourceVnicIscsiBootPolicyUpdate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.IscsiAuthProfile")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1468,7 +1486,7 @@ func resourceVnicIscsiBootPolicyUpdate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1524,7 +1542,7 @@ func resourceVnicIscsiBootPolicyUpdate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("ippool.IpV4Config")
 			if v, ok := l["gateway"]; ok {
 				{
 					x := (v.(string))
@@ -1580,7 +1598,7 @@ func resourceVnicIscsiBootPolicyUpdate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1630,7 +1648,7 @@ func resourceVnicIscsiBootPolicyUpdate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.IscsiAuthProfile")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1682,7 +1700,7 @@ func resourceVnicIscsiBootPolicyUpdate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1726,7 +1744,7 @@ func resourceVnicIscsiBootPolicyUpdate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1770,7 +1788,7 @@ func resourceVnicIscsiBootPolicyUpdate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

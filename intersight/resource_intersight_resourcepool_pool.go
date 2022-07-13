@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceResourcepoolPool() *schema.Resource {
@@ -88,10 +90,11 @@ func resourceResourcepoolPool() *schema.Resource {
 					return
 				}},
 			"assignment_order": {
-				Description: "Assignment order decides the order in which the next identifier is allocated.\n* `sequential` - Identifiers are assigned in a sequential order.\n* `default` - Assignment order is decided by the system.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "sequential",
+				Description:  "Assignment order decides the order in which the next identifier is allocated.\n* `sequential` - Identifiers are assigned in a sequential order.\n* `default` - Assignment order is decided by the system.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"sequential", "default"}, false),
+				Optional:     true,
+				Default:      "sequential",
 			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
@@ -111,9 +114,10 @@ func resourceResourcepoolPool() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -145,9 +149,10 @@ func resourceResourcepoolPool() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the concrete policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the concrete policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -202,7 +207,8 @@ func resourceResourcepoolPool() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -283,10 +289,11 @@ func resourceResourcepoolPool() *schema.Resource {
 				},
 			},
 			"pool_type": {
-				Description: "The resource management type in the pool, it can be either static or dynamic.\n* `Static` - The resources in the pool will not be changed until user manually update it.\n* `Dynamic` - The resources in the pool will be updated dynamically based on the condition.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "Static",
+				Description:  "The resource management type in the pool, it can be either static or dynamic.\n* `Static` - The resources in the pool will not be changed until user manually update it.\n* `Dynamic` - The resources in the pool will be updated dynamically based on the condition.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Static", "Dynamic"}, false),
+				Optional:     true,
+				Default:      "Static",
 			},
 			"resource_pool_parameters": {
 				Description: "The pool specific parameters.",
@@ -318,10 +325,11 @@ func resourceResourcepoolPool() *schema.Resource {
 				},
 			},
 			"resource_type": {
-				Description: "The type of the resource present in the pool, example 'server' its combination of RackUnit and Blade.\n* `None` - The resource cannot consider for Resource Pool.\n* `Server` - Resource Pool holds the server kind of resources, example - RackServer, Blade.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "None",
+				Description:  "The type of the resource present in the pool, example 'server' its combination of RackUnit and Blade.\n* `None` - The resource cannot consider for Resource Pool.\n* `Server` - Resource Pool holds the server kind of resources, example - RackServer, Blade.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"None", "Server"}, false),
+				Optional:     true,
+				Default:      "None",
 			},
 			"selectors": {
 				Type:       schema.TypeList,
@@ -348,9 +356,10 @@ func resourceResourcepoolPool() *schema.Resource {
 							Default:     "resource.Selector",
 						},
 						"selector": {
-							Description: "ODATA filter to select resources. The group selector may include URLs of individual resource, or OData query with filters that match multiple queries. The URLs must be relative (i.e. do not include the host).",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "ODATA filter to select resources. The group selector may include URLs of individual resource, or OData query with filters that match multiple queries. The URLs must be relative (i.e. do not include the host).",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|/api/v1/.*"), ""),
+							Optional:     true,
 						},
 					},
 				},
@@ -390,14 +399,16 @@ func resourceResourcepoolPool() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -601,7 +612,7 @@ func resourceResourcepoolPoolCreate(c context.Context, d *schema.ResourceData, m
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -649,7 +660,7 @@ func resourceResourcepoolPoolCreate(c context.Context, d *schema.ResourceData, m
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("resourcepool.ResourcePoolParameters")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -941,7 +952,7 @@ func resourceResourcepoolPoolUpdate(c context.Context, d *schema.ResourceData, m
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -991,7 +1002,7 @@ func resourceResourcepoolPoolUpdate(c context.Context, d *schema.ResourceData, m
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("resourcepool.ResourcePoolParameters")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))

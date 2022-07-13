@@ -114,7 +114,7 @@ func dataSourceKubernetesContainerRuntimePolicy() *schema.Resource {
 			Optional:    true,
 		},
 		"docker_http_proxy": {
-			Description: "The HTTP proxy configuration for docker. Refer to https://docs.docker.com/network/proxy/ for details.",
+			Description: "The HTTP proxy configuration for docker. Refer to https://docs.docker.com/network/proxy/ for details. Deprecated, assign a HttpProxyPolicy to the ClusterProfile ContainerRuntimeProxyPolicy field instead.",
 			Type:        schema.TypeList,
 			MaxItems:    1,
 			Optional:    true,
@@ -169,7 +169,7 @@ func dataSourceKubernetesContainerRuntimePolicy() *schema.Resource {
 			},
 		},
 		"docker_https_proxy": {
-			Description: "The https proxy configuration for docker. Refer to https://docs.docker.com/network/proxy/ for details.",
+			Description: "The https proxy configuration for docker. Refer to https://docs.docker.com/network/proxy/ for details. Deprecated, assign a HttpProxyPolicy to the ClusterProfile ContainerRuntimeProxyPolicy field instead.",
 			Type:        schema.TypeList,
 			MaxItems:    1,
 			Optional:    true,
@@ -598,7 +598,7 @@ func dataSourceKubernetesContainerRuntimePolicy() *schema.Resource {
 			Optional:    true,
 		},
 		"docker_http_proxy": {
-			Description: "The HTTP proxy configuration for docker. Refer to https://docs.docker.com/network/proxy/ for details.",
+			Description: "The HTTP proxy configuration for docker. Refer to https://docs.docker.com/network/proxy/ for details. Deprecated, assign a HttpProxyPolicy to the ClusterProfile ContainerRuntimeProxyPolicy field instead.",
 			Type:        schema.TypeList,
 			MaxItems:    1,
 			Optional:    true,
@@ -653,7 +653,7 @@ func dataSourceKubernetesContainerRuntimePolicy() *schema.Resource {
 			},
 		},
 		"docker_https_proxy": {
-			Description: "The https proxy configuration for docker. Refer to https://docs.docker.com/network/proxy/ for details.",
+			Description: "The https proxy configuration for docker. Refer to https://docs.docker.com/network/proxy/ for details. Deprecated, assign a HttpProxyPolicy to the ClusterProfile ContainerRuntimeProxyPolicy field instead.",
 			Type:        schema.TypeList,
 			MaxItems:    1,
 			Optional:    true,
@@ -1128,7 +1128,7 @@ func dataSourceKubernetesContainerRuntimePolicyRead(c context.Context, d *schema
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("kubernetes.ProxyConfig")
 			if v, ok := l["hostname"]; ok {
 				{
 					x := (v.(string))
@@ -1189,7 +1189,7 @@ func dataSourceKubernetesContainerRuntimePolicyRead(c context.Context, d *schema
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("kubernetes.ProxyConfig")
 			if v, ok := l["hostname"]; ok {
 				{
 					x := (v.(string))
@@ -1286,7 +1286,7 @@ func dataSourceKubernetesContainerRuntimePolicyRead(c context.Context, d *schema
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1340,7 +1340,7 @@ func dataSourceKubernetesContainerRuntimePolicyRead(c context.Context, d *schema
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1461,7 +1461,7 @@ func dataSourceKubernetesContainerRuntimePolicyRead(c context.Context, d *schema
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.VersionContext")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -1523,7 +1523,7 @@ func dataSourceKubernetesContainerRuntimePolicyRead(c context.Context, d *schema
 	if err != nil {
 		return diag.Errorf("json marshal of KubernetesContainerRuntimePolicy object failed with error : %s", err.Error())
 	}
-	countResponse, _, responseErr := conn.ApiClient.KubernetesApi.GetKubernetesContainerRuntimePolicyList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
+	countResponse, _, responseErr := conn.ApiClient.KubernetesApi.GetKubernetesContainerRuntimePolicyList(conn.ctx).Filter(getRequestParams(data)).Count(true).Execute()
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
@@ -1532,13 +1532,12 @@ func dataSourceKubernetesContainerRuntimePolicyRead(c context.Context, d *schema
 		}
 		return diag.Errorf("error occurred while fetching count of KubernetesContainerRuntimePolicy: %s", responseErr.Error())
 	}
-	count := countResponse.KubernetesContainerRuntimePolicyList.GetCount()
+	count := countResponse.MoDocumentCount.GetCount()
 	if count == 0 {
 		return diag.Errorf("your query for KubernetesContainerRuntimePolicy data source did not return any results. Please change your search criteria and try again")
 	}
 	var i int32
-	var kubernetesContainerRuntimePolicyResults = make([]map[string]interface{}, count, count)
-	var j = 0
+	var kubernetesContainerRuntimePolicyResults = make([]map[string]interface{}, 0, 0)
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.KubernetesApi.GetKubernetesContainerRuntimePolicyList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
@@ -1552,8 +1551,8 @@ func dataSourceKubernetesContainerRuntimePolicyRead(c context.Context, d *schema
 		results := resMo.KubernetesContainerRuntimePolicyList.GetResults()
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
-			for i := 0; i < len(results); i++ {
-				var s = results[i]
+			for k := 0; k < len(results); k++ {
+				var s = results[k]
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
@@ -1589,8 +1588,7 @@ func dataSourceKubernetesContainerRuntimePolicyRead(c context.Context, d *schema
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
-				kubernetesContainerRuntimePolicyResults[j] = temp
-				j += 1
+				kubernetesContainerRuntimePolicyResults = append(kubernetesContainerRuntimePolicyResults, temp)
 			}
 		}
 	}

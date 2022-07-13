@@ -11,6 +11,7 @@ import (
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceVirtualizationVirtualNetwork() *schema.Resource {
@@ -238,11 +239,12 @@ func resourceVirtualizationVirtualNetwork() *schema.Resource {
 				ForceNew:    true,
 			},
 			"network_type": {
-				Description: "Type of network layer, either L2 or L3.\n* `unknown` - This network is of an unknown network type.\n* `L2` - A Layer 2 switching network type.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "unknown",
-				ForceNew:    true,
+				Description:  "Type of network layer, either L2 or L3.\n* `unknown` - This network is of an unknown network type.\n* `L2` - A Layer 2 switching network type.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"unknown", "L2"}, false),
+				Optional:     true,
+				Default:      "unknown",
+				ForceNew:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -256,7 +258,8 @@ func resourceVirtualizationVirtualNetwork() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -401,14 +404,16 @@ func resourceVirtualizationVirtualNetwork() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -419,7 +424,8 @@ func resourceVirtualizationVirtualNetwork() *schema.Resource {
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Computed:   true,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
 				Type:        schema.TypeList,
@@ -654,7 +660,7 @@ func resourceVirtualizationVirtualNetworkCreate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -729,7 +735,7 @@ func resourceVirtualizationVirtualNetworkCreate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1050,7 +1056,7 @@ func resourceVirtualizationVirtualNetworkUpdate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1132,7 +1138,7 @@ func resourceVirtualizationVirtualNetworkUpdate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

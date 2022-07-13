@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceWorkflowTaskDefinition() *schema.Resource {
@@ -373,9 +375,10 @@ func resourceWorkflowTaskDefinition() *schema.Resource {
 				},
 			},
 			"label": {
-				Description: "A user friendly short name to identify the task definition. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), or an underscore (_) and must be at least 2 characters.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "A user friendly short name to identify the task definition. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), or an underscore (_) and must be at least 2 characters.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9]+[\\sa-zA-Z0-9_'./:-]{1,92}$"), ""),
+				Optional:     true,
 			},
 			"license_entitlement": {
 				Description: "License entitlement required to run this task. It is determined by license requirement of features.\n* `Base` - Base as a License type. It is default license type.\n* `Essential` - Essential as a License type.\n* `Standard` - Standard as a License type.\n* `Advantage` - Advantage as a License type.\n* `Premier` - Premier as a License type.\n* `IWO-Essential` - IWO-Essential as a License type.\n* `IWO-Advantage` - IWO-Advantage as a License type.\n* `IWO-Premier` - IWO-Premier as a License type.\n* `IKS-Advantage` - IKS-Advantage as a License type.",
@@ -407,10 +410,11 @@ func resourceWorkflowTaskDefinition() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "The name of the task definition. The name should follow this convention <Verb or Action><Category><Vendor><Product><Noun or object> Verb or Action is a required portion of the name and this must be part of the pre-approved verb list. Category is an optional field and this will refer to the broad category of the task referring to the type of resource or endpoint. If there is no specific category then use \"Generic\" if required. Vendor is an optional field and this will refer to the specific vendor this task applies to. If the task is generic and not tied to a vendor, then do not specify anything. Product is an optional field, this will contain the vendor product and model when desired. Noun or object is a required field and  this will contain the noun or object on which the action is being performed. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), or an underscore (_). Examples SendEmail  - This is a task in Generic category for sending email. NewStorageVolume - This is a vendor agnostic task under Storage device category for creating a new volume.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				ForceNew:    true,
+				Description:  "The name of the task definition. The name should follow this convention <Verb or Action><Category><Vendor><Product><Noun or object> Verb or Action is a required portion of the name and this must be part of the pre-approved verb list. Category is an optional field and this will refer to the broad category of the task referring to the type of resource or endpoint. If there is no specific category then use \"Generic\" if required. Vendor is an optional field and this will refer to the specific vendor this task applies to. If the task is generic and not tied to a vendor, then do not specify anything. Product is an optional field, this will contain the vendor product and model when desired. Noun or object is a required field and  this will contain the noun or object on which the action is being performed. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), or an underscore (_). Examples SendEmail  - This is a task in Generic category for sending email. NewStorageVolume - This is a vendor agnostic task under Storage device category for creating a new volume.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
+				ForceNew:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -424,7 +428,8 @@ func resourceWorkflowTaskDefinition() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -647,10 +652,11 @@ func resourceWorkflowTaskDefinition() *schema.Resource {
 													Default:     "workflow.DisplayMeta",
 												},
 												"widget_type": {
-													Description: "Specify the widget type for data display.\n* `None` - Display none of the widget types.\n* `Radio` - Display the widget as a radio button.\n* `Dropdown` - Display the widget as a dropdown.\n* `GridSelector` - Display the widget as a selector.\n* `DrawerSelector` - Display the widget as a selector.",
-													Type:        schema.TypeString,
-													Optional:    true,
-													Default:     "None",
+													Description:  "Specify the widget type for data display.\n* `None` - Display none of the widget types.\n* `Radio` - Display the widget as a radio button.\n* `Dropdown` - Display the widget as a dropdown.\n* `GridSelector` - Display the widget as a selector.\n* `DrawerSelector` - Display the widget as a selector.",
+													Type:         schema.TypeString,
+													ValidateFunc: validation.StringInSlice([]string{"None", "Radio", "Dropdown", "GridSelector", "DrawerSelector"}, false),
+													Optional:     true,
+													Default:      "None",
 												},
 											},
 										},
@@ -661,14 +667,16 @@ func resourceWorkflowTaskDefinition() *schema.Resource {
 										Optional:    true,
 									},
 									"label": {
-										Description: "Descriptive label for the data type. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), space ( ) or an underscore (_). The first and last character in label must be an alphanumeric character.",
-										Type:        schema.TypeString,
-										Optional:    true,
+										Description:  "Descriptive label for the data type. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), space ( ) or an underscore (_). The first and last character in label must be an alphanumeric character.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9]+[\\sa-zA-Z0-9_'.:-]{1,92}$"), ""), validation.StringLenBetween(1, 92)),
+										Optional:     true,
 									},
 									"name": {
-										Description: "Descriptive name for the data type. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_). The first and last character in name must be an alphanumeric character.",
-										Type:        schema.TypeString,
-										Optional:    true,
+										Description:  "Descriptive name for the data type. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_). The first and last character in name must be an alphanumeric character.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9]+([a-zA-Z0-9-_]*[a-zA-Z0-9])*$"), ""), validation.StringLenBetween(1, 92)),
+										Optional:     true,
 									},
 									"object_type": {
 										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
@@ -796,10 +804,11 @@ func resourceWorkflowTaskDefinition() *schema.Resource {
 													Default:     "workflow.DisplayMeta",
 												},
 												"widget_type": {
-													Description: "Specify the widget type for data display.\n* `None` - Display none of the widget types.\n* `Radio` - Display the widget as a radio button.\n* `Dropdown` - Display the widget as a dropdown.\n* `GridSelector` - Display the widget as a selector.\n* `DrawerSelector` - Display the widget as a selector.",
-													Type:        schema.TypeString,
-													Optional:    true,
-													Default:     "None",
+													Description:  "Specify the widget type for data display.\n* `None` - Display none of the widget types.\n* `Radio` - Display the widget as a radio button.\n* `Dropdown` - Display the widget as a dropdown.\n* `GridSelector` - Display the widget as a selector.\n* `DrawerSelector` - Display the widget as a selector.",
+													Type:         schema.TypeString,
+													ValidateFunc: validation.StringInSlice([]string{"None", "Radio", "Dropdown", "GridSelector", "DrawerSelector"}, false),
+													Optional:     true,
+													Default:      "None",
 												},
 											},
 										},
@@ -810,14 +819,16 @@ func resourceWorkflowTaskDefinition() *schema.Resource {
 										Optional:    true,
 									},
 									"label": {
-										Description: "Descriptive label for the data type. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), space ( ) or an underscore (_). The first and last character in label must be an alphanumeric character.",
-										Type:        schema.TypeString,
-										Optional:    true,
+										Description:  "Descriptive label for the data type. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), space ( ) or an underscore (_). The first and last character in label must be an alphanumeric character.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9]+[\\sa-zA-Z0-9_'.:-]{1,92}$"), ""), validation.StringLenBetween(1, 92)),
+										Optional:     true,
 									},
 									"name": {
-										Description: "Descriptive name for the data type. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_). The first and last character in name must be an alphanumeric character.",
-										Type:        schema.TypeString,
-										Optional:    true,
+										Description:  "Descriptive name for the data type. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_). The first and last character in name must be an alphanumeric character.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9]+([a-zA-Z0-9-_]*[a-zA-Z0-9])*$"), ""), validation.StringLenBetween(1, 92)),
+										Optional:     true,
 									},
 									"object_type": {
 										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
@@ -834,22 +845,25 @@ func resourceWorkflowTaskDefinition() *schema.Resource {
 							},
 						},
 						"retry_count": {
-							Description: "The number of times a task should be tried before marking as failed.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     3,
+							Description:  "The number of times a task should be tried before marking as failed.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(0, 256),
+							Optional:     true,
+							Default:      3,
 						},
 						"retry_delay": {
-							Description: "The delay in seconds after which the the task is re-tried.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     60,
+							Description:  "The delay in seconds after which the the task is re-tried.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(10, 86400),
+							Optional:     true,
+							Default:      60,
 						},
 						"retry_policy": {
-							Description: "The retry policy for the task.\n* `Fixed` - The enum specifies the option as Fixed where the task retry happens after fixed time specified by RetryDelay.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "Fixed",
+							Description:  "The retry policy for the task.\n* `Fixed` - The enum specifies the option as Fixed where the task retry happens after fixed time specified by RetryDelay.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"Fixed"}, false),
+							Optional:     true,
+							Default:      "Fixed",
 						},
 						"starts_workflow": {
 							Description: "Set to true if the task implementation starts another workfow as part of the execution.",
@@ -863,22 +877,25 @@ func resourceWorkflowTaskDefinition() *schema.Resource {
 								return
 							}},
 						"support_status": {
-							Description: "Supported status of the definition.\n* `Supported` - The definition is a supported version and there will be no changes to the mandatory inputs or outputs.\n* `Beta` - The definition is a Beta version and this version can under go changes until the version is marked supported.\n* `Deprecated` - The version of definition is deprecated and typically there will be a higher version of the same definition that has been added.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "Supported",
+							Description:  "Supported status of the definition.\n* `Supported` - The definition is a supported version and there will be no changes to the mandatory inputs or outputs.\n* `Beta` - The definition is a Beta version and this version can under go changes until the version is marked supported.\n* `Deprecated` - The version of definition is deprecated and typically there will be a higher version of the same definition that has been added.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"Supported", "Beta", "Deprecated"}, false),
+							Optional:     true,
+							Default:      "Supported",
 						},
 						"timeout": {
-							Description: "The timeout value in seconds after which task will be marked as timed out. Max allowed value is 7 days.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     600,
+							Description:  "The timeout value in seconds after which task will be marked as timed out. Max allowed value is 7 days.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(10, 604800),
+							Optional:     true,
+							Default:      600,
 						},
 						"timeout_policy": {
-							Description: "The timeout policy for the task.\n* `Timeout` - The enum specifies the option as Timeout where task will be timed out after the specified time in Timeout property.\n* `Retry` - The enum specifies the option as Retry where task will be re-tried.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "Timeout",
+							Description:  "The timeout policy for the task.\n* `Timeout` - The enum specifies the option as Timeout where task will be timed out after the specified time in Timeout property.\n* `Retry` - The enum specifies the option as Retry where task will be re-tried.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"Timeout", "Retry"}, false),
+							Optional:     true,
+							Default:      "Timeout",
 						},
 					},
 				},
@@ -980,14 +997,16 @@ func resourceWorkflowTaskDefinition() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -1033,11 +1052,12 @@ func resourceWorkflowTaskDefinition() *schema.Resource {
 				},
 			},
 			"nr_version": {
-				Description: "The version of the task definition so we can support multiple versions of a task definition.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Default:     1,
-				ForceNew:    true,
+				Description:  "The version of the task definition so we can support multiple versions of a task definition.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntAtLeast(1),
+				Optional:     true,
+				Default:      1,
+				ForceNew:     true,
 			},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
@@ -1214,7 +1234,7 @@ func resourceWorkflowTaskDefinitionCreate(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1311,7 +1331,7 @@ func resourceWorkflowTaskDefinitionCreate(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1371,7 +1391,7 @@ func resourceWorkflowTaskDefinitionCreate(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("workflow.Properties")
 			if v, ok := l["external_meta"]; ok {
 				{
 					x := (v.(bool))
@@ -1413,7 +1433,7 @@ func resourceWorkflowTaskDefinitionCreate(c context.Context, d *schema.ResourceD
 											}
 										}
 									}
-									o.SetClassId("")
+									o.SetClassId("workflow.DefaultValue")
 									if v, ok := l["object_type"]; ok {
 										{
 											x := (v.(string))
@@ -1468,7 +1488,7 @@ func resourceWorkflowTaskDefinitionCreate(c context.Context, d *schema.ResourceD
 											}
 										}
 									}
-									o.SetClassId("")
+									o.SetClassId("workflow.DisplayMeta")
 									if v, ok := l["inventory_selector"]; ok {
 										{
 											x := (v.(bool))
@@ -1578,7 +1598,7 @@ func resourceWorkflowTaskDefinitionCreate(c context.Context, d *schema.ResourceD
 											}
 										}
 									}
-									o.SetClassId("")
+									o.SetClassId("workflow.DefaultValue")
 									if v, ok := l["object_type"]; ok {
 										{
 											x := (v.(string))
@@ -1633,7 +1653,7 @@ func resourceWorkflowTaskDefinitionCreate(c context.Context, d *schema.ResourceD
 											}
 										}
 									}
-									o.SetClassId("")
+									o.SetClassId("workflow.DisplayMeta")
 									if v, ok := l["inventory_selector"]; ok {
 										{
 											x := (v.(bool))
@@ -1873,7 +1893,7 @@ func resourceWorkflowTaskDefinitionCreate(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2098,7 +2118,7 @@ func resourceWorkflowTaskDefinitionUpdate(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2197,7 +2217,7 @@ func resourceWorkflowTaskDefinitionUpdate(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2261,7 +2281,7 @@ func resourceWorkflowTaskDefinitionUpdate(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("workflow.Properties")
 			if v, ok := l["external_meta"]; ok {
 				{
 					x := (v.(bool))
@@ -2303,7 +2323,7 @@ func resourceWorkflowTaskDefinitionUpdate(c context.Context, d *schema.ResourceD
 											}
 										}
 									}
-									o.SetClassId("")
+									o.SetClassId("workflow.DefaultValue")
 									if v, ok := l["object_type"]; ok {
 										{
 											x := (v.(string))
@@ -2358,7 +2378,7 @@ func resourceWorkflowTaskDefinitionUpdate(c context.Context, d *schema.ResourceD
 											}
 										}
 									}
-									o.SetClassId("")
+									o.SetClassId("workflow.DisplayMeta")
 									if v, ok := l["inventory_selector"]; ok {
 										{
 											x := (v.(bool))
@@ -2468,7 +2488,7 @@ func resourceWorkflowTaskDefinitionUpdate(c context.Context, d *schema.ResourceD
 											}
 										}
 									}
-									o.SetClassId("")
+									o.SetClassId("workflow.DefaultValue")
 									if v, ok := l["object_type"]; ok {
 										{
 											x := (v.(string))
@@ -2523,7 +2543,7 @@ func resourceWorkflowTaskDefinitionUpdate(c context.Context, d *schema.ResourceD
 											}
 										}
 									}
-									o.SetClassId("")
+									o.SetClassId("workflow.DisplayMeta")
 									if v, ok := l["inventory_selector"]; ok {
 										{
 											x := (v.(bool))
@@ -2763,7 +2783,7 @@ func resourceWorkflowTaskDefinitionUpdate(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

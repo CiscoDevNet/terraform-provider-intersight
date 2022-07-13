@@ -361,6 +361,11 @@ func dataSourceIamAppRegistration() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"show_consent_screen": {
+			Description: "Set to true if consent screen needs to be shown during the OAuth login process.\nApplicable only for public AppRegistrations, means only 'authorization_code' grantType.\nNote that consent screen will be shown on each login.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -874,6 +879,11 @@ func dataSourceIamAppRegistration() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"show_consent_screen": {
+			Description: "Set to true if consent screen needs to be shown during the OAuth login process.\nApplicable only for public AppRegistrations, means only 'authorization_code' grantType.\nNote that consent screen will be shown on each login.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -1072,7 +1082,7 @@ func dataSourceIamAppRegistrationRead(c context.Context, d *schema.ResourceData,
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1286,7 +1296,7 @@ func dataSourceIamAppRegistrationRead(c context.Context, d *schema.ResourceData,
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1329,7 +1339,7 @@ func dataSourceIamAppRegistrationRead(c context.Context, d *schema.ResourceData,
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1478,6 +1488,11 @@ func dataSourceIamAppRegistrationRead(c context.Context, d *schema.ResourceData,
 		o.SetSharedScope(x)
 	}
 
+	if v, ok := d.GetOkExists("show_consent_screen"); ok {
+		x := (v.(bool))
+		o.SetShowConsentScreen(x)
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -1527,7 +1542,7 @@ func dataSourceIamAppRegistrationRead(c context.Context, d *schema.ResourceData,
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1570,7 +1585,7 @@ func dataSourceIamAppRegistrationRead(c context.Context, d *schema.ResourceData,
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.VersionContext")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -1632,7 +1647,7 @@ func dataSourceIamAppRegistrationRead(c context.Context, d *schema.ResourceData,
 	if err != nil {
 		return diag.Errorf("json marshal of IamAppRegistration object failed with error : %s", err.Error())
 	}
-	countResponse, _, responseErr := conn.ApiClient.IamApi.GetIamAppRegistrationList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
+	countResponse, _, responseErr := conn.ApiClient.IamApi.GetIamAppRegistrationList(conn.ctx).Filter(getRequestParams(data)).Count(true).Execute()
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
@@ -1641,13 +1656,12 @@ func dataSourceIamAppRegistrationRead(c context.Context, d *schema.ResourceData,
 		}
 		return diag.Errorf("error occurred while fetching count of IamAppRegistration: %s", responseErr.Error())
 	}
-	count := countResponse.IamAppRegistrationList.GetCount()
+	count := countResponse.MoDocumentCount.GetCount()
 	if count == 0 {
 		return diag.Errorf("your query for IamAppRegistration data source did not return any results. Please change your search criteria and try again")
 	}
 	var i int32
-	var iamAppRegistrationResults = make([]map[string]interface{}, count, count)
-	var j = 0
+	var iamAppRegistrationResults = make([]map[string]interface{}, 0, 0)
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.IamApi.GetIamAppRegistrationList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
@@ -1661,8 +1675,8 @@ func dataSourceIamAppRegistrationRead(c context.Context, d *schema.ResourceData,
 		results := resMo.IamAppRegistrationList.GetResults()
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
-			for i := 0; i < len(results); i++ {
-				var s = results[i]
+			for k := 0; k < len(results); k++ {
+				var s = results[k]
 				var temp = make(map[string]interface{})
 
 				temp["account"] = flattenMapIamAccountRelationship(s.GetAccount(), d)
@@ -1702,14 +1716,14 @@ func dataSourceIamAppRegistrationRead(c context.Context, d *schema.ResourceData,
 
 				temp["roles"] = flattenListIamRoleRelationship(s.GetRoles(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
+				temp["show_consent_screen"] = (s.GetShowConsentScreen())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 
 				temp["user"] = flattenMapIamUserRelationship(s.GetUser(), d)
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
-				iamAppRegistrationResults[j] = temp
-				j += 1
+				iamAppRegistrationResults = append(iamAppRegistrationResults, temp)
 			}
 		}
 	}

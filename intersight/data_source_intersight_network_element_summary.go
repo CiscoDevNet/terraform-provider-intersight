@@ -134,6 +134,11 @@ func dataSourceNetworkElementSummary() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"default_domain": {
+			Description: "The default domain name configured on the switch.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"device_mo_id": {
 			Description: "The database identifier of the registered device of an object.",
 			Type:        schema.TypeString,
@@ -764,6 +769,11 @@ func dataSourceNetworkElementSummary() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"default_domain": {
+			Description: "The default domain name configured on the switch.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"device_mo_id": {
 			Description: "The database identifier of the registered device of an object.",
 			Type:        schema.TypeString,
@@ -1330,7 +1340,7 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("compute.AlarmSummary")
 			if v, ok := l["critical"]; ok {
 				{
 					x := int64(v.(int))
@@ -1425,6 +1435,11 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
+	}
+
+	if v, ok := d.GetOk("default_domain"); ok {
+		x := (v.(string))
+		o.SetDefaultDomain(x)
 	}
 
 	if v, ok := d.GetOk("device_mo_id"); ok {
@@ -1649,7 +1664,7 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1742,7 +1757,7 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1883,7 +1898,7 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.VersionContext")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -1945,7 +1960,7 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 	if err != nil {
 		return diag.Errorf("json marshal of NetworkElementSummary object failed with error : %s", err.Error())
 	}
-	countResponse, _, responseErr := conn.ApiClient.NetworkApi.GetNetworkElementSummaryList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
+	countResponse, _, responseErr := conn.ApiClient.NetworkApi.GetNetworkElementSummaryList(conn.ctx).Filter(getRequestParams(data)).Count(true).Execute()
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
@@ -1954,13 +1969,12 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 		}
 		return diag.Errorf("error occurred while fetching count of NetworkElementSummary: %s", responseErr.Error())
 	}
-	count := countResponse.NetworkElementSummaryList.GetCount()
+	count := countResponse.MoDocumentCount.GetCount()
 	if count == 0 {
 		return diag.Errorf("your query for NetworkElementSummary data source did not return any results. Please change your search criteria and try again")
 	}
 	var i int32
-	var networkElementSummaryResults = make([]map[string]interface{}, count, count)
-	var j = 0
+	var networkElementSummaryResults = make([]map[string]interface{}, 0, 0)
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.NetworkApi.GetNetworkElementSummaryList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
@@ -1974,8 +1988,8 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 		results := resMo.NetworkElementSummaryList.GetResults()
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
-			for i := 0; i < len(results); i++ {
-				var s = results[i]
+			for k := 0; k < len(results); k++ {
+				var s = results[k]
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
@@ -1992,6 +2006,7 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 				temp["conf_mod_ts_backup"] = (s.GetConfModTsBackup())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
+				temp["default_domain"] = (s.GetDefaultDomain())
 				temp["device_mo_id"] = (s.GetDeviceMoId())
 				temp["dn"] = (s.GetDn())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
@@ -2058,8 +2073,7 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 				temp["nr_version"] = (s.GetVersion())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
-				networkElementSummaryResults[j] = temp
-				j += 1
+				networkElementSummaryResults = append(networkElementSummaryResults, temp)
 			}
 		}
 	}

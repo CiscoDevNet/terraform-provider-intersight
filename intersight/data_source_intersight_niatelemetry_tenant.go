@@ -356,6 +356,11 @@ func dataSourceNiatelemetryTenant() *schema.Resource {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"tenant_health": {
+			Description: "Health of each tenant in the APIC.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"trace_route_ep_count": {
 			Description: "Number of ITrace route endpoint per tenant.",
 			Type:        schema.TypeInt,
@@ -866,6 +871,11 @@ func dataSourceNiatelemetryTenant() *schema.Resource {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"tenant_health": {
+			Description: "Health of each tenant in the APIC.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"trace_route_ep_count": {
 			Description: "Number of ITrace route endpoint per tenant.",
 			Type:        schema.TypeInt,
@@ -1256,7 +1266,7 @@ func dataSourceNiatelemetryTenantRead(c context.Context, d *schema.ResourceData,
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1354,7 +1364,7 @@ func dataSourceNiatelemetryTenantRead(c context.Context, d *schema.ResourceData,
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1439,6 +1449,11 @@ func dataSourceNiatelemetryTenantRead(c context.Context, d *schema.ResourceData,
 		o.SetTcamOptCount(x)
 	}
 
+	if v, ok := d.GetOkExists("tenant_health"); ok {
+		x := int64(v.(int))
+		o.SetTenantHealth(x)
+	}
+
 	if v, ok := d.GetOkExists("trace_route_ep_count"); ok {
 		x := int64(v.(int))
 		o.SetTraceRouteEpCount(x)
@@ -1475,7 +1490,7 @@ func dataSourceNiatelemetryTenantRead(c context.Context, d *schema.ResourceData,
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.VersionContext")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -1577,7 +1592,7 @@ func dataSourceNiatelemetryTenantRead(c context.Context, d *schema.ResourceData,
 	if err != nil {
 		return diag.Errorf("json marshal of NiatelemetryTenant object failed with error : %s", err.Error())
 	}
-	countResponse, _, responseErr := conn.ApiClient.NiatelemetryApi.GetNiatelemetryTenantList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
+	countResponse, _, responseErr := conn.ApiClient.NiatelemetryApi.GetNiatelemetryTenantList(conn.ctx).Filter(getRequestParams(data)).Count(true).Execute()
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
@@ -1586,13 +1601,12 @@ func dataSourceNiatelemetryTenantRead(c context.Context, d *schema.ResourceData,
 		}
 		return diag.Errorf("error occurred while fetching count of NiatelemetryTenant: %s", responseErr.Error())
 	}
-	count := countResponse.NiatelemetryTenantList.GetCount()
+	count := countResponse.MoDocumentCount.GetCount()
 	if count == 0 {
 		return diag.Errorf("your query for NiatelemetryTenant data source did not return any results. Please change your search criteria and try again")
 	}
 	var i int32
-	var niatelemetryTenantResults = make([]map[string]interface{}, count, count)
-	var j = 0
+	var niatelemetryTenantResults = make([]map[string]interface{}, 0, 0)
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.NiatelemetryApi.GetNiatelemetryTenantList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
@@ -1606,8 +1620,8 @@ func dataSourceNiatelemetryTenantRead(c context.Context, d *schema.ResourceData,
 		results := resMo.NiatelemetryTenantList.GetResults()
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
-			for i := 0; i < len(results); i++ {
-				var s = results[i]
+			for k := 0; k < len(results); k++ {
+				var s = results[k]
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
@@ -1657,6 +1671,7 @@ func dataSourceNiatelemetryTenantRead(c context.Context, d *schema.ResourceData,
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["tcam_opt_count"] = (s.GetTcamOptCount())
+				temp["tenant_health"] = (s.GetTenantHealth())
 				temp["trace_route_ep_count"] = (s.GetTraceRouteEpCount())
 				temp["trace_route_ep_ext_count"] = (s.GetTraceRouteEpExtCount())
 				temp["trace_route_ext_ep_count"] = (s.GetTraceRouteExtEpCount())
@@ -1671,8 +1686,7 @@ func dataSourceNiatelemetryTenantRead(c context.Context, d *schema.ResourceData,
 				temp["vz_br_cp_count"] = (s.GetVzBrCpCount())
 				temp["vz_rt_cons_count"] = (s.GetVzRtConsCount())
 				temp["vz_rt_prov_count"] = (s.GetVzRtProvCount())
-				niatelemetryTenantResults[j] = temp
-				j += 1
+				niatelemetryTenantResults = append(niatelemetryTenantResults, temp)
 			}
 		}
 	}

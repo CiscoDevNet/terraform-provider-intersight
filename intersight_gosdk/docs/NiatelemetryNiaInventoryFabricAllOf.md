@@ -40,6 +40,8 @@ Name | Type | Description | Notes
 **NxosVrfBwSitesCount** | Pointer to **int64** | Returns the count of vrfs between sites. | [optional] 
 **NxosVrfCount** | Pointer to **int64** | Returns the value of the nxosVrfCount field. | [optional] 
 **OperStatus** | Pointer to **string** | Fabric oper status information. | [optional] 
+**RecordType** | Pointer to **string** | Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected. | [optional] 
+**RecordVersion** | Pointer to **string** | Version of record being pushed. This determines what was the API version for data available from the device. | [optional] 
 **ReplicationMode** | Pointer to **string** | Replication mode details on the fabric. | [optional] 
 **RpMode** | Pointer to **string** | RP Mode details on the fabric. | [optional] 
 **Serial** | Pointer to **string** | Serial number of device being inventoried. The serial number is unique per device. | [optional] 
@@ -986,6 +988,56 @@ SetOperStatus sets OperStatus field to given value.
 `func (o *NiatelemetryNiaInventoryFabricAllOf) HasOperStatus() bool`
 
 HasOperStatus returns a boolean if a field has been set.
+
+### GetRecordType
+
+`func (o *NiatelemetryNiaInventoryFabricAllOf) GetRecordType() string`
+
+GetRecordType returns the RecordType field if non-nil, zero value otherwise.
+
+### GetRecordTypeOk
+
+`func (o *NiatelemetryNiaInventoryFabricAllOf) GetRecordTypeOk() (*string, bool)`
+
+GetRecordTypeOk returns a tuple with the RecordType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRecordType
+
+`func (o *NiatelemetryNiaInventoryFabricAllOf) SetRecordType(v string)`
+
+SetRecordType sets RecordType field to given value.
+
+### HasRecordType
+
+`func (o *NiatelemetryNiaInventoryFabricAllOf) HasRecordType() bool`
+
+HasRecordType returns a boolean if a field has been set.
+
+### GetRecordVersion
+
+`func (o *NiatelemetryNiaInventoryFabricAllOf) GetRecordVersion() string`
+
+GetRecordVersion returns the RecordVersion field if non-nil, zero value otherwise.
+
+### GetRecordVersionOk
+
+`func (o *NiatelemetryNiaInventoryFabricAllOf) GetRecordVersionOk() (*string, bool)`
+
+GetRecordVersionOk returns a tuple with the RecordVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRecordVersion
+
+`func (o *NiatelemetryNiaInventoryFabricAllOf) SetRecordVersion(v string)`
+
+SetRecordVersion sets RecordVersion field to given value.
+
+### HasRecordVersion
+
+`func (o *NiatelemetryNiaInventoryFabricAllOf) HasRecordVersion() bool`
+
+HasRecordVersion returns a boolean if a field has been set.
 
 ### GetReplicationMode
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-6484
+API version: 1.0.11-7078
 Contact: intersight@cisco.com
 */
 
@@ -35,7 +35,8 @@ type VirtualizationVirtualMachineAllOf struct {
 	Discovered *bool                              `json:"Discovered,omitempty"`
 	Disk       []VirtualizationVirtualMachineDisk `json:"Disk,omitempty"`
 	// Normally any virtual machine that is still powered on cannot be deleted. The expected sequence from a user is to first power off the virtual machine and then invoke the delete operation. However, in special circumstances, the owner of the virtual machine may know very well that the virtual machine is no longer needed and just wants to dispose it off. In such situations a delete operation of a virtual machine object is accepted only when this forceDelete attribute is set to true. Under normal circumstances (forceDelete is false), delete operation first confirms that the virtual machine is powered off and then proceeds to delete the virtual machine.
-	ForceDelete *bool `json:"ForceDelete,omitempty"`
+	ForceDelete *bool                       `json:"ForceDelete,omitempty"`
+	GpuConfigs  []InfraBaseGpuConfiguration `json:"GpuConfigs,omitempty"`
 	// Guest operating system running on virtual machine. * `linux` - A Linux operating system. * `windows` - A Windows operating system.
 	GuestOs *string `json:"GuestOs,omitempty"`
 	// Host where virtual machine is deployed.
@@ -493,6 +494,39 @@ func (o *VirtualizationVirtualMachineAllOf) HasForceDelete() bool {
 // SetForceDelete gets a reference to the given bool and assigns it to the ForceDelete field.
 func (o *VirtualizationVirtualMachineAllOf) SetForceDelete(v bool) {
 	o.ForceDelete = &v
+}
+
+// GetGpuConfigs returns the GpuConfigs field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *VirtualizationVirtualMachineAllOf) GetGpuConfigs() []InfraBaseGpuConfiguration {
+	if o == nil {
+		var ret []InfraBaseGpuConfiguration
+		return ret
+	}
+	return o.GpuConfigs
+}
+
+// GetGpuConfigsOk returns a tuple with the GpuConfigs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *VirtualizationVirtualMachineAllOf) GetGpuConfigsOk() ([]InfraBaseGpuConfiguration, bool) {
+	if o == nil || o.GpuConfigs == nil {
+		return nil, false
+	}
+	return o.GpuConfigs, true
+}
+
+// HasGpuConfigs returns a boolean if a field has been set.
+func (o *VirtualizationVirtualMachineAllOf) HasGpuConfigs() bool {
+	if o != nil && o.GpuConfigs != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetGpuConfigs gets a reference to the given []InfraBaseGpuConfiguration and assigns it to the GpuConfigs field.
+func (o *VirtualizationVirtualMachineAllOf) SetGpuConfigs(v []InfraBaseGpuConfiguration) {
+	o.GpuConfigs = v
 }
 
 // GetGuestOs returns the GuestOs field value if set, zero value otherwise.
@@ -1026,6 +1060,9 @@ func (o VirtualizationVirtualMachineAllOf) MarshalJSON() ([]byte, error) {
 	if o.ForceDelete != nil {
 		toSerialize["ForceDelete"] = o.ForceDelete
 	}
+	if o.GpuConfigs != nil {
+		toSerialize["GpuConfigs"] = o.GpuConfigs
+	}
 	if o.GuestOs != nil {
 		toSerialize["GuestOs"] = o.GuestOs
 	}
@@ -1101,6 +1138,7 @@ func (o *VirtualizationVirtualMachineAllOf) UnmarshalJSON(bytes []byte) (err err
 		delete(additionalProperties, "Discovered")
 		delete(additionalProperties, "Disk")
 		delete(additionalProperties, "ForceDelete")
+		delete(additionalProperties, "GpuConfigs")
 		delete(additionalProperties, "GuestOs")
 		delete(additionalProperties, "HostEsxi")
 		delete(additionalProperties, "HypervisorType")

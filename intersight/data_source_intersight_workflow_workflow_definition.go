@@ -2232,7 +2232,7 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2280,7 +2280,7 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2361,7 +2361,7 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("workflow.DefaultValue")
 						if v, ok := l["object_type"]; ok {
 							{
 								x := (v.(string))
@@ -2416,7 +2416,7 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("workflow.DisplayMeta")
 						if v, ok := l["inventory_selector"]; ok {
 							{
 								x := (v.(bool))
@@ -2623,7 +2623,7 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("workflow.DefaultValue")
 						if v, ok := l["object_type"]; ok {
 							{
 								x := (v.(string))
@@ -2678,7 +2678,7 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("workflow.DisplayMeta")
 						if v, ok := l["inventory_selector"]; ok {
 							{
 								x := (v.(bool))
@@ -2782,7 +2782,7 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2865,7 +2865,7 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("workflow.WorkflowProperties")
 			if v, ok := l["enable_debug"]; ok {
 				{
 					x := (v.(bool))
@@ -3080,7 +3080,7 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("workflow.ValidationInformation")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -3160,7 +3160,7 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("workflow.DefaultValue")
 						if v, ok := l["object_type"]; ok {
 							{
 								x := (v.(string))
@@ -3215,7 +3215,7 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("workflow.DisplayMeta")
 						if v, ok := l["inventory_selector"]; ok {
 							{
 								x := (v.(bool))
@@ -3303,7 +3303,7 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.VersionContext")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -3377,7 +3377,7 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3408,7 +3408,7 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 	if err != nil {
 		return diag.Errorf("json marshal of WorkflowWorkflowDefinition object failed with error : %s", err.Error())
 	}
-	countResponse, _, responseErr := conn.ApiClient.WorkflowApi.GetWorkflowWorkflowDefinitionList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
+	countResponse, _, responseErr := conn.ApiClient.WorkflowApi.GetWorkflowWorkflowDefinitionList(conn.ctx).Filter(getRequestParams(data)).Count(true).Execute()
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
@@ -3417,13 +3417,12 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 		}
 		return diag.Errorf("error occurred while fetching count of WorkflowWorkflowDefinition: %s", responseErr.Error())
 	}
-	count := countResponse.WorkflowWorkflowDefinitionList.GetCount()
+	count := countResponse.MoDocumentCount.GetCount()
 	if count == 0 {
 		return diag.Errorf("your query for WorkflowWorkflowDefinition data source did not return any results. Please change your search criteria and try again")
 	}
 	var i int32
-	var workflowWorkflowDefinitionResults = make([]map[string]interface{}, count, count)
-	var j = 0
+	var workflowWorkflowDefinitionResults = make([]map[string]interface{}, 0, 0)
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.WorkflowApi.GetWorkflowWorkflowDefinitionList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
@@ -3437,8 +3436,8 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 		results := resMo.WorkflowWorkflowDefinitionList.GetResults()
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
-			for i := 0; i < len(results); i++ {
-				var s = results[i]
+			for k := 0; k < len(results); k++ {
+				var s = results[k]
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
@@ -3494,8 +3493,7 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 
 				temp["workflow_metadata"] = flattenMapWorkflowWorkflowMetadataRelationship(s.GetWorkflowMetadata(), d)
-				workflowWorkflowDefinitionResults[j] = temp
-				j += 1
+				workflowWorkflowDefinitionResults = append(workflowWorkflowDefinitionResults, temp)
 			}
 		}
 	}

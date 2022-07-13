@@ -31,6 +31,7 @@ resource "intersight_snmp_policy" "snmp1" {
     #privacy_password = var.privacy_password
     security_level = "AuthPriv"
     auth_type      = "SHA"
+    object_type    = "snmp.User"
   }
   snmp_traps {
     destination = "10.10.10.1"
@@ -39,34 +40,35 @@ resource "intersight_snmp_policy" "snmp1" {
     type        = "Trap"
     user        = "demouser"
     nr_version  = "V3"
+    object_type = "snmp.Trap"
   }
-   profiles {
-     moid        = var.profile
-     object_type = "server.Profile"
-   }
+  profiles {
+    moid        = var.profile
+    object_type = "server.Profile"
+  }
   organization {
     object_type = "organization.Organization"
     moid        = var.organization
   }
 }
 
- variable "auth_password" {
-   type = string
-   description = "value for auth_password"  
- }
+variable "auth_password" {
+  type        = string
+  description = "value for auth_password"
+}
 
- variable "privacy_password" {
-   type =  string
-   description = "value for privacy password"
- }
- 
- variable "organization" {
- type = string
- description = "value for organization"  
- }
+variable "privacy_password" {
+  type        = string
+  description = "value for privacy password"
+}
 
-variable "profile"{
-  type = string
+variable "organization" {
+  type        = string
+  description = "value for organization"
+}
+
+variable "profile" {
+  type        = string
   description = "Moid of server.Profile"
 }
 ```

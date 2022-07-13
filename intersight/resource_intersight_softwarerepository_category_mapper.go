@@ -11,6 +11,7 @@ import (
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceSoftwarerepositoryCategoryMapper() *schema.Resource {
@@ -111,10 +112,11 @@ func resourceSoftwarerepositoryCategoryMapper() *schema.Resource {
 					return
 				}},
 			"file_type": {
-				Description: "The type of distributable image, example huu, scu, driver, os.\n* `Distributable` - Stores firmware host utility images and fabric images.\n* `DriverDistributable` - Stores driver distributable images.\n* `ServerConfigurationUtilityDistributable` - Stores server configuration utility images.\n* `OperatingSystemFile` - Stores operating system iso images.\n* `HyperflexDistributable` - It stores HyperFlex images.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "Distributable",
+				Description:  "The type of distributable image, example huu, scu, driver, os.\n* `Distributable` - Stores firmware host utility images and fabric images.\n* `DriverDistributable` - Stores driver distributable images.\n* `ServerConfigurationUtilityDistributable` - Stores server configuration utility images.\n* `OperatingSystemFile` - Stores operating system iso images.\n* `HyperflexDistributable` - It stores HyperFlex images.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Distributable", "DriverDistributable", "ServerConfigurationUtilityDistributable", "OperatingSystemFile", "HyperflexDistributable"}, false),
+				Optional:     true,
+				Default:      "Distributable",
 			},
 			"image_type": {
 				Description: "The type of image based on the endpoint it can upgrade. For example, ucs-c420m5-huu-3.2.1a.iso can upgrade standalone servers, so the image type is Standalone Server.",
@@ -166,7 +168,8 @@ func resourceSoftwarerepositoryCategoryMapper() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -263,10 +266,11 @@ func resourceSoftwarerepositoryCategoryMapper() *schema.Resource {
 					return
 				}},
 			"nr_source": {
-				Description: "The image can be downloaded from cisco.com or external cloud store.\n* `Cisco` - External repository hosted on cisco.com.\n* `IntersightCloud` - Repository hosted by the Intersight Cloud.\n* `LocalMachine` - The file is available on the local client machine. Used as an upload source type.\n* `NetworkShare` - External repository in the customer datacenter. This will typically be a file server.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "Cisco",
+				Description:  "The image can be downloaded from cisco.com or external cloud store.\n* `Cisco` - External repository hosted on cisco.com.\n* `IntersightCloud` - Repository hosted by the Intersight Cloud.\n* `LocalMachine` - The file is available on the local client machine. Used as an upload source type.\n* `NetworkShare` - External repository in the customer datacenter. This will typically be a file server.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Cisco", "IntersightCloud", "LocalMachine", "NetworkShare"}, false),
+				Optional:     true,
+				Default:      "Cisco",
 			},
 			"supported_models": {
 				Type:       schema.TypeList,
@@ -274,7 +278,8 @@ func resourceSoftwarerepositoryCategoryMapper() *schema.Resource {
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Computed:   true,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"sw_id": {
 				Description: "The software type id provided by cisco.com.",
 				Type:        schema.TypeString,
@@ -286,7 +291,8 @@ func resourceSoftwarerepositoryCategoryMapper() *schema.Resource {
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Computed:   true,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"tags": {
 				Type:       schema.TypeList,
 				Optional:   true,
@@ -300,14 +306,16 @@ func resourceSoftwarerepositoryCategoryMapper() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},

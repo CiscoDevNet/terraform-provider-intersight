@@ -1096,7 +1096,7 @@ func dataSourceHyperflexHealthRead(c context.Context, d *schema.ResourceData, me
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1180,7 +1180,7 @@ func dataSourceHyperflexHealthRead(c context.Context, d *schema.ResourceData, me
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1263,7 +1263,7 @@ func dataSourceHyperflexHealthRead(c context.Context, d *schema.ResourceData, me
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("hyperflex.HxResiliencyInfoDt")
 			if v, ok := l["messages"]; ok {
 				{
 					x := make([]string, 0)
@@ -1356,7 +1356,7 @@ func dataSourceHyperflexHealthRead(c context.Context, d *schema.ResourceData, me
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.VersionContext")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -1451,7 +1451,7 @@ func dataSourceHyperflexHealthRead(c context.Context, d *schema.ResourceData, me
 	if err != nil {
 		return diag.Errorf("json marshal of HyperflexHealth object failed with error : %s", err.Error())
 	}
-	countResponse, _, responseErr := conn.ApiClient.HyperflexApi.GetHyperflexHealthList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
+	countResponse, _, responseErr := conn.ApiClient.HyperflexApi.GetHyperflexHealthList(conn.ctx).Filter(getRequestParams(data)).Count(true).Execute()
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
@@ -1460,13 +1460,12 @@ func dataSourceHyperflexHealthRead(c context.Context, d *schema.ResourceData, me
 		}
 		return diag.Errorf("error occurred while fetching count of HyperflexHealth: %s", responseErr.Error())
 	}
-	count := countResponse.HyperflexHealthList.GetCount()
+	count := countResponse.MoDocumentCount.GetCount()
 	if count == 0 {
 		return diag.Errorf("your query for HyperflexHealth data source did not return any results. Please change your search criteria and try again")
 	}
 	var i int32
-	var hyperflexHealthResults = make([]map[string]interface{}, count, count)
-	var j = 0
+	var hyperflexHealthResults = make([]map[string]interface{}, 0, 0)
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.HyperflexApi.GetHyperflexHealthList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
@@ -1480,8 +1479,8 @@ func dataSourceHyperflexHealthRead(c context.Context, d *schema.ResourceData, me
 		results := resMo.HyperflexHealthList.GetResults()
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
-			for i := 0; i < len(results); i++ {
-				var s = results[i]
+			for k := 0; k < len(results); k++ {
+				var s = results[k]
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
@@ -1516,8 +1515,7 @@ func dataSourceHyperflexHealthRead(c context.Context, d *schema.ResourceData, me
 				temp["zk_health"] = (s.GetZkHealth())
 
 				temp["zone_resiliency_list"] = flattenListHyperflexHxZoneResiliencyInfoDt(s.GetZoneResiliencyList(), d)
-				hyperflexHealthResults[j] = temp
-				j += 1
+				hyperflexHealthResults = append(hyperflexHealthResults, temp)
 			}
 		}
 	}

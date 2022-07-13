@@ -74,6 +74,11 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 				},
 			},
 		},
+		"apic_cluster_health": {
+			Description: "Cluster health for the APIC controller.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"apic_count": {
 			Description: "Number of APIC controllers. This determines the value of controllers for the fabric.",
 			Type:        schema.TypeInt,
@@ -983,6 +988,11 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 					},
 				},
 			},
+		},
+		"apic_cluster_health": {
+			Description: "Cluster health for the APIC controller.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"apic_count": {
 			Description: "Number of APIC controllers. This determines the value of controllers for the fabric.",
@@ -1919,6 +1929,11 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 		o.SetAncestors(x)
 	}
 
+	if v, ok := d.GetOk("apic_cluster_health"); ok {
+		x := (v.(string))
+		o.SetApicClusterHealth(x)
+	}
+
 	if v, ok := d.GetOkExists("apic_count"); ok {
 		x := int64(v.(int))
 		o.SetApicCount(x)
@@ -2281,7 +2296,7 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2419,7 +2434,7 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2504,7 +2519,7 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 					o.SetAuthStatus(x)
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("niatelemetry.SmartLicense")
 			if v, ok := l["license_udi"]; ok {
 				{
 					x := (v.(string))
@@ -2690,7 +2705,7 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.VersionContext")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -2787,7 +2802,7 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 	if err != nil {
 		return diag.Errorf("json marshal of NiatelemetryNiaFeatureUsage object failed with error : %s", err.Error())
 	}
-	countResponse, _, responseErr := conn.ApiClient.NiatelemetryApi.GetNiatelemetryNiaFeatureUsageList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
+	countResponse, _, responseErr := conn.ApiClient.NiatelemetryApi.GetNiatelemetryNiaFeatureUsageList(conn.ctx).Filter(getRequestParams(data)).Count(true).Execute()
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
@@ -2796,13 +2811,12 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 		}
 		return diag.Errorf("error occurred while fetching count of NiatelemetryNiaFeatureUsage: %s", responseErr.Error())
 	}
-	count := countResponse.NiatelemetryNiaFeatureUsageList.GetCount()
+	count := countResponse.MoDocumentCount.GetCount()
 	if count == 0 {
 		return diag.Errorf("your query for NiatelemetryNiaFeatureUsage data source did not return any results. Please change your search criteria and try again")
 	}
 	var i int32
-	var niatelemetryNiaFeatureUsageResults = make([]map[string]interface{}, count, count)
-	var j = 0
+	var niatelemetryNiaFeatureUsageResults = make([]map[string]interface{}, 0, 0)
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.NiatelemetryApi.GetNiatelemetryNiaFeatureUsageList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
@@ -2816,8 +2830,8 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 		results := resMo.NiatelemetryNiaFeatureUsageList.GetResults()
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
-			for i := 0; i < len(results); i++ {
-				var s = results[i]
+			for k := 0; k < len(results); k++ {
+				var s = results[k]
 				var temp = make(map[string]interface{})
 				temp["aaa_ldap_provider_count"] = (s.GetAaaLdapProviderCount())
 				temp["aaa_radius_provider_count"] = (s.GetAaaRadiusProviderCount())
@@ -2826,6 +2840,7 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
+				temp["apic_cluster_health"] = (s.GetApicClusterHealth())
 				temp["apic_count"] = (s.GetApicCount())
 				temp["apic_is_telnet_enabled"] = (s.GetApicIsTelnetEnabled())
 				temp["apic_ntp_count"] = (s.GetApicNtpCount())
@@ -2954,8 +2969,7 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 				temp["vnsm_dev_count"] = (s.GetVnsmDevCount())
 				temp["vpod_count"] = (s.GetVpodCount())
 				temp["webtoken_timeout_seconds"] = (s.GetWebtokenTimeoutSeconds())
-				niatelemetryNiaFeatureUsageResults[j] = temp
-				j += 1
+				niatelemetryNiaFeatureUsageResults = append(niatelemetryNiaFeatureUsageResults, temp)
 			}
 		}
 	}

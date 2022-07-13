@@ -6,11 +6,13 @@ import (
 	"fmt"
 	"log"
 	"reflect"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceOsBulkInstallInfo() *schema.Resource {
@@ -471,7 +473,8 @@ func resourceOsBulkInstallInfo() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}, ForceNew: true,
+					Type: schema.TypeString,
+				}, ForceNew: true,
 			},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -773,11 +776,12 @@ func resourceOsBulkInstallInfo() *schema.Resource {
 																ForceNew:    true,
 															},
 															"widget_type": {
-																Description: "Specify the widget type for data display.\n* `None` - Display none of the widget types.\n* `Radio` - Display the widget as a radio button.\n* `Dropdown` - Display the widget as a dropdown.\n* `GridSelector` - Display the widget as a selector.\n* `DrawerSelector` - Display the widget as a selector.",
-																Type:        schema.TypeString,
-																Optional:    true,
-																Default:     "None",
-																ForceNew:    true,
+																Description:  "Specify the widget type for data display.\n* `None` - Display none of the widget types.\n* `Radio` - Display the widget as a radio button.\n* `Dropdown` - Display the widget as a dropdown.\n* `GridSelector` - Display the widget as a selector.\n* `DrawerSelector` - Display the widget as a selector.",
+																Type:         schema.TypeString,
+																ValidateFunc: validation.StringInSlice([]string{"None", "Radio", "Dropdown", "GridSelector", "DrawerSelector"}, false),
+																Optional:     true,
+																Default:      "None",
+																ForceNew:     true,
 															},
 														},
 													},
@@ -790,16 +794,18 @@ func resourceOsBulkInstallInfo() *schema.Resource {
 													ForceNew:    true,
 												},
 												"label": {
-													Description: "Descriptive label for the data type. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), space ( ) or an underscore (_). The first and last character in label must be an alphanumeric character.",
-													Type:        schema.TypeString,
-													Optional:    true,
-													ForceNew:    true,
+													Description:  "Descriptive label for the data type. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), space ( ) or an underscore (_). The first and last character in label must be an alphanumeric character.",
+													Type:         schema.TypeString,
+													ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9]+[\\sa-zA-Z0-9_'.:-]{1,92}$"), ""), validation.StringLenBetween(1, 92)),
+													Optional:     true,
+													ForceNew:     true,
 												},
 												"name": {
-													Description: "Descriptive name for the data type. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_). The first and last character in name must be an alphanumeric character.",
-													Type:        schema.TypeString,
-													Optional:    true,
-													ForceNew:    true,
+													Description:  "Descriptive name for the data type. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_). The first and last character in name must be an alphanumeric character.",
+													Type:         schema.TypeString,
+													ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9]+([a-zA-Z0-9-_]*[a-zA-Z0-9])*$"), ""), validation.StringLenBetween(1, 92)),
+													Optional:     true,
+													ForceNew:     true,
 												},
 												"object_type": {
 													Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -873,10 +879,11 @@ func resourceOsBulkInstallInfo() *schema.Resource {
 																						ForceNew:    true,
 																					},
 																					"label": {
-																						Description: "Label for the enum value. A user friendly short string to identify the enum value. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), or an underscore (_) and must have an alphanumeric character.",
-																						Type:        schema.TypeString,
-																						Optional:    true,
-																						ForceNew:    true,
+																						Description:  "Label for the enum value. A user friendly short string to identify the enum value. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), or an underscore (_) and must have an alphanumeric character.",
+																						Type:         schema.TypeString,
+																						ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9]+[+\\s\\/a-zA-Z0-9_'.:-]{0,92}$"), ""),
+																						Optional:     true,
+																						ForceNew:     true,
 																					},
 																					"object_type": {
 																						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -886,10 +893,11 @@ func resourceOsBulkInstallInfo() *schema.Resource {
 																						ForceNew:    true,
 																					},
 																					"value": {
-																						Description: "Enum value for this enum entry. Value will be passed to the workflow as string type for execution. Value can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), forward slash (/), or an underscore (_).",
-																						Type:        schema.TypeString,
-																						Optional:    true,
-																						ForceNew:    true,
+																						Description:  "Enum value for this enum entry. Value will be passed to the workflow as string type for execution. Value can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), forward slash (/), or an underscore (_).",
+																						Type:         schema.TypeString,
+																						ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]*[+\\s\\/a-zA-Z0-9_.:-]{1,64}$"), ""),
+																						Optional:     true,
+																						ForceNew:     true,
 																					},
 																				},
 																			},
@@ -946,11 +954,13 @@ func resourceOsBulkInstallInfo() *schema.Resource {
 																		},
 																		"display_attributes": {
 																			Type:       schema.TypeList,
+																			MinItems:   1,
 																			Optional:   true,
 																			ConfigMode: schema.SchemaConfigModeAttr,
 																			Computed:   true,
 																			Elem: &schema.Schema{
-																				Type: schema.TypeString}, ForceNew: true,
+																				Type: schema.TypeString,
+																			}, ForceNew: true,
 																		},
 																		"object_type": {
 																			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -960,10 +970,11 @@ func resourceOsBulkInstallInfo() *schema.Resource {
 																			ForceNew:    true,
 																		},
 																		"selector": {
-																			Description: "Field to hold an Intersight API along with an optional filter to narrow down the search options.",
-																			Type:        schema.TypeString,
-																			Optional:    true,
-																			ForceNew:    true,
+																			Description:  "Field to hold an Intersight API along with an optional filter to narrow down the search options.",
+																			Type:         schema.TypeString,
+																			ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|/api/v1/.*"), ""),
+																			Optional:     true,
+																			ForceNew:     true,
 																		},
 																		"selector_property": {
 																			Description: "Selector properties to define HTTP method and 'body' in case of upsert operation.",
@@ -994,11 +1005,12 @@ func resourceOsBulkInstallInfo() *schema.Resource {
 																						ForceNew:    true,
 																					},
 																					"method": {
-																						Description: "The HTTP method to be used.\n* `GET` - The HTTP GET method requests a representation of the specified resource.\n* `POST` - The HTTP POST method sends data to the server.",
-																						Type:        schema.TypeString,
-																						Optional:    true,
-																						Default:     "GET",
-																						ForceNew:    true,
+																						Description:  "The HTTP method to be used.\n* `GET` - The HTTP GET method requests a representation of the specified resource.\n* `POST` - The HTTP POST method sends data to the server.",
+																						Type:         schema.TypeString,
+																						ValidateFunc: validation.StringInSlice([]string{"GET", "POST"}, false),
+																						Optional:     true,
+																						Default:      "GET",
+																						ForceNew:     true,
 																					},
 																					"object_type": {
 																						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -1035,11 +1047,12 @@ func resourceOsBulkInstallInfo() *schema.Resource {
 																ForceNew:    true,
 															},
 															"type": {
-																Description: "Specify the enum type for primitive data type.\n* `string` - Enum to specify a string data type.\n* `integer` - Enum to specify an integer32 data type.\n* `float` - Enum to specify a float64 data type.\n* `boolean` - Enum to specify a boolean data type.\n* `json` - Enum to specify a json data type.\n* `enum` - Enum to specify a enum data type which is a list of pre-defined strings.",
-																Type:        schema.TypeString,
-																Optional:    true,
-																Default:     "string",
-																ForceNew:    true,
+																Description:  "Specify the enum type for primitive data type.\n* `string` - Enum to specify a string data type.\n* `integer` - Enum to specify an integer32 data type.\n* `float` - Enum to specify a float64 data type.\n* `boolean` - Enum to specify a boolean data type.\n* `json` - Enum to specify a json data type.\n* `enum` - Enum to specify a enum data type which is a list of pre-defined strings.",
+																Type:         schema.TypeString,
+																ValidateFunc: validation.StringInSlice([]string{"string", "integer", "float", "boolean", "json", "enum"}, false),
+																Optional:     true,
+																Default:      "string",
+																ForceNew:     true,
 															},
 														},
 													},
@@ -1106,11 +1119,12 @@ func resourceOsBulkInstallInfo() *schema.Resource {
 										ForceNew:    true,
 									},
 									"ip_config_type": {
-										Description: "IP configuration type. Values are Static or Dynamic configuration of IP.\nIn case of static IP configuration, IP address, gateway and other details need\nto be populated. In case of dynamic the IP configuration is obtained dynamically\nfrom DHCP.\n* `static` - In case of static IP configuraton, provide the details such as IP address, netmask, and gateway.\n* `DHCP` - In case of dynamic IP configuration, the IP address, netmask and gateway detailsare obtained from DHCP.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Default:     "static",
-										ForceNew:    true,
+										Description:  "IP configuration type. Values are Static or Dynamic configuration of IP.\nIn case of static IP configuration, IP address, gateway and other details need\nto be populated. In case of dynamic the IP configuration is obtained dynamically\nfrom DHCP.\n* `static` - In case of static IP configuraton, provide the details such as IP address, netmask, and gateway.\n* `DHCP` - In case of dynamic IP configuration, the IP address, netmask and gateway detailsare obtained from DHCP.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringInSlice([]string{"static", "DHCP"}, false),
+										Optional:     true,
+										Default:      "static",
+										ForceNew:     true,
 									},
 									"ip_configuration": {
 										Description: "In case of static IP configuration, IP address, netmask and gateway details are\nprovided.",
@@ -1207,11 +1221,12 @@ func resourceOsBulkInstallInfo() *schema.Resource {
 										ForceNew:    true,
 									},
 									"nr_source": {
-										Description: "Answer values can be provided from three sources - Embedded in OS image, static file,\nor as placeholder values for an answer file template.\nSource of the answers is given as value, Embedded/File/Template.\n'Embedded' option indicates that the answer file is embedded within the OS Image. 'File'\noption indicates that the answers are provided as a file. 'Template' indicates that the\nplaceholders in the selected os.ConfigurationFile MO are replaced with values provided\nas os.Answers MO.\n* `None` - Indicates that answers is not sent and values must be populated from Install Template.  \n* `Embedded` - Indicates that the answer file is embedded within OS image.\n* `File` - Indicates that the answer file is a static content that has all thevalues populated.\n* `Template` - Indicates that the given answers are used to populate the answer filetemplate. The template allows the users to refer some server specificanswers as fields/placeholders and replace these placeholders with theactual values for each Server during OS installation using 'Answers' and'AdditionalParameters' properties in os.Install MO.The answer file templates can be created by users as os.ConfigurationFile objects.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Default:     "None",
-										ForceNew:    true,
+										Description:  "Answer values can be provided from three sources - Embedded in OS image, static file,\nor as placeholder values for an answer file template.\nSource of the answers is given as value, Embedded/File/Template.\n'Embedded' option indicates that the answer file is embedded within the OS Image. 'File'\noption indicates that the answers are provided as a file. 'Template' indicates that the\nplaceholders in the selected os.ConfigurationFile MO are replaced with values provided\nas os.Answers MO.\n* `None` - Indicates that answers is not sent and values must be populated from Install Template.  \n* `Embedded` - Indicates that the answer file is embedded within OS image.\n* `File` - Indicates that the answer file is a static content that has all thevalues populated.\n* `Template` - Indicates that the given answers are used to populate the answer filetemplate. The template allows the users to refer some server specificanswers as fields/placeholders and replace these placeholders with theactual values for each Server during OS installation using 'Answers' and'AdditionalParameters' properties in os.Install MO.The answer file templates can be created by users as os.ConfigurationFile objects.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringInSlice([]string{"None", "Embedded", "File", "Template"}, false),
+										Optional:     true,
+										Default:      "None",
+										ForceNew:     true,
 									},
 								},
 							},
@@ -1230,7 +1245,8 @@ func resourceOsBulkInstallInfo() *schema.Resource {
 							ConfigMode: schema.SchemaConfigModeAttr,
 							Computed:   true,
 							Elem: &schema.Schema{
-								Type: schema.TypeString}, ForceNew: true,
+								Type: schema.TypeString,
+							}, ForceNew: true,
 						},
 						"install_target": {
 							Description: "The target in which OS installation triggered, the value represented is StorageControllerID follwed by PhysicalDisk SerialNumber in case of Physcial disk or VirtualDriveId for virtual drive.",
@@ -1404,16 +1420,18 @@ func resourceOsBulkInstallInfo() *schema.Resource {
 							ForceNew:         true,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							ForceNew:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
+							ForceNew:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							ForceNew:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
+							ForceNew:     true,
 						},
 					},
 				},
@@ -1682,7 +1700,7 @@ func resourceOsBulkInstallInfoCreate(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1742,7 +1760,7 @@ func resourceOsBulkInstallInfoCreate(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1785,7 +1803,7 @@ func resourceOsBulkInstallInfoCreate(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1828,7 +1846,7 @@ func resourceOsBulkInstallInfoCreate(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1908,7 +1926,7 @@ func resourceOsBulkInstallInfoCreate(c context.Context, d *schema.ResourceData, 
 											}
 										}
 									}
-									o.SetClassId("")
+									o.SetClassId("workflow.PrimitiveDataType")
 									if v, ok := l["default"]; ok {
 										{
 											p := make([]models.WorkflowDefaultValue, 0, 1)
@@ -1926,7 +1944,7 @@ func resourceOsBulkInstallInfoCreate(c context.Context, d *schema.ResourceData, 
 														}
 													}
 												}
-												o.SetClassId("")
+												o.SetClassId("workflow.DefaultValue")
 												if v, ok := l["object_type"]; ok {
 													{
 														x := (v.(string))
@@ -1981,7 +1999,7 @@ func resourceOsBulkInstallInfoCreate(c context.Context, d *schema.ResourceData, 
 														}
 													}
 												}
-												o.SetClassId("")
+												o.SetClassId("workflow.DisplayMeta")
 												if v, ok := l["inventory_selector"]; ok {
 													{
 														x := (v.(bool))
@@ -2054,7 +2072,7 @@ func resourceOsBulkInstallInfoCreate(c context.Context, d *schema.ResourceData, 
 														}
 													}
 												}
-												o.SetClassId("")
+												o.SetClassId("workflow.PrimitiveDataProperty")
 												if v, ok := l["constraints"]; ok {
 													{
 														p := make([]models.WorkflowConstraints, 0, 1)
@@ -2072,7 +2090,7 @@ func resourceOsBulkInstallInfoCreate(c context.Context, d *schema.ResourceData, 
 																	}
 																}
 															}
-															o.SetClassId("")
+															o.SetClassId("workflow.Constraints")
 															if v, ok := l["enum_list"]; ok {
 																{
 																	x := make([]models.WorkflowEnumEntry, 0)
@@ -2220,7 +2238,7 @@ func resourceOsBulkInstallInfoCreate(c context.Context, d *schema.ResourceData, 
 																				}
 																			}
 																		}
-																		o.SetClassId("")
+																		o.SetClassId("workflow.SelectorProperty")
 																		if v, ok := l["method"]; ok {
 																			{
 																				x := (v.(string))

@@ -15,8 +15,9 @@ A profile specifying configuration settings for a HyperFlex cluster.
 ```hcl
 resource "intersight_hyperflex_cluster_profile" "hyperflex_cluster_profile1" {
   storage_data_vlan {
-    name    = "hx-storage-data"
-    vlan_id = 27
+    name        = "hx-storage-data"
+    vlan_id     = 27
+    object_type = "hyperflex.NamedVlan"
   }
   mgmt_ip_address    = "10.225.68.237"
   mac_address_prefix = "00:25:B5:D5"

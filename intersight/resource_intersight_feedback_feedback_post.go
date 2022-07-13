@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"reflect"
+	"regexp"
 	"strconv"
 	"strings"
 	"time"
@@ -13,6 +14,7 @@ import (
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceFeedbackFeedbackPost() *schema.Resource {
@@ -186,11 +188,14 @@ func resourceFeedbackFeedbackPost() *schema.Resource {
 						},
 						"alternative_follow_up_emails": {
 							Type:       schema.TypeList,
+							MaxItems:   5,
 							Optional:   true,
 							ConfigMode: schema.SchemaConfigModeAttr,
 							Computed:   true,
 							Elem: &schema.Schema{
-								Type: schema.TypeString}, ForceNew: true,
+								Type:         schema.TypeString,
+								ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"), ""),
+							}, ForceNew: true,
 						},
 						"class_id": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
@@ -200,10 +205,11 @@ func resourceFeedbackFeedbackPost() *schema.Resource {
 							ForceNew:    true,
 						},
 						"comment": {
-							Description: "Text of the feedback as provided by the user, if it is a bug or a comment.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							ForceNew:    true,
+							Description:  "Text of the feedback as provided by the user, if it is a bug or a comment.",
+							Type:         schema.TypeString,
+							ValidateFunc: StringLenMaximum(1500),
+							Optional:     true,
+							ForceNew:     true,
 						},
 						"email": {
 							Description: "User's email address details.",
@@ -212,11 +218,12 @@ func resourceFeedbackFeedbackPost() *schema.Resource {
 							ForceNew:    true,
 						},
 						"evaluation": {
-							Description: "Evalation rating as provided by the user to capture user sentiment regarding the issue.\n* `Excellent` - Option that specifies user's excelent evaluation.\n* `Poor` - Option that specifies user's poor evaluation.\n* `Fair` - Option that specifies user's fair evaluation.\n* `Good` - Option that specifies user's good evaluation.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "Excellent",
-							ForceNew:    true,
+							Description:  "Evalation rating as provided by the user to capture user sentiment regarding the issue.\n* `Excellent` - Option that specifies user's excelent evaluation.\n* `Poor` - Option that specifies user's poor evaluation.\n* `Fair` - Option that specifies user's fair evaluation.\n* `Good` - Option that specifies user's good evaluation.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"Excellent", "Poor", "Fair", "Good"}, false),
+							Optional:     true,
+							Default:      "Excellent",
+							ForceNew:     true,
 						},
 						"follow_up": {
 							Description: "If a user is open for follow-up or not.",
@@ -238,11 +245,12 @@ func resourceFeedbackFeedbackPost() *schema.Resource {
 							ForceNew:    true,
 						},
 						"type": {
-							Description: "Type of the feedback from user.\n* `Evaluation` - User's feedback classified as an evaluation.\n* `Bug` - User's feedback classified as a bug.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "Evaluation",
-							ForceNew:    true,
+							Description:  "Type of the feedback from user.\n* `Evaluation` - User's feedback classified as an evaluation.\n* `Bug` - User's feedback classified as a bug.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"Evaluation", "Bug"}, false),
+							Optional:     true,
+							Default:      "Evaluation",
+							ForceNew:     true,
 						},
 					},
 				},
@@ -280,7 +288,8 @@ func resourceFeedbackFeedbackPost() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}, ForceNew: true,
+					Type: schema.TypeString,
+				}, ForceNew: true,
 			},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -399,16 +408,18 @@ func resourceFeedbackFeedbackPost() *schema.Resource {
 							ForceNew:         true,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							ForceNew:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
+							ForceNew:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							ForceNew:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
+							ForceNew:     true,
 						},
 					},
 				},
@@ -630,7 +641,7 @@ func resourceFeedbackFeedbackPostCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("feedback.FeedbackData")
 			if v, ok := l["comment"]; ok {
 				{
 					x := (v.(string))

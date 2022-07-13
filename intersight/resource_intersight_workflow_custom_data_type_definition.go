@@ -6,11 +6,13 @@ import (
 	"fmt"
 	"log"
 	"reflect"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceWorkflowCustomDataTypeDefinition() *schema.Resource {
@@ -198,9 +200,10 @@ func resourceWorkflowCustomDataTypeDefinition() *schema.Resource {
 					return
 				}},
 			"label": {
-				Description: "A user friendly short name to identify the custom data type definition. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), or an underscore (_) and must be at least 2 characters.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "A user friendly short name to identify the custom data type definition. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), or an underscore (_) and must be at least 2 characters.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9]+[\\sa-zA-Z0-9_'.:-]{1,92}$"), ""),
+				Optional:     true,
 			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
@@ -221,10 +224,11 @@ func resourceWorkflowCustomDataTypeDefinition() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "The name of custom data type definition. The valid name can contain lower case and upper case alphabetic characters, digits and special characters '-' and '_'.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				ForceNew:    true,
+				Description:  "The name of custom data type definition. The valid name can contain lower case and upper case alphabetic characters, digits and special characters '-' and '_'.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_-]{1,64}$"), ""),
+				Optional:     true,
+				ForceNew:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -238,7 +242,8 @@ func resourceWorkflowCustomDataTypeDefinition() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parameter_set": {
 				Type:       schema.TypeList,
 				Optional:   true,
@@ -258,10 +263,11 @@ func resourceWorkflowCustomDataTypeDefinition() *schema.Resource {
 							Default:     "workflow.ParameterSet",
 						},
 						"condition": {
-							Description: "The condition to be evaluated.\n* `eq` - Checks if the values of the two parameters are equal.\n* `ne` - Checks if the values of the two parameters are not equal.\n* `contains` - Checks if the second parameter string value is a substring of the first parameter string value.\n* `matchesPattern` - Checks if a string matches a regular expression.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "eq",
+							Description:  "The condition to be evaluated.\n* `eq` - Checks if the values of the two parameters are equal.\n* `ne` - Checks if the values of the two parameters are not equal.\n* `contains` - Checks if the second parameter string value is a substring of the first parameter string value.\n* `matchesPattern` - Checks if a string matches a regular expression.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"eq", "ne", "contains", "matchesPattern"}, false),
+							Optional:     true,
+							Default:      "eq",
 						},
 						"control_parameter": {
 							Description: "Name of the controlling entity, whose value will be used for evaluating the parameter set.",
@@ -270,15 +276,18 @@ func resourceWorkflowCustomDataTypeDefinition() *schema.Resource {
 						},
 						"enable_parameters": {
 							Type:       schema.TypeList,
+							MinItems:   1,
 							Optional:   true,
 							ConfigMode: schema.SchemaConfigModeAttr,
 							Computed:   true,
 							Elem: &schema.Schema{
-								Type: schema.TypeString}},
+								Type: schema.TypeString,
+							}},
 						"name": {
-							Description: "Name for the parameter set.  Limited to 64 alphanumeric characters (upper and lower case), and special characters '-' and '_'.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "Name for the parameter set.  Limited to 64 alphanumeric characters (upper and lower case), and special characters '-' and '_'.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_-]{1,64}$"), ""),
+							Optional:     true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -448,14 +457,16 @@ func resourceWorkflowCustomDataTypeDefinition() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -566,10 +577,11 @@ func resourceWorkflowCustomDataTypeDefinition() *schema.Resource {
 										Default:     "workflow.DisplayMeta",
 									},
 									"widget_type": {
-										Description: "Specify the widget type for data display.\n* `None` - Display none of the widget types.\n* `Radio` - Display the widget as a radio button.\n* `Dropdown` - Display the widget as a dropdown.\n* `GridSelector` - Display the widget as a selector.\n* `DrawerSelector` - Display the widget as a selector.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Default:     "None",
+										Description:  "Specify the widget type for data display.\n* `None` - Display none of the widget types.\n* `Radio` - Display the widget as a radio button.\n* `Dropdown` - Display the widget as a dropdown.\n* `GridSelector` - Display the widget as a selector.\n* `DrawerSelector` - Display the widget as a selector.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringInSlice([]string{"None", "Radio", "Dropdown", "GridSelector", "DrawerSelector"}, false),
+										Optional:     true,
+										Default:      "None",
 									},
 								},
 							},
@@ -580,14 +592,16 @@ func resourceWorkflowCustomDataTypeDefinition() *schema.Resource {
 							Optional:    true,
 						},
 						"label": {
-							Description: "Descriptive label for the data type. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), space ( ) or an underscore (_). The first and last character in label must be an alphanumeric character.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "Descriptive label for the data type. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), space ( ) or an underscore (_). The first and last character in label must be an alphanumeric character.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9]+[\\sa-zA-Z0-9_'.:-]{1,92}$"), ""), validation.StringLenBetween(1, 92)),
+							Optional:     true,
 						},
 						"name": {
-							Description: "Descriptive name for the data type. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_). The first and last character in name must be an alphanumeric character.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "Descriptive name for the data type. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_). The first and last character in name must be an alphanumeric character.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9]+([a-zA-Z0-9-_]*[a-zA-Z0-9])*$"), ""), validation.StringLenBetween(1, 92)),
+							Optional:     true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
@@ -778,7 +792,7 @@ func resourceWorkflowCustomDataTypeDefinitionCreate(c context.Context, d *schema
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -918,7 +932,7 @@ func resourceWorkflowCustomDataTypeDefinitionCreate(c context.Context, d *schema
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("workflow.CustomDataTypeProperties")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1002,7 +1016,7 @@ func resourceWorkflowCustomDataTypeDefinitionCreate(c context.Context, d *schema
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("workflow.DefaultValue")
 						if v, ok := l["object_type"]; ok {
 							{
 								x := (v.(string))
@@ -1057,7 +1071,7 @@ func resourceWorkflowCustomDataTypeDefinitionCreate(c context.Context, d *schema
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("workflow.DisplayMeta")
 						if v, ok := l["inventory_selector"]; ok {
 							{
 								x := (v.(bool))
@@ -1295,7 +1309,7 @@ func resourceWorkflowCustomDataTypeDefinitionUpdate(c context.Context, d *schema
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1440,7 +1454,7 @@ func resourceWorkflowCustomDataTypeDefinitionUpdate(c context.Context, d *schema
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("workflow.CustomDataTypeProperties")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1524,7 +1538,7 @@ func resourceWorkflowCustomDataTypeDefinitionUpdate(c context.Context, d *schema
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("workflow.DefaultValue")
 						if v, ok := l["object_type"]; ok {
 							{
 								x := (v.(string))
@@ -1579,7 +1593,7 @@ func resourceWorkflowCustomDataTypeDefinitionUpdate(c context.Context, d *schema
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("workflow.DisplayMeta")
 						if v, ok := l["inventory_selector"]; ok {
 							{
 								x := (v.(bool))

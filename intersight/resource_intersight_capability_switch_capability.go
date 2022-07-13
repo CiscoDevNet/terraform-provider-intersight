@@ -10,6 +10,7 @@ import (
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceCapabilitySwitchCapability() *schema.Resource {
@@ -325,7 +326,8 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -406,10 +408,11 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 				},
 			},
 			"pid": {
-				Description: "Product Identifier for a Switch/Fabric-Interconnect.\n* `UCS-FI-6454` - The standard 4th generation UCS Fabric Interconnect with 54 ports.\n* `UCS-FI-64108` - The expanded 4th generation UCS Fabric Interconnect with 108 ports.\n* `UCS-FI-6536` - The standard 5th generation UCS Fabric Interconnect with 36 ports.\n* `unknown` - Unknown device type, usage is TBD.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "UCS-FI-6454",
+				Description:  "Product Identifier for a Switch/Fabric-Interconnect.\n* `UCS-FI-6454` - The standard 4th generation UCS Fabric Interconnect with 54 ports.\n* `UCS-FI-64108` - The expanded 4th generation UCS Fabric Interconnect with 108 ports.\n* `UCS-FI-6536` - The standard 5th generation UCS Fabric Interconnect with 36 ports.\n* `unknown` - Unknown device type, usage is TBD.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"UCS-FI-6454", "UCS-FI-64108", "UCS-FI-6536", "unknown"}, false),
+				Optional:     true,
+				Default:      "UCS-FI-6454",
 			},
 			"ports_supporting100g_speed": {
 				Type:       schema.TypeList,
@@ -934,10 +937,11 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 							Default:     "capability.SwitchingModeCapability",
 						},
 						"switching_mode": {
-							Description: "Switching mode type (endhost, switch) of the switch.\n* `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer.\n* `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "end-host",
+							Description:  "Switching mode type (endhost, switch) of the switch.\n* `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer.\n* `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"end-host", "switch"}, false),
+							Optional:     true,
+							Default:      "end-host",
 						},
 						"vp_compression_supported": {
 							Description: "VP Compression support on this switch.",
@@ -1004,14 +1008,16 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -1349,7 +1355,7 @@ func resourceCapabilitySwitchCapabilityCreate(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("capability.SwitchNetworkLimits")
 			if v, ok := l["max_compressed_port_vlan_count"]; ok {
 				{
 					x := int64(v.(int))
@@ -1973,7 +1979,7 @@ func resourceCapabilitySwitchCapabilityCreate(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("capability.SwitchStorageLimits")
 			if v, ok := l["maximum_user_zone_count"]; ok {
 				{
 					x := int64(v.(int))
@@ -2076,7 +2082,7 @@ func resourceCapabilitySwitchCapabilityCreate(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("capability.SwitchSystemLimits")
 			if v, ok := l["maximum_chassis_count"]; ok {
 				{
 					x := int64(v.(int))
@@ -2562,7 +2568,7 @@ func resourceCapabilitySwitchCapabilityUpdate(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("capability.SwitchNetworkLimits")
 			if v, ok := l["max_compressed_port_vlan_count"]; ok {
 				{
 					x := int64(v.(int))
@@ -3181,7 +3187,7 @@ func resourceCapabilitySwitchCapabilityUpdate(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("capability.SwitchStorageLimits")
 			if v, ok := l["maximum_user_zone_count"]; ok {
 				{
 					x := int64(v.(int))
@@ -3284,7 +3290,7 @@ func resourceCapabilitySwitchCapabilityUpdate(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("capability.SwitchSystemLimits")
 			if v, ok := l["maximum_chassis_count"]; ok {
 				{
 					x := int64(v.(int))

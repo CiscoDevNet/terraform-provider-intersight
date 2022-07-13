@@ -140,7 +140,7 @@ func dataSourceAssetClusterMember() *schema.Resource {
 			},
 		},
 		"device_external_ip_address": {
-			Description: "The IP Address of the managed device as seen from Intersight at the time of registration.\nThis could be the IP address of the managed device's interface which has a route to the internet or a NAT IP addresss when the managed device is deployed in a private network.",
+			Description: "The IP Address of the managed device as seen from Intersight at the time of registration.\nThis could be the IP address of the managed device's interface which has a route to the internet or a NAT IP address when the managed device is deployed in a private network.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -296,17 +296,17 @@ func dataSourceAssetClusterMember() *schema.Resource {
 						Optional:    true,
 					},
 					"serial_number": {
-						Description: "The device SerialNumber extracted from the X.509 SUDI Leaf Certiicate.",
+						Description: "The device SerialNumber extracted from the X.509 SUDI Leaf Certificate.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
 					"signature": {
-						Description: "The signature is obtained by taking the base64 encoding of the Serial Number + PID + Status, taking the SHA256 hash and then signing with the SUDI X.509 Leaf Certifiate.",
+						Description: "The signature is obtained by taking the base64 encoding of the Serial Number + PID + Status, taking the SHA256 hash and then signing with the SUDI X.509 Leaf Certificate.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
 					"status": {
-						Description: "The validation status of the device.\n* `DeviceStatusUnknown` - SUDI validation is done on the establishment of a connection. Before a device connects or after it disconnects, the SUDI validation status is set to this value.\n* `Verified` - The device returned a valid PID, Serial Number, Status and X.509 Leaf Certificate. The certificate signing chain was validated.\n* `CertificateValidationFailed` - Validation of the certificate signing chain failed.\n* `UnsupportedFirmware` - The firmware version of the Cisco IMC that is installed does not contain the SUDI APIs needed to perform validation.\n* `UnsupportedHardware` - The device is a model that does not contain a Trust Anchor Module (TAM) and thus cannot be validated.\n* `DeviceNotResponding` - An request was sent to the device, but no response was received.",
+						Description: "The validation status of the device.\n* `DeviceStatusUnknown` - SUDI validation is done on the establishment of a connection. Before a device connects or after it disconnects, the SUDI validation status is set to this value.\n* `Verified` - The device returned a valid PID, Serial Number, Status and X.509 Leaf Certificate. The certificate signing chain was validated.\n* `CertificateValidationFailed` - Validation of the certificate signing chain failed.\n* `UnsupportedFirmware` - The firmware version of the Cisco IMC that is installed does not contain the SUDI APIs needed to perform validation.\n* `UnsupportedHardware` - The device is a model that does not contain a Trust Anchor Module (TAM) and thus cannot be validated.\n* `DeviceNotResponding` - A request was sent to the device, but no response was received.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -730,7 +730,7 @@ func dataSourceAssetClusterMember() *schema.Resource {
 			},
 		},
 		"device_external_ip_address": {
-			Description: "The IP Address of the managed device as seen from Intersight at the time of registration.\nThis could be the IP address of the managed device's interface which has a route to the internet or a NAT IP addresss when the managed device is deployed in a private network.",
+			Description: "The IP Address of the managed device as seen from Intersight at the time of registration.\nThis could be the IP address of the managed device's interface which has a route to the internet or a NAT IP address when the managed device is deployed in a private network.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -886,17 +886,17 @@ func dataSourceAssetClusterMember() *schema.Resource {
 						Optional:    true,
 					},
 					"serial_number": {
-						Description: "The device SerialNumber extracted from the X.509 SUDI Leaf Certiicate.",
+						Description: "The device SerialNumber extracted from the X.509 SUDI Leaf Certificate.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
 					"signature": {
-						Description: "The signature is obtained by taking the base64 encoding of the Serial Number + PID + Status, taking the SHA256 hash and then signing with the SUDI X.509 Leaf Certifiate.",
+						Description: "The signature is obtained by taking the base64 encoding of the Serial Number + PID + Status, taking the SHA256 hash and then signing with the SUDI X.509 Leaf Certificate.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
 					"status": {
-						Description: "The validation status of the device.\n* `DeviceStatusUnknown` - SUDI validation is done on the establishment of a connection. Before a device connects or after it disconnects, the SUDI validation status is set to this value.\n* `Verified` - The device returned a valid PID, Serial Number, Status and X.509 Leaf Certificate. The certificate signing chain was validated.\n* `CertificateValidationFailed` - Validation of the certificate signing chain failed.\n* `UnsupportedFirmware` - The firmware version of the Cisco IMC that is installed does not contain the SUDI APIs needed to perform validation.\n* `UnsupportedHardware` - The device is a model that does not contain a Trust Anchor Module (TAM) and thus cannot be validated.\n* `DeviceNotResponding` - An request was sent to the device, but no response was received.",
+						Description: "The validation status of the device.\n* `DeviceStatusUnknown` - SUDI validation is done on the establishment of a connection. Before a device connects or after it disconnects, the SUDI validation status is set to this value.\n* `Verified` - The device returned a valid PID, Serial Number, Status and X.509 Leaf Certificate. The certificate signing chain was validated.\n* `CertificateValidationFailed` - Validation of the certificate signing chain failed.\n* `UnsupportedFirmware` - The firmware version of the Cisco IMC that is installed does not contain the SUDI APIs needed to perform validation.\n* `UnsupportedHardware` - The device is a model that does not contain a Trust Anchor Module (TAM) and thus cannot be validated.\n* `DeviceNotResponding` - A request was sent to the device, but no response was received.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -1325,7 +1325,7 @@ func dataSourceAssetClusterMemberRead(c context.Context, d *schema.ResourceData,
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1419,7 +1419,7 @@ func dataSourceAssetClusterMemberRead(c context.Context, d *schema.ResourceData,
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1517,7 +1517,7 @@ func dataSourceAssetClusterMemberRead(c context.Context, d *schema.ResourceData,
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("asset.SudiInfo")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1565,7 +1565,7 @@ func dataSourceAssetClusterMemberRead(c context.Context, d *schema.ResourceData,
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("x509.Certificate")
 						if v, ok := l["object_type"]; ok {
 							{
 								x := (v.(string))
@@ -1643,7 +1643,7 @@ func dataSourceAssetClusterMemberRead(c context.Context, d *schema.ResourceData,
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.VersionContext")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -1705,7 +1705,7 @@ func dataSourceAssetClusterMemberRead(c context.Context, d *schema.ResourceData,
 	if err != nil {
 		return diag.Errorf("json marshal of AssetClusterMember object failed with error : %s", err.Error())
 	}
-	countResponse, _, responseErr := conn.ApiClient.AssetApi.GetAssetClusterMemberList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
+	countResponse, _, responseErr := conn.ApiClient.AssetApi.GetAssetClusterMemberList(conn.ctx).Filter(getRequestParams(data)).Count(true).Execute()
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
@@ -1714,13 +1714,12 @@ func dataSourceAssetClusterMemberRead(c context.Context, d *schema.ResourceData,
 		}
 		return diag.Errorf("error occurred while fetching count of AssetClusterMember: %s", responseErr.Error())
 	}
-	count := countResponse.AssetClusterMemberList.GetCount()
+	count := countResponse.MoDocumentCount.GetCount()
 	if count == 0 {
 		return diag.Errorf("your query for AssetClusterMember data source did not return any results. Please change your search criteria and try again")
 	}
 	var i int32
-	var assetClusterMemberResults = make([]map[string]interface{}, count, count)
-	var j = 0
+	var assetClusterMemberResults = make([]map[string]interface{}, 0, 0)
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.AssetApi.GetAssetClusterMemberList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
@@ -1734,8 +1733,8 @@ func dataSourceAssetClusterMemberRead(c context.Context, d *schema.ResourceData,
 		results := resMo.AssetClusterMemberList.GetResults()
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
-			for i := 0; i < len(results); i++ {
-				var s = results[i]
+			for k := 0; k < len(results); k++ {
+				var s = results[k]
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
@@ -1777,8 +1776,7 @@ func dataSourceAssetClusterMemberRead(c context.Context, d *schema.ResourceData,
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
-				assetClusterMemberResults[j] = temp
-				j += 1
+				assetClusterMemberResults = append(assetClusterMemberResults, temp)
 			}
 		}
 	}

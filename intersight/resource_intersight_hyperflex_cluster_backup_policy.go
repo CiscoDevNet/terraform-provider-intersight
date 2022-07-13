@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceHyperflexClusterBackupPolicy() *schema.Resource {
@@ -200,9 +202,10 @@ func resourceHyperflexClusterBackupPolicy() *schema.Resource {
 				Default:     false,
 			},
 			"description": {
-				Description: "Description of the policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -216,10 +219,11 @@ func resourceHyperflexClusterBackupPolicy() *schema.Resource {
 					return
 				}},
 			"local_snapshot_retention_count": {
-				Description: "Number of snapshots that will be retained as part of the Multi Point in Time support.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Default:     4,
+				Description:  "Number of snapshots that will be retained as part of the Multi Point in Time support.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(1, 30),
+				Optional:     true,
+				Default:      4,
 			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
@@ -240,9 +244,10 @@ func resourceHyperflexClusterBackupPolicy() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the concrete policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the concrete policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -297,7 +302,8 @@ func resourceHyperflexClusterBackupPolicy() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -399,10 +405,11 @@ func resourceHyperflexClusterBackupPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"backup_interval": {
-							Description: "Time interval between two copies in minutes.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     240,
+							Description:  "Time interval between two copies in minutes.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(5, 10080),
+							Optional:     true,
+							Default:      240,
 						},
 						"class_id": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
@@ -431,10 +438,11 @@ func resourceHyperflexClusterBackupPolicy() *schema.Resource {
 					return
 				}},
 			"snapshot_retention_count": {
-				Description: "Number of snapshots that will be retained as part of the Multi Point in Time support.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Default:     4,
+				Description:  "Number of snapshots that will be retained as part of the Multi Point in Time support.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(1, 30),
+				Optional:     true,
+				Default:      4,
 			},
 			"tags": {
 				Type:       schema.TypeList,
@@ -449,14 +457,16 @@ func resourceHyperflexClusterBackupPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -651,7 +661,7 @@ func resourceHyperflexClusterBackupPolicyCreate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -765,7 +775,7 @@ func resourceHyperflexClusterBackupPolicyCreate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -819,7 +829,7 @@ func resourceHyperflexClusterBackupPolicyCreate(c context.Context, d *schema.Res
 					o.SetBackupInterval(x)
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("hyperflex.ReplicationSchedule")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1077,7 +1087,7 @@ func resourceHyperflexClusterBackupPolicyUpdate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1196,7 +1206,7 @@ func resourceHyperflexClusterBackupPolicyUpdate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1252,7 +1262,7 @@ func resourceHyperflexClusterBackupPolicyUpdate(c context.Context, d *schema.Res
 					o.SetBackupInterval(x)
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("hyperflex.ReplicationSchedule")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))

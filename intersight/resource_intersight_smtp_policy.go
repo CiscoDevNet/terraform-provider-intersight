@@ -6,11 +6,13 @@ import (
 	"fmt"
 	"log"
 	"reflect"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceSmtpPolicy() *schema.Resource {
@@ -118,9 +120,10 @@ func resourceSmtpPolicy() *schema.Resource {
 				},
 			},
 			"auth_password": {
-				Description: "Authorization password for the process.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Authorization password for the process.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[\\S+]{0,254}$"), ""),
+				Optional:     true,
 			},
 			"certificate": {
 				Description: "A reference to a iamTrustPoint resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -180,9 +183,10 @@ func resourceSmtpPolicy() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -225,10 +229,11 @@ func resourceSmtpPolicy() *schema.Resource {
 					return
 				}},
 			"min_severity": {
-				Description: "Minimum fault severity level to receive email notifications. Email notifications are sent for all faults whose severity is equal to or greater than the chosen level.\n* `critical` - Minimum severity to report is critical.\n* `condition` - Minimum severity to report is informational.\n* `warning` - Minimum severity to report is warning.\n* `minor` - Minimum severity to report is minor.\n* `major` - Minimum severity to report is major.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "critical",
+				Description:  "Minimum fault severity level to receive email notifications. Email notifications are sent for all faults whose severity is equal to or greater than the chosen level.\n* `critical` - Minimum severity to report is critical.\n* `condition` - Minimum severity to report is informational.\n* `warning` - Minimum severity to report is warning.\n* `minor` - Minimum severity to report is minor.\n* `major` - Minimum severity to report is major.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"critical", "condition", "warning", "minor", "major"}, false),
+				Optional:     true,
+				Default:      "critical",
 			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
@@ -249,9 +254,10 @@ func resourceSmtpPolicy() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the concrete policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the concrete policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -305,7 +311,8 @@ func resourceSmtpPolicy() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -425,9 +432,10 @@ func resourceSmtpPolicy() *schema.Resource {
 				},
 			},
 			"sender_email": {
-				Description: "The email address entered here will be displayed as the from address (mail received from address) of all the SMTP mail alerts that are received. If not configured, the hostname of the server is used in the from address field.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "The email address entered here will be displayed as the from address (mail received from address) of all the SMTP mail alerts that are received. If not configured, the hostname of the server is used in the from address field.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"), ""),
+				Optional:     true,
 			},
 			"shared_scope": {
 				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
@@ -441,10 +449,11 @@ func resourceSmtpPolicy() *schema.Resource {
 					return
 				}},
 			"smtp_port": {
-				Description: "Port number used by the SMTP server for outgoing SMTP communication.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Default:     25,
+				Description:  "Port number used by the SMTP server for outgoing SMTP communication.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(1, 65535),
+				Optional:     true,
+				Default:      25,
 			},
 			"smtp_recipients": {
 				Type:       schema.TypeList,
@@ -452,7 +461,9 @@ func resourceSmtpPolicy() *schema.Resource {
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Computed:   true,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"), ""),
+				}},
 			"smtp_server": {
 				Description: "IP address or hostname of the SMTP server. The SMTP server is used by the managed device to send email notifications.",
 				Type:        schema.TypeString,
@@ -471,14 +482,16 @@ func resourceSmtpPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -663,7 +676,7 @@ func resourceSmtpPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -711,7 +724,7 @@ func resourceSmtpPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -793,7 +806,7 @@ func resourceSmtpPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1148,7 +1161,7 @@ func resourceSmtpPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1198,7 +1211,7 @@ func resourceSmtpPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1288,7 +1301,7 @@ func resourceSmtpPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

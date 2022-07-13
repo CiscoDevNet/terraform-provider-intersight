@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceKubernetesAddonPolicy() *schema.Resource {
@@ -58,10 +60,11 @@ func resourceKubernetesAddonPolicy() *schema.Resource {
 							Default:     "kubernetes.AddonConfiguration",
 						},
 						"install_strategy": {
-							Description: "Addon install strategy to determine whether an addon is installed if not present.\n* `None` - Unspecified install strategy.\n* `NoAction` - No install action performed.\n* `InstallOnly` - Only install in green field. No action in case of failure or removal.\n* `Always` - Attempt install if chart is not already installed.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "None",
+							Description:  "Addon install strategy to determine whether an addon is installed if not present.\n* `None` - Unspecified install strategy.\n* `NoAction` - No install action performed.\n* `InstallOnly` - Only install in green field. No action in case of failure or removal.\n* `Always` - Attempt install if chart is not already installed.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"None", "NoAction", "InstallOnly", "Always"}, false),
+							Optional:     true,
+							Default:      "None",
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -122,10 +125,11 @@ func resourceKubernetesAddonPolicy() *schema.Resource {
 							Optional:    true,
 						},
 						"upgrade_strategy": {
-							Description: "Addon upgrade strategy to determine whether an addon configuration is overwritten on upgrade.\n* `None` - Unspecified upgrade strategy.\n* `NoAction` - This choice enables No upgrades to be performed.\n* `UpgradeOnly` - Attempt upgrade if chart or overrides options change, no action on upgrade failure.\n* `ReinstallOnFailure` - Attempt upgrade first. Remove and install on upgrade failure.\n* `AlwaysReinstall` - Always remove older release and reinstall.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "None",
+							Description:  "Addon upgrade strategy to determine whether an addon configuration is overwritten on upgrade.\n* `None` - Unspecified upgrade strategy.\n* `NoAction` - This choice enables No upgrades to be performed.\n* `UpgradeOnly` - Attempt upgrade if chart or overrides options change, no action on upgrade failure.\n* `ReinstallOnFailure` - Attempt upgrade first. Remove and install on upgrade failure.\n* `AlwaysReinstall` - Always remove older release and reinstall.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"None", "NoAction", "UpgradeOnly", "ReinstallOnFailure", "AlwaysReinstall"}, false),
+							Optional:     true,
+							Default:      "None",
 						},
 					},
 				},
@@ -227,9 +231,10 @@ func resourceKubernetesAddonPolicy() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -261,9 +266,10 @@ func resourceKubernetesAddonPolicy() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the concrete policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the concrete policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -318,7 +324,8 @@ func resourceKubernetesAddonPolicy() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -422,14 +429,16 @@ func resourceKubernetesAddonPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -609,7 +618,7 @@ func resourceKubernetesAddonPolicyCreate(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("kubernetes.AddonConfiguration")
 			if v, ok := l["install_strategy"]; ok {
 				{
 					x := (v.(string))
@@ -713,7 +722,7 @@ func resourceKubernetesAddonPolicyCreate(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -775,7 +784,7 @@ func resourceKubernetesAddonPolicyCreate(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -990,7 +999,7 @@ func resourceKubernetesAddonPolicyUpdate(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("kubernetes.AddonConfiguration")
 			if v, ok := l["install_strategy"]; ok {
 				{
 					x := (v.(string))
@@ -1095,7 +1104,7 @@ func resourceKubernetesAddonPolicyUpdate(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1161,7 +1170,7 @@ func resourceKubernetesAddonPolicyUpdate(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

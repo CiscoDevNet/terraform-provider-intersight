@@ -10,6 +10,7 @@ import (
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceIamSessionLimits() *schema.Resource {
@@ -145,16 +146,18 @@ func resourceIamSessionLimits() *schema.Resource {
 					return
 				}},
 			"idle_time_out": {
-				Description: "The idle timeout interval for the web session in seconds. When a session is not refreshed for this duration, the session is marked as idle and removed. The minimum value is 300 seconds and the maximum value is 18000 seconds (5 hours). The system default value is 1800 seconds.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Default:     1800,
+				Description:  "The idle timeout interval for the web session in seconds. When a session is not refreshed for this duration, the session is marked as idle and removed. The minimum value is 300 seconds and the maximum value is 18000 seconds (5 hours). The system default value is 1800 seconds.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(300, 18000),
+				Optional:     true,
+				Default:      1800,
 			},
 			"maximum_limit": {
-				Description: "The maximum number of sessions allowed in an account or permission. The default value is 128.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Default:     128,
+				Description:  "The maximum number of sessions allowed in an account or permission. The default value is 128.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(1, 128),
+				Optional:     true,
+				Default:      128,
 			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
@@ -186,7 +189,8 @@ func resourceIamSessionLimits() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -228,10 +232,11 @@ func resourceIamSessionLimits() *schema.Resource {
 				},
 			},
 			"per_user_limit": {
-				Description: "The maximum number of sessions allowed per user. Default value is 32.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Default:     32,
+				Description:  "The maximum number of sessions allowed per user. Default value is 32.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(2, 32),
+				Optional:     true,
+				Default:      32,
 			},
 			"permission": {
 				Description: "A reference to a iamPermission resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -313,10 +318,11 @@ func resourceIamSessionLimits() *schema.Resource {
 				},
 			},
 			"session_time_out": {
-				Description: "The session expiry duration in seconds. The minimum value is 350 seconds and the maximum value is 31536000 seconds (1 year). The system default value is 57600 seconds.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Default:     57600,
+				Description:  "The session expiry duration in seconds. The minimum value is 350 seconds and the maximum value is 31536000 seconds (1 year). The system default value is 57600 seconds.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(300, 31536000),
+				Optional:     true,
+				Default:      57600,
 			},
 			"shared_scope": {
 				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
@@ -342,14 +348,16 @@ func resourceIamSessionLimits() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -553,7 +561,7 @@ func resourceIamSessionLimitsCreate(c context.Context, d *schema.ResourceData, m
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -805,7 +813,7 @@ func resourceIamSessionLimitsUpdate(c context.Context, d *schema.ResourceData, m
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

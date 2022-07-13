@@ -388,6 +388,44 @@ func dataSourceVirtualizationVirtualMachine() *schema.Resource {
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
+		"gpu_configs": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"device_id": {
+						Description: "The device Id of the GPU device.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"memory_size": {
+						Description: "The amount of memory on the GPU (GBs).",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"vendor_id": {
+						Description: "The vendor Id of the GPU device.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"guest_os": {
 			Description: "Guest operating system running on virtual machine.\n* `linux` - A Linux operating system.\n* `windows` - A Windows operating system.",
 			Type:        schema.TypeString,
@@ -1356,6 +1394,44 @@ func dataSourceVirtualizationVirtualMachine() *schema.Resource {
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
+		"gpu_configs": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"device_id": {
+						Description: "The device Id of the GPU device.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"memory_size": {
+						Description: "The amount of memory on the GPU (GBs).",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"vendor_id": {
+						Description: "The vendor Id of the GPU device.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"guest_os": {
 			Description: "Guest operating system running on virtual machine.\n* `linux` - A Linux operating system.\n* `windows` - A Windows operating system.",
 			Type:        schema.TypeString,
@@ -1992,7 +2068,7 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("virtualization.ActionInfo")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -2133,7 +2209,7 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("virtualization.CloudInitConfig")
 			if v, ok := l["config_type"]; ok {
 				{
 					x := (v.(string))
@@ -2194,7 +2270,7 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2311,7 +2387,7 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 								o.SetCapacity(x)
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("virtualization.VirtualDiskConfig")
 						if v, ok := l["mode"]; ok {
 							{
 								x := (v.(string))
@@ -2371,6 +2447,52 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 		o.SetForceDelete(x)
 	}
 
+	if v, ok := d.GetOk("gpu_configs"); ok {
+		x := make([]models.InfraBaseGpuConfiguration, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.InfraBaseGpuConfiguration{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("infra.BaseGpuConfiguration")
+			if v, ok := l["device_id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetDeviceId(x)
+				}
+			}
+			if v, ok := l["memory_size"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMemorySize(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["vendor_id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetVendorId(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetGpuConfigs(x)
+	}
+
 	if v, ok := d.GetOk("guest_os"); ok {
 		x := (v.(string))
 		o.SetGuestOs(x)
@@ -2392,7 +2514,7 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2620,7 +2742,7 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2727,7 +2849,7 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2820,7 +2942,7 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2901,7 +3023,7 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.VersionContext")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -2975,7 +3097,7 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("virtualization.BaseVmConfiguration")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -3006,7 +3128,7 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3037,7 +3159,7 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 	if err != nil {
 		return diag.Errorf("json marshal of VirtualizationVirtualMachine object failed with error : %s", err.Error())
 	}
-	countResponse, _, responseErr := conn.ApiClient.VirtualizationApi.GetVirtualizationVirtualMachineList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
+	countResponse, _, responseErr := conn.ApiClient.VirtualizationApi.GetVirtualizationVirtualMachineList(conn.ctx).Filter(getRequestParams(data)).Count(true).Execute()
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
@@ -3046,13 +3168,12 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 		}
 		return diag.Errorf("error occurred while fetching count of VirtualizationVirtualMachine: %s", responseErr.Error())
 	}
-	count := countResponse.VirtualizationVirtualMachineList.GetCount()
+	count := countResponse.MoDocumentCount.GetCount()
 	if count == 0 {
 		return diag.Errorf("your query for VirtualizationVirtualMachine data source did not return any results. Please change your search criteria and try again")
 	}
 	var i int32
-	var virtualizationVirtualMachineResults = make([]map[string]interface{}, count, count)
-	var j = 0
+	var virtualizationVirtualMachineResults = make([]map[string]interface{}, 0, 0)
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.VirtualizationApi.GetVirtualizationVirtualMachineList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
@@ -3066,8 +3187,8 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 		results := resMo.VirtualizationVirtualMachineList.GetResults()
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
-			for i := 0; i < len(results); i++ {
-				var s = results[i]
+			for k := 0; k < len(results); k++ {
+				var s = results[k]
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["action"] = (s.GetAction())
@@ -3094,6 +3215,8 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 				temp["disk"] = flattenListVirtualizationVirtualMachineDisk(s.GetDisk(), d)
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["force_delete"] = (s.GetForceDelete())
+
+				temp["gpu_configs"] = flattenListInfraBaseGpuConfiguration(s.GetGpuConfigs(), d)
 				temp["guest_os"] = (s.GetGuestOs())
 
 				temp["host"] = flattenMapVirtualizationBaseHostRelationship(s.GetHost(), d)
@@ -3129,8 +3252,7 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 				temp["vm_config"] = flattenMapVirtualizationBaseVmConfiguration(s.GetVmConfig(), d)
 
 				temp["workflow_info"] = flattenMapWorkflowWorkflowInfoRelationship(s.GetWorkflowInfo(), d)
-				virtualizationVirtualMachineResults[j] = temp
-				j += 1
+				virtualizationVirtualMachineResults = append(virtualizationVirtualMachineResults, temp)
 			}
 		}
 	}
