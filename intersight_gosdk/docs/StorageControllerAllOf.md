@@ -33,6 +33,7 @@ Name | Type | Description | Notes
 **SupportedStripSizes** | Pointer to **string** | The strip sizes in KiB supported by the Storage Controller. | [optional] 
 **TotalCacheSize** | Pointer to **int64** | The total configured cache memory, measured in MiB. | [optional] 
 **Type** | Pointer to **string** | Controller types are Raid, FlexFlash. | [optional] [readonly] 
+**BackupBatteryUnit** | Pointer to [**StorageBatteryBackupUnitRelationship**](StorageBatteryBackupUnitRelationship.md) |  | [optional] 
 **ComputeBlade** | Pointer to [**ComputeBladeRelationship**](ComputeBladeRelationship.md) |  | [optional] 
 **ComputeBoard** | Pointer to [**ComputeBoardRelationship**](ComputeBoardRelationship.md) |  | [optional] 
 **ComputeRackUnit** | Pointer to [**ComputeRackUnitRelationship**](ComputeRackUnitRelationship.md) |  | [optional] 
@@ -779,6 +780,31 @@ SetType sets Type field to given value.
 `func (o *StorageControllerAllOf) HasType() bool`
 
 HasType returns a boolean if a field has been set.
+
+### GetBackupBatteryUnit
+
+`func (o *StorageControllerAllOf) GetBackupBatteryUnit() StorageBatteryBackupUnitRelationship`
+
+GetBackupBatteryUnit returns the BackupBatteryUnit field if non-nil, zero value otherwise.
+
+### GetBackupBatteryUnitOk
+
+`func (o *StorageControllerAllOf) GetBackupBatteryUnitOk() (*StorageBatteryBackupUnitRelationship, bool)`
+
+GetBackupBatteryUnitOk returns a tuple with the BackupBatteryUnit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBackupBatteryUnit
+
+`func (o *StorageControllerAllOf) SetBackupBatteryUnit(v StorageBatteryBackupUnitRelationship)`
+
+SetBackupBatteryUnit sets BackupBatteryUnit field to given value.
+
+### HasBackupBatteryUnit
+
+`func (o *StorageControllerAllOf) HasBackupBatteryUnit() bool`
+
+HasBackupBatteryUnit returns a boolean if a field has been set.
 
 ### GetComputeBlade
 

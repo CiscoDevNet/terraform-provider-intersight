@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-6484
+API version: 1.0.11-7078
 Contact: intersight@cisco.com
 */
 
@@ -61,8 +61,9 @@ type VirtualizationVmwareVirtualMachine struct {
 	// Adding memory to a running VM.
 	MemoryHotAddEnabled *bool `json:"MemoryHotAddEnabled,omitempty"`
 	// Indicates how many networks are used by this VM.
-	NetworkCount *int64   `json:"NetworkCount,omitempty"`
-	PortGroups   []string `json:"PortGroups,omitempty"`
+	NetworkCount       *int64   `json:"NetworkCount,omitempty"`
+	PassthroughDevices []int64  `json:"PassthroughDevices,omitempty"`
+	PortGroups         []string `json:"PortGroups,omitempty"`
 	// Shows if this is a protected VM. VMs can be in protection groups.
 	ProtectedVm       *bool                                         `json:"ProtectedVm,omitempty"`
 	RemoteDisplayInfo NullableVirtualizationVmwareRemoteDisplayInfo `json:"RemoteDisplayInfo,omitempty"`
@@ -973,6 +974,39 @@ func (o *VirtualizationVmwareVirtualMachine) SetNetworkCount(v int64) {
 	o.NetworkCount = &v
 }
 
+// GetPassthroughDevices returns the PassthroughDevices field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *VirtualizationVmwareVirtualMachine) GetPassthroughDevices() []int64 {
+	if o == nil {
+		var ret []int64
+		return ret
+	}
+	return o.PassthroughDevices
+}
+
+// GetPassthroughDevicesOk returns a tuple with the PassthroughDevices field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *VirtualizationVmwareVirtualMachine) GetPassthroughDevicesOk() ([]int64, bool) {
+	if o == nil || o.PassthroughDevices == nil {
+		return nil, false
+	}
+	return o.PassthroughDevices, true
+}
+
+// HasPassthroughDevices returns a boolean if a field has been set.
+func (o *VirtualizationVmwareVirtualMachine) HasPassthroughDevices() bool {
+	if o != nil && o.PassthroughDevices != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPassthroughDevices gets a reference to the given []int64 and assigns it to the PassthroughDevices field.
+func (o *VirtualizationVmwareVirtualMachine) SetPassthroughDevices(v []int64) {
+	o.PassthroughDevices = v
+}
+
 // GetPortGroups returns the PortGroups field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationVmwareVirtualMachine) GetPortGroups() []string {
 	if o == nil {
@@ -1810,6 +1844,9 @@ func (o VirtualizationVmwareVirtualMachine) MarshalJSON() ([]byte, error) {
 	if o.NetworkCount != nil {
 		toSerialize["NetworkCount"] = o.NetworkCount
 	}
+	if o.PassthroughDevices != nil {
+		toSerialize["PassthroughDevices"] = o.PassthroughDevices
+	}
 	if o.PortGroups != nil {
 		toSerialize["PortGroups"] = o.PortGroups
 	}
@@ -1930,8 +1967,9 @@ func (o *VirtualizationVmwareVirtualMachine) UnmarshalJSON(bytes []byte) (err er
 		// Adding memory to a running VM.
 		MemoryHotAddEnabled *bool `json:"MemoryHotAddEnabled,omitempty"`
 		// Indicates how many networks are used by this VM.
-		NetworkCount *int64   `json:"NetworkCount,omitempty"`
-		PortGroups   []string `json:"PortGroups,omitempty"`
+		NetworkCount       *int64   `json:"NetworkCount,omitempty"`
+		PassthroughDevices []int64  `json:"PassthroughDevices,omitempty"`
+		PortGroups         []string `json:"PortGroups,omitempty"`
 		// Shows if this is a protected VM. VMs can be in protection groups.
 		ProtectedVm       *bool                                         `json:"ProtectedVm,omitempty"`
 		RemoteDisplayInfo NullableVirtualizationVmwareRemoteDisplayInfo `json:"RemoteDisplayInfo,omitempty"`
@@ -2001,6 +2039,7 @@ func (o *VirtualizationVmwareVirtualMachine) UnmarshalJSON(bytes []byte) (err er
 		varVirtualizationVmwareVirtualMachine.MemShares = varVirtualizationVmwareVirtualMachineWithoutEmbeddedStruct.MemShares
 		varVirtualizationVmwareVirtualMachine.MemoryHotAddEnabled = varVirtualizationVmwareVirtualMachineWithoutEmbeddedStruct.MemoryHotAddEnabled
 		varVirtualizationVmwareVirtualMachine.NetworkCount = varVirtualizationVmwareVirtualMachineWithoutEmbeddedStruct.NetworkCount
+		varVirtualizationVmwareVirtualMachine.PassthroughDevices = varVirtualizationVmwareVirtualMachineWithoutEmbeddedStruct.PassthroughDevices
 		varVirtualizationVmwareVirtualMachine.PortGroups = varVirtualizationVmwareVirtualMachineWithoutEmbeddedStruct.PortGroups
 		varVirtualizationVmwareVirtualMachine.ProtectedVm = varVirtualizationVmwareVirtualMachineWithoutEmbeddedStruct.ProtectedVm
 		varVirtualizationVmwareVirtualMachine.RemoteDisplayInfo = varVirtualizationVmwareVirtualMachineWithoutEmbeddedStruct.RemoteDisplayInfo
@@ -2066,6 +2105,7 @@ func (o *VirtualizationVmwareVirtualMachine) UnmarshalJSON(bytes []byte) (err er
 		delete(additionalProperties, "MemShares")
 		delete(additionalProperties, "MemoryHotAddEnabled")
 		delete(additionalProperties, "NetworkCount")
+		delete(additionalProperties, "PassthroughDevices")
 		delete(additionalProperties, "PortGroups")
 		delete(additionalProperties, "ProtectedVm")
 		delete(additionalProperties, "RemoteDisplayInfo")

@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **AaaLdapProviderCount** | Pointer to **int64** | Returns the total number of AAA Ldap Providers. | [optional] 
 **AaaRadiusProviderCount** | Pointer to **int64** | Returns the total number of AAA Radius Providers. | [optional] 
 **AaaTacacsProviderCount** | Pointer to **int64** | Returns the total number of AAA Tacacs Providers. | [optional] 
+**ApicClusterHealth** | Pointer to **string** | Cluster health for the APIC controller. | [optional] 
 **ApicCount** | Pointer to **int64** | Number of APIC controllers. This determines the value of controllers for the fabric. | [optional] 
 **ApicIsTelnetEnabled** | Pointer to **bool** | Returns if telnet is enabled on APIC. | [optional] 
 **ApicNtpCount** | Pointer to **int64** | Count of NTP servers configured on APIC. | [optional] 
@@ -251,6 +252,31 @@ SetAaaTacacsProviderCount sets AaaTacacsProviderCount field to given value.
 `func (o *NiatelemetryNiaFeatureUsage) HasAaaTacacsProviderCount() bool`
 
 HasAaaTacacsProviderCount returns a boolean if a field has been set.
+
+### GetApicClusterHealth
+
+`func (o *NiatelemetryNiaFeatureUsage) GetApicClusterHealth() string`
+
+GetApicClusterHealth returns the ApicClusterHealth field if non-nil, zero value otherwise.
+
+### GetApicClusterHealthOk
+
+`func (o *NiatelemetryNiaFeatureUsage) GetApicClusterHealthOk() (*string, bool)`
+
+GetApicClusterHealthOk returns a tuple with the ApicClusterHealth field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApicClusterHealth
+
+`func (o *NiatelemetryNiaFeatureUsage) SetApicClusterHealth(v string)`
+
+SetApicClusterHealth sets ApicClusterHealth field to given value.
+
+### HasApicClusterHealth
+
+`func (o *NiatelemetryNiaFeatureUsage) HasApicClusterHealth() bool`
+
+HasApicClusterHealth returns a boolean if a field has been set.
 
 ### GetApicCount
 

@@ -10,6 +10,7 @@ import (
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceHyperflexKeyEncryptionKey() *schema.Resource {
@@ -190,10 +191,11 @@ func resourceHyperflexKeyEncryptionKey() *schema.Resource {
 				ForceNew:    true,
 			},
 			"key_state": {
-				Description: "Last known Key encryption key state for this Key.\n* `NEW` - Key Encryption key is newly created.\n* `ACTIVE` - Key Encryption key is deployed on active resource.\n* `INACTIVE` - Key Encryption key is inactive and not used.\n* `INPROGRESS` - Key Encryption key is in a state where it was used on Intersight but did not receive confirmation from platform of success/failure.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "NEW",
+				Description:  "Last known Key encryption key state for this Key.\n* `NEW` - Key Encryption key is newly created.\n* `ACTIVE` - Key Encryption key is deployed on active resource.\n* `INACTIVE` - Key Encryption key is inactive and not used.\n* `INPROGRESS` - Key Encryption key is in a state where it was used on Intersight but did not receive confirmation from platform of success/failure.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"NEW", "ACTIVE", "INACTIVE", "INPROGRESS"}, false),
+				Optional:     true,
+				Default:      "NEW",
 			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
@@ -225,7 +227,8 @@ func resourceHyperflexKeyEncryptionKey() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -351,10 +354,11 @@ func resourceHyperflexKeyEncryptionKey() *schema.Resource {
 				},
 			},
 			"resource_type": {
-				Description: "Resource type on which this key will be applied.\n* `CLUSTER` - Encryption is per HyperFlex cluster.\n* `DATASTORE` - Encryption is per dataStore on the HyperFlex cluster.\n* `DRIVE` - Encryption is per drive on the HyperFlex cluster.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "CLUSTER",
+				Description:  "Resource type on which this key will be applied.\n* `CLUSTER` - Encryption is per HyperFlex cluster.\n* `DATASTORE` - Encryption is per dataStore on the HyperFlex cluster.\n* `DRIVE` - Encryption is per drive on the HyperFlex cluster.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"CLUSTER", "DATASTORE", "DRIVE"}, false),
+				Optional:     true,
+				Default:      "CLUSTER",
 			},
 			"shared_scope": {
 				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
@@ -380,14 +384,16 @@ func resourceHyperflexKeyEncryptionKey() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -574,7 +580,7 @@ func resourceHyperflexKeyEncryptionKeyCreate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -654,7 +660,7 @@ func resourceHyperflexKeyEncryptionKeyCreate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -901,7 +907,7 @@ func resourceHyperflexKeyEncryptionKeyUpdate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -989,7 +995,7 @@ func resourceHyperflexKeyEncryptionKeyUpdate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

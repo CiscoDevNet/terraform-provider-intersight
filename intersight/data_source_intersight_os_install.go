@@ -2109,7 +2109,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("workflow.PrimitiveDataType")
 						if v, ok := l["default"]; ok {
 							{
 								p := make([]models.WorkflowDefaultValue, 0, 1)
@@ -2127,7 +2127,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 											}
 										}
 									}
-									o.SetClassId("")
+									o.SetClassId("workflow.DefaultValue")
 									if v, ok := l["object_type"]; ok {
 										{
 											x := (v.(string))
@@ -2182,7 +2182,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 											}
 										}
 									}
-									o.SetClassId("")
+									o.SetClassId("workflow.DisplayMeta")
 									if v, ok := l["inventory_selector"]; ok {
 										{
 											x := (v.(bool))
@@ -2255,7 +2255,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 											}
 										}
 									}
-									o.SetClassId("")
+									o.SetClassId("workflow.PrimitiveDataProperty")
 									if v, ok := l["constraints"]; ok {
 										{
 											p := make([]models.WorkflowConstraints, 0, 1)
@@ -2273,7 +2273,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 														}
 													}
 												}
-												o.SetClassId("")
+												o.SetClassId("workflow.Constraints")
 												if v, ok := l["enum_list"]; ok {
 													{
 														x := make([]models.WorkflowEnumEntry, 0)
@@ -2421,7 +2421,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 																	}
 																}
 															}
-															o.SetClassId("")
+															o.SetClassId("workflow.SelectorProperty")
 															if v, ok := l["method"]; ok {
 																{
 																	x := (v.(string))
@@ -2582,7 +2582,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 					o.SetAnswerFile(x)
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("os.Answers")
 			if v, ok := l["hostname"]; ok {
 				{
 					x := (v.(string))
@@ -2612,7 +2612,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("os.IpConfiguration")
 						if v, ok := l["object_type"]; ok {
 							{
 								x := (v.(string))
@@ -2698,7 +2698,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2761,7 +2761,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2809,7 +2809,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("os.InstallTarget")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -2865,7 +2865,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("os.OperatingSystemParameters")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -2896,7 +2896,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2939,7 +2939,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2993,7 +2993,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3076,7 +3076,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3157,7 +3157,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.VersionContext")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -3231,7 +3231,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3262,7 +3262,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 	if err != nil {
 		return diag.Errorf("json marshal of OsInstall object failed with error : %s", err.Error())
 	}
-	countResponse, _, responseErr := conn.ApiClient.OsApi.GetOsInstallList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
+	countResponse, _, responseErr := conn.ApiClient.OsApi.GetOsInstallList(conn.ctx).Filter(getRequestParams(data)).Count(true).Execute()
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
@@ -3271,13 +3271,12 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 		}
 		return diag.Errorf("error occurred while fetching count of OsInstall: %s", responseErr.Error())
 	}
-	count := countResponse.OsInstallList.GetCount()
+	count := countResponse.MoDocumentCount.GetCount()
 	if count == 0 {
 		return diag.Errorf("your query for OsInstall data source did not return any results. Please change your search criteria and try again")
 	}
 	var i int32
-	var osInstallResults = make([]map[string]interface{}, count, count)
-	var j = 0
+	var osInstallResults = make([]map[string]interface{}, 0, 0)
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.OsApi.GetOsInstallList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
@@ -3291,8 +3290,8 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 		results := resMo.OsInstallList.GetResults()
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
-			for i := 0; i < len(results); i++ {
-				var s = results[i]
+			for k := 0; k < len(results); k++ {
+				var s = results[k]
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
 
@@ -3341,8 +3340,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 
 				temp["workflow_info"] = flattenMapWorkflowWorkflowInfoRelationship(s.GetWorkflowInfo(), d)
-				osInstallResults[j] = temp
-				j += 1
+				osInstallResults = append(osInstallResults, temp)
 			}
 		}
 	}

@@ -13,6 +13,7 @@ import (
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceHclCompatibilityStatus() *schema.Resource {
@@ -149,7 +150,8 @@ func resourceHclCompatibilityStatus() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}, ForceNew: true,
+					Type: schema.TypeString,
+				}, ForceNew: true,
 			},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -244,6 +246,7 @@ func resourceHclCompatibilityStatus() *schema.Resource {
 			},
 			"profile_list": {
 				Type:       schema.TypeList,
+				MinItems:   1,
 				Optional:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Computed:   true,
@@ -343,7 +346,8 @@ func resourceHclCompatibilityStatus() *schema.Resource {
 										ConfigMode: schema.SchemaConfigModeAttr,
 										Computed:   true,
 										Elem: &schema.Schema{
-											Type: schema.TypeString}, ForceNew: true,
+											Type: schema.TypeString,
+										}, ForceNew: true,
 									},
 									"error_code": {
 										Description: "Error code indicating the support status.\n* `Success` - The input combination is valid.\n* `Unknown` - Unknown API request to the service.\n* `UnknownServer` - An invalid server model is given API requests or the server model is not present in the HCL database.\n* `InvalidUcsVersion` - UCS Version is not in expected format.\n* `ProcessorNotSupported` - Processor is not supported with the given Server or the Processor does not exist in the HCL database.\n* `OSNotSupported` - OS version is not supported with the given server, processor combination or OS information is not present in the HCL database.\n* `OSUnknown` - OS vendor or version is not known as per the HCL database.\n* `UCSVersionNotSupported` - UCS Version is not supported with the given server, processor and OS combination or the UCS version is not present in the HCL database.\n* `UcsVersionServerOSCombinationNotSupported` - Combination of UCS version, server (model and processor) and os version is not supported.\n* `ProductUnknown` - Product is not known as per the HCL database.\n* `ProductNotSupported` - Product is not supported in the given UCS version, server (model and processor) and operating system version.\n* `DriverNameNotSupported` - Driver protocol or name is not supported for the given product.\n* `FirmwareVersionNotSupported` - Firmware version not supported for the component and the server, operating system combination.\n* `DriverVersionNotSupported` - Driver version not supported for the component and the server, operating system combination.\n* `FirmwareVersionDriverVersionCombinationNotSupported` - Both Firmware and Driver versions are not supported for the component and the server, operating system combination.\n* `FirmwareVersionAndDriverVersionNotSupported` - Firmware and Driver version combination not supported for the component and the server, operating system combination.\n* `FirmwareVersionAndDriverNameNotSupported` - Firmware Version and Driver name or not supported with the component and the server, operating system combination.\n* `InternalError` - API requests to the service have either failed or timed out.\n* `MarshallingError` - Error in JSON marshalling.\n* `Exempted` - An exempted error code means that the product is part of the exempted Catalog and should be ignored for HCL validation purposes.",
@@ -474,11 +478,12 @@ func resourceHclCompatibilityStatus() *schema.Resource {
 										ForceNew:    true,
 									},
 									"type": {
-										Description: "Type of the product/adapter say OCP, PT, GPU.\n* `` - Default type of the Product.\n* `Adapter` - Represents network adapter cards.\n* `StorageController` - Represents storage controllers.\n* `GPU` - Represents graphics cards.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Default:     "",
-										ForceNew:    true,
+										Description:  "Type of the product/adapter say OCP, PT, GPU.\n* `` - Default type of the Product.\n* `Adapter` - Represents network adapter cards.\n* `StorageController` - Represents storage controllers.\n* `GPU` - Represents graphics cards.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringInSlice([]string{"", "Adapter", "StorageController", "GPU"}, false),
+										Optional:     true,
+										Default:      "",
+										ForceNew:     true,
 									},
 									"vendor": {
 										Description: "Vendor of the product or adapter.",
@@ -509,22 +514,24 @@ func resourceHclCompatibilityStatus() *schema.Resource {
 							ForceNew:    true,
 						},
 						"version_type": {
-							Description: "Type of the UCS version indicating whether it is a UCSM release vesion or a IMC release.\n* `UCSM` - The server is managed by UCS Manager.\n* `IMC` - The server is standalone managed by CIMC.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "UCSM",
-							ForceNew:    true,
+							Description:  "Type of the UCS version indicating whether it is a UCSM release vesion or a IMC release.\n* `UCSM` - The server is managed by UCS Manager.\n* `IMC` - The server is standalone managed by CIMC.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"UCSM", "IMC"}, false),
+							Optional:     true,
+							Default:      "UCSM",
+							ForceNew:     true,
 						},
 					},
 				},
 				ForceNew: true,
 			},
 			"request_type": {
-				Description: "Type of the request to be served.\n* `FillSupportedVersions` - Responds with the supported firmware and driver versions. The API doesn't expect firmware and driver versions to be passed in the request and ignores if passed.\n* `CheckCompatibility` - Checks the compatibility for the given firmware and driver versions. This request type expects the firmware and driver versions to filled and the service validates the values and responds back with the error codes.\n* `GetRecommendedDrivers` - Responds with the supported drivers. The API expects firmware version to be filled. The API populates driver ISO url for the given server model. Today the link is same for all servers managed by UCSM whereas it depends on the model for Standalone servers.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "FillSupportedVersions",
-				ForceNew:    true,
+				Description:  "Type of the request to be served.\n* `FillSupportedVersions` - Responds with the supported firmware and driver versions. The API doesn't expect firmware and driver versions to be passed in the request and ignores if passed.\n* `CheckCompatibility` - Checks the compatibility for the given firmware and driver versions. This request type expects the firmware and driver versions to filled and the service validates the values and responds back with the error codes.\n* `GetRecommendedDrivers` - Responds with the supported drivers. The API expects firmware version to be filled. The API populates driver ISO url for the given server model. Today the link is same for all servers managed by UCSM whereas it depends on the model for Standalone servers.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"FillSupportedVersions", "CheckCompatibility", "GetRecommendedDrivers"}, false),
+				Optional:     true,
+				Default:      "FillSupportedVersions",
+				ForceNew:     true,
 			},
 			"shared_scope": {
 				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
@@ -552,16 +559,18 @@ func resourceHclCompatibilityStatus() *schema.Resource {
 							ForceNew:         true,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							ForceNew:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
+							ForceNew:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							ForceNew:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
+							ForceNew:     true,
 						},
 					},
 				},

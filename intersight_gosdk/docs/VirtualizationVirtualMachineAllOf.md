@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **Discovered** | Pointer to **bool** | Flag to indicate whether the configuration is created from inventory object. | [optional] [readonly] 
 **Disk** | Pointer to [**[]VirtualizationVirtualMachineDisk**](VirtualizationVirtualMachineDisk.md) |  | [optional] 
 **ForceDelete** | Pointer to **bool** | Normally any virtual machine that is still powered on cannot be deleted. The expected sequence from a user is to first power off the virtual machine and then invoke the delete operation. However, in special circumstances, the owner of the virtual machine may know very well that the virtual machine is no longer needed and just wants to dispose it off. In such situations a delete operation of a virtual machine object is accepted only when this forceDelete attribute is set to true. Under normal circumstances (forceDelete is false), delete operation first confirms that the virtual machine is powered off and then proceeds to delete the virtual machine. | [optional] 
+**GpuConfigs** | Pointer to [**[]InfraBaseGpuConfiguration**](InfraBaseGpuConfiguration.md) |  | [optional] 
 **GuestOs** | Pointer to **string** | Guest operating system running on virtual machine. * &#x60;linux&#x60; - A Linux operating system. * &#x60;windows&#x60; - A Windows operating system. | [optional] [default to "linux"]
 **HostEsxi** | Pointer to **string** | Host where virtual machine is deployed. | [optional] 
 **HypervisorType** | Pointer to **string** | Identifies the broad product type of the hypervisor but without any version information. It is here to easily identify the type of the virtual machine. There are other entities (Host, Cluster, etc.) that can be indirectly used to determine the hypervisor but a direct attribute makes it easier to work with. * &#x60;ESXi&#x60; - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version. * &#x60;HyperFlexAp&#x60; - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform. * &#x60;IWE&#x60; - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine. * &#x60;Hyper-V&#x60; - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V. * &#x60;Unknown&#x60; - The hypervisor running on the HyperFlex cluster is not known. | [optional] [readonly] [default to "ESXi"]
@@ -391,6 +392,41 @@ SetForceDelete sets ForceDelete field to given value.
 
 HasForceDelete returns a boolean if a field has been set.
 
+### GetGpuConfigs
+
+`func (o *VirtualizationVirtualMachineAllOf) GetGpuConfigs() []InfraBaseGpuConfiguration`
+
+GetGpuConfigs returns the GpuConfigs field if non-nil, zero value otherwise.
+
+### GetGpuConfigsOk
+
+`func (o *VirtualizationVirtualMachineAllOf) GetGpuConfigsOk() (*[]InfraBaseGpuConfiguration, bool)`
+
+GetGpuConfigsOk returns a tuple with the GpuConfigs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGpuConfigs
+
+`func (o *VirtualizationVirtualMachineAllOf) SetGpuConfigs(v []InfraBaseGpuConfiguration)`
+
+SetGpuConfigs sets GpuConfigs field to given value.
+
+### HasGpuConfigs
+
+`func (o *VirtualizationVirtualMachineAllOf) HasGpuConfigs() bool`
+
+HasGpuConfigs returns a boolean if a field has been set.
+
+### SetGpuConfigsNil
+
+`func (o *VirtualizationVirtualMachineAllOf) SetGpuConfigsNil(b bool)`
+
+ SetGpuConfigsNil sets the value for GpuConfigs to be an explicit nil
+
+### UnsetGpuConfigs
+`func (o *VirtualizationVirtualMachineAllOf) UnsetGpuConfigs()`
+
+UnsetGpuConfigs ensures that no value is present for GpuConfigs, not even an explicit nil
 ### GetGuestOs
 
 `func (o *VirtualizationVirtualMachineAllOf) GetGuestOs() string`

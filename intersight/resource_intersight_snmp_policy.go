@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceSnmpPolicy() *schema.Resource {
@@ -22,9 +24,10 @@ func resourceSnmpPolicy() *schema.Resource {
 		CustomizeDiff: CustomizeTagDiff,
 		Schema: map[string]*schema.Schema{
 			"access_community_string": {
-				Description: "The default SNMPv1, SNMPv2c community name or SNMPv3 username to include on any trap messages sent to the SNMP host. The name can be 18 characters long.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "The default SNMPv1, SNMPv2c community name or SNMPv3 username to include on any trap messages sent to the SNMP host. The name can be 18 characters long.",
+				Type:         schema.TypeString,
+				ValidateFunc: StringLenMaximum(18),
+				Optional:     true,
 			},
 			"account_moid": {
 				Description: "The Account ID for this managed object.",
@@ -88,10 +91,11 @@ func resourceSnmpPolicy() *schema.Resource {
 				Default:     "snmp.Policy",
 			},
 			"community_access": {
-				Description: "Controls access to the information in the inventory tables. Applicable only for SNMPv1 and SNMPv2c users.\n* `Disabled` - Blocks access to the information in the inventory tables.\n* `Limited` - Partial access to read the information in the inventory tables.\n* `Full` - Full access to read the information in the inventory tables.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "Disabled",
+				Description:  "Controls access to the information in the inventory tables. Applicable only for SNMPv1 and SNMPv2c users.\n* `Disabled` - Blocks access to the information in the inventory tables.\n* `Limited` - Partial access to read the information in the inventory tables.\n* `Full` - Full access to read the information in the inventory tables.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Disabled", "Limited", "Full"}, false),
+				Optional:     true,
+				Default:      "Disabled",
 			},
 			"create_time": {
 				Description: "The time when this managed object was created.",
@@ -105,9 +109,10 @@ func resourceSnmpPolicy() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -127,9 +132,10 @@ func resourceSnmpPolicy() *schema.Resource {
 				Default:     true,
 			},
 			"engine_id": {
-				Description: "User-defined unique identification of the static engine.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "User-defined unique identification of the static engine.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[^#!&]*$"), ""), StringLenMaximum(27)),
+				Optional:     true,
 			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
@@ -150,9 +156,10 @@ func resourceSnmpPolicy() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the concrete policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the concrete policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -207,7 +214,8 @@ func resourceSnmpPolicy() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -338,13 +346,15 @@ func resourceSnmpPolicy() *schema.Resource {
 					return
 				}},
 			"snmp_port": {
-				Description: "Port on which Cisco IMC SNMP agent runs. Enter a value between 1-65535. Reserved ports not allowed (22, 23, 80, 123, 389, 443, 623, 636, 2068, 3268, 3269).",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Default:     161,
+				Description:  "Port on which Cisco IMC SNMP agent runs. Enter a value between 1-65535. Reserved ports not allowed (22, 23, 80, 123, 389, 443, 623, 636, 2068, 3268, 3269).",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(1, 65535),
+				Optional:     true,
+				Default:      161,
 			},
 			"snmp_traps": {
 				Type:       schema.TypeList,
+				MaxItems:   15,
 				Optional:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Computed:   true,
@@ -362,9 +372,10 @@ func resourceSnmpPolicy() *schema.Resource {
 							Default:     "snmp.Trap",
 						},
 						"community": {
-							Description: "SNMP community group used for sending SNMP trap to other devices. Applicable only for SNMP v2c.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "SNMP community group used for sending SNMP trap to other devices. Applicable only for SNMP v2c.",
+							Type:         schema.TypeString,
+							ValidateFunc: StringLenMaximum(18),
+							Optional:     true,
 						},
 						"destination": {
 							Description: "Address to which the SNMP trap information is sent.",
@@ -384,16 +395,18 @@ func resourceSnmpPolicy() *schema.Resource {
 							Default:     "snmp.Trap",
 						},
 						"port": {
-							Description: "Port used by the server to communicate with the trap destination. Enter a value between 1-65535. Reserved ports not allowed (22, 23, 80, 123, 389, 443, 623, 636, 2068, 3268, 3269).",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     162,
+							Description:  "Port used by the server to communicate with the trap destination. Enter a value between 1-65535. Reserved ports not allowed (22, 23, 80, 123, 389, 443, 623, 636, 2068, 3268, 3269).",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(1, 65535),
+							Optional:     true,
+							Default:      162,
 						},
 						"type": {
-							Description: "Type of trap which decides whether to receive a notification when a trap is received at the destination.\n* `Trap` - Do not receive notifications when trap is sent to the destination.\n* `Inform` - Receive notifications when trap is sent to the destination. This option is valid only for V2 users.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "Trap",
+							Description:  "Type of trap which decides whether to receive a notification when a trap is received at the destination.\n* `Trap` - Do not receive notifications when trap is sent to the destination.\n* `Inform` - Receive notifications when trap is sent to the destination. This option is valid only for V2 users.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"Trap", "Inform"}, false),
+							Optional:     true,
+							Default:      "Trap",
 						},
 						"user": {
 							Description: "SNMP user for the trap. Applicable only to SNMPv3.",
@@ -401,16 +414,18 @@ func resourceSnmpPolicy() *schema.Resource {
 							Optional:    true,
 						},
 						"nr_version": {
-							Description: "SNMP version used for the trap.\n* `V3` - SNMP v3 trap version notifications.\n* `V2` - SNMP v2 trap version notifications.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "V3",
+							Description:  "SNMP version used for the trap.\n* `V3` - SNMP v3 trap version notifications.\n* `V2` - SNMP v2 trap version notifications.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"V3", "V2"}, false),
+							Optional:     true,
+							Default:      "V3",
 						},
 					},
 				},
 			},
 			"snmp_users": {
 				Type:       schema.TypeList,
+				MaxItems:   15,
 				Optional:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Computed:   true,
@@ -427,10 +442,11 @@ func resourceSnmpPolicy() *schema.Resource {
 							Optional:    true,
 						},
 						"auth_type": {
-							Description: "Authorization protocol for authenticating the user.\n* `NA` - Authentication protocol is not applicable.\n* `MD5` - MD5 protocol is used to authenticate SNMP user.\n* `SHA` - SHA protocol is used to authenticate SNMP user.\n* `SHA-224` - SHA-224 protocol is used to authenticate SNMP user.\n* `SHA-256` - SHA-256 protocol is used to authenticate SNMP user.\n* `SHA-384` - SHA-384 protocol is used to authenticate SNMP user.\n* `SHA-512` - SHA-512 protocol is used to authenticate SNMP user.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "NA",
+							Description:  "Authorization protocol for authenticating the user.\n* `NA` - Authentication protocol is not applicable.\n* `MD5` - MD5 protocol is used to authenticate SNMP user.\n* `SHA` - SHA protocol is used to authenticate SNMP user.\n* `SHA-224` - SHA-224 protocol is used to authenticate SNMP user.\n* `SHA-256` - SHA-256 protocol is used to authenticate SNMP user.\n* `SHA-384` - SHA-384 protocol is used to authenticate SNMP user.\n* `SHA-512` - SHA-512 protocol is used to authenticate SNMP user.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"NA", "MD5", "SHA", "SHA-224", "SHA-256", "SHA-384", "SHA-512"}, false),
+							Optional:     true,
+							Default:      "NA",
 						},
 						"class_id": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
@@ -461,9 +477,10 @@ func resourceSnmpPolicy() *schema.Resource {
 								return
 							}},
 						"name": {
-							Description: "SNMP username. Must have a minimum of 1 and and a maximum of 31 characters.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "SNMP username. Must have a minimum of 1 and and a maximum of 31 characters.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 31),
+							Optional:     true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -477,29 +494,33 @@ func resourceSnmpPolicy() *schema.Resource {
 							Optional:    true,
 						},
 						"privacy_type": {
-							Description: "Privacy protocol for the user.\n* `NA` - Privacy protocol is not applicable.\n* `DES` - DES privacy protocol is used for SNMP user.\n* `AES` - AES privacy protocol is used for SNMP user.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "NA",
+							Description:  "Privacy protocol for the user.\n* `NA` - Privacy protocol is not applicable.\n* `DES` - DES privacy protocol is used for SNMP user.\n* `AES` - AES privacy protocol is used for SNMP user.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"NA", "DES", "AES"}, false),
+							Optional:     true,
+							Default:      "NA",
 						},
 						"security_level": {
-							Description: "Security mechanism used for communication between agent and manager.\n* `AuthPriv` - The user requires both an authorization password and a privacy password.\n* `NoAuthNoPriv` - The user does not require an authorization or privacy password.\n* `AuthNoPriv` - The user requires an authorization password but not a privacy password.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "AuthPriv",
+							Description:  "Security mechanism used for communication between agent and manager.\n* `AuthPriv` - The user requires both an authorization password and a privacy password.\n* `NoAuthNoPriv` - The user does not require an authorization or privacy password.\n* `AuthNoPriv` - The user requires an authorization password but not a privacy password.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"AuthPriv", "NoAuthNoPriv", "AuthNoPriv"}, false),
+							Optional:     true,
+							Default:      "AuthPriv",
 						},
 					},
 				},
 			},
 			"sys_contact": {
-				Description: "Contact person responsible for the SNMP implementation. Enter a string up to 64 characters, such as an email address or a name and telephone number.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Contact person responsible for the SNMP implementation. Enter a string up to 64 characters, such as an email address or a name and telephone number.",
+				Type:         schema.TypeString,
+				ValidateFunc: StringLenMaximum(64),
+				Optional:     true,
 			},
 			"sys_location": {
-				Description: "Location of host on which the SNMP agent (server) runs.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Location of host on which the SNMP agent (server) runs.",
+				Type:         schema.TypeString,
+				ValidateFunc: StringLenMaximum(64),
+				Optional:     true,
 			},
 			"tags": {
 				Type:       schema.TypeList,
@@ -514,22 +535,25 @@ func resourceSnmpPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
 			},
 			"trap_community": {
-				Description: "SNMP community group used for sending SNMP trap to other devices. Valid only for SNMPv2c users.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "SNMP community group used for sending SNMP trap to other devices. Valid only for SNMPv2c users.",
+				Type:         schema.TypeString,
+				ValidateFunc: StringLenMaximum(18),
+				Optional:     true,
 			},
 			"v2_enabled": {
 				Description: "State of the SNMP v2c on the endpoint. If enabled, the endpoint sends SNMP v2c properties to the designated host.",
@@ -756,7 +780,7 @@ func resourceSnmpPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1291,7 +1315,7 @@ func resourceSnmpPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

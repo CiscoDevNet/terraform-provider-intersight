@@ -10,6 +10,7 @@ import (
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceFirmwareUnsupportedVersionUpgrade() *schema.Resource {
@@ -97,10 +98,11 @@ func resourceFirmwareUnsupportedVersionUpgrade() *schema.Resource {
 							Default:     "connector.FileChecksum",
 						},
 						"hash_algorithm": {
-							Description: "The hash algorithm used to calculate the checksum.\n* `crc` - A CRC hash as definded by RFC 3385. Generated with the IEEE polynomial.\n* `sha256` - A SHA256 hash as defined by RFC 4634.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "crc",
+							Description:  "The hash algorithm used to calculate the checksum.\n* `crc` - A CRC hash as definded by RFC 3385. Generated with the IEEE polynomial.\n* `sha256` - A SHA256 hash as defined by RFC 4634.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"crc", "sha256"}, false),
+							Optional:     true,
+							Default:      "crc",
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -264,7 +266,8 @@ func resourceFirmwareUnsupportedVersionUpgrade() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -409,23 +412,26 @@ func resourceFirmwareUnsupportedVersionUpgrade() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
 			},
 			"upgrade_status": {
-				Description: "Workflow status of firmware upgrade.\n* `None` - Upgrade status is none when upgrade is in progress.\n* `Completed` - Upgrade completed successfully.\n* `Failed` - Upgrade status is failed when upgrade has failed.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "None",
+				Description:  "Workflow status of firmware upgrade.\n* `None` - Upgrade status is none when upgrade is in progress.\n* `Completed` - Upgrade completed successfully.\n* `Failed` - Upgrade status is failed when upgrade has failed.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"None", "Completed", "Failed"}, false),
+				Optional:     true,
+				Default:      "None",
 			},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
@@ -602,7 +608,7 @@ func resourceFirmwareUnsupportedVersionUpgradeCreate(c context.Context, d *schem
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("connector.FileChecksum")
 			if v, ok := l["hash_algorithm"]; ok {
 				{
 					x := (v.(string))
@@ -641,7 +647,7 @@ func resourceFirmwareUnsupportedVersionUpgradeCreate(c context.Context, d *schem
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -706,7 +712,7 @@ func resourceFirmwareUnsupportedVersionUpgradeCreate(c context.Context, d *schem
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -938,7 +944,7 @@ func resourceFirmwareUnsupportedVersionUpgradeUpdate(c context.Context, d *schem
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("connector.FileChecksum")
 			if v, ok := l["hash_algorithm"]; ok {
 				{
 					x := (v.(string))
@@ -978,7 +984,7 @@ func resourceFirmwareUnsupportedVersionUpgradeUpdate(c context.Context, d *schem
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1048,7 +1054,7 @@ func resourceFirmwareUnsupportedVersionUpgradeUpdate(c context.Context, d *schem
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

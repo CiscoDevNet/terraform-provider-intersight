@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceIpmioverlanPolicy() *schema.Resource {
@@ -94,9 +96,10 @@ func resourceIpmioverlanPolicy() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -116,9 +119,10 @@ func resourceIpmioverlanPolicy() *schema.Resource {
 				Default:     true,
 			},
 			"encryption_key": {
-				Description: "The encryption key to use for IPMI communication. It should have an even number of hexadecimal characters and not exceed 40 characters.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "The encryption key to use for IPMI communication. It should have an even number of hexadecimal characters and not exceed 40 characters.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[a-fA-F0-9]*$"), ""), validation.StringLenBetween(0, 40)),
+				Optional:     true,
 			},
 			"is_encryption_key_set": {
 				Description: "Indicates whether the value of the 'encryptionKey' property has been set.",
@@ -150,9 +154,10 @@ func resourceIpmioverlanPolicy() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the concrete policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the concrete policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -207,7 +212,8 @@ func resourceIpmioverlanPolicy() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -288,10 +294,11 @@ func resourceIpmioverlanPolicy() *schema.Resource {
 				},
 			},
 			"privilege": {
-				Description: "The highest privilege level that can be assigned to an IPMI session on a server.\n* `admin` - Privilege to perform all actions available through IPMI.\n* `user` - Privilege to perform some functions through IPMI but restriction on performing administrative tasks.\n* `read-only` - Privilege to view information throught IPMI but restriction on making any changes.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "admin",
+				Description:  "The highest privilege level that can be assigned to an IPMI session on a server.\n* `admin` - Privilege to perform all actions available through IPMI.\n* `user` - Privilege to perform some functions through IPMI but restriction on performing administrative tasks.\n* `read-only` - Privilege to view information throught IPMI but restriction on making any changes.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"admin", "user", "read-only"}, false),
+				Optional:     true,
+				Default:      "admin",
 			},
 			"profiles": {
 				Description: "An array of relationships to policyAbstractConfigProfile resources.",
@@ -356,14 +363,16 @@ func resourceIpmioverlanPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -572,7 +581,7 @@ func resourceIpmioverlanPolicyCreate(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -897,7 +906,7 @@ func resourceIpmioverlanPolicyUpdate(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

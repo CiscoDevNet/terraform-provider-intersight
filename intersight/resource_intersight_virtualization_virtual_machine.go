@@ -6,11 +6,13 @@ import (
 	"fmt"
 	"log"
 	"reflect"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceVirtualizationVirtualMachine() *schema.Resource {
@@ -34,10 +36,11 @@ func resourceVirtualizationVirtualMachine() *schema.Resource {
 					return
 				}},
 			"action": {
-				Description: "Action to be performed on a virtual machine (Create, PowerState, Migrate, Clone etc).\n* `None` - A place holder for the default value.\n* `PowerState` - Power action is performed on the virtual machine.\n* `Migrate` - The virtual machine will be migrated from existing node to a different node in cluster. The behavior depends on the underlying hypervisor.\n* `Create` - The virtual machine will be created on the specified hypervisor. This action is also useful if the virtual machine creation failed during first POST operation on VirtualMachine managed object. User can set this action to retry the virtual machine creation.\n* `Delete` - The virtual machine will be deleted from the specified hypervisor. User can either set this action or can do a DELETE operation on the VirtualMachine managed object.\n* `Resize` - The virtual machine will be resized to the specified instance type.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "None",
+				Description:  "Action to be performed on a virtual machine (Create, PowerState, Migrate, Clone etc).\n* `None` - A place holder for the default value.\n* `PowerState` - Power action is performed on the virtual machine.\n* `Migrate` - The virtual machine will be migrated from existing node to a different node in cluster. The behavior depends on the underlying hypervisor.\n* `Create` - The virtual machine will be created on the specified hypervisor. This action is also useful if the virtual machine creation failed during first POST operation on VirtualMachine managed object. User can set this action to retry the virtual machine creation.\n* `Delete` - The virtual machine will be deleted from the specified hypervisor. User can either set this action or can do a DELETE operation on the VirtualMachine managed object.\n* `Resize` - The virtual machine will be resized to the specified instance type.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"None", "PowerState", "Migrate", "Create", "Delete", "Resize"}, false),
+				Optional:     true,
+				Default:      "None",
 			},
 			"action_info": {
 				Description: "Details of an action performed on the virtual machine. Contains name of the action performed, status, failure reason message etc.",
@@ -270,10 +273,11 @@ func resourceVirtualizationVirtualMachine() *schema.Resource {
 							Default:     "virtualization.CloudInitConfig",
 						},
 						"config_type": {
-							Description: "Virtual machine cloud init configuration type.\n* `` - No cloud init specified. Cloud-init configurations are not sent to hypervisor, if none is selected.\n* `NoCloudSource` - Allows the user to provide user-data to the instance without running a network service.\n* `CloudConfigDrive` - Allows the user to provide user-data and network-data from cloud.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "",
+							Description:  "Virtual machine cloud init configuration type.\n* `` - No cloud init specified. Cloud-init configurations are not sent to hypervisor, if none is selected.\n* `NoCloudSource` - Allows the user to provide user-data to the instance without running a network service.\n* `CloudConfigDrive` - Allows the user to provide user-data and network-data from cloud.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"", "NoCloudSource", "CloudConfigDrive"}, false),
+							Optional:     true,
+							Default:      "",
 						},
 						"network_data": {
 							Description: "Network configuration data for a virtual machine.",
@@ -351,9 +355,10 @@ func resourceVirtualizationVirtualMachine() *schema.Resource {
 				Optional:    true,
 			},
 			"cpu": {
-				Description: "Number of vCPUs to be allocated to virtual machine. The upper limit depends on the hypervisor.",
-				Type:        schema.TypeInt,
-				Optional:    true,
+				Description:  "Number of vCPUs to be allocated to virtual machine. The upper limit depends on the hypervisor.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(1, 1024),
+				Optional:     true,
 			},
 			"create_time": {
 				Description: "The time when this managed object was created.",
@@ -390,10 +395,11 @@ func resourceVirtualizationVirtualMachine() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"bus": {
-							Description: "Disk bus name given for a virtual machine.\n* `virtio` - Disk uses the same paths as a bare-metal system. This simplifies physical-to-virtual and virtual-to-virtual migration.\n* `sata` - Serial ATA (SATA, abbreviated from Serial AT Attachment) is a computer bus interface that connects host bus adapters to mass storage devices such as hard disk drives, optical drives, and solid-state drives.\n* `scsi` - SCSI (Small Computer System Interface) bus used..",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "virtio",
+							Description:  "Disk bus name given for a virtual machine.\n* `virtio` - Disk uses the same paths as a bare-metal system. This simplifies physical-to-virtual and virtual-to-virtual migration.\n* `sata` - Serial ATA (SATA, abbreviated from Serial AT Attachment) is a computer bus interface that connects host bus adapters to mass storage devices such as hard disk drives, optical drives, and solid-state drives.\n* `scsi` - SCSI (Small Computer System Interface) bus used..",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"virtio", "sata", "scsi"}, false),
+							Optional:     true,
+							Default:      "virtio",
 						},
 						"class_id": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
@@ -413,15 +419,17 @@ func resourceVirtualizationVirtualMachine() *schema.Resource {
 							Default:     "virtualization.VirtualMachineDisk",
 						},
 						"order": {
-							Description: "Priority order of the disk.",
-							Type:        schema.TypeInt,
-							Optional:    true,
+							Description:  "Priority order of the disk.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntAtLeast(1),
+							Optional:     true,
 						},
 						"type": {
-							Description: "Disk type hdd or cdrom for a virtual machine.\n* `hdd` - Allows the virtual machine to mount disk from hard disk drive (hdd) image.\n* `cdrom` - Allows the virtual machine to mount disk from compact disk (cd) image.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "hdd",
+							Description:  "Disk type hdd or cdrom for a virtual machine.\n* `hdd` - Allows the virtual machine to mount disk from hard disk drive (hdd) image.\n* `cdrom` - Allows the virtual machine to mount disk from compact disk (cd) image.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"hdd", "cdrom"}, false),
+							Optional:     true,
+							Default:      "hdd",
 						},
 						"virtual_disk": {
 							Description: "Virtual disk configuration.",
@@ -449,10 +457,11 @@ func resourceVirtualizationVirtualMachine() *schema.Resource {
 										Default:     "virtualization.VirtualDiskConfig",
 									},
 									"mode": {
-										Description: "File mode of the disk, example - Filesystem, Block.\n* `Block` - It is a Block virtual disk.\n* `Filesystem` - It is a File system virtual disk.\n* `` - Disk mode is either unknown or not supported.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Default:     "Block",
+										Description:  "File mode of the disk, example - Filesystem, Block.\n* `Block` - It is a Block virtual disk.\n* `Filesystem` - It is a File system virtual disk.\n* `` - Disk mode is either unknown or not supported.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringInSlice([]string{"Block", "Filesystem", ""}, false),
+										Optional:     true,
+										Default:      "Block",
 									},
 									"object_type": {
 										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -502,11 +511,54 @@ func resourceVirtualizationVirtualMachine() *schema.Resource {
 				Type:        schema.TypeBool,
 				Optional:    true,
 			},
+			"gpu_configs": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"device_id": {
+							Description: "The device Id of the GPU device.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+						},
+						"memory_size": {
+							Description: "The amount of memory on the GPU (GBs).",
+							Type:        schema.TypeInt,
+							Optional:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"vendor_id": {
+							Description: "The vendor Id of the GPU device.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+						},
+					},
+				},
+			},
 			"guest_os": {
-				Description: "Guest operating system running on virtual machine.\n* `linux` - A Linux operating system.\n* `windows` - A Windows operating system.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "linux",
+				Description:  "Guest operating system running on virtual machine.\n* `linux` - A Linux operating system.\n* `windows` - A Windows operating system.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"linux", "windows"}, false),
+				Optional:     true,
+				Default:      "linux",
 			},
 			"host": {
 				Description: "A reference to a virtualizationBaseHost resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -573,10 +625,11 @@ func resourceVirtualizationVirtualMachine() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"adaptor_type": {
-							Description: "Virtual machine network adaptor type.\n* `Unknown` - The type of the network adaptor type is unknown.\n* `E1000` - Emulated version of the Intel 82545EM Gigabit Ethernet NIC.\n* `SRIOV` - Representation of a virtual function (VF) on a physical NIC with SR-IOV support.\n* `VMXNET2` - VMXNET 2 (Enhanced) is available only for some guest operating systems on ESX/ESXi 3.5 and later.\n* `VMXNET3` - VMXNET 3 offers all the features available in VMXNET 2 and adds several new features.\n* `E1000E` - E1000E – emulates a newer real network adapter, the 1 Gbit Intel 82574, and is available for Windows 2012 and later. The E1000E needs virtual machine hardware version 8 or later.\n* `NE2K_PCI` - The Ne2000 network card uses two ring buffers for packet handling. These are circular buffers made of 256-byte pages that the chip's DMA logic will use to store received packets or to get received packets.\n* `PCnet` - The PCnet-PCI II is a PCI network adapter. It has built-in support for CRC checks and can automatically pad short packets to the minimum Ethernet length.\n* `RTL8139` - The RTL8139 is a fast Ethernet card that operates at 10/100 Mbps. It is compliant with PCI version 2.0/2.1 and it is known for reliability and superior performance.\n* `VirtIO` - VirtIO is a standardized interface which allows virtual machines access to simplified \"virtual\" devices, such as block devices, network adapters and consoles. Accessing devices through VirtIO on a guest VM improves performance over more traditional \"emulated\" devices, as VirtIO devices require only the bare minimum setup and configuration needed to send and receive data, while the host machine handles the majority of the setup and maintenance of the actual physical hardware.\n* `` - Default network adaptor type supported by the hypervisor.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "Unknown",
+							Description:  "Virtual machine network adaptor type.\n* `Unknown` - The type of the network adaptor type is unknown.\n* `E1000` - Emulated version of the Intel 82545EM Gigabit Ethernet NIC.\n* `SRIOV` - Representation of a virtual function (VF) on a physical NIC with SR-IOV support.\n* `VMXNET2` - VMXNET 2 (Enhanced) is available only for some guest operating systems on ESX/ESXi 3.5 and later.\n* `VMXNET3` - VMXNET 3 offers all the features available in VMXNET 2 and adds several new features.\n* `E1000E` - E1000E – emulates a newer real network adapter, the 1 Gbit Intel 82574, and is available for Windows 2012 and later. The E1000E needs virtual machine hardware version 8 or later.\n* `NE2K_PCI` - The Ne2000 network card uses two ring buffers for packet handling. These are circular buffers made of 256-byte pages that the chip's DMA logic will use to store received packets or to get received packets.\n* `PCnet` - The PCnet-PCI II is a PCI network adapter. It has built-in support for CRC checks and can automatically pad short packets to the minimum Ethernet length.\n* `RTL8139` - The RTL8139 is a fast Ethernet card that operates at 10/100 Mbps. It is compliant with PCI version 2.0/2.1 and it is known for reliability and superior performance.\n* `VirtIO` - VirtIO is a standardized interface which allows virtual machines access to simplified \"virtual\" devices, such as block devices, network adapters and consoles. Accessing devices through VirtIO on a guest VM improves performance over more traditional \"emulated\" devices, as VirtIO devices require only the bare minimum setup and configuration needed to send and receive data, while the host machine handles the majority of the setup and maintenance of the actual physical hardware.\n* `` - Default network adaptor type supported by the hypervisor.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"Unknown", "E1000", "SRIOV", "VMXNET2", "VMXNET3", "E1000E", "NE2K_PCI", "PCnet", "RTL8139", "VirtIO", ""}, false),
+							Optional:     true,
+							Default:      "Unknown",
 						},
 						"additional_properties": {
 							Type:             schema.TypeString,
@@ -615,9 +668,10 @@ func resourceVirtualizationVirtualMachine() *schema.Resource {
 							Optional:    true,
 						},
 						"mac_address": {
-							Description: "Virtual machine network mac address.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "Virtual machine network mac address.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$"), ""),
+							Optional:     true,
 						},
 						"name": {
 							Description: "Name of the network interface. This may be different from guest operating system assigned.",
@@ -646,10 +700,11 @@ func resourceVirtualizationVirtualMachine() *schema.Resource {
 							Optional:    true,
 						},
 						"private_ip_allocation_mode": {
-							Description: "Allocation mode for NIC addresses e.g. DHCP or static.\n* `DHCP` - Dynamic IP address allocation using DHCP protocol.\n* `STATIC_IP` - Assign fixed / static IPs to resources for use.\n* `IPAM_CALLOUT` - Use callout scripts to query cloud IP allocation tools to assign network parameters.\n* `PREALLOCATE_IP` - Allows the cloud infrastructure IP allocation to be dynamically provided before the server boots up.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "DHCP",
+							Description:  "Allocation mode for NIC addresses e.g. DHCP or static.\n* `DHCP` - Dynamic IP address allocation using DHCP protocol.\n* `STATIC_IP` - Assign fixed / static IPs to resources for use.\n* `IPAM_CALLOUT` - Use callout scripts to query cloud IP allocation tools to assign network parameters.\n* `PREALLOCATE_IP` - Allows the cloud infrastructure IP allocation to be dynamically provided before the server boots up.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"DHCP", "STATIC_IP", "IPAM_CALLOUT", "PREALLOCATE_IP"}, false),
+							Optional:     true,
+							Default:      "DHCP",
 						},
 						"public_ip_allocate": {
 							Description: "Set to true, if public IP should be allocated for the NIC.",
@@ -662,7 +717,8 @@ func resourceVirtualizationVirtualMachine() *schema.Resource {
 							ConfigMode: schema.SchemaConfigModeAttr,
 							Computed:   true,
 							Elem: &schema.Schema{
-								Type: schema.TypeString}},
+								Type: schema.TypeString,
+							}},
 						"static_ip_address": {
 							Type:       schema.TypeList,
 							Optional:   true,
@@ -803,9 +859,10 @@ func resourceVirtualizationVirtualMachine() *schema.Resource {
 				},
 			},
 			"memory": {
-				Description: "Virtual machine memory in mebi bytes (one mebibyte 1MiB is 1048576 bytes, and 1KiB is 1024 bytes). Input must be a whole number and scientific notation is not acceptable. For example, enter 1730 and not 1.73e03. The limit of 4177920 translates to 3.9TiB.",
-				Type:        schema.TypeInt,
-				Optional:    true,
+				Description:  "Virtual machine memory in mebi bytes (one mebibyte 1MiB is 1048576 bytes, and 1KiB is 1024 bytes). Input must be a whole number and scientific notation is not acceptable. For example, enter 1730 and not 1.73e03. The limit of 4177920 translates to 3.9TiB.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(1, 4177920),
+				Optional:     true,
 			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
@@ -826,9 +883,10 @@ func resourceVirtualizationVirtualMachine() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Virtual machine name that is unique. Hypervisors enforce platform specific limits and character sets. The name length limit, both min and max, vary among hypervisors. Therefore, the basic limits are set here and proper enforcement is done elsewhere.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Virtual machine name that is unique. Hypervisors enforce platform specific limits and character sets. The name length limit, both min and max, vary among hypervisors. Therefore, the basic limits are set here and proper enforcement is done elsewhere.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringLenBetween(1, 128),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -842,7 +900,8 @@ func resourceVirtualizationVirtualMachine() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -923,16 +982,18 @@ func resourceVirtualizationVirtualMachine() *schema.Resource {
 				},
 			},
 			"power_state": {
-				Description: "Expected power state of virtual machine (PowerOn, PowerOff, Restart).\n* `PowerOff` - The virtual machine will be powered off if it is already not in powered off state. If it is already powered off, no side-effects are expected.\n* `PowerOn` - The virtual machine will be powered on if it is already not in powered on state. If it is already powered on, no side-effects are expected.\n* `Suspend` - The virtual machine will be put into  a suspended state.\n* `ShutDownGuestOS` - The guest operating system is shut down gracefully.\n* `RestartGuestOS` - It can either act as a reset switch and abruptly reset the guest operating system, or it can send a restart signal to the guest operating system so that it shuts down gracefully and restarts.\n* `Reset` - Resets the virtual machine abruptly, with no consideration for work in progress.\n* `Restart` - The virtual machine will be restarted only if it is in powered on state. If it is powered off, it will not be started up.\n* `Unknown` - Power state of the entity is unknown.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "PowerOff",
+				Description:  "Expected power state of virtual machine (PowerOn, PowerOff, Restart).\n* `PowerOff` - The virtual machine will be powered off if it is already not in powered off state. If it is already powered off, no side-effects are expected.\n* `PowerOn` - The virtual machine will be powered on if it is already not in powered on state. If it is already powered on, no side-effects are expected.\n* `Suspend` - The virtual machine will be put into  a suspended state.\n* `ShutDownGuestOS` - The guest operating system is shut down gracefully.\n* `RestartGuestOS` - It can either act as a reset switch and abruptly reset the guest operating system, or it can send a restart signal to the guest operating system so that it shuts down gracefully and restarts.\n* `Reset` - Resets the virtual machine abruptly, with no consideration for work in progress.\n* `Restart` - The virtual machine will be restarted only if it is in powered on state. If it is powered off, it will not be started up.\n* `Unknown` - Power state of the entity is unknown.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"PowerOff", "PowerOn", "Suspend", "ShutDownGuestOS", "RestartGuestOS", "Reset", "Restart", "Unknown"}, false),
+				Optional:     true,
+				Default:      "PowerOff",
 			},
 			"provision_type": {
-				Description: "Identifies the provision type to create a new virtual machine.\n* `OVA` - Deploy virtual machine using OVA/F file.\n* `Template` - Provision virtual machine using a template file.\n* `Discovered` - A virtual machine was 'discovered' and not created from Intersight. No provisioning information is available.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "OVA",
+				Description:  "Identifies the provision type to create a new virtual machine.\n* `OVA` - Deploy virtual machine using OVA/F file.\n* `Template` - Provision virtual machine using a template file.\n* `Discovered` - A virtual machine was 'discovered' and not created from Intersight. No provisioning information is available.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"OVA", "Template", "Discovered"}, false),
+				Optional:     true,
+				Default:      "OVA",
 			},
 			"registered_device": {
 				Description: "A reference to a assetDeviceRegistration resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -999,14 +1060,16 @@ func resourceVirtualizationVirtualMachine() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -1327,7 +1390,7 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("virtualization.CloudInitConfig")
 			if v, ok := l["config_type"]; ok {
 				{
 					x := (v.(string))
@@ -1388,7 +1451,7 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1495,7 +1558,7 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 								o.SetCapacity(x)
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("virtualization.VirtualDiskConfig")
 						if v, ok := l["mode"]; ok {
 							{
 								x := (v.(string))
@@ -1552,6 +1615,54 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 		o.SetForceDelete(x)
 	}
 
+	if v, ok := d.GetOk("gpu_configs"); ok {
+		x := make([]models.InfraBaseGpuConfiguration, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := models.NewInfraBaseGpuConfigurationWithDefaults()
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("infra.BaseGpuConfiguration")
+			if v, ok := l["device_id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetDeviceId(x)
+				}
+			}
+			if v, ok := l["memory_size"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMemorySize(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["vendor_id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetVendorId(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		if len(x) > 0 {
+			o.SetGpuConfigs(x)
+		}
+	}
+
 	if v, ok := d.GetOk("guest_os"); ok {
 		x := (v.(string))
 		o.SetGuestOs(x)
@@ -1573,7 +1684,7 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1855,7 +1966,7 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1933,7 +2044,7 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("virtualization.BaseVmConfiguration")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -2098,6 +2209,10 @@ func resourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Resou
 
 	if err := d.Set("force_delete", (s.GetForceDelete())); err != nil {
 		return diag.Errorf("error occurred while setting property ForceDelete in VirtualizationVirtualMachine object: %s", err.Error())
+	}
+
+	if err := d.Set("gpu_configs", flattenListInfraBaseGpuConfiguration(s.GetGpuConfigs(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property GpuConfigs in VirtualizationVirtualMachine object: %s", err.Error())
 	}
 
 	if err := d.Set("guest_os", (s.GetGuestOs())); err != nil {
@@ -2296,7 +2411,7 @@ func resourceVirtualizationVirtualMachineUpdate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("virtualization.CloudInitConfig")
 			if v, ok := l["config_type"]; ok {
 				{
 					x := (v.(string))
@@ -2358,7 +2473,7 @@ func resourceVirtualizationVirtualMachineUpdate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2468,7 +2583,7 @@ func resourceVirtualizationVirtualMachineUpdate(c context.Context, d *schema.Res
 								o.SetCapacity(x)
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("virtualization.VirtualDiskConfig")
 						if v, ok := l["mode"]; ok {
 							{
 								x := (v.(string))
@@ -2524,6 +2639,53 @@ func resourceVirtualizationVirtualMachineUpdate(c context.Context, d *schema.Res
 		o.SetForceDelete(x)
 	}
 
+	if d.HasChange("gpu_configs") {
+		v := d.Get("gpu_configs")
+		x := make([]models.InfraBaseGpuConfiguration, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.InfraBaseGpuConfiguration{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("infra.BaseGpuConfiguration")
+			if v, ok := l["device_id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetDeviceId(x)
+				}
+			}
+			if v, ok := l["memory_size"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMemorySize(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["vendor_id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetVendorId(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetGpuConfigs(x)
+	}
+
 	if d.HasChange("guest_os") {
 		v := d.Get("guest_os")
 		x := (v.(string))
@@ -2547,7 +2709,7 @@ func resourceVirtualizationVirtualMachineUpdate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2834,7 +2996,7 @@ func resourceVirtualizationVirtualMachineUpdate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2912,7 +3074,7 @@ func resourceVirtualizationVirtualMachineUpdate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("virtualization.BaseVmConfiguration")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))

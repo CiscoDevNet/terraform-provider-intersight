@@ -11,6 +11,7 @@ import (
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceKubernetesVirtualMachineInfrastructureProvider() *schema.Resource {
@@ -136,7 +137,8 @@ func resourceKubernetesVirtualMachineInfrastructureProvider() *schema.Resource {
 							ConfigMode: schema.SchemaConfigModeAttr,
 							Computed:   true,
 							Elem: &schema.Schema{
-								Type: schema.TypeString}},
+								Type: schema.TypeString,
+							}},
 						"network_interfaces": {
 							Type:       schema.TypeList,
 							Optional:   true,
@@ -422,7 +424,8 @@ func resourceKubernetesVirtualMachineInfrastructureProvider() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -526,14 +529,16 @@ func resourceKubernetesVirtualMachineInfrastructureProvider() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -760,7 +765,7 @@ func resourceKubernetesVirtualMachineInfrastructureProviderCreate(c context.Cont
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("kubernetes.BaseVirtualMachineInfraConfig")
 			if v, ok := l["interfaces"]; ok {
 				{
 					x := make([]string, 0)
@@ -877,7 +882,7 @@ func resourceKubernetesVirtualMachineInfrastructureProviderCreate(c context.Cont
 											}
 										}
 									}
-									o.SetClassId("")
+									o.SetClassId("mo.MoRef")
 									if v, ok := l["moid"]; ok {
 										{
 											x := (v.(string))
@@ -941,7 +946,7 @@ func resourceKubernetesVirtualMachineInfrastructureProviderCreate(c context.Cont
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -984,7 +989,7 @@ func resourceKubernetesVirtualMachineInfrastructureProviderCreate(c context.Cont
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1037,7 +1042,7 @@ func resourceKubernetesVirtualMachineInfrastructureProviderCreate(c context.Cont
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1117,7 +1122,7 @@ func resourceKubernetesVirtualMachineInfrastructureProviderCreate(c context.Cont
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1313,7 +1318,7 @@ func resourceKubernetesVirtualMachineInfrastructureProviderUpdate(c context.Cont
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("kubernetes.BaseVirtualMachineInfraConfig")
 			if v, ok := l["interfaces"]; ok {
 				{
 					x := make([]string, 0)
@@ -1430,7 +1435,7 @@ func resourceKubernetesVirtualMachineInfrastructureProviderUpdate(c context.Cont
 											}
 										}
 									}
-									o.SetClassId("")
+									o.SetClassId("mo.MoRef")
 									if v, ok := l["moid"]; ok {
 										{
 											x := (v.(string))
@@ -1495,7 +1500,7 @@ func resourceKubernetesVirtualMachineInfrastructureProviderUpdate(c context.Cont
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1539,7 +1544,7 @@ func resourceKubernetesVirtualMachineInfrastructureProviderUpdate(c context.Cont
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1595,7 +1600,7 @@ func resourceKubernetesVirtualMachineInfrastructureProviderUpdate(c context.Cont
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1675,7 +1680,7 @@ func resourceKubernetesVirtualMachineInfrastructureProviderUpdate(c context.Cont
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

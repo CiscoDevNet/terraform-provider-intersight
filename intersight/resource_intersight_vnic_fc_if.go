@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceVnicFcIf() *schema.Resource {
@@ -224,6 +226,45 @@ func resourceVnicFcIf() *schema.Resource {
 					},
 				},
 			},
+			"fc_zone_policies": {
+				Description: "An array of relationships to fabricFcZonePolicy resources.",
+				Type:        schema.TypeList,
+				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "mo.MoRef",
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+					},
+				},
+			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
@@ -243,9 +284,10 @@ func resourceVnicFcIf() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the virtual fibre channel interface.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the virtual fibre channel interface.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9\\-\\._:]+$"), ""), StringLenMaximum(31)),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -264,7 +306,8 @@ func resourceVnicFcIf() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -350,9 +393,10 @@ func resourceVnicFcIf() *schema.Resource {
 				Optional:    true,
 			},
 			"pin_group_name": {
-				Description: "Pingroup name associated to vfc for static pinning. SCP deploy will resolve pingroup name and fetches the correspoding uplink port/port channel to pin the vfc traffic.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Pingroup name associated to vfc for static pinning. SCP deploy will resolve pingroup name and fetches the correspoding uplink port/port channel to pin the vfc traffic.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"placement": {
 				Description: "Placement Settings for the virtual interface.",
@@ -375,9 +419,10 @@ func resourceVnicFcIf() *schema.Resource {
 							Default:     "vnic.PlacementSettings",
 						},
 						"id": {
-							Description: "PCIe Slot where the VIC adapter is installed. Supported values are (1-15) and MLOM.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "PCIe Slot where the VIC adapter is installed. Supported values are (1-15) and MLOM.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|1[0-5]|MLOM)$"), ""),
+							Optional:     true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -386,21 +431,24 @@ func resourceVnicFcIf() *schema.Resource {
 							Default:     "vnic.PlacementSettings",
 						},
 						"pci_link": {
-							Description: "The PCI Link used as transport for the virtual interface. This field is applicable only for VIC 1385 model (UCSC-PCIE-C40Q-03) which support two PCI links. The value, if specified, for any other VIC model will be ignored.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     0,
+							Description:  "The PCI Link used as transport for the virtual interface. This field is applicable only for VIC 1385 model (UCSC-PCIE-C40Q-03) which support two PCI links. The value, if specified, for any other VIC model will be ignored.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(0, 1),
+							Optional:     true,
+							Default:      0,
 						},
 						"switch_id": {
-							Description: "The fabric port to which the vNICs will be associated.\n* `None` - Fabric Id is not set to either A or B for the standalone case where the server is not connected to Fabric Interconnects. The value 'None' should be used.\n* `A` - Fabric A of the FI cluster.\n* `B` - Fabric B of the FI cluster.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "None",
+							Description:  "The fabric port to which the vNICs will be associated.\n* `None` - Fabric Id is not set to either A or B for the standalone case where the server is not connected to Fabric Interconnects. The value 'None' should be used.\n* `A` - Fabric A of the FI cluster.\n* `B` - Fabric B of the FI cluster.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"None", "A", "B"}, false),
+							Optional:     true,
+							Default:      "None",
 						},
 						"uplink": {
-							Description: "Adapter port on which the virtual interface will be created.",
-							Type:        schema.TypeInt,
-							Optional:    true,
+							Description:  "Adapter port on which the virtual interface will be created.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(0, 3),
+							Optional:     true,
 						},
 					},
 				},
@@ -576,9 +624,10 @@ func resourceVnicFcIf() *schema.Resource {
 				},
 			},
 			"static_wwpn_address": {
-				Description: "The WWPN address must be in hexadecimal format xx:xx:xx:xx:xx:xx:xx:xx.\nAllowed ranges are 20:00:00:00:00:00:00:00 to 20:FF:FF:FF:FF:FF:FF:FF or from 50:00:00:00:00:00:00:00 to 5F:FF:FF:FF:FF:FF:FF:FF.\nTo ensure uniqueness of WWN's in the SAN fabric, you are strongly encouraged to use the WWN prefix - 20:00:00:25:B5:xx:xx:xx.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "The WWPN address must be in hexadecimal format xx:xx:xx:xx:xx:xx:xx:xx.\nAllowed ranges are 20:00:00:00:00:00:00:00 to 20:FF:FF:FF:FF:FF:FF:FF or from 50:00:00:00:00:00:00:00 to 5F:FF:FF:FF:FF:FF:FF:FF.\nTo ensure uniqueness of WWN's in the SAN fabric, you are strongly encouraged to use the WWN prefix - 20:00:00:25:B5:xx:xx:xx.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|((^20|5[0-9a-fA-F]{1}):([0-9a-fA-F]{2}:){6}([0-9a-fA-F]{2}))"), ""),
+				Optional:     true,
 			},
 			"tags": {
 				Type:       schema.TypeList,
@@ -593,23 +642,26 @@ func resourceVnicFcIf() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
 			},
 			"type": {
-				Description: "VHBA Type configuration for SAN Connectivity Policy. This configuration is supported only on Cisco VIC 14XX series and higher series of adapters.\n* `fc-initiator` - The default value set for vHBA Type Configuration. Fc-initiator specifies vHBA as a consumer of storage. Enables SCSI commands to transfer data and status information between host and target storage systems.\n* `fc-nvme-initiator` - Fc-nvme-initiator specifies vHBA as a consumer of storage. Enables NVMe-based message commands to transfer data and status information between host and target storage systems.\n* `fc-nvme-target` - Fc-nvme-target specifies vHBA as a provider of storage volumes to initiators. Enables NVMe-based message commands to transfer data and status information between host and target storage systems. Currently tech-preview, only enabled with an asynchronous driver.\n* `fc-target` - Fc-target specifies vHBA as a provider of storage volumes to initiators. Enables SCSI commands to transfer data and status information between host and target storage systems. fc-target is enabled only with an asynchronous driver.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "fc-initiator",
+				Description:  "VHBA Type configuration for SAN Connectivity Policy. This configuration is supported only on Cisco VIC 14XX series and higher series of adapters.\n* `fc-initiator` - The default value set for vHBA Type Configuration. Fc-initiator specifies vHBA as a consumer of storage. Enables SCSI commands to transfer data and status information between host and target storage systems.\n* `fc-nvme-initiator` - Fc-nvme-initiator specifies vHBA as a consumer of storage. Enables NVMe-based message commands to transfer data and status information between host and target storage systems.\n* `fc-nvme-target` - Fc-nvme-target specifies vHBA as a provider of storage volumes to initiators. Enables NVMe-based message commands to transfer data and status information between host and target storage systems. Currently tech-preview, only enabled with an asynchronous driver.\n* `fc-target` - Fc-target specifies vHBA as a provider of storage volumes to initiators. Enables SCSI commands to transfer data and status information between host and target storage systems. fc-target is enabled only with an asynchronous driver.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"fc-initiator", "fc-nvme-initiator", "fc-nvme-target", "fc-target"}, false),
+				Optional:     true,
+				Default:      "fc-initiator",
 			},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
@@ -774,10 +826,11 @@ func resourceVnicFcIf() *schema.Resource {
 					return
 				}},
 			"wwpn_address_type": {
-				Description: "Type of allocation selected to assign a WWPN address to the vhba.\n* `POOL` - The user selects a pool from which the mac/wwn address will be leased for the Virtual Interface.\n* `STATIC` - The user assigns a static mac/wwn address for the Virtual Interface.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "POOL",
+				Description:  "Type of allocation selected to assign a WWPN address to the vhba.\n* `POOL` - The user selects a pool from which the mac/wwn address will be leased for the Virtual Interface.\n* `STATIC` - The user assigns a static mac/wwn address for the Virtual Interface.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"POOL", "STATIC"}, false),
+				Optional:     true,
+				Default:      "POOL",
 			},
 			"wwpn_lease": {
 				Description: "A reference to a fcpoolLease resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -896,7 +949,7 @@ func resourceVnicFcIfCreate(c context.Context, d *schema.ResourceData, meta inte
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -939,7 +992,7 @@ func resourceVnicFcIfCreate(c context.Context, d *schema.ResourceData, meta inte
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -982,7 +1035,7 @@ func resourceVnicFcIfCreate(c context.Context, d *schema.ResourceData, meta inte
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1006,6 +1059,48 @@ func resourceVnicFcIfCreate(c context.Context, d *schema.ResourceData, meta inte
 		if len(p) > 0 {
 			x := p[0]
 			o.SetFcQosPolicy(x)
+		}
+	}
+
+	if v, ok := d.GetOk("fc_zone_policies"); ok {
+		x := make([]models.FabricFcZonePolicyRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := models.NewMoMoRefWithDefaults()
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsFabricFcZonePolicyRelationship(o))
+		}
+		if len(x) > 0 {
+			o.SetFcZonePolicies(x)
 		}
 	}
 
@@ -1052,7 +1147,7 @@ func resourceVnicFcIfCreate(c context.Context, d *schema.ResourceData, meta inte
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.PlacementSettings")
 			if v, ok := l["id"]; ok {
 				{
 					x := (v.(string))
@@ -1107,7 +1202,7 @@ func resourceVnicFcIfCreate(c context.Context, d *schema.ResourceData, meta inte
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1150,7 +1245,7 @@ func resourceVnicFcIfCreate(c context.Context, d *schema.ResourceData, meta inte
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1193,7 +1288,7 @@ func resourceVnicFcIfCreate(c context.Context, d *schema.ResourceData, meta inte
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1328,7 +1423,7 @@ func resourceVnicFcIfCreate(c context.Context, d *schema.ResourceData, meta inte
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1371,7 +1466,7 @@ func resourceVnicFcIfCreate(c context.Context, d *schema.ResourceData, meta inte
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1488,6 +1583,10 @@ func resourceVnicFcIfRead(c context.Context, d *schema.ResourceData, meta interf
 
 	if err := d.Set("fc_qos_policy", flattenMapVnicFcQosPolicyRelationship(s.GetFcQosPolicy(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property FcQosPolicy in VnicFcIf object: %s", err.Error())
+	}
+
+	if err := d.Set("fc_zone_policies", flattenListFabricFcZonePolicyRelationship(s.GetFcZonePolicies(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property FcZonePolicies in VnicFcIf object: %s", err.Error())
 	}
 
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {
@@ -1630,7 +1729,7 @@ func resourceVnicFcIfUpdate(c context.Context, d *schema.ResourceData, meta inte
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1674,7 +1773,7 @@ func resourceVnicFcIfUpdate(c context.Context, d *schema.ResourceData, meta inte
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1718,7 +1817,7 @@ func resourceVnicFcIfUpdate(c context.Context, d *schema.ResourceData, meta inte
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1743,6 +1842,47 @@ func resourceVnicFcIfUpdate(c context.Context, d *schema.ResourceData, meta inte
 			x := p[0]
 			o.SetFcQosPolicy(x)
 		}
+	}
+
+	if d.HasChange("fc_zone_policies") {
+		v := d.Get("fc_zone_policies")
+		x := make([]models.FabricFcZonePolicyRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsFabricFcZonePolicyRelationship(o))
+		}
+		o.SetFcZonePolicies(x)
 	}
 
 	if d.HasChange("moid") {
@@ -1794,7 +1934,7 @@ func resourceVnicFcIfUpdate(c context.Context, d *schema.ResourceData, meta inte
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.PlacementSettings")
 			if v, ok := l["id"]; ok {
 				{
 					x := (v.(string))
@@ -1850,7 +1990,7 @@ func resourceVnicFcIfUpdate(c context.Context, d *schema.ResourceData, meta inte
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1894,7 +2034,7 @@ func resourceVnicFcIfUpdate(c context.Context, d *schema.ResourceData, meta inte
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1938,7 +2078,7 @@ func resourceVnicFcIfUpdate(c context.Context, d *schema.ResourceData, meta inte
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2075,7 +2215,7 @@ func resourceVnicFcIfUpdate(c context.Context, d *schema.ResourceData, meta inte
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2119,7 +2259,7 @@ func resourceVnicFcIfUpdate(c context.Context, d *schema.ResourceData, meta inte
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

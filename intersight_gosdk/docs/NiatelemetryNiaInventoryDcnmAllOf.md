@@ -33,6 +33,8 @@ Name | Type | Description | Notes
 **NumUpgUsers** | Pointer to **int64** | Number of users who have upgrade privileges excluding the admin. | [optional] 
 **NxosImageCount** | Pointer to **int64** | Number of NXOS images uploaded to DCNM. | [optional] 
 **OutofbandIp** | Pointer to **string** | Out of band IP of controller on DCNM. | [optional] 
+**RecordType** | Pointer to **string** | Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected. | [optional] 
+**RecordVersion** | Pointer to **string** | Version of record being pushed. This determines what was the API version for data available from the device. | [optional] 
 **Serial** | Pointer to **string** | Serial number of device being inventoried. The serial number is unique per device. | [optional] 
 **SiteName** | Pointer to **string** | Name of fabric domain of the controller. | [optional] 
 **UnderlayPeeringActiveLinksCount** | Pointer to **int64** | Returns the number of underlay peering active links. | [optional] 
@@ -794,6 +796,56 @@ SetOutofbandIp sets OutofbandIp field to given value.
 `func (o *NiatelemetryNiaInventoryDcnmAllOf) HasOutofbandIp() bool`
 
 HasOutofbandIp returns a boolean if a field has been set.
+
+### GetRecordType
+
+`func (o *NiatelemetryNiaInventoryDcnmAllOf) GetRecordType() string`
+
+GetRecordType returns the RecordType field if non-nil, zero value otherwise.
+
+### GetRecordTypeOk
+
+`func (o *NiatelemetryNiaInventoryDcnmAllOf) GetRecordTypeOk() (*string, bool)`
+
+GetRecordTypeOk returns a tuple with the RecordType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRecordType
+
+`func (o *NiatelemetryNiaInventoryDcnmAllOf) SetRecordType(v string)`
+
+SetRecordType sets RecordType field to given value.
+
+### HasRecordType
+
+`func (o *NiatelemetryNiaInventoryDcnmAllOf) HasRecordType() bool`
+
+HasRecordType returns a boolean if a field has been set.
+
+### GetRecordVersion
+
+`func (o *NiatelemetryNiaInventoryDcnmAllOf) GetRecordVersion() string`
+
+GetRecordVersion returns the RecordVersion field if non-nil, zero value otherwise.
+
+### GetRecordVersionOk
+
+`func (o *NiatelemetryNiaInventoryDcnmAllOf) GetRecordVersionOk() (*string, bool)`
+
+GetRecordVersionOk returns a tuple with the RecordVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRecordVersion
+
+`func (o *NiatelemetryNiaInventoryDcnmAllOf) SetRecordVersion(v string)`
+
+SetRecordVersion sets RecordVersion field to given value.
+
+### HasRecordVersion
+
+`func (o *NiatelemetryNiaInventoryDcnmAllOf) HasRecordVersion() bool`
+
+HasRecordVersion returns a boolean if a field has been set.
 
 ### GetSerial
 

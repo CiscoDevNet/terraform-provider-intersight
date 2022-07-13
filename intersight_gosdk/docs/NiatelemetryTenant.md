@@ -32,6 +32,7 @@ Name | Type | Description | Notes
 **Ssm** | Pointer to **string** | SSM property feature usage. | [optional] 
 **SsmCount** | Pointer to **int64** | Number of context-level ssm translate policies per tenant. | [optional] 
 **TcamOptCount** | Pointer to **int64** | Number of TCAM optimization enabled per tenant. | [optional] 
+**TenantHealth** | Pointer to **int64** | Health of each tenant in the APIC. | [optional] 
 **TraceRouteEpCount** | Pointer to **int64** | Number of ITrace route endpoint per tenant. | [optional] 
 **TraceRouteEpExtCount** | Pointer to **int64** | Number of ITrace endpoint external routes per tenant. | [optional] 
 **TraceRouteExtEpCount** | Pointer to **int64** | Number of ITrace external endpoint routes per tenant. | [optional] 
@@ -754,6 +755,31 @@ SetTcamOptCount sets TcamOptCount field to given value.
 `func (o *NiatelemetryTenant) HasTcamOptCount() bool`
 
 HasTcamOptCount returns a boolean if a field has been set.
+
+### GetTenantHealth
+
+`func (o *NiatelemetryTenant) GetTenantHealth() int64`
+
+GetTenantHealth returns the TenantHealth field if non-nil, zero value otherwise.
+
+### GetTenantHealthOk
+
+`func (o *NiatelemetryTenant) GetTenantHealthOk() (*int64, bool)`
+
+GetTenantHealthOk returns a tuple with the TenantHealth field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTenantHealth
+
+`func (o *NiatelemetryTenant) SetTenantHealth(v int64)`
+
+SetTenantHealth sets TenantHealth field to given value.
+
+### HasTenantHealth
+
+`func (o *NiatelemetryTenant) HasTenantHealth() bool`
+
+HasTenantHealth returns a boolean if a field has been set.
 
 ### GetTraceRouteEpCount
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-6484
+API version: 1.0.11-7078
 Contact: intersight@cisco.com
 */
 
@@ -28,8 +28,10 @@ type HyperflexStorageContainer struct {
 	// Storage container accessibility summary. * `NOT_APPLICABLE` - The HyperFlex storage container accessibility summary is not applicable. * `ACCESSIBLE` - The HyperFlex storage container is accessible. * `NOT_ACCESSIBLE` - The HyperFlex storage container is not accessible. * `PARTIALLY_ACCESSIBLE` - The HyperFlex storage container is partially accessible.
 	AccessibilitySummary *string `json:"AccessibilitySummary,omitempty"`
 	// Storage container data block size in bytes.
-	DataBlockSize   *int64                                   `json:"DataBlockSize,omitempty"`
-	HostMountStatus []StorageStorageContainerHostMountStatus `json:"HostMountStatus,omitempty"`
+	DataBlockSize *int64 `json:"DataBlockSize,omitempty"`
+	// Indicate if encryption is enabled on this storage container.
+	EncryptionEnabled *bool                                    `json:"EncryptionEnabled,omitempty"`
+	HostMountStatus   []StorageStorageContainerHostMountStatus `json:"HostMountStatus,omitempty"`
 	// Indicates whether the storage container has volumes.
 	InUse *bool `json:"InUse,omitempty"`
 	// Indicates whether the storage container was user-created, or system-created. * `UNKNOWN` - The storage container creator is unknown. * `USER_CREATED` - The storage container was created by a user action. * `INTERNAL` - The storage container was created by the system.
@@ -195,6 +197,38 @@ func (o *HyperflexStorageContainer) HasDataBlockSize() bool {
 // SetDataBlockSize gets a reference to the given int64 and assigns it to the DataBlockSize field.
 func (o *HyperflexStorageContainer) SetDataBlockSize(v int64) {
 	o.DataBlockSize = &v
+}
+
+// GetEncryptionEnabled returns the EncryptionEnabled field value if set, zero value otherwise.
+func (o *HyperflexStorageContainer) GetEncryptionEnabled() bool {
+	if o == nil || o.EncryptionEnabled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.EncryptionEnabled
+}
+
+// GetEncryptionEnabledOk returns a tuple with the EncryptionEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HyperflexStorageContainer) GetEncryptionEnabledOk() (*bool, bool) {
+	if o == nil || o.EncryptionEnabled == nil {
+		return nil, false
+	}
+	return o.EncryptionEnabled, true
+}
+
+// HasEncryptionEnabled returns a boolean if a field has been set.
+func (o *HyperflexStorageContainer) HasEncryptionEnabled() bool {
+	if o != nil && o.EncryptionEnabled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEncryptionEnabled gets a reference to the given bool and assigns it to the EncryptionEnabled field.
+func (o *HyperflexStorageContainer) SetEncryptionEnabled(v bool) {
+	o.EncryptionEnabled = &v
 }
 
 // GetHostMountStatus returns the HostMountStatus field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -701,6 +735,9 @@ func (o HyperflexStorageContainer) MarshalJSON() ([]byte, error) {
 	if o.DataBlockSize != nil {
 		toSerialize["DataBlockSize"] = o.DataBlockSize
 	}
+	if o.EncryptionEnabled != nil {
+		toSerialize["EncryptionEnabled"] = o.EncryptionEnabled
+	}
 	if o.HostMountStatus != nil {
 		toSerialize["HostMountStatus"] = o.HostMountStatus
 	}
@@ -763,8 +800,10 @@ func (o *HyperflexStorageContainer) UnmarshalJSON(bytes []byte) (err error) {
 		// Storage container accessibility summary. * `NOT_APPLICABLE` - The HyperFlex storage container accessibility summary is not applicable. * `ACCESSIBLE` - The HyperFlex storage container is accessible. * `NOT_ACCESSIBLE` - The HyperFlex storage container is not accessible. * `PARTIALLY_ACCESSIBLE` - The HyperFlex storage container is partially accessible.
 		AccessibilitySummary *string `json:"AccessibilitySummary,omitempty"`
 		// Storage container data block size in bytes.
-		DataBlockSize   *int64                                   `json:"DataBlockSize,omitempty"`
-		HostMountStatus []StorageStorageContainerHostMountStatus `json:"HostMountStatus,omitempty"`
+		DataBlockSize *int64 `json:"DataBlockSize,omitempty"`
+		// Indicate if encryption is enabled on this storage container.
+		EncryptionEnabled *bool                                    `json:"EncryptionEnabled,omitempty"`
+		HostMountStatus   []StorageStorageContainerHostMountStatus `json:"HostMountStatus,omitempty"`
 		// Indicates whether the storage container has volumes.
 		InUse *bool `json:"InUse,omitempty"`
 		// Indicates whether the storage container was user-created, or system-created. * `UNKNOWN` - The storage container creator is unknown. * `USER_CREATED` - The storage container was created by a user action. * `INTERNAL` - The storage container was created by the system.
@@ -803,6 +842,7 @@ func (o *HyperflexStorageContainer) UnmarshalJSON(bytes []byte) (err error) {
 		varHyperflexStorageContainer.ObjectType = varHyperflexStorageContainerWithoutEmbeddedStruct.ObjectType
 		varHyperflexStorageContainer.AccessibilitySummary = varHyperflexStorageContainerWithoutEmbeddedStruct.AccessibilitySummary
 		varHyperflexStorageContainer.DataBlockSize = varHyperflexStorageContainerWithoutEmbeddedStruct.DataBlockSize
+		varHyperflexStorageContainer.EncryptionEnabled = varHyperflexStorageContainerWithoutEmbeddedStruct.EncryptionEnabled
 		varHyperflexStorageContainer.HostMountStatus = varHyperflexStorageContainerWithoutEmbeddedStruct.HostMountStatus
 		varHyperflexStorageContainer.InUse = varHyperflexStorageContainerWithoutEmbeddedStruct.InUse
 		varHyperflexStorageContainer.Kind = varHyperflexStorageContainerWithoutEmbeddedStruct.Kind
@@ -839,6 +879,7 @@ func (o *HyperflexStorageContainer) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AccessibilitySummary")
 		delete(additionalProperties, "DataBlockSize")
+		delete(additionalProperties, "EncryptionEnabled")
 		delete(additionalProperties, "HostMountStatus")
 		delete(additionalProperties, "InUse")
 		delete(additionalProperties, "Kind")

@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceVnicEthAdapterPolicy() *schema.Resource {
@@ -144,10 +146,11 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Default:     "vnic.CompletionQueueSettings",
 						},
 						"nr_count": {
-							Description: "The number of completion queue resources to allocate. In general, the number of completion queue resources to allocate is equal to the number of transmit queue resources plus the number of receive queue resources.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     5,
+							Description:  "The number of completion queue resources to allocate. In general, the number of completion queue resources to allocate is equal to the number of transmit queue resources plus the number of receive queue resources.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(1, 2000),
+							Optional:     true,
+							Default:      5,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -181,9 +184,10 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -229,28 +233,32 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Default:     "vnic.EthInterruptSettings",
 						},
 						"coalescing_time": {
-							Description: "The time to wait between interrupts or the idle period that must be encountered before an interrupt is sent. To turn off interrupt coalescing, enter 0 (zero) in this field.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     125,
+							Description:  "The time to wait between interrupts or the idle period that must be encountered before an interrupt is sent. To turn off interrupt coalescing, enter 0 (zero) in this field.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(0, 65535),
+							Optional:     true,
+							Default:      125,
 						},
 						"coalescing_type": {
-							Description: "Interrupt Coalescing Type. This can be one of the following:- MIN  - The system waits for the time specified in the Coalescing Time field before sending another interrupt event IDLE - The system does not send an interrupt until there is a period of no activity lasting as least as long as the time specified in the Coalescing Time field.\n* `MIN` - The system waits for the time specified in the Coalescing Time field before sending another interrupt event.\n* `IDLE` - The system does not send an interrupt until there is a period of no activity lasting as least as long as the time specified in the Coalescing Time field.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "MIN",
+							Description:  "Interrupt Coalescing Type. This can be one of the following:- MIN  - The system waits for the time specified in the Coalescing Time field before sending another interrupt event IDLE - The system does not send an interrupt until there is a period of no activity lasting as least as long as the time specified in the Coalescing Time field.\n* `MIN` - The system waits for the time specified in the Coalescing Time field before sending another interrupt event.\n* `IDLE` - The system does not send an interrupt until there is a period of no activity lasting as least as long as the time specified in the Coalescing Time field.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"MIN", "IDLE"}, false),
+							Optional:     true,
+							Default:      "MIN",
 						},
 						"nr_count": {
-							Description: "The number of interrupt resources to allocate. Typical value is be equal to the number of completion queue resources.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     8,
+							Description:  "The number of interrupt resources to allocate. Typical value is be equal to the number of completion queue resources.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(1, 1024),
+							Optional:     true,
+							Default:      8,
 						},
 						"mode": {
-							Description: "Preferred driver interrupt mode. This can be one of the following:- MSIx - Message Signaled Interrupts (MSI) with the optional extension. MSI  - MSI only. INTx - PCI INTx interrupts. MSIx is the recommended option.\n* `MSIx` - Message Signaled Interrupt (MSI) mechanism with the optional extension (MSIx). MSIx is the recommended and default option.\n* `MSI` - Message Signaled Interrupt (MSI) mechanism that treats messages as interrupts.\n* `INTx` - Line-based interrupt (INTx) mechanism similar to the one used in Legacy systems.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "MSIx",
+							Description:  "Preferred driver interrupt mode. This can be one of the following:- MSIx - Message Signaled Interrupts (MSI) with the optional extension. MSI  - MSI only. INTx - PCI INTx interrupts. MSIx is the recommended option.\n* `MSIx` - Message Signaled Interrupt (MSI) mechanism with the optional extension (MSIx). MSIx is the recommended and default option.\n* `MSI` - Message Signaled Interrupt (MSI) mechanism that treats messages as interrupts.\n* `INTx` - Line-based interrupt (INTx) mechanism similar to the one used in Legacy systems.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"MSIx", "MSI", "INTx"}, false),
+							Optional:     true,
+							Default:      "MSIx",
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -280,9 +288,10 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the concrete policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the concrete policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"nvgre_settings": {
 				Description: "Network Virtualization using Generic Routing Encapsulation Settings.",
@@ -372,7 +381,8 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -508,10 +518,11 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Default:     "vnic.RoceSettings",
 						},
 						"class_of_service": {
-							Description: "The Class of Service for RoCE on this virtual interface.\n* `5` - RDMA CoS Service Level 5.\n* `1` - RDMA CoS Service Level 1.\n* `2` - RDMA CoS Service Level 2.\n* `4` - RDMA CoS Service Level 4.\n* `6` - RDMA CoS Service Level 6.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     5,
+							Description:  "The Class of Service for RoCE on this virtual interface.\n* `5` - RDMA CoS Service Level 5.\n* `1` - RDMA CoS Service Level 1.\n* `2` - RDMA CoS Service Level 2.\n* `4` - RDMA CoS Service Level 4.\n* `6` - RDMA CoS Service Level 6.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntInSlice([]int{5, 1, 2, 4, 6}),
+							Optional:     true,
+							Default:      5,
 						},
 						"enabled": {
 							Description: "If enabled sets RDMA over Converged Ethernet (RoCE) on this virtual interface.",
@@ -519,9 +530,10 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Optional:    true,
 						},
 						"memory_regions": {
-							Description: "The number of memory regions per adapter. Recommended value = integer power of 2.",
-							Type:        schema.TypeInt,
-							Optional:    true,
+							Description:  "The number of memory regions per adapter. Recommended value = integer power of 2.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(0, 524288),
+							Optional:     true,
 							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
 								if v := d.Get("roce_settings.0.enabled").(bool); v == false {
 									return true
@@ -537,9 +549,10 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Default:     "vnic.RoceSettings",
 						},
 						"queue_pairs": {
-							Description: "The number of queue pairs per adapter. Recommended value = integer power of 2.",
-							Type:        schema.TypeInt,
-							Optional:    true,
+							Description:  "The number of queue pairs per adapter. Recommended value = integer power of 2.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(0, 8192),
+							Optional:     true,
 							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
 								if v := d.Get("roce_settings.0.enabled").(bool); v == false {
 									return true
@@ -549,9 +562,10 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Default: 256,
 						},
 						"resource_groups": {
-							Description: "The number of resource groups per adapter. Recommended value = be an integer power of 2 greater than or equal to the number of CPU cores on the system for optimum performance.",
-							Type:        schema.TypeInt,
-							Optional:    true,
+							Description:  "The number of resource groups per adapter. Recommended value = be an integer power of 2 greater than or equal to the number of CPU cores on the system for optimum performance.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(0, 128),
+							Optional:     true,
 							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
 								if v := d.Get("roce_settings.0.enabled").(bool); v == false {
 									return true
@@ -561,10 +575,11 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Default: 4,
 						},
 						"nr_version": {
-							Description: "Configure RDMA over Converged Ethernet (RoCE) version on the virtual interface. Only RoCEv1 is supported on Cisco VIC 13xx series adapters and only RoCEv2 is supported on Cisco VIC 14xx series adapters.\n* `1` - RDMA over Converged Ethernet Protocol Version 1.\n* `2` - RDMA over Converged Ethernet Protocol Version 2.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     1,
+							Description:  "Configure RDMA over Converged Ethernet (RoCE) version on the virtual interface. Only RoCEv1 is supported on Cisco VIC 13xx series adapters and only RoCEv2 is supported on Cisco VIC 14xx series adapters.\n* `1` - RDMA over Converged Ethernet Protocol Version 1.\n* `2` - RDMA over Converged Ethernet Protocol Version 2.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntInSlice([]int{1, 2}),
+							Optional:     true,
+							Default:      1,
 						},
 					},
 				},
@@ -673,10 +688,11 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Default:     "vnic.EthRxQueueSettings",
 						},
 						"nr_count": {
-							Description: "The number of queue resources to allocate.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     4,
+							Description:  "The number of queue resources to allocate.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(1, 1000),
+							Optional:     true,
+							Default:      4,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -685,10 +701,11 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Default:     "vnic.EthRxQueueSettings",
 						},
 						"ring_size": {
-							Description: "The number of descriptors in each queue.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     512,
+							Description:  "The number of descriptors in each queue.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(64, 16384),
+							Optional:     true,
+							Default:      512,
 						},
 					},
 				},
@@ -717,14 +734,16 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -803,10 +822,11 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Default:     "vnic.EthTxQueueSettings",
 						},
 						"nr_count": {
-							Description: "The number of queue resources to allocate.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     1,
+							Description:  "The number of queue resources to allocate.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(1, 1000),
+							Optional:     true,
+							Default:      1,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -815,19 +835,21 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Default:     "vnic.EthTxQueueSettings",
 						},
 						"ring_size": {
-							Description: "The number of descriptors in each queue.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     256,
+							Description:  "The number of descriptors in each queue.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(64, 16384),
+							Optional:     true,
+							Default:      256,
 						},
 					},
 				},
 			},
 			"uplink_failback_timeout": {
-				Description: "Uplink Failback Timeout in seconds when uplink failover is enabled for a vNIC. After a vNIC has started using its secondary interface, this setting controls how long the primary interface must be available before the system resumes using the primary interface for the vNIC.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Default:     5,
+				Description:  "Uplink Failback Timeout in seconds when uplink failover is enabled for a vNIC. After a vNIC has started using its secondary interface, this setting controls how long the primary interface must be available before the system resumes using the primary interface for the vNIC.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(0, 600),
+				Optional:     true,
+				Default:      5,
 			},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
@@ -1044,7 +1066,7 @@ func resourceVnicEthAdapterPolicyCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.ArfsSettings")
 			if v, ok := l["enabled"]; ok {
 				{
 					x := (v.(bool))
@@ -1083,7 +1105,7 @@ func resourceVnicEthAdapterPolicyCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.CompletionQueueSettings")
 			if v, ok := l["nr_count"]; ok {
 				{
 					x := int64(v.(int))
@@ -1135,7 +1157,7 @@ func resourceVnicEthAdapterPolicyCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.EthInterruptSettings")
 			if v, ok := l["coalescing_time"]; ok {
 				{
 					x := int64(v.(int))
@@ -1200,7 +1222,7 @@ func resourceVnicEthAdapterPolicyCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.NvgreSettings")
 			if v, ok := l["enabled"]; ok {
 				{
 					x := (v.(bool))
@@ -1239,7 +1261,7 @@ func resourceVnicEthAdapterPolicyCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1282,7 +1304,7 @@ func resourceVnicEthAdapterPolicyCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.PtpSettings")
 			if v, ok := l["enabled"]; ok {
 				{
 					x := (v.(bool))
@@ -1319,7 +1341,7 @@ func resourceVnicEthAdapterPolicyCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.RoceSettings")
 			if v, ok := l["class_of_service"]; ok {
 				{
 					x := int32(v.(int))
@@ -1386,7 +1408,7 @@ func resourceVnicEthAdapterPolicyCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.RssHashSettings")
 			if v, ok := l["ipv4_hash"]; ok {
 				{
 					x := (v.(bool))
@@ -1470,7 +1492,7 @@ func resourceVnicEthAdapterPolicyCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.EthRxQueueSettings")
 			if v, ok := l["nr_count"]; ok {
 				{
 					x := int64(v.(int))
@@ -1548,7 +1570,7 @@ func resourceVnicEthAdapterPolicyCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.TcpOffloadSettings")
 			if v, ok := l["large_receive"]; ok {
 				{
 					x := (v.(bool))
@@ -1603,7 +1625,7 @@ func resourceVnicEthAdapterPolicyCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.EthTxQueueSettings")
 			if v, ok := l["nr_count"]; ok {
 				{
 					x := int64(v.(int))
@@ -1651,7 +1673,7 @@ func resourceVnicEthAdapterPolicyCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.VxlanSettings")
 			if v, ok := l["enabled"]; ok {
 				{
 					x := (v.(bool))
@@ -1887,7 +1909,7 @@ func resourceVnicEthAdapterPolicyUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.ArfsSettings")
 			if v, ok := l["enabled"]; ok {
 				{
 					x := (v.(bool))
@@ -1927,7 +1949,7 @@ func resourceVnicEthAdapterPolicyUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.CompletionQueueSettings")
 			if v, ok := l["nr_count"]; ok {
 				{
 					x := int64(v.(int))
@@ -1983,7 +2005,7 @@ func resourceVnicEthAdapterPolicyUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.EthInterruptSettings")
 			if v, ok := l["coalescing_time"]; ok {
 				{
 					x := int64(v.(int))
@@ -2051,7 +2073,7 @@ func resourceVnicEthAdapterPolicyUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.NvgreSettings")
 			if v, ok := l["enabled"]; ok {
 				{
 					x := (v.(bool))
@@ -2091,7 +2113,7 @@ func resourceVnicEthAdapterPolicyUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2135,7 +2157,7 @@ func resourceVnicEthAdapterPolicyUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.PtpSettings")
 			if v, ok := l["enabled"]; ok {
 				{
 					x := (v.(bool))
@@ -2173,7 +2195,7 @@ func resourceVnicEthAdapterPolicyUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.RoceSettings")
 			if v, ok := l["class_of_service"]; ok {
 				{
 					x := int32(v.(int))
@@ -2241,7 +2263,7 @@ func resourceVnicEthAdapterPolicyUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.RssHashSettings")
 			if v, ok := l["ipv4_hash"]; ok {
 				{
 					x := (v.(bool))
@@ -2327,7 +2349,7 @@ func resourceVnicEthAdapterPolicyUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.EthRxQueueSettings")
 			if v, ok := l["nr_count"]; ok {
 				{
 					x := int64(v.(int))
@@ -2405,7 +2427,7 @@ func resourceVnicEthAdapterPolicyUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.TcpOffloadSettings")
 			if v, ok := l["large_receive"]; ok {
 				{
 					x := (v.(bool))
@@ -2461,7 +2483,7 @@ func resourceVnicEthAdapterPolicyUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.EthTxQueueSettings")
 			if v, ok := l["nr_count"]; ok {
 				{
 					x := int64(v.(int))
@@ -2511,7 +2533,7 @@ func resourceVnicEthAdapterPolicyUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.VxlanSettings")
 			if v, ok := l["enabled"]; ok {
 				{
 					x := (v.(bool))

@@ -11,6 +11,7 @@ import (
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceBulkRequest() *schema.Resource {
@@ -34,11 +35,12 @@ func resourceBulkRequest() *schema.Resource {
 				}, ForceNew: true,
 			},
 			"action_on_error": {
-				Description: "The action to be taken when an error occurs during processing of the request.\n* `Stop` - Stop the processing of the request after the first error.\n* `Proceed` - Proceed with the processing of the request even when an error occurs.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "Stop",
-				ForceNew:    true,
+				Description:  "The action to be taken when an error occurs during processing of the request.\n* `Stop` - Stop the processing of the request after the first error.\n* `Proceed` - Proceed with the processing of the request even when an error occurs.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Stop", "Proceed"}, false),
+				Optional:     true,
+				Default:      "Stop",
+				ForceNew:     true,
 			},
 			"actions": {
 				Type:       schema.TypeList,
@@ -46,7 +48,9 @@ func resourceBulkRequest() *schema.Resource {
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Computed:   true,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}, ForceNew: true,
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"CheckObjectPresence", "Execute"}, false),
+				}, ForceNew: true,
 			},
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -389,7 +393,8 @@ func resourceBulkRequest() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}, ForceNew: true,
+					Type: schema.TypeString,
+				}, ForceNew: true,
 			},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -528,11 +533,12 @@ func resourceBulkRequest() *schema.Resource {
 							ForceNew:    true,
 						},
 						"verb": {
-							Description: "The type of operation to be performed.\nOne of - Post (Create), Patch (Update) or Delete (Remove).\nThe value is used to override the top level verb.\n* `POST` - Used to create a REST resource.\n* `PATCH` - Used to update a REST resource.\n* `DELETE` - Used to delete a REST resource.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "POST",
-							ForceNew:    true,
+							Description:  "The type of operation to be performed.\nOne of - Post (Create), Patch (Update) or Delete (Remove).\nThe value is used to override the top level verb.\n* `POST` - Used to create a REST resource.\n* `PATCH` - Used to update a REST resource.\n* `DELETE` - Used to delete a REST resource.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"POST", "PATCH", "DELETE"}, false),
+							Optional:     true,
+							Default:      "POST",
+							ForceNew:     true,
 						},
 					},
 				},
@@ -637,16 +643,18 @@ func resourceBulkRequest() *schema.Resource {
 							ForceNew:         true,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							ForceNew:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
+							ForceNew:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							ForceNew:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
+							ForceNew:     true,
 						},
 					},
 				},
@@ -659,11 +667,12 @@ func resourceBulkRequest() *schema.Resource {
 				ForceNew:    true,
 			},
 			"verb": {
-				Description: "The type of operation to be performed.\nOne of - Post (Create), Patch (Update) or Delete (Remove).\nThe value will be used when there is no override in the SubRequest.\n* `POST` - Used to create a REST resource.\n* `PATCH` - Used to update a REST resource.\n* `DELETE` - Used to delete a REST resource.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "POST",
-				ForceNew:    true,
+				Description:  "The type of operation to be performed.\nOne of - Post (Create), Patch (Update) or Delete (Remove).\nThe value will be used when there is no override in the SubRequest.\n* `POST` - Used to create a REST resource.\n* `PATCH` - Used to update a REST resource.\n* `DELETE` - Used to delete a REST resource.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"POST", "PATCH", "DELETE"}, false),
+				Optional:     true,
+				Default:      "POST",
+				ForceNew:     true,
 			},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
@@ -967,7 +976,7 @@ func resourceBulkRequestCreate(c context.Context, d *schema.ResourceData, meta i
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

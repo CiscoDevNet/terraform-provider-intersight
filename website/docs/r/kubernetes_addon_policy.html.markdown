@@ -20,6 +20,7 @@ resource "intersight_kubernetes_addon_policy" "kubernetes_addon_policy1" {
     install_strategy = "Always"
     release_name     = "helm-release-3"
     upgrade_strategy = "UpgradeOnly"
+    object_type      = "kubernetes.AddonConfiguration"
   }
   addon_definition {
     moid        = intersight_kubernetes_addon_definition.kubernetes_addon_definition1.moid

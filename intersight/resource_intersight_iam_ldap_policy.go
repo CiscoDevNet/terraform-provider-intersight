@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceIamLdapPolicy() *schema.Resource {
@@ -131,25 +133,29 @@ func resourceIamLdapPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"attribute": {
-							Description: "Role and locale information of the user.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "Role and locale information of the user.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9][a-zA-Z0-9\\-\\.]*[a-zA-Z0-9\\-]$"), ""),
+							Optional:     true,
 						},
 						"base_dn": {
-							Description: "Base Distinguished Name (DN). Starting point from where server will search for users and groups.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "Base Distinguished Name (DN). Starting point from where server will search for users and groups.",
+							Type:         schema.TypeString,
+							ValidateFunc: StringLenMaximum(254),
+							Optional:     true,
 						},
 						"bind_dn": {
-							Description: "Distinguished Name (DN) of the user, that is used to authenticate against LDAP servers.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "Distinguished Name (DN) of the user, that is used to authenticate against LDAP servers.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 254),
+							Optional:     true,
 						},
 						"bind_method": {
-							Description: "Authentication method to access LDAP servers.\n* `LoginCredentials` - Requires the user credentials. If the bind process fails, then user is denied access.\n* `Anonymous` - Requires no username and password. If this option is selected and the LDAP server is configured for Anonymous logins, then the user gains access.\n* `ConfiguredCredentials` - Requires a known set of credentials to be specified for the initial bind process. If the initial bind process succeeds, then the distinguished name (DN) of the user name is queried and re-used for the re-binding process. If the re-binding process fails, then the user is denied access.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "LoginCredentials",
+							Description:  "Authentication method to access LDAP servers.\n* `LoginCredentials` - Requires the user credentials. If the bind process fails, then user is denied access.\n* `Anonymous` - Requires no username and password. If this option is selected and the LDAP server is configured for Anonymous logins, then the user gains access.\n* `ConfiguredCredentials` - Requires a known set of credentials to be specified for the initial bind process. If the initial bind process succeeds, then the distinguished name (DN) of the user name is queried and re-used for the re-binding process. If the re-binding process fails, then the user is denied access.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"LoginCredentials", "Anonymous", "ConfiguredCredentials"}, false),
+							Optional:     true,
+							Default:      "LoginCredentials",
 						},
 						"class_id": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
@@ -158,9 +164,10 @@ func resourceIamLdapPolicy() *schema.Resource {
 							Default:     "iam.LdapBaseProperties",
 						},
 						"domain": {
-							Description: "The IPv4 domain that all users must be in.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The IPv4 domain that all users must be in.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^(([a-zA-Z0-9])|([a-zA-Z0-9][a-zA-Z0-9\\.\\-]*[a-zA-Z0-9]))$"), ""), StringLenMaximum(255)),
+							Optional:     true,
 						},
 						"enable_encryption": {
 							Description: "If enabled, the endpoint encrypts all information it sends to the LDAP server.",
@@ -173,14 +180,16 @@ func resourceIamLdapPolicy() *schema.Resource {
 							Optional:    true,
 						},
 						"filter": {
-							Description: "Criteria to identify entries in search requests.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "Criteria to identify entries in search requests.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9(][a-zA-Z0-9_#@$%&\\-\\^|()*=:!,.]*[a-zA-Z0-9\\-)]$"), ""),
+							Optional:     true,
 						},
 						"group_attribute": {
-							Description: "Groups to which an LDAP entry belongs.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "Groups to which an LDAP entry belongs.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9][a-zA-Z0-9_#@$%&\\-\\^]*[a-zA-Z0-9\\-]$"), ""),
+							Optional:     true,
 						},
 						"is_password_set": {
 							Description: "Indicates whether the value of the 'password' property has been set.",
@@ -194,10 +203,11 @@ func resourceIamLdapPolicy() *schema.Resource {
 								return
 							}},
 						"nested_group_search_depth": {
-							Description: "Search depth to look for a nested LDAP group in an LDAP group map.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     128,
+							Description:  "Search depth to look for a nested LDAP group in an LDAP group map.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(1, 128),
+							Optional:     true,
+							Default:      128,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -206,15 +216,17 @@ func resourceIamLdapPolicy() *schema.Resource {
 							Default:     "iam.LdapBaseProperties",
 						},
 						"password": {
-							Description: "The password of the user for initial bind process. It can be any string that adheres to the following constraints. It can have character except spaces, tabs, line breaks. It cannot be more than 254 characters.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The password of the user for initial bind process. It can be any string that adheres to the following constraints. It can have character except spaces, tabs, line breaks. It cannot be more than 254 characters.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^[\\S+]{0,254}$"), ""),
+							Optional:     true,
 						},
 						"timeout": {
-							Description: "LDAP authentication timeout duration, in seconds.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     0,
+							Description:  "LDAP authentication timeout duration, in seconds.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(0, 180),
+							Optional:     true,
+							Default:      0,
 						},
 					},
 				},
@@ -237,9 +249,10 @@ func resourceIamLdapPolicy() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"dns_parameters": {
 				Description: "Configuration settings to resolve LDAP servers, when DNS is enabled.",
@@ -268,20 +281,23 @@ func resourceIamLdapPolicy() *schema.Resource {
 							Default:     "iam.LdapDnsParameters",
 						},
 						"search_domain": {
-							Description: "Domain name that acts as a source for a DNS query.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "Domain name that acts as a source for a DNS query.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^(([a-zA-Z0-9])|([a-zA-Z0-9][a-zA-Z0-9\\.\\-]*[a-zA-Z0-9]))$"), ""), StringLenMaximum(64)),
+							Optional:     true,
 						},
 						"search_forest": {
-							Description: "Forest name that acts as a source for a DNS query.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "Forest name that acts as a source for a DNS query.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^(([a-zA-Z0-9])|([a-zA-Z0-9][a-zA-Z0-9\\.\\-]*[a-zA-Z0-9]))$"), ""), StringLenMaximum(64)),
+							Optional:     true,
 						},
 						"nr_source": {
-							Description: "Source of the domain name used for the DNS SRV request.\n* `Extracted` - The domain name extracted-domain from the login ID.\n* `Configured` - The configured-search domain.\n* `ConfiguredExtracted` - The domain name extracted from the login ID than the configured-search domain.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "Extracted",
+							Description:  "Source of the domain name used for the DNS SRV request.\n* `Extracted` - The domain name extracted-domain from the login ID.\n* `Configured` - The configured-search domain.\n* `ConfiguredExtracted` - The domain name extracted from the login ID than the configured-search domain.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"Extracted", "Configured", "ConfiguredExtracted"}, false),
+							Optional:     true,
+							Default:      "Extracted",
 						},
 					},
 				},
@@ -366,9 +382,10 @@ func resourceIamLdapPolicy() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the concrete policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the concrete policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -423,7 +440,8 @@ func resourceIamLdapPolicy() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -605,23 +623,26 @@ func resourceIamLdapPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
 			},
 			"user_search_precedence": {
-				Description: "Search precedence between local user database and LDAP user database.\n* `LocalUserDb` - Precedence is given to local user database while searching.\n* `LDAPUserDb` - Precedence is given to LADP user database while searching.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "LocalUserDb",
+				Description:  "Search precedence between local user database and LDAP user database.\n* `LocalUserDb` - Precedence is given to local user database while searching.\n* `LDAPUserDb` - Precedence is given to LADP user database while searching.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"LocalUserDb", "LDAPUserDb"}, false),
+				Optional:     true,
+				Default:      "LocalUserDb",
 			},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
@@ -798,7 +819,7 @@ func resourceIamLdapPolicyCreate(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -865,7 +886,7 @@ func resourceIamLdapPolicyCreate(c context.Context, d *schema.ResourceData, meta
 					o.SetBindMethod(x)
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("iam.LdapBaseProperties")
 			if v, ok := l["domain"]; ok {
 				{
 					x := (v.(string))
@@ -951,7 +972,7 @@ func resourceIamLdapPolicyCreate(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("iam.LdapDnsParameters")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1064,7 +1085,7 @@ func resourceIamLdapPolicyCreate(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1417,7 +1438,7 @@ func resourceIamLdapPolicyUpdate(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1485,7 +1506,7 @@ func resourceIamLdapPolicyUpdate(c context.Context, d *schema.ResourceData, meta
 					o.SetBindMethod(x)
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("iam.LdapBaseProperties")
 			if v, ok := l["domain"]; ok {
 				{
 					x := (v.(string))
@@ -1573,7 +1594,7 @@ func resourceIamLdapPolicyUpdate(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("iam.LdapDnsParameters")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1690,7 +1711,7 @@ func resourceIamLdapPolicyUpdate(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

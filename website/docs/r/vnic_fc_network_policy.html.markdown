@@ -16,7 +16,8 @@ A Fibre Channel Network policy governs the vSAN configuration for the virtual in
 resource "intersight_vnic_fc_network_policy" "v_fc_network1" {
   name = "v_fc_network1"
   vsan_settings {
-    id = 100
+    id          = 100
+    object_type = "vnic.VsanSettings"
   }
   organization {
     object_type = "organization.Organization"
@@ -25,9 +26,9 @@ resource "intersight_vnic_fc_network_policy" "v_fc_network1" {
 }
 
 variable "organization" {
-   type = string
-   description = "<value for organization>"
- }
+  type        = string
+  description = "<value for organization>"
+}
 ```
 ## Argument Reference
 The following arguments are supported:

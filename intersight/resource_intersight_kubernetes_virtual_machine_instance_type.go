@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceKubernetesVirtualMachineInstanceType() *schema.Resource {
@@ -83,10 +85,11 @@ func resourceKubernetesVirtualMachineInstanceType() *schema.Resource {
 				Default:     "kubernetes.VirtualMachineInstanceType",
 			},
 			"cpu": {
-				Description: "Number of CPUs allocated to virtual machine.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Default:     4,
+				Description:  "Number of CPUs allocated to virtual machine.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(1, 40),
+				Optional:     true,
+				Default:      4,
 			},
 			"create_time": {
 				Description: "The time when this managed object was created.",
@@ -100,14 +103,16 @@ func resourceKubernetesVirtualMachineInstanceType() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"disk_size": {
-				Description: "Ephemeral disk capacity to be provided with units example - 10Gi.",
-				Type:        schema.TypeInt,
-				Optional:    true,
+				Description:  "Ephemeral disk capacity to be provided with units example - 10Gi.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntAtLeast(0),
+				Optional:     true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -121,10 +126,11 @@ func resourceKubernetesVirtualMachineInstanceType() *schema.Resource {
 					return
 				}},
 			"memory": {
-				Description: "Virtual machine memory defined in mebibytes (MiB).",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Default:     16384,
+				Description:  "Virtual machine memory defined in mebibytes (MiB).",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(1, 4177920),
+				Optional:     true,
+				Default:      16384,
 			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
@@ -145,9 +151,10 @@ func resourceKubernetesVirtualMachineInstanceType() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the concrete policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the concrete policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -202,7 +209,8 @@ func resourceKubernetesVirtualMachineInstanceType() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -345,14 +353,16 @@ func resourceKubernetesVirtualMachineInstanceType() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -566,7 +576,7 @@ func resourceKubernetesVirtualMachineInstanceTypeCreate(c context.Context, d *sc
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -871,7 +881,7 @@ func resourceKubernetesVirtualMachineInstanceTypeUpdate(c context.Context, d *sc
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

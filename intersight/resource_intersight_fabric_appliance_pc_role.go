@@ -10,6 +10,7 @@ import (
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceFabricAppliancePcRole() *schema.Resource {
@@ -38,10 +39,11 @@ func resourceFabricAppliancePcRole() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"admin_speed": {
-				Description: "Admin configured speed for the port channel.\n* `Auto` - Admin configurable speed AUTO ( default ).\n* `1Gbps` - Admin configurable speed 1Gbps.\n* `10Gbps` - Admin configurable speed 10Gbps.\n* `25Gbps` - Admin configurable speed 25Gbps.\n* `40Gbps` - Admin configurable speed 40Gbps.\n* `100Gbps` - Admin configurable speed 100Gbps.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "Auto",
+				Description:  "Admin configured speed for the port channel.\n* `Auto` - Admin configurable speed AUTO ( default ).\n* `1Gbps` - Admin configurable speed 1Gbps.\n* `10Gbps` - Admin configurable speed 10Gbps.\n* `25Gbps` - Admin configurable speed 25Gbps.\n* `40Gbps` - Admin configurable speed 40Gbps.\n* `100Gbps` - Admin configurable speed 100Gbps.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Auto", "1Gbps", "10Gbps", "25Gbps", "40Gbps", "100Gbps"}, false),
+				Optional:     true,
+				Default:      "Auto",
 			},
 			"ancestors": {
 				Description: "An array of relationships to moBaseMo resources.",
@@ -202,10 +204,11 @@ func resourceFabricAppliancePcRole() *schema.Resource {
 					return
 				}},
 			"mode": {
-				Description: "Port mode to be set on the appliance port-channel.\n* `trunk` - Trunk Mode Switch Port Type.\n* `access` - Access Mode Switch Port Type.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "trunk",
+				Description:  "Port mode to be set on the appliance port-channel.\n* `trunk` - Trunk Mode Switch Port Type.\n* `access` - Access Mode Switch Port Type.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"trunk", "access"}, false),
+				Optional:     true,
+				Default:      "trunk",
 			},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
@@ -226,7 +229,8 @@ func resourceFabricAppliancePcRole() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -268,9 +272,10 @@ func resourceFabricAppliancePcRole() *schema.Resource {
 				},
 			},
 			"pc_id": {
-				Description: "Unique Identifier of the port-channel, local to this switch.",
-				Type:        schema.TypeInt,
-				Optional:    true,
+				Description:  "Unique Identifier of the port-channel, local to this switch.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(1, 256),
+				Optional:     true,
 			},
 			"permission_resources": {
 				Description: "An array of relationships to moBaseMo resources.",
@@ -364,9 +369,10 @@ func resourceFabricAppliancePcRole() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"aggregate_port_id": {
-							Description: "Breakout port Identifier of the Switch Interface.\nWhen a port is not configured as a breakout port, the aggregatePortId is set to 0, and unused.\nWhen a port is configured as a breakout port, the 'aggregatePortId' port number as labeled on the equipment,\ne.g. the id of the port on the switch.",
-							Type:        schema.TypeInt,
-							Optional:    true,
+							Description:  "Breakout port Identifier of the Switch Interface.\nWhen a port is not configured as a breakout port, the aggregatePortId is set to 0, and unused.\nWhen a port is configured as a breakout port, the 'aggregatePortId' port number as labeled on the equipment,\ne.g. the id of the port on the switch.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(0, 108),
+							Optional:     true,
 						},
 						"class_id": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
@@ -381,23 +387,26 @@ func resourceFabricAppliancePcRole() *schema.Resource {
 							Default:     "fabric.PortIdentifier",
 						},
 						"port_id": {
-							Description: "Port Identifier of the Switch/FEX/Chassis Interface.\nWhen a port is not configured as a breakout port, the portId is the port number as labeled on the equipment,\ne.g. the id of the port on the switch, FEX or chassis.\nWhen a port is configured as a breakout port, the 'portId' represents the port id on the fanout side of the breakout cable.",
-							Type:        schema.TypeInt,
-							Optional:    true,
+							Description:  "Port Identifier of the Switch/FEX/Chassis Interface.\nWhen a port is not configured as a breakout port, the portId is the port number as labeled on the equipment,\ne.g. the id of the port on the switch, FEX or chassis.\nWhen a port is configured as a breakout port, the 'portId' represents the port id on the fanout side of the breakout cable.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(1, 108),
+							Optional:     true,
 						},
 						"slot_id": {
-							Description: "Slot Identifier of the Switch/FEX/Chassis Interface.",
-							Type:        schema.TypeInt,
-							Optional:    true,
+							Description:  "Slot Identifier of the Switch/FEX/Chassis Interface.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(1, 5),
+							Optional:     true,
 						},
 					},
 				},
 			},
 			"priority": {
-				Description: "The 'name' of the System QoS Class.\n* `Best Effort` - QoS Priority for Best-effort traffic.\n* `FC` - QoS Priority for FC traffic.\n* `Platinum` - QoS Priority for Platinum traffic.\n* `Gold` - QoS Priority for Gold traffic.\n* `Silver` - QoS Priority for Silver traffic.\n* `Bronze` - QoS Priority for Bronze traffic.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "Best Effort",
+				Description:  "The 'name' of the System QoS Class.\n* `Best Effort` - QoS Priority for Best-effort traffic.\n* `FC` - QoS Priority for FC traffic.\n* `Platinum` - QoS Priority for Platinum traffic.\n* `Gold` - QoS Priority for Gold traffic.\n* `Silver` - QoS Priority for Silver traffic.\n* `Bronze` - QoS Priority for Bronze traffic.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Best Effort", "FC", "Platinum", "Gold", "Silver", "Bronze"}, false),
+				Optional:     true,
+				Default:      "Best Effort",
 			},
 			"shared_scope": {
 				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
@@ -423,14 +432,16 @@ func resourceFabricAppliancePcRole() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -617,7 +628,7 @@ func resourceFabricAppliancePcRoleCreate(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -660,7 +671,7 @@ func resourceFabricAppliancePcRoleCreate(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -720,7 +731,7 @@ func resourceFabricAppliancePcRoleCreate(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1008,7 +1019,7 @@ func resourceFabricAppliancePcRoleUpdate(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1052,7 +1063,7 @@ func resourceFabricAppliancePcRoleUpdate(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1116,7 +1127,7 @@ func resourceFabricAppliancePcRoleUpdate(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

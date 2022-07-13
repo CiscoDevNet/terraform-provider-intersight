@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **HypervisorControlIp** | Pointer to **string** | IP address for hypervisor control such as VM migration or pod management. | [optional] 
 **HypervisorDataIp** | Pointer to **string** | IP address for storage data network (Hypervisor interface). | [optional] 
 **HypervisorMgmtIp** | Pointer to **string** | IP address for Hypervisor management network. | [optional] 
-**NodeRole** | Pointer to **string** | The role that this node performs in the HyperFlex cluster. * &#x60;Unknown&#x60; - The node role is not available. * &#x60;Storage&#x60; - The node persists data and contributes to the storage capacity of a cluster. * &#x60;Compute&#x60; - The node contributes to the compute capacity of a cluster. | [optional] [readonly] [default to "Unknown"]
+**NodeRole** | Pointer to **string** | The role that this node performs in the HyperFlex cluster. * &#x60;Unknown&#x60; - The node role is not available. * &#x60;Storage&#x60; - The node persists data and contributes to the storage capacity of a cluster. * &#x60;Compute&#x60; - The node contributes to the compute capacity of a cluster. | [optional] [default to "Unknown"]
 **AssignedServer** | Pointer to [**ComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
 **ClusterProfile** | Pointer to [**HyperflexClusterProfileRelationship**](HyperflexClusterProfileRelationship.md) |  | [optional] 
 **Node** | Pointer to [**HyperflexNodeRelationship**](HyperflexNodeRelationship.md) |  | [optional] 

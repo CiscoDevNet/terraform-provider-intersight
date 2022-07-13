@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceWorkflowWorkflowInfo() *schema.Resource {
@@ -74,10 +76,11 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 					return
 				}},
 			"action": {
-				Description: "The action of the workflow such as start, cancel, retry, pause.\n* `None` - No action is set, this is the default value for action field.\n* `Create` - Create a new instance of the workflow but it does not start the execution of the workflow. Use the Start action to start execution of the workflow.\n* `Start` - Start a new execution of the workflow.\n* `Pause` - Pause the workflow, this can only be issued on workflows that are in running state.\n* `Resume` - Resume the workflow which was previously paused through pause action on the workflow.\n* `Retry` - Retry the workflow that has previously reached a final state and has the retryable property set to true. A running or waiting workflow cannot be retried. If the property retryFromTaskName is also passed along with this action, the workflow will be started from that specific task, otherwise the workflow will be restarted from the first task.  The task name in retryFromTaskName must be one of the tasks that completed or failed in the previous run. It is not possible to retry a workflow from a task which wasn't run in the previous iteration.\n* `RetryFailed` - Retry the workflow that has failed. A running or waiting workflow or a workflow that completed successfully cannot be retried. Only the tasks that failed in the previous run will be retried and the rest of workflow will be run. This action does not restart the workflow and also does not support retrying from a specific task.\n* `Cancel` - Cancel the workflow that is in running or waiting state.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "None",
+				Description:  "The action of the workflow such as start, cancel, retry, pause.\n* `None` - No action is set, this is the default value for action field.\n* `Create` - Create a new instance of the workflow but it does not start the execution of the workflow. Use the Start action to start execution of the workflow.\n* `Start` - Start a new execution of the workflow.\n* `Pause` - Pause the workflow, this can only be issued on workflows that are in running state.\n* `Resume` - Resume the workflow which was previously paused through pause action on the workflow.\n* `Retry` - Retry the workflow that has previously reached a final state and has the retryable property set to true. A running or waiting workflow cannot be retried. If the property retryFromTaskName is also passed along with this action, the workflow will be started from that specific task, otherwise the workflow will be restarted from the first task.  The task name in retryFromTaskName must be one of the tasks that completed or failed in the previous run. It is not possible to retry a workflow from a task which wasn't run in the previous iteration.\n* `RetryFailed` - Retry the workflow that has failed. A running or waiting workflow or a workflow that completed successfully cannot be retried. Only the tasks that failed in the previous run will be retried and the rest of workflow will be run. This action does not restart the workflow and also does not support retrying from a specific task.\n* `Cancel` - Cancel the workflow that is in running or waiting state.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"None", "Create", "Start", "Pause", "Resume", "Retry", "RetryFailed", "Cancel"}, false),
+				Optional:     true,
+				Default:      "None",
 			},
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -295,10 +298,11 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 							Default:     "workflow.Message",
 						},
 						"severity": {
-							Description: "The severity of the Task or Workflow message warning/error/info etc.\n* `Info` - The enum represents the log level to be used to convey info message.\n* `Warning` - The enum represents the log level to be used to convey warning message.\n* `Debug` - The enum represents the log level to be used to convey debug message.\n* `Error` - The enum represents the log level to be used to convey error message.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "Info",
+							Description:  "The severity of the Task or Workflow message warning/error/info etc.\n* `Info` - The enum represents the log level to be used to convey info message.\n* `Warning` - The enum represents the log level to be used to convey warning message.\n* `Debug` - The enum represents the log level to be used to convey debug message.\n* `Error` - The enum represents the log level to be used to convey error message.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"Info", "Warning", "Debug", "Error"}, false),
+							Optional:     true,
+							Default:      "Info",
 						},
 					},
 				},
@@ -328,10 +332,11 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "A name of the workflow execution instance.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				ForceNew:    true,
+				Description:  "A name of the workflow execution instance.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[^:]{1,92}$"), ""),
+				Optional:     true,
+				ForceNew:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -397,7 +402,8 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -479,11 +485,12 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 				},
 			},
 			"pause_reason": {
-				Description: "Denotes the reason workflow is in paused status.\n* `None` - Pause reason is none, which indicates there is no reason for the pause state.\n* `TaskWithWarning` - Pause reason indicates the workflow is in this state due to a task that has a status as completed with warnings.\n* `SystemMaintenance` - Pause reason indicates the workflow is in this state based on actions of system admin for maintenance.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "None",
-				ForceNew:    true,
+				Description:  "Denotes the reason workflow is in paused status.\n* `None` - Pause reason is none, which indicates there is no reason for the pause state.\n* `TaskWithWarning` - Pause reason indicates the workflow is in this state due to a task that has a status as completed with warnings.\n* `SystemMaintenance` - Pause reason indicates the workflow is in this state based on actions of system admin for maintenance.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"None", "TaskWithWarning", "SystemMaintenance"}, false),
+				Optional:     true,
+				Default:      "None",
+				ForceNew:     true,
 			},
 			"pending_dynamic_workflow_info": {
 				Description: "A reference to a workflowPendingDynamicWorkflowInfo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -649,7 +656,8 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 										ConfigMode: schema.SchemaConfigModeAttr,
 										Computed:   true,
 										Elem: &schema.Schema{
-											Type: schema.TypeString}},
+											Type: schema.TypeString,
+										}},
 									"class_id": {
 										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 										Type:        schema.TypeString,
@@ -663,10 +671,11 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 										Default:     true,
 									},
 									"mode": {
-										Description: "Mode controls how the workflow can be canceled.\n* `ApiOnly` - The workflow can only be canceled via API call.\n* `All` - The workflow can be canceled from API or from the user interface.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Default:     "ApiOnly",
+										Description:  "Mode controls how the workflow can be canceled.\n* `ApiOnly` - The workflow can only be canceled via API call.\n* `All` - The workflow can be canceled from API or from the user interface.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringInSlice([]string{"ApiOnly", "All"}, false),
+										Optional:     true,
+										Default:      "ApiOnly",
 									},
 									"object_type": {
 										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -800,14 +809,16 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -1047,11 +1058,12 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 				},
 			},
 			"wait_reason": {
-				Description: "Denotes the reason workflow is in waiting status.\n* `None` - Wait reason is none, which indicates there is no reason for the waiting state.\n* `GatherTasks` - Wait reason is gathering tasks, which indicates the workflow is in this state in order to gather tasks.\n* `Duplicate` - Wait reason is duplicate, which indicates the workflow is a duplicate of current running workflow.\n* `RateLimit` - Wait reason is rate limit, which indicates the workflow is rate limited by account/instance level throttling threshold.\n* `WaitTask` - Wait reason when there are one or more wait tasks in the workflow which are yet to receive a task status update.\n* `PendingRetryFailed` - Wait reason when the workflow is pending a RetryFailed action.\n* `WaitingToStart` - Workflow is waiting to start on workflow engine.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "None",
-				ForceNew:    true,
+				Description:  "Denotes the reason workflow is in waiting status.\n* `None` - Wait reason is none, which indicates there is no reason for the waiting state.\n* `GatherTasks` - Wait reason is gathering tasks, which indicates the workflow is in this state in order to gather tasks.\n* `Duplicate` - Wait reason is duplicate, which indicates the workflow is a duplicate of current running workflow.\n* `RateLimit` - Wait reason is rate limit, which indicates the workflow is rate limited by account/instance level throttling threshold.\n* `WaitTask` - Wait reason when there are one or more wait tasks in the workflow which are yet to receive a task status update.\n* `PendingRetryFailed` - Wait reason when the workflow is pending a RetryFailed action.\n* `WaitingToStart` - Workflow is waiting to start on workflow engine.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"None", "GatherTasks", "Duplicate", "RateLimit", "WaitTask", "PendingRetryFailed", "WaitingToStart"}, false),
+				Optional:     true,
+				Default:      "None",
+				ForceNew:     true,
 			},
 			"workflow_ctx": {
 				Description: "The workflow context which contains initiator and target information.",
@@ -1225,10 +1237,11 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 				ForceNew: true,
 			},
 			"workflow_meta_type": {
-				Description: "The type of workflow meta. Derived from the workflow meta that is used to launch this workflow instance.\n* `SystemDefined` - System defined workflow definition.\n* `UserDefined` - User defined workflow definition.\n* `Dynamic` - Dynamically defined workflow definition.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "SystemDefined",
+				Description:  "The type of workflow meta. Derived from the workflow meta that is used to launch this workflow instance.\n* `SystemDefined` - System defined workflow definition.\n* `UserDefined` - User defined workflow definition.\n* `Dynamic` - Dynamically defined workflow definition.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"SystemDefined", "UserDefined", "Dynamic"}, false),
+				Optional:     true,
+				Default:      "SystemDefined",
 			},
 			"workflow_task_count": {
 				Description: "Total number of workflow tasks in this workflow.",
@@ -1277,7 +1290,7 @@ func resourceWorkflowWorkflowInfoCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1334,7 +1347,7 @@ func resourceWorkflowWorkflowInfoCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1458,7 +1471,7 @@ func resourceWorkflowWorkflowInfoCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1506,7 +1519,7 @@ func resourceWorkflowWorkflowInfoCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1599,7 +1612,7 @@ func resourceWorkflowWorkflowInfoCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("workflow.WorkflowCtx")
 			if v, ok := l["initiator_ctx"]; ok {
 				{
 					p := make([]models.WorkflowInitiatorContext, 0, 1)
@@ -1617,7 +1630,7 @@ func resourceWorkflowWorkflowInfoCreate(c context.Context, d *schema.ResourceDat
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("workflow.InitiatorContext")
 						if v, ok := l["initiator_moid"]; ok {
 							{
 								x := (v.(string))
@@ -1747,7 +1760,7 @@ func resourceWorkflowWorkflowInfoCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2057,7 +2070,7 @@ func resourceWorkflowWorkflowInfoUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2117,7 +2130,7 @@ func resourceWorkflowWorkflowInfoUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2247,7 +2260,7 @@ func resourceWorkflowWorkflowInfoUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2297,7 +2310,7 @@ func resourceWorkflowWorkflowInfoUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2393,7 +2406,7 @@ func resourceWorkflowWorkflowInfoUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("workflow.WorkflowCtx")
 			if v, ok := l["initiator_ctx"]; ok {
 				{
 					p := make([]models.WorkflowInitiatorContext, 0, 1)
@@ -2411,7 +2424,7 @@ func resourceWorkflowWorkflowInfoUpdate(c context.Context, d *schema.ResourceDat
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("workflow.InitiatorContext")
 						if v, ok := l["initiator_moid"]; ok {
 							{
 								x := (v.(string))
@@ -2542,7 +2555,7 @@ func resourceWorkflowWorkflowInfoUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

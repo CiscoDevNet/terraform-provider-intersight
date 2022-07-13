@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceStorageStoragePolicy() *schema.Resource {
@@ -94,9 +96,10 @@ func resourceStorageStoragePolicy() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -149,9 +152,10 @@ func resourceStorageStoragePolicy() *schema.Resource {
 				},
 			},
 			"global_hot_spares": {
-				Description: "A collection of disks that is to be used as hot spares, globally, for all the RAID groups. Allowed value is a number range separated by a comma or a hyphen.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "A collection of disks that is to be used as hot spares, globally, for all the RAID groups. Allowed value is a number range separated by a comma or a hyphen.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^((\\d+\\-\\d+)|(\\d+))(,((\\d+\\-\\d+)|(\\d+)))*$"), ""),
+				Optional:     true,
 			},
 			"m2_virtual_drive": {
 				Description: "Virtual Drive configuration for M.2 RAID controller.",
@@ -174,10 +178,11 @@ func resourceStorageStoragePolicy() *schema.Resource {
 							Default:     "storage.M2VirtualDriveConfig",
 						},
 						"controller_slot": {
-							Description: "Select the M.2 RAID controller slot on which the virtual drive is to be created. Select 'MSTOR-RAID-1' to create virtual drive on the M.2 RAID controller in the first slot or in the MSTOR-RAID slot, 'MSTOR-RAID-2' for second slot, 'MSTOR-RAID-1, MSTOR-RAID-2' for both slots or either slot.\n* `MSTOR-RAID-1` - Virtual drive  will be created on the M.2 RAID controller in the first slot.\n* `MSTOR-RAID-2` - Virtual drive  will be created on the M.2 RAID controller in the second slot, if available.\n* `MSTOR-RAID-1,MSTOR-RAID-2` - Virtual drive  will be created on the M.2 RAID controller in both the slots, if available.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "MSTOR-RAID-1",
+							Description:  "Select the M.2 RAID controller slot on which the virtual drive is to be created. Select 'MSTOR-RAID-1' to create virtual drive on the M.2 RAID controller in the first slot or in the MSTOR-RAID slot, 'MSTOR-RAID-2' for second slot, 'MSTOR-RAID-1, MSTOR-RAID-2' for both slots or either slot.\n* `MSTOR-RAID-1` - Virtual drive  will be created on the M.2 RAID controller in the first slot.\n* `MSTOR-RAID-2` - Virtual drive  will be created on the M.2 RAID controller in the second slot, if available.\n* `MSTOR-RAID-1,MSTOR-RAID-2` - Virtual drive  will be created on the M.2 RAID controller in both the slots, if available.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"MSTOR-RAID-1", "MSTOR-RAID-2", "MSTOR-RAID-1,MSTOR-RAID-2"}, false),
+							Optional:     true,
+							Default:      "MSTOR-RAID-1",
 						},
 						"enable": {
 							Description: "If enabled, this will create a virtual drive on the M.2 RAID controller.",
@@ -213,9 +218,10 @@ func resourceStorageStoragePolicy() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the concrete policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the concrete policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -270,7 +276,8 @@ func resourceStorageStoragePolicy() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -410,9 +417,10 @@ func resourceStorageStoragePolicy() *schema.Resource {
 							Default:     "storage.R0Drive",
 						},
 						"drive_slots": {
-							Description: "The set of drive slots where RAID0 virtual drives must be created.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The set of drive slots where RAID0 virtual drives must be created.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^((\\d+\\-\\d+)|(\\d+))(,((\\d+\\-\\d+)|(\\d+)))*$"), ""),
+							Optional:     true,
 						},
 						"drive_slots_list": {
 							Description: "The list of drive slots where RAID0 virtual drives must be created (comma seperated).",
@@ -447,10 +455,11 @@ func resourceStorageStoragePolicy() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"access_policy": {
-										Description: "Access policy that host has on this virtual drive.\n* `Default` - Use platform default access mode.\n* `ReadWrite` - Enables host to perform read-write on the VD.\n* `ReadOnly` - Host can only read from the VD.\n* `Blocked` - Host can neither read nor write to the VD.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Default:     "Default",
+										Description:  "Access policy that host has on this virtual drive.\n* `Default` - Use platform default access mode.\n* `ReadWrite` - Enables host to perform read-write on the VD.\n* `ReadOnly` - Host can only read from the VD.\n* `Blocked` - Host can neither read nor write to the VD.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringInSlice([]string{"Default", "ReadWrite", "ReadOnly", "Blocked"}, false),
+										Optional:     true,
+										Default:      "Default",
 									},
 									"additional_properties": {
 										Type:             schema.TypeString,
@@ -464,10 +473,11 @@ func resourceStorageStoragePolicy() *schema.Resource {
 										Default:     "storage.VirtualDrivePolicy",
 									},
 									"drive_cache": {
-										Description: "Disk cache policy for the virtual drive.\n* `Default` - Use platform default drive cache mode.\n* `NoChange` - Drive cache policy is unchanged.\n* `Enable` - Enables IO caching on the drive.\n* `Disable` - Disables IO caching on the drive.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Default:     "Default",
+										Description:  "Disk cache policy for the virtual drive.\n* `Default` - Use platform default drive cache mode.\n* `NoChange` - Drive cache policy is unchanged.\n* `Enable` - Enables IO caching on the drive.\n* `Disable` - Disables IO caching on the drive.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringInSlice([]string{"Default", "NoChange", "Enable", "Disable"}, false),
+										Optional:     true,
+										Default:      "Default",
 									},
 									"object_type": {
 										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -476,22 +486,25 @@ func resourceStorageStoragePolicy() *schema.Resource {
 										Default:     "storage.VirtualDrivePolicy",
 									},
 									"read_policy": {
-										Description: "Read ahead mode to be used to read data from this virtual drive.\n* `Default` - Use platform default read ahead mode.\n* `ReadAhead` - Use read ahead mode for the policy.\n* `NoReadAhead` - Do not use read ahead mode for the policy.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Default:     "Default",
+										Description:  "Read ahead mode to be used to read data from this virtual drive.\n* `Default` - Use platform default read ahead mode.\n* `ReadAhead` - Use read ahead mode for the policy.\n* `NoReadAhead` - Do not use read ahead mode for the policy.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringInSlice([]string{"Default", "ReadAhead", "NoReadAhead"}, false),
+										Optional:     true,
+										Default:      "Default",
 									},
 									"strip_size": {
-										Description: "Desired strip size - Allowed values are 64KiB, 128KiB, 256KiB, 512KiB, 1024KiB.\n* `64` - Number of bytes in a strip is 64 Kibibytes.\n* `128` - Number of bytes in a strip is 128 Kibibytes.\n* `256` - Number of bytes in a strip is 256 Kibibytes.\n* `512` - Number of bytes in a strip is 512 Kibibytes.\n* `1024` - Number of bytes in a strip is 1024 Kibibytes or 1 Mebibyte.",
-										Type:        schema.TypeInt,
-										Optional:    true,
-										Default:     64,
+										Description:  "Desired strip size - Allowed values are 64KiB, 128KiB, 256KiB, 512KiB, 1024KiB.\n* `64` - Number of bytes in a strip is 64 Kibibytes.\n* `128` - Number of bytes in a strip is 128 Kibibytes.\n* `256` - Number of bytes in a strip is 256 Kibibytes.\n* `512` - Number of bytes in a strip is 512 Kibibytes.\n* `1024` - Number of bytes in a strip is 1024 Kibibytes or 1 Mebibyte.",
+										Type:         schema.TypeInt,
+										ValidateFunc: validation.IntInSlice([]int{64, 128, 256, 512, 1024}),
+										Optional:     true,
+										Default:      64,
 									},
 									"write_policy": {
-										Description: "Write mode to be used to write data to this virtual drive.\n* `Default` - Use platform default write mode.\n* `WriteThrough` - Data is written through the cache and to the physical drives. Performance is improved, because subsequent reads of that data can be satisfied from the cache.\n* `WriteBackGoodBbu` - Data is stored in the cache, and is only written to the physical drives when space in the cache is needed. Virtual drives requesting this policy fall back to Write Through caching when the battery backup unit (BBU) cannot guarantee the safety of the cache in the event of a power failure.\n* `AlwaysWriteBack` - With this policy, write caching remains Write Back even if the battery backup unit is defective or discharged.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Default:     "Default",
+										Description:  "Write mode to be used to write data to this virtual drive.\n* `Default` - Use platform default write mode.\n* `WriteThrough` - Data is written through the cache and to the physical drives. Performance is improved, because subsequent reads of that data can be satisfied from the cache.\n* `WriteBackGoodBbu` - Data is stored in the cache, and is only written to the physical drives when space in the cache is needed. Virtual drives requesting this policy fall back to Write Through caching when the battery backup unit (BBU) cannot guarantee the safety of the cache in the event of a power failure.\n* `AlwaysWriteBack` - With this policy, write caching remains Write Back even if the battery backup unit is defective or discharged.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringInSlice([]string{"Default", "WriteThrough", "WriteBackGoodBbu", "AlwaysWriteBack"}, false),
+										Optional:     true,
+										Default:      "Default",
 									},
 								},
 							},
@@ -523,23 +536,26 @@ func resourceStorageStoragePolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
 			},
 			"unused_disks_state": {
-				Description: "State to which disks, not used in this policy, are to be moved. NoChange will not change the drive state.\n* `NoChange` - Drive state will not be modified by Storage Policy.\n* `UnconfiguredGood` - Unconfigured good state -ready to be added in a RAID group.\n* `Jbod` - JBOD state where the disks start showing up to Host OS.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "NoChange",
+				Description:  "State to which disks, not used in this policy, are to be moved. NoChange will not change the drive state.\n* `NoChange` - Drive state will not be modified by Storage Policy.\n* `UnconfiguredGood` - Unconfigured good state -ready to be added in a RAID group.\n* `Jbod` - JBOD state where the disks start showing up to Host OS.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"NoChange", "UnconfiguredGood", "Jbod"}, false),
+				Optional:     true,
+				Default:      "NoChange",
 			},
 			"use_jbod_for_vd_creation": {
 				Description: "Disks in JBOD State are used to create virtual drives.",
@@ -775,7 +791,7 @@ func resourceStorageStoragePolicyCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("storage.M2VirtualDriveConfig")
 			if v, ok := l["controller_slot"]; ok {
 				{
 					x := (v.(string))
@@ -830,7 +846,7 @@ func resourceStorageStoragePolicyCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -915,7 +931,7 @@ func resourceStorageStoragePolicyCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("storage.R0Drive")
 			if v, ok := l["drive_slots"]; ok {
 				{
 					x := (v.(string))
@@ -957,7 +973,7 @@ func resourceStorageStoragePolicyCreate(c context.Context, d *schema.ResourceDat
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("storage.VirtualDrivePolicy")
 						if v, ok := l["drive_cache"]; ok {
 							{
 								x := (v.(string))
@@ -1298,7 +1314,7 @@ func resourceStorageStoragePolicyUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("storage.M2VirtualDriveConfig")
 			if v, ok := l["controller_slot"]; ok {
 				{
 					x := (v.(string))
@@ -1356,7 +1372,7 @@ func resourceStorageStoragePolicyUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1441,7 +1457,7 @@ func resourceStorageStoragePolicyUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("storage.R0Drive")
 			if v, ok := l["drive_slots"]; ok {
 				{
 					x := (v.(string))
@@ -1483,7 +1499,7 @@ func resourceStorageStoragePolicyUpdate(c context.Context, d *schema.ResourceDat
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("storage.VirtualDrivePolicy")
 						if v, ok := l["drive_cache"]; ok {
 							{
 								x := (v.(string))

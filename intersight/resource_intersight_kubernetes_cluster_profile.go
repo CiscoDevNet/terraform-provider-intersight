@@ -6,11 +6,13 @@ import (
 	"fmt"
 	"log"
 	"reflect"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceKubernetesClusterProfile() *schema.Resource {
@@ -128,10 +130,11 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 							Default:     "kubernetes.ActionInfo",
 						},
 						"status": {
-							Description: "No longer maintained and will be removed soon.\n* `None` - A place holder for the default value.\n* `InProgress` - Action triggered on the resource is still running.\n* `Success` - Action triggered on the resource is completed successfully.\n* `Failure` - Action triggered on the resource is failed.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "None",
+							Description:  "No longer maintained and will be removed soon.\n* `None` - A place holder for the default value.\n* `InProgress` - Action triggered on the resource is still running.\n* `Success` - Action triggered on the resource is completed successfully.\n* `Failure` - Action triggered on the resource is failed.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"None", "InProgress", "Success", "Failure"}, false),
+							Optional:     true,
+							Default:      "None",
 						},
 					},
 				},
@@ -298,7 +301,8 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 							ConfigMode: schema.SchemaConfigModeAttr,
 							Computed:   true,
 							Elem: &schema.Schema{
-								Type: schema.TypeString}},
+								Type: schema.TypeString,
+							}},
 						"etcd_key": {
 							Description: "Private key for the etcd cluster.",
 							Type:        schema.TypeString,
@@ -490,6 +494,46 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 					},
 				},
 			},
+			"container_runtime_proxy_policy": {
+				Description: "A reference to a kubernetesHttpProxyPolicy resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "mo.MoRef",
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+					},
+				},
+			},
 			"create_time": {
 				Description: "The time when this managed object was created.",
 				Type:        schema.TypeString,
@@ -502,9 +546,50 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the profile.",
-				Type:        schema.TypeString,
+				Description:  "Description of the profile.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
+			},
+			"device_connector_proxy_policy": {
+				Description: "A reference to a kubernetesHttpProxyPolicy resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
 				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "mo.MoRef",
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+					},
+				},
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -550,10 +635,11 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 										Default:     "kubernetes.AddonConfiguration",
 									},
 									"install_strategy": {
-										Description: "Addon install strategy to determine whether an addon is installed if not present.\n* `None` - Unspecified install strategy.\n* `NoAction` - No install action performed.\n* `InstallOnly` - Only install in green field. No action in case of failure or removal.\n* `Always` - Attempt install if chart is not already installed.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Default:     "None",
+										Description:  "Addon install strategy to determine whether an addon is installed if not present.\n* `None` - Unspecified install strategy.\n* `NoAction` - No install action performed.\n* `InstallOnly` - Only install in green field. No action in case of failure or removal.\n* `Always` - Attempt install if chart is not already installed.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringInSlice([]string{"None", "NoAction", "InstallOnly", "Always"}, false),
+										Optional:     true,
+										Default:      "None",
 									},
 									"object_type": {
 										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -614,10 +700,11 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 										Optional:    true,
 									},
 									"upgrade_strategy": {
-										Description: "Addon upgrade strategy to determine whether an addon configuration is overwritten on upgrade.\n* `None` - Unspecified upgrade strategy.\n* `NoAction` - This choice enables No upgrades to be performed.\n* `UpgradeOnly` - Attempt upgrade if chart or overrides options change, no action on upgrade failure.\n* `ReinstallOnFailure` - Attempt upgrade first. Remove and install on upgrade failure.\n* `AlwaysReinstall` - Always remove older release and reinstall.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Default:     "None",
+										Description:  "Addon upgrade strategy to determine whether an addon configuration is overwritten on upgrade.\n* `None` - Unspecified upgrade strategy.\n* `NoAction` - This choice enables No upgrades to be performed.\n* `UpgradeOnly` - Attempt upgrade if chart or overrides options change, no action on upgrade failure.\n* `ReinstallOnFailure` - Attempt upgrade first. Remove and install on upgrade failure.\n* `AlwaysReinstall` - Always remove older release and reinstall.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringInSlice([]string{"None", "NoAction", "UpgradeOnly", "ReinstallOnFailure", "AlwaysReinstall"}, false),
+										Optional:     true,
+										Default:      "None",
 									},
 								},
 							},
@@ -687,8 +774,8 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
-				Computed:    true,
 				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
@@ -706,13 +793,7 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 							Description: "Kubernetes configuration to connect to the cluster as an system administrator.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
-							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
-								if val != nil {
-									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
-								}
-								return
-							}},
+						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
@@ -801,10 +882,11 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 				},
 			},
 			"managed_mode": {
-				Description: "Management mode for the cluster. In some cases Intersight kubernetes service is not required\nto provision and manage the management entities and endpoints (for e.g. EKS). In most other cases\nit will be required to provision and manage these entities and endpoints.\n* `Provided` - Cluster management entities and endpoints are provided by the infrastructure platform.\n* `Managed` - Cluster management entities and endpoints are provisioned and managed by Intersight kubernetes service.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "Provided",
+				Description:  "Management mode for the cluster. In some cases Intersight kubernetes service is not required\nto provision and manage the management entities and endpoints (for e.g. EKS). In most other cases\nit will be required to provision and manage these entities and endpoints.\n* `Provided` - Cluster management entities and endpoints are provided by the infrastructure platform.\n* `Managed` - Cluster management entities and endpoints are provisioned and managed by Intersight kubernetes service.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Provided", "Managed"}, false),
+				Optional:     true,
+				Default:      "Provided",
 			},
 			"management_config": {
 				Description: "Configuration required for provisioning and management of cluster management entities. Required if\n'managedMode' is set to 'Managed'.",
@@ -848,7 +930,8 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 							ConfigMode: schema.SchemaConfigModeAttr,
 							Computed:   true,
 							Elem: &schema.Schema{
-								Type: schema.TypeString}},
+								Type: schema.TypeString,
+							}},
 						"master_vip": {
 							Description: "VIP for the cluster Kubernetes API server. If this is empty and a cluster IP pool is specified, it will be allocated from the IP pool.",
 							Type:        schema.TypeString,
@@ -866,7 +949,8 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 							ConfigMode: schema.SchemaConfigModeAttr,
 							Computed:   true,
 							Elem: &schema.Schema{
-								Type: schema.TypeString}},
+								Type: schema.TypeString,
+							}},
 						"ssh_user": {
 							Description: "Name of the user to SSH to nodes in a cluster.",
 							Type:        schema.TypeString,
@@ -945,9 +1029,10 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the profile instance or profile template.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the profile instance or profile template.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"net_config": {
 				Description: "A reference to a kubernetesNetworkPolicy resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -1081,7 +1166,8 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -1292,10 +1378,11 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 				},
 			},
 			"status": {
-				Description: "Status of the Kubernetes cluster and its nodes.\n* `Undeployed` - The cluster is undeployed.\n* `Configuring` - The cluster is being configured.\n* `Deploying` - The cluster is being deployed.\n* `Undeploying` - The cluster is being undeployed.\n* `DeployFailedTerminal` - The Cluster Deploy failed creation and can not be recovered, only Delete or Undeploy operations are available for this Cluster.\n* `DeployFailed` - The cluster deployment failed.\n* `Upgrading` - The cluster is being upgraded.\n* `Deleting` - The cluster is being deleted.\n* `DeleteFailed` - The Cluster Delete failed and the Cluster can not be recovered, only Delete or Undeploy operations are available for this Cluster.\n* `Ready` - The cluster is ready for use.\n* `Active` - The cluster is being active.\n* `Shutdown` - All the nodes in the cluster are powered off.\n* `Terminated` - The cluster is terminated.\n* `Deployed` - The cluster is deployed. The cluster may not yet be ready for use.\n* `UndeployFailed` - The cluster undeploy action failed.\n* `NotReady` - The cluster is created and some nodes are not ready.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "Undeployed",
+				Description:  "Status of the Kubernetes cluster and its nodes.\n* `Undeployed` - The cluster is undeployed.\n* `Configuring` - The cluster is being configured.\n* `Deploying` - The cluster is being deployed.\n* `Undeploying` - The cluster is being undeployed.\n* `DeployFailedTerminal` - The Cluster Deploy failed creation and can not be recovered, only Delete or Undeploy operations are available for this Cluster.\n* `DeployFailed` - The cluster deployment failed.\n* `Upgrading` - The cluster is being upgraded.\n* `Deleting` - The cluster is being deleted.\n* `DeleteFailed` - The Cluster Delete failed and the Cluster can not be recovered, only Delete or Undeploy operations are available for this Cluster.\n* `Ready` - The cluster is ready for use.\n* `Active` - The cluster is being active.\n* `Shutdown` - All the nodes in the cluster are powered off.\n* `Terminated` - The cluster is terminated.\n* `Deployed` - The cluster is deployed. The cluster may not yet be ready for use.\n* `UndeployFailed` - The cluster undeploy action failed.\n* `NotReady` - The cluster is created and some nodes are not ready.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Undeployed", "Configuring", "Deploying", "Undeploying", "DeployFailedTerminal", "DeployFailed", "Upgrading", "Deleting", "DeleteFailed", "Ready", "Active", "Shutdown", "Terminated", "Deployed", "UndeployFailed", "NotReady"}, false),
+				Optional:     true,
+				Default:      "Undeployed",
 			},
 			"sys_config": {
 				Description: "A reference to a kubernetesSysConfigPolicy resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -1350,14 +1437,16 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -1403,10 +1492,11 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 				},
 			},
 			"type": {
-				Description: "Defines the type of the profile. Accepted values are instance or template.\n* `instance` - The profile defines the configuration for a specific instance of a target.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "instance",
+				Description:  "Defines the type of the profile. Accepted values are instance or template.\n* `instance` - The profile defines the configuration for a specific instance of a target.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"instance"}, false),
+				Optional:     true,
+				Default:      "instance",
 			},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
@@ -1687,7 +1777,7 @@ func resourceKubernetesClusterProfileCreate(c context.Context, d *schema.Resourc
 					o.SetCaKey(x)
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("kubernetes.ClusterCertificateConfiguration")
 			if v, ok := l["etcd_cert"]; ok {
 				{
 					x := (v.(string))
@@ -1812,7 +1902,7 @@ func resourceKubernetesClusterProfileCreate(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("policy.ConfigContext")
 			if v, ok := l["control_action"]; ok {
 				{
 					x := (v.(string))
@@ -1855,7 +1945,7 @@ func resourceKubernetesClusterProfileCreate(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1882,9 +1972,95 @@ func resourceKubernetesClusterProfileCreate(c context.Context, d *schema.Resourc
 		}
 	}
 
+	if v, ok := d.GetOk("container_runtime_proxy_policy"); ok {
+		p := make([]models.KubernetesHttpProxyPolicyRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewMoMoRefWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsKubernetesHttpProxyPolicyRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetContainerRuntimeProxyPolicy(x)
+		}
+	}
+
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
+	}
+
+	if v, ok := d.GetOk("device_connector_proxy_policy"); ok {
+		p := make([]models.KubernetesHttpProxyPolicyRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewMoMoRefWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsKubernetesHttpProxyPolicyRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetDeviceConnectorProxyPolicy(x)
+		}
 	}
 
 	if v, ok := d.GetOk("essential_addons"); ok {
@@ -1920,7 +2096,7 @@ func resourceKubernetesClusterProfileCreate(c context.Context, d *schema.Resourc
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("kubernetes.AddonConfiguration")
 						if v, ok := l["install_strategy"]; ok {
 							{
 								x := (v.(string))
@@ -2025,7 +2201,7 @@ func resourceKubernetesClusterProfileCreate(c context.Context, d *schema.Resourc
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("mo.MoRef")
 						if v, ok := l["moid"]; ok {
 							{
 								x := (v.(string))
@@ -2069,6 +2245,43 @@ func resourceKubernetesClusterProfileCreate(c context.Context, d *schema.Resourc
 		}
 		if len(x) > 0 {
 			o.SetEssentialAddons(x)
+		}
+	}
+
+	if v, ok := d.GetOk("kube_config"); ok {
+		p := make([]models.KubernetesConfiguration, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewKubernetesConfigurationWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("kubernetes.Configuration")
+			if v, ok := l["kube_config"]; ok {
+				{
+					x := (v.(string))
+					o.SetKubeConfig(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetKubeConfig(x)
 		}
 	}
 
@@ -2177,7 +2390,7 @@ func resourceKubernetesClusterProfileCreate(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("kubernetes.ClusterManagementConfig")
 			if v, ok := l["load_balancer_count"]; ok {
 				{
 					x := int64(v.(int))
@@ -2254,7 +2467,7 @@ func resourceKubernetesClusterProfileCreate(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2307,7 +2520,7 @@ func resourceKubernetesClusterProfileCreate(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2394,7 +2607,7 @@ func resourceKubernetesClusterProfileCreate(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2437,7 +2650,7 @@ func resourceKubernetesClusterProfileCreate(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2522,7 +2735,7 @@ func resourceKubernetesClusterProfileCreate(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2570,7 +2783,7 @@ func resourceKubernetesClusterProfileCreate(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2648,7 +2861,7 @@ func resourceKubernetesClusterProfileCreate(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2816,12 +3029,20 @@ func resourceKubernetesClusterProfileRead(c context.Context, d *schema.ResourceD
 		return diag.Errorf("error occurred while setting property ContainerRuntimeConfig in KubernetesClusterProfile object: %s", err.Error())
 	}
 
+	if err := d.Set("container_runtime_proxy_policy", flattenMapKubernetesHttpProxyPolicyRelationship(s.GetContainerRuntimeProxyPolicy(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property ContainerRuntimeProxyPolicy in KubernetesClusterProfile object: %s", err.Error())
+	}
+
 	if err := d.Set("create_time", (s.GetCreateTime()).String()); err != nil {
 		return diag.Errorf("error occurred while setting property CreateTime in KubernetesClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
 		return diag.Errorf("error occurred while setting property Description in KubernetesClusterProfile object: %s", err.Error())
+	}
+
+	if err := d.Set("device_connector_proxy_policy", flattenMapKubernetesHttpProxyPolicyRelationship(s.GetDeviceConnectorProxyPolicy(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property DeviceConnectorProxyPolicy in KubernetesClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("domain_group_moid", (s.GetDomainGroupMoid())); err != nil {
@@ -3037,7 +3258,7 @@ func resourceKubernetesClusterProfileUpdate(c context.Context, d *schema.Resourc
 					o.SetCaKey(x)
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("kubernetes.ClusterCertificateConfiguration")
 			if v, ok := l["etcd_cert"]; ok {
 				{
 					x := (v.(string))
@@ -3162,7 +3383,7 @@ func resourceKubernetesClusterProfileUpdate(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("policy.ConfigContext")
 			if v, ok := l["control_action"]; ok {
 				{
 					x := (v.(string))
@@ -3206,7 +3427,7 @@ func resourceKubernetesClusterProfileUpdate(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3233,10 +3454,98 @@ func resourceKubernetesClusterProfileUpdate(c context.Context, d *schema.Resourc
 		}
 	}
 
+	if d.HasChange("container_runtime_proxy_policy") {
+		v := d.Get("container_runtime_proxy_policy")
+		p := make([]models.KubernetesHttpProxyPolicyRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsKubernetesHttpProxyPolicyRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetContainerRuntimeProxyPolicy(x)
+		}
+	}
+
 	if d.HasChange("description") {
 		v := d.Get("description")
 		x := (v.(string))
 		o.SetDescription(x)
+	}
+
+	if d.HasChange("device_connector_proxy_policy") {
+		v := d.Get("device_connector_proxy_policy")
+		p := make([]models.KubernetesHttpProxyPolicyRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsKubernetesHttpProxyPolicyRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetDeviceConnectorProxyPolicy(x)
+		}
 	}
 
 	if d.HasChange("essential_addons") {
@@ -3273,7 +3582,7 @@ func resourceKubernetesClusterProfileUpdate(c context.Context, d *schema.Resourc
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("kubernetes.AddonConfiguration")
 						if v, ok := l["install_strategy"]; ok {
 							{
 								x := (v.(string))
@@ -3378,7 +3687,7 @@ func resourceKubernetesClusterProfileUpdate(c context.Context, d *schema.Resourc
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("mo.MoRef")
 						if v, ok := l["moid"]; ok {
 							{
 								x := (v.(string))
@@ -3421,6 +3730,44 @@ func resourceKubernetesClusterProfileUpdate(c context.Context, d *schema.Resourc
 			x = append(x, *o)
 		}
 		o.SetEssentialAddons(x)
+	}
+
+	if d.HasChange("kube_config") {
+		v := d.Get("kube_config")
+		p := make([]models.KubernetesConfiguration, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.KubernetesConfiguration{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("kubernetes.Configuration")
+			if v, ok := l["kube_config"]; ok {
+				{
+					x := (v.(string))
+					o.SetKubeConfig(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetKubeConfig(x)
+		}
 	}
 
 	if d.HasChange("loadbalancer_block_ip_leases") {
@@ -3528,7 +3875,7 @@ func resourceKubernetesClusterProfileUpdate(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("kubernetes.ClusterManagementConfig")
 			if v, ok := l["load_balancer_count"]; ok {
 				{
 					x := int64(v.(int))
@@ -3606,7 +3953,7 @@ func resourceKubernetesClusterProfileUpdate(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3662,7 +4009,7 @@ func resourceKubernetesClusterProfileUpdate(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3749,7 +4096,7 @@ func resourceKubernetesClusterProfileUpdate(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3793,7 +4140,7 @@ func resourceKubernetesClusterProfileUpdate(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3878,7 +4225,7 @@ func resourceKubernetesClusterProfileUpdate(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3928,7 +4275,7 @@ func resourceKubernetesClusterProfileUpdate(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -4006,7 +4353,7 @@ func resourceKubernetesClusterProfileUpdate(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

@@ -5,12 +5,14 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceRecoveryScheduleConfigPolicy() *schema.Resource {
@@ -134,9 +136,10 @@ func resourceRecoveryScheduleConfigPolicy() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -168,9 +171,10 @@ func resourceRecoveryScheduleConfigPolicy() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the concrete policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the concrete policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -225,7 +229,8 @@ func resourceRecoveryScheduleConfigPolicy() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -331,16 +336,18 @@ func resourceRecoveryScheduleConfigPolicy() *schema.Resource {
 							Optional:    true,
 						},
 						"frequency_unit": {
-							Description: "The frequency at which the backup schedule must run.\n* `Daily` - Allows the user to run the backup daily at a given time.\n* `Periodic` - Allows the user to run the backup after a certain number of hours.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "Daily",
+							Description:  "The frequency at which the backup schedule must run.\n* `Daily` - Allows the user to run the backup daily at a given time.\n* `Periodic` - Allows the user to run the backup after a certain number of hours.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"Daily", "Periodic"}, false),
+							Optional:     true,
+							Default:      "Daily",
 						},
 						"hours": {
-							Description: "The frequency, in hours, at which the backup schedule runs.\n* `8` - The backup interval is 8 hours.\n* `4` - The backup interval is 4 hours.\n* `12` - The backup interval is 12 hours.\n* `16` - The backup interval is 16 hours.\n* `20` - The backup interval is 20 hours.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     8,
+							Description:  "The frequency, in hours, at which the backup schedule runs.\n* `8` - The backup interval is 8 hours.\n* `4` - The backup interval is 4 hours.\n* `12` - The backup interval is 12 hours.\n* `16` - The backup interval is 16 hours.\n* `20` - The backup interval is 20 hours.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntInSlice([]int{8, 4, 12, 16, 20}),
+							Optional:     true,
+							Default:      8,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -375,14 +382,16 @@ func resourceRecoveryScheduleConfigPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -623,7 +632,7 @@ func resourceRecoveryScheduleConfigPolicyCreate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -666,7 +675,7 @@ func resourceRecoveryScheduleConfigPolicyCreate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("recovery.BackupSchedule")
 			if v, ok := l["execution_time"]; ok {
 				{
 					x, _ := time.Parse(time.RFC1123, v.(string))
@@ -950,7 +959,7 @@ func resourceRecoveryScheduleConfigPolicyUpdate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -994,7 +1003,7 @@ func resourceRecoveryScheduleConfigPolicyUpdate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("recovery.BackupSchedule")
 			if v, ok := l["execution_time"]; ok {
 				{
 					x, _ := time.Parse(time.RFC1123, v.(string))

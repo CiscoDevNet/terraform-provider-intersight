@@ -18,10 +18,10 @@ Name | Type | Description | Notes
 **DiskCommitInfo** | Pointer to [**NullableVirtualizationVmwareVmDiskCommitInfo**](VirtualizationVmwareVmDiskCommitInfo.md) |  | [optional] 
 **DnsServerList** | Pointer to **[]string** |  | [optional] 
 **DnsSuffixList** | Pointer to **[]string** |  | [optional] 
-**ExtraConfig** | Pointer to **interface{}** | Additional custom configuration settings applied to this VM. It is a set of name-value pairs stored as json. | [optional] 
+**ExtraConfig** | Pointer to **interface{}** | Additional custom configuration settings applied to this VM. It is a set of name-value pairs stored as json. | [optional] [readonly] 
 **Folder** | Pointer to **string** | The folder name associated with this VM. | [optional] 
 **GuestState** | Pointer to **string** | The state of the guest OS running on this VM. Could be running, not running etc. * &#x60;Unknown&#x60; - Indicates that the guest OS state cannot be determined. * &#x60;NotRunning&#x60; - Indicates that the guest OS is not running. * &#x60;Resetting&#x60; - Indicates that the guest OS is resetting. * &#x60;Running&#x60; - Indicates that the guest OS is running normally. * &#x60;ShuttingDown&#x60; - Indicates that the guest OS is shutting down. * &#x60;Standby&#x60; - Indicates that the guest OS is in standby mode. | [optional] [default to "Unknown"]
-**HostCompatibility** | Pointer to **string** | Minimum host ESXi version required for the virtual machine. | [optional] 
+**HostCompatibility** | Pointer to **string** | Minimum host ESXi version required for the virtual machine. | [optional] [readonly] 
 **InstanceUuid** | Pointer to **string** | UUID assigned by vCenter to every VM. | [optional] 
 **InventoryPath** | Pointer to **string** | Inventory path to the VM. Example - /DC/vm/folder/VMName. | [optional] 
 **IsTemplate** | Pointer to **bool** | If true, indicates that the entity refers to a template of a virtual machine and not a real virtual machine. | [optional] 
@@ -29,6 +29,7 @@ Name | Type | Description | Notes
 **MemShares** | Pointer to [**NullableVirtualizationVmwareVmMemoryShareInfo**](VirtualizationVmwareVmMemoryShareInfo.md) |  | [optional] 
 **MemoryHotAddEnabled** | Pointer to **bool** | Adding memory to a running VM. | [optional] 
 **NetworkCount** | Pointer to **int64** | Indicates how many networks are used by this VM. | [optional] 
+**PassthroughDevices** | Pointer to **[]int64** |  | [optional] 
 **PortGroups** | Pointer to **[]string** |  | [optional] 
 **ProtectedVm** | Pointer to **bool** | Shows if this is a protected VM. VMs can be in protection groups. | [optional] 
 **RemoteDisplayInfo** | Pointer to [**NullableVirtualizationVmwareRemoteDisplayInfo**](VirtualizationVmwareRemoteDisplayInfo.md) |  | [optional] 
@@ -777,6 +778,41 @@ SetNetworkCount sets NetworkCount field to given value.
 
 HasNetworkCount returns a boolean if a field has been set.
 
+### GetPassthroughDevices
+
+`func (o *VirtualizationVmwareVirtualMachineAllOf) GetPassthroughDevices() []int64`
+
+GetPassthroughDevices returns the PassthroughDevices field if non-nil, zero value otherwise.
+
+### GetPassthroughDevicesOk
+
+`func (o *VirtualizationVmwareVirtualMachineAllOf) GetPassthroughDevicesOk() (*[]int64, bool)`
+
+GetPassthroughDevicesOk returns a tuple with the PassthroughDevices field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPassthroughDevices
+
+`func (o *VirtualizationVmwareVirtualMachineAllOf) SetPassthroughDevices(v []int64)`
+
+SetPassthroughDevices sets PassthroughDevices field to given value.
+
+### HasPassthroughDevices
+
+`func (o *VirtualizationVmwareVirtualMachineAllOf) HasPassthroughDevices() bool`
+
+HasPassthroughDevices returns a boolean if a field has been set.
+
+### SetPassthroughDevicesNil
+
+`func (o *VirtualizationVmwareVirtualMachineAllOf) SetPassthroughDevicesNil(b bool)`
+
+ SetPassthroughDevicesNil sets the value for PassthroughDevices to be an explicit nil
+
+### UnsetPassthroughDevices
+`func (o *VirtualizationVmwareVirtualMachineAllOf) UnsetPassthroughDevices()`
+
+UnsetPassthroughDevices ensures that no value is present for PassthroughDevices, not even an explicit nil
 ### GetPortGroups
 
 `func (o *VirtualizationVmwareVirtualMachineAllOf) GetPortGroups() []string`

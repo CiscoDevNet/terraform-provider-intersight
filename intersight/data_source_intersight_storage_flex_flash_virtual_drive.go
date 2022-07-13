@@ -1125,7 +1125,7 @@ func dataSourceStorageFlexFlashVirtualDriveRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1199,7 +1199,7 @@ func dataSourceStorageFlexFlashVirtualDriveRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1292,7 +1292,7 @@ func dataSourceStorageFlexFlashVirtualDriveRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1335,7 +1335,7 @@ func dataSourceStorageFlexFlashVirtualDriveRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1408,7 +1408,7 @@ func dataSourceStorageFlexFlashVirtualDriveRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1489,7 +1489,7 @@ func dataSourceStorageFlexFlashVirtualDriveRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.VersionContext")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -1556,7 +1556,7 @@ func dataSourceStorageFlexFlashVirtualDriveRead(c context.Context, d *schema.Res
 	if err != nil {
 		return diag.Errorf("json marshal of StorageFlexFlashVirtualDrive object failed with error : %s", err.Error())
 	}
-	countResponse, _, responseErr := conn.ApiClient.StorageApi.GetStorageFlexFlashVirtualDriveList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
+	countResponse, _, responseErr := conn.ApiClient.StorageApi.GetStorageFlexFlashVirtualDriveList(conn.ctx).Filter(getRequestParams(data)).Count(true).Execute()
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
@@ -1565,13 +1565,12 @@ func dataSourceStorageFlexFlashVirtualDriveRead(c context.Context, d *schema.Res
 		}
 		return diag.Errorf("error occurred while fetching count of StorageFlexFlashVirtualDrive: %s", responseErr.Error())
 	}
-	count := countResponse.StorageFlexFlashVirtualDriveList.GetCount()
+	count := countResponse.MoDocumentCount.GetCount()
 	if count == 0 {
 		return diag.Errorf("your query for StorageFlexFlashVirtualDrive data source did not return any results. Please change your search criteria and try again")
 	}
 	var i int32
-	var storageFlexFlashVirtualDriveResults = make([]map[string]interface{}, count, count)
-	var j = 0
+	var storageFlexFlashVirtualDriveResults = make([]map[string]interface{}, 0, 0)
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.StorageApi.GetStorageFlexFlashVirtualDriveList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
@@ -1585,8 +1584,8 @@ func dataSourceStorageFlexFlashVirtualDriveRead(c context.Context, d *schema.Res
 		results := resMo.StorageFlexFlashVirtualDriveList.GetResults()
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
-			for i := 0; i < len(results); i++ {
-				var s = results[i]
+			for k := 0; k < len(results); k++ {
+				var s = results[k]
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
@@ -1632,8 +1631,7 @@ func dataSourceStorageFlexFlashVirtualDriveRead(c context.Context, d *schema.Res
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				temp["virtual_drive"] = (s.GetVirtualDrive())
-				storageFlexFlashVirtualDriveResults[j] = temp
-				j += 1
+				storageFlexFlashVirtualDriveResults = append(storageFlexFlashVirtualDriveResults, temp)
 			}
 		}
 	}

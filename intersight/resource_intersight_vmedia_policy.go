@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceVmediaPolicy() *schema.Resource {
@@ -94,9 +96,10 @@ func resourceVmediaPolicy() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -140,10 +143,11 @@ func resourceVmediaPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"authentication_protocol": {
-							Description: "Type of Authentication protocol when CIFS is used for communication with the remote server.\n* `none` - No authentication is used.\n* `ntlm` - NT LAN Manager (NTLM) security protocol. Use this option only with Windows 2008 R2 and Windows 2012 R2.\n* `ntlmi` - NTLMi security protocol. Use this option only when you enable Digital Signing in the CIFS Windows server.\n* `ntlmv2` - NTLMv2 security protocol. Use this option only with Samba Linux.\n* `ntlmv2i` - NTLMv2i security protocol. Use this option only with Samba Linux.\n* `ntlmssp` - NT LAN Manager Security Support Provider (NTLMSSP) protocol. Use this option only with Windows 2008 R2 and Windows 2012 R2.\n* `ntlmsspi` - NTLMSSPi protocol. Use this option only when you enable Digital Signing in the CIFS Windows server.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "none",
+							Description:  "Type of Authentication protocol when CIFS is used for communication with the remote server.\n* `none` - No authentication is used.\n* `ntlm` - NT LAN Manager (NTLM) security protocol. Use this option only with Windows 2008 R2 and Windows 2012 R2.\n* `ntlmi` - NTLMi security protocol. Use this option only when you enable Digital Signing in the CIFS Windows server.\n* `ntlmv2` - NTLMv2 security protocol. Use this option only with Samba Linux.\n* `ntlmv2i` - NTLMv2i security protocol. Use this option only with Samba Linux.\n* `ntlmssp` - NT LAN Manager Security Support Provider (NTLMSSP) protocol. Use this option only with Windows 2008 R2 and Windows 2012 R2.\n* `ntlmsspi` - NTLMSSPi protocol. Use this option only when you enable Digital Signing in the CIFS Windows server.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"none", "ntlm", "ntlmi", "ntlmv2", "ntlmv2i", "ntlmssp", "ntlmsspi"}, false),
+							Optional:     true,
+							Default:      "none",
 						},
 						"class_id": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
@@ -152,10 +156,11 @@ func resourceVmediaPolicy() *schema.Resource {
 							Default:     "vmedia.Mapping",
 						},
 						"device_type": {
-							Description: "Type of remote Virtual Media device.\n* `cdd` - Uses compact disc drive as the virtual media mount device.\n* `hdd` - Uses hard disk drive as the virtual media mount device.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "cdd",
+							Description:  "Type of remote Virtual Media device.\n* `cdd` - Uses compact disc drive as the virtual media mount device.\n* `hdd` - Uses hard disk drive as the virtual media mount device.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"cdd", "hdd"}, false),
+							Optional:     true,
+							Default:      "cdd",
 						},
 						"file_location": {
 							Description: "Remote location of image. Preferred format is 'hostname/filePath/fileName'.",
@@ -179,15 +184,17 @@ func resourceVmediaPolicy() *schema.Resource {
 								return
 							}},
 						"mount_options": {
-							Description: "Mount options for the Virtual Media mapping. The field can be left blank or filled in a comma separated list with the following options.\\n For NFS, supported options are ro, rw, nolock, noexec, soft, port=VALUE, timeo=VALUE, retry=VALUE.\\n For CIFS, supported options are soft, nounix, noserverino, guest.\\n For CIFS version < 3.0, vers=VALUE is mandatory. e.g. vers=2.0\\n For HTTP/HTTPS, the only supported option is noauto.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "Mount options for the Virtual Media mapping. The field can be left blank or filled in a comma separated list with the following options.\\n For NFS, supported options are ro, rw, nolock, noexec, soft, port=VALUE, timeo=VALUE, retry=VALUE.\\n For CIFS, supported options are soft, nounix, noserverino, guest.\\n For CIFS version < 3.0, vers=VALUE is mandatory. e.g. vers=2.0\\n For HTTP/HTTPS, the only supported option is noauto.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 248),
+							Optional:     true,
 						},
 						"mount_protocol": {
-							Description: "Protocol to use to communicate with the remote server.\n* `nfs` - NFS protocol for vmedia mount.\n* `cifs` - CIFS protocol for vmedia mount.\n* `http` - HTTP protocol for vmedia mount.\n* `https` - HTTPS protocol for vmedia mount.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "nfs",
+							Description:  "Protocol to use to communicate with the remote server.\n* `nfs` - NFS protocol for vmedia mount.\n* `cifs` - CIFS protocol for vmedia mount.\n* `http` - HTTP protocol for vmedia mount.\n* `https` - HTTPS protocol for vmedia mount.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"nfs", "cifs", "http", "https"}, false),
+							Optional:     true,
+							Default:      "nfs",
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -196,19 +203,22 @@ func resourceVmediaPolicy() *schema.Resource {
 							Default:     "vmedia.Mapping",
 						},
 						"password": {
-							Description: "Password associated with the username.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "Password associated with the username.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 255),
+							Optional:     true,
 						},
 						"remote_file": {
-							Description: "The remote file location path for the virtual media mapping. Accepted formats are:\nHDD for CIFS/NFS: hostname-or-IP/filePath/fileName.img.\nCDD for CIFS/NFS: hostname-or-IP/filePath/fileName.iso.\nHDD for HTTP/S: http[s]://hostname-or-IP/filePath/fileName.img.\nCDD for HTTP/S: http[s]://hostname-or-IP/filePath/fileName.iso.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The remote file location path for the virtual media mapping. Accepted formats are:\nHDD for CIFS/NFS: hostname-or-IP/filePath/fileName.img.\nCDD for CIFS/NFS: hostname-or-IP/filePath/fileName.iso.\nHDD for HTTP/S: http[s]://hostname-or-IP/filePath/fileName.img.\nCDD for HTTP/S: http[s]://hostname-or-IP/filePath/fileName.iso.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[ !#$%\\(\\)\\+,\\-\\.:\\?@\\[\\]_\\{\\}=~a-zA-Z0-9]+$"), ""), validation.StringLenBetween(0, 235)),
+							Optional:     true,
 						},
 						"remote_path": {
-							Description: "URL path to the location of the image on the remote server. The preferred format is '/path'.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "URL path to the location of the image on the remote server. The preferred format is '/path'.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[ !#$%\\(\\)\\+,\\-\\.\\/:\\?@\\[\\]_\\{\\}=~a-zA-Z0-9]+$"), ""),
+							Optional:     true,
 						},
 						"sanitized_file_location": {
 							Description: "File Location in standard format 'hostname/filePath/fileName'. This field should be used to calculate config drift. User input format may vary while inventory will return data in format in compliance with mount option for the mount. Both will be converged to this standard format for comparison.",
@@ -222,14 +232,16 @@ func resourceVmediaPolicy() *schema.Resource {
 								return
 							}},
 						"username": {
-							Description: "Username to log in to the remote server.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "Username to log in to the remote server.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 255),
+							Optional:     true,
 						},
 						"volume_name": {
-							Description: "Identity of the image for Virtual Media mapping.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "Identity of the image for Virtual Media mapping.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[\\-\\.:_a-zA-Z0-9]+$"), ""), validation.StringLenBetween(1, 47)),
+							Optional:     true,
 						},
 					},
 				},
@@ -253,9 +265,10 @@ func resourceVmediaPolicy() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the concrete policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the concrete policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -310,7 +323,8 @@ func resourceVmediaPolicy() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -453,14 +467,16 @@ func resourceVmediaPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -770,7 +786,7 @@ func resourceVmediaPolicyCreate(c context.Context, d *schema.ResourceData, meta 
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1195,7 +1211,7 @@ func resourceVmediaPolicyUpdate(c context.Context, d *schema.ResourceData, meta 
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

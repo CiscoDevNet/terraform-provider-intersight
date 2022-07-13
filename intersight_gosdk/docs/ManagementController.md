@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "management.Controller"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "management.Controller"]
+**Certificate** | Pointer to [**CertificatemanagementImc**](CertificatemanagementImc.md) |  | [optional] 
 **Model** | Pointer to **string** | Model of the endpoint that houses the management controller. | [optional] [readonly] 
 **UemStreamAdminState** | Pointer to **string** | Desired state of the UEM stream. * &#x60;Disabled&#x60; - The UEM event channel is disabled. * &#x60;Enabled&#x60; - The UEM event channel is enabled. | [optional] [default to "Disabled"]
 **AdapterUnit** | Pointer to [**AdapterUnitRelationship**](AdapterUnitRelationship.md) |  | [optional] 
@@ -80,6 +81,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetCertificate
+
+`func (o *ManagementController) GetCertificate() CertificatemanagementImc`
+
+GetCertificate returns the Certificate field if non-nil, zero value otherwise.
+
+### GetCertificateOk
+
+`func (o *ManagementController) GetCertificateOk() (*CertificatemanagementImc, bool)`
+
+GetCertificateOk returns a tuple with the Certificate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCertificate
+
+`func (o *ManagementController) SetCertificate(v CertificatemanagementImc)`
+
+SetCertificate sets Certificate field to given value.
+
+### HasCertificate
+
+`func (o *ManagementController) HasCertificate() bool`
+
+HasCertificate returns a boolean if a field has been set.
 
 ### GetModel
 

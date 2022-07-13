@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceWorkflowServiceItemHealthCheckDefinition() *schema.Resource {
@@ -120,10 +122,11 @@ func resourceWorkflowServiceItemHealthCheckDefinition() *schema.Resource {
 					return
 				}},
 			"execution_mode": {
-				Description: "Execution mode of the health check on service item.\n* `OnDemand` - Execute the health check on-demand.\n* `Periodic` - Execute the health check on a periodic basis.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "OnDemand",
+				Description:  "Execution mode of the health check on service item.\n* `OnDemand` - Execute the health check on-demand.\n* `Periodic` - Execute the health check on a periodic basis.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"OnDemand", "Periodic"}, false),
+				Optional:     true,
+				Default:      "OnDemand",
 			},
 			"health_check_workflow": {
 				Description: "Workflow that is associated with this health check definition. This workflow will be run on execution of the respective health check definition.",
@@ -166,9 +169,10 @@ func resourceWorkflowServiceItemHealthCheckDefinition() *schema.Resource {
 							Optional:    true,
 						},
 						"name": {
-							Description: "The name of the workflow, this name must be unique across all the workflow definition used within the action definitions.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The name of the workflow, this name must be unique across all the workflow definition used within the action definitions.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_:-]{1,64}$"), ""),
+							Optional:     true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -230,7 +234,8 @@ func resourceWorkflowServiceItemHealthCheckDefinition() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -374,14 +379,16 @@ func resourceWorkflowServiceItemHealthCheckDefinition() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -589,7 +596,7 @@ func resourceWorkflowServiceItemHealthCheckDefinitionCreate(c context.Context, d
 					o.SetCatalogMoid(x)
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("workflow.ServiceItemActionWorkflowDefinition")
 			if v, ok := l["description"]; ok {
 				{
 					x := (v.(string))
@@ -678,7 +685,7 @@ func resourceWorkflowServiceItemHealthCheckDefinitionCreate(c context.Context, d
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -937,7 +944,7 @@ func resourceWorkflowServiceItemHealthCheckDefinitionUpdate(c context.Context, d
 					o.SetCatalogMoid(x)
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("workflow.ServiceItemActionWorkflowDefinition")
 			if v, ok := l["description"]; ok {
 				{
 					x := (v.(string))
@@ -1030,7 +1037,7 @@ func resourceWorkflowServiceItemHealthCheckDefinitionUpdate(c context.Context, d
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

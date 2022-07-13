@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceKubernetesNodeGroupProfile() *schema.Resource {
@@ -260,15 +262,17 @@ func resourceKubernetesNodeGroupProfile() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the profile.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the profile.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"desiredsize": {
-				Description: "Desired number of nodes in this node group, same as minsize initially and is updated by the auto-scaler.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Default:     3,
+				Description:  "Desired number of nodes in this node group, same as minsize initially and is updated by the auto-scaler.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntAtLeast(0),
+				Optional:     true,
+				Default:      3,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -439,14 +443,16 @@ func resourceKubernetesNodeGroupProfile() *schema.Resource {
 				},
 			},
 			"maxsize": {
-				Description: "Maximum number of nodes this node group can scale up to during repair, replacement or upgrade operations.",
-				Type:        schema.TypeInt,
-				Optional:    true,
+				Description:  "Maximum number of nodes this node group can scale up to during repair, replacement or upgrade operations.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntAtLeast(1),
+				Optional:     true,
 			},
 			"minsize": {
-				Description: "Minimum number of available nodes this node group can scale down to during repair, replacement or upgrade operations.",
-				Type:        schema.TypeInt,
-				Optional:    true,
+				Description:  "Minimum number of available nodes this node group can scale down to during repair, replacement or upgrade operations.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntAtLeast(0),
+				Optional:     true,
 			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
@@ -467,15 +473,17 @@ func resourceKubernetesNodeGroupProfile() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the profile instance or profile template.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the profile instance or profile template.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"node_type": {
-				Description: "The node type ControlPlane, Worker or ControlPlaneWorker.\n* `Worker` - Node will be marked as a worker node.\n* `ControlPlane` - Node will be marked as a control plane node.\n* `ControlPlaneWorker` - Node will be both a controle plane and a worker.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "Worker",
+				Description:  "The node type ControlPlane, Worker or ControlPlaneWorker.\n* `Worker` - Node will be marked as a worker node.\n* `ControlPlane` - Node will be marked as a control plane node.\n* `ControlPlaneWorker` - Node will be both a controle plane and a worker.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Worker", "ControlPlane", "ControlPlaneWorker"}, false),
+				Optional:     true,
+				Default:      "Worker",
 			},
 			"nodes": {
 				Description: "An array of relationships to kubernetesNodeProfile resources.",
@@ -528,7 +536,8 @@ func resourceKubernetesNodeGroupProfile() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -711,14 +720,16 @@ func resourceKubernetesNodeGroupProfile() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -766,10 +777,11 @@ func resourceKubernetesNodeGroupProfile() *schema.Resource {
 				},
 			},
 			"type": {
-				Description: "Defines the type of the profile. Accepted values are instance or template.\n* `instance` - The profile defines the configuration for a specific instance of a target.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "instance",
+				Description:  "Defines the type of the profile. Accepted values are instance or template.\n* `instance` - The profile defines the configuration for a specific instance of a target.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"instance"}, false),
+				Optional:     true,
+				Default:      "instance",
 			},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
@@ -995,7 +1007,7 @@ func resourceKubernetesNodeGroupProfileCreate(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1038,7 +1050,7 @@ func resourceKubernetesNodeGroupProfileCreate(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("policy.ConfigContext")
 			if v, ok := l["control_action"]; ok {
 				{
 					x := (v.(string))
@@ -1091,7 +1103,7 @@ func resourceKubernetesNodeGroupProfileCreate(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1176,7 +1188,7 @@ func resourceKubernetesNodeGroupProfileCreate(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1372,7 +1384,7 @@ func resourceKubernetesNodeGroupProfileCreate(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1749,7 +1761,7 @@ func resourceKubernetesNodeGroupProfileUpdate(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1793,7 +1805,7 @@ func resourceKubernetesNodeGroupProfileUpdate(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("policy.ConfigContext")
 			if v, ok := l["control_action"]; ok {
 				{
 					x := (v.(string))
@@ -1849,7 +1861,7 @@ func resourceKubernetesNodeGroupProfileUpdate(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1934,7 +1946,7 @@ func resourceKubernetesNodeGroupProfileUpdate(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2133,7 +2145,7 @@ func resourceKubernetesNodeGroupProfileUpdate(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

@@ -10,6 +10,7 @@ import (
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceFabricFcStorageRole() *schema.Resource {
@@ -38,15 +39,17 @@ func resourceFabricFcStorageRole() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"admin_speed": {
-				Description: "Admin configured speed for the port.\n* `Auto` - Admin configurable speed AUTO ( default ).\n* `8Gbps` - Admin configurable speed 8Gbps.\n* `16Gbps` - Admin configurable speed 16Gbps.\n* `32Gbps` - Admin configurable speed 32Gbps.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "Auto",
+				Description:  "Admin configured speed for the port.\n* `16Gbps` - Admin configurable speed 16Gbps.\n* `8Gbps` - Admin configurable speed 8Gbps.\n* `32Gbps` - Admin configurable speed 32Gbps.\n* `Auto` - Admin configurable speed AUTO ( default ).",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"16Gbps", "8Gbps", "32Gbps", "Auto"}, false),
+				Optional:     true,
+				Default:      "16Gbps",
 			},
 			"aggregate_port_id": {
-				Description: "Breakout port Identifier of the Switch Interface.\nWhen a port is not configured as a breakout port, the aggregatePortId is set to 0, and unused.\nWhen a port is configured as a breakout port, the 'aggregatePortId' port number as labeled on the equipment,\ne.g. the id of the port on the switch.",
-				Type:        schema.TypeInt,
-				Optional:    true,
+				Description:  "Breakout port Identifier of the Switch Interface.\nWhen a port is not configured as a breakout port, the aggregatePortId is set to 0, and unused.\nWhen a port is configured as a breakout port, the 'aggregatePortId' port number as labeled on the equipment,\ne.g. the id of the port on the switch.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(0, 108),
+				Optional:     true,
 			},
 			"ancestors": {
 				Description: "An array of relationships to moBaseMo resources.",
@@ -145,7 +148,8 @@ func resourceFabricFcStorageRole() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -226,9 +230,10 @@ func resourceFabricFcStorageRole() *schema.Resource {
 				},
 			},
 			"port_id": {
-				Description: "Port Identifier of the Switch/FEX/Chassis Interface.\nWhen a port is not configured as a breakout port, the portId is the port number as labeled on the equipment,\ne.g. the id of the port on the switch, FEX or chassis.\nWhen a port is configured as a breakout port, the 'portId' represents the port id on the fanout side of the breakout cable.",
-				Type:        schema.TypeInt,
-				Optional:    true,
+				Description:  "Port Identifier of the Switch/FEX/Chassis Interface.\nWhen a port is not configured as a breakout port, the portId is the port number as labeled on the equipment,\ne.g. the id of the port on the switch, FEX or chassis.\nWhen a port is configured as a breakout port, the 'portId' represents the port id on the fanout side of the breakout cable.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(1, 108),
+				Optional:     true,
 			},
 			"port_policy": {
 				Description: "A reference to a fabricPortPolicy resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -282,9 +287,10 @@ func resourceFabricFcStorageRole() *schema.Resource {
 					return
 				}},
 			"slot_id": {
-				Description: "Slot Identifier of the Switch/FEX/Chassis Interface.",
-				Type:        schema.TypeInt,
-				Optional:    true,
+				Description:  "Slot Identifier of the Switch/FEX/Chassis Interface.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(1, 5),
+				Optional:     true,
 			},
 			"tags": {
 				Type:       schema.TypeList,
@@ -299,14 +305,16 @@ func resourceFabricFcStorageRole() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -452,9 +460,10 @@ func resourceFabricFcStorageRole() *schema.Resource {
 				},
 			},
 			"vsan_id": {
-				Description: "Virtual San Identifier associated to the FC port.",
-				Type:        schema.TypeInt,
-				Optional:    true,
+				Description:  "Virtual San Identifier associated to the FC port.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(1, 4093),
+				Optional:     true,
 			},
 		},
 	}
@@ -515,7 +524,7 @@ func resourceFabricFcStorageRoleCreate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -772,7 +781,7 @@ func resourceFabricFcStorageRoleUpdate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

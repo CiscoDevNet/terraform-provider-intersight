@@ -11,6 +11,7 @@ import (
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceHyperflexHealthCheckDefinition() *schema.Resource {
@@ -364,7 +365,8 @@ func resourceHyperflexHealthCheckDefinition() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -455,10 +457,11 @@ func resourceHyperflexHealthCheckDefinition() *schema.Resource {
 				Optional:    true,
 			},
 			"script_execution_mode": {
-				Description: "Execution mode of the health script on the HyperFlex cluster.\n* `ON_DEMAND` - Execute the health check on-demand.\n* `SCHEDULED` - Execute the health check on a scheduled interval.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "ON_DEMAND",
+				Description:  "Execution mode of the health script on the HyperFlex cluster.\n* `ON_DEMAND` - Execute the health check on-demand.\n* `SCHEDULED` - Execute the health check on a scheduled interval.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"ON_DEMAND", "SCHEDULED"}, false),
+				Optional:     true,
+				Default:      "ON_DEMAND",
 			},
 			"script_execution_on_compute_nodes": {
 				Description: "Indicates if the script needs to be executed on HyperFlex compute nodes. |\nTypically, scripts are only executed on the storage Nodes.",
@@ -500,23 +503,26 @@ func resourceHyperflexHealthCheckDefinition() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
 			},
 			"target_execution_type": {
-				Description: "Indicates whether the health check is executed only on the leader node, or on all nodes in the HyperFlex cluster.\n* `EXECUTE_ON_LEADER_NODE` - Execute the health check script only on the HyperFlex cluster's leader node.\n* `EXECUTE_ON_ALL_NODES` - Execute health check on all nodes and aggregate the results.\n* `EXECUTE_ON_ALL_NODES_AND_AGGREGATE` - Execute the health check on all Nodes and perform custom aggregation.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "EXECUTE_ON_LEADER_NODE",
+				Description:  "Indicates whether the health check is executed only on the leader node, or on all nodes in the HyperFlex cluster.\n* `EXECUTE_ON_LEADER_NODE` - Execute the health check script only on the HyperFlex cluster's leader node.\n* `EXECUTE_ON_ALL_NODES` - Execute health check on all nodes and aggregate the results.\n* `EXECUTE_ON_ALL_NODES_AND_AGGREGATE` - Execute the health check on all Nodes and perform custom aggregation.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"EXECUTE_ON_LEADER_NODE", "EXECUTE_ON_ALL_NODES", "EXECUTE_ON_ALL_NODES_AND_AGGREGATE"}, false),
+				Optional:     true,
+				Default:      "EXECUTE_ON_LEADER_NODE",
 			},
 			"timeout": {
 				Description: "Health check script execution timeout.",
@@ -529,7 +535,8 @@ func resourceHyperflexHealthCheckDefinition() *schema.Resource {
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Computed:   true,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
 				Type:        schema.TypeList,

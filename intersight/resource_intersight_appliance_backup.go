@@ -6,11 +6,13 @@ import (
 	"fmt"
 	"log"
 	"reflect"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceApplianceBackup() *schema.Resource {
@@ -186,10 +188,11 @@ func resourceApplianceBackup() *schema.Resource {
 				}, ForceNew: true,
 			},
 			"filename": {
-				Description: "Backup filename to backup or restore.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				ForceNew:    true,
+				Description:  "Backup filename to backup or restore.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9][a-zA-Z0-9_\\.\\-\\+]*$"), ""),
+				Optional:     true,
+				ForceNew:     true,
 			},
 			"is_password_set": {
 				Description: "Indicates whether the value of the 'password' property has been set.",
@@ -209,7 +212,8 @@ func resourceApplianceBackup() *schema.Resource {
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Computed:   true,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}, ForceNew: true,
+					Type: schema.TypeString,
+				}, ForceNew: true,
 			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
@@ -243,7 +247,8 @@ func resourceApplianceBackup() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}, ForceNew: true,
+					Type: schema.TypeString,
+				}, ForceNew: true,
 			},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -292,10 +297,11 @@ func resourceApplianceBackup() *schema.Resource {
 				ForceNew: true,
 			},
 			"password": {
-				Description: "Password to authenticate the fileserver.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				ForceNew:    true,
+				Description:  "Password to authenticate the fileserver.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[^`]+$"), ""),
+				Optional:     true,
+				ForceNew:     true,
 			},
 			"permission_resources": {
 				Description: "An array of relationships to moBaseMo resources.",
@@ -343,11 +349,12 @@ func resourceApplianceBackup() *schema.Resource {
 				ForceNew: true,
 			},
 			"protocol": {
-				Description: "Communication protocol used by the file server (e.g. scp or sftp).\n* `scp` - Secure Copy Protocol (SCP) to access the file server.\n* `sftp` - SSH File Transfer Protocol (SFTP) to access file server.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "scp",
-				ForceNew:    true,
+				Description:  "Communication protocol used by the file server (e.g. scp or sftp).\n* `scp` - Secure Copy Protocol (SCP) to access the file server.\n* `sftp` - SSH File Transfer Protocol (SFTP) to access file server.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"scp", "sftp"}, false),
+				Optional:     true,
+				Default:      "scp",
+				ForceNew:     true,
 			},
 			"remote_host": {
 				Description: "Hostname of the remote file server.",
@@ -356,10 +363,11 @@ func resourceApplianceBackup() *schema.Resource {
 				ForceNew:    true,
 			},
 			"remote_path": {
-				Description: "File server directory to copy the file.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				ForceNew:    true,
+				Description:  "File server directory to copy the file.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^(/[^/ ]*)+/?$"), ""),
+				Optional:     true,
+				ForceNew:     true,
 			},
 			"remote_port": {
 				Description: "Remote TCP port on the file server (e.g. 22 for scp).",
@@ -417,26 +425,29 @@ func resourceApplianceBackup() *schema.Resource {
 							ForceNew:         true,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							ForceNew:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
+							ForceNew:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							ForceNew:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
+							ForceNew:     true,
 						},
 					},
 				},
 				ForceNew: true,
 			},
 			"username": {
-				Description: "Username to authenticate the fileserver.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				ForceNew:    true,
+				Description:  "Username to authenticate the fileserver.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9_][a-zA-Z0-9_\\.\\-\\+]*$"), ""),
+				Optional:     true,
+				ForceNew:     true,
 			},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
@@ -622,7 +633,7 @@ func resourceApplianceBackupCreate(c context.Context, d *schema.ResourceData, me
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

@@ -18,12 +18,14 @@ resource "intersight_kubernetes_cluster_addon_profile" "iks1" {
 
   addons {
     addon_policy {
-      moid = intersight_kubernetes_addon_policy.kubernetes_addon_policy1.moid
+      moid        = intersight_kubernetes_addon_policy.kubernetes_addon_policy1.moid
+      object_type ="kubernetes.Addon"
     }
   }
   addons {
     addon_policy {
-      moid = intersight_kubernetes_addon_policy.kubernetes_addon_policy1.moid
+      moid        = intersight_kubernetes_addon_policy.kubernetes_addon_policy1.moid
+      object_type = "kubernetes.Addon"
     }
   }
   organization {
@@ -32,6 +34,7 @@ resource "intersight_kubernetes_cluster_addon_profile" "iks1" {
   }
 }
 ```
+
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

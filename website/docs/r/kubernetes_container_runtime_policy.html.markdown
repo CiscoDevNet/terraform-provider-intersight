@@ -17,18 +17,20 @@ resource "intersight_kubernetes_container_runtime_policy" "kubernetes_container_
   description = "kubernetes container runtime policy"
   name        = "kubernetes_container_runtime_policy1"
   docker_http_proxy {
-    hostname = "10.1.1.10"
-    password = "ChangeMe"
-    port     = 3001
-    protocol = "http"
-    username = "admin1"
+    hostname    = "10.1.1.10"
+    password    = "ChangeMe"
+    port        = 3001
+    protocol    = "http"
+    username    = "admin1"
+    object_type = "kubernetes.ProxyConfig"
   }
   docker_https_proxy {
-    hostname = "10.1.1.10"
-    password = "ChangeMe"
-    port     = 3001
-    protocol = "https"
-    username = "admin1"
+    hostname    = "10.1.1.10"
+    password    = "ChangeMe"
+    port        = 3001
+    protocol    = "https"
+    username    = "admin1"
+    object_type = "kubernetes.ProxyConfig"
   }
   docker_no_proxy = [
     "*.test.example.com",
@@ -57,7 +59,7 @@ This complex property has following sub-properties:
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `description`:(string) Description of the policy. 
 * `docker_bridge_network_cidr`:(string) Bridge IP (--bip) including Prefix (e.g., 172.17.0.5/24) that Docker will use for the default bridge network (docker0). Containers will connect to this if no other network is configured, not used by kubernetes pods because their network is managed by CNI. However this address space must not collide with other CIDRs on your networks, including the cluster's Service CIDR, Pod Network CIDR and IP Pools. 
-* `docker_http_proxy`:(HashMap) - The HTTP proxy configuration for docker. Refer to https://docs.docker.com/network/proxy/ for details. 
+* `docker_http_proxy`:(HashMap) - The HTTP proxy configuration for docker. Refer to https://docs.docker.com/network/proxy/ for details. Deprecated, assign a HttpProxyPolicy to the ClusterProfile ContainerRuntimeProxyPolicy field instead. 
 This complex property has following sub-properties:
   + `hostname`:(string) HTTP/HTTPS Proxy server FQDN or IP. 
   + `is_password_set`:(bool)(ReadOnly) Indicates whether the value of the 'password' property has been set. 
@@ -66,7 +68,7 @@ This complex property has following sub-properties:
   + `port`:(int) The HTTP Proxy port number.The port number of the HTTP/HTTPS proxy must be between 1 and 65535, inclusive. 
   + `protocol`:(string) Protocol to use for the HTTP/HTTPS Proxy. 
   + `username`:(string) The username for the HTTP/HTTPS Proxy. 
-* `docker_https_proxy`:(HashMap) - The https proxy configuration for docker. Refer to https://docs.docker.com/network/proxy/ for details. 
+* `docker_https_proxy`:(HashMap) - The https proxy configuration for docker. Refer to https://docs.docker.com/network/proxy/ for details. Deprecated, assign a HttpProxyPolicy to the ClusterProfile ContainerRuntimeProxyPolicy field instead. 
 This complex property has following sub-properties:
   + `hostname`:(string) HTTP/HTTPS Proxy server FQDN or IP. 
   + `is_password_set`:(bool)(ReadOnly) Indicates whether the value of the 'password' property has been set. 

@@ -10,6 +10,7 @@ import (
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceFabricUplinkRole() *schema.Resource {
@@ -38,15 +39,17 @@ func resourceFabricUplinkRole() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"admin_speed": {
-				Description: "Admin configured speed for the port.\n* `Auto` - Admin configurable speed AUTO ( default ).\n* `1Gbps` - Admin configurable speed 1Gbps.\n* `10Gbps` - Admin configurable speed 10Gbps.\n* `25Gbps` - Admin configurable speed 25Gbps.\n* `40Gbps` - Admin configurable speed 40Gbps.\n* `100Gbps` - Admin configurable speed 100Gbps.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "Auto",
+				Description:  "Admin configured speed for the port.\n* `Auto` - Admin configurable speed AUTO ( default ).\n* `1Gbps` - Admin configurable speed 1Gbps.\n* `10Gbps` - Admin configurable speed 10Gbps.\n* `25Gbps` - Admin configurable speed 25Gbps.\n* `40Gbps` - Admin configurable speed 40Gbps.\n* `100Gbps` - Admin configurable speed 100Gbps.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Auto", "1Gbps", "10Gbps", "25Gbps", "40Gbps", "100Gbps"}, false),
+				Optional:     true,
+				Default:      "Auto",
 			},
 			"aggregate_port_id": {
-				Description: "Breakout port Identifier of the Switch Interface.\nWhen a port is not configured as a breakout port, the aggregatePortId is set to 0, and unused.\nWhen a port is configured as a breakout port, the 'aggregatePortId' port number as labeled on the equipment,\ne.g. the id of the port on the switch.",
-				Type:        schema.TypeInt,
-				Optional:    true,
+				Description:  "Breakout port Identifier of the Switch Interface.\nWhen a port is not configured as a breakout port, the aggregatePortId is set to 0, and unused.\nWhen a port is configured as a breakout port, the 'aggregatePortId' port number as labeled on the equipment,\ne.g. the id of the port on the switch.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(0, 108),
+				Optional:     true,
 			},
 			"ancestors": {
 				Description: "An array of relationships to moBaseMo resources.",
@@ -155,10 +158,11 @@ func resourceFabricUplinkRole() *schema.Resource {
 				},
 			},
 			"fec": {
-				Description: "Forward error correction configuration for the port.\n* `Auto` - Forward error correction option 'Auto'.\n* `Cl91` - Forward error correction option 'cl91'.\n* `Cl74` - Forward error correction option 'cl74'.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "Auto",
+				Description:  "Forward error correction configuration for the port.\n* `Auto` - Forward error correction option 'Auto'.\n* `Cl91` - Forward error correction option 'cl91'.\n* `Cl74` - Forward error correction option 'cl74'.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Auto", "Cl91", "Cl74"}, false),
+				Optional:     true,
+				Default:      "Auto",
 			},
 			"flow_control_policy": {
 				Description: "A reference to a fabricFlowControlPolicy resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -270,7 +274,8 @@ func resourceFabricUplinkRole() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -351,9 +356,10 @@ func resourceFabricUplinkRole() *schema.Resource {
 				},
 			},
 			"port_id": {
-				Description: "Port Identifier of the Switch/FEX/Chassis Interface.\nWhen a port is not configured as a breakout port, the portId is the port number as labeled on the equipment,\ne.g. the id of the port on the switch, FEX or chassis.\nWhen a port is configured as a breakout port, the 'portId' represents the port id on the fanout side of the breakout cable.",
-				Type:        schema.TypeInt,
-				Optional:    true,
+				Description:  "Port Identifier of the Switch/FEX/Chassis Interface.\nWhen a port is not configured as a breakout port, the portId is the port number as labeled on the equipment,\ne.g. the id of the port on the switch, FEX or chassis.\nWhen a port is configured as a breakout port, the 'portId' represents the port id on the fanout side of the breakout cable.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(1, 108),
+				Optional:     true,
 			},
 			"port_policy": {
 				Description: "A reference to a fabricPortPolicy resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -407,9 +413,10 @@ func resourceFabricUplinkRole() *schema.Resource {
 					return
 				}},
 			"slot_id": {
-				Description: "Slot Identifier of the Switch/FEX/Chassis Interface.",
-				Type:        schema.TypeInt,
-				Optional:    true,
+				Description:  "Slot Identifier of the Switch/FEX/Chassis Interface.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(1, 5),
+				Optional:     true,
 			},
 			"tags": {
 				Type:       schema.TypeList,
@@ -424,14 +431,16 @@ func resourceFabricUplinkRole() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -670,7 +679,7 @@ func resourceFabricUplinkRoleCreate(c context.Context, d *schema.ResourceData, m
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -713,7 +722,7 @@ func resourceFabricUplinkRoleCreate(c context.Context, d *schema.ResourceData, m
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -768,7 +777,7 @@ func resourceFabricUplinkRoleCreate(c context.Context, d *schema.ResourceData, m
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1065,7 +1074,7 @@ func resourceFabricUplinkRoleUpdate(c context.Context, d *schema.ResourceData, m
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1109,7 +1118,7 @@ func resourceFabricUplinkRoleUpdate(c context.Context, d *schema.ResourceData, m
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1167,7 +1176,7 @@ func resourceFabricUplinkRoleUpdate(c context.Context, d *schema.ResourceData, m
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

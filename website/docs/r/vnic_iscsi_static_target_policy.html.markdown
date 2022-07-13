@@ -18,13 +18,12 @@ resource "intersight_vnic_iscsi_static_target_policy" "vnic_iscsi_static_target_
   description = "vnic iscsi static target policy"
   ip_address  = "10.1.1.1"
   port        = 860
-  lun = [{
-    additional_properties = ""
-    class_id              = "vnic.Lun"
-    object_type           = "vnic.Lun"
-    bootable              = true
-    lun_id                = 4
-  }]
+  lun {
+    class_id    = "vnic.Lun"
+    object_type = "vnic.Lun"
+    bootable    = true
+    lun_id      = 4
+  }
   organization {
     object_type = "organization.Organization"
     moid        = var.organization
@@ -32,9 +31,9 @@ resource "intersight_vnic_iscsi_static_target_policy" "vnic_iscsi_static_target_
 }
 
 variable "organization" {
-   type = string
-   description = "<value for organization>"
- }
+  type        = string
+  description = "<value for organization>"
+}
 ```
 ## Argument Reference
 The following arguments are supported:

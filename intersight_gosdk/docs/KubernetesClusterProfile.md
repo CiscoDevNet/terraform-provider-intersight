@@ -17,6 +17,8 @@ Name | Type | Description | Notes
 **AssociatedCluster** | Pointer to [**KubernetesClusterRelationship**](KubernetesClusterRelationship.md) |  | [optional] 
 **ClusterIpPools** | Pointer to [**[]IppoolPoolRelationship**](IppoolPoolRelationship.md) | An array of relationships to ippoolPool resources. | [optional] 
 **ContainerRuntimeConfig** | Pointer to [**KubernetesContainerRuntimePolicyRelationship**](KubernetesContainerRuntimePolicyRelationship.md) |  | [optional] 
+**ContainerRuntimeProxyPolicy** | Pointer to [**KubernetesHttpProxyPolicyRelationship**](KubernetesHttpProxyPolicyRelationship.md) |  | [optional] 
+**DeviceConnectorProxyPolicy** | Pointer to [**KubernetesHttpProxyPolicyRelationship**](KubernetesHttpProxyPolicyRelationship.md) |  | [optional] 
 **LoadbalancerBlockIpLeases** | Pointer to [**[]IppoolBlockLeaseRelationship**](IppoolBlockLeaseRelationship.md) | An array of relationships to ippoolBlockLease resources. | [optional] 
 **LoadbalancerIpLeases** | Pointer to [**[]IppoolIpLeaseRelationship**](IppoolIpLeaseRelationship.md) | An array of relationships to ippoolIpLease resources. | [optional] 
 **MasterVipLease** | Pointer to [**IppoolIpLeaseRelationship**](IppoolIpLeaseRelationship.md) |  | [optional] 
@@ -421,6 +423,56 @@ SetContainerRuntimeConfig sets ContainerRuntimeConfig field to given value.
 `func (o *KubernetesClusterProfile) HasContainerRuntimeConfig() bool`
 
 HasContainerRuntimeConfig returns a boolean if a field has been set.
+
+### GetContainerRuntimeProxyPolicy
+
+`func (o *KubernetesClusterProfile) GetContainerRuntimeProxyPolicy() KubernetesHttpProxyPolicyRelationship`
+
+GetContainerRuntimeProxyPolicy returns the ContainerRuntimeProxyPolicy field if non-nil, zero value otherwise.
+
+### GetContainerRuntimeProxyPolicyOk
+
+`func (o *KubernetesClusterProfile) GetContainerRuntimeProxyPolicyOk() (*KubernetesHttpProxyPolicyRelationship, bool)`
+
+GetContainerRuntimeProxyPolicyOk returns a tuple with the ContainerRuntimeProxyPolicy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetContainerRuntimeProxyPolicy
+
+`func (o *KubernetesClusterProfile) SetContainerRuntimeProxyPolicy(v KubernetesHttpProxyPolicyRelationship)`
+
+SetContainerRuntimeProxyPolicy sets ContainerRuntimeProxyPolicy field to given value.
+
+### HasContainerRuntimeProxyPolicy
+
+`func (o *KubernetesClusterProfile) HasContainerRuntimeProxyPolicy() bool`
+
+HasContainerRuntimeProxyPolicy returns a boolean if a field has been set.
+
+### GetDeviceConnectorProxyPolicy
+
+`func (o *KubernetesClusterProfile) GetDeviceConnectorProxyPolicy() KubernetesHttpProxyPolicyRelationship`
+
+GetDeviceConnectorProxyPolicy returns the DeviceConnectorProxyPolicy field if non-nil, zero value otherwise.
+
+### GetDeviceConnectorProxyPolicyOk
+
+`func (o *KubernetesClusterProfile) GetDeviceConnectorProxyPolicyOk() (*KubernetesHttpProxyPolicyRelationship, bool)`
+
+GetDeviceConnectorProxyPolicyOk returns a tuple with the DeviceConnectorProxyPolicy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeviceConnectorProxyPolicy
+
+`func (o *KubernetesClusterProfile) SetDeviceConnectorProxyPolicy(v KubernetesHttpProxyPolicyRelationship)`
+
+SetDeviceConnectorProxyPolicy sets DeviceConnectorProxyPolicy field to given value.
+
+### HasDeviceConnectorProxyPolicy
+
+`func (o *KubernetesClusterProfile) HasDeviceConnectorProxyPolicy() bool`
+
+HasDeviceConnectorProxyPolicy returns a boolean if a field has been set.
 
 ### GetLoadbalancerBlockIpLeases
 

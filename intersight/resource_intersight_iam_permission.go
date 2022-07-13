@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceIamPermission() *schema.Resource {
@@ -134,9 +136,10 @@ func resourceIamPermission() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "The informative description about each permission.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "The informative description about each permission.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringLenBetween(0, 1024),
+				Optional:     true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -207,9 +210,10 @@ func resourceIamPermission() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "The name of the permission which has to be granted to user.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "The name of the permission which has to be granted to user.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_ .:-]{1,64}$"), ""), validation.StringLenBetween(1, 64)),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -223,7 +227,8 @@ func resourceIamPermission() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -485,14 +490,16 @@ func resourceIamPermission() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -853,7 +860,7 @@ func resourceIamPermissionCreate(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1276,7 +1283,7 @@ func resourceIamPermissionUpdate(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

@@ -1160,7 +1160,7 @@ func dataSourceAccessPolicyInventoryRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("access.AddressType")
 			if v, ok := l["enable_ip_v4"]; ok {
 				{
 					x := (v.(bool))
@@ -1248,7 +1248,7 @@ func dataSourceAccessPolicyInventoryRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("access.ConfigurationType")
 			if v, ok := l["configure_inband"]; ok {
 				{
 					x := (v.(bool))
@@ -1311,7 +1311,7 @@ func dataSourceAccessPolicyInventoryRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1359,7 +1359,7 @@ func dataSourceAccessPolicyInventoryRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1422,7 +1422,7 @@ func dataSourceAccessPolicyInventoryRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1465,7 +1465,7 @@ func dataSourceAccessPolicyInventoryRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1519,7 +1519,7 @@ func dataSourceAccessPolicyInventoryRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1640,7 +1640,7 @@ func dataSourceAccessPolicyInventoryRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1683,7 +1683,7 @@ func dataSourceAccessPolicyInventoryRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.VersionContext")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -1745,7 +1745,7 @@ func dataSourceAccessPolicyInventoryRead(c context.Context, d *schema.ResourceDa
 	if err != nil {
 		return diag.Errorf("json marshal of AccessPolicyInventory object failed with error : %s", err.Error())
 	}
-	countResponse, _, responseErr := conn.ApiClient.AccessApi.GetAccessPolicyInventoryList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
+	countResponse, _, responseErr := conn.ApiClient.AccessApi.GetAccessPolicyInventoryList(conn.ctx).Filter(getRequestParams(data)).Count(true).Execute()
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
@@ -1754,13 +1754,12 @@ func dataSourceAccessPolicyInventoryRead(c context.Context, d *schema.ResourceDa
 		}
 		return diag.Errorf("error occurred while fetching count of AccessPolicyInventory: %s", responseErr.Error())
 	}
-	count := countResponse.AccessPolicyInventoryList.GetCount()
+	count := countResponse.MoDocumentCount.GetCount()
 	if count == 0 {
 		return diag.Errorf("your query for AccessPolicyInventory data source did not return any results. Please change your search criteria and try again")
 	}
 	var i int32
-	var accessPolicyInventoryResults = make([]map[string]interface{}, count, count)
-	var j = 0
+	var accessPolicyInventoryResults = make([]map[string]interface{}, 0, 0)
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.AccessApi.GetAccessPolicyInventoryList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
@@ -1774,8 +1773,8 @@ func dataSourceAccessPolicyInventoryRead(c context.Context, d *schema.ResourceDa
 		results := resMo.AccessPolicyInventoryList.GetResults()
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
-			for i := 0; i < len(results); i++ {
-				var s = results[i]
+			for k := 0; k < len(results); k++ {
+				var s = results[k]
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
@@ -1817,8 +1816,7 @@ func dataSourceAccessPolicyInventoryRead(c context.Context, d *schema.ResourceDa
 				temp["target_mo"] = flattenMapMoBaseMoRelationship(s.GetTargetMo(), d)
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
-				accessPolicyInventoryResults[j] = temp
-				j += 1
+				accessPolicyInventoryResults = append(accessPolicyInventoryResults, temp)
 			}
 		}
 	}

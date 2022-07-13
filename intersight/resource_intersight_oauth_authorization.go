@@ -10,6 +10,7 @@ import (
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceOauthAuthorization() *schema.Resource {
@@ -157,10 +158,11 @@ func resourceOauthAuthorization() *schema.Resource {
 				},
 			},
 			"api_type": {
-				Description: "Type of OAuth Api. For example, Smart-licensing-API.\n* `Unknown` - Unknown is the default API type.\n* `SmartLicensing-API` - Smart licensing API type.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "Unknown",
+				Description:  "Type of OAuth Api. For example, Smart-licensing-API.\n* `Unknown` - Unknown is the default API type.\n* `SmartLicensing-API` - Smart licensing API type.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Unknown", "SmartLicensing-API"}, false),
+				Optional:     true,
+				Default:      "Unknown",
 			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
@@ -242,7 +244,8 @@ func resourceOauthAuthorization() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -351,14 +354,16 @@ func resourceOauthAuthorization() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},

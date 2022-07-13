@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceMemoryPersistentMemoryPolicy() *schema.Resource {
@@ -94,9 +96,10 @@ func resourceMemoryPersistentMemoryPolicy() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -128,9 +131,10 @@ func resourceMemoryPersistentMemoryPolicy() *schema.Resource {
 							Default:     "memory.PersistentMemoryGoal",
 						},
 						"memory_mode_percentage": {
-							Description: "Volatile memory percentage.",
-							Type:        schema.TypeInt,
-							Optional:    true,
+							Description:  "Volatile memory percentage.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(0, 100),
+							Optional:     true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -139,16 +143,18 @@ func resourceMemoryPersistentMemoryPolicy() *schema.Resource {
 							Default:     "memory.PersistentMemoryGoal",
 						},
 						"persistent_memory_type": {
-							Description: "Type of the Persistent Memory configuration where the Persistent Memory Modules are combined in an interleaved set or not.\n* `app-direct` - The App Direct interleaved Persistent Memory type.\n* `app-direct-non-interleaved` - The App Direct non-interleaved Persistent Memory type.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "app-direct",
+							Description:  "Type of the Persistent Memory configuration where the Persistent Memory Modules are combined in an interleaved set or not.\n* `app-direct` - The App Direct interleaved Persistent Memory type.\n* `app-direct-non-interleaved` - The App Direct non-interleaved Persistent Memory type.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"app-direct", "app-direct-non-interleaved"}, false),
+							Optional:     true,
+							Default:      "app-direct",
 						},
 						"socket_id": {
-							Description: "CPU Socket ID to which this goal will be applied.\n* `All Sockets` - All the CPU socket IDs in a server.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "All Sockets",
+							Description:  "CPU Socket ID to which this goal will be applied.\n* `All Sockets` - All the CPU socket IDs in a server.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"All Sockets"}, false),
+							Optional:     true,
+							Default:      "All Sockets",
 						},
 					},
 				},
@@ -197,9 +203,10 @@ func resourceMemoryPersistentMemoryPolicy() *schema.Resource {
 							Default:     "memory.PersistentMemoryLocalSecurity",
 						},
 						"secure_passphrase": {
-							Description: "Secure passphrase to be applied on the Persistent Memory Modules on the server. The allowed characters are a-z, A to Z, 0-9, and special characters =, \\u0021, &, \\#, $, %, +, ^, @, _, *, -.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "Secure passphrase to be applied on the Persistent Memory Modules on the server. The allowed characters are a-z, A to Z, 0-9, and special characters =, \\u0021, &, \\#, $, %, +, ^, @, _, *, -.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9=!&#$%+^@_*-]+$"), ""), validation.StringLenBetween(8, 32)),
+							Optional:     true,
 						},
 					},
 				},
@@ -217,9 +224,10 @@ func resourceMemoryPersistentMemoryPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"capacity": {
-							Description: "Capacity of this Namespace that is created or modified.",
-							Type:        schema.TypeInt,
-							Optional:    true,
+							Description:  "Capacity of this Namespace that is created or modified.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(1, 9223372036854775807),
+							Optional:     true,
 						},
 						"class_id": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
@@ -228,15 +236,17 @@ func resourceMemoryPersistentMemoryPolicy() *schema.Resource {
 							Default:     "memory.PersistentMemoryLogicalNamespace",
 						},
 						"mode": {
-							Description: "Mode of this Namespace that is created or modified.\n* `raw` - The raw mode of Persistent Memory Namespace.\n* `block` - The block mode of Persistent Memory Namespace.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "raw",
+							Description:  "Mode of this Namespace that is created or modified.\n* `raw` - The raw mode of Persistent Memory Namespace.\n* `block` - The block mode of Persistent Memory Namespace.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"raw", "block"}, false),
+							Optional:     true,
+							Default:      "raw",
 						},
 						"name": {
-							Description: "Name of this Namespace to be created on the server.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "Name of this Namespace to be created on the server.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9#_-][a-zA-Z0-9#_ -]*$"), ""), validation.StringLenBetween(1, 63)),
+							Optional:     true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -245,25 +255,28 @@ func resourceMemoryPersistentMemoryPolicy() *schema.Resource {
 							Default:     "memory.PersistentMemoryLogicalNamespace",
 						},
 						"socket_id": {
-							Description: "Socket ID of the region on which this Namespace has to be created or modified.\n* `1` - The first CPU socket in a server.\n* `2` - The second CPU socket in a server.\n* `3` - The third CPU socket in a server.\n* `4` - The fourth CPU socket in a server.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     1,
+							Description:  "Socket ID of the region on which this Namespace has to be created or modified.\n* `1` - The first CPU socket in a server.\n* `2` - The second CPU socket in a server.\n* `3` - The third CPU socket in a server.\n* `4` - The fourth CPU socket in a server.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntInSlice([]int{1, 2, 3, 4}),
+							Optional:     true,
+							Default:      1,
 						},
 						"socket_memory_id": {
-							Description: "Socket Memory ID of the region on which this Namespace has to be created or modified.\n* `Not Applicable` - The socket memory ID is not applicable if app-direct persistent memory type is selected in the goal.\n* `2` - The second socket memory ID within a socket in a server.\n* `4` - The fourth socket memory ID within a socket in a server.\n* `6` - The sixth socket memory ID within a socket in a server.\n* `8` - The eighth socket memory ID within a socket in a server.\n* `10` - The tenth socket memory ID within a socket in a server.\n* `12` - The twelfth socket memory ID within a socket in a server.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "Not Applicable",
+							Description:  "Socket Memory ID of the region on which this Namespace has to be created or modified.\n* `Not Applicable` - The socket memory ID is not applicable if app-direct persistent memory type is selected in the goal.\n* `2` - The second socket memory ID within a socket in a server.\n* `4` - The fourth socket memory ID within a socket in a server.\n* `6` - The sixth socket memory ID within a socket in a server.\n* `8` - The eighth socket memory ID within a socket in a server.\n* `10` - The tenth socket memory ID within a socket in a server.\n* `12` - The twelfth socket memory ID within a socket in a server.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"Not Applicable", "2", "4", "6", "8", "10", "12"}, false),
+							Optional:     true,
+							Default:      "Not Applicable",
 						},
 					},
 				},
 			},
 			"management_mode": {
-				Description: "Management Mode of the policy. This can be either Configured from Intersight or Configured from Operating System.\n* `configured-from-intersight` - The Persistent Memory Modules are configured from Intersight thorugh Persistent Memory policy.\n* `configured-from-operating-system` - The Persistent Memory Modules are configured from operating system thorugh OS tools.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "configured-from-intersight",
+				Description:  "Management Mode of the policy. This can be either Configured from Intersight or Configured from Operating System.\n* `configured-from-intersight` - The Persistent Memory Modules are configured from Intersight thorugh Persistent Memory policy.\n* `configured-from-operating-system` - The Persistent Memory Modules are configured from operating system thorugh OS tools.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"configured-from-intersight", "configured-from-operating-system"}, false),
+				Optional:     true,
+				Default:      "configured-from-intersight",
 			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
@@ -284,9 +297,10 @@ func resourceMemoryPersistentMemoryPolicy() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the concrete policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the concrete policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -341,7 +355,8 @@ func resourceMemoryPersistentMemoryPolicy() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -490,14 +505,16 @@ func resourceMemoryPersistentMemoryPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -732,7 +749,7 @@ func resourceMemoryPersistentMemoryPolicyCreate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("memory.PersistentMemoryLocalSecurity")
 			if v, ok := l["enabled"]; ok {
 				{
 					x := (v.(bool))
@@ -852,7 +869,7 @@ func resourceMemoryPersistentMemoryPolicyCreate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1206,7 +1223,7 @@ func resourceMemoryPersistentMemoryPolicyUpdate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("memory.PersistentMemoryLocalSecurity")
 			if v, ok := l["enabled"]; ok {
 				{
 					x := (v.(bool))
@@ -1329,7 +1346,7 @@ func resourceMemoryPersistentMemoryPolicyUpdate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

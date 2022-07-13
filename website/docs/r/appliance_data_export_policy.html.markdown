@@ -34,7 +34,7 @@ configurations (ie. Network and Storage) are also enabled/disabled.
 
 ```hcl
 resource "intersight_appliance_data_export_policy" "appliance_data_export_policy1" {
-  name = "appliance_data_export1"
+  enable = true
   account {
     object_type = "iam.Account"
     moid        = var.account
@@ -46,6 +46,7 @@ variable "account" {
   description = "Moid of iam.Account Mo"
 }
 ```
+
 ## Argument Reference
 The following arguments are supported:
 * `account`:(HashMap) - A reference to a iamAccount resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

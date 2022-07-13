@@ -31,7 +31,7 @@ func dataSourceEquipmentIdentitySummary() *schema.Resource {
 			DiffSuppressFunc: SuppressDiffAdditionProps,
 		},
 		"admin_action": {
-			Description: "Updated by UI/API to trigger specific chassis action type.\n* `None` - No operation value for maintenance actions on an equipment.\n* `Decommission` - Decommission the equipment and temporarily remove it from being managed by Intersight.\n* `Recommission` - Recommission the equipment.\n* `Reack` - Reacknowledge the equipment and discover it again.\n* `Remove` - Remove the equipment permanently from Intersight management.\n* `Replace` - Replace the equipment with the other one.",
+			Description: "Updated by UI/API to trigger specific action type.\n* `None` - No operation value for maintenance actions on an equipment.\n* `Decommission` - Decommission the equipment and temporarily remove it from being managed by Intersight.\n* `Recommission` - Recommission the equipment.\n* `Reack` - Reacknowledge the equipment and discover it again.\n* `Remove` - Remove the equipment permanently from Intersight management.\n* `Replace` - Replace the equipment with the other one.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -110,7 +110,7 @@ func dataSourceEquipmentIdentitySummary() *schema.Resource {
 			Optional:    true,
 		},
 		"identifier": {
-			Description: "Numeric Identifier assigned by the management system to the equipment.",
+			Description: "Numeric Identifier assigned by the management system to the equipment. Identifier can only be changed if it has been PATCHED with the AdminAction property set to 'Recommission'.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
@@ -479,7 +479,7 @@ func dataSourceEquipmentIdentitySummary() *schema.Resource {
 			DiffSuppressFunc: SuppressDiffAdditionProps,
 		},
 		"admin_action": {
-			Description: "Updated by UI/API to trigger specific chassis action type.\n* `None` - No operation value for maintenance actions on an equipment.\n* `Decommission` - Decommission the equipment and temporarily remove it from being managed by Intersight.\n* `Recommission` - Recommission the equipment.\n* `Reack` - Reacknowledge the equipment and discover it again.\n* `Remove` - Remove the equipment permanently from Intersight management.\n* `Replace` - Replace the equipment with the other one.",
+			Description: "Updated by UI/API to trigger specific action type.\n* `None` - No operation value for maintenance actions on an equipment.\n* `Decommission` - Decommission the equipment and temporarily remove it from being managed by Intersight.\n* `Recommission` - Recommission the equipment.\n* `Reack` - Reacknowledge the equipment and discover it again.\n* `Remove` - Remove the equipment permanently from Intersight management.\n* `Replace` - Replace the equipment with the other one.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -558,7 +558,7 @@ func dataSourceEquipmentIdentitySummary() *schema.Resource {
 			Optional:    true,
 		},
 		"identifier": {
-			Description: "Numeric Identifier assigned by the management system to the equipment.",
+			Description: "Numeric Identifier assigned by the management system to the equipment. Identifier can only be changed if it has been PATCHED with the AdminAction property set to 'Recommission'.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
@@ -1144,7 +1144,7 @@ func dataSourceEquipmentIdentitySummaryRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1232,7 +1232,7 @@ func dataSourceEquipmentIdentitySummaryRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1338,7 +1338,7 @@ func dataSourceEquipmentIdentitySummaryRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.VersionContext")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -1400,7 +1400,7 @@ func dataSourceEquipmentIdentitySummaryRead(c context.Context, d *schema.Resourc
 	if err != nil {
 		return diag.Errorf("json marshal of EquipmentIdentitySummary object failed with error : %s", err.Error())
 	}
-	countResponse, _, responseErr := conn.ApiClient.EquipmentApi.GetEquipmentIdentitySummaryList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
+	countResponse, _, responseErr := conn.ApiClient.EquipmentApi.GetEquipmentIdentitySummaryList(conn.ctx).Filter(getRequestParams(data)).Count(true).Execute()
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
@@ -1409,13 +1409,12 @@ func dataSourceEquipmentIdentitySummaryRead(c context.Context, d *schema.Resourc
 		}
 		return diag.Errorf("error occurred while fetching count of EquipmentIdentitySummary: %s", responseErr.Error())
 	}
-	count := countResponse.EquipmentIdentitySummaryList.GetCount()
+	count := countResponse.MoDocumentCount.GetCount()
 	if count == 0 {
 		return diag.Errorf("your query for EquipmentIdentitySummary data source did not return any results. Please change your search criteria and try again")
 	}
 	var i int32
-	var equipmentIdentitySummaryResults = make([]map[string]interface{}, count, count)
-	var j = 0
+	var equipmentIdentitySummaryResults = make([]map[string]interface{}, 0, 0)
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.EquipmentApi.GetEquipmentIdentitySummaryList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
@@ -1429,8 +1428,8 @@ func dataSourceEquipmentIdentitySummaryRead(c context.Context, d *schema.Resourc
 		results := resMo.EquipmentIdentitySummaryList.GetResults()
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
-			for i := 0; i < len(results); i++ {
-				var s = results[i]
+			for k := 0; k < len(results); k++ {
+				var s = results[k]
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["adapter_serial"] = (s.GetAdapterSerial())
@@ -1475,8 +1474,7 @@ func dataSourceEquipmentIdentitySummaryRead(c context.Context, d *schema.Resourc
 				temp["vendor"] = (s.GetVendor())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
-				equipmentIdentitySummaryResults[j] = temp
-				j += 1
+				equipmentIdentitySummaryResults = append(equipmentIdentitySummaryResults, temp)
 			}
 		}
 	}

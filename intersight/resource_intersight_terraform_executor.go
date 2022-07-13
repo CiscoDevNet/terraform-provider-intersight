@@ -10,6 +10,7 @@ import (
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceTerraformExecutor() *schema.Resource {
@@ -216,10 +217,11 @@ func resourceTerraformExecutor() *schema.Resource {
 				Default:     "terraform.Executor",
 			},
 			"operation": {
-				Description: "Enum indicates what operation is being done.\n* `Create` - Creating a Terraform resource.\n* `Update` - Updating a Terraform resource.\n* `Delete` - Deleting a Terraform resource.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "Create",
+				Description:  "Enum indicates what operation is being done.\n* `Create` - Creating a Terraform resource.\n* `Update` - Updating a Terraform resource.\n* `Delete` - Deleting a Terraform resource.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Create", "Update", "Delete"}, false),
+				Optional:     true,
+				Default:      "Create",
 			},
 			"output": {
 				Description: "Terraform output of the entire execution.",
@@ -232,7 +234,8 @@ func resourceTerraformExecutor() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -449,14 +452,16 @@ func resourceTerraformExecutor() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -681,7 +686,7 @@ func resourceTerraformExecutorCreate(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -815,7 +820,7 @@ func resourceTerraformExecutorCreate(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1213,7 +1218,7 @@ func resourceTerraformExecutorUpdate(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1353,7 +1358,7 @@ func resourceTerraformExecutorUpdate(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

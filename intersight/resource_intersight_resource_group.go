@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceResourceGroup() *schema.Resource {
@@ -168,9 +170,10 @@ func resourceResourceGroup() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "The name of this resource group.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "The name of this resource group.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,128}$"), ""), validation.StringLenBetween(1, 128)),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -223,7 +226,8 @@ func resourceResourceGroup() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -364,10 +368,11 @@ func resourceResourceGroup() *schema.Resource {
 				},
 			},
 			"qualifier": {
-				Description: "Qualifier shall be used to specify if we want to organize resources using multiple resource group or single For an account, resource groups can be of only one of the above types. (Both the types are mutually exclusive for an account.).\n* `Allow-Selectors` - Resources will be added to resource groups based on ODATA filter. Multiple resource group can be created to organize resources.\n* `Allow-All` - All resources will become part of the Resource Group. Only one resource group can be created to organize resources.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "Allow-Selectors",
+				Description:  "Qualifier shall be used to specify if we want to organize resources using multiple resource group or single For an account, resource groups can be of only one of the above types. (Both the types are mutually exclusive for an account.).\n* `Allow-Selectors` - Resources will be added to resource groups based on ODATA filter. Multiple resource group can be created to organize resources.\n* `Allow-All` - All resources will become part of the Resource Group. Only one resource group can be created to organize resources.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Allow-Selectors", "Allow-All"}, false),
+				Optional:     true,
+				Default:      "Allow-Selectors",
 			},
 			"selectors": {
 				Type:       schema.TypeList,
@@ -394,9 +399,10 @@ func resourceResourceGroup() *schema.Resource {
 							Default:     "resource.Selector",
 						},
 						"selector": {
-							Description: "ODATA filter to select resources. The group selector may include URLs of individual resource, or OData query with filters that match multiple queries. The URLs must be relative (i.e. do not include the host).",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "ODATA filter to select resources. The group selector may include URLs of individual resource, or OData query with filters that match multiple queries. The URLs must be relative (i.e. do not include the host).",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|/api/v1/.*"), ""),
+							Optional:     true,
 						},
 					},
 				},
@@ -425,14 +431,16 @@ func resourceResourceGroup() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},

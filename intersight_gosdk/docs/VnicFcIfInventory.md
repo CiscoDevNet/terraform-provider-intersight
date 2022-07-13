@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **FcAdapterPolicy** | Pointer to [**VnicFcAdapterPolicyInventoryRelationship**](VnicFcAdapterPolicyInventoryRelationship.md) |  | [optional] 
 **FcNetworkPolicy** | Pointer to [**VnicFcNetworkPolicyInventoryRelationship**](VnicFcNetworkPolicyInventoryRelationship.md) |  | [optional] 
 **FcQosPolicy** | Pointer to [**VnicFcQosPolicyInventoryRelationship**](VnicFcQosPolicyInventoryRelationship.md) |  | [optional] 
+**FcZonePolicies** | Pointer to [**[]FabricFcZonePolicyRelationship**](FabricFcZonePolicyRelationship.md) | An array of relationships to fabricFcZonePolicy resources. | [optional] [readonly] 
 **SanConnectivityPolicy** | Pointer to [**VnicSanConnectivityPolicyInventoryRelationship**](VnicSanConnectivityPolicyInventoryRelationship.md) |  | [optional] 
 **ScpVhba** | Pointer to [**VnicFcIfInventoryRelationship**](VnicFcIfInventoryRelationship.md) |  | [optional] 
 **SpVhbas** | Pointer to [**[]VnicFcIfInventoryRelationship**](VnicFcIfInventoryRelationship.md) | An array of relationships to vnicFcIfInventory resources. | [optional] [readonly] 
@@ -419,6 +420,41 @@ SetFcQosPolicy sets FcQosPolicy field to given value.
 
 HasFcQosPolicy returns a boolean if a field has been set.
 
+### GetFcZonePolicies
+
+`func (o *VnicFcIfInventory) GetFcZonePolicies() []FabricFcZonePolicyRelationship`
+
+GetFcZonePolicies returns the FcZonePolicies field if non-nil, zero value otherwise.
+
+### GetFcZonePoliciesOk
+
+`func (o *VnicFcIfInventory) GetFcZonePoliciesOk() (*[]FabricFcZonePolicyRelationship, bool)`
+
+GetFcZonePoliciesOk returns a tuple with the FcZonePolicies field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFcZonePolicies
+
+`func (o *VnicFcIfInventory) SetFcZonePolicies(v []FabricFcZonePolicyRelationship)`
+
+SetFcZonePolicies sets FcZonePolicies field to given value.
+
+### HasFcZonePolicies
+
+`func (o *VnicFcIfInventory) HasFcZonePolicies() bool`
+
+HasFcZonePolicies returns a boolean if a field has been set.
+
+### SetFcZonePoliciesNil
+
+`func (o *VnicFcIfInventory) SetFcZonePoliciesNil(b bool)`
+
+ SetFcZonePoliciesNil sets the value for FcZonePolicies to be an explicit nil
+
+### UnsetFcZonePolicies
+`func (o *VnicFcIfInventory) UnsetFcZonePolicies()`
+
+UnsetFcZonePolicies ensures that no value is present for FcZonePolicies, not even an explicit nil
 ### GetSanConnectivityPolicy
 
 `func (o *VnicFcIfInventory) GetSanConnectivityPolicy() VnicSanConnectivityPolicyInventoryRelationship`

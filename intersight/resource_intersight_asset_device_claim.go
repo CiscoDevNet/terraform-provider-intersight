@@ -12,6 +12,7 @@ import (
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceAssetDeviceClaim() *schema.Resource {
@@ -229,7 +230,7 @@ func resourceAssetDeviceClaim() *schema.Resource {
 							ForceNew:    true,
 						},
 						"device_id": {
-							Description: "The Moid of the device under change. Used to route the message to a devices connection.",
+							Description: "The Moid of the device under change. Used to route the message to a device's connection.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							ForceNew:    true,
@@ -247,11 +248,12 @@ func resourceAssetDeviceClaim() *schema.Resource {
 							ForceNew:    true,
 						},
 						"leadership": {
-							Description: "The current leadership of a device cluster member.\n* `Unknown` - The node is unable to complete election or determine the current state. If the device has been registered before and the node has access to the current credentials it will establish a connection to Intersight with limited capabilities that can be used to debug the HA failure from Intersight.\n* `Primary` - The node has been elected as the primary and will establish a connection to the Intersight service and accept all message types enabled for a primary node. There can only be one primary in a given cluster, while the underlying platform may be active-active only one connector will assume the primary role.\n* `Secondary` - The node has been elected as a secondary node in the cluster. The device connector will establish a connection to the Intersight service with limited capabilities. e.g. file upload will be enabled, but requests to the underlying platform management will be disabled.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "Unknown",
-							ForceNew:    true,
+							Description:  "The current leadership of a device cluster member.\n* `Unknown` - The node is unable to complete election or determine the current state. If the device has been registered before and the node has access to the current credentials it will establish a connection to Intersight with limited capabilities that can be used to debug the HA failure from Intersight.\n* `Primary` - The node has been elected as the primary and will establish a connection to the Intersight service and accept all message types enabled for a primary node. There can only be one primary in a given cluster, while the underlying platform may be active-active only one connector will assume the primary role.\n* `Secondary` - The node has been elected as a secondary node in the cluster. The device connector will establish a connection to the Intersight service with limited capabilities. e.g. file upload will be enabled, but requests to the underlying platform management will be disabled.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"Unknown", "Primary", "Secondary"}, false),
+							Optional:     true,
+							Default:      "Unknown",
+							ForceNew:     true,
 						},
 						"new_identity": {
 							Description: "The new identity assigned to a device on ownership change (claim/unclaim).",
@@ -320,7 +322,8 @@ func resourceAssetDeviceClaim() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}, ForceNew: true,
+					Type: schema.TypeString,
+				}, ForceNew: true,
 			},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -497,16 +500,18 @@ func resourceAssetDeviceClaim() *schema.Resource {
 							ForceNew:         true,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							ForceNew:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
+							ForceNew:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							ForceNew:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
+							ForceNew:     true,
 						},
 					},
 				},
@@ -793,7 +798,7 @@ func resourceAssetDeviceClaimCreate(c context.Context, d *schema.ResourceData, m
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

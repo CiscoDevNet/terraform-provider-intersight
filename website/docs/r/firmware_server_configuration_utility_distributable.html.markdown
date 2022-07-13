@@ -34,7 +34,8 @@ resource "intersight_firmware_server_configuration_utility_distributable" "scu1"
   ]
   description = "Cisco SCU-6.0(4c)"
   catalog {
-    moid = var.catalog
+    moid        = var.catalog
+    object_type = "softwarerepository.Catalog"
   }
 }
 

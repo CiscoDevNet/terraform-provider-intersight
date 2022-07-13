@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceHyperflexClusterReplicationNetworkPolicyDeployment() *schema.Resource {
@@ -253,7 +255,8 @@ func resourceHyperflexClusterReplicationNetworkPolicyDeployment() *schema.Resour
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -368,6 +371,7 @@ func resourceHyperflexClusterReplicationNetworkPolicyDeployment() *schema.Resour
 				}},
 			"replication_ipranges": {
 				Type:       schema.TypeList,
+				MinItems:   1,
 				Optional:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Computed:   true,
@@ -385,14 +389,16 @@ func resourceHyperflexClusterReplicationNetworkPolicyDeployment() *schema.Resour
 							Default:     "hyperflex.IpAddrRange",
 						},
 						"end_addr": {
-							Description: "The end IPv4 address of the range.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The end IPv4 address of the range.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
+							Optional:     true,
 						},
 						"gateway": {
-							Description: "The default gateway for the start and end IPv4 addresses.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The default gateway for the start and end IPv4 addresses.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
+							Optional:     true,
 						},
 						"ip_addr_blocks": {
 							Type:       schema.TypeList,
@@ -413,9 +419,10 @@ func resourceHyperflexClusterReplicationNetworkPolicyDeployment() *schema.Resour
 										Default:     "comm.IpV4AddressBlock",
 									},
 									"end_address": {
-										Description: "The end address of the IPv4 block.",
-										Type:        schema.TypeString,
-										Optional:    true,
+										Description:  "The end address of the IPv4 block.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
+										Optional:     true,
 									},
 									"object_type": {
 										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -424,17 +431,19 @@ func resourceHyperflexClusterReplicationNetworkPolicyDeployment() *schema.Resour
 										Default:     "comm.IpV4AddressBlock",
 									},
 									"start_address": {
-										Description: "The start address of the IPv4 block.",
-										Type:        schema.TypeString,
-										Optional:    true,
+										Description:  "The start address of the IPv4 block.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
+										Optional:     true,
 									},
 								},
 							},
 						},
 						"netmask": {
-							Description: "The netmask specified in dot decimal notation.\nThe start address, end address, and gateway must all be within the network specified by this netmask.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The netmask specified in dot decimal notation.\nThe start address, end address, and gateway must all be within the network specified by this netmask.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^(((255\\.){3}(255|254|252|248|240|224|192|128|0+))|((255\\.){2}(255|254|252|248|240|224|192|128|0+)\\.0)|((255\\.)(255|254|252|248|240|224|192|128|0+)(\\.0+){2})|((255|254|252|248|240|224|192|128|0+)(\\.0+){3}))$"), ""),
+							Optional:     true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -443,9 +452,10 @@ func resourceHyperflexClusterReplicationNetworkPolicyDeployment() *schema.Resour
 							Default:     "hyperflex.IpAddrRange",
 						},
 						"start_addr": {
-							Description: "The start IPv4 address of the range.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The start IPv4 address of the range.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
+							Optional:     true,
 						},
 					},
 				},
@@ -482,9 +492,10 @@ func resourceHyperflexClusterReplicationNetworkPolicyDeployment() *schema.Resour
 							Default:     "hyperflex.NamedVlan",
 						},
 						"name": {
-							Description: "The name of the VLAN.\nThe name can be from 1 to 32 characters long and can contain a combination of alphanumeric characters, underscores, and hyphens.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The name of the VLAN.\nThe name can be from 1 to 32 characters long and can contain a combination of alphanumeric characters, underscores, and hyphens.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9-_.]{1,32}$"), ""),
+							Optional:     true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -493,9 +504,10 @@ func resourceHyperflexClusterReplicationNetworkPolicyDeployment() *schema.Resour
 							Default:     "hyperflex.NamedVlan",
 						},
 						"vlan_id": {
-							Description: "The ID of the named VLAN. An ID of 0 means the traffic is untagged.\nThe ID can be any number between 0 and 4095, inclusive.",
-							Type:        schema.TypeInt,
-							Optional:    true,
+							Description:  "The ID of the named VLAN. An ID of 0 means the traffic is untagged.\nThe ID can be any number between 0 and 4095, inclusive.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(0, 4095),
+							Optional:     true,
 						},
 					},
 				},
@@ -535,14 +547,16 @@ func resourceHyperflexClusterReplicationNetworkPolicyDeployment() *schema.Resour
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -724,7 +738,7 @@ func resourceHyperflexClusterReplicationNetworkPolicyDeploymentCreate(c context.
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -779,7 +793,7 @@ func resourceHyperflexClusterReplicationNetworkPolicyDeploymentCreate(c context.
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1125,7 +1139,7 @@ func resourceHyperflexClusterReplicationNetworkPolicyDeploymentUpdate(c context.
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1183,7 +1197,7 @@ func resourceHyperflexClusterReplicationNetworkPolicyDeploymentUpdate(c context.
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

@@ -3,12 +3,12 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_remote_file_import"
 description: |-
-        Trigger a remote file import request by configuring this mo.
+        The properties of appliance.RemoteFileImport are used to create an scp or sftp request to import a firmware image.
 
 ---
 
 # Resource: intersight_appliance_remote_file_import
-Trigger a remote file import request by configuring this mo.
+The properties of appliance.RemoteFileImport are used to create an scp or sftp request to import a firmware image.
 ## Usage Example
 ### Resource Creation
 
@@ -67,7 +67,7 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `port`:(int) The port that should be used for the remote request. 
-* `protocol`:(string) Protocol for the remote request.* `scp` - Secure Copy Protocol (SCP) to access the file server.* `sftp` - SSH File Transfer Protocol (SFTP) to access file server. 
+* `protocol`:(string) Specifies if this is an scp or sftp request.* `scp` - Secure Copy Protocol (SCP) to access the file server.* `sftp` - SSH File Transfer Protocol (SFTP) to access file server. 
 * `shared_scope`:(string)(ReadOnly) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `tags`:(Array)
 This complex property has following sub-properties:

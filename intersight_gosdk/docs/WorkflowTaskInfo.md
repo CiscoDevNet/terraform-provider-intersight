@@ -25,6 +25,7 @@ Name | Type | Description | Notes
 **TaskInstIdList** | Pointer to [**[]WorkflowTaskRetryInfo**](WorkflowTaskRetryInfo.md) |  | [optional] 
 **TaskLoopInfo** | Pointer to [**NullableWorkflowTaskLoopInfo**](WorkflowTaskLoopInfo.md) |  | [optional] 
 **SubWorkflowInfo** | Pointer to [**WorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
+**SubWorkflowRetryHistory** | Pointer to [**[]WorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) | An array of relationships to workflowWorkflowInfo resources. | [optional] [readonly] 
 **TaskDefinition** | Pointer to [**WorkflowTaskDefinitionRelationship**](WorkflowTaskDefinitionRelationship.md) |  | [optional] 
 **WorkflowInfo** | Pointer to [**WorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
 
@@ -612,6 +613,41 @@ SetSubWorkflowInfo sets SubWorkflowInfo field to given value.
 
 HasSubWorkflowInfo returns a boolean if a field has been set.
 
+### GetSubWorkflowRetryHistory
+
+`func (o *WorkflowTaskInfo) GetSubWorkflowRetryHistory() []WorkflowWorkflowInfoRelationship`
+
+GetSubWorkflowRetryHistory returns the SubWorkflowRetryHistory field if non-nil, zero value otherwise.
+
+### GetSubWorkflowRetryHistoryOk
+
+`func (o *WorkflowTaskInfo) GetSubWorkflowRetryHistoryOk() (*[]WorkflowWorkflowInfoRelationship, bool)`
+
+GetSubWorkflowRetryHistoryOk returns a tuple with the SubWorkflowRetryHistory field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSubWorkflowRetryHistory
+
+`func (o *WorkflowTaskInfo) SetSubWorkflowRetryHistory(v []WorkflowWorkflowInfoRelationship)`
+
+SetSubWorkflowRetryHistory sets SubWorkflowRetryHistory field to given value.
+
+### HasSubWorkflowRetryHistory
+
+`func (o *WorkflowTaskInfo) HasSubWorkflowRetryHistory() bool`
+
+HasSubWorkflowRetryHistory returns a boolean if a field has been set.
+
+### SetSubWorkflowRetryHistoryNil
+
+`func (o *WorkflowTaskInfo) SetSubWorkflowRetryHistoryNil(b bool)`
+
+ SetSubWorkflowRetryHistoryNil sets the value for SubWorkflowRetryHistory to be an explicit nil
+
+### UnsetSubWorkflowRetryHistory
+`func (o *WorkflowTaskInfo) UnsetSubWorkflowRetryHistory()`
+
+UnsetSubWorkflowRetryHistory ensures that no value is present for SubWorkflowRetryHistory, not even an explicit nil
 ### GetTaskDefinition
 
 `func (o *WorkflowTaskInfo) GetTaskDefinition() WorkflowTaskDefinitionRelationship`

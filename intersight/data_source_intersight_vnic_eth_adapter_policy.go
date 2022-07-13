@@ -1685,7 +1685,7 @@ func dataSourceVnicEthAdapterPolicyRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.ArfsSettings")
 			if v, ok := l["enabled"]; ok {
 				{
 					x := (v.(bool))
@@ -1727,7 +1727,7 @@ func dataSourceVnicEthAdapterPolicyRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.CompletionQueueSettings")
 			if v, ok := l["nr_count"]; ok {
 				{
 					x := int64(v.(int))
@@ -1789,7 +1789,7 @@ func dataSourceVnicEthAdapterPolicyRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.EthInterruptSettings")
 			if v, ok := l["coalescing_time"]; ok {
 				{
 					x := int64(v.(int))
@@ -1859,7 +1859,7 @@ func dataSourceVnicEthAdapterPolicyRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.NvgreSettings")
 			if v, ok := l["enabled"]; ok {
 				{
 					x := (v.(bool))
@@ -1901,7 +1901,7 @@ func dataSourceVnicEthAdapterPolicyRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1955,7 +1955,7 @@ func dataSourceVnicEthAdapterPolicyRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2038,7 +2038,7 @@ func dataSourceVnicEthAdapterPolicyRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.PtpSettings")
 			if v, ok := l["enabled"]; ok {
 				{
 					x := (v.(bool))
@@ -2075,7 +2075,7 @@ func dataSourceVnicEthAdapterPolicyRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.RoceSettings")
 			if v, ok := l["class_of_service"]; ok {
 				{
 					x := int32(v.(int))
@@ -2142,7 +2142,7 @@ func dataSourceVnicEthAdapterPolicyRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.RssHashSettings")
 			if v, ok := l["ipv4_hash"]; ok {
 				{
 					x := (v.(bool))
@@ -2226,7 +2226,7 @@ func dataSourceVnicEthAdapterPolicyRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.EthRxQueueSettings")
 			if v, ok := l["nr_count"]; ok {
 				{
 					x := int64(v.(int))
@@ -2307,7 +2307,7 @@ func dataSourceVnicEthAdapterPolicyRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.TcpOffloadSettings")
 			if v, ok := l["large_receive"]; ok {
 				{
 					x := (v.(bool))
@@ -2362,7 +2362,7 @@ func dataSourceVnicEthAdapterPolicyRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.EthTxQueueSettings")
 			if v, ok := l["nr_count"]; ok {
 				{
 					x := int64(v.(int))
@@ -2410,7 +2410,7 @@ func dataSourceVnicEthAdapterPolicyRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.VersionContext")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -2484,7 +2484,7 @@ func dataSourceVnicEthAdapterPolicyRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.VxlanSettings")
 			if v, ok := l["enabled"]; ok {
 				{
 					x := (v.(bool))
@@ -2509,7 +2509,7 @@ func dataSourceVnicEthAdapterPolicyRead(c context.Context, d *schema.ResourceDat
 	if err != nil {
 		return diag.Errorf("json marshal of VnicEthAdapterPolicy object failed with error : %s", err.Error())
 	}
-	countResponse, _, responseErr := conn.ApiClient.VnicApi.GetVnicEthAdapterPolicyList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
+	countResponse, _, responseErr := conn.ApiClient.VnicApi.GetVnicEthAdapterPolicyList(conn.ctx).Filter(getRequestParams(data)).Count(true).Execute()
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
@@ -2518,13 +2518,12 @@ func dataSourceVnicEthAdapterPolicyRead(c context.Context, d *schema.ResourceDat
 		}
 		return diag.Errorf("error occurred while fetching count of VnicEthAdapterPolicy: %s", responseErr.Error())
 	}
-	count := countResponse.VnicEthAdapterPolicyList.GetCount()
+	count := countResponse.MoDocumentCount.GetCount()
 	if count == 0 {
 		return diag.Errorf("your query for VnicEthAdapterPolicy data source did not return any results. Please change your search criteria and try again")
 	}
 	var i int32
-	var vnicEthAdapterPolicyResults = make([]map[string]interface{}, count, count)
-	var j = 0
+	var vnicEthAdapterPolicyResults = make([]map[string]interface{}, 0, 0)
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.VnicApi.GetVnicEthAdapterPolicyList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
@@ -2538,8 +2537,8 @@ func dataSourceVnicEthAdapterPolicyRead(c context.Context, d *schema.ResourceDat
 		results := resMo.VnicEthAdapterPolicyList.GetResults()
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
-			for i := 0; i < len(results); i++ {
-				var s = results[i]
+			for k := 0; k < len(results); k++ {
+				var s = results[k]
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
@@ -2594,8 +2593,7 @@ func dataSourceVnicEthAdapterPolicyRead(c context.Context, d *schema.ResourceDat
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 
 				temp["vxlan_settings"] = flattenMapVnicVxlanSettings(s.GetVxlanSettings(), d)
-				vnicEthAdapterPolicyResults[j] = temp
-				j += 1
+				vnicEthAdapterPolicyResults = append(vnicEthAdapterPolicyResults, temp)
 			}
 		}
 	}

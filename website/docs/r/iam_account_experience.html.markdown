@@ -18,23 +18,20 @@ resource "intersight_iam_account_experience" "iam_account_experience1" {
     object_type = "iam.Account"
     moid        = var.iam_account
   }
-  features = [
-    {
-      additional_properties = ""
-      class_id              = "iam.FeatureDefinition"
-      feature               = "UnrecognizedValue"
-      object_type           = "iam.FeatureDefinition"
-    }
-  ]
-   parent = {
-     moid        = var.iam_account
-     object_type = "iam.Account"
-   }
+  features {
+    class_id    = "iam.FeatureDefinition"
+    feature     = "UnrecognizedValue"
+    object_type = "iam.FeatureDefinition"
+  }
+  parent {
+    moid        = var.iam_account
+    object_type = "iam.Account"
+  }
 }
 
- variable "iam_account" {
-   type = string
-   description = "value for iam_account"
+variable "iam_account" {
+  type        = string
+  description = "value for iam_account"
 }
 ```
 ## Argument Reference
@@ -54,7 +51,7 @@ This complex property has following sub-properties:
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
 * `features`:(Array)
 This complex property has following sub-properties:
-  + `feature`:(string) The beta feature that will be enabled for specific account.* `IWO` - Intersight Workflow Optimizer.* `Hitachi` - Support to claim Hitachi Storage arrays using the Intersight Orchestrator framework.* `KubernetesExtension` - Extension to the IKS and Adopted Clusters.* `NetAppIO` - Support to claim NetApp Storage arrays as IO targets.* `IvsPublicCloud` - Enables virtualization service for public clouds.* `TerraformCloud` - Enables an ability to create Terraform Cloud.* `IWE` - Enables an ability to use Intersight Workload Engine.* `WashingtonEFT` - Support for EFT customers to use Washington firmware images for upgrades.* `Solutions` - Support for managing solutions.* `IksBm` - Enables Intersight Kubernetes Service on Baremetal server. 
+  + `feature`:(string) The beta feature that will be enabled for specific account.* `IWO` - Intersight Workflow Optimizer.* `Hitachi` - Support to claim Hitachi Storage arrays using the Intersight Orchestrator framework.* `KubernetesExtension` - Extension to the IKS and Adopted Clusters.* `NetAppIO` - Support to claim NetApp Storage arrays as IO targets.* `IvsPublicCloud` - Enables virtualization service for public clouds.* `TerraformCloud` - Enables an ability to create Terraform Cloud.* `IWE` - Enables an ability to use Intersight Workload Engine.* `WashingtonEFT` - Support for EFT customers to use Washington firmware images for upgrades.* `Solutions` - Support for managing solutions.* `IksBm` - Enables Intersight Kubernetes Service on Baremetal server.* `IksGpu` - Enables GPU support for Intersight Kubernetes Service. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 

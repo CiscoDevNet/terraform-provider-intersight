@@ -12,6 +12,7 @@ import (
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceAssetDeviceContractNotification() *schema.Resource {
@@ -372,18 +373,20 @@ func resourceAssetDeviceContractNotification() *schema.Resource {
 				ForceNew: true,
 			},
 			"contract_status": {
-				Description: "Calculated contract status that is derived based on the service line status and contract end date. It is different from serviceLineStatus property. serviceLineStatus gives us ACTIVE, OVERDUE, EXPIRED. These are transformed into Active, Expiring Soon and Not Covered.\n* `Unknown` - The device's contract status cannot be determined.\n* `Not Covered` - The Cisco device does not have a valid support contract.\n* `Active` - The Cisco device is covered under a active support contract.\n* `Expiring Soon` - The contract for this Cisco device is going to expire in the next 30 days.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "Unknown",
-				ForceNew:    true,
+				Description:  "Calculated contract status that is derived based on the service line status and contract end date. It is different from serviceLineStatus property. serviceLineStatus gives us ACTIVE, OVERDUE, EXPIRED. These are transformed into Active, Expiring Soon and Not Covered.\n* `Unknown` - The device's contract status cannot be determined.\n* `Not Covered` - The Cisco device does not have a valid support contract.\n* `Active` - The Cisco device is covered under a active support contract.\n* `Expiring Soon` - The contract for this Cisco device is going to expire in the next 30 days.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Unknown", "Not Covered", "Active", "Expiring Soon"}, false),
+				Optional:     true,
+				Default:      "Unknown",
+				ForceNew:     true,
 			},
 			"contract_status_reason": {
-				Description: "Reason for contract status. In case of Not Covered, reason is either Terminated or Expired.\n* `` - There is no reason for the specified contract status.\n* `Line Item Expired` - The Cisco device does not have a valid support contract, it has expired.\n* `Line Item Terminated` - The Cisco device does not have a valid support contract, it has been terminated.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "",
-				ForceNew:    true,
+				Description:  "Reason for contract status. In case of Not Covered, reason is either Terminated or Expired.\n* `` - There is no reason for the specified contract status.\n* `Line Item Expired` - The Cisco device does not have a valid support contract, it has expired.\n* `Line Item Terminated` - The Cisco device does not have a valid support contract, it has been terminated.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"", "Line Item Expired", "Line Item Terminated"}, false),
+				Optional:     true,
+				Default:      "",
+				ForceNew:     true,
 			},
 			"contract_updated_time": {
 				Description: "Date and time indicating when the contract data is last refreshed.",
@@ -762,7 +765,8 @@ func resourceAssetDeviceContractNotification() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}, ForceNew: true,
+					Type: schema.TypeString,
+				}, ForceNew: true,
 			},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -1436,18 +1440,20 @@ func resourceAssetDeviceContractNotification() *schema.Resource {
 				}, ForceNew: true,
 			},
 			"state_contract": {
-				Description: "Internal property used for triggering and tracking actions for contract information.\n* `Update` - Sn2Info/Contract information needs to be updated.\n* `OK` - Sn2Info/Contract information was fetched succcessfuly and updated.\n* `Failed` - Sn2Info/Contract information was not available  or failed while fetching.\n* `Retry` - Sn2Info/Contract information update failed and will be retried later.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "Update",
-				ForceNew:    true,
+				Description:  "Internal property used for triggering and tracking actions for contract information.\n* `Update` - Sn2Info/Contract information needs to be updated.\n* `OK` - Sn2Info/Contract information was fetched succcessfuly and updated.\n* `Failed` - Sn2Info/Contract information was not available  or failed while fetching.\n* `Retry` - Sn2Info/Contract information update failed and will be retried later.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Update", "OK", "Failed", "Retry"}, false),
+				Optional:     true,
+				Default:      "Update",
+				ForceNew:     true,
 			},
 			"state_sn2_info": {
-				Description: "Internal property used for triggering and tracking actions for sn2info information.\n* `Update` - Sn2Info/Contract information needs to be updated.\n* `OK` - Sn2Info/Contract information was fetched succcessfuly and updated.\n* `Failed` - Sn2Info/Contract information was not available  or failed while fetching.\n* `Retry` - Sn2Info/Contract information update failed and will be retried later.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "Update",
-				ForceNew:    true,
+				Description:  "Internal property used for triggering and tracking actions for sn2info information.\n* `Update` - Sn2Info/Contract information needs to be updated.\n* `OK` - Sn2Info/Contract information was fetched succcessfuly and updated.\n* `Failed` - Sn2Info/Contract information was not available  or failed while fetching.\n* `Retry` - Sn2Info/Contract information update failed and will be retried later.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Update", "OK", "Failed", "Retry"}, false),
+				Optional:     true,
+				Default:      "Update",
+				ForceNew:     true,
 			},
 			"tags": {
 				Type:       schema.TypeList,
@@ -1463,16 +1469,18 @@ func resourceAssetDeviceContractNotification() *schema.Resource {
 							ForceNew:         true,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							ForceNew:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
+							ForceNew:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							ForceNew:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
+							ForceNew:     true,
 						},
 					},
 				},
@@ -1686,7 +1694,7 @@ func resourceAssetDeviceContractNotificationCreate(c context.Context, d *schema.
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("asset.ContractInformation")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1742,7 +1750,7 @@ func resourceAssetDeviceContractNotificationCreate(c context.Context, d *schema.
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("asset.CustomerInformation")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1773,7 +1781,7 @@ func resourceAssetDeviceContractNotificationCreate(c context.Context, d *schema.
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("asset.GlobalUltimate")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1831,7 +1839,7 @@ func resourceAssetDeviceContractNotificationCreate(c context.Context, d *schema.
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("asset.ProductInformation")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1867,7 +1875,7 @@ func resourceAssetDeviceContractNotificationCreate(c context.Context, d *schema.
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("asset.GlobalUltimate")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))

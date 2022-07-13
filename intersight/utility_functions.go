@@ -22,7 +22,7 @@ var (
 //old is from tfstate file
 // new is from tf config file
 func SuppressDiffAdditionProps(k, old, new string, d *schema.ResourceData) bool {
-	if old == "null" && new == "" {
+	if old == "" && new == "" {
 		return true
 	}
 	if new == "" {
@@ -30,10 +30,16 @@ func SuppressDiffAdditionProps(k, old, new string, d *schema.ResourceData) bool 
 	}
 	var oldJson = make(map[string]interface{})
 	var newJson = make(map[string]interface{})
-	err := json.Unmarshal([]byte(old), &oldJson)
+	if old != "" {
+		err := json.Unmarshal([]byte(old), &oldJson)
+		if err != nil {
+			log.Printf("Error while json parsing ERR: %+v", err)
+			return false
+		}
+	}
 	err1 := json.Unmarshal([]byte(new), &newJson)
-	if err != nil || err1 != nil {
-		log.Printf("Error while json parsing ERR: %+v ERR1: %+v", err, err1)
+	if err1 != nil {
+		log.Printf("Error while json parsing ERR1: %+v", err1)
 		return false
 	}
 	different := true
@@ -50,7 +56,7 @@ func parseFilterMap(m map[string]interface{}) ([]string, []string) {
 	var keyArray []string
 	var valArray []string
 	for k, v := range m {
-		if k == "ClassId" || k == "ObjectType" {
+		if (k == "ClassId" && v == "") || (k == "ObjectType" && v == "") {
 			continue
 		}
 		switch reflect.TypeOf(v).Kind() {

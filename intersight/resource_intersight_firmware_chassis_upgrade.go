@@ -11,6 +11,7 @@ import (
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceFirmwareChassisUpgrade() *schema.Resource {
@@ -263,11 +264,12 @@ func resourceFirmwareChassisUpgrade() *schema.Resource {
 							ForceNew: true,
 						},
 						"image_source": {
-							Description: "Source type referring the image to be downloaded from CCO or from a local HTTPS server.\n* `cisco` - Image to be downloaded from Cisco software repository.\n* `localHttp` - Image to be downloaded from a https server.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "cisco",
-							ForceNew:    true,
+							Description:  "Source type referring the image to be downloaded from CCO or from a local HTTPS server.\n* `cisco` - Image to be downloaded from Cisco software repository.\n* `localHttp` - Image to be downloaded from a https server.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"cisco", "localHttp"}, false),
+							Optional:     true,
+							Default:      "cisco",
+							ForceNew:     true,
 						},
 						"is_password_set": {
 							Description: "Indicates whether the value of the 'password' property has been set.",
@@ -295,11 +297,12 @@ func resourceFirmwareChassisUpgrade() *schema.Resource {
 							ForceNew:    true,
 						},
 						"upgradeoption": {
-							Description: "Option to control the upgrade, e.g., sd_upgrade_mount_only - download the image into sd and upgrade wait for the server on-next boot.\n* `sd_upgrade_mount_only` - Direct upgrade SD upgrade mount only.\n* `sd_download_only` - Direct upgrade SD download only.\n* `sd_upgrade_only` - Direct upgrade SD upgrade only.\n* `sd_upgrade_full` - Direct upgrade SD upgrade full.\n* `download_only` - Direct upgrade image download only.\n* `upgrade_full` - The upgrade downloads or mounts the image, and reboots immediately for an upgrade.\n* `upgrade_mount_only` - The upgrade downloads or mounts the image. The upgrade happens in next reboot.\n* `chassis_upgrade_full` - Direct upgrade chassis upgrade full.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "sd_upgrade_mount_only",
-							ForceNew:    true,
+							Description:  "Option to control the upgrade, e.g., sd_upgrade_mount_only - download the image into sd and upgrade wait for the server on-next boot.\n* `sd_upgrade_mount_only` - Direct upgrade SD upgrade mount only.\n* `sd_download_only` - Direct upgrade SD download only.\n* `sd_upgrade_only` - Direct upgrade SD upgrade only.\n* `sd_upgrade_full` - Direct upgrade SD upgrade full.\n* `download_only` - Direct upgrade image download only.\n* `upgrade_full` - The upgrade downloads or mounts the image, and reboots immediately for an upgrade.\n* `upgrade_mount_only` - The upgrade downloads or mounts the image. The upgrade happens in next reboot.\n* `chassis_upgrade_full` - Direct upgrade chassis upgrade full.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"sd_upgrade_mount_only", "sd_download_only", "sd_upgrade_only", "sd_upgrade_full", "download_only", "upgrade_full", "upgrade_mount_only", "chassis_upgrade_full"}, false),
+							Optional:     true,
+							Default:      "sd_upgrade_mount_only",
+							ForceNew:     true,
 						},
 						"username": {
 							Description: "Username as configured on the local https server.",
@@ -375,7 +378,9 @@ func resourceFirmwareChassisUpgrade() *schema.Resource {
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Computed:   true,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}, ForceNew: true,
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"none", "local-disk"}, false),
+				}, ForceNew: true,
 			},
 			"file_server": {
 				Description: "Location of the image in user software repository.",
@@ -473,11 +478,12 @@ func resourceFirmwareChassisUpgrade() *schema.Resource {
 										ForceNew:    true,
 									},
 									"mount_options": {
-										Description: "Mount option (Authentication Protocol) as configured on the CIFS Server. Example:ntlmv2.\n* `none` - The default authentication protocol is decided by the endpoint.\n* `ntlm` - The external CIFS server is configured with ntlm as the authentication protocol.\n* `ntlmi` - Mount options of CIFS file server is ntlmi.\n* `ntlmv2` - Mount options of CIFS file server is ntlmv2.\n* `ntlmv2i` - Mount options of CIFS file server is ntlmv2i.\n* `ntlmssp` - Mount options of CIFS file server is ntlmssp.\n* `ntlmsspi` - Mount options of CIFS file server is ntlmsspi.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Default:     "none",
-										ForceNew:    true,
+										Description:  "Mount option (Authentication Protocol) as configured on the CIFS Server. Example:ntlmv2.\n* `none` - The default authentication protocol is decided by the endpoint.\n* `ntlm` - The external CIFS server is configured with ntlm as the authentication protocol.\n* `ntlmi` - Mount options of CIFS file server is ntlmi.\n* `ntlmv2` - Mount options of CIFS file server is ntlmv2.\n* `ntlmv2i` - Mount options of CIFS file server is ntlmv2i.\n* `ntlmssp` - Mount options of CIFS file server is ntlmssp.\n* `ntlmsspi` - Mount options of CIFS file server is ntlmsspi.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringInSlice([]string{"none", "ntlm", "ntlmi", "ntlmv2", "ntlmv2i", "ntlmssp", "ntlmsspi"}, false),
+										Optional:     true,
+										Default:      "none",
+										ForceNew:     true,
 									},
 									"object_type": {
 										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -591,11 +597,12 @@ func resourceFirmwareChassisUpgrade() *schema.Resource {
 							}, ForceNew: true,
 						},
 						"map_type": {
-							Description: "File server protocols such as CIFS, NFS, WWW for HTTP (S) that hosts the image.\n* `nfs` - File server protocol used is NFS.\n* `cifs` - File server protocol used is CIFS.\n* `www` - File server protocol used is WWW.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "nfs",
-							ForceNew:    true,
+							Description:  "File server protocols such as CIFS, NFS, WWW for HTTP (S) that hosts the image.\n* `nfs` - File server protocol used is NFS.\n* `cifs` - File server protocol used is CIFS.\n* `www` - File server protocol used is WWW.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"nfs", "cifs", "www"}, false),
+							Optional:     true,
+							Default:      "nfs",
+							ForceNew:     true,
 						},
 						"nfs_server": {
 							Description: "NFS file server option for network share upgrade.",
@@ -692,11 +699,12 @@ func resourceFirmwareChassisUpgrade() *schema.Resource {
 							ForceNew:    true,
 						},
 						"upgradeoption": {
-							Description: "Option to control the upgrade operation. Some examples, 1) nw_upgrade_mount_only - mount the image from a file server and run the upgrade on the next server boot and 2) nw_upgrade_full - mount the image and immediately run the upgrade.\n* `nw_upgrade_full` - Network upgrade option for full upgrade.\n* `nw_upgrade_mount_only` - Network upgrade mount only.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "nw_upgrade_full",
-							ForceNew:    true,
+							Description:  "Option to control the upgrade operation. Some examples, 1) nw_upgrade_mount_only - mount the image from a file server and run the upgrade on the next server boot and 2) nw_upgrade_full - mount the image and immediately run the upgrade.\n* `nw_upgrade_full` - Network upgrade option for full upgrade.\n* `nw_upgrade_mount_only` - Network upgrade mount only.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"nw_upgrade_full", "nw_upgrade_mount_only"}, false),
+							Optional:     true,
+							Default:      "nw_upgrade_full",
+							ForceNew:     true,
 						},
 						"username": {
 							Description: "Username as configured on the file server.",
@@ -721,7 +729,8 @@ func resourceFirmwareChassisUpgrade() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}, ForceNew: true,
+					Type: schema.TypeString,
+				}, ForceNew: true,
 			},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -879,11 +888,12 @@ func resourceFirmwareChassisUpgrade() *schema.Resource {
 				ForceNew:    true,
 			},
 			"status": {
-				Description: "Status of the upgrade operation.\n* `NONE` - Upgrade status is not populated.\n* `IN_PROGRESS` - The upgrade is in progress.\n* `SUCCESSFUL` - The upgrade successfully completed.\n* `FAILED` - The upgrade shows failed status.\n* `TERMINATED` - The upgrade has been terminated.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "NONE",
-				ForceNew:    true,
+				Description:  "Status of the upgrade operation.\n* `NONE` - Upgrade status is not populated.\n* `IN_PROGRESS` - The upgrade is in progress.\n* `SUCCESSFUL` - The upgrade successfully completed.\n* `FAILED` - The upgrade shows failed status.\n* `TERMINATED` - The upgrade has been terminated.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"NONE", "IN_PROGRESS", "SUCCESSFUL", "FAILED", "TERMINATED"}, false),
+				Optional:     true,
+				Default:      "NONE",
+				ForceNew:     true,
 			},
 			"tags": {
 				Type:       schema.TypeList,
@@ -899,16 +909,18 @@ func resourceFirmwareChassisUpgrade() *schema.Resource {
 							ForceNew:         true,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							ForceNew:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
+							ForceNew:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							ForceNew:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
+							ForceNew:     true,
 						},
 					},
 				},
@@ -1007,11 +1019,12 @@ func resourceFirmwareChassisUpgrade() *schema.Resource {
 				ForceNew: true,
 			},
 			"upgrade_type": {
-				Description: "Desired upgrade mode to choose either direct download based upgrade or network share upgrade.\n* `direct_upgrade` - Upgrade mode is direct download.\n* `network_upgrade` - Upgrade mode is network upgrade.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "direct_upgrade",
-				ForceNew:    true,
+				Description:  "Desired upgrade mode to choose either direct download based upgrade or network share upgrade.\n* `direct_upgrade` - Upgrade mode is direct download.\n* `network_upgrade` - Upgrade mode is network upgrade.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"direct_upgrade", "network_upgrade"}, false),
+				Optional:     true,
+				Default:      "direct_upgrade",
+				ForceNew:     true,
 			},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
@@ -1207,7 +1220,7 @@ func resourceFirmwareChassisUpgradeCreate(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1252,7 +1265,7 @@ func resourceFirmwareChassisUpgradeCreate(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("firmware.DirectDownload")
 			if v, ok := l["http_server"]; ok {
 				{
 					p := make([]models.FirmwareHttpServer, 0, 1)
@@ -1270,7 +1283,7 @@ func resourceFirmwareChassisUpgradeCreate(c context.Context, d *schema.ResourceD
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("firmware.HttpServer")
 						if v, ok := l["location_link"]; ok {
 							{
 								x := (v.(string))
@@ -1351,7 +1364,7 @@ func resourceFirmwareChassisUpgradeCreate(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1407,7 +1420,7 @@ func resourceFirmwareChassisUpgradeCreate(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("softwarerepository.FileServer")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1460,7 +1473,7 @@ func resourceFirmwareChassisUpgradeCreate(c context.Context, d *schema.ResourceD
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("firmware.CifsServer")
 						if v, ok := l["file_location"]; ok {
 							{
 								x := (v.(string))
@@ -1487,7 +1500,7 @@ func resourceFirmwareChassisUpgradeCreate(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("firmware.NetworkShare")
 			if v, ok := l["http_server"]; ok {
 				{
 					p := make([]models.FirmwareHttpServer, 0, 1)
@@ -1505,7 +1518,7 @@ func resourceFirmwareChassisUpgradeCreate(c context.Context, d *schema.ResourceD
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("firmware.HttpServer")
 						if v, ok := l["location_link"]; ok {
 							{
 								x := (v.(string))
@@ -1555,7 +1568,7 @@ func resourceFirmwareChassisUpgradeCreate(c context.Context, d *schema.ResourceD
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("firmware.NfsServer")
 						if v, ok := l["file_location"]; ok {
 							{
 								x := (v.(string))
@@ -1632,7 +1645,7 @@ func resourceFirmwareChassisUpgradeCreate(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceAdapterConfigPolicy() *schema.Resource {
@@ -94,9 +96,10 @@ func resourceAdapterConfigPolicy() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -128,9 +131,10 @@ func resourceAdapterConfigPolicy() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the concrete policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the concrete policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -185,7 +189,8 @@ func resourceAdapterConfigPolicy() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -324,6 +329,8 @@ func resourceAdapterConfigPolicy() *schema.Resource {
 						},
 						"dce_interface_settings": {
 							Type:       schema.TypeList,
+							MaxItems:   4,
+							MinItems:   0,
 							Optional:   true,
 							ConfigMode: schema.SchemaConfigModeAttr,
 							Computed:   true,
@@ -341,15 +348,17 @@ func resourceAdapterConfigPolicy() *schema.Resource {
 										Default:     "adapter.DceInterfaceSettings",
 									},
 									"fec_mode": {
-										Description: "Forward Error Correction (FEC) mode setting for the DCE interfaces of the adapter. FEC mode setting is supported only for Cisco VIC 14xx adapters. FEC mode 'cl74' is unsupported for Cisco VIC 1495/1497. This setting will be ignored for unsupported adapters and for unavailable DCE interfaces.\n* `cl91` - Use cl91 standard as FEC mode setting. 'Clause 91' aka RS-FEC ('ReedSolomon' FEC) offers better error protection against bursty and random errors but adds latency.\n* `cl74` - Use cl74 standard as FEC mode setting. 'Clause 74' aka FC-FEC ('FireCode' FEC) offers simple, low-latency protection against 1 burst/sparse bit error, but it is not good for random errors.\n* `Off` - Disable FEC mode on the DCE Interface.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Default:     "cl91",
+										Description:  "Forward Error Correction (FEC) mode setting for the DCE interfaces of the adapter. FEC mode setting is supported only for Cisco VIC 14xx adapters. FEC mode 'cl74' is unsupported for Cisco VIC 1495/1497. This setting will be ignored for unsupported adapters and for unavailable DCE interfaces.\n* `cl91` - Use cl91 standard as FEC mode setting. 'Clause 91' aka RS-FEC ('ReedSolomon' FEC) offers better error protection against bursty and random errors but adds latency.\n* `cl74` - Use cl74 standard as FEC mode setting. 'Clause 74' aka FC-FEC ('FireCode' FEC) offers simple, low-latency protection against 1 burst/sparse bit error, but it is not good for random errors.\n* `Off` - Disable FEC mode on the DCE Interface.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringInSlice([]string{"cl91", "cl74", "Off"}, false),
+										Optional:     true,
+										Default:      "cl91",
 									},
 									"interface_id": {
-										Description: "DCE interface id on which settings needs to be configured. Supported values are (0-3).",
-										Type:        schema.TypeInt,
-										Optional:    true,
+										Description:  "DCE interface id on which settings needs to be configured. Supported values are (0-3).",
+										Type:         schema.TypeInt,
+										ValidateFunc: validation.IntBetween(0, 3),
+										Optional:     true,
 									},
 									"object_type": {
 										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -472,9 +481,10 @@ func resourceAdapterConfigPolicy() *schema.Resource {
 							},
 						},
 						"slot_id": {
-							Description: "PCIe slot where the VIC adapter is installed. Supported values are (1-15) and MLOM.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "PCIe slot where the VIC adapter is installed. Supported values are (1-15) and MLOM.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^([1-9]|1[0-5]|MLOM)$"), ""),
+							Optional:     true,
 						},
 					},
 				},
@@ -503,14 +513,16 @@ func resourceAdapterConfigPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -709,7 +721,7 @@ func resourceAdapterConfigPolicyCreate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -855,7 +867,7 @@ func resourceAdapterConfigPolicyCreate(c context.Context, d *schema.ResourceData
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("adapter.EthSettings")
 						if v, ok := l["lldp_enabled"]; ok {
 							{
 								x := (v.(bool))
@@ -893,7 +905,7 @@ func resourceAdapterConfigPolicyCreate(c context.Context, d *schema.ResourceData
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("adapter.FcSettings")
 						if v, ok := l["fip_enabled"]; ok {
 							{
 								x := (v.(bool))
@@ -937,7 +949,7 @@ func resourceAdapterConfigPolicyCreate(c context.Context, d *schema.ResourceData
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("adapter.PortChannelSettings")
 						if v, ok := l["enabled"]; ok {
 							{
 								x := (v.(bool))
@@ -1202,7 +1214,7 @@ func resourceAdapterConfigPolicyUpdate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1348,7 +1360,7 @@ func resourceAdapterConfigPolicyUpdate(c context.Context, d *schema.ResourceData
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("adapter.EthSettings")
 						if v, ok := l["lldp_enabled"]; ok {
 							{
 								x := (v.(bool))
@@ -1386,7 +1398,7 @@ func resourceAdapterConfigPolicyUpdate(c context.Context, d *schema.ResourceData
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("adapter.FcSettings")
 						if v, ok := l["fip_enabled"]; ok {
 							{
 								x := (v.(bool))
@@ -1430,7 +1442,7 @@ func resourceAdapterConfigPolicyUpdate(c context.Context, d *schema.ResourceData
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("adapter.PortChannelSettings")
 						if v, ok := l["enabled"]; ok {
 							{
 								x := (v.(bool))

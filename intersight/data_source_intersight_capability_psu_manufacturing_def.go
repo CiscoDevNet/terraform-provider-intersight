@@ -796,7 +796,7 @@ func dataSourceCapabilityPsuManufacturingDefRead(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -932,7 +932,7 @@ func dataSourceCapabilityPsuManufacturingDefRead(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.VersionContext")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -999,7 +999,7 @@ func dataSourceCapabilityPsuManufacturingDefRead(c context.Context, d *schema.Re
 	if err != nil {
 		return diag.Errorf("json marshal of CapabilityPsuManufacturingDef object failed with error : %s", err.Error())
 	}
-	countResponse, _, responseErr := conn.ApiClient.CapabilityApi.GetCapabilityPsuManufacturingDefList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
+	countResponse, _, responseErr := conn.ApiClient.CapabilityApi.GetCapabilityPsuManufacturingDefList(conn.ctx).Filter(getRequestParams(data)).Count(true).Execute()
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
@@ -1008,13 +1008,12 @@ func dataSourceCapabilityPsuManufacturingDefRead(c context.Context, d *schema.Re
 		}
 		return diag.Errorf("error occurred while fetching count of CapabilityPsuManufacturingDef: %s", responseErr.Error())
 	}
-	count := countResponse.CapabilityPsuManufacturingDefList.GetCount()
+	count := countResponse.MoDocumentCount.GetCount()
 	if count == 0 {
 		return diag.Errorf("your query for CapabilityPsuManufacturingDef data source did not return any results. Please change your search criteria and try again")
 	}
 	var i int32
-	var capabilityPsuManufacturingDefResults = make([]map[string]interface{}, count, count)
-	var j = 0
+	var capabilityPsuManufacturingDefResults = make([]map[string]interface{}, 0, 0)
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.CapabilityApi.GetCapabilityPsuManufacturingDefList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
@@ -1028,8 +1027,8 @@ func dataSourceCapabilityPsuManufacturingDefRead(c context.Context, d *schema.Re
 		results := resMo.CapabilityPsuManufacturingDefList.GetResults()
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
-			for i := 0; i < len(results); i++ {
-				var s = results[i]
+			for k := 0; k < len(results); k++ {
+				var s = results[k]
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
@@ -1060,8 +1059,7 @@ func dataSourceCapabilityPsuManufacturingDefRead(c context.Context, d *schema.Re
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				temp["vid"] = (s.GetVid())
-				capabilityPsuManufacturingDefResults[j] = temp
-				j += 1
+				capabilityPsuManufacturingDefResults = append(capabilityPsuManufacturingDefResults, temp)
 			}
 		}
 	}

@@ -6,11 +6,13 @@ import (
 	"fmt"
 	"log"
 	"reflect"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceIamAppRegistration() *schema.Resource {
@@ -145,10 +147,11 @@ func resourceIamAppRegistration() *schema.Resource {
 				Optional:    true,
 			},
 			"client_type": {
-				Description: "The type of the OAuth2 client (public or confidential), as specified in https://tools.ietf.org/html/rfc6749#section-2.1.\n* `public` - Clients incapable of maintaining the confidentiality of their credentials.This includes clients executing on the device used by the resource owner,such as mobile applications, installed native application or a webbrowser-based application.\n* `confidential` - Clients capable of maintaining the confidentiality of their credentials.For example, this could be a client implemented on a secure server withrestricted access to the client credentials.To maintain the confidentiality of the OAuth2 credentials, two use cases areconsidered.1) The application is running as a service within Intersight. The application automatically   obtains the OAuth2 credentials when the application starts and the credentials are not   exposed to the end-user.   Because end-users (even account administrators) do not have access the OAuth2 credentials,   they cannot take the credentials with them when they leave their organization.2) The application is under the control of a \"trusted\" end-user. For example,   the end-user may create a native application running outside Intersight. The application   uses OAuth2 credentials to interact with the Intersight API. In that case, the Intersight   account administrator may generate OAuth2 credentials with a registered application   using \"client_credentials\" grant type.   In that case, the end-user is responsible for maintaining the confidentiality of the   OAuth2 credentials. If the end-user leaves the organization, you should revoke the   credentials and issue new Oauth2 credentials.Here is a possible workflow for handling OAuth2 tokens.1) User Alice (Intersight Account Administrator) logins to Intersight and deploys an Intersight   application that requires an OAuth2 token.2) Intersight automatically deploys the application. The application is assigned a OAuth2 token,   possibly linked to Alice. The application must NOT expose the OAuth2 secret to Alice, otherwise   Alice would be able to use the token after she leaves the company.3) The application can make API calls to Intersight using its assigned OAuth2 token. For example,   the application could make weekly scheduled API calls to Intersight.4) Separately, Alice may also get OAuth2 tokens that she can use to make API calls from the   Intersight SDK through the northbound API. In that case, Alice will get the associated OAuth2   secrets, but not the one assigned in step #2.5) Alice leaves the organization. The OAuth2 tokens assigned in step #2 must retain their validity   even after Alice has left the organization. Because the OAuth2 secrets were never shared with   Alice, there is no risk Alice can reuse the OAuth2 secrets.   On the other hand, the OAuth2 tokens assigned in step #4 must be invalidated because Alice had   the OAuth2 tokens in her possession.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "public",
+				Description:  "The type of the OAuth2 client (public or confidential), as specified in https://tools.ietf.org/html/rfc6749#section-2.1.\n* `public` - Clients incapable of maintaining the confidentiality of their credentials.This includes clients executing on the device used by the resource owner,such as mobile applications, installed native application or a webbrowser-based application.\n* `confidential` - Clients capable of maintaining the confidentiality of their credentials.For example, this could be a client implemented on a secure server withrestricted access to the client credentials.To maintain the confidentiality of the OAuth2 credentials, two use cases areconsidered.1) The application is running as a service within Intersight. The application automatically   obtains the OAuth2 credentials when the application starts and the credentials are not   exposed to the end-user.   Because end-users (even account administrators) do not have access the OAuth2 credentials,   they cannot take the credentials with them when they leave their organization.2) The application is under the control of a \"trusted\" end-user. For example,   the end-user may create a native application running outside Intersight. The application   uses OAuth2 credentials to interact with the Intersight API. In that case, the Intersight   account administrator may generate OAuth2 credentials with a registered application   using \"client_credentials\" grant type.   In that case, the end-user is responsible for maintaining the confidentiality of the   OAuth2 credentials. If the end-user leaves the organization, you should revoke the   credentials and issue new Oauth2 credentials.Here is a possible workflow for handling OAuth2 tokens.1) User Alice (Intersight Account Administrator) logins to Intersight and deploys an Intersight   application that requires an OAuth2 token.2) Intersight automatically deploys the application. The application is assigned a OAuth2 token,   possibly linked to Alice. The application must NOT expose the OAuth2 secret to Alice, otherwise   Alice would be able to use the token after she leaves the company.3) The application can make API calls to Intersight using its assigned OAuth2 token. For example,   the application could make weekly scheduled API calls to Intersight.4) Separately, Alice may also get OAuth2 tokens that she can use to make API calls from the   Intersight SDK through the northbound API. In that case, Alice will get the associated OAuth2   secrets, but not the one assigned in step #2.5) Alice leaves the organization. The OAuth2 tokens assigned in step #2 must retain their validity   even after Alice has left the organization. Because the OAuth2 secrets were never shared with   Alice, there is no risk Alice can reuse the OAuth2 secrets.   On the other hand, the OAuth2 tokens assigned in step #4 must be invalidated because Alice had   the OAuth2 tokens in her possession.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"public", "confidential"}, false),
+				Optional:     true,
+				Default:      "public",
 			},
 			"create_time": {
 				Description: "The time when this managed object was created.",
@@ -183,7 +186,9 @@ func resourceIamAppRegistration() *schema.Resource {
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Computed:   true,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"authorization_code", "refresh_token", "client_credentials", "implicit", "password", "urn:ietf:params:oauth:grant-type:jwt-bearer", "urn:ietf:params:oauth:grant-type:saml2-bearer"}, false),
+				}},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
@@ -253,7 +258,8 @@ func resourceIamAppRegistration() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -379,7 +385,9 @@ func resourceIamAppRegistration() *schema.Resource {
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Computed:   true,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^(?:[\\w.-]+?:\\/\\/)[\\w\\.\\-\\/\\d\\:]+$"), ""),
+				}},
 			"renew_client_secret": {
 				Description: "Set value to true to renew the client-secret. Applicable to client_credentials grant type.",
 				Type:        schema.TypeBool,
@@ -392,7 +400,9 @@ func resourceIamAppRegistration() *schema.Resource {
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Computed:   true,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"code", "token"}, false),
+				}},
 			"revocation_timestamp": {
 				Description: "Used to perform revocation for tokens of AppRegistration.\nUpdated only internally is case Revoke property come from UI with value true.\nOn each request with OAuth2 access token the CreationTime of the OAuth2 token will be compared to RevokationTimestamp of the\ncorresponding App Registration.",
 				Type:        schema.TypeString,
@@ -460,6 +470,12 @@ func resourceIamAppRegistration() *schema.Resource {
 					}
 					return
 				}},
+			"show_consent_screen": {
+				Description: "Set to true if consent screen needs to be shown during the OAuth login process.\nApplicable only for public AppRegistrations, means only 'authorization_code' grantType.\nNote that consent screen will be shown on each login.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     false,
+			},
 			"tags": {
 				Type:       schema.TypeList,
 				Optional:   true,
@@ -473,14 +489,16 @@ func resourceIamAppRegistration() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -804,6 +822,11 @@ func resourceIamAppRegistrationCreate(c context.Context, d *schema.ResourceData,
 		}
 	}
 
+	if v, ok := d.GetOkExists("show_consent_screen"); ok {
+		x := (v.(bool))
+		o.SetShowConsentScreen(x)
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -986,6 +1009,10 @@ func resourceIamAppRegistrationRead(c context.Context, d *schema.ResourceData, m
 		return diag.Errorf("error occurred while setting property SharedScope in IamAppRegistration object: %s", err.Error())
 	}
 
+	if err := d.Set("show_consent_screen", (s.GetShowConsentScreen())); err != nil {
+		return diag.Errorf("error occurred while setting property ShowConsentScreen in IamAppRegistration object: %s", err.Error())
+	}
+
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Tags in IamAppRegistration object: %s", err.Error())
 	}
@@ -1140,6 +1167,12 @@ func resourceIamAppRegistrationUpdate(c context.Context, d *schema.ResourceData,
 			x = append(x, models.MoMoRefAsIamRoleRelationship(o))
 		}
 		o.SetRoles(x)
+	}
+
+	if d.HasChange("show_consent_screen") {
+		v := d.Get("show_consent_screen")
+		x := (v.(bool))
+		o.SetShowConsentScreen(x)
 	}
 
 	if d.HasChange("tags") {

@@ -6,11 +6,13 @@ import (
 	"fmt"
 	"log"
 	"reflect"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceHyperflexSoftwareVersionPolicy() *schema.Resource {
@@ -134,9 +136,10 @@ func resourceHyperflexSoftwareVersionPolicy() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -258,9 +261,10 @@ func resourceHyperflexSoftwareVersionPolicy() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the concrete policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the concrete policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -315,7 +319,8 @@ func resourceHyperflexSoftwareVersionPolicy() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -396,9 +401,10 @@ func resourceHyperflexSoftwareVersionPolicy() *schema.Resource {
 				},
 			},
 			"server_firmware_version": {
-				Description: "Desired server firmware version to apply on the HyperFlex Cluster.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Desired server firmware version to apply on the HyperFlex Cluster.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|(^3\\.[0-9]\\([1-9][a-z]\\)$|^[4-9]\\.[1-9]\\([1-9][a-z]\\)$|^4\\.0\\([1-3][a-z]\\)$|^4\\.0\\(4[d-z]\\)$|4\\.0\\([5-9][a-z]\\)$|^[4-9]\\.[0-9]\\([0-9](\\.[0-9]+|[a-z]).*\\)$)"), ""),
+				Optional:     true,
 			},
 			"server_firmware_version_info": {
 				Description: "A reference to a firmwareDistributable resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -465,15 +471,17 @@ func resourceHyperflexSoftwareVersionPolicy() *schema.Resource {
 							Default:     "hyperflex.ServerFirmwareVersionInfo",
 						},
 						"server_platform": {
-							Description: "The platform type for UCS server.\n* `M5` - M5 generation of UCS server.\n* `M3` - M3 generation of UCS server.\n* `M4` - M4 generation of UCS server.\n* `M6` - M6 generation of UCS server.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "M5",
+							Description:  "The platform type for UCS server.\n* `M5` - M5 generation of UCS server.\n* `M3` - M3 generation of UCS server.\n* `M4` - M4 generation of UCS server.\n* `M6` - M6 generation of UCS server.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"M5", "M3", "M4", "M6"}, false),
+							Optional:     true,
+							Default:      "M5",
 						},
 						"nr_version": {
-							Description: "The server firmware bundle version.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The server firmware bundle version.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("(^3\\.[1-9]\\([1-9][a-z]\\)$|^[4-9]\\.[0-9]\\([1-9][a-z]\\)$|^[4-9]\\.[0-9]\\([0-9](\\.[0-9]+|[a-z]).*\\)$)"), ""),
+							Optional:     true,
 						},
 					},
 				},
@@ -502,14 +510,16 @@ func resourceHyperflexSoftwareVersionPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -520,7 +530,9 @@ func resourceHyperflexSoftwareVersionPolicy() *schema.Resource {
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Computed:   true,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringInSlice([]string{"NONE", "Hxdp", "Hypervisor", "ServerFirmware", "ServerFirmware_Forced"}, false),
+				}},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
 				Type:        schema.TypeList,
@@ -767,7 +779,7 @@ func resourceHyperflexSoftwareVersionPolicyCreate(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1145,7 +1157,7 @@ func resourceHyperflexSoftwareVersionPolicyUpdate(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

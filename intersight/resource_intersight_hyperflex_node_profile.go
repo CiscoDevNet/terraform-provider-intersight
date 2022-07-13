@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceHyperflexNodeProfile() *schema.Resource {
@@ -289,9 +291,10 @@ func resourceHyperflexNodeProfile() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the profile.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the profile.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -305,34 +308,40 @@ func resourceHyperflexNodeProfile() *schema.Resource {
 					return
 				}},
 			"hxdp_data_ip": {
-				Description: "IP address for storage data network (Controller VM interface).",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "IP address for storage data network (Controller VM interface).",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
+				Optional:     true,
 			},
 			"hxdp_mgmt_ip": {
-				Description: "IP address for HyperFlex management network.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "IP address for HyperFlex management network.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
+				Optional:     true,
 			},
 			"hxdp_storage_client_ip": {
-				Description: "IP address for storage client network (Controller VM interface).",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "IP address for storage client network (Controller VM interface).",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
+				Optional:     true,
 			},
 			"hypervisor_control_ip": {
-				Description: "IP address for hypervisor control such as VM migration or pod management.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "IP address for hypervisor control such as VM migration or pod management.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
+				Optional:     true,
 			},
 			"hypervisor_data_ip": {
-				Description: "IP address for storage data network (Hypervisor interface).",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "IP address for storage data network (Hypervisor interface).",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
+				Optional:     true,
 			},
 			"hypervisor_mgmt_ip": {
-				Description: "IP address for Hypervisor management network.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "IP address for Hypervisor management network.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
+				Optional:     true,
 			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
@@ -353,9 +362,10 @@ func resourceHyperflexNodeProfile() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the profile instance or profile template.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the profile instance or profile template.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"node": {
 				Description: "A reference to a hyperflexNode resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -398,16 +408,12 @@ func resourceHyperflexNodeProfile() *schema.Resource {
 				},
 			},
 			"node_role": {
-				Description: "The role that this node performs in the HyperFlex cluster.\n* `Unknown` - The node role is not available.\n* `Storage` - The node persists data and contributes to the storage capacity of a cluster.\n* `Compute` - The node contributes to the compute capacity of a cluster.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
-				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
-					if val != nil {
-						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
-					}
-					return
-				}},
+				Description:  "The role that this node performs in the HyperFlex cluster.\n* `Unknown` - The node role is not available.\n* `Storage` - The node persists data and contributes to the storage capacity of a cluster.\n* `Compute` - The node contributes to the compute capacity of a cluster.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Unknown", "Storage", "Compute"}, false),
+				Optional:     true,
+				Default:      "Unknown",
+			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
@@ -420,7 +426,8 @@ func resourceHyperflexNodeProfile() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -603,23 +610,26 @@ func resourceHyperflexNodeProfile() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
 			},
 			"type": {
-				Description: "Defines the type of the profile. Accepted values are instance or template.\n* `instance` - The profile defines the configuration for a specific instance of a target.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "instance",
+				Description:  "Defines the type of the profile. Accepted values are instance or template.\n* `instance` - The profile defines the configuration for a specific instance of a target.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"instance"}, false),
+				Optional:     true,
+				Default:      "instance",
 			},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
@@ -843,7 +853,7 @@ func resourceHyperflexNodeProfileCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -888,7 +898,7 @@ func resourceHyperflexNodeProfileCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -931,7 +941,7 @@ func resourceHyperflexNodeProfileCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("policy.ConfigContext")
 			if v, ok := l["control_action"]; ok {
 				{
 					x := (v.(string))
@@ -1003,6 +1013,11 @@ func resourceHyperflexNodeProfileCreate(c context.Context, d *schema.ResourceDat
 		o.SetName(x)
 	}
 
+	if v, ok := d.GetOk("node_role"); ok {
+		x := (v.(string))
+		o.SetNodeRole(x)
+	}
+
 	o.SetObjectType("hyperflex.NodeProfile")
 
 	if v, ok := d.GetOk("policy_bucket"); ok {
@@ -1063,7 +1078,7 @@ func resourceHyperflexNodeProfileCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1382,7 +1397,7 @@ func resourceHyperflexNodeProfileUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1428,7 +1443,7 @@ func resourceHyperflexNodeProfileUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1472,7 +1487,7 @@ func resourceHyperflexNodeProfileUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("policy.ConfigContext")
 			if v, ok := l["control_action"]; ok {
 				{
 					x := (v.(string))
@@ -1553,6 +1568,12 @@ func resourceHyperflexNodeProfileUpdate(c context.Context, d *schema.ResourceDat
 		o.SetName(x)
 	}
 
+	if d.HasChange("node_role") {
+		v := d.Get("node_role")
+		x := (v.(string))
+		o.SetNodeRole(x)
+	}
+
 	o.SetObjectType("hyperflex.NodeProfile")
 
 	if d.HasChange("policy_bucket") {
@@ -1613,7 +1634,7 @@ func resourceHyperflexNodeProfileUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

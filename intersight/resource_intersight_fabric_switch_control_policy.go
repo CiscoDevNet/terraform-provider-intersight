@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceFabricSwitchControlPolicy() *schema.Resource {
@@ -94,9 +96,10 @@ func resourceFabricSwitchControlPolicy() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -110,16 +113,18 @@ func resourceFabricSwitchControlPolicy() *schema.Resource {
 					return
 				}},
 			"ethernet_switching_mode": {
-				Description: "Enable or Disable Ethernet End Host Switching Mode.\n* `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer.\n* `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "end-host",
+				Description:  "Enable or Disable Ethernet End Host Switching Mode.\n* `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer.\n* `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"end-host", "switch"}, false),
+				Optional:     true,
+				Default:      "end-host",
 			},
 			"fc_switching_mode": {
-				Description: "Enable or Disable FC End Host Switching Mode.\n* `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer.\n* `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "end-host",
+				Description:  "Enable or Disable FC End Host Switching Mode.\n* `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer.\n* `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"end-host", "switch"}, false),
+				Optional:     true,
+				Default:      "end-host",
 			},
 			"mac_aging_settings": {
 				Description: "This specifies the MAC aging option and time settings.",
@@ -142,16 +147,18 @@ func resourceFabricSwitchControlPolicy() *schema.Resource {
 							Default:     "fabric.MacAgingSettings",
 						},
 						"mac_aging_option": {
-							Description: "This specifies one of the option to configure the MAC address aging time.\n* `Default` - This option sets the default MAC address aging time to 14500 seconds for End Host mode.\n* `Custom` - This option allows the the user to configure the MAC address aging time on the switch. For Switch Model UCS-FI-6454 or higher, the valid range is 120 to 918000 seconds and the switch will set the lower multiple of 5 of the given time.\n* `Never` - This option disables the MAC address aging process and never allows the MAC address entries to get removed from the table.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "Default",
+							Description:  "This specifies one of the option to configure the MAC address aging time.\n* `Default` - This option sets the default MAC address aging time to 14500 seconds for End Host mode.\n* `Custom` - This option allows the the user to configure the MAC address aging time on the switch. For Switch Model UCS-FI-6454 or higher, the valid range is 120 to 918000 seconds and the switch will set the lower multiple of 5 of the given time.\n* `Never` - This option disables the MAC address aging process and never allows the MAC address entries to get removed from the table.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"Default", "Custom", "Never"}, false),
+							Optional:     true,
+							Default:      "Default",
 						},
 						"mac_aging_time": {
-							Description: "Define the MAC address aging time in seconds. This field is valid when the \"Custom\" MAC address aging option is selected.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     14500,
+							Description:  "Define the MAC address aging time in seconds. This field is valid when the \"Custom\" MAC address aging option is selected.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(1, 1000000),
+							Optional:     true,
+							Default:      14500,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -181,9 +188,10 @@ func resourceFabricSwitchControlPolicy() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the concrete policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the concrete policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -238,7 +246,8 @@ func resourceFabricSwitchControlPolicy() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -381,14 +390,16 @@ func resourceFabricSwitchControlPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -414,10 +425,11 @@ func resourceFabricSwitchControlPolicy() *schema.Resource {
 							Default:     "fabric.UdldGlobalSettings",
 						},
 						"message_interval": {
-							Description: "Configures the time between UDLD probe messages on ports that are in advertisement mode and are\ncurrently determined to be bidirectional.\nValid values are from 7 to 90 seconds.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     15,
+							Description:  "Configures the time between UDLD probe messages on ports that are in advertisement mode and are\ncurrently determined to be bidirectional.\nValid values are from 7 to 90 seconds.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(7, 90),
+							Optional:     true,
+							Default:      15,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -426,10 +438,11 @@ func resourceFabricSwitchControlPolicy() *schema.Resource {
 							Default:     "fabric.UdldGlobalSettings",
 						},
 						"recovery_action": {
-							Description: "UDLD recovery when enabled, attempts to bring an UDLD error-disabled port out of reset.\n* `none` - The standard 4th generation UCS Fabric Interconnect with 54 ports.\n* `reset` - The expanded 4th generation UCS Fabric Interconnect with 108 ports.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "none",
+							Description:  "UDLD recovery when enabled, attempts to bring an UDLD error-disabled port out of reset.\n* `none` - The standard 4th generation UCS Fabric Interconnect with 54 ports.\n* `reset` - The expanded 4th generation UCS Fabric Interconnect with 108 ports.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"none", "reset"}, false),
+							Optional:     true,
+							Default:      "none",
 						},
 					},
 				},
@@ -632,7 +645,7 @@ func resourceFabricSwitchControlPolicyCreate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("fabric.MacAgingSettings")
 			if v, ok := l["mac_aging_option"]; ok {
 				{
 					x := (v.(string))
@@ -687,7 +700,7 @@ func resourceFabricSwitchControlPolicyCreate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -807,7 +820,7 @@ func resourceFabricSwitchControlPolicyCreate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("fabric.UdldGlobalSettings")
 			if v, ok := l["message_interval"]; ok {
 				{
 					x := int64(v.(int))
@@ -1028,7 +1041,7 @@ func resourceFabricSwitchControlPolicyUpdate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("fabric.MacAgingSettings")
 			if v, ok := l["mac_aging_option"]; ok {
 				{
 					x := (v.(string))
@@ -1086,7 +1099,7 @@ func resourceFabricSwitchControlPolicyUpdate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1205,7 +1218,7 @@ func resourceFabricSwitchControlPolicyUpdate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("fabric.UdldGlobalSettings")
 			if v, ok := l["message_interval"]; ok {
 				{
 					x := int64(v.(int))

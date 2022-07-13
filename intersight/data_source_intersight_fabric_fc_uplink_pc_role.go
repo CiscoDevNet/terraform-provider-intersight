@@ -26,7 +26,7 @@ func dataSourceFabricFcUplinkPcRole() *schema.Resource {
 			DiffSuppressFunc: SuppressDiffAdditionProps,
 		},
 		"admin_speed": {
-			Description: "Admin configured speed for the port.\n* `Auto` - Admin configurable speed AUTO ( default ).\n* `8Gbps` - Admin configurable speed 8Gbps.\n* `16Gbps` - Admin configurable speed 16Gbps.\n* `32Gbps` - Admin configurable speed 32Gbps.",
+			Description: "Admin configured speed for the port.\n* `16Gbps` - Admin configurable speed 16Gbps.\n* `8Gbps` - Admin configurable speed 8Gbps.\n* `32Gbps` - Admin configurable speed 32Gbps.\n* `Auto` - Admin configurable speed AUTO ( default ).",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -404,7 +404,7 @@ func dataSourceFabricFcUplinkPcRole() *schema.Resource {
 			DiffSuppressFunc: SuppressDiffAdditionProps,
 		},
 		"admin_speed": {
-			Description: "Admin configured speed for the port.\n* `Auto` - Admin configurable speed AUTO ( default ).\n* `8Gbps` - Admin configurable speed 8Gbps.\n* `16Gbps` - Admin configurable speed 16Gbps.\n* `32Gbps` - Admin configurable speed 32Gbps.",
+			Description: "Admin configured speed for the port.\n* `16Gbps` - Admin configurable speed 16Gbps.\n* `8Gbps` - Admin configurable speed 8Gbps.\n* `32Gbps` - Admin configurable speed 32Gbps.\n* `Auto` - Admin configurable speed AUTO ( default ).",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -907,7 +907,7 @@ func dataSourceFabricFcUplinkPcRoleRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -995,7 +995,7 @@ func dataSourceFabricFcUplinkPcRoleRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1122,7 +1122,7 @@ func dataSourceFabricFcUplinkPcRoleRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.VersionContext")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -1189,7 +1189,7 @@ func dataSourceFabricFcUplinkPcRoleRead(c context.Context, d *schema.ResourceDat
 	if err != nil {
 		return diag.Errorf("json marshal of FabricFcUplinkPcRole object failed with error : %s", err.Error())
 	}
-	countResponse, _, responseErr := conn.ApiClient.FabricApi.GetFabricFcUplinkPcRoleList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
+	countResponse, _, responseErr := conn.ApiClient.FabricApi.GetFabricFcUplinkPcRoleList(conn.ctx).Filter(getRequestParams(data)).Count(true).Execute()
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
@@ -1198,13 +1198,12 @@ func dataSourceFabricFcUplinkPcRoleRead(c context.Context, d *schema.ResourceDat
 		}
 		return diag.Errorf("error occurred while fetching count of FabricFcUplinkPcRole: %s", responseErr.Error())
 	}
-	count := countResponse.FabricFcUplinkPcRoleList.GetCount()
+	count := countResponse.MoDocumentCount.GetCount()
 	if count == 0 {
 		return diag.Errorf("your query for FabricFcUplinkPcRole data source did not return any results. Please change your search criteria and try again")
 	}
 	var i int32
-	var fabricFcUplinkPcRoleResults = make([]map[string]interface{}, count, count)
-	var j = 0
+	var fabricFcUplinkPcRoleResults = make([]map[string]interface{}, 0, 0)
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.FabricApi.GetFabricFcUplinkPcRoleList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
@@ -1218,8 +1217,8 @@ func dataSourceFabricFcUplinkPcRoleRead(c context.Context, d *schema.ResourceDat
 		results := resMo.FabricFcUplinkPcRoleList.GetResults()
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
-			for i := 0; i < len(results); i++ {
-				var s = results[i]
+			for k := 0; k < len(results); k++ {
+				var s = results[k]
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
@@ -1251,8 +1250,7 @@ func dataSourceFabricFcUplinkPcRoleRead(c context.Context, d *schema.ResourceDat
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				temp["vsan_id"] = (s.GetVsanId())
-				fabricFcUplinkPcRoleResults[j] = temp
-				j += 1
+				fabricFcUplinkPcRoleResults = append(fabricFcUplinkPcRoleResults, temp)
 			}
 		}
 	}

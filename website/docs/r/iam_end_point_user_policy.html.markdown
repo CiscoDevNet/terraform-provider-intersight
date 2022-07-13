@@ -24,6 +24,7 @@ resource "intersight_iam_end_point_user_policy" "user_policy1" {
     password_history         = 5
     notification_period      = 1
     grace_period             = 2
+    object_type              = "iam.EndPointPasswordProperties"
   }
   organization {
     object_type = "organization.Organization"
@@ -31,9 +32,9 @@ resource "intersight_iam_end_point_user_policy" "user_policy1" {
   }
 }
 
- variable "organization" {
-   type = string
-   description = "value for organization"
+variable "organization" {
+  type        = string
+  description = "value for organization"
 }
 ```
 ## Argument Reference

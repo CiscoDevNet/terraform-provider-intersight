@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **FcAdapterPolicy** | Pointer to [**VnicFcAdapterPolicyRelationship**](VnicFcAdapterPolicyRelationship.md) |  | [optional] 
 **FcNetworkPolicy** | Pointer to [**VnicFcNetworkPolicyRelationship**](VnicFcNetworkPolicyRelationship.md) |  | [optional] 
 **FcQosPolicy** | Pointer to [**VnicFcQosPolicyRelationship**](VnicFcQosPolicyRelationship.md) |  | [optional] 
+**FcZonePolicies** | Pointer to [**[]FabricFcZonePolicyRelationship**](FabricFcZonePolicyRelationship.md) | An array of relationships to fabricFcZonePolicy resources. | [optional] 
 **Profile** | Pointer to [**PolicyAbstractConfigProfileRelationship**](PolicyAbstractConfigProfileRelationship.md) |  | [optional] 
 **SanConnectivityPolicy** | Pointer to [**VnicSanConnectivityPolicyRelationship**](VnicSanConnectivityPolicyRelationship.md) |  | [optional] 
 **ScpVhba** | Pointer to [**VnicFcIfRelationship**](VnicFcIfRelationship.md) |  | [optional] 
@@ -420,6 +421,41 @@ SetFcQosPolicy sets FcQosPolicy field to given value.
 
 HasFcQosPolicy returns a boolean if a field has been set.
 
+### GetFcZonePolicies
+
+`func (o *VnicFcIf) GetFcZonePolicies() []FabricFcZonePolicyRelationship`
+
+GetFcZonePolicies returns the FcZonePolicies field if non-nil, zero value otherwise.
+
+### GetFcZonePoliciesOk
+
+`func (o *VnicFcIf) GetFcZonePoliciesOk() (*[]FabricFcZonePolicyRelationship, bool)`
+
+GetFcZonePoliciesOk returns a tuple with the FcZonePolicies field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFcZonePolicies
+
+`func (o *VnicFcIf) SetFcZonePolicies(v []FabricFcZonePolicyRelationship)`
+
+SetFcZonePolicies sets FcZonePolicies field to given value.
+
+### HasFcZonePolicies
+
+`func (o *VnicFcIf) HasFcZonePolicies() bool`
+
+HasFcZonePolicies returns a boolean if a field has been set.
+
+### SetFcZonePoliciesNil
+
+`func (o *VnicFcIf) SetFcZonePoliciesNil(b bool)`
+
+ SetFcZonePoliciesNil sets the value for FcZonePolicies to be an explicit nil
+
+### UnsetFcZonePolicies
+`func (o *VnicFcIf) UnsetFcZonePolicies()`
+
+UnsetFcZonePolicies ensures that no value is present for FcZonePolicies, not even an explicit nil
 ### GetProfile
 
 `func (o *VnicFcIf) GetProfile() PolicyAbstractConfigProfileRelationship`

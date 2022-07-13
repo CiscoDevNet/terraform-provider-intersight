@@ -6,12 +6,14 @@ import (
 	"fmt"
 	"log"
 	"reflect"
+	"regexp"
 	"strings"
 	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceTamSecurityAdvisory() *schema.Resource {
@@ -52,10 +54,11 @@ func resourceTamSecurityAdvisory() *schema.Resource {
 							Optional:    true,
 						},
 						"alert_type": {
-							Description: "Alert type is used to denote the category of an Intersight alert (FieldNotice, equipment Fault etc.).\n* `psirt` - Respresents the psirt alert type (https://tools.cisco.com/security/center/publicationListing.x).\n* `fieldNotice` - Respresents the field notice alert type (https://www.cisco.com/c/en/us/support/web/tsd-products-field-notice-summary.html).\n* `eolAdvisory` - Represents product End of Life (EOL) type (https://www.cisco.com/c/en/us/products/eos-eol-policy.html).",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "psirt",
+							Description:  "Alert type is used to denote the category of an Intersight alert (FieldNotice, equipment Fault etc.).\n* `psirt` - Respresents the psirt alert type (https://tools.cisco.com/security/center/publicationListing.x).\n* `fieldNotice` - Respresents the field notice alert type (https://www.cisco.com/c/en/us/support/web/tsd-products-field-notice-summary.html).\n* `eolAdvisory` - Represents product End of Life (EOL) type (https://www.cisco.com/c/en/us/products/eos-eol-policy.html).",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"psirt", "fieldNotice", "eolAdvisory"}, false),
+							Optional:     true,
+							Default:      "psirt",
 						},
 						"class_id": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
@@ -112,10 +115,11 @@ func resourceTamSecurityAdvisory() *schema.Resource {
 							Default:     "tam.Action",
 						},
 						"operation_type": {
-							Description: "Operation type for the alert action. An action is used to carry out the process of \"reacting\" to an alert condition. For e.g.in case of a fieldNotice alert, the intention may be to create a new alert (if the condition matches and there is no existing alert) or to remove an existing alert when the alert condition has been remedied.\n* `create` - Create an instance of AdvisoryInstance.\n* `remove` - Remove an instance of AdvisoryInstance.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "create",
+							Description:  "Operation type for the alert action. An action is used to carry out the process of \"reacting\" to an alert condition. For e.g.in case of a fieldNotice alert, the intention may be to create a new alert (if the condition matches and there is no existing alert) or to remove an existing alert when the alert condition has been remedied.\n* `create` - Create an instance of AdvisoryInstance.\n* `remove` - Remove an instance of AdvisoryInstance.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"create", "remove"}, false),
+							Optional:     true,
+							Default:      "create",
 						},
 						"queries": {
 							Type:       schema.TypeList,
@@ -160,10 +164,11 @@ func resourceTamSecurityAdvisory() *schema.Resource {
 							},
 						},
 						"type": {
-							Description: "Type of Intersight alert. An alert in Intersight could be one of several kinds (FieldNotice, PSIRT etc.). Primarily used for filtering alerts based on the type.\n* `restApi` - Repesents the use of REST API for carrying out alert actions.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "restApi",
+							Description:  "Type of Intersight alert. An alert in Intersight could be one of several kinds (FieldNotice, PSIRT etc.). Primarily used for filtering alerts based on the type.\n* `restApi` - Repesents the use of REST API for carrying out alert actions.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"restApi"}, false),
+							Optional:     true,
+							Default:      "restApi",
 						},
 					},
 				},
@@ -294,18 +299,20 @@ func resourceTamSecurityAdvisory() *schema.Resource {
 							},
 						},
 						"type": {
-							Description: "Type of data source (for e.g. TextFsmTempalate based, Intersight API based etc.).\n* `intersightApi` - Collector type for this data collection is Intersight APIs.\n* `nxos` - Collector type for this data collection is NXOS.\n* `s3File` - Collector type for this data collection is a file in a cloud hosted object storage bucket.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "intersightApi",
+							Description:  "Type of data source (for e.g. TextFsmTempalate based, Intersight API based etc.).\n* `intersightApi` - Collector type for this data collection is Intersight APIs.\n* `nxos` - Collector type for this data collection is NXOS.\n* `s3File` - Collector type for this data collection is a file in a cloud hosted object storage bucket.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"intersightApi", "nxos", "s3File"}, false),
+							Optional:     true,
+							Default:      "intersightApi",
 						},
 					},
 				},
 			},
 			"base_score": {
-				Description: "CVSS version 3 base score for the security Advisory.",
-				Type:        schema.TypeFloat,
-				Optional:    true,
+				Description:  "CVSS version 3 base score for the security Advisory.",
+				Type:         schema.TypeFloat,
+				ValidateFunc: validation.FloatBetween(0, 10),
+				Optional:     true,
 			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
@@ -330,7 +337,9 @@ func resourceTamSecurityAdvisory() *schema.Resource {
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Computed:   true,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|CVE-[0-9][0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]+"), ""),
+				}},
 			"date_published": {
 				Description: "Date when the security advisory was first published by Cisco.",
 				Type:        schema.TypeString,
@@ -358,14 +367,16 @@ func resourceTamSecurityAdvisory() *schema.Resource {
 					return
 				}},
 			"environmental_score": {
-				Description: "CVSS version 3 environmental score for the security Advisory.",
-				Type:        schema.TypeFloat,
-				Optional:    true,
+				Description:  "CVSS version 3 environmental score for the security Advisory.",
+				Type:         schema.TypeFloat,
+				ValidateFunc: validation.FloatBetween(0, 10),
+				Optional:     true,
 			},
 			"external_url": {
-				Description: "A link to an external URL describing security Advisory in more details.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "A link to an external URL describing security Advisory in more details.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^(?:http(s)?:\\/\\/)?[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&'\\(\\)\\*\\+,;=.]+$"), ""),
+				Optional:     true,
 			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
@@ -443,7 +454,8 @@ func resourceTamSecurityAdvisory() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -569,16 +581,18 @@ func resourceTamSecurityAdvisory() *schema.Resource {
 					return
 				}},
 			"state": {
-				Description: "Current state of the advisory.\n* `ready` - Advisory has been evaluated. The affected devices would be analyzed and corresponding advisory instances would be created.\n* `evaluating` - Advisory is currently under evaluation. The affected devices would be analyzed but no advisory instances wouldbe created. The results of the analysis would be made available to Intersight engineering for evaluation and validation.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "ready",
+				Description:  "Current state of the advisory.\n* `ready` - Advisory has been evaluated. The affected devices would be analyzed and corresponding advisory instances would be created.\n* `evaluating` - Advisory is currently under evaluation. The affected devices would be analyzed but no advisory instances wouldbe created. The results of the analysis would be made available to Intersight engineering for evaluation and validation.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"ready", "evaluating"}, false),
+				Optional:     true,
+				Default:      "ready",
 			},
 			"status": {
-				Description: "Cisco assigned status of the published advisory based on whether the investigation is complete or on-going.\n* `interim` - The Cisco investigation for the advisory is ongoing. Cisco will issue revisions to the advisory when additional information, including fixed software release data, becomes available.\n* `final` - Cisco has completed its evaluation of the vulnerability described in the advisory. There will be no further updates unless there is a material change in the nature of the vulnerability.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "interim",
+				Description:  "Cisco assigned status of the published advisory based on whether the investigation is complete or on-going.\n* `interim` - The Cisco investigation for the advisory is ongoing. Cisco will issue revisions to the advisory when additional information, including fixed software release data, becomes available.\n* `final` - Cisco has completed its evaluation of the vulnerability described in the advisory. There will be no further updates unless there is a material change in the nature of the vulnerability.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"interim", "final"}, false),
+				Optional:     true,
+				Default:      "interim",
 			},
 			"tags": {
 				Type:       schema.TypeList,
@@ -593,22 +607,25 @@ func resourceTamSecurityAdvisory() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
 			},
 			"temporal_score": {
-				Description: "CVSS version 3 temporal score for the security Advisory.",
-				Type:        schema.TypeFloat,
-				Optional:    true,
+				Description:  "CVSS version 3 temporal score for the security Advisory.",
+				Type:         schema.TypeFloat,
+				ValidateFunc: validation.FloatBetween(0, 10),
+				Optional:     true,
 			},
 			"nr_version": {
 				Description: "Cisco assigned advisory version after latest revision.",
@@ -1106,7 +1123,7 @@ func resourceTamSecurityAdvisoryCreate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1154,7 +1171,7 @@ func resourceTamSecurityAdvisoryCreate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("tam.Severity")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1755,7 +1772,7 @@ func resourceTamSecurityAdvisoryUpdate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1805,7 +1822,7 @@ func resourceTamSecurityAdvisoryUpdate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("tam.Severity")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))

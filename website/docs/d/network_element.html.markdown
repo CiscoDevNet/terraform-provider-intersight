@@ -22,6 +22,7 @@ The following arguments can be used to get data of already created objects in In
 * `conf_mod_ts`:(string) Configuration modified timestamp of the switch. 
 * `conf_mod_ts_backup`:(string) Configuration modified backup timestamp of the switch. 
 * `create_time`:(string) The time when this managed object was created. 
+* `default_domain`:(string) The default domain name configured on the switch. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 

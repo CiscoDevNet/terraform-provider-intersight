@@ -1054,7 +1054,7 @@ func dataSourceIamEndPointUserPolicyInventoryRead(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1097,7 +1097,7 @@ func dataSourceIamEndPointUserPolicyInventoryRead(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("iam.EndPointPasswordProperties")
 			if v, ok := l["enable_password_expiry"]; ok {
 				{
 					x := (v.(bool))
@@ -1248,7 +1248,7 @@ func dataSourceIamEndPointUserPolicyInventoryRead(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1291,7 +1291,7 @@ func dataSourceIamEndPointUserPolicyInventoryRead(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.VersionContext")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -1353,7 +1353,7 @@ func dataSourceIamEndPointUserPolicyInventoryRead(c context.Context, d *schema.R
 	if err != nil {
 		return diag.Errorf("json marshal of IamEndPointUserPolicyInventory object failed with error : %s", err.Error())
 	}
-	countResponse, _, responseErr := conn.ApiClient.IamApi.GetIamEndPointUserPolicyInventoryList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
+	countResponse, _, responseErr := conn.ApiClient.IamApi.GetIamEndPointUserPolicyInventoryList(conn.ctx).Filter(getRequestParams(data)).Count(true).Execute()
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
@@ -1362,13 +1362,12 @@ func dataSourceIamEndPointUserPolicyInventoryRead(c context.Context, d *schema.R
 		}
 		return diag.Errorf("error occurred while fetching count of IamEndPointUserPolicyInventory: %s", responseErr.Error())
 	}
-	count := countResponse.IamEndPointUserPolicyInventoryList.GetCount()
+	count := countResponse.MoDocumentCount.GetCount()
 	if count == 0 {
 		return diag.Errorf("your query for IamEndPointUserPolicyInventory data source did not return any results. Please change your search criteria and try again")
 	}
 	var i int32
-	var iamEndPointUserPolicyInventoryResults = make([]map[string]interface{}, count, count)
-	var j = 0
+	var iamEndPointUserPolicyInventoryResults = make([]map[string]interface{}, 0, 0)
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.IamApi.GetIamEndPointUserPolicyInventoryList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
@@ -1382,8 +1381,8 @@ func dataSourceIamEndPointUserPolicyInventoryRead(c context.Context, d *schema.R
 		results := resMo.IamEndPointUserPolicyInventoryList.GetResults()
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
-			for i := 0; i < len(results); i++ {
-				var s = results[i]
+			for k := 0; k < len(results); k++ {
+				var s = results[k]
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
@@ -1416,8 +1415,7 @@ func dataSourceIamEndPointUserPolicyInventoryRead(c context.Context, d *schema.R
 				temp["target_mo"] = flattenMapMoBaseMoRelationship(s.GetTargetMo(), d)
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
-				iamEndPointUserPolicyInventoryResults[j] = temp
-				j += 1
+				iamEndPointUserPolicyInventoryResults = append(iamEndPointUserPolicyInventoryResults, temp)
 			}
 		}
 	}

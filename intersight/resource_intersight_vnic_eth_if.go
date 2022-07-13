@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceVnicEthIf() *schema.Resource {
@@ -103,15 +105,17 @@ func resourceVnicEthIf() *schema.Resource {
 							Default:     "vnic.Cdn",
 						},
 						"nr_source": {
-							Description: "Source of the CDN. It can either be user specified or be the same as the vNIC name.\n* `vnic` - Source of the CDN is the same as the vNIC name.\n* `user` - Source of the CDN is specified by the user.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "vnic",
+							Description:  "Source of the CDN. It can either be user specified or be the same as the vNIC name.\n* `vnic` - Source of the CDN is the same as the vNIC name.\n* `user` - Source of the CDN is specified by the user.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"vnic", "user"}, false),
+							Optional:     true,
+							Default:      "vnic",
 						},
 						"value": {
-							Description: "The CDN value entered in case of user defined mode.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The CDN value entered in case of user defined mode.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9\\-\\._:]*$"), ""), StringLenMaximum(31)),
+							Optional:     true,
 						},
 					},
 				},
@@ -461,14 +465,16 @@ func resourceVnicEthIf() *schema.Resource {
 							Default:     "ippool.IpV4Config",
 						},
 						"gateway": {
-							Description: "IP address of the default IPv4 gateway.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "IP address of the default IPv4 gateway.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
+							Optional:     true,
 						},
 						"netmask": {
-							Description: "A subnet mask is a 32-bit number that masks an IP address and divides the IP address into network address and host address.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "A subnet mask is a 32-bit number that masks an IP address and divides the IP address into network address and host address.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^(((255\\.){3}(255|254|252|248|240|224|192|128|0+))|((255\\.){2}(255|254|252|248|240|224|192|128|0+)\\.0)|((255\\.)(255|254|252|248|240|224|192|128|0+)(\\.0+){2})|((255|254|252|248|240|224|192|128|0+)(\\.0+){3}))$"), ""),
+							Optional:     true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -477,14 +483,16 @@ func resourceVnicEthIf() *schema.Resource {
 							Default:     "ippool.IpV4Config",
 						},
 						"primary_dns": {
-							Description: "IP Address of the primary Domain Name System (DNS) server.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "IP Address of the primary Domain Name System (DNS) server.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
+							Optional:     true,
 						},
 						"secondary_dns": {
-							Description: "IP Address of the secondary Domain Name System (DNS) server.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "IP Address of the secondary Domain Name System (DNS) server.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
+							Optional:     true,
 						},
 					},
 				},
@@ -592,10 +600,11 @@ func resourceVnicEthIf() *schema.Resource {
 					return
 				}},
 			"mac_address_type": {
-				Description: "Type of allocation selected to assign a MAC address for the vnic.\n* `POOL` - The user selects a pool from which the mac/wwn address will be leased for the Virtual Interface.\n* `STATIC` - The user assigns a static mac/wwn address for the Virtual Interface.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "POOL",
+				Description:  "Type of allocation selected to assign a MAC address for the vnic.\n* `POOL` - The user selects a pool from which the mac/wwn address will be leased for the Virtual Interface.\n* `STATIC` - The user assigns a static mac/wwn address for the Virtual Interface.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"POOL", "STATIC"}, false),
+				Optional:     true,
+				Default:      "POOL",
 			},
 			"mac_lease": {
 				Description: "A reference to a macpoolLease resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -696,9 +705,10 @@ func resourceVnicEthIf() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the virtual ethernet interface.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the virtual ethernet interface.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9-._:]+$"), ""), StringLenMaximum(31)),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -717,7 +727,8 @@ func resourceVnicEthIf() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -798,9 +809,10 @@ func resourceVnicEthIf() *schema.Resource {
 				},
 			},
 			"pin_group_name": {
-				Description: "Pingroup name associated to vNIC for static pinning. LCP deploy will resolve pingroup name and fetches the correspoding uplink port/port channel to pin the vNIC traffic.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Pingroup name associated to vNIC for static pinning. LCP deploy will resolve pingroup name and fetches the correspoding uplink port/port channel to pin the vNIC traffic.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"placement": {
 				Description: "Placement Settings for the virtual interface.",
@@ -823,9 +835,10 @@ func resourceVnicEthIf() *schema.Resource {
 							Default:     "vnic.PlacementSettings",
 						},
 						"id": {
-							Description: "PCIe Slot where the VIC adapter is installed. Supported values are (1-15) and MLOM.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "PCIe Slot where the VIC adapter is installed. Supported values are (1-15) and MLOM.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|1[0-5]|MLOM)$"), ""),
+							Optional:     true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -834,21 +847,24 @@ func resourceVnicEthIf() *schema.Resource {
 							Default:     "vnic.PlacementSettings",
 						},
 						"pci_link": {
-							Description: "The PCI Link used as transport for the virtual interface. This field is applicable only for VIC 1385 model (UCSC-PCIE-C40Q-03) which support two PCI links. The value, if specified, for any other VIC model will be ignored.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     0,
+							Description:  "The PCI Link used as transport for the virtual interface. This field is applicable only for VIC 1385 model (UCSC-PCIE-C40Q-03) which support two PCI links. The value, if specified, for any other VIC model will be ignored.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(0, 1),
+							Optional:     true,
+							Default:      0,
 						},
 						"switch_id": {
-							Description: "The fabric port to which the vNICs will be associated.\n* `None` - Fabric Id is not set to either A or B for the standalone case where the server is not connected to Fabric Interconnects. The value 'None' should be used.\n* `A` - Fabric A of the FI cluster.\n* `B` - Fabric B of the FI cluster.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "None",
+							Description:  "The fabric port to which the vNICs will be associated.\n* `None` - Fabric Id is not set to either A or B for the standalone case where the server is not connected to Fabric Interconnects. The value 'None' should be used.\n* `A` - Fabric A of the FI cluster.\n* `B` - Fabric B of the FI cluster.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"None", "A", "B"}, false),
+							Optional:     true,
+							Default:      "None",
 						},
 						"uplink": {
-							Description: "Adapter port on which the virtual interface will be created.",
-							Type:        schema.TypeInt,
-							Optional:    true,
+							Description:  "Adapter port on which the virtual interface will be created.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(0, 3),
+							Optional:     true,
 						},
 					},
 				},
@@ -972,14 +988,16 @@ func resourceVnicEthIf() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -1005,15 +1023,17 @@ func resourceVnicEthIf() *schema.Resource {
 							Default:     "vnic.UsnicSettings",
 						},
 						"cos": {
-							Description: "Class of Service to be used for traffic on the usNIC.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     5,
+							Description:  "Class of Service to be used for traffic on the usNIC.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(0, 6),
+							Optional:     true,
+							Default:      5,
 						},
 						"nr_count": {
-							Description: "Number of usNIC interfaces to be created.",
-							Type:        schema.TypeInt,
-							Optional:    true,
+							Description:  "Number of usNIC interfaces to be created.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(0, 225),
+							Optional:     true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -1213,22 +1233,25 @@ func resourceVnicEthIf() *schema.Resource {
 							Default:     false,
 						},
 						"num_interrupts": {
-							Description: "The number of interrupt resources to be allocated. Recommended value is the number of CPU threads or logical processors available in the server.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     16,
+							Description:  "The number of interrupt resources to be allocated. Recommended value is the number of CPU threads or logical processors available in the server.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(1, 514),
+							Optional:     true,
+							Default:      16,
 						},
 						"num_sub_vnics": {
-							Description: "The number of sub vNICs to be created.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     64,
+							Description:  "The number of sub vNICs to be created.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(0, 64),
+							Optional:     true,
+							Default:      64,
 						},
 						"num_vmqs": {
-							Description: "The number of hardware Virtual Machine Queues to be allocated. The number of VMQs per adapter must be one more than the maximum number of VM NICs.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Default:     4,
+							Description:  "The number of hardware Virtual Machine Queues to be allocated. The number of VMQs per adapter must be one more than the maximum number of VM NICs.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(1, 128),
+							Optional:     true,
+							Default:      4,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -1279,7 +1302,7 @@ func resourceVnicEthIfCreate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.Cdn")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1324,7 +1347,7 @@ func resourceVnicEthIfCreate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1367,7 +1390,7 @@ func resourceVnicEthIfCreate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1410,7 +1433,7 @@ func resourceVnicEthIfCreate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1453,7 +1476,7 @@ func resourceVnicEthIfCreate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1543,7 +1566,7 @@ func resourceVnicEthIfCreate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1586,7 +1609,7 @@ func resourceVnicEthIfCreate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1629,7 +1652,7 @@ func resourceVnicEthIfCreate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1677,7 +1700,7 @@ func resourceVnicEthIfCreate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1720,7 +1743,7 @@ func resourceVnicEthIfCreate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1785,7 +1808,7 @@ func resourceVnicEthIfCreate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.PlacementSettings")
 			if v, ok := l["id"]; ok {
 				{
 					x := (v.(string))
@@ -1840,7 +1863,7 @@ func resourceVnicEthIfCreate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1923,7 +1946,7 @@ func resourceVnicEthIfCreate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.UsnicSettings")
 			if v, ok := l["cos"]; ok {
 				{
 					x := int64(v.(int))
@@ -1972,7 +1995,7 @@ func resourceVnicEthIfCreate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.VmqSettings")
 			if v, ok := l["enabled"]; ok {
 				{
 					x := (v.(bool))
@@ -2293,7 +2316,7 @@ func resourceVnicEthIfUpdate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.Cdn")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -2339,7 +2362,7 @@ func resourceVnicEthIfUpdate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2383,7 +2406,7 @@ func resourceVnicEthIfUpdate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2427,7 +2450,7 @@ func resourceVnicEthIfUpdate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2471,7 +2494,7 @@ func resourceVnicEthIfUpdate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2562,7 +2585,7 @@ func resourceVnicEthIfUpdate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2606,7 +2629,7 @@ func resourceVnicEthIfUpdate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2650,7 +2673,7 @@ func resourceVnicEthIfUpdate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2700,7 +2723,7 @@ func resourceVnicEthIfUpdate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2744,7 +2767,7 @@ func resourceVnicEthIfUpdate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2814,7 +2837,7 @@ func resourceVnicEthIfUpdate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.PlacementSettings")
 			if v, ok := l["id"]; ok {
 				{
 					x := (v.(string))
@@ -2870,7 +2893,7 @@ func resourceVnicEthIfUpdate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2954,7 +2977,7 @@ func resourceVnicEthIfUpdate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.UsnicSettings")
 			if v, ok := l["cos"]; ok {
 				{
 					x := int64(v.(int))
@@ -3004,7 +3027,7 @@ func resourceVnicEthIfUpdate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("vnic.VmqSettings")
 			if v, ok := l["enabled"]; ok {
 				{
 					x := (v.(bool))

@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceSolPolicy() *schema.Resource {
@@ -77,10 +79,11 @@ func resourceSolPolicy() *schema.Resource {
 				},
 			},
 			"baud_rate": {
-				Description: "Baud Rate used for Serial Over LAN communication.\n* `9600` - Use baud rate 9600 for communication.\n* `19200` - Use baud rate 19200 for communication.\n* `38400` - Use baud rate 38400 for communication.\n* `57600` - Use baud rate 57600 for communication.\n* `115200` - Use baud rate 115200 for communication.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Default:     9600,
+				Description:  "Baud Rate used for Serial Over LAN communication.\n* `9600` - Use baud rate 9600 for communication.\n* `19200` - Use baud rate 19200 for communication.\n* `38400` - Use baud rate 38400 for communication.\n* `57600` - Use baud rate 57600 for communication.\n* `115200` - Use baud rate 115200 for communication.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntInSlice([]int{9600, 19200, 38400, 57600, 115200}),
+				Optional:     true,
+				Default:      9600,
 			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
@@ -89,10 +92,11 @@ func resourceSolPolicy() *schema.Resource {
 				Default:     "sol.Policy",
 			},
 			"com_port": {
-				Description: "Serial port through which the system routes Serial Over LAN communication. This field is available only on some Cisco UCS C-Series servers. If it is unavailable, the server uses COM port 0 by default.\n* `com0` - Use serial port com0 for communication.\n* `com1` - Use serial port com1 for communication.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "com0",
+				Description:  "Serial port through which the system routes Serial Over LAN communication. This field is available only on some Cisco UCS C-Series servers. If it is unavailable, the server uses COM port 0 by default.\n* `com0` - Use serial port com0 for communication.\n* `com1` - Use serial port com1 for communication.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"com0", "com1"}, false),
+				Optional:     true,
+				Default:      "com0",
 			},
 			"create_time": {
 				Description: "The time when this managed object was created.",
@@ -106,9 +110,10 @@ func resourceSolPolicy() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -146,9 +151,10 @@ func resourceSolPolicy() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the concrete policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the concrete policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -203,7 +209,8 @@ func resourceSolPolicy() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -334,10 +341,11 @@ func resourceSolPolicy() *schema.Resource {
 					return
 				}},
 			"ssh_port": {
-				Description: "SSH port used to access Serial Over LAN directly. Enables bypassing Cisco IMC shell to provide direct access to Serial Over LAN.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Default:     2400,
+				Description:  "SSH port used to access Serial Over LAN directly. Enables bypassing Cisco IMC shell to provide direct access to Serial Over LAN.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(1024, 65535),
+				Optional:     true,
+				Default:      2400,
 			},
 			"tags": {
 				Type:       schema.TypeList,
@@ -352,14 +360,16 @@ func resourceSolPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -573,7 +583,7 @@ func resourceSolPolicyCreate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -908,7 +918,7 @@ func resourceSolPolicyUpdate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

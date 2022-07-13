@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceIamIdp() *schema.Resource {
@@ -145,9 +147,10 @@ func resourceIamIdp() *schema.Resource {
 					return
 				}},
 			"domain_name": {
-				Description: "Email domain name of the user for this IdP. When a user enters an email during login in the Intersight home page, the IdP is picked by matching this domain name with the email domain name for authentication.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Email domain name of the user for this IdP. When a user enters an email during login in the Intersight home page, the IdP is picked by matching this domain name with the email domain name for authentication.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"), ""),
+				Optional:     true,
 			},
 			"enable_single_logout": {
 				Description: "Setting that indicates whether 'Single Logout (SLO)' has been enabled for this IdP.",
@@ -245,7 +248,8 @@ func resourceIamIdp() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -389,23 +393,26 @@ func resourceIamIdp() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
 			},
 			"type": {
-				Description: "Authentication protocol used by the IdP.\n* `saml` - Use SAML as the authentication protocol for sign-on.\n* `oidc` - Open ID connect to be used as an authentication protocol for sign-on.\n* `local` - The local authentication method to be used for sign-on. Local type is set to default for the Intersight Appliance IdP.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "saml",
+				Description:  "Authentication protocol used by the IdP.\n* `saml` - Use SAML as the authentication protocol for sign-on.\n* `oidc` - Open ID connect to be used as an authentication protocol for sign-on.\n* `local` - The local authentication method to be used for sign-on. Local type is set to default for the Intersight Appliance IdP.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"saml", "oidc", "local"}, false),
+				Optional:     true,
+				Default:      "saml",
 			},
 			"user_preferences": {
 				Description: "An array of relationships to iamUserPreference resources.",

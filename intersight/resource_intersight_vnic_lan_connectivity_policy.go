@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceVnicLanConnectivityPolicy() *schema.Resource {
@@ -100,9 +102,10 @@ func resourceVnicLanConnectivityPolicy() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -155,10 +158,11 @@ func resourceVnicLanConnectivityPolicy() *schema.Resource {
 				},
 			},
 			"iqn_allocation_type": {
-				Description: "Allocation Type of iSCSI Qualified Name - Static/Pool/None.\n* `None` - Type indicates that there is no IQN associated to an interface.\n* `Static` - Type represents that static IQN is associated to an interface.\n* `Pool` - Type indicates that IQN value is sourced from an associated pool.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "None",
+				Description:  "Allocation Type of iSCSI Qualified Name - Static/Pool/None.\n* `None` - Type indicates that there is no IQN associated to an interface.\n* `Static` - Type represents that static IQN is associated to an interface.\n* `Pool` - Type indicates that IQN value is sourced from an associated pool.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"None", "Static", "Pool"}, false),
+				Optional:     true,
+				Default:      "None",
 			},
 			"iqn_pool": {
 				Description: "A reference to a iqnpoolPool resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -219,9 +223,10 @@ func resourceVnicLanConnectivityPolicy() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the concrete policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the concrete policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -276,7 +281,8 @@ func resourceVnicLanConnectivityPolicy() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -357,10 +363,11 @@ func resourceVnicLanConnectivityPolicy() *schema.Resource {
 				},
 			},
 			"placement_mode": {
-				Description: "The mode used for placement of vNICs on network adapters. It can either be Auto or Custom.\n* `custom` - The placement of the vNICs / vHBAs on network adapters is manually chosen by the user.\n* `auto` - The placement of the vNICs / vHBAs on network adapters is automatically determined by the system.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "custom",
+				Description:  "The mode used for placement of vNICs on network adapters. It can either be Auto or Custom.\n* `custom` - The placement of the vNICs / vHBAs on network adapters is manually chosen by the user.\n* `auto` - The placement of the vNICs / vHBAs on network adapters is automatically determined by the system.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"custom", "auto"}, false),
+				Optional:     true,
+				Default:      "custom",
 			},
 			"profiles": {
 				Description: "An array of relationships to policyAbstractConfigProfile resources.",
@@ -413,9 +420,10 @@ func resourceVnicLanConnectivityPolicy() *schema.Resource {
 					return
 				}},
 			"static_iqn_name": {
-				Description: "User provided static iSCSI Qualified Name (IQN) for use as initiator identifiers by iSCSI vNICs in a Fabric Interconnect domain.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "User provided static iSCSI Qualified Name (IQN) for use as initiator identifiers by iSCSI vNICs in a Fabric Interconnect domain.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^(?:iqn\\.[0-9]{4}-[0-9]{2}(?:\\.[A-Za-z](?:[A-Za-z0-9\\-]*[A-Za-z0-9])?)+(?::.*)?|eui\\.[0-9A-Fa-f]{16})"), ""),
+				Optional:     true,
 			},
 			"tags": {
 				Type:       schema.TypeList,
@@ -430,23 +438,26 @@ func resourceVnicLanConnectivityPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
 			},
 			"target_platform": {
-				Description: "The platform for which the server profile is applicable. It can either be a server that is operating in standalone mode or which is attached to a Fabric Interconnect managed by Intersight.\n* `Standalone` - Servers which are operating in standalone mode i.e. not connected to a Fabric Interconnected.\n* `FIAttached` - Servers which are connected to a Fabric Interconnect that is managed by Intersight.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "Standalone",
+				Description:  "The platform for which the server profile is applicable. It can either be a server that is operating in standalone mode or which is attached to a Fabric Interconnect managed by Intersight.\n* `Standalone` - Servers which are operating in standalone mode i.e. not connected to a Fabric Interconnected.\n* `FIAttached` - Servers which are connected to a Fabric Interconnect that is managed by Intersight.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Standalone", "FIAttached"}, false),
+				Optional:     true,
+				Default:      "Standalone",
 			},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
@@ -682,7 +693,7 @@ func resourceVnicLanConnectivityPolicyCreate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -737,7 +748,7 @@ func resourceVnicLanConnectivityPolicyCreate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1115,7 +1126,7 @@ func resourceVnicLanConnectivityPolicyUpdate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1173,7 +1184,7 @@ func resourceVnicLanConnectivityPolicyUpdate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

@@ -1345,7 +1345,7 @@ func dataSourceHyperflexClusterNetworkPolicyRead(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("hyperflex.IpAddrRange")
 			if v, ok := l["end_addr"]; ok {
 				{
 					x := (v.(string))
@@ -1443,7 +1443,7 @@ func dataSourceHyperflexClusterNetworkPolicyRead(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("hyperflex.MacAddrPrefixRange")
 			if v, ok := l["end_addr"]; ok {
 				{
 					x := (v.(string))
@@ -1486,7 +1486,7 @@ func dataSourceHyperflexClusterNetworkPolicyRead(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("hyperflex.NamedVlan")
 			if v, ok := l["name"]; ok {
 				{
 					x := (v.(string))
@@ -1549,7 +1549,7 @@ func dataSourceHyperflexClusterNetworkPolicyRead(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1603,7 +1603,7 @@ func dataSourceHyperflexClusterNetworkPolicyRead(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1729,7 +1729,7 @@ func dataSourceHyperflexClusterNetworkPolicyRead(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.VersionContext")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -1803,7 +1803,7 @@ func dataSourceHyperflexClusterNetworkPolicyRead(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("hyperflex.NamedVlan")
 			if v, ok := l["name"]; ok {
 				{
 					x := (v.(string))
@@ -1874,7 +1874,7 @@ func dataSourceHyperflexClusterNetworkPolicyRead(c context.Context, d *schema.Re
 	if err != nil {
 		return diag.Errorf("json marshal of HyperflexClusterNetworkPolicy object failed with error : %s", err.Error())
 	}
-	countResponse, _, responseErr := conn.ApiClient.HyperflexApi.GetHyperflexClusterNetworkPolicyList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
+	countResponse, _, responseErr := conn.ApiClient.HyperflexApi.GetHyperflexClusterNetworkPolicyList(conn.ctx).Filter(getRequestParams(data)).Count(true).Execute()
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
@@ -1883,13 +1883,12 @@ func dataSourceHyperflexClusterNetworkPolicyRead(c context.Context, d *schema.Re
 		}
 		return diag.Errorf("error occurred while fetching count of HyperflexClusterNetworkPolicy: %s", responseErr.Error())
 	}
-	count := countResponse.HyperflexClusterNetworkPolicyList.GetCount()
+	count := countResponse.MoDocumentCount.GetCount()
 	if count == 0 {
 		return diag.Errorf("your query for HyperflexClusterNetworkPolicy data source did not return any results. Please change your search criteria and try again")
 	}
 	var i int32
-	var hyperflexClusterNetworkPolicyResults = make([]map[string]interface{}, count, count)
-	var j = 0
+	var hyperflexClusterNetworkPolicyResults = make([]map[string]interface{}, 0, 0)
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.HyperflexApi.GetHyperflexClusterNetworkPolicyList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
@@ -1903,8 +1902,8 @@ func dataSourceHyperflexClusterNetworkPolicyRead(c context.Context, d *schema.Re
 		results := resMo.HyperflexClusterNetworkPolicyList.GetResults()
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
-			for i := 0; i < len(results); i++ {
-				var s = results[i]
+			for k := 0; k < len(results); k++ {
+				var s = results[k]
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
@@ -1946,8 +1945,7 @@ func dataSourceHyperflexClusterNetworkPolicyRead(c context.Context, d *schema.Re
 				temp["vm_migration_vlan"] = flattenMapHyperflexNamedVlan(s.GetVmMigrationVlan(), d)
 
 				temp["vm_network_vlans"] = flattenListHyperflexNamedVlan(s.GetVmNetworkVlans(), d)
-				hyperflexClusterNetworkPolicyResults[j] = temp
-				j += 1
+				hyperflexClusterNetworkPolicyResults = append(hyperflexClusterNetworkPolicyResults, temp)
 			}
 		}
 	}

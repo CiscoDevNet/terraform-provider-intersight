@@ -10,6 +10,7 @@ import (
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceHyperflexFeatureLimitInternal() *schema.Resource {
@@ -183,10 +184,11 @@ func resourceHyperflexFeatureLimitInternal() *schema.Resource {
 										Default:     "hyperflex.AppSettingConstraint",
 									},
 									"deployment_type": {
-										Description: "The deployment type of the cluster.\n* `NA` - The deployment type of the cluster is not available.\n* `Datacenter` - The deployment type of a cluster consisting of UCS Fabric Interconnect-attached nodes on the same site.\n* `Stretched Cluster` - The deployment type of a cluster consisting of UCS Fabric Interconnect-attached nodes across different sites.\n* `Edge` - The deployment type of a cluster consisting of 2 or more standalone nodes.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Default:     "NA",
+										Description:  "The deployment type of the cluster.\n* `NA` - The deployment type of the cluster is not available.\n* `Datacenter` - The deployment type of a cluster consisting of UCS Fabric Interconnect-attached nodes on the same site.\n* `Stretched Cluster` - The deployment type of a cluster consisting of UCS Fabric Interconnect-attached nodes across different sites.\n* `Edge` - The deployment type of a cluster consisting of 2 or more standalone nodes.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringInSlice([]string{"NA", "Datacenter", "Stretched Cluster", "Edge"}, false),
+										Optional:     true,
+										Default:      "NA",
 									},
 									"hxdp_version": {
 										Description: "The supported HyperFlex Data Platform version in regex format.",
@@ -194,16 +196,18 @@ func resourceHyperflexFeatureLimitInternal() *schema.Resource {
 										Optional:    true,
 									},
 									"hypervisor_type": {
-										Description: "The hypervisor type for the HyperFlex cluster.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `HyperFlexAp` - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform.\n* `IWE` - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Default:     "ESXi",
+										Description:  "The hypervisor type for the HyperFlex cluster.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `HyperFlexAp` - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform.\n* `IWE` - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringInSlice([]string{"ESXi", "HyperFlexAp", "IWE", "Hyper-V", "Unknown"}, false),
+										Optional:     true,
+										Default:      "ESXi",
 									},
 									"mgmt_platform": {
-										Description: "The supported management platform for the HyperFlex Cluster.\n* `FI` - The host servers used in the cluster deployment are managed by a UCS Fabric Interconnect.\n* `EDGE` - The host servers used in the cluster deployment are standalone severs.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Default:     "FI",
+										Description:  "The supported management platform for the HyperFlex Cluster.\n* `FI` - The host servers used in the cluster deployment are managed by a UCS Fabric Interconnect.\n* `EDGE` - The host servers used in the cluster deployment are standalone severs.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringInSlice([]string{"FI", "EDGE"}, false),
+										Optional:     true,
+										Default:      "FI",
 									},
 									"object_type": {
 										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -268,7 +272,8 @@ func resourceHyperflexFeatureLimitInternal() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -372,14 +377,16 @@ func resourceHyperflexFeatureLimitInternal() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -559,7 +566,7 @@ func resourceHyperflexFeatureLimitInternalCreate(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -622,7 +629,7 @@ func resourceHyperflexFeatureLimitInternalCreate(c context.Context, d *schema.Re
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("hyperflex.AppSettingConstraint")
 						if v, ok := l["deployment_type"]; ok {
 							{
 								x := (v.(string))
@@ -875,7 +882,7 @@ func resourceHyperflexFeatureLimitInternalUpdate(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -939,7 +946,7 @@ func resourceHyperflexFeatureLimitInternalUpdate(c context.Context, d *schema.Re
 								}
 							}
 						}
-						o.SetClassId("")
+						o.SetClassId("hyperflex.AppSettingConstraint")
 						if v, ok := l["deployment_type"]; ok {
 							{
 								x := (v.(string))

@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceFabricEthNetworkControlPolicy() *schema.Resource {
@@ -100,9 +102,10 @@ func resourceFabricEthNetworkControlPolicy() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -116,10 +119,11 @@ func resourceFabricEthNetworkControlPolicy() *schema.Resource {
 					return
 				}},
 			"forge_mac": {
-				Description: "Determines if the MAC forging is allowed or denied on an interface.\n* `allow` - Allows mac forging on an interface.\n* `deny` - Denies mac forging on an interface.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "allow",
+				Description:  "Determines if the MAC forging is allowed or denied on an interface.\n* `allow` - Allows mac forging on an interface.\n* `deny` - Denies mac forging on an interface.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"allow", "deny"}, false),
+				Optional:     true,
+				Default:      "allow",
 			},
 			"lldp_settings": {
 				Description: "Determines the LLDP setting on an interface on the switch.",
@@ -163,10 +167,11 @@ func resourceFabricEthNetworkControlPolicy() *schema.Resource {
 				},
 			},
 			"mac_registration_mode": {
-				Description: "Determines the MAC addresses that have to be registered with the switch.\n* `nativeVlanOnly` - Register only the MAC addresses learnt on the native VLAN.\n* `allVlans` - Register all the MAC addresses learnt on all the allowed VLANs.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "nativeVlanOnly",
+				Description:  "Determines the MAC addresses that have to be registered with the switch.\n* `nativeVlanOnly` - Register only the MAC addresses learnt on the native VLAN.\n* `allVlans` - Register all the MAC addresses learnt on all the allowed VLANs.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"nativeVlanOnly", "allVlans"}, false),
+				Optional:     true,
+				Default:      "nativeVlanOnly",
 			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
@@ -187,9 +192,10 @@ func resourceFabricEthNetworkControlPolicy() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the concrete policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the concrete policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"network_policy": {
 				Description: "An array of relationships to vnicEthNetworkPolicy resources.",
@@ -283,7 +289,8 @@ func resourceFabricEthNetworkControlPolicy() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -387,23 +394,26 @@ func resourceFabricEthNetworkControlPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
 			},
 			"uplink_fail_action": {
-				Description: "Determines the state of the virtual interface (vethernet / vfc) on the switch when a suitable uplink is not pinned.\n* `linkDown` - The vethernet will go down in case a suitable uplink is not pinned.\n* `warning` - The vethernet will remain up even if a suitable uplink is not pinned.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "linkDown",
+				Description:  "Determines the state of the virtual interface (vethernet / vfc) on the switch when a suitable uplink is not pinned.\n* `linkDown` - The vethernet will go down in case a suitable uplink is not pinned.\n* `warning` - The vethernet will remain up even if a suitable uplink is not pinned.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"linkDown", "warning"}, false),
+				Optional:     true,
+				Default:      "linkDown",
 			},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
@@ -597,7 +607,7 @@ func resourceFabricEthNetworkControlPolicyCreate(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("fabric.LldpSettings")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -699,7 +709,7 @@ func resourceFabricEthNetworkControlPolicyCreate(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -955,7 +965,7 @@ func resourceFabricEthNetworkControlPolicyUpdate(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("fabric.LldpSettings")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1060,7 +1070,7 @@ func resourceFabricEthNetworkControlPolicyUpdate(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceHyperflexUcsmConfigPolicy() *schema.Resource {
@@ -133,9 +135,10 @@ func resourceHyperflexUcsmConfigPolicy() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Description of the policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9]+[\\x00-\\xFF]*$"), ""), StringLenMaximum(1024)),
+				Optional:     true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -169,14 +172,16 @@ func resourceHyperflexUcsmConfigPolicy() *schema.Resource {
 							Default:     "hyperflex.IpAddrRange",
 						},
 						"end_addr": {
-							Description: "The end IPv4 address of the range.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The end IPv4 address of the range.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
+							Optional:     true,
 						},
 						"gateway": {
-							Description: "The default gateway for the start and end IPv4 addresses.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The default gateway for the start and end IPv4 addresses.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
+							Optional:     true,
 						},
 						"ip_addr_blocks": {
 							Type:       schema.TypeList,
@@ -197,9 +202,10 @@ func resourceHyperflexUcsmConfigPolicy() *schema.Resource {
 										Default:     "comm.IpV4AddressBlock",
 									},
 									"end_address": {
-										Description: "The end address of the IPv4 block.",
-										Type:        schema.TypeString,
-										Optional:    true,
+										Description:  "The end address of the IPv4 block.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
+										Optional:     true,
 									},
 									"object_type": {
 										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -208,17 +214,19 @@ func resourceHyperflexUcsmConfigPolicy() *schema.Resource {
 										Default:     "comm.IpV4AddressBlock",
 									},
 									"start_address": {
-										Description: "The start address of the IPv4 block.",
-										Type:        schema.TypeString,
-										Optional:    true,
+										Description:  "The start address of the IPv4 block.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
+										Optional:     true,
 									},
 								},
 							},
 						},
 						"netmask": {
-							Description: "The netmask specified in dot decimal notation.\nThe start address, end address, and gateway must all be within the network specified by this netmask.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The netmask specified in dot decimal notation.\nThe start address, end address, and gateway must all be within the network specified by this netmask.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^(((255\\.){3}(255|254|252|248|240|224|192|128|0+))|((255\\.){2}(255|254|252|248|240|224|192|128|0+)\\.0)|((255\\.)(255|254|252|248|240|224|192|128|0+)(\\.0+){2})|((255|254|252|248|240|224|192|128|0+)(\\.0+){3}))$"), ""),
+							Optional:     true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -227,9 +235,10 @@ func resourceHyperflexUcsmConfigPolicy() *schema.Resource {
 							Default:     "hyperflex.IpAddrRange",
 						},
 						"start_addr": {
-							Description: "The start IPv4 address of the range.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The start IPv4 address of the range.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
+							Optional:     true,
 						},
 					},
 				},
@@ -255,9 +264,10 @@ func resourceHyperflexUcsmConfigPolicy() *schema.Resource {
 							Default:     "hyperflex.MacAddrPrefixRange",
 						},
 						"end_addr": {
-							Description: "The end MAC address prefix of a MAC address prefix range in the form of 00:25:B5:XX.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The end MAC address prefix of a MAC address prefix range in the form of 00:25:B5:XX.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^00:25:B5:[0-9a-fA-F]{2}$"), ""),
+							Optional:     true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -266,9 +276,10 @@ func resourceHyperflexUcsmConfigPolicy() *schema.Resource {
 							Default:     "hyperflex.MacAddrPrefixRange",
 						},
 						"start_addr": {
-							Description: "The start MAC address prefix of a MAC address prefix range in the form of 00:25:B5:XX.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The start MAC address prefix of a MAC address prefix range in the form of 00:25:B5:XX.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^00:25:B5:[0-9a-fA-F]{2}$"), ""),
+							Optional:     true,
 						},
 					},
 				},
@@ -292,9 +303,10 @@ func resourceHyperflexUcsmConfigPolicy() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the concrete policy.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "Name of the concrete policy.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]{1,64}$"), ""),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -349,7 +361,8 @@ func resourceHyperflexUcsmConfigPolicy() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -430,9 +443,10 @@ func resourceHyperflexUcsmConfigPolicy() *schema.Resource {
 				},
 			},
 			"server_firmware_version": {
-				Description: "The server firmware bundle version used for server components such as CIMC, adapters, BIOS, etc.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "The server firmware bundle version used for server components such as CIMC, adapters, BIOS, etc.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("(^3\\.[1-9]\\([1-9][a-z]\\)$|^[4-9]\\.[0-9]\\([1-9][a-z]\\)$)"), ""),
+				Optional:     true,
 			},
 			"shared_scope": {
 				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
@@ -458,14 +472,16 @@ func resourceHyperflexUcsmConfigPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -694,7 +710,7 @@ func resourceHyperflexUcsmConfigPolicyCreate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("hyperflex.IpAddrRange")
 			if v, ok := l["end_addr"]; ok {
 				{
 					x := (v.(string))
@@ -792,7 +808,7 @@ func resourceHyperflexUcsmConfigPolicyCreate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("hyperflex.MacAddrPrefixRange")
 			if v, ok := l["end_addr"]; ok {
 				{
 					x := (v.(string))
@@ -847,7 +863,7 @@ func resourceHyperflexUcsmConfigPolicyCreate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1124,7 +1140,7 @@ func resourceHyperflexUcsmConfigPolicyUpdate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("hyperflex.IpAddrRange")
 			if v, ok := l["end_addr"]; ok {
 				{
 					x := (v.(string))
@@ -1223,7 +1239,7 @@ func resourceHyperflexUcsmConfigPolicyUpdate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("hyperflex.MacAddrPrefixRange")
 			if v, ok := l["end_addr"]; ok {
 				{
 					x := (v.(string))
@@ -1281,7 +1297,7 @@ func resourceHyperflexUcsmConfigPolicyUpdate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

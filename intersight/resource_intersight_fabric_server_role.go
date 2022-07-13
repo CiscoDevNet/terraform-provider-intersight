@@ -10,6 +10,7 @@ import (
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceFabricServerRole() *schema.Resource {
@@ -38,9 +39,10 @@ func resourceFabricServerRole() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"aggregate_port_id": {
-				Description: "Breakout port Identifier of the Switch Interface.\nWhen a port is not configured as a breakout port, the aggregatePortId is set to 0, and unused.\nWhen a port is configured as a breakout port, the 'aggregatePortId' port number as labeled on the equipment,\ne.g. the id of the port on the switch.",
-				Type:        schema.TypeInt,
-				Optional:    true,
+				Description:  "Breakout port Identifier of the Switch Interface.\nWhen a port is not configured as a breakout port, the aggregatePortId is set to 0, and unused.\nWhen a port is configured as a breakout port, the 'aggregatePortId' port number as labeled on the equipment,\ne.g. the id of the port on the switch.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(0, 108),
+				Optional:     true,
 			},
 			"ancestors": {
 				Description: "An array of relationships to moBaseMo resources.",
@@ -116,10 +118,11 @@ func resourceFabricServerRole() *schema.Resource {
 					return
 				}},
 			"fec": {
-				Description: "Forward error correction configuration for server port. This configuration is required only for FEX Model N9K-C93180YC-FX3 connected with 25G speed ports on UCS-FI-6454/UCS-FI-64108 and should be set as Cl74.\n* `Auto` - Forward error correction option 'Auto'.\n* `Cl91` - Forward error correction option 'cl91'.\n* `Cl74` - Forward error correction option 'cl74'.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "Auto",
+				Description:  "Forward error correction configuration for server port. This configuration is required only for FEX Model N9K-C93180YC-FX3 connected with 25G speed ports on UCS-FI-6454/UCS-FI-64108 and should be set as Cl74.\n* `Auto` - Forward error correction option 'Auto'.\n* `Cl91` - Forward error correction option 'cl91'.\n* `Cl74` - Forward error correction option 'cl74'.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Auto", "Cl91", "Cl74"}, false),
+				Optional:     true,
+				Default:      "Auto",
 			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
@@ -151,7 +154,8 @@ func resourceFabricServerRole() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -232,9 +236,10 @@ func resourceFabricServerRole() *schema.Resource {
 				},
 			},
 			"port_id": {
-				Description: "Port Identifier of the Switch/FEX/Chassis Interface.\nWhen a port is not configured as a breakout port, the portId is the port number as labeled on the equipment,\ne.g. the id of the port on the switch, FEX or chassis.\nWhen a port is configured as a breakout port, the 'portId' represents the port id on the fanout side of the breakout cable.",
-				Type:        schema.TypeInt,
-				Optional:    true,
+				Description:  "Port Identifier of the Switch/FEX/Chassis Interface.\nWhen a port is not configured as a breakout port, the portId is the port number as labeled on the equipment,\ne.g. the id of the port on the switch, FEX or chassis.\nWhen a port is configured as a breakout port, the 'portId' represents the port id on the fanout side of the breakout cable.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(1, 108),
+				Optional:     true,
 			},
 			"port_policy": {
 				Description: "A reference to a fabricPortPolicy resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -288,9 +293,10 @@ func resourceFabricServerRole() *schema.Resource {
 					return
 				}},
 			"slot_id": {
-				Description: "Slot Identifier of the Switch/FEX/Chassis Interface.",
-				Type:        schema.TypeInt,
-				Optional:    true,
+				Description:  "Slot Identifier of the Switch/FEX/Chassis Interface.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(1, 5),
+				Optional:     true,
 			},
 			"tags": {
 				Type:       schema.TypeList,
@@ -305,14 +311,16 @@ func resourceFabricServerRole() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
@@ -521,7 +529,7 @@ func resourceFabricServerRoleCreate(c context.Context, d *schema.ResourceData, m
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -779,7 +787,7 @@ func resourceFabricServerRoleUpdate(c context.Context, d *schema.ResourceData, m
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

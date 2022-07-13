@@ -27,6 +27,7 @@ Name | Type | Description | Notes
 **GraphicsControllers** | Pointer to [**[]GraphicsControllerRelationship**](GraphicsControllerRelationship.md) | An array of relationships to graphicsController resources. | [optional] [readonly] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **PciDevice** | Pointer to [**PciDeviceRelationship**](PciDeviceRelationship.md) |  | [optional] 
+**PciNode** | Pointer to [**PciNodeRelationship**](PciNodeRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 **RunningFirmware** | Pointer to [**[]FirmwareRunningFirmwareRelationship**](FirmwareRunningFirmwareRelationship.md) | An array of relationships to firmwareRunningFirmware resources. | [optional] [readonly] 
 
@@ -633,6 +634,31 @@ SetPciDevice sets PciDevice field to given value.
 `func (o *GraphicsCardAllOf) HasPciDevice() bool`
 
 HasPciDevice returns a boolean if a field has been set.
+
+### GetPciNode
+
+`func (o *GraphicsCardAllOf) GetPciNode() PciNodeRelationship`
+
+GetPciNode returns the PciNode field if non-nil, zero value otherwise.
+
+### GetPciNodeOk
+
+`func (o *GraphicsCardAllOf) GetPciNodeOk() (*PciNodeRelationship, bool)`
+
+GetPciNodeOk returns a tuple with the PciNode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPciNode
+
+`func (o *GraphicsCardAllOf) SetPciNode(v PciNodeRelationship)`
+
+SetPciNode sets PciNode field to given value.
+
+### HasPciNode
+
+`func (o *GraphicsCardAllOf) HasPciNode() bool`
+
+HasPciNode returns a boolean if a field has been set.
 
 ### GetRegisteredDevice
 

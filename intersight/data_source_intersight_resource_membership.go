@@ -1088,7 +1088,7 @@ func dataSourceResourceMembershipRead(c context.Context, d *schema.ResourceData,
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1157,7 +1157,7 @@ func dataSourceResourceMembershipRead(c context.Context, d *schema.ResourceData,
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1240,7 +1240,7 @@ func dataSourceResourceMembershipRead(c context.Context, d *schema.ResourceData,
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.MoRef")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1326,7 +1326,7 @@ func dataSourceResourceMembershipRead(c context.Context, d *schema.ResourceData,
 					}
 				}
 			}
-			o.SetClassId("")
+			o.SetClassId("mo.VersionContext")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -1388,7 +1388,7 @@ func dataSourceResourceMembershipRead(c context.Context, d *schema.ResourceData,
 	if err != nil {
 		return diag.Errorf("json marshal of ResourceMembership object failed with error : %s", err.Error())
 	}
-	countResponse, _, responseErr := conn.ApiClient.ResourceApi.GetResourceMembershipList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
+	countResponse, _, responseErr := conn.ApiClient.ResourceApi.GetResourceMembershipList(conn.ctx).Filter(getRequestParams(data)).Count(true).Execute()
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
@@ -1397,13 +1397,12 @@ func dataSourceResourceMembershipRead(c context.Context, d *schema.ResourceData,
 		}
 		return diag.Errorf("error occurred while fetching count of ResourceMembership: %s", responseErr.Error())
 	}
-	count := countResponse.ResourceMembershipList.GetCount()
+	count := countResponse.MoDocumentCount.GetCount()
 	if count == 0 {
 		return diag.Errorf("your query for ResourceMembership data source did not return any results. Please change your search criteria and try again")
 	}
 	var i int32
-	var resourceMembershipResults = make([]map[string]interface{}, count, count)
-	var j = 0
+	var resourceMembershipResults = make([]map[string]interface{}, 0, 0)
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.ResourceApi.GetResourceMembershipList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
@@ -1417,8 +1416,8 @@ func dataSourceResourceMembershipRead(c context.Context, d *schema.ResourceData,
 		results := resMo.ResourceMembershipList.GetResults()
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
-			for i := 0; i < len(results); i++ {
-				var s = results[i]
+			for k := 0; k < len(results); k++ {
+				var s = results[k]
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
@@ -1449,8 +1448,7 @@ func dataSourceResourceMembershipRead(c context.Context, d *schema.ResourceData,
 				temp["target_app"] = (s.GetTargetApp())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
-				resourceMembershipResults[j] = temp
-				j += 1
+				resourceMembershipResults = append(resourceMembershipResults, temp)
 			}
 		}
 	}

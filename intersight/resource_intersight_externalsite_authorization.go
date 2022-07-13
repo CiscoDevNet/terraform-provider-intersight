@@ -10,6 +10,7 @@ import (
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func resourceExternalsiteAuthorization() *schema.Resource {
@@ -196,7 +197,8 @@ func resourceExternalsiteAuthorization() *schema.Resource {
 				Computed:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
-					Type: schema.TypeString}},
+					Type: schema.TypeString,
+				}},
 			"parent": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -282,10 +284,11 @@ func resourceExternalsiteAuthorization() *schema.Resource {
 				},
 			},
 			"repository_type": {
-				Description: "The repository type to which this authorization will be requested. Cisco is the only available repository today.\n* `cisco` - Cisco as an external site from where the resources like image will be downloaded.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "cisco",
+				Description:  "The repository type to which this authorization will be requested. Cisco is the only available repository today.\n* `cisco` - Cisco as an external site from where the resources like image will be downloaded.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"cisco"}, false),
+				Optional:     true,
+				Default:      "cisco",
 			},
 			"shared_scope": {
 				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
@@ -311,14 +314,16 @@ func resourceExternalsiteAuthorization() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(1, 128),
+							Optional:     true,
 						},
 						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Description:  "The string representation of a tag value.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringLenBetween(0, 256),
+							Optional:     true,
 						},
 					},
 				},
