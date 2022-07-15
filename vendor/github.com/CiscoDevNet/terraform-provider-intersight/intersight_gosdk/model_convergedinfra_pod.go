@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7078
+API version: 1.0.11-7546
 Contact: intersight@cisco.com
 */
 
@@ -24,12 +24,15 @@ type ConvergedinfraPod struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
-	// The deployment type for this solution pod. * `FlexPodInfra` - The deployment type for a pod is of Infrastructure. * `FlexPodNG` - The deployment type for a pod is of Nextgen type.
-	DeploymentType       *string                                  `json:"DeploymentType,omitempty"`
-	Summary              *ConvergedinfraPodSummary                `json:"Summary,omitempty"`
-	Organization         *OrganizationOrganizationRelationship    `json:"Organization,omitempty"`
-	PodResourceGroup     *ResourceGroupRelationship               `json:"PodResourceGroup,omitempty"`
-	ServiceItemInstance  *WorkflowServiceItemInstanceRelationship `json:"ServiceItemInstance,omitempty"`
+	// The deployment type for this integrated system. * `FlexPodInfra` - The deployment type for a pod is of Infrastructure. * `FlexPodNG` - The deployment type for a pod is of Nextgen type.
+	DeploymentType *string `json:"DeploymentType,omitempty"`
+	// The interoperability status for this solution pod. * `NotEvaluated` - The interoperability compliance for the component has not be checked. * `Approved` - The component is valid as per the interoperability compliance check. * `NotApproved` - The component is not valid as per the interoperability compliance check. * `Incomplete` - The interoperability compliance check could not be completed for the component due to incomplete data.
+	InteropStatus        *string                                      `json:"InteropStatus,omitempty"`
+	Summary              *ConvergedinfraPodSummary                    `json:"Summary,omitempty"`
+	Organization         *OrganizationOrganizationRelationship        `json:"Organization,omitempty"`
+	PodCompliance        *ConvergedinfraPodComplianceInfoRelationship `json:"PodCompliance,omitempty"`
+	PodResourceGroup     *ResourceGroupRelationship                   `json:"PodResourceGroup,omitempty"`
+	ServiceItemInstance  *WorkflowServiceItemInstanceRelationship     `json:"ServiceItemInstance,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -140,6 +143,38 @@ func (o *ConvergedinfraPod) SetDeploymentType(v string) {
 	o.DeploymentType = &v
 }
 
+// GetInteropStatus returns the InteropStatus field value if set, zero value otherwise.
+func (o *ConvergedinfraPod) GetInteropStatus() string {
+	if o == nil || o.InteropStatus == nil {
+		var ret string
+		return ret
+	}
+	return *o.InteropStatus
+}
+
+// GetInteropStatusOk returns a tuple with the InteropStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConvergedinfraPod) GetInteropStatusOk() (*string, bool) {
+	if o == nil || o.InteropStatus == nil {
+		return nil, false
+	}
+	return o.InteropStatus, true
+}
+
+// HasInteropStatus returns a boolean if a field has been set.
+func (o *ConvergedinfraPod) HasInteropStatus() bool {
+	if o != nil && o.InteropStatus != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetInteropStatus gets a reference to the given string and assigns it to the InteropStatus field.
+func (o *ConvergedinfraPod) SetInteropStatus(v string) {
+	o.InteropStatus = &v
+}
+
 // GetSummary returns the Summary field value if set, zero value otherwise.
 func (o *ConvergedinfraPod) GetSummary() ConvergedinfraPodSummary {
 	if o == nil || o.Summary == nil {
@@ -202,6 +237,38 @@ func (o *ConvergedinfraPod) HasOrganization() bool {
 // SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *ConvergedinfraPod) SetOrganization(v OrganizationOrganizationRelationship) {
 	o.Organization = &v
+}
+
+// GetPodCompliance returns the PodCompliance field value if set, zero value otherwise.
+func (o *ConvergedinfraPod) GetPodCompliance() ConvergedinfraPodComplianceInfoRelationship {
+	if o == nil || o.PodCompliance == nil {
+		var ret ConvergedinfraPodComplianceInfoRelationship
+		return ret
+	}
+	return *o.PodCompliance
+}
+
+// GetPodComplianceOk returns a tuple with the PodCompliance field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConvergedinfraPod) GetPodComplianceOk() (*ConvergedinfraPodComplianceInfoRelationship, bool) {
+	if o == nil || o.PodCompliance == nil {
+		return nil, false
+	}
+	return o.PodCompliance, true
+}
+
+// HasPodCompliance returns a boolean if a field has been set.
+func (o *ConvergedinfraPod) HasPodCompliance() bool {
+	if o != nil && o.PodCompliance != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPodCompliance gets a reference to the given ConvergedinfraPodComplianceInfoRelationship and assigns it to the PodCompliance field.
+func (o *ConvergedinfraPod) SetPodCompliance(v ConvergedinfraPodComplianceInfoRelationship) {
+	o.PodCompliance = &v
 }
 
 // GetPodResourceGroup returns the PodResourceGroup field value if set, zero value otherwise.
@@ -287,11 +354,17 @@ func (o ConvergedinfraPod) MarshalJSON() ([]byte, error) {
 	if o.DeploymentType != nil {
 		toSerialize["DeploymentType"] = o.DeploymentType
 	}
+	if o.InteropStatus != nil {
+		toSerialize["InteropStatus"] = o.InteropStatus
+	}
 	if o.Summary != nil {
 		toSerialize["Summary"] = o.Summary
 	}
 	if o.Organization != nil {
 		toSerialize["Organization"] = o.Organization
+	}
+	if o.PodCompliance != nil {
+		toSerialize["PodCompliance"] = o.PodCompliance
 	}
 	if o.PodResourceGroup != nil {
 		toSerialize["PodResourceGroup"] = o.PodResourceGroup
@@ -313,12 +386,15 @@ func (o *ConvergedinfraPod) UnmarshalJSON(bytes []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
-		// The deployment type for this solution pod. * `FlexPodInfra` - The deployment type for a pod is of Infrastructure. * `FlexPodNG` - The deployment type for a pod is of Nextgen type.
-		DeploymentType      *string                                  `json:"DeploymentType,omitempty"`
-		Summary             *ConvergedinfraPodSummary                `json:"Summary,omitempty"`
-		Organization        *OrganizationOrganizationRelationship    `json:"Organization,omitempty"`
-		PodResourceGroup    *ResourceGroupRelationship               `json:"PodResourceGroup,omitempty"`
-		ServiceItemInstance *WorkflowServiceItemInstanceRelationship `json:"ServiceItemInstance,omitempty"`
+		// The deployment type for this integrated system. * `FlexPodInfra` - The deployment type for a pod is of Infrastructure. * `FlexPodNG` - The deployment type for a pod is of Nextgen type.
+		DeploymentType *string `json:"DeploymentType,omitempty"`
+		// The interoperability status for this solution pod. * `NotEvaluated` - The interoperability compliance for the component has not be checked. * `Approved` - The component is valid as per the interoperability compliance check. * `NotApproved` - The component is not valid as per the interoperability compliance check. * `Incomplete` - The interoperability compliance check could not be completed for the component due to incomplete data.
+		InteropStatus       *string                                      `json:"InteropStatus,omitempty"`
+		Summary             *ConvergedinfraPodSummary                    `json:"Summary,omitempty"`
+		Organization        *OrganizationOrganizationRelationship        `json:"Organization,omitempty"`
+		PodCompliance       *ConvergedinfraPodComplianceInfoRelationship `json:"PodCompliance,omitempty"`
+		PodResourceGroup    *ResourceGroupRelationship                   `json:"PodResourceGroup,omitempty"`
+		ServiceItemInstance *WorkflowServiceItemInstanceRelationship     `json:"ServiceItemInstance,omitempty"`
 	}
 
 	varConvergedinfraPodWithoutEmbeddedStruct := ConvergedinfraPodWithoutEmbeddedStruct{}
@@ -329,8 +405,10 @@ func (o *ConvergedinfraPod) UnmarshalJSON(bytes []byte) (err error) {
 		varConvergedinfraPod.ClassId = varConvergedinfraPodWithoutEmbeddedStruct.ClassId
 		varConvergedinfraPod.ObjectType = varConvergedinfraPodWithoutEmbeddedStruct.ObjectType
 		varConvergedinfraPod.DeploymentType = varConvergedinfraPodWithoutEmbeddedStruct.DeploymentType
+		varConvergedinfraPod.InteropStatus = varConvergedinfraPodWithoutEmbeddedStruct.InteropStatus
 		varConvergedinfraPod.Summary = varConvergedinfraPodWithoutEmbeddedStruct.Summary
 		varConvergedinfraPod.Organization = varConvergedinfraPodWithoutEmbeddedStruct.Organization
+		varConvergedinfraPod.PodCompliance = varConvergedinfraPodWithoutEmbeddedStruct.PodCompliance
 		varConvergedinfraPod.PodResourceGroup = varConvergedinfraPodWithoutEmbeddedStruct.PodResourceGroup
 		varConvergedinfraPod.ServiceItemInstance = varConvergedinfraPodWithoutEmbeddedStruct.ServiceItemInstance
 		*o = ConvergedinfraPod(varConvergedinfraPod)
@@ -353,8 +431,10 @@ func (o *ConvergedinfraPod) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DeploymentType")
+		delete(additionalProperties, "InteropStatus")
 		delete(additionalProperties, "Summary")
 		delete(additionalProperties, "Organization")
+		delete(additionalProperties, "PodCompliance")
 		delete(additionalProperties, "PodResourceGroup")
 		delete(additionalProperties, "ServiceItemInstance")
 

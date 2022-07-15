@@ -114,6 +114,11 @@ func dataSourcePowerControlState() *schema.Resource {
 				},
 			},
 		},
+		"extended_power_capacity": {
+			Description: "The status of extended power capacity mode of the chassis. If Enabled, this mode allows chassis available power to be increased by borrowing power from redundant power supplies.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"grid_max_power": {
 			Description: "This field identifies the available power when PSUs are in grid mode in Watts.",
 			Type:        schema.TypeInt,
@@ -234,12 +239,12 @@ func dataSourcePowerControlState() *schema.Resource {
 			},
 		},
 		"power_rebalancing": {
-			Description: "The status of power rebalancing mode of the chassis power state.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
+			Description: "The status of power rebalancing mode of the chassis. If enabled, this mode allows the system to dynamically reallocate the power between servers depending on their power usage. \n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"power_save_mode": {
-			Description: "The status of power save mode of the chassis power state.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
+			Description: "The status of power save mode of the chassis. If Enabled and the requested power budget is less than available power\u00a0capacity,  the additional PSUs not required to comply with redundancy policy are placed in Power Save mode. \n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -514,6 +519,11 @@ func dataSourcePowerControlState() *schema.Resource {
 				},
 			},
 		},
+		"extended_power_capacity": {
+			Description: "The status of extended power capacity mode of the chassis. If Enabled, this mode allows chassis available power to be increased by borrowing power from redundant power supplies.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"grid_max_power": {
 			Description: "This field identifies the available power when PSUs are in grid mode in Watts.",
 			Type:        schema.TypeInt,
@@ -634,12 +644,12 @@ func dataSourcePowerControlState() *schema.Resource {
 			},
 		},
 		"power_rebalancing": {
-			Description: "The status of power rebalancing mode of the chassis power state.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
+			Description: "The status of power rebalancing mode of the chassis. If enabled, this mode allows the system to dynamically reallocate the power between servers depending on their power usage. \n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"power_save_mode": {
-			Description: "The status of power save mode of the chassis power state.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
+			Description: "The status of power save mode of the chassis. If Enabled and the requested power budget is less than available power\u00a0capacity,  the additional PSUs not required to comply with redundancy policy are placed in Power Save mode. \n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -945,6 +955,11 @@ func dataSourcePowerControlStateRead(c context.Context, d *schema.ResourceData, 
 			x := p[0]
 			o.SetEquipmentChassis(x)
 		}
+	}
+
+	if v, ok := d.GetOk("extended_power_capacity"); ok {
+		x := (v.(string))
+		o.SetExtendedPowerCapacity(x)
 	}
 
 	if v, ok := d.GetOkExists("grid_max_power"); ok {
@@ -1297,6 +1312,7 @@ func dataSourcePowerControlStateRead(c context.Context, d *schema.ResourceData, 
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
 				temp["equipment_chassis"] = flattenMapEquipmentChassisRelationship(s.GetEquipmentChassis(), d)
+				temp["extended_power_capacity"] = (s.GetExtendedPowerCapacity())
 				temp["grid_max_power"] = (s.GetGridMaxPower())
 				temp["max_required_power"] = (s.GetMaxRequiredPower())
 				temp["min_required_power"] = (s.GetMinRequiredPower())

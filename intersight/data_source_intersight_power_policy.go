@@ -26,7 +26,7 @@ func dataSourcePowerPolicy() *schema.Resource {
 			DiffSuppressFunc: SuppressDiffAdditionProps,
 		},
 		"allocated_budget": {
-			Description: "Sets the Allocated Power Budget of the System (in Watts). This field is only supported for Cisco UCS X series Chassis.",
+			Description: "Sets the Allocated Power Budget of the Chassis (in Watts). This field is only supported for Cisco UCS X series Chassis.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
@@ -85,7 +85,12 @@ func dataSourcePowerPolicy() *schema.Resource {
 			Optional:    true,
 		},
 		"dynamic_rebalancing": {
-			Description: "Sets the Dynamic Power Rebalancing of the System. This option is only supported for Cisco UCS X series Chassis.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
+			Description: "Sets the Dynamic Power Rebalancing mode of the Chassis. If enabled, this mode allows the chassis to dynamically reallocate the power between servers depending on their power usage. This option is only supported for Cisco UCS X series Chassis.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"extended_power_capacity": {
+			Description: "Sets the Extended Power Capacity of the Chassis. If Enabled, this mode allows chassis available power to be increased by borrowing power from redundant power supplies.  This option is only supported for Cisco UCS X series Chassis.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -219,22 +224,22 @@ func dataSourcePowerPolicy() *schema.Resource {
 			},
 		},
 		"power_priority": {
-			Description: "Sets the Power Priority of the System. This field is only supported for Cisco UCS X series servers.\n* `Low` - Set the Power Priority to Low.\n* `Medium` - Set the Power Priority to Medium.\n* `High` - Set the Power Priority to High.",
+			Description: "Sets the Power Priority of the Server. This priority is used to determine the initial power allocation for servers. This field is only supported for Cisco UCS X series servers.\n* `Low` - Set the Power Priority to Low.\n* `Medium` - Set the Power Priority to Medium.\n* `High` - Set the Power Priority to High.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"power_profiling": {
-			Description: "Sets the Power Profiling of the Server. This field is only supported for Cisco UCS X series servers.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
+			Description: "Sets the Power Profiling of the Server. If Enabled, this field allows the power manager to run power profiling  utility to determine the power needs of the server.  This field is only supported for Cisco UCS X series servers.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"power_restore_state": {
-			Description: "Sets the Power Restore State of the Server. This field is only supported for Cisco UCS X series servers.\n* `AlwaysOff` - Set the Power Restore Mode to Off.\n* `AlwaysOn` - Set the Power Restore Mode to On.\n* `LastState` - Set the Power Restore Mode to LastState.",
+			Description: "Sets the Power Restore State of the Server. In the absence of Intersight connectivity, the chassis will use this policy  to recover the host power after a power loss event.  This field is only supported for Cisco UCS X series servers.\n* `AlwaysOff` - Set the Power Restore Mode to Off.\n* `AlwaysOn` - Set the Power Restore Mode to On.\n* `LastState` - Set the Power Restore Mode to LastState.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"power_save_mode": {
-			Description: "Sets the Power Save mode of the System. This option is only supported for Cisco UCS X series Chassis.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
+			Description: "Sets the Power Save mode of the Chassis. If the requested power budget is less than available power\u00a0capacity,  the additional PSUs not required to comply with redundancy policy are placed in Power Save mode. This option is only supported for Cisco UCS X series Chassis.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -273,7 +278,7 @@ func dataSourcePowerPolicy() *schema.Resource {
 			},
 		},
 		"redundancy_mode": {
-			Description: "Sets the Power Redundancy of the System. N+2 mode is only supported for Cisco UCS X series Chassis.\n* `Grid` - Grid Mode requires two power sources. If one source fails, the surviving PSUs connected to the other source provides power to the chassis.\n* `NotRedundant` - Power Manager turns on the minimum number of PSUs required to support chassis power requirements. No Redundant PSUs are maintained.\n* `N+1` - Power Manager turns on the minimum number of PSUs required to support chassis power requirements plus one additional PSU for redundancy.\n* `N+2` - Power Manager turns on the minimum number of PSUs required to support chassis power requirements plus two additional PSU for redundancy. This Mode is only supported for UCS X series Chassis.",
+			Description: "Sets the Power Redundancy Mode of the Chassis.  Redundancy Mode determines the number of PSUs the chassis keeps as redundant.  N+2 mode is only supported for Cisco UCS X series Chassis.\n* `Grid` - Grid Mode requires two power sources. If one source fails, the surviving PSUs connected to the other source provides power to the chassis.\n* `NotRedundant` - Power Manager turns on the minimum number of PSUs required to support chassis power requirements. No Redundant PSUs are maintained.\n* `N+1` - Power Manager turns on the minimum number of PSUs required to support chassis power requirements plus one additional PSU for redundancy.\n* `N+2` - Power Manager turns on the minimum number of PSUs required to support chassis power requirements plus two additional PSU for redundancy. This Mode is only supported for UCS X series Chassis.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -425,7 +430,7 @@ func dataSourcePowerPolicy() *schema.Resource {
 			DiffSuppressFunc: SuppressDiffAdditionProps,
 		},
 		"allocated_budget": {
-			Description: "Sets the Allocated Power Budget of the System (in Watts). This field is only supported for Cisco UCS X series Chassis.",
+			Description: "Sets the Allocated Power Budget of the Chassis (in Watts). This field is only supported for Cisco UCS X series Chassis.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
@@ -484,7 +489,12 @@ func dataSourcePowerPolicy() *schema.Resource {
 			Optional:    true,
 		},
 		"dynamic_rebalancing": {
-			Description: "Sets the Dynamic Power Rebalancing of the System. This option is only supported for Cisco UCS X series Chassis.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
+			Description: "Sets the Dynamic Power Rebalancing mode of the Chassis. If enabled, this mode allows the chassis to dynamically reallocate the power between servers depending on their power usage. This option is only supported for Cisco UCS X series Chassis.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"extended_power_capacity": {
+			Description: "Sets the Extended Power Capacity of the Chassis. If Enabled, this mode allows chassis available power to be increased by borrowing power from redundant power supplies.  This option is only supported for Cisco UCS X series Chassis.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -618,22 +628,22 @@ func dataSourcePowerPolicy() *schema.Resource {
 			},
 		},
 		"power_priority": {
-			Description: "Sets the Power Priority of the System. This field is only supported for Cisco UCS X series servers.\n* `Low` - Set the Power Priority to Low.\n* `Medium` - Set the Power Priority to Medium.\n* `High` - Set the Power Priority to High.",
+			Description: "Sets the Power Priority of the Server. This priority is used to determine the initial power allocation for servers. This field is only supported for Cisco UCS X series servers.\n* `Low` - Set the Power Priority to Low.\n* `Medium` - Set the Power Priority to Medium.\n* `High` - Set the Power Priority to High.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"power_profiling": {
-			Description: "Sets the Power Profiling of the Server. This field is only supported for Cisco UCS X series servers.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
+			Description: "Sets the Power Profiling of the Server. If Enabled, this field allows the power manager to run power profiling  utility to determine the power needs of the server.  This field is only supported for Cisco UCS X series servers.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"power_restore_state": {
-			Description: "Sets the Power Restore State of the Server. This field is only supported for Cisco UCS X series servers.\n* `AlwaysOff` - Set the Power Restore Mode to Off.\n* `AlwaysOn` - Set the Power Restore Mode to On.\n* `LastState` - Set the Power Restore Mode to LastState.",
+			Description: "Sets the Power Restore State of the Server. In the absence of Intersight connectivity, the chassis will use this policy  to recover the host power after a power loss event.  This field is only supported for Cisco UCS X series servers.\n* `AlwaysOff` - Set the Power Restore Mode to Off.\n* `AlwaysOn` - Set the Power Restore Mode to On.\n* `LastState` - Set the Power Restore Mode to LastState.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"power_save_mode": {
-			Description: "Sets the Power Save mode of the System. This option is only supported for Cisco UCS X series Chassis.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
+			Description: "Sets the Power Save mode of the Chassis. If the requested power budget is less than available power\u00a0capacity,  the additional PSUs not required to comply with redundancy policy are placed in Power Save mode. This option is only supported for Cisco UCS X series Chassis.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -672,7 +682,7 @@ func dataSourcePowerPolicy() *schema.Resource {
 			},
 		},
 		"redundancy_mode": {
-			Description: "Sets the Power Redundancy of the System. N+2 mode is only supported for Cisco UCS X series Chassis.\n* `Grid` - Grid Mode requires two power sources. If one source fails, the surviving PSUs connected to the other source provides power to the chassis.\n* `NotRedundant` - Power Manager turns on the minimum number of PSUs required to support chassis power requirements. No Redundant PSUs are maintained.\n* `N+1` - Power Manager turns on the minimum number of PSUs required to support chassis power requirements plus one additional PSU for redundancy.\n* `N+2` - Power Manager turns on the minimum number of PSUs required to support chassis power requirements plus two additional PSU for redundancy. This Mode is only supported for UCS X series Chassis.",
+			Description: "Sets the Power Redundancy Mode of the Chassis.  Redundancy Mode determines the number of PSUs the chassis keeps as redundant.  N+2 mode is only supported for Cisco UCS X series Chassis.\n* `Grid` - Grid Mode requires two power sources. If one source fails, the surviving PSUs connected to the other source provides power to the chassis.\n* `NotRedundant` - Power Manager turns on the minimum number of PSUs required to support chassis power requirements. No Redundant PSUs are maintained.\n* `N+1` - Power Manager turns on the minimum number of PSUs required to support chassis power requirements plus one additional PSU for redundancy.\n* `N+2` - Power Manager turns on the minimum number of PSUs required to support chassis power requirements plus two additional PSU for redundancy. This Mode is only supported for UCS X series Chassis.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -910,6 +920,11 @@ func dataSourcePowerPolicyRead(c context.Context, d *schema.ResourceData, meta i
 	if v, ok := d.GetOk("dynamic_rebalancing"); ok {
 		x := (v.(string))
 		o.SetDynamicRebalancing(x)
+	}
+
+	if v, ok := d.GetOk("extended_power_capacity"); ok {
+		x := (v.(string))
+		o.SetExtendedPowerCapacity(x)
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
@@ -1292,6 +1307,7 @@ func dataSourcePowerPolicyRead(c context.Context, d *schema.ResourceData, meta i
 				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["dynamic_rebalancing"] = (s.GetDynamicRebalancing())
+				temp["extended_power_capacity"] = (s.GetExtendedPowerCapacity())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())

@@ -192,6 +192,46 @@ func resourceFabricAppliancePcRole() *schema.Resource {
 					},
 				},
 			},
+			"link_aggregation_policy": {
+				Description: "A reference to a fabricLinkAggregationPolicy resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "mo.MoRef",
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+					},
+				},
+			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
@@ -698,6 +738,49 @@ func resourceFabricAppliancePcRoleCreate(c context.Context, d *schema.ResourceDa
 		}
 	}
 
+	if v, ok := d.GetOk("link_aggregation_policy"); ok {
+		p := make([]models.FabricLinkAggregationPolicyRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewMoMoRefWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsFabricLinkAggregationPolicyRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetLinkAggregationPolicy(x)
+		}
+	}
+
 	if v, ok := d.GetOk("mode"); ok {
 		x := (v.(string))
 		o.SetMode(x)
@@ -917,6 +1000,10 @@ func resourceFabricAppliancePcRoleRead(c context.Context, d *schema.ResourceData
 		return diag.Errorf("error occurred while setting property EthNetworkGroupPolicy in FabricAppliancePcRole object: %s", err.Error())
 	}
 
+	if err := d.Set("link_aggregation_policy", flattenMapFabricLinkAggregationPolicyRelationship(s.GetLinkAggregationPolicy(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property LinkAggregationPolicy in FabricAppliancePcRole object: %s", err.Error())
+	}
+
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {
 		return diag.Errorf("error occurred while setting property ModTime in FabricAppliancePcRole object: %s", err.Error())
 	}
@@ -1087,6 +1174,50 @@ func resourceFabricAppliancePcRoleUpdate(c context.Context, d *schema.ResourceDa
 		if len(p) > 0 {
 			x := p[0]
 			o.SetEthNetworkGroupPolicy(x)
+		}
+	}
+
+	if d.HasChange("link_aggregation_policy") {
+		v := d.Get("link_aggregation_policy")
+		p := make([]models.FabricLinkAggregationPolicyRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsFabricLinkAggregationPolicyRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetLinkAggregationPolicy(x)
 		}
 	}
 

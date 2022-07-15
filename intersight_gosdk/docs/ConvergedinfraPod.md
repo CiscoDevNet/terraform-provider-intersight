@@ -6,9 +6,11 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "convergedinfra.Pod"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "convergedinfra.Pod"]
-**DeploymentType** | Pointer to **string** | The deployment type for this solution pod. * &#x60;FlexPodInfra&#x60; - The deployment type for a pod is of Infrastructure. * &#x60;FlexPodNG&#x60; - The deployment type for a pod is of Nextgen type. | [optional] [readonly] [default to "FlexPodInfra"]
+**DeploymentType** | Pointer to **string** | The deployment type for this integrated system. * &#x60;FlexPodInfra&#x60; - The deployment type for a pod is of Infrastructure. * &#x60;FlexPodNG&#x60; - The deployment type for a pod is of Nextgen type. | [optional] [readonly] [default to "FlexPodInfra"]
+**InteropStatus** | Pointer to **string** | The interoperability status for this solution pod. * &#x60;NotEvaluated&#x60; - The interoperability compliance for the component has not be checked. * &#x60;Approved&#x60; - The component is valid as per the interoperability compliance check. * &#x60;NotApproved&#x60; - The component is not valid as per the interoperability compliance check. * &#x60;Incomplete&#x60; - The interoperability compliance check could not be completed for the component due to incomplete data. | [optional] [readonly] [default to "NotEvaluated"]
 **Summary** | Pointer to [**ConvergedinfraPodSummary**](ConvergedinfraPodSummary.md) |  | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**PodCompliance** | Pointer to [**ConvergedinfraPodComplianceInfoRelationship**](ConvergedinfraPodComplianceInfoRelationship.md) |  | [optional] 
 **PodResourceGroup** | Pointer to [**ResourceGroupRelationship**](ResourceGroupRelationship.md) |  | [optional] 
 **ServiceItemInstance** | Pointer to [**WorkflowServiceItemInstanceRelationship**](WorkflowServiceItemInstanceRelationship.md) |  | [optional] 
 
@@ -96,6 +98,31 @@ SetDeploymentType sets DeploymentType field to given value.
 
 HasDeploymentType returns a boolean if a field has been set.
 
+### GetInteropStatus
+
+`func (o *ConvergedinfraPod) GetInteropStatus() string`
+
+GetInteropStatus returns the InteropStatus field if non-nil, zero value otherwise.
+
+### GetInteropStatusOk
+
+`func (o *ConvergedinfraPod) GetInteropStatusOk() (*string, bool)`
+
+GetInteropStatusOk returns a tuple with the InteropStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInteropStatus
+
+`func (o *ConvergedinfraPod) SetInteropStatus(v string)`
+
+SetInteropStatus sets InteropStatus field to given value.
+
+### HasInteropStatus
+
+`func (o *ConvergedinfraPod) HasInteropStatus() bool`
+
+HasInteropStatus returns a boolean if a field has been set.
+
 ### GetSummary
 
 `func (o *ConvergedinfraPod) GetSummary() ConvergedinfraPodSummary`
@@ -145,6 +172,31 @@ SetOrganization sets Organization field to given value.
 `func (o *ConvergedinfraPod) HasOrganization() bool`
 
 HasOrganization returns a boolean if a field has been set.
+
+### GetPodCompliance
+
+`func (o *ConvergedinfraPod) GetPodCompliance() ConvergedinfraPodComplianceInfoRelationship`
+
+GetPodCompliance returns the PodCompliance field if non-nil, zero value otherwise.
+
+### GetPodComplianceOk
+
+`func (o *ConvergedinfraPod) GetPodComplianceOk() (*ConvergedinfraPodComplianceInfoRelationship, bool)`
+
+GetPodComplianceOk returns a tuple with the PodCompliance field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPodCompliance
+
+`func (o *ConvergedinfraPod) SetPodCompliance(v ConvergedinfraPodComplianceInfoRelationship)`
+
+SetPodCompliance sets PodCompliance field to given value.
+
+### HasPodCompliance
+
+`func (o *ConvergedinfraPod) HasPodCompliance() bool`
+
+HasPodCompliance returns a boolean if a field has been set.
 
 ### GetPodResourceGroup
 

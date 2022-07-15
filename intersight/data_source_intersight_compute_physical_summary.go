@@ -322,6 +322,16 @@ func dataSourceComputePhysicalSummary() *schema.Resource {
 				},
 			},
 		},
+		"kvm_server_state_enabled": {
+			Description: "The KVM server state of the server.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"kvm_vendor": {
+			Description: "The KVM Vendor for the server.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"management_mode": {
 			Description: "The management mode of the server.\n* `IntersightStandalone` - Intersight Standalone mode of operation.\n* `UCSM` - Unified Computing System Manager mode of operation.\n* `Intersight` - Intersight managed mode of operation.",
 			Type:        schema.TypeString,
@@ -1055,6 +1065,16 @@ func dataSourceComputePhysicalSummary() *schema.Resource {
 				},
 			},
 		},
+		"kvm_server_state_enabled": {
+			Description: "The KVM server state of the server.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"kvm_vendor": {
+			Description: "The KVM Vendor for the server.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"management_mode": {
 			Description: "The management mode of the server.\n* `IntersightStandalone` - Intersight Standalone mode of operation.\n* `UCSM` - Unified Computing System Manager mode of operation.\n* `Intersight` - Intersight managed mode of operation.",
 			Type:        schema.TypeString,
@@ -1787,6 +1807,16 @@ func dataSourceComputePhysicalSummaryRead(c context.Context, d *schema.ResourceD
 		o.SetKvmIpAddresses(x)
 	}
 
+	if v, ok := d.GetOkExists("kvm_server_state_enabled"); ok {
+		x := (v.(bool))
+		o.SetKvmServerStateEnabled(x)
+	}
+
+	if v, ok := d.GetOk("kvm_vendor"); ok {
+		x := (v.(string))
+		o.SetKvmVendor(x)
+	}
+
 	if v, ok := d.GetOk("management_mode"); ok {
 		x := (v.(string))
 		o.SetManagementMode(x)
@@ -2286,6 +2316,8 @@ func dataSourceComputePhysicalSummaryRead(c context.Context, d *schema.ResourceD
 				temp["ipv4_address"] = (s.GetIpv4Address())
 
 				temp["kvm_ip_addresses"] = flattenListComputeIpAddress(s.GetKvmIpAddresses(), d)
+				temp["kvm_server_state_enabled"] = (s.GetKvmServerStateEnabled())
+				temp["kvm_vendor"] = (s.GetKvmVendor())
 				temp["management_mode"] = (s.GetManagementMode())
 				temp["memory_speed"] = (s.GetMemorySpeed())
 				temp["mgmt_ip_address"] = (s.GetMgmtIpAddress())

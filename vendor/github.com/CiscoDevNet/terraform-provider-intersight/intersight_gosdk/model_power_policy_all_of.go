@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7078
+API version: 1.0.11-7546
 Contact: intersight@cisco.com
 */
 
@@ -21,19 +21,21 @@ type PowerPolicyAllOf struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
-	// Sets the Allocated Power Budget of the System (in Watts). This field is only supported for Cisco UCS X series Chassis.
+	// Sets the Allocated Power Budget of the Chassis (in Watts). This field is only supported for Cisco UCS X series Chassis.
 	AllocatedBudget *int64 `json:"AllocatedBudget,omitempty"`
-	// Sets the Dynamic Power Rebalancing of the System. This option is only supported for Cisco UCS X series Chassis. * `Enabled` - Set the value to Enabled. * `Disabled` - Set the value to Disabled.
+	// Sets the Dynamic Power Rebalancing mode of the Chassis. If enabled, this mode allows the chassis to dynamically reallocate the power between servers depending on their power usage. This option is only supported for Cisco UCS X series Chassis. * `Enabled` - Set the value to Enabled. * `Disabled` - Set the value to Disabled.
 	DynamicRebalancing *string `json:"DynamicRebalancing,omitempty"`
-	// Sets the Power Priority of the System. This field is only supported for Cisco UCS X series servers. * `Low` - Set the Power Priority to Low. * `Medium` - Set the Power Priority to Medium. * `High` - Set the Power Priority to High.
+	// Sets the Extended Power Capacity of the Chassis. If Enabled, this mode allows chassis available power to be increased by borrowing power from redundant power supplies.  This option is only supported for Cisco UCS X series Chassis. * `Enabled` - Set the value to Enabled. * `Disabled` - Set the value to Disabled.
+	ExtendedPowerCapacity *string `json:"ExtendedPowerCapacity,omitempty"`
+	// Sets the Power Priority of the Server. This priority is used to determine the initial power allocation for servers. This field is only supported for Cisco UCS X series servers. * `Low` - Set the Power Priority to Low. * `Medium` - Set the Power Priority to Medium. * `High` - Set the Power Priority to High.
 	PowerPriority *string `json:"PowerPriority,omitempty"`
-	// Sets the Power Profiling of the Server. This field is only supported for Cisco UCS X series servers. * `Enabled` - Set the value to Enabled. * `Disabled` - Set the value to Disabled.
+	// Sets the Power Profiling of the Server. If Enabled, this field allows the power manager to run power profiling  utility to determine the power needs of the server.  This field is only supported for Cisco UCS X series servers. * `Enabled` - Set the value to Enabled. * `Disabled` - Set the value to Disabled.
 	PowerProfiling *string `json:"PowerProfiling,omitempty"`
-	// Sets the Power Restore State of the Server. This field is only supported for Cisco UCS X series servers. * `AlwaysOff` - Set the Power Restore Mode to Off. * `AlwaysOn` - Set the Power Restore Mode to On. * `LastState` - Set the Power Restore Mode to LastState.
+	// Sets the Power Restore State of the Server. In the absence of Intersight connectivity, the chassis will use this policy  to recover the host power after a power loss event.  This field is only supported for Cisco UCS X series servers. * `AlwaysOff` - Set the Power Restore Mode to Off. * `AlwaysOn` - Set the Power Restore Mode to On. * `LastState` - Set the Power Restore Mode to LastState.
 	PowerRestoreState *string `json:"PowerRestoreState,omitempty"`
-	// Sets the Power Save mode of the System. This option is only supported for Cisco UCS X series Chassis. * `Enabled` - Set the value to Enabled. * `Disabled` - Set the value to Disabled.
+	// Sets the Power Save mode of the Chassis. If the requested power budget is less than available power capacity,  the additional PSUs not required to comply with redundancy policy are placed in Power Save mode. This option is only supported for Cisco UCS X series Chassis. * `Enabled` - Set the value to Enabled. * `Disabled` - Set the value to Disabled.
 	PowerSaveMode *string `json:"PowerSaveMode,omitempty"`
-	// Sets the Power Redundancy of the System. N+2 mode is only supported for Cisco UCS X series Chassis. * `Grid` - Grid Mode requires two power sources. If one source fails, the surviving PSUs connected to the other source provides power to the chassis. * `NotRedundant` - Power Manager turns on the minimum number of PSUs required to support chassis power requirements. No Redundant PSUs are maintained. * `N+1` - Power Manager turns on the minimum number of PSUs required to support chassis power requirements plus one additional PSU for redundancy. * `N+2` - Power Manager turns on the minimum number of PSUs required to support chassis power requirements plus two additional PSU for redundancy. This Mode is only supported for UCS X series Chassis.
+	// Sets the Power Redundancy Mode of the Chassis.  Redundancy Mode determines the number of PSUs the chassis keeps as redundant.  N+2 mode is only supported for Cisco UCS X series Chassis. * `Grid` - Grid Mode requires two power sources. If one source fails, the surviving PSUs connected to the other source provides power to the chassis. * `NotRedundant` - Power Manager turns on the minimum number of PSUs required to support chassis power requirements. No Redundant PSUs are maintained. * `N+1` - Power Manager turns on the minimum number of PSUs required to support chassis power requirements plus one additional PSU for redundancy. * `N+2` - Power Manager turns on the minimum number of PSUs required to support chassis power requirements plus two additional PSU for redundancy. This Mode is only supported for UCS X series Chassis.
 	RedundancyMode *string                               `json:"RedundancyMode,omitempty"`
 	Organization   *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	// An array of relationships to policyAbstractConfigProfile resources.
@@ -55,6 +57,8 @@ func NewPowerPolicyAllOf(classId string, objectType string) *PowerPolicyAllOf {
 	this.AllocatedBudget = &allocatedBudget
 	var dynamicRebalancing string = "Enabled"
 	this.DynamicRebalancing = &dynamicRebalancing
+	var extendedPowerCapacity string = "Enabled"
+	this.ExtendedPowerCapacity = &extendedPowerCapacity
 	var powerPriority string = "Low"
 	this.PowerPriority = &powerPriority
 	var powerProfiling string = "Enabled"
@@ -81,6 +85,8 @@ func NewPowerPolicyAllOfWithDefaults() *PowerPolicyAllOf {
 	this.AllocatedBudget = &allocatedBudget
 	var dynamicRebalancing string = "Enabled"
 	this.DynamicRebalancing = &dynamicRebalancing
+	var extendedPowerCapacity string = "Enabled"
+	this.ExtendedPowerCapacity = &extendedPowerCapacity
 	var powerPriority string = "Low"
 	this.PowerPriority = &powerPriority
 	var powerProfiling string = "Enabled"
@@ -204,6 +210,38 @@ func (o *PowerPolicyAllOf) HasDynamicRebalancing() bool {
 // SetDynamicRebalancing gets a reference to the given string and assigns it to the DynamicRebalancing field.
 func (o *PowerPolicyAllOf) SetDynamicRebalancing(v string) {
 	o.DynamicRebalancing = &v
+}
+
+// GetExtendedPowerCapacity returns the ExtendedPowerCapacity field value if set, zero value otherwise.
+func (o *PowerPolicyAllOf) GetExtendedPowerCapacity() string {
+	if o == nil || o.ExtendedPowerCapacity == nil {
+		var ret string
+		return ret
+	}
+	return *o.ExtendedPowerCapacity
+}
+
+// GetExtendedPowerCapacityOk returns a tuple with the ExtendedPowerCapacity field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PowerPolicyAllOf) GetExtendedPowerCapacityOk() (*string, bool) {
+	if o == nil || o.ExtendedPowerCapacity == nil {
+		return nil, false
+	}
+	return o.ExtendedPowerCapacity, true
+}
+
+// HasExtendedPowerCapacity returns a boolean if a field has been set.
+func (o *PowerPolicyAllOf) HasExtendedPowerCapacity() bool {
+	if o != nil && o.ExtendedPowerCapacity != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetExtendedPowerCapacity gets a reference to the given string and assigns it to the ExtendedPowerCapacity field.
+func (o *PowerPolicyAllOf) SetExtendedPowerCapacity(v string) {
+	o.ExtendedPowerCapacity = &v
 }
 
 // GetPowerPriority returns the PowerPriority field value if set, zero value otherwise.
@@ -445,6 +483,9 @@ func (o PowerPolicyAllOf) MarshalJSON() ([]byte, error) {
 	if o.DynamicRebalancing != nil {
 		toSerialize["DynamicRebalancing"] = o.DynamicRebalancing
 	}
+	if o.ExtendedPowerCapacity != nil {
+		toSerialize["ExtendedPowerCapacity"] = o.ExtendedPowerCapacity
+	}
 	if o.PowerPriority != nil {
 		toSerialize["PowerPriority"] = o.PowerPriority
 	}
@@ -488,6 +529,7 @@ func (o *PowerPolicyAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AllocatedBudget")
 		delete(additionalProperties, "DynamicRebalancing")
+		delete(additionalProperties, "ExtendedPowerCapacity")
 		delete(additionalProperties, "PowerPriority")
 		delete(additionalProperties, "PowerProfiling")
 		delete(additionalProperties, "PowerRestoreState")

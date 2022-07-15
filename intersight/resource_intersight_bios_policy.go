@@ -595,6 +595,13 @@ func resourceBiosPolicy() *schema.Resource {
 				Optional:     true,
 				Default:      "platform-default",
 			},
+			"cpu_pa_limit": {
+				Description:  "BIOS Token for setting Limit CPU PA to 46 Bits configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "enabled", "disabled"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
 			"cpu_perf_enhancement": {
 				Description:  "BIOS Token for setting Enhanced CPU Performance configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CpuPerfEnhancement token.\n* `Disabled` - Value - Disabled for configuring CpuPerfEnhancement token.",
 				Type:         schema.TypeString,
@@ -2916,6 +2923,13 @@ func resourceBiosPolicy() *schema.Resource {
 				Optional:     true,
 				Default:      "platform-default",
 			},
+			"tpm_ppi_required": {
+				Description:  "BIOS Token for setting TPM Minimal Physical Presence configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "enabled", "disabled"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
 			"tpm_support": {
 				Description:  "BIOS Token for setting TPM Support configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
 				Type:         schema.TypeString,
@@ -3601,6 +3615,11 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 	if v, ok := d.GetOk("cpu_frequency_floor"); ok {
 		x := (v.(string))
 		o.SetCpuFrequencyFloor(x)
+	}
+
+	if v, ok := d.GetOk("cpu_pa_limit"); ok {
+		x := (v.(string))
+		o.SetCpuPaLimit(x)
 	}
 
 	if v, ok := d.GetOk("cpu_perf_enhancement"); ok {
@@ -5210,6 +5229,11 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 		o.SetTpmPendingOperation(x)
 	}
 
+	if v, ok := d.GetOk("tpm_ppi_required"); ok {
+		x := (v.(string))
+		o.SetTpmPpiRequired(x)
+	}
+
 	if v, ok := d.GetOk("tpm_support"); ok {
 		x := (v.(string))
 		o.SetTpmSupport(x)
@@ -5687,6 +5711,10 @@ func resourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta inte
 
 	if err := d.Set("cpu_frequency_floor", (s.GetCpuFrequencyFloor())); err != nil {
 		return diag.Errorf("error occurred while setting property CpuFrequencyFloor in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("cpu_pa_limit", (s.GetCpuPaLimit())); err != nil {
+		return diag.Errorf("error occurred while setting property CpuPaLimit in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("cpu_perf_enhancement", (s.GetCpuPerfEnhancement())); err != nil {
@@ -6921,6 +6949,10 @@ func resourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta inte
 		return diag.Errorf("error occurred while setting property TpmPendingOperation in BiosPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("tpm_ppi_required", (s.GetTpmPpiRequired())); err != nil {
+		return diag.Errorf("error occurred while setting property TpmPpiRequired in BiosPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("tpm_support", (s.GetTpmSupport())); err != nil {
 		return diag.Errorf("error occurred while setting property TpmSupport in BiosPolicy object: %s", err.Error())
 	}
@@ -7476,6 +7508,12 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		v := d.Get("cpu_frequency_floor")
 		x := (v.(string))
 		o.SetCpuFrequencyFloor(x)
+	}
+
+	if d.HasChange("cpu_pa_limit") {
+		v := d.Get("cpu_pa_limit")
+		x := (v.(string))
+		o.SetCpuPaLimit(x)
 	}
 
 	if d.HasChange("cpu_perf_enhancement") {
@@ -9379,6 +9417,12 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		v := d.Get("tpm_pending_operation")
 		x := (v.(string))
 		o.SetTpmPendingOperation(x)
+	}
+
+	if d.HasChange("tpm_ppi_required") {
+		v := d.Get("tpm_ppi_required")
+		x := (v.(string))
+		o.SetTpmPpiRequired(x)
 	}
 
 	if d.HasChange("tpm_support") {

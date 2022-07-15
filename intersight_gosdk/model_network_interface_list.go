@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7078
+API version: 1.0.11-7546
 Contact: intersight@cisco.com
 */
 
@@ -26,8 +26,14 @@ type NetworkInterfaceList struct {
 	ObjectType string `json:"ObjectType"`
 	// Admin state of the interface list.
 	AdminState *string `json:"AdminState,omitempty"`
+	// Allowed VLANs of the interface list.
+	AllowedVlans *string `json:"AllowedVlans,omitempty"`
+	// Description of the interface list.
+	Description *string `json:"Description,omitempty"`
 	// IP address of the interface list.
 	IpAddress *string `json:"IpAddress,omitempty"`
+	// IP subnet of the interface list.
+	IpSubnet *int64 `json:"IpSubnet,omitempty"`
 	// MAC address of the interface list.
 	Mac *string `json:"Mac,omitempty"`
 	// Maximum transmission unit of the interface list.
@@ -158,6 +164,70 @@ func (o *NetworkInterfaceList) SetAdminState(v string) {
 	o.AdminState = &v
 }
 
+// GetAllowedVlans returns the AllowedVlans field value if set, zero value otherwise.
+func (o *NetworkInterfaceList) GetAllowedVlans() string {
+	if o == nil || o.AllowedVlans == nil {
+		var ret string
+		return ret
+	}
+	return *o.AllowedVlans
+}
+
+// GetAllowedVlansOk returns a tuple with the AllowedVlans field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkInterfaceList) GetAllowedVlansOk() (*string, bool) {
+	if o == nil || o.AllowedVlans == nil {
+		return nil, false
+	}
+	return o.AllowedVlans, true
+}
+
+// HasAllowedVlans returns a boolean if a field has been set.
+func (o *NetworkInterfaceList) HasAllowedVlans() bool {
+	if o != nil && o.AllowedVlans != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAllowedVlans gets a reference to the given string and assigns it to the AllowedVlans field.
+func (o *NetworkInterfaceList) SetAllowedVlans(v string) {
+	o.AllowedVlans = &v
+}
+
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *NetworkInterfaceList) GetDescription() string {
+	if o == nil || o.Description == nil {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkInterfaceList) GetDescriptionOk() (*string, bool) {
+	if o == nil || o.Description == nil {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *NetworkInterfaceList) HasDescription() bool {
+	if o != nil && o.Description != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *NetworkInterfaceList) SetDescription(v string) {
+	o.Description = &v
+}
+
 // GetIpAddress returns the IpAddress field value if set, zero value otherwise.
 func (o *NetworkInterfaceList) GetIpAddress() string {
 	if o == nil || o.IpAddress == nil {
@@ -188,6 +258,38 @@ func (o *NetworkInterfaceList) HasIpAddress() bool {
 // SetIpAddress gets a reference to the given string and assigns it to the IpAddress field.
 func (o *NetworkInterfaceList) SetIpAddress(v string) {
 	o.IpAddress = &v
+}
+
+// GetIpSubnet returns the IpSubnet field value if set, zero value otherwise.
+func (o *NetworkInterfaceList) GetIpSubnet() int64 {
+	if o == nil || o.IpSubnet == nil {
+		var ret int64
+		return ret
+	}
+	return *o.IpSubnet
+}
+
+// GetIpSubnetOk returns a tuple with the IpSubnet field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkInterfaceList) GetIpSubnetOk() (*int64, bool) {
+	if o == nil || o.IpSubnet == nil {
+		return nil, false
+	}
+	return o.IpSubnet, true
+}
+
+// HasIpSubnet returns a boolean if a field has been set.
+func (o *NetworkInterfaceList) HasIpSubnet() bool {
+	if o != nil && o.IpSubnet != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIpSubnet gets a reference to the given int64 and assigns it to the IpSubnet field.
+func (o *NetworkInterfaceList) SetIpSubnet(v int64) {
+	o.IpSubnet = &v
 }
 
 // GetMac returns the Mac field value if set, zero value otherwise.
@@ -593,8 +695,17 @@ func (o NetworkInterfaceList) MarshalJSON() ([]byte, error) {
 	if o.AdminState != nil {
 		toSerialize["AdminState"] = o.AdminState
 	}
+	if o.AllowedVlans != nil {
+		toSerialize["AllowedVlans"] = o.AllowedVlans
+	}
+	if o.Description != nil {
+		toSerialize["Description"] = o.Description
+	}
 	if o.IpAddress != nil {
 		toSerialize["IpAddress"] = o.IpAddress
+	}
+	if o.IpSubnet != nil {
+		toSerialize["IpSubnet"] = o.IpSubnet
 	}
 	if o.Mac != nil {
 		toSerialize["Mac"] = o.Mac
@@ -648,8 +759,14 @@ func (o *NetworkInterfaceList) UnmarshalJSON(bytes []byte) (err error) {
 		ObjectType string `json:"ObjectType"`
 		// Admin state of the interface list.
 		AdminState *string `json:"AdminState,omitempty"`
+		// Allowed VLANs of the interface list.
+		AllowedVlans *string `json:"AllowedVlans,omitempty"`
+		// Description of the interface list.
+		Description *string `json:"Description,omitempty"`
 		// IP address of the interface list.
 		IpAddress *string `json:"IpAddress,omitempty"`
+		// IP subnet of the interface list.
+		IpSubnet *int64 `json:"IpSubnet,omitempty"`
 		// MAC address of the interface list.
 		Mac *string `json:"Mac,omitempty"`
 		// Maximum transmission unit of the interface list.
@@ -682,7 +799,10 @@ func (o *NetworkInterfaceList) UnmarshalJSON(bytes []byte) (err error) {
 		varNetworkInterfaceList.ClassId = varNetworkInterfaceListWithoutEmbeddedStruct.ClassId
 		varNetworkInterfaceList.ObjectType = varNetworkInterfaceListWithoutEmbeddedStruct.ObjectType
 		varNetworkInterfaceList.AdminState = varNetworkInterfaceListWithoutEmbeddedStruct.AdminState
+		varNetworkInterfaceList.AllowedVlans = varNetworkInterfaceListWithoutEmbeddedStruct.AllowedVlans
+		varNetworkInterfaceList.Description = varNetworkInterfaceListWithoutEmbeddedStruct.Description
 		varNetworkInterfaceList.IpAddress = varNetworkInterfaceListWithoutEmbeddedStruct.IpAddress
+		varNetworkInterfaceList.IpSubnet = varNetworkInterfaceListWithoutEmbeddedStruct.IpSubnet
 		varNetworkInterfaceList.Mac = varNetworkInterfaceListWithoutEmbeddedStruct.Mac
 		varNetworkInterfaceList.Mtu = varNetworkInterfaceListWithoutEmbeddedStruct.Mtu
 		varNetworkInterfaceList.Name = varNetworkInterfaceListWithoutEmbeddedStruct.Name
@@ -715,7 +835,10 @@ func (o *NetworkInterfaceList) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AdminState")
+		delete(additionalProperties, "AllowedVlans")
+		delete(additionalProperties, "Description")
 		delete(additionalProperties, "IpAddress")
+		delete(additionalProperties, "IpSubnet")
 		delete(additionalProperties, "Mac")
 		delete(additionalProperties, "Mtu")
 		delete(additionalProperties, "Name")

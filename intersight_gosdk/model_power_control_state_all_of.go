@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7078
+API version: 1.0.11-7546
 Contact: intersight@cisco.com
 */
 
@@ -23,6 +23,8 @@ type PowerControlStateAllOf struct {
 	ObjectType string `json:"ObjectType"`
 	// This field identifies the allocated power on the chassis in Watts.
 	AllocatedPower *int64 `json:"AllocatedPower,omitempty"`
+	// The status of extended power capacity mode of the chassis. If Enabled, this mode allows chassis available power to be increased by borrowing power from redundant power supplies. * `Enabled` - Set the value to Enabled. * `Disabled` - Set the value to Disabled.
+	ExtendedPowerCapacity *string `json:"ExtendedPowerCapacity,omitempty"`
 	// This field identifies the available power when PSUs are in grid mode in Watts.
 	GridMaxPower *int64 `json:"GridMaxPower,omitempty"`
 	// This field identifies the maximum power required by the endpoint in Watts.
@@ -35,9 +37,9 @@ type PowerControlStateAllOf struct {
 	N2MaxPower *int64 `json:"N2MaxPower,omitempty"`
 	// This field identifies the available power when PSUs are in non-redundant mode in Watts.
 	NonRedundantMaxPower *int64 `json:"NonRedundantMaxPower,omitempty"`
-	// The status of power rebalancing mode of the chassis power state. * `Enabled` - Set the value to Enabled. * `Disabled` - Set the value to Disabled.
+	// The status of power rebalancing mode of the chassis. If enabled, this mode allows the system to dynamically reallocate the power between servers depending on their power usage.  * `Enabled` - Set the value to Enabled. * `Disabled` - Set the value to Disabled.
 	PowerRebalancing *string `json:"PowerRebalancing,omitempty"`
-	// The status of power save mode of the chassis power state. * `Enabled` - Set the value to Enabled. * `Disabled` - Set the value to Disabled.
+	// The status of power save mode of the chassis. If Enabled and the requested power budget is less than available power capacity,  the additional PSUs not required to comply with redundancy policy are placed in Power Save mode.  * `Enabled` - Set the value to Enabled. * `Disabled` - Set the value to Disabled.
 	PowerSaveMode        *string                              `json:"PowerSaveMode,omitempty"`
 	EquipmentChassis     *EquipmentChassisRelationship        `json:"EquipmentChassis,omitempty"`
 	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
@@ -147,6 +149,38 @@ func (o *PowerControlStateAllOf) HasAllocatedPower() bool {
 // SetAllocatedPower gets a reference to the given int64 and assigns it to the AllocatedPower field.
 func (o *PowerControlStateAllOf) SetAllocatedPower(v int64) {
 	o.AllocatedPower = &v
+}
+
+// GetExtendedPowerCapacity returns the ExtendedPowerCapacity field value if set, zero value otherwise.
+func (o *PowerControlStateAllOf) GetExtendedPowerCapacity() string {
+	if o == nil || o.ExtendedPowerCapacity == nil {
+		var ret string
+		return ret
+	}
+	return *o.ExtendedPowerCapacity
+}
+
+// GetExtendedPowerCapacityOk returns a tuple with the ExtendedPowerCapacity field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PowerControlStateAllOf) GetExtendedPowerCapacityOk() (*string, bool) {
+	if o == nil || o.ExtendedPowerCapacity == nil {
+		return nil, false
+	}
+	return o.ExtendedPowerCapacity, true
+}
+
+// HasExtendedPowerCapacity returns a boolean if a field has been set.
+func (o *PowerControlStateAllOf) HasExtendedPowerCapacity() bool {
+	if o != nil && o.ExtendedPowerCapacity != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetExtendedPowerCapacity gets a reference to the given string and assigns it to the ExtendedPowerCapacity field.
+func (o *PowerControlStateAllOf) SetExtendedPowerCapacity(v string) {
+	o.ExtendedPowerCapacity = &v
 }
 
 // GetGridMaxPower returns the GridMaxPower field value if set, zero value otherwise.
@@ -480,6 +514,9 @@ func (o PowerControlStateAllOf) MarshalJSON() ([]byte, error) {
 	if o.AllocatedPower != nil {
 		toSerialize["AllocatedPower"] = o.AllocatedPower
 	}
+	if o.ExtendedPowerCapacity != nil {
+		toSerialize["ExtendedPowerCapacity"] = o.ExtendedPowerCapacity
+	}
 	if o.GridMaxPower != nil {
 		toSerialize["GridMaxPower"] = o.GridMaxPower
 	}
@@ -531,6 +568,7 @@ func (o *PowerControlStateAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AllocatedPower")
+		delete(additionalProperties, "ExtendedPowerCapacity")
 		delete(additionalProperties, "GridMaxPower")
 		delete(additionalProperties, "MaxRequiredPower")
 		delete(additionalProperties, "MinRequiredPower")

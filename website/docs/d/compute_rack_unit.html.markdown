@@ -26,6 +26,8 @@ The following arguments can be used to get data of already created objects in In
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `fault_summary`:(int) The fault summary for the server. 
 * `hardware_uuid`:(string) The universally unique hardware identity of the server provided by the manufacturer. 
+* `kvm_server_state_enabled`:(bool) The KVM server state of the server. 
+* `kvm_vendor`:(string) The KVM Vendor for the server. 
 * `management_mode`:(string) The management mode of the server.* `IntersightStandalone` - Intersight Standalone mode of operation.* `UCSM` - Unified Computing System Manager mode of operation.* `Intersight` - Intersight managed mode of operation. 
 * `memory_speed`:(string) The maximum memory speed in MHz available on the server. 
 * `mgmt_ip_address`:(string) Management address of the server. 

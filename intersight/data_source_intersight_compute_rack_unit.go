@@ -1056,6 +1056,16 @@ func dataSourceComputeRackUnit() *schema.Resource {
 				},
 			},
 		},
+		"kvm_server_state_enabled": {
+			Description: "The KVM server state of the server.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"kvm_vendor": {
+			Description: "The KVM Vendor for the server.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"locator_led": {
 			Description: "A reference to a equipmentLocatorLed resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -2984,6 +2994,16 @@ func dataSourceComputeRackUnit() *schema.Resource {
 					},
 				},
 			},
+		},
+		"kvm_server_state_enabled": {
+			Description: "The KVM server state of the server.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"kvm_vendor": {
+			Description: "The KVM Vendor for the server.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"locator_led": {
 			Description: "A reference to a equipmentLocatorLed resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -5057,6 +5077,16 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 		o.SetKvmIpAddresses(x)
 	}
 
+	if v, ok := d.GetOkExists("kvm_server_state_enabled"); ok {
+		x := (v.(bool))
+		o.SetKvmServerStateEnabled(x)
+	}
+
+	if v, ok := d.GetOk("kvm_vendor"); ok {
+		x := (v.(string))
+		o.SetKvmVendor(x)
+	}
+
 	if v, ok := d.GetOk("locator_led"); ok {
 		p := make([]models.EquipmentLocatorLedRelationship, 0, 1)
 		s := v.([]interface{})
@@ -6154,6 +6184,8 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 				temp["inventory_device_info"] = flattenMapInventoryDeviceInfoRelationship(s.GetInventoryDeviceInfo(), d)
 
 				temp["kvm_ip_addresses"] = flattenListComputeIpAddress(s.GetKvmIpAddresses(), d)
+				temp["kvm_server_state_enabled"] = (s.GetKvmServerStateEnabled())
+				temp["kvm_vendor"] = (s.GetKvmVendor())
 
 				temp["locator_led"] = flattenMapEquipmentLocatorLedRelationship(s.GetLocatorLed(), d)
 				temp["management_mode"] = (s.GetManagementMode())

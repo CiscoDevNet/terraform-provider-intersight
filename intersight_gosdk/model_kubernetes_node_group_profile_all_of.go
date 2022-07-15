@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7078
+API version: 1.0.11-7546
 Contact: intersight@cisco.com
 */
 
@@ -24,8 +24,9 @@ type KubernetesNodeGroupProfileAllOf struct {
 	// Current number of nodes in this node group at any given point in time.
 	Currentsize *int64 `json:"Currentsize,omitempty"`
 	// Desired number of nodes in this node group, same as minsize initially and is updated by the auto-scaler.
-	Desiredsize *int64                     `json:"Desiredsize,omitempty"`
-	Labels      []KubernetesNodeGroupLabel `json:"Labels,omitempty"`
+	Desiredsize *int64                      `json:"Desiredsize,omitempty"`
+	GpuConfig   []InfraBaseGpuConfiguration `json:"GpuConfig,omitempty"`
+	Labels      []KubernetesNodeGroupLabel  `json:"Labels,omitempty"`
 	// Maximum number of nodes this node group can scale up to during repair, replacement or upgrade operations.
 	Maxsize *int64 `json:"Maxsize,omitempty"`
 	// Minimum number of available nodes this node group can scale down to during repair, replacement or upgrade operations.
@@ -187,6 +188,39 @@ func (o *KubernetesNodeGroupProfileAllOf) HasDesiredsize() bool {
 // SetDesiredsize gets a reference to the given int64 and assigns it to the Desiredsize field.
 func (o *KubernetesNodeGroupProfileAllOf) SetDesiredsize(v int64) {
 	o.Desiredsize = &v
+}
+
+// GetGpuConfig returns the GpuConfig field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *KubernetesNodeGroupProfileAllOf) GetGpuConfig() []InfraBaseGpuConfiguration {
+	if o == nil {
+		var ret []InfraBaseGpuConfiguration
+		return ret
+	}
+	return o.GpuConfig
+}
+
+// GetGpuConfigOk returns a tuple with the GpuConfig field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *KubernetesNodeGroupProfileAllOf) GetGpuConfigOk() ([]InfraBaseGpuConfiguration, bool) {
+	if o == nil || o.GpuConfig == nil {
+		return nil, false
+	}
+	return o.GpuConfig, true
+}
+
+// HasGpuConfig returns a boolean if a field has been set.
+func (o *KubernetesNodeGroupProfileAllOf) HasGpuConfig() bool {
+	if o != nil && o.GpuConfig != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetGpuConfig gets a reference to the given []InfraBaseGpuConfiguration and assigns it to the GpuConfig field.
+func (o *KubernetesNodeGroupProfileAllOf) SetGpuConfig(v []InfraBaseGpuConfiguration) {
+	o.GpuConfig = v
 }
 
 // GetLabels returns the Labels field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -530,6 +564,9 @@ func (o KubernetesNodeGroupProfileAllOf) MarshalJSON() ([]byte, error) {
 	if o.Desiredsize != nil {
 		toSerialize["Desiredsize"] = o.Desiredsize
 	}
+	if o.GpuConfig != nil {
+		toSerialize["GpuConfig"] = o.GpuConfig
+	}
 	if o.Labels != nil {
 		toSerialize["Labels"] = o.Labels
 	}
@@ -582,6 +619,7 @@ func (o *KubernetesNodeGroupProfileAllOf) UnmarshalJSON(bytes []byte) (err error
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Currentsize")
 		delete(additionalProperties, "Desiredsize")
+		delete(additionalProperties, "GpuConfig")
 		delete(additionalProperties, "Labels")
 		delete(additionalProperties, "Maxsize")
 		delete(additionalProperties, "Minsize")

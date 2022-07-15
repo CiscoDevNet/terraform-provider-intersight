@@ -1245,6 +1245,30 @@ func flattenListContentParameter(p []models.ContentParameter, d *schema.Resource
 	}
 	return contentparameters
 }
+func flattenListConvergedinfraBaseComplianceDetailsRelationship(p []models.ConvergedinfraBaseComplianceDetailsRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var convergedinfrabasecompliancedetailsrelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		convergedinfrabasecompliancedetailsrelationship := flattenMoMoRef(item)
+		convergedinfrabasecompliancedetailsrelationships = append(convergedinfrabasecompliancedetailsrelationships, convergedinfrabasecompliancedetailsrelationship)
+	}
+	return convergedinfrabasecompliancedetailsrelationships
+}
+func flattenListConvergedinfraStorageComplianceDetailsRelationship(p []models.ConvergedinfraStorageComplianceDetailsRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var convergedinfrastoragecompliancedetailsrelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		convergedinfrastoragecompliancedetailsrelationship := flattenMoMoRef(item)
+		convergedinfrastoragecompliancedetailsrelationships = append(convergedinfrastoragecompliancedetailsrelationships, convergedinfrastoragecompliancedetailsrelationship)
+	}
+	return convergedinfrastoragecompliancedetailsrelationships
+}
 func flattenListCrdCustomResourceConfigProperty(p []models.CrdCustomResourceConfigProperty, d *schema.ResourceData) []map[string]interface{} {
 	var crdcustomresourceconfigpropertys []map[string]interface{}
 	if len(p) == 0 {
@@ -1575,6 +1599,18 @@ func flattenListFabricSwitchProfileRelationship(p []models.FabricSwitchProfileRe
 		fabricswitchprofilerelationships = append(fabricswitchprofilerelationships, fabricswitchprofilerelationship)
 	}
 	return fabricswitchprofilerelationships
+}
+func flattenListFcNeighborRelationship(p []models.FcNeighborRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var fcneighborrelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		fcneighborrelationship := flattenMoMoRef(item)
+		fcneighborrelationships = append(fcneighborrelationships, fcneighborrelationship)
+	}
+	return fcneighborrelationships
 }
 func flattenListFcPhysicalPortRelationship(p []models.FcPhysicalPortRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var fcphysicalportrelationships []map[string]interface{}
@@ -3748,6 +3784,22 @@ func flattenListKubernetesAddon(p []models.KubernetesAddon, d *schema.ResourceDa
 		kubernetesaddons = append(kubernetesaddons, kubernetesaddon)
 	}
 	return kubernetesaddons
+}
+func flattenListKubernetesAddonVersionReference(p []models.KubernetesAddonVersionReference, d *schema.ResourceData) []map[string]interface{} {
+	var kubernetesaddonversionreferences []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		kubernetesaddonversionreference := make(map[string]interface{})
+		kubernetesaddonversionreference["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		kubernetesaddonversionreference["class_id"] = item.GetClassId()
+		kubernetesaddonversionreference["name"] = item.GetName()
+		kubernetesaddonversionreference["object_type"] = item.GetObjectType()
+		kubernetesaddonversionreference["nr_version"] = item.GetVersion()
+		kubernetesaddonversionreferences = append(kubernetesaddonversionreferences, kubernetesaddonversionreference)
+	}
+	return kubernetesaddonversionreferences
 }
 func flattenListKubernetesClusterProfileRelationship(p []models.KubernetesClusterProfileRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var kubernetesclusterprofilerelationships []map[string]interface{}
@@ -6886,6 +6938,18 @@ func flattenListVirtualizationVmInterface(p []models.VirtualizationVmInterface, 
 	}
 	return virtualizationvminterfaces
 }
+func flattenListVirtualizationVmwareClusterRelationship(p []models.VirtualizationVmwareClusterRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var virtualizationvmwareclusterrelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		virtualizationvmwareclusterrelationship := flattenMoMoRef(item)
+		virtualizationvmwareclusterrelationships = append(virtualizationvmwareclusterrelationships, virtualizationvmwareclusterrelationship)
+	}
+	return virtualizationvmwareclusterrelationships
+}
 func flattenListVirtualizationVmwareDatastoreRelationship(p []models.VirtualizationVmwareDatastoreRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var virtualizationvmwaredatastorerelationships []map[string]interface{}
 	if len(p) == 0 {
@@ -9546,6 +9610,60 @@ func flattenMapConnectorPlatformParamBase(p models.ConnectorPlatformParamBase, d
 	connectorplatformparambases = append(connectorplatformparambases, connectorplatformparambase)
 	return connectorplatformparambases
 }
+func flattenMapConvergedinfraAdapterComplianceDetailsRelationship(p models.ConvergedinfraAdapterComplianceDetailsRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var convergedinfraadaptercompliancedetailsrelationships []map[string]interface{}
+	var ret models.ConvergedinfraAdapterComplianceDetailsRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	convergedinfraadaptercompliancedetailsrelationship := make(map[string]interface{})
+	convergedinfraadaptercompliancedetailsrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	convergedinfraadaptercompliancedetailsrelationship["class_id"] = item.GetClassId()
+	convergedinfraadaptercompliancedetailsrelationship["moid"] = item.GetMoid()
+	convergedinfraadaptercompliancedetailsrelationship["object_type"] = item.GetObjectType()
+	convergedinfraadaptercompliancedetailsrelationship["selector"] = item.GetSelector()
+
+	convergedinfraadaptercompliancedetailsrelationships = append(convergedinfraadaptercompliancedetailsrelationships, convergedinfraadaptercompliancedetailsrelationship)
+	return convergedinfraadaptercompliancedetailsrelationships
+}
+func flattenMapConvergedinfraPodRelationship(p models.ConvergedinfraPodRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var convergedinfrapodrelationships []map[string]interface{}
+	var ret models.ConvergedinfraPodRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	convergedinfrapodrelationship := make(map[string]interface{})
+	convergedinfrapodrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	convergedinfrapodrelationship["class_id"] = item.GetClassId()
+	convergedinfrapodrelationship["moid"] = item.GetMoid()
+	convergedinfrapodrelationship["object_type"] = item.GetObjectType()
+	convergedinfrapodrelationship["selector"] = item.GetSelector()
+
+	convergedinfrapodrelationships = append(convergedinfrapodrelationships, convergedinfrapodrelationship)
+	return convergedinfrapodrelationships
+}
+func flattenMapConvergedinfraPodComplianceInfoRelationship(p models.ConvergedinfraPodComplianceInfoRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var convergedinfrapodcomplianceinforelationships []map[string]interface{}
+	var ret models.ConvergedinfraPodComplianceInfoRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	convergedinfrapodcomplianceinforelationship := make(map[string]interface{})
+	convergedinfrapodcomplianceinforelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	convergedinfrapodcomplianceinforelationship["class_id"] = item.GetClassId()
+	convergedinfrapodcomplianceinforelationship["moid"] = item.GetMoid()
+	convergedinfrapodcomplianceinforelationship["object_type"] = item.GetObjectType()
+	convergedinfrapodcomplianceinforelationship["selector"] = item.GetSelector()
+
+	convergedinfrapodcomplianceinforelationships = append(convergedinfrapodcomplianceinforelationships, convergedinfrapodcomplianceinforelationship)
+	return convergedinfrapodcomplianceinforelationships
+}
 func flattenMapConvergedinfraPodSummary(p models.ConvergedinfraPodSummary, d *schema.ResourceData) []map[string]interface{} {
 	var convergedinfrapodsummarys []map[string]interface{}
 	var ret models.ConvergedinfraPodSummary
@@ -9602,6 +9720,42 @@ func flattenMapConvergedinfraPodSummary(p models.ConvergedinfraPodSummary, d *sc
 
 	convergedinfrapodsummarys = append(convergedinfrapodsummarys, convergedinfrapodsummary)
 	return convergedinfrapodsummarys
+}
+func flattenMapConvergedinfraServerComplianceDetailsRelationship(p models.ConvergedinfraServerComplianceDetailsRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var convergedinfraservercompliancedetailsrelationships []map[string]interface{}
+	var ret models.ConvergedinfraServerComplianceDetailsRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	convergedinfraservercompliancedetailsrelationship := make(map[string]interface{})
+	convergedinfraservercompliancedetailsrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	convergedinfraservercompliancedetailsrelationship["class_id"] = item.GetClassId()
+	convergedinfraservercompliancedetailsrelationship["moid"] = item.GetMoid()
+	convergedinfraservercompliancedetailsrelationship["object_type"] = item.GetObjectType()
+	convergedinfraservercompliancedetailsrelationship["selector"] = item.GetSelector()
+
+	convergedinfraservercompliancedetailsrelationships = append(convergedinfraservercompliancedetailsrelationships, convergedinfraservercompliancedetailsrelationship)
+	return convergedinfraservercompliancedetailsrelationships
+}
+func flattenMapConvergedinfraSwitchComplianceDetailsRelationship(p models.ConvergedinfraSwitchComplianceDetailsRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var convergedinfraswitchcompliancedetailsrelationships []map[string]interface{}
+	var ret models.ConvergedinfraSwitchComplianceDetailsRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	convergedinfraswitchcompliancedetailsrelationship := make(map[string]interface{})
+	convergedinfraswitchcompliancedetailsrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	convergedinfraswitchcompliancedetailsrelationship["class_id"] = item.GetClassId()
+	convergedinfraswitchcompliancedetailsrelationship["moid"] = item.GetMoid()
+	convergedinfraswitchcompliancedetailsrelationship["object_type"] = item.GetObjectType()
+	convergedinfraswitchcompliancedetailsrelationship["selector"] = item.GetSelector()
+
+	convergedinfraswitchcompliancedetailsrelationships = append(convergedinfraswitchcompliancedetailsrelationships, convergedinfraswitchcompliancedetailsrelationship)
+	return convergedinfraswitchcompliancedetailsrelationships
 }
 func flattenMapEquipmentBaseRelationship(p models.EquipmentBaseRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var equipmentbaserelationships []map[string]interface{}
@@ -10300,6 +10454,24 @@ func flattenMapFabricVlanSettings(p models.FabricVlanSettings, d *schema.Resourc
 	fabricvlansettingss = append(fabricvlansettingss, fabricvlansettings)
 	return fabricvlansettingss
 }
+func flattenMapFcNeighborRelationship(p models.FcNeighborRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var fcneighborrelationships []map[string]interface{}
+	var ret models.FcNeighborRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	fcneighborrelationship := make(map[string]interface{})
+	fcneighborrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	fcneighborrelationship["class_id"] = item.GetClassId()
+	fcneighborrelationship["moid"] = item.GetMoid()
+	fcneighborrelationship["object_type"] = item.GetObjectType()
+	fcneighborrelationship["selector"] = item.GetSelector()
+
+	fcneighborrelationships = append(fcneighborrelationships, fcneighborrelationship)
+	return fcneighborrelationships
+}
 func flattenMapFcPhysicalPortRelationship(p models.FcPhysicalPortRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var fcphysicalportrelationships []map[string]interface{}
 	var ret models.FcPhysicalPortRelationship
@@ -10317,6 +10489,24 @@ func flattenMapFcPhysicalPortRelationship(p models.FcPhysicalPortRelationship, d
 
 	fcphysicalportrelationships = append(fcphysicalportrelationships, fcphysicalportrelationship)
 	return fcphysicalportrelationships
+}
+func flattenMapFcPortChannelRelationship(p models.FcPortChannelRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var fcportchannelrelationships []map[string]interface{}
+	var ret models.FcPortChannelRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	fcportchannelrelationship := make(map[string]interface{})
+	fcportchannelrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	fcportchannelrelationship["class_id"] = item.GetClassId()
+	fcportchannelrelationship["moid"] = item.GetMoid()
+	fcportchannelrelationship["object_type"] = item.GetObjectType()
+	fcportchannelrelationship["selector"] = item.GetSelector()
+
+	fcportchannelrelationships = append(fcportchannelrelationships, fcportchannelrelationship)
+	return fcportchannelrelationships
 }
 func flattenMapFcpoolBlock(p models.FcpoolBlock, d *schema.ResourceData) []map[string]interface{} {
 	var fcpoolblocks []map[string]interface{}
@@ -14884,6 +15074,24 @@ func flattenMapNetworkElementRelationship(p models.NetworkElementRelationship, d
 	networkelementrelationships = append(networkelementrelationships, networkelementrelationship)
 	return networkelementrelationships
 }
+func flattenMapNetworkElementSummaryRelationship(p models.NetworkElementSummaryRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var networkelementsummaryrelationships []map[string]interface{}
+	var ret models.NetworkElementSummaryRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	networkelementsummaryrelationship := make(map[string]interface{})
+	networkelementsummaryrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	networkelementsummaryrelationship["class_id"] = item.GetClassId()
+	networkelementsummaryrelationship["moid"] = item.GetMoid()
+	networkelementsummaryrelationship["object_type"] = item.GetObjectType()
+	networkelementsummaryrelationship["selector"] = item.GetSelector()
+
+	networkelementsummaryrelationships = append(networkelementsummaryrelationships, networkelementsummaryrelationship)
+	return networkelementsummaryrelationships
+}
 func flattenMapNetworkFcZoneInfoRelationship(p models.NetworkFcZoneInfoRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var networkfczoneinforelationships []map[string]interface{}
 	var ret models.NetworkFcZoneInfoRelationship
@@ -16554,6 +16762,24 @@ func flattenMapStorageAutomaticDriveGroup(p models.StorageAutomaticDriveGroup, d
 
 	storageautomaticdrivegroups = append(storageautomaticdrivegroups, storageautomaticdrivegroup)
 	return storageautomaticdrivegroups
+}
+func flattenMapStorageBaseArrayRelationship(p models.StorageBaseArrayRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var storagebasearrayrelationships []map[string]interface{}
+	var ret models.StorageBaseArrayRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	storagebasearrayrelationship := make(map[string]interface{})
+	storagebasearrayrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	storagebasearrayrelationship["class_id"] = item.GetClassId()
+	storagebasearrayrelationship["moid"] = item.GetMoid()
+	storagebasearrayrelationship["object_type"] = item.GetObjectType()
+	storagebasearrayrelationship["selector"] = item.GetSelector()
+
+	storagebasearrayrelationships = append(storagebasearrayrelationships, storagebasearrayrelationship)
+	return storagebasearrayrelationships
 }
 func flattenMapStorageBaseCapacity(p models.StorageBaseCapacity, d *schema.ResourceData) []map[string]interface{} {
 	var storagebasecapacitys []map[string]interface{}

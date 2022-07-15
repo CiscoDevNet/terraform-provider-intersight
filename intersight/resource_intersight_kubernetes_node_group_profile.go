@@ -285,6 +285,48 @@ func resourceKubernetesNodeGroupProfile() *schema.Resource {
 					}
 					return
 				}},
+			"gpu_config": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"device_id": {
+							Description: "The device Id of the GPU device.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+						},
+						"memory_size": {
+							Description: "The amount of memory on the GPU (GBs).",
+							Type:        schema.TypeInt,
+							Optional:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"vendor_id": {
+							Description: "The vendor Id of the GPU device.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+						},
+					},
+				},
+			},
 			"infra_provider": {
 				Description: "A reference to a kubernetesBaseInfrastructureProvider resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -1087,6 +1129,54 @@ func resourceKubernetesNodeGroupProfileCreate(c context.Context, d *schema.Resou
 		o.SetDesiredsize(x)
 	}
 
+	if v, ok := d.GetOk("gpu_config"); ok {
+		x := make([]models.InfraBaseGpuConfiguration, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := models.NewInfraBaseGpuConfigurationWithDefaults()
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("infra.BaseGpuConfiguration")
+			if v, ok := l["device_id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetDeviceId(x)
+				}
+			}
+			if v, ok := l["memory_size"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMemorySize(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["vendor_id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetVendorId(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		if len(x) > 0 {
+			o.SetGpuConfig(x)
+		}
+	}
+
 	if v, ok := d.GetOk("infra_provider"); ok {
 		p := make([]models.KubernetesBaseInfrastructureProviderRelationship, 0, 1)
 		s := v.([]interface{})
@@ -1586,6 +1676,10 @@ func resourceKubernetesNodeGroupProfileRead(c context.Context, d *schema.Resourc
 		return diag.Errorf("error occurred while setting property DomainGroupMoid in KubernetesNodeGroupProfile object: %s", err.Error())
 	}
 
+	if err := d.Set("gpu_config", flattenListInfraBaseGpuConfiguration(s.GetGpuConfig(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property GpuConfig in KubernetesNodeGroupProfile object: %s", err.Error())
+	}
+
 	if err := d.Set("infra_provider", flattenMapKubernetesBaseInfrastructureProviderRelationship(s.GetInfraProvider(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property InfraProvider in KubernetesNodeGroupProfile object: %s", err.Error())
 	}
@@ -1842,6 +1936,53 @@ func resourceKubernetesNodeGroupProfileUpdate(c context.Context, d *schema.Resou
 		v := d.Get("desiredsize")
 		x := int64(v.(int))
 		o.SetDesiredsize(x)
+	}
+
+	if d.HasChange("gpu_config") {
+		v := d.Get("gpu_config")
+		x := make([]models.InfraBaseGpuConfiguration, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.InfraBaseGpuConfiguration{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("infra.BaseGpuConfiguration")
+			if v, ok := l["device_id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetDeviceId(x)
+				}
+			}
+			if v, ok := l["memory_size"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMemorySize(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["vendor_id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetVendorId(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetGpuConfig(x)
 	}
 
 	if d.HasChange("infra_provider") {

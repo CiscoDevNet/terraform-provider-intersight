@@ -171,6 +171,100 @@ func resourceWorkflowPowerShellBatchApiExecutor() *schema.Resource {
 					},
 				},
 			},
+			"cancel_action": {
+				Type:       schema.TypeList,
+				MinItems:   0,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"asset_target_moid": {
+							Description: "Asset target defines the remote target endpoints which are either managed by\nIntersight or their service APIs are invoked from Intersight. Generic API executor\nservice Jasmine can invoke these remote APIs via its executors. Asset targets can be\naccessed directly for cloud targets or via an associated Intersight Assist. Prerequisite\nto use asset targets is to persist the target details.\nAsset target MoRef can be given as task input of type TargetDataType. Fusion determines\nand populates the target context with the Assist if associated with. It is set\ninternally at the API level.\nIn case of an associated assist, it is used by Assist to fetch the target details\nand form the API request to send to endpoints. In case of cloud asset targets, Jasmine\nfetched the target details from DB, forms the API request and sends it to the target.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
+						"body": {
+							Description: "The optional request body that is sent as part of this API request.\nThe request body can contain a golang template that can be populated with task input\nparameters and previous API output parameters.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"content_type": {
+							Description: "Intersight Orchestrator, with the support of response parser specification,\ncan extract the values from API responses and map them to task output parameters.\nThe value extraction is supported for response content types XML, JSON and Text.\nThe type of the content that gets passed as payload and response in this\nAPI. The supported values are json, xml, text.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"description": {
+							Description: "A description that task designer can add to individual API requests that explain \nwhat the API call is about.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"error_content_type": {
+							Description: "Intersight Orchestrator, with the support of response parser specification,\ncan extract the values from API responses and map them to task output parameters.\nThe value extraction is supported for response content types XML, JSON and Text.\nOptional input to specify the content type in case of error API response. This\nshould be used if the content type of error response is different from that of\nthe success response. If not specified, contentType input value is used to parse\nthe error response.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"label": {
+							Description: "A user friendly label that task designers have given to the batch API request.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"name": {
+							Description: "A reference name for this API request within the batch API request.\nThis name shall be used to map the API output parameters to subsequent\nAPI input parameters within a batch API task.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"outcomes": {
+							Description: "All the possible outcomes of this API are captured here. Outcomes property\nis a collection property of type workflow.Outcome objects.\nThe outcomes can be mapped to the message to be shown. The outcomes are\nevaluated in the order they are given. At the end of the outcomes list,\nan catchall success/fail outcome can be added with condition as 'true'.\nThis is an optional\nproperty and if not specified the task will be marked as success.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"response_spec": {
+							Description: "The optional grammar specification for parsing the response to extract the\nrequired values.\nThe specification should have extraction specification specified for\nall the API output parameters.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"skip_on_condition": {
+							Description: "The skip expression, if provided, allows the batch API executor to skip the\napi execution when the given expression evaluates to true.\nThe expression is given as such a golang template that has to be\nevaluated to a final content true/false. The expression is an optional and in\ncase not provided, the API will always be executed.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"start_delay": {
+							Description: "The delay in seconds after which the API needs to be executed.\nBy default, the given API is executed immediately. Specifying a start delay adds to the delay to execution.\nStart Delay is not supported for the first API in the Batch and cumulative delay of all the APIs in the Batch should not exceed the task time out.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+						},
+						"timeout": {
+							Description: "The duration in seconds by which the API response is expected from the API target.\nIf the end point does not respond for the API request within this timeout\nduration, the task will be marked as failed.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+						},
+					},
+				},
+			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
@@ -763,6 +857,112 @@ func resourceWorkflowPowerShellBatchApiExecutorCreate(c context.Context, d *sche
 		}
 	}
 
+	if v, ok := d.GetOk("cancel_action"); ok {
+		x := make([]models.WorkflowApi, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := models.NewWorkflowApiWithDefaults()
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			if v, ok := l["body"]; ok {
+				{
+					x := (v.(string))
+					o.SetBody(x)
+				}
+			}
+			o.SetClassId("workflow.Api")
+			if v, ok := l["content_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetContentType(x)
+				}
+			}
+			if v, ok := l["description"]; ok {
+				{
+					x := (v.(string))
+					o.SetDescription(x)
+				}
+			}
+			if v, ok := l["error_content_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetErrorContentType(x)
+				}
+			}
+			if v, ok := l["label"]; ok {
+				{
+					x := (v.(string))
+					o.SetLabel(x)
+				}
+			}
+			if v, ok := l["name"]; ok {
+				{
+					x := (v.(string))
+					o.SetName(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["outcomes"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						x2 := x1.(map[string]interface{})
+						o.SetOutcomes(x2)
+					}
+				}
+			}
+			if v, ok := l["response_spec"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						x2 := x1.(map[string]interface{})
+						o.SetResponseSpec(x2)
+					}
+				}
+			}
+			if v, ok := l["skip_on_condition"]; ok {
+				{
+					x := (v.(string))
+					o.SetSkipOnCondition(x)
+				}
+			}
+			if v, ok := l["start_delay"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetStartDelay(x)
+				}
+			}
+			if v, ok := l["timeout"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetTimeout(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		if len(x) > 0 {
+			o.SetCancelAction(x)
+		}
+	}
+
 	o.SetClassId("workflow.PowerShellBatchApiExecutor")
 
 	if v, ok := d.GetOk("constraints"); ok {
@@ -1036,6 +1236,10 @@ func resourceWorkflowPowerShellBatchApiExecutorRead(c context.Context, d *schema
 		return diag.Errorf("error occurred while setting property Batch in WorkflowPowerShellBatchApiExecutor object: %s", err.Error())
 	}
 
+	if err := d.Set("cancel_action", flattenListWorkflowApi(s.GetCancelAction(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property CancelAction in WorkflowPowerShellBatchApiExecutor object: %s", err.Error())
+	}
+
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
 		return diag.Errorf("error occurred while setting property ClassId in WorkflowPowerShellBatchApiExecutor object: %s", err.Error())
 	}
@@ -1248,6 +1452,111 @@ func resourceWorkflowPowerShellBatchApiExecutorUpdate(c context.Context, d *sche
 			x = append(x, *o)
 		}
 		o.SetBatch(x)
+	}
+
+	if d.HasChange("cancel_action") {
+		v := d.Get("cancel_action")
+		x := make([]models.WorkflowApi, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.WorkflowApi{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			if v, ok := l["body"]; ok {
+				{
+					x := (v.(string))
+					o.SetBody(x)
+				}
+			}
+			o.SetClassId("workflow.Api")
+			if v, ok := l["content_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetContentType(x)
+				}
+			}
+			if v, ok := l["description"]; ok {
+				{
+					x := (v.(string))
+					o.SetDescription(x)
+				}
+			}
+			if v, ok := l["error_content_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetErrorContentType(x)
+				}
+			}
+			if v, ok := l["label"]; ok {
+				{
+					x := (v.(string))
+					o.SetLabel(x)
+				}
+			}
+			if v, ok := l["name"]; ok {
+				{
+					x := (v.(string))
+					o.SetName(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["outcomes"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						x2 := x1.(map[string]interface{})
+						o.SetOutcomes(x2)
+					}
+				}
+			}
+			if v, ok := l["response_spec"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						x2 := x1.(map[string]interface{})
+						o.SetResponseSpec(x2)
+					}
+				}
+			}
+			if v, ok := l["skip_on_condition"]; ok {
+				{
+					x := (v.(string))
+					o.SetSkipOnCondition(x)
+				}
+			}
+			if v, ok := l["start_delay"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetStartDelay(x)
+				}
+			}
+			if v, ok := l["timeout"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetTimeout(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetCancelAction(x)
 	}
 
 	o.SetClassId("workflow.PowerShellBatchApiExecutor")

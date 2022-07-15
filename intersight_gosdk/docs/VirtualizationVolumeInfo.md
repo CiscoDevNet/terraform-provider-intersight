@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **Encryption** | Pointer to **bool** | Set to true, if the volume should be encrypted. | [optional] 
 **Iops** | Pointer to **int64** | IOPS for the volume for applicable volume types. | [optional] 
 **Order** | Pointer to **int64** | Order of the disk attachment to the VM. | [optional] 
+**Throughput** | Pointer to **int64** | Throughput for the volume for applicable volume types. | [optional] 
 **VolumeId** | Pointer to **string** | Unique volume id assigned by the cloud provider. | [optional] [readonly] 
 **VolumeName** | Pointer to **string** | Name assigned to the volume created. | [optional] 
 **VolumeSize** | Pointer to **int64** | Size of the volume created in GB. | [optional] 
@@ -199,6 +200,31 @@ SetOrder sets Order field to given value.
 `func (o *VirtualizationVolumeInfo) HasOrder() bool`
 
 HasOrder returns a boolean if a field has been set.
+
+### GetThroughput
+
+`func (o *VirtualizationVolumeInfo) GetThroughput() int64`
+
+GetThroughput returns the Throughput field if non-nil, zero value otherwise.
+
+### GetThroughputOk
+
+`func (o *VirtualizationVolumeInfo) GetThroughputOk() (*int64, bool)`
+
+GetThroughputOk returns a tuple with the Throughput field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetThroughput
+
+`func (o *VirtualizationVolumeInfo) SetThroughput(v int64)`
+
+SetThroughput sets Throughput field to given value.
+
+### HasThroughput
+
+`func (o *VirtualizationVolumeInfo) HasThroughput() bool`
+
+HasThroughput returns a boolean if a field has been set.
 
 ### GetVolumeId
 

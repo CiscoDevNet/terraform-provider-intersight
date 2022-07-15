@@ -5,6 +5,7 @@ All URIs are relative to *https://intersight.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**DeleteComputeRackUnit**](ComputeApi.md#DeleteComputeRackUnit) | **Delete** /api/v1/compute/RackUnits/{Moid} | Delete a &#39;compute.RackUnit&#39; resource.
+[**DeleteComputeRackUnitIdentity**](ComputeApi.md#DeleteComputeRackUnitIdentity) | **Delete** /api/v1/compute/RackUnitIdentities/{Moid} | Delete a &#39;compute.RackUnitIdentity&#39; resource.
 [**DeleteComputeServerPowerPolicy**](ComputeApi.md#DeleteComputeServerPowerPolicy) | **Delete** /api/v1/compute/ServerPowerPolicies/{Moid} | Delete a &#39;compute.ServerPowerPolicy&#39; resource.
 [**GetComputeBladeByMoid**](ComputeApi.md#GetComputeBladeByMoid) | **Get** /api/v1/compute/Blades/{Moid} | Read a &#39;compute.Blade&#39; resource.
 [**GetComputeBladeIdentityByMoid**](ComputeApi.md#GetComputeBladeIdentityByMoid) | **Get** /api/v1/compute/BladeIdentities/{Moid} | Read a &#39;compute.BladeIdentity&#39; resource.
@@ -89,6 +90,72 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteComputeRackUnitRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteComputeRackUnitIdentity
+
+> DeleteComputeRackUnitIdentity(ctx, moid).Execute()
+
+Delete a 'compute.RackUnitIdentity' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ComputeApi.DeleteComputeRackUnitIdentity(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ComputeApi.DeleteComputeRackUnitIdentity``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteComputeRackUnitIdentityRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes

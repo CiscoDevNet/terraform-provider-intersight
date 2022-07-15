@@ -404,6 +404,11 @@ func dataSourceNtpNtpServer() *schema.Resource {
 				},
 			},
 		},
+		"vrf_name": {
+			Description: "VRF name to be used by NTP Server.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 	}
 	var model = map[string]*schema.Schema{"account_moid": {
 		Description: "The Account ID for this managed object.",
@@ -793,6 +798,11 @@ func dataSourceNtpNtpServer() *schema.Resource {
 					},
 				},
 			},
+		},
+		"vrf_name": {
+			Description: "VRF name to be used by NTP Server.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 	}
 	model["results"] = &schema.Schema{
@@ -1221,6 +1231,11 @@ func dataSourceNtpNtpServerRead(c context.Context, d *schema.ResourceData, meta 
 		}
 	}
 
+	if v, ok := d.GetOk("vrf_name"); ok {
+		x := (v.(string))
+		o.SetVrfName(x)
+	}
+
 	data, err := o.MarshalJSON()
 	if err != nil {
 		return diag.Errorf("json marshal of NtpNtpServer object failed with error : %s", err.Error())
@@ -1289,6 +1304,7 @@ func dataSourceNtpNtpServerRead(c context.Context, d *schema.ResourceData, meta 
 				temp["type"] = (s.GetType())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
+				temp["vrf_name"] = (s.GetVrfName())
 				ntpNtpServerResults = append(ntpNtpServerResults, temp)
 			}
 		}

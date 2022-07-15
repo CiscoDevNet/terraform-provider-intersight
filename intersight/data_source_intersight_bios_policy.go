@@ -429,6 +429,11 @@ func dataSourceBiosPolicy() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"cpu_pa_limit": {
+			Description: "BIOS Token for setting Limit CPU PA to 46 Bits configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"cpu_perf_enhancement": {
 			Description: "BIOS Token for setting Enhanced CPU Performance configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CpuPerfEnhancement token.\n* `Disabled` - Value - Disabled for configuring CpuPerfEnhancement token.",
 			Type:        schema.TypeString,
@@ -2102,6 +2107,11 @@ func dataSourceBiosPolicy() *schema.Resource {
 		},
 		"tpm_pending_operation": {
 			Description: "BIOS Token for setting TPM Pending Operation configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `None` - Value - None for configuring TpmPendingOperation token.\n* `TpmClear` - Value - TpmClear for configuring TpmPendingOperation token.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"tpm_ppi_required": {
+			Description: "BIOS Token for setting TPM Minimal Physical Presence configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -2743,6 +2753,11 @@ func dataSourceBiosPolicy() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"cpu_pa_limit": {
+			Description: "BIOS Token for setting Limit CPU PA to 46 Bits configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"cpu_perf_enhancement": {
 			Description: "BIOS Token for setting Enhanced CPU Performance configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CpuPerfEnhancement token.\n* `Disabled` - Value - Disabled for configuring CpuPerfEnhancement token.",
 			Type:        schema.TypeString,
@@ -4416,6 +4431,11 @@ func dataSourceBiosPolicy() *schema.Resource {
 		},
 		"tpm_pending_operation": {
 			Description: "BIOS Token for setting TPM Pending Operation configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `None` - Value - None for configuring TpmPendingOperation token.\n* `TpmClear` - Value - TpmClear for configuring TpmPendingOperation token.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"tpm_ppi_required": {
+			Description: "BIOS Token for setting TPM Minimal Physical Presence configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -5080,6 +5100,11 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 	if v, ok := d.GetOk("cpu_frequency_floor"); ok {
 		x := (v.(string))
 		o.SetCpuFrequencyFloor(x)
+	}
+
+	if v, ok := d.GetOk("cpu_pa_limit"); ok {
+		x := (v.(string))
+		o.SetCpuPaLimit(x)
 	}
 
 	if v, ok := d.GetOk("cpu_perf_enhancement"); ok {
@@ -6802,6 +6827,11 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetTpmPendingOperation(x)
 	}
 
+	if v, ok := d.GetOk("tpm_ppi_required"); ok {
+		x := (v.(string))
+		o.SetTpmPpiRequired(x)
+	}
+
 	if v, ok := d.GetOk("tpm_support"); ok {
 		x := (v.(string))
 		o.SetTpmSupport(x)
@@ -7104,6 +7134,7 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 				temp["core_multi_processing"] = (s.GetCoreMultiProcessing())
 				temp["cpu_energy_performance"] = (s.GetCpuEnergyPerformance())
 				temp["cpu_frequency_floor"] = (s.GetCpuFrequencyFloor())
+				temp["cpu_pa_limit"] = (s.GetCpuPaLimit())
 				temp["cpu_perf_enhancement"] = (s.GetCpuPerfEnhancement())
 				temp["cpu_performance"] = (s.GetCpuPerformance())
 				temp["cpu_power_management"] = (s.GetCpuPowerManagement())
@@ -7419,6 +7450,7 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 				temp["terminal_type"] = (s.GetTerminalType())
 				temp["tpm_control"] = (s.GetTpmControl())
 				temp["tpm_pending_operation"] = (s.GetTpmPendingOperation())
+				temp["tpm_ppi_required"] = (s.GetTpmPpiRequired())
 				temp["tpm_support"] = (s.GetTpmSupport())
 				temp["tsme"] = (s.GetTsme())
 				temp["txt_support"] = (s.GetTxtSupport())

@@ -16,11 +16,14 @@ To access the ith object of the results obtained, use `data.intersight_network_i
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `admin_state`:(string) Admin state of the interface list. 
+* `allowed_vlans`:(string) Allowed VLANs of the interface list. 
 * `create_time`:(string) The time when this managed object was created. 
+* `description`:(string) Description of the interface list. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `ip_address`:(string) IP address of the interface list. 
+* `ip_subnet`:(int) IP subnet of the interface list. 
 * `mac`:(string) MAC address of the interface list. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 

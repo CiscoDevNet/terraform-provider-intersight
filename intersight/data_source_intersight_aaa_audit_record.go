@@ -60,6 +60,11 @@ func dataSourceAaaAuditRecord() *schema.Resource {
 			Optional:         true,
 			DiffSuppressFunc: SuppressDiffAdditionProps,
 		},
+		"affected_object_type_label": {
+			Description: "The user-friendly label for the object type that was changed.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"ancestors": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
@@ -509,6 +514,11 @@ func dataSourceAaaAuditRecord() *schema.Resource {
 			Type:             schema.TypeString,
 			Optional:         true,
 			DiffSuppressFunc: SuppressDiffAdditionProps,
+		},
+		"affected_object_type_label": {
+			Description: "The user-friendly label for the object type that was changed.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"ancestors": {
 			Description: "An array of relationships to moBaseMo resources.",
@@ -987,6 +997,11 @@ func dataSourceAaaAuditRecordRead(c context.Context, d *schema.ResourceData, met
 		}
 	}
 
+	if v, ok := d.GetOk("affected_object_type_label"); ok {
+		x := (v.(string))
+		o.SetAffectedObjectTypeLabel(x)
+	}
+
 	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
@@ -1458,6 +1473,7 @@ func dataSourceAaaAuditRecordRead(c context.Context, d *schema.ResourceData, met
 				temp["account"] = flattenMapIamAccountRelationship(s.GetAccount(), d)
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+				temp["affected_object_type_label"] = (s.GetAffectedObjectTypeLabel())
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["class_id"] = (s.GetClassId())

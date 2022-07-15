@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **Batch** | Pointer to [**[]WorkflowApi**](WorkflowApi.md) |  | [optional] 
+**CancelAction** | Pointer to [**[]WorkflowApi**](WorkflowApi.md) |  | [optional] 
 **Constraints** | Pointer to [**NullableWorkflowTaskConstraints**](WorkflowTaskConstraints.md) |  | [optional] 
 **Description** | Pointer to **string** | A detailed description about the batch APIs. | [optional] 
 **Name** | Pointer to **string** | Name for the batch API task. | [optional] 
@@ -110,6 +111,41 @@ HasBatch returns a boolean if a field has been set.
 `func (o *WorkflowBatchExecutor) UnsetBatch()`
 
 UnsetBatch ensures that no value is present for Batch, not even an explicit nil
+### GetCancelAction
+
+`func (o *WorkflowBatchExecutor) GetCancelAction() []WorkflowApi`
+
+GetCancelAction returns the CancelAction field if non-nil, zero value otherwise.
+
+### GetCancelActionOk
+
+`func (o *WorkflowBatchExecutor) GetCancelActionOk() (*[]WorkflowApi, bool)`
+
+GetCancelActionOk returns a tuple with the CancelAction field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCancelAction
+
+`func (o *WorkflowBatchExecutor) SetCancelAction(v []WorkflowApi)`
+
+SetCancelAction sets CancelAction field to given value.
+
+### HasCancelAction
+
+`func (o *WorkflowBatchExecutor) HasCancelAction() bool`
+
+HasCancelAction returns a boolean if a field has been set.
+
+### SetCancelActionNil
+
+`func (o *WorkflowBatchExecutor) SetCancelActionNil(b bool)`
+
+ SetCancelActionNil sets the value for CancelAction to be an explicit nil
+
+### UnsetCancelAction
+`func (o *WorkflowBatchExecutor) UnsetCancelAction()`
+
+UnsetCancelAction ensures that no value is present for CancelAction, not even an explicit nil
 ### GetConstraints
 
 `func (o *WorkflowBatchExecutor) GetConstraints() WorkflowTaskConstraints`
