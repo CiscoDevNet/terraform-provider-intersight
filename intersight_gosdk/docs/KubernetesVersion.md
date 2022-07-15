@@ -6,6 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "kubernetes.Version"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "kubernetes.Version"]
+**EssentialAddons** | Pointer to [**[]KubernetesAddonVersionReference**](KubernetesAddonVersionReference.md) |  | [optional] 
+**HelmOperatorVersion** | Pointer to **string** | Version of helm operator to use for this kubernetes version. | [optional] 
+**IksUtilityContainer** | Pointer to **string** | The iks utility container to use for the kubernetes version. | [optional] 
 **KubernetesVersion** | Pointer to **string** | Desired Kubernetes version. | [optional] 
 **Name** | Pointer to **string** | The name of this IKS kubernetes version. | [optional] 
 **BootIso** | Pointer to [**SoftwareSolutionDistributableRelationship**](SoftwareSolutionDistributableRelationship.md) |  | [optional] 
@@ -72,6 +75,91 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetEssentialAddons
+
+`func (o *KubernetesVersion) GetEssentialAddons() []KubernetesAddonVersionReference`
+
+GetEssentialAddons returns the EssentialAddons field if non-nil, zero value otherwise.
+
+### GetEssentialAddonsOk
+
+`func (o *KubernetesVersion) GetEssentialAddonsOk() (*[]KubernetesAddonVersionReference, bool)`
+
+GetEssentialAddonsOk returns a tuple with the EssentialAddons field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEssentialAddons
+
+`func (o *KubernetesVersion) SetEssentialAddons(v []KubernetesAddonVersionReference)`
+
+SetEssentialAddons sets EssentialAddons field to given value.
+
+### HasEssentialAddons
+
+`func (o *KubernetesVersion) HasEssentialAddons() bool`
+
+HasEssentialAddons returns a boolean if a field has been set.
+
+### SetEssentialAddonsNil
+
+`func (o *KubernetesVersion) SetEssentialAddonsNil(b bool)`
+
+ SetEssentialAddonsNil sets the value for EssentialAddons to be an explicit nil
+
+### UnsetEssentialAddons
+`func (o *KubernetesVersion) UnsetEssentialAddons()`
+
+UnsetEssentialAddons ensures that no value is present for EssentialAddons, not even an explicit nil
+### GetHelmOperatorVersion
+
+`func (o *KubernetesVersion) GetHelmOperatorVersion() string`
+
+GetHelmOperatorVersion returns the HelmOperatorVersion field if non-nil, zero value otherwise.
+
+### GetHelmOperatorVersionOk
+
+`func (o *KubernetesVersion) GetHelmOperatorVersionOk() (*string, bool)`
+
+GetHelmOperatorVersionOk returns a tuple with the HelmOperatorVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHelmOperatorVersion
+
+`func (o *KubernetesVersion) SetHelmOperatorVersion(v string)`
+
+SetHelmOperatorVersion sets HelmOperatorVersion field to given value.
+
+### HasHelmOperatorVersion
+
+`func (o *KubernetesVersion) HasHelmOperatorVersion() bool`
+
+HasHelmOperatorVersion returns a boolean if a field has been set.
+
+### GetIksUtilityContainer
+
+`func (o *KubernetesVersion) GetIksUtilityContainer() string`
+
+GetIksUtilityContainer returns the IksUtilityContainer field if non-nil, zero value otherwise.
+
+### GetIksUtilityContainerOk
+
+`func (o *KubernetesVersion) GetIksUtilityContainerOk() (*string, bool)`
+
+GetIksUtilityContainerOk returns a tuple with the IksUtilityContainer field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIksUtilityContainer
+
+`func (o *KubernetesVersion) SetIksUtilityContainer(v string)`
+
+SetIksUtilityContainer sets IksUtilityContainer field to given value.
+
+### HasIksUtilityContainer
+
+`func (o *KubernetesVersion) HasIksUtilityContainer() bool`
+
+HasIksUtilityContainer returns a boolean if a field has been set.
 
 ### GetKubernetesVersion
 

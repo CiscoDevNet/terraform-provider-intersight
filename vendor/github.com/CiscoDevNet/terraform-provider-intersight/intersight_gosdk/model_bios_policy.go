@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7078
+API version: 1.0.11-7546
 Contact: intersight@cisco.com
 */
 
@@ -170,6 +170,8 @@ type BiosPolicy struct {
 	CpuEnergyPerformance *string `json:"CpuEnergyPerformance,omitempty"`
 	// BIOS Token for setting Frequency Floor Override configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	CpuFrequencyFloor *string `json:"CpuFrequencyFloor,omitempty"`
+	// BIOS Token for setting Limit CPU PA to 46 Bits configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	CpuPaLimit *string `json:"CpuPaLimit,omitempty"`
 	// BIOS Token for setting Enhanced CPU Performance configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CpuPerfEnhancement token. * `Disabled` - Value - Disabled for configuring CpuPerfEnhancement token.
 	CpuPerfEnhancement *string `json:"CpuPerfEnhancement,omitempty"`
 	// BIOS Token for setting CPU Performance configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `custom` - Value - custom for configuring CpuPerformance token. * `enterprise` - Value - enterprise for configuring CpuPerformance token. * `high-throughput` - Value - high-throughput for configuring CpuPerformance token. * `hpc` - Value - hpc for configuring CpuPerformance token.
@@ -758,6 +760,8 @@ type BiosPolicy struct {
 	TpmControl *string `json:"TpmControl,omitempty"`
 	// BIOS Token for setting TPM Pending Operation configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `None` - Value - None for configuring TpmPendingOperation token. * `TpmClear` - Value - TpmClear for configuring TpmPendingOperation token.
 	TpmPendingOperation *string `json:"TpmPendingOperation,omitempty"`
+	// BIOS Token for setting TPM Minimal Physical Presence configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	TpmPpiRequired *string `json:"TpmPpiRequired,omitempty"`
 	// BIOS Token for setting TPM Support configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	TpmSupport *string `json:"TpmSupport,omitempty"`
 	// BIOS Token for setting Transparent Secure Memory Encryption configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring Tsme token. * `disabled` - Value - disabled for configuring Tsme token. * `enabled` - Value - enabled for configuring Tsme token.
@@ -966,6 +970,8 @@ func NewBiosPolicy(classId string, objectType string) *BiosPolicy {
 	this.CpuEnergyPerformance = &cpuEnergyPerformance
 	var cpuFrequencyFloor string = "platform-default"
 	this.CpuFrequencyFloor = &cpuFrequencyFloor
+	var cpuPaLimit string = "platform-default"
+	this.CpuPaLimit = &cpuPaLimit
 	var cpuPerfEnhancement string = "platform-default"
 	this.CpuPerfEnhancement = &cpuPerfEnhancement
 	var cpuPerformance string = "platform-default"
@@ -1554,6 +1560,8 @@ func NewBiosPolicy(classId string, objectType string) *BiosPolicy {
 	this.TpmControl = &tpmControl
 	var tpmPendingOperation string = "platform-default"
 	this.TpmPendingOperation = &tpmPendingOperation
+	var tpmPpiRequired string = "platform-default"
+	this.TpmPpiRequired = &tpmPpiRequired
 	var tpmSupport string = "platform-default"
 	this.TpmSupport = &tpmSupport
 	var tsme string = "platform-default"
@@ -1758,6 +1766,8 @@ func NewBiosPolicyWithDefaults() *BiosPolicy {
 	this.CpuEnergyPerformance = &cpuEnergyPerformance
 	var cpuFrequencyFloor string = "platform-default"
 	this.CpuFrequencyFloor = &cpuFrequencyFloor
+	var cpuPaLimit string = "platform-default"
+	this.CpuPaLimit = &cpuPaLimit
 	var cpuPerfEnhancement string = "platform-default"
 	this.CpuPerfEnhancement = &cpuPerfEnhancement
 	var cpuPerformance string = "platform-default"
@@ -2346,6 +2356,8 @@ func NewBiosPolicyWithDefaults() *BiosPolicy {
 	this.TpmControl = &tpmControl
 	var tpmPendingOperation string = "platform-default"
 	this.TpmPendingOperation = &tpmPendingOperation
+	var tpmPpiRequired string = "platform-default"
+	this.TpmPpiRequired = &tpmPpiRequired
 	var tpmSupport string = "platform-default"
 	this.TpmSupport = &tpmSupport
 	var tsme string = "platform-default"
@@ -4777,6 +4789,38 @@ func (o *BiosPolicy) HasCpuFrequencyFloor() bool {
 // SetCpuFrequencyFloor gets a reference to the given string and assigns it to the CpuFrequencyFloor field.
 func (o *BiosPolicy) SetCpuFrequencyFloor(v string) {
 	o.CpuFrequencyFloor = &v
+}
+
+// GetCpuPaLimit returns the CpuPaLimit field value if set, zero value otherwise.
+func (o *BiosPolicy) GetCpuPaLimit() string {
+	if o == nil || o.CpuPaLimit == nil {
+		var ret string
+		return ret
+	}
+	return *o.CpuPaLimit
+}
+
+// GetCpuPaLimitOk returns a tuple with the CpuPaLimit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetCpuPaLimitOk() (*string, bool) {
+	if o == nil || o.CpuPaLimit == nil {
+		return nil, false
+	}
+	return o.CpuPaLimit, true
+}
+
+// HasCpuPaLimit returns a boolean if a field has been set.
+func (o *BiosPolicy) HasCpuPaLimit() bool {
+	if o != nil && o.CpuPaLimit != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCpuPaLimit gets a reference to the given string and assigns it to the CpuPaLimit field.
+func (o *BiosPolicy) SetCpuPaLimit(v string) {
+	o.CpuPaLimit = &v
 }
 
 // GetCpuPerfEnhancement returns the CpuPerfEnhancement field value if set, zero value otherwise.
@@ -14187,6 +14231,38 @@ func (o *BiosPolicy) SetTpmPendingOperation(v string) {
 	o.TpmPendingOperation = &v
 }
 
+// GetTpmPpiRequired returns the TpmPpiRequired field value if set, zero value otherwise.
+func (o *BiosPolicy) GetTpmPpiRequired() string {
+	if o == nil || o.TpmPpiRequired == nil {
+		var ret string
+		return ret
+	}
+	return *o.TpmPpiRequired
+}
+
+// GetTpmPpiRequiredOk returns a tuple with the TpmPpiRequired field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetTpmPpiRequiredOk() (*string, bool) {
+	if o == nil || o.TpmPpiRequired == nil {
+		return nil, false
+	}
+	return o.TpmPpiRequired, true
+}
+
+// HasTpmPpiRequired returns a boolean if a field has been set.
+func (o *BiosPolicy) HasTpmPpiRequired() bool {
+	if o != nil && o.TpmPpiRequired != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTpmPpiRequired gets a reference to the given string and assigns it to the TpmPpiRequired field.
+func (o *BiosPolicy) SetTpmPpiRequired(v string) {
+	o.TpmPpiRequired = &v
+}
+
 // GetTpmSupport returns the TpmSupport field value if set, zero value otherwise.
 func (o *BiosPolicy) GetTpmSupport() string {
 	if o == nil || o.TpmSupport == nil {
@@ -15223,6 +15299,9 @@ func (o BiosPolicy) MarshalJSON() ([]byte, error) {
 	if o.CpuFrequencyFloor != nil {
 		toSerialize["CpuFrequencyFloor"] = o.CpuFrequencyFloor
 	}
+	if o.CpuPaLimit != nil {
+		toSerialize["CpuPaLimit"] = o.CpuPaLimit
+	}
 	if o.CpuPerfEnhancement != nil {
 		toSerialize["CpuPerfEnhancement"] = o.CpuPerfEnhancement
 	}
@@ -16105,6 +16184,9 @@ func (o BiosPolicy) MarshalJSON() ([]byte, error) {
 	if o.TpmPendingOperation != nil {
 		toSerialize["TpmPendingOperation"] = o.TpmPendingOperation
 	}
+	if o.TpmPpiRequired != nil {
+		toSerialize["TpmPpiRequired"] = o.TpmPpiRequired
+	}
 	if o.TpmSupport != nil {
 		toSerialize["TpmSupport"] = o.TpmSupport
 	}
@@ -16340,6 +16422,8 @@ func (o *BiosPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		CpuEnergyPerformance *string `json:"CpuEnergyPerformance,omitempty"`
 		// BIOS Token for setting Frequency Floor Override configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 		CpuFrequencyFloor *string `json:"CpuFrequencyFloor,omitempty"`
+		// BIOS Token for setting Limit CPU PA to 46 Bits configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+		CpuPaLimit *string `json:"CpuPaLimit,omitempty"`
 		// BIOS Token for setting Enhanced CPU Performance configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CpuPerfEnhancement token. * `Disabled` - Value - Disabled for configuring CpuPerfEnhancement token.
 		CpuPerfEnhancement *string `json:"CpuPerfEnhancement,omitempty"`
 		// BIOS Token for setting CPU Performance configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `custom` - Value - custom for configuring CpuPerformance token. * `enterprise` - Value - enterprise for configuring CpuPerformance token. * `high-throughput` - Value - high-throughput for configuring CpuPerformance token. * `hpc` - Value - hpc for configuring CpuPerformance token.
@@ -16928,6 +17012,8 @@ func (o *BiosPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		TpmControl *string `json:"TpmControl,omitempty"`
 		// BIOS Token for setting TPM Pending Operation configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `None` - Value - None for configuring TpmPendingOperation token. * `TpmClear` - Value - TpmClear for configuring TpmPendingOperation token.
 		TpmPendingOperation *string `json:"TpmPendingOperation,omitempty"`
+		// BIOS Token for setting TPM Minimal Physical Presence configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+		TpmPpiRequired *string `json:"TpmPpiRequired,omitempty"`
 		// BIOS Token for setting TPM Support configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 		TpmSupport *string `json:"TpmSupport,omitempty"`
 		// BIOS Token for setting Transparent Secure Memory Encryption configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring Tsme token. * `disabled` - Value - disabled for configuring Tsme token. * `enabled` - Value - enabled for configuring Tsme token.
@@ -17059,6 +17145,7 @@ func (o *BiosPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		varBiosPolicy.CoreMultiProcessing = varBiosPolicyWithoutEmbeddedStruct.CoreMultiProcessing
 		varBiosPolicy.CpuEnergyPerformance = varBiosPolicyWithoutEmbeddedStruct.CpuEnergyPerformance
 		varBiosPolicy.CpuFrequencyFloor = varBiosPolicyWithoutEmbeddedStruct.CpuFrequencyFloor
+		varBiosPolicy.CpuPaLimit = varBiosPolicyWithoutEmbeddedStruct.CpuPaLimit
 		varBiosPolicy.CpuPerfEnhancement = varBiosPolicyWithoutEmbeddedStruct.CpuPerfEnhancement
 		varBiosPolicy.CpuPerformance = varBiosPolicyWithoutEmbeddedStruct.CpuPerformance
 		varBiosPolicy.CpuPowerManagement = varBiosPolicyWithoutEmbeddedStruct.CpuPowerManagement
@@ -17353,6 +17440,7 @@ func (o *BiosPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		varBiosPolicy.TerminalType = varBiosPolicyWithoutEmbeddedStruct.TerminalType
 		varBiosPolicy.TpmControl = varBiosPolicyWithoutEmbeddedStruct.TpmControl
 		varBiosPolicy.TpmPendingOperation = varBiosPolicyWithoutEmbeddedStruct.TpmPendingOperation
+		varBiosPolicy.TpmPpiRequired = varBiosPolicyWithoutEmbeddedStruct.TpmPpiRequired
 		varBiosPolicy.TpmSupport = varBiosPolicyWithoutEmbeddedStruct.TpmSupport
 		varBiosPolicy.Tsme = varBiosPolicyWithoutEmbeddedStruct.Tsme
 		varBiosPolicy.TxtSupport = varBiosPolicyWithoutEmbeddedStruct.TxtSupport
@@ -17470,6 +17558,7 @@ func (o *BiosPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "CoreMultiProcessing")
 		delete(additionalProperties, "CpuEnergyPerformance")
 		delete(additionalProperties, "CpuFrequencyFloor")
+		delete(additionalProperties, "CpuPaLimit")
 		delete(additionalProperties, "CpuPerfEnhancement")
 		delete(additionalProperties, "CpuPerformance")
 		delete(additionalProperties, "CpuPowerManagement")
@@ -17764,6 +17853,7 @@ func (o *BiosPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "TerminalType")
 		delete(additionalProperties, "TpmControl")
 		delete(additionalProperties, "TpmPendingOperation")
+		delete(additionalProperties, "TpmPpiRequired")
 		delete(additionalProperties, "TpmSupport")
 		delete(additionalProperties, "Tsme")
 		delete(additionalProperties, "TxtSupport")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7078
+API version: 1.0.11-7546
 Contact: intersight@cisco.com
 */
 
@@ -23,9 +23,10 @@ type WorkflowBatchExecutor struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property. The enum values provides the list of concrete types that can be instantiated from this abstract type.
-	ObjectType  string                          `json:"ObjectType"`
-	Batch       []WorkflowApi                   `json:"Batch,omitempty"`
-	Constraints NullableWorkflowTaskConstraints `json:"Constraints,omitempty"`
+	ObjectType   string                          `json:"ObjectType"`
+	Batch        []WorkflowApi                   `json:"Batch,omitempty"`
+	CancelAction []WorkflowApi                   `json:"CancelAction,omitempty"`
+	Constraints  NullableWorkflowTaskConstraints `json:"Constraints,omitempty"`
 	// A detailed description about the batch APIs.
 	Description *string `json:"Description,omitempty"`
 	// Name for the batch API task.
@@ -143,6 +144,39 @@ func (o *WorkflowBatchExecutor) HasBatch() bool {
 // SetBatch gets a reference to the given []WorkflowApi and assigns it to the Batch field.
 func (o *WorkflowBatchExecutor) SetBatch(v []WorkflowApi) {
 	o.Batch = v
+}
+
+// GetCancelAction returns the CancelAction field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *WorkflowBatchExecutor) GetCancelAction() []WorkflowApi {
+	if o == nil {
+		var ret []WorkflowApi
+		return ret
+	}
+	return o.CancelAction
+}
+
+// GetCancelActionOk returns a tuple with the CancelAction field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *WorkflowBatchExecutor) GetCancelActionOk() ([]WorkflowApi, bool) {
+	if o == nil || o.CancelAction == nil {
+		return nil, false
+	}
+	return o.CancelAction, true
+}
+
+// HasCancelAction returns a boolean if a field has been set.
+func (o *WorkflowBatchExecutor) HasCancelAction() bool {
+	if o != nil && o.CancelAction != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCancelAction gets a reference to the given []WorkflowApi and assigns it to the CancelAction field.
+func (o *WorkflowBatchExecutor) SetCancelAction(v []WorkflowApi) {
+	o.CancelAction = v
 }
 
 // GetConstraints returns the Constraints field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -434,6 +468,9 @@ func (o WorkflowBatchExecutor) MarshalJSON() ([]byte, error) {
 	if o.Batch != nil {
 		toSerialize["Batch"] = o.Batch
 	}
+	if o.CancelAction != nil {
+		toSerialize["CancelAction"] = o.CancelAction
+	}
 	if o.Constraints.IsSet() {
 		toSerialize["Constraints"] = o.Constraints.Get()
 	}
@@ -471,9 +508,10 @@ func (o *WorkflowBatchExecutor) UnmarshalJSON(bytes []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property. The enum values provides the list of concrete types that can be instantiated from this abstract type.
-		ObjectType  string                          `json:"ObjectType"`
-		Batch       []WorkflowApi                   `json:"Batch,omitempty"`
-		Constraints NullableWorkflowTaskConstraints `json:"Constraints,omitempty"`
+		ObjectType   string                          `json:"ObjectType"`
+		Batch        []WorkflowApi                   `json:"Batch,omitempty"`
+		CancelAction []WorkflowApi                   `json:"CancelAction,omitempty"`
+		Constraints  NullableWorkflowTaskConstraints `json:"Constraints,omitempty"`
 		// A detailed description about the batch APIs.
 		Description *string `json:"Description,omitempty"`
 		// Name for the batch API task.
@@ -498,6 +536,7 @@ func (o *WorkflowBatchExecutor) UnmarshalJSON(bytes []byte) (err error) {
 		varWorkflowBatchExecutor.ClassId = varWorkflowBatchExecutorWithoutEmbeddedStruct.ClassId
 		varWorkflowBatchExecutor.ObjectType = varWorkflowBatchExecutorWithoutEmbeddedStruct.ObjectType
 		varWorkflowBatchExecutor.Batch = varWorkflowBatchExecutorWithoutEmbeddedStruct.Batch
+		varWorkflowBatchExecutor.CancelAction = varWorkflowBatchExecutorWithoutEmbeddedStruct.CancelAction
 		varWorkflowBatchExecutor.Constraints = varWorkflowBatchExecutorWithoutEmbeddedStruct.Constraints
 		varWorkflowBatchExecutor.Description = varWorkflowBatchExecutorWithoutEmbeddedStruct.Description
 		varWorkflowBatchExecutor.Name = varWorkflowBatchExecutorWithoutEmbeddedStruct.Name
@@ -526,6 +565,7 @@ func (o *WorkflowBatchExecutor) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Batch")
+		delete(additionalProperties, "CancelAction")
 		delete(additionalProperties, "Constraints")
 		delete(additionalProperties, "Description")
 		delete(additionalProperties, "Name")

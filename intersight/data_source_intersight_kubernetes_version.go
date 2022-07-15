@@ -144,6 +144,49 @@ func dataSourceKubernetesVersion() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"essential_addons": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"name": {
+						Description: "Name of the addon to lookup.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"nr_version": {
+						Description: "Version number to filter the addon with.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"helm_operator_version": {
+			Description: "Version of helm operator to use for this kubernetes version.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"iks_utility_container": {
+			Description: "The iks utility container to use for the kubernetes version.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"kubernetes_version": {
 			Description: "Desired Kubernetes version.",
 			Type:        schema.TypeString,
@@ -611,6 +654,49 @@ func dataSourceKubernetesVersion() *schema.Resource {
 		},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"essential_addons": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"name": {
+						Description: "Name of the addon to lookup.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"nr_version": {
+						Description: "Version number to filter the addon with.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"helm_operator_version": {
+			Description: "Version of helm operator to use for this kubernetes version.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"iks_utility_container": {
+			Description: "The iks utility container to use for the kubernetes version.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1125,6 +1211,56 @@ func dataSourceKubernetesVersionRead(c context.Context, d *schema.ResourceData, 
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOk("essential_addons"); ok {
+		x := make([]models.KubernetesAddonVersionReference, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.KubernetesAddonVersionReference{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("kubernetes.AddonVersionReference")
+			if v, ok := l["name"]; ok {
+				{
+					x := (v.(string))
+					o.SetName(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["nr_version"]; ok {
+				{
+					x := (v.(string))
+					o.SetVersion(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetEssentialAddons(x)
+	}
+
+	if v, ok := d.GetOk("helm_operator_version"); ok {
+		x := (v.(string))
+		o.SetHelmOperatorVersion(x)
+	}
+
+	if v, ok := d.GetOk("iks_utility_container"); ok {
+		x := (v.(string))
+		o.SetIksUtilityContainer(x)
+	}
+
 	if v, ok := d.GetOk("kubernetes_version"); ok {
 		x := (v.(string))
 		o.SetKubernetesVersion(x)
@@ -1532,6 +1668,10 @@ func dataSourceKubernetesVersionRead(c context.Context, d *schema.ResourceData, 
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+
+				temp["essential_addons"] = flattenListKubernetesAddonVersionReference(s.GetEssentialAddons(), d)
+				temp["helm_operator_version"] = (s.GetHelmOperatorVersion())
+				temp["iks_utility_container"] = (s.GetIksUtilityContainer())
 				temp["kubernetes_version"] = (s.GetKubernetesVersion())
 
 				temp["mod_time"] = (s.GetModTime()).String()

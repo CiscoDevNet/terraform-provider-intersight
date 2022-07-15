@@ -340,6 +340,11 @@ func resourceIamIdp() *schema.Resource {
 					}
 					return
 				}},
+			"skip_warning": {
+				Description: "When users attempt the Account URL login with an unverified Domain Name, they get a warning stating that they are logging in using an unverified Domain Name. Enable the slider if you do not wish to see the warning message.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+			},
 			"system": {
 				Description: "A reference to a iamSystem resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -719,6 +724,11 @@ func resourceIamIdpCreate(c context.Context, d *schema.ResourceData, meta interf
 
 	o.SetObjectType("iam.Idp")
 
+	if v, ok := d.GetOkExists("skip_warning"); ok {
+		x := (v.(bool))
+		o.SetSkipWarning(x)
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -958,6 +968,10 @@ func resourceIamIdpRead(c context.Context, d *schema.ResourceData, meta interfac
 		return diag.Errorf("error occurred while setting property SharedScope in IamIdp object: %s", err.Error())
 	}
 
+	if err := d.Set("skip_warning", (s.GetSkipWarning())); err != nil {
+		return diag.Errorf("error occurred while setting property SkipWarning in IamIdp object: %s", err.Error())
+	}
+
 	if err := d.Set("system", flattenMapIamSystemRelationship(s.GetSystem(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property System in IamIdp object: %s", err.Error())
 	}
@@ -1040,6 +1054,12 @@ func resourceIamIdpUpdate(c context.Context, d *schema.ResourceData, meta interf
 	}
 
 	o.SetObjectType("iam.Idp")
+
+	if d.HasChange("skip_warning") {
+		v := d.Get("skip_warning")
+		x := (v.(bool))
+		o.SetSkipWarning(x)
+	}
 
 	if d.HasChange("tags") {
 		v := d.Get("tags")

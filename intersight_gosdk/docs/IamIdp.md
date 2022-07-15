@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **IdpEntityId** | Pointer to **string** | The Entity ID of the IdP. In SAML, the entity ID uniquely identifies the IdP or Service Provider. | [optional] [readonly] 
 **Metadata** | Pointer to **string** | SAML metadata of the IdP. | [optional] 
 **Name** | Pointer to **string** | The name of the Identity Provider, for example Cisco, Okta, or OneID. | [optional] 
+**SkipWarning** | Pointer to **bool** | When users attempt the Account URL login with an unverified Domain Name, they get a warning stating that they are logging in using an unverified Domain Name. Enable the slider if you do not wish to see the warning message. | [optional] 
 **Type** | Pointer to **string** | Authentication protocol used by the IdP. * &#x60;saml&#x60; - Use SAML as the authentication protocol for sign-on. * &#x60;oidc&#x60; - Open ID connect to be used as an authentication protocol for sign-on. * &#x60;local&#x60; - The local authentication method to be used for sign-on. Local type is set to default for the Intersight Appliance IdP. | [optional] [default to "saml"]
 **Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 **LdapPolicy** | Pointer to [**IamLdapPolicyRelationship**](IamLdapPolicyRelationship.md) |  | [optional] 
@@ -202,6 +203,31 @@ SetName sets Name field to given value.
 `func (o *IamIdp) HasName() bool`
 
 HasName returns a boolean if a field has been set.
+
+### GetSkipWarning
+
+`func (o *IamIdp) GetSkipWarning() bool`
+
+GetSkipWarning returns the SkipWarning field if non-nil, zero value otherwise.
+
+### GetSkipWarningOk
+
+`func (o *IamIdp) GetSkipWarningOk() (*bool, bool)`
+
+GetSkipWarningOk returns a tuple with the SkipWarning field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSkipWarning
+
+`func (o *IamIdp) SetSkipWarning(v bool)`
+
+SetSkipWarning sets SkipWarning field to given value.
+
+### HasSkipWarning
+
+`func (o *IamIdp) HasSkipWarning() bool`
+
+HasSkipWarning returns a boolean if a field has been set.
 
 ### GetType
 

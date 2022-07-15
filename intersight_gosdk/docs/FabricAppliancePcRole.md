@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **Priority** | Pointer to **string** | The &#39;name&#39; of the System QoS Class. * &#x60;Best Effort&#x60; - QoS Priority for Best-effort traffic. * &#x60;FC&#x60; - QoS Priority for FC traffic. * &#x60;Platinum&#x60; - QoS Priority for Platinum traffic. * &#x60;Gold&#x60; - QoS Priority for Gold traffic. * &#x60;Silver&#x60; - QoS Priority for Silver traffic. * &#x60;Bronze&#x60; - QoS Priority for Bronze traffic. | [optional] [default to "Best Effort"]
 **EthNetworkControlPolicy** | Pointer to [**FabricEthNetworkControlPolicyRelationship**](FabricEthNetworkControlPolicyRelationship.md) |  | [optional] 
 **EthNetworkGroupPolicy** | Pointer to [**FabricEthNetworkGroupPolicyRelationship**](FabricEthNetworkGroupPolicyRelationship.md) |  | [optional] 
+**LinkAggregationPolicy** | Pointer to [**FabricLinkAggregationPolicyRelationship**](FabricLinkAggregationPolicyRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -195,6 +196,31 @@ SetEthNetworkGroupPolicy sets EthNetworkGroupPolicy field to given value.
 `func (o *FabricAppliancePcRole) HasEthNetworkGroupPolicy() bool`
 
 HasEthNetworkGroupPolicy returns a boolean if a field has been set.
+
+### GetLinkAggregationPolicy
+
+`func (o *FabricAppliancePcRole) GetLinkAggregationPolicy() FabricLinkAggregationPolicyRelationship`
+
+GetLinkAggregationPolicy returns the LinkAggregationPolicy field if non-nil, zero value otherwise.
+
+### GetLinkAggregationPolicyOk
+
+`func (o *FabricAppliancePcRole) GetLinkAggregationPolicyOk() (*FabricLinkAggregationPolicyRelationship, bool)`
+
+GetLinkAggregationPolicyOk returns a tuple with the LinkAggregationPolicy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLinkAggregationPolicy
+
+`func (o *FabricAppliancePcRole) SetLinkAggregationPolicy(v FabricLinkAggregationPolicyRelationship)`
+
+SetLinkAggregationPolicy sets LinkAggregationPolicy field to given value.
+
+### HasLinkAggregationPolicy
+
+`func (o *FabricAppliancePcRole) HasLinkAggregationPolicy() bool`
+
+HasLinkAggregationPolicy returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

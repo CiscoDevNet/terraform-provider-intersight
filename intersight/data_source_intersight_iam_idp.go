@@ -263,6 +263,11 @@ func dataSourceIamIdp() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"skip_warning": {
+			Description: "When users attempt the Account URL login with an unverified Domain Name, they get a warning stating that they are logging in using an unverified Domain Name. Enable the slider if you do not wish to see the warning message.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"system": {
 			Description: "A reference to a iamSystem resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -783,6 +788,11 @@ func dataSourceIamIdp() *schema.Resource {
 		"shared_scope": {
 			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"skip_warning": {
+			Description: "When users attempt the Account URL login with an unverified Domain Name, they get a warning stating that they are logging in using an unverified Domain Name. Enable the slider if you do not wish to see the warning message.",
+			Type:        schema.TypeBool,
 			Optional:    true,
 		},
 		"system": {
@@ -1368,6 +1378,11 @@ func dataSourceIamIdpRead(c context.Context, d *schema.ResourceData, meta interf
 		o.SetSharedScope(x)
 	}
 
+	if v, ok := d.GetOkExists("skip_warning"); ok {
+		x := (v.(bool))
+		o.SetSkipWarning(x)
+	}
+
 	if v, ok := d.GetOk("system"); ok {
 		p := make([]models.IamSystemRelationship, 0, 1)
 		s := v.([]interface{})
@@ -1705,6 +1720,7 @@ func dataSourceIamIdpRead(c context.Context, d *schema.ResourceData, meta interf
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
+				temp["skip_warning"] = (s.GetSkipWarning())
 
 				temp["system"] = flattenMapIamSystemRelationship(s.GetSystem(), d)
 

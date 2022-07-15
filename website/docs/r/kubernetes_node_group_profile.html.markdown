@@ -67,6 +67,14 @@ This complex property has following sub-properties:
 * `description`:(string) Description of the profile. 
 * `desiredsize`:(int) Desired number of nodes in this node group, same as minsize initially and is updated by the auto-scaler. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
+* `gpu_config`:(Array)
+This complex property has following sub-properties:
+  + `additional_properties`:(JSON as string) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [infra.GpuConfiguration](#infraGpuConfiguration)
+[infra.MigGpuConfiguration](#infraMigGpuConfiguration)
+  + `device_id`:(int) The device Id of the GPU device. 
+  + `memory_size`:(int) The amount of memory on the GPU (GBs). 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `vendor_id`:(int) The vendor Id of the GPU device. 
 * `infra_provider`:(HashMap) - A reference to a kubernetesBaseInfrastructureProvider resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
@@ -154,4 +162,13 @@ This complex property has following sub-properties:
 `intersight_kubernetes_node_group_profile` can be imported using the Moid of the object, e.g.
 ```
 $ terraform import intersight_kubernetes_node_group_profile.example 1234567890987654321abcde
-``` 
+```
+## Allowed Types in `AdditionalProperties`
+ 
+### [infra.GpuConfiguration](#argument-reference)
+Generic GPU configuration on a compute resource (BM or VM).
+
+### [infra.MigGpuConfiguration](#argument-reference)
+Nvidia MIG capable GPU configuration on a compute resource (BM or VM).
+* `mig_profile_name`:(string) The predefined MIG profile name, e.g. 1g.5gb, 2g.10gb, etc. 
+  

@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "kubernetes.NodeGroupProfile"]
 **Currentsize** | Pointer to **int64** | Current number of nodes in this node group at any given point in time. | [optional] [readonly] 
 **Desiredsize** | Pointer to **int64** | Desired number of nodes in this node group, same as minsize initially and is updated by the auto-scaler. | [optional] [default to 3]
+**GpuConfig** | Pointer to [**[]InfraBaseGpuConfiguration**](InfraBaseGpuConfiguration.md) |  | [optional] 
 **Labels** | Pointer to [**[]KubernetesNodeGroupLabel**](KubernetesNodeGroupLabel.md) |  | [optional] 
 **Maxsize** | Pointer to **int64** | Maximum number of nodes this node group can scale up to during repair, replacement or upgrade operations. | [optional] 
 **Minsize** | Pointer to **int64** | Minimum number of available nodes this node group can scale down to during repair, replacement or upgrade operations. | [optional] 
@@ -128,6 +129,41 @@ SetDesiredsize sets Desiredsize field to given value.
 
 HasDesiredsize returns a boolean if a field has been set.
 
+### GetGpuConfig
+
+`func (o *KubernetesNodeGroupProfileAllOf) GetGpuConfig() []InfraBaseGpuConfiguration`
+
+GetGpuConfig returns the GpuConfig field if non-nil, zero value otherwise.
+
+### GetGpuConfigOk
+
+`func (o *KubernetesNodeGroupProfileAllOf) GetGpuConfigOk() (*[]InfraBaseGpuConfiguration, bool)`
+
+GetGpuConfigOk returns a tuple with the GpuConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGpuConfig
+
+`func (o *KubernetesNodeGroupProfileAllOf) SetGpuConfig(v []InfraBaseGpuConfiguration)`
+
+SetGpuConfig sets GpuConfig field to given value.
+
+### HasGpuConfig
+
+`func (o *KubernetesNodeGroupProfileAllOf) HasGpuConfig() bool`
+
+HasGpuConfig returns a boolean if a field has been set.
+
+### SetGpuConfigNil
+
+`func (o *KubernetesNodeGroupProfileAllOf) SetGpuConfigNil(b bool)`
+
+ SetGpuConfigNil sets the value for GpuConfig to be an explicit nil
+
+### UnsetGpuConfig
+`func (o *KubernetesNodeGroupProfileAllOf) UnsetGpuConfig()`
+
+UnsetGpuConfig ensures that no value is present for GpuConfig, not even an explicit nil
 ### GetLabels
 
 `func (o *KubernetesNodeGroupProfileAllOf) GetLabels() []KubernetesNodeGroupLabel`

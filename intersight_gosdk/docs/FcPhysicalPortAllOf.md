@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **Vsan** | Pointer to **int64** | Virtual San that is associated to the port. | [optional] [readonly] 
 **Wwn** | Pointer to **string** | World Wide Name of a Fibre Channel port. | [optional] [readonly] 
 **EquipmentSwitchCard** | Pointer to [**EquipmentSwitchCardRelationship**](EquipmentSwitchCardRelationship.md) |  | [optional] 
+**FcNeighbor** | Pointer to [**FcNeighborRelationship**](FcNeighborRelationship.md) |  | [optional] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **NetworkSupervisorCard** | Pointer to [**NetworkSupervisorCardRelationship**](NetworkSupervisorCardRelationship.md) |  | [optional] 
 **PortGroup** | Pointer to [**PortGroupRelationship**](PortGroupRelationship.md) |  | [optional] 
@@ -434,6 +435,31 @@ SetEquipmentSwitchCard sets EquipmentSwitchCard field to given value.
 `func (o *FcPhysicalPortAllOf) HasEquipmentSwitchCard() bool`
 
 HasEquipmentSwitchCard returns a boolean if a field has been set.
+
+### GetFcNeighbor
+
+`func (o *FcPhysicalPortAllOf) GetFcNeighbor() FcNeighborRelationship`
+
+GetFcNeighbor returns the FcNeighbor field if non-nil, zero value otherwise.
+
+### GetFcNeighborOk
+
+`func (o *FcPhysicalPortAllOf) GetFcNeighborOk() (*FcNeighborRelationship, bool)`
+
+GetFcNeighborOk returns a tuple with the FcNeighbor field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFcNeighbor
+
+`func (o *FcPhysicalPortAllOf) SetFcNeighbor(v FcNeighborRelationship)`
+
+SetFcNeighbor sets FcNeighbor field to given value.
+
+### HasFcNeighbor
+
+`func (o *FcPhysicalPortAllOf) HasFcNeighbor() bool`
+
+HasFcNeighbor returns a boolean if a field has been set.
 
 ### GetInventoryDeviceInfo
 

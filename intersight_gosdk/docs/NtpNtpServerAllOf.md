@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **ServerIpAddress** | Pointer to **string** | The IP address of the NTP server. Supports both IPv4 or IPv6 address. | [optional] [readonly] 
 **Stratum** | Pointer to **int64** | The stratum level of the NTP server. | [optional] [readonly] 
 **Type** | Pointer to **string** | It determines whether the IP address configured is server or peer. * &#x60;Server&#x60; - NTP configured is server type. * &#x60;Peer&#x60; - NTP configured is peer type. | [optional] [readonly] [default to "Server"]
+**VrfName** | Pointer to **string** | VRF name to be used by NTP Server. | [optional] [readonly] 
 **NetworkElement** | Pointer to [**NetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
@@ -171,6 +172,31 @@ SetType sets Type field to given value.
 `func (o *NtpNtpServerAllOf) HasType() bool`
 
 HasType returns a boolean if a field has been set.
+
+### GetVrfName
+
+`func (o *NtpNtpServerAllOf) GetVrfName() string`
+
+GetVrfName returns the VrfName field if non-nil, zero value otherwise.
+
+### GetVrfNameOk
+
+`func (o *NtpNtpServerAllOf) GetVrfNameOk() (*string, bool)`
+
+GetVrfNameOk returns a tuple with the VrfName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVrfName
+
+`func (o *NtpNtpServerAllOf) SetVrfName(v string)`
+
+SetVrfName sets VrfName field to given value.
+
+### HasVrfName
+
+`func (o *NtpNtpServerAllOf) HasVrfName() bool`
+
+HasVrfName returns a boolean if a field has been set.
 
 ### GetNetworkElement
 

@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **Url** | Pointer to **string** | The URL to access this datastore (example - &#39;ds:///vmfs/volumes/562a4e8a-0eeb5372-dd61-78baf9cb9afa/&#39;). | [optional] 
 **VmTemplateCount** | Pointer to **int64** | Number of virtual machine templates relying on (using) this datastore. | [optional] 
 **Cluster** | Pointer to [**VirtualizationVmwareClusterRelationship**](VirtualizationVmwareClusterRelationship.md) |  | [optional] 
+**Clusters** | Pointer to [**[]VirtualizationVmwareClusterRelationship**](VirtualizationVmwareClusterRelationship.md) | An array of relationships to virtualizationVmwareCluster resources. | [optional] 
 **Datacenter** | Pointer to [**VirtualizationVmwareDatacenterRelationship**](VirtualizationVmwareDatacenterRelationship.md) |  | [optional] 
 **DatastoreCluster** | Pointer to [**VirtualizationVmwareDatastoreClusterRelationship**](VirtualizationVmwareDatastoreClusterRelationship.md) |  | [optional] 
 **Hosts** | Pointer to [**[]VirtualizationVmwareHostRelationship**](VirtualizationVmwareHostRelationship.md) | An array of relationships to virtualizationVmwareHost resources. | [optional] [readonly] 
@@ -329,6 +330,41 @@ SetCluster sets Cluster field to given value.
 
 HasCluster returns a boolean if a field has been set.
 
+### GetClusters
+
+`func (o *VirtualizationVmwareDatastore) GetClusters() []VirtualizationVmwareClusterRelationship`
+
+GetClusters returns the Clusters field if non-nil, zero value otherwise.
+
+### GetClustersOk
+
+`func (o *VirtualizationVmwareDatastore) GetClustersOk() (*[]VirtualizationVmwareClusterRelationship, bool)`
+
+GetClustersOk returns a tuple with the Clusters field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClusters
+
+`func (o *VirtualizationVmwareDatastore) SetClusters(v []VirtualizationVmwareClusterRelationship)`
+
+SetClusters sets Clusters field to given value.
+
+### HasClusters
+
+`func (o *VirtualizationVmwareDatastore) HasClusters() bool`
+
+HasClusters returns a boolean if a field has been set.
+
+### SetClustersNil
+
+`func (o *VirtualizationVmwareDatastore) SetClustersNil(b bool)`
+
+ SetClustersNil sets the value for Clusters to be an explicit nil
+
+### UnsetClusters
+`func (o *VirtualizationVmwareDatastore) UnsetClusters()`
+
+UnsetClusters ensures that no value is present for Clusters, not even an explicit nil
 ### GetDatacenter
 
 `func (o *VirtualizationVmwareDatastore) GetDatacenter() VirtualizationVmwareDatacenterRelationship`

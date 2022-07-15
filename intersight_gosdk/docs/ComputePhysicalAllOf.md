@@ -14,6 +14,8 @@ Name | Type | Description | Notes
 **FaultSummary** | Pointer to **int64** | The fault summary for the server. | [optional] 
 **HardwareUuid** | Pointer to **string** | The universally unique hardware identity of the server provided by the manufacturer. | [optional] 
 **KvmIpAddresses** | Pointer to [**[]ComputeIpAddress**](ComputeIpAddress.md) |  | [optional] 
+**KvmServerStateEnabled** | Pointer to **bool** | The KVM server state of the server. | [optional] [readonly] 
+**KvmVendor** | Pointer to **string** | The KVM Vendor for the server. | [optional] [readonly] 
 **ManagementMode** | Pointer to **string** | The management mode of the server. * &#x60;IntersightStandalone&#x60; - Intersight Standalone mode of operation. * &#x60;UCSM&#x60; - Unified Computing System Manager mode of operation. * &#x60;Intersight&#x60; - Intersight managed mode of operation. | [optional] [default to "IntersightStandalone"]
 **MemorySpeed** | Pointer to **string** | The maximum memory speed in MHz available on the server. | [optional] [readonly] 
 **MgmtIpAddress** | Pointer to **string** | Management address of the server. | [optional] 
@@ -329,6 +331,56 @@ HasKvmIpAddresses returns a boolean if a field has been set.
 `func (o *ComputePhysicalAllOf) UnsetKvmIpAddresses()`
 
 UnsetKvmIpAddresses ensures that no value is present for KvmIpAddresses, not even an explicit nil
+### GetKvmServerStateEnabled
+
+`func (o *ComputePhysicalAllOf) GetKvmServerStateEnabled() bool`
+
+GetKvmServerStateEnabled returns the KvmServerStateEnabled field if non-nil, zero value otherwise.
+
+### GetKvmServerStateEnabledOk
+
+`func (o *ComputePhysicalAllOf) GetKvmServerStateEnabledOk() (*bool, bool)`
+
+GetKvmServerStateEnabledOk returns a tuple with the KvmServerStateEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetKvmServerStateEnabled
+
+`func (o *ComputePhysicalAllOf) SetKvmServerStateEnabled(v bool)`
+
+SetKvmServerStateEnabled sets KvmServerStateEnabled field to given value.
+
+### HasKvmServerStateEnabled
+
+`func (o *ComputePhysicalAllOf) HasKvmServerStateEnabled() bool`
+
+HasKvmServerStateEnabled returns a boolean if a field has been set.
+
+### GetKvmVendor
+
+`func (o *ComputePhysicalAllOf) GetKvmVendor() string`
+
+GetKvmVendor returns the KvmVendor field if non-nil, zero value otherwise.
+
+### GetKvmVendorOk
+
+`func (o *ComputePhysicalAllOf) GetKvmVendorOk() (*string, bool)`
+
+GetKvmVendorOk returns a tuple with the KvmVendor field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetKvmVendor
+
+`func (o *ComputePhysicalAllOf) SetKvmVendor(v string)`
+
+SetKvmVendor sets KvmVendor field to given value.
+
+### HasKvmVendor
+
+`func (o *ComputePhysicalAllOf) HasKvmVendor() bool`
+
+HasKvmVendor returns a boolean if a field has been set.
+
 ### GetManagementMode
 
 `func (o *ComputePhysicalAllOf) GetManagementMode() string`

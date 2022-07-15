@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7078
+API version: 1.0.11-7546
 Contact: intersight@cisco.com
 */
 
@@ -34,6 +34,8 @@ type IamIdp struct {
 	Metadata *string `json:"Metadata,omitempty"`
 	// The name of the Identity Provider, for example Cisco, Okta, or OneID.
 	Name *string `json:"Name,omitempty"`
+	// When users attempt the Account URL login with an unverified Domain Name, they get a warning stating that they are logging in using an unverified Domain Name. Enable the slider if you do not wish to see the warning message.
+	SkipWarning *bool `json:"SkipWarning,omitempty"`
 	// Authentication protocol used by the IdP. * `saml` - Use SAML as the authentication protocol for sign-on. * `oidc` - Open ID connect to be used as an authentication protocol for sign-on. * `local` - The local authentication method to be used for sign-on. Local type is set to default for the Intersight Appliance IdP.
 	Type       *string                    `json:"Type,omitempty"`
 	Account    *IamAccountRelationship    `json:"Account,omitempty"`
@@ -283,6 +285,38 @@ func (o *IamIdp) HasName() bool {
 // SetName gets a reference to the given string and assigns it to the Name field.
 func (o *IamIdp) SetName(v string) {
 	o.Name = &v
+}
+
+// GetSkipWarning returns the SkipWarning field value if set, zero value otherwise.
+func (o *IamIdp) GetSkipWarning() bool {
+	if o == nil || o.SkipWarning == nil {
+		var ret bool
+		return ret
+	}
+	return *o.SkipWarning
+}
+
+// GetSkipWarningOk returns a tuple with the SkipWarning field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamIdp) GetSkipWarningOk() (*bool, bool) {
+	if o == nil || o.SkipWarning == nil {
+		return nil, false
+	}
+	return o.SkipWarning, true
+}
+
+// HasSkipWarning returns a boolean if a field has been set.
+func (o *IamIdp) HasSkipWarning() bool {
+	if o != nil && o.SkipWarning != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSkipWarning gets a reference to the given bool and assigns it to the SkipWarning field.
+func (o *IamIdp) SetSkipWarning(v bool) {
+	o.SkipWarning = &v
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
@@ -543,6 +577,9 @@ func (o IamIdp) MarshalJSON() ([]byte, error) {
 	if o.Name != nil {
 		toSerialize["Name"] = o.Name
 	}
+	if o.SkipWarning != nil {
+		toSerialize["SkipWarning"] = o.SkipWarning
+	}
 	if o.Type != nil {
 		toSerialize["Type"] = o.Type
 	}
@@ -588,6 +625,8 @@ func (o *IamIdp) UnmarshalJSON(bytes []byte) (err error) {
 		Metadata *string `json:"Metadata,omitempty"`
 		// The name of the Identity Provider, for example Cisco, Okta, or OneID.
 		Name *string `json:"Name,omitempty"`
+		// When users attempt the Account URL login with an unverified Domain Name, they get a warning stating that they are logging in using an unverified Domain Name. Enable the slider if you do not wish to see the warning message.
+		SkipWarning *bool `json:"SkipWarning,omitempty"`
 		// Authentication protocol used by the IdP. * `saml` - Use SAML as the authentication protocol for sign-on. * `oidc` - Open ID connect to be used as an authentication protocol for sign-on. * `local` - The local authentication method to be used for sign-on. Local type is set to default for the Intersight Appliance IdP.
 		Type       *string                    `json:"Type,omitempty"`
 		Account    *IamAccountRelationship    `json:"Account,omitempty"`
@@ -613,6 +652,7 @@ func (o *IamIdp) UnmarshalJSON(bytes []byte) (err error) {
 		varIamIdp.IdpEntityId = varIamIdpWithoutEmbeddedStruct.IdpEntityId
 		varIamIdp.Metadata = varIamIdpWithoutEmbeddedStruct.Metadata
 		varIamIdp.Name = varIamIdpWithoutEmbeddedStruct.Name
+		varIamIdp.SkipWarning = varIamIdpWithoutEmbeddedStruct.SkipWarning
 		varIamIdp.Type = varIamIdpWithoutEmbeddedStruct.Type
 		varIamIdp.Account = varIamIdpWithoutEmbeddedStruct.Account
 		varIamIdp.LdapPolicy = varIamIdpWithoutEmbeddedStruct.LdapPolicy
@@ -644,6 +684,7 @@ func (o *IamIdp) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "IdpEntityId")
 		delete(additionalProperties, "Metadata")
 		delete(additionalProperties, "Name")
+		delete(additionalProperties, "SkipWarning")
 		delete(additionalProperties, "Type")
 		delete(additionalProperties, "Account")
 		delete(additionalProperties, "LdapPolicy")

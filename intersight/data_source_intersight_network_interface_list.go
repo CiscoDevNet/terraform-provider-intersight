@@ -30,6 +30,11 @@ func dataSourceNetworkInterfaceList() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"allowed_vlans": {
+			Description: "Allowed VLANs of the interface list.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"ancestors": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
@@ -74,6 +79,11 @@ func dataSourceNetworkInterfaceList() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"description": {
+			Description: "Description of the interface list.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"device_mo_id": {
 			Description: "The database identifier of the registered device of an object.",
 			Type:        schema.TypeString,
@@ -92,6 +102,11 @@ func dataSourceNetworkInterfaceList() *schema.Resource {
 		"ip_address": {
 			Description: "IP address of the interface list.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"ip_subnet": {
+			Description: "IP subnet of the interface list.",
+			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"mac": {
@@ -460,6 +475,11 @@ func dataSourceNetworkInterfaceList() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"allowed_vlans": {
+			Description: "Allowed VLANs of the interface list.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"ancestors": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
@@ -504,6 +524,11 @@ func dataSourceNetworkInterfaceList() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"description": {
+			Description: "Description of the interface list.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"device_mo_id": {
 			Description: "The database identifier of the registered device of an object.",
 			Type:        schema.TypeString,
@@ -522,6 +547,11 @@ func dataSourceNetworkInterfaceList() *schema.Resource {
 		"ip_address": {
 			Description: "IP address of the interface list.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"ip_subnet": {
+			Description: "IP subnet of the interface list.",
+			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"mac": {
@@ -909,6 +939,11 @@ func dataSourceNetworkInterfaceListRead(c context.Context, d *schema.ResourceDat
 		o.SetAdminState(x)
 	}
 
+	if v, ok := d.GetOk("allowed_vlans"); ok {
+		x := (v.(string))
+		o.SetAllowedVlans(x)
+	}
+
 	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
@@ -959,6 +994,11 @@ func dataSourceNetworkInterfaceListRead(c context.Context, d *schema.ResourceDat
 		o.SetCreateTime(x)
 	}
 
+	if v, ok := d.GetOk("description"); ok {
+		x := (v.(string))
+		o.SetDescription(x)
+	}
+
 	if v, ok := d.GetOk("device_mo_id"); ok {
 		x := (v.(string))
 		o.SetDeviceMoId(x)
@@ -977,6 +1017,11 @@ func dataSourceNetworkInterfaceListRead(c context.Context, d *schema.ResourceDat
 	if v, ok := d.GetOk("ip_address"); ok {
 		x := (v.(string))
 		o.SetIpAddress(x)
+	}
+
+	if v, ok := d.GetOkExists("ip_subnet"); ok {
+		x := int64(v.(int))
+		o.SetIpSubnet(x)
 	}
 
 	if v, ok := d.GetOk("mac"); ok {
@@ -1379,15 +1424,18 @@ func dataSourceNetworkInterfaceListRead(c context.Context, d *schema.ResourceDat
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 				temp["admin_state"] = (s.GetAdminState())
+				temp["allowed_vlans"] = (s.GetAllowedVlans())
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
+				temp["description"] = (s.GetDescription())
 				temp["device_mo_id"] = (s.GetDeviceMoId())
 				temp["dn"] = (s.GetDn())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["ip_address"] = (s.GetIpAddress())
+				temp["ip_subnet"] = (s.GetIpSubnet())
 				temp["mac"] = (s.GetMac())
 
 				temp["mod_time"] = (s.GetModTime()).String()

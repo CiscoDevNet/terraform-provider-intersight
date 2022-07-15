@@ -79,6 +79,7 @@ Name | Type | Description | Notes
 **CoreMultiProcessing** | Pointer to **string** | BIOS Token for setting Core Multi Processing configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;1&#x60; - Value - 1 for configuring CoreMultiProcessing token. * &#x60;2&#x60; - Value - 2 for configuring CoreMultiProcessing token. * &#x60;3&#x60; - Value - 3 for configuring CoreMultiProcessing token. * &#x60;4&#x60; - Value - 4 for configuring CoreMultiProcessing token. * &#x60;5&#x60; - Value - 5 for configuring CoreMultiProcessing token. * &#x60;6&#x60; - Value - 6 for configuring CoreMultiProcessing token. * &#x60;7&#x60; - Value - 7 for configuring CoreMultiProcessing token. * &#x60;8&#x60; - Value - 8 for configuring CoreMultiProcessing token. * &#x60;9&#x60; - Value - 9 for configuring CoreMultiProcessing token. * &#x60;10&#x60; - Value - 10 for configuring CoreMultiProcessing token. * &#x60;11&#x60; - Value - 11 for configuring CoreMultiProcessing token. * &#x60;12&#x60; - Value - 12 for configuring CoreMultiProcessing token. * &#x60;13&#x60; - Value - 13 for configuring CoreMultiProcessing token. * &#x60;14&#x60; - Value - 14 for configuring CoreMultiProcessing token. * &#x60;15&#x60; - Value - 15 for configuring CoreMultiProcessing token. * &#x60;16&#x60; - Value - 16 for configuring CoreMultiProcessing token. * &#x60;17&#x60; - Value - 17 for configuring CoreMultiProcessing token. * &#x60;18&#x60; - Value - 18 for configuring CoreMultiProcessing token. * &#x60;19&#x60; - Value - 19 for configuring CoreMultiProcessing token. * &#x60;20&#x60; - Value - 20 for configuring CoreMultiProcessing token. * &#x60;21&#x60; - Value - 21 for configuring CoreMultiProcessing token. * &#x60;22&#x60; - Value - 22 for configuring CoreMultiProcessing token. * &#x60;23&#x60; - Value - 23 for configuring CoreMultiProcessing token. * &#x60;24&#x60; - Value - 24 for configuring CoreMultiProcessing token. * &#x60;25&#x60; - Value - 25 for configuring CoreMultiProcessing token. * &#x60;26&#x60; - Value - 26 for configuring CoreMultiProcessing token. * &#x60;27&#x60; - Value - 27 for configuring CoreMultiProcessing token. * &#x60;28&#x60; - Value - 28 for configuring CoreMultiProcessing token. * &#x60;29&#x60; - Value - 29 for configuring CoreMultiProcessing token. * &#x60;30&#x60; - Value - 30 for configuring CoreMultiProcessing token. * &#x60;31&#x60; - Value - 31 for configuring CoreMultiProcessing token. * &#x60;32&#x60; - Value - 32 for configuring CoreMultiProcessing token. * &#x60;33&#x60; - Value - 33 for configuring CoreMultiProcessing token. * &#x60;34&#x60; - Value - 34 for configuring CoreMultiProcessing token. * &#x60;35&#x60; - Value - 35 for configuring CoreMultiProcessing token. * &#x60;36&#x60; - Value - 36 for configuring CoreMultiProcessing token. * &#x60;37&#x60; - Value - 37 for configuring CoreMultiProcessing token. * &#x60;38&#x60; - Value - 38 for configuring CoreMultiProcessing token. * &#x60;39&#x60; - Value - 39 for configuring CoreMultiProcessing token. * &#x60;40&#x60; - Value - 40 for configuring CoreMultiProcessing token. * &#x60;41&#x60; - Value - 41 for configuring CoreMultiProcessing token. * &#x60;42&#x60; - Value - 42 for configuring CoreMultiProcessing token. * &#x60;43&#x60; - Value - 43 for configuring CoreMultiProcessing token. * &#x60;44&#x60; - Value - 44 for configuring CoreMultiProcessing token. * &#x60;45&#x60; - Value - 45 for configuring CoreMultiProcessing token. * &#x60;46&#x60; - Value - 46 for configuring CoreMultiProcessing token. * &#x60;47&#x60; - Value - 47 for configuring CoreMultiProcessing token. * &#x60;48&#x60; - Value - 48 for configuring CoreMultiProcessing token. * &#x60;all&#x60; - Value - all for configuring CoreMultiProcessing token. | [optional] [default to "platform-default"]
 **CpuEnergyPerformance** | Pointer to **string** | BIOS Token for setting Energy Performance configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;balanced-energy&#x60; - Value - balanced-energy for configuring CpuEnergyPerformance token. * &#x60;balanced-performance&#x60; - Value - balanced-performance for configuring CpuEnergyPerformance token. * &#x60;balanced-power&#x60; - Value - balanced-power for configuring CpuEnergyPerformance token. * &#x60;energy-efficient&#x60; - Value - energy-efficient for configuring CpuEnergyPerformance token. * &#x60;performance&#x60; - Value - performance for configuring CpuEnergyPerformance token. * &#x60;power&#x60; - Value - power for configuring CpuEnergyPerformance token. | [optional] [default to "platform-default"]
 **CpuFrequencyFloor** | Pointer to **string** | BIOS Token for setting Frequency Floor Override configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
+**CpuPaLimit** | Pointer to **string** | BIOS Token for setting Limit CPU PA to 46 Bits configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **CpuPerfEnhancement** | Pointer to **string** | BIOS Token for setting Enhanced CPU Performance configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CpuPerfEnhancement token. * &#x60;Disabled&#x60; - Value - Disabled for configuring CpuPerfEnhancement token. | [optional] [default to "platform-default"]
 **CpuPerformance** | Pointer to **string** | BIOS Token for setting CPU Performance configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;custom&#x60; - Value - custom for configuring CpuPerformance token. * &#x60;enterprise&#x60; - Value - enterprise for configuring CpuPerformance token. * &#x60;high-throughput&#x60; - Value - high-throughput for configuring CpuPerformance token. * &#x60;hpc&#x60; - Value - hpc for configuring CpuPerformance token. | [optional] [default to "platform-default"]
 **CpuPowerManagement** | Pointer to **string** | BIOS Token for setting Power Technology configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;custom&#x60; - Value - custom for configuring CpuPowerManagement token. * &#x60;disabled&#x60; - Value - disabled for configuring CpuPowerManagement token. * &#x60;energy-efficient&#x60; - Value - energy-efficient for configuring CpuPowerManagement token. * &#x60;performance&#x60; - Value - performance for configuring CpuPowerManagement token. | [optional] [default to "platform-default"]
@@ -373,6 +374,7 @@ Name | Type | Description | Notes
 **TerminalType** | Pointer to **string** | BIOS Token for setting Terminal Type configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;pc-ansi&#x60; - Value - pc-ansi for configuring TerminalType token. * &#x60;vt100&#x60; - Value - vt100 for configuring TerminalType token. * &#x60;vt100-plus&#x60; - Value - vt100-plus for configuring TerminalType token. * &#x60;vt-utf8&#x60; - Value - vt-utf8 for configuring TerminalType token. | [optional] [default to "platform-default"]
 **TpmControl** | Pointer to **string** | BIOS Token for setting Trusted Platform Module State configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **TpmPendingOperation** | Pointer to **string** | BIOS Token for setting TPM Pending Operation configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;None&#x60; - Value - None for configuring TpmPendingOperation token. * &#x60;TpmClear&#x60; - Value - TpmClear for configuring TpmPendingOperation token. | [optional] [default to "platform-default"]
+**TpmPpiRequired** | Pointer to **string** | BIOS Token for setting TPM Minimal Physical Presence configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **TpmSupport** | Pointer to **string** | BIOS Token for setting TPM Support configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **Tsme** | Pointer to **string** | BIOS Token for setting Transparent Secure Memory Encryption configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring Tsme token. * &#x60;disabled&#x60; - Value - disabled for configuring Tsme token. * &#x60;enabled&#x60; - Value - enabled for configuring Tsme token. | [optional] [default to "platform-default"]
 **TxtSupport** | Pointer to **string** | BIOS Token for setting Intel Trusted Execution Technology Support configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
@@ -2282,6 +2284,31 @@ SetCpuFrequencyFloor sets CpuFrequencyFloor field to given value.
 `func (o *BiosPolicyAllOf) HasCpuFrequencyFloor() bool`
 
 HasCpuFrequencyFloor returns a boolean if a field has been set.
+
+### GetCpuPaLimit
+
+`func (o *BiosPolicyAllOf) GetCpuPaLimit() string`
+
+GetCpuPaLimit returns the CpuPaLimit field if non-nil, zero value otherwise.
+
+### GetCpuPaLimitOk
+
+`func (o *BiosPolicyAllOf) GetCpuPaLimitOk() (*string, bool)`
+
+GetCpuPaLimitOk returns a tuple with the CpuPaLimit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCpuPaLimit
+
+`func (o *BiosPolicyAllOf) SetCpuPaLimit(v string)`
+
+SetCpuPaLimit sets CpuPaLimit field to given value.
+
+### HasCpuPaLimit
+
+`func (o *BiosPolicyAllOf) HasCpuPaLimit() bool`
+
+HasCpuPaLimit returns a boolean if a field has been set.
 
 ### GetCpuPerfEnhancement
 
@@ -9632,6 +9659,31 @@ SetTpmPendingOperation sets TpmPendingOperation field to given value.
 `func (o *BiosPolicyAllOf) HasTpmPendingOperation() bool`
 
 HasTpmPendingOperation returns a boolean if a field has been set.
+
+### GetTpmPpiRequired
+
+`func (o *BiosPolicyAllOf) GetTpmPpiRequired() string`
+
+GetTpmPpiRequired returns the TpmPpiRequired field if non-nil, zero value otherwise.
+
+### GetTpmPpiRequiredOk
+
+`func (o *BiosPolicyAllOf) GetTpmPpiRequiredOk() (*string, bool)`
+
+GetTpmPpiRequiredOk returns a tuple with the TpmPpiRequired field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTpmPpiRequired
+
+`func (o *BiosPolicyAllOf) SetTpmPpiRequired(v string)`
+
+SetTpmPpiRequired sets TpmPpiRequired field to given value.
+
+### HasTpmPpiRequired
+
+`func (o *BiosPolicyAllOf) HasTpmPpiRequired() bool`
+
+HasTpmPpiRequired returns a boolean if a field has been set.
 
 ### GetTpmSupport
 

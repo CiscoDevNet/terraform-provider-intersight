@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7078
+API version: 1.0.11-7546
 Contact: intersight@cisco.com
 */
 
@@ -39,6 +39,10 @@ type ComputePhysical struct {
 	// The universally unique hardware identity of the server provided by the manufacturer.
 	HardwareUuid   *string            `json:"HardwareUuid,omitempty"`
 	KvmIpAddresses []ComputeIpAddress `json:"KvmIpAddresses,omitempty"`
+	// The KVM server state of the server.
+	KvmServerStateEnabled *bool `json:"KvmServerStateEnabled,omitempty"`
+	// The KVM Vendor for the server.
+	KvmVendor *string `json:"KvmVendor,omitempty"`
 	// The management mode of the server. * `IntersightStandalone` - Intersight Standalone mode of operation. * `UCSM` - Unified Computing System Manager mode of operation. * `Intersight` - Intersight managed mode of operation.
 	ManagementMode *string `json:"ManagementMode,omitempty"`
 	// The maximum memory speed in MHz available on the server.
@@ -450,6 +454,70 @@ func (o *ComputePhysical) HasKvmIpAddresses() bool {
 // SetKvmIpAddresses gets a reference to the given []ComputeIpAddress and assigns it to the KvmIpAddresses field.
 func (o *ComputePhysical) SetKvmIpAddresses(v []ComputeIpAddress) {
 	o.KvmIpAddresses = v
+}
+
+// GetKvmServerStateEnabled returns the KvmServerStateEnabled field value if set, zero value otherwise.
+func (o *ComputePhysical) GetKvmServerStateEnabled() bool {
+	if o == nil || o.KvmServerStateEnabled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.KvmServerStateEnabled
+}
+
+// GetKvmServerStateEnabledOk returns a tuple with the KvmServerStateEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ComputePhysical) GetKvmServerStateEnabledOk() (*bool, bool) {
+	if o == nil || o.KvmServerStateEnabled == nil {
+		return nil, false
+	}
+	return o.KvmServerStateEnabled, true
+}
+
+// HasKvmServerStateEnabled returns a boolean if a field has been set.
+func (o *ComputePhysical) HasKvmServerStateEnabled() bool {
+	if o != nil && o.KvmServerStateEnabled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetKvmServerStateEnabled gets a reference to the given bool and assigns it to the KvmServerStateEnabled field.
+func (o *ComputePhysical) SetKvmServerStateEnabled(v bool) {
+	o.KvmServerStateEnabled = &v
+}
+
+// GetKvmVendor returns the KvmVendor field value if set, zero value otherwise.
+func (o *ComputePhysical) GetKvmVendor() string {
+	if o == nil || o.KvmVendor == nil {
+		var ret string
+		return ret
+	}
+	return *o.KvmVendor
+}
+
+// GetKvmVendorOk returns a tuple with the KvmVendor field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ComputePhysical) GetKvmVendorOk() (*string, bool) {
+	if o == nil || o.KvmVendor == nil {
+		return nil, false
+	}
+	return o.KvmVendor, true
+}
+
+// HasKvmVendor returns a boolean if a field has been set.
+func (o *ComputePhysical) HasKvmVendor() bool {
+	if o != nil && o.KvmVendor != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetKvmVendor gets a reference to the given string and assigns it to the KvmVendor field.
+func (o *ComputePhysical) SetKvmVendor(v string) {
+	o.KvmVendor = &v
 }
 
 // GetManagementMode returns the ManagementMode field value if set, zero value otherwise.
@@ -1624,6 +1692,12 @@ func (o ComputePhysical) MarshalJSON() ([]byte, error) {
 	if o.KvmIpAddresses != nil {
 		toSerialize["KvmIpAddresses"] = o.KvmIpAddresses
 	}
+	if o.KvmServerStateEnabled != nil {
+		toSerialize["KvmServerStateEnabled"] = o.KvmServerStateEnabled
+	}
+	if o.KvmVendor != nil {
+		toSerialize["KvmVendor"] = o.KvmVendor
+	}
 	if o.ManagementMode != nil {
 		toSerialize["ManagementMode"] = o.ManagementMode
 	}
@@ -1758,6 +1832,10 @@ func (o *ComputePhysical) UnmarshalJSON(bytes []byte) (err error) {
 		// The universally unique hardware identity of the server provided by the manufacturer.
 		HardwareUuid   *string            `json:"HardwareUuid,omitempty"`
 		KvmIpAddresses []ComputeIpAddress `json:"KvmIpAddresses,omitempty"`
+		// The KVM server state of the server.
+		KvmServerStateEnabled *bool `json:"KvmServerStateEnabled,omitempty"`
+		// The KVM Vendor for the server.
+		KvmVendor *string `json:"KvmVendor,omitempty"`
 		// The management mode of the server. * `IntersightStandalone` - Intersight Standalone mode of operation. * `UCSM` - Unified Computing System Manager mode of operation. * `Intersight` - Intersight managed mode of operation.
 		ManagementMode *string `json:"ManagementMode,omitempty"`
 		// The maximum memory speed in MHz available on the server.
@@ -1841,6 +1919,8 @@ func (o *ComputePhysical) UnmarshalJSON(bytes []byte) (err error) {
 		varComputePhysical.FaultSummary = varComputePhysicalWithoutEmbeddedStruct.FaultSummary
 		varComputePhysical.HardwareUuid = varComputePhysicalWithoutEmbeddedStruct.HardwareUuid
 		varComputePhysical.KvmIpAddresses = varComputePhysicalWithoutEmbeddedStruct.KvmIpAddresses
+		varComputePhysical.KvmServerStateEnabled = varComputePhysicalWithoutEmbeddedStruct.KvmServerStateEnabled
+		varComputePhysical.KvmVendor = varComputePhysicalWithoutEmbeddedStruct.KvmVendor
 		varComputePhysical.ManagementMode = varComputePhysicalWithoutEmbeddedStruct.ManagementMode
 		varComputePhysical.MemorySpeed = varComputePhysicalWithoutEmbeddedStruct.MemorySpeed
 		varComputePhysical.MgmtIpAddress = varComputePhysicalWithoutEmbeddedStruct.MgmtIpAddress
@@ -1903,6 +1983,8 @@ func (o *ComputePhysical) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "FaultSummary")
 		delete(additionalProperties, "HardwareUuid")
 		delete(additionalProperties, "KvmIpAddresses")
+		delete(additionalProperties, "KvmServerStateEnabled")
+		delete(additionalProperties, "KvmVendor")
 		delete(additionalProperties, "ManagementMode")
 		delete(additionalProperties, "MemorySpeed")
 		delete(additionalProperties, "MgmtIpAddress")

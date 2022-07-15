@@ -6,18 +6,21 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "network.InterfaceList"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "network.InterfaceList"]
-**AdminState** | Pointer to **string** | Admin state of the interface list. | [optional] 
-**IpAddress** | Pointer to **string** | IP address of the interface list. | [optional] 
-**Mac** | Pointer to **string** | MAC address of the interface list. | [optional] 
-**Mtu** | Pointer to **int64** | Maximum transmission unit of the interface list. | [optional] 
-**Name** | Pointer to **string** | Name of the interface list. | [optional] 
-**OperState** | Pointer to **string** | Operational state of the interface list. | [optional] 
-**PortSubType** | Pointer to **string** | Interface types supported in Network device like Subinterfaces, Breakout Interfaces. | [optional] 
-**PortType** | Pointer to **string** | Port type of interface list. | [optional] 
-**SlotId** | Pointer to **string** | Slot id of the interface list. | [optional] 
-**Speed** | Pointer to **string** | Port speed of the interface list. | [optional] 
-**SpeedGroup** | Pointer to **string** | Speed Group of the interface list. | [optional] 
-**Vlan** | Pointer to **string** | VLAN of the interface list. | [optional] 
+**AdminState** | Pointer to **string** | Admin state of the interface list. | [optional] [readonly] 
+**AllowedVlans** | Pointer to **string** | Allowed VLANs of the interface list. | [optional] [readonly] 
+**Description** | Pointer to **string** | Description of the interface list. | [optional] [readonly] 
+**IpAddress** | Pointer to **string** | IP address of the interface list. | [optional] [readonly] 
+**IpSubnet** | Pointer to **int64** | IP subnet of the interface list. | [optional] [readonly] 
+**Mac** | Pointer to **string** | MAC address of the interface list. | [optional] [readonly] 
+**Mtu** | Pointer to **int64** | Maximum transmission unit of the interface list. | [optional] [readonly] 
+**Name** | Pointer to **string** | Name of the interface list. | [optional] [readonly] 
+**OperState** | Pointer to **string** | Operational state of the interface list. | [optional] [readonly] 
+**PortSubType** | Pointer to **string** | Interface types supported in Network device like Subinterfaces, Breakout Interfaces. | [optional] [readonly] 
+**PortType** | Pointer to **string** | Port type of interface list. | [optional] [readonly] 
+**SlotId** | Pointer to **string** | Slot id of the interface list. | [optional] [readonly] 
+**Speed** | Pointer to **string** | Port speed of the interface list. | [optional] [readonly] 
+**SpeedGroup** | Pointer to **string** | Speed Group of the interface list. | [optional] [readonly] 
+**Vlan** | Pointer to **string** | VLAN of the interface list. | [optional] [readonly] 
 **NetworkElement** | Pointer to [**NetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
@@ -105,6 +108,56 @@ SetAdminState sets AdminState field to given value.
 
 HasAdminState returns a boolean if a field has been set.
 
+### GetAllowedVlans
+
+`func (o *NetworkInterfaceList) GetAllowedVlans() string`
+
+GetAllowedVlans returns the AllowedVlans field if non-nil, zero value otherwise.
+
+### GetAllowedVlansOk
+
+`func (o *NetworkInterfaceList) GetAllowedVlansOk() (*string, bool)`
+
+GetAllowedVlansOk returns a tuple with the AllowedVlans field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAllowedVlans
+
+`func (o *NetworkInterfaceList) SetAllowedVlans(v string)`
+
+SetAllowedVlans sets AllowedVlans field to given value.
+
+### HasAllowedVlans
+
+`func (o *NetworkInterfaceList) HasAllowedVlans() bool`
+
+HasAllowedVlans returns a boolean if a field has been set.
+
+### GetDescription
+
+`func (o *NetworkInterfaceList) GetDescription() string`
+
+GetDescription returns the Description field if non-nil, zero value otherwise.
+
+### GetDescriptionOk
+
+`func (o *NetworkInterfaceList) GetDescriptionOk() (*string, bool)`
+
+GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDescription
+
+`func (o *NetworkInterfaceList) SetDescription(v string)`
+
+SetDescription sets Description field to given value.
+
+### HasDescription
+
+`func (o *NetworkInterfaceList) HasDescription() bool`
+
+HasDescription returns a boolean if a field has been set.
+
 ### GetIpAddress
 
 `func (o *NetworkInterfaceList) GetIpAddress() string`
@@ -129,6 +182,31 @@ SetIpAddress sets IpAddress field to given value.
 `func (o *NetworkInterfaceList) HasIpAddress() bool`
 
 HasIpAddress returns a boolean if a field has been set.
+
+### GetIpSubnet
+
+`func (o *NetworkInterfaceList) GetIpSubnet() int64`
+
+GetIpSubnet returns the IpSubnet field if non-nil, zero value otherwise.
+
+### GetIpSubnetOk
+
+`func (o *NetworkInterfaceList) GetIpSubnetOk() (*int64, bool)`
+
+GetIpSubnetOk returns a tuple with the IpSubnet field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIpSubnet
+
+`func (o *NetworkInterfaceList) SetIpSubnet(v int64)`
+
+SetIpSubnet sets IpSubnet field to given value.
+
+### HasIpSubnet
+
+`func (o *NetworkInterfaceList) HasIpSubnet() bool`
+
+HasIpSubnet returns a boolean if a field has been set.
 
 ### GetMac
 

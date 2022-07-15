@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7078
+API version: 1.0.11-7546
 Contact: intersight@cisco.com
 */
 
@@ -38,8 +38,10 @@ type VirtualizationVmwareDatastoreAllOf struct {
 	// The URL to access this datastore (example - 'ds:///vmfs/volumes/562a4e8a-0eeb5372-dd61-78baf9cb9afa/').
 	Url *string `json:"Url,omitempty"`
 	// Number of virtual machine templates relying on (using) this datastore.
-	VmTemplateCount  *int64                                            `json:"VmTemplateCount,omitempty"`
-	Cluster          *VirtualizationVmwareClusterRelationship          `json:"Cluster,omitempty"`
+	VmTemplateCount *int64                                   `json:"VmTemplateCount,omitempty"`
+	Cluster         *VirtualizationVmwareClusterRelationship `json:"Cluster,omitempty"`
+	// An array of relationships to virtualizationVmwareCluster resources.
+	Clusters         []VirtualizationVmwareClusterRelationship         `json:"Clusters,omitempty"`
 	Datacenter       *VirtualizationVmwareDatacenterRelationship       `json:"Datacenter,omitempty"`
 	DatastoreCluster *VirtualizationVmwareDatastoreClusterRelationship `json:"DatastoreCluster,omitempty"`
 	// An array of relationships to virtualizationVmwareHost resources.
@@ -444,6 +446,39 @@ func (o *VirtualizationVmwareDatastoreAllOf) SetCluster(v VirtualizationVmwareCl
 	o.Cluster = &v
 }
 
+// GetClusters returns the Clusters field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *VirtualizationVmwareDatastoreAllOf) GetClusters() []VirtualizationVmwareClusterRelationship {
+	if o == nil {
+		var ret []VirtualizationVmwareClusterRelationship
+		return ret
+	}
+	return o.Clusters
+}
+
+// GetClustersOk returns a tuple with the Clusters field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *VirtualizationVmwareDatastoreAllOf) GetClustersOk() ([]VirtualizationVmwareClusterRelationship, bool) {
+	if o == nil || o.Clusters == nil {
+		return nil, false
+	}
+	return o.Clusters, true
+}
+
+// HasClusters returns a boolean if a field has been set.
+func (o *VirtualizationVmwareDatastoreAllOf) HasClusters() bool {
+	if o != nil && o.Clusters != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetClusters gets a reference to the given []VirtualizationVmwareClusterRelationship and assigns it to the Clusters field.
+func (o *VirtualizationVmwareDatastoreAllOf) SetClusters(v []VirtualizationVmwareClusterRelationship) {
+	o.Clusters = v
+}
+
 // GetDatacenter returns the Datacenter field value if set, zero value otherwise.
 func (o *VirtualizationVmwareDatastoreAllOf) GetDatacenter() VirtualizationVmwareDatacenterRelationship {
 	if o == nil || o.Datacenter == nil {
@@ -579,6 +614,9 @@ func (o VirtualizationVmwareDatastoreAllOf) MarshalJSON() ([]byte, error) {
 	if o.Cluster != nil {
 		toSerialize["Cluster"] = o.Cluster
 	}
+	if o.Clusters != nil {
+		toSerialize["Clusters"] = o.Clusters
+	}
 	if o.Datacenter != nil {
 		toSerialize["Datacenter"] = o.Datacenter
 	}
@@ -618,6 +656,7 @@ func (o *VirtualizationVmwareDatastoreAllOf) UnmarshalJSON(bytes []byte) (err er
 		delete(additionalProperties, "Url")
 		delete(additionalProperties, "VmTemplateCount")
 		delete(additionalProperties, "Cluster")
+		delete(additionalProperties, "Clusters")
 		delete(additionalProperties, "Datacenter")
 		delete(additionalProperties, "DatastoreCluster")
 		delete(additionalProperties, "Hosts")

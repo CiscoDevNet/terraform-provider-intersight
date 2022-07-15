@@ -59,6 +59,11 @@ func dataSourceStoragePureArray() *schema.Resource {
 				},
 			},
 		},
+		"api_version": {
+			Description: "Major version of REST API supported by the Pure storage array. Will be used as constraint for implementation tasks. If REST API version is less than 2.4, then this property returns the major version 1, else returns 2.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 			Type:        schema.TypeString,
@@ -518,6 +523,11 @@ func dataSourceStoragePureArray() *schema.Resource {
 					},
 				},
 			},
+		},
+		"api_version": {
+			Description: "Major version of REST API supported by the Pure storage array. Will be used as constraint for implementation tasks. If REST API version is less than 2.4, then this property returns the major version 1, else returns 2.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
@@ -1004,6 +1014,11 @@ func dataSourceStoragePureArrayRead(c context.Context, d *schema.ResourceData, m
 		o.SetAncestors(x)
 	}
 
+	if v, ok := d.GetOk("api_version"); ok {
+		x := (v.(string))
+		o.SetApiVersion(x)
+	}
+
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
@@ -1451,6 +1466,7 @@ func dataSourceStoragePureArrayRead(c context.Context, d *schema.ResourceData, m
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
+				temp["api_version"] = (s.GetApiVersion())
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
