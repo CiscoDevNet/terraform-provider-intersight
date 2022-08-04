@@ -1401,28 +1401,10 @@ func dataSourceStorageNetAppEthernetPortRead(c context.Context, d *schema.Resour
 							}
 						}
 						o.SetClassId("storage.NetAppPort")
-						if v, ok := l["name"]; ok {
-							{
-								x := (v.(string))
-								o.SetName(x)
-							}
-						}
-						if v, ok := l["node_name"]; ok {
-							{
-								x := (v.(string))
-								o.SetNodeName(x)
-							}
-						}
 						if v, ok := l["object_type"]; ok {
 							{
 								x := (v.(string))
 								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["uuid"]; ok {
-							{
-								x := (v.(string))
-								o.SetUuid(x)
 							}
 						}
 						x = append(x, *o)
@@ -1443,12 +1425,6 @@ func dataSourceStorageNetAppEthernetPortRead(c context.Context, d *schema.Resour
 				}
 			}
 			o.SetClassId("storage.NetAppEthernetPortLag")
-			if v, ok := l["distribution_policy"]; ok {
-				{
-					x := (v.(string))
-					o.SetDistributionPolicy(x)
-				}
-			}
 			if v, ok := l["member_ports"]; ok {
 				{
 					x := make([]models.StorageNetAppPort, 0)
@@ -1467,28 +1443,10 @@ func dataSourceStorageNetAppEthernetPortRead(c context.Context, d *schema.Resour
 							}
 						}
 						o.SetClassId("storage.NetAppPort")
-						if v, ok := l["name"]; ok {
-							{
-								x := (v.(string))
-								o.SetName(x)
-							}
-						}
-						if v, ok := l["node_name"]; ok {
-							{
-								x := (v.(string))
-								o.SetNodeName(x)
-							}
-						}
 						if v, ok := l["object_type"]; ok {
 							{
 								x := (v.(string))
 								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["uuid"]; ok {
-							{
-								x := (v.(string))
-								o.SetUuid(x)
 							}
 						}
 						x = append(x, *o)
@@ -1496,12 +1454,6 @@ func dataSourceStorageNetAppEthernetPortRead(c context.Context, d *schema.Resour
 					if len(x) > 0 {
 						o.SetMemberPorts(x)
 					}
-				}
-			}
-			if v, ok := l["mode"]; ok {
-				{
-					x := (v.(string))
-					o.SetMode(x)
 				}
 			}
 			if v, ok := l["object_type"]; ok {
@@ -1534,67 +1486,11 @@ func dataSourceStorageNetAppEthernetPortRead(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			if v, ok := l["base_port"]; ok {
-				{
-					p := make([]models.StorageNetAppPort, 0, 1)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						l := s[i].(map[string]interface{})
-						o := models.NewStorageNetAppPortWithDefaults()
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("storage.NetAppPort")
-						if v, ok := l["name"]; ok {
-							{
-								x := (v.(string))
-								o.SetName(x)
-							}
-						}
-						if v, ok := l["node_name"]; ok {
-							{
-								x := (v.(string))
-								o.SetNodeName(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["uuid"]; ok {
-							{
-								x := (v.(string))
-								o.SetUuid(x)
-							}
-						}
-						p = append(p, *o)
-					}
-					if len(p) > 0 {
-						x := p[0]
-						o.SetBasePort(x)
-					}
-				}
-			}
 			o.SetClassId("storage.NetAppEthernetPortVlan")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["tag"]; ok {
-				{
-					x := int64(v.(int))
-					o.SetTag(x)
 				}
 			}
 			p = append(p, *o)

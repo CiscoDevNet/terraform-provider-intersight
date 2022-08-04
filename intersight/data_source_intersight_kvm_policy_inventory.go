@@ -90,7 +90,7 @@ func dataSourceKvmPolicyInventory() *schema.Resource {
 			Optional:    true,
 		},
 		"enable_video_encryption": {
-			Description: "If enabled, encrypts all video information sent through KVM. Please note that this is no longer applicable for servers running versions 4.2 and above.",
+			Description: "If enabled, encrypts all video information sent through KVM. Please note that this can no longer be disabled for servers running versions 4.2 and above.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
@@ -455,7 +455,7 @@ func dataSourceKvmPolicyInventory() *schema.Resource {
 			Optional:    true,
 		},
 		"enable_video_encryption": {
-			Description: "If enabled, encrypts all video information sent through KVM. Please note that this is no longer applicable for servers running versions 4.2 and above.",
+			Description: "If enabled, encrypts all video information sent through KVM. Please note that this can no longer be disabled for servers running versions 4.2 and above.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},

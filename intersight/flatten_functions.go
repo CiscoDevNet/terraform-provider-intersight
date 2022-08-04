@@ -1147,6 +1147,53 @@ func flattenListComputeServerOpStatus(p []models.ComputeServerOpStatus, d *schem
 	}
 	return computeserveropstatuss
 }
+func flattenListCondAlarmAction(p []models.CondAlarmAction, d *schema.ResourceData) []map[string]interface{} {
+	var condalarmactions []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		condalarmaction := make(map[string]interface{})
+		condalarmaction["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		condalarmaction["class_id"] = item.GetClassId()
+		condalarmaction["message"] = (func(p models.IssueMessage, d *schema.ResourceData) []map[string]interface{} {
+			var issuemessages []map[string]interface{}
+			var ret models.IssueMessage
+			if reflect.DeepEqual(ret, p) {
+				return nil
+			}
+			item := p
+			issuemessage := make(map[string]interface{})
+			issuemessage["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			issuemessage["class_id"] = item.GetClassId()
+			issuemessage["message"] = item.GetMessage()
+			issuemessage["object_type"] = item.GetObjectType()
+			issuemessage["parameters"] = item.GetParameters()
+
+			issuemessages = append(issuemessages, issuemessage)
+			return issuemessages
+		})(item.GetMessage(), d)
+		condalarmaction["object_type"] = item.GetObjectType()
+		condalarmaction["spec"] = (func(p models.CondAlarmSpec, d *schema.ResourceData) []map[string]interface{} {
+			var condalarmspecs []map[string]interface{}
+			var ret models.CondAlarmSpec
+			if reflect.DeepEqual(ret, p) {
+				return nil
+			}
+			item := p
+			condalarmspec := make(map[string]interface{})
+			condalarmspec["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			condalarmspec["class_id"] = item.GetClassId()
+			condalarmspec["object_type"] = item.GetObjectType()
+			condalarmspec["severity"] = item.GetSeverity()
+
+			condalarmspecs = append(condalarmspecs, condalarmspec)
+			return condalarmspecs
+		})(item.GetSpec(), d)
+		condalarmactions = append(condalarmactions, condalarmaction)
+	}
+	return condalarmactions
+}
 func flattenListCondHclStatusDetailRelationship(p []models.CondHclStatusDetailRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var condhclstatusdetailrelationships []map[string]interface{}
 	if len(p) == 0 {
@@ -13460,6 +13507,21 @@ func flattenMapIqnpoolUniverseRelationship(p models.IqnpoolUniverseRelationship,
 
 	iqnpooluniverserelationships = append(iqnpooluniverserelationships, iqnpooluniverserelationship)
 	return iqnpooluniverserelationships
+}
+func flattenMapIssueCondition(p models.IssueCondition, d *schema.ResourceData) []map[string]interface{} {
+	var issueconditions []map[string]interface{}
+	var ret models.IssueCondition
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	issuecondition := make(map[string]interface{})
+	issuecondition["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	issuecondition["class_id"] = item.GetClassId()
+	issuecondition["object_type"] = item.GetObjectType()
+
+	issueconditions = append(issueconditions, issuecondition)
+	return issueconditions
 }
 func flattenMapKubernetesAciCniProfileRelationship(p models.KubernetesAciCniProfileRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var kubernetesacicniprofilerelationships []map[string]interface{}

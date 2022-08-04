@@ -39,7 +39,7 @@ This complex property has following sub-properties:
 * `description`:(string) Description of the policy. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
 * `enable_local_server_video`:(bool) If enabled, displays KVM session on any monitor attached to the server. 
-* `enable_video_encryption`:(bool) If enabled, encrypts all video information sent through KVM. Please note that this is no longer applicable for servers running versions 4.2 and above. 
+* `enable_video_encryption`:(bool) If enabled, encrypts all video information sent through KVM. Please note that this can no longer be disabled for servers running versions 4.2 and above. 
 * `enabled`:(bool) State of the vKVM service on the endpoint. 
 * `maximum_sessions`:(int) The maximum number of concurrent KVM sessions allowed. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 

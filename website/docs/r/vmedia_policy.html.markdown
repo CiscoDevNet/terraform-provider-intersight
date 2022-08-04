@@ -54,7 +54,7 @@ This complex property has following sub-properties:
 * `description`:(string) Description of the policy. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
 * `enabled`:(bool) State of the Virtual Media service on the endpoint. 
-* `encryption`:(bool) If enabled, allows encryption of all Virtual Media communications. Please note that this is no longer applicable for servers running versions 4.2 and above. 
+* `encryption`:(bool) If enabled, allows encryption of all Virtual Media communications. Please note that this can no longer be disabled for servers running versions 4.2 and above. 
 * `low_power_usb`:(bool) If enabled, the virtual drives appear on the boot selection menu after mapping the image and rebooting the host. 
 * `mappings`:(Array)
 This complex property has following sub-properties:

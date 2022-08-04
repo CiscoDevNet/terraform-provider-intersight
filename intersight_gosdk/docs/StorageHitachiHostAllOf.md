@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.HitachiHost"]
 **AuthenticationMode** | Pointer to **string** | Authentication mode for the iSCSI target. * &#x60;N/A&#x60; - Authentication Mode is not available. * &#x60;CHAP&#x60; - CHAP-authentication mode. * &#x60;NONE&#x60; - Authentication mode is not set. * &#x60;BOTH&#x60; - Comply with Host Setting. | [optional] [readonly] [default to "N/A"]
 **HostGroupId** | Pointer to **string** | ID of the host group for this host. | [optional] [readonly] 
-**HostGroupNumber** | Pointer to **int64** | Host group number for this host. | [optional] 
+**HostGroupNumber** | Pointer to **int64** | Host group number for this host. | [optional] [readonly] 
 **HostModeOptions** | Pointer to **[]int64** |  | [optional] 
 **IsChapMutual** | Pointer to **bool** | Mutual CHAP setting that is Enabled or Disabled. | [optional] [readonly] 
 **IscsiName** | Pointer to **string** | IQN (iSCSI qualified name). Can be up to 255 characters long. | [optional] [readonly] 

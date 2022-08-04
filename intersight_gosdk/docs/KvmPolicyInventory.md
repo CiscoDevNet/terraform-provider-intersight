@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "kvm.PolicyInventory"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "kvm.PolicyInventory"]
 **EnableLocalServerVideo** | Pointer to **bool** | If enabled, displays KVM session on any monitor attached to the server. | [optional] [readonly] [default to true]
-**EnableVideoEncryption** | Pointer to **bool** | If enabled, encrypts all video information sent through KVM. Please note that this is no longer applicable for servers running versions 4.2 and above. | [optional] [readonly] [default to true]
+**EnableVideoEncryption** | Pointer to **bool** | If enabled, encrypts all video information sent through KVM. Please note that this can no longer be disabled for servers running versions 4.2 and above. | [optional] [readonly] [default to true]
 **Enabled** | Pointer to **bool** | State of the vKVM service on the endpoint. | [optional] [readonly] [default to true]
 **MaximumSessions** | Pointer to **int64** | The maximum number of concurrent KVM sessions allowed. | [optional] [readonly] [default to 4]
 **RemotePort** | Pointer to **int64** | The port used for KVM communication. | [optional] [readonly] [default to 2068]

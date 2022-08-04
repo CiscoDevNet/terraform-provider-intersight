@@ -7,11 +7,11 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.NetAppExportPolicyRule"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.NetAppExportPolicyRule"]
 **ClientMatch** | Pointer to **[]string** |  | [optional] 
-**Index** | Pointer to **int64** | Position of export rule in the list of rules. | [optional] 
+**Index** | Pointer to **int64** | Position of export rule in the list of rules. | [optional] [readonly] 
 **RoRule** | Pointer to **[]string** |  | [optional] 
 **RwRule** | Pointer to **[]string** |  | [optional] 
 **SuperUser** | Pointer to **[]string** |  | [optional] 
-**User** | Pointer to **string** | Export Policy rule that are mapped to this User ID. | [optional] 
+**User** | Pointer to **string** | Export Policy rule that are mapped to this User ID. | [optional] [readonly] 
 
 ## Methods
 
