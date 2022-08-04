@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.NetAppEthernetPortVlan"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.NetAppEthernetPortVlan"]
 **BasePort** | Pointer to [**NullableStorageNetAppPort**](StorageNetAppPort.md) |  | [optional] 
-**Tag** | Pointer to **int64** | The ID tag of the VLAN for this port. | [optional] 
+**Tag** | Pointer to **int64** | The ID tag of the VLAN for this port. | [optional] [readonly] 
 
 ## Methods
 

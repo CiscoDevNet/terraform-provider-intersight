@@ -1049,12 +1049,6 @@ func dataSourceStorageNetAppExportPolicyRead(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			if v, ok := l["index"]; ok {
-				{
-					x := int64(v.(int))
-					o.SetIndex(x)
-				}
-			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1101,12 +1095,6 @@ func dataSourceStorageNetAppExportPolicyRead(c context.Context, d *schema.Resour
 					if len(x) > 0 {
 						o.SetSuperUser(x)
 					}
-				}
-			}
-			if v, ok := l["user"]; ok {
-				{
-					x := (v.(string))
-					o.SetUser(x)
 				}
 			}
 			x = append(x, *o)

@@ -90,7 +90,7 @@ func dataSourceVmediaPolicyInventory() *schema.Resource {
 			Optional:    true,
 		},
 		"encryption": {
-			Description: "If enabled, allows encryption of all Virtual Media communications. Please note that this is no longer applicable for servers running versions 4.2 and above.",
+			Description: "If enabled, allows encryption of all Virtual Media communications. Please note that this can no longer be disabled for servers running versions 4.2 and above.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
@@ -528,7 +528,7 @@ func dataSourceVmediaPolicyInventory() *schema.Resource {
 			Optional:    true,
 		},
 		"encryption": {
-			Description: "If enabled, allows encryption of all Virtual Media communications. Please note that this is no longer applicable for servers running versions 4.2 and above.",
+			Description: "If enabled, allows encryption of all Virtual Media communications. Please note that this can no longer be disabled for servers running versions 4.2 and above.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
