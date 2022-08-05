@@ -279,97 +279,6 @@ $ terraform import intersight_workflow_workflow_definition.example 1234567890987
 ```
 ## Allowed Types in `AdditionalProperties`
  
-### [workflow.DecisionTask](#argument-reference)
-A DecisionTask is a control task that executes a sequence of WorkflowTasks based off decision provided and evaluated by this task.
-* `condition`:(string) The condition to evaluate for this decision task. The condition can be a workflow or task variable or an JavaScript expression. Example value for condition could be a variable like \ ${task1.output.var1} or ${workflow.input.var2}\  which evaluates to a value matching any of the decision case values. Example value for condition if it's an expression - \ if ( ${task1.output.var1} ! = null && ${task1.output.var1} > 0 ) 'true'; else 'false'; \  which evaluates to 'true' or 'false' and will match one of the decision case values. You can also use JavaScript functions like indexOf, toUpperCase in the expression which will be evaluated by the expression evaluator. 
-* `decision_cases`:(Array)
-This complex property has following sub-properties:
-  + `description`:(string) Description of this decision case. 
-  + `next_task`:(string) The name of the next task (Task names unique within workflow) to run.  In a graph model, denotes an edge to another Task Node. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `value`:(string) Value for the decision case. 
-* `default_task`:(string) The default next Task to execute if the decision cannot be evaluated to any of the DecisionCases. 
-* `input_parameters`:(JSON as string) This field is deprecated. Decision case conditions can be added using the workflow input or task output variables in the Condition field. Refer to Condition field for more details. 
-
-### [workflow.FailureEndTask](#argument-reference)
-A FailureEndTask denotes the failed completion of a workflow.
-
-### [workflow.ForkTask](#argument-reference)
-A ForkTask is a control task that forks tasks for parallel execution in a workflow.
-* `forked_tasks`:
-                (Array of schema.TypeString) -
-* `join_task`:(string) Task name for the join control task that must follow a fork control task. 
-
-### [workflow.JoinTask](#argument-reference)
-A JoinTask is a control task that must follow a fork task and specify all the fork tasks that must complete and join before the worfklow can proceed to the task specified in the OnSuccess transition.
-* `join_on_tasks`:
-                (Array of schema.TypeString) -
-* `on_success`:(string) Name of the next task to run if all fork path specified in the JoinOnTasks list succeeds which is the unique name given to the task instance within the workflow. In a graph model, denotes an edge to another Task Node. 
-
-### [workflow.LoopTask](#argument-reference)
-A Parallel Loop is a control task that runs one task or one sub-workflow multiple times based on a specified count. The count can be a static value that is specified during design time or a dynamic value that is derived from workflow inputs or task outputs. When the loop is executed, the count 'N' is determined and then N tasks or sub-workflows are scheduled for execution in parallel. When all N instances of the task or sub-workflow reach a final state the parallel loop will complete and workflow execution will move on to the next task. If any one of the tasks or sub-workflows fails, then the entire loop will fail.
-* `nr_count`:(string) Count value for the loop, this can be a static value defined as a constant at design time or can be a dynamic value defined as an expression that will evaluate to an integer value at execution time. Dynamic values for count must be specified as a template. For example, if a loop must run for a count which matches the length of a workflow input called StringArray, then the count must be specified using a template '{{ len .global.workflow.input.StringArray }}'. The count must be less than or equal to 100. If count is given as a dynamic value, and during execution time if count evaluates to be a value greater than 100, then the loop task will fail. 
-* `loop_start_task`:(string) Start task where the list of tasks will be executed multiple times based on the count or condition value. 
-* `number_of_batches`:(int) When tasks are run in parallel and the count is large, the actual number of task run in parallel can be controlled by this property. If count is 100 and numberOfBatches is 5 then 20 tasks are run in parallel 5 times. Parallel batch size must be less than the count. In cases where count is dynamic and depends on input given during workflow execution, if that count is less than batch then empty batches might get created which do not have any tasks under them. 
-* `on_success`:(string) This specifies the name of the next task to run if all iterations of the loop task succeeds. The unique name given to the task instance within the workflow must be provided here. In a graph model, denotes an edge to another Task Node. 
-* `parallel`:(bool) This field is deprecated. Always set to true for parallel loop. 
-
-### [workflow.SerialLoopTask](#argument-reference)
-A Serial Loop is a control task that runs one or more worker tasks multiple times based on a specified count or a given condition. Either count or condition must be provided, not both. When the loop is executed, based on count or condition, each iteration of task or a sequence of tasks inside loop run in serial. If any of the task fail then the entire loop will fail.
-* `condition`:(string) Condition expression which will be evaluated and when expression is true the tasks under loop will be executed. 
-* `nr_count`:(string) Count value for the loop, this can be a static value defined as a constant at design time or can be a dynamic value defined as an expression that will evaluate to an integer value at execution time. Dynamic values for count must be specified as a template. For example, if a loop must run for a count which matches the length of a workflow input called StringArray, then the count must be specified using a template '{{ len .global.workflow.input.StringArray }}'. The count must be less than or equal to 100. If count is given as a dynamic value, and during execution time if count evaluates to be a value greater than 100, then the loop task will fail. 
-* `loop_start_task`:(string) Start task where the list of tasks will be executed multiple times based on the count or condition value. 
-* `on_success`:(string) This specifies the name of the next task to run if all iterations of the loop task succeeds. The unique name given to the task instance within the workflow must be provided here. In a graph model, denotes an edge to another Task Node. 
-
-### [workflow.StartTask](#argument-reference)
-A StartTask is the starting point for a workflow.  There can only be one StartTask in a workflow.
-* `next_task`:(string) The name of the next task (Task names unique within workflow) to run.  In a graph model, denotes an edge to another Task Node. 
-
-### [workflow.SubWorkflowTask](#argument-reference)
-A SubWorkflowTask is used to include another workflow as a task within this workflow.
-* `catalog_moid`:(string) Specify the catalog moid that this task belongs. 
-* `input_parameters`:(JSON as string) JSON formatted key-value pairs that define the inputs given to the task. Mapping for task inputs can be provided as either static values, direct mapping or advanced mapping using templates. The direct mapping can be specified as '${Source.< input | output | variable>.<JSONPath>}'. 'Source' can be either workflow or the name of an earlier task within the workflow. You can map the task input to either a workflow input, a task output or a variable. Golang template syntax is supported for advanced mapping. A simple flattened example is \ InputParameters\ :{ \ input1\ :\ ${workflow.variable.var1}\ , \ input2\ :\ prefixStr_{{.global.workflow.input.input1}}\  } where task input1 is mapped directly to variable var1 and task input2 is using a template to prefix a string to workflow input1 and then assign that value. 
-* `on_failure`:(string) This specifies the name of the next task to run if Task fails.  This is the unique name given to the task instance within the workflow. In a graph model, denotes an edge to another Task Node. 
-* `on_success`:(string) This specifies the name of the next task to run if Task succeeds.  This is the unique name given to the task instance within the workflow. In a graph model, denotes an edge to another Task Node. 
-* `rollback_disabled`:(bool) The task is disabled/enabled for rollback operation in this workflow if the task has rollback support. 
-* `use_default`:(bool) UseDefault when set to true, means the default version of the task or workflow will be used at the time of execution. When this property is set then version for task or subworkflow cannot be set. When workflow is created or updated the default version of task or subworkflow will be used for validation, but when the workflow is executed the default version that that time will be used for validation and subsequent execution. 
-* `variable_parameters`:(JSON as string) JSON formatted key-value pairs that perform variable update at the end of the task execution. Mapping for variables can be provided as either static values, direct mapping or advanced mapping using templates. The direct mapping can be specified as '${Source.< input | output | variable>.<JSONPath>}'. 'Source' can be either workflow or the name of the current or an earlier task within the workflow. You can map the variable to either a workflow input, a task output or another variable. Golang template syntax is supported for advanced mapping. A simple flattened example is \ VariableParameters\ :{ \ var1\ :\ ${task1.output.output1}\ , \ var2\ :\ {{ Itoa .global.workflow.variable.varInt}}\  } where variable var1 is mapped directly to output1 of task1 and variable var2 is using a template to convert another variable varInt to string and assign that value. 
-* `nr_version`:(int) The workflow definition version to use as subworkflow. When no version is specified then the default version of the workflow at the time of creating or updating this workflow is used. 
-* `workflow_definition_id`:(string)(ReadOnly) The resolved referenced workflow definition managed object. 
-* `workflow_definition_name`:(string) The qualified name of workflow that should be executed as a task. 
-
-### [workflow.SuccessEndTask](#argument-reference)
-A SuccessEndTask denotes the successful completion of a workflow.
-
-### [workflow.WaitTask](#argument-reference)
-A WaitTask will remain in progress until marked success or failed by an external trigger. The timeout for wait task is 180 days, so a workflow can wait for task status update for upto 180 days. Currently the only supported means to update the task status is through an API that provides the status of the task runtime instance. Once the wait task status has been set the workflow will continue with the execution based on the task status.
-* `input_parameters`:(JSON as string) JSON formatted key-value pairs that define the inputs given to the task. Mapping for task inputs can be provided as either static values, direct mapping or advanced mapping using templates. The direct mapping can be specified as '${Source.< input | output | variable>.<JSONPath>}'. 'Source' can be either workflow or the name of an earlier task within the workflow. You can map the task input to either a workflow input, a task output or a variable. Golang template syntax is supported for advanced mapping. A simple flattened example is \ InputParameters\ :{ \ input1\ :\ ${workflow.variable.var1}\ , \ input2\ :\ prefixStr_{{.global.workflow.input.input1}}\  } where task input1 is mapped directly to variable var1 and task input2 is using a template to prefix a string to workflow input1 and then assign that value. 
-* `on_failure`:(string) This specifies the name of the next task to run if Task fails.  This is the unique name given to the task instance within the workflow. In a graph model, denotes an edge to another Task Node. 
-* `on_success`:(string) This specifies the name of the next task to run if Task succeeds.  This is the unique name given to the task instance within the workflow. In a graph model, denotes an edge to another Task Node. 
-* `prompts`:(Array)
-This complex property has following sub-properties:
-  + `description`:(string) Description that give more details about what it means to pick this prompt option for the wait task. 
-  + `label`:(string) User friendly label for the prompt. This label will be shown to the user as one of available options for the wait task. 
-  + `name`:(string) Name for the wait prompt. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `task_status`:(string) Task status for the wait task when this prompt option is selected.* `Scheduled` - The enum represents the status when task is in scheduled state.* `InProgress` - The enum represents the status when task is in-progress state.* `NoOp` - The enum represents the status when task is a noop.* `Timeout` - The enum represents the status when task has timed out.* `Completed` - The enum represents the status when task has completed.* `Failed` - The enum represents the status when task has failed. 
-* `rollback_disabled`:(bool) The task is disabled/enabled for rollback operation in this workflow if the task has rollback support. 
-* `use_default`:(bool) UseDefault when set to true, means the default version of the task or workflow will be used at the time of execution. When this property is set then version for task or subworkflow cannot be set. When workflow is created or updated the default version of task or subworkflow will be used for validation, but when the workflow is executed the default version that that time will be used for validation and subsequent execution. 
-* `variable_parameters`:(JSON as string) JSON formatted key-value pairs that perform variable update at the end of the task execution. Mapping for variables can be provided as either static values, direct mapping or advanced mapping using templates. The direct mapping can be specified as '${Source.< input | output | variable>.<JSONPath>}'. 'Source' can be either workflow or the name of the current or an earlier task within the workflow. You can map the variable to either a workflow input, a task output or another variable. Golang template syntax is supported for advanced mapping. A simple flattened example is \ VariableParameters\ :{ \ var1\ :\ ${task1.output.output1}\ , \ var2\ :\ {{ Itoa .global.workflow.variable.varInt}}\  } where variable var1 is mapped directly to output1 of task1 and variable var2 is using a template to convert another variable varInt to string and assign that value. 
-
-### [workflow.WorkerTask](#argument-reference)
-A WorkerTask is a simple task and the smallest granularity of work that can be defined as a task.
-* `catalog_moid`:(string) Specify the catalog moid that this task belongs. 
-* `input_parameters`:(JSON as string) JSON formatted key-value pairs that define the inputs given to the task. Mapping for task inputs can be provided as either static values, direct mapping or advanced mapping using templates. The direct mapping can be specified as '${Source.< input | output | variable>.<JSONPath>}'. 'Source' can be either workflow or the name of an earlier task within the workflow. You can map the task input to either a workflow input, a task output or a variable. Golang template syntax is supported for advanced mapping. A simple flattened example is \ InputParameters\ :{ \ input1\ :\ ${workflow.variable.var1}\ , \ input2\ :\ prefixStr_{{.global.workflow.input.input1}}\  } where task input1 is mapped directly to variable var1 and task input2 is using a template to prefix a string to workflow input1 and then assign that value. 
-* `on_failure`:(string) This specifies the name of the next task to run if Task fails.  This is the unique name given to the task instance within the workflow. In a graph model, denotes an edge to another Task Node. 
-* `on_success`:(string) This specifies the name of the next task to run if Task succeeds.  This is the unique name given to the task instance within the workflow. In a graph model, denotes an edge to another Task Node. 
-* `rollback_disabled`:(bool) The task is disabled/enabled for rollback operation in this workflow if the task has rollback support. 
-* `task_definition_id`:(string)(ReadOnly) The resolved referenced task definition managed object. 
-* `task_definition_name`:(string) The qualified name of task that should be executed. 
-* `use_default`:(bool) UseDefault when set to true, means the default version of the task or workflow will be used at the time of execution. When this property is set then version for task or subworkflow cannot be set. When workflow is created or updated the default version of task or subworkflow will be used for validation, but when the workflow is executed the default version that that time will be used for validation and subsequent execution. 
-* `variable_parameters`:(JSON as string) JSON formatted key-value pairs that perform variable update at the end of the task execution. Mapping for variables can be provided as either static values, direct mapping or advanced mapping using templates. The direct mapping can be specified as '${Source.< input | output | variable>.<JSONPath>}'. 'Source' can be either workflow or the name of the current or an earlier task within the workflow. You can map the variable to either a workflow input, a task output or another variable. Golang template syntax is supported for advanced mapping. A simple flattened example is \ VariableParameters\ :{ \ var1\ :\ ${task1.output.output1}\ , \ var2\ :\ {{ Itoa .global.workflow.variable.varInt}}\  } where variable var1 is mapped directly to output1 of task1 and variable var2 is using a template to convert another variable varInt to string and assign that value. 
-* `nr_version`:(int) The task definition version to use in this workflow. When no version is specified then the default version of the task at the time of creating or updating this workflow is used. 
-  
 ### [workflow.ArrayDataType](#argument-reference)
 This data type represents an array of a given type. It can be an array of primitive data or of custom data.
 * `array_item_type`:(HashMap) - Data item within the array data type. 
@@ -465,6 +374,97 @@ This complex property has following sub-properties:
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `supported_objects`:
                 (Array of schema.TypeString) -
+  
+### [workflow.DecisionTask](#argument-reference)
+A DecisionTask is a control task that executes a sequence of WorkflowTasks based off decision provided and evaluated by this task.
+* `condition`:(string) The condition to evaluate for this decision task. The condition can be a workflow or task variable or an JavaScript expression. Example value for condition could be a variable like \ ${task1.output.var1} or ${workflow.input.var2}\  which evaluates to a value matching any of the decision case values. Example value for condition if it's an expression - \ if ( ${task1.output.var1} ! = null && ${task1.output.var1} > 0 ) 'true'; else 'false'; \  which evaluates to 'true' or 'false' and will match one of the decision case values. You can also use JavaScript functions like indexOf, toUpperCase in the expression which will be evaluated by the expression evaluator. 
+* `decision_cases`:(Array)
+This complex property has following sub-properties:
+  + `description`:(string) Description of this decision case. 
+  + `next_task`:(string) The name of the next task (Task names unique within workflow) to run.  In a graph model, denotes an edge to another Task Node. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `value`:(string) Value for the decision case. 
+* `default_task`:(string) The default next Task to execute if the decision cannot be evaluated to any of the DecisionCases. 
+* `input_parameters`:(JSON as string) This field is deprecated. Decision case conditions can be added using the workflow input or task output variables in the Condition field. Refer to Condition field for more details. 
+
+### [workflow.FailureEndTask](#argument-reference)
+A FailureEndTask denotes the failed completion of a workflow.
+
+### [workflow.ForkTask](#argument-reference)
+A ForkTask is a control task that forks tasks for parallel execution in a workflow.
+* `forked_tasks`:
+                (Array of schema.TypeString) -
+* `join_task`:(string) Task name for the join control task that must follow a fork control task. 
+
+### [workflow.JoinTask](#argument-reference)
+A JoinTask is a control task that must follow a fork task and specify all the fork tasks that must complete and join before the worfklow can proceed to the task specified in the OnSuccess transition.
+* `join_on_tasks`:
+                (Array of schema.TypeString) -
+* `on_success`:(string) Name of the next task to run if all fork path specified in the JoinOnTasks list succeeds which is the unique name given to the task instance within the workflow. In a graph model, denotes an edge to another Task Node. 
+
+### [workflow.LoopTask](#argument-reference)
+A Parallel Loop is a control task that runs one task or one sub-workflow multiple times based on a specified count. The count can be a static value that is specified during design time or a dynamic value that is derived from workflow inputs or task outputs. When the loop is executed, the count 'N' is determined and then N tasks or sub-workflows are scheduled for execution in parallel. When all N instances of the task or sub-workflow reach a final state the parallel loop will complete and workflow execution will move on to the next task. If any one of the tasks or sub-workflows fails, then the entire loop will fail.
+* `nr_count`:(string) Count value for the loop, this can be a static value defined as a constant at design time or can be a dynamic value defined as an expression that will evaluate to an integer value at execution time. Dynamic values for count must be specified as a template. For example, if a loop must run for a count which matches the length of a workflow input called StringArray, then the count must be specified using a template '{{ len .global.workflow.input.StringArray }}'. The count must be less than or equal to 100. If count is given as a dynamic value, and during execution time if count evaluates to be a value greater than 100, then the loop task will fail. 
+* `loop_start_task`:(string) Start task where the list of tasks will be executed multiple times based on the count or condition value. 
+* `number_of_batches`:(int) When tasks are run in parallel and the count is large, the actual number of task run in parallel can be controlled by this property. If count is 100 and numberOfBatches is 5 then 20 tasks are run in parallel 5 times. Parallel batch size must be less than the count. In cases where count is dynamic and depends on input given during workflow execution, if that count is less than batch then empty batches might get created which do not have any tasks under them. 
+* `on_success`:(string) This specifies the name of the next task to run if all iterations of the loop task succeeds. The unique name given to the task instance within the workflow must be provided here. In a graph model, denotes an edge to another Task Node. 
+* `parallel`:(bool) This field is deprecated. Always set to true for parallel loop. 
+
+### [workflow.SerialLoopTask](#argument-reference)
+A Serial Loop is a control task that runs one or more worker tasks multiple times based on a specified count or a given condition. Either count or condition must be provided, not both. When the loop is executed, based on count or condition, each iteration of task or a sequence of tasks inside loop run in serial. If any of the task fail then the entire loop will fail.
+* `condition`:(string) Condition expression which will be evaluated and when expression is true the tasks under loop will be executed. 
+* `nr_count`:(string) Count value for the loop, this can be a static value defined as a constant at design time or can be a dynamic value defined as an expression that will evaluate to an integer value at execution time. Dynamic values for count must be specified as a template. For example, if a loop must run for a count which matches the length of a workflow input called StringArray, then the count must be specified using a template '{{ len .global.workflow.input.StringArray }}'. The count must be less than or equal to 100. If count is given as a dynamic value, and during execution time if count evaluates to be a value greater than 100, then the loop task will fail. 
+* `loop_start_task`:(string) Start task where the list of tasks will be executed multiple times based on the count or condition value. 
+* `on_success`:(string) This specifies the name of the next task to run if all iterations of the loop task succeeds. The unique name given to the task instance within the workflow must be provided here. In a graph model, denotes an edge to another Task Node. 
+
+### [workflow.StartTask](#argument-reference)
+A StartTask is the starting point for a workflow.  There can only be one StartTask in a workflow.
+* `next_task`:(string) The name of the next task (Task names unique within workflow) to run.  In a graph model, denotes an edge to another Task Node. 
+
+### [workflow.SubWorkflowTask](#argument-reference)
+A SubWorkflowTask is used to include another workflow as a task within this workflow.
+* `catalog_moid`:(string) Specify the catalog moid that this task belongs. 
+* `input_parameters`:(JSON as string) JSON formatted key-value pairs that define the inputs given to the task. Mapping for task inputs can be provided as either static values, direct mapping or advanced mapping using templates. The direct mapping can be specified as '${Source.< input | output | variable>.<JSONPath>}'. 'Source' can be either workflow or the name of an earlier task within the workflow. You can map the task input to either a workflow input, a task output or a variable. Golang template syntax is supported for advanced mapping. A simple flattened example is \ InputParameters\ :{ \ input1\ :\ ${workflow.variable.var1}\ , \ input2\ :\ prefixStr_{{.global.workflow.input.input1}}\  } where task input1 is mapped directly to variable var1 and task input2 is using a template to prefix a string to workflow input1 and then assign that value. 
+* `on_failure`:(string) This specifies the name of the next task to run if Task fails.  This is the unique name given to the task instance within the workflow. In a graph model, denotes an edge to another Task Node. 
+* `on_success`:(string) This specifies the name of the next task to run if Task succeeds.  This is the unique name given to the task instance within the workflow. In a graph model, denotes an edge to another Task Node. 
+* `rollback_disabled`:(bool) The task is disabled/enabled for rollback operation in this workflow if the task has rollback support. 
+* `use_default`:(bool) UseDefault when set to true, means the default version of the task or workflow will be used at the time of execution. When this property is set then version for task or subworkflow cannot be set. When workflow is created or updated the default version of task or subworkflow will be used for validation, but when the workflow is executed the default version that that time will be used for validation and subsequent execution. 
+* `variable_parameters`:(JSON as string) JSON formatted key-value pairs that perform variable update at the end of the task execution. Mapping for variables can be provided as either static values, direct mapping or advanced mapping using templates. The direct mapping can be specified as '${Source.< input | output | variable>.<JSONPath>}'. 'Source' can be either workflow or the name of the current or an earlier task within the workflow. You can map the variable to either a workflow input, a task output or another variable. Golang template syntax is supported for advanced mapping. A simple flattened example is \ VariableParameters\ :{ \ var1\ :\ ${task1.output.output1}\ , \ var2\ :\ {{ Itoa .global.workflow.variable.varInt}}\  } where variable var1 is mapped directly to output1 of task1 and variable var2 is using a template to convert another variable varInt to string and assign that value. 
+* `nr_version`:(int) The workflow definition version to use as subworkflow. When no version is specified then the default version of the workflow at the time of creating or updating this workflow is used. 
+* `workflow_definition_id`:(string)(ReadOnly) The resolved referenced workflow definition managed object. 
+* `workflow_definition_name`:(string) The qualified name of workflow that should be executed as a task. 
+
+### [workflow.SuccessEndTask](#argument-reference)
+A SuccessEndTask denotes the successful completion of a workflow.
+
+### [workflow.WaitTask](#argument-reference)
+A WaitTask will remain in progress until marked success or failed by an external trigger. The timeout for wait task is 180 days, so a workflow can wait for task status update for upto 180 days. Currently the only supported means to update the task status is through an API that provides the status of the task runtime instance. Once the wait task status has been set the workflow will continue with the execution based on the task status.
+* `input_parameters`:(JSON as string) JSON formatted key-value pairs that define the inputs given to the task. Mapping for task inputs can be provided as either static values, direct mapping or advanced mapping using templates. The direct mapping can be specified as '${Source.< input | output | variable>.<JSONPath>}'. 'Source' can be either workflow or the name of an earlier task within the workflow. You can map the task input to either a workflow input, a task output or a variable. Golang template syntax is supported for advanced mapping. A simple flattened example is \ InputParameters\ :{ \ input1\ :\ ${workflow.variable.var1}\ , \ input2\ :\ prefixStr_{{.global.workflow.input.input1}}\  } where task input1 is mapped directly to variable var1 and task input2 is using a template to prefix a string to workflow input1 and then assign that value. 
+* `on_failure`:(string) This specifies the name of the next task to run if Task fails.  This is the unique name given to the task instance within the workflow. In a graph model, denotes an edge to another Task Node. 
+* `on_success`:(string) This specifies the name of the next task to run if Task succeeds.  This is the unique name given to the task instance within the workflow. In a graph model, denotes an edge to another Task Node. 
+* `prompts`:(Array)
+This complex property has following sub-properties:
+  + `description`:(string) Description that give more details about what it means to pick this prompt option for the wait task. 
+  + `label`:(string) User friendly label for the prompt. This label will be shown to the user as one of available options for the wait task. 
+  + `name`:(string) Name for the wait prompt. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `task_status`:(string) Task status for the wait task when this prompt option is selected.* `Scheduled` - The enum represents the status when task is in scheduled state.* `InProgress` - The enum represents the status when task is in-progress state.* `NoOp` - The enum represents the status when task is a noop.* `Timeout` - The enum represents the status when task has timed out.* `Completed` - The enum represents the status when task has completed.* `Failed` - The enum represents the status when task has failed. 
+* `rollback_disabled`:(bool) The task is disabled/enabled for rollback operation in this workflow if the task has rollback support. 
+* `use_default`:(bool) UseDefault when set to true, means the default version of the task or workflow will be used at the time of execution. When this property is set then version for task or subworkflow cannot be set. When workflow is created or updated the default version of task or subworkflow will be used for validation, but when the workflow is executed the default version that that time will be used for validation and subsequent execution. 
+* `variable_parameters`:(JSON as string) JSON formatted key-value pairs that perform variable update at the end of the task execution. Mapping for variables can be provided as either static values, direct mapping or advanced mapping using templates. The direct mapping can be specified as '${Source.< input | output | variable>.<JSONPath>}'. 'Source' can be either workflow or the name of the current or an earlier task within the workflow. You can map the variable to either a workflow input, a task output or another variable. Golang template syntax is supported for advanced mapping. A simple flattened example is \ VariableParameters\ :{ \ var1\ :\ ${task1.output.output1}\ , \ var2\ :\ {{ Itoa .global.workflow.variable.varInt}}\  } where variable var1 is mapped directly to output1 of task1 and variable var2 is using a template to convert another variable varInt to string and assign that value. 
+
+### [workflow.WorkerTask](#argument-reference)
+A WorkerTask is a simple task and the smallest granularity of work that can be defined as a task.
+* `catalog_moid`:(string) Specify the catalog moid that this task belongs. 
+* `input_parameters`:(JSON as string) JSON formatted key-value pairs that define the inputs given to the task. Mapping for task inputs can be provided as either static values, direct mapping or advanced mapping using templates. The direct mapping can be specified as '${Source.< input | output | variable>.<JSONPath>}'. 'Source' can be either workflow or the name of an earlier task within the workflow. You can map the task input to either a workflow input, a task output or a variable. Golang template syntax is supported for advanced mapping. A simple flattened example is \ InputParameters\ :{ \ input1\ :\ ${workflow.variable.var1}\ , \ input2\ :\ prefixStr_{{.global.workflow.input.input1}}\  } where task input1 is mapped directly to variable var1 and task input2 is using a template to prefix a string to workflow input1 and then assign that value. 
+* `on_failure`:(string) This specifies the name of the next task to run if Task fails.  This is the unique name given to the task instance within the workflow. In a graph model, denotes an edge to another Task Node. 
+* `on_success`:(string) This specifies the name of the next task to run if Task succeeds.  This is the unique name given to the task instance within the workflow. In a graph model, denotes an edge to another Task Node. 
+* `rollback_disabled`:(bool) The task is disabled/enabled for rollback operation in this workflow if the task has rollback support. 
+* `task_definition_id`:(string)(ReadOnly) The resolved referenced task definition managed object. 
+* `task_definition_name`:(string) The qualified name of task that should be executed. 
+* `use_default`:(bool) UseDefault when set to true, means the default version of the task or workflow will be used at the time of execution. When this property is set then version for task or subworkflow cannot be set. When workflow is created or updated the default version of task or subworkflow will be used for validation, but when the workflow is executed the default version that that time will be used for validation and subsequent execution. 
+* `variable_parameters`:(JSON as string) JSON formatted key-value pairs that perform variable update at the end of the task execution. Mapping for variables can be provided as either static values, direct mapping or advanced mapping using templates. The direct mapping can be specified as '${Source.< input | output | variable>.<JSONPath>}'. 'Source' can be either workflow or the name of the current or an earlier task within the workflow. You can map the variable to either a workflow input, a task output or another variable. Golang template syntax is supported for advanced mapping. A simple flattened example is \ VariableParameters\ :{ \ var1\ :\ ${task1.output.output1}\ , \ var2\ :\ {{ Itoa .global.workflow.variable.varInt}}\  } where variable var1 is mapped directly to output1 of task1 and variable var2 is using a template to convert another variable varInt to string and assign that value. 
+* `nr_version`:(int) The task definition version to use in this workflow. When no version is specified then the default version of the task at the time of creating or updating this workflow is used. 
   
 ### [workflow.ArrayDataType](#argument-reference)
 This data type represents an array of a given type. It can be an array of primitive data or of custom data.
