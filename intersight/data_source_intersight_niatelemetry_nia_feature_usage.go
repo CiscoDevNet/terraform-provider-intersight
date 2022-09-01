@@ -14,1837 +14,934 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
+func getNiatelemetryNiaFeatureUsageSchema() map[string]*schema.Schema {
+	var schemaMap = make(map[string]*schema.Schema)
+	schemaMap = map[string]*schema.Schema{"aaa_ldap_provider_count": {
+		Description: "Returns the total number of AAA Ldap Providers.",
+		Type:        schema.TypeInt,
+		Optional:    true,
+	},
+		"aaa_radius_provider_count": {
+			Description: "Returns the total number of AAA Radius Providers.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"aaa_tacacs_provider_count": {
+			Description: "Returns the total number of AAA Tacacs Providers.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"account_moid": {
+			Description: "The Account ID for this managed object.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"additional_properties": {
+			Type:             schema.TypeString,
+			Optional:         true,
+			DiffSuppressFunc: SuppressDiffAdditionProps,
+		},
+		"ancestors": {
+			Description: "An array of relationships to moBaseMo resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"apic_cluster_health": {
+			Description: "Cluster health for the APIC controller.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"apic_count": {
+			Description: "Number of APIC controllers. This determines the value of controllers for the fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"apic_is_telnet_enabled": {
+			Description: "Returns if telnet is enabled on APIC.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"apic_ntp_count": {
+			Description: "Count of NTP servers configured on APIC.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"apic_snmp_community_count": {
+			Description: "Number of SNMP communities configured on APIC.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"apic_sys_log_grp_count": {
+			Description: "Number of logging groups configured on APIC.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"apic_sys_log_src_count": {
+			Description: "Number of logging sources configured on APIC.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"app_center_count": {
+			Description: "ACI APPs feature usage scale.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"ave": {
+			Description: "AVE feature usage. This determines if ACI virtual edge feature is enabled or disabled.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"bd_count": {
+			Description: "Number of BDs. This determines the total number of Broadcast Domains across the fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"callhome_smart_group_count": {
+			Description: "Number of call home smart monitoring policies on the fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"class_id": {
+			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"cloud_sec_peer_count": {
+			Description: "Number of Cloudsec SA peers.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"cloud_tenant_count": {
+			Description: "Returns the total number of tenants deployed.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"comp_hv_count": {
+			Description: "Number of compute hypervisors on the fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"config_exportp_count": {
+			Description: "Number of system backup configure export policies on the fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"config_job_count": {
+			Description: "Number of system backup configure jobs on the fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"consistency_checker_app": {
+			Description: "Consistency checker application usage. This determines if the fabric has Consistency checker application installed.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"contract_count": {
+			Description: "Number of contracts. This determines the total number of Contracts configured across the fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"create_time": {
+			Description: "The time when this managed object was created.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"dns_count": {
+			Description: "DNS feature usage. This determines the total number of DNS configurations across the fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"domain_group_moid": {
+			Description: "The DomainGroup ID for this managed object.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"eigrp_count": {
+			Description: "Eigrp feature usage. This determines the total number of EIGRP sessions across the fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"epg_count": {
+			Description: "Number of End Point Groups. This determines the total number of End Point Groups across the fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"fabric_module_count": {
+			Description: "Returns the total number of fabric module slots.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"fabric_setupp_count": {
+			Description: "Number of Multi-Pods per fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"fcoe_nport_count": {
+			Description: "Total number of FCoE N-Port for DOM, VSAn, and VLAN.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"fcoe_nport_dom_count": {
+			Description: "Number of FCoE N-Port DOM.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"fcoe_nport_vlan_count": {
+			Description: "Number of FCoE N-Port VLAN.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"fcoe_nport_vsan_count": {
+			Description: "Number of FCoE N-Port VSAN.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"fv_sla_def_count": {
+			Description: "Number of Internet Protocol Service Level Agreements Monitoring policy objects for object tracking.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"hsrp_count": {
+			Description: "Hsrp feature usage. This determines the total number of HSRP sessions across the fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"ibgp_count": {
+			Description: "Ibgp feature usage. This determines the total number of BGP sessions across the fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"igmp_access_list_count": {
+			Description: "IGMP Access List feature usage. This determines the total number of IGMP access lists configured across the fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"igmp_snoop": {
+			Description: "IGMP Snooping feature usage. This determines if this feature is enabled or disabled.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"ip_epg_count": {
+			Description: "Number of IP based End Point Groups. This determines the total number of IP End Point Groups across the fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"is_bgp_route_reflectors_feature_used": {
+			Description: "BGP route reflector usage on APIC.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"is_bridge_domains_feature_used": {
+			Description: "Brodge domains feature usage on APIC controller.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"is_common_local_user_name": {
+			Description: "Returns value of isCommonLocalUserName field.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"is_contracts_feature_used": {
+			Description: "Contracts feature usage on APIC controller.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"is_epg_feature_used": {
+			Description: "EPG feature usage on APIC controller.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"is_filters_feature_used": {
+			Description: "Filters feature usage on APIC.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"is_http_configured": {
+			Description: "Returns if HTTP is configured.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"is_https_configured": {
+			Description: "Returns if HTTPS is configured.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"is_ntp_feature_used": {
+			Description: "NTP feature usage on APIC controller.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"is_ptp_feature_used": {
+			Description: "Ptp feature usage on APIC.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"is_synce_feature_used": {
+			Description: "Synce feature usage on APIC.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"is_tech_support_collected": {
+			Description: "Status of techsupport collection.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"is_tenants_feature_used": {
+			Description: "Tenants feature usage on APIC.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"is_vrfs_feature_used": {
+			Description: "VRF feature usage on APIC controller.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"isis_count": {
+			Description: "Isis feature usage. This determines the total number of ISIS sessions across the fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"l2_multicast": {
+			Description: "L2Multicast feature usage. This determines if this Layer 2 Multicast feature is being enabled / disabled on the fabric.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"latency_ptp_mode": {
+			Description: "Returns the Latency ptp mode for the controller.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"leaf_count": {
+			Description: "Number of Leafs. This determines the total number of Leaf switches in the fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"local_username_count": {
+			Description: "Returns count of local users.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"login_block_duration": {
+			Description: "Returns login block duration value.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"login_max_failed_attempts": {
+			Description: "Returns the maximum failed attempts on login.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"login_max_failed_attempts_window": {
+			Description: "Returns the maximum failed attempt windows on login.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"maintenance_mode_count": {
+			Description: "Maintenance Mode feature usage. This determines the number of switches that are currently in maintenance mode.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"management_over_v6_count": {
+			Description: "Management over IPv6 feature usage. This determines the total number of IPv6 configurtaions in the fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"microsoft_useg_vmm_ep_pd_count": {
+			Description: "Number of Microsoft microsegmentation VmmEpPD objects. Ensures that Microsoft was configured.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"mod_time": {
+			Description: "The time when this managed object was last modified.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"moid": {
+			Description: "The unique identifier of this Managed Object instance.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"net_flow_count": {
+			Description: "Number of Netflow monitor policies.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"nir": {
+			Description: "NIR application usage. This determines if the fabric has NIR application installed.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"object_type": {
+			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"open_stack": {
+			Description: "Open stack feature usage.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"opflex_kubernetes_count": {
+			Description: "Opflex for Kubernetes feature usage. This determines the total number of VMM sessions of type kubernetes.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"ospf_count": {
+			Description: "Ospf feature usage. This determines the total number of OSPF sessions across the fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"owners": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
+		"parent": {
+			Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"password_history_count": {
+			Description: "Returns count of passwords.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"password_strength_check": {
+			Description: "Returns if the password is strong or not.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"password_strength_profile_count": {
+			Description: "Returns the number of password strength profile.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"permission_resources": {
+			Description: "An array of relationships to moBaseMo resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"poe_count": {
+			Description: "POE feature usage. This determines the total number of POE configurations across the fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"port_security_count": {
+			Description: "Number of objects with Port Security enabled. Non-Zero value indicates the object as enabled.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"qin_vni_tunnel_count": {
+			Description: "QinVniTunnel feature usage. This determines if the qinVniTunnel feature is being used on the fabric and the scale of it.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"qos_cong_count": {
+			Description: "Number of Quality Of Service congestion class.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"qos_pfc_pol_count": {
+			Description: "Number of Quality Of Service class.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"realm_count": {
+			Description: "Returns the value of count of realms.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"record_type": {
+			Description: "Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"record_version": {
+			Description: "Version of record being pushed. This determines what was the API version for data available from the device.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"registered_device": {
+			Description: "A reference to a assetDeviceRegistration resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"remote_leaf_count": {
+			Description: "Number of remote Leafs. This determines the total number of remote leaf switches in the fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"scvmm_count": {
+			Description: "SCVMM feature usage. This determines the total number of SCVMM configurations in the fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"shared_l3_out_count": {
+			Description: "SharedL3Out feature usage. This determines the total number of Shared L3 out configured across the fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"shared_scope": {
+			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"site_name": {
+			Description: "The Site name represents an APIC cluster. Service Engine can onboard multiple APIC clusters / sites. There will be a feature usage object per site in Multi site scenario. In multi-site scenario the site name is available in all the requests being made.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"smart_call_home": {
+			Description: "Smart callhome feature usage. This determines if this feature is being enabled or disabled.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"smart_license": {
+			Description: "Details of smart license.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"active_mode": {
+						Description: "Indicate the mode smart license is curerntly running.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"auth_status": {
+						Description: "Authorization status of the smart license.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"license_udi": {
+						Description: "License Udi of the smart license.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"smart_account": {
+						Description: "Smart licensing account name in CSSM and is retrieved from CSSM after regsitration.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"snapshot_count": {
+			Description: "Returns count of snapshots.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"snmp": {
+			Description: "SNMP feature usage. This determines if this feature is enabled or disabled.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"snmp_community_access_count": {
+			Description: "Returns count of SNMP Community Access.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"snmp_group_count": {
+			Description: "Number of SNMP monitoring policies on the fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"snmp_trap_count": {
+			Description: "Returns count of SNMP trap.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"snmp_v3_count": {
+			Description: "Returns count of SNMP V3 on the fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"span_count": {
+			Description: "Number of Span Sources and Destinations.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"span_dst_count": {
+			Description: "Number of Span Destinations with valid state.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"span_src_count": {
+			Description: "Number of Span Sources with valid state.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"spine_count": {
+			Description: "Number of Spines. This determines the total number of spine switches in the fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"ssh_over_v6_count": {
+			Description: "Ssh over IPv6 feature usage. This determines the total number of IPv6 configurtaions in the fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"ssh_v2_count": {
+			Description: "Returns count of ssh V2 on the fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"supervisor_module_count": {
+			Description: "Returns the total number of supervisor module slots.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"syslog_group_count": {
+			Description: "Number of syslog monitoring policies on the fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"syslog_over_v6_count": {
+			Description: "Syslog over IPv6 feature usage. This determines the total number of IPv6 configurtaions in the fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"system_controller_count": {
+			Description: "Returns the total number of system controller slots.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"tacacs_group_count": {
+			Description: "Number of tacacs monitoring policies on the fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"tags": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"key": {
+						Description: "The string representation of a tag key.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"value": {
+						Description: "The string representation of a tag value.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"tenant_count": {
+			Description: "Number of tenants. This determines the total number of tenants configured across the fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"tier_two_leaf_count": {
+			Description: "Number of tier 2 Leafs. This determines the total number of tier 2 Leaf switches in the fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"total_critical_faults": {
+			Description: "Returns the total number of critical faults.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"twamp": {
+			Description: "TWAMP feature usage. This determines if this feature is enabled or disabled.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"useg": {
+			Description: "VMM uSegmentation feature usage. This determines if microsegmentation feature is enabled or disabled.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"version_context": {
+			Description: "The versioning info for this managed object.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"interested_mos": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"ref_mo": {
+						Description: "A reference to the original Managed Object.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"timestamp": {
+						Description: "The time this versioned Managed Object was created.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"nr_version": {
+						Description: "The version of the Managed Object, e.g. an incrementing number or a hash id.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"version_type": {
+						Description: "Specifies type of version. Currently the only supported value is \"Configured\"\nthat is used to keep track of snapshots of policies and profiles that are intended\nto be configured to target endpoints.\n* `Modified` - Version created every time an object is modified.\n* `Configured` - Version created every time an object is configured to the service profile.\n* `Deployed` - Version created for objects related to a service profile when it is deployed.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"vm_ware_vds_count": {
+			Description: "Number of objects with VmWare vCenter 6.5 support. Checks the controller revision value.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"vmm_ctrlrp_count": {
+			Description: "Number of Virtual Machine Monitor controller policy objects for VMware vCenter.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"vmm_domp_count": {
+			Description: "Number of Virtual Machine Monitor domain policy model objects for VMware vCenter.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"vmm_ep_pd_count": {
+			Description: "Microsegmentation Distributed Virtual Switch feature usage. Gets the number of objects associated to VMware vCenter.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"vnsm_dev_count": {
+			Description: "Number of objects with L4-L7 Device Package Import enabled. Checks for the vendor and the model.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"vpod_count": {
+			Description: "Virtual pod feature usage. This determines the total number of virtual POD configurations in the fabrics.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"webtoken_timeout_seconds": {
+			Description: "Timeout for web token in seconds.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+	}
+	return schemaMap
+}
+
 func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
-	var subSchema = map[string]*schema.Schema{"aaa_ldap_provider_count": {
-		Description: "Returns the total number of AAA Ldap Providers.",
-		Type:        schema.TypeInt,
-		Optional:    true,
-	},
-		"aaa_radius_provider_count": {
-			Description: "Returns the total number of AAA Radius Providers.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"aaa_tacacs_provider_count": {
-			Description: "Returns the total number of AAA Tacacs Providers.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"account_moid": {
-			Description: "The Account ID for this managed object.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"additional_properties": {
-			Type:             schema.TypeString,
-			Optional:         true,
-			DiffSuppressFunc: SuppressDiffAdditionProps,
-		},
-		"ancestors": {
-			Description: "An array of relationships to moBaseMo resources.",
-			Type:        schema.TypeList,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"moid": {
-						Description: "The Moid of the referenced REST resource.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the remote type referred by this relationship.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"selector": {
-						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"apic_cluster_health": {
-			Description: "Cluster health for the APIC controller.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"apic_count": {
-			Description: "Number of APIC controllers. This determines the value of controllers for the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"apic_is_telnet_enabled": {
-			Description: "Returns if telnet is enabled on APIC.",
-			Type:        schema.TypeBool,
-			Optional:    true,
-		},
-		"apic_ntp_count": {
-			Description: "Count of NTP servers configured on APIC.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"apic_snmp_community_count": {
-			Description: "Number of SNMP communities configured on APIC.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"apic_sys_log_grp_count": {
-			Description: "Number of logging groups configured on APIC.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"apic_sys_log_src_count": {
-			Description: "Number of logging sources configured on APIC.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"app_center_count": {
-			Description: "ACI APPs feature usage scale.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"ave": {
-			Description: "AVE feature usage. This determines if ACI virtual edge feature is enabled or disabled.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"bd_count": {
-			Description: "Number of BDs. This determines the total number of Broadcast Domains across the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"callhome_smart_group_count": {
-			Description: "Number of call home smart monitoring policies on the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"class_id": {
-			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"cloud_sec_peer_count": {
-			Description: "Number of Cloudsec SA peers.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"comp_hv_count": {
-			Description: "Number of compute hypervisors on the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"config_exportp_count": {
-			Description: "Number of system backup configure export policies on the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"config_job_count": {
-			Description: "Number of system backup configure jobs on the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"consistency_checker_app": {
-			Description: "Consistency checker application usage. This determines if the fabric has Consistency checker application installed.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"contract_count": {
-			Description: "Number of contracts. This determines the total number of Contracts configured across the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"create_time": {
-			Description: "The time when this managed object was created.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"dns_count": {
-			Description: "DNS feature usage. This determines the total number of DNS configurations across the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"domain_group_moid": {
-			Description: "The DomainGroup ID for this managed object.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"eigrp_count": {
-			Description: "Eigrp feature usage. This determines the total number of EIGRP sessions across the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"epg_count": {
-			Description: "Number of End Point Groups. This determines the total number of End Point Groups across the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"fabric_module_count": {
-			Description: "Returns the total number of fabric module slots.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"fabric_setupp_count": {
-			Description: "Number of Multi-Pods per fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"fcoe_nport_count": {
-			Description: "Total number of FCoE N-Port for DOM, VSAn, and VLAN.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"fcoe_nport_dom_count": {
-			Description: "Number of FCoE N-Port DOM.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"fcoe_nport_vlan_count": {
-			Description: "Number of FCoE N-Port VLAN.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"fcoe_nport_vsan_count": {
-			Description: "Number of FCoE N-Port VSAN.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"fv_sla_def_count": {
-			Description: "Number of Internet Protocol Service Level Agreements Monitoring policy objects for object tracking.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"hsrp_count": {
-			Description: "Hsrp feature usage. This determines the total number of HSRP sessions across the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"ibgp_count": {
-			Description: "Ibgp feature usage. This determines the total number of BGP sessions across the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"igmp_access_list_count": {
-			Description: "IGMP Access List feature usage. This determines the total number of IGMP access lists configured across the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"igmp_snoop": {
-			Description: "IGMP Snooping feature usage. This determines if this feature is enabled or disabled.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"ip_epg_count": {
-			Description: "Number of IP based End Point Groups. This determines the total number of IP End Point Groups across the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"is_bgp_route_reflectors_feature_used": {
-			Description: "BGP route reflector usage on APIC.",
-			Type:        schema.TypeBool,
-			Optional:    true,
-		},
-		"is_bridge_domains_feature_used": {
-			Description: "Brodge domains feature usage on APIC controller.",
-			Type:        schema.TypeBool,
-			Optional:    true,
-		},
-		"is_common_local_user_name": {
-			Description: "Returns value of isCommonLocalUserName field.",
-			Type:        schema.TypeBool,
-			Optional:    true,
-		},
-		"is_contracts_feature_used": {
-			Description: "Contracts feature usage on APIC controller.",
-			Type:        schema.TypeBool,
-			Optional:    true,
-		},
-		"is_epg_feature_used": {
-			Description: "EPG feature usage on APIC controller.",
-			Type:        schema.TypeBool,
-			Optional:    true,
-		},
-		"is_filters_feature_used": {
-			Description: "Filters feature usage on APIC.",
-			Type:        schema.TypeBool,
-			Optional:    true,
-		},
-		"is_http_configured": {
-			Description: "Returns if HTTP is configured.",
-			Type:        schema.TypeBool,
-			Optional:    true,
-		},
-		"is_https_configured": {
-			Description: "Returns if HTTPS is configured.",
-			Type:        schema.TypeBool,
-			Optional:    true,
-		},
-		"is_ntp_feature_used": {
-			Description: "NTP feature usage on APIC controller.",
-			Type:        schema.TypeBool,
-			Optional:    true,
-		},
-		"is_ptp_feature_used": {
-			Description: "Ptp feature usage on APIC.",
-			Type:        schema.TypeBool,
-			Optional:    true,
-		},
-		"is_synce_feature_used": {
-			Description: "Synce feature usage on APIC.",
-			Type:        schema.TypeBool,
-			Optional:    true,
-		},
-		"is_tech_support_collected": {
-			Description: "Status of techsupport collection.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"is_tenants_feature_used": {
-			Description: "Tenants feature usage on APIC.",
-			Type:        schema.TypeBool,
-			Optional:    true,
-		},
-		"is_vrfs_feature_used": {
-			Description: "VRF feature usage on APIC controller.",
-			Type:        schema.TypeBool,
-			Optional:    true,
-		},
-		"isis_count": {
-			Description: "Isis feature usage. This determines the total number of ISIS sessions across the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"l2_multicast": {
-			Description: "L2Multicast feature usage. This determines if this Layer 2 Multicast feature is being enabled / disabled on the fabric.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"latency_ptp_mode": {
-			Description: "Returns the Latency ptp mode for the controller.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"leaf_count": {
-			Description: "Number of Leafs. This determines the total number of Leaf switches in the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"local_username_count": {
-			Description: "Returns count of local users.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"login_block_duration": {
-			Description: "Returns login block duration value.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"login_max_failed_attempts": {
-			Description: "Returns the maximum failed attempts on login.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"login_max_failed_attempts_window": {
-			Description: "Returns the maximum failed attempt windows on login.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"maintenance_mode_count": {
-			Description: "Maintenance Mode feature usage. This determines the number of switches that are currently in maintenance mode.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"management_over_v6_count": {
-			Description: "Management over IPv6 feature usage. This determines the total number of IPv6 configurtaions in the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"microsoft_useg_vmm_ep_pd_count": {
-			Description: "Number of Microsoft microsegmentation VmmEpPD objects. Ensures that Microsoft was configured.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"mod_time": {
-			Description: "The time when this managed object was last modified.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"moid": {
-			Description: "The unique identifier of this Managed Object instance.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"net_flow_count": {
-			Description: "Number of Netflow monitor policies.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"nir": {
-			Description: "NIR application usage. This determines if the fabric has NIR application installed.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"object_type": {
-			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"open_stack": {
-			Description: "Open stack feature usage.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"opflex_kubernetes_count": {
-			Description: "Opflex for Kubernetes feature usage. This determines the total number of VMM sessions of type kubernetes.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"ospf_count": {
-			Description: "Ospf feature usage. This determines the total number of OSPF sessions across the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"owners": {
-			Type:     schema.TypeList,
-			Optional: true,
-			Elem: &schema.Schema{
-				Type: schema.TypeString}},
-		"parent": {
-			Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"moid": {
-						Description: "The Moid of the referenced REST resource.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the remote type referred by this relationship.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"selector": {
-						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"password_history_count": {
-			Description: "Returns count of passwords.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"password_strength_check": {
-			Description: "Returns if the password is strong or not.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"password_strength_profile_count": {
-			Description: "Returns the number of password strength profile.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"permission_resources": {
-			Description: "An array of relationships to moBaseMo resources.",
-			Type:        schema.TypeList,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"moid": {
-						Description: "The Moid of the referenced REST resource.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the remote type referred by this relationship.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"selector": {
-						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"poe_count": {
-			Description: "POE feature usage. This determines the total number of POE configurations across the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"port_security_count": {
-			Description: "Number of objects with Port Security enabled. Non-Zero value indicates the object as enabled.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"qin_vni_tunnel_count": {
-			Description: "QinVniTunnel feature usage. This determines if the qinVniTunnel feature is being used on the fabric and the scale of it.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"qos_cong_count": {
-			Description: "Number of Quality Of Service congestion class.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"qos_pfc_pol_count": {
-			Description: "Number of Quality Of Service class.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"realm_count": {
-			Description: "Returns the value of count of realms.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"record_type": {
-			Description: "Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"record_version": {
-			Description: "Version of record being pushed. This determines what was the API version for data available from the device.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"registered_device": {
-			Description: "A reference to a assetDeviceRegistration resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"moid": {
-						Description: "The Moid of the referenced REST resource.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the remote type referred by this relationship.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"selector": {
-						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"remote_leaf_count": {
-			Description: "Number of remote Leafs. This determines the total number of remote leaf switches in the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"scvmm_count": {
-			Description: "SCVMM feature usage. This determines the total number of SCVMM configurations in the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"shared_l3_out_count": {
-			Description: "SharedL3Out feature usage. This determines the total number of Shared L3 out configured across the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"shared_scope": {
-			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"site_name": {
-			Description: "The Site name represents an APIC cluster. Service Engine can onboard multiple APIC clusters / sites. There will be a feature usage object per site in Multi site scenario. In multi-site scenario the site name is available in all the requests being made.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"smart_call_home": {
-			Description: "Smart callhome feature usage. This determines if this feature is being enabled or disabled.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"smart_license": {
-			Description: "Details of smart license.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"active_mode": {
-						Description: "Indicate the mode smart license is curerntly running.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"auth_status": {
-						Description: "Authorization status of the smart license.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"license_udi": {
-						Description: "License Udi of the smart license.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"smart_account": {
-						Description: "Smart licensing account name in CSSM and is retrieved from CSSM after regsitration.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"snapshot_count": {
-			Description: "Returns count of snapshots.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"snmp": {
-			Description: "SNMP feature usage. This determines if this feature is enabled or disabled.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"snmp_community_access_count": {
-			Description: "Returns count of SNMP Community Access.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"snmp_group_count": {
-			Description: "Number of SNMP monitoring policies on the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"snmp_trap_count": {
-			Description: "Returns count of SNMP trap.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"snmp_v3_count": {
-			Description: "Returns count of SNMP V3 on the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"span_count": {
-			Description: "Number of Span Sources and Destinations.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"span_dst_count": {
-			Description: "Number of Span Destinations with valid state.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"span_src_count": {
-			Description: "Number of Span Sources with valid state.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"spine_count": {
-			Description: "Number of Spines. This determines the total number of spine switches in the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"ssh_over_v6_count": {
-			Description: "Ssh over IPv6 feature usage. This determines the total number of IPv6 configurtaions in the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"ssh_v2_count": {
-			Description: "Returns count of ssh V2 on the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"supervisor_module_count": {
-			Description: "Returns the total number of supervisor module slots.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"syslog_group_count": {
-			Description: "Number of syslog monitoring policies on the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"syslog_over_v6_count": {
-			Description: "Syslog over IPv6 feature usage. This determines the total number of IPv6 configurtaions in the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"system_controller_count": {
-			Description: "Returns the total number of system controller slots.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"tacacs_group_count": {
-			Description: "Number of tacacs monitoring policies on the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"tags": {
-			Type:     schema.TypeList,
-			Optional: true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"key": {
-						Description: "The string representation of a tag key.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"value": {
-						Description: "The string representation of a tag value.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"tenant_count": {
-			Description: "Number of tenants. This determines the total number of tenants configured across the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"tier_two_leaf_count": {
-			Description: "Number of tier 2 Leafs. This determines the total number of tier 2 Leaf switches in the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"total_critical_faults": {
-			Description: "Returns the total number of critical faults.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"twamp": {
-			Description: "TWAMP feature usage. This determines if this feature is enabled or disabled.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"useg": {
-			Description: "VMM uSegmentation feature usage. This determines if microsegmentation feature is enabled or disabled.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"version_context": {
-			Description: "The versioning info for this managed object.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"interested_mos": {
-						Type:     schema.TypeList,
-						Optional: true,
-						Elem: &schema.Resource{
-							Schema: map[string]*schema.Schema{
-								"additional_properties": {
-									Type:             schema.TypeString,
-									Optional:         true,
-									DiffSuppressFunc: SuppressDiffAdditionProps,
-								},
-								"class_id": {
-									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"moid": {
-									Description: "The Moid of the referenced REST resource.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"object_type": {
-									Description: "The fully-qualified name of the remote type referred by this relationship.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"selector": {
-									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-							},
-						},
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"ref_mo": {
-						Description: "A reference to the original Managed Object.",
-						Type:        schema.TypeList,
-						MaxItems:    1,
-						Optional:    true,
-						Elem: &schema.Resource{
-							Schema: map[string]*schema.Schema{
-								"additional_properties": {
-									Type:             schema.TypeString,
-									Optional:         true,
-									DiffSuppressFunc: SuppressDiffAdditionProps,
-								},
-								"class_id": {
-									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"moid": {
-									Description: "The Moid of the referenced REST resource.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"object_type": {
-									Description: "The fully-qualified name of the remote type referred by this relationship.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"selector": {
-									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-							},
-						},
-					},
-					"timestamp": {
-						Description: "The time this versioned Managed Object was created.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"nr_version": {
-						Description: "The version of the Managed Object, e.g. an incrementing number or a hash id.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"version_type": {
-						Description: "Specifies type of version. Currently the only supported value is \"Configured\"\nthat is used to keep track of snapshots of policies and profiles that are intended\nto be configured to target endpoints.\n* `Modified` - Version created every time an object is modified.\n* `Configured` - Version created every time an object is configured to the service profile.\n* `Deployed` - Version created for objects related to a service profile when it is deployed.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"vm_ware_vds_count": {
-			Description: "Number of objects with VmWare vCenter 6.5 support. Checks the controller revision value.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"vmm_ctrlrp_count": {
-			Description: "Number of Virtual Machine Monitor controller policy objects for VMware vCenter.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"vmm_domp_count": {
-			Description: "Number of Virtual Machine Monitor domain policy model objects for VMware vCenter.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"vmm_ep_pd_count": {
-			Description: "Microsegmentation Distributed Virtual Switch feature usage. Gets the number of objects associated to VMware vCenter.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"vnsm_dev_count": {
-			Description: "Number of objects with L4-L7 Device Package Import enabled. Checks for the vendor and the model.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"vpod_count": {
-			Description: "Virtual pod feature usage. This determines the total number of virtual POD configurations in the fabrics.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"webtoken_timeout_seconds": {
-			Description: "Timeout for web token in seconds.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-	}
-	var model = map[string]*schema.Schema{"aaa_ldap_provider_count": {
-		Description: "Returns the total number of AAA Ldap Providers.",
-		Type:        schema.TypeInt,
-		Optional:    true,
-	},
-		"aaa_radius_provider_count": {
-			Description: "Returns the total number of AAA Radius Providers.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"aaa_tacacs_provider_count": {
-			Description: "Returns the total number of AAA Tacacs Providers.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"account_moid": {
-			Description: "The Account ID for this managed object.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"additional_properties": {
-			Type:             schema.TypeString,
-			Optional:         true,
-			DiffSuppressFunc: SuppressDiffAdditionProps,
-		},
-		"ancestors": {
-			Description: "An array of relationships to moBaseMo resources.",
-			Type:        schema.TypeList,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"moid": {
-						Description: "The Moid of the referenced REST resource.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the remote type referred by this relationship.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"selector": {
-						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"apic_cluster_health": {
-			Description: "Cluster health for the APIC controller.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"apic_count": {
-			Description: "Number of APIC controllers. This determines the value of controllers for the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"apic_is_telnet_enabled": {
-			Description: "Returns if telnet is enabled on APIC.",
-			Type:        schema.TypeBool,
-			Optional:    true,
-		},
-		"apic_ntp_count": {
-			Description: "Count of NTP servers configured on APIC.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"apic_snmp_community_count": {
-			Description: "Number of SNMP communities configured on APIC.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"apic_sys_log_grp_count": {
-			Description: "Number of logging groups configured on APIC.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"apic_sys_log_src_count": {
-			Description: "Number of logging sources configured on APIC.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"app_center_count": {
-			Description: "ACI APPs feature usage scale.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"ave": {
-			Description: "AVE feature usage. This determines if ACI virtual edge feature is enabled or disabled.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"bd_count": {
-			Description: "Number of BDs. This determines the total number of Broadcast Domains across the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"callhome_smart_group_count": {
-			Description: "Number of call home smart monitoring policies on the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"class_id": {
-			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"cloud_sec_peer_count": {
-			Description: "Number of Cloudsec SA peers.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"comp_hv_count": {
-			Description: "Number of compute hypervisors on the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"config_exportp_count": {
-			Description: "Number of system backup configure export policies on the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"config_job_count": {
-			Description: "Number of system backup configure jobs on the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"consistency_checker_app": {
-			Description: "Consistency checker application usage. This determines if the fabric has Consistency checker application installed.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"contract_count": {
-			Description: "Number of contracts. This determines the total number of Contracts configured across the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"create_time": {
-			Description: "The time when this managed object was created.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"dns_count": {
-			Description: "DNS feature usage. This determines the total number of DNS configurations across the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"domain_group_moid": {
-			Description: "The DomainGroup ID for this managed object.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"eigrp_count": {
-			Description: "Eigrp feature usage. This determines the total number of EIGRP sessions across the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"epg_count": {
-			Description: "Number of End Point Groups. This determines the total number of End Point Groups across the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"fabric_module_count": {
-			Description: "Returns the total number of fabric module slots.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"fabric_setupp_count": {
-			Description: "Number of Multi-Pods per fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"fcoe_nport_count": {
-			Description: "Total number of FCoE N-Port for DOM, VSAn, and VLAN.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"fcoe_nport_dom_count": {
-			Description: "Number of FCoE N-Port DOM.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"fcoe_nport_vlan_count": {
-			Description: "Number of FCoE N-Port VLAN.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"fcoe_nport_vsan_count": {
-			Description: "Number of FCoE N-Port VSAN.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"fv_sla_def_count": {
-			Description: "Number of Internet Protocol Service Level Agreements Monitoring policy objects for object tracking.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"hsrp_count": {
-			Description: "Hsrp feature usage. This determines the total number of HSRP sessions across the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"ibgp_count": {
-			Description: "Ibgp feature usage. This determines the total number of BGP sessions across the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"igmp_access_list_count": {
-			Description: "IGMP Access List feature usage. This determines the total number of IGMP access lists configured across the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"igmp_snoop": {
-			Description: "IGMP Snooping feature usage. This determines if this feature is enabled or disabled.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"ip_epg_count": {
-			Description: "Number of IP based End Point Groups. This determines the total number of IP End Point Groups across the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"is_bgp_route_reflectors_feature_used": {
-			Description: "BGP route reflector usage on APIC.",
-			Type:        schema.TypeBool,
-			Optional:    true,
-		},
-		"is_bridge_domains_feature_used": {
-			Description: "Brodge domains feature usage on APIC controller.",
-			Type:        schema.TypeBool,
-			Optional:    true,
-		},
-		"is_common_local_user_name": {
-			Description: "Returns value of isCommonLocalUserName field.",
-			Type:        schema.TypeBool,
-			Optional:    true,
-		},
-		"is_contracts_feature_used": {
-			Description: "Contracts feature usage on APIC controller.",
-			Type:        schema.TypeBool,
-			Optional:    true,
-		},
-		"is_epg_feature_used": {
-			Description: "EPG feature usage on APIC controller.",
-			Type:        schema.TypeBool,
-			Optional:    true,
-		},
-		"is_filters_feature_used": {
-			Description: "Filters feature usage on APIC.",
-			Type:        schema.TypeBool,
-			Optional:    true,
-		},
-		"is_http_configured": {
-			Description: "Returns if HTTP is configured.",
-			Type:        schema.TypeBool,
-			Optional:    true,
-		},
-		"is_https_configured": {
-			Description: "Returns if HTTPS is configured.",
-			Type:        schema.TypeBool,
-			Optional:    true,
-		},
-		"is_ntp_feature_used": {
-			Description: "NTP feature usage on APIC controller.",
-			Type:        schema.TypeBool,
-			Optional:    true,
-		},
-		"is_ptp_feature_used": {
-			Description: "Ptp feature usage on APIC.",
-			Type:        schema.TypeBool,
-			Optional:    true,
-		},
-		"is_synce_feature_used": {
-			Description: "Synce feature usage on APIC.",
-			Type:        schema.TypeBool,
-			Optional:    true,
-		},
-		"is_tech_support_collected": {
-			Description: "Status of techsupport collection.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"is_tenants_feature_used": {
-			Description: "Tenants feature usage on APIC.",
-			Type:        schema.TypeBool,
-			Optional:    true,
-		},
-		"is_vrfs_feature_used": {
-			Description: "VRF feature usage on APIC controller.",
-			Type:        schema.TypeBool,
-			Optional:    true,
-		},
-		"isis_count": {
-			Description: "Isis feature usage. This determines the total number of ISIS sessions across the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"l2_multicast": {
-			Description: "L2Multicast feature usage. This determines if this Layer 2 Multicast feature is being enabled / disabled on the fabric.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"latency_ptp_mode": {
-			Description: "Returns the Latency ptp mode for the controller.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"leaf_count": {
-			Description: "Number of Leafs. This determines the total number of Leaf switches in the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"local_username_count": {
-			Description: "Returns count of local users.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"login_block_duration": {
-			Description: "Returns login block duration value.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"login_max_failed_attempts": {
-			Description: "Returns the maximum failed attempts on login.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"login_max_failed_attempts_window": {
-			Description: "Returns the maximum failed attempt windows on login.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"maintenance_mode_count": {
-			Description: "Maintenance Mode feature usage. This determines the number of switches that are currently in maintenance mode.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"management_over_v6_count": {
-			Description: "Management over IPv6 feature usage. This determines the total number of IPv6 configurtaions in the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"microsoft_useg_vmm_ep_pd_count": {
-			Description: "Number of Microsoft microsegmentation VmmEpPD objects. Ensures that Microsoft was configured.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"mod_time": {
-			Description: "The time when this managed object was last modified.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"moid": {
-			Description: "The unique identifier of this Managed Object instance.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"net_flow_count": {
-			Description: "Number of Netflow monitor policies.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"nir": {
-			Description: "NIR application usage. This determines if the fabric has NIR application installed.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"object_type": {
-			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"open_stack": {
-			Description: "Open stack feature usage.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"opflex_kubernetes_count": {
-			Description: "Opflex for Kubernetes feature usage. This determines the total number of VMM sessions of type kubernetes.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"ospf_count": {
-			Description: "Ospf feature usage. This determines the total number of OSPF sessions across the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"owners": {
-			Type:     schema.TypeList,
-			Optional: true,
-			Elem: &schema.Schema{
-				Type: schema.TypeString}},
-		"parent": {
-			Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"moid": {
-						Description: "The Moid of the referenced REST resource.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the remote type referred by this relationship.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"selector": {
-						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"password_history_count": {
-			Description: "Returns count of passwords.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"password_strength_check": {
-			Description: "Returns if the password is strong or not.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"password_strength_profile_count": {
-			Description: "Returns the number of password strength profile.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"permission_resources": {
-			Description: "An array of relationships to moBaseMo resources.",
-			Type:        schema.TypeList,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"moid": {
-						Description: "The Moid of the referenced REST resource.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the remote type referred by this relationship.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"selector": {
-						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"poe_count": {
-			Description: "POE feature usage. This determines the total number of POE configurations across the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"port_security_count": {
-			Description: "Number of objects with Port Security enabled. Non-Zero value indicates the object as enabled.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"qin_vni_tunnel_count": {
-			Description: "QinVniTunnel feature usage. This determines if the qinVniTunnel feature is being used on the fabric and the scale of it.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"qos_cong_count": {
-			Description: "Number of Quality Of Service congestion class.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"qos_pfc_pol_count": {
-			Description: "Number of Quality Of Service class.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"realm_count": {
-			Description: "Returns the value of count of realms.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"record_type": {
-			Description: "Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"record_version": {
-			Description: "Version of record being pushed. This determines what was the API version for data available from the device.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"registered_device": {
-			Description: "A reference to a assetDeviceRegistration resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"moid": {
-						Description: "The Moid of the referenced REST resource.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the remote type referred by this relationship.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"selector": {
-						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"remote_leaf_count": {
-			Description: "Number of remote Leafs. This determines the total number of remote leaf switches in the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"scvmm_count": {
-			Description: "SCVMM feature usage. This determines the total number of SCVMM configurations in the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"shared_l3_out_count": {
-			Description: "SharedL3Out feature usage. This determines the total number of Shared L3 out configured across the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"shared_scope": {
-			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"site_name": {
-			Description: "The Site name represents an APIC cluster. Service Engine can onboard multiple APIC clusters / sites. There will be a feature usage object per site in Multi site scenario. In multi-site scenario the site name is available in all the requests being made.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"smart_call_home": {
-			Description: "Smart callhome feature usage. This determines if this feature is being enabled or disabled.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"smart_license": {
-			Description: "Details of smart license.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"active_mode": {
-						Description: "Indicate the mode smart license is curerntly running.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"auth_status": {
-						Description: "Authorization status of the smart license.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"license_udi": {
-						Description: "License Udi of the smart license.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"smart_account": {
-						Description: "Smart licensing account name in CSSM and is retrieved from CSSM after regsitration.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"snapshot_count": {
-			Description: "Returns count of snapshots.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"snmp": {
-			Description: "SNMP feature usage. This determines if this feature is enabled or disabled.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"snmp_community_access_count": {
-			Description: "Returns count of SNMP Community Access.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"snmp_group_count": {
-			Description: "Number of SNMP monitoring policies on the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"snmp_trap_count": {
-			Description: "Returns count of SNMP trap.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"snmp_v3_count": {
-			Description: "Returns count of SNMP V3 on the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"span_count": {
-			Description: "Number of Span Sources and Destinations.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"span_dst_count": {
-			Description: "Number of Span Destinations with valid state.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"span_src_count": {
-			Description: "Number of Span Sources with valid state.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"spine_count": {
-			Description: "Number of Spines. This determines the total number of spine switches in the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"ssh_over_v6_count": {
-			Description: "Ssh over IPv6 feature usage. This determines the total number of IPv6 configurtaions in the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"ssh_v2_count": {
-			Description: "Returns count of ssh V2 on the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"supervisor_module_count": {
-			Description: "Returns the total number of supervisor module slots.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"syslog_group_count": {
-			Description: "Number of syslog monitoring policies on the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"syslog_over_v6_count": {
-			Description: "Syslog over IPv6 feature usage. This determines the total number of IPv6 configurtaions in the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"system_controller_count": {
-			Description: "Returns the total number of system controller slots.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"tacacs_group_count": {
-			Description: "Number of tacacs monitoring policies on the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"tags": {
-			Type:     schema.TypeList,
-			Optional: true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"key": {
-						Description: "The string representation of a tag key.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"value": {
-						Description: "The string representation of a tag value.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"tenant_count": {
-			Description: "Number of tenants. This determines the total number of tenants configured across the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"tier_two_leaf_count": {
-			Description: "Number of tier 2 Leafs. This determines the total number of tier 2 Leaf switches in the fabric.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"total_critical_faults": {
-			Description: "Returns the total number of critical faults.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"twamp": {
-			Description: "TWAMP feature usage. This determines if this feature is enabled or disabled.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"useg": {
-			Description: "VMM uSegmentation feature usage. This determines if microsegmentation feature is enabled or disabled.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"version_context": {
-			Description: "The versioning info for this managed object.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"interested_mos": {
-						Type:     schema.TypeList,
-						Optional: true,
-						Elem: &schema.Resource{
-							Schema: map[string]*schema.Schema{
-								"additional_properties": {
-									Type:             schema.TypeString,
-									Optional:         true,
-									DiffSuppressFunc: SuppressDiffAdditionProps,
-								},
-								"class_id": {
-									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"moid": {
-									Description: "The Moid of the referenced REST resource.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"object_type": {
-									Description: "The fully-qualified name of the remote type referred by this relationship.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"selector": {
-									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-							},
-						},
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"ref_mo": {
-						Description: "A reference to the original Managed Object.",
-						Type:        schema.TypeList,
-						MaxItems:    1,
-						Optional:    true,
-						Elem: &schema.Resource{
-							Schema: map[string]*schema.Schema{
-								"additional_properties": {
-									Type:             schema.TypeString,
-									Optional:         true,
-									DiffSuppressFunc: SuppressDiffAdditionProps,
-								},
-								"class_id": {
-									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"moid": {
-									Description: "The Moid of the referenced REST resource.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"object_type": {
-									Description: "The fully-qualified name of the remote type referred by this relationship.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"selector": {
-									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-							},
-						},
-					},
-					"timestamp": {
-						Description: "The time this versioned Managed Object was created.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"nr_version": {
-						Description: "The version of the Managed Object, e.g. an incrementing number or a hash id.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"version_type": {
-						Description: "Specifies type of version. Currently the only supported value is \"Configured\"\nthat is used to keep track of snapshots of policies and profiles that are intended\nto be configured to target endpoints.\n* `Modified` - Version created every time an object is modified.\n* `Configured` - Version created every time an object is configured to the service profile.\n* `Deployed` - Version created for objects related to a service profile when it is deployed.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"vm_ware_vds_count": {
-			Description: "Number of objects with VmWare vCenter 6.5 support. Checks the controller revision value.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"vmm_ctrlrp_count": {
-			Description: "Number of Virtual Machine Monitor controller policy objects for VMware vCenter.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"vmm_domp_count": {
-			Description: "Number of Virtual Machine Monitor domain policy model objects for VMware vCenter.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"vmm_ep_pd_count": {
-			Description: "Microsegmentation Distributed Virtual Switch feature usage. Gets the number of objects associated to VMware vCenter.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"vnsm_dev_count": {
-			Description: "Number of objects with L4-L7 Device Package Import enabled. Checks for the vendor and the model.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"vpod_count": {
-			Description: "Virtual pod feature usage. This determines the total number of virtual POD configurations in the fabrics.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"webtoken_timeout_seconds": {
-			Description: "Timeout for web token in seconds.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-	}
+	var subSchema = getNiatelemetryNiaFeatureUsageSchema()
+	var model = getNiatelemetryNiaFeatureUsageSchema()
 	model["results"] = &schema.Schema{
 		Type:     schema.TypeList,
 		Elem:     &schema.Resource{Schema: subSchema},
@@ -1992,6 +1089,11 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 	if v, ok := d.GetOkExists("cloud_sec_peer_count"); ok {
 		x := int64(v.(int))
 		o.SetCloudSecPeerCount(x)
+	}
+
+	if v, ok := d.GetOkExists("cloud_tenant_count"); ok {
+		x := int64(v.(int))
+		o.SetCloudTenantCount(x)
 	}
 
 	if v, ok := d.GetOkExists("comp_hv_count"); ok {
@@ -2853,6 +1955,7 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 				temp["callhome_smart_group_count"] = (s.GetCallhomeSmartGroupCount())
 				temp["class_id"] = (s.GetClassId())
 				temp["cloud_sec_peer_count"] = (s.GetCloudSecPeerCount())
+				temp["cloud_tenant_count"] = (s.GetCloudTenantCount())
 				temp["comp_hv_count"] = (s.GetCompHvCount())
 				temp["config_exportp_count"] = (s.GetConfigExportpCount())
 				temp["config_job_count"] = (s.GetConfigJobCount())

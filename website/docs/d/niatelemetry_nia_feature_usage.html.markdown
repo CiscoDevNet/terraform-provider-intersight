@@ -30,6 +30,7 @@ The following arguments can be used to get data of already created objects in In
 * `bd_count`:(int) Number of BDs. This determines the total number of Broadcast Domains across the fabric. 
 * `callhome_smart_group_count`:(int) Number of call home smart monitoring policies on the fabric. 
 * `cloud_sec_peer_count`:(int) Number of Cloudsec SA peers. 
+* `cloud_tenant_count`:(int) Returns the total number of tenants deployed. 
 * `comp_hv_count`:(int) Number of compute hypervisors on the fabric. 
 * `config_exportp_count`:(int) Number of system backup configure export policies on the fabric. 
 * `config_job_count`:(int) Number of system backup configure jobs on the fabric. 

@@ -1070,6 +1070,18 @@ func flattenListComputeBladeRelationship(p []models.ComputeBladeRelationship, d 
 	}
 	return computebladerelationships
 }
+func flattenListComputeBladeIdentityRelationship(p []models.ComputeBladeIdentityRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var computebladeidentityrelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		computebladeidentityrelationship := flattenMoMoRef(item)
+		computebladeidentityrelationships = append(computebladeidentityrelationships, computebladeidentityrelationship)
+	}
+	return computebladeidentityrelationships
+}
 func flattenListComputeIpAddress(p []models.ComputeIpAddress, d *schema.ResourceData) []map[string]interface{} {
 	var computeipaddresss []map[string]interface{}
 	if len(p) == 0 {
@@ -4563,6 +4575,40 @@ func flattenListNiaapiRevisionInfo(p []models.NiaapiRevisionInfo, d *schema.Reso
 	}
 	return niaapirevisioninfos
 }
+func flattenListNiatelemetryCloudRegionsElement(p []models.NiatelemetryCloudRegionsElement, d *schema.ResourceData) []map[string]interface{} {
+	var niatelemetrycloudregionselements []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		niatelemetrycloudregionselement := make(map[string]interface{})
+		niatelemetrycloudregionselement["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		niatelemetrycloudregionselement["admin_state"] = item.GetAdminState()
+		niatelemetrycloudregionselement["capic_deployed"] = item.GetCapicDeployed()
+		niatelemetrycloudregionselement["class_id"] = item.GetClassId()
+		niatelemetrycloudregionselement["in_use"] = item.GetInUse()
+		niatelemetrycloudregionselement["name"] = item.GetName()
+		niatelemetrycloudregionselement["object_type"] = item.GetObjectType()
+		niatelemetrycloudregionselements = append(niatelemetrycloudregionselements, niatelemetrycloudregionselement)
+	}
+	return niatelemetrycloudregionselements
+}
+func flattenListNiatelemetryCloudRoutersElement(p []models.NiatelemetryCloudRoutersElement, d *schema.ResourceData) []map[string]interface{} {
+	var niatelemetrycloudrouterselements []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		niatelemetrycloudrouterselement := make(map[string]interface{})
+		niatelemetrycloudrouterselement["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		niatelemetrycloudrouterselement["class_id"] = item.GetClassId()
+		niatelemetrycloudrouterselement["name"] = item.GetName()
+		niatelemetrycloudrouterselement["object_type"] = item.GetObjectType()
+		niatelemetrycloudrouterselement["nr_version"] = item.GetVersion()
+		niatelemetrycloudrouterselements = append(niatelemetrycloudrouterselements, niatelemetrycloudrouterselement)
+	}
+	return niatelemetrycloudrouterselements
+}
 func flattenListNiatelemetryDeploymentStatus(p []models.NiatelemetryDeploymentStatus, d *schema.ResourceData) []map[string]interface{} {
 	var niatelemetrydeploymentstatuss []map[string]interface{}
 	if len(p) == 0 {
@@ -6154,6 +6200,7 @@ func flattenListStorageNetAppExportPolicyRule(p []models.StorageNetAppExportPoli
 		storagenetappexportpolicyrule["client_match"] = item.GetClientMatch()
 		storagenetappexportpolicyrule["index"] = item.GetIndex()
 		storagenetappexportpolicyrule["object_type"] = item.GetObjectType()
+		storagenetappexportpolicyrule["protocols"] = item.GetProtocols()
 		storagenetappexportpolicyrule["ro_rule"] = item.GetRoRule()
 		storagenetappexportpolicyrule["rw_rule"] = item.GetRwRule()
 		storagenetappexportpolicyrule["super_user"] = item.GetSuperUser()
@@ -10484,6 +10531,24 @@ func flattenMapFabricUdldSettings(p models.FabricUdldSettings, d *schema.Resourc
 	fabricudldsettingss = append(fabricudldsettingss, fabricudldsettings)
 	return fabricudldsettingss
 }
+func flattenMapFabricVlanSetRelationship(p models.FabricVlanSetRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var fabricvlansetrelationships []map[string]interface{}
+	var ret models.FabricVlanSetRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	fabricvlansetrelationship := make(map[string]interface{})
+	fabricvlansetrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	fabricvlansetrelationship["class_id"] = item.GetClassId()
+	fabricvlansetrelationship["moid"] = item.GetMoid()
+	fabricvlansetrelationship["object_type"] = item.GetObjectType()
+	fabricvlansetrelationship["selector"] = item.GetSelector()
+
+	fabricvlansetrelationships = append(fabricvlansetrelationships, fabricvlansetrelationship)
+	return fabricvlansetrelationships
+}
 func flattenMapFabricVlanSettings(p models.FabricVlanSettings, d *schema.ResourceData) []map[string]interface{} {
 	var fabricvlansettingss []map[string]interface{}
 	var ret models.FabricVlanSettings
@@ -14311,7 +14376,7 @@ func flattenMapKubernetesProxyConfig(p models.KubernetesProxyConfig, d *schema.R
 	kubernetesproxyconfig["hostname"] = item.GetHostname()
 	kubernetesproxyconfig["is_password_set"] = item.GetIsPasswordSet()
 	kubernetesproxyconfig["object_type"] = item.GetObjectType()
-	password_x, exists := d.GetOk("http_proxy")
+	password_x, exists := d.GetOk("docker_http_proxy")
 	if exists && password_x != nil {
 		password_y := password_x.([]interface{})[0].(map[string]interface{})
 		kubernetesproxyconfig["password"] = password_y["password"]
@@ -17388,6 +17453,7 @@ func flattenMapStorageNetAppHighAvailability(p models.StorageNetAppHighAvailabil
 	storagenetapphighavailability["enabled"] = item.GetEnabled()
 	storagenetapphighavailability["giveback_state"] = item.GetGivebackState()
 	storagenetapphighavailability["object_type"] = item.GetObjectType()
+	storagenetapphighavailability["partner_model"] = item.GetPartnerModel()
 	storagenetapphighavailability["partner_name"] = item.GetPartnerName()
 	storagenetapphighavailability["partner_uuid"] = item.GetPartnerUuid()
 	storagenetapphighavailability["takeover_state"] = item.GetTakeoverState()

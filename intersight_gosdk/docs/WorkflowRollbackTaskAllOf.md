@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | Name of the task definition which is capable of doing rollback of this task. | [optional] 
 **SkipCondition** | Pointer to **string** | The rollback task will not be executed if the given condition evaluates to \&quot;true\&quot;. | [optional] [readonly] 
 **TaskMoid** | Pointer to **string** | The resolved referenced rollback task definition managed object. | [optional] 
-**Version** | Pointer to **int64** | The version of the task definition. | [optional] 
+**Version** | Pointer to **int64** | The version of the task definition. | [optional] [default to 1]
 
 ## Methods
 

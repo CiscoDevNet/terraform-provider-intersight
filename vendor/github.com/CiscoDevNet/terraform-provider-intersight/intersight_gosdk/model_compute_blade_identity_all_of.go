@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7658
+API version: 1.0.11-7766
 Contact: intersight@cisco.com
 */
 
@@ -29,10 +29,14 @@ type ComputeBladeIdentityAllOf struct {
 	CurrentSlotId *int64 `json:"CurrentSlotId,omitempty"`
 	// Describes whether the running CIMC version supports Intersight managed mode. * `Unknown` - The running firmware version is unknown. * `Supported` - The running firmware version is known and supports IMM mode. * `NotSupported` - The running firmware version is known and does not support IMM mode.
 	FirmwareSupportability *string `json:"FirmwareSupportability,omitempty"`
+	// Chassis slot number of the manager compute server.
+	ManagerSlotId *int64 `json:"ManagerSlotId,omitempty"`
 	// The presence state of the blade server. * `Unknown` - The default presence state. * `Equipped` - The server is equipped in the slot. * `EquippedMismatch` - The slot is equipped, but there is another server currently inventoried in the slot. * `Missing` - The server is not present in the given slot.
 	Presence *string `json:"Presence,omitempty"`
 	// Chassis slot number of a blade server.
-	SlotId               *int64 `json:"SlotId,omitempty"`
+	SlotId *int64 `json:"SlotId,omitempty"`
+	// An array of relationships to computeBladeIdentity resources.
+	ManagedNodes         []ComputeBladeIdentityRelationship `json:"ManagedNodes,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -237,6 +241,38 @@ func (o *ComputeBladeIdentityAllOf) SetFirmwareSupportability(v string) {
 	o.FirmwareSupportability = &v
 }
 
+// GetManagerSlotId returns the ManagerSlotId field value if set, zero value otherwise.
+func (o *ComputeBladeIdentityAllOf) GetManagerSlotId() int64 {
+	if o == nil || o.ManagerSlotId == nil {
+		var ret int64
+		return ret
+	}
+	return *o.ManagerSlotId
+}
+
+// GetManagerSlotIdOk returns a tuple with the ManagerSlotId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ComputeBladeIdentityAllOf) GetManagerSlotIdOk() (*int64, bool) {
+	if o == nil || o.ManagerSlotId == nil {
+		return nil, false
+	}
+	return o.ManagerSlotId, true
+}
+
+// HasManagerSlotId returns a boolean if a field has been set.
+func (o *ComputeBladeIdentityAllOf) HasManagerSlotId() bool {
+	if o != nil && o.ManagerSlotId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetManagerSlotId gets a reference to the given int64 and assigns it to the ManagerSlotId field.
+func (o *ComputeBladeIdentityAllOf) SetManagerSlotId(v int64) {
+	o.ManagerSlotId = &v
+}
+
 // GetPresence returns the Presence field value if set, zero value otherwise.
 func (o *ComputeBladeIdentityAllOf) GetPresence() string {
 	if o == nil || o.Presence == nil {
@@ -301,6 +337,39 @@ func (o *ComputeBladeIdentityAllOf) SetSlotId(v int64) {
 	o.SlotId = &v
 }
 
+// GetManagedNodes returns the ManagedNodes field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ComputeBladeIdentityAllOf) GetManagedNodes() []ComputeBladeIdentityRelationship {
+	if o == nil {
+		var ret []ComputeBladeIdentityRelationship
+		return ret
+	}
+	return o.ManagedNodes
+}
+
+// GetManagedNodesOk returns a tuple with the ManagedNodes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ComputeBladeIdentityAllOf) GetManagedNodesOk() ([]ComputeBladeIdentityRelationship, bool) {
+	if o == nil || o.ManagedNodes == nil {
+		return nil, false
+	}
+	return o.ManagedNodes, true
+}
+
+// HasManagedNodes returns a boolean if a field has been set.
+func (o *ComputeBladeIdentityAllOf) HasManagedNodes() bool {
+	if o != nil && o.ManagedNodes != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetManagedNodes gets a reference to the given []ComputeBladeIdentityRelationship and assigns it to the ManagedNodes field.
+func (o *ComputeBladeIdentityAllOf) SetManagedNodes(v []ComputeBladeIdentityRelationship) {
+	o.ManagedNodes = v
+}
+
 func (o ComputeBladeIdentityAllOf) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -321,11 +390,17 @@ func (o ComputeBladeIdentityAllOf) MarshalJSON() ([]byte, error) {
 	if o.FirmwareSupportability != nil {
 		toSerialize["FirmwareSupportability"] = o.FirmwareSupportability
 	}
+	if o.ManagerSlotId != nil {
+		toSerialize["ManagerSlotId"] = o.ManagerSlotId
+	}
 	if o.Presence != nil {
 		toSerialize["Presence"] = o.Presence
 	}
 	if o.SlotId != nil {
 		toSerialize["SlotId"] = o.SlotId
+	}
+	if o.ManagedNodes != nil {
+		toSerialize["ManagedNodes"] = o.ManagedNodes
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -351,8 +426,10 @@ func (o *ComputeBladeIdentityAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "CurrentChassisId")
 		delete(additionalProperties, "CurrentSlotId")
 		delete(additionalProperties, "FirmwareSupportability")
+		delete(additionalProperties, "ManagerSlotId")
 		delete(additionalProperties, "Presence")
 		delete(additionalProperties, "SlotId")
+		delete(additionalProperties, "ManagedNodes")
 		o.AdditionalProperties = additionalProperties
 	}
 

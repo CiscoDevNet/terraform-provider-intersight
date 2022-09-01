@@ -16,7 +16,11 @@ Name | Type | Description | Notes
 **ManagementAddress** | Pointer to **string** | FQDN or IP Address of Storage Cluster. | [optional] [readonly] 
 **NameServers** | Pointer to **[]string** |  | [optional] 
 **NtpServers** | Pointer to **[]string** |  | [optional] 
+**RshEnabled** | Pointer to **bool** | Indicates whether or not rsh is enabled on the cluster. | [optional] [readonly] 
 **TelnetEnabled** | Pointer to **bool** | Indicates whether or not telnet is enabled on the cluster. | [optional] [readonly] 
+**VersionGeneration** | Pointer to **int64** | The generation portion of the version. | [optional] [readonly] 
+**VersionMajor** | Pointer to **int64** | The major portion of the version. | [optional] [readonly] 
+**VersionMinor** | Pointer to **int64** | The minor portion of the version. | [optional] [readonly] 
 **Events** | Pointer to [**[]StorageNetAppClusterEventRelationship**](StorageNetAppClusterEventRelationship.md) | An array of relationships to storageNetAppClusterEvent resources. | [optional] [readonly] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
@@ -379,6 +383,31 @@ HasNtpServers returns a boolean if a field has been set.
 `func (o *StorageNetAppClusterAllOf) UnsetNtpServers()`
 
 UnsetNtpServers ensures that no value is present for NtpServers, not even an explicit nil
+### GetRshEnabled
+
+`func (o *StorageNetAppClusterAllOf) GetRshEnabled() bool`
+
+GetRshEnabled returns the RshEnabled field if non-nil, zero value otherwise.
+
+### GetRshEnabledOk
+
+`func (o *StorageNetAppClusterAllOf) GetRshEnabledOk() (*bool, bool)`
+
+GetRshEnabledOk returns a tuple with the RshEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRshEnabled
+
+`func (o *StorageNetAppClusterAllOf) SetRshEnabled(v bool)`
+
+SetRshEnabled sets RshEnabled field to given value.
+
+### HasRshEnabled
+
+`func (o *StorageNetAppClusterAllOf) HasRshEnabled() bool`
+
+HasRshEnabled returns a boolean if a field has been set.
+
 ### GetTelnetEnabled
 
 `func (o *StorageNetAppClusterAllOf) GetTelnetEnabled() bool`
@@ -403,6 +432,81 @@ SetTelnetEnabled sets TelnetEnabled field to given value.
 `func (o *StorageNetAppClusterAllOf) HasTelnetEnabled() bool`
 
 HasTelnetEnabled returns a boolean if a field has been set.
+
+### GetVersionGeneration
+
+`func (o *StorageNetAppClusterAllOf) GetVersionGeneration() int64`
+
+GetVersionGeneration returns the VersionGeneration field if non-nil, zero value otherwise.
+
+### GetVersionGenerationOk
+
+`func (o *StorageNetAppClusterAllOf) GetVersionGenerationOk() (*int64, bool)`
+
+GetVersionGenerationOk returns a tuple with the VersionGeneration field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVersionGeneration
+
+`func (o *StorageNetAppClusterAllOf) SetVersionGeneration(v int64)`
+
+SetVersionGeneration sets VersionGeneration field to given value.
+
+### HasVersionGeneration
+
+`func (o *StorageNetAppClusterAllOf) HasVersionGeneration() bool`
+
+HasVersionGeneration returns a boolean if a field has been set.
+
+### GetVersionMajor
+
+`func (o *StorageNetAppClusterAllOf) GetVersionMajor() int64`
+
+GetVersionMajor returns the VersionMajor field if non-nil, zero value otherwise.
+
+### GetVersionMajorOk
+
+`func (o *StorageNetAppClusterAllOf) GetVersionMajorOk() (*int64, bool)`
+
+GetVersionMajorOk returns a tuple with the VersionMajor field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVersionMajor
+
+`func (o *StorageNetAppClusterAllOf) SetVersionMajor(v int64)`
+
+SetVersionMajor sets VersionMajor field to given value.
+
+### HasVersionMajor
+
+`func (o *StorageNetAppClusterAllOf) HasVersionMajor() bool`
+
+HasVersionMajor returns a boolean if a field has been set.
+
+### GetVersionMinor
+
+`func (o *StorageNetAppClusterAllOf) GetVersionMinor() int64`
+
+GetVersionMinor returns the VersionMinor field if non-nil, zero value otherwise.
+
+### GetVersionMinorOk
+
+`func (o *StorageNetAppClusterAllOf) GetVersionMinorOk() (*int64, bool)`
+
+GetVersionMinorOk returns a tuple with the VersionMinor field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVersionMinor
+
+`func (o *StorageNetAppClusterAllOf) SetVersionMinor(v int64)`
+
+SetVersionMinor sets VersionMinor field to given value.
+
+### HasVersionMinor
+
+`func (o *StorageNetAppClusterAllOf) HasVersionMinor() bool`
+
+HasVersionMinor returns a boolean if a field has been set.
 
 ### GetEvents
 

@@ -7,7 +7,8 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.NetAppLicense"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.NetAppLicense"]
 **ClusterUuid** | Pointer to **string** | Unique identity of the device. | [optional] [readonly] 
-**Name** | Pointer to **string** | The name of the licensed package. | [optional] [readonly] 
+**Name** | Pointer to **string** | The name of the license package. | [optional] [readonly] 
+**State** | Pointer to **string** | Summary state of license package based on all installed licenses. * &#x60;Unknown&#x60; - The summary state of the license package is unknown. * &#x60;Compliant&#x60; - The summary state of the license package is compliant. * &#x60;Noncompliant&#x60; - The summary state of the license package is noncompliant. * &#x60;Unlicensed&#x60; - The summary state of the license package is unlicensed. | [optional] [readonly] [default to "Unknown"]
 **Array** | Pointer to [**StorageNetAppClusterRelationship**](StorageNetAppClusterRelationship.md) |  | [optional] 
 
 ## Methods
@@ -118,6 +119,31 @@ SetName sets Name field to given value.
 `func (o *StorageNetAppLicenseAllOf) HasName() bool`
 
 HasName returns a boolean if a field has been set.
+
+### GetState
+
+`func (o *StorageNetAppLicenseAllOf) GetState() string`
+
+GetState returns the State field if non-nil, zero value otherwise.
+
+### GetStateOk
+
+`func (o *StorageNetAppLicenseAllOf) GetStateOk() (*string, bool)`
+
+GetStateOk returns a tuple with the State field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetState
+
+`func (o *StorageNetAppLicenseAllOf) SetState(v string)`
+
+SetState sets State field to given value.
+
+### HasState
+
+`func (o *StorageNetAppLicenseAllOf) HasState() bool`
+
+HasState returns a boolean if a field has been set.
 
 ### GetArray
 

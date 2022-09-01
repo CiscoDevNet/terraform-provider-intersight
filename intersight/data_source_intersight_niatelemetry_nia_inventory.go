@@ -14,2155 +14,1088 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
+func getNiatelemetryNiaInventorySchema() map[string]*schema.Schema {
+	var schemaMap = make(map[string]*schema.Schema)
+	schemaMap = map[string]*schema.Schema{"account_moid": {
+		Description: "The Account ID for this managed object.",
+		Type:        schema.TypeString,
+		Optional:    true,
+	},
+		"additional_properties": {
+			Type:             schema.TypeString,
+			Optional:         true,
+			DiffSuppressFunc: SuppressDiffAdditionProps,
+		},
+		"ancestors": {
+			Description: "An array of relationships to moBaseMo resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"class_id": {
+			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"controller_ip_address": {
+			Description: "Returns controller's IP address details.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"cpu": {
+			Description: "CPU usage of device being inventoried. This determines the percentage of CPU resources used.",
+			Type:        schema.TypeFloat,
+			Optional:    true,
+		},
+		"crash_reset_logs": {
+			Description: "Last crash reset reason of device being inventoried. This determines the last reason for a device's restart due to crash of the system.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"create_time": {
+			Description: "The time when this managed object was created.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"customer_device_connector": {
+			Description: "Returns the value of the customerDeviceConnector field.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"dcnm_fan_details": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"name": {
+						Description: "Name of the fan used in the switch.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"product_id": {
+						Description: "Product ID of the fan used in the switch.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"serial_number": {
+						Description: "Serial number of the fan used in the switch.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"vendor_id": {
+						Description: "Vendor Id of the fan used in the switch.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"dcnm_license_state": {
+			Description: "Returns the License state of the device.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"device_discovery": {
+			Description: "Returns the value of the deviceDiscovery field.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"device_health": {
+			Description: "Returns the device health.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"device_id": {
+			Description: "Returns the value of the deviceId field.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"device_name": {
+			Description: "Name of device being inventoried. The name the user assigns to the device is inventoried here.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"device_type": {
+			Description: "Type of device being inventoried. This determines whether the device is a controller, leaf or spine.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"device_up_time": {
+			Description: "Returns the device up time.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"disk": {
+			Description: "Disk Usage of device being inventoried. This determines the amount of disk usage.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"free": {
+						Description: "The free disk capacity, currently the type of this field is set to integer. This determines how much memory is free in Bytes.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"name": {
+						Description: "Disk Name used to identified the disk usage record. This determines the name of the disk partition that is inventoried.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"total": {
+						Description: "The total disk capacity, it should be the sum of free and used, currently the type of this field is set to integer. This determines the total memory for this partition.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"used": {
+						Description: "The used disk capacity, currently the type of this field is set to integer. This determines how much memory is used in Bytes.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"dn": {
+			Description: "Dn for the inventories present.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"domain_group_moid": {
+			Description: "The DomainGroup ID for this managed object.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"fabric_name": {
+			Description: "Name of the fabric of the device being inventoried.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"fex_count": {
+			Description: "Number of fabric extendors utilized.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"infra_wi_node_count": {
+			Description: "Number of appliances as physical device that are wired into the cluster.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"interface": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"name": {
+						Description: "Return value of name of the port.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"oper_state": {
+						Description: "Return value of operState attribute.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"xcvr_present": {
+						Description: "Return whether sfp is present or not.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"ip_address": {
+			Description: "The IP address of the device being inventoried.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"is_virtual_node": {
+			Description: "Flag to specify if the node is virtual.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"last_reboot_time": {
+			Description: "Returns the last reboot Time of the device.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"last_reset_reason": {
+			Description: "Returns the last reset reason of the device.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"license_state": {
+			Description: "A reference to a niatelemetryNiaLicenseState resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"license_type": {
+			Description: "Returns the License type of the device.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"log_in_time": {
+			Description: "Last log in time device being inventoried. This determines the last login time on the device.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"log_out_time": {
+			Description: "Last log out time of device being inventoried. This determines the last logout time on the device.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"mac_sec_count": {
+			Description: "Number of Macsec configured interfaces on a TOR.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"mac_sec_fab_count": {
+			Description: "Number of Macsec configured interfaces on a Spine.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"macsec_total_count": {
+			Description: "Number of total Macsec configured interfaces for all nodes.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"memory": {
+			Description: "Memory usage of device being inventoried. This determines the percentage of memory resources used.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"mod_time": {
+			Description: "The time when this managed object was last modified.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"moid": {
+			Description: "The unique identifier of this Managed Object instance.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"node_id": {
+			Description: "The ID of the device being inventoried.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"nxos_bgp_evpn": {
+			Description: "Returns Nxos EVPN BGP details.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"nxos_evpn_mac_count": {
+						Description: "Returns the EVPN mac count.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"total_networks": {
+						Description: "Returns the BGP EVPN total networks.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"total_paths": {
+						Description: "Returns the BGP EVPN total paths.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"nxos_bgp_mvpn": {
+			Description: "Returns the value of the nxosTrmConfigs field.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"capable_peers": {
+						Description: "Return count of BGP MVPN table capable peers.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"configured_peers": {
+						Description: "Return count of BGP MVPN configured peers.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"memory_used": {
+						Description: "Return value of BGP MVPN memory used.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"number_of_cluster_lists": {
+						Description: "Return value of BGP MVPN cluster list.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"number_of_communities": {
+						Description: "Return count of BGP MVPN communities.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"table_version": {
+						Description: "Return value of BGP MVPN table version.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"total_networks": {
+						Description: "Return count of BGP MVPN networks.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"total_paths": {
+						Description: "Return count of BGP MVPN paths.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"nxos_bootflash_details": {
+			Description: "Returns the value of the nxosBootflashDetails field.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"fw_rev": {
+						Description: "Return firmware revision in boot flash details.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"model_type": {
+						Description: "Return model type in boot flash details.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"serial": {
+						Description: "Return serial id in boot flash details.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"nxos_dci_interface_status": {
+			Description: "Returns the status of dci interface configured.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"nxos_interface_brief": {
+			Description: "Returns the value of the nxosInterfaceBrief field.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"interface_down_count": {
+						Description: "Return value of number of interafces down.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"interface_up_count": {
+						Description: "Return value of number of interafces up.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"nxos_nve_interface_status": {
+			Description: "Returns the value of the nxosNveInterface field.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"nxos_nve_packet_counters": {
+			Description: "Returns the value of the nxosNvePacketCounters field.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"mcast_inpkts": {
+						Description: "Return mcast in packet count.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"mcast_outbytes": {
+						Description: "Return mcast outbytes count.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"ucast_inpkts": {
+						Description: "Return ucast in packet count.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"ucast_outpkts": {
+						Description: "Return ucast out packet count.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"nxos_nve_vni": {
+			Description: "Returns the value of the nxosNveVni field.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"cp_vni_count": {
+						Description: "Return value of cp vni count.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"cp_vni_down": {
+						Description: "Return value of cp vni down count.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"cp_vni_up": {
+						Description: "Return value of cp vni up count.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"dp_vni_count": {
+						Description: "Return value of dp vni count.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"dp_vni_down": {
+						Description: "Return value of cp vni down count.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"dp_vni_up": {
+						Description: "Return value of cp vni up count.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"nxos_ospf_neighbors": {
+			Description: "Total number of ospf neighbors per switch in DCNM.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"nxos_pim_neighbors": {
+			Description: "Total number of pim neighbors per switch in DCNM.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"nxos_telnet": {
+			Description: "Returns the value of the nxosTelnet field.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"nxos_total_routes": {
+			Description: "Total number of routes configured in the DCNM.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"nxos_vtp": {
+			Description: "Returns the value of the nxosVtpStatus field.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"oper_mode": {
+						Description: "Returns the status of operational mode of vtp.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"pruning_mode": {
+						Description: "Returns the status pruning mode of vtp.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"running_version": {
+						Description: "Returns the running version of vtp.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"trap_enabled": {
+						Description: "Returns the status of trap in vtp.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"v2_mode": {
+						Description: "Returns the status of v2 mode of vtp.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"nr_version": {
+						Description: "Returns version of vtp running.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"object_type": {
+			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"owners": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
+		"parent": {
+			Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"permission_resources": {
+			Description: "An array of relationships to moBaseMo resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"record_type": {
+			Description: "Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"record_version": {
+			Description: "Version of record being pushed. This determines what was the API version for data available from the device.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"registered_device": {
+			Description: "A reference to a assetDeviceRegistration resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"route_prefix_count": {
+			Description: "Total nuumber of v4 and v6 routes per node.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"route_prefix_v4_count": {
+			Description: "Number of v4 routes per node.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"route_prefix_v6_count": {
+			Description: "Number of v6 routes per node.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"serial": {
+			Description: "Serial number of device being invetoried. The serial number is unique per device and will be used as the key.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"shared_scope": {
+			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"site_name": {
+			Description: "Name of fabric domain of the controller.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"smart_account_id": {
+			Description: "Returns the value of the smartAccountId/CustomerId field.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"software_download": {
+			Description: "Last software downloaded of device being inventoried. This determines if software download API was used.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"system_up_time": {
+			Description: "The amount of time that the device being inventoried been up.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"tags": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"key": {
+						Description: "The string representation of a tag key.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"value": {
+						Description: "The string representation of a tag value.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"nr_version": {
+			Description: "Software version of device being inventoried. The various software version values for each device are available on cisco.com.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"version_context": {
+			Description: "The versioning info for this managed object.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"interested_mos": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"ref_mo": {
+						Description: "A reference to the original Managed Object.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"timestamp": {
+						Description: "The time this versioned Managed Object was created.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"nr_version": {
+						Description: "The version of the Managed Object, e.g. an incrementing number or a hash id.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"version_type": {
+						Description: "Specifies type of version. Currently the only supported value is \"Configured\"\nthat is used to keep track of snapshots of policies and profiles that are intended\nto be configured to target endpoints.\n* `Modified` - Version created every time an object is modified.\n* `Configured` - Version created every time an object is configured to the service profile.\n* `Deployed` - Version created for objects related to a service profile when it is deployed.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"vni_status": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"vni": {
+						Description: "Returns the vni id of the vni.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"vni_state": {
+						Description: "Returns the vni state of the vni.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"vni_type": {
+						Description: "Returns the vni type of the vni.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+	}
+	return schemaMap
+}
+
 func dataSourceNiatelemetryNiaInventory() *schema.Resource {
-	var subSchema = map[string]*schema.Schema{"account_moid": {
-		Description: "The Account ID for this managed object.",
-		Type:        schema.TypeString,
-		Optional:    true,
-	},
-		"additional_properties": {
-			Type:             schema.TypeString,
-			Optional:         true,
-			DiffSuppressFunc: SuppressDiffAdditionProps,
-		},
-		"ancestors": {
-			Description: "An array of relationships to moBaseMo resources.",
-			Type:        schema.TypeList,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"moid": {
-						Description: "The Moid of the referenced REST resource.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the remote type referred by this relationship.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"selector": {
-						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"class_id": {
-			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"controller_ip_address": {
-			Description: "Returns controller's IP address details.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"cpu": {
-			Description: "CPU usage of device being inventoried. This determines the percentage of CPU resources used.",
-			Type:        schema.TypeFloat,
-			Optional:    true,
-		},
-		"crash_reset_logs": {
-			Description: "Last crash reset reason of device being inventoried. This determines the last reason for a device's restart due to crash of the system.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"create_time": {
-			Description: "The time when this managed object was created.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"customer_device_connector": {
-			Description: "Returns the value of the customerDeviceConnector field.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"dcnm_fan_details": {
-			Type:     schema.TypeList,
-			Optional: true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"name": {
-						Description: "Name of the fan used in the switch.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"product_id": {
-						Description: "Product ID of the fan used in the switch.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"serial_number": {
-						Description: "Serial number of the fan used in the switch.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"vendor_id": {
-						Description: "Vendor Id of the fan used in the switch.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"dcnm_license_state": {
-			Description: "Returns the License state of the device.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"device_discovery": {
-			Description: "Returns the value of the deviceDiscovery field.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"device_health": {
-			Description: "Returns the device health.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"device_id": {
-			Description: "Returns the value of the deviceId field.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"device_name": {
-			Description: "Name of device being inventoried. The name the user assigns to the device is inventoried here.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"device_type": {
-			Description: "Type of device being inventoried. This determines whether the device is a controller, leaf or spine.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"device_up_time": {
-			Description: "Returns the device up time.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"disk": {
-			Description: "Disk Usage of device being inventoried. This determines the amount of disk usage.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"free": {
-						Description: "The free disk capacity, currently the type of this field is set to integer. This determines how much memory is free in Bytes.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"name": {
-						Description: "Disk Name used to identified the disk usage record. This determines the name of the disk partition that is inventoried.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"total": {
-						Description: "The total disk capacity, it should be the sum of free and used, currently the type of this field is set to integer. This determines the total memory for this partition.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"used": {
-						Description: "The used disk capacity, currently the type of this field is set to integer. This determines how much memory is used in Bytes.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"dn": {
-			Description: "Dn for the inventories present.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"domain_group_moid": {
-			Description: "The DomainGroup ID for this managed object.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"fabric_name": {
-			Description: "Name of the fabric of the device being inventoried.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"fex_count": {
-			Description: "Number of fabric extendors utilized.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"infra_wi_node_count": {
-			Description: "Number of appliances as physical device that are wired into the cluster.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"interface": {
-			Type:     schema.TypeList,
-			Optional: true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"name": {
-						Description: "Return value of name of the port.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"oper_state": {
-						Description: "Return value of operState attribute.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"xcvr_present": {
-						Description: "Return whether sfp is present or not.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"ip_address": {
-			Description: "The IP address of the device being inventoried.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"is_virtual_node": {
-			Description: "Flag to specify if the node is virtual.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"last_reboot_time": {
-			Description: "Returns the last reboot Time of the device.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"last_reset_reason": {
-			Description: "Returns the last reset reason of the device.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"license_state": {
-			Description: "A reference to a niatelemetryNiaLicenseState resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"moid": {
-						Description: "The Moid of the referenced REST resource.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the remote type referred by this relationship.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"selector": {
-						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"license_type": {
-			Description: "Returns the License type of the device.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"log_in_time": {
-			Description: "Last log in time device being inventoried. This determines the last login time on the device.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"log_out_time": {
-			Description: "Last log out time of device being inventoried. This determines the last logout time on the device.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"mac_sec_count": {
-			Description: "Number of Macsec configured interfaces on a TOR.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"mac_sec_fab_count": {
-			Description: "Number of Macsec configured interfaces on a Spine.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"macsec_total_count": {
-			Description: "Number of total Macsec configured interfaces for all nodes.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"memory": {
-			Description: "Memory usage of device being inventoried. This determines the percentage of memory resources used.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"mod_time": {
-			Description: "The time when this managed object was last modified.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"moid": {
-			Description: "The unique identifier of this Managed Object instance.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"node_id": {
-			Description: "The ID of the device being inventoried.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"nxos_bgp_evpn": {
-			Description: "Returns Nxos EVPN BGP details.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"nxos_evpn_mac_count": {
-						Description: "Returns the EVPN mac count.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"total_networks": {
-						Description: "Returns the BGP EVPN total networks.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"total_paths": {
-						Description: "Returns the BGP EVPN total paths.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"nxos_bgp_mvpn": {
-			Description: "Returns the value of the nxosTrmConfigs field.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"capable_peers": {
-						Description: "Return count of BGP MVPN table capable peers.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"configured_peers": {
-						Description: "Return count of BGP MVPN configured peers.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"memory_used": {
-						Description: "Return value of BGP MVPN memory used.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"number_of_cluster_lists": {
-						Description: "Return value of BGP MVPN cluster list.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"number_of_communities": {
-						Description: "Return count of BGP MVPN communities.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"table_version": {
-						Description: "Return value of BGP MVPN table version.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"total_networks": {
-						Description: "Return count of BGP MVPN networks.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"total_paths": {
-						Description: "Return count of BGP MVPN paths.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"nxos_bootflash_details": {
-			Description: "Returns the value of the nxosBootflashDetails field.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"fw_rev": {
-						Description: "Return firmware revision in boot flash details.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"model_type": {
-						Description: "Return model type in boot flash details.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"serial": {
-						Description: "Return serial id in boot flash details.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"nxos_dci_interface_status": {
-			Description: "Returns the status of dci interface configured.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"nxos_interface_brief": {
-			Description: "Returns the value of the nxosInterfaceBrief field.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"interface_down_count": {
-						Description: "Return value of number of interafces down.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"interface_up_count": {
-						Description: "Return value of number of interafces up.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"nxos_nve_interface_status": {
-			Description: "Returns the value of the nxosNveInterface field.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"nxos_nve_packet_counters": {
-			Description: "Returns the value of the nxosNvePacketCounters field.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"mcast_inpkts": {
-						Description: "Return mcast in packet count.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"mcast_outbytes": {
-						Description: "Return mcast outbytes count.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"ucast_inpkts": {
-						Description: "Return ucast in packet count.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"ucast_outpkts": {
-						Description: "Return ucast out packet count.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"nxos_nve_vni": {
-			Description: "Returns the value of the nxosNveVni field.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"cp_vni_count": {
-						Description: "Return value of cp vni count.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"cp_vni_down": {
-						Description: "Return value of cp vni down count.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"cp_vni_up": {
-						Description: "Return value of cp vni up count.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"dp_vni_count": {
-						Description: "Return value of dp vni count.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"dp_vni_down": {
-						Description: "Return value of cp vni down count.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"dp_vni_up": {
-						Description: "Return value of cp vni up count.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"nxos_ospf_neighbors": {
-			Description: "Total number of ospf neighbors per switch in DCNM.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"nxos_pim_neighbors": {
-			Description: "Total number of pim neighbors per switch in DCNM.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"nxos_telnet": {
-			Description: "Returns the value of the nxosTelnet field.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"nxos_total_routes": {
-			Description: "Total number of routes configured in the DCNM.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"nxos_vtp": {
-			Description: "Returns the value of the nxosVtpStatus field.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"oper_mode": {
-						Description: "Returns the status of operational mode of vtp.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"pruning_mode": {
-						Description: "Returns the status pruning mode of vtp.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"running_version": {
-						Description: "Returns the running version of vtp.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"trap_enabled": {
-						Description: "Returns the status of trap in vtp.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"v2_mode": {
-						Description: "Returns the status of v2 mode of vtp.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"nr_version": {
-						Description: "Returns version of vtp running.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"object_type": {
-			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"owners": {
-			Type:     schema.TypeList,
-			Optional: true,
-			Elem: &schema.Schema{
-				Type: schema.TypeString}},
-		"parent": {
-			Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"moid": {
-						Description: "The Moid of the referenced REST resource.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the remote type referred by this relationship.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"selector": {
-						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"permission_resources": {
-			Description: "An array of relationships to moBaseMo resources.",
-			Type:        schema.TypeList,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"moid": {
-						Description: "The Moid of the referenced REST resource.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the remote type referred by this relationship.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"selector": {
-						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"record_type": {
-			Description: "Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"record_version": {
-			Description: "Version of record being pushed. This determines what was the API version for data available from the device.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"registered_device": {
-			Description: "A reference to a assetDeviceRegistration resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"moid": {
-						Description: "The Moid of the referenced REST resource.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the remote type referred by this relationship.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"selector": {
-						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"route_prefix_count": {
-			Description: "Total nuumber of v4 and v6 routes per node.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"route_prefix_v4_count": {
-			Description: "Number of v4 routes per node.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"route_prefix_v6_count": {
-			Description: "Number of v6 routes per node.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"serial": {
-			Description: "Serial number of device being invetoried. The serial number is unique per device and will be used as the key.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"shared_scope": {
-			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"site_name": {
-			Description: "Name of fabric domain of the controller.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"smart_account_id": {
-			Description: "Returns the value of the smartAccountId/CustomerId field.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"software_download": {
-			Description: "Last software downloaded of device being inventoried. This determines if software download API was used.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"system_up_time": {
-			Description: "The amount of time that the device being inventoried been up.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"tags": {
-			Type:     schema.TypeList,
-			Optional: true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"key": {
-						Description: "The string representation of a tag key.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"value": {
-						Description: "The string representation of a tag value.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"nr_version": {
-			Description: "Software version of device being inventoried. The various software version values for each device are available on cisco.com.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"version_context": {
-			Description: "The versioning info for this managed object.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"interested_mos": {
-						Type:     schema.TypeList,
-						Optional: true,
-						Elem: &schema.Resource{
-							Schema: map[string]*schema.Schema{
-								"additional_properties": {
-									Type:             schema.TypeString,
-									Optional:         true,
-									DiffSuppressFunc: SuppressDiffAdditionProps,
-								},
-								"class_id": {
-									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"moid": {
-									Description: "The Moid of the referenced REST resource.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"object_type": {
-									Description: "The fully-qualified name of the remote type referred by this relationship.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"selector": {
-									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-							},
-						},
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"ref_mo": {
-						Description: "A reference to the original Managed Object.",
-						Type:        schema.TypeList,
-						MaxItems:    1,
-						Optional:    true,
-						Elem: &schema.Resource{
-							Schema: map[string]*schema.Schema{
-								"additional_properties": {
-									Type:             schema.TypeString,
-									Optional:         true,
-									DiffSuppressFunc: SuppressDiffAdditionProps,
-								},
-								"class_id": {
-									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"moid": {
-									Description: "The Moid of the referenced REST resource.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"object_type": {
-									Description: "The fully-qualified name of the remote type referred by this relationship.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"selector": {
-									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-							},
-						},
-					},
-					"timestamp": {
-						Description: "The time this versioned Managed Object was created.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"nr_version": {
-						Description: "The version of the Managed Object, e.g. an incrementing number or a hash id.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"version_type": {
-						Description: "Specifies type of version. Currently the only supported value is \"Configured\"\nthat is used to keep track of snapshots of policies and profiles that are intended\nto be configured to target endpoints.\n* `Modified` - Version created every time an object is modified.\n* `Configured` - Version created every time an object is configured to the service profile.\n* `Deployed` - Version created for objects related to a service profile when it is deployed.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"vni_status": {
-			Type:     schema.TypeList,
-			Optional: true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"vni": {
-						Description: "Returns the vni id of the vni.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"vni_state": {
-						Description: "Returns the vni state of the vni.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"vni_type": {
-						Description: "Returns the vni type of the vni.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-	}
-	var model = map[string]*schema.Schema{"account_moid": {
-		Description: "The Account ID for this managed object.",
-		Type:        schema.TypeString,
-		Optional:    true,
-	},
-		"additional_properties": {
-			Type:             schema.TypeString,
-			Optional:         true,
-			DiffSuppressFunc: SuppressDiffAdditionProps,
-		},
-		"ancestors": {
-			Description: "An array of relationships to moBaseMo resources.",
-			Type:        schema.TypeList,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"moid": {
-						Description: "The Moid of the referenced REST resource.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the remote type referred by this relationship.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"selector": {
-						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"class_id": {
-			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"controller_ip_address": {
-			Description: "Returns controller's IP address details.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"cpu": {
-			Description: "CPU usage of device being inventoried. This determines the percentage of CPU resources used.",
-			Type:        schema.TypeFloat,
-			Optional:    true,
-		},
-		"crash_reset_logs": {
-			Description: "Last crash reset reason of device being inventoried. This determines the last reason for a device's restart due to crash of the system.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"create_time": {
-			Description: "The time when this managed object was created.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"customer_device_connector": {
-			Description: "Returns the value of the customerDeviceConnector field.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"dcnm_fan_details": {
-			Type:     schema.TypeList,
-			Optional: true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"name": {
-						Description: "Name of the fan used in the switch.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"product_id": {
-						Description: "Product ID of the fan used in the switch.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"serial_number": {
-						Description: "Serial number of the fan used in the switch.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"vendor_id": {
-						Description: "Vendor Id of the fan used in the switch.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"dcnm_license_state": {
-			Description: "Returns the License state of the device.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"device_discovery": {
-			Description: "Returns the value of the deviceDiscovery field.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"device_health": {
-			Description: "Returns the device health.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"device_id": {
-			Description: "Returns the value of the deviceId field.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"device_name": {
-			Description: "Name of device being inventoried. The name the user assigns to the device is inventoried here.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"device_type": {
-			Description: "Type of device being inventoried. This determines whether the device is a controller, leaf or spine.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"device_up_time": {
-			Description: "Returns the device up time.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"disk": {
-			Description: "Disk Usage of device being inventoried. This determines the amount of disk usage.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"free": {
-						Description: "The free disk capacity, currently the type of this field is set to integer. This determines how much memory is free in Bytes.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"name": {
-						Description: "Disk Name used to identified the disk usage record. This determines the name of the disk partition that is inventoried.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"total": {
-						Description: "The total disk capacity, it should be the sum of free and used, currently the type of this field is set to integer. This determines the total memory for this partition.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"used": {
-						Description: "The used disk capacity, currently the type of this field is set to integer. This determines how much memory is used in Bytes.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"dn": {
-			Description: "Dn for the inventories present.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"domain_group_moid": {
-			Description: "The DomainGroup ID for this managed object.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"fabric_name": {
-			Description: "Name of the fabric of the device being inventoried.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"fex_count": {
-			Description: "Number of fabric extendors utilized.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"infra_wi_node_count": {
-			Description: "Number of appliances as physical device that are wired into the cluster.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"interface": {
-			Type:     schema.TypeList,
-			Optional: true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"name": {
-						Description: "Return value of name of the port.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"oper_state": {
-						Description: "Return value of operState attribute.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"xcvr_present": {
-						Description: "Return whether sfp is present or not.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"ip_address": {
-			Description: "The IP address of the device being inventoried.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"is_virtual_node": {
-			Description: "Flag to specify if the node is virtual.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"last_reboot_time": {
-			Description: "Returns the last reboot Time of the device.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"last_reset_reason": {
-			Description: "Returns the last reset reason of the device.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"license_state": {
-			Description: "A reference to a niatelemetryNiaLicenseState resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"moid": {
-						Description: "The Moid of the referenced REST resource.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the remote type referred by this relationship.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"selector": {
-						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"license_type": {
-			Description: "Returns the License type of the device.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"log_in_time": {
-			Description: "Last log in time device being inventoried. This determines the last login time on the device.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"log_out_time": {
-			Description: "Last log out time of device being inventoried. This determines the last logout time on the device.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"mac_sec_count": {
-			Description: "Number of Macsec configured interfaces on a TOR.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"mac_sec_fab_count": {
-			Description: "Number of Macsec configured interfaces on a Spine.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"macsec_total_count": {
-			Description: "Number of total Macsec configured interfaces for all nodes.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"memory": {
-			Description: "Memory usage of device being inventoried. This determines the percentage of memory resources used.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"mod_time": {
-			Description: "The time when this managed object was last modified.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"moid": {
-			Description: "The unique identifier of this Managed Object instance.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"node_id": {
-			Description: "The ID of the device being inventoried.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"nxos_bgp_evpn": {
-			Description: "Returns Nxos EVPN BGP details.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"nxos_evpn_mac_count": {
-						Description: "Returns the EVPN mac count.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"total_networks": {
-						Description: "Returns the BGP EVPN total networks.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"total_paths": {
-						Description: "Returns the BGP EVPN total paths.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"nxos_bgp_mvpn": {
-			Description: "Returns the value of the nxosTrmConfigs field.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"capable_peers": {
-						Description: "Return count of BGP MVPN table capable peers.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"configured_peers": {
-						Description: "Return count of BGP MVPN configured peers.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"memory_used": {
-						Description: "Return value of BGP MVPN memory used.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"number_of_cluster_lists": {
-						Description: "Return value of BGP MVPN cluster list.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"number_of_communities": {
-						Description: "Return count of BGP MVPN communities.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"table_version": {
-						Description: "Return value of BGP MVPN table version.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"total_networks": {
-						Description: "Return count of BGP MVPN networks.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"total_paths": {
-						Description: "Return count of BGP MVPN paths.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"nxos_bootflash_details": {
-			Description: "Returns the value of the nxosBootflashDetails field.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"fw_rev": {
-						Description: "Return firmware revision in boot flash details.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"model_type": {
-						Description: "Return model type in boot flash details.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"serial": {
-						Description: "Return serial id in boot flash details.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"nxos_dci_interface_status": {
-			Description: "Returns the status of dci interface configured.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"nxos_interface_brief": {
-			Description: "Returns the value of the nxosInterfaceBrief field.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"interface_down_count": {
-						Description: "Return value of number of interafces down.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"interface_up_count": {
-						Description: "Return value of number of interafces up.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"nxos_nve_interface_status": {
-			Description: "Returns the value of the nxosNveInterface field.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"nxos_nve_packet_counters": {
-			Description: "Returns the value of the nxosNvePacketCounters field.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"mcast_inpkts": {
-						Description: "Return mcast in packet count.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"mcast_outbytes": {
-						Description: "Return mcast outbytes count.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"ucast_inpkts": {
-						Description: "Return ucast in packet count.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"ucast_outpkts": {
-						Description: "Return ucast out packet count.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"nxos_nve_vni": {
-			Description: "Returns the value of the nxosNveVni field.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"cp_vni_count": {
-						Description: "Return value of cp vni count.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"cp_vni_down": {
-						Description: "Return value of cp vni down count.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"cp_vni_up": {
-						Description: "Return value of cp vni up count.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"dp_vni_count": {
-						Description: "Return value of dp vni count.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"dp_vni_down": {
-						Description: "Return value of cp vni down count.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"dp_vni_up": {
-						Description: "Return value of cp vni up count.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"nxos_ospf_neighbors": {
-			Description: "Total number of ospf neighbors per switch in DCNM.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"nxos_pim_neighbors": {
-			Description: "Total number of pim neighbors per switch in DCNM.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"nxos_telnet": {
-			Description: "Returns the value of the nxosTelnet field.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"nxos_total_routes": {
-			Description: "Total number of routes configured in the DCNM.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"nxos_vtp": {
-			Description: "Returns the value of the nxosVtpStatus field.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"oper_mode": {
-						Description: "Returns the status of operational mode of vtp.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"pruning_mode": {
-						Description: "Returns the status pruning mode of vtp.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"running_version": {
-						Description: "Returns the running version of vtp.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"trap_enabled": {
-						Description: "Returns the status of trap in vtp.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"v2_mode": {
-						Description: "Returns the status of v2 mode of vtp.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"nr_version": {
-						Description: "Returns version of vtp running.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"object_type": {
-			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"owners": {
-			Type:     schema.TypeList,
-			Optional: true,
-			Elem: &schema.Schema{
-				Type: schema.TypeString}},
-		"parent": {
-			Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"moid": {
-						Description: "The Moid of the referenced REST resource.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the remote type referred by this relationship.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"selector": {
-						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"permission_resources": {
-			Description: "An array of relationships to moBaseMo resources.",
-			Type:        schema.TypeList,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"moid": {
-						Description: "The Moid of the referenced REST resource.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the remote type referred by this relationship.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"selector": {
-						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"record_type": {
-			Description: "Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"record_version": {
-			Description: "Version of record being pushed. This determines what was the API version for data available from the device.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"registered_device": {
-			Description: "A reference to a assetDeviceRegistration resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"moid": {
-						Description: "The Moid of the referenced REST resource.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the remote type referred by this relationship.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"selector": {
-						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"route_prefix_count": {
-			Description: "Total nuumber of v4 and v6 routes per node.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"route_prefix_v4_count": {
-			Description: "Number of v4 routes per node.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"route_prefix_v6_count": {
-			Description: "Number of v6 routes per node.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"serial": {
-			Description: "Serial number of device being invetoried. The serial number is unique per device and will be used as the key.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"shared_scope": {
-			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"site_name": {
-			Description: "Name of fabric domain of the controller.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"smart_account_id": {
-			Description: "Returns the value of the smartAccountId/CustomerId field.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"software_download": {
-			Description: "Last software downloaded of device being inventoried. This determines if software download API was used.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"system_up_time": {
-			Description: "The amount of time that the device being inventoried been up.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"tags": {
-			Type:     schema.TypeList,
-			Optional: true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"key": {
-						Description: "The string representation of a tag key.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"value": {
-						Description: "The string representation of a tag value.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"nr_version": {
-			Description: "Software version of device being inventoried. The various software version values for each device are available on cisco.com.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"version_context": {
-			Description: "The versioning info for this managed object.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"interested_mos": {
-						Type:     schema.TypeList,
-						Optional: true,
-						Elem: &schema.Resource{
-							Schema: map[string]*schema.Schema{
-								"additional_properties": {
-									Type:             schema.TypeString,
-									Optional:         true,
-									DiffSuppressFunc: SuppressDiffAdditionProps,
-								},
-								"class_id": {
-									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"moid": {
-									Description: "The Moid of the referenced REST resource.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"object_type": {
-									Description: "The fully-qualified name of the remote type referred by this relationship.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"selector": {
-									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-							},
-						},
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"ref_mo": {
-						Description: "A reference to the original Managed Object.",
-						Type:        schema.TypeList,
-						MaxItems:    1,
-						Optional:    true,
-						Elem: &schema.Resource{
-							Schema: map[string]*schema.Schema{
-								"additional_properties": {
-									Type:             schema.TypeString,
-									Optional:         true,
-									DiffSuppressFunc: SuppressDiffAdditionProps,
-								},
-								"class_id": {
-									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"moid": {
-									Description: "The Moid of the referenced REST resource.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"object_type": {
-									Description: "The fully-qualified name of the remote type referred by this relationship.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"selector": {
-									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-							},
-						},
-					},
-					"timestamp": {
-						Description: "The time this versioned Managed Object was created.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"nr_version": {
-						Description: "The version of the Managed Object, e.g. an incrementing number or a hash id.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"version_type": {
-						Description: "Specifies type of version. Currently the only supported value is \"Configured\"\nthat is used to keep track of snapshots of policies and profiles that are intended\nto be configured to target endpoints.\n* `Modified` - Version created every time an object is modified.\n* `Configured` - Version created every time an object is configured to the service profile.\n* `Deployed` - Version created for objects related to a service profile when it is deployed.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"vni_status": {
-			Type:     schema.TypeList,
-			Optional: true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"vni": {
-						Description: "Returns the vni id of the vni.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"vni_state": {
-						Description: "Returns the vni state of the vni.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"vni_type": {
-						Description: "Returns the vni type of the vni.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-	}
+	var subSchema = getNiatelemetryNiaInventorySchema()
+	var model = getNiatelemetryNiaInventorySchema()
 	model["results"] = &schema.Schema{
 		Type:     schema.TypeList,
 		Elem:     &schema.Resource{Schema: subSchema},

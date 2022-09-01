@@ -600,6 +600,17 @@ func resourceAssetTarget() *schema.Resource {
 				Optional:     true,
 				Default:      "",
 			},
+			"vendor": {
+				Description: "The vendor of the managed target.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
 				Type:        schema.TypeList,
@@ -1317,6 +1328,10 @@ func resourceAssetTargetRead(c context.Context, d *schema.ResourceData, meta int
 
 	if err := d.Set("target_type", (s.GetTargetType())); err != nil {
 		return diag.Errorf("error occurred while setting property TargetType in AssetTarget object: %s", err.Error())
+	}
+
+	if err := d.Set("vendor", (s.GetVendor())); err != nil {
+		return diag.Errorf("error occurred while setting property Vendor in AssetTarget object: %s", err.Error())
 	}
 
 	if err := d.Set("version_context", flattenMapMoVersionContext(s.GetVersionContext(), d)); err != nil {

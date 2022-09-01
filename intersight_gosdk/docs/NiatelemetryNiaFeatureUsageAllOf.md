@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **BdCount** | Pointer to **int64** | Number of BDs. This determines the total number of Broadcast Domains across the fabric. | [optional] 
 **CallhomeSmartGroupCount** | Pointer to **int64** | Number of call home smart monitoring policies on the fabric. | [optional] 
 **CloudSecPeerCount** | Pointer to **int64** | Number of Cloudsec SA peers. | [optional] 
+**CloudTenantCount** | Pointer to **int64** | Returns the total number of tenants deployed. | [optional] 
 **CompHvCount** | Pointer to **int64** | Number of compute hypervisors on the fabric. | [optional] 
 **ConfigExportpCount** | Pointer to **int64** | Number of system backup configure export policies on the fabric. | [optional] 
 **ConfigJobCount** | Pointer to **int64** | Number of system backup configure jobs on the fabric. | [optional] 
@@ -552,6 +553,31 @@ SetCloudSecPeerCount sets CloudSecPeerCount field to given value.
 `func (o *NiatelemetryNiaFeatureUsageAllOf) HasCloudSecPeerCount() bool`
 
 HasCloudSecPeerCount returns a boolean if a field has been set.
+
+### GetCloudTenantCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetCloudTenantCount() int64`
+
+GetCloudTenantCount returns the CloudTenantCount field if non-nil, zero value otherwise.
+
+### GetCloudTenantCountOk
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetCloudTenantCountOk() (*int64, bool)`
+
+GetCloudTenantCountOk returns a tuple with the CloudTenantCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCloudTenantCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) SetCloudTenantCount(v int64)`
+
+SetCloudTenantCount sets CloudTenantCount field to given value.
+
+### HasCloudTenantCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) HasCloudTenantCount() bool`
+
+HasCloudTenantCount returns a boolean if a field has been set.
 
 ### GetCompHvCount
 
