@@ -16,9 +16,6 @@ Name | Type | Description | Notes
 **Key** | Pointer to **string** | Unique identifier of VServer across data center. | [optional] [readonly] 
 **NameServers** | Pointer to **[]string** |  | [optional] 
 **NfsEnabled** | Pointer to **bool** | Status for Network File System Protocol ( NFS ) allowed to run on  Vservers. | [optional] [readonly] 
-**NfsV3Enabled** | Pointer to **bool** | Status for Network File System Protocol ( NFSv3 ) allowed to run on  Vservers. | [optional] [readonly] 
-**NfsV41Enabled** | Pointer to **bool** | Status for Network File System Protocol ( NFSv4.1 ) allowed to run on  Vservers. | [optional] [readonly] 
-**NfsV4Enabled** | Pointer to **bool** | Status for Network File System Protocol ( NFSv4 ) allowed to run on  Vservers. | [optional] [readonly] 
 **NvmeEnabled** | Pointer to **bool** | Status for NVME protocol allowed to run on Vservers. | [optional] [readonly] 
 **Subtype** | Pointer to **string** | SVM subtype (default, dp_destination, sync_source, or sync_destination). The SVM subtype sync_destination is created automatically when an SVM of subtype sync_source is created on the source MetroCluster cluster. | [optional] [readonly] 
 **Array** | Pointer to [**StorageNetAppClusterRelationship**](StorageNetAppClusterRelationship.md) |  | [optional] 
@@ -363,81 +360,6 @@ SetNfsEnabled sets NfsEnabled field to given value.
 `func (o *StorageNetAppStorageVmAllOf) HasNfsEnabled() bool`
 
 HasNfsEnabled returns a boolean if a field has been set.
-
-### GetNfsV3Enabled
-
-`func (o *StorageNetAppStorageVmAllOf) GetNfsV3Enabled() bool`
-
-GetNfsV3Enabled returns the NfsV3Enabled field if non-nil, zero value otherwise.
-
-### GetNfsV3EnabledOk
-
-`func (o *StorageNetAppStorageVmAllOf) GetNfsV3EnabledOk() (*bool, bool)`
-
-GetNfsV3EnabledOk returns a tuple with the NfsV3Enabled field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetNfsV3Enabled
-
-`func (o *StorageNetAppStorageVmAllOf) SetNfsV3Enabled(v bool)`
-
-SetNfsV3Enabled sets NfsV3Enabled field to given value.
-
-### HasNfsV3Enabled
-
-`func (o *StorageNetAppStorageVmAllOf) HasNfsV3Enabled() bool`
-
-HasNfsV3Enabled returns a boolean if a field has been set.
-
-### GetNfsV41Enabled
-
-`func (o *StorageNetAppStorageVmAllOf) GetNfsV41Enabled() bool`
-
-GetNfsV41Enabled returns the NfsV41Enabled field if non-nil, zero value otherwise.
-
-### GetNfsV41EnabledOk
-
-`func (o *StorageNetAppStorageVmAllOf) GetNfsV41EnabledOk() (*bool, bool)`
-
-GetNfsV41EnabledOk returns a tuple with the NfsV41Enabled field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetNfsV41Enabled
-
-`func (o *StorageNetAppStorageVmAllOf) SetNfsV41Enabled(v bool)`
-
-SetNfsV41Enabled sets NfsV41Enabled field to given value.
-
-### HasNfsV41Enabled
-
-`func (o *StorageNetAppStorageVmAllOf) HasNfsV41Enabled() bool`
-
-HasNfsV41Enabled returns a boolean if a field has been set.
-
-### GetNfsV4Enabled
-
-`func (o *StorageNetAppStorageVmAllOf) GetNfsV4Enabled() bool`
-
-GetNfsV4Enabled returns the NfsV4Enabled field if non-nil, zero value otherwise.
-
-### GetNfsV4EnabledOk
-
-`func (o *StorageNetAppStorageVmAllOf) GetNfsV4EnabledOk() (*bool, bool)`
-
-GetNfsV4EnabledOk returns a tuple with the NfsV4Enabled field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetNfsV4Enabled
-
-`func (o *StorageNetAppStorageVmAllOf) SetNfsV4Enabled(v bool)`
-
-SetNfsV4Enabled sets NfsV4Enabled field to given value.
-
-### HasNfsV4Enabled
-
-`func (o *StorageNetAppStorageVmAllOf) HasNfsV4Enabled() bool`
-
-HasNfsV4Enabled returns a boolean if a field has been set.
 
 ### GetNvmeEnabled
 

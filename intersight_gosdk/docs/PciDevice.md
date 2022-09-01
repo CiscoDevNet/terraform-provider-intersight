@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "pci.Device"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "pci.Device"]
+**DeviceId** | Pointer to **string** | The PCI device id of the PCI device. | [optional] 
 **FirmwareVersion** | Pointer to **string** | The running firmware version of the PCI device. | [optional] 
 **Pid** | Pointer to **string** | The product identifier of the PCI device. | [optional] 
 **SlotId** | Pointer to **string** | The PCI slot id of the PCI device. | [optional] [readonly] 
@@ -73,6 +74,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetDeviceId
+
+`func (o *PciDevice) GetDeviceId() string`
+
+GetDeviceId returns the DeviceId field if non-nil, zero value otherwise.
+
+### GetDeviceIdOk
+
+`func (o *PciDevice) GetDeviceIdOk() (*string, bool)`
+
+GetDeviceIdOk returns a tuple with the DeviceId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeviceId
+
+`func (o *PciDevice) SetDeviceId(v string)`
+
+SetDeviceId sets DeviceId field to given value.
+
+### HasDeviceId
+
+`func (o *PciDevice) HasDeviceId() bool`
+
+HasDeviceId returns a boolean if a field has been set.
 
 ### GetFirmwareVersion
 

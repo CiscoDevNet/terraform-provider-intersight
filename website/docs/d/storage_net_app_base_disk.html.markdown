@@ -16,6 +16,7 @@ To access the ith object of the results obtained, use `data.intersight_storage_n
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `base_disk_model`:(string) The NetApp base disk model. 
+* `cluster_uuid`:(string) Unique identity of the device. 
 * `container_type`:(string) Supported container type for NetApp disk.* `Unknown` - Default container type is currently unknown.* `Aggregate` - Disk is used as a physical disk in an aggregate.* `Broken` - Disk is in a broken pool.* `Label Maintenance` - Disk is in online label maintenance list.* `Foreign` - Array LUN has been marked foreign.* `Maintenance` - Disk is in maintenance center.* `Mediator` - A mediator disk is a disk used on non-shared HA systems hosted by an external node which is used to communicate the viability of the storage failover between non-shared HA nodes.* `Shared` - Disk is partitioned or in a storage pool.* `Remote` - Disk belongs to a remote cluster.* `Spare` - The disk is a spare disk.* `Unassigned` - Disk ownership has not been assigned.* `Unsupported` - The disk is not supported. 
 * `create_time`:(string) The time when this managed object was created. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 

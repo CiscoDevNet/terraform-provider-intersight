@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7658
+API version: 1.0.11-7766
 Contact: intersight@cisco.com
 */
 
@@ -40,12 +40,6 @@ type StorageNetAppStorageVm struct {
 	NameServers []string `json:"NameServers,omitempty"`
 	// Status for Network File System Protocol ( NFS ) allowed to run on  Vservers.
 	NfsEnabled *bool `json:"NfsEnabled,omitempty"`
-	// Status for Network File System Protocol ( NFSv3 ) allowed to run on  Vservers.
-	NfsV3Enabled *bool `json:"NfsV3Enabled,omitempty"`
-	// Status for Network File System Protocol ( NFSv4.1 ) allowed to run on  Vservers.
-	NfsV41Enabled *bool `json:"NfsV41Enabled,omitempty"`
-	// Status for Network File System Protocol ( NFSv4 ) allowed to run on  Vservers.
-	NfsV4Enabled *bool `json:"NfsV4Enabled,omitempty"`
 	// Status for NVME protocol allowed to run on Vservers.
 	NvmeEnabled *bool `json:"NvmeEnabled,omitempty"`
 	// SVM subtype (default, dp_destination, sync_source, or sync_destination). The SVM subtype sync_destination is created automatically when an SVM of subtype sync_source is created on the source MetroCluster cluster.
@@ -454,102 +448,6 @@ func (o *StorageNetAppStorageVm) SetNfsEnabled(v bool) {
 	o.NfsEnabled = &v
 }
 
-// GetNfsV3Enabled returns the NfsV3Enabled field value if set, zero value otherwise.
-func (o *StorageNetAppStorageVm) GetNfsV3Enabled() bool {
-	if o == nil || o.NfsV3Enabled == nil {
-		var ret bool
-		return ret
-	}
-	return *o.NfsV3Enabled
-}
-
-// GetNfsV3EnabledOk returns a tuple with the NfsV3Enabled field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *StorageNetAppStorageVm) GetNfsV3EnabledOk() (*bool, bool) {
-	if o == nil || o.NfsV3Enabled == nil {
-		return nil, false
-	}
-	return o.NfsV3Enabled, true
-}
-
-// HasNfsV3Enabled returns a boolean if a field has been set.
-func (o *StorageNetAppStorageVm) HasNfsV3Enabled() bool {
-	if o != nil && o.NfsV3Enabled != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetNfsV3Enabled gets a reference to the given bool and assigns it to the NfsV3Enabled field.
-func (o *StorageNetAppStorageVm) SetNfsV3Enabled(v bool) {
-	o.NfsV3Enabled = &v
-}
-
-// GetNfsV41Enabled returns the NfsV41Enabled field value if set, zero value otherwise.
-func (o *StorageNetAppStorageVm) GetNfsV41Enabled() bool {
-	if o == nil || o.NfsV41Enabled == nil {
-		var ret bool
-		return ret
-	}
-	return *o.NfsV41Enabled
-}
-
-// GetNfsV41EnabledOk returns a tuple with the NfsV41Enabled field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *StorageNetAppStorageVm) GetNfsV41EnabledOk() (*bool, bool) {
-	if o == nil || o.NfsV41Enabled == nil {
-		return nil, false
-	}
-	return o.NfsV41Enabled, true
-}
-
-// HasNfsV41Enabled returns a boolean if a field has been set.
-func (o *StorageNetAppStorageVm) HasNfsV41Enabled() bool {
-	if o != nil && o.NfsV41Enabled != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetNfsV41Enabled gets a reference to the given bool and assigns it to the NfsV41Enabled field.
-func (o *StorageNetAppStorageVm) SetNfsV41Enabled(v bool) {
-	o.NfsV41Enabled = &v
-}
-
-// GetNfsV4Enabled returns the NfsV4Enabled field value if set, zero value otherwise.
-func (o *StorageNetAppStorageVm) GetNfsV4Enabled() bool {
-	if o == nil || o.NfsV4Enabled == nil {
-		var ret bool
-		return ret
-	}
-	return *o.NfsV4Enabled
-}
-
-// GetNfsV4EnabledOk returns a tuple with the NfsV4Enabled field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *StorageNetAppStorageVm) GetNfsV4EnabledOk() (*bool, bool) {
-	if o == nil || o.NfsV4Enabled == nil {
-		return nil, false
-	}
-	return o.NfsV4Enabled, true
-}
-
-// HasNfsV4Enabled returns a boolean if a field has been set.
-func (o *StorageNetAppStorageVm) HasNfsV4Enabled() bool {
-	if o != nil && o.NfsV4Enabled != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetNfsV4Enabled gets a reference to the given bool and assigns it to the NfsV4Enabled field.
-func (o *StorageNetAppStorageVm) SetNfsV4Enabled(v bool) {
-	o.NfsV4Enabled = &v
-}
-
 // GetNvmeEnabled returns the NvmeEnabled field value if set, zero value otherwise.
 func (o *StorageNetAppStorageVm) GetNvmeEnabled() bool {
 	if o == nil || o.NvmeEnabled == nil {
@@ -758,15 +656,6 @@ func (o StorageNetAppStorageVm) MarshalJSON() ([]byte, error) {
 	if o.NfsEnabled != nil {
 		toSerialize["NfsEnabled"] = o.NfsEnabled
 	}
-	if o.NfsV3Enabled != nil {
-		toSerialize["NfsV3Enabled"] = o.NfsV3Enabled
-	}
-	if o.NfsV41Enabled != nil {
-		toSerialize["NfsV41Enabled"] = o.NfsV41Enabled
-	}
-	if o.NfsV4Enabled != nil {
-		toSerialize["NfsV4Enabled"] = o.NfsV4Enabled
-	}
 	if o.NvmeEnabled != nil {
 		toSerialize["NvmeEnabled"] = o.NvmeEnabled
 	}
@@ -812,12 +701,6 @@ func (o *StorageNetAppStorageVm) UnmarshalJSON(bytes []byte) (err error) {
 		NameServers []string `json:"NameServers,omitempty"`
 		// Status for Network File System Protocol ( NFS ) allowed to run on  Vservers.
 		NfsEnabled *bool `json:"NfsEnabled,omitempty"`
-		// Status for Network File System Protocol ( NFSv3 ) allowed to run on  Vservers.
-		NfsV3Enabled *bool `json:"NfsV3Enabled,omitempty"`
-		// Status for Network File System Protocol ( NFSv4.1 ) allowed to run on  Vservers.
-		NfsV41Enabled *bool `json:"NfsV41Enabled,omitempty"`
-		// Status for Network File System Protocol ( NFSv4 ) allowed to run on  Vservers.
-		NfsV4Enabled *bool `json:"NfsV4Enabled,omitempty"`
 		// Status for NVME protocol allowed to run on Vservers.
 		NvmeEnabled *bool `json:"NvmeEnabled,omitempty"`
 		// SVM subtype (default, dp_destination, sync_source, or sync_destination). The SVM subtype sync_destination is created automatically when an SVM of subtype sync_source is created on the source MetroCluster cluster.
@@ -846,9 +729,6 @@ func (o *StorageNetAppStorageVm) UnmarshalJSON(bytes []byte) (err error) {
 		varStorageNetAppStorageVm.Key = varStorageNetAppStorageVmWithoutEmbeddedStruct.Key
 		varStorageNetAppStorageVm.NameServers = varStorageNetAppStorageVmWithoutEmbeddedStruct.NameServers
 		varStorageNetAppStorageVm.NfsEnabled = varStorageNetAppStorageVmWithoutEmbeddedStruct.NfsEnabled
-		varStorageNetAppStorageVm.NfsV3Enabled = varStorageNetAppStorageVmWithoutEmbeddedStruct.NfsV3Enabled
-		varStorageNetAppStorageVm.NfsV41Enabled = varStorageNetAppStorageVmWithoutEmbeddedStruct.NfsV41Enabled
-		varStorageNetAppStorageVm.NfsV4Enabled = varStorageNetAppStorageVmWithoutEmbeddedStruct.NfsV4Enabled
 		varStorageNetAppStorageVm.NvmeEnabled = varStorageNetAppStorageVmWithoutEmbeddedStruct.NvmeEnabled
 		varStorageNetAppStorageVm.Subtype = varStorageNetAppStorageVmWithoutEmbeddedStruct.Subtype
 		varStorageNetAppStorageVm.Array = varStorageNetAppStorageVmWithoutEmbeddedStruct.Array
@@ -883,9 +763,6 @@ func (o *StorageNetAppStorageVm) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "Key")
 		delete(additionalProperties, "NameServers")
 		delete(additionalProperties, "NfsEnabled")
-		delete(additionalProperties, "NfsV3Enabled")
-		delete(additionalProperties, "NfsV41Enabled")
-		delete(additionalProperties, "NfsV4Enabled")
 		delete(additionalProperties, "NvmeEnabled")
 		delete(additionalProperties, "Subtype")
 		delete(additionalProperties, "Array")

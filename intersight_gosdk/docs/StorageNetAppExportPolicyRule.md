@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.NetAppExportPolicyRule"]
 **ClientMatch** | Pointer to **[]string** |  | [optional] 
 **Index** | Pointer to **int64** | Position of export rule in the list of rules. | [optional] [readonly] 
+**Protocols** | Pointer to **[]string** |  | [optional] 
 **RoRule** | Pointer to **[]string** |  | [optional] 
 **RwRule** | Pointer to **[]string** |  | [optional] 
 **SuperUser** | Pointer to **[]string** |  | [optional] 
@@ -132,6 +133,41 @@ SetIndex sets Index field to given value.
 
 HasIndex returns a boolean if a field has been set.
 
+### GetProtocols
+
+`func (o *StorageNetAppExportPolicyRule) GetProtocols() []string`
+
+GetProtocols returns the Protocols field if non-nil, zero value otherwise.
+
+### GetProtocolsOk
+
+`func (o *StorageNetAppExportPolicyRule) GetProtocolsOk() (*[]string, bool)`
+
+GetProtocolsOk returns a tuple with the Protocols field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProtocols
+
+`func (o *StorageNetAppExportPolicyRule) SetProtocols(v []string)`
+
+SetProtocols sets Protocols field to given value.
+
+### HasProtocols
+
+`func (o *StorageNetAppExportPolicyRule) HasProtocols() bool`
+
+HasProtocols returns a boolean if a field has been set.
+
+### SetProtocolsNil
+
+`func (o *StorageNetAppExportPolicyRule) SetProtocolsNil(b bool)`
+
+ SetProtocolsNil sets the value for Protocols to be an explicit nil
+
+### UnsetProtocols
+`func (o *StorageNetAppExportPolicyRule) UnsetProtocols()`
+
+UnsetProtocols ensures that no value is present for Protocols, not even an explicit nil
 ### GetRoRule
 
 `func (o *StorageNetAppExportPolicyRule) GetRoRule() []string`

@@ -10,8 +10,10 @@ Name | Type | Description | Notes
 **CurrentChassisId** | Pointer to **int64** | The id of the chassis that the blade is currently located in. | [optional] [readonly] 
 **CurrentSlotId** | Pointer to **int64** | The slot number in the chassis that the blade is currently located in. | [optional] [readonly] 
 **FirmwareSupportability** | Pointer to **string** | Describes whether the running CIMC version supports Intersight managed mode. * &#x60;Unknown&#x60; - The running firmware version is unknown. * &#x60;Supported&#x60; - The running firmware version is known and supports IMM mode. * &#x60;NotSupported&#x60; - The running firmware version is known and does not support IMM mode. | [optional] [readonly] [default to "Unknown"]
+**ManagerSlotId** | Pointer to **int64** | Chassis slot number of the manager compute server. | [optional] [readonly] 
 **Presence** | Pointer to **string** | The presence state of the blade server. * &#x60;Unknown&#x60; - The default presence state. * &#x60;Equipped&#x60; - The server is equipped in the slot. * &#x60;EquippedMismatch&#x60; - The slot is equipped, but there is another server currently inventoried in the slot. * &#x60;Missing&#x60; - The server is not present in the given slot. | [optional] [readonly] [default to "Unknown"]
 **SlotId** | Pointer to **int64** | Chassis slot number of a blade server. | [optional] [readonly] 
+**ManagedNodes** | Pointer to [**[]ComputeBladeIdentityRelationship**](ComputeBladeIdentityRelationship.md) | An array of relationships to computeBladeIdentity resources. | [optional] [readonly] 
 
 ## Methods
 
@@ -172,6 +174,31 @@ SetFirmwareSupportability sets FirmwareSupportability field to given value.
 
 HasFirmwareSupportability returns a boolean if a field has been set.
 
+### GetManagerSlotId
+
+`func (o *ComputeBladeIdentity) GetManagerSlotId() int64`
+
+GetManagerSlotId returns the ManagerSlotId field if non-nil, zero value otherwise.
+
+### GetManagerSlotIdOk
+
+`func (o *ComputeBladeIdentity) GetManagerSlotIdOk() (*int64, bool)`
+
+GetManagerSlotIdOk returns a tuple with the ManagerSlotId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetManagerSlotId
+
+`func (o *ComputeBladeIdentity) SetManagerSlotId(v int64)`
+
+SetManagerSlotId sets ManagerSlotId field to given value.
+
+### HasManagerSlotId
+
+`func (o *ComputeBladeIdentity) HasManagerSlotId() bool`
+
+HasManagerSlotId returns a boolean if a field has been set.
+
 ### GetPresence
 
 `func (o *ComputeBladeIdentity) GetPresence() string`
@@ -222,6 +249,41 @@ SetSlotId sets SlotId field to given value.
 
 HasSlotId returns a boolean if a field has been set.
 
+### GetManagedNodes
+
+`func (o *ComputeBladeIdentity) GetManagedNodes() []ComputeBladeIdentityRelationship`
+
+GetManagedNodes returns the ManagedNodes field if non-nil, zero value otherwise.
+
+### GetManagedNodesOk
+
+`func (o *ComputeBladeIdentity) GetManagedNodesOk() (*[]ComputeBladeIdentityRelationship, bool)`
+
+GetManagedNodesOk returns a tuple with the ManagedNodes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetManagedNodes
+
+`func (o *ComputeBladeIdentity) SetManagedNodes(v []ComputeBladeIdentityRelationship)`
+
+SetManagedNodes sets ManagedNodes field to given value.
+
+### HasManagedNodes
+
+`func (o *ComputeBladeIdentity) HasManagedNodes() bool`
+
+HasManagedNodes returns a boolean if a field has been set.
+
+### SetManagedNodesNil
+
+`func (o *ComputeBladeIdentity) SetManagedNodesNil(b bool)`
+
+ SetManagedNodesNil sets the value for ManagedNodes to be an explicit nil
+
+### UnsetManagedNodes
+`func (o *ComputeBladeIdentity) UnsetManagedNodes()`
+
+UnsetManagedNodes ensures that no value is present for ManagedNodes, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

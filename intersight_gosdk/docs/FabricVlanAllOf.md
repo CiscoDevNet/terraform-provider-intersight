@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **VlanId** | Pointer to **int64** | The identifier for this Virtual LAN. | [optional] 
 **EthNetworkPolicy** | Pointer to [**FabricEthNetworkPolicyRelationship**](FabricEthNetworkPolicyRelationship.md) |  | [optional] 
 **MulticastPolicy** | Pointer to [**FabricMulticastPolicyRelationship**](FabricMulticastPolicyRelationship.md) |  | [optional] 
+**VlanSet** | Pointer to [**FabricVlanSetRelationship**](FabricVlanSetRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -221,6 +222,31 @@ SetMulticastPolicy sets MulticastPolicy field to given value.
 `func (o *FabricVlanAllOf) HasMulticastPolicy() bool`
 
 HasMulticastPolicy returns a boolean if a field has been set.
+
+### GetVlanSet
+
+`func (o *FabricVlanAllOf) GetVlanSet() FabricVlanSetRelationship`
+
+GetVlanSet returns the VlanSet field if non-nil, zero value otherwise.
+
+### GetVlanSetOk
+
+`func (o *FabricVlanAllOf) GetVlanSetOk() (*FabricVlanSetRelationship, bool)`
+
+GetVlanSetOk returns a tuple with the VlanSet field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVlanSet
+
+`func (o *FabricVlanAllOf) SetVlanSet(v FabricVlanSetRelationship)`
+
+SetVlanSet sets VlanSet field to given value.
+
+### HasVlanSet
+
+`func (o *FabricVlanAllOf) HasVlanSet() bool`
+
+HasVlanSet returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

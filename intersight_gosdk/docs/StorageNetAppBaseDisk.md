@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.NetAppBaseDisk"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.NetAppBaseDisk"]
 **BaseDiskModel** | Pointer to **string** | The NetApp base disk model. | [optional] [readonly] 
+**ClusterUuid** | Pointer to **string** | Unique identity of the device. | [optional] [readonly] 
 **ContainerType** | Pointer to **string** | Supported container type for NetApp disk. * &#x60;Unknown&#x60; - Default container type is currently unknown. * &#x60;Aggregate&#x60; - Disk is used as a physical disk in an aggregate. * &#x60;Broken&#x60; - Disk is in a broken pool. * &#x60;Label Maintenance&#x60; - Disk is in online label maintenance list. * &#x60;Foreign&#x60; - Array LUN has been marked foreign. * &#x60;Maintenance&#x60; - Disk is in maintenance center. * &#x60;Mediator&#x60; - A mediator disk is a disk used on non-shared HA systems hosted by an external node which is used to communicate the viability of the storage failover between non-shared HA nodes. * &#x60;Shared&#x60; - Disk is partitioned or in a storage pool. * &#x60;Remote&#x60; - Disk belongs to a remote cluster. * &#x60;Spare&#x60; - The disk is a spare disk. * &#x60;Unassigned&#x60; - Disk ownership has not been assigned. * &#x60;Unsupported&#x60; - The disk is not supported. | [optional] [readonly] [default to "Unknown"]
 **DiskBay** | Pointer to **int64** | NetApp base disk shelf bay. | [optional] [readonly] 
 **DiskSerialNumber** | Pointer to **string** | NetApp base disk serial number. | [optional] [readonly] 
@@ -104,6 +105,31 @@ SetBaseDiskModel sets BaseDiskModel field to given value.
 `func (o *StorageNetAppBaseDisk) HasBaseDiskModel() bool`
 
 HasBaseDiskModel returns a boolean if a field has been set.
+
+### GetClusterUuid
+
+`func (o *StorageNetAppBaseDisk) GetClusterUuid() string`
+
+GetClusterUuid returns the ClusterUuid field if non-nil, zero value otherwise.
+
+### GetClusterUuidOk
+
+`func (o *StorageNetAppBaseDisk) GetClusterUuidOk() (*string, bool)`
+
+GetClusterUuidOk returns a tuple with the ClusterUuid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClusterUuid
+
+`func (o *StorageNetAppBaseDisk) SetClusterUuid(v string)`
+
+SetClusterUuid sets ClusterUuid field to given value.
+
+### HasClusterUuid
+
+`func (o *StorageNetAppBaseDisk) HasClusterUuid() bool`
+
+HasClusterUuid returns a boolean if a field has been set.
 
 ### GetContainerType
 
