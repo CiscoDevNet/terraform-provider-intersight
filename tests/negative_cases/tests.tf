@@ -6,7 +6,7 @@ resource "intersight_sol_policy" "enum_int" {
 
 # Enum property for string
 resource "intersight_workflow_workflow_info" "enum_string" {
-    wait_reason = "ratelimi"
+    action = "retryfailed"
 }
 
 # Maximum integer
