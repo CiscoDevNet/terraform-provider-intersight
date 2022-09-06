@@ -3,15 +3,12 @@
 ```hcl
 resource "intersight_workflow_workflow_info" "workflow_workflow_info1" {
   name         = "workflow_workflow_info1"
-  pause_reason = null
   action       = "Create"
   properties {
     object_type = "workflow.WorkflowInfoProperties"
     retryable   = false
   }
   success_workflow_cleanup_duration = 2160
-  wait_reason                       = null
-  workflow_meta_type                = "SystemDefined"
   organization {
     object_type = "organization.Organization"
     moid        = var.organization
