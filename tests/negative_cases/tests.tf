@@ -6,7 +6,7 @@ resource "intersight_sol_policy" "enum_int" {
 
 # Enum property for string
 resource "intersight_workflow_workflow_info" "enum_string" {
-    workflow_meta_type = "systemdefined"
+    action = "retryfailed"
 }
 
 # Maximum integer
