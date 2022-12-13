@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -56,8 +56,8 @@ func (r ApiCreateOsBulkInstallInfoRequest) Execute() (*OsBulkInstallInfo, *http.
 /*
 CreateOsBulkInstallInfo Create a 'os.BulkInstallInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateOsBulkInstallInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateOsBulkInstallInfoRequest
 */
 func (a *OsApiService) CreateOsBulkInstallInfo(ctx context.Context) ApiCreateOsBulkInstallInfoRequest {
 	return ApiCreateOsBulkInstallInfoRequest{
@@ -67,7 +67,8 @@ func (a *OsApiService) CreateOsBulkInstallInfo(ctx context.Context) ApiCreateOsB
 }
 
 // Execute executes the request
-//  @return OsBulkInstallInfo
+//
+//	@return OsBulkInstallInfo
 func (a *OsApiService) CreateOsBulkInstallInfoExecute(r ApiCreateOsBulkInstallInfoRequest) (*OsBulkInstallInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -232,8 +233,8 @@ func (r ApiCreateOsConfigurationFileRequest) Execute() (*OsConfigurationFile, *h
 /*
 CreateOsConfigurationFile Create a 'os.ConfigurationFile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateOsConfigurationFileRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateOsConfigurationFileRequest
 */
 func (a *OsApiService) CreateOsConfigurationFile(ctx context.Context) ApiCreateOsConfigurationFileRequest {
 	return ApiCreateOsConfigurationFileRequest{
@@ -243,7 +244,8 @@ func (a *OsApiService) CreateOsConfigurationFile(ctx context.Context) ApiCreateO
 }
 
 // Execute executes the request
-//  @return OsConfigurationFile
+//
+//	@return OsConfigurationFile
 func (a *OsApiService) CreateOsConfigurationFileExecute(r ApiCreateOsConfigurationFileRequest) (*OsConfigurationFile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -408,8 +410,8 @@ func (r ApiCreateOsInstallRequest) Execute() (*OsInstall, *http.Response, error)
 /*
 CreateOsInstall Create a 'os.Install' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateOsInstallRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateOsInstallRequest
 */
 func (a *OsApiService) CreateOsInstall(ctx context.Context) ApiCreateOsInstallRequest {
 	return ApiCreateOsInstallRequest{
@@ -419,7 +421,8 @@ func (a *OsApiService) CreateOsInstall(ctx context.Context) ApiCreateOsInstallRe
 }
 
 // Execute executes the request
-//  @return OsInstall
+//
+//	@return OsInstall
 func (a *OsApiService) CreateOsInstallExecute(r ApiCreateOsInstallRequest) (*OsInstall, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -584,8 +587,8 @@ func (r ApiCreateOsOsSupportRequest) Execute() (*OsOsSupport, *http.Response, er
 /*
 CreateOsOsSupport Create a 'os.OsSupport' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateOsOsSupportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateOsOsSupportRequest
 */
 func (a *OsApiService) CreateOsOsSupport(ctx context.Context) ApiCreateOsOsSupportRequest {
 	return ApiCreateOsOsSupportRequest{
@@ -595,7 +598,8 @@ func (a *OsApiService) CreateOsOsSupport(ctx context.Context) ApiCreateOsOsSuppo
 }
 
 // Execute executes the request
-//  @return OsOsSupport
+//
+//	@return OsOsSupport
 func (a *OsApiService) CreateOsOsSupportExecute(r ApiCreateOsOsSupportRequest) (*OsOsSupport, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -760,8 +764,8 @@ func (r ApiCreateOsTemplateFileRequest) Execute() (*OsTemplateFile, *http.Respon
 /*
 CreateOsTemplateFile Create a 'os.TemplateFile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateOsTemplateFileRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateOsTemplateFileRequest
 */
 func (a *OsApiService) CreateOsTemplateFile(ctx context.Context) ApiCreateOsTemplateFileRequest {
 	return ApiCreateOsTemplateFileRequest{
@@ -771,7 +775,8 @@ func (a *OsApiService) CreateOsTemplateFile(ctx context.Context) ApiCreateOsTemp
 }
 
 // Execute executes the request
-//  @return OsTemplateFile
+//
+//	@return OsTemplateFile
 func (a *OsApiService) CreateOsTemplateFileExecute(r ApiCreateOsTemplateFileRequest) (*OsTemplateFile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -936,8 +941,8 @@ func (r ApiCreateOsValidInstallTargetRequest) Execute() (*OsValidInstallTarget, 
 /*
 CreateOsValidInstallTarget Create a 'os.ValidInstallTarget' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateOsValidInstallTargetRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateOsValidInstallTargetRequest
 */
 func (a *OsApiService) CreateOsValidInstallTarget(ctx context.Context) ApiCreateOsValidInstallTargetRequest {
 	return ApiCreateOsValidInstallTargetRequest{
@@ -947,7 +952,8 @@ func (a *OsApiService) CreateOsValidInstallTarget(ctx context.Context) ApiCreate
 }
 
 // Execute executes the request
-//  @return OsValidInstallTarget
+//
+//	@return OsValidInstallTarget
 func (a *OsApiService) CreateOsValidInstallTargetExecute(r ApiCreateOsValidInstallTargetRequest) (*OsValidInstallTarget, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1092,9 +1098,9 @@ func (r ApiDeleteOsConfigurationFileRequest) Execute() (*http.Response, error) {
 /*
 DeleteOsConfigurationFile Delete a 'os.ConfigurationFile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteOsConfigurationFileRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteOsConfigurationFileRequest
 */
 func (a *OsApiService) DeleteOsConfigurationFile(ctx context.Context, moid string) ApiDeleteOsConfigurationFileRequest {
 	return ApiDeleteOsConfigurationFileRequest{
@@ -1229,9 +1235,9 @@ func (r ApiGetOsBulkInstallInfoByMoidRequest) Execute() (*OsBulkInstallInfo, *ht
 /*
 GetOsBulkInstallInfoByMoid Read a 'os.BulkInstallInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetOsBulkInstallInfoByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetOsBulkInstallInfoByMoidRequest
 */
 func (a *OsApiService) GetOsBulkInstallInfoByMoid(ctx context.Context, moid string) ApiGetOsBulkInstallInfoByMoidRequest {
 	return ApiGetOsBulkInstallInfoByMoidRequest{
@@ -1242,7 +1248,8 @@ func (a *OsApiService) GetOsBulkInstallInfoByMoid(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return OsBulkInstallInfo
+//
+//	@return OsBulkInstallInfo
 func (a *OsApiService) GetOsBulkInstallInfoByMoidExecute(r ApiGetOsBulkInstallInfoByMoidRequest) (*OsBulkInstallInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1453,8 +1460,8 @@ func (r ApiGetOsBulkInstallInfoListRequest) Execute() (*OsBulkInstallInfoRespons
 /*
 GetOsBulkInstallInfoList Read a 'os.BulkInstallInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetOsBulkInstallInfoListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetOsBulkInstallInfoListRequest
 */
 func (a *OsApiService) GetOsBulkInstallInfoList(ctx context.Context) ApiGetOsBulkInstallInfoListRequest {
 	return ApiGetOsBulkInstallInfoListRequest{
@@ -1464,7 +1471,8 @@ func (a *OsApiService) GetOsBulkInstallInfoList(ctx context.Context) ApiGetOsBul
 }
 
 // Execute executes the request
-//  @return OsBulkInstallInfoResponse
+//
+//	@return OsBulkInstallInfoResponse
 func (a *OsApiService) GetOsBulkInstallInfoListExecute(r ApiGetOsBulkInstallInfoListRequest) (*OsBulkInstallInfoResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1631,9 +1639,9 @@ func (r ApiGetOsCatalogByMoidRequest) Execute() (*OsCatalog, *http.Response, err
 /*
 GetOsCatalogByMoid Read a 'os.Catalog' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetOsCatalogByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetOsCatalogByMoidRequest
 */
 func (a *OsApiService) GetOsCatalogByMoid(ctx context.Context, moid string) ApiGetOsCatalogByMoidRequest {
 	return ApiGetOsCatalogByMoidRequest{
@@ -1644,7 +1652,8 @@ func (a *OsApiService) GetOsCatalogByMoid(ctx context.Context, moid string) ApiG
 }
 
 // Execute executes the request
-//  @return OsCatalog
+//
+//	@return OsCatalog
 func (a *OsApiService) GetOsCatalogByMoidExecute(r ApiGetOsCatalogByMoidRequest) (*OsCatalog, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1855,8 +1864,8 @@ func (r ApiGetOsCatalogListRequest) Execute() (*OsCatalogResponse, *http.Respons
 /*
 GetOsCatalogList Read a 'os.Catalog' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetOsCatalogListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetOsCatalogListRequest
 */
 func (a *OsApiService) GetOsCatalogList(ctx context.Context) ApiGetOsCatalogListRequest {
 	return ApiGetOsCatalogListRequest{
@@ -1866,7 +1875,8 @@ func (a *OsApiService) GetOsCatalogList(ctx context.Context) ApiGetOsCatalogList
 }
 
 // Execute executes the request
-//  @return OsCatalogResponse
+//
+//	@return OsCatalogResponse
 func (a *OsApiService) GetOsCatalogListExecute(r ApiGetOsCatalogListRequest) (*OsCatalogResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2033,9 +2043,9 @@ func (r ApiGetOsConfigurationFileByMoidRequest) Execute() (*OsConfigurationFile,
 /*
 GetOsConfigurationFileByMoid Read a 'os.ConfigurationFile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetOsConfigurationFileByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetOsConfigurationFileByMoidRequest
 */
 func (a *OsApiService) GetOsConfigurationFileByMoid(ctx context.Context, moid string) ApiGetOsConfigurationFileByMoidRequest {
 	return ApiGetOsConfigurationFileByMoidRequest{
@@ -2046,7 +2056,8 @@ func (a *OsApiService) GetOsConfigurationFileByMoid(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return OsConfigurationFile
+//
+//	@return OsConfigurationFile
 func (a *OsApiService) GetOsConfigurationFileByMoidExecute(r ApiGetOsConfigurationFileByMoidRequest) (*OsConfigurationFile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2257,8 +2268,8 @@ func (r ApiGetOsConfigurationFileListRequest) Execute() (*OsConfigurationFileRes
 /*
 GetOsConfigurationFileList Read a 'os.ConfigurationFile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetOsConfigurationFileListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetOsConfigurationFileListRequest
 */
 func (a *OsApiService) GetOsConfigurationFileList(ctx context.Context) ApiGetOsConfigurationFileListRequest {
 	return ApiGetOsConfigurationFileListRequest{
@@ -2268,7 +2279,8 @@ func (a *OsApiService) GetOsConfigurationFileList(ctx context.Context) ApiGetOsC
 }
 
 // Execute executes the request
-//  @return OsConfigurationFileResponse
+//
+//	@return OsConfigurationFileResponse
 func (a *OsApiService) GetOsConfigurationFileListExecute(r ApiGetOsConfigurationFileListRequest) (*OsConfigurationFileResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2435,9 +2447,9 @@ func (r ApiGetOsDistributionByMoidRequest) Execute() (*OsDistribution, *http.Res
 /*
 GetOsDistributionByMoid Read a 'os.Distribution' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetOsDistributionByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetOsDistributionByMoidRequest
 */
 func (a *OsApiService) GetOsDistributionByMoid(ctx context.Context, moid string) ApiGetOsDistributionByMoidRequest {
 	return ApiGetOsDistributionByMoidRequest{
@@ -2448,7 +2460,8 @@ func (a *OsApiService) GetOsDistributionByMoid(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//  @return OsDistribution
+//
+//	@return OsDistribution
 func (a *OsApiService) GetOsDistributionByMoidExecute(r ApiGetOsDistributionByMoidRequest) (*OsDistribution, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2659,8 +2672,8 @@ func (r ApiGetOsDistributionListRequest) Execute() (*OsDistributionResponse, *ht
 /*
 GetOsDistributionList Read a 'os.Distribution' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetOsDistributionListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetOsDistributionListRequest
 */
 func (a *OsApiService) GetOsDistributionList(ctx context.Context) ApiGetOsDistributionListRequest {
 	return ApiGetOsDistributionListRequest{
@@ -2670,7 +2683,8 @@ func (a *OsApiService) GetOsDistributionList(ctx context.Context) ApiGetOsDistri
 }
 
 // Execute executes the request
-//  @return OsDistributionResponse
+//
+//	@return OsDistributionResponse
 func (a *OsApiService) GetOsDistributionListExecute(r ApiGetOsDistributionListRequest) (*OsDistributionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2837,9 +2851,9 @@ func (r ApiGetOsInstallByMoidRequest) Execute() (*OsInstall, *http.Response, err
 /*
 GetOsInstallByMoid Read a 'os.Install' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetOsInstallByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetOsInstallByMoidRequest
 */
 func (a *OsApiService) GetOsInstallByMoid(ctx context.Context, moid string) ApiGetOsInstallByMoidRequest {
 	return ApiGetOsInstallByMoidRequest{
@@ -2850,7 +2864,8 @@ func (a *OsApiService) GetOsInstallByMoid(ctx context.Context, moid string) ApiG
 }
 
 // Execute executes the request
-//  @return OsInstall
+//
+//	@return OsInstall
 func (a *OsApiService) GetOsInstallByMoidExecute(r ApiGetOsInstallByMoidRequest) (*OsInstall, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3061,8 +3076,8 @@ func (r ApiGetOsInstallListRequest) Execute() (*OsInstallResponse, *http.Respons
 /*
 GetOsInstallList Read a 'os.Install' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetOsInstallListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetOsInstallListRequest
 */
 func (a *OsApiService) GetOsInstallList(ctx context.Context) ApiGetOsInstallListRequest {
 	return ApiGetOsInstallListRequest{
@@ -3072,7 +3087,8 @@ func (a *OsApiService) GetOsInstallList(ctx context.Context) ApiGetOsInstallList
 }
 
 // Execute executes the request
-//  @return OsInstallResponse
+//
+//	@return OsInstallResponse
 func (a *OsApiService) GetOsInstallListExecute(r ApiGetOsInstallListRequest) (*OsInstallResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3239,9 +3255,9 @@ func (r ApiGetOsSupportedVersionByMoidRequest) Execute() (*OsSupportedVersion, *
 /*
 GetOsSupportedVersionByMoid Read a 'os.SupportedVersion' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetOsSupportedVersionByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetOsSupportedVersionByMoidRequest
 */
 func (a *OsApiService) GetOsSupportedVersionByMoid(ctx context.Context, moid string) ApiGetOsSupportedVersionByMoidRequest {
 	return ApiGetOsSupportedVersionByMoidRequest{
@@ -3252,7 +3268,8 @@ func (a *OsApiService) GetOsSupportedVersionByMoid(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return OsSupportedVersion
+//
+//	@return OsSupportedVersion
 func (a *OsApiService) GetOsSupportedVersionByMoidExecute(r ApiGetOsSupportedVersionByMoidRequest) (*OsSupportedVersion, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3463,8 +3480,8 @@ func (r ApiGetOsSupportedVersionListRequest) Execute() (*OsSupportedVersionRespo
 /*
 GetOsSupportedVersionList Read a 'os.SupportedVersion' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetOsSupportedVersionListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetOsSupportedVersionListRequest
 */
 func (a *OsApiService) GetOsSupportedVersionList(ctx context.Context) ApiGetOsSupportedVersionListRequest {
 	return ApiGetOsSupportedVersionListRequest{
@@ -3474,7 +3491,8 @@ func (a *OsApiService) GetOsSupportedVersionList(ctx context.Context) ApiGetOsSu
 }
 
 // Execute executes the request
-//  @return OsSupportedVersionResponse
+//
+//	@return OsSupportedVersionResponse
 func (a *OsApiService) GetOsSupportedVersionListExecute(r ApiGetOsSupportedVersionListRequest) (*OsSupportedVersionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3655,9 +3673,9 @@ func (r ApiPatchOsConfigurationFileRequest) Execute() (*OsConfigurationFile, *ht
 /*
 PatchOsConfigurationFile Update a 'os.ConfigurationFile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchOsConfigurationFileRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchOsConfigurationFileRequest
 */
 func (a *OsApiService) PatchOsConfigurationFile(ctx context.Context, moid string) ApiPatchOsConfigurationFileRequest {
 	return ApiPatchOsConfigurationFileRequest{
@@ -3668,7 +3686,8 @@ func (a *OsApiService) PatchOsConfigurationFile(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return OsConfigurationFile
+//
+//	@return OsConfigurationFile
 func (a *OsApiService) PatchOsConfigurationFileExecute(r ApiPatchOsConfigurationFileRequest) (*OsConfigurationFile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -3825,9 +3844,9 @@ func (r ApiUpdateOsConfigurationFileRequest) Execute() (*OsConfigurationFile, *h
 /*
 UpdateOsConfigurationFile Update a 'os.ConfigurationFile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateOsConfigurationFileRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateOsConfigurationFileRequest
 */
 func (a *OsApiService) UpdateOsConfigurationFile(ctx context.Context, moid string) ApiUpdateOsConfigurationFileRequest {
 	return ApiUpdateOsConfigurationFileRequest{
@@ -3838,7 +3857,8 @@ func (a *OsApiService) UpdateOsConfigurationFile(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return OsConfigurationFile
+//
+//	@return OsConfigurationFile
 func (a *OsApiService) UpdateOsConfigurationFileExecute(r ApiUpdateOsConfigurationFileRequest) (*OsConfigurationFile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

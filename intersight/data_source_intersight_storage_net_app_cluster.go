@@ -270,10 +270,10 @@ func getStorageNetAppClusterSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"management_address": {
-			Description: "FQDN or IP Address of Storage Cluster.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -960,7 +960,13 @@ func dataSourceStorageNetAppClusterRead(c context.Context, d *schema.ResourceDat
 	}
 
 	if v, ok := d.GetOk("management_address"); ok {
-		x := (v.(string))
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
 		o.SetManagementAddress(x)
 	}
 

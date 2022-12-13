@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "license.LicenseInfo"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "license.LicenseInfo"]
 **ActiveAdmin** | Pointer to **bool** | The license administrative state. Set this property to &#39;true&#39; to activate the license entitlements. | [optional] [readonly] 
+**Balance** | Pointer to **int64** | The total balance we have for licenses. | [optional] [readonly] 
 **DaysLeft** | Pointer to **int64** | The number of days left for licenseState to stay in TrialPeriod or OutOfCompliance state. | [optional] [readonly] 
 **EndTime** | Pointer to **time.Time** | The date and time when the trial period expires. The value of the &#39;endTime&#39; property is set when the account enters the TrialPeriod or OutOfCompliance state. | [optional] [readonly] 
 **EnforceMode** | Pointer to **string** | The entitlement mode reported by Cisco Smart Software Manager. | [optional] [readonly] 
@@ -17,8 +18,11 @@ Name | Type | Description | Notes
 **LicenseCount** | Pointer to **int64** | The total number of license consumed in the Intersight account. | [optional] [readonly] 
 **LicenseCountPurchased** | Pointer to **int64** | The total number of license purchased from cisco. | [optional] [readonly] 
 **LicenseState** | Pointer to **string** | The license state defined by Intersight. The value may be one of NotLicensed, TrialPeriod, OutOfCompliance, Compliance, GraceExpired, or TrialExpired. * &#x60;NotLicensed&#x60; - The license token is neither activated nor registered. * &#x60;GraceExpired&#x60; - The license grace period has expired. * &#x60;TrialPeriod&#x60; - The 90 days of trial period. * &#x60;OutOfCompliance&#x60; - The license is out of compliance. * &#x60;Compliance&#x60; - The license is in compliance. * &#x60;TrialExpired&#x60; - The trial period of 90 days has expired. | [optional] [readonly] [default to "NotLicensed"]
-**LicenseType** | Pointer to **string** | The name of the Intersight license entitlement. For example, this property may be set to &#39;Essential&#39;. * &#x60;Base&#x60; - Base as a License type. It is default license type. * &#x60;Essential&#x60; - Essential as a License type. * &#x60;Standard&#x60; - Standard as a License type. * &#x60;Advantage&#x60; - Advantage as a License type. * &#x60;Premier&#x60; - Premier as a License type. * &#x60;IWO-Essential&#x60; - IWO-Essential as a License type. * &#x60;IWO-Advantage&#x60; - IWO-Advantage as a License type. * &#x60;IWO-Premier&#x60; - IWO-Premier as a License type. * &#x60;IKS-Advantage&#x60; - IKS-Advantage as a License type. | [optional] [readonly] [default to "Base"]
+**LicenseType** | Pointer to **string** | The name of the Intersight license entitlement. For example, this property may be set to &#39;Essential&#39;. * &#x60;Base&#x60; - Base as a License type. It is default license type. * &#x60;Essential&#x60; - Essential as a License type. * &#x60;Standard&#x60; - Standard as a License type. * &#x60;Advantage&#x60; - Advantage as a License type. * &#x60;Premier&#x60; - Premier as a License type. * &#x60;IWO-Essential&#x60; - IWO-Essential as a License type. * &#x60;IWO-Advantage&#x60; - IWO-Advantage as a License type. * &#x60;IWO-Premier&#x60; - IWO-Premier as a License type. * &#x60;IKS-Advantage&#x60; - IKS-Advantage as a License type. * &#x60;INC-Premier-1GFixed&#x60; - Premier 1G Fixed license tier for Intersight Nexus Cloud. * &#x60;INC-Premier-10GFixed&#x60; - Premier 10G Fixed license tier for Intersight Nexus Cloud. * &#x60;INC-Premier-100GFixed&#x60; - Premier 100G Fixed license tier for Intersight Nexus Cloud. * &#x60;INC-Premier-Mod4Slot&#x60; - Premier Modular 4 slot license tier for Intersight Nexus Cloud. * &#x60;INC-Premier-Mod8Slot&#x60; - Premier Modular 8 slot license tier for Intersight Nexus Cloud. * &#x60;INC-Premier-D2OpsFixed&#x60; - Premier D2Ops fixed license tier for Intersight Nexus Cloud. * &#x60;INC-Premier-D2OpsMod&#x60; - Premier D2Ops modular license tier for Intersight Nexus Cloud. * &#x60;IntersightTrial&#x60; - Virtual dummy license type to indicate trial. Used for UI display of trial mode Intersight tiers. * &#x60;IWOTrial&#x60; - Virtual dummy license type to indicate trial. Used for UI display of trial mode IKS tiers. * &#x60;IKSTrial&#x60; - Virtual dummy license type to indicate trial. Used for UI display of trial mode IWO tiers. * &#x60;INCTrial&#x60; - Virtual dummy license type to indicate trial. Used for UI display of trial mode Nexus tiers. | [optional] [readonly] [default to "Base"]
+**NetSubstitution** | Pointer to **int64** | The total number of substituted licenses added or removed. | [optional] [readonly] 
 **StartTime** | Pointer to **time.Time** | The date and time when the licenseState entered the TrialPeriod or OutOfCompliance state. | [optional] [readonly] 
+**SubscriptionId** | Pointer to **string** | The id of license subscription. | [optional] [readonly] 
+**SubstitutedLicense** | Pointer to [**[]LicenseSubstituteLicense**](LicenseSubstituteLicense.md) |  | [optional] 
 **TrialAdmin** | Pointer to **bool** | The administrative state of the trial license. When the LicenseState is set to &#39;NotLicensed&#39;, &#39;trialAdmin&#39; can be set to true to start the trial period, i.e. licenseState is set to be TrialPeriod. | [optional] [readonly] 
 **AccountLicenseData** | Pointer to [**LicenseAccountLicenseDataRelationship**](LicenseAccountLicenseDataRelationship.md) |  | [optional] 
 
@@ -105,6 +109,31 @@ SetActiveAdmin sets ActiveAdmin field to given value.
 `func (o *LicenseLicenseInfoAllOf) HasActiveAdmin() bool`
 
 HasActiveAdmin returns a boolean if a field has been set.
+
+### GetBalance
+
+`func (o *LicenseLicenseInfoAllOf) GetBalance() int64`
+
+GetBalance returns the Balance field if non-nil, zero value otherwise.
+
+### GetBalanceOk
+
+`func (o *LicenseLicenseInfoAllOf) GetBalanceOk() (*int64, bool)`
+
+GetBalanceOk returns a tuple with the Balance field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBalance
+
+`func (o *LicenseLicenseInfoAllOf) SetBalance(v int64)`
+
+SetBalance sets Balance field to given value.
+
+### HasBalance
+
+`func (o *LicenseLicenseInfoAllOf) HasBalance() bool`
+
+HasBalance returns a boolean if a field has been set.
 
 ### GetDaysLeft
 
@@ -381,6 +410,31 @@ SetLicenseType sets LicenseType field to given value.
 
 HasLicenseType returns a boolean if a field has been set.
 
+### GetNetSubstitution
+
+`func (o *LicenseLicenseInfoAllOf) GetNetSubstitution() int64`
+
+GetNetSubstitution returns the NetSubstitution field if non-nil, zero value otherwise.
+
+### GetNetSubstitutionOk
+
+`func (o *LicenseLicenseInfoAllOf) GetNetSubstitutionOk() (*int64, bool)`
+
+GetNetSubstitutionOk returns a tuple with the NetSubstitution field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNetSubstitution
+
+`func (o *LicenseLicenseInfoAllOf) SetNetSubstitution(v int64)`
+
+SetNetSubstitution sets NetSubstitution field to given value.
+
+### HasNetSubstitution
+
+`func (o *LicenseLicenseInfoAllOf) HasNetSubstitution() bool`
+
+HasNetSubstitution returns a boolean if a field has been set.
+
 ### GetStartTime
 
 `func (o *LicenseLicenseInfoAllOf) GetStartTime() time.Time`
@@ -406,6 +460,66 @@ SetStartTime sets StartTime field to given value.
 
 HasStartTime returns a boolean if a field has been set.
 
+### GetSubscriptionId
+
+`func (o *LicenseLicenseInfoAllOf) GetSubscriptionId() string`
+
+GetSubscriptionId returns the SubscriptionId field if non-nil, zero value otherwise.
+
+### GetSubscriptionIdOk
+
+`func (o *LicenseLicenseInfoAllOf) GetSubscriptionIdOk() (*string, bool)`
+
+GetSubscriptionIdOk returns a tuple with the SubscriptionId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSubscriptionId
+
+`func (o *LicenseLicenseInfoAllOf) SetSubscriptionId(v string)`
+
+SetSubscriptionId sets SubscriptionId field to given value.
+
+### HasSubscriptionId
+
+`func (o *LicenseLicenseInfoAllOf) HasSubscriptionId() bool`
+
+HasSubscriptionId returns a boolean if a field has been set.
+
+### GetSubstitutedLicense
+
+`func (o *LicenseLicenseInfoAllOf) GetSubstitutedLicense() []LicenseSubstituteLicense`
+
+GetSubstitutedLicense returns the SubstitutedLicense field if non-nil, zero value otherwise.
+
+### GetSubstitutedLicenseOk
+
+`func (o *LicenseLicenseInfoAllOf) GetSubstitutedLicenseOk() (*[]LicenseSubstituteLicense, bool)`
+
+GetSubstitutedLicenseOk returns a tuple with the SubstitutedLicense field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSubstitutedLicense
+
+`func (o *LicenseLicenseInfoAllOf) SetSubstitutedLicense(v []LicenseSubstituteLicense)`
+
+SetSubstitutedLicense sets SubstitutedLicense field to given value.
+
+### HasSubstitutedLicense
+
+`func (o *LicenseLicenseInfoAllOf) HasSubstitutedLicense() bool`
+
+HasSubstitutedLicense returns a boolean if a field has been set.
+
+### SetSubstitutedLicenseNil
+
+`func (o *LicenseLicenseInfoAllOf) SetSubstitutedLicenseNil(b bool)`
+
+ SetSubstitutedLicenseNil sets the value for SubstitutedLicense to be an explicit nil
+
+### UnsetSubstitutedLicense
+`func (o *LicenseLicenseInfoAllOf) UnsetSubstitutedLicense()`
+
+UnsetSubstitutedLicense ensures that no value is present for SubstitutedLicense, not even an explicit nil
 ### GetTrialAdmin
 
 `func (o *LicenseLicenseInfoAllOf) GetTrialAdmin() bool`

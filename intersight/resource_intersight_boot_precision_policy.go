@@ -126,11 +126,11 @@ func resourceBootPrecisionPolicy() *schema.Resource {
 				Default:     "boot.PrecisionPolicy",
 			},
 			"configured_boot_mode": {
-				Description:  "Sets the BIOS boot mode. UEFI uses the GUID Partition Table (GPT) whereas Legacy mode uses the Master Boot Record (MBR) partitioning scheme. To apply this setting, Please reboot the server.\n* `Legacy` - Legacy mode refers to the traditional process of booting from BIOS. Legacy mode uses the Master Boot Record (MBR) to locate the bootloader.\n* `Uefi` - UEFI mode uses the GUID Partition Table (GPT) to locate EFI Service Partitions to boot from.",
+				Description:  "Sets the BIOS boot mode. UEFI uses the GUID Partition Table (GPT) whereas Legacy mode uses the Master Boot Record (MBR) partitioning scheme. To apply this setting, Please reboot the server.\n* `Uefi` - UEFI mode uses the GUID Partition Table (GPT) to locate EFI Service Partitions to boot from.\n* `Legacy` - Legacy mode refers to the traditional process of booting from BIOS. Legacy mode uses the Master Boot Record (MBR) to locate the bootloader.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"Legacy", "Uefi"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"Uefi", "Legacy"}, false),
 				Optional:     true,
-				Default:      "Legacy",
+				Default:      "Uefi",
 			},
 			"create_time": {
 				Description: "The time when this managed object was created.",

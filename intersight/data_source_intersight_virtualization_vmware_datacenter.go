@@ -80,6 +80,16 @@ func getVirtualizationVmwareDatacenterSchema() map[string]*schema.Schema {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"distributed_network_count": {
+			Description: "Count of all distributed networks associated with this datacenter (DC).",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"distributed_virtual_switch_count": {
+			Description: "Count of all distributed virtual switches associated with this datacenter (DC).",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
 			Type:        schema.TypeString,
@@ -307,6 +317,11 @@ func getVirtualizationVmwareDatacenterSchema() map[string]*schema.Schema {
 		"shared_scope": {
 			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"standard_network_count": {
+			Description: "Count of all standard networks associated with this datacenter (DC).",
+			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"tags": {
@@ -549,6 +564,16 @@ func dataSourceVirtualizationVmwareDatacenterRead(c context.Context, d *schema.R
 	if v, ok := d.GetOkExists("datastore_count"); ok {
 		x := int64(v.(int))
 		o.SetDatastoreCount(x)
+	}
+
+	if v, ok := d.GetOkExists("distributed_network_count"); ok {
+		x := int64(v.(int))
+		o.SetDistributedNetworkCount(x)
+	}
+
+	if v, ok := d.GetOkExists("distributed_virtual_switch_count"); ok {
+		x := int64(v.(int))
+		o.SetDistributedVirtualSwitchCount(x)
 	}
 
 	if v, ok := d.GetOk("domain_group_moid"); ok {
@@ -824,6 +849,11 @@ func dataSourceVirtualizationVmwareDatacenterRead(c context.Context, d *schema.R
 		o.SetSharedScope(x)
 	}
 
+	if v, ok := d.GetOkExists("standard_network_count"); ok {
+		x := int64(v.(int))
+		o.SetStandardNetworkCount(x)
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -990,6 +1020,8 @@ func dataSourceVirtualizationVmwareDatacenterRead(c context.Context, d *schema.R
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["datastore_count"] = (s.GetDatastoreCount())
+				temp["distributed_network_count"] = (s.GetDistributedNetworkCount())
+				temp["distributed_virtual_switch_count"] = (s.GetDistributedVirtualSwitchCount())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["host_count"] = (s.GetHostCount())
 
@@ -1012,6 +1044,7 @@ func dataSourceVirtualizationVmwareDatacenterRead(c context.Context, d *schema.R
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
+				temp["standard_network_count"] = (s.GetStandardNetworkCount())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["uuid"] = (s.GetUuid())

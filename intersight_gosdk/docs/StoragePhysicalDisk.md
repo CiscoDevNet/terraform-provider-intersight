@@ -40,11 +40,12 @@ Name | Type | Description | Notes
 **Pid** | Pointer to **string** | This field identifies the Product ID for physicalDisk. | [optional] [readonly] 
 **PowerCycleCount** | Pointer to **int64** | Number of powercycles the drive has undergone. | [optional] 
 **PowerOnHours** | Pointer to **int64** | Number of hours the drive has been powered on. | [optional] 
+**PowerOnHoursPercentage** | Pointer to **int64** | Percentage of life used based on five year life span of Cisco supported drives. | [optional] [readonly] 
 **PredictedMediaLifeLeftPercent** | Pointer to **int64** | Predicted physical disk life left in percentage. | [optional] 
 **PredictiveFailureCount** | Pointer to **int64** | Error count on the physical disk. | [optional] 
 **Protocol** | Pointer to **string** | This field identifies the disk protocol used for communication. | [optional] [readonly] 
 **RawSize** | Pointer to **string** | The raw size of the physical disk in MB. | [optional] [readonly] 
-**ReadErrorCountThreshold** | Pointer to **int64** | The number of read errors that are permitted while accessing the drive/card. | [optional] 
+**ReadErrorCountThreshold** | Pointer to **int64** | The number of read errors that are permitted while accessing the drive/card. | [optional] [readonly] 
 **ReadIoErrorCount** | Pointer to **int64** | Number of IO Errors that occured while reading data from the disk. | [optional] 
 **Secured** | Pointer to **string** | This field identifies whether the disk is encrypted. | [optional] 
 **Size** | Pointer to **string** | The size of the physical disk in MB. | [optional] [readonly] 
@@ -53,8 +54,8 @@ Name | Type | Description | Notes
 **Type** | Pointer to **string** | This field identifies the type of the physical disk. | [optional] [readonly] 
 **VariantType** | Pointer to **string** | The variant type of the physical disk. | [optional] [readonly] 
 **WearStatusInDays** | Pointer to **int64** | The number of days an SSD has gone through with the write cycles. | [optional] 
-**WriteErrorCountThreshold** | Pointer to **int64** | The number of write errors that are permitted while accessing the drive/card. | [optional] 
-**WriteIoErrorCount** | Pointer to **int64** | Number of IO Errors that occured while writing data to the disk. | [optional] 
+**WriteErrorCountThreshold** | Pointer to **int64** | The number of write errors that are permitted while accessing the drive/card. | [optional] [readonly] 
+**WriteIoErrorCount** | Pointer to **int64** | Number of IO Errors that occured while writing data to the disk. | [optional] [readonly] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **LocatorLed** | Pointer to [**EquipmentLocatorLedRelationship**](EquipmentLocatorLedRelationship.md) |  | [optional] 
 **PhysicalDiskExtensions** | Pointer to [**[]StoragePhysicalDiskExtensionRelationship**](StoragePhysicalDiskExtensionRelationship.md) | An array of relationships to storagePhysicalDiskExtension resources. | [optional] 
@@ -972,6 +973,31 @@ SetPowerOnHours sets PowerOnHours field to given value.
 `func (o *StoragePhysicalDisk) HasPowerOnHours() bool`
 
 HasPowerOnHours returns a boolean if a field has been set.
+
+### GetPowerOnHoursPercentage
+
+`func (o *StoragePhysicalDisk) GetPowerOnHoursPercentage() int64`
+
+GetPowerOnHoursPercentage returns the PowerOnHoursPercentage field if non-nil, zero value otherwise.
+
+### GetPowerOnHoursPercentageOk
+
+`func (o *StoragePhysicalDisk) GetPowerOnHoursPercentageOk() (*int64, bool)`
+
+GetPowerOnHoursPercentageOk returns a tuple with the PowerOnHoursPercentage field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPowerOnHoursPercentage
+
+`func (o *StoragePhysicalDisk) SetPowerOnHoursPercentage(v int64)`
+
+SetPowerOnHoursPercentage sets PowerOnHoursPercentage field to given value.
+
+### HasPowerOnHoursPercentage
+
+`func (o *StoragePhysicalDisk) HasPowerOnHoursPercentage() bool`
+
+HasPowerOnHoursPercentage returns a boolean if a field has been set.
 
 ### GetPredictedMediaLifeLeftPercent
 

@@ -372,6 +372,13 @@ func resourceTamSecurityAdvisory() *schema.Resource {
 				ValidateFunc: validation.FloatBetween(0, 10),
 				Optional:     true,
 			},
+			"execute_on_pod": {
+				Description:  "Orion pod on which this advisory should process.\n* `tier1` - Advisory processing will be taken care in first advisory driver of multinode cluster.\n* `tier2` - Advisory processing will be taken care in second advisory driver of multinode cluster.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"tier1", "tier2"}, false),
+				Optional:     true,
+				Default:      "tier1",
+			},
 			"external_url": {
 				Description:  "A link to an external URL describing security Advisory in more details.",
 				Type:         schema.TypeString,
@@ -448,6 +455,15 @@ func resourceTamSecurityAdvisory() *schema.Resource {
 				},
 				ForceNew: true,
 			},
+			"other_ref_urls": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Schema{
+					Type:         schema.TypeString,
+					ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^(?:http(s)?:\\/\\/)?[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&'\\(\\)\\*\\+,;=.]+$"), ""),
+				}},
 			"owners": {
 				Type:       schema.TypeList,
 				Optional:   true,
@@ -1090,6 +1106,11 @@ func resourceTamSecurityAdvisoryCreate(c context.Context, d *schema.ResourceData
 		o.SetEnvironmentalScore(x)
 	}
 
+	if v, ok := d.GetOk("execute_on_pod"); ok {
+		x := (v.(string))
+		o.SetExecuteOnPod(x)
+	}
+
 	if v, ok := d.GetOk("external_url"); ok {
 		x := (v.(string))
 		o.SetExternalUrl(x)
@@ -1147,6 +1168,19 @@ func resourceTamSecurityAdvisoryCreate(c context.Context, d *schema.ResourceData
 		if len(p) > 0 {
 			x := p[0]
 			o.SetOrganization(x)
+		}
+	}
+
+	if v, ok := d.GetOk("other_ref_urls"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		if len(x) > 0 {
+			o.SetOtherRefUrls(x)
 		}
 	}
 
@@ -1341,6 +1375,10 @@ func resourceTamSecurityAdvisoryRead(c context.Context, d *schema.ResourceData, 
 		return diag.Errorf("error occurred while setting property EnvironmentalScore in TamSecurityAdvisory object: %s", err.Error())
 	}
 
+	if err := d.Set("execute_on_pod", (s.GetExecuteOnPod())); err != nil {
+		return diag.Errorf("error occurred while setting property ExecuteOnPod in TamSecurityAdvisory object: %s", err.Error())
+	}
+
 	if err := d.Set("external_url", (s.GetExternalUrl())); err != nil {
 		return diag.Errorf("error occurred while setting property ExternalUrl in TamSecurityAdvisory object: %s", err.Error())
 	}
@@ -1363,6 +1401,10 @@ func resourceTamSecurityAdvisoryRead(c context.Context, d *schema.ResourceData, 
 
 	if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Organization in TamSecurityAdvisory object: %s", err.Error())
+	}
+
+	if err := d.Set("other_ref_urls", (s.GetOtherRefUrls())); err != nil {
+		return diag.Errorf("error occurred while setting property OtherRefUrls in TamSecurityAdvisory object: %s", err.Error())
 	}
 
 	if err := d.Set("owners", (s.GetOwners())); err != nil {
@@ -1735,6 +1777,12 @@ func resourceTamSecurityAdvisoryUpdate(c context.Context, d *schema.ResourceData
 		o.SetEnvironmentalScore(x)
 	}
 
+	if d.HasChange("execute_on_pod") {
+		v := d.Get("execute_on_pod")
+		x := (v.(string))
+		o.SetExecuteOnPod(x)
+	}
+
 	if d.HasChange("external_url") {
 		v := d.Get("external_url")
 		x := (v.(string))
@@ -1797,6 +1845,18 @@ func resourceTamSecurityAdvisoryUpdate(c context.Context, d *schema.ResourceData
 			x := p[0]
 			o.SetOrganization(x)
 		}
+	}
+
+	if d.HasChange("other_ref_urls") {
+		v := d.Get("other_ref_urls")
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetOtherRefUrls(x)
 	}
 
 	if d.HasChange("recommendation") {

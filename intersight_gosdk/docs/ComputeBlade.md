@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **Bmc** | Pointer to [**ManagementControllerRelationship**](ManagementControllerRelationship.md) |  | [optional] 
 **Board** | Pointer to [**ComputeBoardRelationship**](ComputeBoardRelationship.md) |  | [optional] 
 **BootDeviceBootmode** | Pointer to [**BootDeviceBootModeRelationship**](BootDeviceBootModeRelationship.md) |  | [optional] 
+**ComputePersonality** | Pointer to [**[]ComputePersonalityRelationship**](ComputePersonalityRelationship.md) | An array of relationships to computePersonality resources. | [optional] [readonly] 
 **EquipmentChassis** | Pointer to [**EquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
 **EquipmentIoExpanders** | Pointer to [**[]EquipmentIoExpanderRelationship**](EquipmentIoExpanderRelationship.md) | An array of relationships to equipmentIoExpander resources. | [optional] [readonly] 
 **GenericInventoryHolders** | Pointer to [**[]InventoryGenericInventoryHolderRelationship**](InventoryGenericInventoryHolderRelationship.md) | An array of relationships to inventoryGenericInventoryHolder resources. | [optional] [readonly] 
@@ -386,6 +387,41 @@ SetBootDeviceBootmode sets BootDeviceBootmode field to given value.
 
 HasBootDeviceBootmode returns a boolean if a field has been set.
 
+### GetComputePersonality
+
+`func (o *ComputeBlade) GetComputePersonality() []ComputePersonalityRelationship`
+
+GetComputePersonality returns the ComputePersonality field if non-nil, zero value otherwise.
+
+### GetComputePersonalityOk
+
+`func (o *ComputeBlade) GetComputePersonalityOk() (*[]ComputePersonalityRelationship, bool)`
+
+GetComputePersonalityOk returns a tuple with the ComputePersonality field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetComputePersonality
+
+`func (o *ComputeBlade) SetComputePersonality(v []ComputePersonalityRelationship)`
+
+SetComputePersonality sets ComputePersonality field to given value.
+
+### HasComputePersonality
+
+`func (o *ComputeBlade) HasComputePersonality() bool`
+
+HasComputePersonality returns a boolean if a field has been set.
+
+### SetComputePersonalityNil
+
+`func (o *ComputeBlade) SetComputePersonalityNil(b bool)`
+
+ SetComputePersonalityNil sets the value for ComputePersonality to be an explicit nil
+
+### UnsetComputePersonality
+`func (o *ComputeBlade) UnsetComputePersonality()`
+
+UnsetComputePersonality ensures that no value is present for ComputePersonality, not even an explicit nil
 ### GetEquipmentChassis
 
 `func (o *ComputeBlade) GetEquipmentChassis() EquipmentChassisRelationship`

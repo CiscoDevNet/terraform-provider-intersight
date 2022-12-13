@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -36,9 +36,9 @@ func (r ApiGetConvergedinfraAdapterComplianceDetailsByMoidRequest) Execute() (*C
 /*
 GetConvergedinfraAdapterComplianceDetailsByMoid Read a 'convergedinfra.AdapterComplianceDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetConvergedinfraAdapterComplianceDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetConvergedinfraAdapterComplianceDetailsByMoidRequest
 */
 func (a *ConvergedinfraApiService) GetConvergedinfraAdapterComplianceDetailsByMoid(ctx context.Context, moid string) ApiGetConvergedinfraAdapterComplianceDetailsByMoidRequest {
 	return ApiGetConvergedinfraAdapterComplianceDetailsByMoidRequest{
@@ -49,7 +49,8 @@ func (a *ConvergedinfraApiService) GetConvergedinfraAdapterComplianceDetailsByMo
 }
 
 // Execute executes the request
-//  @return ConvergedinfraAdapterComplianceDetails
+//
+//	@return ConvergedinfraAdapterComplianceDetails
 func (a *ConvergedinfraApiService) GetConvergedinfraAdapterComplianceDetailsByMoidExecute(r ApiGetConvergedinfraAdapterComplianceDetailsByMoidRequest) (*ConvergedinfraAdapterComplianceDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -260,8 +261,8 @@ func (r ApiGetConvergedinfraAdapterComplianceDetailsListRequest) Execute() (*Con
 /*
 GetConvergedinfraAdapterComplianceDetailsList Read a 'convergedinfra.AdapterComplianceDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetConvergedinfraAdapterComplianceDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetConvergedinfraAdapterComplianceDetailsListRequest
 */
 func (a *ConvergedinfraApiService) GetConvergedinfraAdapterComplianceDetailsList(ctx context.Context) ApiGetConvergedinfraAdapterComplianceDetailsListRequest {
 	return ApiGetConvergedinfraAdapterComplianceDetailsListRequest{
@@ -271,7 +272,8 @@ func (a *ConvergedinfraApiService) GetConvergedinfraAdapterComplianceDetailsList
 }
 
 // Execute executes the request
-//  @return ConvergedinfraAdapterComplianceDetailsResponse
+//
+//	@return ConvergedinfraAdapterComplianceDetailsResponse
 func (a *ConvergedinfraApiService) GetConvergedinfraAdapterComplianceDetailsListExecute(r ApiGetConvergedinfraAdapterComplianceDetailsListRequest) (*ConvergedinfraAdapterComplianceDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -438,9 +440,9 @@ func (r ApiGetConvergedinfraPodByMoidRequest) Execute() (*ConvergedinfraPod, *ht
 /*
 GetConvergedinfraPodByMoid Read a 'convergedinfra.Pod' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetConvergedinfraPodByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetConvergedinfraPodByMoidRequest
 */
 func (a *ConvergedinfraApiService) GetConvergedinfraPodByMoid(ctx context.Context, moid string) ApiGetConvergedinfraPodByMoidRequest {
 	return ApiGetConvergedinfraPodByMoidRequest{
@@ -451,7 +453,8 @@ func (a *ConvergedinfraApiService) GetConvergedinfraPodByMoid(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return ConvergedinfraPod
+//
+//	@return ConvergedinfraPod
 func (a *ConvergedinfraApiService) GetConvergedinfraPodByMoidExecute(r ApiGetConvergedinfraPodByMoidRequest) (*ConvergedinfraPod, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -586,9 +589,9 @@ func (r ApiGetConvergedinfraPodComplianceInfoByMoidRequest) Execute() (*Converge
 /*
 GetConvergedinfraPodComplianceInfoByMoid Read a 'convergedinfra.PodComplianceInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetConvergedinfraPodComplianceInfoByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetConvergedinfraPodComplianceInfoByMoidRequest
 */
 func (a *ConvergedinfraApiService) GetConvergedinfraPodComplianceInfoByMoid(ctx context.Context, moid string) ApiGetConvergedinfraPodComplianceInfoByMoidRequest {
 	return ApiGetConvergedinfraPodComplianceInfoByMoidRequest{
@@ -599,7 +602,8 @@ func (a *ConvergedinfraApiService) GetConvergedinfraPodComplianceInfoByMoid(ctx 
 }
 
 // Execute executes the request
-//  @return ConvergedinfraPodComplianceInfo
+//
+//	@return ConvergedinfraPodComplianceInfo
 func (a *ConvergedinfraApiService) GetConvergedinfraPodComplianceInfoByMoidExecute(r ApiGetConvergedinfraPodComplianceInfoByMoidRequest) (*ConvergedinfraPodComplianceInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -810,8 +814,8 @@ func (r ApiGetConvergedinfraPodComplianceInfoListRequest) Execute() (*Convergedi
 /*
 GetConvergedinfraPodComplianceInfoList Read a 'convergedinfra.PodComplianceInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetConvergedinfraPodComplianceInfoListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetConvergedinfraPodComplianceInfoListRequest
 */
 func (a *ConvergedinfraApiService) GetConvergedinfraPodComplianceInfoList(ctx context.Context) ApiGetConvergedinfraPodComplianceInfoListRequest {
 	return ApiGetConvergedinfraPodComplianceInfoListRequest{
@@ -821,7 +825,8 @@ func (a *ConvergedinfraApiService) GetConvergedinfraPodComplianceInfoList(ctx co
 }
 
 // Execute executes the request
-//  @return ConvergedinfraPodComplianceInfoResponse
+//
+//	@return ConvergedinfraPodComplianceInfoResponse
 func (a *ConvergedinfraApiService) GetConvergedinfraPodComplianceInfoListExecute(r ApiGetConvergedinfraPodComplianceInfoListRequest) (*ConvergedinfraPodComplianceInfoResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1064,8 +1069,8 @@ func (r ApiGetConvergedinfraPodListRequest) Execute() (*ConvergedinfraPodRespons
 /*
 GetConvergedinfraPodList Read a 'convergedinfra.Pod' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetConvergedinfraPodListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetConvergedinfraPodListRequest
 */
 func (a *ConvergedinfraApiService) GetConvergedinfraPodList(ctx context.Context) ApiGetConvergedinfraPodListRequest {
 	return ApiGetConvergedinfraPodListRequest{
@@ -1075,7 +1080,8 @@ func (a *ConvergedinfraApiService) GetConvergedinfraPodList(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return ConvergedinfraPodResponse
+//
+//	@return ConvergedinfraPodResponse
 func (a *ConvergedinfraApiService) GetConvergedinfraPodListExecute(r ApiGetConvergedinfraPodListRequest) (*ConvergedinfraPodResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1242,9 +1248,9 @@ func (r ApiGetConvergedinfraServerComplianceDetailsByMoidRequest) Execute() (*Co
 /*
 GetConvergedinfraServerComplianceDetailsByMoid Read a 'convergedinfra.ServerComplianceDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetConvergedinfraServerComplianceDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetConvergedinfraServerComplianceDetailsByMoidRequest
 */
 func (a *ConvergedinfraApiService) GetConvergedinfraServerComplianceDetailsByMoid(ctx context.Context, moid string) ApiGetConvergedinfraServerComplianceDetailsByMoidRequest {
 	return ApiGetConvergedinfraServerComplianceDetailsByMoidRequest{
@@ -1255,7 +1261,8 @@ func (a *ConvergedinfraApiService) GetConvergedinfraServerComplianceDetailsByMoi
 }
 
 // Execute executes the request
-//  @return ConvergedinfraServerComplianceDetails
+//
+//	@return ConvergedinfraServerComplianceDetails
 func (a *ConvergedinfraApiService) GetConvergedinfraServerComplianceDetailsByMoidExecute(r ApiGetConvergedinfraServerComplianceDetailsByMoidRequest) (*ConvergedinfraServerComplianceDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1466,8 +1473,8 @@ func (r ApiGetConvergedinfraServerComplianceDetailsListRequest) Execute() (*Conv
 /*
 GetConvergedinfraServerComplianceDetailsList Read a 'convergedinfra.ServerComplianceDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetConvergedinfraServerComplianceDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetConvergedinfraServerComplianceDetailsListRequest
 */
 func (a *ConvergedinfraApiService) GetConvergedinfraServerComplianceDetailsList(ctx context.Context) ApiGetConvergedinfraServerComplianceDetailsListRequest {
 	return ApiGetConvergedinfraServerComplianceDetailsListRequest{
@@ -1477,7 +1484,8 @@ func (a *ConvergedinfraApiService) GetConvergedinfraServerComplianceDetailsList(
 }
 
 // Execute executes the request
-//  @return ConvergedinfraServerComplianceDetailsResponse
+//
+//	@return ConvergedinfraServerComplianceDetailsResponse
 func (a *ConvergedinfraApiService) GetConvergedinfraServerComplianceDetailsListExecute(r ApiGetConvergedinfraServerComplianceDetailsListRequest) (*ConvergedinfraServerComplianceDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1644,9 +1652,9 @@ func (r ApiGetConvergedinfraStorageComplianceDetailsByMoidRequest) Execute() (*C
 /*
 GetConvergedinfraStorageComplianceDetailsByMoid Read a 'convergedinfra.StorageComplianceDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetConvergedinfraStorageComplianceDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetConvergedinfraStorageComplianceDetailsByMoidRequest
 */
 func (a *ConvergedinfraApiService) GetConvergedinfraStorageComplianceDetailsByMoid(ctx context.Context, moid string) ApiGetConvergedinfraStorageComplianceDetailsByMoidRequest {
 	return ApiGetConvergedinfraStorageComplianceDetailsByMoidRequest{
@@ -1657,7 +1665,8 @@ func (a *ConvergedinfraApiService) GetConvergedinfraStorageComplianceDetailsByMo
 }
 
 // Execute executes the request
-//  @return ConvergedinfraStorageComplianceDetails
+//
+//	@return ConvergedinfraStorageComplianceDetails
 func (a *ConvergedinfraApiService) GetConvergedinfraStorageComplianceDetailsByMoidExecute(r ApiGetConvergedinfraStorageComplianceDetailsByMoidRequest) (*ConvergedinfraStorageComplianceDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1868,8 +1877,8 @@ func (r ApiGetConvergedinfraStorageComplianceDetailsListRequest) Execute() (*Con
 /*
 GetConvergedinfraStorageComplianceDetailsList Read a 'convergedinfra.StorageComplianceDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetConvergedinfraStorageComplianceDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetConvergedinfraStorageComplianceDetailsListRequest
 */
 func (a *ConvergedinfraApiService) GetConvergedinfraStorageComplianceDetailsList(ctx context.Context) ApiGetConvergedinfraStorageComplianceDetailsListRequest {
 	return ApiGetConvergedinfraStorageComplianceDetailsListRequest{
@@ -1879,7 +1888,8 @@ func (a *ConvergedinfraApiService) GetConvergedinfraStorageComplianceDetailsList
 }
 
 // Execute executes the request
-//  @return ConvergedinfraStorageComplianceDetailsResponse
+//
+//	@return ConvergedinfraStorageComplianceDetailsResponse
 func (a *ConvergedinfraApiService) GetConvergedinfraStorageComplianceDetailsListExecute(r ApiGetConvergedinfraStorageComplianceDetailsListRequest) (*ConvergedinfraStorageComplianceDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2046,9 +2056,9 @@ func (r ApiGetConvergedinfraSwitchComplianceDetailsByMoidRequest) Execute() (*Co
 /*
 GetConvergedinfraSwitchComplianceDetailsByMoid Read a 'convergedinfra.SwitchComplianceDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetConvergedinfraSwitchComplianceDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetConvergedinfraSwitchComplianceDetailsByMoidRequest
 */
 func (a *ConvergedinfraApiService) GetConvergedinfraSwitchComplianceDetailsByMoid(ctx context.Context, moid string) ApiGetConvergedinfraSwitchComplianceDetailsByMoidRequest {
 	return ApiGetConvergedinfraSwitchComplianceDetailsByMoidRequest{
@@ -2059,7 +2069,8 @@ func (a *ConvergedinfraApiService) GetConvergedinfraSwitchComplianceDetailsByMoi
 }
 
 // Execute executes the request
-//  @return ConvergedinfraSwitchComplianceDetails
+//
+//	@return ConvergedinfraSwitchComplianceDetails
 func (a *ConvergedinfraApiService) GetConvergedinfraSwitchComplianceDetailsByMoidExecute(r ApiGetConvergedinfraSwitchComplianceDetailsByMoidRequest) (*ConvergedinfraSwitchComplianceDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2270,8 +2281,8 @@ func (r ApiGetConvergedinfraSwitchComplianceDetailsListRequest) Execute() (*Conv
 /*
 GetConvergedinfraSwitchComplianceDetailsList Read a 'convergedinfra.SwitchComplianceDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetConvergedinfraSwitchComplianceDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetConvergedinfraSwitchComplianceDetailsListRequest
 */
 func (a *ConvergedinfraApiService) GetConvergedinfraSwitchComplianceDetailsList(ctx context.Context) ApiGetConvergedinfraSwitchComplianceDetailsListRequest {
 	return ApiGetConvergedinfraSwitchComplianceDetailsListRequest{
@@ -2281,7 +2292,8 @@ func (a *ConvergedinfraApiService) GetConvergedinfraSwitchComplianceDetailsList(
 }
 
 // Execute executes the request
-//  @return ConvergedinfraSwitchComplianceDetailsResponse
+//
+//	@return ConvergedinfraSwitchComplianceDetailsResponse
 func (a *ConvergedinfraApiService) GetConvergedinfraSwitchComplianceDetailsListExecute(r ApiGetConvergedinfraSwitchComplianceDetailsListRequest) (*ConvergedinfraSwitchComplianceDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2462,9 +2474,9 @@ func (r ApiPatchConvergedinfraPodRequest) Execute() (*ConvergedinfraPod, *http.R
 /*
 PatchConvergedinfraPod Update a 'convergedinfra.Pod' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchConvergedinfraPodRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchConvergedinfraPodRequest
 */
 func (a *ConvergedinfraApiService) PatchConvergedinfraPod(ctx context.Context, moid string) ApiPatchConvergedinfraPodRequest {
 	return ApiPatchConvergedinfraPodRequest{
@@ -2475,7 +2487,8 @@ func (a *ConvergedinfraApiService) PatchConvergedinfraPod(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return ConvergedinfraPod
+//
+//	@return ConvergedinfraPod
 func (a *ConvergedinfraApiService) PatchConvergedinfraPodExecute(r ApiPatchConvergedinfraPodRequest) (*ConvergedinfraPod, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -2632,9 +2645,9 @@ func (r ApiUpdateConvergedinfraPodRequest) Execute() (*ConvergedinfraPod, *http.
 /*
 UpdateConvergedinfraPod Update a 'convergedinfra.Pod' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateConvergedinfraPodRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateConvergedinfraPodRequest
 */
 func (a *ConvergedinfraApiService) UpdateConvergedinfraPod(ctx context.Context, moid string) ApiUpdateConvergedinfraPodRequest {
 	return ApiUpdateConvergedinfraPodRequest{
@@ -2645,7 +2658,8 @@ func (a *ConvergedinfraApiService) UpdateConvergedinfraPod(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return ConvergedinfraPod
+//
+//	@return ConvergedinfraPod
 func (a *ConvergedinfraApiService) UpdateConvergedinfraPodExecute(r ApiUpdateConvergedinfraPodRequest) (*ConvergedinfraPod, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

@@ -209,6 +209,11 @@ func getEquipmentChassisIdPoolSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"preferred_ids": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeInt}},
 		"shared_scope": {
 			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 			Type:        schema.TypeString,
@@ -604,6 +609,17 @@ func dataSourceEquipmentChassisIdPoolRead(c context.Context, d *schema.ResourceD
 		o.SetPermissionResources(x)
 	}
 
+	if v, ok := d.GetOk("preferred_ids"); ok {
+		x := make([]int64, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(int64))
+			}
+		}
+		o.SetPreferredIds(x)
+	}
+
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
@@ -772,6 +788,7 @@ func dataSourceEquipmentChassisIdPoolRead(c context.Context, d *schema.ResourceD
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["preferred_ids"] = (s.GetPreferredIds())
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)

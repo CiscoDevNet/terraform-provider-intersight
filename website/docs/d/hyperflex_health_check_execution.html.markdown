@@ -26,6 +26,7 @@ The following arguments can be used to get data of already created objects in In
 * `health_check_execution_status`:(string) Status of the health check execution.* `UNKNOWN` - Indicates that the health heck execution results are unknown.* `SUCCEEDED` - Indicates that the health check execution succeeded.* `FAILED` - Indicates that the health check execution failed.* `TIMED_OUT` - Indicates that the health check execution timed out before completion. 
 * `health_check_result`:(string) Health check execution result. Valid only if HealthCheckExecutionStatus is SUCCEEDED.* `UNKNOWN` - Indicates that the health check results could not be determined.* `PASS` - Indicates that the health check passed.* `FAIL` - Indicates that the health check failed.* `WARN` - Indicates that the health check completed with a warning.* `NOT_APPLICABLE` - Indicates that the health check is either unsupported, or not applicable on the Cluster. 
 * `health_check_summary`:(string) A brief summary of health check results. 
+* `health_check_vcenter_ip`:(string) IP Address of the vCenter. 
 * `hx_device_name`:(string) HyperFlex Device Name where the healthcheck is executed. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 

@@ -9,9 +9,10 @@ Name | Type | Description | Notes
 **Account** | Pointer to **string** | The account id to which the device belongs. | [optional] 
 **ConnectorVersion** | Pointer to **string** | The version of the device connector currently running on the platform. Deprecated by newer connectors that will report this directly to the device connector gateway in a websocket header, but included to continue to support older versions which report any version change after connect. | [optional] 
 **DeviceId** | Pointer to **string** | The Moid of the device under change. Used to route the message to a device&#39;s connection. | [optional] 
-**DomainGroup** | Pointer to **string** | The domain group id to which the device belongs. | [optional] 
+**DomainGroup** | Pointer to **string** | The domain group id to which the device belongs. | [optional] [readonly] 
 **Evict** | Pointer to **bool** | Flag to force any open connections to be evicted. Used in case device has been deleted or blacklisted. | [optional] 
-**Leadership** | Pointer to **string** | The current leadership of a device cluster member. * &#x60;Unknown&#x60; - The node is unable to complete election or determine the current state. If the device has been registered before and the node has access to the current credentials it will establish a connection to Intersight with limited capabilities that can be used to debug the HA failure from Intersight. * &#x60;Primary&#x60; - The node has been elected as the primary and will establish a connection to the Intersight service and accept all message types enabled for a primary node. There can only be one primary in a given cluster, while the underlying platform may be active-active only one connector will assume the primary role. * &#x60;Secondary&#x60; - The node has been elected as a secondary node in the cluster. The device connector will establish a connection to the Intersight service with limited capabilities. e.g. file upload will be enabled, but requests to the underlying platform management will be disabled. | [optional] [default to "Unknown"]
+**InternalConnectionId** | Pointer to **string** | Uniquely identifies a specific connection this control message is addressed to. Each connection to the gateway is associated with a unique connection id, which is used to identify the connection across any number of connection or connection attempts from the same device endpoint. When an evict message is published from device service to the gateway it may be tagged to a specific connection using this field. e.g. The device re-connects to Intersight before the previous connection has received a close or timeout, in which case we may send an evict specifically to the previous connection, with the new connection ignoring the message. If empty, the control message will be processed by any connections associated with the deviceId. | [optional] [readonly] 
+**Leadership** | Pointer to **string** | The current leadership of a device cluster member. * &#x60;Unknown&#x60; - The node is unable to complete election or determine the current state. If the device has been registered before and the node has access to the current credentials, it will establish a connection to Intersight with limited capabilities that can be used to debug the HA failure from Intersight. * &#x60;Primary&#x60; - The node has been elected as the primary and will establish a connection to the Intersight service and accept all message types enabled for a primary node. There can only be one primary node in a given cluster, while the underlying platform may be active. If it is active, only one connector will assume the primary role. * &#x60;Secondary&#x60; - The node has been elected as a secondary node in the cluster. The device connector will establish a connection to the Intersight service with limited capabilities. E.g. file upload will be enabled, but requests to the underlying platform management will be disabled. | [optional] [default to "Unknown"]
 **NewIdentity** | Pointer to **string** | The new identity assigned to a device on ownership change (claim/unclaim). | [optional] 
 **Partition** | Pointer to **int64** | The partition the device was last connected to, used to address the control message to the device connector gateway instance holding the devices connection. | [optional] 
 
@@ -198,6 +199,31 @@ SetEvict sets Evict field to given value.
 `func (o *AssetConnectionControlMessageAllOf) HasEvict() bool`
 
 HasEvict returns a boolean if a field has been set.
+
+### GetInternalConnectionId
+
+`func (o *AssetConnectionControlMessageAllOf) GetInternalConnectionId() string`
+
+GetInternalConnectionId returns the InternalConnectionId field if non-nil, zero value otherwise.
+
+### GetInternalConnectionIdOk
+
+`func (o *AssetConnectionControlMessageAllOf) GetInternalConnectionIdOk() (*string, bool)`
+
+GetInternalConnectionIdOk returns a tuple with the InternalConnectionId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInternalConnectionId
+
+`func (o *AssetConnectionControlMessageAllOf) SetInternalConnectionId(v string)`
+
+SetInternalConnectionId sets InternalConnectionId field to given value.
+
+### HasInternalConnectionId
+
+`func (o *AssetConnectionControlMessageAllOf) HasInternalConnectionId() bool`
+
+HasInternalConnectionId returns a boolean if a field has been set.
 
 ### GetLeadership
 

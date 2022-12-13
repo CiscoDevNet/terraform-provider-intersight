@@ -22,7 +22,6 @@ The following arguments can be used to get data of already created objects in In
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `key`:(string) Unique identifier of NetApp Cluster across data center. 
 * `location`:(string) Location of the storage controller. 
-* `management_address`:(string) FQDN or IP Address of Storage Cluster. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `model`:(string) This field identifies the model of the given component. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 

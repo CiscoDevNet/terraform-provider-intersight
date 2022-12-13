@@ -817,22 +817,10 @@ func dataSourceVirtualizationIweClusterRead(c context.Context, d *schema.Resourc
 				}
 			}
 			o.SetClassId("cond.AlarmSummary")
-			if v, ok := l["critical"]; ok {
-				{
-					x := int64(v.(int))
-					o.SetCritical(x)
-				}
-			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["warning"]; ok {
-				{
-					x := int64(v.(int))
-					o.SetWarning(x)
 				}
 			}
 			p = append(p, *o)

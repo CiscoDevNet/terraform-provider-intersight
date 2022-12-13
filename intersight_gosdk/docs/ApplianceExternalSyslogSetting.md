@@ -7,10 +7,13 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "appliance.ExternalSyslogSetting"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "appliance.ExternalSyslogSetting"]
 **Enabled** | Pointer to **bool** | Enable or disable External Syslog Server. | [optional] [default to false]
+**ExportAlarms** | Pointer to **bool** | If the flag is set, the alarms reported in Intersight Appliances are exported to external syslog server based on the alarm severity selection. | [optional] [default to false]
+**ExportAudit** | Pointer to **bool** | Enable or disable exporting of Audit logs. | [optional] [default to false]
 **ExportNginx** | Pointer to **bool** | Enable or disable exporting of Web Server access logs. | [optional] [default to false]
 **Port** | Pointer to **int64** | External Syslog Server Port for connection establishment. | [optional] [default to 10514]
 **Protocol** | Pointer to **string** | Protocol used to connect to external syslog server. * &#x60;TCP&#x60; - External Syslog messages sent over TCP. * &#x60;UDP&#x60; - External Syslog messages sent over UDP. * &#x60;TLS&#x60; - Secure External Syslog messages sent over TLS. | [optional] [default to "TCP"]
 **Server** | Pointer to **string** | External Syslog Server Address, can be IP address or hostname. | [optional] 
+**Severity** | Pointer to **string** | Minimum severity level to report. * &#x60;None&#x60; - The Enum value None represents that there is no severity. * &#x60;Info&#x60; - The Enum value Info represents the Informational level of severity. * &#x60;Critical&#x60; - The Enum value Critical represents the Critical level of severity. * &#x60;Warning&#x60; - The Enum value Warning represents the Warning level of severity. * &#x60;Cleared&#x60; - The Enum value Cleared represents that the alarm severity has been cleared. | [optional] [default to "None"]
 **Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 
 ## Methods
@@ -96,6 +99,56 @@ SetEnabled sets Enabled field to given value.
 `func (o *ApplianceExternalSyslogSetting) HasEnabled() bool`
 
 HasEnabled returns a boolean if a field has been set.
+
+### GetExportAlarms
+
+`func (o *ApplianceExternalSyslogSetting) GetExportAlarms() bool`
+
+GetExportAlarms returns the ExportAlarms field if non-nil, zero value otherwise.
+
+### GetExportAlarmsOk
+
+`func (o *ApplianceExternalSyslogSetting) GetExportAlarmsOk() (*bool, bool)`
+
+GetExportAlarmsOk returns a tuple with the ExportAlarms field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExportAlarms
+
+`func (o *ApplianceExternalSyslogSetting) SetExportAlarms(v bool)`
+
+SetExportAlarms sets ExportAlarms field to given value.
+
+### HasExportAlarms
+
+`func (o *ApplianceExternalSyslogSetting) HasExportAlarms() bool`
+
+HasExportAlarms returns a boolean if a field has been set.
+
+### GetExportAudit
+
+`func (o *ApplianceExternalSyslogSetting) GetExportAudit() bool`
+
+GetExportAudit returns the ExportAudit field if non-nil, zero value otherwise.
+
+### GetExportAuditOk
+
+`func (o *ApplianceExternalSyslogSetting) GetExportAuditOk() (*bool, bool)`
+
+GetExportAuditOk returns a tuple with the ExportAudit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExportAudit
+
+`func (o *ApplianceExternalSyslogSetting) SetExportAudit(v bool)`
+
+SetExportAudit sets ExportAudit field to given value.
+
+### HasExportAudit
+
+`func (o *ApplianceExternalSyslogSetting) HasExportAudit() bool`
+
+HasExportAudit returns a boolean if a field has been set.
 
 ### GetExportNginx
 
@@ -196,6 +249,31 @@ SetServer sets Server field to given value.
 `func (o *ApplianceExternalSyslogSetting) HasServer() bool`
 
 HasServer returns a boolean if a field has been set.
+
+### GetSeverity
+
+`func (o *ApplianceExternalSyslogSetting) GetSeverity() string`
+
+GetSeverity returns the Severity field if non-nil, zero value otherwise.
+
+### GetSeverityOk
+
+`func (o *ApplianceExternalSyslogSetting) GetSeverityOk() (*string, bool)`
+
+GetSeverityOk returns a tuple with the Severity field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSeverity
+
+`func (o *ApplianceExternalSyslogSetting) SetSeverity(v string)`
+
+SetSeverity sets Severity field to given value.
+
+### HasSeverity
+
+`func (o *ApplianceExternalSyslogSetting) HasSeverity() bool`
+
+HasSeverity returns a boolean if a field has been set.
 
 ### GetAccount
 

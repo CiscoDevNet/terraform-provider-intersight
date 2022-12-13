@@ -95,6 +95,11 @@ func getStorageFlexUtilVirtualDriveSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"host_accessible": {
+			Description: "Connection status of the Flex Util virtual drive to the host.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"inventory_device_info": {
 			Description: "A reference to a inventoryDeviceInfo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -566,6 +571,11 @@ func dataSourceStorageFlexUtilVirtualDriveRead(c context.Context, d *schema.Reso
 		o.SetDriveType(x)
 	}
 
+	if v, ok := d.GetOk("host_accessible"); ok {
+		x := (v.(string))
+		o.SetHostAccessible(x)
+	}
+
 	if v, ok := d.GetOk("inventory_device_info"); ok {
 		p := make([]models.InventoryDeviceInfoRelationship, 0, 1)
 		s := v.([]interface{})
@@ -993,6 +1003,7 @@ func dataSourceStorageFlexUtilVirtualDriveRead(c context.Context, d *schema.Reso
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["drive_status"] = (s.GetDriveStatus())
 				temp["drive_type"] = (s.GetDriveType())
+				temp["host_accessible"] = (s.GetHostAccessible())
 
 				temp["inventory_device_info"] = flattenMapInventoryDeviceInfoRelationship(s.GetInventoryDeviceInfo(), d)
 

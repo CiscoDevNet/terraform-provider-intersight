@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "appliance.Upgrade"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "appliance.Upgrade"]
 **Active** | Pointer to **bool** | Indicates if the software upgrade is active or not. | [optional] [readonly] 
+**AllNodesPingable** | Pointer to **bool** | True if all nodes in cluster are pingable, otherwise false. | [optional] [readonly] 
 **AutoCreated** | Pointer to **bool** | Indicates that the request was automatically created by the system. | [optional] [readonly] 
 **CompletedPhases** | Pointer to [**[]OnpremUpgradePhase**](OnpremUpgradePhase.md) |  | [optional] 
 **CurrentPhase** | Pointer to [**NullableOnpremUpgradePhase**](OnpremUpgradePhase.md) |  | [optional] 
@@ -18,12 +19,14 @@ Name | Type | Description | Notes
 **IsRollingBack** | Pointer to **bool** | Track if software upgrade is upgrading or rolling back. | [optional] [readonly] [default to false]
 **IsUserTriggered** | Pointer to **bool** | Indicates if the upgrade is triggered by user or due to schedule. | [optional] [readonly] [default to false]
 **Messages** | Pointer to **[]string** |  | [optional] 
+**NodeInfo** | Pointer to [**[]ApplianceNodeIpInfo**](ApplianceNodeIpInfo.md) |  | [optional] 
 **RollbackNeeded** | Pointer to **bool** | Track if rollback is needed. | [optional] [default to false]
 **RollbackPhases** | Pointer to [**[]OnpremUpgradePhase**](OnpremUpgradePhase.md) |  | [optional] 
 **RollbackStatus** | Pointer to **string** | Status of the Intersight Appliance&#39;s software rollback status. | [optional] [readonly] 
 **Services** | Pointer to **[]string** |  | [optional] 
 **StartTime** | Pointer to **time.Time** | Start date of the software upgrade. UI can modify startTime to re-schedule an upgrade. | [optional] 
 **Status** | Pointer to **string** | Status of the Intersight Appliance&#39;s software upgrade. | [optional] [readonly] 
+**TotalNodes** | Pointer to **int64** | Total number of nodes this upgrade will run on. | [optional] [readonly] 
 **TotalPhases** | Pointer to **int64** | TotalPhase represents the total number of the upgradePhases for one upgrade. | [optional] [readonly] 
 **UiPackages** | Pointer to **[]string** |  | [optional] 
 **Version** | Pointer to **string** | Software upgrade manifest&#39;s version. | [optional] [readonly] 
@@ -113,6 +116,31 @@ SetActive sets Active field to given value.
 `func (o *ApplianceUpgradeAllOf) HasActive() bool`
 
 HasActive returns a boolean if a field has been set.
+
+### GetAllNodesPingable
+
+`func (o *ApplianceUpgradeAllOf) GetAllNodesPingable() bool`
+
+GetAllNodesPingable returns the AllNodesPingable field if non-nil, zero value otherwise.
+
+### GetAllNodesPingableOk
+
+`func (o *ApplianceUpgradeAllOf) GetAllNodesPingableOk() (*bool, bool)`
+
+GetAllNodesPingableOk returns a tuple with the AllNodesPingable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAllNodesPingable
+
+`func (o *ApplianceUpgradeAllOf) SetAllNodesPingable(v bool)`
+
+SetAllNodesPingable sets AllNodesPingable field to given value.
+
+### HasAllNodesPingable
+
+`func (o *ApplianceUpgradeAllOf) HasAllNodesPingable() bool`
+
+HasAllNodesPingable returns a boolean if a field has been set.
 
 ### GetAutoCreated
 
@@ -419,6 +447,41 @@ HasMessages returns a boolean if a field has been set.
 `func (o *ApplianceUpgradeAllOf) UnsetMessages()`
 
 UnsetMessages ensures that no value is present for Messages, not even an explicit nil
+### GetNodeInfo
+
+`func (o *ApplianceUpgradeAllOf) GetNodeInfo() []ApplianceNodeIpInfo`
+
+GetNodeInfo returns the NodeInfo field if non-nil, zero value otherwise.
+
+### GetNodeInfoOk
+
+`func (o *ApplianceUpgradeAllOf) GetNodeInfoOk() (*[]ApplianceNodeIpInfo, bool)`
+
+GetNodeInfoOk returns a tuple with the NodeInfo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNodeInfo
+
+`func (o *ApplianceUpgradeAllOf) SetNodeInfo(v []ApplianceNodeIpInfo)`
+
+SetNodeInfo sets NodeInfo field to given value.
+
+### HasNodeInfo
+
+`func (o *ApplianceUpgradeAllOf) HasNodeInfo() bool`
+
+HasNodeInfo returns a boolean if a field has been set.
+
+### SetNodeInfoNil
+
+`func (o *ApplianceUpgradeAllOf) SetNodeInfoNil(b bool)`
+
+ SetNodeInfoNil sets the value for NodeInfo to be an explicit nil
+
+### UnsetNodeInfo
+`func (o *ApplianceUpgradeAllOf) UnsetNodeInfo()`
+
+UnsetNodeInfo ensures that no value is present for NodeInfo, not even an explicit nil
 ### GetRollbackNeeded
 
 `func (o *ApplianceUpgradeAllOf) GetRollbackNeeded() bool`
@@ -588,6 +651,31 @@ SetStatus sets Status field to given value.
 `func (o *ApplianceUpgradeAllOf) HasStatus() bool`
 
 HasStatus returns a boolean if a field has been set.
+
+### GetTotalNodes
+
+`func (o *ApplianceUpgradeAllOf) GetTotalNodes() int64`
+
+GetTotalNodes returns the TotalNodes field if non-nil, zero value otherwise.
+
+### GetTotalNodesOk
+
+`func (o *ApplianceUpgradeAllOf) GetTotalNodesOk() (*int64, bool)`
+
+GetTotalNodesOk returns a tuple with the TotalNodes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTotalNodes
+
+`func (o *ApplianceUpgradeAllOf) SetTotalNodes(v int64)`
+
+SetTotalNodes sets TotalNodes field to given value.
+
+### HasTotalNodes
+
+`func (o *ApplianceUpgradeAllOf) HasTotalNodes() bool`
+
+HasTotalNodes returns a boolean if a field has been set.
 
 ### GetTotalPhases
 

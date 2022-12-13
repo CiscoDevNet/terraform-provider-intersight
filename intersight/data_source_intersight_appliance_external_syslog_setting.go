@@ -115,6 +115,16 @@ func getApplianceExternalSyslogSettingSchema() map[string]*schema.Schema {
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
+		"export_alarms": {
+			Description: "If the flag is set, the alarms reported in Intersight Appliances are exported to external syslog server based on the alarm severity selection.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"export_audit": {
+			Description: "Enable or disable exporting of Audit logs.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"export_nginx": {
 			Description: "Enable or disable exporting of Web Server access logs.",
 			Type:        schema.TypeBool,
@@ -221,6 +231,11 @@ func getApplianceExternalSyslogSettingSchema() map[string]*schema.Schema {
 		},
 		"server": {
 			Description: "External Syslog Server Address, can be IP address or hostname.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"severity": {
+			Description: "Minimum severity level to report.\n* `None` - The Enum value None represents that there is no severity.\n* `Info` - The Enum value Info represents the Informational level of severity.\n* `Critical` - The Enum value Critical represents the Critical level of severity.\n* `Warning` - The Enum value Warning represents the Warning level of severity.\n* `Cleared` - The Enum value Cleared represents that the alarm severity has been cleared.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -499,6 +514,16 @@ func dataSourceApplianceExternalSyslogSettingRead(c context.Context, d *schema.R
 		o.SetEnabled(x)
 	}
 
+	if v, ok := d.GetOkExists("export_alarms"); ok {
+		x := (v.(bool))
+		o.SetExportAlarms(x)
+	}
+
+	if v, ok := d.GetOkExists("export_audit"); ok {
+		x := (v.(bool))
+		o.SetExportAudit(x)
+	}
+
 	if v, ok := d.GetOkExists("export_nginx"); ok {
 		x := (v.(bool))
 		o.SetExportNginx(x)
@@ -626,6 +651,11 @@ func dataSourceApplianceExternalSyslogSettingRead(c context.Context, d *schema.R
 	if v, ok := d.GetOk("server"); ok {
 		x := (v.(string))
 		o.SetServer(x)
+	}
+
+	if v, ok := d.GetOk("severity"); ok {
+		x := (v.(string))
+		o.SetSeverity(x)
 	}
 
 	if v, ok := d.GetOk("shared_scope"); ok {
@@ -786,6 +816,8 @@ func dataSourceApplianceExternalSyslogSettingRead(c context.Context, d *schema.R
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["enabled"] = (s.GetEnabled())
+				temp["export_alarms"] = (s.GetExportAlarms())
+				temp["export_audit"] = (s.GetExportAudit())
 				temp["export_nginx"] = (s.GetExportNginx())
 
 				temp["mod_time"] = (s.GetModTime()).String()
@@ -799,6 +831,7 @@ func dataSourceApplianceExternalSyslogSettingRead(c context.Context, d *schema.R
 				temp["port"] = (s.GetPort())
 				temp["protocol"] = (s.GetProtocol())
 				temp["server"] = (s.GetServer())
+				temp["severity"] = (s.GetSeverity())
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)

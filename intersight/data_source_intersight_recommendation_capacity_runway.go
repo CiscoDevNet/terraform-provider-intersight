@@ -332,7 +332,7 @@ func getRecommendationCapacityRunwaySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"unit": {
-			Description: "Unit for the new capacity.\n* `TB` - The Enum value TB represents that the measurement unit is in terabytes.\n* `MB` - The Enum value MB represents that the measurement unit is in megabytes.",
+			Description: "Unit for the new capacity.\n* `TB` - The Enum value TB represents that the measurement unit is in terabytes.\n* `MB` - The Enum value MB represents that the measurement unit is in megabytes.\n* `GB` - The Enum value GB represents that the measurement unit is in gigabytes.\n* `MHz` - The Enum value MHz represents that the measurement unit is in megahertz.\n* `GHz` - The Enum value GHz represents that the measurement unit is in gigahertz.\n* `Percentage` - The Enum value Percentage represents that the expansion request is in the percentage of resource increase. For example, a 20% increase in CPU capacity.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

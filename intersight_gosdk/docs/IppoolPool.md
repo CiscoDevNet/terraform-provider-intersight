@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **V6Assigned** | Pointer to **int64** | Number of IPv6 addresses currently in use. | [optional] [readonly] 
 **V6Size** | Pointer to **int64** | Number of IPv6 addresses in this pool. | [optional] [readonly] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**Reservations** | Pointer to [**[]IppoolReservationRelationship**](IppoolReservationRelationship.md) | An array of relationships to ippoolReservation resources. | [optional] 
 **ShadowPools** | Pointer to [**[]IppoolShadowPoolRelationship**](IppoolShadowPoolRelationship.md) | An array of relationships to ippoolShadowPool resources. | [optional] [readonly] 
 
 ## Methods
@@ -341,6 +342,41 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### GetReservations
+
+`func (o *IppoolPool) GetReservations() []IppoolReservationRelationship`
+
+GetReservations returns the Reservations field if non-nil, zero value otherwise.
+
+### GetReservationsOk
+
+`func (o *IppoolPool) GetReservationsOk() (*[]IppoolReservationRelationship, bool)`
+
+GetReservationsOk returns a tuple with the Reservations field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReservations
+
+`func (o *IppoolPool) SetReservations(v []IppoolReservationRelationship)`
+
+SetReservations sets Reservations field to given value.
+
+### HasReservations
+
+`func (o *IppoolPool) HasReservations() bool`
+
+HasReservations returns a boolean if a field has been set.
+
+### SetReservationsNil
+
+`func (o *IppoolPool) SetReservationsNil(b bool)`
+
+ SetReservationsNil sets the value for Reservations to be an explicit nil
+
+### UnsetReservations
+`func (o *IppoolPool) UnsetReservations()`
+
+UnsetReservations ensures that no value is present for Reservations, not even an explicit nil
 ### GetShadowPools
 
 `func (o *IppoolPool) GetShadowPools() []IppoolShadowPoolRelationship`

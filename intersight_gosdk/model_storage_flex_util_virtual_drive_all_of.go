@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -25,6 +25,8 @@ type StorageFlexUtilVirtualDriveAllOf struct {
 	DriveStatus *string `json:"DriveStatus,omitempty"`
 	// Type of virtual drive managed by flex util controller.
 	DriveType *string `json:"DriveType,omitempty"`
+	// Connection status of the Flex Util virtual drive to the host.
+	HostAccessible *string `json:"HostAccessible,omitempty"`
 	// Disk Partition Id of virtual drive managed by flex util controller.
 	PartitionId *string `json:"PartitionId,omitempty"`
 	// Partition name of the Flex Util virtual drive.
@@ -176,6 +178,38 @@ func (o *StorageFlexUtilVirtualDriveAllOf) HasDriveType() bool {
 // SetDriveType gets a reference to the given string and assigns it to the DriveType field.
 func (o *StorageFlexUtilVirtualDriveAllOf) SetDriveType(v string) {
 	o.DriveType = &v
+}
+
+// GetHostAccessible returns the HostAccessible field value if set, zero value otherwise.
+func (o *StorageFlexUtilVirtualDriveAllOf) GetHostAccessible() string {
+	if o == nil || o.HostAccessible == nil {
+		var ret string
+		return ret
+	}
+	return *o.HostAccessible
+}
+
+// GetHostAccessibleOk returns a tuple with the HostAccessible field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageFlexUtilVirtualDriveAllOf) GetHostAccessibleOk() (*string, bool) {
+	if o == nil || o.HostAccessible == nil {
+		return nil, false
+	}
+	return o.HostAccessible, true
+}
+
+// HasHostAccessible returns a boolean if a field has been set.
+func (o *StorageFlexUtilVirtualDriveAllOf) HasHostAccessible() bool {
+	if o != nil && o.HostAccessible != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetHostAccessible gets a reference to the given string and assigns it to the HostAccessible field.
+func (o *StorageFlexUtilVirtualDriveAllOf) SetHostAccessible(v string) {
+	o.HostAccessible = &v
 }
 
 // GetPartitionId returns the PartitionId field value if set, zero value otherwise.
@@ -448,6 +482,9 @@ func (o StorageFlexUtilVirtualDriveAllOf) MarshalJSON() ([]byte, error) {
 	if o.DriveType != nil {
 		toSerialize["DriveType"] = o.DriveType
 	}
+	if o.HostAccessible != nil {
+		toSerialize["HostAccessible"] = o.HostAccessible
+	}
 	if o.PartitionId != nil {
 		toSerialize["PartitionId"] = o.PartitionId
 	}
@@ -494,6 +531,7 @@ func (o *StorageFlexUtilVirtualDriveAllOf) UnmarshalJSON(bytes []byte) (err erro
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DriveStatus")
 		delete(additionalProperties, "DriveType")
+		delete(additionalProperties, "HostAccessible")
 		delete(additionalProperties, "PartitionId")
 		delete(additionalProperties, "PartitionName")
 		delete(additionalProperties, "ResidentImage")

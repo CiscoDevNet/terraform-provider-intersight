@@ -21,6 +21,7 @@ The following arguments can be used to get data of already created objects in In
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `drive_status`:(string) Status of the Flex Util virtual drive. 
 * `drive_type`:(string) Type of virtual drive managed by flex util controller. 
+* `host_accessible`:(string) Connection status of the Flex Util virtual drive to the host. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `partition_id`:(string) Disk Partition Id of virtual drive managed by flex util controller. 

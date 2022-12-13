@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -27,6 +27,10 @@ type FabricVlanSetAllOf struct {
 	IsNative *bool `json:"IsNative,omitempty"`
 	// The 'name' used to identify this VLAN.
 	Name *string `json:"Name,omitempty"`
+	// The Primary VLAN ID of the VLAN, if the sharing type of the VLAN is Isolated or Community.
+	PrimaryVlanId *int64 `json:"PrimaryVlanId,omitempty"`
+	// The sharing type of this VLAN. * `None` - This represents a regular VLAN. * `Primary` - This represents a primary VLAN. * `Isolated` - This represents an isolated VLAN. * `Community` - This represents a community VLAN.
+	SharingType *string `json:"SharingType,omitempty"`
 	// Set of VLANs defined by VLAN object with identical configuration.
 	Vlans                *string                             `json:"Vlans,omitempty"`
 	EthNetworkPolicy     *FabricEthNetworkPolicyRelationship `json:"EthNetworkPolicy,omitempty"`
@@ -203,6 +207,70 @@ func (o *FabricVlanSetAllOf) SetName(v string) {
 	o.Name = &v
 }
 
+// GetPrimaryVlanId returns the PrimaryVlanId field value if set, zero value otherwise.
+func (o *FabricVlanSetAllOf) GetPrimaryVlanId() int64 {
+	if o == nil || o.PrimaryVlanId == nil {
+		var ret int64
+		return ret
+	}
+	return *o.PrimaryVlanId
+}
+
+// GetPrimaryVlanIdOk returns a tuple with the PrimaryVlanId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FabricVlanSetAllOf) GetPrimaryVlanIdOk() (*int64, bool) {
+	if o == nil || o.PrimaryVlanId == nil {
+		return nil, false
+	}
+	return o.PrimaryVlanId, true
+}
+
+// HasPrimaryVlanId returns a boolean if a field has been set.
+func (o *FabricVlanSetAllOf) HasPrimaryVlanId() bool {
+	if o != nil && o.PrimaryVlanId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPrimaryVlanId gets a reference to the given int64 and assigns it to the PrimaryVlanId field.
+func (o *FabricVlanSetAllOf) SetPrimaryVlanId(v int64) {
+	o.PrimaryVlanId = &v
+}
+
+// GetSharingType returns the SharingType field value if set, zero value otherwise.
+func (o *FabricVlanSetAllOf) GetSharingType() string {
+	if o == nil || o.SharingType == nil {
+		var ret string
+		return ret
+	}
+	return *o.SharingType
+}
+
+// GetSharingTypeOk returns a tuple with the SharingType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FabricVlanSetAllOf) GetSharingTypeOk() (*string, bool) {
+	if o == nil || o.SharingType == nil {
+		return nil, false
+	}
+	return o.SharingType, true
+}
+
+// HasSharingType returns a boolean if a field has been set.
+func (o *FabricVlanSetAllOf) HasSharingType() bool {
+	if o != nil && o.SharingType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSharingType gets a reference to the given string and assigns it to the SharingType field.
+func (o *FabricVlanSetAllOf) SetSharingType(v string) {
+	o.SharingType = &v
+}
+
 // GetVlans returns the Vlans field value if set, zero value otherwise.
 func (o *FabricVlanSetAllOf) GetVlans() string {
 	if o == nil || o.Vlans == nil {
@@ -316,6 +384,12 @@ func (o FabricVlanSetAllOf) MarshalJSON() ([]byte, error) {
 	if o.Name != nil {
 		toSerialize["Name"] = o.Name
 	}
+	if o.PrimaryVlanId != nil {
+		toSerialize["PrimaryVlanId"] = o.PrimaryVlanId
+	}
+	if o.SharingType != nil {
+		toSerialize["SharingType"] = o.SharingType
+	}
 	if o.Vlans != nil {
 		toSerialize["Vlans"] = o.Vlans
 	}
@@ -348,6 +422,8 @@ func (o *FabricVlanSetAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "AutoAllowOnUplinks")
 		delete(additionalProperties, "IsNative")
 		delete(additionalProperties, "Name")
+		delete(additionalProperties, "PrimaryVlanId")
+		delete(additionalProperties, "SharingType")
 		delete(additionalProperties, "Vlans")
 		delete(additionalProperties, "EthNetworkPolicy")
 		delete(additionalProperties, "MulticastPolicy")

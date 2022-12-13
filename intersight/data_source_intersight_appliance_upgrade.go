@@ -66,6 +66,11 @@ func getApplianceUpgradeSchema() map[string]*schema.Schema {
 			Optional:         true,
 			DiffSuppressFunc: SuppressDiffAdditionProps,
 		},
+		"all_nodes_pingable": {
+			Description: "True if all nodes in cluster are pingable, otherwise false.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"ancestors": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
@@ -125,6 +130,16 @@ func getApplianceUpgradeSchema() map[string]*schema.Schema {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"current_node": {
+						Description: "Id of the node the upgrade phase is running on.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"current_node_hostname": {
+						Description: "Hostname of the node the upgrade phase is running on.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 					"elapsed_time": {
 						Description: "Elapsed time in seconds to complete the current upgrade phase.",
 						Type:        schema.TypeInt,
@@ -146,7 +161,7 @@ func getApplianceUpgradeSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"name": {
-						Description: "Name of the upgrade phase.\n* `init` - Upgrade service initialization phase.\n* `Prepare` - Upgrade service prepares folders and templated files.\n* `ServiceLoad` - Upgrade service loads the service images into the local docker cache.\n* `UiLoad` - Upgrade service loads the UI packages into the local cache.\n* `GenerateConfig` - Upgrade service generates the Kubernetes configuration files.\n* `DeployService` - Upgrade service deploys the Kubernetes services.\n* `Success` - Upgrade completed successfully.\n* `Fail` - Indicates that the upgrade process has failed.\n* `Cancel` - Indicates that the upgrade was canceled by the Intersight Appliance.\n* `Telemetry` - Upgrade service sends basic telemetry data to the Intersight.",
+						Description: "Name of the upgrade phase.\n* `init` - Upgrade service initialization phase.\n* `CheckCluster` - For a multinode system, check that all nodes in the cluster are connected and running.\n* `SyncImages` - For a multinode system, sync image files between nodes.\n* `Prepare` - Upgrade service prepares folders and templated files.\n* `ServiceLoad` - Upgrade service loads the service images into the local docker cache.\n* `UiLoad` - Upgrade service loads the UI packages into the local cache.\n* `GenerateConfig` - Upgrade service generates the Kubernetes configuration files.\n* `DeployService` - Upgrade service deploys the Kubernetes services.\n* `UpgradeOS` - Run /opt/cisco/bin/onprem-upgrade-start.sh for each node.\n* `UpgradeServices` - Run /opt/cisco/bin/onprem-upgrade-start.sh per node.\n* `FinishUpgrade` - Run /opt/cisco/bin/onprem-upgrade-finish.sh for each node.\n* `Success` - Upgrade completed successfully.\n* `Fail` - Indicates that the upgrade process has failed.\n* `Cancel` - Indicates that the upgrade was canceled by the Intersight Appliance.\n* `Telemetry` - Upgrade service sends basic telemetry data to the Intersight.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -157,6 +172,11 @@ func getApplianceUpgradeSchema() map[string]*schema.Schema {
 					},
 					"start_time": {
 						Description: "Start date of the software upgrade phase.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"status": {
+						Description: "Status of the upgrade phase.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -185,6 +205,16 @@ func getApplianceUpgradeSchema() map[string]*schema.Schema {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"current_node": {
+						Description: "Id of the node the upgrade phase is running on.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"current_node_hostname": {
+						Description: "Hostname of the node the upgrade phase is running on.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 					"elapsed_time": {
 						Description: "Elapsed time in seconds to complete the current upgrade phase.",
 						Type:        schema.TypeInt,
@@ -206,7 +236,7 @@ func getApplianceUpgradeSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"name": {
-						Description: "Name of the upgrade phase.\n* `init` - Upgrade service initialization phase.\n* `Prepare` - Upgrade service prepares folders and templated files.\n* `ServiceLoad` - Upgrade service loads the service images into the local docker cache.\n* `UiLoad` - Upgrade service loads the UI packages into the local cache.\n* `GenerateConfig` - Upgrade service generates the Kubernetes configuration files.\n* `DeployService` - Upgrade service deploys the Kubernetes services.\n* `Success` - Upgrade completed successfully.\n* `Fail` - Indicates that the upgrade process has failed.\n* `Cancel` - Indicates that the upgrade was canceled by the Intersight Appliance.\n* `Telemetry` - Upgrade service sends basic telemetry data to the Intersight.",
+						Description: "Name of the upgrade phase.\n* `init` - Upgrade service initialization phase.\n* `CheckCluster` - For a multinode system, check that all nodes in the cluster are connected and running.\n* `SyncImages` - For a multinode system, sync image files between nodes.\n* `Prepare` - Upgrade service prepares folders and templated files.\n* `ServiceLoad` - Upgrade service loads the service images into the local docker cache.\n* `UiLoad` - Upgrade service loads the UI packages into the local cache.\n* `GenerateConfig` - Upgrade service generates the Kubernetes configuration files.\n* `DeployService` - Upgrade service deploys the Kubernetes services.\n* `UpgradeOS` - Run /opt/cisco/bin/onprem-upgrade-start.sh for each node.\n* `UpgradeServices` - Run /opt/cisco/bin/onprem-upgrade-start.sh per node.\n* `FinishUpgrade` - Run /opt/cisco/bin/onprem-upgrade-finish.sh for each node.\n* `Success` - Upgrade completed successfully.\n* `Fail` - Indicates that the upgrade process has failed.\n* `Cancel` - Indicates that the upgrade was canceled by the Intersight Appliance.\n* `Telemetry` - Upgrade service sends basic telemetry data to the Intersight.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -217,6 +247,11 @@ func getApplianceUpgradeSchema() map[string]*schema.Schema {
 					},
 					"start_time": {
 						Description: "Start date of the software upgrade phase.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"status": {
+						Description: "Status of the upgrade phase.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -312,6 +347,64 @@ func getApplianceUpgradeSchema() map[string]*schema.Schema {
 			Description: "The unique identifier of this Managed Object instance.",
 			Type:        schema.TypeString,
 			Optional:    true,
+		},
+		"node_info": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"gateway": {
+						Description: "Gateway ip address of the cluster node.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"hostname": {
+						Description: "Hostname of the cluster node.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"ip_address": {
+						Description: "Ip address of the cluster node.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"netmask": {
+						Description: "Netmask of the cluster node.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"node_id": {
+						Description: "Id number of the cluster node.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"node_moid": {
+						Description: "Moid of the corresponding appliance.ClusterInfo or appliance.NodeInfo mo.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"status": {
+						Description: "Status of the cluster node.\n* `Unknown` - The status of the appliance node is unknown.\n* `Operational` - The appliance node is operational.\n* `Impaired` - The appliance node is impaired.\n* `AttentionNeeded` - The appliance node needs attention.\n* `ReadyToJoin` - The node is ready to be added to a standalone Intersight Appliance to form a cluster.\n* `OutOfService` - The user has taken this node (part of a cluster) to out of service.\n* `ReadyForReplacement` - The cluster node is ready to be replaced.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"object_type": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -412,6 +505,16 @@ func getApplianceUpgradeSchema() map[string]*schema.Schema {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"current_node": {
+						Description: "Id of the node the upgrade phase is running on.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"current_node_hostname": {
+						Description: "Hostname of the node the upgrade phase is running on.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 					"elapsed_time": {
 						Description: "Elapsed time in seconds to complete the current upgrade phase.",
 						Type:        schema.TypeInt,
@@ -433,7 +536,7 @@ func getApplianceUpgradeSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"name": {
-						Description: "Name of the upgrade phase.\n* `init` - Upgrade service initialization phase.\n* `Prepare` - Upgrade service prepares folders and templated files.\n* `ServiceLoad` - Upgrade service loads the service images into the local docker cache.\n* `UiLoad` - Upgrade service loads the UI packages into the local cache.\n* `GenerateConfig` - Upgrade service generates the Kubernetes configuration files.\n* `DeployService` - Upgrade service deploys the Kubernetes services.\n* `Success` - Upgrade completed successfully.\n* `Fail` - Indicates that the upgrade process has failed.\n* `Cancel` - Indicates that the upgrade was canceled by the Intersight Appliance.\n* `Telemetry` - Upgrade service sends basic telemetry data to the Intersight.",
+						Description: "Name of the upgrade phase.\n* `init` - Upgrade service initialization phase.\n* `CheckCluster` - For a multinode system, check that all nodes in the cluster are connected and running.\n* `SyncImages` - For a multinode system, sync image files between nodes.\n* `Prepare` - Upgrade service prepares folders and templated files.\n* `ServiceLoad` - Upgrade service loads the service images into the local docker cache.\n* `UiLoad` - Upgrade service loads the UI packages into the local cache.\n* `GenerateConfig` - Upgrade service generates the Kubernetes configuration files.\n* `DeployService` - Upgrade service deploys the Kubernetes services.\n* `UpgradeOS` - Run /opt/cisco/bin/onprem-upgrade-start.sh for each node.\n* `UpgradeServices` - Run /opt/cisco/bin/onprem-upgrade-start.sh per node.\n* `FinishUpgrade` - Run /opt/cisco/bin/onprem-upgrade-finish.sh for each node.\n* `Success` - Upgrade completed successfully.\n* `Fail` - Indicates that the upgrade process has failed.\n* `Cancel` - Indicates that the upgrade was canceled by the Intersight Appliance.\n* `Telemetry` - Upgrade service sends basic telemetry data to the Intersight.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -444,6 +547,11 @@ func getApplianceUpgradeSchema() map[string]*schema.Schema {
 					},
 					"start_time": {
 						Description: "Start date of the software upgrade phase.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"status": {
+						Description: "Status of the upgrade phase.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -497,6 +605,11 @@ func getApplianceUpgradeSchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"total_nodes": {
+			Description: "Total number of nodes this upgrade will run on.",
+			Type:        schema.TypeInt,
+			Optional:    true,
 		},
 		"total_phases": {
 			Description: "TotalPhase represents the total number of the upgradePhases for one upgrade.",
@@ -703,6 +816,11 @@ func dataSourceApplianceUpgradeRead(c context.Context, d *schema.ResourceData, m
 		if err == nil && x1 != nil {
 			o.AdditionalProperties = x1.(map[string]interface{})
 		}
+	}
+
+	if v, ok := d.GetOkExists("all_nodes_pingable"); ok {
+		x := (v.(bool))
+		o.SetAllNodesPingable(x)
 	}
 
 	if v, ok := d.GetOk("ancestors"); ok {
@@ -923,6 +1041,34 @@ func dataSourceApplianceUpgradeRead(c context.Context, d *schema.ResourceData, m
 		o.SetMoid(x)
 	}
 
+	if v, ok := d.GetOk("node_info"); ok {
+		x := make([]models.ApplianceNodeIpInfo, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.ApplianceNodeIpInfo{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("appliance.NodeIpInfo")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetNodeInfo(x)
+	}
+
 	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
@@ -1119,6 +1265,11 @@ func dataSourceApplianceUpgradeRead(c context.Context, d *schema.ResourceData, m
 		o.SetTags(x)
 	}
 
+	if v, ok := d.GetOkExists("total_nodes"); ok {
+		x := int64(v.(int))
+		o.SetTotalNodes(x)
+	}
+
 	if v, ok := d.GetOkExists("total_phases"); ok {
 		x := int64(v.(int))
 		o.SetTotalPhases(x)
@@ -1254,6 +1405,7 @@ func dataSourceApplianceUpgradeRead(c context.Context, d *schema.ResourceData, m
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["active"] = (s.GetActive())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+				temp["all_nodes_pingable"] = (s.GetAllNodesPingable())
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["auto_created"] = (s.GetAutoCreated())
@@ -1279,6 +1431,8 @@ func dataSourceApplianceUpgradeRead(c context.Context, d *schema.ResourceData, m
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
+
+				temp["node_info"] = flattenListApplianceNodeIpInfo(s.GetNodeInfo(), d)
 				temp["object_type"] = (s.GetObjectType())
 				temp["owners"] = (s.GetOwners())
 
@@ -1296,6 +1450,7 @@ func dataSourceApplianceUpgradeRead(c context.Context, d *schema.ResourceData, m
 				temp["status"] = (s.GetStatus())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["total_nodes"] = (s.GetTotalNodes())
 				temp["total_phases"] = (s.GetTotalPhases())
 				temp["ui_packages"] = (s.GetUiPackages())
 				temp["nr_version"] = (s.GetVersion())

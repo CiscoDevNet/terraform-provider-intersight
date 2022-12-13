@@ -96,7 +96,7 @@ func getStorageNetAppNtpServerSchema() map[string]*schema.Schema {
 			},
 		},
 		"authentication_enabled": {
-			Description: "Indicates whether or not NTP symmetric authentication is enabled.",
+			Description: "Indicates that NTP symmetric authentication is enabled.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},

@@ -189,6 +189,11 @@ func getStorageNetAppDataIpInterfaceSchema() map[string]*schema.Schema {
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
+		"location_failover": {
+			Description: "Defines where an interface may failover, [ home_port_only, default, home_node_only, sfo_partners_only, broadcast_domain_only ].",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -738,6 +743,11 @@ func dataSourceStorageNetAppDataIpInterfaceRead(c context.Context, d *schema.Res
 		o.SetIsHome(x)
 	}
 
+	if v, ok := d.GetOk("location_failover"); ok {
+		x := (v.(string))
+		o.SetLocationFailover(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
@@ -1142,6 +1152,7 @@ func dataSourceStorageNetAppDataIpInterfaceRead(c context.Context, d *schema.Res
 				temp["ip_family"] = (s.GetIpFamily())
 				temp["ipspace"] = (s.GetIpspace())
 				temp["is_home"] = (s.GetIsHome())
+				temp["location_failover"] = (s.GetLocationFailover())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -56,8 +56,8 @@ func (r ApiCreateLicenseIksLicenseCountRequest) Execute() (*LicenseIksLicenseCou
 /*
 CreateLicenseIksLicenseCount Create a 'license.IksLicenseCount' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateLicenseIksLicenseCountRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateLicenseIksLicenseCountRequest
 */
 func (a *LicenseApiService) CreateLicenseIksLicenseCount(ctx context.Context) ApiCreateLicenseIksLicenseCountRequest {
 	return ApiCreateLicenseIksLicenseCountRequest{
@@ -67,7 +67,8 @@ func (a *LicenseApiService) CreateLicenseIksLicenseCount(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return LicenseIksLicenseCount
+//
+//	@return LicenseIksLicenseCount
 func (a *LicenseApiService) CreateLicenseIksLicenseCountExecute(r ApiCreateLicenseIksLicenseCountRequest) (*LicenseIksLicenseCount, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -199,6 +200,183 @@ func (a *LicenseApiService) CreateLicenseIksLicenseCountExecute(r ApiCreateLicen
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiCreateLicenseIncLicenseCountRequest struct {
+	ctx                    context.Context
+	ApiService             *LicenseApiService
+	licenseIncLicenseCount *LicenseIncLicenseCount
+	ifMatch                *string
+	ifNoneMatch            *string
+}
+
+// The &#39;license.IncLicenseCount&#39; resource to create.
+func (r ApiCreateLicenseIncLicenseCountRequest) LicenseIncLicenseCount(licenseIncLicenseCount LicenseIncLicenseCount) ApiCreateLicenseIncLicenseCountRequest {
+	r.licenseIncLicenseCount = &licenseIncLicenseCount
+	return r
+}
+
+// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
+func (r ApiCreateLicenseIncLicenseCountRequest) IfMatch(ifMatch string) ApiCreateLicenseIncLicenseCountRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+// For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte.
+func (r ApiCreateLicenseIncLicenseCountRequest) IfNoneMatch(ifNoneMatch string) ApiCreateLicenseIncLicenseCountRequest {
+	r.ifNoneMatch = &ifNoneMatch
+	return r
+}
+
+func (r ApiCreateLicenseIncLicenseCountRequest) Execute() (*LicenseIncLicenseCount, *http.Response, error) {
+	return r.ApiService.CreateLicenseIncLicenseCountExecute(r)
+}
+
+/*
+CreateLicenseIncLicenseCount Create a 'license.IncLicenseCount' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateLicenseIncLicenseCountRequest
+*/
+func (a *LicenseApiService) CreateLicenseIncLicenseCount(ctx context.Context) ApiCreateLicenseIncLicenseCountRequest {
+	return ApiCreateLicenseIncLicenseCountRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return LicenseIncLicenseCount
+func (a *LicenseApiService) CreateLicenseIncLicenseCountExecute(r ApiCreateLicenseIncLicenseCountRequest) (*LicenseIncLicenseCount, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *LicenseIncLicenseCount
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.CreateLicenseIncLicenseCount")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/license/IncLicenseCounts"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.licenseIncLicenseCount == nil {
+		return localVarReturnValue, nil, reportError("licenseIncLicenseCount is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	if r.ifNoneMatch != nil {
+		localVarHeaderParams["If-None-Match"] = parameterToString(*r.ifNoneMatch, "")
+	}
+	// body params
+	localVarPostBody = r.licenseIncLicenseCount
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiCreateLicenseIwoLicenseCountRequest struct {
 	ctx                    context.Context
 	ApiService             *LicenseApiService
@@ -232,8 +410,8 @@ func (r ApiCreateLicenseIwoLicenseCountRequest) Execute() (*LicenseIwoLicenseCou
 /*
 CreateLicenseIwoLicenseCount Create a 'license.IwoLicenseCount' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateLicenseIwoLicenseCountRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateLicenseIwoLicenseCountRequest
 */
 func (a *LicenseApiService) CreateLicenseIwoLicenseCount(ctx context.Context) ApiCreateLicenseIwoLicenseCountRequest {
 	return ApiCreateLicenseIwoLicenseCountRequest{
@@ -243,7 +421,8 @@ func (a *LicenseApiService) CreateLicenseIwoLicenseCount(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return LicenseIwoLicenseCount
+//
+//	@return LicenseIwoLicenseCount
 func (a *LicenseApiService) CreateLicenseIwoLicenseCountExecute(r ApiCreateLicenseIwoLicenseCountRequest) (*LicenseIwoLicenseCount, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -408,8 +587,8 @@ func (r ApiCreateLicenseLicenseInfoRequest) Execute() (*LicenseLicenseInfo, *htt
 /*
 CreateLicenseLicenseInfo Create a 'license.LicenseInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateLicenseLicenseInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateLicenseLicenseInfoRequest
 */
 func (a *LicenseApiService) CreateLicenseLicenseInfo(ctx context.Context) ApiCreateLicenseLicenseInfoRequest {
 	return ApiCreateLicenseLicenseInfoRequest{
@@ -419,7 +598,8 @@ func (a *LicenseApiService) CreateLicenseLicenseInfo(ctx context.Context) ApiCre
 }
 
 // Execute executes the request
-//  @return LicenseLicenseInfo
+//
+//	@return LicenseLicenseInfo
 func (a *LicenseApiService) CreateLicenseLicenseInfoExecute(r ApiCreateLicenseLicenseInfoRequest) (*LicenseLicenseInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -584,8 +764,8 @@ func (r ApiCreateLicenseLicenseReservationOpRequest) Execute() (*LicenseLicenseR
 /*
 CreateLicenseLicenseReservationOp Create a 'license.LicenseReservationOp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateLicenseLicenseReservationOpRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateLicenseLicenseReservationOpRequest
 */
 func (a *LicenseApiService) CreateLicenseLicenseReservationOp(ctx context.Context) ApiCreateLicenseLicenseReservationOpRequest {
 	return ApiCreateLicenseLicenseReservationOpRequest{
@@ -595,7 +775,8 @@ func (a *LicenseApiService) CreateLicenseLicenseReservationOp(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return LicenseLicenseReservationOp
+//
+//	@return LicenseLicenseReservationOp
 func (a *LicenseApiService) CreateLicenseLicenseReservationOpExecute(r ApiCreateLicenseLicenseReservationOpRequest) (*LicenseLicenseReservationOp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -740,9 +921,9 @@ func (r ApiGetLicenseAccountLicenseDataByMoidRequest) Execute() (*LicenseAccount
 /*
 GetLicenseAccountLicenseDataByMoid Read a 'license.AccountLicenseData' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetLicenseAccountLicenseDataByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetLicenseAccountLicenseDataByMoidRequest
 */
 func (a *LicenseApiService) GetLicenseAccountLicenseDataByMoid(ctx context.Context, moid string) ApiGetLicenseAccountLicenseDataByMoidRequest {
 	return ApiGetLicenseAccountLicenseDataByMoidRequest{
@@ -753,7 +934,8 @@ func (a *LicenseApiService) GetLicenseAccountLicenseDataByMoid(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return LicenseAccountLicenseData
+//
+//	@return LicenseAccountLicenseData
 func (a *LicenseApiService) GetLicenseAccountLicenseDataByMoidExecute(r ApiGetLicenseAccountLicenseDataByMoidRequest) (*LicenseAccountLicenseData, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -964,8 +1146,8 @@ func (r ApiGetLicenseAccountLicenseDataListRequest) Execute() (*LicenseAccountLi
 /*
 GetLicenseAccountLicenseDataList Read a 'license.AccountLicenseData' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetLicenseAccountLicenseDataListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetLicenseAccountLicenseDataListRequest
 */
 func (a *LicenseApiService) GetLicenseAccountLicenseDataList(ctx context.Context) ApiGetLicenseAccountLicenseDataListRequest {
 	return ApiGetLicenseAccountLicenseDataListRequest{
@@ -975,7 +1157,8 @@ func (a *LicenseApiService) GetLicenseAccountLicenseDataList(ctx context.Context
 }
 
 // Execute executes the request
-//  @return LicenseAccountLicenseDataResponse
+//
+//	@return LicenseAccountLicenseDataResponse
 func (a *LicenseApiService) GetLicenseAccountLicenseDataListExecute(r ApiGetLicenseAccountLicenseDataListRequest) (*LicenseAccountLicenseDataResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1142,9 +1325,9 @@ func (r ApiGetLicenseCustomerOpByMoidRequest) Execute() (*LicenseCustomerOp, *ht
 /*
 GetLicenseCustomerOpByMoid Read a 'license.CustomerOp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetLicenseCustomerOpByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetLicenseCustomerOpByMoidRequest
 */
 func (a *LicenseApiService) GetLicenseCustomerOpByMoid(ctx context.Context, moid string) ApiGetLicenseCustomerOpByMoidRequest {
 	return ApiGetLicenseCustomerOpByMoidRequest{
@@ -1155,7 +1338,8 @@ func (a *LicenseApiService) GetLicenseCustomerOpByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return LicenseCustomerOp
+//
+//	@return LicenseCustomerOp
 func (a *LicenseApiService) GetLicenseCustomerOpByMoidExecute(r ApiGetLicenseCustomerOpByMoidRequest) (*LicenseCustomerOp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1366,8 +1550,8 @@ func (r ApiGetLicenseCustomerOpListRequest) Execute() (*LicenseCustomerOpRespons
 /*
 GetLicenseCustomerOpList Read a 'license.CustomerOp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetLicenseCustomerOpListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetLicenseCustomerOpListRequest
 */
 func (a *LicenseApiService) GetLicenseCustomerOpList(ctx context.Context) ApiGetLicenseCustomerOpListRequest {
 	return ApiGetLicenseCustomerOpListRequest{
@@ -1377,7 +1561,8 @@ func (a *LicenseApiService) GetLicenseCustomerOpList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//  @return LicenseCustomerOpResponse
+//
+//	@return LicenseCustomerOpResponse
 func (a *LicenseApiService) GetLicenseCustomerOpListExecute(r ApiGetLicenseCustomerOpListRequest) (*LicenseCustomerOpResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1544,9 +1729,9 @@ func (r ApiGetLicenseIksCustomerOpByMoidRequest) Execute() (*LicenseIksCustomerO
 /*
 GetLicenseIksCustomerOpByMoid Read a 'license.IksCustomerOp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetLicenseIksCustomerOpByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetLicenseIksCustomerOpByMoidRequest
 */
 func (a *LicenseApiService) GetLicenseIksCustomerOpByMoid(ctx context.Context, moid string) ApiGetLicenseIksCustomerOpByMoidRequest {
 	return ApiGetLicenseIksCustomerOpByMoidRequest{
@@ -1557,7 +1742,8 @@ func (a *LicenseApiService) GetLicenseIksCustomerOpByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return LicenseIksCustomerOp
+//
+//	@return LicenseIksCustomerOp
 func (a *LicenseApiService) GetLicenseIksCustomerOpByMoidExecute(r ApiGetLicenseIksCustomerOpByMoidRequest) (*LicenseIksCustomerOp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1768,8 +1954,8 @@ func (r ApiGetLicenseIksCustomerOpListRequest) Execute() (*LicenseIksCustomerOpR
 /*
 GetLicenseIksCustomerOpList Read a 'license.IksCustomerOp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetLicenseIksCustomerOpListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetLicenseIksCustomerOpListRequest
 */
 func (a *LicenseApiService) GetLicenseIksCustomerOpList(ctx context.Context) ApiGetLicenseIksCustomerOpListRequest {
 	return ApiGetLicenseIksCustomerOpListRequest{
@@ -1779,7 +1965,8 @@ func (a *LicenseApiService) GetLicenseIksCustomerOpList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return LicenseIksCustomerOpResponse
+//
+//	@return LicenseIksCustomerOpResponse
 func (a *LicenseApiService) GetLicenseIksCustomerOpListExecute(r ApiGetLicenseIksCustomerOpListRequest) (*LicenseIksCustomerOpResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1946,9 +2133,9 @@ func (r ApiGetLicenseIksLicenseCountByMoidRequest) Execute() (*LicenseIksLicense
 /*
 GetLicenseIksLicenseCountByMoid Read a 'license.IksLicenseCount' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetLicenseIksLicenseCountByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetLicenseIksLicenseCountByMoidRequest
 */
 func (a *LicenseApiService) GetLicenseIksLicenseCountByMoid(ctx context.Context, moid string) ApiGetLicenseIksLicenseCountByMoidRequest {
 	return ApiGetLicenseIksLicenseCountByMoidRequest{
@@ -1959,7 +2146,8 @@ func (a *LicenseApiService) GetLicenseIksLicenseCountByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return LicenseIksLicenseCount
+//
+//	@return LicenseIksLicenseCount
 func (a *LicenseApiService) GetLicenseIksLicenseCountByMoidExecute(r ApiGetLicenseIksLicenseCountByMoidRequest) (*LicenseIksLicenseCount, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2170,8 +2358,8 @@ func (r ApiGetLicenseIksLicenseCountListRequest) Execute() (*LicenseIksLicenseCo
 /*
 GetLicenseIksLicenseCountList Read a 'license.IksLicenseCount' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetLicenseIksLicenseCountListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetLicenseIksLicenseCountListRequest
 */
 func (a *LicenseApiService) GetLicenseIksLicenseCountList(ctx context.Context) ApiGetLicenseIksLicenseCountListRequest {
 	return ApiGetLicenseIksLicenseCountListRequest{
@@ -2181,7 +2369,8 @@ func (a *LicenseApiService) GetLicenseIksLicenseCountList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return LicenseIksLicenseCountResponse
+//
+//	@return LicenseIksLicenseCountResponse
 func (a *LicenseApiService) GetLicenseIksLicenseCountListExecute(r ApiGetLicenseIksLicenseCountListRequest) (*LicenseIksLicenseCountResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2335,6 +2524,814 @@ func (a *LicenseApiService) GetLicenseIksLicenseCountListExecute(r ApiGetLicense
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetLicenseIncCustomerOpByMoidRequest struct {
+	ctx        context.Context
+	ApiService *LicenseApiService
+	moid       string
+}
+
+func (r ApiGetLicenseIncCustomerOpByMoidRequest) Execute() (*LicenseIncCustomerOp, *http.Response, error) {
+	return r.ApiService.GetLicenseIncCustomerOpByMoidExecute(r)
+}
+
+/*
+GetLicenseIncCustomerOpByMoid Read a 'license.IncCustomerOp' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetLicenseIncCustomerOpByMoidRequest
+*/
+func (a *LicenseApiService) GetLicenseIncCustomerOpByMoid(ctx context.Context, moid string) ApiGetLicenseIncCustomerOpByMoidRequest {
+	return ApiGetLicenseIncCustomerOpByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//
+//	@return LicenseIncCustomerOp
+func (a *LicenseApiService) GetLicenseIncCustomerOpByMoidExecute(r ApiGetLicenseIncCustomerOpByMoidRequest) (*LicenseIncCustomerOp, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *LicenseIncCustomerOp
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.GetLicenseIncCustomerOpByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/license/IncCustomerOps/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetLicenseIncCustomerOpListRequest struct {
+	ctx         context.Context
+	ApiService  *LicenseApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetLicenseIncCustomerOpListRequest) Filter(filter string) ApiGetLicenseIncCustomerOpListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetLicenseIncCustomerOpListRequest) Orderby(orderby string) ApiGetLicenseIncCustomerOpListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetLicenseIncCustomerOpListRequest) Top(top int32) ApiGetLicenseIncCustomerOpListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetLicenseIncCustomerOpListRequest) Skip(skip int32) ApiGetLicenseIncCustomerOpListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetLicenseIncCustomerOpListRequest) Select_(select_ string) ApiGetLicenseIncCustomerOpListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetLicenseIncCustomerOpListRequest) Expand(expand string) ApiGetLicenseIncCustomerOpListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetLicenseIncCustomerOpListRequest) Apply(apply string) ApiGetLicenseIncCustomerOpListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetLicenseIncCustomerOpListRequest) Count(count bool) ApiGetLicenseIncCustomerOpListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetLicenseIncCustomerOpListRequest) Inlinecount(inlinecount string) ApiGetLicenseIncCustomerOpListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetLicenseIncCustomerOpListRequest) At(at string) ApiGetLicenseIncCustomerOpListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetLicenseIncCustomerOpListRequest) Tags(tags string) ApiGetLicenseIncCustomerOpListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetLicenseIncCustomerOpListRequest) Execute() (*LicenseIncCustomerOpResponse, *http.Response, error) {
+	return r.ApiService.GetLicenseIncCustomerOpListExecute(r)
+}
+
+/*
+GetLicenseIncCustomerOpList Read a 'license.IncCustomerOp' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetLicenseIncCustomerOpListRequest
+*/
+func (a *LicenseApiService) GetLicenseIncCustomerOpList(ctx context.Context) ApiGetLicenseIncCustomerOpListRequest {
+	return ApiGetLicenseIncCustomerOpListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return LicenseIncCustomerOpResponse
+func (a *LicenseApiService) GetLicenseIncCustomerOpListExecute(r ApiGetLicenseIncCustomerOpListRequest) (*LicenseIncCustomerOpResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *LicenseIncCustomerOpResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.GetLicenseIncCustomerOpList")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/license/IncCustomerOps"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetLicenseIncLicenseCountByMoidRequest struct {
+	ctx        context.Context
+	ApiService *LicenseApiService
+	moid       string
+}
+
+func (r ApiGetLicenseIncLicenseCountByMoidRequest) Execute() (*LicenseIncLicenseCount, *http.Response, error) {
+	return r.ApiService.GetLicenseIncLicenseCountByMoidExecute(r)
+}
+
+/*
+GetLicenseIncLicenseCountByMoid Read a 'license.IncLicenseCount' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetLicenseIncLicenseCountByMoidRequest
+*/
+func (a *LicenseApiService) GetLicenseIncLicenseCountByMoid(ctx context.Context, moid string) ApiGetLicenseIncLicenseCountByMoidRequest {
+	return ApiGetLicenseIncLicenseCountByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//
+//	@return LicenseIncLicenseCount
+func (a *LicenseApiService) GetLicenseIncLicenseCountByMoidExecute(r ApiGetLicenseIncLicenseCountByMoidRequest) (*LicenseIncLicenseCount, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *LicenseIncLicenseCount
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.GetLicenseIncLicenseCountByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/license/IncLicenseCounts/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetLicenseIncLicenseCountListRequest struct {
+	ctx         context.Context
+	ApiService  *LicenseApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetLicenseIncLicenseCountListRequest) Filter(filter string) ApiGetLicenseIncLicenseCountListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetLicenseIncLicenseCountListRequest) Orderby(orderby string) ApiGetLicenseIncLicenseCountListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetLicenseIncLicenseCountListRequest) Top(top int32) ApiGetLicenseIncLicenseCountListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetLicenseIncLicenseCountListRequest) Skip(skip int32) ApiGetLicenseIncLicenseCountListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetLicenseIncLicenseCountListRequest) Select_(select_ string) ApiGetLicenseIncLicenseCountListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetLicenseIncLicenseCountListRequest) Expand(expand string) ApiGetLicenseIncLicenseCountListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetLicenseIncLicenseCountListRequest) Apply(apply string) ApiGetLicenseIncLicenseCountListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetLicenseIncLicenseCountListRequest) Count(count bool) ApiGetLicenseIncLicenseCountListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetLicenseIncLicenseCountListRequest) Inlinecount(inlinecount string) ApiGetLicenseIncLicenseCountListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetLicenseIncLicenseCountListRequest) At(at string) ApiGetLicenseIncLicenseCountListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetLicenseIncLicenseCountListRequest) Tags(tags string) ApiGetLicenseIncLicenseCountListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetLicenseIncLicenseCountListRequest) Execute() (*LicenseIncLicenseCountResponse, *http.Response, error) {
+	return r.ApiService.GetLicenseIncLicenseCountListExecute(r)
+}
+
+/*
+GetLicenseIncLicenseCountList Read a 'license.IncLicenseCount' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetLicenseIncLicenseCountListRequest
+*/
+func (a *LicenseApiService) GetLicenseIncLicenseCountList(ctx context.Context) ApiGetLicenseIncLicenseCountListRequest {
+	return ApiGetLicenseIncLicenseCountListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return LicenseIncLicenseCountResponse
+func (a *LicenseApiService) GetLicenseIncLicenseCountListExecute(r ApiGetLicenseIncLicenseCountListRequest) (*LicenseIncLicenseCountResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *LicenseIncLicenseCountResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.GetLicenseIncLicenseCountList")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/license/IncLicenseCounts"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetLicenseIwoCustomerOpByMoidRequest struct {
 	ctx        context.Context
 	ApiService *LicenseApiService
@@ -2348,9 +3345,9 @@ func (r ApiGetLicenseIwoCustomerOpByMoidRequest) Execute() (*LicenseIwoCustomerO
 /*
 GetLicenseIwoCustomerOpByMoid Read a 'license.IwoCustomerOp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetLicenseIwoCustomerOpByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetLicenseIwoCustomerOpByMoidRequest
 */
 func (a *LicenseApiService) GetLicenseIwoCustomerOpByMoid(ctx context.Context, moid string) ApiGetLicenseIwoCustomerOpByMoidRequest {
 	return ApiGetLicenseIwoCustomerOpByMoidRequest{
@@ -2361,7 +3358,8 @@ func (a *LicenseApiService) GetLicenseIwoCustomerOpByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return LicenseIwoCustomerOp
+//
+//	@return LicenseIwoCustomerOp
 func (a *LicenseApiService) GetLicenseIwoCustomerOpByMoidExecute(r ApiGetLicenseIwoCustomerOpByMoidRequest) (*LicenseIwoCustomerOp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2572,8 +3570,8 @@ func (r ApiGetLicenseIwoCustomerOpListRequest) Execute() (*LicenseIwoCustomerOpR
 /*
 GetLicenseIwoCustomerOpList Read a 'license.IwoCustomerOp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetLicenseIwoCustomerOpListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetLicenseIwoCustomerOpListRequest
 */
 func (a *LicenseApiService) GetLicenseIwoCustomerOpList(ctx context.Context) ApiGetLicenseIwoCustomerOpListRequest {
 	return ApiGetLicenseIwoCustomerOpListRequest{
@@ -2583,7 +3581,8 @@ func (a *LicenseApiService) GetLicenseIwoCustomerOpList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return LicenseIwoCustomerOpResponse
+//
+//	@return LicenseIwoCustomerOpResponse
 func (a *LicenseApiService) GetLicenseIwoCustomerOpListExecute(r ApiGetLicenseIwoCustomerOpListRequest) (*LicenseIwoCustomerOpResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2750,9 +3749,9 @@ func (r ApiGetLicenseIwoLicenseCountByMoidRequest) Execute() (*LicenseIwoLicense
 /*
 GetLicenseIwoLicenseCountByMoid Read a 'license.IwoLicenseCount' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetLicenseIwoLicenseCountByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetLicenseIwoLicenseCountByMoidRequest
 */
 func (a *LicenseApiService) GetLicenseIwoLicenseCountByMoid(ctx context.Context, moid string) ApiGetLicenseIwoLicenseCountByMoidRequest {
 	return ApiGetLicenseIwoLicenseCountByMoidRequest{
@@ -2763,7 +3762,8 @@ func (a *LicenseApiService) GetLicenseIwoLicenseCountByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return LicenseIwoLicenseCount
+//
+//	@return LicenseIwoLicenseCount
 func (a *LicenseApiService) GetLicenseIwoLicenseCountByMoidExecute(r ApiGetLicenseIwoLicenseCountByMoidRequest) (*LicenseIwoLicenseCount, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2974,8 +3974,8 @@ func (r ApiGetLicenseIwoLicenseCountListRequest) Execute() (*LicenseIwoLicenseCo
 /*
 GetLicenseIwoLicenseCountList Read a 'license.IwoLicenseCount' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetLicenseIwoLicenseCountListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetLicenseIwoLicenseCountListRequest
 */
 func (a *LicenseApiService) GetLicenseIwoLicenseCountList(ctx context.Context) ApiGetLicenseIwoLicenseCountListRequest {
 	return ApiGetLicenseIwoLicenseCountListRequest{
@@ -2985,7 +3985,8 @@ func (a *LicenseApiService) GetLicenseIwoLicenseCountList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return LicenseIwoLicenseCountResponse
+//
+//	@return LicenseIwoLicenseCountResponse
 func (a *LicenseApiService) GetLicenseIwoLicenseCountListExecute(r ApiGetLicenseIwoLicenseCountListRequest) (*LicenseIwoLicenseCountResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3152,9 +4153,9 @@ func (r ApiGetLicenseLicenseInfoByMoidRequest) Execute() (*LicenseLicenseInfo, *
 /*
 GetLicenseLicenseInfoByMoid Read a 'license.LicenseInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetLicenseLicenseInfoByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetLicenseLicenseInfoByMoidRequest
 */
 func (a *LicenseApiService) GetLicenseLicenseInfoByMoid(ctx context.Context, moid string) ApiGetLicenseLicenseInfoByMoidRequest {
 	return ApiGetLicenseLicenseInfoByMoidRequest{
@@ -3165,7 +4166,8 @@ func (a *LicenseApiService) GetLicenseLicenseInfoByMoid(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return LicenseLicenseInfo
+//
+//	@return LicenseLicenseInfo
 func (a *LicenseApiService) GetLicenseLicenseInfoByMoidExecute(r ApiGetLicenseLicenseInfoByMoidRequest) (*LicenseLicenseInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3376,8 +4378,8 @@ func (r ApiGetLicenseLicenseInfoListRequest) Execute() (*LicenseLicenseInfoRespo
 /*
 GetLicenseLicenseInfoList Read a 'license.LicenseInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetLicenseLicenseInfoListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetLicenseLicenseInfoListRequest
 */
 func (a *LicenseApiService) GetLicenseLicenseInfoList(ctx context.Context) ApiGetLicenseLicenseInfoListRequest {
 	return ApiGetLicenseLicenseInfoListRequest{
@@ -3387,7 +4389,8 @@ func (a *LicenseApiService) GetLicenseLicenseInfoList(ctx context.Context) ApiGe
 }
 
 // Execute executes the request
-//  @return LicenseLicenseInfoResponse
+//
+//	@return LicenseLicenseInfoResponse
 func (a *LicenseApiService) GetLicenseLicenseInfoListExecute(r ApiGetLicenseLicenseInfoListRequest) (*LicenseLicenseInfoResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3541,6 +4544,814 @@ func (a *LicenseApiService) GetLicenseLicenseInfoListExecute(r ApiGetLicenseLice
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetLicenseLicenseInfoViewByMoidRequest struct {
+	ctx        context.Context
+	ApiService *LicenseApiService
+	moid       string
+}
+
+func (r ApiGetLicenseLicenseInfoViewByMoidRequest) Execute() (*LicenseLicenseInfoView, *http.Response, error) {
+	return r.ApiService.GetLicenseLicenseInfoViewByMoidExecute(r)
+}
+
+/*
+GetLicenseLicenseInfoViewByMoid Read a 'license.LicenseInfoView' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetLicenseLicenseInfoViewByMoidRequest
+*/
+func (a *LicenseApiService) GetLicenseLicenseInfoViewByMoid(ctx context.Context, moid string) ApiGetLicenseLicenseInfoViewByMoidRequest {
+	return ApiGetLicenseLicenseInfoViewByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//
+//	@return LicenseLicenseInfoView
+func (a *LicenseApiService) GetLicenseLicenseInfoViewByMoidExecute(r ApiGetLicenseLicenseInfoViewByMoidRequest) (*LicenseLicenseInfoView, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *LicenseLicenseInfoView
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.GetLicenseLicenseInfoViewByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/license/LicenseInfoViews/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetLicenseLicenseInfoViewListRequest struct {
+	ctx         context.Context
+	ApiService  *LicenseApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetLicenseLicenseInfoViewListRequest) Filter(filter string) ApiGetLicenseLicenseInfoViewListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetLicenseLicenseInfoViewListRequest) Orderby(orderby string) ApiGetLicenseLicenseInfoViewListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetLicenseLicenseInfoViewListRequest) Top(top int32) ApiGetLicenseLicenseInfoViewListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetLicenseLicenseInfoViewListRequest) Skip(skip int32) ApiGetLicenseLicenseInfoViewListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetLicenseLicenseInfoViewListRequest) Select_(select_ string) ApiGetLicenseLicenseInfoViewListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetLicenseLicenseInfoViewListRequest) Expand(expand string) ApiGetLicenseLicenseInfoViewListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetLicenseLicenseInfoViewListRequest) Apply(apply string) ApiGetLicenseLicenseInfoViewListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetLicenseLicenseInfoViewListRequest) Count(count bool) ApiGetLicenseLicenseInfoViewListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetLicenseLicenseInfoViewListRequest) Inlinecount(inlinecount string) ApiGetLicenseLicenseInfoViewListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetLicenseLicenseInfoViewListRequest) At(at string) ApiGetLicenseLicenseInfoViewListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetLicenseLicenseInfoViewListRequest) Tags(tags string) ApiGetLicenseLicenseInfoViewListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetLicenseLicenseInfoViewListRequest) Execute() (*LicenseLicenseInfoViewResponse, *http.Response, error) {
+	return r.ApiService.GetLicenseLicenseInfoViewListExecute(r)
+}
+
+/*
+GetLicenseLicenseInfoViewList Read a 'license.LicenseInfoView' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetLicenseLicenseInfoViewListRequest
+*/
+func (a *LicenseApiService) GetLicenseLicenseInfoViewList(ctx context.Context) ApiGetLicenseLicenseInfoViewListRequest {
+	return ApiGetLicenseLicenseInfoViewListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return LicenseLicenseInfoViewResponse
+func (a *LicenseApiService) GetLicenseLicenseInfoViewListExecute(r ApiGetLicenseLicenseInfoViewListRequest) (*LicenseLicenseInfoViewResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *LicenseLicenseInfoViewResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.GetLicenseLicenseInfoViewList")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/license/LicenseInfoViews"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetLicenseLicenseRegistrationStatusByMoidRequest struct {
+	ctx        context.Context
+	ApiService *LicenseApiService
+	moid       string
+}
+
+func (r ApiGetLicenseLicenseRegistrationStatusByMoidRequest) Execute() (*LicenseLicenseRegistrationStatus, *http.Response, error) {
+	return r.ApiService.GetLicenseLicenseRegistrationStatusByMoidExecute(r)
+}
+
+/*
+GetLicenseLicenseRegistrationStatusByMoid Read a 'license.LicenseRegistrationStatus' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetLicenseLicenseRegistrationStatusByMoidRequest
+*/
+func (a *LicenseApiService) GetLicenseLicenseRegistrationStatusByMoid(ctx context.Context, moid string) ApiGetLicenseLicenseRegistrationStatusByMoidRequest {
+	return ApiGetLicenseLicenseRegistrationStatusByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//
+//	@return LicenseLicenseRegistrationStatus
+func (a *LicenseApiService) GetLicenseLicenseRegistrationStatusByMoidExecute(r ApiGetLicenseLicenseRegistrationStatusByMoidRequest) (*LicenseLicenseRegistrationStatus, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *LicenseLicenseRegistrationStatus
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.GetLicenseLicenseRegistrationStatusByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/license/LicenseRegistrationStatuses/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetLicenseLicenseRegistrationStatusListRequest struct {
+	ctx         context.Context
+	ApiService  *LicenseApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetLicenseLicenseRegistrationStatusListRequest) Filter(filter string) ApiGetLicenseLicenseRegistrationStatusListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetLicenseLicenseRegistrationStatusListRequest) Orderby(orderby string) ApiGetLicenseLicenseRegistrationStatusListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetLicenseLicenseRegistrationStatusListRequest) Top(top int32) ApiGetLicenseLicenseRegistrationStatusListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetLicenseLicenseRegistrationStatusListRequest) Skip(skip int32) ApiGetLicenseLicenseRegistrationStatusListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetLicenseLicenseRegistrationStatusListRequest) Select_(select_ string) ApiGetLicenseLicenseRegistrationStatusListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetLicenseLicenseRegistrationStatusListRequest) Expand(expand string) ApiGetLicenseLicenseRegistrationStatusListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetLicenseLicenseRegistrationStatusListRequest) Apply(apply string) ApiGetLicenseLicenseRegistrationStatusListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetLicenseLicenseRegistrationStatusListRequest) Count(count bool) ApiGetLicenseLicenseRegistrationStatusListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetLicenseLicenseRegistrationStatusListRequest) Inlinecount(inlinecount string) ApiGetLicenseLicenseRegistrationStatusListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetLicenseLicenseRegistrationStatusListRequest) At(at string) ApiGetLicenseLicenseRegistrationStatusListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetLicenseLicenseRegistrationStatusListRequest) Tags(tags string) ApiGetLicenseLicenseRegistrationStatusListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetLicenseLicenseRegistrationStatusListRequest) Execute() (*LicenseLicenseRegistrationStatusResponse, *http.Response, error) {
+	return r.ApiService.GetLicenseLicenseRegistrationStatusListExecute(r)
+}
+
+/*
+GetLicenseLicenseRegistrationStatusList Read a 'license.LicenseRegistrationStatus' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetLicenseLicenseRegistrationStatusListRequest
+*/
+func (a *LicenseApiService) GetLicenseLicenseRegistrationStatusList(ctx context.Context) ApiGetLicenseLicenseRegistrationStatusListRequest {
+	return ApiGetLicenseLicenseRegistrationStatusListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return LicenseLicenseRegistrationStatusResponse
+func (a *LicenseApiService) GetLicenseLicenseRegistrationStatusListExecute(r ApiGetLicenseLicenseRegistrationStatusListRequest) (*LicenseLicenseRegistrationStatusResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *LicenseLicenseRegistrationStatusResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.GetLicenseLicenseRegistrationStatusList")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/license/LicenseRegistrationStatuses"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetLicenseLicenseReservationOpByMoidRequest struct {
 	ctx        context.Context
 	ApiService *LicenseApiService
@@ -3554,9 +5365,9 @@ func (r ApiGetLicenseLicenseReservationOpByMoidRequest) Execute() (*LicenseLicen
 /*
 GetLicenseLicenseReservationOpByMoid Read a 'license.LicenseReservationOp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetLicenseLicenseReservationOpByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetLicenseLicenseReservationOpByMoidRequest
 */
 func (a *LicenseApiService) GetLicenseLicenseReservationOpByMoid(ctx context.Context, moid string) ApiGetLicenseLicenseReservationOpByMoidRequest {
 	return ApiGetLicenseLicenseReservationOpByMoidRequest{
@@ -3567,7 +5378,8 @@ func (a *LicenseApiService) GetLicenseLicenseReservationOpByMoid(ctx context.Con
 }
 
 // Execute executes the request
-//  @return LicenseLicenseReservationOp
+//
+//	@return LicenseLicenseReservationOp
 func (a *LicenseApiService) GetLicenseLicenseReservationOpByMoidExecute(r ApiGetLicenseLicenseReservationOpByMoidRequest) (*LicenseLicenseReservationOp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3778,8 +5590,8 @@ func (r ApiGetLicenseLicenseReservationOpListRequest) Execute() (*LicenseLicense
 /*
 GetLicenseLicenseReservationOpList Read a 'license.LicenseReservationOp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetLicenseLicenseReservationOpListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetLicenseLicenseReservationOpListRequest
 */
 func (a *LicenseApiService) GetLicenseLicenseReservationOpList(ctx context.Context) ApiGetLicenseLicenseReservationOpListRequest {
 	return ApiGetLicenseLicenseReservationOpListRequest{
@@ -3789,7 +5601,8 @@ func (a *LicenseApiService) GetLicenseLicenseReservationOpList(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return LicenseLicenseReservationOpResponse
+//
+//	@return LicenseLicenseReservationOpResponse
 func (a *LicenseApiService) GetLicenseLicenseReservationOpListExecute(r ApiGetLicenseLicenseReservationOpListRequest) (*LicenseLicenseReservationOpResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3956,9 +5769,9 @@ func (r ApiGetLicenseSmartlicenseTokenByMoidRequest) Execute() (*LicenseSmartlic
 /*
 GetLicenseSmartlicenseTokenByMoid Read a 'license.SmartlicenseToken' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetLicenseSmartlicenseTokenByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetLicenseSmartlicenseTokenByMoidRequest
 */
 func (a *LicenseApiService) GetLicenseSmartlicenseTokenByMoid(ctx context.Context, moid string) ApiGetLicenseSmartlicenseTokenByMoidRequest {
 	return ApiGetLicenseSmartlicenseTokenByMoidRequest{
@@ -3969,7 +5782,8 @@ func (a *LicenseApiService) GetLicenseSmartlicenseTokenByMoid(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return LicenseSmartlicenseToken
+//
+//	@return LicenseSmartlicenseToken
 func (a *LicenseApiService) GetLicenseSmartlicenseTokenByMoidExecute(r ApiGetLicenseSmartlicenseTokenByMoidRequest) (*LicenseSmartlicenseToken, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4180,8 +5994,8 @@ func (r ApiGetLicenseSmartlicenseTokenListRequest) Execute() (*LicenseSmartlicen
 /*
 GetLicenseSmartlicenseTokenList Read a 'license.SmartlicenseToken' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetLicenseSmartlicenseTokenListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetLicenseSmartlicenseTokenListRequest
 */
 func (a *LicenseApiService) GetLicenseSmartlicenseTokenList(ctx context.Context) ApiGetLicenseSmartlicenseTokenListRequest {
 	return ApiGetLicenseSmartlicenseTokenListRequest{
@@ -4191,7 +6005,8 @@ func (a *LicenseApiService) GetLicenseSmartlicenseTokenList(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return LicenseSmartlicenseTokenResponse
+//
+//	@return LicenseSmartlicenseTokenResponse
 func (a *LicenseApiService) GetLicenseSmartlicenseTokenListExecute(r ApiGetLicenseSmartlicenseTokenListRequest) (*LicenseSmartlicenseTokenResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4372,9 +6187,9 @@ func (r ApiPatchLicenseAccountLicenseDataRequest) Execute() (*LicenseAccountLice
 /*
 PatchLicenseAccountLicenseData Update a 'license.AccountLicenseData' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchLicenseAccountLicenseDataRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchLicenseAccountLicenseDataRequest
 */
 func (a *LicenseApiService) PatchLicenseAccountLicenseData(ctx context.Context, moid string) ApiPatchLicenseAccountLicenseDataRequest {
 	return ApiPatchLicenseAccountLicenseDataRequest{
@@ -4385,7 +6200,8 @@ func (a *LicenseApiService) PatchLicenseAccountLicenseData(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return LicenseAccountLicenseData
+//
+//	@return LicenseAccountLicenseData
 func (a *LicenseApiService) PatchLicenseAccountLicenseDataExecute(r ApiPatchLicenseAccountLicenseDataRequest) (*LicenseAccountLicenseData, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -4542,9 +6358,9 @@ func (r ApiPatchLicenseCustomerOpRequest) Execute() (*LicenseCustomerOp, *http.R
 /*
 PatchLicenseCustomerOp Update a 'license.CustomerOp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchLicenseCustomerOpRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchLicenseCustomerOpRequest
 */
 func (a *LicenseApiService) PatchLicenseCustomerOp(ctx context.Context, moid string) ApiPatchLicenseCustomerOpRequest {
 	return ApiPatchLicenseCustomerOpRequest{
@@ -4555,7 +6371,8 @@ func (a *LicenseApiService) PatchLicenseCustomerOp(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return LicenseCustomerOp
+//
+//	@return LicenseCustomerOp
 func (a *LicenseApiService) PatchLicenseCustomerOpExecute(r ApiPatchLicenseCustomerOpRequest) (*LicenseCustomerOp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -4712,9 +6529,9 @@ func (r ApiPatchLicenseIksCustomerOpRequest) Execute() (*LicenseIksCustomerOp, *
 /*
 PatchLicenseIksCustomerOp Update a 'license.IksCustomerOp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchLicenseIksCustomerOpRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchLicenseIksCustomerOpRequest
 */
 func (a *LicenseApiService) PatchLicenseIksCustomerOp(ctx context.Context, moid string) ApiPatchLicenseIksCustomerOpRequest {
 	return ApiPatchLicenseIksCustomerOpRequest{
@@ -4725,7 +6542,8 @@ func (a *LicenseApiService) PatchLicenseIksCustomerOp(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return LicenseIksCustomerOp
+//
+//	@return LicenseIksCustomerOp
 func (a *LicenseApiService) PatchLicenseIksCustomerOpExecute(r ApiPatchLicenseIksCustomerOpRequest) (*LicenseIksCustomerOp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -4882,9 +6700,9 @@ func (r ApiPatchLicenseIksLicenseCountRequest) Execute() (*LicenseIksLicenseCoun
 /*
 PatchLicenseIksLicenseCount Update a 'license.IksLicenseCount' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchLicenseIksLicenseCountRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchLicenseIksLicenseCountRequest
 */
 func (a *LicenseApiService) PatchLicenseIksLicenseCount(ctx context.Context, moid string) ApiPatchLicenseIksLicenseCountRequest {
 	return ApiPatchLicenseIksLicenseCountRequest{
@@ -4895,7 +6713,8 @@ func (a *LicenseApiService) PatchLicenseIksLicenseCount(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return LicenseIksLicenseCount
+//
+//	@return LicenseIksLicenseCount
 func (a *LicenseApiService) PatchLicenseIksLicenseCountExecute(r ApiPatchLicenseIksLicenseCountRequest) (*LicenseIksLicenseCount, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -5025,6 +6844,348 @@ func (a *LicenseApiService) PatchLicenseIksLicenseCountExecute(r ApiPatchLicense
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiPatchLicenseIncCustomerOpRequest struct {
+	ctx                  context.Context
+	ApiService           *LicenseApiService
+	moid                 string
+	licenseIncCustomerOp *LicenseIncCustomerOp
+	ifMatch              *string
+}
+
+// The &#39;license.IncCustomerOp&#39; resource to update.
+func (r ApiPatchLicenseIncCustomerOpRequest) LicenseIncCustomerOp(licenseIncCustomerOp LicenseIncCustomerOp) ApiPatchLicenseIncCustomerOpRequest {
+	r.licenseIncCustomerOp = &licenseIncCustomerOp
+	return r
+}
+
+// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
+func (r ApiPatchLicenseIncCustomerOpRequest) IfMatch(ifMatch string) ApiPatchLicenseIncCustomerOpRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiPatchLicenseIncCustomerOpRequest) Execute() (*LicenseIncCustomerOp, *http.Response, error) {
+	return r.ApiService.PatchLicenseIncCustomerOpExecute(r)
+}
+
+/*
+PatchLicenseIncCustomerOp Update a 'license.IncCustomerOp' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchLicenseIncCustomerOpRequest
+*/
+func (a *LicenseApiService) PatchLicenseIncCustomerOp(ctx context.Context, moid string) ApiPatchLicenseIncCustomerOpRequest {
+	return ApiPatchLicenseIncCustomerOpRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//
+//	@return LicenseIncCustomerOp
+func (a *LicenseApiService) PatchLicenseIncCustomerOpExecute(r ApiPatchLicenseIncCustomerOpRequest) (*LicenseIncCustomerOp, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *LicenseIncCustomerOp
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.PatchLicenseIncCustomerOp")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/license/IncCustomerOps/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.licenseIncCustomerOp == nil {
+		return localVarReturnValue, nil, reportError("licenseIncCustomerOp is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.licenseIncCustomerOp
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiPatchLicenseIncLicenseCountRequest struct {
+	ctx                    context.Context
+	ApiService             *LicenseApiService
+	moid                   string
+	licenseIncLicenseCount *LicenseIncLicenseCount
+	ifMatch                *string
+}
+
+// The &#39;license.IncLicenseCount&#39; resource to update.
+func (r ApiPatchLicenseIncLicenseCountRequest) LicenseIncLicenseCount(licenseIncLicenseCount LicenseIncLicenseCount) ApiPatchLicenseIncLicenseCountRequest {
+	r.licenseIncLicenseCount = &licenseIncLicenseCount
+	return r
+}
+
+// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
+func (r ApiPatchLicenseIncLicenseCountRequest) IfMatch(ifMatch string) ApiPatchLicenseIncLicenseCountRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiPatchLicenseIncLicenseCountRequest) Execute() (*LicenseIncLicenseCount, *http.Response, error) {
+	return r.ApiService.PatchLicenseIncLicenseCountExecute(r)
+}
+
+/*
+PatchLicenseIncLicenseCount Update a 'license.IncLicenseCount' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchLicenseIncLicenseCountRequest
+*/
+func (a *LicenseApiService) PatchLicenseIncLicenseCount(ctx context.Context, moid string) ApiPatchLicenseIncLicenseCountRequest {
+	return ApiPatchLicenseIncLicenseCountRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//
+//	@return LicenseIncLicenseCount
+func (a *LicenseApiService) PatchLicenseIncLicenseCountExecute(r ApiPatchLicenseIncLicenseCountRequest) (*LicenseIncLicenseCount, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *LicenseIncLicenseCount
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.PatchLicenseIncLicenseCount")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/license/IncLicenseCounts/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.licenseIncLicenseCount == nil {
+		return localVarReturnValue, nil, reportError("licenseIncLicenseCount is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.licenseIncLicenseCount
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiPatchLicenseIwoCustomerOpRequest struct {
 	ctx                  context.Context
 	ApiService           *LicenseApiService
@@ -5052,9 +7213,9 @@ func (r ApiPatchLicenseIwoCustomerOpRequest) Execute() (*LicenseIwoCustomerOp, *
 /*
 PatchLicenseIwoCustomerOp Update a 'license.IwoCustomerOp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchLicenseIwoCustomerOpRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchLicenseIwoCustomerOpRequest
 */
 func (a *LicenseApiService) PatchLicenseIwoCustomerOp(ctx context.Context, moid string) ApiPatchLicenseIwoCustomerOpRequest {
 	return ApiPatchLicenseIwoCustomerOpRequest{
@@ -5065,7 +7226,8 @@ func (a *LicenseApiService) PatchLicenseIwoCustomerOp(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return LicenseIwoCustomerOp
+//
+//	@return LicenseIwoCustomerOp
 func (a *LicenseApiService) PatchLicenseIwoCustomerOpExecute(r ApiPatchLicenseIwoCustomerOpRequest) (*LicenseIwoCustomerOp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -5222,9 +7384,9 @@ func (r ApiPatchLicenseIwoLicenseCountRequest) Execute() (*LicenseIwoLicenseCoun
 /*
 PatchLicenseIwoLicenseCount Update a 'license.IwoLicenseCount' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchLicenseIwoLicenseCountRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchLicenseIwoLicenseCountRequest
 */
 func (a *LicenseApiService) PatchLicenseIwoLicenseCount(ctx context.Context, moid string) ApiPatchLicenseIwoLicenseCountRequest {
 	return ApiPatchLicenseIwoLicenseCountRequest{
@@ -5235,7 +7397,8 @@ func (a *LicenseApiService) PatchLicenseIwoLicenseCount(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return LicenseIwoLicenseCount
+//
+//	@return LicenseIwoLicenseCount
 func (a *LicenseApiService) PatchLicenseIwoLicenseCountExecute(r ApiPatchLicenseIwoLicenseCountRequest) (*LicenseIwoLicenseCount, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -5392,9 +7555,9 @@ func (r ApiPatchLicenseLicenseInfoRequest) Execute() (*LicenseLicenseInfo, *http
 /*
 PatchLicenseLicenseInfo Update a 'license.LicenseInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchLicenseLicenseInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchLicenseLicenseInfoRequest
 */
 func (a *LicenseApiService) PatchLicenseLicenseInfo(ctx context.Context, moid string) ApiPatchLicenseLicenseInfoRequest {
 	return ApiPatchLicenseLicenseInfoRequest{
@@ -5405,7 +7568,8 @@ func (a *LicenseApiService) PatchLicenseLicenseInfo(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return LicenseLicenseInfo
+//
+//	@return LicenseLicenseInfo
 func (a *LicenseApiService) PatchLicenseLicenseInfoExecute(r ApiPatchLicenseLicenseInfoRequest) (*LicenseLicenseInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -5535,6 +7699,177 @@ func (a *LicenseApiService) PatchLicenseLicenseInfoExecute(r ApiPatchLicenseLice
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiPatchLicenseLicenseRegistrationStatusRequest struct {
+	ctx                              context.Context
+	ApiService                       *LicenseApiService
+	moid                             string
+	licenseLicenseRegistrationStatus *LicenseLicenseRegistrationStatus
+	ifMatch                          *string
+}
+
+// The &#39;license.LicenseRegistrationStatus&#39; resource to update.
+func (r ApiPatchLicenseLicenseRegistrationStatusRequest) LicenseLicenseRegistrationStatus(licenseLicenseRegistrationStatus LicenseLicenseRegistrationStatus) ApiPatchLicenseLicenseRegistrationStatusRequest {
+	r.licenseLicenseRegistrationStatus = &licenseLicenseRegistrationStatus
+	return r
+}
+
+// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
+func (r ApiPatchLicenseLicenseRegistrationStatusRequest) IfMatch(ifMatch string) ApiPatchLicenseLicenseRegistrationStatusRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiPatchLicenseLicenseRegistrationStatusRequest) Execute() (*LicenseLicenseRegistrationStatus, *http.Response, error) {
+	return r.ApiService.PatchLicenseLicenseRegistrationStatusExecute(r)
+}
+
+/*
+PatchLicenseLicenseRegistrationStatus Update a 'license.LicenseRegistrationStatus' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchLicenseLicenseRegistrationStatusRequest
+*/
+func (a *LicenseApiService) PatchLicenseLicenseRegistrationStatus(ctx context.Context, moid string) ApiPatchLicenseLicenseRegistrationStatusRequest {
+	return ApiPatchLicenseLicenseRegistrationStatusRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//
+//	@return LicenseLicenseRegistrationStatus
+func (a *LicenseApiService) PatchLicenseLicenseRegistrationStatusExecute(r ApiPatchLicenseLicenseRegistrationStatusRequest) (*LicenseLicenseRegistrationStatus, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *LicenseLicenseRegistrationStatus
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.PatchLicenseLicenseRegistrationStatus")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/license/LicenseRegistrationStatuses/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.licenseLicenseRegistrationStatus == nil {
+		return localVarReturnValue, nil, reportError("licenseLicenseRegistrationStatus is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.licenseLicenseRegistrationStatus
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiPatchLicenseLicenseReservationOpRequest struct {
 	ctx                         context.Context
 	ApiService                  *LicenseApiService
@@ -5562,9 +7897,9 @@ func (r ApiPatchLicenseLicenseReservationOpRequest) Execute() (*LicenseLicenseRe
 /*
 PatchLicenseLicenseReservationOp Update a 'license.LicenseReservationOp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchLicenseLicenseReservationOpRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchLicenseLicenseReservationOpRequest
 */
 func (a *LicenseApiService) PatchLicenseLicenseReservationOp(ctx context.Context, moid string) ApiPatchLicenseLicenseReservationOpRequest {
 	return ApiPatchLicenseLicenseReservationOpRequest{
@@ -5575,7 +7910,8 @@ func (a *LicenseApiService) PatchLicenseLicenseReservationOp(ctx context.Context
 }
 
 // Execute executes the request
-//  @return LicenseLicenseReservationOp
+//
+//	@return LicenseLicenseReservationOp
 func (a *LicenseApiService) PatchLicenseLicenseReservationOpExecute(r ApiPatchLicenseLicenseReservationOpRequest) (*LicenseLicenseReservationOp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -5732,9 +8068,9 @@ func (r ApiPatchLicenseSmartlicenseTokenRequest) Execute() (*LicenseSmartlicense
 /*
 PatchLicenseSmartlicenseToken Update a 'license.SmartlicenseToken' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchLicenseSmartlicenseTokenRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchLicenseSmartlicenseTokenRequest
 */
 func (a *LicenseApiService) PatchLicenseSmartlicenseToken(ctx context.Context, moid string) ApiPatchLicenseSmartlicenseTokenRequest {
 	return ApiPatchLicenseSmartlicenseTokenRequest{
@@ -5745,7 +8081,8 @@ func (a *LicenseApiService) PatchLicenseSmartlicenseToken(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return LicenseSmartlicenseToken
+//
+//	@return LicenseSmartlicenseToken
 func (a *LicenseApiService) PatchLicenseSmartlicenseTokenExecute(r ApiPatchLicenseSmartlicenseTokenRequest) (*LicenseSmartlicenseToken, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -5902,9 +8239,9 @@ func (r ApiUpdateLicenseAccountLicenseDataRequest) Execute() (*LicenseAccountLic
 /*
 UpdateLicenseAccountLicenseData Update a 'license.AccountLicenseData' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateLicenseAccountLicenseDataRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateLicenseAccountLicenseDataRequest
 */
 func (a *LicenseApiService) UpdateLicenseAccountLicenseData(ctx context.Context, moid string) ApiUpdateLicenseAccountLicenseDataRequest {
 	return ApiUpdateLicenseAccountLicenseDataRequest{
@@ -5915,7 +8252,8 @@ func (a *LicenseApiService) UpdateLicenseAccountLicenseData(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return LicenseAccountLicenseData
+//
+//	@return LicenseAccountLicenseData
 func (a *LicenseApiService) UpdateLicenseAccountLicenseDataExecute(r ApiUpdateLicenseAccountLicenseDataRequest) (*LicenseAccountLicenseData, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -6072,9 +8410,9 @@ func (r ApiUpdateLicenseCustomerOpRequest) Execute() (*LicenseCustomerOp, *http.
 /*
 UpdateLicenseCustomerOp Update a 'license.CustomerOp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateLicenseCustomerOpRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateLicenseCustomerOpRequest
 */
 func (a *LicenseApiService) UpdateLicenseCustomerOp(ctx context.Context, moid string) ApiUpdateLicenseCustomerOpRequest {
 	return ApiUpdateLicenseCustomerOpRequest{
@@ -6085,7 +8423,8 @@ func (a *LicenseApiService) UpdateLicenseCustomerOp(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return LicenseCustomerOp
+//
+//	@return LicenseCustomerOp
 func (a *LicenseApiService) UpdateLicenseCustomerOpExecute(r ApiUpdateLicenseCustomerOpRequest) (*LicenseCustomerOp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -6242,9 +8581,9 @@ func (r ApiUpdateLicenseIksCustomerOpRequest) Execute() (*LicenseIksCustomerOp, 
 /*
 UpdateLicenseIksCustomerOp Update a 'license.IksCustomerOp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateLicenseIksCustomerOpRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateLicenseIksCustomerOpRequest
 */
 func (a *LicenseApiService) UpdateLicenseIksCustomerOp(ctx context.Context, moid string) ApiUpdateLicenseIksCustomerOpRequest {
 	return ApiUpdateLicenseIksCustomerOpRequest{
@@ -6255,7 +8594,8 @@ func (a *LicenseApiService) UpdateLicenseIksCustomerOp(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return LicenseIksCustomerOp
+//
+//	@return LicenseIksCustomerOp
 func (a *LicenseApiService) UpdateLicenseIksCustomerOpExecute(r ApiUpdateLicenseIksCustomerOpRequest) (*LicenseIksCustomerOp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -6412,9 +8752,9 @@ func (r ApiUpdateLicenseIksLicenseCountRequest) Execute() (*LicenseIksLicenseCou
 /*
 UpdateLicenseIksLicenseCount Update a 'license.IksLicenseCount' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateLicenseIksLicenseCountRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateLicenseIksLicenseCountRequest
 */
 func (a *LicenseApiService) UpdateLicenseIksLicenseCount(ctx context.Context, moid string) ApiUpdateLicenseIksLicenseCountRequest {
 	return ApiUpdateLicenseIksLicenseCountRequest{
@@ -6425,7 +8765,8 @@ func (a *LicenseApiService) UpdateLicenseIksLicenseCount(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return LicenseIksLicenseCount
+//
+//	@return LicenseIksLicenseCount
 func (a *LicenseApiService) UpdateLicenseIksLicenseCountExecute(r ApiUpdateLicenseIksLicenseCountRequest) (*LicenseIksLicenseCount, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -6555,6 +8896,348 @@ func (a *LicenseApiService) UpdateLicenseIksLicenseCountExecute(r ApiUpdateLicen
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiUpdateLicenseIncCustomerOpRequest struct {
+	ctx                  context.Context
+	ApiService           *LicenseApiService
+	moid                 string
+	licenseIncCustomerOp *LicenseIncCustomerOp
+	ifMatch              *string
+}
+
+// The &#39;license.IncCustomerOp&#39; resource to update.
+func (r ApiUpdateLicenseIncCustomerOpRequest) LicenseIncCustomerOp(licenseIncCustomerOp LicenseIncCustomerOp) ApiUpdateLicenseIncCustomerOpRequest {
+	r.licenseIncCustomerOp = &licenseIncCustomerOp
+	return r
+}
+
+// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
+func (r ApiUpdateLicenseIncCustomerOpRequest) IfMatch(ifMatch string) ApiUpdateLicenseIncCustomerOpRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiUpdateLicenseIncCustomerOpRequest) Execute() (*LicenseIncCustomerOp, *http.Response, error) {
+	return r.ApiService.UpdateLicenseIncCustomerOpExecute(r)
+}
+
+/*
+UpdateLicenseIncCustomerOp Update a 'license.IncCustomerOp' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateLicenseIncCustomerOpRequest
+*/
+func (a *LicenseApiService) UpdateLicenseIncCustomerOp(ctx context.Context, moid string) ApiUpdateLicenseIncCustomerOpRequest {
+	return ApiUpdateLicenseIncCustomerOpRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//
+//	@return LicenseIncCustomerOp
+func (a *LicenseApiService) UpdateLicenseIncCustomerOpExecute(r ApiUpdateLicenseIncCustomerOpRequest) (*LicenseIncCustomerOp, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *LicenseIncCustomerOp
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.UpdateLicenseIncCustomerOp")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/license/IncCustomerOps/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.licenseIncCustomerOp == nil {
+		return localVarReturnValue, nil, reportError("licenseIncCustomerOp is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.licenseIncCustomerOp
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateLicenseIncLicenseCountRequest struct {
+	ctx                    context.Context
+	ApiService             *LicenseApiService
+	moid                   string
+	licenseIncLicenseCount *LicenseIncLicenseCount
+	ifMatch                *string
+}
+
+// The &#39;license.IncLicenseCount&#39; resource to update.
+func (r ApiUpdateLicenseIncLicenseCountRequest) LicenseIncLicenseCount(licenseIncLicenseCount LicenseIncLicenseCount) ApiUpdateLicenseIncLicenseCountRequest {
+	r.licenseIncLicenseCount = &licenseIncLicenseCount
+	return r
+}
+
+// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
+func (r ApiUpdateLicenseIncLicenseCountRequest) IfMatch(ifMatch string) ApiUpdateLicenseIncLicenseCountRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiUpdateLicenseIncLicenseCountRequest) Execute() (*LicenseIncLicenseCount, *http.Response, error) {
+	return r.ApiService.UpdateLicenseIncLicenseCountExecute(r)
+}
+
+/*
+UpdateLicenseIncLicenseCount Update a 'license.IncLicenseCount' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateLicenseIncLicenseCountRequest
+*/
+func (a *LicenseApiService) UpdateLicenseIncLicenseCount(ctx context.Context, moid string) ApiUpdateLicenseIncLicenseCountRequest {
+	return ApiUpdateLicenseIncLicenseCountRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//
+//	@return LicenseIncLicenseCount
+func (a *LicenseApiService) UpdateLicenseIncLicenseCountExecute(r ApiUpdateLicenseIncLicenseCountRequest) (*LicenseIncLicenseCount, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *LicenseIncLicenseCount
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.UpdateLicenseIncLicenseCount")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/license/IncLicenseCounts/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.licenseIncLicenseCount == nil {
+		return localVarReturnValue, nil, reportError("licenseIncLicenseCount is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.licenseIncLicenseCount
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiUpdateLicenseIwoCustomerOpRequest struct {
 	ctx                  context.Context
 	ApiService           *LicenseApiService
@@ -6582,9 +9265,9 @@ func (r ApiUpdateLicenseIwoCustomerOpRequest) Execute() (*LicenseIwoCustomerOp, 
 /*
 UpdateLicenseIwoCustomerOp Update a 'license.IwoCustomerOp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateLicenseIwoCustomerOpRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateLicenseIwoCustomerOpRequest
 */
 func (a *LicenseApiService) UpdateLicenseIwoCustomerOp(ctx context.Context, moid string) ApiUpdateLicenseIwoCustomerOpRequest {
 	return ApiUpdateLicenseIwoCustomerOpRequest{
@@ -6595,7 +9278,8 @@ func (a *LicenseApiService) UpdateLicenseIwoCustomerOp(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return LicenseIwoCustomerOp
+//
+//	@return LicenseIwoCustomerOp
 func (a *LicenseApiService) UpdateLicenseIwoCustomerOpExecute(r ApiUpdateLicenseIwoCustomerOpRequest) (*LicenseIwoCustomerOp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -6752,9 +9436,9 @@ func (r ApiUpdateLicenseIwoLicenseCountRequest) Execute() (*LicenseIwoLicenseCou
 /*
 UpdateLicenseIwoLicenseCount Update a 'license.IwoLicenseCount' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateLicenseIwoLicenseCountRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateLicenseIwoLicenseCountRequest
 */
 func (a *LicenseApiService) UpdateLicenseIwoLicenseCount(ctx context.Context, moid string) ApiUpdateLicenseIwoLicenseCountRequest {
 	return ApiUpdateLicenseIwoLicenseCountRequest{
@@ -6765,7 +9449,8 @@ func (a *LicenseApiService) UpdateLicenseIwoLicenseCount(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return LicenseIwoLicenseCount
+//
+//	@return LicenseIwoLicenseCount
 func (a *LicenseApiService) UpdateLicenseIwoLicenseCountExecute(r ApiUpdateLicenseIwoLicenseCountRequest) (*LicenseIwoLicenseCount, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -6922,9 +9607,9 @@ func (r ApiUpdateLicenseLicenseInfoRequest) Execute() (*LicenseLicenseInfo, *htt
 /*
 UpdateLicenseLicenseInfo Update a 'license.LicenseInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateLicenseLicenseInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateLicenseLicenseInfoRequest
 */
 func (a *LicenseApiService) UpdateLicenseLicenseInfo(ctx context.Context, moid string) ApiUpdateLicenseLicenseInfoRequest {
 	return ApiUpdateLicenseLicenseInfoRequest{
@@ -6935,7 +9620,8 @@ func (a *LicenseApiService) UpdateLicenseLicenseInfo(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return LicenseLicenseInfo
+//
+//	@return LicenseLicenseInfo
 func (a *LicenseApiService) UpdateLicenseLicenseInfoExecute(r ApiUpdateLicenseLicenseInfoRequest) (*LicenseLicenseInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -7065,6 +9751,177 @@ func (a *LicenseApiService) UpdateLicenseLicenseInfoExecute(r ApiUpdateLicenseLi
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiUpdateLicenseLicenseRegistrationStatusRequest struct {
+	ctx                              context.Context
+	ApiService                       *LicenseApiService
+	moid                             string
+	licenseLicenseRegistrationStatus *LicenseLicenseRegistrationStatus
+	ifMatch                          *string
+}
+
+// The &#39;license.LicenseRegistrationStatus&#39; resource to update.
+func (r ApiUpdateLicenseLicenseRegistrationStatusRequest) LicenseLicenseRegistrationStatus(licenseLicenseRegistrationStatus LicenseLicenseRegistrationStatus) ApiUpdateLicenseLicenseRegistrationStatusRequest {
+	r.licenseLicenseRegistrationStatus = &licenseLicenseRegistrationStatus
+	return r
+}
+
+// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
+func (r ApiUpdateLicenseLicenseRegistrationStatusRequest) IfMatch(ifMatch string) ApiUpdateLicenseLicenseRegistrationStatusRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiUpdateLicenseLicenseRegistrationStatusRequest) Execute() (*LicenseLicenseRegistrationStatus, *http.Response, error) {
+	return r.ApiService.UpdateLicenseLicenseRegistrationStatusExecute(r)
+}
+
+/*
+UpdateLicenseLicenseRegistrationStatus Update a 'license.LicenseRegistrationStatus' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateLicenseLicenseRegistrationStatusRequest
+*/
+func (a *LicenseApiService) UpdateLicenseLicenseRegistrationStatus(ctx context.Context, moid string) ApiUpdateLicenseLicenseRegistrationStatusRequest {
+	return ApiUpdateLicenseLicenseRegistrationStatusRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//
+//	@return LicenseLicenseRegistrationStatus
+func (a *LicenseApiService) UpdateLicenseLicenseRegistrationStatusExecute(r ApiUpdateLicenseLicenseRegistrationStatusRequest) (*LicenseLicenseRegistrationStatus, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *LicenseLicenseRegistrationStatus
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.UpdateLicenseLicenseRegistrationStatus")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/license/LicenseRegistrationStatuses/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.licenseLicenseRegistrationStatus == nil {
+		return localVarReturnValue, nil, reportError("licenseLicenseRegistrationStatus is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.licenseLicenseRegistrationStatus
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiUpdateLicenseLicenseReservationOpRequest struct {
 	ctx                         context.Context
 	ApiService                  *LicenseApiService
@@ -7092,9 +9949,9 @@ func (r ApiUpdateLicenseLicenseReservationOpRequest) Execute() (*LicenseLicenseR
 /*
 UpdateLicenseLicenseReservationOp Update a 'license.LicenseReservationOp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateLicenseLicenseReservationOpRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateLicenseLicenseReservationOpRequest
 */
 func (a *LicenseApiService) UpdateLicenseLicenseReservationOp(ctx context.Context, moid string) ApiUpdateLicenseLicenseReservationOpRequest {
 	return ApiUpdateLicenseLicenseReservationOpRequest{
@@ -7105,7 +9962,8 @@ func (a *LicenseApiService) UpdateLicenseLicenseReservationOp(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return LicenseLicenseReservationOp
+//
+//	@return LicenseLicenseReservationOp
 func (a *LicenseApiService) UpdateLicenseLicenseReservationOpExecute(r ApiUpdateLicenseLicenseReservationOpRequest) (*LicenseLicenseReservationOp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -7262,9 +10120,9 @@ func (r ApiUpdateLicenseSmartlicenseTokenRequest) Execute() (*LicenseSmartlicens
 /*
 UpdateLicenseSmartlicenseToken Update a 'license.SmartlicenseToken' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateLicenseSmartlicenseTokenRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateLicenseSmartlicenseTokenRequest
 */
 func (a *LicenseApiService) UpdateLicenseSmartlicenseToken(ctx context.Context, moid string) ApiUpdateLicenseSmartlicenseTokenRequest {
 	return ApiUpdateLicenseSmartlicenseTokenRequest{
@@ -7275,7 +10133,8 @@ func (a *LicenseApiService) UpdateLicenseSmartlicenseToken(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return LicenseSmartlicenseToken
+//
+//	@return LicenseSmartlicenseToken
 func (a *LicenseApiService) UpdateLicenseSmartlicenseTokenExecute(r ApiUpdateLicenseSmartlicenseTokenRequest) (*LicenseSmartlicenseToken, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

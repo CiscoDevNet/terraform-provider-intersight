@@ -22,6 +22,8 @@ The following arguments can be used to get data of already created objects in In
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) The 'name' used to identify this VLAN. 
+* `primary_vlan_id`:(int) The Primary VLAN ID of the VLAN, if the sharing type of the VLAN is Isolated or Community. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
+* `sharing_type`:(string) The sharing type of this VLAN.* `None` - This represents a regular VLAN.* `Primary` - This represents a primary VLAN.* `Isolated` - This represents an isolated VLAN.* `Community` - This represents a community VLAN. 
 * `vlans`:(string) Set of VLANs defined by VLAN object with identical configuration. 
  

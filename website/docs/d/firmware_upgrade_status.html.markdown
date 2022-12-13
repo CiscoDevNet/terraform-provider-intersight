@@ -20,7 +20,7 @@ The following arguments can be used to get data of already created objects in In
 * `download_error`:(string) Any error encountered. Set to empty when download is in progress or completed. 
 * `download_message`:(string) The message from the endpoint during the download. 
 * `download_percentage`:(int) The percentage of the image downloaded in the endpoint. 
-* `download_progress`:(int) The download progress of the file represented as a percentage between 0% and 100%. If progress reporting is not possible a value of -1 is sent. 
+* `download_progress`:(int) The download progress of the file represented as a percentage between 0% and 100%. If progress reporting is not possible, a value of -1 is sent. 
 * `download_retries`:(int) The number of retries the plugin attempted before succeeding or failing the download. 
 * `download_stage`:(string) The image download stages. Example:downloading, flashing. 
 * `ep_power_status`:(string) The server power status after the upgrade request is submitted in the endpoint.* `none` - Server power status is none.* `powered on` - Server power status is powered on.* `powered off` - Server power status is powered off. 

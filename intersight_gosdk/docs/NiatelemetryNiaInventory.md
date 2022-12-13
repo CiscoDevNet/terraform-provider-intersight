@@ -35,6 +35,7 @@ Name | Type | Description | Notes
 **MacSecFabCount** | Pointer to **int64** | Number of Macsec configured interfaces on a Spine. | [optional] 
 **MacsecTotalCount** | Pointer to **int64** | Number of total Macsec configured interfaces for all nodes. | [optional] 
 **Memory** | Pointer to **int64** | Memory usage of device being inventoried. This determines the percentage of memory resources used. | [optional] 
+**NexusCloudMembershipStatus** | Pointer to **bool** | Returns if site has been onboarded to nexus cloud or not. | [optional] [default to false]
 **NodeId** | Pointer to **string** | The ID of the device being inventoried. | [optional] 
 **NxosBgpEvpn** | Pointer to [**NullableNiatelemetryNxosBgpEvpn**](NiatelemetryNxosBgpEvpn.md) |  | [optional] 
 **NxosBgpMvpn** | Pointer to [**NullableNiatelemetryNxosBgpMvpn**](NiatelemetryNxosBgpMvpn.md) |  | [optional] 
@@ -49,13 +50,14 @@ Name | Type | Description | Notes
 **NxosTelnet** | Pointer to **string** | Returns the value of the nxosTelnet field. | [optional] 
 **NxosTotalRoutes** | Pointer to **int64** | Total number of routes configured in the DCNM. | [optional] 
 **NxosVtp** | Pointer to [**NullableNiatelemetryNxosVtp**](NiatelemetryNxosVtp.md) |  | [optional] 
-**RecordType** | Pointer to **string** | Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected. | [optional] 
+**RecordType** | Pointer to **string** | Type of record DCNM / APIC / SE / Nexus Switch. This determines the type of platform where inventory was collected. | [optional] 
 **RecordVersion** | Pointer to **string** | Version of record being pushed. This determines what was the API version for data available from the device. | [optional] 
 **RoutePrefixCount** | Pointer to **int64** | Total nuumber of v4 and v6 routes per node. | [optional] 
 **RoutePrefixV4Count** | Pointer to **int64** | Number of v4 routes per node. | [optional] 
 **RoutePrefixV6Count** | Pointer to **int64** | Number of v6 routes per node. | [optional] 
 **Serial** | Pointer to **string** | Serial number of device being invetoried. The serial number is unique per device and will be used as the key. | [optional] 
 **SiteName** | Pointer to **string** | Name of fabric domain of the controller. | [optional] 
+**Siteuuid** | Pointer to **string** | Returns the uuid of the Nexus Cloud site associated to the inventory object. | [optional] 
 **SmartAccountId** | Pointer to **int64** | Returns the value of the smartAccountId/CustomerId field. | [optional] 
 **SoftwareDownload** | Pointer to **string** | Last software downloaded of device being inventoried. This determines if software download API was used. | [optional] 
 **SystemUpTime** | Pointer to **string** | The amount of time that the device being inventoried been up. | [optional] 
@@ -878,6 +880,31 @@ SetMemory sets Memory field to given value.
 
 HasMemory returns a boolean if a field has been set.
 
+### GetNexusCloudMembershipStatus
+
+`func (o *NiatelemetryNiaInventory) GetNexusCloudMembershipStatus() bool`
+
+GetNexusCloudMembershipStatus returns the NexusCloudMembershipStatus field if non-nil, zero value otherwise.
+
+### GetNexusCloudMembershipStatusOk
+
+`func (o *NiatelemetryNiaInventory) GetNexusCloudMembershipStatusOk() (*bool, bool)`
+
+GetNexusCloudMembershipStatusOk returns a tuple with the NexusCloudMembershipStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNexusCloudMembershipStatus
+
+`func (o *NiatelemetryNiaInventory) SetNexusCloudMembershipStatus(v bool)`
+
+SetNexusCloudMembershipStatus sets NexusCloudMembershipStatus field to given value.
+
+### HasNexusCloudMembershipStatus
+
+`func (o *NiatelemetryNiaInventory) HasNexusCloudMembershipStatus() bool`
+
+HasNexusCloudMembershipStatus returns a boolean if a field has been set.
+
 ### GetNodeId
 
 `func (o *NiatelemetryNiaInventory) GetNodeId() string`
@@ -1472,6 +1499,31 @@ SetSiteName sets SiteName field to given value.
 `func (o *NiatelemetryNiaInventory) HasSiteName() bool`
 
 HasSiteName returns a boolean if a field has been set.
+
+### GetSiteuuid
+
+`func (o *NiatelemetryNiaInventory) GetSiteuuid() string`
+
+GetSiteuuid returns the Siteuuid field if non-nil, zero value otherwise.
+
+### GetSiteuuidOk
+
+`func (o *NiatelemetryNiaInventory) GetSiteuuidOk() (*string, bool)`
+
+GetSiteuuidOk returns a tuple with the Siteuuid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSiteuuid
+
+`func (o *NiatelemetryNiaInventory) SetSiteuuid(v string)`
+
+SetSiteuuid sets Siteuuid field to given value.
+
+### HasSiteuuid
+
+`func (o *NiatelemetryNiaInventory) HasSiteuuid() bool`
+
+HasSiteuuid returns a boolean if a field has been set.
 
 ### GetSmartAccountId
 

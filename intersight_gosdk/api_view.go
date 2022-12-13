@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -36,9 +36,9 @@ func (r ApiGetViewHealthStatusByMoidRequest) Execute() (*ViewHealthStatus, *http
 /*
 GetViewHealthStatusByMoid Read a 'view.HealthStatus' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetViewHealthStatusByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetViewHealthStatusByMoidRequest
 */
 func (a *ViewApiService) GetViewHealthStatusByMoid(ctx context.Context, moid string) ApiGetViewHealthStatusByMoidRequest {
 	return ApiGetViewHealthStatusByMoidRequest{
@@ -49,7 +49,8 @@ func (a *ViewApiService) GetViewHealthStatusByMoid(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return ViewHealthStatus
+//
+//	@return ViewHealthStatus
 func (a *ViewApiService) GetViewHealthStatusByMoidExecute(r ApiGetViewHealthStatusByMoidRequest) (*ViewHealthStatus, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -260,8 +261,8 @@ func (r ApiGetViewHealthStatusListRequest) Execute() (*ViewHealthStatusResponse,
 /*
 GetViewHealthStatusList Read a 'view.HealthStatus' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetViewHealthStatusListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetViewHealthStatusListRequest
 */
 func (a *ViewApiService) GetViewHealthStatusList(ctx context.Context) ApiGetViewHealthStatusListRequest {
 	return ApiGetViewHealthStatusListRequest{
@@ -271,7 +272,8 @@ func (a *ViewApiService) GetViewHealthStatusList(ctx context.Context) ApiGetView
 }
 
 // Execute executes the request
-//  @return ViewHealthStatusResponse
+//
+//	@return ViewHealthStatusResponse
 func (a *ViewApiService) GetViewHealthStatusListExecute(r ApiGetViewHealthStatusListRequest) (*ViewHealthStatusResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -438,9 +440,9 @@ func (r ApiGetViewServerByMoidRequest) Execute() (*ViewServer, *http.Response, e
 /*
 GetViewServerByMoid Read a 'view.Server' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetViewServerByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetViewServerByMoidRequest
 */
 func (a *ViewApiService) GetViewServerByMoid(ctx context.Context, moid string) ApiGetViewServerByMoidRequest {
 	return ApiGetViewServerByMoidRequest{
@@ -451,7 +453,8 @@ func (a *ViewApiService) GetViewServerByMoid(ctx context.Context, moid string) A
 }
 
 // Execute executes the request
-//  @return ViewServer
+//
+//	@return ViewServer
 func (a *ViewApiService) GetViewServerByMoidExecute(r ApiGetViewServerByMoidRequest) (*ViewServer, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -662,8 +665,8 @@ func (r ApiGetViewServerListRequest) Execute() (*ViewServerResponse, *http.Respo
 /*
 GetViewServerList Read a 'view.Server' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetViewServerListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetViewServerListRequest
 */
 func (a *ViewApiService) GetViewServerList(ctx context.Context) ApiGetViewServerListRequest {
 	return ApiGetViewServerListRequest{
@@ -673,7 +676,8 @@ func (a *ViewApiService) GetViewServerList(ctx context.Context) ApiGetViewServer
 }
 
 // Execute executes the request
-//  @return ViewServerResponse
+//
+//	@return ViewServerResponse
 func (a *ViewApiService) GetViewServerListExecute(r ApiGetViewServerListRequest) (*ViewServerResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet

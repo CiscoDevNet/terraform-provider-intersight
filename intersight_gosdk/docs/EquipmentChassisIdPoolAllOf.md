@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "equipment.ChassisIdPool"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "equipment.ChassisIdPool"]
+**PreferredIds** | Pointer to **[]int64** |  | [optional] 
 **DeviceRegistration** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
@@ -67,6 +68,41 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetPreferredIds
+
+`func (o *EquipmentChassisIdPoolAllOf) GetPreferredIds() []int64`
+
+GetPreferredIds returns the PreferredIds field if non-nil, zero value otherwise.
+
+### GetPreferredIdsOk
+
+`func (o *EquipmentChassisIdPoolAllOf) GetPreferredIdsOk() (*[]int64, bool)`
+
+GetPreferredIdsOk returns a tuple with the PreferredIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPreferredIds
+
+`func (o *EquipmentChassisIdPoolAllOf) SetPreferredIds(v []int64)`
+
+SetPreferredIds sets PreferredIds field to given value.
+
+### HasPreferredIds
+
+`func (o *EquipmentChassisIdPoolAllOf) HasPreferredIds() bool`
+
+HasPreferredIds returns a boolean if a field has been set.
+
+### SetPreferredIdsNil
+
+`func (o *EquipmentChassisIdPoolAllOf) SetPreferredIdsNil(b bool)`
+
+ SetPreferredIdsNil sets the value for PreferredIds to be an explicit nil
+
+### UnsetPreferredIds
+`func (o *EquipmentChassisIdPoolAllOf) UnsetPreferredIds()`
+
+UnsetPreferredIds ensures that no value is present for PreferredIds, not even an explicit nil
 ### GetDeviceRegistration
 
 `func (o *EquipmentChassisIdPoolAllOf) GetDeviceRegistration() AssetDeviceRegistrationRelationship`

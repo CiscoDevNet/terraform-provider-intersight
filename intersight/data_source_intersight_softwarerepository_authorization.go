@@ -115,11 +115,6 @@ func getSoftwarerepositoryAuthorizationSchema() map[string]*schema.Schema {
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
-		"is_user_id_set": {
-			Description: "Indicates whether the value of the 'userId' property has been set.",
-			Type:        schema.TypeBool,
-			Optional:    true,
-		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -499,11 +494,6 @@ func dataSourceSoftwarerepositoryAuthorizationRead(c context.Context, d *schema.
 		o.SetIsPasswordSet(x)
 	}
 
-	if v, ok := d.GetOkExists("is_user_id_set"); ok {
-		x := (v.(bool))
-		o.SetIsUserIdSet(x)
-	}
-
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
@@ -786,7 +776,6 @@ func dataSourceSoftwarerepositoryAuthorizationRead(c context.Context, d *schema.
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["is_password_set"] = (s.GetIsPasswordSet())
-				temp["is_user_id_set"] = (s.GetIsUserIdSet())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
@@ -800,6 +789,7 @@ func dataSourceSoftwarerepositoryAuthorizationRead(c context.Context, d *schema.
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["user_id"] = (s.GetUserId())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				softwarerepositoryAuthorizationResults = append(softwarerepositoryAuthorizationResults, temp)

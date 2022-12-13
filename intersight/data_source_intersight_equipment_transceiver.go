@@ -26,6 +26,11 @@ func getEquipmentTransceiverSchema() map[string]*schema.Schema {
 			Optional:         true,
 			DiffSuppressFunc: SuppressDiffAdditionProps,
 		},
+		"aggregate_port_id": {
+			Description: "Breakout port member in the Fabric Interconnect.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"ancestors": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
@@ -614,6 +619,11 @@ func dataSourceEquipmentTransceiverRead(c context.Context, d *schema.ResourceDat
 		if err == nil && x1 != nil {
 			o.AdditionalProperties = x1.(map[string]interface{})
 		}
+	}
+
+	if v, ok := d.GetOkExists("aggregate_port_id"); ok {
+		x := int64(v.(int))
+		o.SetAggregatePortId(x)
 	}
 
 	if v, ok := d.GetOk("ancestors"); ok {
@@ -1249,6 +1259,7 @@ func dataSourceEquipmentTransceiverRead(c context.Context, d *schema.ResourceDat
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+				temp["aggregate_port_id"] = (s.GetAggregatePortId())
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["cisco_extended_id_number"] = (s.GetCiscoExtendedIdNumber())

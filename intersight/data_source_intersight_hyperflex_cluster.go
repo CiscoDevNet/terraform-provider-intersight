@@ -1002,6 +1002,11 @@ func getHyperflexClusterSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"uplink_speed": {
+			Description: "The uplink speed information of the HyperFlex cluster.\n* `Unknown` - The uplink speed could not be determined. The physical servers are potentially not claimed.\n* `10G` - The uplink speed is 10G.\n* `1G` - The uplink speed is 1G.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"utilization_percentage": {
 			Description: "The storage utilization percentage is computed based on total capacity and current capacity utilization.",
 			Type:        schema.TypeFloat,
@@ -2109,6 +2114,11 @@ func dataSourceHyperflexClusterRead(c context.Context, d *schema.ResourceData, m
 		o.SetUpgradeStatus(x)
 	}
 
+	if v, ok := d.GetOk("uplink_speed"); ok {
+		x := (v.(string))
+		o.SetUplinkSpeed(x)
+	}
+
 	if v, ok := d.GetOk("utilization_percentage"); ok {
 		x := float32(v.(float64))
 		o.SetUtilizationPercentage(x)
@@ -2346,6 +2356,7 @@ func dataSourceHyperflexClusterRead(c context.Context, d *schema.ResourceData, m
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["upgrade_status"] = (s.GetUpgradeStatus())
+				temp["uplink_speed"] = (s.GetUplinkSpeed())
 				temp["utilization_percentage"] = (s.GetUtilizationPercentage())
 				temp["utilization_trend_percentage"] = (s.GetUtilizationTrendPercentage())
 

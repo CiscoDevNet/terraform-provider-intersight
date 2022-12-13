@@ -285,7 +285,7 @@ func getFirmwareRunningFirmwareSchema() map[string]*schema.Schema {
 			Elem: &schema.Schema{
 				Type: schema.TypeString}},
 		"package_version": {
-			Description: "Package version which the firmware belongs to.",
+			Description: "Bundle version which the firmware belongs to.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

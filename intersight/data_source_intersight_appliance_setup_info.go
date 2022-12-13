@@ -95,11 +95,6 @@ func getApplianceSetupInfoSchema() map[string]*schema.Schema {
 				},
 			},
 		},
-		"backup_version": {
-			Description: "The version of Intersight Appliance backup which can restore to.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
 		"build_type": {
 			Description: "Build type of the Intersight Appliance setup (e.g. release or debug).",
 			Type:        schema.TypeString,
@@ -171,6 +166,16 @@ func getApplianceSetupInfoSchema() map[string]*schema.Schema {
 		"latest_version": {
 			Description: "The most recent version which Intersight Appliance can upgrade to.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"min_cpu": {
+			Description: "The minimum cpu required of the node in cluster.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"min_ram": {
+			Description: "The minimum ram required of the node in cluster.",
+			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"mod_time": {
@@ -527,11 +532,6 @@ func dataSourceApplianceSetupInfoRead(c context.Context, d *schema.ResourceData,
 		o.SetAncestors(x)
 	}
 
-	if v, ok := d.GetOk("backup_version"); ok {
-		x := (v.(string))
-		o.SetBackupVersion(x)
-	}
-
 	if v, ok := d.GetOk("build_type"); ok {
 		x := (v.(string))
 		o.SetBuildType(x)
@@ -598,6 +598,16 @@ func dataSourceApplianceSetupInfoRead(c context.Context, d *schema.ResourceData,
 	if v, ok := d.GetOk("latest_version"); ok {
 		x := (v.(string))
 		o.SetLatestVersion(x)
+	}
+
+	if v, ok := d.GetOkExists("min_cpu"); ok {
+		x := int64(v.(int))
+		o.SetMinCpu(x)
+	}
+
+	if v, ok := d.GetOkExists("min_ram"); ok {
+		x := int64(v.(int))
+		o.SetMinRam(x)
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
@@ -878,7 +888,6 @@ func dataSourceApplianceSetupInfoRead(c context.Context, d *schema.ResourceData,
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
-				temp["backup_version"] = (s.GetBackupVersion())
 				temp["build_type"] = (s.GetBuildType())
 
 				temp["capabilities"] = flattenListApplianceKeyValuePair(s.GetCapabilities(), d)
@@ -891,6 +900,8 @@ func dataSourceApplianceSetupInfoRead(c context.Context, d *schema.ResourceData,
 
 				temp["end_time"] = (s.GetEndTime()).String()
 				temp["latest_version"] = (s.GetLatestVersion())
+				temp["min_cpu"] = (s.GetMinCpu())
+				temp["min_ram"] = (s.GetMinRam())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())

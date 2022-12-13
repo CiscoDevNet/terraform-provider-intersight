@@ -229,14 +229,15 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 					return
 				}},
 			"failed_workflow_cleanup_duration": {
-				Description: "The duration in hours after which the workflow info for failed, terminated or timed out workflow will be removed from database.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Default:     2160,
-				ForceNew:    true,
+				Description:  "The duration in hours after which the workflow info for failed, terminated or timed out workflow will be removed from database.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(1, 8760),
+				Optional:     true,
+				Default:      2160,
+				ForceNew:     true,
 			},
 			"input": {
-				Description: "All the given inputs for the workflow.",
+				Description: "The input data provided for the workflow execution.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -287,10 +288,16 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 							Default:     "workflow.Message",
 						},
 						"message": {
-							Description: "An i18n message that can be translated in multiple languages to support internationalization.",
+							Description: "An i18n message that can be translated into multiple languages to support internationalization.",
 							Type:        schema.TypeString,
 							Optional:    true,
-						},
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
@@ -298,12 +305,16 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 							Default:     "workflow.Message",
 						},
 						"severity": {
-							Description:  "The severity of the Task or Workflow message warning/error/info etc.\n* `Info` - The enum represents the log level to be used to convey info message.\n* `Warning` - The enum represents the log level to be used to convey warning message.\n* `Debug` - The enum represents the log level to be used to convey debug message.\n* `Error` - The enum represents the log level to be used to convey error message.",
-							Type:         schema.TypeString,
-							ValidateFunc: validation.StringInSlice([]string{"Info", "Warning", "Debug", "Error"}, false),
-							Optional:     true,
-							Default:      "Info",
-						},
+							Description: "The severity of the Task or Workflow message warning/error/info etc.\n* `Info` - The enum represents the log level to be used to convey info message.\n* `Warning` - The enum represents the log level to be used to convey warning message.\n* `Debug` - The enum represents the log level to be used to convey debug message.\n* `Error` - The enum represents the log level to be used to convey error message.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 					},
 				},
 			},
@@ -386,7 +397,7 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 				ForceNew: true,
 			},
 			"output": {
-				Description: "All the generated outputs for the workflow.",
+				Description: "The output generated at the end of the workflow execution.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -485,13 +496,16 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 				},
 			},
 			"pause_reason": {
-				Description:  "Denotes the reason workflow is in paused status.\n* `None` - Pause reason is none, which indicates there is no reason for the pause state.\n* `TaskWithWarning` - Pause reason indicates the workflow is in this state due to a task that has a status as completed with warnings.\n* `SystemMaintenance` - Pause reason indicates the workflow is in this state based on actions of system admin for maintenance.",
-				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"None", "TaskWithWarning", "SystemMaintenance"}, false),
-				Optional:     true,
-				Default:      "None",
-				ForceNew:     true,
-			},
+				Description: "Denotes the reason workflow is in paused status.\n* `None` - Pause reason is none, which indicates there is no reason for the pause state.\n* `TaskWithWarning` - Pause reason indicates the workflow is in this state due to a task that has a status as completed with warnings.\n* `SystemMaintenance` - Pause reason indicates the workflow is in this state based on actions of system admin for maintenance.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"pending_dynamic_workflow_info": {
 				Description: "A reference to a workflowPendingDynamicWorkflowInfo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -612,7 +626,7 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 				},
 			},
 			"progress": {
-				Description: "This field indicates percentage of workflow task execution.",
+				Description: "The progress of a workflow is calculated based on the total number of tasks in the workflow and the number of tasks completed. A task is considered as completed if the task status is either \"NO_OP\" or \"COMPLETED\". If the task status is \"SKIP_TO_FAIL\", the workflow will be terminated and the progress of the workflow will be set to 100.",
 				Type:        schema.TypeFloat,
 				Optional:    true,
 				Computed:    true,
@@ -699,13 +713,18 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 							Default:     "workflow.WorkflowInfoProperties",
 						},
 						"retryable": {
-							Description: "When true, this workflow can be retried if has not been modified for more than a period of 2 weeks.",
+							Description: "When true, this workflow can be retried within 2 weeks from the last failure.",
 							Type:        schema.TypeBool,
 							Optional:    true,
-							Default:     false,
-						},
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 						"rollback_action": {
-							Description: "Status of rollback for this workflow instance. The rollback action of the workflow can be enabled, disabled, completed.\n* `Disabled` - Status of the rollback action when workflow is disabled for rollback.\n* `Enabled` - Status of the rollback action when workflow is enabled for rollback.\n* `Completed` - Status of the rollback action once workflow completes the rollback for all eligible tasks.",
+							Description: "Status of rollback for this workflow instance. The rollback action can be enabled, disabled or completed.\n* `Disabled` - Status of the rollback action when workflow is disabled for rollback.\n* `Enabled` - Status of the rollback action when workflow is enabled for rollback.\n* `Completed` - Status of the rollback action once workflow completes the rollback for all eligible tasks.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -757,7 +776,7 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 					return
 				}},
 			"src": {
-				Description: "The source microservice name which is the owner for this workflow.",
+				Description: "The source microservice name which is the owner of this workflow.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -790,11 +809,12 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 					return
 				}},
 			"success_workflow_cleanup_duration": {
-				Description: "The duration in hours after which the workflow info for successful workflow will be removed from database.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Default:     2160,
-				ForceNew:    true,
+				Description:  "The duration in hours after which the workflow info for successful workflow will be removed from database.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(1, 8760),
+				Optional:     true,
+				Default:      2160,
+				ForceNew:     true,
 			},
 			"tags": {
 				Type:       schema.TypeList,
@@ -885,7 +905,7 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 					return
 				}},
 			"user_action_required": {
-				Description: "Property will be set when an user action is required on the workflow. This can be because the workflow is waiting for a wait task to be updated, workflow is paused or workflow launched by a configuration object has failed and needs to be retried in order to complete successfully.",
+				Description: "Property will be set when a user action is required on the workflow. This can be because the workflow is waiting for a wait task to be updated, workflow is paused or workflow launched by a configuration object has failed and needs to be retried in order to complete successfully.",
 				Type:        schema.TypeBool,
 				Optional:    true,
 				Computed:    true,
@@ -1058,13 +1078,16 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 				},
 			},
 			"wait_reason": {
-				Description:  "Denotes the reason workflow is in waiting status.\n* `None` - Wait reason is none, which indicates there is no reason for the waiting state.\n* `GatherTasks` - Wait reason is gathering tasks, which indicates the workflow is in this state in order to gather tasks.\n* `Duplicate` - Wait reason is duplicate, which indicates the workflow is a duplicate of current running workflow.\n* `RateLimit` - Wait reason is rate limit, which indicates the workflow is rate limited by account/instance level throttling threshold.\n* `WaitTask` - Wait reason when there are one or more wait tasks in the workflow which are yet to receive a task status update.\n* `PendingRetryFailed` - Wait reason when the workflow is pending a RetryFailed action.\n* `WaitingToStart` - Workflow is waiting to start on workflow engine.",
-				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"None", "GatherTasks", "Duplicate", "RateLimit", "WaitTask", "PendingRetryFailed", "WaitingToStart"}, false),
-				Optional:     true,
-				Default:      "None",
-				ForceNew:     true,
-			},
+				Description: "Denotes the reason workflow is in waiting status.\n* `None` - Wait reason is none, which indicates there is no reason for the waiting state.\n* `GatherTasks` - Wait reason is gathering tasks, which indicates the workflow is in this state in order to gather tasks.\n* `Duplicate` - Wait reason is duplicate, which indicates the workflow is a duplicate of current running workflow.\n* `RateLimit` - Wait reason is rate limit, which indicates the workflow is rate limited by account/instance level throttling threshold.\n* `WaitTask` - Wait reason when there are one or more wait tasks in the workflow which are yet to receive a task status update.\n* `PendingRetryFailed` - Wait reason when the workflow is pending a RetryFailed action.\n* `WaitingToStart` - Workflow is waiting to start on workflow engine.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"workflow_ctx": {
 				Description: "The workflow context which contains initiator and target information.",
 				Type:        schema.TypeList,
@@ -1163,17 +1186,35 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 										Description: "Moid of the target Intersight managed object.",
 										Type:        schema.TypeString,
 										Optional:    true,
-									},
+										Computed:    true,
+										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+											if val != nil {
+												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+											}
+											return
+										}},
 									"target_name": {
 										Description: "Name of the target instance.",
 										Type:        schema.TypeString,
 										Optional:    true,
-									},
+										Computed:    true,
+										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+											if val != nil {
+												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+											}
+											return
+										}},
 									"target_type": {
 										Description: "Object type of the target Intersight managed object.",
 										Type:        schema.TypeString,
 										Optional:    true,
-									},
+										Computed:    true,
+										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+											if val != nil {
+												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+											}
+											return
+										}},
 								},
 							},
 						},
@@ -1194,6 +1235,7 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 						},
 					},
 				},
+				ForceNew: true,
 			},
 			"workflow_definition": {
 				Description: "A reference to a workflowWorkflowDefinition resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -1237,26 +1279,8 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 				ForceNew: true,
 			},
 			"workflow_meta_type": {
-				Description:  "The type of workflow meta. Derived from the workflow meta that is used to launch this workflow instance.\n* `SystemDefined` - System defined workflow definition.\n* `UserDefined` - User defined workflow definition.\n* `Dynamic` - Dynamically defined workflow definition.",
-				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"SystemDefined", "UserDefined", "Dynamic"}, false),
-				Optional:     true,
-				Default:      "SystemDefined",
-			},
-			"workflow_task_count": {
-				Description: "Total number of workflow tasks in this workflow.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				Computed:    true,
-				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
-					if val != nil {
-						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
-					}
-					return
-				}},
-			"workflow_worker_task_count": {
-				Description: "Total number of worker tasks in this workflow. This count doesn't include the control tasks in the workflow.",
-				Type:        schema.TypeInt,
+				Description: "The type of workflow meta. Derived from the workflow meta that is used to launch this workflow instance.\n* `SystemDefined` - System defined workflow definition.\n* `UserDefined` - User defined workflow definition.\n* `Dynamic` - Dynamically defined workflow definition.",
+				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
 				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
@@ -1413,22 +1437,10 @@ func resourceWorkflowWorkflowInfoCreate(c context.Context, d *schema.ResourceDat
 				}
 			}
 			o.SetClassId("workflow.Message")
-			if v, ok := l["message"]; ok {
-				{
-					x := (v.(string))
-					o.SetMessage(x)
-				}
-			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["severity"]; ok {
-				{
-					x := (v.(string))
-					o.SetSeverity(x)
 				}
 			}
 			x = append(x, *o)
@@ -1496,11 +1508,6 @@ func resourceWorkflowWorkflowInfoCreate(c context.Context, d *schema.ResourceDat
 			x := p[0]
 			o.SetOrganization(x)
 		}
-	}
-
-	if v, ok := d.GetOk("pause_reason"); ok {
-		x := (v.(string))
-		o.SetPauseReason(x)
 	}
 
 	if v, ok := d.GetOk("permission"); ok {
@@ -1589,11 +1596,6 @@ func resourceWorkflowWorkflowInfoCreate(c context.Context, d *schema.ResourceDat
 		if len(x) > 0 {
 			o.SetTags(x)
 		}
-	}
-
-	if v, ok := d.GetOk("wait_reason"); ok {
-		x := (v.(string))
-		o.SetWaitReason(x)
 	}
 
 	if v, ok := d.GetOk("workflow_ctx"); ok {
@@ -1693,24 +1695,6 @@ func resourceWorkflowWorkflowInfoCreate(c context.Context, d *schema.ResourceDat
 								o.SetObjectType(x)
 							}
 						}
-						if v, ok := l["target_moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetTargetMoid(x)
-							}
-						}
-						if v, ok := l["target_name"]; ok {
-							{
-								x := (v.(string))
-								o.SetTargetName(x)
-							}
-						}
-						if v, ok := l["target_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetTargetType(x)
-							}
-						}
 						x = append(x, *o)
 					}
 					if len(x) > 0 {
@@ -1785,11 +1769,6 @@ func resourceWorkflowWorkflowInfoCreate(c context.Context, d *schema.ResourceDat
 			x := p[0]
 			o.SetWorkflowDefinition(x)
 		}
-	}
-
-	if v, ok := d.GetOk("workflow_meta_type"); ok {
-		x := (v.(string))
-		o.SetWorkflowMetaType(x)
 	}
 
 	r := conn.ApiClient.WorkflowApi.CreateWorkflowWorkflowInfo(conn.ctx).WorkflowWorkflowInfo(*o)
@@ -2035,14 +2014,6 @@ func resourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceData,
 		return diag.Errorf("error occurred while setting property WorkflowMetaType in WorkflowWorkflowInfo object: %s", err.Error())
 	}
 
-	if err := d.Set("workflow_task_count", (s.GetWorkflowTaskCount())); err != nil {
-		return diag.Errorf("error occurred while setting property WorkflowTaskCount in WorkflowWorkflowInfo object: %s", err.Error())
-	}
-
-	if err := d.Set("workflow_worker_task_count", (s.GetWorkflowWorkerTaskCount())); err != nil {
-		return diag.Errorf("error occurred while setting property WorkflowWorkerTaskCount in WorkflowWorkflowInfo object: %s", err.Error())
-	}
-
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
 	return de
@@ -2200,22 +2171,10 @@ func resourceWorkflowWorkflowInfoUpdate(c context.Context, d *schema.ResourceDat
 				}
 			}
 			o.SetClassId("workflow.Message")
-			if v, ok := l["message"]; ok {
-				{
-					x := (v.(string))
-					o.SetMessage(x)
-				}
-			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["severity"]; ok {
-				{
-					x := (v.(string))
-					o.SetSeverity(x)
 				}
 			}
 			x = append(x, *o)
@@ -2285,12 +2244,6 @@ func resourceWorkflowWorkflowInfoUpdate(c context.Context, d *schema.ResourceDat
 			x := p[0]
 			o.SetOrganization(x)
 		}
-	}
-
-	if d.HasChange("pause_reason") {
-		v := d.Get("pause_reason")
-		x := (v.(string))
-		o.SetPauseReason(x)
 	}
 
 	if d.HasChange("permission") {
@@ -2381,12 +2334,6 @@ func resourceWorkflowWorkflowInfoUpdate(c context.Context, d *schema.ResourceDat
 			x = append(x, *o)
 		}
 		o.SetTags(x)
-	}
-
-	if d.HasChange("wait_reason") {
-		v := d.Get("wait_reason")
-		x := (v.(string))
-		o.SetWaitReason(x)
 	}
 
 	if d.HasChange("workflow_ctx") {
@@ -2487,24 +2434,6 @@ func resourceWorkflowWorkflowInfoUpdate(c context.Context, d *schema.ResourceDat
 								o.SetObjectType(x)
 							}
 						}
-						if v, ok := l["target_moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetTargetMoid(x)
-							}
-						}
-						if v, ok := l["target_name"]; ok {
-							{
-								x := (v.(string))
-								o.SetTargetName(x)
-							}
-						}
-						if v, ok := l["target_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetTargetType(x)
-							}
-						}
 						x = append(x, *o)
 					}
 					if len(x) > 0 {
@@ -2580,12 +2509,6 @@ func resourceWorkflowWorkflowInfoUpdate(c context.Context, d *schema.ResourceDat
 			x := p[0]
 			o.SetWorkflowDefinition(x)
 		}
-	}
-
-	if d.HasChange("workflow_meta_type") {
-		v := d.Get("workflow_meta_type")
-		x := (v.(string))
-		o.SetWorkflowMetaType(x)
 	}
 
 	r := conn.ApiClient.WorkflowApi.UpdateWorkflowWorkflowInfo(conn.ctx, d.Id()).WorkflowWorkflowInfo(*o)

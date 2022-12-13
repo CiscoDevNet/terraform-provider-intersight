@@ -11,32 +11,30 @@ Name | Type | Description | Notes
 **Email** | Pointer to **string** | The email address of the user who started this workflow. | [optional] [readonly] 
 **EndTime** | Pointer to **time.Time** | The time when the workflow reached a final state. | [optional] [readonly] 
 **FailedWorkflowCleanupDuration** | Pointer to **int64** | The duration in hours after which the workflow info for failed, terminated or timed out workflow will be removed from database. | [optional] [default to 2160]
-**Input** | Pointer to **interface{}** | All the given inputs for the workflow. | [optional] 
+**Input** | Pointer to **interface{}** | The input data provided for the workflow execution. | [optional] 
 **InstId** | Pointer to **string** | A workflow instance Id which is the unique identified for the workflow execution. | [optional] [readonly] 
 **Internal** | Pointer to **bool** | Denotes if this workflow is internal and should be hidden from user view of running workflows. | [optional] 
 **LastAction** | Pointer to **string** | The last action that was issued on the workflow is saved in this field. * &#x60;None&#x60; - No action is set, this is the default value for action field. * &#x60;Create&#x60; - Create a new instance of the workflow but it does not start the execution of the workflow. Use the Start action to start execution of the workflow. * &#x60;Start&#x60; - Start a new execution of the workflow. * &#x60;Pause&#x60; - Pause the workflow, this can only be issued on workflows that are in running state. * &#x60;Resume&#x60; - Resume the workflow which was previously paused through pause action on the workflow. * &#x60;Retry&#x60; - Retry the workflow that has previously reached a final state and has the retryable property set to true. A running or waiting workflow cannot be retried. If the property retryFromTaskName is also passed along with this action, the workflow will be started from that specific task, otherwise the workflow will be restarted from the first task.  The task name in retryFromTaskName must be one of the tasks that completed or failed in the previous run. It is not possible to retry a workflow from a task which wasn&#39;t run in the previous iteration. * &#x60;RetryFailed&#x60; - Retry the workflow that has failed. A running or waiting workflow or a workflow that completed successfully cannot be retried. Only the tasks that failed in the previous run will be retried and the rest of workflow will be run. This action does not restart the workflow and also does not support retrying from a specific task. * &#x60;Cancel&#x60; - Cancel the workflow that is in running or waiting state. | [optional] [readonly] [default to "None"]
 **Message** | Pointer to [**[]WorkflowMessage**](WorkflowMessage.md) |  | [optional] 
 **MetaVersion** | Pointer to **int64** | Version of the workflow metadata for which this workflow execution was started. | [optional] 
 **Name** | Pointer to **string** | A name of the workflow execution instance. | [optional] 
-**Output** | Pointer to **interface{}** | All the generated outputs for the workflow. | [optional] [readonly] 
-**PauseReason** | Pointer to **string** | Denotes the reason workflow is in paused status. * &#x60;None&#x60; - Pause reason is none, which indicates there is no reason for the pause state. * &#x60;TaskWithWarning&#x60; - Pause reason indicates the workflow is in this state due to a task that has a status as completed with warnings. * &#x60;SystemMaintenance&#x60; - Pause reason indicates the workflow is in this state based on actions of system admin for maintenance. | [optional] [default to "None"]
-**Progress** | Pointer to **float32** | This field indicates percentage of workflow task execution. | [optional] [readonly] 
+**Output** | Pointer to **interface{}** | The output generated at the end of the workflow execution. | [optional] [readonly] 
+**PauseReason** | Pointer to **string** | Denotes the reason workflow is in paused status. * &#x60;None&#x60; - Pause reason is none, which indicates there is no reason for the pause state. * &#x60;TaskWithWarning&#x60; - Pause reason indicates the workflow is in this state due to a task that has a status as completed with warnings. * &#x60;SystemMaintenance&#x60; - Pause reason indicates the workflow is in this state based on actions of system admin for maintenance. | [optional] [readonly] [default to "None"]
+**Progress** | Pointer to **float32** | The progress of a workflow is calculated based on the total number of tasks in the workflow and the number of tasks completed. A task is considered as completed if the task status is either \&quot;NO_OP\&quot; or \&quot;COMPLETED\&quot;. If the task status is \&quot;SKIP_TO_FAIL\&quot;, the workflow will be terminated and the progress of the workflow will be set to 100. | [optional] [readonly] 
 **Properties** | Pointer to [**NullableWorkflowWorkflowInfoProperties**](WorkflowWorkflowInfoProperties.md) |  | [optional] 
 **RetryFromTaskName** | Pointer to **string** | This field is applicable when Retry action is issued for a workflow which is in &#39;final&#39; state. When this field is not specified, the workflow will be retried from the start i.e., the first task. When this field is specified then the workflow will be retried from the specified task. This field should specify the task name which is the unique name of the task within the workflow. The task name must be one of the tasks that completed or failed in the previous run. It is not possible to retry a workflow from a task which wasn&#39;t run in the previous iteration. | [optional] 
-**Src** | Pointer to **string** | The source microservice name which is the owner for this workflow. | [optional] [readonly] 
+**Src** | Pointer to **string** | The source microservice name which is the owner of this workflow. | [optional] [readonly] 
 **StartTime** | Pointer to **time.Time** | The time when the workflow was started for execution. | [optional] [readonly] 
 **Status** | Pointer to **string** | A status of the workflow (RUNNING, WAITING, COMPLETED, TIME_OUT, FAILED). | [optional] [readonly] 
 **SuccessWorkflowCleanupDuration** | Pointer to **int64** | The duration in hours after which the workflow info for successful workflow will be removed from database. | [optional] [default to 2160]
 **TraceId** | Pointer to **string** | The trace id to keep track of workflow execution. | [optional] [readonly] 
 **Type** | Pointer to **string** | A type of the workflow (serverconfig, ansible_monitoring). | [optional] [readonly] 
-**UserActionRequired** | Pointer to **bool** | Property will be set when an user action is required on the workflow. This can be because the workflow is waiting for a wait task to be updated, workflow is paused or workflow launched by a configuration object has failed and needs to be retried in order to complete successfully. | [optional] [readonly] [default to false]
+**UserActionRequired** | Pointer to **bool** | Property will be set when a user action is required on the workflow. This can be because the workflow is waiting for a wait task to be updated, workflow is paused or workflow launched by a configuration object has failed and needs to be retried in order to complete successfully. | [optional] [readonly] [default to false]
 **UserId** | Pointer to **string** | The user identifier which indicates the user that started this workflow. | [optional] [readonly] 
 **Variable** | Pointer to **interface{}** | All the generated variables for the workflow. During workflow execution, the variables will be updated as per the variableParameters specified after each task execution. | [optional] [readonly] 
-**WaitReason** | Pointer to **string** | Denotes the reason workflow is in waiting status. * &#x60;None&#x60; - Wait reason is none, which indicates there is no reason for the waiting state. * &#x60;GatherTasks&#x60; - Wait reason is gathering tasks, which indicates the workflow is in this state in order to gather tasks. * &#x60;Duplicate&#x60; - Wait reason is duplicate, which indicates the workflow is a duplicate of current running workflow. * &#x60;RateLimit&#x60; - Wait reason is rate limit, which indicates the workflow is rate limited by account/instance level throttling threshold. * &#x60;WaitTask&#x60; - Wait reason when there are one or more wait tasks in the workflow which are yet to receive a task status update. * &#x60;PendingRetryFailed&#x60; - Wait reason when the workflow is pending a RetryFailed action. * &#x60;WaitingToStart&#x60; - Workflow is waiting to start on workflow engine. | [optional] [default to "None"]
+**WaitReason** | Pointer to **string** | Denotes the reason workflow is in waiting status. * &#x60;None&#x60; - Wait reason is none, which indicates there is no reason for the waiting state. * &#x60;GatherTasks&#x60; - Wait reason is gathering tasks, which indicates the workflow is in this state in order to gather tasks. * &#x60;Duplicate&#x60; - Wait reason is duplicate, which indicates the workflow is a duplicate of current running workflow. * &#x60;RateLimit&#x60; - Wait reason is rate limit, which indicates the workflow is rate limited by account/instance level throttling threshold. * &#x60;WaitTask&#x60; - Wait reason when there are one or more wait tasks in the workflow which are yet to receive a task status update. * &#x60;PendingRetryFailed&#x60; - Wait reason when the workflow is pending a RetryFailed action. * &#x60;WaitingToStart&#x60; - Workflow is waiting to start on workflow engine. | [optional] [readonly] [default to "None"]
 **WorkflowCtx** | Pointer to [**NullableWorkflowWorkflowCtx**](WorkflowWorkflowCtx.md) |  | [optional] 
-**WorkflowMetaType** | Pointer to **string** | The type of workflow meta. Derived from the workflow meta that is used to launch this workflow instance. * &#x60;SystemDefined&#x60; - System defined workflow definition. * &#x60;UserDefined&#x60; - User defined workflow definition. * &#x60;Dynamic&#x60; - Dynamically defined workflow definition. | [optional] [default to "SystemDefined"]
-**WorkflowTaskCount** | Pointer to **int64** | Total number of workflow tasks in this workflow. | [optional] [readonly] 
-**WorkflowWorkerTaskCount** | Pointer to **int64** | Total number of worker tasks in this workflow. This count doesn&#39;t include the control tasks in the workflow. | [optional] [readonly] 
+**WorkflowMetaType** | Pointer to **string** | The type of workflow meta. Derived from the workflow meta that is used to launch this workflow instance. * &#x60;SystemDefined&#x60; - System defined workflow definition. * &#x60;UserDefined&#x60; - User defined workflow definition. * &#x60;Dynamic&#x60; - Dynamically defined workflow definition. | [optional] [readonly] [default to "SystemDefined"]
 **Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 **AssociatedObject** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
@@ -889,56 +887,6 @@ SetWorkflowMetaType sets WorkflowMetaType field to given value.
 `func (o *WorkflowWorkflowInfo) HasWorkflowMetaType() bool`
 
 HasWorkflowMetaType returns a boolean if a field has been set.
-
-### GetWorkflowTaskCount
-
-`func (o *WorkflowWorkflowInfo) GetWorkflowTaskCount() int64`
-
-GetWorkflowTaskCount returns the WorkflowTaskCount field if non-nil, zero value otherwise.
-
-### GetWorkflowTaskCountOk
-
-`func (o *WorkflowWorkflowInfo) GetWorkflowTaskCountOk() (*int64, bool)`
-
-GetWorkflowTaskCountOk returns a tuple with the WorkflowTaskCount field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetWorkflowTaskCount
-
-`func (o *WorkflowWorkflowInfo) SetWorkflowTaskCount(v int64)`
-
-SetWorkflowTaskCount sets WorkflowTaskCount field to given value.
-
-### HasWorkflowTaskCount
-
-`func (o *WorkflowWorkflowInfo) HasWorkflowTaskCount() bool`
-
-HasWorkflowTaskCount returns a boolean if a field has been set.
-
-### GetWorkflowWorkerTaskCount
-
-`func (o *WorkflowWorkflowInfo) GetWorkflowWorkerTaskCount() int64`
-
-GetWorkflowWorkerTaskCount returns the WorkflowWorkerTaskCount field if non-nil, zero value otherwise.
-
-### GetWorkflowWorkerTaskCountOk
-
-`func (o *WorkflowWorkflowInfo) GetWorkflowWorkerTaskCountOk() (*int64, bool)`
-
-GetWorkflowWorkerTaskCountOk returns a tuple with the WorkflowWorkerTaskCount field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetWorkflowWorkerTaskCount
-
-`func (o *WorkflowWorkflowInfo) SetWorkflowWorkerTaskCount(v int64)`
-
-SetWorkflowWorkerTaskCount sets WorkflowWorkerTaskCount field to given value.
-
-### HasWorkflowWorkerTaskCount
-
-`func (o *WorkflowWorkflowInfo) HasWorkflowWorkerTaskCount() bool`
-
-HasWorkflowWorkerTaskCount returns a boolean if a field has been set.
 
 ### GetAccount
 

@@ -90,6 +90,11 @@ func getNetworkInterfaceListSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"display_name": {
+			Description: "Display name of the interface list.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"dn": {
 			Description: "The Distinguished Name unambiguously identifies an object in the system.",
 			Type:        schema.TypeString,
@@ -253,6 +258,11 @@ func getNetworkInterfaceListSchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"port_channel_id": {
+			Description: "Port channel id for port channel created on FI switch.",
+			Type:        schema.TypeInt,
+			Optional:    true,
 		},
 		"port_sub_type": {
 			Description: "Interface types supported in Network device like Subinterfaces, Breakout Interfaces.",
@@ -566,6 +576,11 @@ func dataSourceNetworkInterfaceListRead(c context.Context, d *schema.ResourceDat
 		o.SetDeviceMoId(x)
 	}
 
+	if v, ok := d.GetOk("display_name"); ok {
+		x := (v.(string))
+		o.SetDisplayName(x)
+	}
+
 	if v, ok := d.GetOk("dn"); ok {
 		x := (v.(string))
 		o.SetDn(x)
@@ -756,6 +771,11 @@ func dataSourceNetworkInterfaceListRead(c context.Context, d *schema.ResourceDat
 			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
 		}
 		o.SetPermissionResources(x)
+	}
+
+	if v, ok := d.GetOkExists("port_channel_id"); ok {
+		x := int64(v.(int))
+		o.SetPortChannelId(x)
 	}
 
 	if v, ok := d.GetOk("port_sub_type"); ok {
@@ -994,6 +1014,7 @@ func dataSourceNetworkInterfaceListRead(c context.Context, d *schema.ResourceDat
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["description"] = (s.GetDescription())
 				temp["device_mo_id"] = (s.GetDeviceMoId())
+				temp["display_name"] = (s.GetDisplayName())
 				temp["dn"] = (s.GetDn())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["ip_address"] = (s.GetIpAddress())
@@ -1013,6 +1034,7 @@ func dataSourceNetworkInterfaceListRead(c context.Context, d *schema.ResourceDat
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["port_channel_id"] = (s.GetPortChannelId())
 				temp["port_sub_type"] = (s.GetPortSubType())
 				temp["port_type"] = (s.GetPortType())
 

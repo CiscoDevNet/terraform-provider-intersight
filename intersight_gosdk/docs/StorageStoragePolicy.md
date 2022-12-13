@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.StoragePolicy"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.StoragePolicy"]
+**DefaultDriveMode** | Pointer to **string** | Newly inserted drives or on reboot, drives will be moved to the corresponding disk state on supported storage controller based on this setting. Unused Disks State should be &#39;No Change&#39; if Default Drive Mode is set to JBOD or RAID 0. This setting is applicable only to FI attached servers. * &#x60;UnconfiguredGood&#x60; - Newly inserted drives or on reboot, drives will remain the same state. * &#x60;Jbod&#x60; - Newly inserted drives or on reboot, drives will automatically move to JBOD state if drive state was UnconfiguredGood. * &#x60;RAID0&#x60; - Newly inserted drives or on reboot, virtual drives will be created, respective drives will move to Online state. | [optional] [default to "UnconfiguredGood"]
 **GlobalHotSpares** | Pointer to **string** | A collection of disks that is to be used as hot spares, globally, for all the RAID groups. Allowed value is a number range separated by a comma or a hyphen. | [optional] 
 **M2VirtualDrive** | Pointer to [**NullableStorageM2VirtualDriveConfig**](StorageM2VirtualDriveConfig.md) |  | [optional] 
 **Raid0Drive** | Pointer to [**NullableStorageR0Drive**](StorageR0Drive.md) |  | [optional] 
@@ -73,6 +74,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetDefaultDriveMode
+
+`func (o *StorageStoragePolicy) GetDefaultDriveMode() string`
+
+GetDefaultDriveMode returns the DefaultDriveMode field if non-nil, zero value otherwise.
+
+### GetDefaultDriveModeOk
+
+`func (o *StorageStoragePolicy) GetDefaultDriveModeOk() (*string, bool)`
+
+GetDefaultDriveModeOk returns a tuple with the DefaultDriveMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDefaultDriveMode
+
+`func (o *StorageStoragePolicy) SetDefaultDriveMode(v string)`
+
+SetDefaultDriveMode sets DefaultDriveMode field to given value.
+
+### HasDefaultDriveMode
+
+`func (o *StorageStoragePolicy) HasDefaultDriveMode() bool`
+
+HasDefaultDriveMode returns a boolean if a field has been set.
 
 ### GetGlobalHotSpares
 

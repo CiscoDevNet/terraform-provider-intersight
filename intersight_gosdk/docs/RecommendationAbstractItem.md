@@ -4,10 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | [default to "recommendation.PhysicalItem"]
-**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | [default to "recommendation.PhysicalItem"]
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **Name** | Pointer to **string** | The name of the physical device recommended. | [optional] [readonly] 
-**Type** | Pointer to **string** | The type of physical device recommended. * &#x60;Disk&#x60; - The Enum value Disk represents that the item type recommended is a Physical Disk. * &#x60;Node&#x60; - The Enum value Node represents that the item type recommended is a Storage Node. * &#x60;Cluster&#x60; - The Enum value Cluster represents that the item type recommended is a HyperFlex Cluster. | [optional] [readonly] [default to "Disk"]
+**Personality** | Pointer to **string** | The personality of the physical device recommended. | [optional] [readonly] 
+**Type** | Pointer to **string** | The type of physical device recommended. * &#x60;None&#x60; - The Enum value None represents that no value was set for the item type. * &#x60;Disk&#x60; - The Enum value Disk represents that the item type recommended is a Physical Disk. * &#x60;Node&#x60; - The Enum value Node represents that the item type recommended is a Storage Node. * &#x60;CPU&#x60; - The Enum value CPU represents that the item type recommended is a Processor. * &#x60;Memory&#x60; - The Enum value Memory represents that the item type recommended is a memory unit. * &#x60;Cluster&#x60; - The Enum value Cluster represents that the item type recommended is a HyperFlex Cluster. | [optional] [readonly] [default to "None"]
 
 ## Methods
 
@@ -92,6 +93,31 @@ SetName sets Name field to given value.
 `func (o *RecommendationAbstractItem) HasName() bool`
 
 HasName returns a boolean if a field has been set.
+
+### GetPersonality
+
+`func (o *RecommendationAbstractItem) GetPersonality() string`
+
+GetPersonality returns the Personality field if non-nil, zero value otherwise.
+
+### GetPersonalityOk
+
+`func (o *RecommendationAbstractItem) GetPersonalityOk() (*string, bool)`
+
+GetPersonalityOk returns a tuple with the Personality field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPersonality
+
+`func (o *RecommendationAbstractItem) SetPersonality(v string)`
+
+SetPersonality sets Personality field to given value.
+
+### HasPersonality
+
+`func (o *RecommendationAbstractItem) HasPersonality() bool`
+
+HasPersonality returns a boolean if a field has been set.
 
 ### GetType
 

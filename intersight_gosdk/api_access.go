@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -56,8 +56,8 @@ func (r ApiCreateAccessPolicyRequest) Execute() (*AccessPolicy, *http.Response, 
 /*
 CreateAccessPolicy Create a 'access.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateAccessPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateAccessPolicyRequest
 */
 func (a *AccessApiService) CreateAccessPolicy(ctx context.Context) ApiCreateAccessPolicyRequest {
 	return ApiCreateAccessPolicyRequest{
@@ -67,7 +67,8 @@ func (a *AccessApiService) CreateAccessPolicy(ctx context.Context) ApiCreateAcce
 }
 
 // Execute executes the request
-//  @return AccessPolicy
+//
+//	@return AccessPolicy
 func (a *AccessApiService) CreateAccessPolicyExecute(r ApiCreateAccessPolicyRequest) (*AccessPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -212,9 +213,9 @@ func (r ApiDeleteAccessPolicyRequest) Execute() (*http.Response, error) {
 /*
 DeleteAccessPolicy Delete a 'access.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteAccessPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteAccessPolicyRequest
 */
 func (a *AccessApiService) DeleteAccessPolicy(ctx context.Context, moid string) ApiDeleteAccessPolicyRequest {
 	return ApiDeleteAccessPolicyRequest{
@@ -349,9 +350,9 @@ func (r ApiGetAccessPolicyByMoidRequest) Execute() (*AccessPolicy, *http.Respons
 /*
 GetAccessPolicyByMoid Read a 'access.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetAccessPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetAccessPolicyByMoidRequest
 */
 func (a *AccessApiService) GetAccessPolicyByMoid(ctx context.Context, moid string) ApiGetAccessPolicyByMoidRequest {
 	return ApiGetAccessPolicyByMoidRequest{
@@ -362,7 +363,8 @@ func (a *AccessApiService) GetAccessPolicyByMoid(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return AccessPolicy
+//
+//	@return AccessPolicy
 func (a *AccessApiService) GetAccessPolicyByMoidExecute(r ApiGetAccessPolicyByMoidRequest) (*AccessPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -497,9 +499,9 @@ func (r ApiGetAccessPolicyInventoryByMoidRequest) Execute() (*AccessPolicyInvent
 /*
 GetAccessPolicyInventoryByMoid Read a 'access.PolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetAccessPolicyInventoryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetAccessPolicyInventoryByMoidRequest
 */
 func (a *AccessApiService) GetAccessPolicyInventoryByMoid(ctx context.Context, moid string) ApiGetAccessPolicyInventoryByMoidRequest {
 	return ApiGetAccessPolicyInventoryByMoidRequest{
@@ -510,7 +512,8 @@ func (a *AccessApiService) GetAccessPolicyInventoryByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return AccessPolicyInventory
+//
+//	@return AccessPolicyInventory
 func (a *AccessApiService) GetAccessPolicyInventoryByMoidExecute(r ApiGetAccessPolicyInventoryByMoidRequest) (*AccessPolicyInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -721,8 +724,8 @@ func (r ApiGetAccessPolicyInventoryListRequest) Execute() (*AccessPolicyInventor
 /*
 GetAccessPolicyInventoryList Read a 'access.PolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetAccessPolicyInventoryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetAccessPolicyInventoryListRequest
 */
 func (a *AccessApiService) GetAccessPolicyInventoryList(ctx context.Context) ApiGetAccessPolicyInventoryListRequest {
 	return ApiGetAccessPolicyInventoryListRequest{
@@ -732,7 +735,8 @@ func (a *AccessApiService) GetAccessPolicyInventoryList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return AccessPolicyInventoryResponse
+//
+//	@return AccessPolicyInventoryResponse
 func (a *AccessApiService) GetAccessPolicyInventoryListExecute(r ApiGetAccessPolicyInventoryListRequest) (*AccessPolicyInventoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -975,8 +979,8 @@ func (r ApiGetAccessPolicyListRequest) Execute() (*AccessPolicyResponse, *http.R
 /*
 GetAccessPolicyList Read a 'access.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetAccessPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetAccessPolicyListRequest
 */
 func (a *AccessApiService) GetAccessPolicyList(ctx context.Context) ApiGetAccessPolicyListRequest {
 	return ApiGetAccessPolicyListRequest{
@@ -986,7 +990,8 @@ func (a *AccessApiService) GetAccessPolicyList(ctx context.Context) ApiGetAccess
 }
 
 // Execute executes the request
-//  @return AccessPolicyResponse
+//
+//	@return AccessPolicyResponse
 func (a *AccessApiService) GetAccessPolicyListExecute(r ApiGetAccessPolicyListRequest) (*AccessPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1167,9 +1172,9 @@ func (r ApiPatchAccessPolicyRequest) Execute() (*AccessPolicy, *http.Response, e
 /*
 PatchAccessPolicy Update a 'access.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchAccessPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchAccessPolicyRequest
 */
 func (a *AccessApiService) PatchAccessPolicy(ctx context.Context, moid string) ApiPatchAccessPolicyRequest {
 	return ApiPatchAccessPolicyRequest{
@@ -1180,7 +1185,8 @@ func (a *AccessApiService) PatchAccessPolicy(ctx context.Context, moid string) A
 }
 
 // Execute executes the request
-//  @return AccessPolicy
+//
+//	@return AccessPolicy
 func (a *AccessApiService) PatchAccessPolicyExecute(r ApiPatchAccessPolicyRequest) (*AccessPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -1337,9 +1343,9 @@ func (r ApiUpdateAccessPolicyRequest) Execute() (*AccessPolicy, *http.Response, 
 /*
 UpdateAccessPolicy Update a 'access.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateAccessPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateAccessPolicyRequest
 */
 func (a *AccessApiService) UpdateAccessPolicy(ctx context.Context, moid string) ApiUpdateAccessPolicyRequest {
 	return ApiUpdateAccessPolicyRequest{
@@ -1350,7 +1356,8 @@ func (a *AccessApiService) UpdateAccessPolicy(ctx context.Context, moid string) 
 }
 
 // Execute executes the request
-//  @return AccessPolicy
+//
+//	@return AccessPolicy
 func (a *AccessApiService) UpdateAccessPolicyExecute(r ApiUpdateAccessPolicyRequest) (*AccessPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

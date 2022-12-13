@@ -26,7 +26,7 @@ This complex property has following sub-properties:
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
 * `domain_name`:(string) Email domain name. When a user enters an email during login in the Intersight home page, the IdP is picked by matching this domain name with the email domain name for authentication. 
-* `failure_details`:(HashMap) - Reason for the failure during verification. 
+* `failure_details`:(HashMap) -(ReadOnly) Reason for the failure during verification. 
 This complex property has following sub-properties:
   + `failure_reason`:(string)(ReadOnly) Reason for the failure during verification. 
   + `failure_time`:(string)(ReadOnly) Timestamp of the failure during verification. 

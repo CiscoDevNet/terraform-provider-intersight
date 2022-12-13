@@ -848,6 +848,38 @@ func resourceServerProfile() *schema.Resource {
 					},
 				},
 			},
+			"reservation_references": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"reservation_moid": {
+							Description: "The moid of the reservation object.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+					},
+				},
+			},
 			"resource_lease": {
 				Description: "A reference to a resourcepoolLease resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -1662,6 +1694,42 @@ func resourceServerProfileCreate(c context.Context, d *schema.ResourceData, meta
 		}
 	}
 
+	if v, ok := d.GetOk("reservation_references"); ok {
+		x := make([]models.PoolReservationReference, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := models.NewPoolReservationReferenceWithDefaults()
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("pool.ReservationReference")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["reservation_moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetReservationMoid(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		if len(x) > 0 {
+			o.SetReservationReferences(x)
+		}
+	}
+
 	if v, ok := d.GetOk("server_assignment_mode"); ok {
 		x := (v.(string))
 		o.SetServerAssignmentMode(x)
@@ -2067,6 +2135,10 @@ func resourceServerProfileRead(c context.Context, d *schema.ResourceData, meta i
 
 	if err := d.Set("policy_bucket", flattenListPolicyAbstractPolicyRelationship(s.GetPolicyBucket(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property PolicyBucket in ServerProfile object: %s", err.Error())
+	}
+
+	if err := d.Set("reservation_references", flattenListPoolReservationReference(s.GetReservationReferences(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property ReservationReferences in ServerProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("resource_lease", flattenMapResourcepoolLeaseRelationship(s.GetResourceLease(), d)); err != nil {
@@ -2484,6 +2556,41 @@ func resourceServerProfileUpdate(c context.Context, d *schema.ResourceData, meta
 			x = append(x, models.MoMoRefAsPolicyAbstractPolicyRelationship(o))
 		}
 		o.SetPolicyBucket(x)
+	}
+
+	if d.HasChange("reservation_references") {
+		v := d.Get("reservation_references")
+		x := make([]models.PoolReservationReference, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.PoolReservationReference{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("pool.ReservationReference")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["reservation_moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetReservationMoid(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetReservationReferences(x)
 	}
 
 	if d.HasChange("server_assignment_mode") {

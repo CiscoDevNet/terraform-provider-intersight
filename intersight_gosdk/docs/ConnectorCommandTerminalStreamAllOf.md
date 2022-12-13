@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "connector.CommandTerminalStream"]
 **MsgType** | Pointer to **string** | The type of data this message contains. | [optional] 
 **Sequence** | Pointer to **int64** | Sequence of the message within a session to handle out-of-order delivery. | [optional] 
-**Stream** | Pointer to **string** | The input/output payload to/from the pseudo terminal session. When sent from the cloud service if the msgType is CommandInput stream is piped to stdin of the command or a resize message if msgType is CommandResize. From the device connector value is always the combined output of stdout &amp; stderr. | [optional] 
+**Stream** | Pointer to **string** | The input/output payload to/from the pseudo terminal session. When sent from the cloud service, if the msgType is CommandInput, stream is piped to stdin of the command or a resize message, if msgType is CommandResize. From the device connector value is always the combined output of stdout &amp; stderr. | [optional] 
 
 ## Methods
 

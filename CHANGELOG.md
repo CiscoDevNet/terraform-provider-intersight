@@ -1,5 +1,8 @@
 # Change Logs
 
+## v1.0.33 
+* Refreshes the terraform module to be in sync with the latest Cisco Intersight model (build 9661)
+
 ## v1.0.32 
 * Refreshes the terraform module to be in sync with the latest Cisco Intersight model (build 7766)
 

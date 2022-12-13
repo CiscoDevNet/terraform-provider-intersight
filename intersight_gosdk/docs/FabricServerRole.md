@@ -8,6 +8,8 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.ServerRole"]
 **AutoNegotiationDisabled** | Pointer to **bool** | Auto negotiation configuration for server port. This configuration is required only for FEX Model N9K-C93180YC-FX3 connected with 100G speed port on UCS-FI-6536 and should be set as True. | [optional] [default to false]
 **Fec** | Pointer to **string** | Forward error correction configuration for server port. This configuration is required only for FEX Model N9K-C93180YC-FX3 connected with 25G speed ports on UCS-FI-6454/UCS-FI-64108 and should be set as Cl74. * &#x60;Auto&#x60; - Forward error correction option &#39;Auto&#39;. * &#x60;Cl91&#x60; - Forward error correction option &#39;cl91&#39;. * &#x60;Cl74&#x60; - Forward error correction option &#39;cl74&#39;. | [optional] [default to "Auto"]
+**PreferredDeviceId** | Pointer to **int64** | Preferred device ID to be configured by user for the connected device. This ID must be specified together with the &#39;PreferredDeviceType&#39; property. This ID will only takes effect if the actual connected device matches the &#39;PreferredDeviceType&#39;. If the preferred ID is not available, the ID is automatically allocated and assigned by the system. If different preferred IDs are specified for the ports connected to the same device, only the preferred ID (if specified) of the port that is discovered first will be considered. | [optional] 
+**PreferredDeviceType** | Pointer to **string** | Device type for which preferred ID to be configured. If the actual connected device does not match the specified device type, the system ignores the &#39;PreferredDeviceId&#39; property. * &#x60;Auto&#x60; - Preferred Id will be ignored if specified with this type. * &#x60;RackServer&#x60; - Connected device type is Rack Unit Server. * &#x60;Chassis&#x60; - Connected device type is Chassis. | [optional] [default to "Auto"]
 
 ## Methods
 
@@ -117,6 +119,56 @@ SetFec sets Fec field to given value.
 `func (o *FabricServerRole) HasFec() bool`
 
 HasFec returns a boolean if a field has been set.
+
+### GetPreferredDeviceId
+
+`func (o *FabricServerRole) GetPreferredDeviceId() int64`
+
+GetPreferredDeviceId returns the PreferredDeviceId field if non-nil, zero value otherwise.
+
+### GetPreferredDeviceIdOk
+
+`func (o *FabricServerRole) GetPreferredDeviceIdOk() (*int64, bool)`
+
+GetPreferredDeviceIdOk returns a tuple with the PreferredDeviceId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPreferredDeviceId
+
+`func (o *FabricServerRole) SetPreferredDeviceId(v int64)`
+
+SetPreferredDeviceId sets PreferredDeviceId field to given value.
+
+### HasPreferredDeviceId
+
+`func (o *FabricServerRole) HasPreferredDeviceId() bool`
+
+HasPreferredDeviceId returns a boolean if a field has been set.
+
+### GetPreferredDeviceType
+
+`func (o *FabricServerRole) GetPreferredDeviceType() string`
+
+GetPreferredDeviceType returns the PreferredDeviceType field if non-nil, zero value otherwise.
+
+### GetPreferredDeviceTypeOk
+
+`func (o *FabricServerRole) GetPreferredDeviceTypeOk() (*string, bool)`
+
+GetPreferredDeviceTypeOk returns a tuple with the PreferredDeviceType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPreferredDeviceType
+
+`func (o *FabricServerRole) SetPreferredDeviceType(v string)`
+
+SetPreferredDeviceType sets PreferredDeviceType field to given value.
+
+### HasPreferredDeviceType
+
+`func (o *FabricServerRole) HasPreferredDeviceType() bool`
+
+HasPreferredDeviceType returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -27,6 +27,8 @@ type TechsupportmanagementTechSupportStatus struct {
 	ObjectType string `json:"ObjectType"`
 	// The name of the Techsupport bundle file.
 	FileName *string `json:"FileName,omitempty"`
+	// Techsupport file size in bytes.
+	FileSize *int64 `json:"FileSize,omitempty"`
 	// Reason for techsupport failure, if any.
 	Reason *string `json:"Reason,omitempty"`
 	// Reason for status relay failure, if any.
@@ -38,12 +40,14 @@ type TechsupportmanagementTechSupportStatus struct {
 	// Status of techsupport collection. Valid values are Pending, CollectionInProgress, CollectionFailed, CollectionComplete, UploadPending, UploadInProgress, UploadPartsComplete, UploadFailed and Completed. The final status will be either CollectionFailed or UploadFailed if there is a failure and Completed if the request completed successfully and the file was uploaded to Intersight Storage Service. All the remaining status values indicates the progress of techsupport collection.
 	Status *string `json:"Status,omitempty"`
 	// The Url to download the techsupport file.
-	TechsupportDownloadUrl *string                                             `json:"TechsupportDownloadUrl,omitempty"`
-	ClusterMember          *AssetClusterMemberRelationship                     `json:"ClusterMember,omitempty"`
-	DeviceRegistration     *AssetDeviceRegistrationRelationship                `json:"DeviceRegistration,omitempty"`
-	OriginResource         *MoBaseMoRelationship                               `json:"OriginResource,omitempty"`
-	TechSupportRequest     *TechsupportmanagementTechSupportBundleRelationship `json:"TechSupportRequest,omitempty"`
-	AdditionalProperties   map[string]interface{}
+	TechsupportDownloadUrl *string `json:"TechsupportDownloadUrl,omitempty"`
+	// The name of the role granted to the user that issued the techsupport request.
+	UserRole             *string                                             `json:"UserRole,omitempty"`
+	ClusterMember        *AssetClusterMemberRelationship                     `json:"ClusterMember,omitempty"`
+	DeviceRegistration   *AssetDeviceRegistrationRelationship                `json:"DeviceRegistration,omitempty"`
+	OriginResource       *MoBaseMoRelationship                               `json:"OriginResource,omitempty"`
+	TechSupportRequest   *TechsupportmanagementTechSupportBundleRelationship `json:"TechSupportRequest,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TechsupportmanagementTechSupportStatus TechsupportmanagementTechSupportStatus
@@ -149,6 +153,38 @@ func (o *TechsupportmanagementTechSupportStatus) HasFileName() bool {
 // SetFileName gets a reference to the given string and assigns it to the FileName field.
 func (o *TechsupportmanagementTechSupportStatus) SetFileName(v string) {
 	o.FileName = &v
+}
+
+// GetFileSize returns the FileSize field value if set, zero value otherwise.
+func (o *TechsupportmanagementTechSupportStatus) GetFileSize() int64 {
+	if o == nil || o.FileSize == nil {
+		var ret int64
+		return ret
+	}
+	return *o.FileSize
+}
+
+// GetFileSizeOk returns a tuple with the FileSize field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TechsupportmanagementTechSupportStatus) GetFileSizeOk() (*int64, bool) {
+	if o == nil || o.FileSize == nil {
+		return nil, false
+	}
+	return o.FileSize, true
+}
+
+// HasFileSize returns a boolean if a field has been set.
+func (o *TechsupportmanagementTechSupportStatus) HasFileSize() bool {
+	if o != nil && o.FileSize != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetFileSize gets a reference to the given int64 and assigns it to the FileSize field.
+func (o *TechsupportmanagementTechSupportStatus) SetFileSize(v int64) {
+	o.FileSize = &v
 }
 
 // GetReason returns the Reason field value if set, zero value otherwise.
@@ -343,6 +379,38 @@ func (o *TechsupportmanagementTechSupportStatus) SetTechsupportDownloadUrl(v str
 	o.TechsupportDownloadUrl = &v
 }
 
+// GetUserRole returns the UserRole field value if set, zero value otherwise.
+func (o *TechsupportmanagementTechSupportStatus) GetUserRole() string {
+	if o == nil || o.UserRole == nil {
+		var ret string
+		return ret
+	}
+	return *o.UserRole
+}
+
+// GetUserRoleOk returns a tuple with the UserRole field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TechsupportmanagementTechSupportStatus) GetUserRoleOk() (*string, bool) {
+	if o == nil || o.UserRole == nil {
+		return nil, false
+	}
+	return o.UserRole, true
+}
+
+// HasUserRole returns a boolean if a field has been set.
+func (o *TechsupportmanagementTechSupportStatus) HasUserRole() bool {
+	if o != nil && o.UserRole != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUserRole gets a reference to the given string and assigns it to the UserRole field.
+func (o *TechsupportmanagementTechSupportStatus) SetUserRole(v string) {
+	o.UserRole = &v
+}
+
 // GetClusterMember returns the ClusterMember field value if set, zero value otherwise.
 func (o *TechsupportmanagementTechSupportStatus) GetClusterMember() AssetClusterMemberRelationship {
 	if o == nil || o.ClusterMember == nil {
@@ -490,6 +558,9 @@ func (o TechsupportmanagementTechSupportStatus) MarshalJSON() ([]byte, error) {
 	if o.FileName != nil {
 		toSerialize["FileName"] = o.FileName
 	}
+	if o.FileSize != nil {
+		toSerialize["FileSize"] = o.FileSize
+	}
 	if o.Reason != nil {
 		toSerialize["Reason"] = o.Reason
 	}
@@ -507,6 +578,9 @@ func (o TechsupportmanagementTechSupportStatus) MarshalJSON() ([]byte, error) {
 	}
 	if o.TechsupportDownloadUrl != nil {
 		toSerialize["TechsupportDownloadUrl"] = o.TechsupportDownloadUrl
+	}
+	if o.UserRole != nil {
+		toSerialize["UserRole"] = o.UserRole
 	}
 	if o.ClusterMember != nil {
 		toSerialize["ClusterMember"] = o.ClusterMember
@@ -536,6 +610,8 @@ func (o *TechsupportmanagementTechSupportStatus) UnmarshalJSON(bytes []byte) (er
 		ObjectType string `json:"ObjectType"`
 		// The name of the Techsupport bundle file.
 		FileName *string `json:"FileName,omitempty"`
+		// Techsupport file size in bytes.
+		FileSize *int64 `json:"FileSize,omitempty"`
 		// Reason for techsupport failure, if any.
 		Reason *string `json:"Reason,omitempty"`
 		// Reason for status relay failure, if any.
@@ -547,11 +623,13 @@ func (o *TechsupportmanagementTechSupportStatus) UnmarshalJSON(bytes []byte) (er
 		// Status of techsupport collection. Valid values are Pending, CollectionInProgress, CollectionFailed, CollectionComplete, UploadPending, UploadInProgress, UploadPartsComplete, UploadFailed and Completed. The final status will be either CollectionFailed or UploadFailed if there is a failure and Completed if the request completed successfully and the file was uploaded to Intersight Storage Service. All the remaining status values indicates the progress of techsupport collection.
 		Status *string `json:"Status,omitempty"`
 		// The Url to download the techsupport file.
-		TechsupportDownloadUrl *string                                             `json:"TechsupportDownloadUrl,omitempty"`
-		ClusterMember          *AssetClusterMemberRelationship                     `json:"ClusterMember,omitempty"`
-		DeviceRegistration     *AssetDeviceRegistrationRelationship                `json:"DeviceRegistration,omitempty"`
-		OriginResource         *MoBaseMoRelationship                               `json:"OriginResource,omitempty"`
-		TechSupportRequest     *TechsupportmanagementTechSupportBundleRelationship `json:"TechSupportRequest,omitempty"`
+		TechsupportDownloadUrl *string `json:"TechsupportDownloadUrl,omitempty"`
+		// The name of the role granted to the user that issued the techsupport request.
+		UserRole           *string                                             `json:"UserRole,omitempty"`
+		ClusterMember      *AssetClusterMemberRelationship                     `json:"ClusterMember,omitempty"`
+		DeviceRegistration *AssetDeviceRegistrationRelationship                `json:"DeviceRegistration,omitempty"`
+		OriginResource     *MoBaseMoRelationship                               `json:"OriginResource,omitempty"`
+		TechSupportRequest *TechsupportmanagementTechSupportBundleRelationship `json:"TechSupportRequest,omitempty"`
 	}
 
 	varTechsupportmanagementTechSupportStatusWithoutEmbeddedStruct := TechsupportmanagementTechSupportStatusWithoutEmbeddedStruct{}
@@ -562,12 +640,14 @@ func (o *TechsupportmanagementTechSupportStatus) UnmarshalJSON(bytes []byte) (er
 		varTechsupportmanagementTechSupportStatus.ClassId = varTechsupportmanagementTechSupportStatusWithoutEmbeddedStruct.ClassId
 		varTechsupportmanagementTechSupportStatus.ObjectType = varTechsupportmanagementTechSupportStatusWithoutEmbeddedStruct.ObjectType
 		varTechsupportmanagementTechSupportStatus.FileName = varTechsupportmanagementTechSupportStatusWithoutEmbeddedStruct.FileName
+		varTechsupportmanagementTechSupportStatus.FileSize = varTechsupportmanagementTechSupportStatusWithoutEmbeddedStruct.FileSize
 		varTechsupportmanagementTechSupportStatus.Reason = varTechsupportmanagementTechSupportStatusWithoutEmbeddedStruct.Reason
 		varTechsupportmanagementTechSupportStatus.RelayReason = varTechsupportmanagementTechSupportStatusWithoutEmbeddedStruct.RelayReason
 		varTechsupportmanagementTechSupportStatus.RelayStatus = varTechsupportmanagementTechSupportStatusWithoutEmbeddedStruct.RelayStatus
 		varTechsupportmanagementTechSupportStatus.RequestTs = varTechsupportmanagementTechSupportStatusWithoutEmbeddedStruct.RequestTs
 		varTechsupportmanagementTechSupportStatus.Status = varTechsupportmanagementTechSupportStatusWithoutEmbeddedStruct.Status
 		varTechsupportmanagementTechSupportStatus.TechsupportDownloadUrl = varTechsupportmanagementTechSupportStatusWithoutEmbeddedStruct.TechsupportDownloadUrl
+		varTechsupportmanagementTechSupportStatus.UserRole = varTechsupportmanagementTechSupportStatusWithoutEmbeddedStruct.UserRole
 		varTechsupportmanagementTechSupportStatus.ClusterMember = varTechsupportmanagementTechSupportStatusWithoutEmbeddedStruct.ClusterMember
 		varTechsupportmanagementTechSupportStatus.DeviceRegistration = varTechsupportmanagementTechSupportStatusWithoutEmbeddedStruct.DeviceRegistration
 		varTechsupportmanagementTechSupportStatus.OriginResource = varTechsupportmanagementTechSupportStatusWithoutEmbeddedStruct.OriginResource
@@ -592,12 +672,14 @@ func (o *TechsupportmanagementTechSupportStatus) UnmarshalJSON(bytes []byte) (er
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "FileName")
+		delete(additionalProperties, "FileSize")
 		delete(additionalProperties, "Reason")
 		delete(additionalProperties, "RelayReason")
 		delete(additionalProperties, "RelayStatus")
 		delete(additionalProperties, "RequestTs")
 		delete(additionalProperties, "Status")
 		delete(additionalProperties, "TechsupportDownloadUrl")
+		delete(additionalProperties, "UserRole")
 		delete(additionalProperties, "ClusterMember")
 		delete(additionalProperties, "DeviceRegistration")
 		delete(additionalProperties, "OriginResource")

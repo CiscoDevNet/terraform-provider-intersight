@@ -126,7 +126,7 @@ func getWorkflowTaskInfoSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"message": {
-						Description: "An i18n message that can be translated in multiple languages to support internationalization.",
+						Description: "An i18n message that can be translated into multiple languages to support internationalization.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -248,7 +248,7 @@ func getWorkflowTaskInfoSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"retry_count": {
-			Description: "A counter for number of retries.",
+			Description: "Denotes the number of times the task has been retried.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
@@ -258,7 +258,7 @@ func getWorkflowTaskInfoSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"running_inst_id": {
-			Description: "The instance ID of the task that is currently being executed. When retrying a workflow with failed tasks, the task in workflow engine will have a new instance ID, but the task may still be in-progress. In this case, the task instId reflects the instance ID in the workflow engine, while runningInstId reflects the instance ID of the instance that is currently being executed.",
+			Description: "The instance ID of the task that is currently being executed. When retrying a workflow with failed tasks, the task in workflow engine will have a new instance ID, but the task may still be in progress. In this case, the task instId reflects the instance ID in the workflow engine, while runningInstId reflects the instance ID of the instance that is currently being executed.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -773,22 +773,10 @@ func dataSourceWorkflowTaskInfoRead(c context.Context, d *schema.ResourceData, m
 				}
 			}
 			o.SetClassId("workflow.Message")
-			if v, ok := l["message"]; ok {
-				{
-					x := (v.(string))
-					o.SetMessage(x)
-				}
-			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["severity"]; ok {
-				{
-					x := (v.(string))
-					o.SetSeverity(x)
 				}
 			}
 			x = append(x, *o)

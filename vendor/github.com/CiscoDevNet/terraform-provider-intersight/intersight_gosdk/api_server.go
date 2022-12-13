@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -56,8 +56,8 @@ func (r ApiCreateServerConfigImportRequest) Execute() (*ServerConfigImport, *htt
 /*
 CreateServerConfigImport Create a 'server.ConfigImport' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateServerConfigImportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateServerConfigImportRequest
 */
 func (a *ServerApiService) CreateServerConfigImport(ctx context.Context) ApiCreateServerConfigImportRequest {
 	return ApiCreateServerConfigImportRequest{
@@ -67,7 +67,8 @@ func (a *ServerApiService) CreateServerConfigImport(ctx context.Context) ApiCrea
 }
 
 // Execute executes the request
-//  @return ServerConfigImport
+//
+//	@return ServerConfigImport
 func (a *ServerApiService) CreateServerConfigImportExecute(r ApiCreateServerConfigImportRequest) (*ServerConfigImport, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -232,8 +233,8 @@ func (r ApiCreateServerProfileRequest) Execute() (*ServerProfile, *http.Response
 /*
 CreateServerProfile Create a 'server.Profile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateServerProfileRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateServerProfileRequest
 */
 func (a *ServerApiService) CreateServerProfile(ctx context.Context) ApiCreateServerProfileRequest {
 	return ApiCreateServerProfileRequest{
@@ -243,7 +244,8 @@ func (a *ServerApiService) CreateServerProfile(ctx context.Context) ApiCreateSer
 }
 
 // Execute executes the request
-//  @return ServerProfile
+//
+//	@return ServerProfile
 func (a *ServerApiService) CreateServerProfileExecute(r ApiCreateServerProfileRequest) (*ServerProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -408,8 +410,8 @@ func (r ApiCreateServerProfileTemplateRequest) Execute() (*ServerProfileTemplate
 /*
 CreateServerProfileTemplate Create a 'server.ProfileTemplate' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateServerProfileTemplateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateServerProfileTemplateRequest
 */
 func (a *ServerApiService) CreateServerProfileTemplate(ctx context.Context) ApiCreateServerProfileTemplateRequest {
 	return ApiCreateServerProfileTemplateRequest{
@@ -419,7 +421,8 @@ func (a *ServerApiService) CreateServerProfileTemplate(ctx context.Context) ApiC
 }
 
 // Execute executes the request
-//  @return ServerProfileTemplate
+//
+//	@return ServerProfileTemplate
 func (a *ServerApiService) CreateServerProfileTemplateExecute(r ApiCreateServerProfileTemplateRequest) (*ServerProfileTemplate, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -564,9 +567,9 @@ func (r ApiDeleteServerProfileRequest) Execute() (*http.Response, error) {
 /*
 DeleteServerProfile Delete a 'server.Profile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteServerProfileRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteServerProfileRequest
 */
 func (a *ServerApiService) DeleteServerProfile(ctx context.Context, moid string) ApiDeleteServerProfileRequest {
 	return ApiDeleteServerProfileRequest{
@@ -701,9 +704,9 @@ func (r ApiDeleteServerProfileTemplateRequest) Execute() (*http.Response, error)
 /*
 DeleteServerProfileTemplate Delete a 'server.ProfileTemplate' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteServerProfileTemplateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteServerProfileTemplateRequest
 */
 func (a *ServerApiService) DeleteServerProfileTemplate(ctx context.Context, moid string) ApiDeleteServerProfileTemplateRequest {
 	return ApiDeleteServerProfileTemplateRequest{
@@ -838,9 +841,9 @@ func (r ApiGetServerConfigChangeDetailByMoidRequest) Execute() (*ServerConfigCha
 /*
 GetServerConfigChangeDetailByMoid Read a 'server.ConfigChangeDetail' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetServerConfigChangeDetailByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetServerConfigChangeDetailByMoidRequest
 */
 func (a *ServerApiService) GetServerConfigChangeDetailByMoid(ctx context.Context, moid string) ApiGetServerConfigChangeDetailByMoidRequest {
 	return ApiGetServerConfigChangeDetailByMoidRequest{
@@ -851,7 +854,8 @@ func (a *ServerApiService) GetServerConfigChangeDetailByMoid(ctx context.Context
 }
 
 // Execute executes the request
-//  @return ServerConfigChangeDetail
+//
+//	@return ServerConfigChangeDetail
 func (a *ServerApiService) GetServerConfigChangeDetailByMoidExecute(r ApiGetServerConfigChangeDetailByMoidRequest) (*ServerConfigChangeDetail, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1062,8 +1066,8 @@ func (r ApiGetServerConfigChangeDetailListRequest) Execute() (*ServerConfigChang
 /*
 GetServerConfigChangeDetailList Read a 'server.ConfigChangeDetail' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetServerConfigChangeDetailListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetServerConfigChangeDetailListRequest
 */
 func (a *ServerApiService) GetServerConfigChangeDetailList(ctx context.Context) ApiGetServerConfigChangeDetailListRequest {
 	return ApiGetServerConfigChangeDetailListRequest{
@@ -1073,7 +1077,8 @@ func (a *ServerApiService) GetServerConfigChangeDetailList(ctx context.Context) 
 }
 
 // Execute executes the request
-//  @return ServerConfigChangeDetailResponse
+//
+//	@return ServerConfigChangeDetailResponse
 func (a *ServerApiService) GetServerConfigChangeDetailListExecute(r ApiGetServerConfigChangeDetailListRequest) (*ServerConfigChangeDetailResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1240,9 +1245,9 @@ func (r ApiGetServerConfigImportByMoidRequest) Execute() (*ServerConfigImport, *
 /*
 GetServerConfigImportByMoid Read a 'server.ConfigImport' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetServerConfigImportByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetServerConfigImportByMoidRequest
 */
 func (a *ServerApiService) GetServerConfigImportByMoid(ctx context.Context, moid string) ApiGetServerConfigImportByMoidRequest {
 	return ApiGetServerConfigImportByMoidRequest{
@@ -1253,7 +1258,8 @@ func (a *ServerApiService) GetServerConfigImportByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return ServerConfigImport
+//
+//	@return ServerConfigImport
 func (a *ServerApiService) GetServerConfigImportByMoidExecute(r ApiGetServerConfigImportByMoidRequest) (*ServerConfigImport, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1464,8 +1470,8 @@ func (r ApiGetServerConfigImportListRequest) Execute() (*ServerConfigImportRespo
 /*
 GetServerConfigImportList Read a 'server.ConfigImport' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetServerConfigImportListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetServerConfigImportListRequest
 */
 func (a *ServerApiService) GetServerConfigImportList(ctx context.Context) ApiGetServerConfigImportListRequest {
 	return ApiGetServerConfigImportListRequest{
@@ -1475,7 +1481,8 @@ func (a *ServerApiService) GetServerConfigImportList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//  @return ServerConfigImportResponse
+//
+//	@return ServerConfigImportResponse
 func (a *ServerApiService) GetServerConfigImportListExecute(r ApiGetServerConfigImportListRequest) (*ServerConfigImportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1642,9 +1649,9 @@ func (r ApiGetServerConfigResultByMoidRequest) Execute() (*ServerConfigResult, *
 /*
 GetServerConfigResultByMoid Read a 'server.ConfigResult' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetServerConfigResultByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetServerConfigResultByMoidRequest
 */
 func (a *ServerApiService) GetServerConfigResultByMoid(ctx context.Context, moid string) ApiGetServerConfigResultByMoidRequest {
 	return ApiGetServerConfigResultByMoidRequest{
@@ -1655,7 +1662,8 @@ func (a *ServerApiService) GetServerConfigResultByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return ServerConfigResult
+//
+//	@return ServerConfigResult
 func (a *ServerApiService) GetServerConfigResultByMoidExecute(r ApiGetServerConfigResultByMoidRequest) (*ServerConfigResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1790,9 +1798,9 @@ func (r ApiGetServerConfigResultEntryByMoidRequest) Execute() (*ServerConfigResu
 /*
 GetServerConfigResultEntryByMoid Read a 'server.ConfigResultEntry' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetServerConfigResultEntryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetServerConfigResultEntryByMoidRequest
 */
 func (a *ServerApiService) GetServerConfigResultEntryByMoid(ctx context.Context, moid string) ApiGetServerConfigResultEntryByMoidRequest {
 	return ApiGetServerConfigResultEntryByMoidRequest{
@@ -1803,7 +1811,8 @@ func (a *ServerApiService) GetServerConfigResultEntryByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return ServerConfigResultEntry
+//
+//	@return ServerConfigResultEntry
 func (a *ServerApiService) GetServerConfigResultEntryByMoidExecute(r ApiGetServerConfigResultEntryByMoidRequest) (*ServerConfigResultEntry, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2014,8 +2023,8 @@ func (r ApiGetServerConfigResultEntryListRequest) Execute() (*ServerConfigResult
 /*
 GetServerConfigResultEntryList Read a 'server.ConfigResultEntry' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetServerConfigResultEntryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetServerConfigResultEntryListRequest
 */
 func (a *ServerApiService) GetServerConfigResultEntryList(ctx context.Context) ApiGetServerConfigResultEntryListRequest {
 	return ApiGetServerConfigResultEntryListRequest{
@@ -2025,7 +2034,8 @@ func (a *ServerApiService) GetServerConfigResultEntryList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return ServerConfigResultEntryResponse
+//
+//	@return ServerConfigResultEntryResponse
 func (a *ServerApiService) GetServerConfigResultEntryListExecute(r ApiGetServerConfigResultEntryListRequest) (*ServerConfigResultEntryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2268,8 +2278,8 @@ func (r ApiGetServerConfigResultListRequest) Execute() (*ServerConfigResultRespo
 /*
 GetServerConfigResultList Read a 'server.ConfigResult' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetServerConfigResultListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetServerConfigResultListRequest
 */
 func (a *ServerApiService) GetServerConfigResultList(ctx context.Context) ApiGetServerConfigResultListRequest {
 	return ApiGetServerConfigResultListRequest{
@@ -2279,7 +2289,8 @@ func (a *ServerApiService) GetServerConfigResultList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//  @return ServerConfigResultResponse
+//
+//	@return ServerConfigResultResponse
 func (a *ServerApiService) GetServerConfigResultListExecute(r ApiGetServerConfigResultListRequest) (*ServerConfigResultResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2446,9 +2457,9 @@ func (r ApiGetServerProfileByMoidRequest) Execute() (*ServerProfile, *http.Respo
 /*
 GetServerProfileByMoid Read a 'server.Profile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetServerProfileByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetServerProfileByMoidRequest
 */
 func (a *ServerApiService) GetServerProfileByMoid(ctx context.Context, moid string) ApiGetServerProfileByMoidRequest {
 	return ApiGetServerProfileByMoidRequest{
@@ -2459,7 +2470,8 @@ func (a *ServerApiService) GetServerProfileByMoid(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return ServerProfile
+//
+//	@return ServerProfile
 func (a *ServerApiService) GetServerProfileByMoidExecute(r ApiGetServerProfileByMoidRequest) (*ServerProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2670,8 +2682,8 @@ func (r ApiGetServerProfileListRequest) Execute() (*ServerProfileResponse, *http
 /*
 GetServerProfileList Read a 'server.Profile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetServerProfileListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetServerProfileListRequest
 */
 func (a *ServerApiService) GetServerProfileList(ctx context.Context) ApiGetServerProfileListRequest {
 	return ApiGetServerProfileListRequest{
@@ -2681,7 +2693,8 @@ func (a *ServerApiService) GetServerProfileList(ctx context.Context) ApiGetServe
 }
 
 // Execute executes the request
-//  @return ServerProfileResponse
+//
+//	@return ServerProfileResponse
 func (a *ServerApiService) GetServerProfileListExecute(r ApiGetServerProfileListRequest) (*ServerProfileResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2848,9 +2861,9 @@ func (r ApiGetServerProfileTemplateByMoidRequest) Execute() (*ServerProfileTempl
 /*
 GetServerProfileTemplateByMoid Read a 'server.ProfileTemplate' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetServerProfileTemplateByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetServerProfileTemplateByMoidRequest
 */
 func (a *ServerApiService) GetServerProfileTemplateByMoid(ctx context.Context, moid string) ApiGetServerProfileTemplateByMoidRequest {
 	return ApiGetServerProfileTemplateByMoidRequest{
@@ -2861,7 +2874,8 @@ func (a *ServerApiService) GetServerProfileTemplateByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return ServerProfileTemplate
+//
+//	@return ServerProfileTemplate
 func (a *ServerApiService) GetServerProfileTemplateByMoidExecute(r ApiGetServerProfileTemplateByMoidRequest) (*ServerProfileTemplate, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3072,8 +3086,8 @@ func (r ApiGetServerProfileTemplateListRequest) Execute() (*ServerProfileTemplat
 /*
 GetServerProfileTemplateList Read a 'server.ProfileTemplate' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetServerProfileTemplateListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetServerProfileTemplateListRequest
 */
 func (a *ServerApiService) GetServerProfileTemplateList(ctx context.Context) ApiGetServerProfileTemplateListRequest {
 	return ApiGetServerProfileTemplateListRequest{
@@ -3083,7 +3097,8 @@ func (a *ServerApiService) GetServerProfileTemplateList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return ServerProfileTemplateResponse
+//
+//	@return ServerProfileTemplateResponse
 func (a *ServerApiService) GetServerProfileTemplateListExecute(r ApiGetServerProfileTemplateListRequest) (*ServerProfileTemplateResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3264,9 +3279,9 @@ func (r ApiPatchServerProfileRequest) Execute() (*ServerProfile, *http.Response,
 /*
 PatchServerProfile Update a 'server.Profile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchServerProfileRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchServerProfileRequest
 */
 func (a *ServerApiService) PatchServerProfile(ctx context.Context, moid string) ApiPatchServerProfileRequest {
 	return ApiPatchServerProfileRequest{
@@ -3277,7 +3292,8 @@ func (a *ServerApiService) PatchServerProfile(ctx context.Context, moid string) 
 }
 
 // Execute executes the request
-//  @return ServerProfile
+//
+//	@return ServerProfile
 func (a *ServerApiService) PatchServerProfileExecute(r ApiPatchServerProfileRequest) (*ServerProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -3434,9 +3450,9 @@ func (r ApiPatchServerProfileTemplateRequest) Execute() (*ServerProfileTemplate,
 /*
 PatchServerProfileTemplate Update a 'server.ProfileTemplate' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchServerProfileTemplateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchServerProfileTemplateRequest
 */
 func (a *ServerApiService) PatchServerProfileTemplate(ctx context.Context, moid string) ApiPatchServerProfileTemplateRequest {
 	return ApiPatchServerProfileTemplateRequest{
@@ -3447,7 +3463,8 @@ func (a *ServerApiService) PatchServerProfileTemplate(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return ServerProfileTemplate
+//
+//	@return ServerProfileTemplate
 func (a *ServerApiService) PatchServerProfileTemplateExecute(r ApiPatchServerProfileTemplateRequest) (*ServerProfileTemplate, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -3604,9 +3621,9 @@ func (r ApiUpdateServerProfileRequest) Execute() (*ServerProfile, *http.Response
 /*
 UpdateServerProfile Update a 'server.Profile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateServerProfileRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateServerProfileRequest
 */
 func (a *ServerApiService) UpdateServerProfile(ctx context.Context, moid string) ApiUpdateServerProfileRequest {
 	return ApiUpdateServerProfileRequest{
@@ -3617,7 +3634,8 @@ func (a *ServerApiService) UpdateServerProfile(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//  @return ServerProfile
+//
+//	@return ServerProfile
 func (a *ServerApiService) UpdateServerProfileExecute(r ApiUpdateServerProfileRequest) (*ServerProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3774,9 +3792,9 @@ func (r ApiUpdateServerProfileTemplateRequest) Execute() (*ServerProfileTemplate
 /*
 UpdateServerProfileTemplate Update a 'server.ProfileTemplate' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateServerProfileTemplateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateServerProfileTemplateRequest
 */
 func (a *ServerApiService) UpdateServerProfileTemplate(ctx context.Context, moid string) ApiUpdateServerProfileTemplateRequest {
 	return ApiUpdateServerProfileTemplateRequest{
@@ -3787,7 +3805,8 @@ func (a *ServerApiService) UpdateServerProfileTemplate(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return ServerProfileTemplate
+//
+//	@return ServerProfileTemplate
 func (a *ServerApiService) UpdateServerProfileTemplateExecute(r ApiUpdateServerProfileTemplateRequest) (*ServerProfileTemplate, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

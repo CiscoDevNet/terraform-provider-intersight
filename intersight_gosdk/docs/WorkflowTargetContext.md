@@ -6,9 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.TargetContext"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.TargetContext"]
-**TargetMoid** | Pointer to **string** | Moid of the target Intersight managed object. | [optional] 
-**TargetName** | Pointer to **string** | Name of the target instance. | [optional] 
-**TargetType** | Pointer to **string** | Object type of the target Intersight managed object. | [optional] 
+**TargetMoid** | Pointer to **string** | Moid of the target Intersight managed object. | [optional] [readonly] 
+**TargetName** | Pointer to **string** | Name of the target instance. | [optional] [readonly] 
+**TargetType** | Pointer to **string** | Object type of the target Intersight managed object. | [optional] [readonly] 
 
 ## Methods
 

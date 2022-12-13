@@ -376,6 +376,11 @@ func getNiatelemetryNiaInventorySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"nexus_cloud_membership_status": {
+			Description: "Returns if site has been onboarded to nexus cloud or not.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"node_id": {
 			Description: "The ID of the device being inventoried.",
 			Type:        schema.TypeString,
@@ -826,7 +831,7 @@ func getNiatelemetryNiaInventorySchema() map[string]*schema.Schema {
 			},
 		},
 		"record_type": {
-			Description: "Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected.",
+			Description: "Type of record DCNM / APIC / SE / Nexus Switch. This determines the type of platform where inventory was collected.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -897,6 +902,11 @@ func getNiatelemetryNiaInventorySchema() map[string]*schema.Schema {
 		},
 		"site_name": {
 			Description: "Name of fabric domain of the controller.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"siteuuid": {
+			Description: "Returns the uuid of the Nexus Cloud site associated to the inventory object.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1514,6 +1524,11 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
+	}
+
+	if v, ok := d.GetOkExists("nexus_cloud_membership_status"); ok {
+		x := (v.(bool))
+		o.SetNexusCloudMembershipStatus(x)
 	}
 
 	if v, ok := d.GetOk("node_id"); ok {
@@ -2142,6 +2157,11 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 		o.SetSiteName(x)
 	}
 
+	if v, ok := d.GetOk("siteuuid"); ok {
+		x := (v.(string))
+		o.SetSiteuuid(x)
+	}
+
 	if v, ok := d.GetOkExists("smart_account_id"); ok {
 		x := int64(v.(int))
 		o.SetSmartAccountId(x)
@@ -2395,6 +2415,7 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
+				temp["nexus_cloud_membership_status"] = (s.GetNexusCloudMembershipStatus())
 				temp["node_id"] = (s.GetNodeId())
 
 				temp["nxos_bgp_evpn"] = flattenMapNiatelemetryNxosBgpEvpn(s.GetNxosBgpEvpn(), d)
@@ -2432,6 +2453,7 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 				temp["serial"] = (s.GetSerial())
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["site_name"] = (s.GetSiteName())
+				temp["siteuuid"] = (s.GetSiteuuid())
 				temp["smart_account_id"] = (s.GetSmartAccountId())
 				temp["software_download"] = (s.GetSoftwareDownload())
 				temp["system_up_time"] = (s.GetSystemUpTime())

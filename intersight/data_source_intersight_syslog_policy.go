@@ -291,6 +291,11 @@ func getSyslogPolicySchema() map[string]*schema.Schema {
 						Type:        schema.TypeBool,
 						Optional:    true,
 					},
+					"facility": {
+						Description: "This component represents the process of the system which created the message.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 					"hostname": {
 						Description: "Hostname or IP Address of the syslog server where log should be stored.",
 						Type:        schema.TypeString,
@@ -313,6 +318,11 @@ func getSyslogPolicySchema() map[string]*schema.Schema {
 					},
 					"protocol": {
 						Description: "Transport layer protocol for transmission of log messages to syslog server.\n* `udp` - Use User Datagram Protocol (UDP) for syslog remote server connection.\n* `tcp` - Use Transmission Control Protocol (TCP) for syslog remote server connection.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"vrf_name": {
+						Description: "VRF name used by the syslog server.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},

@@ -6,8 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "vnic.PlacementSettings"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "vnic.PlacementSettings"]
+**AutoPciLink** | Pointer to **bool** | Enable or disable automatic assignment of the PCI Link in a dual-link adapter. This option applies only to 13xx series VICs that support dual-link. If enabled, the system determines the placement of the vNIC/vHBA on either of the PCI Links. | [optional] [default to false]
+**AutoSlotId** | Pointer to **bool** | Enable or disable automatic assignment of the VIC slot ID. If enabled and the server has only one VIC, the same VIC is chosen for all the vNICs. If enabled and the server has multiple VICs, the vNIC/vHBA are deployed on the first VIC. The Slot ID determines the first VIC. MLOM is the first Slot ID and the ID increments to 2, 3, and so on. | [optional] [default to false]
 **Id** | Pointer to **string** | PCIe Slot where the VIC adapter is installed. Supported values are (1-15) and MLOM. | [optional] 
-**PciLink** | Pointer to **int64** | The PCI Link used as transport for the virtual interface. This field is applicable only for VIC 1385 model (UCSC-PCIE-C40Q-03) which support two PCI links. The value, if specified, for any other VIC model will be ignored. | [optional] [default to 0]
+**PciLink** | Pointer to **int64** | The PCI Link used as transport for the virtual interface. PCI Link is only applicable for select Cisco UCS VIC 1300 models (UCSC-PCIE-C40Q-03, UCSB-MLOM-40G-03, UCSB-VIC-M83-8P) that support two PCI links. The value, if specified, for any other VIC model will be ignored. | [optional] [default to 0]
 **SwitchId** | Pointer to **string** | The fabric port to which the vNICs will be associated. * &#x60;None&#x60; - Fabric Id is not set to either A or B for the standalone case where the server is not connected to Fabric Interconnects. The value &#39;None&#39; should be used. * &#x60;A&#x60; - Fabric A of the FI cluster. * &#x60;B&#x60; - Fabric B of the FI cluster. | [optional] [default to "None"]
 **Uplink** | Pointer to **int64** | Adapter port on which the virtual interface will be created. | [optional] 
 
@@ -69,6 +71,56 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetAutoPciLink
+
+`func (o *VnicPlacementSettings) GetAutoPciLink() bool`
+
+GetAutoPciLink returns the AutoPciLink field if non-nil, zero value otherwise.
+
+### GetAutoPciLinkOk
+
+`func (o *VnicPlacementSettings) GetAutoPciLinkOk() (*bool, bool)`
+
+GetAutoPciLinkOk returns a tuple with the AutoPciLink field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAutoPciLink
+
+`func (o *VnicPlacementSettings) SetAutoPciLink(v bool)`
+
+SetAutoPciLink sets AutoPciLink field to given value.
+
+### HasAutoPciLink
+
+`func (o *VnicPlacementSettings) HasAutoPciLink() bool`
+
+HasAutoPciLink returns a boolean if a field has been set.
+
+### GetAutoSlotId
+
+`func (o *VnicPlacementSettings) GetAutoSlotId() bool`
+
+GetAutoSlotId returns the AutoSlotId field if non-nil, zero value otherwise.
+
+### GetAutoSlotIdOk
+
+`func (o *VnicPlacementSettings) GetAutoSlotIdOk() (*bool, bool)`
+
+GetAutoSlotIdOk returns a tuple with the AutoSlotId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAutoSlotId
+
+`func (o *VnicPlacementSettings) SetAutoSlotId(v bool)`
+
+SetAutoSlotId sets AutoSlotId field to given value.
+
+### HasAutoSlotId
+
+`func (o *VnicPlacementSettings) HasAutoSlotId() bool`
+
+HasAutoSlotId returns a boolean if a field has been set.
 
 ### GetId
 

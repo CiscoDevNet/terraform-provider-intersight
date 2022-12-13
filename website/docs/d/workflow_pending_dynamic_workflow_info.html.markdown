@@ -24,5 +24,4 @@ The following arguments can be used to get data of already created objects in In
 * `src`:(string) The src is workflow owner service. 
 * `status`:(string) The current status of the PendingDynamicWorkflowInfo.* `GatheringTasks` - Dynamic workflow is gathering tasks before workflow can start execution.* `Waiting` - Dynamic workflow is in waiting state and not yet started execution.* `RateLimit` - Dynamic workflow is rate limited and hasn't started execution. 
 * `wait_on_duplicate`:(bool) When set to true workflow engine will wait for a duplicate to finish before starting a new one. 
-* `workflow_key`:(string) This key contains workflow, initiator and target name. Workflow engine uses the key to do workflow dedup. 
  

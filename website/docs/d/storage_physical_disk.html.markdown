@@ -56,6 +56,7 @@ The following arguments can be used to get data of already created objects in In
 * `pid`:(string) This field identifies the Product ID for physicalDisk. 
 * `power_cycle_count`:(int) Number of powercycles the drive has undergone. 
 * `power_on_hours`:(int) Number of hours the drive has been powered on. 
+* `power_on_hours_percentage`:(int) Percentage of life used based on five year life span of Cisco supported drives. 
 * `predicted_media_life_left_percent`:(int) Predicted physical disk life left in percentage. 
 * `predictive_failure_count`:(int) Error count on the physical disk. 
 * `presence`:(string) This field identifies the presence (equipped) or absence of the given component. 

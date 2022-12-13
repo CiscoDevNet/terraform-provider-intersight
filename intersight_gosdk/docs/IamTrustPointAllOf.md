@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Certificates** | Pointer to [**[]X509Certificate**](X509Certificate.md) |  | [optional] 
 **Chain** | Pointer to **string** | The certificate information for this trusted point. The certificate must be in Base64 encoded X.509 (CER) format. | [optional] 
 **Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**AssignedToEntity** | Pointer to [**[]MoBaseMoRelationship**](MoBaseMoRelationship.md) | An array of relationships to moBaseMo resources. | [optional] [readonly] 
 
 ## Methods
 
@@ -154,6 +155,41 @@ SetAccount sets Account field to given value.
 
 HasAccount returns a boolean if a field has been set.
 
+### GetAssignedToEntity
+
+`func (o *IamTrustPointAllOf) GetAssignedToEntity() []MoBaseMoRelationship`
+
+GetAssignedToEntity returns the AssignedToEntity field if non-nil, zero value otherwise.
+
+### GetAssignedToEntityOk
+
+`func (o *IamTrustPointAllOf) GetAssignedToEntityOk() (*[]MoBaseMoRelationship, bool)`
+
+GetAssignedToEntityOk returns a tuple with the AssignedToEntity field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAssignedToEntity
+
+`func (o *IamTrustPointAllOf) SetAssignedToEntity(v []MoBaseMoRelationship)`
+
+SetAssignedToEntity sets AssignedToEntity field to given value.
+
+### HasAssignedToEntity
+
+`func (o *IamTrustPointAllOf) HasAssignedToEntity() bool`
+
+HasAssignedToEntity returns a boolean if a field has been set.
+
+### SetAssignedToEntityNil
+
+`func (o *IamTrustPointAllOf) SetAssignedToEntityNil(b bool)`
+
+ SetAssignedToEntityNil sets the value for AssignedToEntity to be an explicit nil
+
+### UnsetAssignedToEntity
+`func (o *IamTrustPointAllOf) UnsetAssignedToEntity()`
+
+UnsetAssignedToEntity ensures that no value is present for AssignedToEntity, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

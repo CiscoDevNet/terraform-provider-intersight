@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -23,13 +23,19 @@ type ApplianceSystemInfoAllOf struct {
 	ObjectType string `json:"ObjectType"`
 	// Connection state of the Intersight Appliance to the Intersight. * `` - The target details have been persisted but Intersight has not yet attempted to connect to the target. * `Connected` - Intersight is able to establish a connection to the target and initiate management activities. * `NotConnected` - Intersight is unable to establish a connection to the target. * `ClaimInProgress` - Claim of the target is in progress. A connection to the target has not been fully established. * `UnclaimInProgress` - Unclaim of the target is in progress. Intersight is able to connect to the target and all management operations are supported. * `Unclaimed` - The device was un-claimed from the users account by an Administrator of the device. Also indicates the failure to claim Targets of type HTTP Endpoint in Intersight. * `Claimed` - Target of type HTTP Endpoint is successfully claimed in Intersight. Currently no validation is performed to verify the Target connectivity from Intersight at the time of creation. However invoking API from Intersight Orchestrator fails if this Target is not reachable from Intersight or if Target API credentials are incorrect.
 	CloudConnStatus *string `json:"CloudConnStatus,omitempty"`
+	// Current status of cluster operation on the Intersight Appliance. * `none` - The Intersight Appliance is running in standalone mode. * `active` - The Intersight Appliance is running as part of a cluster. * `pending` - The Intersight Appliance is currently forming a cluster. * `failed` - The Intersight Appliance failed to form a cluster.
+	ClusterStatus *string `json:"ClusterStatus,omitempty"`
 	// Current running deployment size for the Intersight Appliance cluster. Eg. small, medium, large etc.
 	DeploymentSize *string `json:"DeploymentSize,omitempty"`
-	// Publicly accessible FQDN or IP address of the Intersight Appliance.
+	// Publicly accessible FQDN of the Intersight Appliance.
 	Hostname *string `json:"Hostname,omitempty"`
 	// Indicates that the setup initialization process has been completed.
 	InitDone *bool `json:"InitDone,omitempty"`
-	// Operational status of the Intersight Appliance cluster. * `Unknown` - Operational status of the Intersight Appliance entity is Unknown. * `Operational` - Operational status of the Intersight Appliance entity is Operational. * `Impaired` - Operational status of the Intersight Appliance entity is Impaired. * `AttentionNeeded` - Operational status of the Intersight Appliance entity is AttentionNeeded.
+	// Publicly accessible IP address of the Intersight Appliance.
+	IpAddress *string `json:"IpAddress,omitempty"`
+	// Specifies whether this Intersight Appliance is using a virtual ip address.
+	IsVirtualIp *bool `json:"IsVirtualIp,omitempty"`
+	// Operational status of the Intersight Appliance cluster. * `Unknown` - The status of the appliance node is unknown. * `Operational` - The appliance node is operational. * `Impaired` - The appliance node is impaired. * `AttentionNeeded` - The appliance node needs attention. * `ReadyToJoin` - The node is ready to be added to a standalone Intersight Appliance to form a cluster. * `OutOfService` - The user has taken this node (part of a cluster) to out of service. * `ReadyForReplacement` - The cluster node is ready to be replaced.
 	OperationalStatus *string `json:"OperationalStatus,omitempty"`
 	// SerialId of the Intersight Appliance. SerialId is generated when the Intersight Appliance is setup. It is a unique UUID string, and serialId will not change for the life time of the Intersight Appliance.
 	SerialId *string `json:"SerialId,omitempty"`
@@ -149,6 +155,38 @@ func (o *ApplianceSystemInfoAllOf) SetCloudConnStatus(v string) {
 	o.CloudConnStatus = &v
 }
 
+// GetClusterStatus returns the ClusterStatus field value if set, zero value otherwise.
+func (o *ApplianceSystemInfoAllOf) GetClusterStatus() string {
+	if o == nil || o.ClusterStatus == nil {
+		var ret string
+		return ret
+	}
+	return *o.ClusterStatus
+}
+
+// GetClusterStatusOk returns a tuple with the ClusterStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApplianceSystemInfoAllOf) GetClusterStatusOk() (*string, bool) {
+	if o == nil || o.ClusterStatus == nil {
+		return nil, false
+	}
+	return o.ClusterStatus, true
+}
+
+// HasClusterStatus returns a boolean if a field has been set.
+func (o *ApplianceSystemInfoAllOf) HasClusterStatus() bool {
+	if o != nil && o.ClusterStatus != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetClusterStatus gets a reference to the given string and assigns it to the ClusterStatus field.
+func (o *ApplianceSystemInfoAllOf) SetClusterStatus(v string) {
+	o.ClusterStatus = &v
+}
+
 // GetDeploymentSize returns the DeploymentSize field value if set, zero value otherwise.
 func (o *ApplianceSystemInfoAllOf) GetDeploymentSize() string {
 	if o == nil || o.DeploymentSize == nil {
@@ -243,6 +281,70 @@ func (o *ApplianceSystemInfoAllOf) HasInitDone() bool {
 // SetInitDone gets a reference to the given bool and assigns it to the InitDone field.
 func (o *ApplianceSystemInfoAllOf) SetInitDone(v bool) {
 	o.InitDone = &v
+}
+
+// GetIpAddress returns the IpAddress field value if set, zero value otherwise.
+func (o *ApplianceSystemInfoAllOf) GetIpAddress() string {
+	if o == nil || o.IpAddress == nil {
+		var ret string
+		return ret
+	}
+	return *o.IpAddress
+}
+
+// GetIpAddressOk returns a tuple with the IpAddress field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApplianceSystemInfoAllOf) GetIpAddressOk() (*string, bool) {
+	if o == nil || o.IpAddress == nil {
+		return nil, false
+	}
+	return o.IpAddress, true
+}
+
+// HasIpAddress returns a boolean if a field has been set.
+func (o *ApplianceSystemInfoAllOf) HasIpAddress() bool {
+	if o != nil && o.IpAddress != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIpAddress gets a reference to the given string and assigns it to the IpAddress field.
+func (o *ApplianceSystemInfoAllOf) SetIpAddress(v string) {
+	o.IpAddress = &v
+}
+
+// GetIsVirtualIp returns the IsVirtualIp field value if set, zero value otherwise.
+func (o *ApplianceSystemInfoAllOf) GetIsVirtualIp() bool {
+	if o == nil || o.IsVirtualIp == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsVirtualIp
+}
+
+// GetIsVirtualIpOk returns a tuple with the IsVirtualIp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApplianceSystemInfoAllOf) GetIsVirtualIpOk() (*bool, bool) {
+	if o == nil || o.IsVirtualIp == nil {
+		return nil, false
+	}
+	return o.IsVirtualIp, true
+}
+
+// HasIsVirtualIp returns a boolean if a field has been set.
+func (o *ApplianceSystemInfoAllOf) HasIsVirtualIp() bool {
+	if o != nil && o.IsVirtualIp != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsVirtualIp gets a reference to the given bool and assigns it to the IsVirtualIp field.
+func (o *ApplianceSystemInfoAllOf) SetIsVirtualIp(v bool) {
+	o.IsVirtualIp = &v
 }
 
 // GetOperationalStatus returns the OperationalStatus field value if set, zero value otherwise.
@@ -384,6 +486,9 @@ func (o ApplianceSystemInfoAllOf) MarshalJSON() ([]byte, error) {
 	if o.CloudConnStatus != nil {
 		toSerialize["CloudConnStatus"] = o.CloudConnStatus
 	}
+	if o.ClusterStatus != nil {
+		toSerialize["ClusterStatus"] = o.ClusterStatus
+	}
 	if o.DeploymentSize != nil {
 		toSerialize["DeploymentSize"] = o.DeploymentSize
 	}
@@ -392,6 +497,12 @@ func (o ApplianceSystemInfoAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.InitDone != nil {
 		toSerialize["InitDone"] = o.InitDone
+	}
+	if o.IpAddress != nil {
+		toSerialize["IpAddress"] = o.IpAddress
+	}
+	if o.IsVirtualIp != nil {
+		toSerialize["IsVirtualIp"] = o.IsVirtualIp
 	}
 	if o.OperationalStatus != nil {
 		toSerialize["OperationalStatus"] = o.OperationalStatus
@@ -426,9 +537,12 @@ func (o *ApplianceSystemInfoAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "CloudConnStatus")
+		delete(additionalProperties, "ClusterStatus")
 		delete(additionalProperties, "DeploymentSize")
 		delete(additionalProperties, "Hostname")
 		delete(additionalProperties, "InitDone")
+		delete(additionalProperties, "IpAddress")
+		delete(additionalProperties, "IsVirtualIp")
 		delete(additionalProperties, "OperationalStatus")
 		delete(additionalProperties, "SerialId")
 		delete(additionalProperties, "TimeZone")

@@ -76,7 +76,7 @@ func getWorkflowPendingDynamicWorkflowInfoSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"input": {
-			Description: "The inputs of the workflow.",
+			Description: "The input data provided for workflow execution.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -140,11 +140,6 @@ func getWorkflowPendingDynamicWorkflowInfoSchema() map[string]*schema.Schema {
 				},
 			},
 		},
-		"pending_services": {
-			Type:     schema.TypeList,
-			Optional: true,
-			Elem: &schema.Schema{
-				Type: schema.TypeString}},
 		"permission_resources": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
@@ -516,11 +511,6 @@ func getWorkflowPendingDynamicWorkflowInfoSchema() map[string]*schema.Schema {
 				},
 			},
 		},
-		"workflow_key": {
-			Description: "This key contains workflow, initiator and target name. Workflow engine uses the key to do workflow dedup.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
 		"workflow_meta": {
 			Description: "The metadata of the workflow.",
 			Type:        schema.TypeString,
@@ -699,17 +689,6 @@ func dataSourceWorkflowPendingDynamicWorkflowInfoRead(c context.Context, d *sche
 			x := p[0]
 			o.SetParent(x)
 		}
-	}
-
-	if v, ok := d.GetOk("pending_services"); ok {
-		x := make([]string, 0)
-		y := reflect.ValueOf(v)
-		for i := 0; i < y.Len(); i++ {
-			if y.Index(i).Interface() != nil {
-				x = append(x, y.Index(i).Interface().(string))
-			}
-		}
-		o.SetPendingServices(x)
 	}
 
 	if v, ok := d.GetOk("permission_resources"); ok {
@@ -1021,24 +1000,6 @@ func dataSourceWorkflowPendingDynamicWorkflowInfoRead(c context.Context, d *sche
 								o.SetObjectType(x)
 							}
 						}
-						if v, ok := l["target_moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetTargetMoid(x)
-							}
-						}
-						if v, ok := l["target_name"]; ok {
-							{
-								x := (v.(string))
-								o.SetTargetName(x)
-							}
-						}
-						if v, ok := l["target_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetTargetType(x)
-							}
-						}
 						x = append(x, *o)
 					}
 					if len(x) > 0 {
@@ -1115,11 +1076,6 @@ func dataSourceWorkflowPendingDynamicWorkflowInfoRead(c context.Context, d *sche
 		}
 	}
 
-	if v, ok := d.GetOk("workflow_key"); ok {
-		x := (v.(string))
-		o.SetWorkflowKey(x)
-	}
-
 	if v, ok := d.GetOk("workflow_meta"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
@@ -1182,7 +1138,6 @@ func dataSourceWorkflowPendingDynamicWorkflowInfoRead(c context.Context, d *sche
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
-				temp["pending_services"] = (s.GetPendingServices())
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
@@ -1199,7 +1154,6 @@ func dataSourceWorkflowPendingDynamicWorkflowInfoRead(c context.Context, d *sche
 				temp["workflow_ctx"] = flattenMapWorkflowWorkflowCtx(s.GetWorkflowCtx(), d)
 
 				temp["workflow_info"] = flattenMapWorkflowWorkflowInfoRelationship(s.GetWorkflowInfo(), d)
-				temp["workflow_key"] = (s.GetWorkflowKey())
 				temp["workflow_meta"] = flattenAdditionalProperties(s.GetWorkflowMeta())
 				workflowPendingDynamicWorkflowInfoResults = append(workflowPendingDynamicWorkflowInfoResults, temp)
 			}

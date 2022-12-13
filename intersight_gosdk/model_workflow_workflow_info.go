@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -35,7 +35,7 @@ type WorkflowWorkflowInfo struct {
 	EndTime *time.Time `json:"EndTime,omitempty"`
 	// The duration in hours after which the workflow info for failed, terminated or timed out workflow will be removed from database.
 	FailedWorkflowCleanupDuration *int64 `json:"FailedWorkflowCleanupDuration,omitempty"`
-	// All the given inputs for the workflow.
+	// The input data provided for the workflow execution.
 	Input interface{} `json:"Input,omitempty"`
 	// A workflow instance Id which is the unique identified for the workflow execution.
 	InstId *string `json:"InstId,omitempty"`
@@ -48,16 +48,16 @@ type WorkflowWorkflowInfo struct {
 	MetaVersion *int64 `json:"MetaVersion,omitempty"`
 	// A name of the workflow execution instance.
 	Name *string `json:"Name,omitempty"`
-	// All the generated outputs for the workflow.
+	// The output generated at the end of the workflow execution.
 	Output interface{} `json:"Output,omitempty"`
 	// Denotes the reason workflow is in paused status. * `None` - Pause reason is none, which indicates there is no reason for the pause state. * `TaskWithWarning` - Pause reason indicates the workflow is in this state due to a task that has a status as completed with warnings. * `SystemMaintenance` - Pause reason indicates the workflow is in this state based on actions of system admin for maintenance.
 	PauseReason *string `json:"PauseReason,omitempty"`
-	// This field indicates percentage of workflow task execution.
+	// The progress of a workflow is calculated based on the total number of tasks in the workflow and the number of tasks completed. A task is considered as completed if the task status is either \"NO_OP\" or \"COMPLETED\". If the task status is \"SKIP_TO_FAIL\", the workflow will be terminated and the progress of the workflow will be set to 100.
 	Progress   *float32                               `json:"Progress,omitempty"`
 	Properties NullableWorkflowWorkflowInfoProperties `json:"Properties,omitempty"`
 	// This field is applicable when Retry action is issued for a workflow which is in 'final' state. When this field is not specified, the workflow will be retried from the start i.e., the first task. When this field is specified then the workflow will be retried from the specified task. This field should specify the task name which is the unique name of the task within the workflow. The task name must be one of the tasks that completed or failed in the previous run. It is not possible to retry a workflow from a task which wasn't run in the previous iteration.
 	RetryFromTaskName *string `json:"RetryFromTaskName,omitempty"`
-	// The source microservice name which is the owner for this workflow.
+	// The source microservice name which is the owner of this workflow.
 	Src *string `json:"Src,omitempty"`
 	// The time when the workflow was started for execution.
 	StartTime *time.Time `json:"StartTime,omitempty"`
@@ -69,7 +69,7 @@ type WorkflowWorkflowInfo struct {
 	TraceId *string `json:"TraceId,omitempty"`
 	// A type of the workflow (serverconfig, ansible_monitoring).
 	Type *string `json:"Type,omitempty"`
-	// Property will be set when an user action is required on the workflow. This can be because the workflow is waiting for a wait task to be updated, workflow is paused or workflow launched by a configuration object has failed and needs to be retried in order to complete successfully.
+	// Property will be set when a user action is required on the workflow. This can be because the workflow is waiting for a wait task to be updated, workflow is paused or workflow launched by a configuration object has failed and needs to be retried in order to complete successfully.
 	UserActionRequired *bool `json:"UserActionRequired,omitempty"`
 	// The user identifier which indicates the user that started this workflow.
 	UserId *string `json:"UserId,omitempty"`
@@ -79,11 +79,7 @@ type WorkflowWorkflowInfo struct {
 	WaitReason  *string                     `json:"WaitReason,omitempty"`
 	WorkflowCtx NullableWorkflowWorkflowCtx `json:"WorkflowCtx,omitempty"`
 	// The type of workflow meta. Derived from the workflow meta that is used to launch this workflow instance. * `SystemDefined` - System defined workflow definition. * `UserDefined` - User defined workflow definition. * `Dynamic` - Dynamically defined workflow definition.
-	WorkflowMetaType *string `json:"WorkflowMetaType,omitempty"`
-	// Total number of workflow tasks in this workflow.
-	WorkflowTaskCount *int64 `json:"WorkflowTaskCount,omitempty"`
-	// Total number of worker tasks in this workflow. This count doesn't include the control tasks in the workflow.
-	WorkflowWorkerTaskCount    *int64                                          `json:"WorkflowWorkerTaskCount,omitempty"`
+	WorkflowMetaType           *string                                         `json:"WorkflowMetaType,omitempty"`
 	Account                    *IamAccountRelationship                         `json:"Account,omitempty"`
 	AssociatedObject           *MoBaseMoRelationship                           `json:"AssociatedObject,omitempty"`
 	Organization               *OrganizationOrganizationRelationship           `json:"Organization,omitempty"`
@@ -110,14 +106,8 @@ func NewWorkflowWorkflowInfo(classId string, objectType string) *WorkflowWorkflo
 	this.Action = &action
 	var failedWorkflowCleanupDuration int64 = 2160
 	this.FailedWorkflowCleanupDuration = &failedWorkflowCleanupDuration
-	var pauseReason string = "None"
-	this.PauseReason = &pauseReason
 	var successWorkflowCleanupDuration int64 = 2160
 	this.SuccessWorkflowCleanupDuration = &successWorkflowCleanupDuration
-	var waitReason string = "None"
-	this.WaitReason = &waitReason
-	var workflowMetaType string = "SystemDefined"
-	this.WorkflowMetaType = &workflowMetaType
 	return &this
 }
 
@@ -134,14 +124,8 @@ func NewWorkflowWorkflowInfoWithDefaults() *WorkflowWorkflowInfo {
 	this.Action = &action
 	var failedWorkflowCleanupDuration int64 = 2160
 	this.FailedWorkflowCleanupDuration = &failedWorkflowCleanupDuration
-	var pauseReason string = "None"
-	this.PauseReason = &pauseReason
 	var successWorkflowCleanupDuration int64 = 2160
 	this.SuccessWorkflowCleanupDuration = &successWorkflowCleanupDuration
-	var waitReason string = "None"
-	this.WaitReason = &waitReason
-	var workflowMetaType string = "SystemDefined"
-	this.WorkflowMetaType = &workflowMetaType
 	return &this
 }
 
@@ -1147,70 +1131,6 @@ func (o *WorkflowWorkflowInfo) SetWorkflowMetaType(v string) {
 	o.WorkflowMetaType = &v
 }
 
-// GetWorkflowTaskCount returns the WorkflowTaskCount field value if set, zero value otherwise.
-func (o *WorkflowWorkflowInfo) GetWorkflowTaskCount() int64 {
-	if o == nil || o.WorkflowTaskCount == nil {
-		var ret int64
-		return ret
-	}
-	return *o.WorkflowTaskCount
-}
-
-// GetWorkflowTaskCountOk returns a tuple with the WorkflowTaskCount field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *WorkflowWorkflowInfo) GetWorkflowTaskCountOk() (*int64, bool) {
-	if o == nil || o.WorkflowTaskCount == nil {
-		return nil, false
-	}
-	return o.WorkflowTaskCount, true
-}
-
-// HasWorkflowTaskCount returns a boolean if a field has been set.
-func (o *WorkflowWorkflowInfo) HasWorkflowTaskCount() bool {
-	if o != nil && o.WorkflowTaskCount != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetWorkflowTaskCount gets a reference to the given int64 and assigns it to the WorkflowTaskCount field.
-func (o *WorkflowWorkflowInfo) SetWorkflowTaskCount(v int64) {
-	o.WorkflowTaskCount = &v
-}
-
-// GetWorkflowWorkerTaskCount returns the WorkflowWorkerTaskCount field value if set, zero value otherwise.
-func (o *WorkflowWorkflowInfo) GetWorkflowWorkerTaskCount() int64 {
-	if o == nil || o.WorkflowWorkerTaskCount == nil {
-		var ret int64
-		return ret
-	}
-	return *o.WorkflowWorkerTaskCount
-}
-
-// GetWorkflowWorkerTaskCountOk returns a tuple with the WorkflowWorkerTaskCount field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *WorkflowWorkflowInfo) GetWorkflowWorkerTaskCountOk() (*int64, bool) {
-	if o == nil || o.WorkflowWorkerTaskCount == nil {
-		return nil, false
-	}
-	return o.WorkflowWorkerTaskCount, true
-}
-
-// HasWorkflowWorkerTaskCount returns a boolean if a field has been set.
-func (o *WorkflowWorkflowInfo) HasWorkflowWorkerTaskCount() bool {
-	if o != nil && o.WorkflowWorkerTaskCount != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetWorkflowWorkerTaskCount gets a reference to the given int64 and assigns it to the WorkflowWorkerTaskCount field.
-func (o *WorkflowWorkflowInfo) SetWorkflowWorkerTaskCount(v int64) {
-	o.WorkflowWorkerTaskCount = &v
-}
-
 // GetAccount returns the Account field value if set, zero value otherwise.
 func (o *WorkflowWorkflowInfo) GetAccount() IamAccountRelationship {
 	if o == nil || o.Account == nil {
@@ -1571,12 +1491,6 @@ func (o WorkflowWorkflowInfo) MarshalJSON() ([]byte, error) {
 	if o.WorkflowMetaType != nil {
 		toSerialize["WorkflowMetaType"] = o.WorkflowMetaType
 	}
-	if o.WorkflowTaskCount != nil {
-		toSerialize["WorkflowTaskCount"] = o.WorkflowTaskCount
-	}
-	if o.WorkflowWorkerTaskCount != nil {
-		toSerialize["WorkflowWorkerTaskCount"] = o.WorkflowWorkerTaskCount
-	}
 	if o.Account != nil {
 		toSerialize["Account"] = o.Account
 	}
@@ -1625,7 +1539,7 @@ func (o *WorkflowWorkflowInfo) UnmarshalJSON(bytes []byte) (err error) {
 		EndTime *time.Time `json:"EndTime,omitempty"`
 		// The duration in hours after which the workflow info for failed, terminated or timed out workflow will be removed from database.
 		FailedWorkflowCleanupDuration *int64 `json:"FailedWorkflowCleanupDuration,omitempty"`
-		// All the given inputs for the workflow.
+		// The input data provided for the workflow execution.
 		Input interface{} `json:"Input,omitempty"`
 		// A workflow instance Id which is the unique identified for the workflow execution.
 		InstId *string `json:"InstId,omitempty"`
@@ -1638,16 +1552,16 @@ func (o *WorkflowWorkflowInfo) UnmarshalJSON(bytes []byte) (err error) {
 		MetaVersion *int64 `json:"MetaVersion,omitempty"`
 		// A name of the workflow execution instance.
 		Name *string `json:"Name,omitempty"`
-		// All the generated outputs for the workflow.
+		// The output generated at the end of the workflow execution.
 		Output interface{} `json:"Output,omitempty"`
 		// Denotes the reason workflow is in paused status. * `None` - Pause reason is none, which indicates there is no reason for the pause state. * `TaskWithWarning` - Pause reason indicates the workflow is in this state due to a task that has a status as completed with warnings. * `SystemMaintenance` - Pause reason indicates the workflow is in this state based on actions of system admin for maintenance.
 		PauseReason *string `json:"PauseReason,omitempty"`
-		// This field indicates percentage of workflow task execution.
+		// The progress of a workflow is calculated based on the total number of tasks in the workflow and the number of tasks completed. A task is considered as completed if the task status is either \"NO_OP\" or \"COMPLETED\". If the task status is \"SKIP_TO_FAIL\", the workflow will be terminated and the progress of the workflow will be set to 100.
 		Progress   *float32                               `json:"Progress,omitempty"`
 		Properties NullableWorkflowWorkflowInfoProperties `json:"Properties,omitempty"`
 		// This field is applicable when Retry action is issued for a workflow which is in 'final' state. When this field is not specified, the workflow will be retried from the start i.e., the first task. When this field is specified then the workflow will be retried from the specified task. This field should specify the task name which is the unique name of the task within the workflow. The task name must be one of the tasks that completed or failed in the previous run. It is not possible to retry a workflow from a task which wasn't run in the previous iteration.
 		RetryFromTaskName *string `json:"RetryFromTaskName,omitempty"`
-		// The source microservice name which is the owner for this workflow.
+		// The source microservice name which is the owner of this workflow.
 		Src *string `json:"Src,omitempty"`
 		// The time when the workflow was started for execution.
 		StartTime *time.Time `json:"StartTime,omitempty"`
@@ -1659,7 +1573,7 @@ func (o *WorkflowWorkflowInfo) UnmarshalJSON(bytes []byte) (err error) {
 		TraceId *string `json:"TraceId,omitempty"`
 		// A type of the workflow (serverconfig, ansible_monitoring).
 		Type *string `json:"Type,omitempty"`
-		// Property will be set when an user action is required on the workflow. This can be because the workflow is waiting for a wait task to be updated, workflow is paused or workflow launched by a configuration object has failed and needs to be retried in order to complete successfully.
+		// Property will be set when a user action is required on the workflow. This can be because the workflow is waiting for a wait task to be updated, workflow is paused or workflow launched by a configuration object has failed and needs to be retried in order to complete successfully.
 		UserActionRequired *bool `json:"UserActionRequired,omitempty"`
 		// The user identifier which indicates the user that started this workflow.
 		UserId *string `json:"UserId,omitempty"`
@@ -1669,11 +1583,7 @@ func (o *WorkflowWorkflowInfo) UnmarshalJSON(bytes []byte) (err error) {
 		WaitReason  *string                     `json:"WaitReason,omitempty"`
 		WorkflowCtx NullableWorkflowWorkflowCtx `json:"WorkflowCtx,omitempty"`
 		// The type of workflow meta. Derived from the workflow meta that is used to launch this workflow instance. * `SystemDefined` - System defined workflow definition. * `UserDefined` - User defined workflow definition. * `Dynamic` - Dynamically defined workflow definition.
-		WorkflowMetaType *string `json:"WorkflowMetaType,omitempty"`
-		// Total number of workflow tasks in this workflow.
-		WorkflowTaskCount *int64 `json:"WorkflowTaskCount,omitempty"`
-		// Total number of worker tasks in this workflow. This count doesn't include the control tasks in the workflow.
-		WorkflowWorkerTaskCount    *int64                                          `json:"WorkflowWorkerTaskCount,omitempty"`
+		WorkflowMetaType           *string                                         `json:"WorkflowMetaType,omitempty"`
 		Account                    *IamAccountRelationship                         `json:"Account,omitempty"`
 		AssociatedObject           *MoBaseMoRelationship                           `json:"AssociatedObject,omitempty"`
 		Organization               *OrganizationOrganizationRelationship           `json:"Organization,omitempty"`
@@ -1721,8 +1631,6 @@ func (o *WorkflowWorkflowInfo) UnmarshalJSON(bytes []byte) (err error) {
 		varWorkflowWorkflowInfo.WaitReason = varWorkflowWorkflowInfoWithoutEmbeddedStruct.WaitReason
 		varWorkflowWorkflowInfo.WorkflowCtx = varWorkflowWorkflowInfoWithoutEmbeddedStruct.WorkflowCtx
 		varWorkflowWorkflowInfo.WorkflowMetaType = varWorkflowWorkflowInfoWithoutEmbeddedStruct.WorkflowMetaType
-		varWorkflowWorkflowInfo.WorkflowTaskCount = varWorkflowWorkflowInfoWithoutEmbeddedStruct.WorkflowTaskCount
-		varWorkflowWorkflowInfo.WorkflowWorkerTaskCount = varWorkflowWorkflowInfoWithoutEmbeddedStruct.WorkflowWorkerTaskCount
 		varWorkflowWorkflowInfo.Account = varWorkflowWorkflowInfoWithoutEmbeddedStruct.Account
 		varWorkflowWorkflowInfo.AssociatedObject = varWorkflowWorkflowInfoWithoutEmbeddedStruct.AssociatedObject
 		varWorkflowWorkflowInfo.Organization = varWorkflowWorkflowInfoWithoutEmbeddedStruct.Organization
@@ -1779,8 +1687,6 @@ func (o *WorkflowWorkflowInfo) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "WaitReason")
 		delete(additionalProperties, "WorkflowCtx")
 		delete(additionalProperties, "WorkflowMetaType")
-		delete(additionalProperties, "WorkflowTaskCount")
-		delete(additionalProperties, "WorkflowWorkerTaskCount")
 		delete(additionalProperties, "Account")
 		delete(additionalProperties, "AssociatedObject")
 		delete(additionalProperties, "Organization")

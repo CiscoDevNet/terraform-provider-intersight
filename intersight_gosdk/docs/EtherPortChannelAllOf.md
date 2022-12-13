@@ -6,18 +6,28 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "ether.PortChannel"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "ether.PortChannel"]
-**AccessVlan** | Pointer to **string** | Access VLANs for this port-channel, on this FI. | [optional] 
-**AdminState** | Pointer to **string** | Administratively configured state (enabled/disabled) for this port-channel. | [optional] 
-**AllowedVlans** | Pointer to **string** | Allowed VLANs on this port-channel, on this FI. | [optional] 
-**Mode** | Pointer to **string** | Operating mode of this port-channel. | [optional] 
-**NativeVlan** | Pointer to **string** | Native VLAN for this port-channel, on this FI. | [optional] 
-**OperSpeed** | Pointer to **string** | Operational speed of this port-channel. | [optional] 
-**OperState** | Pointer to **string** | Operational state of this port-channel. | [optional] 
-**OperStateQual** | Pointer to **string** | Reason for this port-channel&#39;s Operational state. | [optional] 
-**PortChannelId** | Pointer to **int64** | Unique identifier for this port-channel on the FI. | [optional] 
-**Role** | Pointer to **string** | This port-channel&#39;s configured role (uplink, server, etc.). | [optional] 
-**SwitchId** | Pointer to **string** | Switch Identifier that is local to a cluster. | [optional] 
+**AccessVlan** | Pointer to **string** | Access VLANs for this port-channel, on this FI. | [optional] [readonly] 
+**AdminState** | Pointer to **string** | Administratively configured state (enabled/disabled) for this port-channel. | [optional] [readonly] 
+**AllowedVlans** | Pointer to **string** | Allowed VLANs on this port-channel, on this FI. | [optional] [readonly] 
+**BandWidth** | Pointer to **string** | Bandwidth of this port-channel. | [optional] [readonly] 
+**Description** | Pointer to **string** | Description of this port-channel. | [optional] [readonly] 
+**IpAddress** | Pointer to **string** | IP address of this port-channel. | [optional] [readonly] 
+**IpAddressMask** | Pointer to **int64** | IP address mask of this port-channel. | [optional] [readonly] 
+**Ipv6SubnetCidr** | Pointer to **string** | IPv6 subnet in CIDR notation of this port-channel. Ex. 2000::/8. | [optional] [readonly] 
+**MacAddress** | Pointer to **string** | MAC address of this port-channel. | [optional] [readonly] 
+**Mode** | Pointer to **string** | Operating mode of this port-channel. | [optional] [readonly] 
+**Mtu** | Pointer to **int64** | Maximum transmission unit of this port-channel. | [optional] [readonly] 
+**Name** | Pointer to **string** | Name of the port channel. | [optional] [readonly] 
+**NativeVlan** | Pointer to **string** | Native VLAN for this port-channel, on this FI. | [optional] [readonly] 
+**OperSpeed** | Pointer to **string** | Operational speed of this port-channel. | [optional] [readonly] 
+**OperState** | Pointer to **string** | Operational state of this port-channel. | [optional] [readonly] 
+**OperStateQual** | Pointer to **string** | Reason for this port-channel&#39;s Operational state. | [optional] [readonly] 
+**PortChannelId** | Pointer to **int64** | Unique identifier for this port-channel on the FI. | [optional] [readonly] 
+**Role** | Pointer to **string** | This port-channel&#39;s configured role (uplink, server, etc.). | [optional] [readonly] 
+**Status** | Pointer to **string** | Detailed status of this port-channel. | [optional] [readonly] 
+**SwitchId** | Pointer to **string** | Switch Identifier that is local to a cluster. | [optional] [readonly] 
 **EquipmentSwitchCard** | Pointer to [**EquipmentSwitchCardRelationship**](EquipmentSwitchCardRelationship.md) |  | [optional] 
+**NetworkElement** | Pointer to [**NetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
@@ -154,6 +164,156 @@ SetAllowedVlans sets AllowedVlans field to given value.
 
 HasAllowedVlans returns a boolean if a field has been set.
 
+### GetBandWidth
+
+`func (o *EtherPortChannelAllOf) GetBandWidth() string`
+
+GetBandWidth returns the BandWidth field if non-nil, zero value otherwise.
+
+### GetBandWidthOk
+
+`func (o *EtherPortChannelAllOf) GetBandWidthOk() (*string, bool)`
+
+GetBandWidthOk returns a tuple with the BandWidth field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBandWidth
+
+`func (o *EtherPortChannelAllOf) SetBandWidth(v string)`
+
+SetBandWidth sets BandWidth field to given value.
+
+### HasBandWidth
+
+`func (o *EtherPortChannelAllOf) HasBandWidth() bool`
+
+HasBandWidth returns a boolean if a field has been set.
+
+### GetDescription
+
+`func (o *EtherPortChannelAllOf) GetDescription() string`
+
+GetDescription returns the Description field if non-nil, zero value otherwise.
+
+### GetDescriptionOk
+
+`func (o *EtherPortChannelAllOf) GetDescriptionOk() (*string, bool)`
+
+GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDescription
+
+`func (o *EtherPortChannelAllOf) SetDescription(v string)`
+
+SetDescription sets Description field to given value.
+
+### HasDescription
+
+`func (o *EtherPortChannelAllOf) HasDescription() bool`
+
+HasDescription returns a boolean if a field has been set.
+
+### GetIpAddress
+
+`func (o *EtherPortChannelAllOf) GetIpAddress() string`
+
+GetIpAddress returns the IpAddress field if non-nil, zero value otherwise.
+
+### GetIpAddressOk
+
+`func (o *EtherPortChannelAllOf) GetIpAddressOk() (*string, bool)`
+
+GetIpAddressOk returns a tuple with the IpAddress field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIpAddress
+
+`func (o *EtherPortChannelAllOf) SetIpAddress(v string)`
+
+SetIpAddress sets IpAddress field to given value.
+
+### HasIpAddress
+
+`func (o *EtherPortChannelAllOf) HasIpAddress() bool`
+
+HasIpAddress returns a boolean if a field has been set.
+
+### GetIpAddressMask
+
+`func (o *EtherPortChannelAllOf) GetIpAddressMask() int64`
+
+GetIpAddressMask returns the IpAddressMask field if non-nil, zero value otherwise.
+
+### GetIpAddressMaskOk
+
+`func (o *EtherPortChannelAllOf) GetIpAddressMaskOk() (*int64, bool)`
+
+GetIpAddressMaskOk returns a tuple with the IpAddressMask field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIpAddressMask
+
+`func (o *EtherPortChannelAllOf) SetIpAddressMask(v int64)`
+
+SetIpAddressMask sets IpAddressMask field to given value.
+
+### HasIpAddressMask
+
+`func (o *EtherPortChannelAllOf) HasIpAddressMask() bool`
+
+HasIpAddressMask returns a boolean if a field has been set.
+
+### GetIpv6SubnetCidr
+
+`func (o *EtherPortChannelAllOf) GetIpv6SubnetCidr() string`
+
+GetIpv6SubnetCidr returns the Ipv6SubnetCidr field if non-nil, zero value otherwise.
+
+### GetIpv6SubnetCidrOk
+
+`func (o *EtherPortChannelAllOf) GetIpv6SubnetCidrOk() (*string, bool)`
+
+GetIpv6SubnetCidrOk returns a tuple with the Ipv6SubnetCidr field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIpv6SubnetCidr
+
+`func (o *EtherPortChannelAllOf) SetIpv6SubnetCidr(v string)`
+
+SetIpv6SubnetCidr sets Ipv6SubnetCidr field to given value.
+
+### HasIpv6SubnetCidr
+
+`func (o *EtherPortChannelAllOf) HasIpv6SubnetCidr() bool`
+
+HasIpv6SubnetCidr returns a boolean if a field has been set.
+
+### GetMacAddress
+
+`func (o *EtherPortChannelAllOf) GetMacAddress() string`
+
+GetMacAddress returns the MacAddress field if non-nil, zero value otherwise.
+
+### GetMacAddressOk
+
+`func (o *EtherPortChannelAllOf) GetMacAddressOk() (*string, bool)`
+
+GetMacAddressOk returns a tuple with the MacAddress field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMacAddress
+
+`func (o *EtherPortChannelAllOf) SetMacAddress(v string)`
+
+SetMacAddress sets MacAddress field to given value.
+
+### HasMacAddress
+
+`func (o *EtherPortChannelAllOf) HasMacAddress() bool`
+
+HasMacAddress returns a boolean if a field has been set.
+
 ### GetMode
 
 `func (o *EtherPortChannelAllOf) GetMode() string`
@@ -178,6 +338,56 @@ SetMode sets Mode field to given value.
 `func (o *EtherPortChannelAllOf) HasMode() bool`
 
 HasMode returns a boolean if a field has been set.
+
+### GetMtu
+
+`func (o *EtherPortChannelAllOf) GetMtu() int64`
+
+GetMtu returns the Mtu field if non-nil, zero value otherwise.
+
+### GetMtuOk
+
+`func (o *EtherPortChannelAllOf) GetMtuOk() (*int64, bool)`
+
+GetMtuOk returns a tuple with the Mtu field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMtu
+
+`func (o *EtherPortChannelAllOf) SetMtu(v int64)`
+
+SetMtu sets Mtu field to given value.
+
+### HasMtu
+
+`func (o *EtherPortChannelAllOf) HasMtu() bool`
+
+HasMtu returns a boolean if a field has been set.
+
+### GetName
+
+`func (o *EtherPortChannelAllOf) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *EtherPortChannelAllOf) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *EtherPortChannelAllOf) SetName(v string)`
+
+SetName sets Name field to given value.
+
+### HasName
+
+`func (o *EtherPortChannelAllOf) HasName() bool`
+
+HasName returns a boolean if a field has been set.
 
 ### GetNativeVlan
 
@@ -329,6 +539,31 @@ SetRole sets Role field to given value.
 
 HasRole returns a boolean if a field has been set.
 
+### GetStatus
+
+`func (o *EtherPortChannelAllOf) GetStatus() string`
+
+GetStatus returns the Status field if non-nil, zero value otherwise.
+
+### GetStatusOk
+
+`func (o *EtherPortChannelAllOf) GetStatusOk() (*string, bool)`
+
+GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStatus
+
+`func (o *EtherPortChannelAllOf) SetStatus(v string)`
+
+SetStatus sets Status field to given value.
+
+### HasStatus
+
+`func (o *EtherPortChannelAllOf) HasStatus() bool`
+
+HasStatus returns a boolean if a field has been set.
+
 ### GetSwitchId
 
 `func (o *EtherPortChannelAllOf) GetSwitchId() string`
@@ -378,6 +613,31 @@ SetEquipmentSwitchCard sets EquipmentSwitchCard field to given value.
 `func (o *EtherPortChannelAllOf) HasEquipmentSwitchCard() bool`
 
 HasEquipmentSwitchCard returns a boolean if a field has been set.
+
+### GetNetworkElement
+
+`func (o *EtherPortChannelAllOf) GetNetworkElement() NetworkElementRelationship`
+
+GetNetworkElement returns the NetworkElement field if non-nil, zero value otherwise.
+
+### GetNetworkElementOk
+
+`func (o *EtherPortChannelAllOf) GetNetworkElementOk() (*NetworkElementRelationship, bool)`
+
+GetNetworkElementOk returns a tuple with the NetworkElement field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNetworkElement
+
+`func (o *EtherPortChannelAllOf) SetNetworkElement(v NetworkElementRelationship)`
+
+SetNetworkElement sets NetworkElement field to given value.
+
+### HasNetworkElement
+
+`func (o *EtherPortChannelAllOf) HasNetworkElement() bool`
+
+HasNetworkElement returns a boolean if a field has been set.
 
 ### GetRegisteredDevice
 

@@ -159,16 +159,12 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Default:     "vnic.CompletionQueueSettings",
 						},
 						"ring_size": {
-							Description: "The number of descriptors in each completion queue.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Computed:    true,
-							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
-								if val != nil {
-									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
-								}
-								return
-							}},
+							Description:  "The number of descriptors in each completion queue.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(1, 256),
+							Optional:     true,
+							Default:      1,
+						},
 					},
 				},
 			},
@@ -1118,6 +1114,12 @@ func resourceVnicEthAdapterPolicyCreate(c context.Context, d *schema.ResourceDat
 					o.SetObjectType(x)
 				}
 			}
+			if v, ok := l["ring_size"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetRingSize(x)
+				}
+			}
 			p = append(p, *o)
 		}
 		if len(p) > 0 {
@@ -1960,6 +1962,12 @@ func resourceVnicEthAdapterPolicyUpdate(c context.Context, d *schema.ResourceDat
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["ring_size"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetRingSize(x)
 				}
 			}
 			p = append(p, *o)

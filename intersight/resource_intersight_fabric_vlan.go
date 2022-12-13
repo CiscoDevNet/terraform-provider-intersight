@@ -312,6 +312,13 @@ func resourceFabricVlan() *schema.Resource {
 					},
 				},
 			},
+			"primary_vlan_id": {
+				Description:  "The Primary VLAN ID of the VLAN, if the sharing type of the VLAN is Isolated or Community.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(0, 4093),
+				Optional:     true,
+				Default:      0,
+			},
 			"shared_scope": {
 				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 				Type:        schema.TypeString,
@@ -323,6 +330,13 @@ func resourceFabricVlan() *schema.Resource {
 					}
 					return
 				}},
+			"sharing_type": {
+				Description:  "The sharing type of this VLAN.\n* `None` - This represents a regular VLAN.\n* `Primary` - This represents a primary VLAN.\n* `Isolated` - This represents an isolated VLAN.\n* `Community` - This represents a community VLAN.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"None", "Primary", "Isolated", "Community"}, false),
+				Optional:     true,
+				Default:      "None",
+			},
 			"tags": {
 				Type:       schema.TypeList,
 				Optional:   true,
@@ -665,6 +679,16 @@ func resourceFabricVlanCreate(c context.Context, d *schema.ResourceData, meta in
 
 	o.SetObjectType("fabric.Vlan")
 
+	if v, ok := d.GetOkExists("primary_vlan_id"); ok {
+		x := int64(v.(int))
+		o.SetPrimaryVlanId(x)
+	}
+
+	if v, ok := d.GetOk("sharing_type"); ok {
+		x := (v.(string))
+		o.SetSharingType(x)
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -808,8 +832,16 @@ func resourceFabricVlanRead(c context.Context, d *schema.ResourceData, meta inte
 		return diag.Errorf("error occurred while setting property PermissionResources in FabricVlan object: %s", err.Error())
 	}
 
+	if err := d.Set("primary_vlan_id", (s.GetPrimaryVlanId())); err != nil {
+		return diag.Errorf("error occurred while setting property PrimaryVlanId in FabricVlan object: %s", err.Error())
+	}
+
 	if err := d.Set("shared_scope", (s.GetSharedScope())); err != nil {
 		return diag.Errorf("error occurred while setting property SharedScope in FabricVlan object: %s", err.Error())
+	}
+
+	if err := d.Set("sharing_type", (s.GetSharingType())); err != nil {
+		return diag.Errorf("error occurred while setting property SharingType in FabricVlan object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
@@ -964,6 +996,18 @@ func resourceFabricVlanUpdate(c context.Context, d *schema.ResourceData, meta in
 	}
 
 	o.SetObjectType("fabric.Vlan")
+
+	if d.HasChange("primary_vlan_id") {
+		v := d.Get("primary_vlan_id")
+		x := int64(v.(int))
+		o.SetPrimaryVlanId(x)
+	}
+
+	if d.HasChange("sharing_type") {
+		v := d.Get("sharing_type")
+		x := (v.(string))
+		o.SetSharingType(x)
+	}
 
 	if d.HasChange("tags") {
 		v := d.Get("tags")

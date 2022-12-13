@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "macpool.Lease"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "macpool.Lease"]
 **MacAddress** | Pointer to **string** | MAC address allocated for pool-based allocation. | [optional] 
+**Reservation** | Pointer to [**MacpoolReservationReference**](MacpoolReservationReference.md) |  | [optional] 
 **AssignedToEntity** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 **Pool** | Pointer to [**MacpoolPoolRelationship**](MacpoolPoolRelationship.md) |  | [optional] 
 **PoolMember** | Pointer to [**MacpoolPoolMemberRelationship**](MacpoolPoolMemberRelationship.md) |  | [optional] 
@@ -95,6 +96,31 @@ SetMacAddress sets MacAddress field to given value.
 `func (o *MacpoolLeaseAllOf) HasMacAddress() bool`
 
 HasMacAddress returns a boolean if a field has been set.
+
+### GetReservation
+
+`func (o *MacpoolLeaseAllOf) GetReservation() MacpoolReservationReference`
+
+GetReservation returns the Reservation field if non-nil, zero value otherwise.
+
+### GetReservationOk
+
+`func (o *MacpoolLeaseAllOf) GetReservationOk() (*MacpoolReservationReference, bool)`
+
+GetReservationOk returns a tuple with the Reservation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReservation
+
+`func (o *MacpoolLeaseAllOf) SetReservation(v MacpoolReservationReference)`
+
+SetReservation sets Reservation field to given value.
+
+### HasReservation
+
+`func (o *MacpoolLeaseAllOf) HasReservation() bool`
+
+HasReservation returns a boolean if a field has been set.
 
 ### GetAssignedToEntity
 

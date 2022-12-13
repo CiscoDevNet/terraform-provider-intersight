@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **DnsDomains** | Pointer to **[]string** |  | [optional] 
 **Key** | Pointer to **string** | Unique identifier of NetApp Cluster across data center. | [optional] [readonly] 
 **Location** | Pointer to **string** | Location of the storage controller. | [optional] [readonly] 
-**ManagementAddress** | Pointer to **string** | FQDN or IP Address of Storage Cluster. | [optional] [readonly] 
+**ManagementAddress** | Pointer to **[]string** |  | [optional] 
 **NameServers** | Pointer to **[]string** |  | [optional] 
 **NtpServers** | Pointer to **[]string** |  | [optional] 
 **RshEnabled** | Pointer to **bool** | Indicates whether or not rsh is enabled on the cluster. | [optional] [readonly] 
@@ -290,20 +290,20 @@ HasLocation returns a boolean if a field has been set.
 
 ### GetManagementAddress
 
-`func (o *StorageNetAppClusterAllOf) GetManagementAddress() string`
+`func (o *StorageNetAppClusterAllOf) GetManagementAddress() []string`
 
 GetManagementAddress returns the ManagementAddress field if non-nil, zero value otherwise.
 
 ### GetManagementAddressOk
 
-`func (o *StorageNetAppClusterAllOf) GetManagementAddressOk() (*string, bool)`
+`func (o *StorageNetAppClusterAllOf) GetManagementAddressOk() (*[]string, bool)`
 
 GetManagementAddressOk returns a tuple with the ManagementAddress field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetManagementAddress
 
-`func (o *StorageNetAppClusterAllOf) SetManagementAddress(v string)`
+`func (o *StorageNetAppClusterAllOf) SetManagementAddress(v []string)`
 
 SetManagementAddress sets ManagementAddress field to given value.
 
@@ -313,6 +313,16 @@ SetManagementAddress sets ManagementAddress field to given value.
 
 HasManagementAddress returns a boolean if a field has been set.
 
+### SetManagementAddressNil
+
+`func (o *StorageNetAppClusterAllOf) SetManagementAddressNil(b bool)`
+
+ SetManagementAddressNil sets the value for ManagementAddress to be an explicit nil
+
+### UnsetManagementAddress
+`func (o *StorageNetAppClusterAllOf) UnsetManagementAddress()`
+
+UnsetManagementAddress ensures that no value is present for ManagementAddress, not even an explicit nil
 ### GetNameServers
 
 `func (o *StorageNetAppClusterAllOf) GetNameServers() []string`

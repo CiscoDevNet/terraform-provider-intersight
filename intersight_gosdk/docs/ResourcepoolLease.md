@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "resourcepool.Lease"]
 **Condition** | Pointer to [**[]ResourceSelector**](ResourceSelector.md) |  | [optional] 
 **Feature** | Pointer to **string** | Lease opertion applied for the feature. | [optional] 
+**IsExclusiveAtAssignedEntity** | Pointer to **bool** | Indicates whether a lease allocation is exclusive based on the Assigned Entity, if the AssignedEntity holds any lease then not allowed to create new lease later. | [optional] [default to false]
 **LeaseParameters** | Pointer to [**NullableResourcepoolLeaseParameters**](ResourcepoolLeaseParameters.md) |  | [optional] 
 **Resource** | Pointer to [**MoBaseMo**](MoBaseMo.md) |  | [optional] 
 **ResourceType** | Pointer to **string** | The type of the resource present in the pool, example &#39;server&#39; its combination of RackUnit and Blade. * &#x60;None&#x60; - The resource cannot consider for Resource Pool. * &#x60;Server&#x60; - Resource Pool holds the server kind of resources, example - RackServer, Blade. | [optional] [default to "None"]
@@ -135,6 +136,31 @@ SetFeature sets Feature field to given value.
 `func (o *ResourcepoolLease) HasFeature() bool`
 
 HasFeature returns a boolean if a field has been set.
+
+### GetIsExclusiveAtAssignedEntity
+
+`func (o *ResourcepoolLease) GetIsExclusiveAtAssignedEntity() bool`
+
+GetIsExclusiveAtAssignedEntity returns the IsExclusiveAtAssignedEntity field if non-nil, zero value otherwise.
+
+### GetIsExclusiveAtAssignedEntityOk
+
+`func (o *ResourcepoolLease) GetIsExclusiveAtAssignedEntityOk() (*bool, bool)`
+
+GetIsExclusiveAtAssignedEntityOk returns a tuple with the IsExclusiveAtAssignedEntity field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsExclusiveAtAssignedEntity
+
+`func (o *ResourcepoolLease) SetIsExclusiveAtAssignedEntity(v bool)`
+
+SetIsExclusiveAtAssignedEntity sets IsExclusiveAtAssignedEntity field to given value.
+
+### HasIsExclusiveAtAssignedEntity
+
+`func (o *ResourcepoolLease) HasIsExclusiveAtAssignedEntity() bool`
+
+HasIsExclusiveAtAssignedEntity returns a boolean if a field has been set.
 
 ### GetLeaseParameters
 

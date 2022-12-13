@@ -45,6 +45,7 @@ The following arguments can be used to get data of already created objects in In
 * `memory`:(int) Memory usage of device being inventoried. This determines the percentage of memory resources used. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
+* `nexus_cloud_membership_status`:(bool) Returns if site has been onboarded to nexus cloud or not. 
 * `node_id`:(string) The ID of the device being inventoried. 
 * `nxos_dci_interface_status`:(string) Returns the status of dci interface configured. 
 * `nxos_nve_interface_status`:(string) Returns the value of the nxosNveInterface field. 
@@ -52,7 +53,7 @@ The following arguments can be used to get data of already created objects in In
 * `nxos_pim_neighbors`:(string) Total number of pim neighbors per switch in DCNM. 
 * `nxos_telnet`:(string) Returns the value of the nxosTelnet field. 
 * `nxos_total_routes`:(int) Total number of routes configured in the DCNM. 
-* `record_type`:(string) Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected. 
+* `record_type`:(string) Type of record DCNM / APIC / SE / Nexus Switch. This determines the type of platform where inventory was collected. 
 * `record_version`:(string) Version of record being pushed. This determines what was the API version for data available from the device. 
 * `route_prefix_count`:(int) Total nuumber of v4 and v6 routes per node. 
 * `route_prefix_v4_count`:(int) Number of v4 routes per node. 
@@ -60,6 +61,7 @@ The following arguments can be used to get data of already created objects in In
 * `serial`:(string) Serial number of device being invetoried. The serial number is unique per device and will be used as the key. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `site_name`:(string) Name of fabric domain of the controller. 
+* `siteuuid`:(string) Returns the uuid of the Nexus Cloud site associated to the inventory object. 
 * `smart_account_id`:(int) Returns the value of the smartAccountId/CustomerId field. 
 * `software_download`:(string) Last software downloaded of device being inventoried. This determines if software download API was used. 
 * `system_up_time`:(string) The amount of time that the device being inventoried been up. 

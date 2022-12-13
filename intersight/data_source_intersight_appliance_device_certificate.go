@@ -96,22 +96,22 @@ func getApplianceDeviceCertificateSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"end_time": {
-						Description: "End date of the cert renewal phase.",
+						Description: "End date of the certificate renewal phase.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
 					"failed": {
-						Description: "Indicates if the cert renewal phase has failed or not.",
+						Description: "Indicates if the certificate renewal phase has failed or not.",
 						Type:        schema.TypeBool,
 						Optional:    true,
 					},
 					"message": {
-						Description: "Status message set during the cert renewal phase.",
+						Description: "Status message set during the certificate renewal phase.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
 					"name": {
-						Description: "Name of the cert renewal phase phase.\n* `Init` - New certificate detected, cleanup the old process if any running.\n* `ScheduleCertificateAddOperation` - Certificate Add Operation Schedulled.\n* `WaitForCertCollectionByEndpoint` - Monitor cert collection by endpoint.\n* `Success` - Certificate Renewal Task Success.\n* `Fail` - Certificate Renewal Task Fail.\n* `Cancel` - Certificate Renewal Task Cancel.",
+						Description: "Name of the certificate renewal phase.\n* `Init` - New certificate detected, cleanup the old process if any running.\n* `ScheduleCertificateAddOperation` - Certificate Add Operation Schedulled.\n* `WaitForCertCollectionByEndpoint` - Monitor cert collection by endpoint.\n* `Success` - Certificate Renewal Task Success.\n* `Fail` - Certificate Renewal Task Fail.\n* `Cancel` - Certificate Renewal Task Cancel.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -121,7 +121,7 @@ func getApplianceDeviceCertificateSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"start_time": {
-						Description: "Start date of the cert renewal phase.",
+						Description: "Start date of the certificate renewal phase.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -156,22 +156,22 @@ func getApplianceDeviceCertificateSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"end_time": {
-						Description: "End date of the cert renewal phase.",
+						Description: "End date of the certificate renewal phase.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
 					"failed": {
-						Description: "Indicates if the cert renewal phase has failed or not.",
+						Description: "Indicates if the certificate renewal phase has failed or not.",
 						Type:        schema.TypeBool,
 						Optional:    true,
 					},
 					"message": {
-						Description: "Status message set during the cert renewal phase.",
+						Description: "Status message set during the certificate renewal phase.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
 					"name": {
-						Description: "Name of the cert renewal phase phase.\n* `Init` - New certificate detected, cleanup the old process if any running.\n* `ScheduleCertificateAddOperation` - Certificate Add Operation Schedulled.\n* `WaitForCertCollectionByEndpoint` - Monitor cert collection by endpoint.\n* `Success` - Certificate Renewal Task Success.\n* `Fail` - Certificate Renewal Task Fail.\n* `Cancel` - Certificate Renewal Task Cancel.",
+						Description: "Name of the certificate renewal phase.\n* `Init` - New certificate detected, cleanup the old process if any running.\n* `ScheduleCertificateAddOperation` - Certificate Add Operation Schedulled.\n* `WaitForCertCollectionByEndpoint` - Monitor cert collection by endpoint.\n* `Success` - Certificate Renewal Task Success.\n* `Fail` - Certificate Renewal Task Fail.\n* `Cancel` - Certificate Renewal Task Cancel.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -181,7 +181,7 @@ func getApplianceDeviceCertificateSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"start_time": {
-						Description: "Start date of the cert renewal phase.",
+						Description: "Start date of the certificate renewal phase.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},

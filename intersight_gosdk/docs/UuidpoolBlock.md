@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "uuidpool.Block"]
 **UuidSuffixBlock** | Pointer to [**UuidpoolUuidBlock**](UuidpoolUuidBlock.md) |  | [optional] 
 **Pool** | Pointer to [**UuidpoolPoolRelationship**](UuidpoolPoolRelationship.md) |  | [optional] 
+**Reservations** | Pointer to [**[]UuidpoolReservationRelationship**](UuidpoolReservationRelationship.md) | An array of relationships to uuidpoolReservation resources. | [optional] [readonly] 
 
 ## Methods
 
@@ -118,6 +119,41 @@ SetPool sets Pool field to given value.
 
 HasPool returns a boolean if a field has been set.
 
+### GetReservations
+
+`func (o *UuidpoolBlock) GetReservations() []UuidpoolReservationRelationship`
+
+GetReservations returns the Reservations field if non-nil, zero value otherwise.
+
+### GetReservationsOk
+
+`func (o *UuidpoolBlock) GetReservationsOk() (*[]UuidpoolReservationRelationship, bool)`
+
+GetReservationsOk returns a tuple with the Reservations field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReservations
+
+`func (o *UuidpoolBlock) SetReservations(v []UuidpoolReservationRelationship)`
+
+SetReservations sets Reservations field to given value.
+
+### HasReservations
+
+`func (o *UuidpoolBlock) HasReservations() bool`
+
+HasReservations returns a boolean if a field has been set.
+
+### SetReservationsNil
+
+`func (o *UuidpoolBlock) SetReservationsNil(b bool)`
+
+ SetReservationsNil sets the value for Reservations to be an explicit nil
+
+### UnsetReservations
+`func (o *UuidpoolBlock) UnsetReservations()`
+
+UnsetReservations ensures that no value is present for Reservations, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

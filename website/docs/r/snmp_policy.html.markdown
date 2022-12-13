@@ -121,9 +121,11 @@ This complex property has following sub-properties:
   + `enabled`:(bool) Enables/disables the trap on the server If enabled, trap is active on the server. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `port`:(int) Port used by the server to communicate with the trap destination. Enter a value between 1-65535. Reserved ports not allowed (22, 23, 80, 123, 389, 443, 623, 636, 2068, 3268, 3269). 
+  + `security_level`:(string)(ReadOnly) Security level of the trap receiver used for communication.* `AuthPriv` - The user requires both an authorization password and a privacy password.* `NoAuthNoPriv` - The user does not require an authorization or privacy password.* `AuthNoPriv` - The user requires an authorization password but not a privacy password. 
   + `type`:(string) Type of trap which decides whether to receive a notification when a trap is received at the destination.* `Trap` - Do not receive notifications when trap is sent to the destination.* `Inform` - Receive notifications when trap is sent to the destination. This option is valid only for V2 users. 
   + `user`:(string) SNMP user for the trap. Applicable only to SNMPv3. 
-  + `nr_version`:(string) SNMP version used for the trap.* `V3` - SNMP v3 trap version notifications.* `V2` - SNMP v2 trap version notifications. 
+  + `nr_version`:(string) SNMP version used for the trap.* `V3` - SNMP v3 trap version notifications.* `V1` - SNMP v1 trap version notifications.* `V2` - SNMP v2 trap version notifications. 
+  + `vrf_name`:(string)(ReadOnly) VRF name of the SNMP server. 
 * `snmp_users`:(Array)
 This complex property has following sub-properties:
   + `auth_password`:(string) Authorization password for the user. 

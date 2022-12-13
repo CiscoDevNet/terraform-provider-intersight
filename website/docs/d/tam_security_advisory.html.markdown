@@ -23,6 +23,7 @@ The following arguments can be used to get data of already created objects in In
 * `description`:(string) Brief description of the advisory details. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `environmental_score`:(float) CVSS version 3 environmental score for the security Advisory. 
+* `execute_on_pod`:(string) Orion pod on which this advisory should process.* `tier1` - Advisory processing will be taken care in first advisory driver of multinode cluster.* `tier2` - Advisory processing will be taken care in second advisory driver of multinode cluster. 
 * `external_url`:(string) A link to an external URL describing security Advisory in more details. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 

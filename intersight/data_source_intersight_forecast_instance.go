@@ -656,12 +656,6 @@ func dataSourceForecastInstanceRead(c context.Context, d *schema.ResourceData, m
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
 			o := &models.ForecastModel{}
-			if v, ok := l["accuracy"]; ok {
-				{
-					x := float32(v.(float64))
-					o.SetAccuracy(x)
-				}
-			}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -685,12 +679,6 @@ func dataSourceForecastInstanceRead(c context.Context, d *schema.ResourceData, m
 					if len(x) > 0 {
 						o.SetModelData(x)
 					}
-				}
-			}
-			if v, ok := l["model_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetModelType(x)
 				}
 			}
 			if v, ok := l["object_type"]; ok {

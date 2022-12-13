@@ -158,7 +158,7 @@ func resourceHyperflexClusterStoragePolicy() *schema.Resource {
 					return
 				}},
 			"logical_avalability_zone_config": {
-				Description: "Enable or disable Logical Availability Zones (LAZ). If enabled, HyperFlex Data Platform automatically selects and groups nodes into different availability zones. For HyperFlex Data Platform versions prior to 3.0 release, this setting does not apply. For HyperFlex Data Platform versions 3.0 or higher, this setting is only applicable to Fabric Interconnect attached HyperFlex systems with 8 or more converged nodes.",
+				Description: "Enable or disable Logical Availability Zones (LAZ). If enabled, HyperFlex Data Platform automatically selects and groups nodes into different availability zones. For HyperFlex Data Platform versions prior to 3.0 release, this setting does not apply. For HyperFlex Data Platform versions 3.0 or higher, this setting is only applicable to HyperFlex systems with 8 or more converged nodes.",
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
@@ -172,7 +172,7 @@ func resourceHyperflexClusterStoragePolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"auto_config": {
-							Description: "Enable or disable Logical Availability Zones (LAZ).\nIf enabled, HyperFlex Data Platform automatically selects and groups nodes into different availability zones. For HyperFlex Data Platform versions prior to 3.0 release, this setting does not apply. For HyperFlex Data Platform versions 3.0 or higher, this setting is only applicable to Fabric Interconnect attached HyperFlex systems with 8 or more converged nodes.",
+							Description: "Enable or disable Logical Availability Zones (LAZ).\nIf enabled, HyperFlex Data Platform automatically selects and groups nodes into different availability zones. For HyperFlex Data Platform versions prior to 3.0 release, this setting does not apply. For HyperFlex Data Platform versions 3.0 or higher, this setting is only applicable to HyperFlex systems with 8 or more converged nodes.",
 							Type:        schema.TypeBool,
 							Optional:    true,
 							Default:     false,

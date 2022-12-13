@@ -320,6 +320,11 @@ func getTamAdvisoryDefinitionSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"execute_on_pod": {
+			Description: "Orion pod on which this advisory should process.\n* `tier1` - Advisory processing will be taken care in first advisory driver of multinode cluster.\n* `tier2` - Advisory processing will be taken care in second advisory driver of multinode cluster.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"external_url": {
 			Description: "A link to an external URL describing security Advisory in more details.",
 			Type:        schema.TypeString,
@@ -380,6 +385,11 @@ func getTamAdvisoryDefinitionSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"other_ref_urls": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"owners": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -1109,6 +1119,11 @@ func dataSourceTamAdvisoryDefinitionRead(c context.Context, d *schema.ResourceDa
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOk("execute_on_pod"); ok {
+		x := (v.(string))
+		o.SetExecuteOnPod(x)
+	}
+
 	if v, ok := d.GetOk("external_url"); ok {
 		x := (v.(string))
 		o.SetExternalUrl(x)
@@ -1175,6 +1190,17 @@ func dataSourceTamAdvisoryDefinitionRead(c context.Context, d *schema.ResourceDa
 			x := p[0]
 			o.SetOrganization(x)
 		}
+	}
+
+	if v, ok := d.GetOk("other_ref_urls"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetOtherRefUrls(x)
 	}
 
 	if v, ok := d.GetOk("owners"); ok {
@@ -1589,6 +1615,7 @@ func dataSourceTamAdvisoryDefinitionRead(c context.Context, d *schema.ResourceDa
 				temp["date_updated"] = (s.GetDateUpdated()).String()
 				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["execute_on_pod"] = (s.GetExecuteOnPod())
 				temp["external_url"] = (s.GetExternalUrl())
 
 				temp["mod_time"] = (s.GetModTime()).String()
@@ -1597,6 +1624,7 @@ func dataSourceTamAdvisoryDefinitionRead(c context.Context, d *schema.ResourceDa
 				temp["object_type"] = (s.GetObjectType())
 
 				temp["organization"] = flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)
+				temp["other_ref_urls"] = (s.GetOtherRefUrls())
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)

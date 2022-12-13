@@ -11,6 +11,8 @@ Name | Type | Description | Notes
 **HypervisorType** | Pointer to **string** | Type fo Hypervisor the HyperFlex components versions are compatible with. For example ESX, Hyperv or KVM. * &#x60;ESXi&#x60; - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version. * &#x60;HyperFlexAp&#x60; - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform. * &#x60;IWE&#x60; - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine. * &#x60;Hyper-V&#x60; - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V. * &#x60;Unknown&#x60; - The hypervisor running on the HyperFlex cluster is not known. | [optional] [default to "ESXi"]
 **HypervisorVersion** | Pointer to **string** | Hypervisor component software version. | [optional] 
 **IsMgmtBuild** | Pointer to **string** | Type of the HXDP bundle mgmt or full. | [optional] 
+**MaxMgmtVersion** | Pointer to **string** | Maximum supported HyperFlex Data Platform build version. | [optional] 
+**MinMgmtVersion** | Pointer to **string** | Minimum supported HyperFlex Data Platform build version. | [optional] 
 **ServerFwVersion** | Pointer to **string** | UCS Server Firmware component software version. | [optional] 
 **AppCatalog** | Pointer to [**HyperflexAppCatalogRelationship**](HyperflexAppCatalogRelationship.md) |  | [optional] 
 
@@ -207,6 +209,56 @@ SetIsMgmtBuild sets IsMgmtBuild field to given value.
 `func (o *HclHyperflexSoftwareCompatibilityInfoAllOf) HasIsMgmtBuild() bool`
 
 HasIsMgmtBuild returns a boolean if a field has been set.
+
+### GetMaxMgmtVersion
+
+`func (o *HclHyperflexSoftwareCompatibilityInfoAllOf) GetMaxMgmtVersion() string`
+
+GetMaxMgmtVersion returns the MaxMgmtVersion field if non-nil, zero value otherwise.
+
+### GetMaxMgmtVersionOk
+
+`func (o *HclHyperflexSoftwareCompatibilityInfoAllOf) GetMaxMgmtVersionOk() (*string, bool)`
+
+GetMaxMgmtVersionOk returns a tuple with the MaxMgmtVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMaxMgmtVersion
+
+`func (o *HclHyperflexSoftwareCompatibilityInfoAllOf) SetMaxMgmtVersion(v string)`
+
+SetMaxMgmtVersion sets MaxMgmtVersion field to given value.
+
+### HasMaxMgmtVersion
+
+`func (o *HclHyperflexSoftwareCompatibilityInfoAllOf) HasMaxMgmtVersion() bool`
+
+HasMaxMgmtVersion returns a boolean if a field has been set.
+
+### GetMinMgmtVersion
+
+`func (o *HclHyperflexSoftwareCompatibilityInfoAllOf) GetMinMgmtVersion() string`
+
+GetMinMgmtVersion returns the MinMgmtVersion field if non-nil, zero value otherwise.
+
+### GetMinMgmtVersionOk
+
+`func (o *HclHyperflexSoftwareCompatibilityInfoAllOf) GetMinMgmtVersionOk() (*string, bool)`
+
+GetMinMgmtVersionOk returns a tuple with the MinMgmtVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMinMgmtVersion
+
+`func (o *HclHyperflexSoftwareCompatibilityInfoAllOf) SetMinMgmtVersion(v string)`
+
+SetMinMgmtVersion sets MinMgmtVersion field to given value.
+
+### HasMinMgmtVersion
+
+`func (o *HclHyperflexSoftwareCompatibilityInfoAllOf) HasMinMgmtVersion() bool`
+
+HasMinMgmtVersion returns a boolean if a field has been set.
 
 ### GetServerFwVersion
 

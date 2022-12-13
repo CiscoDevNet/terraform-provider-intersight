@@ -204,6 +204,16 @@ func resourceHclHyperflexSoftwareCompatibilityInfo() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"max_mgmt_version": {
+				Description: "Maximum supported HyperFlex Data Platform build version.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"min_mgmt_version": {
+				Description: "Minimum supported HyperFlex Data Platform build version.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
@@ -624,6 +634,16 @@ func resourceHclHyperflexSoftwareCompatibilityInfoCreate(c context.Context, d *s
 		o.SetIsMgmtBuild(x)
 	}
 
+	if v, ok := d.GetOk("max_mgmt_version"); ok {
+		x := (v.(string))
+		o.SetMaxMgmtVersion(x)
+	}
+
+	if v, ok := d.GetOk("min_mgmt_version"); ok {
+		x := (v.(string))
+		o.SetMinMgmtVersion(x)
+	}
+
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
@@ -752,6 +772,14 @@ func resourceHclHyperflexSoftwareCompatibilityInfoRead(c context.Context, d *sch
 
 	if err := d.Set("is_mgmt_build", (s.GetIsMgmtBuild())); err != nil {
 		return diag.Errorf("error occurred while setting property IsMgmtBuild in HclHyperflexSoftwareCompatibilityInfo object: %s", err.Error())
+	}
+
+	if err := d.Set("max_mgmt_version", (s.GetMaxMgmtVersion())); err != nil {
+		return diag.Errorf("error occurred while setting property MaxMgmtVersion in HclHyperflexSoftwareCompatibilityInfo object: %s", err.Error())
+	}
+
+	if err := d.Set("min_mgmt_version", (s.GetMinMgmtVersion())); err != nil {
+		return diag.Errorf("error occurred while setting property MinMgmtVersion in HclHyperflexSoftwareCompatibilityInfo object: %s", err.Error())
 	}
 
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {
@@ -924,6 +952,18 @@ func resourceHclHyperflexSoftwareCompatibilityInfoUpdate(c context.Context, d *s
 		v := d.Get("is_mgmt_build")
 		x := (v.(string))
 		o.SetIsMgmtBuild(x)
+	}
+
+	if d.HasChange("max_mgmt_version") {
+		v := d.Get("max_mgmt_version")
+		x := (v.(string))
+		o.SetMaxMgmtVersion(x)
+	}
+
+	if d.HasChange("min_mgmt_version") {
+		v := d.Get("min_mgmt_version")
+		x := (v.(string))
+		o.SetMinMgmtVersion(x)
 	}
 
 	if d.HasChange("moid") {

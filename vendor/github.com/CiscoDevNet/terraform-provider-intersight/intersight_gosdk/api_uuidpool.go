@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -56,8 +56,8 @@ func (r ApiCreateUuidpoolPoolRequest) Execute() (*UuidpoolPool, *http.Response, 
 /*
 CreateUuidpoolPool Create a 'uuidpool.Pool' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateUuidpoolPoolRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateUuidpoolPoolRequest
 */
 func (a *UuidpoolApiService) CreateUuidpoolPool(ctx context.Context) ApiCreateUuidpoolPoolRequest {
 	return ApiCreateUuidpoolPoolRequest{
@@ -67,7 +67,8 @@ func (a *UuidpoolApiService) CreateUuidpoolPool(ctx context.Context) ApiCreateUu
 }
 
 // Execute executes the request
-//  @return UuidpoolPool
+//
+//	@return UuidpoolPool
 func (a *UuidpoolApiService) CreateUuidpoolPoolExecute(r ApiCreateUuidpoolPoolRequest) (*UuidpoolPool, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -199,6 +200,183 @@ func (a *UuidpoolApiService) CreateUuidpoolPoolExecute(r ApiCreateUuidpoolPoolRe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiCreateUuidpoolReservationRequest struct {
+	ctx                 context.Context
+	ApiService          *UuidpoolApiService
+	uuidpoolReservation *UuidpoolReservation
+	ifMatch             *string
+	ifNoneMatch         *string
+}
+
+// The &#39;uuidpool.Reservation&#39; resource to create.
+func (r ApiCreateUuidpoolReservationRequest) UuidpoolReservation(uuidpoolReservation UuidpoolReservation) ApiCreateUuidpoolReservationRequest {
+	r.uuidpoolReservation = &uuidpoolReservation
+	return r
+}
+
+// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
+func (r ApiCreateUuidpoolReservationRequest) IfMatch(ifMatch string) ApiCreateUuidpoolReservationRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+// For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte.
+func (r ApiCreateUuidpoolReservationRequest) IfNoneMatch(ifNoneMatch string) ApiCreateUuidpoolReservationRequest {
+	r.ifNoneMatch = &ifNoneMatch
+	return r
+}
+
+func (r ApiCreateUuidpoolReservationRequest) Execute() (*UuidpoolReservation, *http.Response, error) {
+	return r.ApiService.CreateUuidpoolReservationExecute(r)
+}
+
+/*
+CreateUuidpoolReservation Create a 'uuidpool.Reservation' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateUuidpoolReservationRequest
+*/
+func (a *UuidpoolApiService) CreateUuidpoolReservation(ctx context.Context) ApiCreateUuidpoolReservationRequest {
+	return ApiCreateUuidpoolReservationRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return UuidpoolReservation
+func (a *UuidpoolApiService) CreateUuidpoolReservationExecute(r ApiCreateUuidpoolReservationRequest) (*UuidpoolReservation, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UuidpoolReservation
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UuidpoolApiService.CreateUuidpoolReservation")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/uuidpool/Reservations"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.uuidpoolReservation == nil {
+		return localVarReturnValue, nil, reportError("uuidpoolReservation is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	if r.ifNoneMatch != nil {
+		localVarHeaderParams["If-None-Match"] = parameterToString(*r.ifNoneMatch, "")
+	}
+	// body params
+	localVarPostBody = r.uuidpoolReservation
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiDeleteUuidpoolPoolRequest struct {
 	ctx        context.Context
 	ApiService *UuidpoolApiService
@@ -212,9 +390,9 @@ func (r ApiDeleteUuidpoolPoolRequest) Execute() (*http.Response, error) {
 /*
 DeleteUuidpoolPool Delete a 'uuidpool.Pool' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteUuidpoolPoolRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteUuidpoolPoolRequest
 */
 func (a *UuidpoolApiService) DeleteUuidpoolPool(ctx context.Context, moid string) ApiDeleteUuidpoolPoolRequest {
 	return ApiDeleteUuidpoolPoolRequest{
@@ -336,6 +514,143 @@ func (a *UuidpoolApiService) DeleteUuidpoolPoolExecute(r ApiDeleteUuidpoolPoolRe
 	return localVarHTTPResponse, nil
 }
 
+type ApiDeleteUuidpoolReservationRequest struct {
+	ctx        context.Context
+	ApiService *UuidpoolApiService
+	moid       string
+}
+
+func (r ApiDeleteUuidpoolReservationRequest) Execute() (*http.Response, error) {
+	return r.ApiService.DeleteUuidpoolReservationExecute(r)
+}
+
+/*
+DeleteUuidpoolReservation Delete a 'uuidpool.Reservation' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteUuidpoolReservationRequest
+*/
+func (a *UuidpoolApiService) DeleteUuidpoolReservation(ctx context.Context, moid string) ApiDeleteUuidpoolReservationRequest {
+	return ApiDeleteUuidpoolReservationRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+func (a *UuidpoolApiService) DeleteUuidpoolReservationExecute(r ApiDeleteUuidpoolReservationRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UuidpoolApiService.DeleteUuidpoolReservation")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/uuidpool/Reservations/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
 type ApiDeleteUuidpoolUuidLeaseRequest struct {
 	ctx        context.Context
 	ApiService *UuidpoolApiService
@@ -349,9 +664,9 @@ func (r ApiDeleteUuidpoolUuidLeaseRequest) Execute() (*http.Response, error) {
 /*
 DeleteUuidpoolUuidLease Delete a 'uuidpool.UuidLease' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteUuidpoolUuidLeaseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteUuidpoolUuidLeaseRequest
 */
 func (a *UuidpoolApiService) DeleteUuidpoolUuidLease(ctx context.Context, moid string) ApiDeleteUuidpoolUuidLeaseRequest {
 	return ApiDeleteUuidpoolUuidLeaseRequest{
@@ -486,9 +801,9 @@ func (r ApiGetUuidpoolBlockByMoidRequest) Execute() (*UuidpoolBlock, *http.Respo
 /*
 GetUuidpoolBlockByMoid Read a 'uuidpool.Block' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetUuidpoolBlockByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetUuidpoolBlockByMoidRequest
 */
 func (a *UuidpoolApiService) GetUuidpoolBlockByMoid(ctx context.Context, moid string) ApiGetUuidpoolBlockByMoidRequest {
 	return ApiGetUuidpoolBlockByMoidRequest{
@@ -499,7 +814,8 @@ func (a *UuidpoolApiService) GetUuidpoolBlockByMoid(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return UuidpoolBlock
+//
+//	@return UuidpoolBlock
 func (a *UuidpoolApiService) GetUuidpoolBlockByMoidExecute(r ApiGetUuidpoolBlockByMoidRequest) (*UuidpoolBlock, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -710,8 +1026,8 @@ func (r ApiGetUuidpoolBlockListRequest) Execute() (*UuidpoolBlockResponse, *http
 /*
 GetUuidpoolBlockList Read a 'uuidpool.Block' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetUuidpoolBlockListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetUuidpoolBlockListRequest
 */
 func (a *UuidpoolApiService) GetUuidpoolBlockList(ctx context.Context) ApiGetUuidpoolBlockListRequest {
 	return ApiGetUuidpoolBlockListRequest{
@@ -721,7 +1037,8 @@ func (a *UuidpoolApiService) GetUuidpoolBlockList(ctx context.Context) ApiGetUui
 }
 
 // Execute executes the request
-//  @return UuidpoolBlockResponse
+//
+//	@return UuidpoolBlockResponse
 func (a *UuidpoolApiService) GetUuidpoolBlockListExecute(r ApiGetUuidpoolBlockListRequest) (*UuidpoolBlockResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -888,9 +1205,9 @@ func (r ApiGetUuidpoolPoolByMoidRequest) Execute() (*UuidpoolPool, *http.Respons
 /*
 GetUuidpoolPoolByMoid Read a 'uuidpool.Pool' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetUuidpoolPoolByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetUuidpoolPoolByMoidRequest
 */
 func (a *UuidpoolApiService) GetUuidpoolPoolByMoid(ctx context.Context, moid string) ApiGetUuidpoolPoolByMoidRequest {
 	return ApiGetUuidpoolPoolByMoidRequest{
@@ -901,7 +1218,8 @@ func (a *UuidpoolApiService) GetUuidpoolPoolByMoid(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return UuidpoolPool
+//
+//	@return UuidpoolPool
 func (a *UuidpoolApiService) GetUuidpoolPoolByMoidExecute(r ApiGetUuidpoolPoolByMoidRequest) (*UuidpoolPool, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1112,8 +1430,8 @@ func (r ApiGetUuidpoolPoolListRequest) Execute() (*UuidpoolPoolResponse, *http.R
 /*
 GetUuidpoolPoolList Read a 'uuidpool.Pool' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetUuidpoolPoolListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetUuidpoolPoolListRequest
 */
 func (a *UuidpoolApiService) GetUuidpoolPoolList(ctx context.Context) ApiGetUuidpoolPoolListRequest {
 	return ApiGetUuidpoolPoolListRequest{
@@ -1123,7 +1441,8 @@ func (a *UuidpoolApiService) GetUuidpoolPoolList(ctx context.Context) ApiGetUuid
 }
 
 // Execute executes the request
-//  @return UuidpoolPoolResponse
+//
+//	@return UuidpoolPoolResponse
 func (a *UuidpoolApiService) GetUuidpoolPoolListExecute(r ApiGetUuidpoolPoolListRequest) (*UuidpoolPoolResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1290,9 +1609,9 @@ func (r ApiGetUuidpoolPoolMemberByMoidRequest) Execute() (*UuidpoolPoolMember, *
 /*
 GetUuidpoolPoolMemberByMoid Read a 'uuidpool.PoolMember' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetUuidpoolPoolMemberByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetUuidpoolPoolMemberByMoidRequest
 */
 func (a *UuidpoolApiService) GetUuidpoolPoolMemberByMoid(ctx context.Context, moid string) ApiGetUuidpoolPoolMemberByMoidRequest {
 	return ApiGetUuidpoolPoolMemberByMoidRequest{
@@ -1303,7 +1622,8 @@ func (a *UuidpoolApiService) GetUuidpoolPoolMemberByMoid(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return UuidpoolPoolMember
+//
+//	@return UuidpoolPoolMember
 func (a *UuidpoolApiService) GetUuidpoolPoolMemberByMoidExecute(r ApiGetUuidpoolPoolMemberByMoidRequest) (*UuidpoolPoolMember, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1514,8 +1834,8 @@ func (r ApiGetUuidpoolPoolMemberListRequest) Execute() (*UuidpoolPoolMemberRespo
 /*
 GetUuidpoolPoolMemberList Read a 'uuidpool.PoolMember' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetUuidpoolPoolMemberListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetUuidpoolPoolMemberListRequest
 */
 func (a *UuidpoolApiService) GetUuidpoolPoolMemberList(ctx context.Context) ApiGetUuidpoolPoolMemberListRequest {
 	return ApiGetUuidpoolPoolMemberListRequest{
@@ -1525,7 +1845,8 @@ func (a *UuidpoolApiService) GetUuidpoolPoolMemberList(ctx context.Context) ApiG
 }
 
 // Execute executes the request
-//  @return UuidpoolPoolMemberResponse
+//
+//	@return UuidpoolPoolMemberResponse
 func (a *UuidpoolApiService) GetUuidpoolPoolMemberListExecute(r ApiGetUuidpoolPoolMemberListRequest) (*UuidpoolPoolMemberResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1679,6 +2000,410 @@ func (a *UuidpoolApiService) GetUuidpoolPoolMemberListExecute(r ApiGetUuidpoolPo
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetUuidpoolReservationByMoidRequest struct {
+	ctx        context.Context
+	ApiService *UuidpoolApiService
+	moid       string
+}
+
+func (r ApiGetUuidpoolReservationByMoidRequest) Execute() (*UuidpoolReservation, *http.Response, error) {
+	return r.ApiService.GetUuidpoolReservationByMoidExecute(r)
+}
+
+/*
+GetUuidpoolReservationByMoid Read a 'uuidpool.Reservation' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetUuidpoolReservationByMoidRequest
+*/
+func (a *UuidpoolApiService) GetUuidpoolReservationByMoid(ctx context.Context, moid string) ApiGetUuidpoolReservationByMoidRequest {
+	return ApiGetUuidpoolReservationByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//
+//	@return UuidpoolReservation
+func (a *UuidpoolApiService) GetUuidpoolReservationByMoidExecute(r ApiGetUuidpoolReservationByMoidRequest) (*UuidpoolReservation, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UuidpoolReservation
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UuidpoolApiService.GetUuidpoolReservationByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/uuidpool/Reservations/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetUuidpoolReservationListRequest struct {
+	ctx         context.Context
+	ApiService  *UuidpoolApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetUuidpoolReservationListRequest) Filter(filter string) ApiGetUuidpoolReservationListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetUuidpoolReservationListRequest) Orderby(orderby string) ApiGetUuidpoolReservationListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetUuidpoolReservationListRequest) Top(top int32) ApiGetUuidpoolReservationListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetUuidpoolReservationListRequest) Skip(skip int32) ApiGetUuidpoolReservationListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetUuidpoolReservationListRequest) Select_(select_ string) ApiGetUuidpoolReservationListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetUuidpoolReservationListRequest) Expand(expand string) ApiGetUuidpoolReservationListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetUuidpoolReservationListRequest) Apply(apply string) ApiGetUuidpoolReservationListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetUuidpoolReservationListRequest) Count(count bool) ApiGetUuidpoolReservationListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetUuidpoolReservationListRequest) Inlinecount(inlinecount string) ApiGetUuidpoolReservationListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetUuidpoolReservationListRequest) At(at string) ApiGetUuidpoolReservationListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetUuidpoolReservationListRequest) Tags(tags string) ApiGetUuidpoolReservationListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetUuidpoolReservationListRequest) Execute() (*UuidpoolReservationResponse, *http.Response, error) {
+	return r.ApiService.GetUuidpoolReservationListExecute(r)
+}
+
+/*
+GetUuidpoolReservationList Read a 'uuidpool.Reservation' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetUuidpoolReservationListRequest
+*/
+func (a *UuidpoolApiService) GetUuidpoolReservationList(ctx context.Context) ApiGetUuidpoolReservationListRequest {
+	return ApiGetUuidpoolReservationListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return UuidpoolReservationResponse
+func (a *UuidpoolApiService) GetUuidpoolReservationListExecute(r ApiGetUuidpoolReservationListRequest) (*UuidpoolReservationResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UuidpoolReservationResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UuidpoolApiService.GetUuidpoolReservationList")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/uuidpool/Reservations"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetUuidpoolUniverseByMoidRequest struct {
 	ctx        context.Context
 	ApiService *UuidpoolApiService
@@ -1692,9 +2417,9 @@ func (r ApiGetUuidpoolUniverseByMoidRequest) Execute() (*UuidpoolUniverse, *http
 /*
 GetUuidpoolUniverseByMoid Read a 'uuidpool.Universe' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetUuidpoolUniverseByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetUuidpoolUniverseByMoidRequest
 */
 func (a *UuidpoolApiService) GetUuidpoolUniverseByMoid(ctx context.Context, moid string) ApiGetUuidpoolUniverseByMoidRequest {
 	return ApiGetUuidpoolUniverseByMoidRequest{
@@ -1705,7 +2430,8 @@ func (a *UuidpoolApiService) GetUuidpoolUniverseByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return UuidpoolUniverse
+//
+//	@return UuidpoolUniverse
 func (a *UuidpoolApiService) GetUuidpoolUniverseByMoidExecute(r ApiGetUuidpoolUniverseByMoidRequest) (*UuidpoolUniverse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1916,8 +2642,8 @@ func (r ApiGetUuidpoolUniverseListRequest) Execute() (*UuidpoolUniverseResponse,
 /*
 GetUuidpoolUniverseList Read a 'uuidpool.Universe' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetUuidpoolUniverseListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetUuidpoolUniverseListRequest
 */
 func (a *UuidpoolApiService) GetUuidpoolUniverseList(ctx context.Context) ApiGetUuidpoolUniverseListRequest {
 	return ApiGetUuidpoolUniverseListRequest{
@@ -1927,7 +2653,8 @@ func (a *UuidpoolApiService) GetUuidpoolUniverseList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//  @return UuidpoolUniverseResponse
+//
+//	@return UuidpoolUniverseResponse
 func (a *UuidpoolApiService) GetUuidpoolUniverseListExecute(r ApiGetUuidpoolUniverseListRequest) (*UuidpoolUniverseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2094,9 +2821,9 @@ func (r ApiGetUuidpoolUuidLeaseByMoidRequest) Execute() (*UuidpoolUuidLease, *ht
 /*
 GetUuidpoolUuidLeaseByMoid Read a 'uuidpool.UuidLease' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetUuidpoolUuidLeaseByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetUuidpoolUuidLeaseByMoidRequest
 */
 func (a *UuidpoolApiService) GetUuidpoolUuidLeaseByMoid(ctx context.Context, moid string) ApiGetUuidpoolUuidLeaseByMoidRequest {
 	return ApiGetUuidpoolUuidLeaseByMoidRequest{
@@ -2107,7 +2834,8 @@ func (a *UuidpoolApiService) GetUuidpoolUuidLeaseByMoid(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return UuidpoolUuidLease
+//
+//	@return UuidpoolUuidLease
 func (a *UuidpoolApiService) GetUuidpoolUuidLeaseByMoidExecute(r ApiGetUuidpoolUuidLeaseByMoidRequest) (*UuidpoolUuidLease, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2318,8 +3046,8 @@ func (r ApiGetUuidpoolUuidLeaseListRequest) Execute() (*UuidpoolUuidLeaseRespons
 /*
 GetUuidpoolUuidLeaseList Read a 'uuidpool.UuidLease' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetUuidpoolUuidLeaseListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetUuidpoolUuidLeaseListRequest
 */
 func (a *UuidpoolApiService) GetUuidpoolUuidLeaseList(ctx context.Context) ApiGetUuidpoolUuidLeaseListRequest {
 	return ApiGetUuidpoolUuidLeaseListRequest{
@@ -2329,7 +3057,8 @@ func (a *UuidpoolApiService) GetUuidpoolUuidLeaseList(ctx context.Context) ApiGe
 }
 
 // Execute executes the request
-//  @return UuidpoolUuidLeaseResponse
+//
+//	@return UuidpoolUuidLeaseResponse
 func (a *UuidpoolApiService) GetUuidpoolUuidLeaseListExecute(r ApiGetUuidpoolUuidLeaseListRequest) (*UuidpoolUuidLeaseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2510,9 +3239,9 @@ func (r ApiPatchUuidpoolPoolRequest) Execute() (*UuidpoolPool, *http.Response, e
 /*
 PatchUuidpoolPool Update a 'uuidpool.Pool' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchUuidpoolPoolRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchUuidpoolPoolRequest
 */
 func (a *UuidpoolApiService) PatchUuidpoolPool(ctx context.Context, moid string) ApiPatchUuidpoolPoolRequest {
 	return ApiPatchUuidpoolPoolRequest{
@@ -2523,7 +3252,8 @@ func (a *UuidpoolApiService) PatchUuidpoolPool(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//  @return UuidpoolPool
+//
+//	@return UuidpoolPool
 func (a *UuidpoolApiService) PatchUuidpoolPoolExecute(r ApiPatchUuidpoolPoolRequest) (*UuidpoolPool, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -2680,9 +3410,9 @@ func (r ApiUpdateUuidpoolPoolRequest) Execute() (*UuidpoolPool, *http.Response, 
 /*
 UpdateUuidpoolPool Update a 'uuidpool.Pool' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateUuidpoolPoolRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateUuidpoolPoolRequest
 */
 func (a *UuidpoolApiService) UpdateUuidpoolPool(ctx context.Context, moid string) ApiUpdateUuidpoolPoolRequest {
 	return ApiUpdateUuidpoolPoolRequest{
@@ -2693,7 +3423,8 @@ func (a *UuidpoolApiService) UpdateUuidpoolPool(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return UuidpoolPool
+//
+//	@return UuidpoolPool
 func (a *UuidpoolApiService) UpdateUuidpoolPoolExecute(r ApiUpdateUuidpoolPoolRequest) (*UuidpoolPool, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

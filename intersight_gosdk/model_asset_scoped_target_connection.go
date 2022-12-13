@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -26,6 +26,8 @@ type AssetScopedTargetConnection struct {
 	ObjectType string `json:"ObjectType"`
 	// When this flag is set to true, every IWO entity in the scope targets will be checked and discovery of the scope target will be regarded as a failure when anyone of these entities cannot be connected and validated.
 	FullValidation *bool `json:"FullValidation,omitempty"`
+	// Indicates whether a connection to the target should be established using TLS.
+	IsSecure *bool `json:"IsSecure,omitempty"`
 	// The port number to be used to connect to the managed target. Values 1-65535 indicate a port number to be used. A value of 0 is not a valid port number and instead indicates that the default management port, as defined by the documentation of the managed target, should be used to establish a connection.
 	Port *int64 `json:"Port,omitempty"`
 	// The group id of IWO entities upon which the discover of a scoped target is performed. For example, a database target may be scoped to the group of virtual machines upon which the database application is running. Scope value is group id created for all those virtual machines in this scope.
@@ -43,6 +45,8 @@ func NewAssetScopedTargetConnection(classId string, objectType string) *AssetSco
 	this := AssetScopedTargetConnection{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var isSecure bool = true
+	this.IsSecure = &isSecure
 	return &this
 }
 
@@ -55,6 +59,8 @@ func NewAssetScopedTargetConnectionWithDefaults() *AssetScopedTargetConnection {
 	this.ClassId = classId
 	var objectType string = "asset.ScopedTargetConnection"
 	this.ObjectType = objectType
+	var isSecure bool = true
+	this.IsSecure = &isSecure
 	return &this
 }
 
@@ -136,6 +142,38 @@ func (o *AssetScopedTargetConnection) HasFullValidation() bool {
 // SetFullValidation gets a reference to the given bool and assigns it to the FullValidation field.
 func (o *AssetScopedTargetConnection) SetFullValidation(v bool) {
 	o.FullValidation = &v
+}
+
+// GetIsSecure returns the IsSecure field value if set, zero value otherwise.
+func (o *AssetScopedTargetConnection) GetIsSecure() bool {
+	if o == nil || o.IsSecure == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsSecure
+}
+
+// GetIsSecureOk returns a tuple with the IsSecure field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssetScopedTargetConnection) GetIsSecureOk() (*bool, bool) {
+	if o == nil || o.IsSecure == nil {
+		return nil, false
+	}
+	return o.IsSecure, true
+}
+
+// HasIsSecure returns a boolean if a field has been set.
+func (o *AssetScopedTargetConnection) HasIsSecure() bool {
+	if o != nil && o.IsSecure != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsSecure gets a reference to the given bool and assigns it to the IsSecure field.
+func (o *AssetScopedTargetConnection) SetIsSecure(v bool) {
+	o.IsSecure = &v
 }
 
 // GetPort returns the Port field value if set, zero value otherwise.
@@ -221,6 +259,9 @@ func (o AssetScopedTargetConnection) MarshalJSON() ([]byte, error) {
 	if o.FullValidation != nil {
 		toSerialize["FullValidation"] = o.FullValidation
 	}
+	if o.IsSecure != nil {
+		toSerialize["IsSecure"] = o.IsSecure
+	}
 	if o.Port != nil {
 		toSerialize["Port"] = o.Port
 	}
@@ -243,6 +284,8 @@ func (o *AssetScopedTargetConnection) UnmarshalJSON(bytes []byte) (err error) {
 		ObjectType string `json:"ObjectType"`
 		// When this flag is set to true, every IWO entity in the scope targets will be checked and discovery of the scope target will be regarded as a failure when anyone of these entities cannot be connected and validated.
 		FullValidation *bool `json:"FullValidation,omitempty"`
+		// Indicates whether a connection to the target should be established using TLS.
+		IsSecure *bool `json:"IsSecure,omitempty"`
 		// The port number to be used to connect to the managed target. Values 1-65535 indicate a port number to be used. A value of 0 is not a valid port number and instead indicates that the default management port, as defined by the documentation of the managed target, should be used to establish a connection.
 		Port *int64 `json:"Port,omitempty"`
 		// The group id of IWO entities upon which the discover of a scoped target is performed. For example, a database target may be scoped to the group of virtual machines upon which the database application is running. Scope value is group id created for all those virtual machines in this scope.
@@ -257,6 +300,7 @@ func (o *AssetScopedTargetConnection) UnmarshalJSON(bytes []byte) (err error) {
 		varAssetScopedTargetConnection.ClassId = varAssetScopedTargetConnectionWithoutEmbeddedStruct.ClassId
 		varAssetScopedTargetConnection.ObjectType = varAssetScopedTargetConnectionWithoutEmbeddedStruct.ObjectType
 		varAssetScopedTargetConnection.FullValidation = varAssetScopedTargetConnectionWithoutEmbeddedStruct.FullValidation
+		varAssetScopedTargetConnection.IsSecure = varAssetScopedTargetConnectionWithoutEmbeddedStruct.IsSecure
 		varAssetScopedTargetConnection.Port = varAssetScopedTargetConnectionWithoutEmbeddedStruct.Port
 		varAssetScopedTargetConnection.Scope = varAssetScopedTargetConnectionWithoutEmbeddedStruct.Scope
 		*o = AssetScopedTargetConnection(varAssetScopedTargetConnection)
@@ -279,6 +323,7 @@ func (o *AssetScopedTargetConnection) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "FullValidation")
+		delete(additionalProperties, "IsSecure")
 		delete(additionalProperties, "Port")
 		delete(additionalProperties, "Scope")
 

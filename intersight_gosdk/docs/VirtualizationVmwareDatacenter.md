@@ -6,13 +6,16 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "virtualization.VmwareDatacenter"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "virtualization.VmwareDatacenter"]
-**ClusterCount** | Pointer to **int64** | Count of all clusters associated with this DC. | [optional] 
-**DatastoreCount** | Pointer to **int64** | Count of all datastores associated with this DC. | [optional] 
-**HostCount** | Pointer to **int64** | Count of all hosts associated with this DC. | [optional] 
-**InventoryPath** | Pointer to **string** | Inventory path of the DC. | [optional] 
-**NetworkCount** | Pointer to **int64** | Count of all networks associated with this datacenter (DC). | [optional] 
+**ClusterCount** | Pointer to **int64** | Count of all clusters associated with this DC. | [optional] [readonly] 
+**DatastoreCount** | Pointer to **int64** | Count of all datastores associated with this DC. | [optional] [readonly] 
+**DistributedNetworkCount** | Pointer to **int64** | Count of all distributed networks associated with this datacenter (DC). | [optional] 
+**DistributedVirtualSwitchCount** | Pointer to **int64** | Count of all distributed virtual switches associated with this datacenter (DC). | [optional] 
+**HostCount** | Pointer to **int64** | Count of all hosts associated with this DC. | [optional] [readonly] 
+**InventoryPath** | Pointer to **string** | Inventory path of the DC. | [optional] [readonly] 
+**NetworkCount** | Pointer to **int64** | Count of all networks associated with this datacenter (DC). | [optional] [readonly] 
+**StandardNetworkCount** | Pointer to **int64** | Count of all standard networks associated with this datacenter (DC). | [optional] 
 **VmCount** | Pointer to **int64** | Count of all virtual machines (VMs) associated with this DC. | [optional] 
-**VmTemplateCount** | Pointer to **int64** | Count of all virtual machines templates associated with this DC. | [optional] 
+**VmTemplateCount** | Pointer to **int64** | Count of all virtual machines templates associated with this DC. | [optional] [readonly] 
 **HypervisorManager** | Pointer to [**VirtualizationVmwareVcenterRelationship**](VirtualizationVmwareVcenterRelationship.md) |  | [optional] 
 **ParentFolder** | Pointer to [**VirtualizationVmwareFolderRelationship**](VirtualizationVmwareFolderRelationship.md) |  | [optional] 
 
@@ -125,6 +128,56 @@ SetDatastoreCount sets DatastoreCount field to given value.
 
 HasDatastoreCount returns a boolean if a field has been set.
 
+### GetDistributedNetworkCount
+
+`func (o *VirtualizationVmwareDatacenter) GetDistributedNetworkCount() int64`
+
+GetDistributedNetworkCount returns the DistributedNetworkCount field if non-nil, zero value otherwise.
+
+### GetDistributedNetworkCountOk
+
+`func (o *VirtualizationVmwareDatacenter) GetDistributedNetworkCountOk() (*int64, bool)`
+
+GetDistributedNetworkCountOk returns a tuple with the DistributedNetworkCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDistributedNetworkCount
+
+`func (o *VirtualizationVmwareDatacenter) SetDistributedNetworkCount(v int64)`
+
+SetDistributedNetworkCount sets DistributedNetworkCount field to given value.
+
+### HasDistributedNetworkCount
+
+`func (o *VirtualizationVmwareDatacenter) HasDistributedNetworkCount() bool`
+
+HasDistributedNetworkCount returns a boolean if a field has been set.
+
+### GetDistributedVirtualSwitchCount
+
+`func (o *VirtualizationVmwareDatacenter) GetDistributedVirtualSwitchCount() int64`
+
+GetDistributedVirtualSwitchCount returns the DistributedVirtualSwitchCount field if non-nil, zero value otherwise.
+
+### GetDistributedVirtualSwitchCountOk
+
+`func (o *VirtualizationVmwareDatacenter) GetDistributedVirtualSwitchCountOk() (*int64, bool)`
+
+GetDistributedVirtualSwitchCountOk returns a tuple with the DistributedVirtualSwitchCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDistributedVirtualSwitchCount
+
+`func (o *VirtualizationVmwareDatacenter) SetDistributedVirtualSwitchCount(v int64)`
+
+SetDistributedVirtualSwitchCount sets DistributedVirtualSwitchCount field to given value.
+
+### HasDistributedVirtualSwitchCount
+
+`func (o *VirtualizationVmwareDatacenter) HasDistributedVirtualSwitchCount() bool`
+
+HasDistributedVirtualSwitchCount returns a boolean if a field has been set.
+
 ### GetHostCount
 
 `func (o *VirtualizationVmwareDatacenter) GetHostCount() int64`
@@ -199,6 +252,31 @@ SetNetworkCount sets NetworkCount field to given value.
 `func (o *VirtualizationVmwareDatacenter) HasNetworkCount() bool`
 
 HasNetworkCount returns a boolean if a field has been set.
+
+### GetStandardNetworkCount
+
+`func (o *VirtualizationVmwareDatacenter) GetStandardNetworkCount() int64`
+
+GetStandardNetworkCount returns the StandardNetworkCount field if non-nil, zero value otherwise.
+
+### GetStandardNetworkCountOk
+
+`func (o *VirtualizationVmwareDatacenter) GetStandardNetworkCountOk() (*int64, bool)`
+
+GetStandardNetworkCountOk returns a tuple with the StandardNetworkCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStandardNetworkCount
+
+`func (o *VirtualizationVmwareDatacenter) SetStandardNetworkCount(v int64)`
+
+SetStandardNetworkCount sets StandardNetworkCount field to given value.
+
+### HasStandardNetworkCount
+
+`func (o *VirtualizationVmwareDatacenter) HasStandardNetworkCount() bool`
+
+HasStandardNetworkCount returns a boolean if a field has been set.
 
 ### GetVmCount
 

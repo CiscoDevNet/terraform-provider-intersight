@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -25,6 +25,10 @@ type OnpremUpgradePhase struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// Id of the node the upgrade phase is running on.
+	CurrentNode *int64 `json:"CurrentNode,omitempty"`
+	// Hostname of the node the upgrade phase is running on.
+	CurrentNodeHostname *string `json:"CurrentNodeHostname,omitempty"`
 	// Elapsed time in seconds to complete the current upgrade phase.
 	ElapsedTime *int64 `json:"ElapsedTime,omitempty"`
 	// End date of the software upgrade phase.
@@ -33,10 +37,12 @@ type OnpremUpgradePhase struct {
 	Failed *bool `json:"Failed,omitempty"`
 	// Status message set during the upgrade phase.
 	Message *string `json:"Message,omitempty"`
-	// Name of the upgrade phase. * `init` - Upgrade service initialization phase. * `Prepare` - Upgrade service prepares folders and templated files. * `ServiceLoad` - Upgrade service loads the service images into the local docker cache. * `UiLoad` - Upgrade service loads the UI packages into the local cache. * `GenerateConfig` - Upgrade service generates the Kubernetes configuration files. * `DeployService` - Upgrade service deploys the Kubernetes services. * `Success` - Upgrade completed successfully. * `Fail` - Indicates that the upgrade process has failed. * `Cancel` - Indicates that the upgrade was canceled by the Intersight Appliance. * `Telemetry` - Upgrade service sends basic telemetry data to the Intersight.
+	// Name of the upgrade phase. * `init` - Upgrade service initialization phase. * `CheckCluster` - For a multinode system, check that all nodes in the cluster are connected and running. * `SyncImages` - For a multinode system, sync image files between nodes. * `Prepare` - Upgrade service prepares folders and templated files. * `ServiceLoad` - Upgrade service loads the service images into the local docker cache. * `UiLoad` - Upgrade service loads the UI packages into the local cache. * `GenerateConfig` - Upgrade service generates the Kubernetes configuration files. * `DeployService` - Upgrade service deploys the Kubernetes services. * `UpgradeOS` - Run /opt/cisco/bin/onprem-upgrade-start.sh for each node. * `UpgradeServices` - Run /opt/cisco/bin/onprem-upgrade-start.sh per node. * `FinishUpgrade` - Run /opt/cisco/bin/onprem-upgrade-finish.sh for each node. * `Success` - Upgrade completed successfully. * `Fail` - Indicates that the upgrade process has failed. * `Cancel` - Indicates that the upgrade was canceled by the Intersight Appliance. * `Telemetry` - Upgrade service sends basic telemetry data to the Intersight.
 	Name *string `json:"Name,omitempty"`
 	// Start date of the software upgrade phase.
-	StartTime            *time.Time `json:"StartTime,omitempty"`
+	StartTime *time.Time `json:"StartTime,omitempty"`
+	// Status of the upgrade phase.
+	Status               *string `json:"Status,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -111,6 +117,70 @@ func (o *OnpremUpgradePhase) GetObjectTypeOk() (*string, bool) {
 // SetObjectType sets field value
 func (o *OnpremUpgradePhase) SetObjectType(v string) {
 	o.ObjectType = v
+}
+
+// GetCurrentNode returns the CurrentNode field value if set, zero value otherwise.
+func (o *OnpremUpgradePhase) GetCurrentNode() int64 {
+	if o == nil || o.CurrentNode == nil {
+		var ret int64
+		return ret
+	}
+	return *o.CurrentNode
+}
+
+// GetCurrentNodeOk returns a tuple with the CurrentNode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OnpremUpgradePhase) GetCurrentNodeOk() (*int64, bool) {
+	if o == nil || o.CurrentNode == nil {
+		return nil, false
+	}
+	return o.CurrentNode, true
+}
+
+// HasCurrentNode returns a boolean if a field has been set.
+func (o *OnpremUpgradePhase) HasCurrentNode() bool {
+	if o != nil && o.CurrentNode != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCurrentNode gets a reference to the given int64 and assigns it to the CurrentNode field.
+func (o *OnpremUpgradePhase) SetCurrentNode(v int64) {
+	o.CurrentNode = &v
+}
+
+// GetCurrentNodeHostname returns the CurrentNodeHostname field value if set, zero value otherwise.
+func (o *OnpremUpgradePhase) GetCurrentNodeHostname() string {
+	if o == nil || o.CurrentNodeHostname == nil {
+		var ret string
+		return ret
+	}
+	return *o.CurrentNodeHostname
+}
+
+// GetCurrentNodeHostnameOk returns a tuple with the CurrentNodeHostname field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OnpremUpgradePhase) GetCurrentNodeHostnameOk() (*string, bool) {
+	if o == nil || o.CurrentNodeHostname == nil {
+		return nil, false
+	}
+	return o.CurrentNodeHostname, true
+}
+
+// HasCurrentNodeHostname returns a boolean if a field has been set.
+func (o *OnpremUpgradePhase) HasCurrentNodeHostname() bool {
+	if o != nil && o.CurrentNodeHostname != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCurrentNodeHostname gets a reference to the given string and assigns it to the CurrentNodeHostname field.
+func (o *OnpremUpgradePhase) SetCurrentNodeHostname(v string) {
+	o.CurrentNodeHostname = &v
 }
 
 // GetElapsedTime returns the ElapsedTime field value if set, zero value otherwise.
@@ -305,6 +375,38 @@ func (o *OnpremUpgradePhase) SetStartTime(v time.Time) {
 	o.StartTime = &v
 }
 
+// GetStatus returns the Status field value if set, zero value otherwise.
+func (o *OnpremUpgradePhase) GetStatus() string {
+	if o == nil || o.Status == nil {
+		var ret string
+		return ret
+	}
+	return *o.Status
+}
+
+// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OnpremUpgradePhase) GetStatusOk() (*string, bool) {
+	if o == nil || o.Status == nil {
+		return nil, false
+	}
+	return o.Status, true
+}
+
+// HasStatus returns a boolean if a field has been set.
+func (o *OnpremUpgradePhase) HasStatus() bool {
+	if o != nil && o.Status != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStatus gets a reference to the given string and assigns it to the Status field.
+func (o *OnpremUpgradePhase) SetStatus(v string) {
+	o.Status = &v
+}
+
 func (o OnpremUpgradePhase) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
@@ -320,6 +422,12 @@ func (o OnpremUpgradePhase) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
+	}
+	if o.CurrentNode != nil {
+		toSerialize["CurrentNode"] = o.CurrentNode
+	}
+	if o.CurrentNodeHostname != nil {
+		toSerialize["CurrentNodeHostname"] = o.CurrentNodeHostname
 	}
 	if o.ElapsedTime != nil {
 		toSerialize["ElapsedTime"] = o.ElapsedTime
@@ -339,6 +447,9 @@ func (o OnpremUpgradePhase) MarshalJSON() ([]byte, error) {
 	if o.StartTime != nil {
 		toSerialize["StartTime"] = o.StartTime
 	}
+	if o.Status != nil {
+		toSerialize["Status"] = o.Status
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -353,6 +464,10 @@ func (o *OnpremUpgradePhase) UnmarshalJSON(bytes []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
+		// Id of the node the upgrade phase is running on.
+		CurrentNode *int64 `json:"CurrentNode,omitempty"`
+		// Hostname of the node the upgrade phase is running on.
+		CurrentNodeHostname *string `json:"CurrentNodeHostname,omitempty"`
 		// Elapsed time in seconds to complete the current upgrade phase.
 		ElapsedTime *int64 `json:"ElapsedTime,omitempty"`
 		// End date of the software upgrade phase.
@@ -361,10 +476,12 @@ func (o *OnpremUpgradePhase) UnmarshalJSON(bytes []byte) (err error) {
 		Failed *bool `json:"Failed,omitempty"`
 		// Status message set during the upgrade phase.
 		Message *string `json:"Message,omitempty"`
-		// Name of the upgrade phase. * `init` - Upgrade service initialization phase. * `Prepare` - Upgrade service prepares folders and templated files. * `ServiceLoad` - Upgrade service loads the service images into the local docker cache. * `UiLoad` - Upgrade service loads the UI packages into the local cache. * `GenerateConfig` - Upgrade service generates the Kubernetes configuration files. * `DeployService` - Upgrade service deploys the Kubernetes services. * `Success` - Upgrade completed successfully. * `Fail` - Indicates that the upgrade process has failed. * `Cancel` - Indicates that the upgrade was canceled by the Intersight Appliance. * `Telemetry` - Upgrade service sends basic telemetry data to the Intersight.
+		// Name of the upgrade phase. * `init` - Upgrade service initialization phase. * `CheckCluster` - For a multinode system, check that all nodes in the cluster are connected and running. * `SyncImages` - For a multinode system, sync image files between nodes. * `Prepare` - Upgrade service prepares folders and templated files. * `ServiceLoad` - Upgrade service loads the service images into the local docker cache. * `UiLoad` - Upgrade service loads the UI packages into the local cache. * `GenerateConfig` - Upgrade service generates the Kubernetes configuration files. * `DeployService` - Upgrade service deploys the Kubernetes services. * `UpgradeOS` - Run /opt/cisco/bin/onprem-upgrade-start.sh for each node. * `UpgradeServices` - Run /opt/cisco/bin/onprem-upgrade-start.sh per node. * `FinishUpgrade` - Run /opt/cisco/bin/onprem-upgrade-finish.sh for each node. * `Success` - Upgrade completed successfully. * `Fail` - Indicates that the upgrade process has failed. * `Cancel` - Indicates that the upgrade was canceled by the Intersight Appliance. * `Telemetry` - Upgrade service sends basic telemetry data to the Intersight.
 		Name *string `json:"Name,omitempty"`
 		// Start date of the software upgrade phase.
 		StartTime *time.Time `json:"StartTime,omitempty"`
+		// Status of the upgrade phase.
+		Status *string `json:"Status,omitempty"`
 	}
 
 	varOnpremUpgradePhaseWithoutEmbeddedStruct := OnpremUpgradePhaseWithoutEmbeddedStruct{}
@@ -374,12 +491,15 @@ func (o *OnpremUpgradePhase) UnmarshalJSON(bytes []byte) (err error) {
 		varOnpremUpgradePhase := _OnpremUpgradePhase{}
 		varOnpremUpgradePhase.ClassId = varOnpremUpgradePhaseWithoutEmbeddedStruct.ClassId
 		varOnpremUpgradePhase.ObjectType = varOnpremUpgradePhaseWithoutEmbeddedStruct.ObjectType
+		varOnpremUpgradePhase.CurrentNode = varOnpremUpgradePhaseWithoutEmbeddedStruct.CurrentNode
+		varOnpremUpgradePhase.CurrentNodeHostname = varOnpremUpgradePhaseWithoutEmbeddedStruct.CurrentNodeHostname
 		varOnpremUpgradePhase.ElapsedTime = varOnpremUpgradePhaseWithoutEmbeddedStruct.ElapsedTime
 		varOnpremUpgradePhase.EndTime = varOnpremUpgradePhaseWithoutEmbeddedStruct.EndTime
 		varOnpremUpgradePhase.Failed = varOnpremUpgradePhaseWithoutEmbeddedStruct.Failed
 		varOnpremUpgradePhase.Message = varOnpremUpgradePhaseWithoutEmbeddedStruct.Message
 		varOnpremUpgradePhase.Name = varOnpremUpgradePhaseWithoutEmbeddedStruct.Name
 		varOnpremUpgradePhase.StartTime = varOnpremUpgradePhaseWithoutEmbeddedStruct.StartTime
+		varOnpremUpgradePhase.Status = varOnpremUpgradePhaseWithoutEmbeddedStruct.Status
 		*o = OnpremUpgradePhase(varOnpremUpgradePhase)
 	} else {
 		return err
@@ -399,12 +519,15 @@ func (o *OnpremUpgradePhase) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "CurrentNode")
+		delete(additionalProperties, "CurrentNodeHostname")
 		delete(additionalProperties, "ElapsedTime")
 		delete(additionalProperties, "EndTime")
 		delete(additionalProperties, "Failed")
 		delete(additionalProperties, "Message")
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "StartTime")
+		delete(additionalProperties, "Status")
 
 		// remove fields from embedded structs
 		reflectMoBaseComplexType := reflect.ValueOf(o.MoBaseComplexType)

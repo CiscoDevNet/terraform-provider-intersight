@@ -110,6 +110,11 @@ func getNetworkElementSummarySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"bundle_version": {
+			Description: "Running firmware bundle information.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"chassis": {
 			Description: "Chassis IP of the switch.",
 			Type:        schema.TypeString,
@@ -127,6 +132,11 @@ func getNetworkElementSummarySchema() map[string]*schema.Schema {
 		},
 		"conf_mod_ts_backup": {
 			Description: "Configuration modified backup timestamp of the switch.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"connection_status": {
+			Description: "Connection status of the switch.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -181,6 +191,11 @@ func getNetworkElementSummarySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"firmware": {
+			Description: "Running firmware information.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"firmware_version": {
 			Description: "Running firmware information.",
 			Type:        schema.TypeString,
 			Optional:    true,
@@ -784,6 +799,11 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 		o.SetAvailableMemory(x)
 	}
 
+	if v, ok := d.GetOk("bundle_version"); ok {
+		x := (v.(string))
+		o.SetBundleVersion(x)
+	}
+
 	if v, ok := d.GetOk("chassis"); ok {
 		x := (v.(string))
 		o.SetChassis(x)
@@ -802,6 +822,11 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 	if v, ok := d.GetOk("conf_mod_ts_backup"); ok {
 		x := (v.(string))
 		o.SetConfModTsBackup(x)
+	}
+
+	if v, ok := d.GetOk("connection_status"); ok {
+		x := (v.(string))
+		o.SetConnectionStatus(x)
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
@@ -857,6 +882,11 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 	if v, ok := d.GetOk("firmware"); ok {
 		x := (v.(string))
 		o.SetFirmware(x)
+	}
+
+	if v, ok := d.GetOk("firmware_version"); ok {
+		x := (v.(string))
+		o.SetFirmwareVersion(x)
 	}
 
 	if v, ok := d.GetOk("inband_ip_address"); ok {
@@ -1372,10 +1402,12 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["available_memory"] = (s.GetAvailableMemory())
+				temp["bundle_version"] = (s.GetBundleVersion())
 				temp["chassis"] = (s.GetChassis())
 				temp["class_id"] = (s.GetClassId())
 				temp["conf_mod_ts"] = (s.GetConfModTs())
 				temp["conf_mod_ts_backup"] = (s.GetConfModTsBackup())
+				temp["connection_status"] = (s.GetConnectionStatus())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["default_domain"] = (s.GetDefaultDomain())
@@ -1388,6 +1420,7 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 				temp["fc_mode"] = (s.GetFcMode())
 				temp["fc_switching_mode"] = (s.GetFcSwitchingMode())
 				temp["firmware"] = (s.GetFirmware())
+				temp["firmware_version"] = (s.GetFirmwareVersion())
 				temp["inband_ip_address"] = (s.GetInbandIpAddress())
 				temp["inband_ip_gateway"] = (s.GetInbandIpGateway())
 				temp["inband_ip_mask"] = (s.GetInbandIpMask())

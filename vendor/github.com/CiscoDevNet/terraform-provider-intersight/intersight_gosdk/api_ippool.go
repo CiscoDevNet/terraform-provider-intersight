@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -56,8 +56,8 @@ func (r ApiCreateIppoolPoolRequest) Execute() (*IppoolPool, *http.Response, erro
 /*
 CreateIppoolPool Create a 'ippool.Pool' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateIppoolPoolRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateIppoolPoolRequest
 */
 func (a *IppoolApiService) CreateIppoolPool(ctx context.Context) ApiCreateIppoolPoolRequest {
 	return ApiCreateIppoolPoolRequest{
@@ -67,7 +67,8 @@ func (a *IppoolApiService) CreateIppoolPool(ctx context.Context) ApiCreateIppool
 }
 
 // Execute executes the request
-//  @return IppoolPool
+//
+//	@return IppoolPool
 func (a *IppoolApiService) CreateIppoolPoolExecute(r ApiCreateIppoolPoolRequest) (*IppoolPool, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -199,6 +200,183 @@ func (a *IppoolApiService) CreateIppoolPoolExecute(r ApiCreateIppoolPoolRequest)
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiCreateIppoolReservationRequest struct {
+	ctx               context.Context
+	ApiService        *IppoolApiService
+	ippoolReservation *IppoolReservation
+	ifMatch           *string
+	ifNoneMatch       *string
+}
+
+// The &#39;ippool.Reservation&#39; resource to create.
+func (r ApiCreateIppoolReservationRequest) IppoolReservation(ippoolReservation IppoolReservation) ApiCreateIppoolReservationRequest {
+	r.ippoolReservation = &ippoolReservation
+	return r
+}
+
+// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
+func (r ApiCreateIppoolReservationRequest) IfMatch(ifMatch string) ApiCreateIppoolReservationRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+// For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte.
+func (r ApiCreateIppoolReservationRequest) IfNoneMatch(ifNoneMatch string) ApiCreateIppoolReservationRequest {
+	r.ifNoneMatch = &ifNoneMatch
+	return r
+}
+
+func (r ApiCreateIppoolReservationRequest) Execute() (*IppoolReservation, *http.Response, error) {
+	return r.ApiService.CreateIppoolReservationExecute(r)
+}
+
+/*
+CreateIppoolReservation Create a 'ippool.Reservation' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateIppoolReservationRequest
+*/
+func (a *IppoolApiService) CreateIppoolReservation(ctx context.Context) ApiCreateIppoolReservationRequest {
+	return ApiCreateIppoolReservationRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return IppoolReservation
+func (a *IppoolApiService) CreateIppoolReservationExecute(r ApiCreateIppoolReservationRequest) (*IppoolReservation, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IppoolReservation
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IppoolApiService.CreateIppoolReservation")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/ippool/Reservations"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.ippoolReservation == nil {
+		return localVarReturnValue, nil, reportError("ippoolReservation is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	if r.ifNoneMatch != nil {
+		localVarHeaderParams["If-None-Match"] = parameterToString(*r.ifNoneMatch, "")
+	}
+	// body params
+	localVarPostBody = r.ippoolReservation
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiDeleteIppoolIpLeaseRequest struct {
 	ctx        context.Context
 	ApiService *IppoolApiService
@@ -212,9 +390,9 @@ func (r ApiDeleteIppoolIpLeaseRequest) Execute() (*http.Response, error) {
 /*
 DeleteIppoolIpLease Delete a 'ippool.IpLease' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteIppoolIpLeaseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteIppoolIpLeaseRequest
 */
 func (a *IppoolApiService) DeleteIppoolIpLease(ctx context.Context, moid string) ApiDeleteIppoolIpLeaseRequest {
 	return ApiDeleteIppoolIpLeaseRequest{
@@ -349,9 +527,9 @@ func (r ApiDeleteIppoolPoolRequest) Execute() (*http.Response, error) {
 /*
 DeleteIppoolPool Delete a 'ippool.Pool' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteIppoolPoolRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteIppoolPoolRequest
 */
 func (a *IppoolApiService) DeleteIppoolPool(ctx context.Context, moid string) ApiDeleteIppoolPoolRequest {
 	return ApiDeleteIppoolPoolRequest{
@@ -473,6 +651,143 @@ func (a *IppoolApiService) DeleteIppoolPoolExecute(r ApiDeleteIppoolPoolRequest)
 	return localVarHTTPResponse, nil
 }
 
+type ApiDeleteIppoolReservationRequest struct {
+	ctx        context.Context
+	ApiService *IppoolApiService
+	moid       string
+}
+
+func (r ApiDeleteIppoolReservationRequest) Execute() (*http.Response, error) {
+	return r.ApiService.DeleteIppoolReservationExecute(r)
+}
+
+/*
+DeleteIppoolReservation Delete a 'ippool.Reservation' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteIppoolReservationRequest
+*/
+func (a *IppoolApiService) DeleteIppoolReservation(ctx context.Context, moid string) ApiDeleteIppoolReservationRequest {
+	return ApiDeleteIppoolReservationRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+func (a *IppoolApiService) DeleteIppoolReservationExecute(r ApiDeleteIppoolReservationRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IppoolApiService.DeleteIppoolReservation")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/ippool/Reservations/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
 type ApiGetIppoolBlockLeaseByMoidRequest struct {
 	ctx        context.Context
 	ApiService *IppoolApiService
@@ -486,9 +801,9 @@ func (r ApiGetIppoolBlockLeaseByMoidRequest) Execute() (*IppoolBlockLease, *http
 /*
 GetIppoolBlockLeaseByMoid Read a 'ippool.BlockLease' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIppoolBlockLeaseByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIppoolBlockLeaseByMoidRequest
 */
 func (a *IppoolApiService) GetIppoolBlockLeaseByMoid(ctx context.Context, moid string) ApiGetIppoolBlockLeaseByMoidRequest {
 	return ApiGetIppoolBlockLeaseByMoidRequest{
@@ -499,7 +814,8 @@ func (a *IppoolApiService) GetIppoolBlockLeaseByMoid(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return IppoolBlockLease
+//
+//	@return IppoolBlockLease
 func (a *IppoolApiService) GetIppoolBlockLeaseByMoidExecute(r ApiGetIppoolBlockLeaseByMoidRequest) (*IppoolBlockLease, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -710,8 +1026,8 @@ func (r ApiGetIppoolBlockLeaseListRequest) Execute() (*IppoolBlockLeaseResponse,
 /*
 GetIppoolBlockLeaseList Read a 'ippool.BlockLease' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIppoolBlockLeaseListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIppoolBlockLeaseListRequest
 */
 func (a *IppoolApiService) GetIppoolBlockLeaseList(ctx context.Context) ApiGetIppoolBlockLeaseListRequest {
 	return ApiGetIppoolBlockLeaseListRequest{
@@ -721,7 +1037,8 @@ func (a *IppoolApiService) GetIppoolBlockLeaseList(ctx context.Context) ApiGetIp
 }
 
 // Execute executes the request
-//  @return IppoolBlockLeaseResponse
+//
+//	@return IppoolBlockLeaseResponse
 func (a *IppoolApiService) GetIppoolBlockLeaseListExecute(r ApiGetIppoolBlockLeaseListRequest) (*IppoolBlockLeaseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -888,9 +1205,9 @@ func (r ApiGetIppoolIpLeaseByMoidRequest) Execute() (*IppoolIpLease, *http.Respo
 /*
 GetIppoolIpLeaseByMoid Read a 'ippool.IpLease' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIppoolIpLeaseByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIppoolIpLeaseByMoidRequest
 */
 func (a *IppoolApiService) GetIppoolIpLeaseByMoid(ctx context.Context, moid string) ApiGetIppoolIpLeaseByMoidRequest {
 	return ApiGetIppoolIpLeaseByMoidRequest{
@@ -901,7 +1218,8 @@ func (a *IppoolApiService) GetIppoolIpLeaseByMoid(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return IppoolIpLease
+//
+//	@return IppoolIpLease
 func (a *IppoolApiService) GetIppoolIpLeaseByMoidExecute(r ApiGetIppoolIpLeaseByMoidRequest) (*IppoolIpLease, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1112,8 +1430,8 @@ func (r ApiGetIppoolIpLeaseListRequest) Execute() (*IppoolIpLeaseResponse, *http
 /*
 GetIppoolIpLeaseList Read a 'ippool.IpLease' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIppoolIpLeaseListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIppoolIpLeaseListRequest
 */
 func (a *IppoolApiService) GetIppoolIpLeaseList(ctx context.Context) ApiGetIppoolIpLeaseListRequest {
 	return ApiGetIppoolIpLeaseListRequest{
@@ -1123,7 +1441,8 @@ func (a *IppoolApiService) GetIppoolIpLeaseList(ctx context.Context) ApiGetIppoo
 }
 
 // Execute executes the request
-//  @return IppoolIpLeaseResponse
+//
+//	@return IppoolIpLeaseResponse
 func (a *IppoolApiService) GetIppoolIpLeaseListExecute(r ApiGetIppoolIpLeaseListRequest) (*IppoolIpLeaseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1290,9 +1609,9 @@ func (r ApiGetIppoolPoolByMoidRequest) Execute() (*IppoolPool, *http.Response, e
 /*
 GetIppoolPoolByMoid Read a 'ippool.Pool' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIppoolPoolByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIppoolPoolByMoidRequest
 */
 func (a *IppoolApiService) GetIppoolPoolByMoid(ctx context.Context, moid string) ApiGetIppoolPoolByMoidRequest {
 	return ApiGetIppoolPoolByMoidRequest{
@@ -1303,7 +1622,8 @@ func (a *IppoolApiService) GetIppoolPoolByMoid(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//  @return IppoolPool
+//
+//	@return IppoolPool
 func (a *IppoolApiService) GetIppoolPoolByMoidExecute(r ApiGetIppoolPoolByMoidRequest) (*IppoolPool, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1514,8 +1834,8 @@ func (r ApiGetIppoolPoolListRequest) Execute() (*IppoolPoolResponse, *http.Respo
 /*
 GetIppoolPoolList Read a 'ippool.Pool' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIppoolPoolListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIppoolPoolListRequest
 */
 func (a *IppoolApiService) GetIppoolPoolList(ctx context.Context) ApiGetIppoolPoolListRequest {
 	return ApiGetIppoolPoolListRequest{
@@ -1525,7 +1845,8 @@ func (a *IppoolApiService) GetIppoolPoolList(ctx context.Context) ApiGetIppoolPo
 }
 
 // Execute executes the request
-//  @return IppoolPoolResponse
+//
+//	@return IppoolPoolResponse
 func (a *IppoolApiService) GetIppoolPoolListExecute(r ApiGetIppoolPoolListRequest) (*IppoolPoolResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1692,9 +2013,9 @@ func (r ApiGetIppoolPoolMemberByMoidRequest) Execute() (*IppoolPoolMember, *http
 /*
 GetIppoolPoolMemberByMoid Read a 'ippool.PoolMember' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIppoolPoolMemberByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIppoolPoolMemberByMoidRequest
 */
 func (a *IppoolApiService) GetIppoolPoolMemberByMoid(ctx context.Context, moid string) ApiGetIppoolPoolMemberByMoidRequest {
 	return ApiGetIppoolPoolMemberByMoidRequest{
@@ -1705,7 +2026,8 @@ func (a *IppoolApiService) GetIppoolPoolMemberByMoid(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return IppoolPoolMember
+//
+//	@return IppoolPoolMember
 func (a *IppoolApiService) GetIppoolPoolMemberByMoidExecute(r ApiGetIppoolPoolMemberByMoidRequest) (*IppoolPoolMember, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1916,8 +2238,8 @@ func (r ApiGetIppoolPoolMemberListRequest) Execute() (*IppoolPoolMemberResponse,
 /*
 GetIppoolPoolMemberList Read a 'ippool.PoolMember' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIppoolPoolMemberListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIppoolPoolMemberListRequest
 */
 func (a *IppoolApiService) GetIppoolPoolMemberList(ctx context.Context) ApiGetIppoolPoolMemberListRequest {
 	return ApiGetIppoolPoolMemberListRequest{
@@ -1927,7 +2249,8 @@ func (a *IppoolApiService) GetIppoolPoolMemberList(ctx context.Context) ApiGetIp
 }
 
 // Execute executes the request
-//  @return IppoolPoolMemberResponse
+//
+//	@return IppoolPoolMemberResponse
 func (a *IppoolApiService) GetIppoolPoolMemberListExecute(r ApiGetIppoolPoolMemberListRequest) (*IppoolPoolMemberResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2081,6 +2404,410 @@ func (a *IppoolApiService) GetIppoolPoolMemberListExecute(r ApiGetIppoolPoolMemb
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetIppoolReservationByMoidRequest struct {
+	ctx        context.Context
+	ApiService *IppoolApiService
+	moid       string
+}
+
+func (r ApiGetIppoolReservationByMoidRequest) Execute() (*IppoolReservation, *http.Response, error) {
+	return r.ApiService.GetIppoolReservationByMoidExecute(r)
+}
+
+/*
+GetIppoolReservationByMoid Read a 'ippool.Reservation' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIppoolReservationByMoidRequest
+*/
+func (a *IppoolApiService) GetIppoolReservationByMoid(ctx context.Context, moid string) ApiGetIppoolReservationByMoidRequest {
+	return ApiGetIppoolReservationByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//
+//	@return IppoolReservation
+func (a *IppoolApiService) GetIppoolReservationByMoidExecute(r ApiGetIppoolReservationByMoidRequest) (*IppoolReservation, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IppoolReservation
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IppoolApiService.GetIppoolReservationByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/ippool/Reservations/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetIppoolReservationListRequest struct {
+	ctx         context.Context
+	ApiService  *IppoolApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetIppoolReservationListRequest) Filter(filter string) ApiGetIppoolReservationListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetIppoolReservationListRequest) Orderby(orderby string) ApiGetIppoolReservationListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetIppoolReservationListRequest) Top(top int32) ApiGetIppoolReservationListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetIppoolReservationListRequest) Skip(skip int32) ApiGetIppoolReservationListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetIppoolReservationListRequest) Select_(select_ string) ApiGetIppoolReservationListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetIppoolReservationListRequest) Expand(expand string) ApiGetIppoolReservationListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetIppoolReservationListRequest) Apply(apply string) ApiGetIppoolReservationListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetIppoolReservationListRequest) Count(count bool) ApiGetIppoolReservationListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetIppoolReservationListRequest) Inlinecount(inlinecount string) ApiGetIppoolReservationListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetIppoolReservationListRequest) At(at string) ApiGetIppoolReservationListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetIppoolReservationListRequest) Tags(tags string) ApiGetIppoolReservationListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetIppoolReservationListRequest) Execute() (*IppoolReservationResponse, *http.Response, error) {
+	return r.ApiService.GetIppoolReservationListExecute(r)
+}
+
+/*
+GetIppoolReservationList Read a 'ippool.Reservation' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIppoolReservationListRequest
+*/
+func (a *IppoolApiService) GetIppoolReservationList(ctx context.Context) ApiGetIppoolReservationListRequest {
+	return ApiGetIppoolReservationListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return IppoolReservationResponse
+func (a *IppoolApiService) GetIppoolReservationListExecute(r ApiGetIppoolReservationListRequest) (*IppoolReservationResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IppoolReservationResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IppoolApiService.GetIppoolReservationList")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/ippool/Reservations"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetIppoolShadowBlockByMoidRequest struct {
 	ctx        context.Context
 	ApiService *IppoolApiService
@@ -2094,9 +2821,9 @@ func (r ApiGetIppoolShadowBlockByMoidRequest) Execute() (*IppoolShadowBlock, *ht
 /*
 GetIppoolShadowBlockByMoid Read a 'ippool.ShadowBlock' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIppoolShadowBlockByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIppoolShadowBlockByMoidRequest
 */
 func (a *IppoolApiService) GetIppoolShadowBlockByMoid(ctx context.Context, moid string) ApiGetIppoolShadowBlockByMoidRequest {
 	return ApiGetIppoolShadowBlockByMoidRequest{
@@ -2107,7 +2834,8 @@ func (a *IppoolApiService) GetIppoolShadowBlockByMoid(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return IppoolShadowBlock
+//
+//	@return IppoolShadowBlock
 func (a *IppoolApiService) GetIppoolShadowBlockByMoidExecute(r ApiGetIppoolShadowBlockByMoidRequest) (*IppoolShadowBlock, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2318,8 +3046,8 @@ func (r ApiGetIppoolShadowBlockListRequest) Execute() (*IppoolShadowBlockRespons
 /*
 GetIppoolShadowBlockList Read a 'ippool.ShadowBlock' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIppoolShadowBlockListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIppoolShadowBlockListRequest
 */
 func (a *IppoolApiService) GetIppoolShadowBlockList(ctx context.Context) ApiGetIppoolShadowBlockListRequest {
 	return ApiGetIppoolShadowBlockListRequest{
@@ -2329,7 +3057,8 @@ func (a *IppoolApiService) GetIppoolShadowBlockList(ctx context.Context) ApiGetI
 }
 
 // Execute executes the request
-//  @return IppoolShadowBlockResponse
+//
+//	@return IppoolShadowBlockResponse
 func (a *IppoolApiService) GetIppoolShadowBlockListExecute(r ApiGetIppoolShadowBlockListRequest) (*IppoolShadowBlockResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2496,9 +3225,9 @@ func (r ApiGetIppoolShadowPoolByMoidRequest) Execute() (*IppoolShadowPool, *http
 /*
 GetIppoolShadowPoolByMoid Read a 'ippool.ShadowPool' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIppoolShadowPoolByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIppoolShadowPoolByMoidRequest
 */
 func (a *IppoolApiService) GetIppoolShadowPoolByMoid(ctx context.Context, moid string) ApiGetIppoolShadowPoolByMoidRequest {
 	return ApiGetIppoolShadowPoolByMoidRequest{
@@ -2509,7 +3238,8 @@ func (a *IppoolApiService) GetIppoolShadowPoolByMoid(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return IppoolShadowPool
+//
+//	@return IppoolShadowPool
 func (a *IppoolApiService) GetIppoolShadowPoolByMoidExecute(r ApiGetIppoolShadowPoolByMoidRequest) (*IppoolShadowPool, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2720,8 +3450,8 @@ func (r ApiGetIppoolShadowPoolListRequest) Execute() (*IppoolShadowPoolResponse,
 /*
 GetIppoolShadowPoolList Read a 'ippool.ShadowPool' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIppoolShadowPoolListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIppoolShadowPoolListRequest
 */
 func (a *IppoolApiService) GetIppoolShadowPoolList(ctx context.Context) ApiGetIppoolShadowPoolListRequest {
 	return ApiGetIppoolShadowPoolListRequest{
@@ -2731,7 +3461,8 @@ func (a *IppoolApiService) GetIppoolShadowPoolList(ctx context.Context) ApiGetIp
 }
 
 // Execute executes the request
-//  @return IppoolShadowPoolResponse
+//
+//	@return IppoolShadowPoolResponse
 func (a *IppoolApiService) GetIppoolShadowPoolListExecute(r ApiGetIppoolShadowPoolListRequest) (*IppoolShadowPoolResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2898,9 +3629,9 @@ func (r ApiGetIppoolUniverseByMoidRequest) Execute() (*IppoolUniverse, *http.Res
 /*
 GetIppoolUniverseByMoid Read a 'ippool.Universe' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIppoolUniverseByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIppoolUniverseByMoidRequest
 */
 func (a *IppoolApiService) GetIppoolUniverseByMoid(ctx context.Context, moid string) ApiGetIppoolUniverseByMoidRequest {
 	return ApiGetIppoolUniverseByMoidRequest{
@@ -2911,7 +3642,8 @@ func (a *IppoolApiService) GetIppoolUniverseByMoid(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return IppoolUniverse
+//
+//	@return IppoolUniverse
 func (a *IppoolApiService) GetIppoolUniverseByMoidExecute(r ApiGetIppoolUniverseByMoidRequest) (*IppoolUniverse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3122,8 +3854,8 @@ func (r ApiGetIppoolUniverseListRequest) Execute() (*IppoolUniverseResponse, *ht
 /*
 GetIppoolUniverseList Read a 'ippool.Universe' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIppoolUniverseListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIppoolUniverseListRequest
 */
 func (a *IppoolApiService) GetIppoolUniverseList(ctx context.Context) ApiGetIppoolUniverseListRequest {
 	return ApiGetIppoolUniverseListRequest{
@@ -3133,7 +3865,8 @@ func (a *IppoolApiService) GetIppoolUniverseList(ctx context.Context) ApiGetIppo
 }
 
 // Execute executes the request
-//  @return IppoolUniverseResponse
+//
+//	@return IppoolUniverseResponse
 func (a *IppoolApiService) GetIppoolUniverseListExecute(r ApiGetIppoolUniverseListRequest) (*IppoolUniverseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3314,9 +4047,9 @@ func (r ApiPatchIppoolPoolRequest) Execute() (*IppoolPool, *http.Response, error
 /*
 PatchIppoolPool Update a 'ippool.Pool' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchIppoolPoolRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchIppoolPoolRequest
 */
 func (a *IppoolApiService) PatchIppoolPool(ctx context.Context, moid string) ApiPatchIppoolPoolRequest {
 	return ApiPatchIppoolPoolRequest{
@@ -3327,7 +4060,8 @@ func (a *IppoolApiService) PatchIppoolPool(ctx context.Context, moid string) Api
 }
 
 // Execute executes the request
-//  @return IppoolPool
+//
+//	@return IppoolPool
 func (a *IppoolApiService) PatchIppoolPoolExecute(r ApiPatchIppoolPoolRequest) (*IppoolPool, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -3484,9 +4218,9 @@ func (r ApiUpdateIppoolPoolRequest) Execute() (*IppoolPool, *http.Response, erro
 /*
 UpdateIppoolPool Update a 'ippool.Pool' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateIppoolPoolRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateIppoolPoolRequest
 */
 func (a *IppoolApiService) UpdateIppoolPool(ctx context.Context, moid string) ApiUpdateIppoolPoolRequest {
 	return ApiUpdateIppoolPoolRequest{
@@ -3497,7 +4231,8 @@ func (a *IppoolApiService) UpdateIppoolPool(ctx context.Context, moid string) Ap
 }
 
 // Execute executes the request
-//  @return IppoolPool
+//
+//	@return IppoolPool
 func (a *IppoolApiService) UpdateIppoolPoolExecute(r ApiUpdateIppoolPoolRequest) (*IppoolPool, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

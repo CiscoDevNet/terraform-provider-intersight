@@ -133,6 +133,15 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `reservation_references`:(Array)
+This complex property has following sub-properties:
+  + `additional_properties`:(JSON as string) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [fcpool.ReservationReference](#fcpoolReservationReference)
+[ippool.ReservationReference](#ippoolReservationReference)
+[iqnpool.ReservationReference](#iqnpoolReservationReference)
+[macpool.ReservationReference](#macpoolReservationReference)
+[uuidpool.ReservationReference](#uuidpoolReservationReference)
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `reservation_moid`:(string) The moid of the reservation object. 
 * `resource_lease`:(HashMap) -(ReadOnly) A reference to a resourcepoolLease resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
@@ -199,4 +208,27 @@ These are
 `intersight_server_profile` can be imported using the Moid of the object, e.g.
 ```
 $ terraform import intersight_server_profile.example 1234567890987654321abcde
-``` 
+```
+## Allowed Types in `AdditionalProperties`
+ 
+### [fcpool.ReservationReference](#argument-reference)
+The reference to the reservation object.
+* `consumer_name`:(string) The consumer name for which the reserved fc pool would be used. 
+* `consumer_type`:(string) The consumer type for which the reserved fc pool would be used.* `Vhba` - FC reservation would be used by Vhba.* `WWNN` - FC reservation would be used by WWNN. 
+
+### [ippool.ReservationReference](#argument-reference)
+The reference to the reservation object.
+* `consumer_name`:(string) The consumer name for which the reserved IP would be used. 
+* `consumer_type`:(string) The consumer type for which the reserved IP would be used.* `OutofbandIpv4-Access` - IP reservation would be used for out of band management.* `InbandIpv4-Access` - IP reservation would be used for inband management.* `InbandIpv6-Access` - IP reservation would be used for inband management.* `ISCSI` - IP reservation would be used for ISCSI management. 
+
+### [iqnpool.ReservationReference](#argument-reference)
+The reference to the reservation object.
+
+### [macpool.ReservationReference](#argument-reference)
+The reference to the reservation object.
+* `consumer_name`:(string) The consumer name for which the reserved MAC would be used. 
+* `consumer_type`:(string) The consumer type for which the reserved MAC would be used.* `Vnic` - MAC reservation would be used by VNIC. 
+
+### [uuidpool.ReservationReference](#argument-reference)
+The reference to the reservation object.
+  

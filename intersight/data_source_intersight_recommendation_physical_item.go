@@ -105,6 +105,41 @@ func getRecommendationPhysicalItemSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"cluster_expansion": {
+			Description: "A reference to a recommendationClusterExpansion resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"nr_count": {
 			Description: "Count of number of items/devices to be added.For example, number of disks to add on a node PhysicalItem in case of HyperFlex Cluster recommendation.",
 			Type:        schema.TypeInt,
@@ -195,6 +230,11 @@ func getRecommendationPhysicalItemSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"parent_moid": {
+			Description: "Moid of the managed object which represents the parent physical entity.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"permission_resources": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
@@ -228,6 +268,11 @@ func getRecommendationPhysicalItemSchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"personality": {
+			Description: "The personality of the physical device recommended.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"physical_item": {
 			Description: "An array of relationships to recommendationPhysicalItem resources.",
@@ -297,12 +342,12 @@ func getRecommendationPhysicalItemSchema() map[string]*schema.Schema {
 			},
 		},
 		"type": {
-			Description: "The type of physical device recommended.\n* `Disk` - The Enum value Disk represents that the item type recommended is a Physical Disk.\n* `Node` - The Enum value Node represents that the item type recommended is a Storage Node.\n* `Cluster` - The Enum value Cluster represents that the item type recommended is a HyperFlex Cluster.",
+			Description: "The type of physical device recommended.\n* `None` - The Enum value None represents that no value was set for the item type.\n* `Disk` - The Enum value Disk represents that the item type recommended is a Physical Disk.\n* `Node` - The Enum value Node represents that the item type recommended is a Storage Node.\n* `CPU` - The Enum value CPU represents that the item type recommended is a Processor.\n* `Memory` - The Enum value Memory represents that the item type recommended is a memory unit.\n* `Cluster` - The Enum value Cluster represents that the item type recommended is a HyperFlex Cluster.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"unit": {
-			Description: "Unit of the new capacity.\n* `TB` - The Enum value TB represents that the measurement unit is in terabytes.\n* `MB` - The Enum value MB represents that the measurement unit is in megabytes.",
+			Description: "Unit of the new capacity.\n* `TB` - The Enum value TB represents that the measurement unit is in terabytes.\n* `MB` - The Enum value MB represents that the measurement unit is in megabytes.\n* `GB` - The Enum value GB represents that the measurement unit is in gigabytes.\n* `MHz` - The Enum value MHz represents that the measurement unit is in megahertz.\n* `GHz` - The Enum value GHz represents that the measurement unit is in gigahertz.\n* `Percentage` - The Enum value Percentage represents that the expansion request is in the percentage of resource increase. For example, a 20% increase in CPU capacity.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -548,6 +593,49 @@ func dataSourceRecommendationPhysicalItemRead(c context.Context, d *schema.Resou
 		o.SetClassId(x)
 	}
 
+	if v, ok := d.GetOk("cluster_expansion"); ok {
+		p := make([]models.RecommendationClusterExpansionRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsRecommendationClusterExpansionRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetClusterExpansion(x)
+		}
+	}
+
 	if v, ok := d.GetOkExists("nr_count"); ok {
 		x := int64(v.(int))
 		o.SetCount(x)
@@ -652,6 +740,11 @@ func dataSourceRecommendationPhysicalItemRead(c context.Context, d *schema.Resou
 		}
 	}
 
+	if v, ok := d.GetOk("parent_moid"); ok {
+		x := (v.(string))
+		o.SetParentMoid(x)
+	}
+
 	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
@@ -690,6 +783,11 @@ func dataSourceRecommendationPhysicalItemRead(c context.Context, d *schema.Resou
 			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
 		}
 		o.SetPermissionResources(x)
+	}
+
+	if v, ok := d.GetOk("personality"); ok {
+		x := (v.(string))
+		o.SetPersonality(x)
 	}
 
 	if v, ok := d.GetOk("physical_item"); ok {
@@ -907,6 +1005,8 @@ func dataSourceRecommendationPhysicalItemRead(c context.Context, d *schema.Resou
 
 				temp["capacity_runway"] = flattenMapRecommendationCapacityRunwayRelationship(s.GetCapacityRunway(), d)
 				temp["class_id"] = (s.GetClassId())
+
+				temp["cluster_expansion"] = flattenMapRecommendationClusterExpansionRelationship(s.GetClusterExpansion(), d)
 				temp["nr_count"] = (s.GetCount())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
@@ -922,8 +1022,10 @@ func dataSourceRecommendationPhysicalItemRead(c context.Context, d *schema.Resou
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
+				temp["parent_moid"] = (s.GetParentMoid())
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["personality"] = (s.GetPersonality())
 
 				temp["physical_item"] = flattenListRecommendationPhysicalItemRelationship(s.GetPhysicalItem(), d)
 				temp["shared_scope"] = (s.GetSharedScope())

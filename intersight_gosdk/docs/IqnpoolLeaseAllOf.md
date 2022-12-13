@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iqnpool.Lease"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iqnpool.Lease"]
 **IqnAddress** | Pointer to **string** | IQN address allocated for pool-based allocation \&quot;prefix+suffix+number\&quot;. | [optional] 
+**Reservation** | Pointer to [**IqnpoolReservationReference**](IqnpoolReservationReference.md) |  | [optional] 
 **AssignedToEntity** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 **Pool** | Pointer to [**IqnpoolPoolRelationship**](IqnpoolPoolRelationship.md) |  | [optional] 
 **PoolMember** | Pointer to [**IqnpoolPoolMemberRelationship**](IqnpoolPoolMemberRelationship.md) |  | [optional] 
@@ -95,6 +96,31 @@ SetIqnAddress sets IqnAddress field to given value.
 `func (o *IqnpoolLeaseAllOf) HasIqnAddress() bool`
 
 HasIqnAddress returns a boolean if a field has been set.
+
+### GetReservation
+
+`func (o *IqnpoolLeaseAllOf) GetReservation() IqnpoolReservationReference`
+
+GetReservation returns the Reservation field if non-nil, zero value otherwise.
+
+### GetReservationOk
+
+`func (o *IqnpoolLeaseAllOf) GetReservationOk() (*IqnpoolReservationReference, bool)`
+
+GetReservationOk returns a tuple with the Reservation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReservation
+
+`func (o *IqnpoolLeaseAllOf) SetReservation(v IqnpoolReservationReference)`
+
+SetReservation sets Reservation field to given value.
+
+### HasReservation
+
+`func (o *IqnpoolLeaseAllOf) HasReservation() bool`
+
+HasReservation returns a boolean if a field has been set.
 
 ### GetAssignedToEntity
 

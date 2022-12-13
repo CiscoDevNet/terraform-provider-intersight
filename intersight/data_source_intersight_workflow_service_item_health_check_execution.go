@@ -599,12 +599,6 @@ func dataSourceWorkflowServiceItemHealthCheckExecutionRead(c context.Context, d 
 				}
 			}
 			o.SetClassId("serviceitem.HealthCheckErrorElement")
-			if v, ok := l["element_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetElementType(x)
-				}
-			}
 			if v, ok := l["elements"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)

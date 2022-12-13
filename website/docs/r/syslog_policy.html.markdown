@@ -99,11 +99,13 @@ This complex property has following sub-properties:
 * `remote_clients`:(Array)
 This complex property has following sub-properties:
   + `enabled`:(bool) Enables/disables remote logging for the endpoint If enabled, log messages will be sent to the syslog server mentioned in the Hostname/IP Address field. 
+  + `facility`:(string)(ReadOnly) This component represents the process of the system which created the message. 
   + `hostname`:(string) Hostname or IP Address of the syslog server where log should be stored. 
   + `min_severity`:(string) Lowest level of messages to be included in the remote log.* `warning` - Use logging level warning for logs classified as warning.* `emergency` - Use logging level emergency for logs classified as emergency.* `alert` - Use logging level alert for logs classified as alert.* `critical` - Use logging level critical for logs classified as critical.* `error` - Use logging level error for logs classified as error.* `notice` - Use logging level notice for logs classified as notice.* `informational` - Use logging level informational for logs classified as informational.* `debug` - Use logging level debug for logs classified as debug. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `port`:(int) Port number used for logging on syslog server. 
   + `protocol`:(string) Transport layer protocol for transmission of log messages to syslog server.* `udp` - Use User Datagram Protocol (UDP) for syslog remote server connection.* `tcp` - Use Transmission Control Protocol (TCP) for syslog remote server connection. 
+  + `vrf_name`:(string)(ReadOnly) VRF name used by the syslog server. 
 * `shared_scope`:(string)(ReadOnly) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `tags`:(Array)
 This complex property has following sub-properties:

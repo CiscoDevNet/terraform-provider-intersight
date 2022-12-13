@@ -11,10 +11,12 @@ Name | Type | Description | Notes
 **IsNew** | Pointer to **bool** | If the PhysicalItem is new, this is set to true, else false. | [optional] [readonly] 
 **MaxCount** | Pointer to **int64** | Maximum number of items/devices which can be added on this PhysicalItem.For example, maximum number of disks allowed on a node PhysicalItem in case of HyperFlex Cluster recommendation. | [optional] [readonly] 
 **Model** | Pointer to **string** | Model of the recommended physical device which is externally identifiable. | [optional] [readonly] 
+**ParentMoid** | Pointer to **string** | Moid of the managed object which represents the parent physical entity. | [optional] [readonly] 
 **SourceMoid** | Pointer to **string** | Moid of the managed object which represents the existing physical entity. | [optional] [readonly] 
-**Unit** | Pointer to **string** | Unit of the new capacity. * &#x60;TB&#x60; - The Enum value TB represents that the measurement unit is in terabytes. * &#x60;MB&#x60; - The Enum value MB represents that the measurement unit is in megabytes. | [optional] [readonly] [default to "TB"]
+**Unit** | Pointer to **string** | Unit of the new capacity. * &#x60;TB&#x60; - The Enum value TB represents that the measurement unit is in terabytes. * &#x60;MB&#x60; - The Enum value MB represents that the measurement unit is in megabytes. * &#x60;GB&#x60; - The Enum value GB represents that the measurement unit is in gigabytes. * &#x60;MHz&#x60; - The Enum value MHz represents that the measurement unit is in megahertz. * &#x60;GHz&#x60; - The Enum value GHz represents that the measurement unit is in gigahertz. * &#x60;Percentage&#x60; - The Enum value Percentage represents that the expansion request is in the percentage of resource increase. For example, a 20% increase in CPU capacity. | [optional] [readonly] [default to "TB"]
 **Uuid** | Pointer to **string** | Uuid of the recommended physical device. | [optional] [readonly] 
 **CapacityRunway** | Pointer to [**RecommendationCapacityRunwayRelationship**](RecommendationCapacityRunwayRelationship.md) |  | [optional] 
+**ClusterExpansion** | Pointer to [**RecommendationClusterExpansionRelationship**](RecommendationClusterExpansionRelationship.md) |  | [optional] 
 **PhysicalItem** | Pointer to [**[]RecommendationPhysicalItemRelationship**](RecommendationPhysicalItemRelationship.md) | An array of relationships to recommendationPhysicalItem resources. | [optional] [readonly] 
 
 ## Methods
@@ -201,6 +203,31 @@ SetModel sets Model field to given value.
 
 HasModel returns a boolean if a field has been set.
 
+### GetParentMoid
+
+`func (o *RecommendationPhysicalItemAllOf) GetParentMoid() string`
+
+GetParentMoid returns the ParentMoid field if non-nil, zero value otherwise.
+
+### GetParentMoidOk
+
+`func (o *RecommendationPhysicalItemAllOf) GetParentMoidOk() (*string, bool)`
+
+GetParentMoidOk returns a tuple with the ParentMoid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetParentMoid
+
+`func (o *RecommendationPhysicalItemAllOf) SetParentMoid(v string)`
+
+SetParentMoid sets ParentMoid field to given value.
+
+### HasParentMoid
+
+`func (o *RecommendationPhysicalItemAllOf) HasParentMoid() bool`
+
+HasParentMoid returns a boolean if a field has been set.
+
 ### GetSourceMoid
 
 `func (o *RecommendationPhysicalItemAllOf) GetSourceMoid() string`
@@ -300,6 +327,31 @@ SetCapacityRunway sets CapacityRunway field to given value.
 `func (o *RecommendationPhysicalItemAllOf) HasCapacityRunway() bool`
 
 HasCapacityRunway returns a boolean if a field has been set.
+
+### GetClusterExpansion
+
+`func (o *RecommendationPhysicalItemAllOf) GetClusterExpansion() RecommendationClusterExpansionRelationship`
+
+GetClusterExpansion returns the ClusterExpansion field if non-nil, zero value otherwise.
+
+### GetClusterExpansionOk
+
+`func (o *RecommendationPhysicalItemAllOf) GetClusterExpansionOk() (*RecommendationClusterExpansionRelationship, bool)`
+
+GetClusterExpansionOk returns a tuple with the ClusterExpansion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClusterExpansion
+
+`func (o *RecommendationPhysicalItemAllOf) SetClusterExpansion(v RecommendationClusterExpansionRelationship)`
+
+SetClusterExpansion sets ClusterExpansion field to given value.
+
+### HasClusterExpansion
+
+`func (o *RecommendationPhysicalItemAllOf) HasClusterExpansion() bool`
+
+HasClusterExpansion returns a boolean if a field has been set.
 
 ### GetPhysicalItem
 

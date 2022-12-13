@@ -7,12 +7,14 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "techsupportmanagement.TechSupportStatus"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "techsupportmanagement.TechSupportStatus"]
 **FileName** | Pointer to **string** | The name of the Techsupport bundle file. | [optional] 
+**FileSize** | Pointer to **int64** | Techsupport file size in bytes. | [optional] [readonly] 
 **Reason** | Pointer to **string** | Reason for techsupport failure, if any. | [optional] 
 **RelayReason** | Pointer to **string** | Reason for status relay failure, if any. | [optional] [readonly] 
 **RelayStatus** | Pointer to **string** | Status of techsupport status relay. Valid values are NoRelay, Pending, Completed, and Failed. | [optional] [readonly] 
 **RequestTs** | Pointer to **time.Time** | The time at which the techsupport request was initiated. | [optional] 
 **Status** | Pointer to **string** | Status of techsupport collection. Valid values are Pending, CollectionInProgress, CollectionFailed, CollectionComplete, UploadPending, UploadInProgress, UploadPartsComplete, UploadFailed and Completed. The final status will be either CollectionFailed or UploadFailed if there is a failure and Completed if the request completed successfully and the file was uploaded to Intersight Storage Service. All the remaining status values indicates the progress of techsupport collection. | [optional] 
 **TechsupportDownloadUrl** | Pointer to **string** | The Url to download the techsupport file. | [optional] 
+**UserRole** | Pointer to **string** | The name of the role granted to the user that issued the techsupport request. | [optional] [readonly] 
 **ClusterMember** | Pointer to [**AssetClusterMemberRelationship**](AssetClusterMemberRelationship.md) |  | [optional] 
 **DeviceRegistration** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 **OriginResource** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
@@ -101,6 +103,31 @@ SetFileName sets FileName field to given value.
 `func (o *TechsupportmanagementTechSupportStatusAllOf) HasFileName() bool`
 
 HasFileName returns a boolean if a field has been set.
+
+### GetFileSize
+
+`func (o *TechsupportmanagementTechSupportStatusAllOf) GetFileSize() int64`
+
+GetFileSize returns the FileSize field if non-nil, zero value otherwise.
+
+### GetFileSizeOk
+
+`func (o *TechsupportmanagementTechSupportStatusAllOf) GetFileSizeOk() (*int64, bool)`
+
+GetFileSizeOk returns a tuple with the FileSize field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFileSize
+
+`func (o *TechsupportmanagementTechSupportStatusAllOf) SetFileSize(v int64)`
+
+SetFileSize sets FileSize field to given value.
+
+### HasFileSize
+
+`func (o *TechsupportmanagementTechSupportStatusAllOf) HasFileSize() bool`
+
+HasFileSize returns a boolean if a field has been set.
 
 ### GetReason
 
@@ -251,6 +278,31 @@ SetTechsupportDownloadUrl sets TechsupportDownloadUrl field to given value.
 `func (o *TechsupportmanagementTechSupportStatusAllOf) HasTechsupportDownloadUrl() bool`
 
 HasTechsupportDownloadUrl returns a boolean if a field has been set.
+
+### GetUserRole
+
+`func (o *TechsupportmanagementTechSupportStatusAllOf) GetUserRole() string`
+
+GetUserRole returns the UserRole field if non-nil, zero value otherwise.
+
+### GetUserRoleOk
+
+`func (o *TechsupportmanagementTechSupportStatusAllOf) GetUserRoleOk() (*string, bool)`
+
+GetUserRoleOk returns a tuple with the UserRole field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserRole
+
+`func (o *TechsupportmanagementTechSupportStatusAllOf) SetUserRole(v string)`
+
+SetUserRole sets UserRole field to given value.
+
+### HasUserRole
+
+`func (o *TechsupportmanagementTechSupportStatusAllOf) HasUserRole() bool`
+
+HasUserRole returns a boolean if a field has been set.
 
 ### GetClusterMember
 

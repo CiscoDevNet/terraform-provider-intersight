@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -56,8 +56,8 @@ func (r ApiCreateBulkExportRequest) Execute() (*BulkExport, *http.Response, erro
 /*
 CreateBulkExport Create a 'bulk.Export' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateBulkExportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateBulkExportRequest
 */
 func (a *BulkApiService) CreateBulkExport(ctx context.Context) ApiCreateBulkExportRequest {
 	return ApiCreateBulkExportRequest{
@@ -67,7 +67,8 @@ func (a *BulkApiService) CreateBulkExport(ctx context.Context) ApiCreateBulkExpo
 }
 
 // Execute executes the request
-//  @return BulkExport
+//
+//	@return BulkExport
 func (a *BulkApiService) CreateBulkExportExecute(r ApiCreateBulkExportRequest) (*BulkExport, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -232,8 +233,8 @@ func (r ApiCreateBulkMoClonerRequest) Execute() (*BulkMoCloner, *http.Response, 
 /*
 CreateBulkMoCloner Create a 'bulk.MoCloner' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateBulkMoClonerRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateBulkMoClonerRequest
 */
 func (a *BulkApiService) CreateBulkMoCloner(ctx context.Context) ApiCreateBulkMoClonerRequest {
 	return ApiCreateBulkMoClonerRequest{
@@ -243,7 +244,8 @@ func (a *BulkApiService) CreateBulkMoCloner(ctx context.Context) ApiCreateBulkMo
 }
 
 // Execute executes the request
-//  @return BulkMoCloner
+//
+//	@return BulkMoCloner
 func (a *BulkApiService) CreateBulkMoClonerExecute(r ApiCreateBulkMoClonerRequest) (*BulkMoCloner, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -408,8 +410,8 @@ func (r ApiCreateBulkMoMergerRequest) Execute() (*BulkMoMerger, *http.Response, 
 /*
 CreateBulkMoMerger Create a 'bulk.MoMerger' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateBulkMoMergerRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateBulkMoMergerRequest
 */
 func (a *BulkApiService) CreateBulkMoMerger(ctx context.Context) ApiCreateBulkMoMergerRequest {
 	return ApiCreateBulkMoMergerRequest{
@@ -419,7 +421,8 @@ func (a *BulkApiService) CreateBulkMoMerger(ctx context.Context) ApiCreateBulkMo
 }
 
 // Execute executes the request
-//  @return BulkMoMerger
+//
+//	@return BulkMoMerger
 func (a *BulkApiService) CreateBulkMoMergerExecute(r ApiCreateBulkMoMergerRequest) (*BulkMoMerger, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -584,8 +587,8 @@ func (r ApiCreateBulkRequestRequest) Execute() (*BulkRequest, *http.Response, er
 /*
 CreateBulkRequest Create a 'bulk.Request' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateBulkRequestRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateBulkRequestRequest
 */
 func (a *BulkApiService) CreateBulkRequest(ctx context.Context) ApiCreateBulkRequestRequest {
 	return ApiCreateBulkRequestRequest{
@@ -595,7 +598,8 @@ func (a *BulkApiService) CreateBulkRequest(ctx context.Context) ApiCreateBulkReq
 }
 
 // Execute executes the request
-//  @return BulkRequest
+//
+//	@return BulkRequest
 func (a *BulkApiService) CreateBulkRequestExecute(r ApiCreateBulkRequestRequest) (*BulkRequest, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -740,9 +744,9 @@ func (r ApiDeleteBulkExportRequest) Execute() (*http.Response, error) {
 /*
 DeleteBulkExport Delete a 'bulk.Export' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteBulkExportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteBulkExportRequest
 */
 func (a *BulkApiService) DeleteBulkExport(ctx context.Context, moid string) ApiDeleteBulkExportRequest {
 	return ApiDeleteBulkExportRequest{
@@ -877,9 +881,9 @@ func (r ApiGetBulkExportByMoidRequest) Execute() (*BulkExport, *http.Response, e
 /*
 GetBulkExportByMoid Read a 'bulk.Export' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetBulkExportByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetBulkExportByMoidRequest
 */
 func (a *BulkApiService) GetBulkExportByMoid(ctx context.Context, moid string) ApiGetBulkExportByMoidRequest {
 	return ApiGetBulkExportByMoidRequest{
@@ -890,7 +894,8 @@ func (a *BulkApiService) GetBulkExportByMoid(ctx context.Context, moid string) A
 }
 
 // Execute executes the request
-//  @return BulkExport
+//
+//	@return BulkExport
 func (a *BulkApiService) GetBulkExportByMoidExecute(r ApiGetBulkExportByMoidRequest) (*BulkExport, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1101,8 +1106,8 @@ func (r ApiGetBulkExportListRequest) Execute() (*BulkExportResponse, *http.Respo
 /*
 GetBulkExportList Read a 'bulk.Export' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetBulkExportListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetBulkExportListRequest
 */
 func (a *BulkApiService) GetBulkExportList(ctx context.Context) ApiGetBulkExportListRequest {
 	return ApiGetBulkExportListRequest{
@@ -1112,7 +1117,8 @@ func (a *BulkApiService) GetBulkExportList(ctx context.Context) ApiGetBulkExport
 }
 
 // Execute executes the request
-//  @return BulkExportResponse
+//
+//	@return BulkExportResponse
 func (a *BulkApiService) GetBulkExportListExecute(r ApiGetBulkExportListRequest) (*BulkExportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1279,9 +1285,9 @@ func (r ApiGetBulkExportedItemByMoidRequest) Execute() (*BulkExportedItem, *http
 /*
 GetBulkExportedItemByMoid Read a 'bulk.ExportedItem' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetBulkExportedItemByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetBulkExportedItemByMoidRequest
 */
 func (a *BulkApiService) GetBulkExportedItemByMoid(ctx context.Context, moid string) ApiGetBulkExportedItemByMoidRequest {
 	return ApiGetBulkExportedItemByMoidRequest{
@@ -1292,7 +1298,8 @@ func (a *BulkApiService) GetBulkExportedItemByMoid(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return BulkExportedItem
+//
+//	@return BulkExportedItem
 func (a *BulkApiService) GetBulkExportedItemByMoidExecute(r ApiGetBulkExportedItemByMoidRequest) (*BulkExportedItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1503,8 +1510,8 @@ func (r ApiGetBulkExportedItemListRequest) Execute() (*BulkExportedItemResponse,
 /*
 GetBulkExportedItemList Read a 'bulk.ExportedItem' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetBulkExportedItemListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetBulkExportedItemListRequest
 */
 func (a *BulkApiService) GetBulkExportedItemList(ctx context.Context) ApiGetBulkExportedItemListRequest {
 	return ApiGetBulkExportedItemListRequest{
@@ -1514,7 +1521,8 @@ func (a *BulkApiService) GetBulkExportedItemList(ctx context.Context) ApiGetBulk
 }
 
 // Execute executes the request
-//  @return BulkExportedItemResponse
+//
+//	@return BulkExportedItemResponse
 func (a *BulkApiService) GetBulkExportedItemListExecute(r ApiGetBulkExportedItemListRequest) (*BulkExportedItemResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1681,9 +1689,9 @@ func (r ApiGetBulkRequestByMoidRequest) Execute() (*BulkRequest, *http.Response,
 /*
 GetBulkRequestByMoid Read a 'bulk.Request' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetBulkRequestByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetBulkRequestByMoidRequest
 */
 func (a *BulkApiService) GetBulkRequestByMoid(ctx context.Context, moid string) ApiGetBulkRequestByMoidRequest {
 	return ApiGetBulkRequestByMoidRequest{
@@ -1694,7 +1702,8 @@ func (a *BulkApiService) GetBulkRequestByMoid(ctx context.Context, moid string) 
 }
 
 // Execute executes the request
-//  @return BulkRequest
+//
+//	@return BulkRequest
 func (a *BulkApiService) GetBulkRequestByMoidExecute(r ApiGetBulkRequestByMoidRequest) (*BulkRequest, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1905,8 +1914,8 @@ func (r ApiGetBulkRequestListRequest) Execute() (*BulkRequestResponse, *http.Res
 /*
 GetBulkRequestList Read a 'bulk.Request' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetBulkRequestListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetBulkRequestListRequest
 */
 func (a *BulkApiService) GetBulkRequestList(ctx context.Context) ApiGetBulkRequestListRequest {
 	return ApiGetBulkRequestListRequest{
@@ -1916,7 +1925,8 @@ func (a *BulkApiService) GetBulkRequestList(ctx context.Context) ApiGetBulkReque
 }
 
 // Execute executes the request
-//  @return BulkRequestResponse
+//
+//	@return BulkRequestResponse
 func (a *BulkApiService) GetBulkRequestListExecute(r ApiGetBulkRequestListRequest) (*BulkRequestResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2083,9 +2093,9 @@ func (r ApiGetBulkSubRequestObjByMoidRequest) Execute() (*BulkSubRequestObj, *ht
 /*
 GetBulkSubRequestObjByMoid Read a 'bulk.SubRequestObj' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetBulkSubRequestObjByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetBulkSubRequestObjByMoidRequest
 */
 func (a *BulkApiService) GetBulkSubRequestObjByMoid(ctx context.Context, moid string) ApiGetBulkSubRequestObjByMoidRequest {
 	return ApiGetBulkSubRequestObjByMoidRequest{
@@ -2096,7 +2106,8 @@ func (a *BulkApiService) GetBulkSubRequestObjByMoid(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return BulkSubRequestObj
+//
+//	@return BulkSubRequestObj
 func (a *BulkApiService) GetBulkSubRequestObjByMoidExecute(r ApiGetBulkSubRequestObjByMoidRequest) (*BulkSubRequestObj, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2307,8 +2318,8 @@ func (r ApiGetBulkSubRequestObjListRequest) Execute() (*BulkSubRequestObjRespons
 /*
 GetBulkSubRequestObjList Read a 'bulk.SubRequestObj' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetBulkSubRequestObjListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetBulkSubRequestObjListRequest
 */
 func (a *BulkApiService) GetBulkSubRequestObjList(ctx context.Context) ApiGetBulkSubRequestObjListRequest {
 	return ApiGetBulkSubRequestObjListRequest{
@@ -2318,7 +2329,8 @@ func (a *BulkApiService) GetBulkSubRequestObjList(ctx context.Context) ApiGetBul
 }
 
 // Execute executes the request
-//  @return BulkSubRequestObjResponse
+//
+//	@return BulkSubRequestObjResponse
 func (a *BulkApiService) GetBulkSubRequestObjListExecute(r ApiGetBulkSubRequestObjListRequest) (*BulkSubRequestObjResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2499,9 +2511,9 @@ func (r ApiPatchBulkExportRequest) Execute() (*BulkExport, *http.Response, error
 /*
 PatchBulkExport Update a 'bulk.Export' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchBulkExportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchBulkExportRequest
 */
 func (a *BulkApiService) PatchBulkExport(ctx context.Context, moid string) ApiPatchBulkExportRequest {
 	return ApiPatchBulkExportRequest{
@@ -2512,7 +2524,8 @@ func (a *BulkApiService) PatchBulkExport(ctx context.Context, moid string) ApiPa
 }
 
 // Execute executes the request
-//  @return BulkExport
+//
+//	@return BulkExport
 func (a *BulkApiService) PatchBulkExportExecute(r ApiPatchBulkExportRequest) (*BulkExport, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -2669,9 +2682,9 @@ func (r ApiUpdateBulkExportRequest) Execute() (*BulkExport, *http.Response, erro
 /*
 UpdateBulkExport Update a 'bulk.Export' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateBulkExportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateBulkExportRequest
 */
 func (a *BulkApiService) UpdateBulkExport(ctx context.Context, moid string) ApiUpdateBulkExportRequest {
 	return ApiUpdateBulkExportRequest{
@@ -2682,7 +2695,8 @@ func (a *BulkApiService) UpdateBulkExport(ctx context.Context, moid string) ApiU
 }
 
 // Execute executes the request
-//  @return BulkExport
+//
+//	@return BulkExport
 func (a *BulkApiService) UpdateBulkExportExecute(r ApiUpdateBulkExportRequest) (*BulkExport, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

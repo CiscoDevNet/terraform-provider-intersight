@@ -9,12 +9,14 @@ Name | Type | Description | Notes
 **AdminState** | Pointer to **string** | Admin state of the interface list. | [optional] [readonly] 
 **AllowedVlans** | Pointer to **string** | Allowed VLANs of the interface list. | [optional] [readonly] 
 **Description** | Pointer to **string** | Description of the interface list. | [optional] [readonly] 
+**DisplayName** | Pointer to **string** | Display name of the interface list. | [optional] [readonly] 
 **IpAddress** | Pointer to **string** | IP address of the interface list. | [optional] [readonly] 
 **IpSubnet** | Pointer to **int64** | IP subnet of the interface list. | [optional] [readonly] 
 **Mac** | Pointer to **string** | MAC address of the interface list. | [optional] [readonly] 
 **Mtu** | Pointer to **int64** | Maximum transmission unit of the interface list. | [optional] [readonly] 
 **Name** | Pointer to **string** | Name of the interface list. | [optional] [readonly] 
 **OperState** | Pointer to **string** | Operational state of the interface list. | [optional] [readonly] 
+**PortChannelId** | Pointer to **int64** | Port channel id for port channel created on FI switch. | [optional] [readonly] 
 **PortSubType** | Pointer to **string** | Interface types supported in Network device like Subinterfaces, Breakout Interfaces. | [optional] [readonly] 
 **PortType** | Pointer to **string** | Port type of interface list. | [optional] [readonly] 
 **SlotId** | Pointer to **string** | Slot id of the interface list. | [optional] [readonly] 
@@ -157,6 +159,31 @@ SetDescription sets Description field to given value.
 `func (o *NetworkInterfaceList) HasDescription() bool`
 
 HasDescription returns a boolean if a field has been set.
+
+### GetDisplayName
+
+`func (o *NetworkInterfaceList) GetDisplayName() string`
+
+GetDisplayName returns the DisplayName field if non-nil, zero value otherwise.
+
+### GetDisplayNameOk
+
+`func (o *NetworkInterfaceList) GetDisplayNameOk() (*string, bool)`
+
+GetDisplayNameOk returns a tuple with the DisplayName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDisplayName
+
+`func (o *NetworkInterfaceList) SetDisplayName(v string)`
+
+SetDisplayName sets DisplayName field to given value.
+
+### HasDisplayName
+
+`func (o *NetworkInterfaceList) HasDisplayName() bool`
+
+HasDisplayName returns a boolean if a field has been set.
 
 ### GetIpAddress
 
@@ -307,6 +334,31 @@ SetOperState sets OperState field to given value.
 `func (o *NetworkInterfaceList) HasOperState() bool`
 
 HasOperState returns a boolean if a field has been set.
+
+### GetPortChannelId
+
+`func (o *NetworkInterfaceList) GetPortChannelId() int64`
+
+GetPortChannelId returns the PortChannelId field if non-nil, zero value otherwise.
+
+### GetPortChannelIdOk
+
+`func (o *NetworkInterfaceList) GetPortChannelIdOk() (*int64, bool)`
+
+GetPortChannelIdOk returns a tuple with the PortChannelId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPortChannelId
+
+`func (o *NetworkInterfaceList) SetPortChannelId(v int64)`
+
+SetPortChannelId sets PortChannelId field to given value.
+
+### HasPortChannelId
+
+`func (o *NetworkInterfaceList) HasPortChannelId() bool`
+
+HasPortChannelId returns a boolean if a field has been set.
 
 ### GetPortSubType
 

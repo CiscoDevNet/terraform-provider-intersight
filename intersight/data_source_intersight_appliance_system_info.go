@@ -70,6 +70,11 @@ func getApplianceSystemInfoSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"cluster_status": {
+			Description: "Current status of cluster operation on the Intersight Appliance.\n* `none` - The Intersight Appliance is running in standalone mode.\n* `active` - The Intersight Appliance is running as part of a cluster.\n* `pending` - The Intersight Appliance is currently forming a cluster.\n* `failed` - The Intersight Appliance failed to form a cluster.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"create_time": {
 			Description: "The time when this managed object was created.",
 			Type:        schema.TypeString,
@@ -86,12 +91,22 @@ func getApplianceSystemInfoSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"hostname": {
-			Description: "Publicly accessible FQDN or IP address of the Intersight Appliance.",
+			Description: "Publicly accessible FQDN of the Intersight Appliance.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"init_done": {
 			Description: "Indicates that the setup initialization process has been completed.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"ip_address": {
+			Description: "Publicly accessible IP address of the Intersight Appliance.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"is_virtual_ip": {
+			Description: "Specifies whether this Intersight Appliance is using a virtual ip address.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
@@ -111,7 +126,7 @@ func getApplianceSystemInfoSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"operational_status": {
-			Description: "Operational status of the Intersight Appliance cluster.\n* `Unknown` - Operational status of the Intersight Appliance entity is Unknown.\n* `Operational` - Operational status of the Intersight Appliance entity is Operational.\n* `Impaired` - Operational status of the Intersight Appliance entity is Impaired.\n* `AttentionNeeded` - Operational status of the Intersight Appliance entity is AttentionNeeded.",
+			Description: "Operational status of the Intersight Appliance cluster.\n* `Unknown` - The status of the appliance node is unknown.\n* `Operational` - The appliance node is operational.\n* `Impaired` - The appliance node is impaired.\n* `AttentionNeeded` - The appliance node needs attention.\n* `ReadyToJoin` - The node is ready to be added to a standalone Intersight Appliance to form a cluster.\n* `OutOfService` - The user has taken this node (part of a cluster) to out of service.\n* `ReadyForReplacement` - The cluster node is ready to be replaced.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -426,6 +441,11 @@ func dataSourceApplianceSystemInfoRead(c context.Context, d *schema.ResourceData
 		o.SetCloudConnStatus(x)
 	}
 
+	if v, ok := d.GetOk("cluster_status"); ok {
+		x := (v.(string))
+		o.SetClusterStatus(x)
+	}
+
 	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
@@ -449,6 +469,16 @@ func dataSourceApplianceSystemInfoRead(c context.Context, d *schema.ResourceData
 	if v, ok := d.GetOkExists("init_done"); ok {
 		x := (v.(bool))
 		o.SetInitDone(x)
+	}
+
+	if v, ok := d.GetOk("ip_address"); ok {
+		x := (v.(string))
+		o.SetIpAddress(x)
+	}
+
+	if v, ok := d.GetOkExists("is_virtual_ip"); ok {
+		x := (v.(bool))
+		o.SetIsVirtualIp(x)
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
@@ -733,12 +763,15 @@ func dataSourceApplianceSystemInfoRead(c context.Context, d *schema.ResourceData
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["class_id"] = (s.GetClassId())
 				temp["cloud_conn_status"] = (s.GetCloudConnStatus())
+				temp["cluster_status"] = (s.GetClusterStatus())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["deployment_size"] = (s.GetDeploymentSize())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["hostname"] = (s.GetHostname())
 				temp["init_done"] = (s.GetInitDone())
+				temp["ip_address"] = (s.GetIpAddress())
+				temp["is_virtual_ip"] = (s.GetIsVirtualIp())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())

@@ -27,9 +27,9 @@ The following arguments can be used to get data of already created objects in In
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Task definition name which specifies the task type. 
 * `ref_name`:(string) The task reference name to ensure its unique inside a workflow. 
-* `retry_count`:(int) A counter for number of retries. 
+* `retry_count`:(int) Denotes the number of times the task has been retried. 
 * `rollback_disabled`:(bool) The task is disabled/enabled for rollback operation in this workflow if the task has rollback support. 
-* `running_inst_id`:(string) The instance ID of the task that is currently being executed. When retrying a workflow with failed tasks, the task in workflow engine will have a new instance ID, but the task may still be in-progress. In this case, the task instId reflects the instance ID in the workflow engine, while runningInstId reflects the instance ID of the instance that is currently being executed. 
+* `running_inst_id`:(string) The instance ID of the task that is currently being executed. When retrying a workflow with failed tasks, the task in workflow engine will have a new instance ID, but the task may still be in progress. In this case, the task instId reflects the instance ID in the workflow engine, while runningInstId reflects the instance ID of the instance that is currently being executed. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `start_time`:(string) The time stamp when the task started execution. 
 * `status`:(string) The status of the task and this will specify if the task is running or has reached a final state. 

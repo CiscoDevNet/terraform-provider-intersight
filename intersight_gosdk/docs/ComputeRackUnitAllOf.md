@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **Bmc** | Pointer to [**ManagementControllerRelationship**](ManagementControllerRelationship.md) |  | [optional] 
 **Board** | Pointer to [**ComputeBoardRelationship**](ComputeBoardRelationship.md) |  | [optional] 
 **BootDeviceBootmode** | Pointer to [**BootDeviceBootModeRelationship**](BootDeviceBootModeRelationship.md) |  | [optional] 
+**ComputePersonality** | Pointer to [**[]ComputePersonalityRelationship**](ComputePersonalityRelationship.md) | An array of relationships to computePersonality resources. | [optional] [readonly] 
 **Fanmodules** | Pointer to [**[]EquipmentFanModuleRelationship**](EquipmentFanModuleRelationship.md) | An array of relationships to equipmentFanModule resources. | [optional] [readonly] 
 **GenericInventoryHolders** | Pointer to [**[]InventoryGenericInventoryHolderRelationship**](InventoryGenericInventoryHolderRelationship.md) | An array of relationships to inventoryGenericInventoryHolder resources. | [optional] [readonly] 
 **GraphicsCards** | Pointer to [**[]GraphicsCardRelationship**](GraphicsCardRelationship.md) | An array of relationships to graphicsCard resources. | [optional] 
@@ -388,6 +389,41 @@ SetBootDeviceBootmode sets BootDeviceBootmode field to given value.
 
 HasBootDeviceBootmode returns a boolean if a field has been set.
 
+### GetComputePersonality
+
+`func (o *ComputeRackUnitAllOf) GetComputePersonality() []ComputePersonalityRelationship`
+
+GetComputePersonality returns the ComputePersonality field if non-nil, zero value otherwise.
+
+### GetComputePersonalityOk
+
+`func (o *ComputeRackUnitAllOf) GetComputePersonalityOk() (*[]ComputePersonalityRelationship, bool)`
+
+GetComputePersonalityOk returns a tuple with the ComputePersonality field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetComputePersonality
+
+`func (o *ComputeRackUnitAllOf) SetComputePersonality(v []ComputePersonalityRelationship)`
+
+SetComputePersonality sets ComputePersonality field to given value.
+
+### HasComputePersonality
+
+`func (o *ComputeRackUnitAllOf) HasComputePersonality() bool`
+
+HasComputePersonality returns a boolean if a field has been set.
+
+### SetComputePersonalityNil
+
+`func (o *ComputeRackUnitAllOf) SetComputePersonalityNil(b bool)`
+
+ SetComputePersonalityNil sets the value for ComputePersonality to be an explicit nil
+
+### UnsetComputePersonality
+`func (o *ComputeRackUnitAllOf) UnsetComputePersonality()`
+
+UnsetComputePersonality ensures that no value is present for ComputePersonality, not even an explicit nil
 ### GetFanmodules
 
 `func (o *ComputeRackUnitAllOf) GetFanmodules() []EquipmentFanModuleRelationship`

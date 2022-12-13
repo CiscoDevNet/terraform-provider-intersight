@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -23,6 +23,10 @@ type ApplianceExternalSyslogSettingAllOf struct {
 	ObjectType string `json:"ObjectType"`
 	// Enable or disable External Syslog Server.
 	Enabled *bool `json:"Enabled,omitempty"`
+	// If the flag is set, the alarms reported in Intersight Appliances are exported to external syslog server based on the alarm severity selection.
+	ExportAlarms *bool `json:"ExportAlarms,omitempty"`
+	// Enable or disable exporting of Audit logs.
+	ExportAudit *bool `json:"ExportAudit,omitempty"`
 	// Enable or disable exporting of Web Server access logs.
 	ExportNginx *bool `json:"ExportNginx,omitempty"`
 	// External Syslog Server Port for connection establishment.
@@ -30,7 +34,9 @@ type ApplianceExternalSyslogSettingAllOf struct {
 	// Protocol used to connect to external syslog server. * `TCP` - External Syslog messages sent over TCP. * `UDP` - External Syslog messages sent over UDP. * `TLS` - Secure External Syslog messages sent over TLS.
 	Protocol *string `json:"Protocol,omitempty"`
 	// External Syslog Server Address, can be IP address or hostname.
-	Server               *string                 `json:"Server,omitempty"`
+	Server *string `json:"Server,omitempty"`
+	// Minimum severity level to report. * `None` - The Enum value None represents that there is no severity. * `Info` - The Enum value Info represents the Informational level of severity. * `Critical` - The Enum value Critical represents the Critical level of severity. * `Warning` - The Enum value Warning represents the Warning level of severity. * `Cleared` - The Enum value Cleared represents that the alarm severity has been cleared.
+	Severity             *string                 `json:"Severity,omitempty"`
 	Account              *IamAccountRelationship `json:"Account,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -47,12 +53,18 @@ func NewApplianceExternalSyslogSettingAllOf(classId string, objectType string) *
 	this.ObjectType = objectType
 	var enabled bool = false
 	this.Enabled = &enabled
+	var exportAlarms bool = false
+	this.ExportAlarms = &exportAlarms
+	var exportAudit bool = false
+	this.ExportAudit = &exportAudit
 	var exportNginx bool = false
 	this.ExportNginx = &exportNginx
 	var port int64 = 10514
 	this.Port = &port
 	var protocol string = "TCP"
 	this.Protocol = &protocol
+	var severity string = "None"
+	this.Severity = &severity
 	return &this
 }
 
@@ -67,12 +79,18 @@ func NewApplianceExternalSyslogSettingAllOfWithDefaults() *ApplianceExternalSysl
 	this.ObjectType = objectType
 	var enabled bool = false
 	this.Enabled = &enabled
+	var exportAlarms bool = false
+	this.ExportAlarms = &exportAlarms
+	var exportAudit bool = false
+	this.ExportAudit = &exportAudit
 	var exportNginx bool = false
 	this.ExportNginx = &exportNginx
 	var port int64 = 10514
 	this.Port = &port
 	var protocol string = "TCP"
 	this.Protocol = &protocol
+	var severity string = "None"
+	this.Severity = &severity
 	return &this
 }
 
@@ -154,6 +172,70 @@ func (o *ApplianceExternalSyslogSettingAllOf) HasEnabled() bool {
 // SetEnabled gets a reference to the given bool and assigns it to the Enabled field.
 func (o *ApplianceExternalSyslogSettingAllOf) SetEnabled(v bool) {
 	o.Enabled = &v
+}
+
+// GetExportAlarms returns the ExportAlarms field value if set, zero value otherwise.
+func (o *ApplianceExternalSyslogSettingAllOf) GetExportAlarms() bool {
+	if o == nil || o.ExportAlarms == nil {
+		var ret bool
+		return ret
+	}
+	return *o.ExportAlarms
+}
+
+// GetExportAlarmsOk returns a tuple with the ExportAlarms field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApplianceExternalSyslogSettingAllOf) GetExportAlarmsOk() (*bool, bool) {
+	if o == nil || o.ExportAlarms == nil {
+		return nil, false
+	}
+	return o.ExportAlarms, true
+}
+
+// HasExportAlarms returns a boolean if a field has been set.
+func (o *ApplianceExternalSyslogSettingAllOf) HasExportAlarms() bool {
+	if o != nil && o.ExportAlarms != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetExportAlarms gets a reference to the given bool and assigns it to the ExportAlarms field.
+func (o *ApplianceExternalSyslogSettingAllOf) SetExportAlarms(v bool) {
+	o.ExportAlarms = &v
+}
+
+// GetExportAudit returns the ExportAudit field value if set, zero value otherwise.
+func (o *ApplianceExternalSyslogSettingAllOf) GetExportAudit() bool {
+	if o == nil || o.ExportAudit == nil {
+		var ret bool
+		return ret
+	}
+	return *o.ExportAudit
+}
+
+// GetExportAuditOk returns a tuple with the ExportAudit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApplianceExternalSyslogSettingAllOf) GetExportAuditOk() (*bool, bool) {
+	if o == nil || o.ExportAudit == nil {
+		return nil, false
+	}
+	return o.ExportAudit, true
+}
+
+// HasExportAudit returns a boolean if a field has been set.
+func (o *ApplianceExternalSyslogSettingAllOf) HasExportAudit() bool {
+	if o != nil && o.ExportAudit != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetExportAudit gets a reference to the given bool and assigns it to the ExportAudit field.
+func (o *ApplianceExternalSyslogSettingAllOf) SetExportAudit(v bool) {
+	o.ExportAudit = &v
 }
 
 // GetExportNginx returns the ExportNginx field value if set, zero value otherwise.
@@ -284,6 +366,38 @@ func (o *ApplianceExternalSyslogSettingAllOf) SetServer(v string) {
 	o.Server = &v
 }
 
+// GetSeverity returns the Severity field value if set, zero value otherwise.
+func (o *ApplianceExternalSyslogSettingAllOf) GetSeverity() string {
+	if o == nil || o.Severity == nil {
+		var ret string
+		return ret
+	}
+	return *o.Severity
+}
+
+// GetSeverityOk returns a tuple with the Severity field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApplianceExternalSyslogSettingAllOf) GetSeverityOk() (*string, bool) {
+	if o == nil || o.Severity == nil {
+		return nil, false
+	}
+	return o.Severity, true
+}
+
+// HasSeverity returns a boolean if a field has been set.
+func (o *ApplianceExternalSyslogSettingAllOf) HasSeverity() bool {
+	if o != nil && o.Severity != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSeverity gets a reference to the given string and assigns it to the Severity field.
+func (o *ApplianceExternalSyslogSettingAllOf) SetSeverity(v string) {
+	o.Severity = &v
+}
+
 // GetAccount returns the Account field value if set, zero value otherwise.
 func (o *ApplianceExternalSyslogSettingAllOf) GetAccount() IamAccountRelationship {
 	if o == nil || o.Account == nil {
@@ -327,6 +441,12 @@ func (o ApplianceExternalSyslogSettingAllOf) MarshalJSON() ([]byte, error) {
 	if o.Enabled != nil {
 		toSerialize["Enabled"] = o.Enabled
 	}
+	if o.ExportAlarms != nil {
+		toSerialize["ExportAlarms"] = o.ExportAlarms
+	}
+	if o.ExportAudit != nil {
+		toSerialize["ExportAudit"] = o.ExportAudit
+	}
 	if o.ExportNginx != nil {
 		toSerialize["ExportNginx"] = o.ExportNginx
 	}
@@ -338,6 +458,9 @@ func (o ApplianceExternalSyslogSettingAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.Server != nil {
 		toSerialize["Server"] = o.Server
+	}
+	if o.Severity != nil {
+		toSerialize["Severity"] = o.Severity
 	}
 	if o.Account != nil {
 		toSerialize["Account"] = o.Account
@@ -363,10 +486,13 @@ func (o *ApplianceExternalSyslogSettingAllOf) UnmarshalJSON(bytes []byte) (err e
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Enabled")
+		delete(additionalProperties, "ExportAlarms")
+		delete(additionalProperties, "ExportAudit")
 		delete(additionalProperties, "ExportNginx")
 		delete(additionalProperties, "Port")
 		delete(additionalProperties, "Protocol")
 		delete(additionalProperties, "Server")
+		delete(additionalProperties, "Severity")
 		delete(additionalProperties, "Account")
 		o.AdditionalProperties = additionalProperties
 	}

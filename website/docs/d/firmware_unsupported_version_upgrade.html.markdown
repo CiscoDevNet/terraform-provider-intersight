@@ -18,7 +18,7 @@ The following arguments can be used to get data of already created objects in In
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `download_error`:(string) Any error encountered. Set to empty when download is in progress or completed. 
-* `download_progress`:(int) The download progress of the file represented as a percentage between 0% and 100%. If progress reporting is not possible a value of -1 is sent. 
+* `download_progress`:(int) The download progress of the file represented as a percentage between 0% and 100%. If progress reporting is not possible, a value of -1 is sent. 
 * `download_retries`:(int) The number of retries the plugin attempted before succeeding or failing the download. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 

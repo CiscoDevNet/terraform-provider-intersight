@@ -18,6 +18,8 @@ The following arguments can be used to get data of already created objects in In
 * `cluster_count`:(int) Count of all clusters associated with this DC. 
 * `create_time`:(string) The time when this managed object was created. 
 * `datastore_count`:(int) Count of all datastores associated with this DC. 
+* `distributed_network_count`:(int) Count of all distributed networks associated with this datacenter (DC). 
+* `distributed_virtual_switch_count`:(int) Count of all distributed virtual switches associated with this datacenter (DC). 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `host_count`:(int) Count of all hosts associated with this DC. 
 * `identity`:(string) The internally generated identity of this placement. This entity is not manipulated by users. It aids in uniquely identifying the placement object. 
@@ -27,6 +29,7 @@ The following arguments can be used to get data of already created objects in In
 * `name`:(string) Name of the virtual machine placement. It is the name of the VPC (Virtual Private Cloud) in case of AWSvirtual machine, and datacenter name in case of VMware virtual machine. 
 * `network_count`:(int) Count of all networks associated with this datacenter (DC). 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
+* `standard_network_count`:(int) Count of all standard networks associated with this datacenter (DC). 
 * `uuid`:(string) The uuid of this placement. The uuid is internally generated and not user specified. 
 * `vm_count`:(int) Count of all virtual machines (VMs) associated with this DC. 
 * `vm_template_count`:(int) Count of all virtual machines templates associated with this DC. 

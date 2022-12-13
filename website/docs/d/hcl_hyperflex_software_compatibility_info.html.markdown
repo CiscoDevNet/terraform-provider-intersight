@@ -21,6 +21,8 @@ The following arguments can be used to get data of already created objects in In
 * `hypervisor_type`:(string) Type fo Hypervisor the HyperFlex components versions are compatible with. For example ESX, Hyperv or KVM.* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.* `HyperFlexAp` - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform.* `IWE` - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine.* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.* `Unknown` - The hypervisor running on the HyperFlex cluster is not known. 
 * `hypervisor_version`:(string) Hypervisor component software version. 
 * `is_mgmt_build`:(string) Type of the HXDP bundle mgmt or full. 
+* `max_mgmt_version`:(string) Maximum supported HyperFlex Data Platform build version. 
+* `min_mgmt_version`:(string) Minimum supported HyperFlex Data Platform build version. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `server_fw_version`:(string) UCS Server Firmware component software version. 

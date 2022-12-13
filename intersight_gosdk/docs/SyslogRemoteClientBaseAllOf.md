@@ -7,10 +7,12 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | [default to "syslog.RemoteLoggingClient"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | [default to "syslog.RemoteLoggingClient"]
 **Enabled** | Pointer to **bool** | Enables/disables remote logging for the endpoint If enabled, log messages will be sent to the syslog server mentioned in the Hostname/IP Address field. | [optional] [default to true]
+**Facility** | Pointer to **string** | This component represents the process of the system which created the message. | [optional] [readonly] 
 **Hostname** | Pointer to **string** | Hostname or IP Address of the syslog server where log should be stored. | [optional] 
 **MinSeverity** | Pointer to **string** | Lowest level of messages to be included in the remote log. * &#x60;warning&#x60; - Use logging level warning for logs classified as warning. * &#x60;emergency&#x60; - Use logging level emergency for logs classified as emergency. * &#x60;alert&#x60; - Use logging level alert for logs classified as alert. * &#x60;critical&#x60; - Use logging level critical for logs classified as critical. * &#x60;error&#x60; - Use logging level error for logs classified as error. * &#x60;notice&#x60; - Use logging level notice for logs classified as notice. * &#x60;informational&#x60; - Use logging level informational for logs classified as informational. * &#x60;debug&#x60; - Use logging level debug for logs classified as debug. | [optional] [default to "warning"]
 **Port** | Pointer to **int64** | Port number used for logging on syslog server. | [optional] [default to 514]
 **Protocol** | Pointer to **string** | Transport layer protocol for transmission of log messages to syslog server. * &#x60;udp&#x60; - Use User Datagram Protocol (UDP) for syslog remote server connection. * &#x60;tcp&#x60; - Use Transmission Control Protocol (TCP) for syslog remote server connection. | [optional] [default to "udp"]
+**VrfName** | Pointer to **string** | VRF name used by the syslog server. | [optional] [readonly] 
 
 ## Methods
 
@@ -95,6 +97,31 @@ SetEnabled sets Enabled field to given value.
 `func (o *SyslogRemoteClientBaseAllOf) HasEnabled() bool`
 
 HasEnabled returns a boolean if a field has been set.
+
+### GetFacility
+
+`func (o *SyslogRemoteClientBaseAllOf) GetFacility() string`
+
+GetFacility returns the Facility field if non-nil, zero value otherwise.
+
+### GetFacilityOk
+
+`func (o *SyslogRemoteClientBaseAllOf) GetFacilityOk() (*string, bool)`
+
+GetFacilityOk returns a tuple with the Facility field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFacility
+
+`func (o *SyslogRemoteClientBaseAllOf) SetFacility(v string)`
+
+SetFacility sets Facility field to given value.
+
+### HasFacility
+
+`func (o *SyslogRemoteClientBaseAllOf) HasFacility() bool`
+
+HasFacility returns a boolean if a field has been set.
 
 ### GetHostname
 
@@ -195,6 +222,31 @@ SetProtocol sets Protocol field to given value.
 `func (o *SyslogRemoteClientBaseAllOf) HasProtocol() bool`
 
 HasProtocol returns a boolean if a field has been set.
+
+### GetVrfName
+
+`func (o *SyslogRemoteClientBaseAllOf) GetVrfName() string`
+
+GetVrfName returns the VrfName field if non-nil, zero value otherwise.
+
+### GetVrfNameOk
+
+`func (o *SyslogRemoteClientBaseAllOf) GetVrfNameOk() (*string, bool)`
+
+GetVrfNameOk returns a tuple with the VrfName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVrfName
+
+`func (o *SyslogRemoteClientBaseAllOf) SetVrfName(v string)`
+
+SetVrfName sets VrfName field to given value.
+
+### HasVrfName
+
+`func (o *SyslogRemoteClientBaseAllOf) HasVrfName() bool`
+
+HasVrfName returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

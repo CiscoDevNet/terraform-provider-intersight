@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -56,8 +56,8 @@ func (r ApiCreateKvmPolicyRequest) Execute() (*KvmPolicy, *http.Response, error)
 /*
 CreateKvmPolicy Create a 'kvm.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateKvmPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateKvmPolicyRequest
 */
 func (a *KvmApiService) CreateKvmPolicy(ctx context.Context) ApiCreateKvmPolicyRequest {
 	return ApiCreateKvmPolicyRequest{
@@ -67,7 +67,8 @@ func (a *KvmApiService) CreateKvmPolicy(ctx context.Context) ApiCreateKvmPolicyR
 }
 
 // Execute executes the request
-//  @return KvmPolicy
+//
+//	@return KvmPolicy
 func (a *KvmApiService) CreateKvmPolicyExecute(r ApiCreateKvmPolicyRequest) (*KvmPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -232,8 +233,8 @@ func (r ApiCreateKvmSessionRequest) Execute() (*KvmSession, *http.Response, erro
 /*
 CreateKvmSession Create a 'kvm.Session' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateKvmSessionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateKvmSessionRequest
 */
 func (a *KvmApiService) CreateKvmSession(ctx context.Context) ApiCreateKvmSessionRequest {
 	return ApiCreateKvmSessionRequest{
@@ -243,7 +244,8 @@ func (a *KvmApiService) CreateKvmSession(ctx context.Context) ApiCreateKvmSessio
 }
 
 // Execute executes the request
-//  @return KvmSession
+//
+//	@return KvmSession
 func (a *KvmApiService) CreateKvmSessionExecute(r ApiCreateKvmSessionRequest) (*KvmSession, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -408,8 +410,8 @@ func (r ApiCreateKvmTunnelRequest) Execute() (*KvmTunnel, *http.Response, error)
 /*
 CreateKvmTunnel Create a 'kvm.Tunnel' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateKvmTunnelRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateKvmTunnelRequest
 */
 func (a *KvmApiService) CreateKvmTunnel(ctx context.Context) ApiCreateKvmTunnelRequest {
 	return ApiCreateKvmTunnelRequest{
@@ -419,7 +421,8 @@ func (a *KvmApiService) CreateKvmTunnel(ctx context.Context) ApiCreateKvmTunnelR
 }
 
 // Execute executes the request
-//  @return KvmTunnel
+//
+//	@return KvmTunnel
 func (a *KvmApiService) CreateKvmTunnelExecute(r ApiCreateKvmTunnelRequest) (*KvmTunnel, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -584,8 +587,8 @@ func (r ApiCreateKvmTunneledKvmPolicyRequest) Execute() (*KvmTunneledKvmPolicy, 
 /*
 CreateKvmTunneledKvmPolicy Create a 'kvm.TunneledKvmPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateKvmTunneledKvmPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateKvmTunneledKvmPolicyRequest
 */
 func (a *KvmApiService) CreateKvmTunneledKvmPolicy(ctx context.Context) ApiCreateKvmTunneledKvmPolicyRequest {
 	return ApiCreateKvmTunneledKvmPolicyRequest{
@@ -595,7 +598,8 @@ func (a *KvmApiService) CreateKvmTunneledKvmPolicy(ctx context.Context) ApiCreat
 }
 
 // Execute executes the request
-//  @return KvmTunneledKvmPolicy
+//
+//	@return KvmTunneledKvmPolicy
 func (a *KvmApiService) CreateKvmTunneledKvmPolicyExecute(r ApiCreateKvmTunneledKvmPolicyRequest) (*KvmTunneledKvmPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -740,9 +744,9 @@ func (r ApiDeleteKvmPolicyRequest) Execute() (*http.Response, error) {
 /*
 DeleteKvmPolicy Delete a 'kvm.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteKvmPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteKvmPolicyRequest
 */
 func (a *KvmApiService) DeleteKvmPolicy(ctx context.Context, moid string) ApiDeleteKvmPolicyRequest {
 	return ApiDeleteKvmPolicyRequest{
@@ -877,9 +881,9 @@ func (r ApiDeleteKvmTunneledKvmPolicyRequest) Execute() (*http.Response, error) 
 /*
 DeleteKvmTunneledKvmPolicy Delete a 'kvm.TunneledKvmPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteKvmTunneledKvmPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteKvmTunneledKvmPolicyRequest
 */
 func (a *KvmApiService) DeleteKvmTunneledKvmPolicy(ctx context.Context, moid string) ApiDeleteKvmTunneledKvmPolicyRequest {
 	return ApiDeleteKvmTunneledKvmPolicyRequest{
@@ -1014,9 +1018,9 @@ func (r ApiGetKvmPolicyByMoidRequest) Execute() (*KvmPolicy, *http.Response, err
 /*
 GetKvmPolicyByMoid Read a 'kvm.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetKvmPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetKvmPolicyByMoidRequest
 */
 func (a *KvmApiService) GetKvmPolicyByMoid(ctx context.Context, moid string) ApiGetKvmPolicyByMoidRequest {
 	return ApiGetKvmPolicyByMoidRequest{
@@ -1027,7 +1031,8 @@ func (a *KvmApiService) GetKvmPolicyByMoid(ctx context.Context, moid string) Api
 }
 
 // Execute executes the request
-//  @return KvmPolicy
+//
+//	@return KvmPolicy
 func (a *KvmApiService) GetKvmPolicyByMoidExecute(r ApiGetKvmPolicyByMoidRequest) (*KvmPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1162,9 +1167,9 @@ func (r ApiGetKvmPolicyInventoryByMoidRequest) Execute() (*KvmPolicyInventory, *
 /*
 GetKvmPolicyInventoryByMoid Read a 'kvm.PolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetKvmPolicyInventoryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetKvmPolicyInventoryByMoidRequest
 */
 func (a *KvmApiService) GetKvmPolicyInventoryByMoid(ctx context.Context, moid string) ApiGetKvmPolicyInventoryByMoidRequest {
 	return ApiGetKvmPolicyInventoryByMoidRequest{
@@ -1175,7 +1180,8 @@ func (a *KvmApiService) GetKvmPolicyInventoryByMoid(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return KvmPolicyInventory
+//
+//	@return KvmPolicyInventory
 func (a *KvmApiService) GetKvmPolicyInventoryByMoidExecute(r ApiGetKvmPolicyInventoryByMoidRequest) (*KvmPolicyInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1386,8 +1392,8 @@ func (r ApiGetKvmPolicyInventoryListRequest) Execute() (*KvmPolicyInventoryRespo
 /*
 GetKvmPolicyInventoryList Read a 'kvm.PolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetKvmPolicyInventoryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetKvmPolicyInventoryListRequest
 */
 func (a *KvmApiService) GetKvmPolicyInventoryList(ctx context.Context) ApiGetKvmPolicyInventoryListRequest {
 	return ApiGetKvmPolicyInventoryListRequest{
@@ -1397,7 +1403,8 @@ func (a *KvmApiService) GetKvmPolicyInventoryList(ctx context.Context) ApiGetKvm
 }
 
 // Execute executes the request
-//  @return KvmPolicyInventoryResponse
+//
+//	@return KvmPolicyInventoryResponse
 func (a *KvmApiService) GetKvmPolicyInventoryListExecute(r ApiGetKvmPolicyInventoryListRequest) (*KvmPolicyInventoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1640,8 +1647,8 @@ func (r ApiGetKvmPolicyListRequest) Execute() (*KvmPolicyResponse, *http.Respons
 /*
 GetKvmPolicyList Read a 'kvm.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetKvmPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetKvmPolicyListRequest
 */
 func (a *KvmApiService) GetKvmPolicyList(ctx context.Context) ApiGetKvmPolicyListRequest {
 	return ApiGetKvmPolicyListRequest{
@@ -1651,7 +1658,8 @@ func (a *KvmApiService) GetKvmPolicyList(ctx context.Context) ApiGetKvmPolicyLis
 }
 
 // Execute executes the request
-//  @return KvmPolicyResponse
+//
+//	@return KvmPolicyResponse
 func (a *KvmApiService) GetKvmPolicyListExecute(r ApiGetKvmPolicyListRequest) (*KvmPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1818,9 +1826,9 @@ func (r ApiGetKvmSessionByMoidRequest) Execute() (*KvmSession, *http.Response, e
 /*
 GetKvmSessionByMoid Read a 'kvm.Session' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetKvmSessionByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetKvmSessionByMoidRequest
 */
 func (a *KvmApiService) GetKvmSessionByMoid(ctx context.Context, moid string) ApiGetKvmSessionByMoidRequest {
 	return ApiGetKvmSessionByMoidRequest{
@@ -1831,7 +1839,8 @@ func (a *KvmApiService) GetKvmSessionByMoid(ctx context.Context, moid string) Ap
 }
 
 // Execute executes the request
-//  @return KvmSession
+//
+//	@return KvmSession
 func (a *KvmApiService) GetKvmSessionByMoidExecute(r ApiGetKvmSessionByMoidRequest) (*KvmSession, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2042,8 +2051,8 @@ func (r ApiGetKvmSessionListRequest) Execute() (*KvmSessionResponse, *http.Respo
 /*
 GetKvmSessionList Read a 'kvm.Session' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetKvmSessionListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetKvmSessionListRequest
 */
 func (a *KvmApiService) GetKvmSessionList(ctx context.Context) ApiGetKvmSessionListRequest {
 	return ApiGetKvmSessionListRequest{
@@ -2053,7 +2062,8 @@ func (a *KvmApiService) GetKvmSessionList(ctx context.Context) ApiGetKvmSessionL
 }
 
 // Execute executes the request
-//  @return KvmSessionResponse
+//
+//	@return KvmSessionResponse
 func (a *KvmApiService) GetKvmSessionListExecute(r ApiGetKvmSessionListRequest) (*KvmSessionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2220,9 +2230,9 @@ func (r ApiGetKvmTunnelByMoidRequest) Execute() (*KvmTunnel, *http.Response, err
 /*
 GetKvmTunnelByMoid Read a 'kvm.Tunnel' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetKvmTunnelByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetKvmTunnelByMoidRequest
 */
 func (a *KvmApiService) GetKvmTunnelByMoid(ctx context.Context, moid string) ApiGetKvmTunnelByMoidRequest {
 	return ApiGetKvmTunnelByMoidRequest{
@@ -2233,7 +2243,8 @@ func (a *KvmApiService) GetKvmTunnelByMoid(ctx context.Context, moid string) Api
 }
 
 // Execute executes the request
-//  @return KvmTunnel
+//
+//	@return KvmTunnel
 func (a *KvmApiService) GetKvmTunnelByMoidExecute(r ApiGetKvmTunnelByMoidRequest) (*KvmTunnel, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2444,8 +2455,8 @@ func (r ApiGetKvmTunnelListRequest) Execute() (*KvmTunnelResponse, *http.Respons
 /*
 GetKvmTunnelList Read a 'kvm.Tunnel' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetKvmTunnelListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetKvmTunnelListRequest
 */
 func (a *KvmApiService) GetKvmTunnelList(ctx context.Context) ApiGetKvmTunnelListRequest {
 	return ApiGetKvmTunnelListRequest{
@@ -2455,7 +2466,8 @@ func (a *KvmApiService) GetKvmTunnelList(ctx context.Context) ApiGetKvmTunnelLis
 }
 
 // Execute executes the request
-//  @return KvmTunnelResponse
+//
+//	@return KvmTunnelResponse
 func (a *KvmApiService) GetKvmTunnelListExecute(r ApiGetKvmTunnelListRequest) (*KvmTunnelResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2622,9 +2634,9 @@ func (r ApiGetKvmTunneledKvmPolicyByMoidRequest) Execute() (*KvmTunneledKvmPolic
 /*
 GetKvmTunneledKvmPolicyByMoid Read a 'kvm.TunneledKvmPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetKvmTunneledKvmPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetKvmTunneledKvmPolicyByMoidRequest
 */
 func (a *KvmApiService) GetKvmTunneledKvmPolicyByMoid(ctx context.Context, moid string) ApiGetKvmTunneledKvmPolicyByMoidRequest {
 	return ApiGetKvmTunneledKvmPolicyByMoidRequest{
@@ -2635,7 +2647,8 @@ func (a *KvmApiService) GetKvmTunneledKvmPolicyByMoid(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return KvmTunneledKvmPolicy
+//
+//	@return KvmTunneledKvmPolicy
 func (a *KvmApiService) GetKvmTunneledKvmPolicyByMoidExecute(r ApiGetKvmTunneledKvmPolicyByMoidRequest) (*KvmTunneledKvmPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2846,8 +2859,8 @@ func (r ApiGetKvmTunneledKvmPolicyListRequest) Execute() (*KvmTunneledKvmPolicyR
 /*
 GetKvmTunneledKvmPolicyList Read a 'kvm.TunneledKvmPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetKvmTunneledKvmPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetKvmTunneledKvmPolicyListRequest
 */
 func (a *KvmApiService) GetKvmTunneledKvmPolicyList(ctx context.Context) ApiGetKvmTunneledKvmPolicyListRequest {
 	return ApiGetKvmTunneledKvmPolicyListRequest{
@@ -2857,7 +2870,8 @@ func (a *KvmApiService) GetKvmTunneledKvmPolicyList(ctx context.Context) ApiGetK
 }
 
 // Execute executes the request
-//  @return KvmTunneledKvmPolicyResponse
+//
+//	@return KvmTunneledKvmPolicyResponse
 func (a *KvmApiService) GetKvmTunneledKvmPolicyListExecute(r ApiGetKvmTunneledKvmPolicyListRequest) (*KvmTunneledKvmPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3038,9 +3052,9 @@ func (r ApiPatchKvmPolicyRequest) Execute() (*KvmPolicy, *http.Response, error) 
 /*
 PatchKvmPolicy Update a 'kvm.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchKvmPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchKvmPolicyRequest
 */
 func (a *KvmApiService) PatchKvmPolicy(ctx context.Context, moid string) ApiPatchKvmPolicyRequest {
 	return ApiPatchKvmPolicyRequest{
@@ -3051,7 +3065,8 @@ func (a *KvmApiService) PatchKvmPolicy(ctx context.Context, moid string) ApiPatc
 }
 
 // Execute executes the request
-//  @return KvmPolicy
+//
+//	@return KvmPolicy
 func (a *KvmApiService) PatchKvmPolicyExecute(r ApiPatchKvmPolicyRequest) (*KvmPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -3208,9 +3223,9 @@ func (r ApiPatchKvmSessionRequest) Execute() (*KvmSession, *http.Response, error
 /*
 PatchKvmSession Update a 'kvm.Session' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchKvmSessionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchKvmSessionRequest
 */
 func (a *KvmApiService) PatchKvmSession(ctx context.Context, moid string) ApiPatchKvmSessionRequest {
 	return ApiPatchKvmSessionRequest{
@@ -3221,7 +3236,8 @@ func (a *KvmApiService) PatchKvmSession(ctx context.Context, moid string) ApiPat
 }
 
 // Execute executes the request
-//  @return KvmSession
+//
+//	@return KvmSession
 func (a *KvmApiService) PatchKvmSessionExecute(r ApiPatchKvmSessionRequest) (*KvmSession, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -3378,9 +3394,9 @@ func (r ApiPatchKvmTunneledKvmPolicyRequest) Execute() (*KvmTunneledKvmPolicy, *
 /*
 PatchKvmTunneledKvmPolicy Update a 'kvm.TunneledKvmPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchKvmTunneledKvmPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchKvmTunneledKvmPolicyRequest
 */
 func (a *KvmApiService) PatchKvmTunneledKvmPolicy(ctx context.Context, moid string) ApiPatchKvmTunneledKvmPolicyRequest {
 	return ApiPatchKvmTunneledKvmPolicyRequest{
@@ -3391,7 +3407,8 @@ func (a *KvmApiService) PatchKvmTunneledKvmPolicy(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return KvmTunneledKvmPolicy
+//
+//	@return KvmTunneledKvmPolicy
 func (a *KvmApiService) PatchKvmTunneledKvmPolicyExecute(r ApiPatchKvmTunneledKvmPolicyRequest) (*KvmTunneledKvmPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -3548,9 +3565,9 @@ func (r ApiUpdateKvmPolicyRequest) Execute() (*KvmPolicy, *http.Response, error)
 /*
 UpdateKvmPolicy Update a 'kvm.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateKvmPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateKvmPolicyRequest
 */
 func (a *KvmApiService) UpdateKvmPolicy(ctx context.Context, moid string) ApiUpdateKvmPolicyRequest {
 	return ApiUpdateKvmPolicyRequest{
@@ -3561,7 +3578,8 @@ func (a *KvmApiService) UpdateKvmPolicy(ctx context.Context, moid string) ApiUpd
 }
 
 // Execute executes the request
-//  @return KvmPolicy
+//
+//	@return KvmPolicy
 func (a *KvmApiService) UpdateKvmPolicyExecute(r ApiUpdateKvmPolicyRequest) (*KvmPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3718,9 +3736,9 @@ func (r ApiUpdateKvmSessionRequest) Execute() (*KvmSession, *http.Response, erro
 /*
 UpdateKvmSession Update a 'kvm.Session' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateKvmSessionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateKvmSessionRequest
 */
 func (a *KvmApiService) UpdateKvmSession(ctx context.Context, moid string) ApiUpdateKvmSessionRequest {
 	return ApiUpdateKvmSessionRequest{
@@ -3731,7 +3749,8 @@ func (a *KvmApiService) UpdateKvmSession(ctx context.Context, moid string) ApiUp
 }
 
 // Execute executes the request
-//  @return KvmSession
+//
+//	@return KvmSession
 func (a *KvmApiService) UpdateKvmSessionExecute(r ApiUpdateKvmSessionRequest) (*KvmSession, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3888,9 +3907,9 @@ func (r ApiUpdateKvmTunneledKvmPolicyRequest) Execute() (*KvmTunneledKvmPolicy, 
 /*
 UpdateKvmTunneledKvmPolicy Update a 'kvm.TunneledKvmPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateKvmTunneledKvmPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateKvmTunneledKvmPolicyRequest
 */
 func (a *KvmApiService) UpdateKvmTunneledKvmPolicy(ctx context.Context, moid string) ApiUpdateKvmTunneledKvmPolicyRequest {
 	return ApiUpdateKvmTunneledKvmPolicyRequest{
@@ -3901,7 +3920,8 @@ func (a *KvmApiService) UpdateKvmTunneledKvmPolicy(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return KvmTunneledKvmPolicy
+//
+//	@return KvmTunneledKvmPolicy
 func (a *KvmApiService) UpdateKvmTunneledKvmPolicyExecute(r ApiUpdateKvmTunneledKvmPolicyRequest) (*KvmTunneledKvmPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

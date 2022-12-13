@@ -453,6 +453,11 @@ func getStoragePhysicalDiskSchema() map[string]*schema.Schema {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"power_on_hours_percentage": {
+			Description: "Percentage of life used based on five year life span of Cisco supported drives.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"predicted_media_life_left_percent": {
 			Description: "Predicted physical disk life left in percentage.",
 			Type:        schema.TypeInt,
@@ -1408,6 +1413,11 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 		o.SetPowerOnHours(x)
 	}
 
+	if v, ok := d.GetOkExists("power_on_hours_percentage"); ok {
+		x := int64(v.(int))
+		o.SetPowerOnHoursPercentage(x)
+	}
+
 	if v, ok := d.GetOkExists("predicted_media_life_left_percent"); ok {
 		x := int64(v.(int))
 		o.SetPredictedMediaLifeLeftPercent(x)
@@ -1967,6 +1977,7 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 				temp["pid"] = (s.GetPid())
 				temp["power_cycle_count"] = (s.GetPowerCycleCount())
 				temp["power_on_hours"] = (s.GetPowerOnHours())
+				temp["power_on_hours_percentage"] = (s.GetPowerOnHoursPercentage())
 				temp["predicted_media_life_left_percent"] = (s.GetPredictedMediaLifeLeftPercent())
 				temp["predictive_failure_count"] = (s.GetPredictiveFailureCount())
 				temp["presence"] = (s.GetPresence())

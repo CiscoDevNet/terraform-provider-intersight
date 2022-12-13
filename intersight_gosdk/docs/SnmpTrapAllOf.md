@@ -10,9 +10,11 @@ Name | Type | Description | Notes
 **Destination** | Pointer to **string** | Address to which the SNMP trap information is sent. | [optional] 
 **Enabled** | Pointer to **bool** | Enables/disables the trap on the server If enabled, trap is active on the server. | [optional] [default to true]
 **Port** | Pointer to **int64** | Port used by the server to communicate with the trap destination. Enter a value between 1-65535. Reserved ports not allowed (22, 23, 80, 123, 389, 443, 623, 636, 2068, 3268, 3269). | [optional] [default to 162]
+**SecurityLevel** | Pointer to **string** | Security level of the trap receiver used for communication. * &#x60;AuthPriv&#x60; - The user requires both an authorization password and a privacy password. * &#x60;NoAuthNoPriv&#x60; - The user does not require an authorization or privacy password. * &#x60;AuthNoPriv&#x60; - The user requires an authorization password but not a privacy password. | [optional] [readonly] [default to "AuthPriv"]
 **Type** | Pointer to **string** | Type of trap which decides whether to receive a notification when a trap is received at the destination. * &#x60;Trap&#x60; - Do not receive notifications when trap is sent to the destination. * &#x60;Inform&#x60; - Receive notifications when trap is sent to the destination. This option is valid only for V2 users. | [optional] [default to "Trap"]
 **User** | Pointer to **string** | SNMP user for the trap. Applicable only to SNMPv3. | [optional] 
-**Version** | Pointer to **string** | SNMP version used for the trap. * &#x60;V3&#x60; - SNMP v3 trap version notifications. * &#x60;V2&#x60; - SNMP v2 trap version notifications. | [optional] [default to "V3"]
+**Version** | Pointer to **string** | SNMP version used for the trap. * &#x60;V3&#x60; - SNMP v3 trap version notifications. * &#x60;V1&#x60; - SNMP v1 trap version notifications. * &#x60;V2&#x60; - SNMP v2 trap version notifications. | [optional] [default to "V3"]
+**VrfName** | Pointer to **string** | VRF name of the SNMP server. | [optional] [readonly] 
 
 ## Methods
 
@@ -173,6 +175,31 @@ SetPort sets Port field to given value.
 
 HasPort returns a boolean if a field has been set.
 
+### GetSecurityLevel
+
+`func (o *SnmpTrapAllOf) GetSecurityLevel() string`
+
+GetSecurityLevel returns the SecurityLevel field if non-nil, zero value otherwise.
+
+### GetSecurityLevelOk
+
+`func (o *SnmpTrapAllOf) GetSecurityLevelOk() (*string, bool)`
+
+GetSecurityLevelOk returns a tuple with the SecurityLevel field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSecurityLevel
+
+`func (o *SnmpTrapAllOf) SetSecurityLevel(v string)`
+
+SetSecurityLevel sets SecurityLevel field to given value.
+
+### HasSecurityLevel
+
+`func (o *SnmpTrapAllOf) HasSecurityLevel() bool`
+
+HasSecurityLevel returns a boolean if a field has been set.
+
 ### GetType
 
 `func (o *SnmpTrapAllOf) GetType() string`
@@ -247,6 +274,31 @@ SetVersion sets Version field to given value.
 `func (o *SnmpTrapAllOf) HasVersion() bool`
 
 HasVersion returns a boolean if a field has been set.
+
+### GetVrfName
+
+`func (o *SnmpTrapAllOf) GetVrfName() string`
+
+GetVrfName returns the VrfName field if non-nil, zero value otherwise.
+
+### GetVrfNameOk
+
+`func (o *SnmpTrapAllOf) GetVrfNameOk() (*string, bool)`
+
+GetVrfNameOk returns a tuple with the VrfName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVrfName
+
+`func (o *SnmpTrapAllOf) SetVrfName(v string)`
+
+SetVrfName sets VrfName field to given value.
+
+### HasVrfName
+
+`func (o *SnmpTrapAllOf) HasVrfName() bool`
+
+HasVrfName returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

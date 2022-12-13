@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -26,7 +26,9 @@ type RecommendationAbstractItem struct {
 	ObjectType string `json:"ObjectType"`
 	// The name of the physical device recommended.
 	Name *string `json:"Name,omitempty"`
-	// The type of physical device recommended. * `Disk` - The Enum value Disk represents that the item type recommended is a Physical Disk. * `Node` - The Enum value Node represents that the item type recommended is a Storage Node. * `Cluster` - The Enum value Cluster represents that the item type recommended is a HyperFlex Cluster.
+	// The personality of the physical device recommended.
+	Personality *string `json:"Personality,omitempty"`
+	// The type of physical device recommended. * `None` - The Enum value None represents that no value was set for the item type. * `Disk` - The Enum value Disk represents that the item type recommended is a Physical Disk. * `Node` - The Enum value Node represents that the item type recommended is a Storage Node. * `CPU` - The Enum value CPU represents that the item type recommended is a Processor. * `Memory` - The Enum value Memory represents that the item type recommended is a memory unit. * `Cluster` - The Enum value Cluster represents that the item type recommended is a HyperFlex Cluster.
 	Type                 *string `json:"Type,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -49,10 +51,6 @@ func NewRecommendationAbstractItem(classId string, objectType string) *Recommend
 // but it doesn't guarantee that properties required by API are set
 func NewRecommendationAbstractItemWithDefaults() *RecommendationAbstractItem {
 	this := RecommendationAbstractItem{}
-	var classId string = "recommendation.PhysicalItem"
-	this.ClassId = classId
-	var objectType string = "recommendation.PhysicalItem"
-	this.ObjectType = objectType
 	return &this
 }
 
@@ -136,6 +134,38 @@ func (o *RecommendationAbstractItem) SetName(v string) {
 	o.Name = &v
 }
 
+// GetPersonality returns the Personality field value if set, zero value otherwise.
+func (o *RecommendationAbstractItem) GetPersonality() string {
+	if o == nil || o.Personality == nil {
+		var ret string
+		return ret
+	}
+	return *o.Personality
+}
+
+// GetPersonalityOk returns a tuple with the Personality field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RecommendationAbstractItem) GetPersonalityOk() (*string, bool) {
+	if o == nil || o.Personality == nil {
+		return nil, false
+	}
+	return o.Personality, true
+}
+
+// HasPersonality returns a boolean if a field has been set.
+func (o *RecommendationAbstractItem) HasPersonality() bool {
+	if o != nil && o.Personality != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPersonality gets a reference to the given string and assigns it to the Personality field.
+func (o *RecommendationAbstractItem) SetPersonality(v string) {
+	o.Personality = &v
+}
+
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *RecommendationAbstractItem) GetType() string {
 	if o == nil || o.Type == nil {
@@ -187,6 +217,9 @@ func (o RecommendationAbstractItem) MarshalJSON() ([]byte, error) {
 	if o.Name != nil {
 		toSerialize["Name"] = o.Name
 	}
+	if o.Personality != nil {
+		toSerialize["Personality"] = o.Personality
+	}
 	if o.Type != nil {
 		toSerialize["Type"] = o.Type
 	}
@@ -206,7 +239,9 @@ func (o *RecommendationAbstractItem) UnmarshalJSON(bytes []byte) (err error) {
 		ObjectType string `json:"ObjectType"`
 		// The name of the physical device recommended.
 		Name *string `json:"Name,omitempty"`
-		// The type of physical device recommended. * `Disk` - The Enum value Disk represents that the item type recommended is a Physical Disk. * `Node` - The Enum value Node represents that the item type recommended is a Storage Node. * `Cluster` - The Enum value Cluster represents that the item type recommended is a HyperFlex Cluster.
+		// The personality of the physical device recommended.
+		Personality *string `json:"Personality,omitempty"`
+		// The type of physical device recommended. * `None` - The Enum value None represents that no value was set for the item type. * `Disk` - The Enum value Disk represents that the item type recommended is a Physical Disk. * `Node` - The Enum value Node represents that the item type recommended is a Storage Node. * `CPU` - The Enum value CPU represents that the item type recommended is a Processor. * `Memory` - The Enum value Memory represents that the item type recommended is a memory unit. * `Cluster` - The Enum value Cluster represents that the item type recommended is a HyperFlex Cluster.
 		Type *string `json:"Type,omitempty"`
 	}
 
@@ -218,6 +253,7 @@ func (o *RecommendationAbstractItem) UnmarshalJSON(bytes []byte) (err error) {
 		varRecommendationAbstractItem.ClassId = varRecommendationAbstractItemWithoutEmbeddedStruct.ClassId
 		varRecommendationAbstractItem.ObjectType = varRecommendationAbstractItemWithoutEmbeddedStruct.ObjectType
 		varRecommendationAbstractItem.Name = varRecommendationAbstractItemWithoutEmbeddedStruct.Name
+		varRecommendationAbstractItem.Personality = varRecommendationAbstractItemWithoutEmbeddedStruct.Personality
 		varRecommendationAbstractItem.Type = varRecommendationAbstractItemWithoutEmbeddedStruct.Type
 		*o = RecommendationAbstractItem(varRecommendationAbstractItem)
 	} else {
@@ -239,6 +275,7 @@ func (o *RecommendationAbstractItem) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Name")
+		delete(additionalProperties, "Personality")
 		delete(additionalProperties, "Type")
 
 		// remove fields from embedded structs

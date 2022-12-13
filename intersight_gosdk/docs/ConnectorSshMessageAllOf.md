@@ -8,10 +8,10 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "connector.SshMessage"]
 **ExpectPrompts** | Pointer to [**[]ConnectorExpectPrompt**](ConnectorExpectPrompt.md) |  | [optional] 
 **MsgType** | Pointer to **int64** | The operation to execute on a new or existing session. | [optional] 
-**SessionId** | Pointer to **string** | Unique id of session to route messages to. | [optional] 
+**SessionId** | Pointer to **string** | Unique Id of session to route messages to. | [optional] 
 **ShellPrompt** | Pointer to **string** | The regex of the secure shell prompt. | [optional] 
-**Stream** | Pointer to **string** | Input to the SSH operation to be executed. e.g. file contents to write. | [optional] 
-**Timeout** | Pointer to **int64** | The timeout for the ssh command to complete and exit after starting or receiving input. If timeout is not set a default of 10 minutes will be used. | [optional] 
+**Stream** | Pointer to **string** | Input to the SSH operation to be executed, e.g. file contents to write. | [optional] 
+**Timeout** | Pointer to **int64** | The timeout for the SSH command to complete and exit after starting or receiving input. If timeout is not set, a default of 10 minutes will be used. | [optional] 
 
 ## Methods
 

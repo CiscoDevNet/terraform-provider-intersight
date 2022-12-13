@@ -15,7 +15,9 @@ Name | Type | Description | Notes
 **HealthCheckExecutionStatus** | Pointer to **string** | Status of the health check execution. * &#x60;UNKNOWN&#x60; - Indicates that the health heck execution results are unknown. * &#x60;SUCCEEDED&#x60; - Indicates that the health check execution succeeded. * &#x60;FAILED&#x60; - Indicates that the health check execution failed. * &#x60;TIMED_OUT&#x60; - Indicates that the health check execution timed out before completion. | [optional] [readonly] [default to "UNKNOWN"]
 **HealthCheckResult** | Pointer to **string** | Health check execution result. Valid only if HealthCheckExecutionStatus is SUCCEEDED. * &#x60;UNKNOWN&#x60; - Indicates that the health check results could not be determined. * &#x60;PASS&#x60; - Indicates that the health check passed. * &#x60;FAIL&#x60; - Indicates that the health check failed. * &#x60;WARN&#x60; - Indicates that the health check completed with a warning. * &#x60;NOT_APPLICABLE&#x60; - Indicates that the health check is either unsupported, or not applicable on the Cluster. | [optional] [readonly] [default to "UNKNOWN"]
 **HealthCheckSummary** | Pointer to **string** | A brief summary of health check results. | [optional] [readonly] 
+**HealthCheckVcenterIp** | Pointer to **string** | IP Address of the vCenter. | [optional] [readonly] 
 **HxDeviceName** | Pointer to **string** | HyperFlex Device Name where the healthcheck is executed. | [optional] [readonly] 
+**NodeLevelInfo** | Pointer to [**[]HyperflexHealthCheckNodeLevelInfo**](HyperflexHealthCheckNodeLevelInfo.md) |  | [optional] 
 **SuggestedResolution** | Pointer to **string** | Information detailing a suggested resolution for the healthcheck failure, if the check fails. | [optional] 
 **Uuid** | Pointer to **string** | UUID of an instance of health check execution. | [optional] [readonly] 
 **HealthCheckDefinition** | Pointer to [**HyperflexHealthCheckDefinitionRelationship**](HyperflexHealthCheckDefinitionRelationship.md) |  | [optional] 
@@ -306,6 +308,31 @@ SetHealthCheckSummary sets HealthCheckSummary field to given value.
 
 HasHealthCheckSummary returns a boolean if a field has been set.
 
+### GetHealthCheckVcenterIp
+
+`func (o *HyperflexHealthCheckExecutionAllOf) GetHealthCheckVcenterIp() string`
+
+GetHealthCheckVcenterIp returns the HealthCheckVcenterIp field if non-nil, zero value otherwise.
+
+### GetHealthCheckVcenterIpOk
+
+`func (o *HyperflexHealthCheckExecutionAllOf) GetHealthCheckVcenterIpOk() (*string, bool)`
+
+GetHealthCheckVcenterIpOk returns a tuple with the HealthCheckVcenterIp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHealthCheckVcenterIp
+
+`func (o *HyperflexHealthCheckExecutionAllOf) SetHealthCheckVcenterIp(v string)`
+
+SetHealthCheckVcenterIp sets HealthCheckVcenterIp field to given value.
+
+### HasHealthCheckVcenterIp
+
+`func (o *HyperflexHealthCheckExecutionAllOf) HasHealthCheckVcenterIp() bool`
+
+HasHealthCheckVcenterIp returns a boolean if a field has been set.
+
 ### GetHxDeviceName
 
 `func (o *HyperflexHealthCheckExecutionAllOf) GetHxDeviceName() string`
@@ -331,6 +358,41 @@ SetHxDeviceName sets HxDeviceName field to given value.
 
 HasHxDeviceName returns a boolean if a field has been set.
 
+### GetNodeLevelInfo
+
+`func (o *HyperflexHealthCheckExecutionAllOf) GetNodeLevelInfo() []HyperflexHealthCheckNodeLevelInfo`
+
+GetNodeLevelInfo returns the NodeLevelInfo field if non-nil, zero value otherwise.
+
+### GetNodeLevelInfoOk
+
+`func (o *HyperflexHealthCheckExecutionAllOf) GetNodeLevelInfoOk() (*[]HyperflexHealthCheckNodeLevelInfo, bool)`
+
+GetNodeLevelInfoOk returns a tuple with the NodeLevelInfo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNodeLevelInfo
+
+`func (o *HyperflexHealthCheckExecutionAllOf) SetNodeLevelInfo(v []HyperflexHealthCheckNodeLevelInfo)`
+
+SetNodeLevelInfo sets NodeLevelInfo field to given value.
+
+### HasNodeLevelInfo
+
+`func (o *HyperflexHealthCheckExecutionAllOf) HasNodeLevelInfo() bool`
+
+HasNodeLevelInfo returns a boolean if a field has been set.
+
+### SetNodeLevelInfoNil
+
+`func (o *HyperflexHealthCheckExecutionAllOf) SetNodeLevelInfoNil(b bool)`
+
+ SetNodeLevelInfoNil sets the value for NodeLevelInfo to be an explicit nil
+
+### UnsetNodeLevelInfo
+`func (o *HyperflexHealthCheckExecutionAllOf) UnsetNodeLevelInfo()`
+
+UnsetNodeLevelInfo ensures that no value is present for NodeLevelInfo, not even an explicit nil
 ### GetSuggestedResolution
 
 `func (o *HyperflexHealthCheckExecutionAllOf) GetSuggestedResolution() string`
