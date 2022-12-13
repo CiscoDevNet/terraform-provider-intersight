@@ -64,12 +64,12 @@ resource "intersight_server_profile" "server1" {
     moid = intersight_vmedia_policy.tf_vmedia.moid
     object_type = "vmedia.Policy"
   }
-  policy_bucket {
-    moid = intersight_vnic_lan_connectivity_policy.tf_vnic_lan.moid
-    object_type = "vnic.LanConnectivityPolicy"
-  }
-  policy_bucket {
-    moid = intersight_vnic_san_connectivity_policy.tf_vnic_san.moid
-    object_type = "vnic.SanConnectivityPolicy"
-  }
+  # policy_bucket {
+  #   moid = intersight_vnic_lan_connectivity_policy.tf_vnic_lan.moid
+  #   object_type = "vnic.LanConnectivityPolicy"
+  # }
+  # policy_bucket {
+  #   moid = intersight_vnic_san_connectivity_policy.tf_vnic_san.moid
+  #   object_type = "vnic.SanConnectivityPolicy"
+  # }
 }

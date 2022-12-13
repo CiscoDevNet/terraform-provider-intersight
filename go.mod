@@ -1,6 +1,6 @@
 module github.com/CiscoDevNet/terraform-provider-intersight
 
-go 1.15
+go 1.19
 
 require (
 	github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk v0.0.0

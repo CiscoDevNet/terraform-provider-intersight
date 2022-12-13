@@ -16,9 +16,10 @@ export GO111MODULE=on
 
 default: build
 
-build: fmtcheck
+build: fmt fmtcheck
 	go get -v golang.org/x/tools/cmd/goimports
 	goimports -w ./intersight
+	go mod tidy
 	go mod vendor
 	go install
 	GOOS=linux GOARCH=amd64 $(GO_BUILD) -o .build/linux_amd64/terraform-provider-intersight_v$(VERSION)
@@ -47,22 +48,22 @@ vet:
 	fi
 
 website:
-	ifeq (,$(wildcard $(GOPATH)/src/$(WEBSITE_REPO)))
+	ifeq (,$(wildcard ../$(WEBSITE_REPO)))
 		echo "$(WEBSITE_REPO) not found in your GOPATH (necessary for layouts and assets), get-ting..."
-		git clone https://$(WEBSITE_REPO) $(GOPATH)/src/$(WEBSITE_REPO)
+		git clone https://$(WEBSITE_REPO) ../$(WEBSITE_REPO)
 	endif
-		@$(MAKE) -C $(GOPATH)/src/$(WEBSITE_REPO) website-provider PROVIDER_PATH=$(shell pwd) PROVIDER_NAME=$(PKG_NAME)
+		@$(MAKE) -C $../$(WEBSITE_REPO) website-provider PROVIDER_PATH=$(shell pwd) PROVIDER_NAME=$(PKG_NAME)
 
 website-lint:
 	@echo "==> Checking website against linters..."
 	@misspell -error -source=text website/
 
 website-test:
-ifeq (,$(wildcard $(GOPATH)/src/$(WEBSITE_REPO)))
+ifeq (,$(wildcard ../$(WEBSITE_REPO)))
 	echo "$(WEBSITE_REPO) not found in your GOPATH (necessary for layouts and assets), get-ting..."
-	git clone https://$(WEBSITE_REPO) $(GOPATH)/src/$(WEBSITE_REPO)
+	git clone https://$(WEBSITE_REPO) ../$(WEBSITE_REPO)
 endif
-	@$(MAKE) -C $(GOPATH)/src/$(WEBSITE_REPO) website-provider-test PROVIDER_PATH=$(shell pwd) PROVIDER_NAME=$(PKG_NAME)
+	@$(MAKE) -C ../$(WEBSITE_REPO) website-provider-test PROVIDER_PATH=$(shell pwd) PROVIDER_NAME=$(PKG_NAME)
 
 clean:
 	go clean --cache
