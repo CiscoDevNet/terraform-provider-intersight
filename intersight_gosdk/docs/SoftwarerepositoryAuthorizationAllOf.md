@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "softwarerepository.Authorization"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "softwarerepository.Authorization"]
 **IsPasswordSet** | Pointer to **bool** | Indicates whether the value of the &#39;password&#39; property has been set. | [optional] [readonly] [default to false]
-**IsUserIdSet** | Pointer to **bool** | Indicates whether the value of the &#39;userId&#39; property has been set. | [optional] [readonly] [default to false]
 **Password** | Pointer to **string** | The password that will be used by Intersight to create OAuth2 tokens for interacting with the external repository, on the user account&#39;s behalf. | [optional] 
 **RepositoryType** | Pointer to **string** | The external repository for which this authorization has been provided. The only supported repository today is cisco.com. * &#x60;Cisco&#x60; - External repository hosted on cisco.com. * &#x60;IntersightCloud&#x60; - Repository hosted by the Intersight Cloud. * &#x60;LocalMachine&#x60; - The file is available on the local client machine. Used as an upload source type. * &#x60;NetworkShare&#x60; - External repository in the customer datacenter. This will typically be a file server. | [optional] [default to "Cisco"]
 **UserId** | Pointer to **string** | The username that will be used by Intersight to create OAuth2 tokens for interacting with the external repository, on the user account&#39;s behalf. | [optional] 
@@ -96,31 +95,6 @@ SetIsPasswordSet sets IsPasswordSet field to given value.
 `func (o *SoftwarerepositoryAuthorizationAllOf) HasIsPasswordSet() bool`
 
 HasIsPasswordSet returns a boolean if a field has been set.
-
-### GetIsUserIdSet
-
-`func (o *SoftwarerepositoryAuthorizationAllOf) GetIsUserIdSet() bool`
-
-GetIsUserIdSet returns the IsUserIdSet field if non-nil, zero value otherwise.
-
-### GetIsUserIdSetOk
-
-`func (o *SoftwarerepositoryAuthorizationAllOf) GetIsUserIdSetOk() (*bool, bool)`
-
-GetIsUserIdSetOk returns a tuple with the IsUserIdSet field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIsUserIdSet
-
-`func (o *SoftwarerepositoryAuthorizationAllOf) SetIsUserIdSet(v bool)`
-
-SetIsUserIdSet sets IsUserIdSet field to given value.
-
-### HasIsUserIdSet
-
-`func (o *SoftwarerepositoryAuthorizationAllOf) HasIsUserIdSet() bool`
-
-HasIsUserIdSet returns a boolean if a field has been set.
 
 ### GetPassword
 

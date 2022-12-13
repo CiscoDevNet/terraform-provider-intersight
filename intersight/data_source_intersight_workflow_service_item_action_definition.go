@@ -249,7 +249,7 @@ func getWorkflowServiceItemActionDefinitionSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"label": {
-						Description: "Descriptive label for the data type. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), space ( ) or an underscore (_). The first and last character in label must be an alphanumeric character.",
+						Description: "Descriptive label for the data type. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), space ( ), forward slash (/) or an underscore (_). The first and last character in label must be an alphanumeric character.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -495,6 +495,11 @@ func getWorkflowServiceItemActionDefinitionSchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"restrict_on_private_appliance": {
+			Description: "The flag to indicate that action is restricted on a Private Virtual Appliance.",
+			Type:        schema.TypeBool,
+			Optional:    true,
 		},
 		"service_item_definition": {
 			Description: "A reference to a workflowServiceItemDefinition resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -1518,6 +1523,11 @@ func dataSourceWorkflowServiceItemActionDefinitionRead(c context.Context, d *sch
 		o.SetPreCoreWorkflows(x)
 	}
 
+	if v, ok := d.GetOkExists("restrict_on_private_appliance"); ok {
+		x := (v.(bool))
+		o.SetRestrictOnPrivateAppliance(x)
+	}
+
 	if v, ok := d.GetOk("service_item_definition"); ok {
 		p := make([]models.WorkflowServiceItemDefinitionRelationship, 0, 1)
 		s := v.([]interface{})
@@ -1995,6 +2005,7 @@ func dataSourceWorkflowServiceItemActionDefinitionRead(c context.Context, d *sch
 				temp["post_core_workflows"] = flattenListWorkflowServiceItemActionWorkflowDefinition(s.GetPostCoreWorkflows(), d)
 
 				temp["pre_core_workflows"] = flattenListWorkflowServiceItemActionWorkflowDefinition(s.GetPreCoreWorkflows(), d)
+				temp["restrict_on_private_appliance"] = (s.GetRestrictOnPrivateAppliance())
 
 				temp["service_item_definition"] = flattenMapWorkflowServiceItemDefinitionRelationship(s.GetServiceItemDefinition(), d)
 				temp["shared_scope"] = (s.GetSharedScope())

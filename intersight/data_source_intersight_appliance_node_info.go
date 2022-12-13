@@ -181,7 +181,7 @@ func getApplianceNodeInfoSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"operational_status": {
-			Description: "Operational status of the Intersight Appliance node.\n* `Unknown` - Operational status of the Intersight Appliance entity is Unknown.\n* `Operational` - Operational status of the Intersight Appliance entity is Operational.\n* `Impaired` - Operational status of the Intersight Appliance entity is Impaired.\n* `AttentionNeeded` - Operational status of the Intersight Appliance entity is AttentionNeeded.",
+			Description: "Operational status of the Intersight Appliance node.\n* `Unknown` - The status of the appliance node is unknown.\n* `Operational` - The appliance node is operational.\n* `Impaired` - The appliance node is impaired.\n* `AttentionNeeded` - The appliance node needs attention.\n* `ReadyToJoin` - The node is ready to be added to a standalone Intersight Appliance to form a cluster.\n* `OutOfService` - The user has taken this node (part of a cluster) to out of service.\n* `ReadyForReplacement` - The cluster node is ready to be replaced.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

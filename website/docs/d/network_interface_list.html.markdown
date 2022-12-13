@@ -20,6 +20,7 @@ The following arguments can be used to get data of already created objects in In
 * `create_time`:(string) The time when this managed object was created. 
 * `description`:(string) Description of the interface list. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
+* `display_name`:(string) Display name of the interface list. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `ip_address`:(string) IP address of the interface list. 
@@ -30,6 +31,7 @@ The following arguments can be used to get data of already created objects in In
 * `mtu`:(int) Maximum transmission unit of the interface list. 
 * `name`:(string) Name of the interface list. 
 * `oper_state`:(string) Operational state of the interface list. 
+* `port_channel_id`:(int) Port channel id for port channel created on FI switch. 
 * `port_sub_type`:(string) Interface types supported in Network device like Subinterfaces, Breakout Interfaces. 
 * `port_type`:(string) Port type of interface list. 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 

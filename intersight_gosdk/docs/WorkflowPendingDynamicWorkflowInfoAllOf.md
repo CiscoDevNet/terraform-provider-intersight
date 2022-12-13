@@ -6,16 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.PendingDynamicWorkflowInfo"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.PendingDynamicWorkflowInfo"]
-**Input** | Pointer to **interface{}** | The inputs of the workflow. | [optional] 
+**Input** | Pointer to **interface{}** | The input data provided for workflow execution. | [optional] [readonly] 
 **Name** | Pointer to **string** | A name for the pending dynamic workflow. | [optional] 
-**PendingServices** | Pointer to **[]string** |  | [optional] 
-**Src** | Pointer to **string** | The src is workflow owner service. | [optional] 
-**Status** | Pointer to **string** | The current status of the PendingDynamicWorkflowInfo. * &#x60;GatheringTasks&#x60; - Dynamic workflow is gathering tasks before workflow can start execution. * &#x60;Waiting&#x60; - Dynamic workflow is in waiting state and not yet started execution. * &#x60;RateLimit&#x60; - Dynamic workflow is rate limited and hasn&#39;t started execution. | [optional] [default to "GatheringTasks"]
-**WaitOnDuplicate** | Pointer to **bool** | When set to true workflow engine will wait for a duplicate to finish before starting a new one. | [optional] 
+**Src** | Pointer to **string** | The src is workflow owner service. | [optional] [readonly] 
+**Status** | Pointer to **string** | The current status of the PendingDynamicWorkflowInfo. * &#x60;GatheringTasks&#x60; - Dynamic workflow is gathering tasks before workflow can start execution. * &#x60;Waiting&#x60; - Dynamic workflow is in waiting state and not yet started execution. * &#x60;RateLimit&#x60; - Dynamic workflow is rate limited and hasn&#39;t started execution. | [optional] [readonly] [default to "GatheringTasks"]
+**WaitOnDuplicate** | Pointer to **bool** | When set to true workflow engine will wait for a duplicate to finish before starting a new one. | [optional] [readonly] 
 **WorkflowActionTaskLists** | Pointer to [**[]WorkflowDynamicWorkflowActionTaskList**](WorkflowDynamicWorkflowActionTaskList.md) |  | [optional] 
 **WorkflowCtx** | Pointer to [**NullableWorkflowWorkflowCtx**](WorkflowWorkflowCtx.md) |  | [optional] 
-**WorkflowKey** | Pointer to **string** | This key contains workflow, initiator and target name. Workflow engine uses the key to do workflow dedup. | [optional] 
-**WorkflowMeta** | Pointer to **interface{}** | The metadata of the workflow. | [optional] 
+**WorkflowMeta** | Pointer to **interface{}** | The metadata of the workflow. | [optional] [readonly] 
 **WorkflowInfo** | Pointer to [**WorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
 
 ## Methods
@@ -137,41 +135,6 @@ SetName sets Name field to given value.
 
 HasName returns a boolean if a field has been set.
 
-### GetPendingServices
-
-`func (o *WorkflowPendingDynamicWorkflowInfoAllOf) GetPendingServices() []string`
-
-GetPendingServices returns the PendingServices field if non-nil, zero value otherwise.
-
-### GetPendingServicesOk
-
-`func (o *WorkflowPendingDynamicWorkflowInfoAllOf) GetPendingServicesOk() (*[]string, bool)`
-
-GetPendingServicesOk returns a tuple with the PendingServices field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPendingServices
-
-`func (o *WorkflowPendingDynamicWorkflowInfoAllOf) SetPendingServices(v []string)`
-
-SetPendingServices sets PendingServices field to given value.
-
-### HasPendingServices
-
-`func (o *WorkflowPendingDynamicWorkflowInfoAllOf) HasPendingServices() bool`
-
-HasPendingServices returns a boolean if a field has been set.
-
-### SetPendingServicesNil
-
-`func (o *WorkflowPendingDynamicWorkflowInfoAllOf) SetPendingServicesNil(b bool)`
-
- SetPendingServicesNil sets the value for PendingServices to be an explicit nil
-
-### UnsetPendingServices
-`func (o *WorkflowPendingDynamicWorkflowInfoAllOf) UnsetPendingServices()`
-
-UnsetPendingServices ensures that no value is present for PendingServices, not even an explicit nil
 ### GetSrc
 
 `func (o *WorkflowPendingDynamicWorkflowInfoAllOf) GetSrc() string`
@@ -317,31 +280,6 @@ HasWorkflowCtx returns a boolean if a field has been set.
 `func (o *WorkflowPendingDynamicWorkflowInfoAllOf) UnsetWorkflowCtx()`
 
 UnsetWorkflowCtx ensures that no value is present for WorkflowCtx, not even an explicit nil
-### GetWorkflowKey
-
-`func (o *WorkflowPendingDynamicWorkflowInfoAllOf) GetWorkflowKey() string`
-
-GetWorkflowKey returns the WorkflowKey field if non-nil, zero value otherwise.
-
-### GetWorkflowKeyOk
-
-`func (o *WorkflowPendingDynamicWorkflowInfoAllOf) GetWorkflowKeyOk() (*string, bool)`
-
-GetWorkflowKeyOk returns a tuple with the WorkflowKey field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetWorkflowKey
-
-`func (o *WorkflowPendingDynamicWorkflowInfoAllOf) SetWorkflowKey(v string)`
-
-SetWorkflowKey sets WorkflowKey field to given value.
-
-### HasWorkflowKey
-
-`func (o *WorkflowPendingDynamicWorkflowInfoAllOf) HasWorkflowKey() bool`
-
-HasWorkflowKey returns a boolean if a field has been set.
-
 ### GetWorkflowMeta
 
 `func (o *WorkflowPendingDynamicWorkflowInfoAllOf) GetWorkflowMeta() interface{}`

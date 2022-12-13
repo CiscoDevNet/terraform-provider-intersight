@@ -6,8 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "compute.ServerIdPool"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "compute.ServerIdPool"]
-**GapAvailableIds** | Pointer to **[]int64** |  | [optional] 
-**NextAvailableId** | Pointer to **int64** | Shows the next available server ID to be allocated. | [optional] 
+**PreferredIds** | Pointer to **[]int64** |  | [optional] 
 **DeviceRegistration** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
@@ -69,66 +68,41 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
-### GetGapAvailableIds
+### GetPreferredIds
 
-`func (o *ComputeServerIdPool) GetGapAvailableIds() []int64`
+`func (o *ComputeServerIdPool) GetPreferredIds() []int64`
 
-GetGapAvailableIds returns the GapAvailableIds field if non-nil, zero value otherwise.
+GetPreferredIds returns the PreferredIds field if non-nil, zero value otherwise.
 
-### GetGapAvailableIdsOk
+### GetPreferredIdsOk
 
-`func (o *ComputeServerIdPool) GetGapAvailableIdsOk() (*[]int64, bool)`
+`func (o *ComputeServerIdPool) GetPreferredIdsOk() (*[]int64, bool)`
 
-GetGapAvailableIdsOk returns a tuple with the GapAvailableIds field if it's non-nil, zero value otherwise
+GetPreferredIdsOk returns a tuple with the PreferredIds field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetGapAvailableIds
+### SetPreferredIds
 
-`func (o *ComputeServerIdPool) SetGapAvailableIds(v []int64)`
+`func (o *ComputeServerIdPool) SetPreferredIds(v []int64)`
 
-SetGapAvailableIds sets GapAvailableIds field to given value.
+SetPreferredIds sets PreferredIds field to given value.
 
-### HasGapAvailableIds
+### HasPreferredIds
 
-`func (o *ComputeServerIdPool) HasGapAvailableIds() bool`
+`func (o *ComputeServerIdPool) HasPreferredIds() bool`
 
-HasGapAvailableIds returns a boolean if a field has been set.
+HasPreferredIds returns a boolean if a field has been set.
 
-### SetGapAvailableIdsNil
+### SetPreferredIdsNil
 
-`func (o *ComputeServerIdPool) SetGapAvailableIdsNil(b bool)`
+`func (o *ComputeServerIdPool) SetPreferredIdsNil(b bool)`
 
- SetGapAvailableIdsNil sets the value for GapAvailableIds to be an explicit nil
+ SetPreferredIdsNil sets the value for PreferredIds to be an explicit nil
 
-### UnsetGapAvailableIds
-`func (o *ComputeServerIdPool) UnsetGapAvailableIds()`
+### UnsetPreferredIds
+`func (o *ComputeServerIdPool) UnsetPreferredIds()`
 
-UnsetGapAvailableIds ensures that no value is present for GapAvailableIds, not even an explicit nil
-### GetNextAvailableId
-
-`func (o *ComputeServerIdPool) GetNextAvailableId() int64`
-
-GetNextAvailableId returns the NextAvailableId field if non-nil, zero value otherwise.
-
-### GetNextAvailableIdOk
-
-`func (o *ComputeServerIdPool) GetNextAvailableIdOk() (*int64, bool)`
-
-GetNextAvailableIdOk returns a tuple with the NextAvailableId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetNextAvailableId
-
-`func (o *ComputeServerIdPool) SetNextAvailableId(v int64)`
-
-SetNextAvailableId sets NextAvailableId field to given value.
-
-### HasNextAvailableId
-
-`func (o *ComputeServerIdPool) HasNextAvailableId() bool`
-
-HasNextAvailableId returns a boolean if a field has been set.
-
+UnsetPreferredIds ensures that no value is present for PreferredIds, not even an explicit nil
 ### GetDeviceRegistration
 
 `func (o *ComputeServerIdPool) GetDeviceRegistration() AssetDeviceRegistrationRelationship`

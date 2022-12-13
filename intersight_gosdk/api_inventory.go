@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -56,8 +56,8 @@ func (r ApiCreateInventoryRequestRequest) Execute() (*InventoryRequest, *http.Re
 /*
 CreateInventoryRequest Create a 'inventory.Request' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateInventoryRequestRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateInventoryRequestRequest
 */
 func (a *InventoryApiService) CreateInventoryRequest(ctx context.Context) ApiCreateInventoryRequestRequest {
 	return ApiCreateInventoryRequestRequest{
@@ -67,7 +67,8 @@ func (a *InventoryApiService) CreateInventoryRequest(ctx context.Context) ApiCre
 }
 
 // Execute executes the request
-//  @return InventoryRequest
+//
+//	@return InventoryRequest
 func (a *InventoryApiService) CreateInventoryRequestExecute(r ApiCreateInventoryRequestRequest) (*InventoryRequest, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -212,9 +213,9 @@ func (r ApiGetInventoryDeviceInfoByMoidRequest) Execute() (*InventoryDeviceInfo,
 /*
 GetInventoryDeviceInfoByMoid Read a 'inventory.DeviceInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetInventoryDeviceInfoByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetInventoryDeviceInfoByMoidRequest
 */
 func (a *InventoryApiService) GetInventoryDeviceInfoByMoid(ctx context.Context, moid string) ApiGetInventoryDeviceInfoByMoidRequest {
 	return ApiGetInventoryDeviceInfoByMoidRequest{
@@ -225,7 +226,8 @@ func (a *InventoryApiService) GetInventoryDeviceInfoByMoid(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return InventoryDeviceInfo
+//
+//	@return InventoryDeviceInfo
 func (a *InventoryApiService) GetInventoryDeviceInfoByMoidExecute(r ApiGetInventoryDeviceInfoByMoidRequest) (*InventoryDeviceInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -436,8 +438,8 @@ func (r ApiGetInventoryDeviceInfoListRequest) Execute() (*InventoryDeviceInfoRes
 /*
 GetInventoryDeviceInfoList Read a 'inventory.DeviceInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetInventoryDeviceInfoListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetInventoryDeviceInfoListRequest
 */
 func (a *InventoryApiService) GetInventoryDeviceInfoList(ctx context.Context) ApiGetInventoryDeviceInfoListRequest {
 	return ApiGetInventoryDeviceInfoListRequest{
@@ -447,7 +449,8 @@ func (a *InventoryApiService) GetInventoryDeviceInfoList(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return InventoryDeviceInfoResponse
+//
+//	@return InventoryDeviceInfoResponse
 func (a *InventoryApiService) GetInventoryDeviceInfoListExecute(r ApiGetInventoryDeviceInfoListRequest) (*InventoryDeviceInfoResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -614,9 +617,9 @@ func (r ApiGetInventoryDnMoBindingByMoidRequest) Execute() (*InventoryDnMoBindin
 /*
 GetInventoryDnMoBindingByMoid Read a 'inventory.DnMoBinding' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetInventoryDnMoBindingByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetInventoryDnMoBindingByMoidRequest
 */
 func (a *InventoryApiService) GetInventoryDnMoBindingByMoid(ctx context.Context, moid string) ApiGetInventoryDnMoBindingByMoidRequest {
 	return ApiGetInventoryDnMoBindingByMoidRequest{
@@ -627,7 +630,8 @@ func (a *InventoryApiService) GetInventoryDnMoBindingByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return InventoryDnMoBinding
+//
+//	@return InventoryDnMoBinding
 func (a *InventoryApiService) GetInventoryDnMoBindingByMoidExecute(r ApiGetInventoryDnMoBindingByMoidRequest) (*InventoryDnMoBinding, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -838,8 +842,8 @@ func (r ApiGetInventoryDnMoBindingListRequest) Execute() (*InventoryDnMoBindingR
 /*
 GetInventoryDnMoBindingList Read a 'inventory.DnMoBinding' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetInventoryDnMoBindingListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetInventoryDnMoBindingListRequest
 */
 func (a *InventoryApiService) GetInventoryDnMoBindingList(ctx context.Context) ApiGetInventoryDnMoBindingListRequest {
 	return ApiGetInventoryDnMoBindingListRequest{
@@ -849,7 +853,8 @@ func (a *InventoryApiService) GetInventoryDnMoBindingList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return InventoryDnMoBindingResponse
+//
+//	@return InventoryDnMoBindingResponse
 func (a *InventoryApiService) GetInventoryDnMoBindingListExecute(r ApiGetInventoryDnMoBindingListRequest) (*InventoryDnMoBindingResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1016,9 +1021,9 @@ func (r ApiGetInventoryGenericInventoryByMoidRequest) Execute() (*InventoryGener
 /*
 GetInventoryGenericInventoryByMoid Read a 'inventory.GenericInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetInventoryGenericInventoryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetInventoryGenericInventoryByMoidRequest
 */
 func (a *InventoryApiService) GetInventoryGenericInventoryByMoid(ctx context.Context, moid string) ApiGetInventoryGenericInventoryByMoidRequest {
 	return ApiGetInventoryGenericInventoryByMoidRequest{
@@ -1029,7 +1034,8 @@ func (a *InventoryApiService) GetInventoryGenericInventoryByMoid(ctx context.Con
 }
 
 // Execute executes the request
-//  @return InventoryGenericInventory
+//
+//	@return InventoryGenericInventory
 func (a *InventoryApiService) GetInventoryGenericInventoryByMoidExecute(r ApiGetInventoryGenericInventoryByMoidRequest) (*InventoryGenericInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1164,9 +1170,9 @@ func (r ApiGetInventoryGenericInventoryHolderByMoidRequest) Execute() (*Inventor
 /*
 GetInventoryGenericInventoryHolderByMoid Read a 'inventory.GenericInventoryHolder' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetInventoryGenericInventoryHolderByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetInventoryGenericInventoryHolderByMoidRequest
 */
 func (a *InventoryApiService) GetInventoryGenericInventoryHolderByMoid(ctx context.Context, moid string) ApiGetInventoryGenericInventoryHolderByMoidRequest {
 	return ApiGetInventoryGenericInventoryHolderByMoidRequest{
@@ -1177,7 +1183,8 @@ func (a *InventoryApiService) GetInventoryGenericInventoryHolderByMoid(ctx conte
 }
 
 // Execute executes the request
-//  @return InventoryGenericInventoryHolder
+//
+//	@return InventoryGenericInventoryHolder
 func (a *InventoryApiService) GetInventoryGenericInventoryHolderByMoidExecute(r ApiGetInventoryGenericInventoryHolderByMoidRequest) (*InventoryGenericInventoryHolder, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1388,8 +1395,8 @@ func (r ApiGetInventoryGenericInventoryHolderListRequest) Execute() (*InventoryG
 /*
 GetInventoryGenericInventoryHolderList Read a 'inventory.GenericInventoryHolder' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetInventoryGenericInventoryHolderListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetInventoryGenericInventoryHolderListRequest
 */
 func (a *InventoryApiService) GetInventoryGenericInventoryHolderList(ctx context.Context) ApiGetInventoryGenericInventoryHolderListRequest {
 	return ApiGetInventoryGenericInventoryHolderListRequest{
@@ -1399,7 +1406,8 @@ func (a *InventoryApiService) GetInventoryGenericInventoryHolderList(ctx context
 }
 
 // Execute executes the request
-//  @return InventoryGenericInventoryHolderResponse
+//
+//	@return InventoryGenericInventoryHolderResponse
 func (a *InventoryApiService) GetInventoryGenericInventoryHolderListExecute(r ApiGetInventoryGenericInventoryHolderListRequest) (*InventoryGenericInventoryHolderResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1642,8 +1650,8 @@ func (r ApiGetInventoryGenericInventoryListRequest) Execute() (*InventoryGeneric
 /*
 GetInventoryGenericInventoryList Read a 'inventory.GenericInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetInventoryGenericInventoryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetInventoryGenericInventoryListRequest
 */
 func (a *InventoryApiService) GetInventoryGenericInventoryList(ctx context.Context) ApiGetInventoryGenericInventoryListRequest {
 	return ApiGetInventoryGenericInventoryListRequest{
@@ -1653,7 +1661,8 @@ func (a *InventoryApiService) GetInventoryGenericInventoryList(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return InventoryGenericInventoryResponse
+//
+//	@return InventoryGenericInventoryResponse
 func (a *InventoryApiService) GetInventoryGenericInventoryListExecute(r ApiGetInventoryGenericInventoryListRequest) (*InventoryGenericInventoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1834,9 +1843,9 @@ func (r ApiPatchInventoryGenericInventoryRequest) Execute() (*InventoryGenericIn
 /*
 PatchInventoryGenericInventory Update a 'inventory.GenericInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchInventoryGenericInventoryRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchInventoryGenericInventoryRequest
 */
 func (a *InventoryApiService) PatchInventoryGenericInventory(ctx context.Context, moid string) ApiPatchInventoryGenericInventoryRequest {
 	return ApiPatchInventoryGenericInventoryRequest{
@@ -1847,7 +1856,8 @@ func (a *InventoryApiService) PatchInventoryGenericInventory(ctx context.Context
 }
 
 // Execute executes the request
-//  @return InventoryGenericInventory
+//
+//	@return InventoryGenericInventory
 func (a *InventoryApiService) PatchInventoryGenericInventoryExecute(r ApiPatchInventoryGenericInventoryRequest) (*InventoryGenericInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -2004,9 +2014,9 @@ func (r ApiPatchInventoryGenericInventoryHolderRequest) Execute() (*InventoryGen
 /*
 PatchInventoryGenericInventoryHolder Update a 'inventory.GenericInventoryHolder' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchInventoryGenericInventoryHolderRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchInventoryGenericInventoryHolderRequest
 */
 func (a *InventoryApiService) PatchInventoryGenericInventoryHolder(ctx context.Context, moid string) ApiPatchInventoryGenericInventoryHolderRequest {
 	return ApiPatchInventoryGenericInventoryHolderRequest{
@@ -2017,7 +2027,8 @@ func (a *InventoryApiService) PatchInventoryGenericInventoryHolder(ctx context.C
 }
 
 // Execute executes the request
-//  @return InventoryGenericInventoryHolder
+//
+//	@return InventoryGenericInventoryHolder
 func (a *InventoryApiService) PatchInventoryGenericInventoryHolderExecute(r ApiPatchInventoryGenericInventoryHolderRequest) (*InventoryGenericInventoryHolder, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -2174,9 +2185,9 @@ func (r ApiUpdateInventoryGenericInventoryRequest) Execute() (*InventoryGenericI
 /*
 UpdateInventoryGenericInventory Update a 'inventory.GenericInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateInventoryGenericInventoryRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateInventoryGenericInventoryRequest
 */
 func (a *InventoryApiService) UpdateInventoryGenericInventory(ctx context.Context, moid string) ApiUpdateInventoryGenericInventoryRequest {
 	return ApiUpdateInventoryGenericInventoryRequest{
@@ -2187,7 +2198,8 @@ func (a *InventoryApiService) UpdateInventoryGenericInventory(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return InventoryGenericInventory
+//
+//	@return InventoryGenericInventory
 func (a *InventoryApiService) UpdateInventoryGenericInventoryExecute(r ApiUpdateInventoryGenericInventoryRequest) (*InventoryGenericInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2344,9 +2356,9 @@ func (r ApiUpdateInventoryGenericInventoryHolderRequest) Execute() (*InventoryGe
 /*
 UpdateInventoryGenericInventoryHolder Update a 'inventory.GenericInventoryHolder' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateInventoryGenericInventoryHolderRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateInventoryGenericInventoryHolderRequest
 */
 func (a *InventoryApiService) UpdateInventoryGenericInventoryHolder(ctx context.Context, moid string) ApiUpdateInventoryGenericInventoryHolderRequest {
 	return ApiUpdateInventoryGenericInventoryHolderRequest{
@@ -2357,7 +2369,8 @@ func (a *InventoryApiService) UpdateInventoryGenericInventoryHolder(ctx context.
 }
 
 // Execute executes the request
-//  @return InventoryGenericInventoryHolder
+//
+//	@return InventoryGenericInventoryHolder
 func (a *InventoryApiService) UpdateInventoryGenericInventoryHolderExecute(r ApiUpdateInventoryGenericInventoryHolderRequest) (*InventoryGenericInventoryHolder, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

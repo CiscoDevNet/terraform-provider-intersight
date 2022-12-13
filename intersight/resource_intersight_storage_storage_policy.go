@@ -95,6 +95,13 @@ func resourceStorageStoragePolicy() *schema.Resource {
 					}
 					return
 				}},
+			"default_drive_mode": {
+				Description:  "Newly inserted drives or on reboot, drives will be moved to the corresponding disk state on supported storage controller based on this setting. Unused Disks State should be 'No Change' if Default Drive Mode is set to JBOD or RAID 0. This setting is applicable only to FI attached servers.\n* `UnconfiguredGood` - Newly inserted drives or on reboot, drives will remain the same state.\n* `Jbod` - Newly inserted drives or on reboot, drives will automatically move to JBOD state if drive state was UnconfiguredGood.\n* `RAID0` - Newly inserted drives or on reboot, virtual drives will be created, respective drives will move to Online state.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"UnconfiguredGood", "Jbod", "RAID0"}, false),
+				Optional:     true,
+				Default:      "UnconfiguredGood",
+			},
 			"description": {
 				Description:  "Description of the policy.",
 				Type:         schema.TypeString,
@@ -723,6 +730,11 @@ func resourceStorageStoragePolicyCreate(c context.Context, d *schema.ResourceDat
 
 	o.SetClassId("storage.StoragePolicy")
 
+	if v, ok := d.GetOk("default_drive_mode"); ok {
+		x := (v.(string))
+		o.SetDefaultDriveMode(x)
+	}
+
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
@@ -1141,6 +1153,10 @@ func resourceStorageStoragePolicyRead(c context.Context, d *schema.ResourceData,
 		return diag.Errorf("error occurred while setting property CreateTime in StorageStoragePolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("default_drive_mode", (s.GetDefaultDriveMode())); err != nil {
+		return diag.Errorf("error occurred while setting property DefaultDriveMode in StorageStoragePolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("description", (s.GetDescription())); err != nil {
 		return diag.Errorf("error occurred while setting property Description in StorageStoragePolicy object: %s", err.Error())
 	}
@@ -1243,6 +1259,12 @@ func resourceStorageStoragePolicyUpdate(c context.Context, d *schema.ResourceDat
 	}
 
 	o.SetClassId("storage.StoragePolicy")
+
+	if d.HasChange("default_drive_mode") {
+		v := d.Get("default_drive_mode")
+		x := (v.(string))
+		o.SetDefaultDriveMode(x)
+	}
 
 	if d.HasChange("description") {
 		v := d.Get("description")

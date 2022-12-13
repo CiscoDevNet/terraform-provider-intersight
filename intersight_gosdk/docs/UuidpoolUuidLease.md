@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "uuidpool.UuidLease"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "uuidpool.UuidLease"]
+**Reservation** | Pointer to [**UuidpoolReservationReference**](UuidpoolReservationReference.md) |  | [optional] 
 **Uuid** | Pointer to **string** | UUID Prefix+Suffix numbers. | [optional] 
 **AssignedToEntity** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 **Pool** | Pointer to [**UuidpoolPoolRelationship**](UuidpoolPoolRelationship.md) |  | [optional] 
@@ -70,6 +71,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetReservation
+
+`func (o *UuidpoolUuidLease) GetReservation() UuidpoolReservationReference`
+
+GetReservation returns the Reservation field if non-nil, zero value otherwise.
+
+### GetReservationOk
+
+`func (o *UuidpoolUuidLease) GetReservationOk() (*UuidpoolReservationReference, bool)`
+
+GetReservationOk returns a tuple with the Reservation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReservation
+
+`func (o *UuidpoolUuidLease) SetReservation(v UuidpoolReservationReference)`
+
+SetReservation sets Reservation field to given value.
+
+### HasReservation
+
+`func (o *UuidpoolUuidLease) HasReservation() bool`
+
+HasReservation returns a boolean if a field has been set.
 
 ### GetUuid
 

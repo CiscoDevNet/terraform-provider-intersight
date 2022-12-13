@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **Chassis** | Pointer to **string** | Chassis IP of the switch. | [optional] 
 **ConfModTs** | Pointer to **string** | Configuration modified timestamp of the switch. | [optional] 
 **ConfModTsBackup** | Pointer to **string** | Configuration modified backup timestamp of the switch. | [optional] 
+**ConnectionStatus** | Pointer to **string** | Connection status of the switch. | [optional] 
 **DefaultDomain** | Pointer to **string** | The default domain name configured on the switch. | [optional] 
 **EthernetMode** | Pointer to **string** | The user configured Ethernet operational mode for this switch (End-Host or Switching). | [optional] [readonly] 
 **EthernetSwitchingMode** | Pointer to **string** | The user configured Ethernet operational mode for this switch (End-Host or Switching). * &#x60;end-host&#x60; - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer. * &#x60;switch&#x60; - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode. | [optional] [readonly] [default to "end-host"]
@@ -45,27 +46,35 @@ Name | Type | Description | Notes
 **TotalMemory** | Pointer to **int64** | Total available memory on this switch platform. | [optional] [readonly] 
 **Version** | Pointer to **string** | Firmware version of the switch. | [optional] 
 **Cards** | Pointer to [**[]EquipmentSwitchCardRelationship**](EquipmentSwitchCardRelationship.md) | An array of relationships to equipmentSwitchCard resources. | [optional] [readonly] 
-**Console** | Pointer to [**[]ConsoleConsoleConfigRelationship**](ConsoleConsoleConfigRelationship.md) | An array of relationships to consoleConsoleConfig resources. | [optional] 
+**CdpNeighbor** | Pointer to [**[]NetworkDiscoveredNeighborRelationship**](NetworkDiscoveredNeighborRelationship.md) | An array of relationships to networkDiscoveredNeighbor resources. | [optional] [readonly] 
+**Console** | Pointer to [**[]ConsoleConsoleConfigRelationship**](ConsoleConsoleConfigRelationship.md) | An array of relationships to consoleConsoleConfig resources. | [optional] [readonly] 
+**Dns** | Pointer to [**[]NetworkDnsRelationship**](NetworkDnsRelationship.md) | An array of relationships to networkDns resources. | [optional] [readonly] 
+**EtherPortChannels** | Pointer to [**[]EtherPortChannelRelationship**](EtherPortChannelRelationship.md) | An array of relationships to etherPortChannel resources. | [optional] [readonly] 
 **Fanmodules** | Pointer to [**[]EquipmentFanModuleRelationship**](EquipmentFanModuleRelationship.md) | An array of relationships to equipmentFanModule resources. | [optional] [readonly] 
-**FcPortChannels** | Pointer to [**[]FcPortChannelRelationship**](FcPortChannelRelationship.md) | An array of relationships to fcPortChannel resources. | [optional] 
+**FcPortChannels** | Pointer to [**[]FcPortChannelRelationship**](FcPortChannelRelationship.md) | An array of relationships to fcPortChannel resources. | [optional] [readonly] 
 **FeatureControl** | Pointer to [**[]NetworkFeatureControlRelationship**](NetworkFeatureControlRelationship.md) | An array of relationships to networkFeatureControl resources. | [optional] 
-**InterfaceList** | Pointer to [**[]NetworkInterfaceListRelationship**](NetworkInterfaceListRelationship.md) | An array of relationships to networkInterfaceList resources. | [optional] 
+**InterfaceList** | Pointer to [**[]NetworkInterfaceListRelationship**](NetworkInterfaceListRelationship.md) | An array of relationships to networkInterfaceList resources. | [optional] [readonly] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **LicenseFile** | Pointer to [**[]NetworkLicenseFileRelationship**](NetworkLicenseFileRelationship.md) | An array of relationships to networkLicenseFile resources. | [optional] 
+**LldpNeighbor** | Pointer to [**[]NetworkDiscoveredNeighborRelationship**](NetworkDiscoveredNeighborRelationship.md) | An array of relationships to networkDiscoveredNeighbor resources. | [optional] [readonly] 
 **ManagementController** | Pointer to [**ManagementControllerRelationship**](ManagementControllerRelationship.md) |  | [optional] 
 **ManagementEntity** | Pointer to [**ManagementEntityRelationship**](ManagementEntityRelationship.md) |  | [optional] 
 **NetworkFcZoneInfo** | Pointer to [**NetworkFcZoneInfoRelationship**](NetworkFcZoneInfoRelationship.md) |  | [optional] 
 **NetworkVlanPortInfo** | Pointer to [**NetworkVlanPortInfoRelationship**](NetworkVlanPortInfoRelationship.md) |  | [optional] 
 **NtpServer** | Pointer to [**[]NtpNtpServerRelationship**](NtpNtpServerRelationship.md) | An array of relationships to ntpNtpServer resources. | [optional] [readonly] 
-**PortMacBindings** | Pointer to [**[]PortMacBindingRelationship**](PortMacBindingRelationship.md) | An array of relationships to portMacBinding resources. | [optional] 
+**PortMacBindings** | Pointer to [**[]PortMacBindingRelationship**](PortMacBindingRelationship.md) | An array of relationships to portMacBinding resources. | [optional] [readonly] 
 **ProcessorUnit** | Pointer to [**[]ProcessorUnitRelationship**](ProcessorUnitRelationship.md) | An array of relationships to processorUnit resources. | [optional] 
 **Psus** | Pointer to [**[]EquipmentPsuRelationship**](EquipmentPsuRelationship.md) | An array of relationships to equipmentPsu resources. | [optional] [readonly] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**Sensors** | Pointer to [**[]EquipmentSensorRelationship**](EquipmentSensorRelationship.md) | An array of relationships to equipmentSensor resources. | [optional] [readonly] 
 **StorageItems** | Pointer to [**[]StorageItemRelationship**](StorageItemRelationship.md) | An array of relationships to storageItem resources. | [optional] [readonly] 
 **SupervisorCard** | Pointer to [**[]NetworkSupervisorCardRelationship**](NetworkSupervisorCardRelationship.md) | An array of relationships to networkSupervisorCard resources. | [optional] 
 **TopSystem** | Pointer to [**TopSystemRelationship**](TopSystemRelationship.md) |  | [optional] 
 **UcsmRunningFirmware** | Pointer to [**FirmwareRunningFirmwareRelationship**](FirmwareRunningFirmwareRelationship.md) |  | [optional] 
-**Vrf** | Pointer to [**[]NetworkVrfRelationship**](NetworkVrfRelationship.md) | An array of relationships to networkVrf resources. | [optional] 
+**VpcDomain** | Pointer to [**NetworkVpcDomainRelationship**](NetworkVpcDomainRelationship.md) |  | [optional] 
+**VpcMember** | Pointer to [**[]NetworkVpcMemberRelationship**](NetworkVpcMemberRelationship.md) | An array of relationships to networkVpcMember resources. | [optional] [readonly] 
+**VpcPeer** | Pointer to [**[]NetworkVpcPeerRelationship**](NetworkVpcPeerRelationship.md) | An array of relationships to networkVpcPeer resources. | [optional] [readonly] 
+**Vrf** | Pointer to [**[]NetworkVrfRelationship**](NetworkVrfRelationship.md) | An array of relationships to networkVrf resources. | [optional] [readonly] 
 
 ## Methods
 
@@ -310,6 +319,31 @@ SetConfModTsBackup sets ConfModTsBackup field to given value.
 `func (o *NetworkElementAllOf) HasConfModTsBackup() bool`
 
 HasConfModTsBackup returns a boolean if a field has been set.
+
+### GetConnectionStatus
+
+`func (o *NetworkElementAllOf) GetConnectionStatus() string`
+
+GetConnectionStatus returns the ConnectionStatus field if non-nil, zero value otherwise.
+
+### GetConnectionStatusOk
+
+`func (o *NetworkElementAllOf) GetConnectionStatusOk() (*string, bool)`
+
+GetConnectionStatusOk returns a tuple with the ConnectionStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConnectionStatus
+
+`func (o *NetworkElementAllOf) SetConnectionStatus(v string)`
+
+SetConnectionStatus sets ConnectionStatus field to given value.
+
+### HasConnectionStatus
+
+`func (o *NetworkElementAllOf) HasConnectionStatus() bool`
+
+HasConnectionStatus returns a boolean if a field has been set.
 
 ### GetDefaultDomain
 
@@ -1121,6 +1155,41 @@ HasCards returns a boolean if a field has been set.
 `func (o *NetworkElementAllOf) UnsetCards()`
 
 UnsetCards ensures that no value is present for Cards, not even an explicit nil
+### GetCdpNeighbor
+
+`func (o *NetworkElementAllOf) GetCdpNeighbor() []NetworkDiscoveredNeighborRelationship`
+
+GetCdpNeighbor returns the CdpNeighbor field if non-nil, zero value otherwise.
+
+### GetCdpNeighborOk
+
+`func (o *NetworkElementAllOf) GetCdpNeighborOk() (*[]NetworkDiscoveredNeighborRelationship, bool)`
+
+GetCdpNeighborOk returns a tuple with the CdpNeighbor field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCdpNeighbor
+
+`func (o *NetworkElementAllOf) SetCdpNeighbor(v []NetworkDiscoveredNeighborRelationship)`
+
+SetCdpNeighbor sets CdpNeighbor field to given value.
+
+### HasCdpNeighbor
+
+`func (o *NetworkElementAllOf) HasCdpNeighbor() bool`
+
+HasCdpNeighbor returns a boolean if a field has been set.
+
+### SetCdpNeighborNil
+
+`func (o *NetworkElementAllOf) SetCdpNeighborNil(b bool)`
+
+ SetCdpNeighborNil sets the value for CdpNeighbor to be an explicit nil
+
+### UnsetCdpNeighbor
+`func (o *NetworkElementAllOf) UnsetCdpNeighbor()`
+
+UnsetCdpNeighbor ensures that no value is present for CdpNeighbor, not even an explicit nil
 ### GetConsole
 
 `func (o *NetworkElementAllOf) GetConsole() []ConsoleConsoleConfigRelationship`
@@ -1156,6 +1225,76 @@ HasConsole returns a boolean if a field has been set.
 `func (o *NetworkElementAllOf) UnsetConsole()`
 
 UnsetConsole ensures that no value is present for Console, not even an explicit nil
+### GetDns
+
+`func (o *NetworkElementAllOf) GetDns() []NetworkDnsRelationship`
+
+GetDns returns the Dns field if non-nil, zero value otherwise.
+
+### GetDnsOk
+
+`func (o *NetworkElementAllOf) GetDnsOk() (*[]NetworkDnsRelationship, bool)`
+
+GetDnsOk returns a tuple with the Dns field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDns
+
+`func (o *NetworkElementAllOf) SetDns(v []NetworkDnsRelationship)`
+
+SetDns sets Dns field to given value.
+
+### HasDns
+
+`func (o *NetworkElementAllOf) HasDns() bool`
+
+HasDns returns a boolean if a field has been set.
+
+### SetDnsNil
+
+`func (o *NetworkElementAllOf) SetDnsNil(b bool)`
+
+ SetDnsNil sets the value for Dns to be an explicit nil
+
+### UnsetDns
+`func (o *NetworkElementAllOf) UnsetDns()`
+
+UnsetDns ensures that no value is present for Dns, not even an explicit nil
+### GetEtherPortChannels
+
+`func (o *NetworkElementAllOf) GetEtherPortChannels() []EtherPortChannelRelationship`
+
+GetEtherPortChannels returns the EtherPortChannels field if non-nil, zero value otherwise.
+
+### GetEtherPortChannelsOk
+
+`func (o *NetworkElementAllOf) GetEtherPortChannelsOk() (*[]EtherPortChannelRelationship, bool)`
+
+GetEtherPortChannelsOk returns a tuple with the EtherPortChannels field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEtherPortChannels
+
+`func (o *NetworkElementAllOf) SetEtherPortChannels(v []EtherPortChannelRelationship)`
+
+SetEtherPortChannels sets EtherPortChannels field to given value.
+
+### HasEtherPortChannels
+
+`func (o *NetworkElementAllOf) HasEtherPortChannels() bool`
+
+HasEtherPortChannels returns a boolean if a field has been set.
+
+### SetEtherPortChannelsNil
+
+`func (o *NetworkElementAllOf) SetEtherPortChannelsNil(b bool)`
+
+ SetEtherPortChannelsNil sets the value for EtherPortChannels to be an explicit nil
+
+### UnsetEtherPortChannels
+`func (o *NetworkElementAllOf) UnsetEtherPortChannels()`
+
+UnsetEtherPortChannels ensures that no value is present for EtherPortChannels, not even an explicit nil
 ### GetFanmodules
 
 `func (o *NetworkElementAllOf) GetFanmodules() []EquipmentFanModuleRelationship`
@@ -1356,6 +1495,41 @@ HasLicenseFile returns a boolean if a field has been set.
 `func (o *NetworkElementAllOf) UnsetLicenseFile()`
 
 UnsetLicenseFile ensures that no value is present for LicenseFile, not even an explicit nil
+### GetLldpNeighbor
+
+`func (o *NetworkElementAllOf) GetLldpNeighbor() []NetworkDiscoveredNeighborRelationship`
+
+GetLldpNeighbor returns the LldpNeighbor field if non-nil, zero value otherwise.
+
+### GetLldpNeighborOk
+
+`func (o *NetworkElementAllOf) GetLldpNeighborOk() (*[]NetworkDiscoveredNeighborRelationship, bool)`
+
+GetLldpNeighborOk returns a tuple with the LldpNeighbor field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLldpNeighbor
+
+`func (o *NetworkElementAllOf) SetLldpNeighbor(v []NetworkDiscoveredNeighborRelationship)`
+
+SetLldpNeighbor sets LldpNeighbor field to given value.
+
+### HasLldpNeighbor
+
+`func (o *NetworkElementAllOf) HasLldpNeighbor() bool`
+
+HasLldpNeighbor returns a boolean if a field has been set.
+
+### SetLldpNeighborNil
+
+`func (o *NetworkElementAllOf) SetLldpNeighborNil(b bool)`
+
+ SetLldpNeighborNil sets the value for LldpNeighbor to be an explicit nil
+
+### UnsetLldpNeighbor
+`func (o *NetworkElementAllOf) UnsetLldpNeighbor()`
+
+UnsetLldpNeighbor ensures that no value is present for LldpNeighbor, not even an explicit nil
 ### GetManagementController
 
 `func (o *NetworkElementAllOf) GetManagementController() ManagementControllerRelationship`
@@ -1621,6 +1795,41 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### GetSensors
+
+`func (o *NetworkElementAllOf) GetSensors() []EquipmentSensorRelationship`
+
+GetSensors returns the Sensors field if non-nil, zero value otherwise.
+
+### GetSensorsOk
+
+`func (o *NetworkElementAllOf) GetSensorsOk() (*[]EquipmentSensorRelationship, bool)`
+
+GetSensorsOk returns a tuple with the Sensors field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSensors
+
+`func (o *NetworkElementAllOf) SetSensors(v []EquipmentSensorRelationship)`
+
+SetSensors sets Sensors field to given value.
+
+### HasSensors
+
+`func (o *NetworkElementAllOf) HasSensors() bool`
+
+HasSensors returns a boolean if a field has been set.
+
+### SetSensorsNil
+
+`func (o *NetworkElementAllOf) SetSensorsNil(b bool)`
+
+ SetSensorsNil sets the value for Sensors to be an explicit nil
+
+### UnsetSensors
+`func (o *NetworkElementAllOf) UnsetSensors()`
+
+UnsetSensors ensures that no value is present for Sensors, not even an explicit nil
 ### GetStorageItems
 
 `func (o *NetworkElementAllOf) GetStorageItems() []StorageItemRelationship`
@@ -1741,6 +1950,101 @@ SetUcsmRunningFirmware sets UcsmRunningFirmware field to given value.
 
 HasUcsmRunningFirmware returns a boolean if a field has been set.
 
+### GetVpcDomain
+
+`func (o *NetworkElementAllOf) GetVpcDomain() NetworkVpcDomainRelationship`
+
+GetVpcDomain returns the VpcDomain field if non-nil, zero value otherwise.
+
+### GetVpcDomainOk
+
+`func (o *NetworkElementAllOf) GetVpcDomainOk() (*NetworkVpcDomainRelationship, bool)`
+
+GetVpcDomainOk returns a tuple with the VpcDomain field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVpcDomain
+
+`func (o *NetworkElementAllOf) SetVpcDomain(v NetworkVpcDomainRelationship)`
+
+SetVpcDomain sets VpcDomain field to given value.
+
+### HasVpcDomain
+
+`func (o *NetworkElementAllOf) HasVpcDomain() bool`
+
+HasVpcDomain returns a boolean if a field has been set.
+
+### GetVpcMember
+
+`func (o *NetworkElementAllOf) GetVpcMember() []NetworkVpcMemberRelationship`
+
+GetVpcMember returns the VpcMember field if non-nil, zero value otherwise.
+
+### GetVpcMemberOk
+
+`func (o *NetworkElementAllOf) GetVpcMemberOk() (*[]NetworkVpcMemberRelationship, bool)`
+
+GetVpcMemberOk returns a tuple with the VpcMember field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVpcMember
+
+`func (o *NetworkElementAllOf) SetVpcMember(v []NetworkVpcMemberRelationship)`
+
+SetVpcMember sets VpcMember field to given value.
+
+### HasVpcMember
+
+`func (o *NetworkElementAllOf) HasVpcMember() bool`
+
+HasVpcMember returns a boolean if a field has been set.
+
+### SetVpcMemberNil
+
+`func (o *NetworkElementAllOf) SetVpcMemberNil(b bool)`
+
+ SetVpcMemberNil sets the value for VpcMember to be an explicit nil
+
+### UnsetVpcMember
+`func (o *NetworkElementAllOf) UnsetVpcMember()`
+
+UnsetVpcMember ensures that no value is present for VpcMember, not even an explicit nil
+### GetVpcPeer
+
+`func (o *NetworkElementAllOf) GetVpcPeer() []NetworkVpcPeerRelationship`
+
+GetVpcPeer returns the VpcPeer field if non-nil, zero value otherwise.
+
+### GetVpcPeerOk
+
+`func (o *NetworkElementAllOf) GetVpcPeerOk() (*[]NetworkVpcPeerRelationship, bool)`
+
+GetVpcPeerOk returns a tuple with the VpcPeer field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVpcPeer
+
+`func (o *NetworkElementAllOf) SetVpcPeer(v []NetworkVpcPeerRelationship)`
+
+SetVpcPeer sets VpcPeer field to given value.
+
+### HasVpcPeer
+
+`func (o *NetworkElementAllOf) HasVpcPeer() bool`
+
+HasVpcPeer returns a boolean if a field has been set.
+
+### SetVpcPeerNil
+
+`func (o *NetworkElementAllOf) SetVpcPeerNil(b bool)`
+
+ SetVpcPeerNil sets the value for VpcPeer to be an explicit nil
+
+### UnsetVpcPeer
+`func (o *NetworkElementAllOf) UnsetVpcPeer()`
+
+UnsetVpcPeer ensures that no value is present for VpcPeer, not even an explicit nil
 ### GetVrf
 
 `func (o *NetworkElementAllOf) GetVrf() []NetworkVrfRelationship`

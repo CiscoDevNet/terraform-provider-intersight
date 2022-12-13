@@ -155,6 +155,11 @@ func getHyperflexHealthCheckExecutionSnapshotSchema() map[string]*schema.Schema 
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"health_check_vcenter_ip": {
+			Description: "IP Address of the vCenter.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"hx_cluster": {
 			Description: "A reference to a hyperflexCluster resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -204,6 +209,59 @@ func getHyperflexHealthCheckExecutionSnapshotSchema() map[string]*schema.Schema 
 			Description: "The unique identifier of this Managed Object instance.",
 			Type:        schema.TypeString,
 			Optional:    true,
+		},
+		"node_level_info": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"node_cause": {
+						Description: "Node-specific check failure cause.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"node_check_result": {
+						Description: "Node-specific check result.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"node_esx_ip_address": {
+						Description: "The IP Address of the ESXi server.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"node_ip_address": {
+						Description: "The IP Address of cluster node.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"node_name": {
+						Description: "Cluster node name on which the check was run.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"node_resolution": {
+						Description: "Node-specific check failure suggested resolution.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"object_type": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -674,6 +732,11 @@ func dataSourceHyperflexHealthCheckExecutionSnapshotRead(c context.Context, d *s
 		o.SetHealthCheckSummary(x)
 	}
 
+	if v, ok := d.GetOk("health_check_vcenter_ip"); ok {
+		x := (v.(string))
+		o.SetHealthCheckVcenterIp(x)
+	}
+
 	if v, ok := d.GetOk("hx_cluster"); ok {
 		p := make([]models.HyperflexClusterRelationship, 0, 1)
 		s := v.([]interface{})
@@ -730,6 +793,34 @@ func dataSourceHyperflexHealthCheckExecutionSnapshotRead(c context.Context, d *s
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
+	}
+
+	if v, ok := d.GetOk("node_level_info"); ok {
+		x := make([]models.HyperflexHealthCheckNodeLevelInfo, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.HyperflexHealthCheckNodeLevelInfo{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("hyperflex.HealthCheckNodeLevelInfo")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetNodeLevelInfo(x)
 	}
 
 	if v, ok := d.GetOk("object_type"); ok {
@@ -1089,12 +1180,15 @@ func dataSourceHyperflexHealthCheckExecutionSnapshotRead(c context.Context, d *s
 				temp["health_check_execution_status"] = (s.GetHealthCheckExecutionStatus())
 				temp["health_check_result"] = (s.GetHealthCheckResult())
 				temp["health_check_summary"] = (s.GetHealthCheckSummary())
+				temp["health_check_vcenter_ip"] = (s.GetHealthCheckVcenterIp())
 
 				temp["hx_cluster"] = flattenMapHyperflexClusterRelationship(s.GetHxCluster(), d)
 				temp["hx_device_name"] = (s.GetHxDeviceName())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
+
+				temp["node_level_info"] = flattenListHyperflexHealthCheckNodeLevelInfo(s.GetNodeLevelInfo(), d)
 				temp["object_type"] = (s.GetObjectType())
 				temp["owners"] = (s.GetOwners())
 

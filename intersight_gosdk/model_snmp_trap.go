@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -32,12 +32,16 @@ type SnmpTrap struct {
 	Enabled *bool `json:"Enabled,omitempty"`
 	// Port used by the server to communicate with the trap destination. Enter a value between 1-65535. Reserved ports not allowed (22, 23, 80, 123, 389, 443, 623, 636, 2068, 3268, 3269).
 	Port *int64 `json:"Port,omitempty"`
+	// Security level of the trap receiver used for communication. * `AuthPriv` - The user requires both an authorization password and a privacy password. * `NoAuthNoPriv` - The user does not require an authorization or privacy password. * `AuthNoPriv` - The user requires an authorization password but not a privacy password.
+	SecurityLevel *string `json:"SecurityLevel,omitempty"`
 	// Type of trap which decides whether to receive a notification when a trap is received at the destination. * `Trap` - Do not receive notifications when trap is sent to the destination. * `Inform` - Receive notifications when trap is sent to the destination. This option is valid only for V2 users.
 	Type *string `json:"Type,omitempty"`
 	// SNMP user for the trap. Applicable only to SNMPv3.
 	User *string `json:"User,omitempty"`
-	// SNMP version used for the trap. * `V3` - SNMP v3 trap version notifications. * `V2` - SNMP v2 trap version notifications.
-	Version              *string `json:"Version,omitempty"`
+	// SNMP version used for the trap. * `V3` - SNMP v3 trap version notifications. * `V1` - SNMP v1 trap version notifications. * `V2` - SNMP v2 trap version notifications.
+	Version *string `json:"Version,omitempty"`
+	// VRF name of the SNMP server.
+	VrfName              *string `json:"VrfName,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -258,6 +262,38 @@ func (o *SnmpTrap) SetPort(v int64) {
 	o.Port = &v
 }
 
+// GetSecurityLevel returns the SecurityLevel field value if set, zero value otherwise.
+func (o *SnmpTrap) GetSecurityLevel() string {
+	if o == nil || o.SecurityLevel == nil {
+		var ret string
+		return ret
+	}
+	return *o.SecurityLevel
+}
+
+// GetSecurityLevelOk returns a tuple with the SecurityLevel field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SnmpTrap) GetSecurityLevelOk() (*string, bool) {
+	if o == nil || o.SecurityLevel == nil {
+		return nil, false
+	}
+	return o.SecurityLevel, true
+}
+
+// HasSecurityLevel returns a boolean if a field has been set.
+func (o *SnmpTrap) HasSecurityLevel() bool {
+	if o != nil && o.SecurityLevel != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSecurityLevel gets a reference to the given string and assigns it to the SecurityLevel field.
+func (o *SnmpTrap) SetSecurityLevel(v string) {
+	o.SecurityLevel = &v
+}
+
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *SnmpTrap) GetType() string {
 	if o == nil || o.Type == nil {
@@ -354,6 +390,38 @@ func (o *SnmpTrap) SetVersion(v string) {
 	o.Version = &v
 }
 
+// GetVrfName returns the VrfName field value if set, zero value otherwise.
+func (o *SnmpTrap) GetVrfName() string {
+	if o == nil || o.VrfName == nil {
+		var ret string
+		return ret
+	}
+	return *o.VrfName
+}
+
+// GetVrfNameOk returns a tuple with the VrfName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SnmpTrap) GetVrfNameOk() (*string, bool) {
+	if o == nil || o.VrfName == nil {
+		return nil, false
+	}
+	return o.VrfName, true
+}
+
+// HasVrfName returns a boolean if a field has been set.
+func (o *SnmpTrap) HasVrfName() bool {
+	if o != nil && o.VrfName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetVrfName gets a reference to the given string and assigns it to the VrfName field.
+func (o *SnmpTrap) SetVrfName(v string) {
+	o.VrfName = &v
+}
+
 func (o SnmpTrap) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
@@ -382,6 +450,9 @@ func (o SnmpTrap) MarshalJSON() ([]byte, error) {
 	if o.Port != nil {
 		toSerialize["Port"] = o.Port
 	}
+	if o.SecurityLevel != nil {
+		toSerialize["SecurityLevel"] = o.SecurityLevel
+	}
 	if o.Type != nil {
 		toSerialize["Type"] = o.Type
 	}
@@ -390,6 +461,9 @@ func (o SnmpTrap) MarshalJSON() ([]byte, error) {
 	}
 	if o.Version != nil {
 		toSerialize["Version"] = o.Version
+	}
+	if o.VrfName != nil {
+		toSerialize["VrfName"] = o.VrfName
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -413,12 +487,16 @@ func (o *SnmpTrap) UnmarshalJSON(bytes []byte) (err error) {
 		Enabled *bool `json:"Enabled,omitempty"`
 		// Port used by the server to communicate with the trap destination. Enter a value between 1-65535. Reserved ports not allowed (22, 23, 80, 123, 389, 443, 623, 636, 2068, 3268, 3269).
 		Port *int64 `json:"Port,omitempty"`
+		// Security level of the trap receiver used for communication. * `AuthPriv` - The user requires both an authorization password and a privacy password. * `NoAuthNoPriv` - The user does not require an authorization or privacy password. * `AuthNoPriv` - The user requires an authorization password but not a privacy password.
+		SecurityLevel *string `json:"SecurityLevel,omitempty"`
 		// Type of trap which decides whether to receive a notification when a trap is received at the destination. * `Trap` - Do not receive notifications when trap is sent to the destination. * `Inform` - Receive notifications when trap is sent to the destination. This option is valid only for V2 users.
 		Type *string `json:"Type,omitempty"`
 		// SNMP user for the trap. Applicable only to SNMPv3.
 		User *string `json:"User,omitempty"`
-		// SNMP version used for the trap. * `V3` - SNMP v3 trap version notifications. * `V2` - SNMP v2 trap version notifications.
+		// SNMP version used for the trap. * `V3` - SNMP v3 trap version notifications. * `V1` - SNMP v1 trap version notifications. * `V2` - SNMP v2 trap version notifications.
 		Version *string `json:"Version,omitempty"`
+		// VRF name of the SNMP server.
+		VrfName *string `json:"VrfName,omitempty"`
 	}
 
 	varSnmpTrapWithoutEmbeddedStruct := SnmpTrapWithoutEmbeddedStruct{}
@@ -432,9 +510,11 @@ func (o *SnmpTrap) UnmarshalJSON(bytes []byte) (err error) {
 		varSnmpTrap.Destination = varSnmpTrapWithoutEmbeddedStruct.Destination
 		varSnmpTrap.Enabled = varSnmpTrapWithoutEmbeddedStruct.Enabled
 		varSnmpTrap.Port = varSnmpTrapWithoutEmbeddedStruct.Port
+		varSnmpTrap.SecurityLevel = varSnmpTrapWithoutEmbeddedStruct.SecurityLevel
 		varSnmpTrap.Type = varSnmpTrapWithoutEmbeddedStruct.Type
 		varSnmpTrap.User = varSnmpTrapWithoutEmbeddedStruct.User
 		varSnmpTrap.Version = varSnmpTrapWithoutEmbeddedStruct.Version
+		varSnmpTrap.VrfName = varSnmpTrapWithoutEmbeddedStruct.VrfName
 		*o = SnmpTrap(varSnmpTrap)
 	} else {
 		return err
@@ -458,9 +538,11 @@ func (o *SnmpTrap) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "Destination")
 		delete(additionalProperties, "Enabled")
 		delete(additionalProperties, "Port")
+		delete(additionalProperties, "SecurityLevel")
 		delete(additionalProperties, "Type")
 		delete(additionalProperties, "User")
 		delete(additionalProperties, "Version")
+		delete(additionalProperties, "VrfName")
 
 		// remove fields from embedded structs
 		reflectMoBaseComplexType := reflect.ValueOf(o.MoBaseComplexType)

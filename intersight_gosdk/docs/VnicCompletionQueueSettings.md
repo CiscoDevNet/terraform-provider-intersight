@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "vnic.CompletionQueueSettings"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "vnic.CompletionQueueSettings"]
 **Count** | Pointer to **int64** | The number of completion queue resources to allocate. In general, the number of completion queue resources to allocate is equal to the number of transmit queue resources plus the number of receive queue resources. | [optional] [default to 5]
-**RingSize** | Pointer to **int64** | The number of descriptors in each completion queue. | [optional] [readonly] [default to 1]
+**RingSize** | Pointer to **int64** | The number of descriptors in each completion queue. | [optional] [default to 1]
 
 ## Methods
 

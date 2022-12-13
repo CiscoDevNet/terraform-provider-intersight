@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **IpV4Block** | Pointer to [**IppoolIpV4Block**](IppoolIpV4Block.md) |  | [optional] 
 **IpV6Block** | Pointer to [**IppoolIpV6Block**](IppoolIpV6Block.md) |  | [optional] 
 **Pool** | Pointer to [**IppoolShadowPoolRelationship**](IppoolShadowPoolRelationship.md) |  | [optional] 
+**Reservations** | Pointer to [**[]IppoolReservationRelationship**](IppoolReservationRelationship.md) | An array of relationships to ippoolReservation resources. | [optional] [readonly] 
 
 ## Methods
 
@@ -170,6 +171,41 @@ SetPool sets Pool field to given value.
 
 HasPool returns a boolean if a field has been set.
 
+### GetReservations
+
+`func (o *IppoolShadowBlockAllOf) GetReservations() []IppoolReservationRelationship`
+
+GetReservations returns the Reservations field if non-nil, zero value otherwise.
+
+### GetReservationsOk
+
+`func (o *IppoolShadowBlockAllOf) GetReservationsOk() (*[]IppoolReservationRelationship, bool)`
+
+GetReservationsOk returns a tuple with the Reservations field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReservations
+
+`func (o *IppoolShadowBlockAllOf) SetReservations(v []IppoolReservationRelationship)`
+
+SetReservations sets Reservations field to given value.
+
+### HasReservations
+
+`func (o *IppoolShadowBlockAllOf) HasReservations() bool`
+
+HasReservations returns a boolean if a field has been set.
+
+### SetReservationsNil
+
+`func (o *IppoolShadowBlockAllOf) SetReservationsNil(b bool)`
+
+ SetReservationsNil sets the value for Reservations to be an explicit nil
+
+### UnsetReservations
+`func (o *IppoolShadowBlockAllOf) UnsetReservations()`
+
+UnsetReservations ensures that no value is present for Reservations, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

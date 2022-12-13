@@ -889,6 +889,11 @@ func getComputeServerSettingSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"tpm_reset": {
+			Description: "Clear the configuration of TPM chip in the server.\n* `None` - Perform no action on the TPM.\n* `ClearTpm` - Clear the configuration and restore factory defaults of TPM chip in the server.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"tunneled_kvm_state": {
 			Description: "By default, the tunneled vKVM property appears in Ready state. The property can be configured by performing allowed actions. Once the property is configured, it reverts to Ready state.\n* `Ready` - Tunneled vKVM is ready to be configured on the server.\n* `Enable` - Tunneled vKVM is enabled for the server.\n* `Disable` - Tunneled vKVM is disabled for the server.",
 			Type:        schema.TypeString,
@@ -1920,6 +1925,11 @@ func dataSourceComputeServerSettingRead(c context.Context, d *schema.ResourceDat
 		o.SetTags(x)
 	}
 
+	if v, ok := d.GetOk("tpm_reset"); ok {
+		x := (v.(string))
+		o.SetTpmReset(x)
+	}
+
 	if v, ok := d.GetOk("tunneled_kvm_state"); ok {
 		x := (v.(string))
 		o.SetTunneledKvmState(x)
@@ -2087,6 +2097,7 @@ func dataSourceComputeServerSettingRead(c context.Context, d *schema.ResourceDat
 				temp["storage_virtual_drive_operation"] = flattenMapComputeStorageVirtualDriveOperation(s.GetStorageVirtualDriveOperation(), d)
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["tpm_reset"] = (s.GetTpmReset())
 				temp["tunneled_kvm_state"] = (s.GetTunneledKvmState())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)

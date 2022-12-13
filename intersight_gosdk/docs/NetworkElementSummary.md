@@ -10,9 +10,11 @@ Name | Type | Description | Notes
 **AdminInbandInterfaceState** | Pointer to **string** | The administrative state of the network Element inband management interface. | [optional] [readonly] 
 **AlarmSummary** | Pointer to [**NullableComputeAlarmSummary**](ComputeAlarmSummary.md) |  | [optional] 
 **AvailableMemory** | Pointer to **string** | Available memory (un-used) on this switch platform. | [optional] [readonly] 
+**BundleVersion** | Pointer to **string** | Running firmware bundle information. | [optional] [readonly] 
 **Chassis** | Pointer to **string** | Chassis IP of the switch. | [optional] [readonly] 
 **ConfModTs** | Pointer to **string** | Configuration modified timestamp of the switch. | [optional] [readonly] 
 **ConfModTsBackup** | Pointer to **string** | Configuration modified backup timestamp of the switch. | [optional] [readonly] 
+**ConnectionStatus** | Pointer to **string** | Connection status of the switch. | [optional] [readonly] 
 **DefaultDomain** | Pointer to **string** | The default domain name configured on the switch. | [optional] [readonly] 
 **DeviceMoId** | Pointer to **string** | The database identifier of the registered device of an object. | [optional] [readonly] 
 **Dn** | Pointer to **string** | The Distinguished Name unambiguously identifies an object in the system. | [optional] [readonly] 
@@ -22,6 +24,7 @@ Name | Type | Description | Notes
 **FcMode** | Pointer to **string** | The user configured FC operational mode for this switch (End-Host or Switching). | [optional] [readonly] 
 **FcSwitchingMode** | Pointer to **string** | The user configured FC operational mode for this switch (End-Host or Switching). * &#x60;end-host&#x60; - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer. * &#x60;switch&#x60; - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode. | [optional] [readonly] [default to "end-host"]
 **Firmware** | Pointer to **string** | Running firmware information. | [optional] [readonly] 
+**FirmwareVersion** | Pointer to **string** | Running firmware information. | [optional] [readonly] 
 **InbandIpAddress** | Pointer to **string** | The IP address of the network Element inband management interface. | [optional] [readonly] 
 **InbandIpGateway** | Pointer to **string** | The default gateway of the network Element inband management interface. | [optional] [readonly] 
 **InbandIpMask** | Pointer to **string** | The network mask of the network Element inband management interface. | [optional] [readonly] 
@@ -234,6 +237,31 @@ SetAvailableMemory sets AvailableMemory field to given value.
 
 HasAvailableMemory returns a boolean if a field has been set.
 
+### GetBundleVersion
+
+`func (o *NetworkElementSummary) GetBundleVersion() string`
+
+GetBundleVersion returns the BundleVersion field if non-nil, zero value otherwise.
+
+### GetBundleVersionOk
+
+`func (o *NetworkElementSummary) GetBundleVersionOk() (*string, bool)`
+
+GetBundleVersionOk returns a tuple with the BundleVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBundleVersion
+
+`func (o *NetworkElementSummary) SetBundleVersion(v string)`
+
+SetBundleVersion sets BundleVersion field to given value.
+
+### HasBundleVersion
+
+`func (o *NetworkElementSummary) HasBundleVersion() bool`
+
+HasBundleVersion returns a boolean if a field has been set.
+
 ### GetChassis
 
 `func (o *NetworkElementSummary) GetChassis() string`
@@ -308,6 +336,31 @@ SetConfModTsBackup sets ConfModTsBackup field to given value.
 `func (o *NetworkElementSummary) HasConfModTsBackup() bool`
 
 HasConfModTsBackup returns a boolean if a field has been set.
+
+### GetConnectionStatus
+
+`func (o *NetworkElementSummary) GetConnectionStatus() string`
+
+GetConnectionStatus returns the ConnectionStatus field if non-nil, zero value otherwise.
+
+### GetConnectionStatusOk
+
+`func (o *NetworkElementSummary) GetConnectionStatusOk() (*string, bool)`
+
+GetConnectionStatusOk returns a tuple with the ConnectionStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConnectionStatus
+
+`func (o *NetworkElementSummary) SetConnectionStatus(v string)`
+
+SetConnectionStatus sets ConnectionStatus field to given value.
+
+### HasConnectionStatus
+
+`func (o *NetworkElementSummary) HasConnectionStatus() bool`
+
+HasConnectionStatus returns a boolean if a field has been set.
 
 ### GetDefaultDomain
 
@@ -533,6 +586,31 @@ SetFirmware sets Firmware field to given value.
 `func (o *NetworkElementSummary) HasFirmware() bool`
 
 HasFirmware returns a boolean if a field has been set.
+
+### GetFirmwareVersion
+
+`func (o *NetworkElementSummary) GetFirmwareVersion() string`
+
+GetFirmwareVersion returns the FirmwareVersion field if non-nil, zero value otherwise.
+
+### GetFirmwareVersionOk
+
+`func (o *NetworkElementSummary) GetFirmwareVersionOk() (*string, bool)`
+
+GetFirmwareVersionOk returns a tuple with the FirmwareVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFirmwareVersion
+
+`func (o *NetworkElementSummary) SetFirmwareVersion(v string)`
+
+SetFirmwareVersion sets FirmwareVersion field to given value.
+
+### HasFirmwareVersion
+
+`func (o *NetworkElementSummary) HasFirmwareVersion() bool`
+
+HasFirmwareVersion returns a boolean if a field has been set.
 
 ### GetInbandIpAddress
 

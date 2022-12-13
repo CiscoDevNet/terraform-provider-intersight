@@ -320,8 +320,8 @@ func resourceWorkflowServiceItemHealthCheckDefinition() *schema.Resource {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
-				ConfigMode:  schema.SchemaConfigModeAttr,
 				Computed:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
@@ -669,49 +669,6 @@ func resourceWorkflowServiceItemHealthCheckDefinitionCreate(c context.Context, d
 
 	o.SetObjectType("workflow.ServiceItemHealthCheckDefinition")
 
-	if v, ok := d.GetOk("service_item_definition"); ok {
-		p := make([]models.WorkflowServiceItemDefinitionRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewMoMoRefWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsWorkflowServiceItemDefinitionRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetServiceItemDefinition(x)
-		}
-	}
-
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -1019,50 +976,6 @@ func resourceWorkflowServiceItemHealthCheckDefinitionUpdate(c context.Context, d
 	}
 
 	o.SetObjectType("workflow.ServiceItemHealthCheckDefinition")
-
-	if d.HasChange("service_item_definition") {
-		v := d.Get("service_item_definition")
-		p := make([]models.WorkflowServiceItemDefinitionRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.MoMoRef{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsWorkflowServiceItemDefinitionRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetServiceItemDefinition(x)
-		}
-	}
 
 	if d.HasChange("tags") {
 		v := d.Get("tags")

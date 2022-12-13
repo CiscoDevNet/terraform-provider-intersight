@@ -4,6 +4,7 @@ All URIs are relative to *https://intersight.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**CreateCapabilityActionsMetaData**](CapabilityApi.md#CreateCapabilityActionsMetaData) | **Post** /api/v1/capability/ActionsMetaData | Create a &#39;capability.ActionsMetaData&#39; resource.
 [**CreateCapabilityAdapterDeprecatedDef**](CapabilityApi.md#CreateCapabilityAdapterDeprecatedDef) | **Post** /api/v1/capability/AdapterDeprecatedDefs | Create a &#39;capability.AdapterDeprecatedDef&#39; resource.
 [**CreateCapabilityAdapterUnitDescriptor**](CapabilityApi.md#CreateCapabilityAdapterUnitDescriptor) | **Post** /api/v1/capability/AdapterUnitDescriptors | Create a &#39;capability.AdapterUnitDescriptor&#39; resource.
 [**CreateCapabilityChassisDescriptor**](CapabilityApi.md#CreateCapabilityChassisDescriptor) | **Post** /api/v1/capability/ChassisDescriptors | Create a &#39;capability.ChassisDescriptor&#39; resource.
@@ -13,6 +14,7 @@ Method | HTTP request | Description
 [**CreateCapabilityEquipmentSlotArray**](CapabilityApi.md#CreateCapabilityEquipmentSlotArray) | **Post** /api/v1/capability/EquipmentSlotArrays | Create a &#39;capability.EquipmentSlotArray&#39; resource.
 [**CreateCapabilityFanModuleDescriptor**](CapabilityApi.md#CreateCapabilityFanModuleDescriptor) | **Post** /api/v1/capability/FanModuleDescriptors | Create a &#39;capability.FanModuleDescriptor&#39; resource.
 [**CreateCapabilityFanModuleManufacturingDef**](CapabilityApi.md#CreateCapabilityFanModuleManufacturingDef) | **Post** /api/v1/capability/FanModuleManufacturingDefs | Create a &#39;capability.FanModuleManufacturingDef&#39; resource.
+[**CreateCapabilityFexCapabilityDef**](CapabilityApi.md#CreateCapabilityFexCapabilityDef) | **Post** /api/v1/capability/FexCapabilityDefs | Create a &#39;capability.FexCapabilityDef&#39; resource.
 [**CreateCapabilityFexDescriptor**](CapabilityApi.md#CreateCapabilityFexDescriptor) | **Post** /api/v1/capability/FexDescriptors | Create a &#39;capability.FexDescriptor&#39; resource.
 [**CreateCapabilityFexManufacturingDef**](CapabilityApi.md#CreateCapabilityFexManufacturingDef) | **Post** /api/v1/capability/FexManufacturingDefs | Create a &#39;capability.FexManufacturingDef&#39; resource.
 [**CreateCapabilityIoCardCapabilityDef**](CapabilityApi.md#CreateCapabilityIoCardCapabilityDef) | **Post** /api/v1/capability/IoCardCapabilityDefs | Create a &#39;capability.IoCardCapabilityDef&#39; resource.
@@ -30,6 +32,7 @@ Method | HTTP request | Description
 [**CreateCapabilitySwitchCapability**](CapabilityApi.md#CreateCapabilitySwitchCapability) | **Post** /api/v1/capability/SwitchCapabilities | Create a &#39;capability.SwitchCapability&#39; resource.
 [**CreateCapabilitySwitchDescriptor**](CapabilityApi.md#CreateCapabilitySwitchDescriptor) | **Post** /api/v1/capability/SwitchDescriptors | Create a &#39;capability.SwitchDescriptor&#39; resource.
 [**CreateCapabilitySwitchManufacturingDef**](CapabilityApi.md#CreateCapabilitySwitchManufacturingDef) | **Post** /api/v1/capability/SwitchManufacturingDefs | Create a &#39;capability.SwitchManufacturingDef&#39; resource.
+[**DeleteCapabilityActionsMetaData**](CapabilityApi.md#DeleteCapabilityActionsMetaData) | **Delete** /api/v1/capability/ActionsMetaData/{Moid} | Delete a &#39;capability.ActionsMetaData&#39; resource.
 [**DeleteCapabilityAdapterDeprecatedDef**](CapabilityApi.md#DeleteCapabilityAdapterDeprecatedDef) | **Delete** /api/v1/capability/AdapterDeprecatedDefs/{Moid} | Delete a &#39;capability.AdapterDeprecatedDef&#39; resource.
 [**DeleteCapabilityAdapterUnitDescriptor**](CapabilityApi.md#DeleteCapabilityAdapterUnitDescriptor) | **Delete** /api/v1/capability/AdapterUnitDescriptors/{Moid} | Delete a &#39;capability.AdapterUnitDescriptor&#39; resource.
 [**DeleteCapabilityChassisDescriptor**](CapabilityApi.md#DeleteCapabilityChassisDescriptor) | **Delete** /api/v1/capability/ChassisDescriptors/{Moid} | Delete a &#39;capability.ChassisDescriptor&#39; resource.
@@ -39,6 +42,7 @@ Method | HTTP request | Description
 [**DeleteCapabilityEquipmentSlotArray**](CapabilityApi.md#DeleteCapabilityEquipmentSlotArray) | **Delete** /api/v1/capability/EquipmentSlotArrays/{Moid} | Delete a &#39;capability.EquipmentSlotArray&#39; resource.
 [**DeleteCapabilityFanModuleDescriptor**](CapabilityApi.md#DeleteCapabilityFanModuleDescriptor) | **Delete** /api/v1/capability/FanModuleDescriptors/{Moid} | Delete a &#39;capability.FanModuleDescriptor&#39; resource.
 [**DeleteCapabilityFanModuleManufacturingDef**](CapabilityApi.md#DeleteCapabilityFanModuleManufacturingDef) | **Delete** /api/v1/capability/FanModuleManufacturingDefs/{Moid} | Delete a &#39;capability.FanModuleManufacturingDef&#39; resource.
+[**DeleteCapabilityFexCapabilityDef**](CapabilityApi.md#DeleteCapabilityFexCapabilityDef) | **Delete** /api/v1/capability/FexCapabilityDefs/{Moid} | Delete a &#39;capability.FexCapabilityDef&#39; resource.
 [**DeleteCapabilityFexDescriptor**](CapabilityApi.md#DeleteCapabilityFexDescriptor) | **Delete** /api/v1/capability/FexDescriptors/{Moid} | Delete a &#39;capability.FexDescriptor&#39; resource.
 [**DeleteCapabilityFexManufacturingDef**](CapabilityApi.md#DeleteCapabilityFexManufacturingDef) | **Delete** /api/v1/capability/FexManufacturingDefs/{Moid} | Delete a &#39;capability.FexManufacturingDef&#39; resource.
 [**DeleteCapabilityIoCardCapabilityDef**](CapabilityApi.md#DeleteCapabilityIoCardCapabilityDef) | **Delete** /api/v1/capability/IoCardCapabilityDefs/{Moid} | Delete a &#39;capability.IoCardCapabilityDef&#39; resource.
@@ -56,6 +60,8 @@ Method | HTTP request | Description
 [**DeleteCapabilitySwitchCapability**](CapabilityApi.md#DeleteCapabilitySwitchCapability) | **Delete** /api/v1/capability/SwitchCapabilities/{Moid} | Delete a &#39;capability.SwitchCapability&#39; resource.
 [**DeleteCapabilitySwitchDescriptor**](CapabilityApi.md#DeleteCapabilitySwitchDescriptor) | **Delete** /api/v1/capability/SwitchDescriptors/{Moid} | Delete a &#39;capability.SwitchDescriptor&#39; resource.
 [**DeleteCapabilitySwitchManufacturingDef**](CapabilityApi.md#DeleteCapabilitySwitchManufacturingDef) | **Delete** /api/v1/capability/SwitchManufacturingDefs/{Moid} | Delete a &#39;capability.SwitchManufacturingDef&#39; resource.
+[**GetCapabilityActionsMetaDataByMoid**](CapabilityApi.md#GetCapabilityActionsMetaDataByMoid) | **Get** /api/v1/capability/ActionsMetaData/{Moid} | Read a &#39;capability.ActionsMetaData&#39; resource.
+[**GetCapabilityActionsMetaDataList**](CapabilityApi.md#GetCapabilityActionsMetaDataList) | **Get** /api/v1/capability/ActionsMetaData | Read a &#39;capability.ActionsMetaData&#39; resource.
 [**GetCapabilityAdapterDeprecatedDefByMoid**](CapabilityApi.md#GetCapabilityAdapterDeprecatedDefByMoid) | **Get** /api/v1/capability/AdapterDeprecatedDefs/{Moid} | Read a &#39;capability.AdapterDeprecatedDef&#39; resource.
 [**GetCapabilityAdapterDeprecatedDefList**](CapabilityApi.md#GetCapabilityAdapterDeprecatedDefList) | **Get** /api/v1/capability/AdapterDeprecatedDefs | Read a &#39;capability.AdapterDeprecatedDef&#39; resource.
 [**GetCapabilityAdapterUnitDescriptorByMoid**](CapabilityApi.md#GetCapabilityAdapterUnitDescriptorByMoid) | **Get** /api/v1/capability/AdapterUnitDescriptors/{Moid} | Read a &#39;capability.AdapterUnitDescriptor&#39; resource.
@@ -76,6 +82,8 @@ Method | HTTP request | Description
 [**GetCapabilityFanModuleDescriptorList**](CapabilityApi.md#GetCapabilityFanModuleDescriptorList) | **Get** /api/v1/capability/FanModuleDescriptors | Read a &#39;capability.FanModuleDescriptor&#39; resource.
 [**GetCapabilityFanModuleManufacturingDefByMoid**](CapabilityApi.md#GetCapabilityFanModuleManufacturingDefByMoid) | **Get** /api/v1/capability/FanModuleManufacturingDefs/{Moid} | Read a &#39;capability.FanModuleManufacturingDef&#39; resource.
 [**GetCapabilityFanModuleManufacturingDefList**](CapabilityApi.md#GetCapabilityFanModuleManufacturingDefList) | **Get** /api/v1/capability/FanModuleManufacturingDefs | Read a &#39;capability.FanModuleManufacturingDef&#39; resource.
+[**GetCapabilityFexCapabilityDefByMoid**](CapabilityApi.md#GetCapabilityFexCapabilityDefByMoid) | **Get** /api/v1/capability/FexCapabilityDefs/{Moid} | Read a &#39;capability.FexCapabilityDef&#39; resource.
+[**GetCapabilityFexCapabilityDefList**](CapabilityApi.md#GetCapabilityFexCapabilityDefList) | **Get** /api/v1/capability/FexCapabilityDefs | Read a &#39;capability.FexCapabilityDef&#39; resource.
 [**GetCapabilityFexDescriptorByMoid**](CapabilityApi.md#GetCapabilityFexDescriptorByMoid) | **Get** /api/v1/capability/FexDescriptors/{Moid} | Read a &#39;capability.FexDescriptor&#39; resource.
 [**GetCapabilityFexDescriptorList**](CapabilityApi.md#GetCapabilityFexDescriptorList) | **Get** /api/v1/capability/FexDescriptors | Read a &#39;capability.FexDescriptor&#39; resource.
 [**GetCapabilityFexManufacturingDefByMoid**](CapabilityApi.md#GetCapabilityFexManufacturingDefByMoid) | **Get** /api/v1/capability/FexManufacturingDefs/{Moid} | Read a &#39;capability.FexManufacturingDef&#39; resource.
@@ -110,6 +118,7 @@ Method | HTTP request | Description
 [**GetCapabilitySwitchDescriptorList**](CapabilityApi.md#GetCapabilitySwitchDescriptorList) | **Get** /api/v1/capability/SwitchDescriptors | Read a &#39;capability.SwitchDescriptor&#39; resource.
 [**GetCapabilitySwitchManufacturingDefByMoid**](CapabilityApi.md#GetCapabilitySwitchManufacturingDefByMoid) | **Get** /api/v1/capability/SwitchManufacturingDefs/{Moid} | Read a &#39;capability.SwitchManufacturingDef&#39; resource.
 [**GetCapabilitySwitchManufacturingDefList**](CapabilityApi.md#GetCapabilitySwitchManufacturingDefList) | **Get** /api/v1/capability/SwitchManufacturingDefs | Read a &#39;capability.SwitchManufacturingDef&#39; resource.
+[**PatchCapabilityActionsMetaData**](CapabilityApi.md#PatchCapabilityActionsMetaData) | **Patch** /api/v1/capability/ActionsMetaData/{Moid} | Update a &#39;capability.ActionsMetaData&#39; resource.
 [**PatchCapabilityAdapterDeprecatedDef**](CapabilityApi.md#PatchCapabilityAdapterDeprecatedDef) | **Patch** /api/v1/capability/AdapterDeprecatedDefs/{Moid} | Update a &#39;capability.AdapterDeprecatedDef&#39; resource.
 [**PatchCapabilityAdapterUnitDescriptor**](CapabilityApi.md#PatchCapabilityAdapterUnitDescriptor) | **Patch** /api/v1/capability/AdapterUnitDescriptors/{Moid} | Update a &#39;capability.AdapterUnitDescriptor&#39; resource.
 [**PatchCapabilityCatalog**](CapabilityApi.md#PatchCapabilityCatalog) | **Patch** /api/v1/capability/Catalogs/{Moid} | Update a &#39;capability.Catalog&#39; resource.
@@ -120,6 +129,7 @@ Method | HTTP request | Description
 [**PatchCapabilityEquipmentSlotArray**](CapabilityApi.md#PatchCapabilityEquipmentSlotArray) | **Patch** /api/v1/capability/EquipmentSlotArrays/{Moid} | Update a &#39;capability.EquipmentSlotArray&#39; resource.
 [**PatchCapabilityFanModuleDescriptor**](CapabilityApi.md#PatchCapabilityFanModuleDescriptor) | **Patch** /api/v1/capability/FanModuleDescriptors/{Moid} | Update a &#39;capability.FanModuleDescriptor&#39; resource.
 [**PatchCapabilityFanModuleManufacturingDef**](CapabilityApi.md#PatchCapabilityFanModuleManufacturingDef) | **Patch** /api/v1/capability/FanModuleManufacturingDefs/{Moid} | Update a &#39;capability.FanModuleManufacturingDef&#39; resource.
+[**PatchCapabilityFexCapabilityDef**](CapabilityApi.md#PatchCapabilityFexCapabilityDef) | **Patch** /api/v1/capability/FexCapabilityDefs/{Moid} | Update a &#39;capability.FexCapabilityDef&#39; resource.
 [**PatchCapabilityFexDescriptor**](CapabilityApi.md#PatchCapabilityFexDescriptor) | **Patch** /api/v1/capability/FexDescriptors/{Moid} | Update a &#39;capability.FexDescriptor&#39; resource.
 [**PatchCapabilityFexManufacturingDef**](CapabilityApi.md#PatchCapabilityFexManufacturingDef) | **Patch** /api/v1/capability/FexManufacturingDefs/{Moid} | Update a &#39;capability.FexManufacturingDef&#39; resource.
 [**PatchCapabilityIoCardCapabilityDef**](CapabilityApi.md#PatchCapabilityIoCardCapabilityDef) | **Patch** /api/v1/capability/IoCardCapabilityDefs/{Moid} | Update a &#39;capability.IoCardCapabilityDef&#39; resource.
@@ -137,6 +147,7 @@ Method | HTTP request | Description
 [**PatchCapabilitySwitchCapability**](CapabilityApi.md#PatchCapabilitySwitchCapability) | **Patch** /api/v1/capability/SwitchCapabilities/{Moid} | Update a &#39;capability.SwitchCapability&#39; resource.
 [**PatchCapabilitySwitchDescriptor**](CapabilityApi.md#PatchCapabilitySwitchDescriptor) | **Patch** /api/v1/capability/SwitchDescriptors/{Moid} | Update a &#39;capability.SwitchDescriptor&#39; resource.
 [**PatchCapabilitySwitchManufacturingDef**](CapabilityApi.md#PatchCapabilitySwitchManufacturingDef) | **Patch** /api/v1/capability/SwitchManufacturingDefs/{Moid} | Update a &#39;capability.SwitchManufacturingDef&#39; resource.
+[**UpdateCapabilityActionsMetaData**](CapabilityApi.md#UpdateCapabilityActionsMetaData) | **Post** /api/v1/capability/ActionsMetaData/{Moid} | Update a &#39;capability.ActionsMetaData&#39; resource.
 [**UpdateCapabilityAdapterDeprecatedDef**](CapabilityApi.md#UpdateCapabilityAdapterDeprecatedDef) | **Post** /api/v1/capability/AdapterDeprecatedDefs/{Moid} | Update a &#39;capability.AdapterDeprecatedDef&#39; resource.
 [**UpdateCapabilityAdapterUnitDescriptor**](CapabilityApi.md#UpdateCapabilityAdapterUnitDescriptor) | **Post** /api/v1/capability/AdapterUnitDescriptors/{Moid} | Update a &#39;capability.AdapterUnitDescriptor&#39; resource.
 [**UpdateCapabilityCatalog**](CapabilityApi.md#UpdateCapabilityCatalog) | **Post** /api/v1/capability/Catalogs/{Moid} | Update a &#39;capability.Catalog&#39; resource.
@@ -147,6 +158,7 @@ Method | HTTP request | Description
 [**UpdateCapabilityEquipmentSlotArray**](CapabilityApi.md#UpdateCapabilityEquipmentSlotArray) | **Post** /api/v1/capability/EquipmentSlotArrays/{Moid} | Update a &#39;capability.EquipmentSlotArray&#39; resource.
 [**UpdateCapabilityFanModuleDescriptor**](CapabilityApi.md#UpdateCapabilityFanModuleDescriptor) | **Post** /api/v1/capability/FanModuleDescriptors/{Moid} | Update a &#39;capability.FanModuleDescriptor&#39; resource.
 [**UpdateCapabilityFanModuleManufacturingDef**](CapabilityApi.md#UpdateCapabilityFanModuleManufacturingDef) | **Post** /api/v1/capability/FanModuleManufacturingDefs/{Moid} | Update a &#39;capability.FanModuleManufacturingDef&#39; resource.
+[**UpdateCapabilityFexCapabilityDef**](CapabilityApi.md#UpdateCapabilityFexCapabilityDef) | **Post** /api/v1/capability/FexCapabilityDefs/{Moid} | Update a &#39;capability.FexCapabilityDef&#39; resource.
 [**UpdateCapabilityFexDescriptor**](CapabilityApi.md#UpdateCapabilityFexDescriptor) | **Post** /api/v1/capability/FexDescriptors/{Moid} | Update a &#39;capability.FexDescriptor&#39; resource.
 [**UpdateCapabilityFexManufacturingDef**](CapabilityApi.md#UpdateCapabilityFexManufacturingDef) | **Post** /api/v1/capability/FexManufacturingDefs/{Moid} | Update a &#39;capability.FexManufacturingDef&#39; resource.
 [**UpdateCapabilityIoCardCapabilityDef**](CapabilityApi.md#UpdateCapabilityIoCardCapabilityDef) | **Post** /api/v1/capability/IoCardCapabilityDefs/{Moid} | Update a &#39;capability.IoCardCapabilityDef&#39; resource.
@@ -165,6 +177,74 @@ Method | HTTP request | Description
 [**UpdateCapabilitySwitchDescriptor**](CapabilityApi.md#UpdateCapabilitySwitchDescriptor) | **Post** /api/v1/capability/SwitchDescriptors/{Moid} | Update a &#39;capability.SwitchDescriptor&#39; resource.
 [**UpdateCapabilitySwitchManufacturingDef**](CapabilityApi.md#UpdateCapabilitySwitchManufacturingDef) | **Post** /api/v1/capability/SwitchManufacturingDefs/{Moid} | Update a &#39;capability.SwitchManufacturingDef&#39; resource.
 
+
+
+## CreateCapabilityActionsMetaData
+
+> CapabilityActionsMetaData CreateCapabilityActionsMetaData(ctx).CapabilityActionsMetaData(capabilityActionsMetaData).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+
+Create a 'capability.ActionsMetaData' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    capabilityActionsMetaData := *openapiclient.NewCapabilityActionsMetaData("ClassId_example", "ObjectType_example") // CapabilityActionsMetaData | The 'capability.ActionsMetaData' resource to create.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+    ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.CapabilityApi.CreateCapabilityActionsMetaData(context.Background()).CapabilityActionsMetaData(capabilityActionsMetaData).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.CreateCapabilityActionsMetaData``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateCapabilityActionsMetaData`: CapabilityActionsMetaData
+    fmt.Fprintf(os.Stdout, "Response from `CapabilityApi.CreateCapabilityActionsMetaData`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateCapabilityActionsMetaDataRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **capabilityActionsMetaData** | [**CapabilityActionsMetaData**](CapabilityActionsMetaData.md) | The &#39;capability.ActionsMetaData&#39; resource to create. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+ **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
+
+### Return type
+
+[**CapabilityActionsMetaData**](CapabilityActionsMetaData.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## CreateCapabilityAdapterDeprecatedDef
@@ -764,6 +844,74 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CapabilityFanModuleManufacturingDef**](CapabilityFanModuleManufacturingDef.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateCapabilityFexCapabilityDef
+
+> CapabilityFexCapabilityDef CreateCapabilityFexCapabilityDef(ctx).CapabilityFexCapabilityDef(capabilityFexCapabilityDef).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+
+Create a 'capability.FexCapabilityDef' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    capabilityFexCapabilityDef := *openapiclient.NewCapabilityFexCapabilityDef("ClassId_example", "ObjectType_example") // CapabilityFexCapabilityDef | The 'capability.FexCapabilityDef' resource to create.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+    ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.CapabilityApi.CreateCapabilityFexCapabilityDef(context.Background()).CapabilityFexCapabilityDef(capabilityFexCapabilityDef).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.CreateCapabilityFexCapabilityDef``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateCapabilityFexCapabilityDef`: CapabilityFexCapabilityDef
+    fmt.Fprintf(os.Stdout, "Response from `CapabilityApi.CreateCapabilityFexCapabilityDef`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateCapabilityFexCapabilityDefRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **capabilityFexCapabilityDef** | [**CapabilityFexCapabilityDef**](CapabilityFexCapabilityDef.md) | The &#39;capability.FexCapabilityDef&#39; resource to create. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+ **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
+
+### Return type
+
+[**CapabilityFexCapabilityDef**](CapabilityFexCapabilityDef.md)
 
 ### Authorization
 
@@ -1935,6 +2083,72 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## DeleteCapabilityActionsMetaData
+
+> DeleteCapabilityActionsMetaData(ctx, moid).Execute()
+
+Delete a 'capability.ActionsMetaData' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.CapabilityApi.DeleteCapabilityActionsMetaData(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.DeleteCapabilityActionsMetaData``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteCapabilityActionsMetaDataRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## DeleteCapabilityAdapterDeprecatedDef
 
 > DeleteCapabilityAdapterDeprecatedDef(ctx, moid).Execute()
@@ -2505,6 +2719,72 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteCapabilityFanModuleManufacturingDefRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteCapabilityFexCapabilityDef
+
+> DeleteCapabilityFexCapabilityDef(ctx, moid).Execute()
+
+Delete a 'capability.FexCapabilityDef' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.CapabilityApi.DeleteCapabilityFexCapabilityDef(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.DeleteCapabilityFexCapabilityDef``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteCapabilityFexCapabilityDefRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -3645,6 +3925,158 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: Not defined
 - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetCapabilityActionsMetaDataByMoid
+
+> CapabilityActionsMetaData GetCapabilityActionsMetaDataByMoid(ctx, moid).Execute()
+
+Read a 'capability.ActionsMetaData' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.CapabilityApi.GetCapabilityActionsMetaDataByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.GetCapabilityActionsMetaDataByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetCapabilityActionsMetaDataByMoid`: CapabilityActionsMetaData
+    fmt.Fprintf(os.Stdout, "Response from `CapabilityApi.GetCapabilityActionsMetaDataByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetCapabilityActionsMetaDataByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**CapabilityActionsMetaData**](CapabilityActionsMetaData.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetCapabilityActionsMetaDataList
+
+> CapabilityActionsMetaDataResponse GetCapabilityActionsMetaDataList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'capability.ActionsMetaData' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.CapabilityApi.GetCapabilityActionsMetaDataList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.GetCapabilityActionsMetaDataList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetCapabilityActionsMetaDataList`: CapabilityActionsMetaDataResponse
+    fmt.Fprintf(os.Stdout, "Response from `CapabilityApi.GetCapabilityActionsMetaDataList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetCapabilityActionsMetaDataListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**CapabilityActionsMetaDataResponse**](CapabilityActionsMetaDataResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -5156,6 +5588,158 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CapabilityFanModuleManufacturingDefResponse**](CapabilityFanModuleManufacturingDefResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetCapabilityFexCapabilityDefByMoid
+
+> CapabilityFexCapabilityDef GetCapabilityFexCapabilityDefByMoid(ctx, moid).Execute()
+
+Read a 'capability.FexCapabilityDef' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.CapabilityApi.GetCapabilityFexCapabilityDefByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.GetCapabilityFexCapabilityDefByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetCapabilityFexCapabilityDefByMoid`: CapabilityFexCapabilityDef
+    fmt.Fprintf(os.Stdout, "Response from `CapabilityApi.GetCapabilityFexCapabilityDefByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetCapabilityFexCapabilityDefByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**CapabilityFexCapabilityDef**](CapabilityFexCapabilityDef.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetCapabilityFexCapabilityDefList
+
+> CapabilityFexCapabilityDefResponse GetCapabilityFexCapabilityDefList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'capability.FexCapabilityDef' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.CapabilityApi.GetCapabilityFexCapabilityDefList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.GetCapabilityFexCapabilityDefList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetCapabilityFexCapabilityDefList`: CapabilityFexCapabilityDefResponse
+    fmt.Fprintf(os.Stdout, "Response from `CapabilityApi.GetCapabilityFexCapabilityDefList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetCapabilityFexCapabilityDefListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**CapabilityFexCapabilityDefResponse**](CapabilityFexCapabilityDefResponse.md)
 
 ### Authorization
 
@@ -7755,6 +8339,78 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## PatchCapabilityActionsMetaData
+
+> CapabilityActionsMetaData PatchCapabilityActionsMetaData(ctx, moid).CapabilityActionsMetaData(capabilityActionsMetaData).IfMatch(ifMatch).Execute()
+
+Update a 'capability.ActionsMetaData' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    capabilityActionsMetaData := *openapiclient.NewCapabilityActionsMetaData("ClassId_example", "ObjectType_example") // CapabilityActionsMetaData | The 'capability.ActionsMetaData' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.CapabilityApi.PatchCapabilityActionsMetaData(context.Background(), moid).CapabilityActionsMetaData(capabilityActionsMetaData).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.PatchCapabilityActionsMetaData``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchCapabilityActionsMetaData`: CapabilityActionsMetaData
+    fmt.Fprintf(os.Stdout, "Response from `CapabilityApi.PatchCapabilityActionsMetaData`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchCapabilityActionsMetaDataRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **capabilityActionsMetaData** | [**CapabilityActionsMetaData**](CapabilityActionsMetaData.md) | The &#39;capability.ActionsMetaData&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**CapabilityActionsMetaData**](CapabilityActionsMetaData.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## PatchCapabilityAdapterDeprecatedDef
 
 > CapabilityAdapterDeprecatedDef PatchCapabilityAdapterDeprecatedDef(ctx, moid).CapabilityAdapterDeprecatedDef(capabilityAdapterDeprecatedDef).IfMatch(ifMatch).Execute()
@@ -8460,6 +9116,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CapabilityFanModuleManufacturingDef**](CapabilityFanModuleManufacturingDef.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PatchCapabilityFexCapabilityDef
+
+> CapabilityFexCapabilityDef PatchCapabilityFexCapabilityDef(ctx, moid).CapabilityFexCapabilityDef(capabilityFexCapabilityDef).IfMatch(ifMatch).Execute()
+
+Update a 'capability.FexCapabilityDef' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    capabilityFexCapabilityDef := *openapiclient.NewCapabilityFexCapabilityDef("ClassId_example", "ObjectType_example") // CapabilityFexCapabilityDef | The 'capability.FexCapabilityDef' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.CapabilityApi.PatchCapabilityFexCapabilityDef(context.Background(), moid).CapabilityFexCapabilityDef(capabilityFexCapabilityDef).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.PatchCapabilityFexCapabilityDef``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchCapabilityFexCapabilityDef`: CapabilityFexCapabilityDef
+    fmt.Fprintf(os.Stdout, "Response from `CapabilityApi.PatchCapabilityFexCapabilityDef`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchCapabilityFexCapabilityDefRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **capabilityFexCapabilityDef** | [**CapabilityFexCapabilityDef**](CapabilityFexCapabilityDef.md) | The &#39;capability.FexCapabilityDef&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**CapabilityFexCapabilityDef**](CapabilityFexCapabilityDef.md)
 
 ### Authorization
 
@@ -9699,6 +10427,78 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## UpdateCapabilityActionsMetaData
+
+> CapabilityActionsMetaData UpdateCapabilityActionsMetaData(ctx, moid).CapabilityActionsMetaData(capabilityActionsMetaData).IfMatch(ifMatch).Execute()
+
+Update a 'capability.ActionsMetaData' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    capabilityActionsMetaData := *openapiclient.NewCapabilityActionsMetaData("ClassId_example", "ObjectType_example") // CapabilityActionsMetaData | The 'capability.ActionsMetaData' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.CapabilityApi.UpdateCapabilityActionsMetaData(context.Background(), moid).CapabilityActionsMetaData(capabilityActionsMetaData).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.UpdateCapabilityActionsMetaData``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateCapabilityActionsMetaData`: CapabilityActionsMetaData
+    fmt.Fprintf(os.Stdout, "Response from `CapabilityApi.UpdateCapabilityActionsMetaData`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateCapabilityActionsMetaDataRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **capabilityActionsMetaData** | [**CapabilityActionsMetaData**](CapabilityActionsMetaData.md) | The &#39;capability.ActionsMetaData&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**CapabilityActionsMetaData**](CapabilityActionsMetaData.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## UpdateCapabilityAdapterDeprecatedDef
 
 > CapabilityAdapterDeprecatedDef UpdateCapabilityAdapterDeprecatedDef(ctx, moid).CapabilityAdapterDeprecatedDef(capabilityAdapterDeprecatedDef).IfMatch(ifMatch).Execute()
@@ -10404,6 +11204,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CapabilityFanModuleManufacturingDef**](CapabilityFanModuleManufacturingDef.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateCapabilityFexCapabilityDef
+
+> CapabilityFexCapabilityDef UpdateCapabilityFexCapabilityDef(ctx, moid).CapabilityFexCapabilityDef(capabilityFexCapabilityDef).IfMatch(ifMatch).Execute()
+
+Update a 'capability.FexCapabilityDef' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    capabilityFexCapabilityDef := *openapiclient.NewCapabilityFexCapabilityDef("ClassId_example", "ObjectType_example") // CapabilityFexCapabilityDef | The 'capability.FexCapabilityDef' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.CapabilityApi.UpdateCapabilityFexCapabilityDef(context.Background(), moid).CapabilityFexCapabilityDef(capabilityFexCapabilityDef).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.UpdateCapabilityFexCapabilityDef``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateCapabilityFexCapabilityDef`: CapabilityFexCapabilityDef
+    fmt.Fprintf(os.Stdout, "Response from `CapabilityApi.UpdateCapabilityFexCapabilityDef`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateCapabilityFexCapabilityDefRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **capabilityFexCapabilityDef** | [**CapabilityFexCapabilityDef**](CapabilityFexCapabilityDef.md) | The &#39;capability.FexCapabilityDef&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**CapabilityFexCapabilityDef**](CapabilityFexCapabilityDef.md)
 
 ### Authorization
 

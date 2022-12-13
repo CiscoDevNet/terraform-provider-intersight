@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -24,6 +24,8 @@ type LicenseLicenseInfoAllOf struct {
 	ObjectType string `json:"ObjectType"`
 	// The license administrative state. Set this property to 'true' to activate the license entitlements.
 	ActiveAdmin *bool `json:"ActiveAdmin,omitempty"`
+	// The total balance we have for licenses.
+	Balance *int64 `json:"Balance,omitempty"`
 	// The number of days left for licenseState to stay in TrialPeriod or OutOfCompliance state.
 	DaysLeft *int64 `json:"DaysLeft,omitempty"`
 	// The date and time when the trial period expires. The value of the 'endTime' property is set when the account enters the TrialPeriod or OutOfCompliance state.
@@ -44,10 +46,15 @@ type LicenseLicenseInfoAllOf struct {
 	LicenseCountPurchased *int64 `json:"LicenseCountPurchased,omitempty"`
 	// The license state defined by Intersight. The value may be one of NotLicensed, TrialPeriod, OutOfCompliance, Compliance, GraceExpired, or TrialExpired. * `NotLicensed` - The license token is neither activated nor registered. * `GraceExpired` - The license grace period has expired. * `TrialPeriod` - The 90 days of trial period. * `OutOfCompliance` - The license is out of compliance. * `Compliance` - The license is in compliance. * `TrialExpired` - The trial period of 90 days has expired.
 	LicenseState *string `json:"LicenseState,omitempty"`
-	// The name of the Intersight license entitlement. For example, this property may be set to 'Essential'. * `Base` - Base as a License type. It is default license type. * `Essential` - Essential as a License type. * `Standard` - Standard as a License type. * `Advantage` - Advantage as a License type. * `Premier` - Premier as a License type. * `IWO-Essential` - IWO-Essential as a License type. * `IWO-Advantage` - IWO-Advantage as a License type. * `IWO-Premier` - IWO-Premier as a License type. * `IKS-Advantage` - IKS-Advantage as a License type.
+	// The name of the Intersight license entitlement. For example, this property may be set to 'Essential'. * `Base` - Base as a License type. It is default license type. * `Essential` - Essential as a License type. * `Standard` - Standard as a License type. * `Advantage` - Advantage as a License type. * `Premier` - Premier as a License type. * `IWO-Essential` - IWO-Essential as a License type. * `IWO-Advantage` - IWO-Advantage as a License type. * `IWO-Premier` - IWO-Premier as a License type. * `IKS-Advantage` - IKS-Advantage as a License type. * `INC-Premier-1GFixed` - Premier 1G Fixed license tier for Intersight Nexus Cloud. * `INC-Premier-10GFixed` - Premier 10G Fixed license tier for Intersight Nexus Cloud. * `INC-Premier-100GFixed` - Premier 100G Fixed license tier for Intersight Nexus Cloud. * `INC-Premier-Mod4Slot` - Premier Modular 4 slot license tier for Intersight Nexus Cloud. * `INC-Premier-Mod8Slot` - Premier Modular 8 slot license tier for Intersight Nexus Cloud. * `INC-Premier-D2OpsFixed` - Premier D2Ops fixed license tier for Intersight Nexus Cloud. * `INC-Premier-D2OpsMod` - Premier D2Ops modular license tier for Intersight Nexus Cloud. * `IntersightTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode Intersight tiers. * `IWOTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode IKS tiers. * `IKSTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode IWO tiers. * `INCTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode Nexus tiers.
 	LicenseType *string `json:"LicenseType,omitempty"`
+	// The total number of substituted licenses added or removed.
+	NetSubstitution *int64 `json:"NetSubstitution,omitempty"`
 	// The date and time when the licenseState entered the TrialPeriod or OutOfCompliance state.
 	StartTime *time.Time `json:"StartTime,omitempty"`
+	// The id of license subscription.
+	SubscriptionId     *string                    `json:"SubscriptionId,omitempty"`
+	SubstitutedLicense []LicenseSubstituteLicense `json:"SubstitutedLicense,omitempty"`
 	// The administrative state of the trial license. When the LicenseState is set to 'NotLicensed', 'trialAdmin' can be set to true to start the trial period, i.e. licenseState is set to be TrialPeriod.
 	TrialAdmin           *bool                                  `json:"TrialAdmin,omitempty"`
 	AccountLicenseData   *LicenseAccountLicenseDataRelationship `json:"AccountLicenseData,omitempty"`
@@ -157,6 +164,38 @@ func (o *LicenseLicenseInfoAllOf) HasActiveAdmin() bool {
 // SetActiveAdmin gets a reference to the given bool and assigns it to the ActiveAdmin field.
 func (o *LicenseLicenseInfoAllOf) SetActiveAdmin(v bool) {
 	o.ActiveAdmin = &v
+}
+
+// GetBalance returns the Balance field value if set, zero value otherwise.
+func (o *LicenseLicenseInfoAllOf) GetBalance() int64 {
+	if o == nil || o.Balance == nil {
+		var ret int64
+		return ret
+	}
+	return *o.Balance
+}
+
+// GetBalanceOk returns a tuple with the Balance field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LicenseLicenseInfoAllOf) GetBalanceOk() (*int64, bool) {
+	if o == nil || o.Balance == nil {
+		return nil, false
+	}
+	return o.Balance, true
+}
+
+// HasBalance returns a boolean if a field has been set.
+func (o *LicenseLicenseInfoAllOf) HasBalance() bool {
+	if o != nil && o.Balance != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetBalance gets a reference to the given int64 and assigns it to the Balance field.
+func (o *LicenseLicenseInfoAllOf) SetBalance(v int64) {
+	o.Balance = &v
 }
 
 // GetDaysLeft returns the DaysLeft field value if set, zero value otherwise.
@@ -511,6 +550,38 @@ func (o *LicenseLicenseInfoAllOf) SetLicenseType(v string) {
 	o.LicenseType = &v
 }
 
+// GetNetSubstitution returns the NetSubstitution field value if set, zero value otherwise.
+func (o *LicenseLicenseInfoAllOf) GetNetSubstitution() int64 {
+	if o == nil || o.NetSubstitution == nil {
+		var ret int64
+		return ret
+	}
+	return *o.NetSubstitution
+}
+
+// GetNetSubstitutionOk returns a tuple with the NetSubstitution field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LicenseLicenseInfoAllOf) GetNetSubstitutionOk() (*int64, bool) {
+	if o == nil || o.NetSubstitution == nil {
+		return nil, false
+	}
+	return o.NetSubstitution, true
+}
+
+// HasNetSubstitution returns a boolean if a field has been set.
+func (o *LicenseLicenseInfoAllOf) HasNetSubstitution() bool {
+	if o != nil && o.NetSubstitution != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNetSubstitution gets a reference to the given int64 and assigns it to the NetSubstitution field.
+func (o *LicenseLicenseInfoAllOf) SetNetSubstitution(v int64) {
+	o.NetSubstitution = &v
+}
+
 // GetStartTime returns the StartTime field value if set, zero value otherwise.
 func (o *LicenseLicenseInfoAllOf) GetStartTime() time.Time {
 	if o == nil || o.StartTime == nil {
@@ -541,6 +612,71 @@ func (o *LicenseLicenseInfoAllOf) HasStartTime() bool {
 // SetStartTime gets a reference to the given time.Time and assigns it to the StartTime field.
 func (o *LicenseLicenseInfoAllOf) SetStartTime(v time.Time) {
 	o.StartTime = &v
+}
+
+// GetSubscriptionId returns the SubscriptionId field value if set, zero value otherwise.
+func (o *LicenseLicenseInfoAllOf) GetSubscriptionId() string {
+	if o == nil || o.SubscriptionId == nil {
+		var ret string
+		return ret
+	}
+	return *o.SubscriptionId
+}
+
+// GetSubscriptionIdOk returns a tuple with the SubscriptionId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LicenseLicenseInfoAllOf) GetSubscriptionIdOk() (*string, bool) {
+	if o == nil || o.SubscriptionId == nil {
+		return nil, false
+	}
+	return o.SubscriptionId, true
+}
+
+// HasSubscriptionId returns a boolean if a field has been set.
+func (o *LicenseLicenseInfoAllOf) HasSubscriptionId() bool {
+	if o != nil && o.SubscriptionId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSubscriptionId gets a reference to the given string and assigns it to the SubscriptionId field.
+func (o *LicenseLicenseInfoAllOf) SetSubscriptionId(v string) {
+	o.SubscriptionId = &v
+}
+
+// GetSubstitutedLicense returns the SubstitutedLicense field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *LicenseLicenseInfoAllOf) GetSubstitutedLicense() []LicenseSubstituteLicense {
+	if o == nil {
+		var ret []LicenseSubstituteLicense
+		return ret
+	}
+	return o.SubstitutedLicense
+}
+
+// GetSubstitutedLicenseOk returns a tuple with the SubstitutedLicense field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *LicenseLicenseInfoAllOf) GetSubstitutedLicenseOk() ([]LicenseSubstituteLicense, bool) {
+	if o == nil || o.SubstitutedLicense == nil {
+		return nil, false
+	}
+	return o.SubstitutedLicense, true
+}
+
+// HasSubstitutedLicense returns a boolean if a field has been set.
+func (o *LicenseLicenseInfoAllOf) HasSubstitutedLicense() bool {
+	if o != nil && o.SubstitutedLicense != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSubstitutedLicense gets a reference to the given []LicenseSubstituteLicense and assigns it to the SubstitutedLicense field.
+func (o *LicenseLicenseInfoAllOf) SetSubstitutedLicense(v []LicenseSubstituteLicense) {
+	o.SubstitutedLicense = v
 }
 
 // GetTrialAdmin returns the TrialAdmin field value if set, zero value otherwise.
@@ -618,6 +754,9 @@ func (o LicenseLicenseInfoAllOf) MarshalJSON() ([]byte, error) {
 	if o.ActiveAdmin != nil {
 		toSerialize["ActiveAdmin"] = o.ActiveAdmin
 	}
+	if o.Balance != nil {
+		toSerialize["Balance"] = o.Balance
+	}
 	if o.DaysLeft != nil {
 		toSerialize["DaysLeft"] = o.DaysLeft
 	}
@@ -651,8 +790,17 @@ func (o LicenseLicenseInfoAllOf) MarshalJSON() ([]byte, error) {
 	if o.LicenseType != nil {
 		toSerialize["LicenseType"] = o.LicenseType
 	}
+	if o.NetSubstitution != nil {
+		toSerialize["NetSubstitution"] = o.NetSubstitution
+	}
 	if o.StartTime != nil {
 		toSerialize["StartTime"] = o.StartTime
+	}
+	if o.SubscriptionId != nil {
+		toSerialize["SubscriptionId"] = o.SubscriptionId
+	}
+	if o.SubstitutedLicense != nil {
+		toSerialize["SubstitutedLicense"] = o.SubstitutedLicense
 	}
 	if o.TrialAdmin != nil {
 		toSerialize["TrialAdmin"] = o.TrialAdmin
@@ -681,6 +829,7 @@ func (o *LicenseLicenseInfoAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ActiveAdmin")
+		delete(additionalProperties, "Balance")
 		delete(additionalProperties, "DaysLeft")
 		delete(additionalProperties, "EndTime")
 		delete(additionalProperties, "EnforceMode")
@@ -692,7 +841,10 @@ func (o *LicenseLicenseInfoAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "LicenseCountPurchased")
 		delete(additionalProperties, "LicenseState")
 		delete(additionalProperties, "LicenseType")
+		delete(additionalProperties, "NetSubstitution")
 		delete(additionalProperties, "StartTime")
+		delete(additionalProperties, "SubscriptionId")
+		delete(additionalProperties, "SubstitutedLicense")
 		delete(additionalProperties, "TrialAdmin")
 		delete(additionalProperties, "AccountLicenseData")
 		o.AdditionalProperties = additionalProperties

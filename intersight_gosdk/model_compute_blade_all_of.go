@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -37,7 +37,9 @@ type ComputeBladeAllOf struct {
 	Bmc                                *ManagementControllerRelationship               `json:"Bmc,omitempty"`
 	Board                              *ComputeBoardRelationship                       `json:"Board,omitempty"`
 	BootDeviceBootmode                 *BootDeviceBootModeRelationship                 `json:"BootDeviceBootmode,omitempty"`
-	EquipmentChassis                   *EquipmentChassisRelationship                   `json:"EquipmentChassis,omitempty"`
+	// An array of relationships to computePersonality resources.
+	ComputePersonality []ComputePersonalityRelationship `json:"ComputePersonality,omitempty"`
+	EquipmentChassis   *EquipmentChassisRelationship    `json:"EquipmentChassis,omitempty"`
 	// An array of relationships to equipmentIoExpander resources.
 	EquipmentIoExpanders []EquipmentIoExpanderRelationship `json:"EquipmentIoExpanders,omitempty"`
 	// An array of relationships to inventoryGenericInventoryHolder resources.
@@ -488,6 +490,39 @@ func (o *ComputeBladeAllOf) HasBootDeviceBootmode() bool {
 // SetBootDeviceBootmode gets a reference to the given BootDeviceBootModeRelationship and assigns it to the BootDeviceBootmode field.
 func (o *ComputeBladeAllOf) SetBootDeviceBootmode(v BootDeviceBootModeRelationship) {
 	o.BootDeviceBootmode = &v
+}
+
+// GetComputePersonality returns the ComputePersonality field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ComputeBladeAllOf) GetComputePersonality() []ComputePersonalityRelationship {
+	if o == nil {
+		var ret []ComputePersonalityRelationship
+		return ret
+	}
+	return o.ComputePersonality
+}
+
+// GetComputePersonalityOk returns a tuple with the ComputePersonality field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ComputeBladeAllOf) GetComputePersonalityOk() ([]ComputePersonalityRelationship, bool) {
+	if o == nil || o.ComputePersonality == nil {
+		return nil, false
+	}
+	return o.ComputePersonality, true
+}
+
+// HasComputePersonality returns a boolean if a field has been set.
+func (o *ComputeBladeAllOf) HasComputePersonality() bool {
+	if o != nil && o.ComputePersonality != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetComputePersonality gets a reference to the given []ComputePersonalityRelationship and assigns it to the ComputePersonality field.
+func (o *ComputeBladeAllOf) SetComputePersonality(v []ComputePersonalityRelationship) {
+	o.ComputePersonality = v
 }
 
 // GetEquipmentChassis returns the EquipmentChassis field value if set, zero value otherwise.
@@ -988,6 +1023,9 @@ func (o ComputeBladeAllOf) MarshalJSON() ([]byte, error) {
 	if o.BootDeviceBootmode != nil {
 		toSerialize["BootDeviceBootmode"] = o.BootDeviceBootmode
 	}
+	if o.ComputePersonality != nil {
+		toSerialize["ComputePersonality"] = o.ComputePersonality
+	}
 	if o.EquipmentChassis != nil {
 		toSerialize["EquipmentChassis"] = o.EquipmentChassis
 	}
@@ -1061,6 +1099,7 @@ func (o *ComputeBladeAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "Bmc")
 		delete(additionalProperties, "Board")
 		delete(additionalProperties, "BootDeviceBootmode")
+		delete(additionalProperties, "ComputePersonality")
 		delete(additionalProperties, "EquipmentChassis")
 		delete(additionalProperties, "EquipmentIoExpanders")
 		delete(additionalProperties, "GenericInventoryHolders")

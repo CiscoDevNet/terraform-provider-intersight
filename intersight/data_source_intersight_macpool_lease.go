@@ -279,6 +279,46 @@ func getMacpoolLeaseSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"reservation": {
+			Description: "The holder of a reference to reservation Moid and the specific details on lease condition for this reservation. Specified to allocate already reserved identities.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"consumer_name": {
+						Description: "The consumer name for which the reserved MAC would be used.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"consumer_type": {
+						Description: "The consumer type for which the reserved MAC would be used.\n* `Vnic` - MAC reservation would be used by VNIC.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"reservation_moid": {
+						Description: "The moid of the reservation object.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"shared_scope": {
 			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 			Type:        schema.TypeString,
@@ -789,6 +829,55 @@ func dataSourceMacpoolLeaseRead(c context.Context, d *schema.ResourceData, meta 
 		}
 	}
 
+	if v, ok := d.GetOk("reservation"); ok {
+		p := make([]models.MacpoolReservationReference, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MacpoolReservationReference{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("macpool.ReservationReference")
+			if v, ok := l["consumer_name"]; ok {
+				{
+					x := (v.(string))
+					o.SetConsumerName(x)
+				}
+			}
+			if v, ok := l["consumer_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetConsumerType(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["reservation_moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetReservationMoid(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetReservation(x)
+		}
+	}
+
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
@@ -1004,6 +1093,8 @@ func dataSourceMacpoolLeaseRead(c context.Context, d *schema.ResourceData, meta 
 				temp["pool"] = flattenMapMacpoolPoolRelationship(s.GetPool(), d)
 
 				temp["pool_member"] = flattenMapMacpoolPoolMemberRelationship(s.GetPoolMember(), d)
+
+				temp["reservation"] = flattenMapMacpoolReservationReference(s.GetReservation(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)

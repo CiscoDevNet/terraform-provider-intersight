@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -27,6 +27,8 @@ type NetworkInterfaceListAllOf struct {
 	AllowedVlans *string `json:"AllowedVlans,omitempty"`
 	// Description of the interface list.
 	Description *string `json:"Description,omitempty"`
+	// Display name of the interface list.
+	DisplayName *string `json:"DisplayName,omitempty"`
 	// IP address of the interface list.
 	IpAddress *string `json:"IpAddress,omitempty"`
 	// IP subnet of the interface list.
@@ -39,6 +41,8 @@ type NetworkInterfaceListAllOf struct {
 	Name *string `json:"Name,omitempty"`
 	// Operational state of the interface list.
 	OperState *string `json:"OperState,omitempty"`
+	// Port channel id for port channel created on FI switch.
+	PortChannelId *int64 `json:"PortChannelId,omitempty"`
 	// Interface types supported in Network device like Subinterfaces, Breakout Interfaces.
 	PortSubType *string `json:"PortSubType,omitempty"`
 	// Port type of interface list.
@@ -223,6 +227,38 @@ func (o *NetworkInterfaceListAllOf) HasDescription() bool {
 // SetDescription gets a reference to the given string and assigns it to the Description field.
 func (o *NetworkInterfaceListAllOf) SetDescription(v string) {
 	o.Description = &v
+}
+
+// GetDisplayName returns the DisplayName field value if set, zero value otherwise.
+func (o *NetworkInterfaceListAllOf) GetDisplayName() string {
+	if o == nil || o.DisplayName == nil {
+		var ret string
+		return ret
+	}
+	return *o.DisplayName
+}
+
+// GetDisplayNameOk returns a tuple with the DisplayName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkInterfaceListAllOf) GetDisplayNameOk() (*string, bool) {
+	if o == nil || o.DisplayName == nil {
+		return nil, false
+	}
+	return o.DisplayName, true
+}
+
+// HasDisplayName returns a boolean if a field has been set.
+func (o *NetworkInterfaceListAllOf) HasDisplayName() bool {
+	if o != nil && o.DisplayName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDisplayName gets a reference to the given string and assigns it to the DisplayName field.
+func (o *NetworkInterfaceListAllOf) SetDisplayName(v string) {
+	o.DisplayName = &v
 }
 
 // GetIpAddress returns the IpAddress field value if set, zero value otherwise.
@@ -415,6 +451,38 @@ func (o *NetworkInterfaceListAllOf) HasOperState() bool {
 // SetOperState gets a reference to the given string and assigns it to the OperState field.
 func (o *NetworkInterfaceListAllOf) SetOperState(v string) {
 	o.OperState = &v
+}
+
+// GetPortChannelId returns the PortChannelId field value if set, zero value otherwise.
+func (o *NetworkInterfaceListAllOf) GetPortChannelId() int64 {
+	if o == nil || o.PortChannelId == nil {
+		var ret int64
+		return ret
+	}
+	return *o.PortChannelId
+}
+
+// GetPortChannelIdOk returns a tuple with the PortChannelId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkInterfaceListAllOf) GetPortChannelIdOk() (*int64, bool) {
+	if o == nil || o.PortChannelId == nil {
+		return nil, false
+	}
+	return o.PortChannelId, true
+}
+
+// HasPortChannelId returns a boolean if a field has been set.
+func (o *NetworkInterfaceListAllOf) HasPortChannelId() bool {
+	if o != nil && o.PortChannelId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPortChannelId gets a reference to the given int64 and assigns it to the PortChannelId field.
+func (o *NetworkInterfaceListAllOf) SetPortChannelId(v int64) {
+	o.PortChannelId = &v
 }
 
 // GetPortSubType returns the PortSubType field value if set, zero value otherwise.
@@ -690,6 +758,9 @@ func (o NetworkInterfaceListAllOf) MarshalJSON() ([]byte, error) {
 	if o.Description != nil {
 		toSerialize["Description"] = o.Description
 	}
+	if o.DisplayName != nil {
+		toSerialize["DisplayName"] = o.DisplayName
+	}
 	if o.IpAddress != nil {
 		toSerialize["IpAddress"] = o.IpAddress
 	}
@@ -707,6 +778,9 @@ func (o NetworkInterfaceListAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.OperState != nil {
 		toSerialize["OperState"] = o.OperState
+	}
+	if o.PortChannelId != nil {
+		toSerialize["PortChannelId"] = o.PortChannelId
 	}
 	if o.PortSubType != nil {
 		toSerialize["PortSubType"] = o.PortSubType
@@ -755,12 +829,14 @@ func (o *NetworkInterfaceListAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "AdminState")
 		delete(additionalProperties, "AllowedVlans")
 		delete(additionalProperties, "Description")
+		delete(additionalProperties, "DisplayName")
 		delete(additionalProperties, "IpAddress")
 		delete(additionalProperties, "IpSubnet")
 		delete(additionalProperties, "Mac")
 		delete(additionalProperties, "Mtu")
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "OperState")
+		delete(additionalProperties, "PortChannelId")
 		delete(additionalProperties, "PortSubType")
 		delete(additionalProperties, "PortType")
 		delete(additionalProperties, "SlotId")

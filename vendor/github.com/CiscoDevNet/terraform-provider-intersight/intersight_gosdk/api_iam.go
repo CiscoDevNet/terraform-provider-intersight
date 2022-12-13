@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -56,8 +56,8 @@ func (r ApiCreateIamAccountRequest) Execute() (*IamAccount, *http.Response, erro
 /*
 CreateIamAccount Create a 'iam.Account' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateIamAccountRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateIamAccountRequest
 */
 func (a *IamApiService) CreateIamAccount(ctx context.Context) ApiCreateIamAccountRequest {
 	return ApiCreateIamAccountRequest{
@@ -67,7 +67,8 @@ func (a *IamApiService) CreateIamAccount(ctx context.Context) ApiCreateIamAccoun
 }
 
 // Execute executes the request
-//  @return IamAccount
+//
+//	@return IamAccount
 func (a *IamApiService) CreateIamAccountExecute(r ApiCreateIamAccountRequest) (*IamAccount, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -232,8 +233,8 @@ func (r ApiCreateIamAccountExperienceRequest) Execute() (*IamAccountExperience, 
 /*
 CreateIamAccountExperience Create a 'iam.AccountExperience' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateIamAccountExperienceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateIamAccountExperienceRequest
 */
 func (a *IamApiService) CreateIamAccountExperience(ctx context.Context) ApiCreateIamAccountExperienceRequest {
 	return ApiCreateIamAccountExperienceRequest{
@@ -243,7 +244,8 @@ func (a *IamApiService) CreateIamAccountExperience(ctx context.Context) ApiCreat
 }
 
 // Execute executes the request
-//  @return IamAccountExperience
+//
+//	@return IamAccountExperience
 func (a *IamApiService) CreateIamAccountExperienceExecute(r ApiCreateIamAccountExperienceRequest) (*IamAccountExperience, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -408,8 +410,8 @@ func (r ApiCreateIamApiKeyRequest) Execute() (*IamApiKey, *http.Response, error)
 /*
 CreateIamApiKey Create a 'iam.ApiKey' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateIamApiKeyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateIamApiKeyRequest
 */
 func (a *IamApiService) CreateIamApiKey(ctx context.Context) ApiCreateIamApiKeyRequest {
 	return ApiCreateIamApiKeyRequest{
@@ -419,7 +421,8 @@ func (a *IamApiService) CreateIamApiKey(ctx context.Context) ApiCreateIamApiKeyR
 }
 
 // Execute executes the request
-//  @return IamApiKey
+//
+//	@return IamApiKey
 func (a *IamApiService) CreateIamApiKeyExecute(r ApiCreateIamApiKeyRequest) (*IamApiKey, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -584,8 +587,8 @@ func (r ApiCreateIamAppRegistrationRequest) Execute() (*IamAppRegistration, *htt
 /*
 CreateIamAppRegistration Create a 'iam.AppRegistration' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateIamAppRegistrationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateIamAppRegistrationRequest
 */
 func (a *IamApiService) CreateIamAppRegistration(ctx context.Context) ApiCreateIamAppRegistrationRequest {
 	return ApiCreateIamAppRegistrationRequest{
@@ -595,7 +598,8 @@ func (a *IamApiService) CreateIamAppRegistration(ctx context.Context) ApiCreateI
 }
 
 // Execute executes the request
-//  @return IamAppRegistration
+//
+//	@return IamAppRegistration
 func (a *IamApiService) CreateIamAppRegistrationExecute(r ApiCreateIamAppRegistrationRequest) (*IamAppRegistration, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -760,8 +764,8 @@ func (r ApiCreateIamCertificateRequest) Execute() (*IamCertificate, *http.Respon
 /*
 CreateIamCertificate Create a 'iam.Certificate' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateIamCertificateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateIamCertificateRequest
 */
 func (a *IamApiService) CreateIamCertificate(ctx context.Context) ApiCreateIamCertificateRequest {
 	return ApiCreateIamCertificateRequest{
@@ -771,7 +775,8 @@ func (a *IamApiService) CreateIamCertificate(ctx context.Context) ApiCreateIamCe
 }
 
 // Execute executes the request
-//  @return IamCertificate
+//
+//	@return IamCertificate
 func (a *IamApiService) CreateIamCertificateExecute(r ApiCreateIamCertificateRequest) (*IamCertificate, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -936,8 +941,8 @@ func (r ApiCreateIamCertificateRequestRequest) Execute() (*IamCertificateRequest
 /*
 CreateIamCertificateRequest Create a 'iam.CertificateRequest' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateIamCertificateRequestRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateIamCertificateRequestRequest
 */
 func (a *IamApiService) CreateIamCertificateRequest(ctx context.Context) ApiCreateIamCertificateRequestRequest {
 	return ApiCreateIamCertificateRequestRequest{
@@ -947,7 +952,8 @@ func (a *IamApiService) CreateIamCertificateRequest(ctx context.Context) ApiCrea
 }
 
 // Execute executes the request
-//  @return IamCertificateRequest
+//
+//	@return IamCertificateRequest
 func (a *IamApiService) CreateIamCertificateRequestExecute(r ApiCreateIamCertificateRequestRequest) (*IamCertificateRequest, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1112,8 +1118,8 @@ func (r ApiCreateIamDomainNameInfoRequest) Execute() (*IamDomainNameInfo, *http.
 /*
 CreateIamDomainNameInfo Create a 'iam.DomainNameInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateIamDomainNameInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateIamDomainNameInfoRequest
 */
 func (a *IamApiService) CreateIamDomainNameInfo(ctx context.Context) ApiCreateIamDomainNameInfoRequest {
 	return ApiCreateIamDomainNameInfoRequest{
@@ -1123,7 +1129,8 @@ func (a *IamApiService) CreateIamDomainNameInfo(ctx context.Context) ApiCreateIa
 }
 
 // Execute executes the request
-//  @return IamDomainNameInfo
+//
+//	@return IamDomainNameInfo
 func (a *IamApiService) CreateIamDomainNameInfoExecute(r ApiCreateIamDomainNameInfoRequest) (*IamDomainNameInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1288,8 +1295,8 @@ func (r ApiCreateIamEndPointUserRequest) Execute() (*IamEndPointUser, *http.Resp
 /*
 CreateIamEndPointUser Create a 'iam.EndPointUser' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateIamEndPointUserRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateIamEndPointUserRequest
 */
 func (a *IamApiService) CreateIamEndPointUser(ctx context.Context) ApiCreateIamEndPointUserRequest {
 	return ApiCreateIamEndPointUserRequest{
@@ -1299,7 +1306,8 @@ func (a *IamApiService) CreateIamEndPointUser(ctx context.Context) ApiCreateIamE
 }
 
 // Execute executes the request
-//  @return IamEndPointUser
+//
+//	@return IamEndPointUser
 func (a *IamApiService) CreateIamEndPointUserExecute(r ApiCreateIamEndPointUserRequest) (*IamEndPointUser, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1464,8 +1472,8 @@ func (r ApiCreateIamEndPointUserPolicyRequest) Execute() (*IamEndPointUserPolicy
 /*
 CreateIamEndPointUserPolicy Create a 'iam.EndPointUserPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateIamEndPointUserPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateIamEndPointUserPolicyRequest
 */
 func (a *IamApiService) CreateIamEndPointUserPolicy(ctx context.Context) ApiCreateIamEndPointUserPolicyRequest {
 	return ApiCreateIamEndPointUserPolicyRequest{
@@ -1475,7 +1483,8 @@ func (a *IamApiService) CreateIamEndPointUserPolicy(ctx context.Context) ApiCrea
 }
 
 // Execute executes the request
-//  @return IamEndPointUserPolicy
+//
+//	@return IamEndPointUserPolicy
 func (a *IamApiService) CreateIamEndPointUserPolicyExecute(r ApiCreateIamEndPointUserPolicyRequest) (*IamEndPointUserPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1640,8 +1649,8 @@ func (r ApiCreateIamEndPointUserRoleRequest) Execute() (*IamEndPointUserRole, *h
 /*
 CreateIamEndPointUserRole Create a 'iam.EndPointUserRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateIamEndPointUserRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateIamEndPointUserRoleRequest
 */
 func (a *IamApiService) CreateIamEndPointUserRole(ctx context.Context) ApiCreateIamEndPointUserRoleRequest {
 	return ApiCreateIamEndPointUserRoleRequest{
@@ -1651,7 +1660,8 @@ func (a *IamApiService) CreateIamEndPointUserRole(ctx context.Context) ApiCreate
 }
 
 // Execute executes the request
-//  @return IamEndPointUserRole
+//
+//	@return IamEndPointUserRole
 func (a *IamApiService) CreateIamEndPointUserRoleExecute(r ApiCreateIamEndPointUserRoleRequest) (*IamEndPointUserRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1816,8 +1826,8 @@ func (r ApiCreateIamIdpRequest) Execute() (*IamIdp, *http.Response, error) {
 /*
 CreateIamIdp Create a 'iam.Idp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateIamIdpRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateIamIdpRequest
 */
 func (a *IamApiService) CreateIamIdp(ctx context.Context) ApiCreateIamIdpRequest {
 	return ApiCreateIamIdpRequest{
@@ -1827,7 +1837,8 @@ func (a *IamApiService) CreateIamIdp(ctx context.Context) ApiCreateIamIdpRequest
 }
 
 // Execute executes the request
-//  @return IamIdp
+//
+//	@return IamIdp
 func (a *IamApiService) CreateIamIdpExecute(r ApiCreateIamIdpRequest) (*IamIdp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1992,8 +2003,8 @@ func (r ApiCreateIamIpAccessManagementRequest) Execute() (*IamIpAccessManagement
 /*
 CreateIamIpAccessManagement Create a 'iam.IpAccessManagement' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateIamIpAccessManagementRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateIamIpAccessManagementRequest
 */
 func (a *IamApiService) CreateIamIpAccessManagement(ctx context.Context) ApiCreateIamIpAccessManagementRequest {
 	return ApiCreateIamIpAccessManagementRequest{
@@ -2003,7 +2014,8 @@ func (a *IamApiService) CreateIamIpAccessManagement(ctx context.Context) ApiCrea
 }
 
 // Execute executes the request
-//  @return IamIpAccessManagement
+//
+//	@return IamIpAccessManagement
 func (a *IamApiService) CreateIamIpAccessManagementExecute(r ApiCreateIamIpAccessManagementRequest) (*IamIpAccessManagement, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2168,8 +2180,8 @@ func (r ApiCreateIamIpAddressRequest) Execute() (*IamIpAddress, *http.Response, 
 /*
 CreateIamIpAddress Create a 'iam.IpAddress' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateIamIpAddressRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateIamIpAddressRequest
 */
 func (a *IamApiService) CreateIamIpAddress(ctx context.Context) ApiCreateIamIpAddressRequest {
 	return ApiCreateIamIpAddressRequest{
@@ -2179,7 +2191,8 @@ func (a *IamApiService) CreateIamIpAddress(ctx context.Context) ApiCreateIamIpAd
 }
 
 // Execute executes the request
-//  @return IamIpAddress
+//
+//	@return IamIpAddress
 func (a *IamApiService) CreateIamIpAddressExecute(r ApiCreateIamIpAddressRequest) (*IamIpAddress, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2344,8 +2357,8 @@ func (r ApiCreateIamLdapGroupRequest) Execute() (*IamLdapGroup, *http.Response, 
 /*
 CreateIamLdapGroup Create a 'iam.LdapGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateIamLdapGroupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateIamLdapGroupRequest
 */
 func (a *IamApiService) CreateIamLdapGroup(ctx context.Context) ApiCreateIamLdapGroupRequest {
 	return ApiCreateIamLdapGroupRequest{
@@ -2355,7 +2368,8 @@ func (a *IamApiService) CreateIamLdapGroup(ctx context.Context) ApiCreateIamLdap
 }
 
 // Execute executes the request
-//  @return IamLdapGroup
+//
+//	@return IamLdapGroup
 func (a *IamApiService) CreateIamLdapGroupExecute(r ApiCreateIamLdapGroupRequest) (*IamLdapGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2520,8 +2534,8 @@ func (r ApiCreateIamLdapPolicyRequest) Execute() (*IamLdapPolicy, *http.Response
 /*
 CreateIamLdapPolicy Create a 'iam.LdapPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateIamLdapPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateIamLdapPolicyRequest
 */
 func (a *IamApiService) CreateIamLdapPolicy(ctx context.Context) ApiCreateIamLdapPolicyRequest {
 	return ApiCreateIamLdapPolicyRequest{
@@ -2531,7 +2545,8 @@ func (a *IamApiService) CreateIamLdapPolicy(ctx context.Context) ApiCreateIamLda
 }
 
 // Execute executes the request
-//  @return IamLdapPolicy
+//
+//	@return IamLdapPolicy
 func (a *IamApiService) CreateIamLdapPolicyExecute(r ApiCreateIamLdapPolicyRequest) (*IamLdapPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2696,8 +2711,8 @@ func (r ApiCreateIamLdapProviderRequest) Execute() (*IamLdapProvider, *http.Resp
 /*
 CreateIamLdapProvider Create a 'iam.LdapProvider' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateIamLdapProviderRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateIamLdapProviderRequest
 */
 func (a *IamApiService) CreateIamLdapProvider(ctx context.Context) ApiCreateIamLdapProviderRequest {
 	return ApiCreateIamLdapProviderRequest{
@@ -2707,7 +2722,8 @@ func (a *IamApiService) CreateIamLdapProvider(ctx context.Context) ApiCreateIamL
 }
 
 // Execute executes the request
-//  @return IamLdapProvider
+//
+//	@return IamLdapProvider
 func (a *IamApiService) CreateIamLdapProviderExecute(r ApiCreateIamLdapProviderRequest) (*IamLdapProvider, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2872,8 +2888,8 @@ func (r ApiCreateIamPermissionRequest) Execute() (*IamPermission, *http.Response
 /*
 CreateIamPermission Create a 'iam.Permission' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateIamPermissionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateIamPermissionRequest
 */
 func (a *IamApiService) CreateIamPermission(ctx context.Context) ApiCreateIamPermissionRequest {
 	return ApiCreateIamPermissionRequest{
@@ -2883,7 +2899,8 @@ func (a *IamApiService) CreateIamPermission(ctx context.Context) ApiCreateIamPer
 }
 
 // Execute executes the request
-//  @return IamPermission
+//
+//	@return IamPermission
 func (a *IamApiService) CreateIamPermissionExecute(r ApiCreateIamPermissionRequest) (*IamPermission, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3048,8 +3065,8 @@ func (r ApiCreateIamPrivateKeySpecRequest) Execute() (*IamPrivateKeySpec, *http.
 /*
 CreateIamPrivateKeySpec Create a 'iam.PrivateKeySpec' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateIamPrivateKeySpecRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateIamPrivateKeySpecRequest
 */
 func (a *IamApiService) CreateIamPrivateKeySpec(ctx context.Context) ApiCreateIamPrivateKeySpecRequest {
 	return ApiCreateIamPrivateKeySpecRequest{
@@ -3059,7 +3076,8 @@ func (a *IamApiService) CreateIamPrivateKeySpec(ctx context.Context) ApiCreateIa
 }
 
 // Execute executes the request
-//  @return IamPrivateKeySpec
+//
+//	@return IamPrivateKeySpec
 func (a *IamApiService) CreateIamPrivateKeySpecExecute(r ApiCreateIamPrivateKeySpecRequest) (*IamPrivateKeySpec, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3224,8 +3242,8 @@ func (r ApiCreateIamQualifierRequest) Execute() (*IamQualifier, *http.Response, 
 /*
 CreateIamQualifier Create a 'iam.Qualifier' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateIamQualifierRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateIamQualifierRequest
 */
 func (a *IamApiService) CreateIamQualifier(ctx context.Context) ApiCreateIamQualifierRequest {
 	return ApiCreateIamQualifierRequest{
@@ -3235,7 +3253,8 @@ func (a *IamApiService) CreateIamQualifier(ctx context.Context) ApiCreateIamQual
 }
 
 // Execute executes the request
-//  @return IamQualifier
+//
+//	@return IamQualifier
 func (a *IamApiService) CreateIamQualifierExecute(r ApiCreateIamQualifierRequest) (*IamQualifier, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3400,8 +3419,8 @@ func (r ApiCreateIamResourceRolesRequest) Execute() (*IamResourceRoles, *http.Re
 /*
 CreateIamResourceRoles Create a 'iam.ResourceRoles' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateIamResourceRolesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateIamResourceRolesRequest
 */
 func (a *IamApiService) CreateIamResourceRoles(ctx context.Context) ApiCreateIamResourceRolesRequest {
 	return ApiCreateIamResourceRolesRequest{
@@ -3411,7 +3430,8 @@ func (a *IamApiService) CreateIamResourceRoles(ctx context.Context) ApiCreateIam
 }
 
 // Execute executes the request
-//  @return IamResourceRoles
+//
+//	@return IamResourceRoles
 func (a *IamApiService) CreateIamResourceRolesExecute(r ApiCreateIamResourceRolesRequest) (*IamResourceRoles, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3576,8 +3596,8 @@ func (r ApiCreateIamSessionLimitsRequest) Execute() (*IamSessionLimits, *http.Re
 /*
 CreateIamSessionLimits Create a 'iam.SessionLimits' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateIamSessionLimitsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateIamSessionLimitsRequest
 */
 func (a *IamApiService) CreateIamSessionLimits(ctx context.Context) ApiCreateIamSessionLimitsRequest {
 	return ApiCreateIamSessionLimitsRequest{
@@ -3587,7 +3607,8 @@ func (a *IamApiService) CreateIamSessionLimits(ctx context.Context) ApiCreateIam
 }
 
 // Execute executes the request
-//  @return IamSessionLimits
+//
+//	@return IamSessionLimits
 func (a *IamApiService) CreateIamSessionLimitsExecute(r ApiCreateIamSessionLimitsRequest) (*IamSessionLimits, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3752,8 +3773,8 @@ func (r ApiCreateIamTrustPointRequest) Execute() (*IamTrustPoint, *http.Response
 /*
 CreateIamTrustPoint Create a 'iam.TrustPoint' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateIamTrustPointRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateIamTrustPointRequest
 */
 func (a *IamApiService) CreateIamTrustPoint(ctx context.Context) ApiCreateIamTrustPointRequest {
 	return ApiCreateIamTrustPointRequest{
@@ -3763,7 +3784,8 @@ func (a *IamApiService) CreateIamTrustPoint(ctx context.Context) ApiCreateIamTru
 }
 
 // Execute executes the request
-//  @return IamTrustPoint
+//
+//	@return IamTrustPoint
 func (a *IamApiService) CreateIamTrustPointExecute(r ApiCreateIamTrustPointRequest) (*IamTrustPoint, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3928,8 +3950,8 @@ func (r ApiCreateIamUserRequest) Execute() (*IamUser, *http.Response, error) {
 /*
 CreateIamUser Create a 'iam.User' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateIamUserRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateIamUserRequest
 */
 func (a *IamApiService) CreateIamUser(ctx context.Context) ApiCreateIamUserRequest {
 	return ApiCreateIamUserRequest{
@@ -3939,7 +3961,8 @@ func (a *IamApiService) CreateIamUser(ctx context.Context) ApiCreateIamUserReque
 }
 
 // Execute executes the request
-//  @return IamUser
+//
+//	@return IamUser
 func (a *IamApiService) CreateIamUserExecute(r ApiCreateIamUserRequest) (*IamUser, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4104,8 +4127,8 @@ func (r ApiCreateIamUserGroupRequest) Execute() (*IamUserGroup, *http.Response, 
 /*
 CreateIamUserGroup Create a 'iam.UserGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateIamUserGroupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateIamUserGroupRequest
 */
 func (a *IamApiService) CreateIamUserGroup(ctx context.Context) ApiCreateIamUserGroupRequest {
 	return ApiCreateIamUserGroupRequest{
@@ -4115,7 +4138,8 @@ func (a *IamApiService) CreateIamUserGroup(ctx context.Context) ApiCreateIamUser
 }
 
 // Execute executes the request
-//  @return IamUserGroup
+//
+//	@return IamUserGroup
 func (a *IamApiService) CreateIamUserGroupExecute(r ApiCreateIamUserGroupRequest) (*IamUserGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4247,6 +4271,183 @@ func (a *IamApiService) CreateIamUserGroupExecute(r ApiCreateIamUserGroupRequest
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiCreateIamUserSettingRequest struct {
+	ctx            context.Context
+	ApiService     *IamApiService
+	iamUserSetting *IamUserSetting
+	ifMatch        *string
+	ifNoneMatch    *string
+}
+
+// The &#39;iam.UserSetting&#39; resource to create.
+func (r ApiCreateIamUserSettingRequest) IamUserSetting(iamUserSetting IamUserSetting) ApiCreateIamUserSettingRequest {
+	r.iamUserSetting = &iamUserSetting
+	return r
+}
+
+// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
+func (r ApiCreateIamUserSettingRequest) IfMatch(ifMatch string) ApiCreateIamUserSettingRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+// For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte.
+func (r ApiCreateIamUserSettingRequest) IfNoneMatch(ifNoneMatch string) ApiCreateIamUserSettingRequest {
+	r.ifNoneMatch = &ifNoneMatch
+	return r
+}
+
+func (r ApiCreateIamUserSettingRequest) Execute() (*IamUserSetting, *http.Response, error) {
+	return r.ApiService.CreateIamUserSettingExecute(r)
+}
+
+/*
+CreateIamUserSetting Create a 'iam.UserSetting' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateIamUserSettingRequest
+*/
+func (a *IamApiService) CreateIamUserSetting(ctx context.Context) ApiCreateIamUserSettingRequest {
+	return ApiCreateIamUserSettingRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return IamUserSetting
+func (a *IamApiService) CreateIamUserSettingExecute(r ApiCreateIamUserSettingRequest) (*IamUserSetting, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamUserSetting
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.CreateIamUserSetting")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/iam/UserSettings"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.iamUserSetting == nil {
+		return localVarReturnValue, nil, reportError("iamUserSetting is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	if r.ifNoneMatch != nil {
+		localVarHeaderParams["If-None-Match"] = parameterToString(*r.ifNoneMatch, "")
+	}
+	// body params
+	localVarPostBody = r.iamUserSetting
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiDeleteIamAccountRequest struct {
 	ctx        context.Context
 	ApiService *IamApiService
@@ -4260,9 +4461,9 @@ func (r ApiDeleteIamAccountRequest) Execute() (*http.Response, error) {
 /*
 DeleteIamAccount Delete a 'iam.Account' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteIamAccountRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteIamAccountRequest
 */
 func (a *IamApiService) DeleteIamAccount(ctx context.Context, moid string) ApiDeleteIamAccountRequest {
 	return ApiDeleteIamAccountRequest{
@@ -4397,9 +4598,9 @@ func (r ApiDeleteIamApiKeyRequest) Execute() (*http.Response, error) {
 /*
 DeleteIamApiKey Delete a 'iam.ApiKey' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteIamApiKeyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteIamApiKeyRequest
 */
 func (a *IamApiService) DeleteIamApiKey(ctx context.Context, moid string) ApiDeleteIamApiKeyRequest {
 	return ApiDeleteIamApiKeyRequest{
@@ -4534,9 +4735,9 @@ func (r ApiDeleteIamAppRegistrationRequest) Execute() (*http.Response, error) {
 /*
 DeleteIamAppRegistration Delete a 'iam.AppRegistration' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteIamAppRegistrationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteIamAppRegistrationRequest
 */
 func (a *IamApiService) DeleteIamAppRegistration(ctx context.Context, moid string) ApiDeleteIamAppRegistrationRequest {
 	return ApiDeleteIamAppRegistrationRequest{
@@ -4671,9 +4872,9 @@ func (r ApiDeleteIamCertificateRequest) Execute() (*http.Response, error) {
 /*
 DeleteIamCertificate Delete a 'iam.Certificate' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteIamCertificateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteIamCertificateRequest
 */
 func (a *IamApiService) DeleteIamCertificate(ctx context.Context, moid string) ApiDeleteIamCertificateRequest {
 	return ApiDeleteIamCertificateRequest{
@@ -4808,9 +5009,9 @@ func (r ApiDeleteIamCertificateRequestRequest) Execute() (*http.Response, error)
 /*
 DeleteIamCertificateRequest Delete a 'iam.CertificateRequest' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteIamCertificateRequestRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteIamCertificateRequestRequest
 */
 func (a *IamApiService) DeleteIamCertificateRequest(ctx context.Context, moid string) ApiDeleteIamCertificateRequestRequest {
 	return ApiDeleteIamCertificateRequestRequest{
@@ -4945,9 +5146,9 @@ func (r ApiDeleteIamDomainNameInfoRequest) Execute() (*http.Response, error) {
 /*
 DeleteIamDomainNameInfo Delete a 'iam.DomainNameInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteIamDomainNameInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteIamDomainNameInfoRequest
 */
 func (a *IamApiService) DeleteIamDomainNameInfo(ctx context.Context, moid string) ApiDeleteIamDomainNameInfoRequest {
 	return ApiDeleteIamDomainNameInfoRequest{
@@ -5082,9 +5283,9 @@ func (r ApiDeleteIamEndPointUserRequest) Execute() (*http.Response, error) {
 /*
 DeleteIamEndPointUser Delete a 'iam.EndPointUser' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteIamEndPointUserRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteIamEndPointUserRequest
 */
 func (a *IamApiService) DeleteIamEndPointUser(ctx context.Context, moid string) ApiDeleteIamEndPointUserRequest {
 	return ApiDeleteIamEndPointUserRequest{
@@ -5219,9 +5420,9 @@ func (r ApiDeleteIamEndPointUserPolicyRequest) Execute() (*http.Response, error)
 /*
 DeleteIamEndPointUserPolicy Delete a 'iam.EndPointUserPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteIamEndPointUserPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteIamEndPointUserPolicyRequest
 */
 func (a *IamApiService) DeleteIamEndPointUserPolicy(ctx context.Context, moid string) ApiDeleteIamEndPointUserPolicyRequest {
 	return ApiDeleteIamEndPointUserPolicyRequest{
@@ -5356,9 +5557,9 @@ func (r ApiDeleteIamEndPointUserRoleRequest) Execute() (*http.Response, error) {
 /*
 DeleteIamEndPointUserRole Delete a 'iam.EndPointUserRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteIamEndPointUserRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteIamEndPointUserRoleRequest
 */
 func (a *IamApiService) DeleteIamEndPointUserRole(ctx context.Context, moid string) ApiDeleteIamEndPointUserRoleRequest {
 	return ApiDeleteIamEndPointUserRoleRequest{
@@ -5493,9 +5694,9 @@ func (r ApiDeleteIamIdpRequest) Execute() (*http.Response, error) {
 /*
 DeleteIamIdp Delete a 'iam.Idp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteIamIdpRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteIamIdpRequest
 */
 func (a *IamApiService) DeleteIamIdp(ctx context.Context, moid string) ApiDeleteIamIdpRequest {
 	return ApiDeleteIamIdpRequest{
@@ -5630,9 +5831,9 @@ func (r ApiDeleteIamIpAddressRequest) Execute() (*http.Response, error) {
 /*
 DeleteIamIpAddress Delete a 'iam.IpAddress' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteIamIpAddressRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteIamIpAddressRequest
 */
 func (a *IamApiService) DeleteIamIpAddress(ctx context.Context, moid string) ApiDeleteIamIpAddressRequest {
 	return ApiDeleteIamIpAddressRequest{
@@ -5767,9 +5968,9 @@ func (r ApiDeleteIamLdapGroupRequest) Execute() (*http.Response, error) {
 /*
 DeleteIamLdapGroup Delete a 'iam.LdapGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteIamLdapGroupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteIamLdapGroupRequest
 */
 func (a *IamApiService) DeleteIamLdapGroup(ctx context.Context, moid string) ApiDeleteIamLdapGroupRequest {
 	return ApiDeleteIamLdapGroupRequest{
@@ -5904,9 +6105,9 @@ func (r ApiDeleteIamLdapPolicyRequest) Execute() (*http.Response, error) {
 /*
 DeleteIamLdapPolicy Delete a 'iam.LdapPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteIamLdapPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteIamLdapPolicyRequest
 */
 func (a *IamApiService) DeleteIamLdapPolicy(ctx context.Context, moid string) ApiDeleteIamLdapPolicyRequest {
 	return ApiDeleteIamLdapPolicyRequest{
@@ -6041,9 +6242,9 @@ func (r ApiDeleteIamLdapProviderRequest) Execute() (*http.Response, error) {
 /*
 DeleteIamLdapProvider Delete a 'iam.LdapProvider' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteIamLdapProviderRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteIamLdapProviderRequest
 */
 func (a *IamApiService) DeleteIamLdapProvider(ctx context.Context, moid string) ApiDeleteIamLdapProviderRequest {
 	return ApiDeleteIamLdapProviderRequest{
@@ -6178,9 +6379,9 @@ func (r ApiDeleteIamOAuthTokenRequest) Execute() (*http.Response, error) {
 /*
 DeleteIamOAuthToken Delete a 'iam.OAuthToken' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteIamOAuthTokenRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteIamOAuthTokenRequest
 */
 func (a *IamApiService) DeleteIamOAuthToken(ctx context.Context, moid string) ApiDeleteIamOAuthTokenRequest {
 	return ApiDeleteIamOAuthTokenRequest{
@@ -6315,9 +6516,9 @@ func (r ApiDeleteIamPermissionRequest) Execute() (*http.Response, error) {
 /*
 DeleteIamPermission Delete a 'iam.Permission' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteIamPermissionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteIamPermissionRequest
 */
 func (a *IamApiService) DeleteIamPermission(ctx context.Context, moid string) ApiDeleteIamPermissionRequest {
 	return ApiDeleteIamPermissionRequest{
@@ -6452,9 +6653,9 @@ func (r ApiDeleteIamPrivateKeySpecRequest) Execute() (*http.Response, error) {
 /*
 DeleteIamPrivateKeySpec Delete a 'iam.PrivateKeySpec' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteIamPrivateKeySpecRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteIamPrivateKeySpecRequest
 */
 func (a *IamApiService) DeleteIamPrivateKeySpec(ctx context.Context, moid string) ApiDeleteIamPrivateKeySpecRequest {
 	return ApiDeleteIamPrivateKeySpecRequest{
@@ -6589,9 +6790,9 @@ func (r ApiDeleteIamQualifierRequest) Execute() (*http.Response, error) {
 /*
 DeleteIamQualifier Delete a 'iam.Qualifier' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteIamQualifierRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteIamQualifierRequest
 */
 func (a *IamApiService) DeleteIamQualifier(ctx context.Context, moid string) ApiDeleteIamQualifierRequest {
 	return ApiDeleteIamQualifierRequest{
@@ -6726,9 +6927,9 @@ func (r ApiDeleteIamResourceRolesRequest) Execute() (*http.Response, error) {
 /*
 DeleteIamResourceRoles Delete a 'iam.ResourceRoles' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteIamResourceRolesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteIamResourceRolesRequest
 */
 func (a *IamApiService) DeleteIamResourceRoles(ctx context.Context, moid string) ApiDeleteIamResourceRolesRequest {
 	return ApiDeleteIamResourceRolesRequest{
@@ -6863,9 +7064,9 @@ func (r ApiDeleteIamSessionRequest) Execute() (*http.Response, error) {
 /*
 DeleteIamSession Delete a 'iam.Session' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteIamSessionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteIamSessionRequest
 */
 func (a *IamApiService) DeleteIamSession(ctx context.Context, moid string) ApiDeleteIamSessionRequest {
 	return ApiDeleteIamSessionRequest{
@@ -7000,9 +7201,9 @@ func (r ApiDeleteIamSessionLimitsRequest) Execute() (*http.Response, error) {
 /*
 DeleteIamSessionLimits Delete a 'iam.SessionLimits' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteIamSessionLimitsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteIamSessionLimitsRequest
 */
 func (a *IamApiService) DeleteIamSessionLimits(ctx context.Context, moid string) ApiDeleteIamSessionLimitsRequest {
 	return ApiDeleteIamSessionLimitsRequest{
@@ -7137,9 +7338,9 @@ func (r ApiDeleteIamTrustPointRequest) Execute() (*http.Response, error) {
 /*
 DeleteIamTrustPoint Delete a 'iam.TrustPoint' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteIamTrustPointRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteIamTrustPointRequest
 */
 func (a *IamApiService) DeleteIamTrustPoint(ctx context.Context, moid string) ApiDeleteIamTrustPointRequest {
 	return ApiDeleteIamTrustPointRequest{
@@ -7274,9 +7475,9 @@ func (r ApiDeleteIamUserRequest) Execute() (*http.Response, error) {
 /*
 DeleteIamUser Delete a 'iam.User' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteIamUserRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteIamUserRequest
 */
 func (a *IamApiService) DeleteIamUser(ctx context.Context, moid string) ApiDeleteIamUserRequest {
 	return ApiDeleteIamUserRequest{
@@ -7411,9 +7612,9 @@ func (r ApiDeleteIamUserGroupRequest) Execute() (*http.Response, error) {
 /*
 DeleteIamUserGroup Delete a 'iam.UserGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteIamUserGroupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteIamUserGroupRequest
 */
 func (a *IamApiService) DeleteIamUserGroup(ctx context.Context, moid string) ApiDeleteIamUserGroupRequest {
 	return ApiDeleteIamUserGroupRequest{
@@ -7548,9 +7749,9 @@ func (r ApiGetIamAccountByMoidRequest) Execute() (*IamAccount, *http.Response, e
 /*
 GetIamAccountByMoid Read a 'iam.Account' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamAccountByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamAccountByMoidRequest
 */
 func (a *IamApiService) GetIamAccountByMoid(ctx context.Context, moid string) ApiGetIamAccountByMoidRequest {
 	return ApiGetIamAccountByMoidRequest{
@@ -7561,7 +7762,8 @@ func (a *IamApiService) GetIamAccountByMoid(ctx context.Context, moid string) Ap
 }
 
 // Execute executes the request
-//  @return IamAccount
+//
+//	@return IamAccount
 func (a *IamApiService) GetIamAccountByMoidExecute(r ApiGetIamAccountByMoidRequest) (*IamAccount, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7696,9 +7898,9 @@ func (r ApiGetIamAccountExperienceByMoidRequest) Execute() (*IamAccountExperienc
 /*
 GetIamAccountExperienceByMoid Read a 'iam.AccountExperience' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamAccountExperienceByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamAccountExperienceByMoidRequest
 */
 func (a *IamApiService) GetIamAccountExperienceByMoid(ctx context.Context, moid string) ApiGetIamAccountExperienceByMoidRequest {
 	return ApiGetIamAccountExperienceByMoidRequest{
@@ -7709,7 +7911,8 @@ func (a *IamApiService) GetIamAccountExperienceByMoid(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return IamAccountExperience
+//
+//	@return IamAccountExperience
 func (a *IamApiService) GetIamAccountExperienceByMoidExecute(r ApiGetIamAccountExperienceByMoidRequest) (*IamAccountExperience, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7920,8 +8123,8 @@ func (r ApiGetIamAccountExperienceListRequest) Execute() (*IamAccountExperienceR
 /*
 GetIamAccountExperienceList Read a 'iam.AccountExperience' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamAccountExperienceListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamAccountExperienceListRequest
 */
 func (a *IamApiService) GetIamAccountExperienceList(ctx context.Context) ApiGetIamAccountExperienceListRequest {
 	return ApiGetIamAccountExperienceListRequest{
@@ -7931,7 +8134,8 @@ func (a *IamApiService) GetIamAccountExperienceList(ctx context.Context) ApiGetI
 }
 
 // Execute executes the request
-//  @return IamAccountExperienceResponse
+//
+//	@return IamAccountExperienceResponse
 func (a *IamApiService) GetIamAccountExperienceListExecute(r ApiGetIamAccountExperienceListRequest) (*IamAccountExperienceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8174,8 +8378,8 @@ func (r ApiGetIamAccountListRequest) Execute() (*IamAccountResponse, *http.Respo
 /*
 GetIamAccountList Read a 'iam.Account' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamAccountListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamAccountListRequest
 */
 func (a *IamApiService) GetIamAccountList(ctx context.Context) ApiGetIamAccountListRequest {
 	return ApiGetIamAccountListRequest{
@@ -8185,7 +8389,8 @@ func (a *IamApiService) GetIamAccountList(ctx context.Context) ApiGetIamAccountL
 }
 
 // Execute executes the request
-//  @return IamAccountResponse
+//
+//	@return IamAccountResponse
 func (a *IamApiService) GetIamAccountListExecute(r ApiGetIamAccountListRequest) (*IamAccountResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8352,9 +8557,9 @@ func (r ApiGetIamApiKeyByMoidRequest) Execute() (*IamApiKey, *http.Response, err
 /*
 GetIamApiKeyByMoid Read a 'iam.ApiKey' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamApiKeyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamApiKeyByMoidRequest
 */
 func (a *IamApiService) GetIamApiKeyByMoid(ctx context.Context, moid string) ApiGetIamApiKeyByMoidRequest {
 	return ApiGetIamApiKeyByMoidRequest{
@@ -8365,7 +8570,8 @@ func (a *IamApiService) GetIamApiKeyByMoid(ctx context.Context, moid string) Api
 }
 
 // Execute executes the request
-//  @return IamApiKey
+//
+//	@return IamApiKey
 func (a *IamApiService) GetIamApiKeyByMoidExecute(r ApiGetIamApiKeyByMoidRequest) (*IamApiKey, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8576,8 +8782,8 @@ func (r ApiGetIamApiKeyListRequest) Execute() (*IamApiKeyResponse, *http.Respons
 /*
 GetIamApiKeyList Read a 'iam.ApiKey' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamApiKeyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamApiKeyListRequest
 */
 func (a *IamApiService) GetIamApiKeyList(ctx context.Context) ApiGetIamApiKeyListRequest {
 	return ApiGetIamApiKeyListRequest{
@@ -8587,7 +8793,8 @@ func (a *IamApiService) GetIamApiKeyList(ctx context.Context) ApiGetIamApiKeyLis
 }
 
 // Execute executes the request
-//  @return IamApiKeyResponse
+//
+//	@return IamApiKeyResponse
 func (a *IamApiService) GetIamApiKeyListExecute(r ApiGetIamApiKeyListRequest) (*IamApiKeyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8754,9 +8961,9 @@ func (r ApiGetIamAppRegistrationByMoidRequest) Execute() (*IamAppRegistration, *
 /*
 GetIamAppRegistrationByMoid Read a 'iam.AppRegistration' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamAppRegistrationByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamAppRegistrationByMoidRequest
 */
 func (a *IamApiService) GetIamAppRegistrationByMoid(ctx context.Context, moid string) ApiGetIamAppRegistrationByMoidRequest {
 	return ApiGetIamAppRegistrationByMoidRequest{
@@ -8767,7 +8974,8 @@ func (a *IamApiService) GetIamAppRegistrationByMoid(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return IamAppRegistration
+//
+//	@return IamAppRegistration
 func (a *IamApiService) GetIamAppRegistrationByMoidExecute(r ApiGetIamAppRegistrationByMoidRequest) (*IamAppRegistration, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8978,8 +9186,8 @@ func (r ApiGetIamAppRegistrationListRequest) Execute() (*IamAppRegistrationRespo
 /*
 GetIamAppRegistrationList Read a 'iam.AppRegistration' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamAppRegistrationListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamAppRegistrationListRequest
 */
 func (a *IamApiService) GetIamAppRegistrationList(ctx context.Context) ApiGetIamAppRegistrationListRequest {
 	return ApiGetIamAppRegistrationListRequest{
@@ -8989,7 +9197,8 @@ func (a *IamApiService) GetIamAppRegistrationList(ctx context.Context) ApiGetIam
 }
 
 // Execute executes the request
-//  @return IamAppRegistrationResponse
+//
+//	@return IamAppRegistrationResponse
 func (a *IamApiService) GetIamAppRegistrationListExecute(r ApiGetIamAppRegistrationListRequest) (*IamAppRegistrationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9156,9 +9365,9 @@ func (r ApiGetIamBannerMessageByMoidRequest) Execute() (*IamBannerMessage, *http
 /*
 GetIamBannerMessageByMoid Read a 'iam.BannerMessage' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamBannerMessageByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamBannerMessageByMoidRequest
 */
 func (a *IamApiService) GetIamBannerMessageByMoid(ctx context.Context, moid string) ApiGetIamBannerMessageByMoidRequest {
 	return ApiGetIamBannerMessageByMoidRequest{
@@ -9169,7 +9378,8 @@ func (a *IamApiService) GetIamBannerMessageByMoid(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return IamBannerMessage
+//
+//	@return IamBannerMessage
 func (a *IamApiService) GetIamBannerMessageByMoidExecute(r ApiGetIamBannerMessageByMoidRequest) (*IamBannerMessage, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9380,8 +9590,8 @@ func (r ApiGetIamBannerMessageListRequest) Execute() (*IamBannerMessageResponse,
 /*
 GetIamBannerMessageList Read a 'iam.BannerMessage' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamBannerMessageListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamBannerMessageListRequest
 */
 func (a *IamApiService) GetIamBannerMessageList(ctx context.Context) ApiGetIamBannerMessageListRequest {
 	return ApiGetIamBannerMessageListRequest{
@@ -9391,7 +9601,8 @@ func (a *IamApiService) GetIamBannerMessageList(ctx context.Context) ApiGetIamBa
 }
 
 // Execute executes the request
-//  @return IamBannerMessageResponse
+//
+//	@return IamBannerMessageResponse
 func (a *IamApiService) GetIamBannerMessageListExecute(r ApiGetIamBannerMessageListRequest) (*IamBannerMessageResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9558,9 +9769,9 @@ func (r ApiGetIamCertificateByMoidRequest) Execute() (*IamCertificate, *http.Res
 /*
 GetIamCertificateByMoid Read a 'iam.Certificate' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamCertificateByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamCertificateByMoidRequest
 */
 func (a *IamApiService) GetIamCertificateByMoid(ctx context.Context, moid string) ApiGetIamCertificateByMoidRequest {
 	return ApiGetIamCertificateByMoidRequest{
@@ -9571,7 +9782,8 @@ func (a *IamApiService) GetIamCertificateByMoid(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return IamCertificate
+//
+//	@return IamCertificate
 func (a *IamApiService) GetIamCertificateByMoidExecute(r ApiGetIamCertificateByMoidRequest) (*IamCertificate, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9782,8 +9994,8 @@ func (r ApiGetIamCertificateListRequest) Execute() (*IamCertificateResponse, *ht
 /*
 GetIamCertificateList Read a 'iam.Certificate' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamCertificateListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamCertificateListRequest
 */
 func (a *IamApiService) GetIamCertificateList(ctx context.Context) ApiGetIamCertificateListRequest {
 	return ApiGetIamCertificateListRequest{
@@ -9793,7 +10005,8 @@ func (a *IamApiService) GetIamCertificateList(ctx context.Context) ApiGetIamCert
 }
 
 // Execute executes the request
-//  @return IamCertificateResponse
+//
+//	@return IamCertificateResponse
 func (a *IamApiService) GetIamCertificateListExecute(r ApiGetIamCertificateListRequest) (*IamCertificateResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9960,9 +10173,9 @@ func (r ApiGetIamCertificateRequestByMoidRequest) Execute() (*IamCertificateRequ
 /*
 GetIamCertificateRequestByMoid Read a 'iam.CertificateRequest' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamCertificateRequestByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamCertificateRequestByMoidRequest
 */
 func (a *IamApiService) GetIamCertificateRequestByMoid(ctx context.Context, moid string) ApiGetIamCertificateRequestByMoidRequest {
 	return ApiGetIamCertificateRequestByMoidRequest{
@@ -9973,7 +10186,8 @@ func (a *IamApiService) GetIamCertificateRequestByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return IamCertificateRequest
+//
+//	@return IamCertificateRequest
 func (a *IamApiService) GetIamCertificateRequestByMoidExecute(r ApiGetIamCertificateRequestByMoidRequest) (*IamCertificateRequest, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10184,8 +10398,8 @@ func (r ApiGetIamCertificateRequestListRequest) Execute() (*IamCertificateReques
 /*
 GetIamCertificateRequestList Read a 'iam.CertificateRequest' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamCertificateRequestListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamCertificateRequestListRequest
 */
 func (a *IamApiService) GetIamCertificateRequestList(ctx context.Context) ApiGetIamCertificateRequestListRequest {
 	return ApiGetIamCertificateRequestListRequest{
@@ -10195,7 +10409,8 @@ func (a *IamApiService) GetIamCertificateRequestList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//  @return IamCertificateRequestResponse
+//
+//	@return IamCertificateRequestResponse
 func (a *IamApiService) GetIamCertificateRequestListExecute(r ApiGetIamCertificateRequestListRequest) (*IamCertificateRequestResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10362,9 +10577,9 @@ func (r ApiGetIamDomainGroupByMoidRequest) Execute() (*IamDomainGroup, *http.Res
 /*
 GetIamDomainGroupByMoid Read a 'iam.DomainGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamDomainGroupByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamDomainGroupByMoidRequest
 */
 func (a *IamApiService) GetIamDomainGroupByMoid(ctx context.Context, moid string) ApiGetIamDomainGroupByMoidRequest {
 	return ApiGetIamDomainGroupByMoidRequest{
@@ -10375,7 +10590,8 @@ func (a *IamApiService) GetIamDomainGroupByMoid(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return IamDomainGroup
+//
+//	@return IamDomainGroup
 func (a *IamApiService) GetIamDomainGroupByMoidExecute(r ApiGetIamDomainGroupByMoidRequest) (*IamDomainGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10586,8 +10802,8 @@ func (r ApiGetIamDomainGroupListRequest) Execute() (*IamDomainGroupResponse, *ht
 /*
 GetIamDomainGroupList Read a 'iam.DomainGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamDomainGroupListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamDomainGroupListRequest
 */
 func (a *IamApiService) GetIamDomainGroupList(ctx context.Context) ApiGetIamDomainGroupListRequest {
 	return ApiGetIamDomainGroupListRequest{
@@ -10597,7 +10813,8 @@ func (a *IamApiService) GetIamDomainGroupList(ctx context.Context) ApiGetIamDoma
 }
 
 // Execute executes the request
-//  @return IamDomainGroupResponse
+//
+//	@return IamDomainGroupResponse
 func (a *IamApiService) GetIamDomainGroupListExecute(r ApiGetIamDomainGroupListRequest) (*IamDomainGroupResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10764,9 +10981,9 @@ func (r ApiGetIamDomainNameInfoByMoidRequest) Execute() (*IamDomainNameInfo, *ht
 /*
 GetIamDomainNameInfoByMoid Read a 'iam.DomainNameInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamDomainNameInfoByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamDomainNameInfoByMoidRequest
 */
 func (a *IamApiService) GetIamDomainNameInfoByMoid(ctx context.Context, moid string) ApiGetIamDomainNameInfoByMoidRequest {
 	return ApiGetIamDomainNameInfoByMoidRequest{
@@ -10777,7 +10994,8 @@ func (a *IamApiService) GetIamDomainNameInfoByMoid(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return IamDomainNameInfo
+//
+//	@return IamDomainNameInfo
 func (a *IamApiService) GetIamDomainNameInfoByMoidExecute(r ApiGetIamDomainNameInfoByMoidRequest) (*IamDomainNameInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10988,8 +11206,8 @@ func (r ApiGetIamDomainNameInfoListRequest) Execute() (*IamDomainNameInfoRespons
 /*
 GetIamDomainNameInfoList Read a 'iam.DomainNameInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamDomainNameInfoListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamDomainNameInfoListRequest
 */
 func (a *IamApiService) GetIamDomainNameInfoList(ctx context.Context) ApiGetIamDomainNameInfoListRequest {
 	return ApiGetIamDomainNameInfoListRequest{
@@ -10999,7 +11217,8 @@ func (a *IamApiService) GetIamDomainNameInfoList(ctx context.Context) ApiGetIamD
 }
 
 // Execute executes the request
-//  @return IamDomainNameInfoResponse
+//
+//	@return IamDomainNameInfoResponse
 func (a *IamApiService) GetIamDomainNameInfoListExecute(r ApiGetIamDomainNameInfoListRequest) (*IamDomainNameInfoResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -11166,9 +11385,9 @@ func (r ApiGetIamEndPointPrivilegeByMoidRequest) Execute() (*IamEndPointPrivileg
 /*
 GetIamEndPointPrivilegeByMoid Read a 'iam.EndPointPrivilege' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamEndPointPrivilegeByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamEndPointPrivilegeByMoidRequest
 */
 func (a *IamApiService) GetIamEndPointPrivilegeByMoid(ctx context.Context, moid string) ApiGetIamEndPointPrivilegeByMoidRequest {
 	return ApiGetIamEndPointPrivilegeByMoidRequest{
@@ -11179,7 +11398,8 @@ func (a *IamApiService) GetIamEndPointPrivilegeByMoid(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return IamEndPointPrivilege
+//
+//	@return IamEndPointPrivilege
 func (a *IamApiService) GetIamEndPointPrivilegeByMoidExecute(r ApiGetIamEndPointPrivilegeByMoidRequest) (*IamEndPointPrivilege, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -11390,8 +11610,8 @@ func (r ApiGetIamEndPointPrivilegeListRequest) Execute() (*IamEndPointPrivilegeR
 /*
 GetIamEndPointPrivilegeList Read a 'iam.EndPointPrivilege' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamEndPointPrivilegeListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamEndPointPrivilegeListRequest
 */
 func (a *IamApiService) GetIamEndPointPrivilegeList(ctx context.Context) ApiGetIamEndPointPrivilegeListRequest {
 	return ApiGetIamEndPointPrivilegeListRequest{
@@ -11401,7 +11621,8 @@ func (a *IamApiService) GetIamEndPointPrivilegeList(ctx context.Context) ApiGetI
 }
 
 // Execute executes the request
-//  @return IamEndPointPrivilegeResponse
+//
+//	@return IamEndPointPrivilegeResponse
 func (a *IamApiService) GetIamEndPointPrivilegeListExecute(r ApiGetIamEndPointPrivilegeListRequest) (*IamEndPointPrivilegeResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -11568,9 +11789,9 @@ func (r ApiGetIamEndPointRoleByMoidRequest) Execute() (*IamEndPointRole, *http.R
 /*
 GetIamEndPointRoleByMoid Read a 'iam.EndPointRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamEndPointRoleByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamEndPointRoleByMoidRequest
 */
 func (a *IamApiService) GetIamEndPointRoleByMoid(ctx context.Context, moid string) ApiGetIamEndPointRoleByMoidRequest {
 	return ApiGetIamEndPointRoleByMoidRequest{
@@ -11581,7 +11802,8 @@ func (a *IamApiService) GetIamEndPointRoleByMoid(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return IamEndPointRole
+//
+//	@return IamEndPointRole
 func (a *IamApiService) GetIamEndPointRoleByMoidExecute(r ApiGetIamEndPointRoleByMoidRequest) (*IamEndPointRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -11792,8 +12014,8 @@ func (r ApiGetIamEndPointRoleListRequest) Execute() (*IamEndPointRoleResponse, *
 /*
 GetIamEndPointRoleList Read a 'iam.EndPointRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamEndPointRoleListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamEndPointRoleListRequest
 */
 func (a *IamApiService) GetIamEndPointRoleList(ctx context.Context) ApiGetIamEndPointRoleListRequest {
 	return ApiGetIamEndPointRoleListRequest{
@@ -11803,7 +12025,8 @@ func (a *IamApiService) GetIamEndPointRoleList(ctx context.Context) ApiGetIamEnd
 }
 
 // Execute executes the request
-//  @return IamEndPointRoleResponse
+//
+//	@return IamEndPointRoleResponse
 func (a *IamApiService) GetIamEndPointRoleListExecute(r ApiGetIamEndPointRoleListRequest) (*IamEndPointRoleResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -11970,9 +12193,9 @@ func (r ApiGetIamEndPointUserByMoidRequest) Execute() (*IamEndPointUser, *http.R
 /*
 GetIamEndPointUserByMoid Read a 'iam.EndPointUser' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamEndPointUserByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamEndPointUserByMoidRequest
 */
 func (a *IamApiService) GetIamEndPointUserByMoid(ctx context.Context, moid string) ApiGetIamEndPointUserByMoidRequest {
 	return ApiGetIamEndPointUserByMoidRequest{
@@ -11983,7 +12206,8 @@ func (a *IamApiService) GetIamEndPointUserByMoid(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return IamEndPointUser
+//
+//	@return IamEndPointUser
 func (a *IamApiService) GetIamEndPointUserByMoidExecute(r ApiGetIamEndPointUserByMoidRequest) (*IamEndPointUser, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12118,9 +12342,9 @@ func (r ApiGetIamEndPointUserInventoryByMoidRequest) Execute() (*IamEndPointUser
 /*
 GetIamEndPointUserInventoryByMoid Read a 'iam.EndPointUserInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamEndPointUserInventoryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamEndPointUserInventoryByMoidRequest
 */
 func (a *IamApiService) GetIamEndPointUserInventoryByMoid(ctx context.Context, moid string) ApiGetIamEndPointUserInventoryByMoidRequest {
 	return ApiGetIamEndPointUserInventoryByMoidRequest{
@@ -12131,7 +12355,8 @@ func (a *IamApiService) GetIamEndPointUserInventoryByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return IamEndPointUserInventory
+//
+//	@return IamEndPointUserInventory
 func (a *IamApiService) GetIamEndPointUserInventoryByMoidExecute(r ApiGetIamEndPointUserInventoryByMoidRequest) (*IamEndPointUserInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12342,8 +12567,8 @@ func (r ApiGetIamEndPointUserInventoryListRequest) Execute() (*IamEndPointUserIn
 /*
 GetIamEndPointUserInventoryList Read a 'iam.EndPointUserInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamEndPointUserInventoryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamEndPointUserInventoryListRequest
 */
 func (a *IamApiService) GetIamEndPointUserInventoryList(ctx context.Context) ApiGetIamEndPointUserInventoryListRequest {
 	return ApiGetIamEndPointUserInventoryListRequest{
@@ -12353,7 +12578,8 @@ func (a *IamApiService) GetIamEndPointUserInventoryList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return IamEndPointUserInventoryResponse
+//
+//	@return IamEndPointUserInventoryResponse
 func (a *IamApiService) GetIamEndPointUserInventoryListExecute(r ApiGetIamEndPointUserInventoryListRequest) (*IamEndPointUserInventoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12596,8 +12822,8 @@ func (r ApiGetIamEndPointUserListRequest) Execute() (*IamEndPointUserResponse, *
 /*
 GetIamEndPointUserList Read a 'iam.EndPointUser' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamEndPointUserListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamEndPointUserListRequest
 */
 func (a *IamApiService) GetIamEndPointUserList(ctx context.Context) ApiGetIamEndPointUserListRequest {
 	return ApiGetIamEndPointUserListRequest{
@@ -12607,7 +12833,8 @@ func (a *IamApiService) GetIamEndPointUserList(ctx context.Context) ApiGetIamEnd
 }
 
 // Execute executes the request
-//  @return IamEndPointUserResponse
+//
+//	@return IamEndPointUserResponse
 func (a *IamApiService) GetIamEndPointUserListExecute(r ApiGetIamEndPointUserListRequest) (*IamEndPointUserResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12774,9 +13001,9 @@ func (r ApiGetIamEndPointUserPolicyByMoidRequest) Execute() (*IamEndPointUserPol
 /*
 GetIamEndPointUserPolicyByMoid Read a 'iam.EndPointUserPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamEndPointUserPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamEndPointUserPolicyByMoidRequest
 */
 func (a *IamApiService) GetIamEndPointUserPolicyByMoid(ctx context.Context, moid string) ApiGetIamEndPointUserPolicyByMoidRequest {
 	return ApiGetIamEndPointUserPolicyByMoidRequest{
@@ -12787,7 +13014,8 @@ func (a *IamApiService) GetIamEndPointUserPolicyByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return IamEndPointUserPolicy
+//
+//	@return IamEndPointUserPolicy
 func (a *IamApiService) GetIamEndPointUserPolicyByMoidExecute(r ApiGetIamEndPointUserPolicyByMoidRequest) (*IamEndPointUserPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12922,9 +13150,9 @@ func (r ApiGetIamEndPointUserPolicyInventoryByMoidRequest) Execute() (*IamEndPoi
 /*
 GetIamEndPointUserPolicyInventoryByMoid Read a 'iam.EndPointUserPolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamEndPointUserPolicyInventoryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamEndPointUserPolicyInventoryByMoidRequest
 */
 func (a *IamApiService) GetIamEndPointUserPolicyInventoryByMoid(ctx context.Context, moid string) ApiGetIamEndPointUserPolicyInventoryByMoidRequest {
 	return ApiGetIamEndPointUserPolicyInventoryByMoidRequest{
@@ -12935,7 +13163,8 @@ func (a *IamApiService) GetIamEndPointUserPolicyInventoryByMoid(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return IamEndPointUserPolicyInventory
+//
+//	@return IamEndPointUserPolicyInventory
 func (a *IamApiService) GetIamEndPointUserPolicyInventoryByMoidExecute(r ApiGetIamEndPointUserPolicyInventoryByMoidRequest) (*IamEndPointUserPolicyInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13146,8 +13375,8 @@ func (r ApiGetIamEndPointUserPolicyInventoryListRequest) Execute() (*IamEndPoint
 /*
 GetIamEndPointUserPolicyInventoryList Read a 'iam.EndPointUserPolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamEndPointUserPolicyInventoryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamEndPointUserPolicyInventoryListRequest
 */
 func (a *IamApiService) GetIamEndPointUserPolicyInventoryList(ctx context.Context) ApiGetIamEndPointUserPolicyInventoryListRequest {
 	return ApiGetIamEndPointUserPolicyInventoryListRequest{
@@ -13157,7 +13386,8 @@ func (a *IamApiService) GetIamEndPointUserPolicyInventoryList(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return IamEndPointUserPolicyInventoryResponse
+//
+//	@return IamEndPointUserPolicyInventoryResponse
 func (a *IamApiService) GetIamEndPointUserPolicyInventoryListExecute(r ApiGetIamEndPointUserPolicyInventoryListRequest) (*IamEndPointUserPolicyInventoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13400,8 +13630,8 @@ func (r ApiGetIamEndPointUserPolicyListRequest) Execute() (*IamEndPointUserPolic
 /*
 GetIamEndPointUserPolicyList Read a 'iam.EndPointUserPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamEndPointUserPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamEndPointUserPolicyListRequest
 */
 func (a *IamApiService) GetIamEndPointUserPolicyList(ctx context.Context) ApiGetIamEndPointUserPolicyListRequest {
 	return ApiGetIamEndPointUserPolicyListRequest{
@@ -13411,7 +13641,8 @@ func (a *IamApiService) GetIamEndPointUserPolicyList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//  @return IamEndPointUserPolicyResponse
+//
+//	@return IamEndPointUserPolicyResponse
 func (a *IamApiService) GetIamEndPointUserPolicyListExecute(r ApiGetIamEndPointUserPolicyListRequest) (*IamEndPointUserPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13578,9 +13809,9 @@ func (r ApiGetIamEndPointUserRoleByMoidRequest) Execute() (*IamEndPointUserRole,
 /*
 GetIamEndPointUserRoleByMoid Read a 'iam.EndPointUserRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamEndPointUserRoleByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamEndPointUserRoleByMoidRequest
 */
 func (a *IamApiService) GetIamEndPointUserRoleByMoid(ctx context.Context, moid string) ApiGetIamEndPointUserRoleByMoidRequest {
 	return ApiGetIamEndPointUserRoleByMoidRequest{
@@ -13591,7 +13822,8 @@ func (a *IamApiService) GetIamEndPointUserRoleByMoid(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return IamEndPointUserRole
+//
+//	@return IamEndPointUserRole
 func (a *IamApiService) GetIamEndPointUserRoleByMoidExecute(r ApiGetIamEndPointUserRoleByMoidRequest) (*IamEndPointUserRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13726,9 +13958,9 @@ func (r ApiGetIamEndPointUserRoleInventoryByMoidRequest) Execute() (*IamEndPoint
 /*
 GetIamEndPointUserRoleInventoryByMoid Read a 'iam.EndPointUserRoleInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamEndPointUserRoleInventoryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamEndPointUserRoleInventoryByMoidRequest
 */
 func (a *IamApiService) GetIamEndPointUserRoleInventoryByMoid(ctx context.Context, moid string) ApiGetIamEndPointUserRoleInventoryByMoidRequest {
 	return ApiGetIamEndPointUserRoleInventoryByMoidRequest{
@@ -13739,7 +13971,8 @@ func (a *IamApiService) GetIamEndPointUserRoleInventoryByMoid(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return IamEndPointUserRoleInventory
+//
+//	@return IamEndPointUserRoleInventory
 func (a *IamApiService) GetIamEndPointUserRoleInventoryByMoidExecute(r ApiGetIamEndPointUserRoleInventoryByMoidRequest) (*IamEndPointUserRoleInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13950,8 +14183,8 @@ func (r ApiGetIamEndPointUserRoleInventoryListRequest) Execute() (*IamEndPointUs
 /*
 GetIamEndPointUserRoleInventoryList Read a 'iam.EndPointUserRoleInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamEndPointUserRoleInventoryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamEndPointUserRoleInventoryListRequest
 */
 func (a *IamApiService) GetIamEndPointUserRoleInventoryList(ctx context.Context) ApiGetIamEndPointUserRoleInventoryListRequest {
 	return ApiGetIamEndPointUserRoleInventoryListRequest{
@@ -13961,7 +14194,8 @@ func (a *IamApiService) GetIamEndPointUserRoleInventoryList(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return IamEndPointUserRoleInventoryResponse
+//
+//	@return IamEndPointUserRoleInventoryResponse
 func (a *IamApiService) GetIamEndPointUserRoleInventoryListExecute(r ApiGetIamEndPointUserRoleInventoryListRequest) (*IamEndPointUserRoleInventoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14204,8 +14438,8 @@ func (r ApiGetIamEndPointUserRoleListRequest) Execute() (*IamEndPointUserRoleRes
 /*
 GetIamEndPointUserRoleList Read a 'iam.EndPointUserRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamEndPointUserRoleListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamEndPointUserRoleListRequest
 */
 func (a *IamApiService) GetIamEndPointUserRoleList(ctx context.Context) ApiGetIamEndPointUserRoleListRequest {
 	return ApiGetIamEndPointUserRoleListRequest{
@@ -14215,7 +14449,8 @@ func (a *IamApiService) GetIamEndPointUserRoleList(ctx context.Context) ApiGetIa
 }
 
 // Execute executes the request
-//  @return IamEndPointUserRoleResponse
+//
+//	@return IamEndPointUserRoleResponse
 func (a *IamApiService) GetIamEndPointUserRoleListExecute(r ApiGetIamEndPointUserRoleListRequest) (*IamEndPointUserRoleResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14382,9 +14617,9 @@ func (r ApiGetIamIdpByMoidRequest) Execute() (*IamIdp, *http.Response, error) {
 /*
 GetIamIdpByMoid Read a 'iam.Idp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamIdpByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamIdpByMoidRequest
 */
 func (a *IamApiService) GetIamIdpByMoid(ctx context.Context, moid string) ApiGetIamIdpByMoidRequest {
 	return ApiGetIamIdpByMoidRequest{
@@ -14395,7 +14630,8 @@ func (a *IamApiService) GetIamIdpByMoid(ctx context.Context, moid string) ApiGet
 }
 
 // Execute executes the request
-//  @return IamIdp
+//
+//	@return IamIdp
 func (a *IamApiService) GetIamIdpByMoidExecute(r ApiGetIamIdpByMoidRequest) (*IamIdp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14606,8 +14842,8 @@ func (r ApiGetIamIdpListRequest) Execute() (*IamIdpResponse, *http.Response, err
 /*
 GetIamIdpList Read a 'iam.Idp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamIdpListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamIdpListRequest
 */
 func (a *IamApiService) GetIamIdpList(ctx context.Context) ApiGetIamIdpListRequest {
 	return ApiGetIamIdpListRequest{
@@ -14617,7 +14853,8 @@ func (a *IamApiService) GetIamIdpList(ctx context.Context) ApiGetIamIdpListReque
 }
 
 // Execute executes the request
-//  @return IamIdpResponse
+//
+//	@return IamIdpResponse
 func (a *IamApiService) GetIamIdpListExecute(r ApiGetIamIdpListRequest) (*IamIdpResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14784,9 +15021,9 @@ func (r ApiGetIamIdpReferenceByMoidRequest) Execute() (*IamIdpReference, *http.R
 /*
 GetIamIdpReferenceByMoid Read a 'iam.IdpReference' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamIdpReferenceByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamIdpReferenceByMoidRequest
 */
 func (a *IamApiService) GetIamIdpReferenceByMoid(ctx context.Context, moid string) ApiGetIamIdpReferenceByMoidRequest {
 	return ApiGetIamIdpReferenceByMoidRequest{
@@ -14797,7 +15034,8 @@ func (a *IamApiService) GetIamIdpReferenceByMoid(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return IamIdpReference
+//
+//	@return IamIdpReference
 func (a *IamApiService) GetIamIdpReferenceByMoidExecute(r ApiGetIamIdpReferenceByMoidRequest) (*IamIdpReference, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15008,8 +15246,8 @@ func (r ApiGetIamIdpReferenceListRequest) Execute() (*IamIdpReferenceResponse, *
 /*
 GetIamIdpReferenceList Read a 'iam.IdpReference' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamIdpReferenceListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamIdpReferenceListRequest
 */
 func (a *IamApiService) GetIamIdpReferenceList(ctx context.Context) ApiGetIamIdpReferenceListRequest {
 	return ApiGetIamIdpReferenceListRequest{
@@ -15019,7 +15257,8 @@ func (a *IamApiService) GetIamIdpReferenceList(ctx context.Context) ApiGetIamIdp
 }
 
 // Execute executes the request
-//  @return IamIdpReferenceResponse
+//
+//	@return IamIdpReferenceResponse
 func (a *IamApiService) GetIamIdpReferenceListExecute(r ApiGetIamIdpReferenceListRequest) (*IamIdpReferenceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15186,9 +15425,9 @@ func (r ApiGetIamIpAccessManagementByMoidRequest) Execute() (*IamIpAccessManagem
 /*
 GetIamIpAccessManagementByMoid Read a 'iam.IpAccessManagement' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamIpAccessManagementByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamIpAccessManagementByMoidRequest
 */
 func (a *IamApiService) GetIamIpAccessManagementByMoid(ctx context.Context, moid string) ApiGetIamIpAccessManagementByMoidRequest {
 	return ApiGetIamIpAccessManagementByMoidRequest{
@@ -15199,7 +15438,8 @@ func (a *IamApiService) GetIamIpAccessManagementByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return IamIpAccessManagement
+//
+//	@return IamIpAccessManagement
 func (a *IamApiService) GetIamIpAccessManagementByMoidExecute(r ApiGetIamIpAccessManagementByMoidRequest) (*IamIpAccessManagement, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15410,8 +15650,8 @@ func (r ApiGetIamIpAccessManagementListRequest) Execute() (*IamIpAccessManagemen
 /*
 GetIamIpAccessManagementList Read a 'iam.IpAccessManagement' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamIpAccessManagementListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamIpAccessManagementListRequest
 */
 func (a *IamApiService) GetIamIpAccessManagementList(ctx context.Context) ApiGetIamIpAccessManagementListRequest {
 	return ApiGetIamIpAccessManagementListRequest{
@@ -15421,7 +15661,8 @@ func (a *IamApiService) GetIamIpAccessManagementList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//  @return IamIpAccessManagementResponse
+//
+//	@return IamIpAccessManagementResponse
 func (a *IamApiService) GetIamIpAccessManagementListExecute(r ApiGetIamIpAccessManagementListRequest) (*IamIpAccessManagementResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15588,9 +15829,9 @@ func (r ApiGetIamIpAddressByMoidRequest) Execute() (*IamIpAddress, *http.Respons
 /*
 GetIamIpAddressByMoid Read a 'iam.IpAddress' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamIpAddressByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamIpAddressByMoidRequest
 */
 func (a *IamApiService) GetIamIpAddressByMoid(ctx context.Context, moid string) ApiGetIamIpAddressByMoidRequest {
 	return ApiGetIamIpAddressByMoidRequest{
@@ -15601,7 +15842,8 @@ func (a *IamApiService) GetIamIpAddressByMoid(ctx context.Context, moid string) 
 }
 
 // Execute executes the request
-//  @return IamIpAddress
+//
+//	@return IamIpAddress
 func (a *IamApiService) GetIamIpAddressByMoidExecute(r ApiGetIamIpAddressByMoidRequest) (*IamIpAddress, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15812,8 +16054,8 @@ func (r ApiGetIamIpAddressListRequest) Execute() (*IamIpAddressResponse, *http.R
 /*
 GetIamIpAddressList Read a 'iam.IpAddress' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamIpAddressListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamIpAddressListRequest
 */
 func (a *IamApiService) GetIamIpAddressList(ctx context.Context) ApiGetIamIpAddressListRequest {
 	return ApiGetIamIpAddressListRequest{
@@ -15823,7 +16065,8 @@ func (a *IamApiService) GetIamIpAddressList(ctx context.Context) ApiGetIamIpAddr
 }
 
 // Execute executes the request
-//  @return IamIpAddressResponse
+//
+//	@return IamIpAddressResponse
 func (a *IamApiService) GetIamIpAddressListExecute(r ApiGetIamIpAddressListRequest) (*IamIpAddressResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15977,6 +16220,410 @@ func (a *IamApiService) GetIamIpAddressListExecute(r ApiGetIamIpAddressListReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetIamLdapConfigParamsByMoidRequest struct {
+	ctx        context.Context
+	ApiService *IamApiService
+	moid       string
+}
+
+func (r ApiGetIamLdapConfigParamsByMoidRequest) Execute() (*IamLdapConfigParams, *http.Response, error) {
+	return r.ApiService.GetIamLdapConfigParamsByMoidExecute(r)
+}
+
+/*
+GetIamLdapConfigParamsByMoid Read a 'iam.LdapConfigParams' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamLdapConfigParamsByMoidRequest
+*/
+func (a *IamApiService) GetIamLdapConfigParamsByMoid(ctx context.Context, moid string) ApiGetIamLdapConfigParamsByMoidRequest {
+	return ApiGetIamLdapConfigParamsByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//
+//	@return IamLdapConfigParams
+func (a *IamApiService) GetIamLdapConfigParamsByMoidExecute(r ApiGetIamLdapConfigParamsByMoidRequest) (*IamLdapConfigParams, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamLdapConfigParams
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamLdapConfigParamsByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/iam/LdapConfigParams/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetIamLdapConfigParamsListRequest struct {
+	ctx         context.Context
+	ApiService  *IamApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetIamLdapConfigParamsListRequest) Filter(filter string) ApiGetIamLdapConfigParamsListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetIamLdapConfigParamsListRequest) Orderby(orderby string) ApiGetIamLdapConfigParamsListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetIamLdapConfigParamsListRequest) Top(top int32) ApiGetIamLdapConfigParamsListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetIamLdapConfigParamsListRequest) Skip(skip int32) ApiGetIamLdapConfigParamsListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetIamLdapConfigParamsListRequest) Select_(select_ string) ApiGetIamLdapConfigParamsListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetIamLdapConfigParamsListRequest) Expand(expand string) ApiGetIamLdapConfigParamsListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetIamLdapConfigParamsListRequest) Apply(apply string) ApiGetIamLdapConfigParamsListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetIamLdapConfigParamsListRequest) Count(count bool) ApiGetIamLdapConfigParamsListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetIamLdapConfigParamsListRequest) Inlinecount(inlinecount string) ApiGetIamLdapConfigParamsListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetIamLdapConfigParamsListRequest) At(at string) ApiGetIamLdapConfigParamsListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetIamLdapConfigParamsListRequest) Tags(tags string) ApiGetIamLdapConfigParamsListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetIamLdapConfigParamsListRequest) Execute() (*IamLdapConfigParamsResponse, *http.Response, error) {
+	return r.ApiService.GetIamLdapConfigParamsListExecute(r)
+}
+
+/*
+GetIamLdapConfigParamsList Read a 'iam.LdapConfigParams' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamLdapConfigParamsListRequest
+*/
+func (a *IamApiService) GetIamLdapConfigParamsList(ctx context.Context) ApiGetIamLdapConfigParamsListRequest {
+	return ApiGetIamLdapConfigParamsListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return IamLdapConfigParamsResponse
+func (a *IamApiService) GetIamLdapConfigParamsListExecute(r ApiGetIamLdapConfigParamsListRequest) (*IamLdapConfigParamsResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamLdapConfigParamsResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamLdapConfigParamsList")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/iam/LdapConfigParams"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetIamLdapGroupByMoidRequest struct {
 	ctx        context.Context
 	ApiService *IamApiService
@@ -15990,9 +16637,9 @@ func (r ApiGetIamLdapGroupByMoidRequest) Execute() (*IamLdapGroup, *http.Respons
 /*
 GetIamLdapGroupByMoid Read a 'iam.LdapGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamLdapGroupByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamLdapGroupByMoidRequest
 */
 func (a *IamApiService) GetIamLdapGroupByMoid(ctx context.Context, moid string) ApiGetIamLdapGroupByMoidRequest {
 	return ApiGetIamLdapGroupByMoidRequest{
@@ -16003,7 +16650,8 @@ func (a *IamApiService) GetIamLdapGroupByMoid(ctx context.Context, moid string) 
 }
 
 // Execute executes the request
-//  @return IamLdapGroup
+//
+//	@return IamLdapGroup
 func (a *IamApiService) GetIamLdapGroupByMoidExecute(r ApiGetIamLdapGroupByMoidRequest) (*IamLdapGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16214,8 +16862,8 @@ func (r ApiGetIamLdapGroupListRequest) Execute() (*IamLdapGroupResponse, *http.R
 /*
 GetIamLdapGroupList Read a 'iam.LdapGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamLdapGroupListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamLdapGroupListRequest
 */
 func (a *IamApiService) GetIamLdapGroupList(ctx context.Context) ApiGetIamLdapGroupListRequest {
 	return ApiGetIamLdapGroupListRequest{
@@ -16225,7 +16873,8 @@ func (a *IamApiService) GetIamLdapGroupList(ctx context.Context) ApiGetIamLdapGr
 }
 
 // Execute executes the request
-//  @return IamLdapGroupResponse
+//
+//	@return IamLdapGroupResponse
 func (a *IamApiService) GetIamLdapGroupListExecute(r ApiGetIamLdapGroupListRequest) (*IamLdapGroupResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16392,9 +17041,9 @@ func (r ApiGetIamLdapPolicyByMoidRequest) Execute() (*IamLdapPolicy, *http.Respo
 /*
 GetIamLdapPolicyByMoid Read a 'iam.LdapPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamLdapPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamLdapPolicyByMoidRequest
 */
 func (a *IamApiService) GetIamLdapPolicyByMoid(ctx context.Context, moid string) ApiGetIamLdapPolicyByMoidRequest {
 	return ApiGetIamLdapPolicyByMoidRequest{
@@ -16405,7 +17054,8 @@ func (a *IamApiService) GetIamLdapPolicyByMoid(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//  @return IamLdapPolicy
+//
+//	@return IamLdapPolicy
 func (a *IamApiService) GetIamLdapPolicyByMoidExecute(r ApiGetIamLdapPolicyByMoidRequest) (*IamLdapPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16616,8 +17266,8 @@ func (r ApiGetIamLdapPolicyListRequest) Execute() (*IamLdapPolicyResponse, *http
 /*
 GetIamLdapPolicyList Read a 'iam.LdapPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamLdapPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamLdapPolicyListRequest
 */
 func (a *IamApiService) GetIamLdapPolicyList(ctx context.Context) ApiGetIamLdapPolicyListRequest {
 	return ApiGetIamLdapPolicyListRequest{
@@ -16627,7 +17277,8 @@ func (a *IamApiService) GetIamLdapPolicyList(ctx context.Context) ApiGetIamLdapP
 }
 
 // Execute executes the request
-//  @return IamLdapPolicyResponse
+//
+//	@return IamLdapPolicyResponse
 func (a *IamApiService) GetIamLdapPolicyListExecute(r ApiGetIamLdapPolicyListRequest) (*IamLdapPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16794,9 +17445,9 @@ func (r ApiGetIamLdapProviderByMoidRequest) Execute() (*IamLdapProvider, *http.R
 /*
 GetIamLdapProviderByMoid Read a 'iam.LdapProvider' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamLdapProviderByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamLdapProviderByMoidRequest
 */
 func (a *IamApiService) GetIamLdapProviderByMoid(ctx context.Context, moid string) ApiGetIamLdapProviderByMoidRequest {
 	return ApiGetIamLdapProviderByMoidRequest{
@@ -16807,7 +17458,8 @@ func (a *IamApiService) GetIamLdapProviderByMoid(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return IamLdapProvider
+//
+//	@return IamLdapProvider
 func (a *IamApiService) GetIamLdapProviderByMoidExecute(r ApiGetIamLdapProviderByMoidRequest) (*IamLdapProvider, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17018,8 +17670,8 @@ func (r ApiGetIamLdapProviderListRequest) Execute() (*IamLdapProviderResponse, *
 /*
 GetIamLdapProviderList Read a 'iam.LdapProvider' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamLdapProviderListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamLdapProviderListRequest
 */
 func (a *IamApiService) GetIamLdapProviderList(ctx context.Context) ApiGetIamLdapProviderListRequest {
 	return ApiGetIamLdapProviderListRequest{
@@ -17029,7 +17681,8 @@ func (a *IamApiService) GetIamLdapProviderList(ctx context.Context) ApiGetIamLda
 }
 
 // Execute executes the request
-//  @return IamLdapProviderResponse
+//
+//	@return IamLdapProviderResponse
 func (a *IamApiService) GetIamLdapProviderListExecute(r ApiGetIamLdapProviderListRequest) (*IamLdapProviderResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17196,9 +17849,9 @@ func (r ApiGetIamLocalUserPasswordPolicyByMoidRequest) Execute() (*IamLocalUserP
 /*
 GetIamLocalUserPasswordPolicyByMoid Read a 'iam.LocalUserPasswordPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamLocalUserPasswordPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamLocalUserPasswordPolicyByMoidRequest
 */
 func (a *IamApiService) GetIamLocalUserPasswordPolicyByMoid(ctx context.Context, moid string) ApiGetIamLocalUserPasswordPolicyByMoidRequest {
 	return ApiGetIamLocalUserPasswordPolicyByMoidRequest{
@@ -17209,7 +17862,8 @@ func (a *IamApiService) GetIamLocalUserPasswordPolicyByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return IamLocalUserPasswordPolicy
+//
+//	@return IamLocalUserPasswordPolicy
 func (a *IamApiService) GetIamLocalUserPasswordPolicyByMoidExecute(r ApiGetIamLocalUserPasswordPolicyByMoidRequest) (*IamLocalUserPasswordPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17420,8 +18074,8 @@ func (r ApiGetIamLocalUserPasswordPolicyListRequest) Execute() (*IamLocalUserPas
 /*
 GetIamLocalUserPasswordPolicyList Read a 'iam.LocalUserPasswordPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamLocalUserPasswordPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamLocalUserPasswordPolicyListRequest
 */
 func (a *IamApiService) GetIamLocalUserPasswordPolicyList(ctx context.Context) ApiGetIamLocalUserPasswordPolicyListRequest {
 	return ApiGetIamLocalUserPasswordPolicyListRequest{
@@ -17431,7 +18085,8 @@ func (a *IamApiService) GetIamLocalUserPasswordPolicyList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return IamLocalUserPasswordPolicyResponse
+//
+//	@return IamLocalUserPasswordPolicyResponse
 func (a *IamApiService) GetIamLocalUserPasswordPolicyListExecute(r ApiGetIamLocalUserPasswordPolicyListRequest) (*IamLocalUserPasswordPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17598,9 +18253,9 @@ func (r ApiGetIamOAuthTokenByMoidRequest) Execute() (*IamOAuthToken, *http.Respo
 /*
 GetIamOAuthTokenByMoid Read a 'iam.OAuthToken' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamOAuthTokenByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamOAuthTokenByMoidRequest
 */
 func (a *IamApiService) GetIamOAuthTokenByMoid(ctx context.Context, moid string) ApiGetIamOAuthTokenByMoidRequest {
 	return ApiGetIamOAuthTokenByMoidRequest{
@@ -17611,7 +18266,8 @@ func (a *IamApiService) GetIamOAuthTokenByMoid(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//  @return IamOAuthToken
+//
+//	@return IamOAuthToken
 func (a *IamApiService) GetIamOAuthTokenByMoidExecute(r ApiGetIamOAuthTokenByMoidRequest) (*IamOAuthToken, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17822,8 +18478,8 @@ func (r ApiGetIamOAuthTokenListRequest) Execute() (*IamOAuthTokenResponse, *http
 /*
 GetIamOAuthTokenList Read a 'iam.OAuthToken' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamOAuthTokenListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamOAuthTokenListRequest
 */
 func (a *IamApiService) GetIamOAuthTokenList(ctx context.Context) ApiGetIamOAuthTokenListRequest {
 	return ApiGetIamOAuthTokenListRequest{
@@ -17833,7 +18489,8 @@ func (a *IamApiService) GetIamOAuthTokenList(ctx context.Context) ApiGetIamOAuth
 }
 
 // Execute executes the request
-//  @return IamOAuthTokenResponse
+//
+//	@return IamOAuthTokenResponse
 func (a *IamApiService) GetIamOAuthTokenListExecute(r ApiGetIamOAuthTokenListRequest) (*IamOAuthTokenResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18000,9 +18657,9 @@ func (r ApiGetIamPermissionByMoidRequest) Execute() (*IamPermission, *http.Respo
 /*
 GetIamPermissionByMoid Read a 'iam.Permission' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamPermissionByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamPermissionByMoidRequest
 */
 func (a *IamApiService) GetIamPermissionByMoid(ctx context.Context, moid string) ApiGetIamPermissionByMoidRequest {
 	return ApiGetIamPermissionByMoidRequest{
@@ -18013,7 +18670,8 @@ func (a *IamApiService) GetIamPermissionByMoid(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//  @return IamPermission
+//
+//	@return IamPermission
 func (a *IamApiService) GetIamPermissionByMoidExecute(r ApiGetIamPermissionByMoidRequest) (*IamPermission, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18224,8 +18882,8 @@ func (r ApiGetIamPermissionListRequest) Execute() (*IamPermissionResponse, *http
 /*
 GetIamPermissionList Read a 'iam.Permission' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamPermissionListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamPermissionListRequest
 */
 func (a *IamApiService) GetIamPermissionList(ctx context.Context) ApiGetIamPermissionListRequest {
 	return ApiGetIamPermissionListRequest{
@@ -18235,7 +18893,8 @@ func (a *IamApiService) GetIamPermissionList(ctx context.Context) ApiGetIamPermi
 }
 
 // Execute executes the request
-//  @return IamPermissionResponse
+//
+//	@return IamPermissionResponse
 func (a *IamApiService) GetIamPermissionListExecute(r ApiGetIamPermissionListRequest) (*IamPermissionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18402,9 +19061,9 @@ func (r ApiGetIamPrivateKeySpecByMoidRequest) Execute() (*IamPrivateKeySpec, *ht
 /*
 GetIamPrivateKeySpecByMoid Read a 'iam.PrivateKeySpec' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamPrivateKeySpecByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamPrivateKeySpecByMoidRequest
 */
 func (a *IamApiService) GetIamPrivateKeySpecByMoid(ctx context.Context, moid string) ApiGetIamPrivateKeySpecByMoidRequest {
 	return ApiGetIamPrivateKeySpecByMoidRequest{
@@ -18415,7 +19074,8 @@ func (a *IamApiService) GetIamPrivateKeySpecByMoid(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return IamPrivateKeySpec
+//
+//	@return IamPrivateKeySpec
 func (a *IamApiService) GetIamPrivateKeySpecByMoidExecute(r ApiGetIamPrivateKeySpecByMoidRequest) (*IamPrivateKeySpec, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18626,8 +19286,8 @@ func (r ApiGetIamPrivateKeySpecListRequest) Execute() (*IamPrivateKeySpecRespons
 /*
 GetIamPrivateKeySpecList Read a 'iam.PrivateKeySpec' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamPrivateKeySpecListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamPrivateKeySpecListRequest
 */
 func (a *IamApiService) GetIamPrivateKeySpecList(ctx context.Context) ApiGetIamPrivateKeySpecListRequest {
 	return ApiGetIamPrivateKeySpecListRequest{
@@ -18637,7 +19297,8 @@ func (a *IamApiService) GetIamPrivateKeySpecList(ctx context.Context) ApiGetIamP
 }
 
 // Execute executes the request
-//  @return IamPrivateKeySpecResponse
+//
+//	@return IamPrivateKeySpecResponse
 func (a *IamApiService) GetIamPrivateKeySpecListExecute(r ApiGetIamPrivateKeySpecListRequest) (*IamPrivateKeySpecResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18804,9 +19465,9 @@ func (r ApiGetIamPrivilegeByMoidRequest) Execute() (*IamPrivilege, *http.Respons
 /*
 GetIamPrivilegeByMoid Read a 'iam.Privilege' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamPrivilegeByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamPrivilegeByMoidRequest
 */
 func (a *IamApiService) GetIamPrivilegeByMoid(ctx context.Context, moid string) ApiGetIamPrivilegeByMoidRequest {
 	return ApiGetIamPrivilegeByMoidRequest{
@@ -18817,7 +19478,8 @@ func (a *IamApiService) GetIamPrivilegeByMoid(ctx context.Context, moid string) 
 }
 
 // Execute executes the request
-//  @return IamPrivilege
+//
+//	@return IamPrivilege
 func (a *IamApiService) GetIamPrivilegeByMoidExecute(r ApiGetIamPrivilegeByMoidRequest) (*IamPrivilege, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -19028,8 +19690,8 @@ func (r ApiGetIamPrivilegeListRequest) Execute() (*IamPrivilegeResponse, *http.R
 /*
 GetIamPrivilegeList Read a 'iam.Privilege' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamPrivilegeListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamPrivilegeListRequest
 */
 func (a *IamApiService) GetIamPrivilegeList(ctx context.Context) ApiGetIamPrivilegeListRequest {
 	return ApiGetIamPrivilegeListRequest{
@@ -19039,7 +19701,8 @@ func (a *IamApiService) GetIamPrivilegeList(ctx context.Context) ApiGetIamPrivil
 }
 
 // Execute executes the request
-//  @return IamPrivilegeResponse
+//
+//	@return IamPrivilegeResponse
 func (a *IamApiService) GetIamPrivilegeListExecute(r ApiGetIamPrivilegeListRequest) (*IamPrivilegeResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -19206,9 +19869,9 @@ func (r ApiGetIamPrivilegeSetByMoidRequest) Execute() (*IamPrivilegeSet, *http.R
 /*
 GetIamPrivilegeSetByMoid Read a 'iam.PrivilegeSet' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamPrivilegeSetByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamPrivilegeSetByMoidRequest
 */
 func (a *IamApiService) GetIamPrivilegeSetByMoid(ctx context.Context, moid string) ApiGetIamPrivilegeSetByMoidRequest {
 	return ApiGetIamPrivilegeSetByMoidRequest{
@@ -19219,7 +19882,8 @@ func (a *IamApiService) GetIamPrivilegeSetByMoid(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return IamPrivilegeSet
+//
+//	@return IamPrivilegeSet
 func (a *IamApiService) GetIamPrivilegeSetByMoidExecute(r ApiGetIamPrivilegeSetByMoidRequest) (*IamPrivilegeSet, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -19430,8 +20094,8 @@ func (r ApiGetIamPrivilegeSetListRequest) Execute() (*IamPrivilegeSetResponse, *
 /*
 GetIamPrivilegeSetList Read a 'iam.PrivilegeSet' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamPrivilegeSetListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamPrivilegeSetListRequest
 */
 func (a *IamApiService) GetIamPrivilegeSetList(ctx context.Context) ApiGetIamPrivilegeSetListRequest {
 	return ApiGetIamPrivilegeSetListRequest{
@@ -19441,7 +20105,8 @@ func (a *IamApiService) GetIamPrivilegeSetList(ctx context.Context) ApiGetIamPri
 }
 
 // Execute executes the request
-//  @return IamPrivilegeSetResponse
+//
+//	@return IamPrivilegeSetResponse
 func (a *IamApiService) GetIamPrivilegeSetListExecute(r ApiGetIamPrivilegeSetListRequest) (*IamPrivilegeSetResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -19608,9 +20273,9 @@ func (r ApiGetIamQualifierByMoidRequest) Execute() (*IamQualifier, *http.Respons
 /*
 GetIamQualifierByMoid Read a 'iam.Qualifier' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamQualifierByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamQualifierByMoidRequest
 */
 func (a *IamApiService) GetIamQualifierByMoid(ctx context.Context, moid string) ApiGetIamQualifierByMoidRequest {
 	return ApiGetIamQualifierByMoidRequest{
@@ -19621,7 +20286,8 @@ func (a *IamApiService) GetIamQualifierByMoid(ctx context.Context, moid string) 
 }
 
 // Execute executes the request
-//  @return IamQualifier
+//
+//	@return IamQualifier
 func (a *IamApiService) GetIamQualifierByMoidExecute(r ApiGetIamQualifierByMoidRequest) (*IamQualifier, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -19832,8 +20498,8 @@ func (r ApiGetIamQualifierListRequest) Execute() (*IamQualifierResponse, *http.R
 /*
 GetIamQualifierList Read a 'iam.Qualifier' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamQualifierListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamQualifierListRequest
 */
 func (a *IamApiService) GetIamQualifierList(ctx context.Context) ApiGetIamQualifierListRequest {
 	return ApiGetIamQualifierListRequest{
@@ -19843,7 +20509,8 @@ func (a *IamApiService) GetIamQualifierList(ctx context.Context) ApiGetIamQualif
 }
 
 // Execute executes the request
-//  @return IamQualifierResponse
+//
+//	@return IamQualifierResponse
 func (a *IamApiService) GetIamQualifierListExecute(r ApiGetIamQualifierListRequest) (*IamQualifierResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -20010,9 +20677,9 @@ func (r ApiGetIamResourceLimitsByMoidRequest) Execute() (*IamResourceLimits, *ht
 /*
 GetIamResourceLimitsByMoid Read a 'iam.ResourceLimits' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamResourceLimitsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamResourceLimitsByMoidRequest
 */
 func (a *IamApiService) GetIamResourceLimitsByMoid(ctx context.Context, moid string) ApiGetIamResourceLimitsByMoidRequest {
 	return ApiGetIamResourceLimitsByMoidRequest{
@@ -20023,7 +20690,8 @@ func (a *IamApiService) GetIamResourceLimitsByMoid(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return IamResourceLimits
+//
+//	@return IamResourceLimits
 func (a *IamApiService) GetIamResourceLimitsByMoidExecute(r ApiGetIamResourceLimitsByMoidRequest) (*IamResourceLimits, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -20234,8 +20902,8 @@ func (r ApiGetIamResourceLimitsListRequest) Execute() (*IamResourceLimitsRespons
 /*
 GetIamResourceLimitsList Read a 'iam.ResourceLimits' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamResourceLimitsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamResourceLimitsListRequest
 */
 func (a *IamApiService) GetIamResourceLimitsList(ctx context.Context) ApiGetIamResourceLimitsListRequest {
 	return ApiGetIamResourceLimitsListRequest{
@@ -20245,7 +20913,8 @@ func (a *IamApiService) GetIamResourceLimitsList(ctx context.Context) ApiGetIamR
 }
 
 // Execute executes the request
-//  @return IamResourceLimitsResponse
+//
+//	@return IamResourceLimitsResponse
 func (a *IamApiService) GetIamResourceLimitsListExecute(r ApiGetIamResourceLimitsListRequest) (*IamResourceLimitsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -20412,9 +21081,9 @@ func (r ApiGetIamResourcePermissionByMoidRequest) Execute() (*IamResourcePermiss
 /*
 GetIamResourcePermissionByMoid Read a 'iam.ResourcePermission' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamResourcePermissionByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamResourcePermissionByMoidRequest
 */
 func (a *IamApiService) GetIamResourcePermissionByMoid(ctx context.Context, moid string) ApiGetIamResourcePermissionByMoidRequest {
 	return ApiGetIamResourcePermissionByMoidRequest{
@@ -20425,7 +21094,8 @@ func (a *IamApiService) GetIamResourcePermissionByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return IamResourcePermission
+//
+//	@return IamResourcePermission
 func (a *IamApiService) GetIamResourcePermissionByMoidExecute(r ApiGetIamResourcePermissionByMoidRequest) (*IamResourcePermission, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -20636,8 +21306,8 @@ func (r ApiGetIamResourcePermissionListRequest) Execute() (*IamResourcePermissio
 /*
 GetIamResourcePermissionList Read a 'iam.ResourcePermission' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamResourcePermissionListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamResourcePermissionListRequest
 */
 func (a *IamApiService) GetIamResourcePermissionList(ctx context.Context) ApiGetIamResourcePermissionListRequest {
 	return ApiGetIamResourcePermissionListRequest{
@@ -20647,7 +21317,8 @@ func (a *IamApiService) GetIamResourcePermissionList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//  @return IamResourcePermissionResponse
+//
+//	@return IamResourcePermissionResponse
 func (a *IamApiService) GetIamResourcePermissionListExecute(r ApiGetIamResourcePermissionListRequest) (*IamResourcePermissionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -20814,9 +21485,9 @@ func (r ApiGetIamResourceRolesByMoidRequest) Execute() (*IamResourceRoles, *http
 /*
 GetIamResourceRolesByMoid Read a 'iam.ResourceRoles' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamResourceRolesByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamResourceRolesByMoidRequest
 */
 func (a *IamApiService) GetIamResourceRolesByMoid(ctx context.Context, moid string) ApiGetIamResourceRolesByMoidRequest {
 	return ApiGetIamResourceRolesByMoidRequest{
@@ -20827,7 +21498,8 @@ func (a *IamApiService) GetIamResourceRolesByMoid(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return IamResourceRoles
+//
+//	@return IamResourceRoles
 func (a *IamApiService) GetIamResourceRolesByMoidExecute(r ApiGetIamResourceRolesByMoidRequest) (*IamResourceRoles, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -21038,8 +21710,8 @@ func (r ApiGetIamResourceRolesListRequest) Execute() (*IamResourceRolesResponse,
 /*
 GetIamResourceRolesList Read a 'iam.ResourceRoles' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamResourceRolesListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamResourceRolesListRequest
 */
 func (a *IamApiService) GetIamResourceRolesList(ctx context.Context) ApiGetIamResourceRolesListRequest {
 	return ApiGetIamResourceRolesListRequest{
@@ -21049,7 +21721,8 @@ func (a *IamApiService) GetIamResourceRolesList(ctx context.Context) ApiGetIamRe
 }
 
 // Execute executes the request
-//  @return IamResourceRolesResponse
+//
+//	@return IamResourceRolesResponse
 func (a *IamApiService) GetIamResourceRolesListExecute(r ApiGetIamResourceRolesListRequest) (*IamResourceRolesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -21216,9 +21889,9 @@ func (r ApiGetIamRoleByMoidRequest) Execute() (*IamRole, *http.Response, error) 
 /*
 GetIamRoleByMoid Read a 'iam.Role' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamRoleByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamRoleByMoidRequest
 */
 func (a *IamApiService) GetIamRoleByMoid(ctx context.Context, moid string) ApiGetIamRoleByMoidRequest {
 	return ApiGetIamRoleByMoidRequest{
@@ -21229,7 +21902,8 @@ func (a *IamApiService) GetIamRoleByMoid(ctx context.Context, moid string) ApiGe
 }
 
 // Execute executes the request
-//  @return IamRole
+//
+//	@return IamRole
 func (a *IamApiService) GetIamRoleByMoidExecute(r ApiGetIamRoleByMoidRequest) (*IamRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -21440,8 +22114,8 @@ func (r ApiGetIamRoleListRequest) Execute() (*IamRoleResponse, *http.Response, e
 /*
 GetIamRoleList Read a 'iam.Role' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamRoleListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamRoleListRequest
 */
 func (a *IamApiService) GetIamRoleList(ctx context.Context) ApiGetIamRoleListRequest {
 	return ApiGetIamRoleListRequest{
@@ -21451,7 +22125,8 @@ func (a *IamApiService) GetIamRoleList(ctx context.Context) ApiGetIamRoleListReq
 }
 
 // Execute executes the request
-//  @return IamRoleResponse
+//
+//	@return IamRoleResponse
 func (a *IamApiService) GetIamRoleListExecute(r ApiGetIamRoleListRequest) (*IamRoleResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -21618,9 +22293,9 @@ func (r ApiGetIamSecurityHolderByMoidRequest) Execute() (*IamSecurityHolder, *ht
 /*
 GetIamSecurityHolderByMoid Read a 'iam.SecurityHolder' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamSecurityHolderByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamSecurityHolderByMoidRequest
 */
 func (a *IamApiService) GetIamSecurityHolderByMoid(ctx context.Context, moid string) ApiGetIamSecurityHolderByMoidRequest {
 	return ApiGetIamSecurityHolderByMoidRequest{
@@ -21631,7 +22306,8 @@ func (a *IamApiService) GetIamSecurityHolderByMoid(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return IamSecurityHolder
+//
+//	@return IamSecurityHolder
 func (a *IamApiService) GetIamSecurityHolderByMoidExecute(r ApiGetIamSecurityHolderByMoidRequest) (*IamSecurityHolder, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -21842,8 +22518,8 @@ func (r ApiGetIamSecurityHolderListRequest) Execute() (*IamSecurityHolderRespons
 /*
 GetIamSecurityHolderList Read a 'iam.SecurityHolder' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamSecurityHolderListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamSecurityHolderListRequest
 */
 func (a *IamApiService) GetIamSecurityHolderList(ctx context.Context) ApiGetIamSecurityHolderListRequest {
 	return ApiGetIamSecurityHolderListRequest{
@@ -21853,7 +22529,8 @@ func (a *IamApiService) GetIamSecurityHolderList(ctx context.Context) ApiGetIamS
 }
 
 // Execute executes the request
-//  @return IamSecurityHolderResponse
+//
+//	@return IamSecurityHolderResponse
 func (a *IamApiService) GetIamSecurityHolderListExecute(r ApiGetIamSecurityHolderListRequest) (*IamSecurityHolderResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -22020,9 +22697,9 @@ func (r ApiGetIamServiceProviderByMoidRequest) Execute() (*IamServiceProvider, *
 /*
 GetIamServiceProviderByMoid Read a 'iam.ServiceProvider' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamServiceProviderByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamServiceProviderByMoidRequest
 */
 func (a *IamApiService) GetIamServiceProviderByMoid(ctx context.Context, moid string) ApiGetIamServiceProviderByMoidRequest {
 	return ApiGetIamServiceProviderByMoidRequest{
@@ -22033,7 +22710,8 @@ func (a *IamApiService) GetIamServiceProviderByMoid(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return IamServiceProvider
+//
+//	@return IamServiceProvider
 func (a *IamApiService) GetIamServiceProviderByMoidExecute(r ApiGetIamServiceProviderByMoidRequest) (*IamServiceProvider, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -22244,8 +22922,8 @@ func (r ApiGetIamServiceProviderListRequest) Execute() (*IamServiceProviderRespo
 /*
 GetIamServiceProviderList Read a 'iam.ServiceProvider' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamServiceProviderListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamServiceProviderListRequest
 */
 func (a *IamApiService) GetIamServiceProviderList(ctx context.Context) ApiGetIamServiceProviderListRequest {
 	return ApiGetIamServiceProviderListRequest{
@@ -22255,7 +22933,8 @@ func (a *IamApiService) GetIamServiceProviderList(ctx context.Context) ApiGetIam
 }
 
 // Execute executes the request
-//  @return IamServiceProviderResponse
+//
+//	@return IamServiceProviderResponse
 func (a *IamApiService) GetIamServiceProviderListExecute(r ApiGetIamServiceProviderListRequest) (*IamServiceProviderResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -22422,9 +23101,9 @@ func (r ApiGetIamSessionByMoidRequest) Execute() (*IamSession, *http.Response, e
 /*
 GetIamSessionByMoid Read a 'iam.Session' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamSessionByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamSessionByMoidRequest
 */
 func (a *IamApiService) GetIamSessionByMoid(ctx context.Context, moid string) ApiGetIamSessionByMoidRequest {
 	return ApiGetIamSessionByMoidRequest{
@@ -22435,7 +23114,8 @@ func (a *IamApiService) GetIamSessionByMoid(ctx context.Context, moid string) Ap
 }
 
 // Execute executes the request
-//  @return IamSession
+//
+//	@return IamSession
 func (a *IamApiService) GetIamSessionByMoidExecute(r ApiGetIamSessionByMoidRequest) (*IamSession, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -22570,9 +23250,9 @@ func (r ApiGetIamSessionLimitsByMoidRequest) Execute() (*IamSessionLimits, *http
 /*
 GetIamSessionLimitsByMoid Read a 'iam.SessionLimits' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamSessionLimitsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamSessionLimitsByMoidRequest
 */
 func (a *IamApiService) GetIamSessionLimitsByMoid(ctx context.Context, moid string) ApiGetIamSessionLimitsByMoidRequest {
 	return ApiGetIamSessionLimitsByMoidRequest{
@@ -22583,7 +23263,8 @@ func (a *IamApiService) GetIamSessionLimitsByMoid(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return IamSessionLimits
+//
+//	@return IamSessionLimits
 func (a *IamApiService) GetIamSessionLimitsByMoidExecute(r ApiGetIamSessionLimitsByMoidRequest) (*IamSessionLimits, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -22794,8 +23475,8 @@ func (r ApiGetIamSessionLimitsListRequest) Execute() (*IamSessionLimitsResponse,
 /*
 GetIamSessionLimitsList Read a 'iam.SessionLimits' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamSessionLimitsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamSessionLimitsListRequest
 */
 func (a *IamApiService) GetIamSessionLimitsList(ctx context.Context) ApiGetIamSessionLimitsListRequest {
 	return ApiGetIamSessionLimitsListRequest{
@@ -22805,7 +23486,8 @@ func (a *IamApiService) GetIamSessionLimitsList(ctx context.Context) ApiGetIamSe
 }
 
 // Execute executes the request
-//  @return IamSessionLimitsResponse
+//
+//	@return IamSessionLimitsResponse
 func (a *IamApiService) GetIamSessionLimitsListExecute(r ApiGetIamSessionLimitsListRequest) (*IamSessionLimitsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -23048,8 +23730,8 @@ func (r ApiGetIamSessionListRequest) Execute() (*IamSessionResponse, *http.Respo
 /*
 GetIamSessionList Read a 'iam.Session' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamSessionListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamSessionListRequest
 */
 func (a *IamApiService) GetIamSessionList(ctx context.Context) ApiGetIamSessionListRequest {
 	return ApiGetIamSessionListRequest{
@@ -23059,7 +23741,8 @@ func (a *IamApiService) GetIamSessionList(ctx context.Context) ApiGetIamSessionL
 }
 
 // Execute executes the request
-//  @return IamSessionResponse
+//
+//	@return IamSessionResponse
 func (a *IamApiService) GetIamSessionListExecute(r ApiGetIamSessionListRequest) (*IamSessionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -23226,9 +23909,9 @@ func (r ApiGetIamSystemByMoidRequest) Execute() (*IamSystem, *http.Response, err
 /*
 GetIamSystemByMoid Read a 'iam.System' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamSystemByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamSystemByMoidRequest
 */
 func (a *IamApiService) GetIamSystemByMoid(ctx context.Context, moid string) ApiGetIamSystemByMoidRequest {
 	return ApiGetIamSystemByMoidRequest{
@@ -23239,7 +23922,8 @@ func (a *IamApiService) GetIamSystemByMoid(ctx context.Context, moid string) Api
 }
 
 // Execute executes the request
-//  @return IamSystem
+//
+//	@return IamSystem
 func (a *IamApiService) GetIamSystemByMoidExecute(r ApiGetIamSystemByMoidRequest) (*IamSystem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -23450,8 +24134,8 @@ func (r ApiGetIamSystemListRequest) Execute() (*IamSystemResponse, *http.Respons
 /*
 GetIamSystemList Read a 'iam.System' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamSystemListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamSystemListRequest
 */
 func (a *IamApiService) GetIamSystemList(ctx context.Context) ApiGetIamSystemListRequest {
 	return ApiGetIamSystemListRequest{
@@ -23461,7 +24145,8 @@ func (a *IamApiService) GetIamSystemList(ctx context.Context) ApiGetIamSystemLis
 }
 
 // Execute executes the request
-//  @return IamSystemResponse
+//
+//	@return IamSystemResponse
 func (a *IamApiService) GetIamSystemListExecute(r ApiGetIamSystemListRequest) (*IamSystemResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -23628,9 +24313,9 @@ func (r ApiGetIamTrustPointByMoidRequest) Execute() (*IamTrustPoint, *http.Respo
 /*
 GetIamTrustPointByMoid Read a 'iam.TrustPoint' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamTrustPointByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamTrustPointByMoidRequest
 */
 func (a *IamApiService) GetIamTrustPointByMoid(ctx context.Context, moid string) ApiGetIamTrustPointByMoidRequest {
 	return ApiGetIamTrustPointByMoidRequest{
@@ -23641,7 +24326,8 @@ func (a *IamApiService) GetIamTrustPointByMoid(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//  @return IamTrustPoint
+//
+//	@return IamTrustPoint
 func (a *IamApiService) GetIamTrustPointByMoidExecute(r ApiGetIamTrustPointByMoidRequest) (*IamTrustPoint, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -23852,8 +24538,8 @@ func (r ApiGetIamTrustPointListRequest) Execute() (*IamTrustPointResponse, *http
 /*
 GetIamTrustPointList Read a 'iam.TrustPoint' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamTrustPointListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamTrustPointListRequest
 */
 func (a *IamApiService) GetIamTrustPointList(ctx context.Context) ApiGetIamTrustPointListRequest {
 	return ApiGetIamTrustPointListRequest{
@@ -23863,7 +24549,8 @@ func (a *IamApiService) GetIamTrustPointList(ctx context.Context) ApiGetIamTrust
 }
 
 // Execute executes the request
-//  @return IamTrustPointResponse
+//
+//	@return IamTrustPointResponse
 func (a *IamApiService) GetIamTrustPointListExecute(r ApiGetIamTrustPointListRequest) (*IamTrustPointResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -24030,9 +24717,9 @@ func (r ApiGetIamUserByMoidRequest) Execute() (*IamUser, *http.Response, error) 
 /*
 GetIamUserByMoid Read a 'iam.User' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamUserByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamUserByMoidRequest
 */
 func (a *IamApiService) GetIamUserByMoid(ctx context.Context, moid string) ApiGetIamUserByMoidRequest {
 	return ApiGetIamUserByMoidRequest{
@@ -24043,7 +24730,8 @@ func (a *IamApiService) GetIamUserByMoid(ctx context.Context, moid string) ApiGe
 }
 
 // Execute executes the request
-//  @return IamUser
+//
+//	@return IamUser
 func (a *IamApiService) GetIamUserByMoidExecute(r ApiGetIamUserByMoidRequest) (*IamUser, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -24178,9 +24866,9 @@ func (r ApiGetIamUserGroupByMoidRequest) Execute() (*IamUserGroup, *http.Respons
 /*
 GetIamUserGroupByMoid Read a 'iam.UserGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamUserGroupByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamUserGroupByMoidRequest
 */
 func (a *IamApiService) GetIamUserGroupByMoid(ctx context.Context, moid string) ApiGetIamUserGroupByMoidRequest {
 	return ApiGetIamUserGroupByMoidRequest{
@@ -24191,7 +24879,8 @@ func (a *IamApiService) GetIamUserGroupByMoid(ctx context.Context, moid string) 
 }
 
 // Execute executes the request
-//  @return IamUserGroup
+//
+//	@return IamUserGroup
 func (a *IamApiService) GetIamUserGroupByMoidExecute(r ApiGetIamUserGroupByMoidRequest) (*IamUserGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -24402,8 +25091,8 @@ func (r ApiGetIamUserGroupListRequest) Execute() (*IamUserGroupResponse, *http.R
 /*
 GetIamUserGroupList Read a 'iam.UserGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamUserGroupListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamUserGroupListRequest
 */
 func (a *IamApiService) GetIamUserGroupList(ctx context.Context) ApiGetIamUserGroupListRequest {
 	return ApiGetIamUserGroupListRequest{
@@ -24413,7 +25102,8 @@ func (a *IamApiService) GetIamUserGroupList(ctx context.Context) ApiGetIamUserGr
 }
 
 // Execute executes the request
-//  @return IamUserGroupResponse
+//
+//	@return IamUserGroupResponse
 func (a *IamApiService) GetIamUserGroupListExecute(r ApiGetIamUserGroupListRequest) (*IamUserGroupResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -24656,8 +25346,8 @@ func (r ApiGetIamUserListRequest) Execute() (*IamUserResponse, *http.Response, e
 /*
 GetIamUserList Read a 'iam.User' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamUserListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamUserListRequest
 */
 func (a *IamApiService) GetIamUserList(ctx context.Context) ApiGetIamUserListRequest {
 	return ApiGetIamUserListRequest{
@@ -24667,7 +25357,8 @@ func (a *IamApiService) GetIamUserList(ctx context.Context) ApiGetIamUserListReq
 }
 
 // Execute executes the request
-//  @return IamUserResponse
+//
+//	@return IamUserResponse
 func (a *IamApiService) GetIamUserListExecute(r ApiGetIamUserListRequest) (*IamUserResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -24834,9 +25525,9 @@ func (r ApiGetIamUserPreferenceByMoidRequest) Execute() (*IamUserPreference, *ht
 /*
 GetIamUserPreferenceByMoid Read a 'iam.UserPreference' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIamUserPreferenceByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamUserPreferenceByMoidRequest
 */
 func (a *IamApiService) GetIamUserPreferenceByMoid(ctx context.Context, moid string) ApiGetIamUserPreferenceByMoidRequest {
 	return ApiGetIamUserPreferenceByMoidRequest{
@@ -24847,7 +25538,8 @@ func (a *IamApiService) GetIamUserPreferenceByMoid(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return IamUserPreference
+//
+//	@return IamUserPreference
 func (a *IamApiService) GetIamUserPreferenceByMoidExecute(r ApiGetIamUserPreferenceByMoidRequest) (*IamUserPreference, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -25058,8 +25750,8 @@ func (r ApiGetIamUserPreferenceListRequest) Execute() (*IamUserPreferenceRespons
 /*
 GetIamUserPreferenceList Read a 'iam.UserPreference' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIamUserPreferenceListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamUserPreferenceListRequest
 */
 func (a *IamApiService) GetIamUserPreferenceList(ctx context.Context) ApiGetIamUserPreferenceListRequest {
 	return ApiGetIamUserPreferenceListRequest{
@@ -25069,7 +25761,8 @@ func (a *IamApiService) GetIamUserPreferenceList(ctx context.Context) ApiGetIamU
 }
 
 // Execute executes the request
-//  @return IamUserPreferenceResponse
+//
+//	@return IamUserPreferenceResponse
 func (a *IamApiService) GetIamUserPreferenceListExecute(r ApiGetIamUserPreferenceListRequest) (*IamUserPreferenceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -25084,6 +25777,410 @@ func (a *IamApiService) GetIamUserPreferenceListExecute(r ApiGetIamUserPreferenc
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/UserPreferences"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetIamUserSettingByMoidRequest struct {
+	ctx        context.Context
+	ApiService *IamApiService
+	moid       string
+}
+
+func (r ApiGetIamUserSettingByMoidRequest) Execute() (*IamUserSetting, *http.Response, error) {
+	return r.ApiService.GetIamUserSettingByMoidExecute(r)
+}
+
+/*
+GetIamUserSettingByMoid Read a 'iam.UserSetting' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIamUserSettingByMoidRequest
+*/
+func (a *IamApiService) GetIamUserSettingByMoid(ctx context.Context, moid string) ApiGetIamUserSettingByMoidRequest {
+	return ApiGetIamUserSettingByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//
+//	@return IamUserSetting
+func (a *IamApiService) GetIamUserSettingByMoidExecute(r ApiGetIamUserSettingByMoidRequest) (*IamUserSetting, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamUserSetting
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamUserSettingByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/iam/UserSettings/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetIamUserSettingListRequest struct {
+	ctx         context.Context
+	ApiService  *IamApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetIamUserSettingListRequest) Filter(filter string) ApiGetIamUserSettingListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetIamUserSettingListRequest) Orderby(orderby string) ApiGetIamUserSettingListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetIamUserSettingListRequest) Top(top int32) ApiGetIamUserSettingListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetIamUserSettingListRequest) Skip(skip int32) ApiGetIamUserSettingListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetIamUserSettingListRequest) Select_(select_ string) ApiGetIamUserSettingListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetIamUserSettingListRequest) Expand(expand string) ApiGetIamUserSettingListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetIamUserSettingListRequest) Apply(apply string) ApiGetIamUserSettingListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetIamUserSettingListRequest) Count(count bool) ApiGetIamUserSettingListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetIamUserSettingListRequest) Inlinecount(inlinecount string) ApiGetIamUserSettingListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetIamUserSettingListRequest) At(at string) ApiGetIamUserSettingListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetIamUserSettingListRequest) Tags(tags string) ApiGetIamUserSettingListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetIamUserSettingListRequest) Execute() (*IamUserSettingResponse, *http.Response, error) {
+	return r.ApiService.GetIamUserSettingListExecute(r)
+}
+
+/*
+GetIamUserSettingList Read a 'iam.UserSetting' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIamUserSettingListRequest
+*/
+func (a *IamApiService) GetIamUserSettingList(ctx context.Context) ApiGetIamUserSettingListRequest {
+	return ApiGetIamUserSettingListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return IamUserSettingResponse
+func (a *IamApiService) GetIamUserSettingListExecute(r ApiGetIamUserSettingListRequest) (*IamUserSettingResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamUserSettingResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamUserSettingList")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/iam/UserSettings"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -25250,9 +26347,9 @@ func (r ApiPatchIamAccountRequest) Execute() (*IamAccount, *http.Response, error
 /*
 PatchIamAccount Update a 'iam.Account' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchIamAccountRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchIamAccountRequest
 */
 func (a *IamApiService) PatchIamAccount(ctx context.Context, moid string) ApiPatchIamAccountRequest {
 	return ApiPatchIamAccountRequest{
@@ -25263,7 +26360,8 @@ func (a *IamApiService) PatchIamAccount(ctx context.Context, moid string) ApiPat
 }
 
 // Execute executes the request
-//  @return IamAccount
+//
+//	@return IamAccount
 func (a *IamApiService) PatchIamAccountExecute(r ApiPatchIamAccountRequest) (*IamAccount, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -25420,9 +26518,9 @@ func (r ApiPatchIamAccountExperienceRequest) Execute() (*IamAccountExperience, *
 /*
 PatchIamAccountExperience Update a 'iam.AccountExperience' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchIamAccountExperienceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchIamAccountExperienceRequest
 */
 func (a *IamApiService) PatchIamAccountExperience(ctx context.Context, moid string) ApiPatchIamAccountExperienceRequest {
 	return ApiPatchIamAccountExperienceRequest{
@@ -25433,7 +26531,8 @@ func (a *IamApiService) PatchIamAccountExperience(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return IamAccountExperience
+//
+//	@return IamAccountExperience
 func (a *IamApiService) PatchIamAccountExperienceExecute(r ApiPatchIamAccountExperienceRequest) (*IamAccountExperience, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -25590,9 +26689,9 @@ func (r ApiPatchIamApiKeyRequest) Execute() (*IamApiKey, *http.Response, error) 
 /*
 PatchIamApiKey Update a 'iam.ApiKey' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchIamApiKeyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchIamApiKeyRequest
 */
 func (a *IamApiService) PatchIamApiKey(ctx context.Context, moid string) ApiPatchIamApiKeyRequest {
 	return ApiPatchIamApiKeyRequest{
@@ -25603,7 +26702,8 @@ func (a *IamApiService) PatchIamApiKey(ctx context.Context, moid string) ApiPatc
 }
 
 // Execute executes the request
-//  @return IamApiKey
+//
+//	@return IamApiKey
 func (a *IamApiService) PatchIamApiKeyExecute(r ApiPatchIamApiKeyRequest) (*IamApiKey, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -25760,9 +26860,9 @@ func (r ApiPatchIamAppRegistrationRequest) Execute() (*IamAppRegistration, *http
 /*
 PatchIamAppRegistration Update a 'iam.AppRegistration' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchIamAppRegistrationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchIamAppRegistrationRequest
 */
 func (a *IamApiService) PatchIamAppRegistration(ctx context.Context, moid string) ApiPatchIamAppRegistrationRequest {
 	return ApiPatchIamAppRegistrationRequest{
@@ -25773,7 +26873,8 @@ func (a *IamApiService) PatchIamAppRegistration(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return IamAppRegistration
+//
+//	@return IamAppRegistration
 func (a *IamApiService) PatchIamAppRegistrationExecute(r ApiPatchIamAppRegistrationRequest) (*IamAppRegistration, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -25930,9 +27031,9 @@ func (r ApiPatchIamBannerMessageRequest) Execute() (*IamBannerMessage, *http.Res
 /*
 PatchIamBannerMessage Update a 'iam.BannerMessage' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchIamBannerMessageRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchIamBannerMessageRequest
 */
 func (a *IamApiService) PatchIamBannerMessage(ctx context.Context, moid string) ApiPatchIamBannerMessageRequest {
 	return ApiPatchIamBannerMessageRequest{
@@ -25943,7 +27044,8 @@ func (a *IamApiService) PatchIamBannerMessage(ctx context.Context, moid string) 
 }
 
 // Execute executes the request
-//  @return IamBannerMessage
+//
+//	@return IamBannerMessage
 func (a *IamApiService) PatchIamBannerMessageExecute(r ApiPatchIamBannerMessageRequest) (*IamBannerMessage, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -26100,9 +27202,9 @@ func (r ApiPatchIamCertificateRequest) Execute() (*IamCertificate, *http.Respons
 /*
 PatchIamCertificate Update a 'iam.Certificate' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchIamCertificateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchIamCertificateRequest
 */
 func (a *IamApiService) PatchIamCertificate(ctx context.Context, moid string) ApiPatchIamCertificateRequest {
 	return ApiPatchIamCertificateRequest{
@@ -26113,7 +27215,8 @@ func (a *IamApiService) PatchIamCertificate(ctx context.Context, moid string) Ap
 }
 
 // Execute executes the request
-//  @return IamCertificate
+//
+//	@return IamCertificate
 func (a *IamApiService) PatchIamCertificateExecute(r ApiPatchIamCertificateRequest) (*IamCertificate, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -26270,9 +27373,9 @@ func (r ApiPatchIamCertificateRequestRequest) Execute() (*IamCertificateRequest,
 /*
 PatchIamCertificateRequest Update a 'iam.CertificateRequest' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchIamCertificateRequestRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchIamCertificateRequestRequest
 */
 func (a *IamApiService) PatchIamCertificateRequest(ctx context.Context, moid string) ApiPatchIamCertificateRequestRequest {
 	return ApiPatchIamCertificateRequestRequest{
@@ -26283,7 +27386,8 @@ func (a *IamApiService) PatchIamCertificateRequest(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return IamCertificateRequest
+//
+//	@return IamCertificateRequest
 func (a *IamApiService) PatchIamCertificateRequestExecute(r ApiPatchIamCertificateRequestRequest) (*IamCertificateRequest, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -26440,9 +27544,9 @@ func (r ApiPatchIamDomainNameInfoRequest) Execute() (*IamDomainNameInfo, *http.R
 /*
 PatchIamDomainNameInfo Update a 'iam.DomainNameInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchIamDomainNameInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchIamDomainNameInfoRequest
 */
 func (a *IamApiService) PatchIamDomainNameInfo(ctx context.Context, moid string) ApiPatchIamDomainNameInfoRequest {
 	return ApiPatchIamDomainNameInfoRequest{
@@ -26453,7 +27557,8 @@ func (a *IamApiService) PatchIamDomainNameInfo(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//  @return IamDomainNameInfo
+//
+//	@return IamDomainNameInfo
 func (a *IamApiService) PatchIamDomainNameInfoExecute(r ApiPatchIamDomainNameInfoRequest) (*IamDomainNameInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -26610,9 +27715,9 @@ func (r ApiPatchIamEndPointUserRequest) Execute() (*IamEndPointUser, *http.Respo
 /*
 PatchIamEndPointUser Update a 'iam.EndPointUser' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchIamEndPointUserRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchIamEndPointUserRequest
 */
 func (a *IamApiService) PatchIamEndPointUser(ctx context.Context, moid string) ApiPatchIamEndPointUserRequest {
 	return ApiPatchIamEndPointUserRequest{
@@ -26623,7 +27728,8 @@ func (a *IamApiService) PatchIamEndPointUser(ctx context.Context, moid string) A
 }
 
 // Execute executes the request
-//  @return IamEndPointUser
+//
+//	@return IamEndPointUser
 func (a *IamApiService) PatchIamEndPointUserExecute(r ApiPatchIamEndPointUserRequest) (*IamEndPointUser, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -26780,9 +27886,9 @@ func (r ApiPatchIamEndPointUserPolicyRequest) Execute() (*IamEndPointUserPolicy,
 /*
 PatchIamEndPointUserPolicy Update a 'iam.EndPointUserPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchIamEndPointUserPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchIamEndPointUserPolicyRequest
 */
 func (a *IamApiService) PatchIamEndPointUserPolicy(ctx context.Context, moid string) ApiPatchIamEndPointUserPolicyRequest {
 	return ApiPatchIamEndPointUserPolicyRequest{
@@ -26793,7 +27899,8 @@ func (a *IamApiService) PatchIamEndPointUserPolicy(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return IamEndPointUserPolicy
+//
+//	@return IamEndPointUserPolicy
 func (a *IamApiService) PatchIamEndPointUserPolicyExecute(r ApiPatchIamEndPointUserPolicyRequest) (*IamEndPointUserPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -26950,9 +28057,9 @@ func (r ApiPatchIamEndPointUserRoleRequest) Execute() (*IamEndPointUserRole, *ht
 /*
 PatchIamEndPointUserRole Update a 'iam.EndPointUserRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchIamEndPointUserRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchIamEndPointUserRoleRequest
 */
 func (a *IamApiService) PatchIamEndPointUserRole(ctx context.Context, moid string) ApiPatchIamEndPointUserRoleRequest {
 	return ApiPatchIamEndPointUserRoleRequest{
@@ -26963,7 +28070,8 @@ func (a *IamApiService) PatchIamEndPointUserRole(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return IamEndPointUserRole
+//
+//	@return IamEndPointUserRole
 func (a *IamApiService) PatchIamEndPointUserRoleExecute(r ApiPatchIamEndPointUserRoleRequest) (*IamEndPointUserRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -27120,9 +28228,9 @@ func (r ApiPatchIamIdpRequest) Execute() (*IamIdp, *http.Response, error) {
 /*
 PatchIamIdp Update a 'iam.Idp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchIamIdpRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchIamIdpRequest
 */
 func (a *IamApiService) PatchIamIdp(ctx context.Context, moid string) ApiPatchIamIdpRequest {
 	return ApiPatchIamIdpRequest{
@@ -27133,7 +28241,8 @@ func (a *IamApiService) PatchIamIdp(ctx context.Context, moid string) ApiPatchIa
 }
 
 // Execute executes the request
-//  @return IamIdp
+//
+//	@return IamIdp
 func (a *IamApiService) PatchIamIdpExecute(r ApiPatchIamIdpRequest) (*IamIdp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -27290,9 +28399,9 @@ func (r ApiPatchIamIdpReferenceRequest) Execute() (*IamIdpReference, *http.Respo
 /*
 PatchIamIdpReference Update a 'iam.IdpReference' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchIamIdpReferenceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchIamIdpReferenceRequest
 */
 func (a *IamApiService) PatchIamIdpReference(ctx context.Context, moid string) ApiPatchIamIdpReferenceRequest {
 	return ApiPatchIamIdpReferenceRequest{
@@ -27303,7 +28412,8 @@ func (a *IamApiService) PatchIamIdpReference(ctx context.Context, moid string) A
 }
 
 // Execute executes the request
-//  @return IamIdpReference
+//
+//	@return IamIdpReference
 func (a *IamApiService) PatchIamIdpReferenceExecute(r ApiPatchIamIdpReferenceRequest) (*IamIdpReference, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -27460,9 +28570,9 @@ func (r ApiPatchIamIpAccessManagementRequest) Execute() (*IamIpAccessManagement,
 /*
 PatchIamIpAccessManagement Update a 'iam.IpAccessManagement' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchIamIpAccessManagementRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchIamIpAccessManagementRequest
 */
 func (a *IamApiService) PatchIamIpAccessManagement(ctx context.Context, moid string) ApiPatchIamIpAccessManagementRequest {
 	return ApiPatchIamIpAccessManagementRequest{
@@ -27473,7 +28583,8 @@ func (a *IamApiService) PatchIamIpAccessManagement(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return IamIpAccessManagement
+//
+//	@return IamIpAccessManagement
 func (a *IamApiService) PatchIamIpAccessManagementExecute(r ApiPatchIamIpAccessManagementRequest) (*IamIpAccessManagement, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -27630,9 +28741,9 @@ func (r ApiPatchIamIpAddressRequest) Execute() (*IamIpAddress, *http.Response, e
 /*
 PatchIamIpAddress Update a 'iam.IpAddress' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchIamIpAddressRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchIamIpAddressRequest
 */
 func (a *IamApiService) PatchIamIpAddress(ctx context.Context, moid string) ApiPatchIamIpAddressRequest {
 	return ApiPatchIamIpAddressRequest{
@@ -27643,7 +28754,8 @@ func (a *IamApiService) PatchIamIpAddress(ctx context.Context, moid string) ApiP
 }
 
 // Execute executes the request
-//  @return IamIpAddress
+//
+//	@return IamIpAddress
 func (a *IamApiService) PatchIamIpAddressExecute(r ApiPatchIamIpAddressRequest) (*IamIpAddress, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -27800,9 +28912,9 @@ func (r ApiPatchIamLdapGroupRequest) Execute() (*IamLdapGroup, *http.Response, e
 /*
 PatchIamLdapGroup Update a 'iam.LdapGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchIamLdapGroupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchIamLdapGroupRequest
 */
 func (a *IamApiService) PatchIamLdapGroup(ctx context.Context, moid string) ApiPatchIamLdapGroupRequest {
 	return ApiPatchIamLdapGroupRequest{
@@ -27813,7 +28925,8 @@ func (a *IamApiService) PatchIamLdapGroup(ctx context.Context, moid string) ApiP
 }
 
 // Execute executes the request
-//  @return IamLdapGroup
+//
+//	@return IamLdapGroup
 func (a *IamApiService) PatchIamLdapGroupExecute(r ApiPatchIamLdapGroupRequest) (*IamLdapGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -27970,9 +29083,9 @@ func (r ApiPatchIamLdapPolicyRequest) Execute() (*IamLdapPolicy, *http.Response,
 /*
 PatchIamLdapPolicy Update a 'iam.LdapPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchIamLdapPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchIamLdapPolicyRequest
 */
 func (a *IamApiService) PatchIamLdapPolicy(ctx context.Context, moid string) ApiPatchIamLdapPolicyRequest {
 	return ApiPatchIamLdapPolicyRequest{
@@ -27983,7 +29096,8 @@ func (a *IamApiService) PatchIamLdapPolicy(ctx context.Context, moid string) Api
 }
 
 // Execute executes the request
-//  @return IamLdapPolicy
+//
+//	@return IamLdapPolicy
 func (a *IamApiService) PatchIamLdapPolicyExecute(r ApiPatchIamLdapPolicyRequest) (*IamLdapPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -28140,9 +29254,9 @@ func (r ApiPatchIamLdapProviderRequest) Execute() (*IamLdapProvider, *http.Respo
 /*
 PatchIamLdapProvider Update a 'iam.LdapProvider' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchIamLdapProviderRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchIamLdapProviderRequest
 */
 func (a *IamApiService) PatchIamLdapProvider(ctx context.Context, moid string) ApiPatchIamLdapProviderRequest {
 	return ApiPatchIamLdapProviderRequest{
@@ -28153,7 +29267,8 @@ func (a *IamApiService) PatchIamLdapProvider(ctx context.Context, moid string) A
 }
 
 // Execute executes the request
-//  @return IamLdapProvider
+//
+//	@return IamLdapProvider
 func (a *IamApiService) PatchIamLdapProviderExecute(r ApiPatchIamLdapProviderRequest) (*IamLdapProvider, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -28310,9 +29425,9 @@ func (r ApiPatchIamLocalUserPasswordRequest) Execute() (*IamLocalUserPassword, *
 /*
 PatchIamLocalUserPassword Update a 'iam.LocalUserPassword' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchIamLocalUserPasswordRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchIamLocalUserPasswordRequest
 */
 func (a *IamApiService) PatchIamLocalUserPassword(ctx context.Context, moid string) ApiPatchIamLocalUserPasswordRequest {
 	return ApiPatchIamLocalUserPasswordRequest{
@@ -28323,7 +29438,8 @@ func (a *IamApiService) PatchIamLocalUserPassword(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return IamLocalUserPassword
+//
+//	@return IamLocalUserPassword
 func (a *IamApiService) PatchIamLocalUserPasswordExecute(r ApiPatchIamLocalUserPasswordRequest) (*IamLocalUserPassword, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -28480,9 +29596,9 @@ func (r ApiPatchIamLocalUserPasswordPolicyRequest) Execute() (*IamLocalUserPassw
 /*
 PatchIamLocalUserPasswordPolicy Update a 'iam.LocalUserPasswordPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchIamLocalUserPasswordPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchIamLocalUserPasswordPolicyRequest
 */
 func (a *IamApiService) PatchIamLocalUserPasswordPolicy(ctx context.Context, moid string) ApiPatchIamLocalUserPasswordPolicyRequest {
 	return ApiPatchIamLocalUserPasswordPolicyRequest{
@@ -28493,7 +29609,8 @@ func (a *IamApiService) PatchIamLocalUserPasswordPolicy(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return IamLocalUserPasswordPolicy
+//
+//	@return IamLocalUserPasswordPolicy
 func (a *IamApiService) PatchIamLocalUserPasswordPolicyExecute(r ApiPatchIamLocalUserPasswordPolicyRequest) (*IamLocalUserPasswordPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -28650,9 +29767,9 @@ func (r ApiPatchIamPermissionRequest) Execute() (*IamPermission, *http.Response,
 /*
 PatchIamPermission Update a 'iam.Permission' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchIamPermissionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchIamPermissionRequest
 */
 func (a *IamApiService) PatchIamPermission(ctx context.Context, moid string) ApiPatchIamPermissionRequest {
 	return ApiPatchIamPermissionRequest{
@@ -28663,7 +29780,8 @@ func (a *IamApiService) PatchIamPermission(ctx context.Context, moid string) Api
 }
 
 // Execute executes the request
-//  @return IamPermission
+//
+//	@return IamPermission
 func (a *IamApiService) PatchIamPermissionExecute(r ApiPatchIamPermissionRequest) (*IamPermission, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -28820,9 +29938,9 @@ func (r ApiPatchIamPrivateKeySpecRequest) Execute() (*IamPrivateKeySpec, *http.R
 /*
 PatchIamPrivateKeySpec Update a 'iam.PrivateKeySpec' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchIamPrivateKeySpecRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchIamPrivateKeySpecRequest
 */
 func (a *IamApiService) PatchIamPrivateKeySpec(ctx context.Context, moid string) ApiPatchIamPrivateKeySpecRequest {
 	return ApiPatchIamPrivateKeySpecRequest{
@@ -28833,7 +29951,8 @@ func (a *IamApiService) PatchIamPrivateKeySpec(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//  @return IamPrivateKeySpec
+//
+//	@return IamPrivateKeySpec
 func (a *IamApiService) PatchIamPrivateKeySpecExecute(r ApiPatchIamPrivateKeySpecRequest) (*IamPrivateKeySpec, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -28990,9 +30109,9 @@ func (r ApiPatchIamQualifierRequest) Execute() (*IamQualifier, *http.Response, e
 /*
 PatchIamQualifier Update a 'iam.Qualifier' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchIamQualifierRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchIamQualifierRequest
 */
 func (a *IamApiService) PatchIamQualifier(ctx context.Context, moid string) ApiPatchIamQualifierRequest {
 	return ApiPatchIamQualifierRequest{
@@ -29003,7 +30122,8 @@ func (a *IamApiService) PatchIamQualifier(ctx context.Context, moid string) ApiP
 }
 
 // Execute executes the request
-//  @return IamQualifier
+//
+//	@return IamQualifier
 func (a *IamApiService) PatchIamQualifierExecute(r ApiPatchIamQualifierRequest) (*IamQualifier, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -29160,9 +30280,9 @@ func (r ApiPatchIamResourceRolesRequest) Execute() (*IamResourceRoles, *http.Res
 /*
 PatchIamResourceRoles Update a 'iam.ResourceRoles' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchIamResourceRolesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchIamResourceRolesRequest
 */
 func (a *IamApiService) PatchIamResourceRoles(ctx context.Context, moid string) ApiPatchIamResourceRolesRequest {
 	return ApiPatchIamResourceRolesRequest{
@@ -29173,7 +30293,8 @@ func (a *IamApiService) PatchIamResourceRoles(ctx context.Context, moid string) 
 }
 
 // Execute executes the request
-//  @return IamResourceRoles
+//
+//	@return IamResourceRoles
 func (a *IamApiService) PatchIamResourceRolesExecute(r ApiPatchIamResourceRolesRequest) (*IamResourceRoles, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -29330,9 +30451,9 @@ func (r ApiPatchIamSessionLimitsRequest) Execute() (*IamSessionLimits, *http.Res
 /*
 PatchIamSessionLimits Update a 'iam.SessionLimits' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchIamSessionLimitsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchIamSessionLimitsRequest
 */
 func (a *IamApiService) PatchIamSessionLimits(ctx context.Context, moid string) ApiPatchIamSessionLimitsRequest {
 	return ApiPatchIamSessionLimitsRequest{
@@ -29343,7 +30464,8 @@ func (a *IamApiService) PatchIamSessionLimits(ctx context.Context, moid string) 
 }
 
 // Execute executes the request
-//  @return IamSessionLimits
+//
+//	@return IamSessionLimits
 func (a *IamApiService) PatchIamSessionLimitsExecute(r ApiPatchIamSessionLimitsRequest) (*IamSessionLimits, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -29500,9 +30622,9 @@ func (r ApiPatchIamUserRequest) Execute() (*IamUser, *http.Response, error) {
 /*
 PatchIamUser Update a 'iam.User' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchIamUserRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchIamUserRequest
 */
 func (a *IamApiService) PatchIamUser(ctx context.Context, moid string) ApiPatchIamUserRequest {
 	return ApiPatchIamUserRequest{
@@ -29513,7 +30635,8 @@ func (a *IamApiService) PatchIamUser(ctx context.Context, moid string) ApiPatchI
 }
 
 // Execute executes the request
-//  @return IamUser
+//
+//	@return IamUser
 func (a *IamApiService) PatchIamUserExecute(r ApiPatchIamUserRequest) (*IamUser, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -29670,9 +30793,9 @@ func (r ApiPatchIamUserGroupRequest) Execute() (*IamUserGroup, *http.Response, e
 /*
 PatchIamUserGroup Update a 'iam.UserGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchIamUserGroupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchIamUserGroupRequest
 */
 func (a *IamApiService) PatchIamUserGroup(ctx context.Context, moid string) ApiPatchIamUserGroupRequest {
 	return ApiPatchIamUserGroupRequest{
@@ -29683,7 +30806,8 @@ func (a *IamApiService) PatchIamUserGroup(ctx context.Context, moid string) ApiP
 }
 
 // Execute executes the request
-//  @return IamUserGroup
+//
+//	@return IamUserGroup
 func (a *IamApiService) PatchIamUserGroupExecute(r ApiPatchIamUserGroupRequest) (*IamUserGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -29840,9 +30964,9 @@ func (r ApiPatchIamUserPreferenceRequest) Execute() (*IamUserPreference, *http.R
 /*
 PatchIamUserPreference Update a 'iam.UserPreference' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchIamUserPreferenceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchIamUserPreferenceRequest
 */
 func (a *IamApiService) PatchIamUserPreference(ctx context.Context, moid string) ApiPatchIamUserPreferenceRequest {
 	return ApiPatchIamUserPreferenceRequest{
@@ -29853,7 +30977,8 @@ func (a *IamApiService) PatchIamUserPreference(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//  @return IamUserPreference
+//
+//	@return IamUserPreference
 func (a *IamApiService) PatchIamUserPreferenceExecute(r ApiPatchIamUserPreferenceRequest) (*IamUserPreference, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -29983,6 +31108,177 @@ func (a *IamApiService) PatchIamUserPreferenceExecute(r ApiPatchIamUserPreferenc
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiPatchIamUserSettingRequest struct {
+	ctx            context.Context
+	ApiService     *IamApiService
+	moid           string
+	iamUserSetting *IamUserSetting
+	ifMatch        *string
+}
+
+// The &#39;iam.UserSetting&#39; resource to update.
+func (r ApiPatchIamUserSettingRequest) IamUserSetting(iamUserSetting IamUserSetting) ApiPatchIamUserSettingRequest {
+	r.iamUserSetting = &iamUserSetting
+	return r
+}
+
+// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
+func (r ApiPatchIamUserSettingRequest) IfMatch(ifMatch string) ApiPatchIamUserSettingRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiPatchIamUserSettingRequest) Execute() (*IamUserSetting, *http.Response, error) {
+	return r.ApiService.PatchIamUserSettingExecute(r)
+}
+
+/*
+PatchIamUserSetting Update a 'iam.UserSetting' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchIamUserSettingRequest
+*/
+func (a *IamApiService) PatchIamUserSetting(ctx context.Context, moid string) ApiPatchIamUserSettingRequest {
+	return ApiPatchIamUserSettingRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//
+//	@return IamUserSetting
+func (a *IamApiService) PatchIamUserSettingExecute(r ApiPatchIamUserSettingRequest) (*IamUserSetting, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamUserSetting
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.PatchIamUserSetting")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/iam/UserSettings/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.iamUserSetting == nil {
+		return localVarReturnValue, nil, reportError("iamUserSetting is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.iamUserSetting
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiUpdateIamAccountRequest struct {
 	ctx        context.Context
 	ApiService *IamApiService
@@ -30010,9 +31306,9 @@ func (r ApiUpdateIamAccountRequest) Execute() (*IamAccount, *http.Response, erro
 /*
 UpdateIamAccount Update a 'iam.Account' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateIamAccountRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateIamAccountRequest
 */
 func (a *IamApiService) UpdateIamAccount(ctx context.Context, moid string) ApiUpdateIamAccountRequest {
 	return ApiUpdateIamAccountRequest{
@@ -30023,7 +31319,8 @@ func (a *IamApiService) UpdateIamAccount(ctx context.Context, moid string) ApiUp
 }
 
 // Execute executes the request
-//  @return IamAccount
+//
+//	@return IamAccount
 func (a *IamApiService) UpdateIamAccountExecute(r ApiUpdateIamAccountRequest) (*IamAccount, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -30180,9 +31477,9 @@ func (r ApiUpdateIamAccountExperienceRequest) Execute() (*IamAccountExperience, 
 /*
 UpdateIamAccountExperience Update a 'iam.AccountExperience' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateIamAccountExperienceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateIamAccountExperienceRequest
 */
 func (a *IamApiService) UpdateIamAccountExperience(ctx context.Context, moid string) ApiUpdateIamAccountExperienceRequest {
 	return ApiUpdateIamAccountExperienceRequest{
@@ -30193,7 +31490,8 @@ func (a *IamApiService) UpdateIamAccountExperience(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return IamAccountExperience
+//
+//	@return IamAccountExperience
 func (a *IamApiService) UpdateIamAccountExperienceExecute(r ApiUpdateIamAccountExperienceRequest) (*IamAccountExperience, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -30350,9 +31648,9 @@ func (r ApiUpdateIamApiKeyRequest) Execute() (*IamApiKey, *http.Response, error)
 /*
 UpdateIamApiKey Update a 'iam.ApiKey' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateIamApiKeyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateIamApiKeyRequest
 */
 func (a *IamApiService) UpdateIamApiKey(ctx context.Context, moid string) ApiUpdateIamApiKeyRequest {
 	return ApiUpdateIamApiKeyRequest{
@@ -30363,7 +31661,8 @@ func (a *IamApiService) UpdateIamApiKey(ctx context.Context, moid string) ApiUpd
 }
 
 // Execute executes the request
-//  @return IamApiKey
+//
+//	@return IamApiKey
 func (a *IamApiService) UpdateIamApiKeyExecute(r ApiUpdateIamApiKeyRequest) (*IamApiKey, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -30520,9 +31819,9 @@ func (r ApiUpdateIamAppRegistrationRequest) Execute() (*IamAppRegistration, *htt
 /*
 UpdateIamAppRegistration Update a 'iam.AppRegistration' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateIamAppRegistrationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateIamAppRegistrationRequest
 */
 func (a *IamApiService) UpdateIamAppRegistration(ctx context.Context, moid string) ApiUpdateIamAppRegistrationRequest {
 	return ApiUpdateIamAppRegistrationRequest{
@@ -30533,7 +31832,8 @@ func (a *IamApiService) UpdateIamAppRegistration(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return IamAppRegistration
+//
+//	@return IamAppRegistration
 func (a *IamApiService) UpdateIamAppRegistrationExecute(r ApiUpdateIamAppRegistrationRequest) (*IamAppRegistration, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -30690,9 +31990,9 @@ func (r ApiUpdateIamBannerMessageRequest) Execute() (*IamBannerMessage, *http.Re
 /*
 UpdateIamBannerMessage Update a 'iam.BannerMessage' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateIamBannerMessageRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateIamBannerMessageRequest
 */
 func (a *IamApiService) UpdateIamBannerMessage(ctx context.Context, moid string) ApiUpdateIamBannerMessageRequest {
 	return ApiUpdateIamBannerMessageRequest{
@@ -30703,7 +32003,8 @@ func (a *IamApiService) UpdateIamBannerMessage(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//  @return IamBannerMessage
+//
+//	@return IamBannerMessage
 func (a *IamApiService) UpdateIamBannerMessageExecute(r ApiUpdateIamBannerMessageRequest) (*IamBannerMessage, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -30860,9 +32161,9 @@ func (r ApiUpdateIamCertificateRequest) Execute() (*IamCertificate, *http.Respon
 /*
 UpdateIamCertificate Update a 'iam.Certificate' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateIamCertificateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateIamCertificateRequest
 */
 func (a *IamApiService) UpdateIamCertificate(ctx context.Context, moid string) ApiUpdateIamCertificateRequest {
 	return ApiUpdateIamCertificateRequest{
@@ -30873,7 +32174,8 @@ func (a *IamApiService) UpdateIamCertificate(ctx context.Context, moid string) A
 }
 
 // Execute executes the request
-//  @return IamCertificate
+//
+//	@return IamCertificate
 func (a *IamApiService) UpdateIamCertificateExecute(r ApiUpdateIamCertificateRequest) (*IamCertificate, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -31030,9 +32332,9 @@ func (r ApiUpdateIamCertificateRequestRequest) Execute() (*IamCertificateRequest
 /*
 UpdateIamCertificateRequest Update a 'iam.CertificateRequest' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateIamCertificateRequestRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateIamCertificateRequestRequest
 */
 func (a *IamApiService) UpdateIamCertificateRequest(ctx context.Context, moid string) ApiUpdateIamCertificateRequestRequest {
 	return ApiUpdateIamCertificateRequestRequest{
@@ -31043,7 +32345,8 @@ func (a *IamApiService) UpdateIamCertificateRequest(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return IamCertificateRequest
+//
+//	@return IamCertificateRequest
 func (a *IamApiService) UpdateIamCertificateRequestExecute(r ApiUpdateIamCertificateRequestRequest) (*IamCertificateRequest, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -31200,9 +32503,9 @@ func (r ApiUpdateIamDomainNameInfoRequest) Execute() (*IamDomainNameInfo, *http.
 /*
 UpdateIamDomainNameInfo Update a 'iam.DomainNameInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateIamDomainNameInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateIamDomainNameInfoRequest
 */
 func (a *IamApiService) UpdateIamDomainNameInfo(ctx context.Context, moid string) ApiUpdateIamDomainNameInfoRequest {
 	return ApiUpdateIamDomainNameInfoRequest{
@@ -31213,7 +32516,8 @@ func (a *IamApiService) UpdateIamDomainNameInfo(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return IamDomainNameInfo
+//
+//	@return IamDomainNameInfo
 func (a *IamApiService) UpdateIamDomainNameInfoExecute(r ApiUpdateIamDomainNameInfoRequest) (*IamDomainNameInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -31370,9 +32674,9 @@ func (r ApiUpdateIamEndPointUserRequest) Execute() (*IamEndPointUser, *http.Resp
 /*
 UpdateIamEndPointUser Update a 'iam.EndPointUser' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateIamEndPointUserRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateIamEndPointUserRequest
 */
 func (a *IamApiService) UpdateIamEndPointUser(ctx context.Context, moid string) ApiUpdateIamEndPointUserRequest {
 	return ApiUpdateIamEndPointUserRequest{
@@ -31383,7 +32687,8 @@ func (a *IamApiService) UpdateIamEndPointUser(ctx context.Context, moid string) 
 }
 
 // Execute executes the request
-//  @return IamEndPointUser
+//
+//	@return IamEndPointUser
 func (a *IamApiService) UpdateIamEndPointUserExecute(r ApiUpdateIamEndPointUserRequest) (*IamEndPointUser, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -31540,9 +32845,9 @@ func (r ApiUpdateIamEndPointUserPolicyRequest) Execute() (*IamEndPointUserPolicy
 /*
 UpdateIamEndPointUserPolicy Update a 'iam.EndPointUserPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateIamEndPointUserPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateIamEndPointUserPolicyRequest
 */
 func (a *IamApiService) UpdateIamEndPointUserPolicy(ctx context.Context, moid string) ApiUpdateIamEndPointUserPolicyRequest {
 	return ApiUpdateIamEndPointUserPolicyRequest{
@@ -31553,7 +32858,8 @@ func (a *IamApiService) UpdateIamEndPointUserPolicy(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return IamEndPointUserPolicy
+//
+//	@return IamEndPointUserPolicy
 func (a *IamApiService) UpdateIamEndPointUserPolicyExecute(r ApiUpdateIamEndPointUserPolicyRequest) (*IamEndPointUserPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -31710,9 +33016,9 @@ func (r ApiUpdateIamEndPointUserRoleRequest) Execute() (*IamEndPointUserRole, *h
 /*
 UpdateIamEndPointUserRole Update a 'iam.EndPointUserRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateIamEndPointUserRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateIamEndPointUserRoleRequest
 */
 func (a *IamApiService) UpdateIamEndPointUserRole(ctx context.Context, moid string) ApiUpdateIamEndPointUserRoleRequest {
 	return ApiUpdateIamEndPointUserRoleRequest{
@@ -31723,7 +33029,8 @@ func (a *IamApiService) UpdateIamEndPointUserRole(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return IamEndPointUserRole
+//
+//	@return IamEndPointUserRole
 func (a *IamApiService) UpdateIamEndPointUserRoleExecute(r ApiUpdateIamEndPointUserRoleRequest) (*IamEndPointUserRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -31880,9 +33187,9 @@ func (r ApiUpdateIamIdpRequest) Execute() (*IamIdp, *http.Response, error) {
 /*
 UpdateIamIdp Update a 'iam.Idp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateIamIdpRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateIamIdpRequest
 */
 func (a *IamApiService) UpdateIamIdp(ctx context.Context, moid string) ApiUpdateIamIdpRequest {
 	return ApiUpdateIamIdpRequest{
@@ -31893,7 +33200,8 @@ func (a *IamApiService) UpdateIamIdp(ctx context.Context, moid string) ApiUpdate
 }
 
 // Execute executes the request
-//  @return IamIdp
+//
+//	@return IamIdp
 func (a *IamApiService) UpdateIamIdpExecute(r ApiUpdateIamIdpRequest) (*IamIdp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -32050,9 +33358,9 @@ func (r ApiUpdateIamIdpReferenceRequest) Execute() (*IamIdpReference, *http.Resp
 /*
 UpdateIamIdpReference Update a 'iam.IdpReference' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateIamIdpReferenceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateIamIdpReferenceRequest
 */
 func (a *IamApiService) UpdateIamIdpReference(ctx context.Context, moid string) ApiUpdateIamIdpReferenceRequest {
 	return ApiUpdateIamIdpReferenceRequest{
@@ -32063,7 +33371,8 @@ func (a *IamApiService) UpdateIamIdpReference(ctx context.Context, moid string) 
 }
 
 // Execute executes the request
-//  @return IamIdpReference
+//
+//	@return IamIdpReference
 func (a *IamApiService) UpdateIamIdpReferenceExecute(r ApiUpdateIamIdpReferenceRequest) (*IamIdpReference, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -32220,9 +33529,9 @@ func (r ApiUpdateIamIpAccessManagementRequest) Execute() (*IamIpAccessManagement
 /*
 UpdateIamIpAccessManagement Update a 'iam.IpAccessManagement' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateIamIpAccessManagementRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateIamIpAccessManagementRequest
 */
 func (a *IamApiService) UpdateIamIpAccessManagement(ctx context.Context, moid string) ApiUpdateIamIpAccessManagementRequest {
 	return ApiUpdateIamIpAccessManagementRequest{
@@ -32233,7 +33542,8 @@ func (a *IamApiService) UpdateIamIpAccessManagement(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return IamIpAccessManagement
+//
+//	@return IamIpAccessManagement
 func (a *IamApiService) UpdateIamIpAccessManagementExecute(r ApiUpdateIamIpAccessManagementRequest) (*IamIpAccessManagement, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -32390,9 +33700,9 @@ func (r ApiUpdateIamIpAddressRequest) Execute() (*IamIpAddress, *http.Response, 
 /*
 UpdateIamIpAddress Update a 'iam.IpAddress' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateIamIpAddressRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateIamIpAddressRequest
 */
 func (a *IamApiService) UpdateIamIpAddress(ctx context.Context, moid string) ApiUpdateIamIpAddressRequest {
 	return ApiUpdateIamIpAddressRequest{
@@ -32403,7 +33713,8 @@ func (a *IamApiService) UpdateIamIpAddress(ctx context.Context, moid string) Api
 }
 
 // Execute executes the request
-//  @return IamIpAddress
+//
+//	@return IamIpAddress
 func (a *IamApiService) UpdateIamIpAddressExecute(r ApiUpdateIamIpAddressRequest) (*IamIpAddress, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -32560,9 +33871,9 @@ func (r ApiUpdateIamLdapGroupRequest) Execute() (*IamLdapGroup, *http.Response, 
 /*
 UpdateIamLdapGroup Update a 'iam.LdapGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateIamLdapGroupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateIamLdapGroupRequest
 */
 func (a *IamApiService) UpdateIamLdapGroup(ctx context.Context, moid string) ApiUpdateIamLdapGroupRequest {
 	return ApiUpdateIamLdapGroupRequest{
@@ -32573,7 +33884,8 @@ func (a *IamApiService) UpdateIamLdapGroup(ctx context.Context, moid string) Api
 }
 
 // Execute executes the request
-//  @return IamLdapGroup
+//
+//	@return IamLdapGroup
 func (a *IamApiService) UpdateIamLdapGroupExecute(r ApiUpdateIamLdapGroupRequest) (*IamLdapGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -32730,9 +34042,9 @@ func (r ApiUpdateIamLdapPolicyRequest) Execute() (*IamLdapPolicy, *http.Response
 /*
 UpdateIamLdapPolicy Update a 'iam.LdapPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateIamLdapPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateIamLdapPolicyRequest
 */
 func (a *IamApiService) UpdateIamLdapPolicy(ctx context.Context, moid string) ApiUpdateIamLdapPolicyRequest {
 	return ApiUpdateIamLdapPolicyRequest{
@@ -32743,7 +34055,8 @@ func (a *IamApiService) UpdateIamLdapPolicy(ctx context.Context, moid string) Ap
 }
 
 // Execute executes the request
-//  @return IamLdapPolicy
+//
+//	@return IamLdapPolicy
 func (a *IamApiService) UpdateIamLdapPolicyExecute(r ApiUpdateIamLdapPolicyRequest) (*IamLdapPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -32900,9 +34213,9 @@ func (r ApiUpdateIamLdapProviderRequest) Execute() (*IamLdapProvider, *http.Resp
 /*
 UpdateIamLdapProvider Update a 'iam.LdapProvider' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateIamLdapProviderRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateIamLdapProviderRequest
 */
 func (a *IamApiService) UpdateIamLdapProvider(ctx context.Context, moid string) ApiUpdateIamLdapProviderRequest {
 	return ApiUpdateIamLdapProviderRequest{
@@ -32913,7 +34226,8 @@ func (a *IamApiService) UpdateIamLdapProvider(ctx context.Context, moid string) 
 }
 
 // Execute executes the request
-//  @return IamLdapProvider
+//
+//	@return IamLdapProvider
 func (a *IamApiService) UpdateIamLdapProviderExecute(r ApiUpdateIamLdapProviderRequest) (*IamLdapProvider, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -33070,9 +34384,9 @@ func (r ApiUpdateIamLocalUserPasswordRequest) Execute() (*IamLocalUserPassword, 
 /*
 UpdateIamLocalUserPassword Update a 'iam.LocalUserPassword' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateIamLocalUserPasswordRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateIamLocalUserPasswordRequest
 */
 func (a *IamApiService) UpdateIamLocalUserPassword(ctx context.Context, moid string) ApiUpdateIamLocalUserPasswordRequest {
 	return ApiUpdateIamLocalUserPasswordRequest{
@@ -33083,7 +34397,8 @@ func (a *IamApiService) UpdateIamLocalUserPassword(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return IamLocalUserPassword
+//
+//	@return IamLocalUserPassword
 func (a *IamApiService) UpdateIamLocalUserPasswordExecute(r ApiUpdateIamLocalUserPasswordRequest) (*IamLocalUserPassword, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -33240,9 +34555,9 @@ func (r ApiUpdateIamLocalUserPasswordPolicyRequest) Execute() (*IamLocalUserPass
 /*
 UpdateIamLocalUserPasswordPolicy Update a 'iam.LocalUserPasswordPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateIamLocalUserPasswordPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateIamLocalUserPasswordPolicyRequest
 */
 func (a *IamApiService) UpdateIamLocalUserPasswordPolicy(ctx context.Context, moid string) ApiUpdateIamLocalUserPasswordPolicyRequest {
 	return ApiUpdateIamLocalUserPasswordPolicyRequest{
@@ -33253,7 +34568,8 @@ func (a *IamApiService) UpdateIamLocalUserPasswordPolicy(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return IamLocalUserPasswordPolicy
+//
+//	@return IamLocalUserPasswordPolicy
 func (a *IamApiService) UpdateIamLocalUserPasswordPolicyExecute(r ApiUpdateIamLocalUserPasswordPolicyRequest) (*IamLocalUserPasswordPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -33410,9 +34726,9 @@ func (r ApiUpdateIamPermissionRequest) Execute() (*IamPermission, *http.Response
 /*
 UpdateIamPermission Update a 'iam.Permission' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateIamPermissionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateIamPermissionRequest
 */
 func (a *IamApiService) UpdateIamPermission(ctx context.Context, moid string) ApiUpdateIamPermissionRequest {
 	return ApiUpdateIamPermissionRequest{
@@ -33423,7 +34739,8 @@ func (a *IamApiService) UpdateIamPermission(ctx context.Context, moid string) Ap
 }
 
 // Execute executes the request
-//  @return IamPermission
+//
+//	@return IamPermission
 func (a *IamApiService) UpdateIamPermissionExecute(r ApiUpdateIamPermissionRequest) (*IamPermission, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -33580,9 +34897,9 @@ func (r ApiUpdateIamPrivateKeySpecRequest) Execute() (*IamPrivateKeySpec, *http.
 /*
 UpdateIamPrivateKeySpec Update a 'iam.PrivateKeySpec' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateIamPrivateKeySpecRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateIamPrivateKeySpecRequest
 */
 func (a *IamApiService) UpdateIamPrivateKeySpec(ctx context.Context, moid string) ApiUpdateIamPrivateKeySpecRequest {
 	return ApiUpdateIamPrivateKeySpecRequest{
@@ -33593,7 +34910,8 @@ func (a *IamApiService) UpdateIamPrivateKeySpec(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return IamPrivateKeySpec
+//
+//	@return IamPrivateKeySpec
 func (a *IamApiService) UpdateIamPrivateKeySpecExecute(r ApiUpdateIamPrivateKeySpecRequest) (*IamPrivateKeySpec, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -33750,9 +35068,9 @@ func (r ApiUpdateIamQualifierRequest) Execute() (*IamQualifier, *http.Response, 
 /*
 UpdateIamQualifier Update a 'iam.Qualifier' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateIamQualifierRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateIamQualifierRequest
 */
 func (a *IamApiService) UpdateIamQualifier(ctx context.Context, moid string) ApiUpdateIamQualifierRequest {
 	return ApiUpdateIamQualifierRequest{
@@ -33763,7 +35081,8 @@ func (a *IamApiService) UpdateIamQualifier(ctx context.Context, moid string) Api
 }
 
 // Execute executes the request
-//  @return IamQualifier
+//
+//	@return IamQualifier
 func (a *IamApiService) UpdateIamQualifierExecute(r ApiUpdateIamQualifierRequest) (*IamQualifier, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -33920,9 +35239,9 @@ func (r ApiUpdateIamResourceRolesRequest) Execute() (*IamResourceRoles, *http.Re
 /*
 UpdateIamResourceRoles Update a 'iam.ResourceRoles' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateIamResourceRolesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateIamResourceRolesRequest
 */
 func (a *IamApiService) UpdateIamResourceRoles(ctx context.Context, moid string) ApiUpdateIamResourceRolesRequest {
 	return ApiUpdateIamResourceRolesRequest{
@@ -33933,7 +35252,8 @@ func (a *IamApiService) UpdateIamResourceRoles(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//  @return IamResourceRoles
+//
+//	@return IamResourceRoles
 func (a *IamApiService) UpdateIamResourceRolesExecute(r ApiUpdateIamResourceRolesRequest) (*IamResourceRoles, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -34090,9 +35410,9 @@ func (r ApiUpdateIamSessionLimitsRequest) Execute() (*IamSessionLimits, *http.Re
 /*
 UpdateIamSessionLimits Update a 'iam.SessionLimits' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateIamSessionLimitsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateIamSessionLimitsRequest
 */
 func (a *IamApiService) UpdateIamSessionLimits(ctx context.Context, moid string) ApiUpdateIamSessionLimitsRequest {
 	return ApiUpdateIamSessionLimitsRequest{
@@ -34103,7 +35423,8 @@ func (a *IamApiService) UpdateIamSessionLimits(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//  @return IamSessionLimits
+//
+//	@return IamSessionLimits
 func (a *IamApiService) UpdateIamSessionLimitsExecute(r ApiUpdateIamSessionLimitsRequest) (*IamSessionLimits, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -34260,9 +35581,9 @@ func (r ApiUpdateIamUserRequest) Execute() (*IamUser, *http.Response, error) {
 /*
 UpdateIamUser Update a 'iam.User' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateIamUserRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateIamUserRequest
 */
 func (a *IamApiService) UpdateIamUser(ctx context.Context, moid string) ApiUpdateIamUserRequest {
 	return ApiUpdateIamUserRequest{
@@ -34273,7 +35594,8 @@ func (a *IamApiService) UpdateIamUser(ctx context.Context, moid string) ApiUpdat
 }
 
 // Execute executes the request
-//  @return IamUser
+//
+//	@return IamUser
 func (a *IamApiService) UpdateIamUserExecute(r ApiUpdateIamUserRequest) (*IamUser, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -34430,9 +35752,9 @@ func (r ApiUpdateIamUserGroupRequest) Execute() (*IamUserGroup, *http.Response, 
 /*
 UpdateIamUserGroup Update a 'iam.UserGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateIamUserGroupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateIamUserGroupRequest
 */
 func (a *IamApiService) UpdateIamUserGroup(ctx context.Context, moid string) ApiUpdateIamUserGroupRequest {
 	return ApiUpdateIamUserGroupRequest{
@@ -34443,7 +35765,8 @@ func (a *IamApiService) UpdateIamUserGroup(ctx context.Context, moid string) Api
 }
 
 // Execute executes the request
-//  @return IamUserGroup
+//
+//	@return IamUserGroup
 func (a *IamApiService) UpdateIamUserGroupExecute(r ApiUpdateIamUserGroupRequest) (*IamUserGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -34600,9 +35923,9 @@ func (r ApiUpdateIamUserPreferenceRequest) Execute() (*IamUserPreference, *http.
 /*
 UpdateIamUserPreference Update a 'iam.UserPreference' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateIamUserPreferenceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateIamUserPreferenceRequest
 */
 func (a *IamApiService) UpdateIamUserPreference(ctx context.Context, moid string) ApiUpdateIamUserPreferenceRequest {
 	return ApiUpdateIamUserPreferenceRequest{
@@ -34613,7 +35936,8 @@ func (a *IamApiService) UpdateIamUserPreference(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return IamUserPreference
+//
+//	@return IamUserPreference
 func (a *IamApiService) UpdateIamUserPreferenceExecute(r ApiUpdateIamUserPreferenceRequest) (*IamUserPreference, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -34659,6 +35983,177 @@ func (a *IamApiService) UpdateIamUserPreferenceExecute(r ApiUpdateIamUserPrefere
 	}
 	// body params
 	localVarPostBody = r.iamUserPreference
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateIamUserSettingRequest struct {
+	ctx            context.Context
+	ApiService     *IamApiService
+	moid           string
+	iamUserSetting *IamUserSetting
+	ifMatch        *string
+}
+
+// The &#39;iam.UserSetting&#39; resource to update.
+func (r ApiUpdateIamUserSettingRequest) IamUserSetting(iamUserSetting IamUserSetting) ApiUpdateIamUserSettingRequest {
+	r.iamUserSetting = &iamUserSetting
+	return r
+}
+
+// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
+func (r ApiUpdateIamUserSettingRequest) IfMatch(ifMatch string) ApiUpdateIamUserSettingRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiUpdateIamUserSettingRequest) Execute() (*IamUserSetting, *http.Response, error) {
+	return r.ApiService.UpdateIamUserSettingExecute(r)
+}
+
+/*
+UpdateIamUserSetting Update a 'iam.UserSetting' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateIamUserSettingRequest
+*/
+func (a *IamApiService) UpdateIamUserSetting(ctx context.Context, moid string) ApiUpdateIamUserSettingRequest {
+	return ApiUpdateIamUserSettingRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//
+//	@return IamUserSetting
+func (a *IamApiService) UpdateIamUserSettingExecute(r ApiUpdateIamUserSettingRequest) (*IamUserSetting, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IamUserSetting
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.UpdateIamUserSetting")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/iam/UserSettings/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.iamUserSetting == nil {
+		return localVarReturnValue, nil, reportError("iamUserSetting is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.iamUserSetting
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

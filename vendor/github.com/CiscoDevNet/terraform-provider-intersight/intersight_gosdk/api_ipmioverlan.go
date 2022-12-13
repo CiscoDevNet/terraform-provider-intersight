@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -56,8 +56,8 @@ func (r ApiCreateIpmioverlanPolicyRequest) Execute() (*IpmioverlanPolicy, *http.
 /*
 CreateIpmioverlanPolicy Create a 'ipmioverlan.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateIpmioverlanPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateIpmioverlanPolicyRequest
 */
 func (a *IpmioverlanApiService) CreateIpmioverlanPolicy(ctx context.Context) ApiCreateIpmioverlanPolicyRequest {
 	return ApiCreateIpmioverlanPolicyRequest{
@@ -67,7 +67,8 @@ func (a *IpmioverlanApiService) CreateIpmioverlanPolicy(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return IpmioverlanPolicy
+//
+//	@return IpmioverlanPolicy
 func (a *IpmioverlanApiService) CreateIpmioverlanPolicyExecute(r ApiCreateIpmioverlanPolicyRequest) (*IpmioverlanPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -212,9 +213,9 @@ func (r ApiDeleteIpmioverlanPolicyRequest) Execute() (*http.Response, error) {
 /*
 DeleteIpmioverlanPolicy Delete a 'ipmioverlan.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteIpmioverlanPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteIpmioverlanPolicyRequest
 */
 func (a *IpmioverlanApiService) DeleteIpmioverlanPolicy(ctx context.Context, moid string) ApiDeleteIpmioverlanPolicyRequest {
 	return ApiDeleteIpmioverlanPolicyRequest{
@@ -349,9 +350,9 @@ func (r ApiGetIpmioverlanPolicyByMoidRequest) Execute() (*IpmioverlanPolicy, *ht
 /*
 GetIpmioverlanPolicyByMoid Read a 'ipmioverlan.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIpmioverlanPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIpmioverlanPolicyByMoidRequest
 */
 func (a *IpmioverlanApiService) GetIpmioverlanPolicyByMoid(ctx context.Context, moid string) ApiGetIpmioverlanPolicyByMoidRequest {
 	return ApiGetIpmioverlanPolicyByMoidRequest{
@@ -362,7 +363,8 @@ func (a *IpmioverlanApiService) GetIpmioverlanPolicyByMoid(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return IpmioverlanPolicy
+//
+//	@return IpmioverlanPolicy
 func (a *IpmioverlanApiService) GetIpmioverlanPolicyByMoidExecute(r ApiGetIpmioverlanPolicyByMoidRequest) (*IpmioverlanPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -497,9 +499,9 @@ func (r ApiGetIpmioverlanPolicyInventoryByMoidRequest) Execute() (*IpmioverlanPo
 /*
 GetIpmioverlanPolicyInventoryByMoid Read a 'ipmioverlan.PolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIpmioverlanPolicyInventoryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIpmioverlanPolicyInventoryByMoidRequest
 */
 func (a *IpmioverlanApiService) GetIpmioverlanPolicyInventoryByMoid(ctx context.Context, moid string) ApiGetIpmioverlanPolicyInventoryByMoidRequest {
 	return ApiGetIpmioverlanPolicyInventoryByMoidRequest{
@@ -510,7 +512,8 @@ func (a *IpmioverlanApiService) GetIpmioverlanPolicyInventoryByMoid(ctx context.
 }
 
 // Execute executes the request
-//  @return IpmioverlanPolicyInventory
+//
+//	@return IpmioverlanPolicyInventory
 func (a *IpmioverlanApiService) GetIpmioverlanPolicyInventoryByMoidExecute(r ApiGetIpmioverlanPolicyInventoryByMoidRequest) (*IpmioverlanPolicyInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -721,8 +724,8 @@ func (r ApiGetIpmioverlanPolicyInventoryListRequest) Execute() (*IpmioverlanPoli
 /*
 GetIpmioverlanPolicyInventoryList Read a 'ipmioverlan.PolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIpmioverlanPolicyInventoryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIpmioverlanPolicyInventoryListRequest
 */
 func (a *IpmioverlanApiService) GetIpmioverlanPolicyInventoryList(ctx context.Context) ApiGetIpmioverlanPolicyInventoryListRequest {
 	return ApiGetIpmioverlanPolicyInventoryListRequest{
@@ -732,7 +735,8 @@ func (a *IpmioverlanApiService) GetIpmioverlanPolicyInventoryList(ctx context.Co
 }
 
 // Execute executes the request
-//  @return IpmioverlanPolicyInventoryResponse
+//
+//	@return IpmioverlanPolicyInventoryResponse
 func (a *IpmioverlanApiService) GetIpmioverlanPolicyInventoryListExecute(r ApiGetIpmioverlanPolicyInventoryListRequest) (*IpmioverlanPolicyInventoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -975,8 +979,8 @@ func (r ApiGetIpmioverlanPolicyListRequest) Execute() (*IpmioverlanPolicyRespons
 /*
 GetIpmioverlanPolicyList Read a 'ipmioverlan.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIpmioverlanPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIpmioverlanPolicyListRequest
 */
 func (a *IpmioverlanApiService) GetIpmioverlanPolicyList(ctx context.Context) ApiGetIpmioverlanPolicyListRequest {
 	return ApiGetIpmioverlanPolicyListRequest{
@@ -986,7 +990,8 @@ func (a *IpmioverlanApiService) GetIpmioverlanPolicyList(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return IpmioverlanPolicyResponse
+//
+//	@return IpmioverlanPolicyResponse
 func (a *IpmioverlanApiService) GetIpmioverlanPolicyListExecute(r ApiGetIpmioverlanPolicyListRequest) (*IpmioverlanPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1167,9 +1172,9 @@ func (r ApiPatchIpmioverlanPolicyRequest) Execute() (*IpmioverlanPolicy, *http.R
 /*
 PatchIpmioverlanPolicy Update a 'ipmioverlan.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchIpmioverlanPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchIpmioverlanPolicyRequest
 */
 func (a *IpmioverlanApiService) PatchIpmioverlanPolicy(ctx context.Context, moid string) ApiPatchIpmioverlanPolicyRequest {
 	return ApiPatchIpmioverlanPolicyRequest{
@@ -1180,7 +1185,8 @@ func (a *IpmioverlanApiService) PatchIpmioverlanPolicy(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return IpmioverlanPolicy
+//
+//	@return IpmioverlanPolicy
 func (a *IpmioverlanApiService) PatchIpmioverlanPolicyExecute(r ApiPatchIpmioverlanPolicyRequest) (*IpmioverlanPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -1337,9 +1343,9 @@ func (r ApiUpdateIpmioverlanPolicyRequest) Execute() (*IpmioverlanPolicy, *http.
 /*
 UpdateIpmioverlanPolicy Update a 'ipmioverlan.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateIpmioverlanPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateIpmioverlanPolicyRequest
 */
 func (a *IpmioverlanApiService) UpdateIpmioverlanPolicy(ctx context.Context, moid string) ApiUpdateIpmioverlanPolicyRequest {
 	return ApiUpdateIpmioverlanPolicyRequest{
@@ -1350,7 +1356,8 @@ func (a *IpmioverlanApiService) UpdateIpmioverlanPolicy(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return IpmioverlanPolicy
+//
+//	@return IpmioverlanPolicy
 func (a *IpmioverlanApiService) UpdateIpmioverlanPolicyExecute(r ApiUpdateIpmioverlanPolicyRequest) (*IpmioverlanPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

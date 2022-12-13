@@ -249,8 +249,18 @@ func getFabricVlanSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"primary_vlan_id": {
+			Description: "The Primary VLAN ID of the VLAN, if the sharing type of the VLAN is Isolated or Community.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"shared_scope": {
 			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"sharing_type": {
+			Description: "The sharing type of this VLAN.\n* `None` - This represents a regular VLAN.\n* `Primary` - This represents a primary VLAN.\n* `Isolated` - This represents an isolated VLAN.\n* `Community` - This represents a community VLAN.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -726,9 +736,19 @@ func dataSourceFabricVlanRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetPermissionResources(x)
 	}
 
+	if v, ok := d.GetOkExists("primary_vlan_id"); ok {
+		x := int64(v.(int))
+		o.SetPrimaryVlanId(x)
+	}
+
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
+	}
+
+	if v, ok := d.GetOk("sharing_type"); ok {
+		x := (v.(string))
+		o.SetSharingType(x)
 	}
 
 	if v, ok := d.GetOk("tags"); ok {
@@ -945,7 +965,9 @@ func dataSourceFabricVlanRead(c context.Context, d *schema.ResourceData, meta in
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["primary_vlan_id"] = (s.GetPrimaryVlanId())
 				temp["shared_scope"] = (s.GetSharedScope())
+				temp["sharing_type"] = (s.GetSharingType())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 

@@ -15,7 +15,7 @@ All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_storage_net_app_ntp_server.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
-* `authentication_enabled`:(bool) Indicates whether or not NTP symmetric authentication is enabled. 
+* `authentication_enabled`:(bool) Indicates that NTP symmetric authentication is enabled. 
 * `authentication_key_id`:(string) NTP symmetric authentication key identifier or index number (ID). 
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 

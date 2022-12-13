@@ -12,7 +12,9 @@ Name | Type | Description | Notes
 **ApiDataSources** | Pointer to [**[]TamApiDataSource**](TamApiDataSource.md) |  | [optional] 
 **DatePublished** | Pointer to **time.Time** | Date when the security/field-notice/end-of-life advisory was first published by Cisco. | [optional] 
 **DateUpdated** | Pointer to **time.Time** | Date when the security/field-notice/end-of-life advisory was last updated by Cisco. | [optional] 
+**ExecuteOnPod** | Pointer to **string** | Orion pod on which this advisory should process. * &#x60;tier1&#x60; - Advisory processing will be taken care in first advisory driver of multinode cluster. * &#x60;tier2&#x60; - Advisory processing will be taken care in second advisory driver of multinode cluster. | [optional] [default to "tier1"]
 **ExternalUrl** | Pointer to **string** | A link to an external URL describing security Advisory in more details. | [optional] 
+**OtherRefUrls** | Pointer to **[]string** |  | [optional] 
 **Recommendation** | Pointer to **string** | Recommended action to resolve the security advisory. | [optional] 
 **S3DataSources** | Pointer to [**[]TamS3DataSource**](TamS3DataSource.md) |  | [optional] 
 **Type** | Pointer to **string** | The type (field notice, security advisory, end-of-life milestone advisory etc.) of Intersight advisory. * &#x60;securityAdvisory&#x60; - Respresents the psirt alert type (https://tools.cisco.com/security/center/publicationListing.x). * &#x60;fieldNotice&#x60; - Respresents the field notice alert type (https://www.cisco.com/c/en/us/support/web/tsd-products-field-notice-summary.html). * &#x60;eolAdvisory&#x60; - Represents product End of Life (EOL) type (https://www.cisco.com/c/en/us/products/eos-eol-policy.html). | [optional] [default to "securityAdvisory"]
@@ -259,6 +261,31 @@ SetDateUpdated sets DateUpdated field to given value.
 
 HasDateUpdated returns a boolean if a field has been set.
 
+### GetExecuteOnPod
+
+`func (o *TamAdvisoryDefinitionAllOf) GetExecuteOnPod() string`
+
+GetExecuteOnPod returns the ExecuteOnPod field if non-nil, zero value otherwise.
+
+### GetExecuteOnPodOk
+
+`func (o *TamAdvisoryDefinitionAllOf) GetExecuteOnPodOk() (*string, bool)`
+
+GetExecuteOnPodOk returns a tuple with the ExecuteOnPod field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExecuteOnPod
+
+`func (o *TamAdvisoryDefinitionAllOf) SetExecuteOnPod(v string)`
+
+SetExecuteOnPod sets ExecuteOnPod field to given value.
+
+### HasExecuteOnPod
+
+`func (o *TamAdvisoryDefinitionAllOf) HasExecuteOnPod() bool`
+
+HasExecuteOnPod returns a boolean if a field has been set.
+
 ### GetExternalUrl
 
 `func (o *TamAdvisoryDefinitionAllOf) GetExternalUrl() string`
@@ -284,6 +311,41 @@ SetExternalUrl sets ExternalUrl field to given value.
 
 HasExternalUrl returns a boolean if a field has been set.
 
+### GetOtherRefUrls
+
+`func (o *TamAdvisoryDefinitionAllOf) GetOtherRefUrls() []string`
+
+GetOtherRefUrls returns the OtherRefUrls field if non-nil, zero value otherwise.
+
+### GetOtherRefUrlsOk
+
+`func (o *TamAdvisoryDefinitionAllOf) GetOtherRefUrlsOk() (*[]string, bool)`
+
+GetOtherRefUrlsOk returns a tuple with the OtherRefUrls field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOtherRefUrls
+
+`func (o *TamAdvisoryDefinitionAllOf) SetOtherRefUrls(v []string)`
+
+SetOtherRefUrls sets OtherRefUrls field to given value.
+
+### HasOtherRefUrls
+
+`func (o *TamAdvisoryDefinitionAllOf) HasOtherRefUrls() bool`
+
+HasOtherRefUrls returns a boolean if a field has been set.
+
+### SetOtherRefUrlsNil
+
+`func (o *TamAdvisoryDefinitionAllOf) SetOtherRefUrlsNil(b bool)`
+
+ SetOtherRefUrlsNil sets the value for OtherRefUrls to be an explicit nil
+
+### UnsetOtherRefUrls
+`func (o *TamAdvisoryDefinitionAllOf) UnsetOtherRefUrls()`
+
+UnsetOtherRefUrls ensures that no value is present for OtherRefUrls, not even an explicit nil
 ### GetRecommendation
 
 `func (o *TamAdvisoryDefinitionAllOf) GetRecommendation() string`

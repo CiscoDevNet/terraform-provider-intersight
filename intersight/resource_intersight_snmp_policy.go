@@ -374,7 +374,7 @@ func resourceSnmpPolicy() *schema.Resource {
 						"community": {
 							Description:  "SNMP community group used for sending SNMP trap to other devices. Applicable only for SNMP v2c.",
 							Type:         schema.TypeString,
-							ValidateFunc: StringLenMaximum(18),
+							ValidateFunc: StringLenMaximum(32),
 							Optional:     true,
 						},
 						"destination": {
@@ -401,6 +401,17 @@ func resourceSnmpPolicy() *schema.Resource {
 							Optional:     true,
 							Default:      162,
 						},
+						"security_level": {
+							Description: "Security level of the trap receiver used for communication.\n* `AuthPriv` - The user requires both an authorization password and a privacy password.\n* `NoAuthNoPriv` - The user does not require an authorization or privacy password.\n* `AuthNoPriv` - The user requires an authorization password but not a privacy password.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 						"type": {
 							Description:  "Type of trap which decides whether to receive a notification when a trap is received at the destination.\n* `Trap` - Do not receive notifications when trap is sent to the destination.\n* `Inform` - Receive notifications when trap is sent to the destination. This option is valid only for V2 users.",
 							Type:         schema.TypeString,
@@ -414,12 +425,23 @@ func resourceSnmpPolicy() *schema.Resource {
 							Optional:    true,
 						},
 						"nr_version": {
-							Description:  "SNMP version used for the trap.\n* `V3` - SNMP v3 trap version notifications.\n* `V2` - SNMP v2 trap version notifications.",
+							Description:  "SNMP version used for the trap.\n* `V3` - SNMP v3 trap version notifications.\n* `V1` - SNMP v1 trap version notifications.\n* `V2` - SNMP v2 trap version notifications.",
 							Type:         schema.TypeString,
-							ValidateFunc: validation.StringInSlice([]string{"V3", "V2"}, false),
+							ValidateFunc: validation.StringInSlice([]string{"V3", "V1", "V2"}, false),
 							Optional:     true,
 							Default:      "V3",
 						},
+						"vrf_name": {
+							Description: "VRF name of the SNMP server.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 					},
 				},
 			},

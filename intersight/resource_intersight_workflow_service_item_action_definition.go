@@ -312,9 +312,9 @@ func resourceWorkflowServiceItemActionDefinition() *schema.Resource {
 							Optional:    true,
 						},
 						"label": {
-							Description:  "Descriptive label for the data type. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), space ( ) or an underscore (_). The first and last character in label must be an alphanumeric character.",
+							Description:  "Descriptive label for the data type. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), space ( ), forward slash (/) or an underscore (_). The first and last character in label must be an alphanumeric character.",
 							Type:         schema.TypeString,
-							ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9]+[\\sa-zA-Z0-9_'.:-]{1,92}$"), ""), validation.StringLenBetween(1, 92)),
+							ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9]+[\\sa-zA-Z0-9_'.:/-]{1,92}$"), ""), validation.StringLenBetween(1, 92)),
 							Optional:     true,
 						},
 						"name": {
@@ -597,6 +597,12 @@ func resourceWorkflowServiceItemActionDefinition() *schema.Resource {
 						},
 					},
 				},
+			},
+			"restrict_on_private_appliance": {
+				Description: "The flag to indicate that action is restricted on a Private Virtual Appliance.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     false,
 			},
 			"service_item_definition": {
 				Description: "A reference to a workflowServiceItemDefinition resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -1559,6 +1565,11 @@ func resourceWorkflowServiceItemActionDefinitionCreate(c context.Context, d *sch
 		}
 	}
 
+	if v, ok := d.GetOkExists("restrict_on_private_appliance"); ok {
+		x := (v.(bool))
+		o.SetRestrictOnPrivateAppliance(x)
+	}
+
 	if v, ok := d.GetOk("service_item_definition"); ok {
 		p := make([]models.WorkflowServiceItemDefinitionRelationship, 0, 1)
 		s := v.([]interface{})
@@ -1916,6 +1927,10 @@ func resourceWorkflowServiceItemActionDefinitionRead(c context.Context, d *schem
 
 	if err := d.Set("pre_core_workflows", flattenListWorkflowServiceItemActionWorkflowDefinition(s.GetPreCoreWorkflows(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property PreCoreWorkflows in WorkflowServiceItemActionDefinition object: %s", err.Error())
+	}
+
+	if err := d.Set("restrict_on_private_appliance", (s.GetRestrictOnPrivateAppliance())); err != nil {
+		return diag.Errorf("error occurred while setting property RestrictOnPrivateAppliance in WorkflowServiceItemActionDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("service_item_definition", flattenMapWorkflowServiceItemDefinitionRelationship(s.GetServiceItemDefinition(), d)); err != nil {
@@ -2417,6 +2432,12 @@ func resourceWorkflowServiceItemActionDefinitionUpdate(c context.Context, d *sch
 			x = append(x, *o)
 		}
 		o.SetPreCoreWorkflows(x)
+	}
+
+	if d.HasChange("restrict_on_private_appliance") {
+		v := d.Get("restrict_on_private_appliance")
+		x := (v.(bool))
+		o.SetRestrictOnPrivateAppliance(x)
 	}
 
 	if d.HasChange("service_item_definition") {

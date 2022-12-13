@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **IpFamily** | Pointer to **string** | IP address family of interface. * &#x60;IPv4&#x60; - IP address family type is IPv4. * &#x60;IPv6&#x60; - IP address family type is IP6. | [optional] [readonly] [default to "IPv4"]
 **Ipspace** | Pointer to **string** | The name of the IPspace of the IP interface. | [optional] [readonly] 
 **IsHome** | Pointer to **bool** | Reports whether the IP interface is home or has failed over to its HA peer. | [optional] [readonly] 
+**LocationFailover** | Pointer to **string** | Defines where an interface may failover, [ home_port_only, default, home_node_only, sfo_partners_only, broadcast_domain_only ]. | [optional] [readonly] 
 **Name** | Pointer to **string** | The name of the IP interface. | [optional] [readonly] 
 **Netmask** | Pointer to **string** | The netmask of the interface. | [optional] [readonly] 
 **ServicePolicyName** | Pointer to **string** | Service policy name of IP interface. | [optional] [readonly] 
@@ -306,6 +307,31 @@ SetIsHome sets IsHome field to given value.
 `func (o *StorageNetAppBaseIpInterfaceAllOf) HasIsHome() bool`
 
 HasIsHome returns a boolean if a field has been set.
+
+### GetLocationFailover
+
+`func (o *StorageNetAppBaseIpInterfaceAllOf) GetLocationFailover() string`
+
+GetLocationFailover returns the LocationFailover field if non-nil, zero value otherwise.
+
+### GetLocationFailoverOk
+
+`func (o *StorageNetAppBaseIpInterfaceAllOf) GetLocationFailoverOk() (*string, bool)`
+
+GetLocationFailoverOk returns a tuple with the LocationFailover field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLocationFailover
+
+`func (o *StorageNetAppBaseIpInterfaceAllOf) SetLocationFailover(v string)`
+
+SetLocationFailover sets LocationFailover field to given value.
+
+### HasLocationFailover
+
+`func (o *StorageNetAppBaseIpInterfaceAllOf) HasLocationFailover() bool`
+
+HasLocationFailover returns a boolean if a field has been set.
 
 ### GetName
 

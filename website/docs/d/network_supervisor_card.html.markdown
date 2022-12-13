@@ -26,6 +26,7 @@ The following arguments can be used to get data of already created objects in In
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) The name of the supervisor card like Supervisor Card-1. 
 * `number_of_ports`:(int) The number of ports on the supervisor card. 
+* `oper_reason`:(string) The health issue of the supervisor card. 
 * `oper_state`:(string) The operational status of the supervisor card. 
 * `part_number`:(string) The part number of the supervisor card. 
 * `power_state`:(string) The power state of the supervisor card. 

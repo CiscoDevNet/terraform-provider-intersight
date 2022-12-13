@@ -828,6 +828,18 @@ func resourceVnicEthIf() *schema.Resource {
 							Optional:         true,
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
+						"auto_pci_link": {
+							Description: "Enable or disable automatic assignment of the PCI Link in a dual-link adapter. This option applies only to 13xx series VICs that support dual-link. If enabled, the system determines the placement of the vNIC/vHBA on either of the PCI Links.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Default:     false,
+						},
+						"auto_slot_id": {
+							Description: "Enable or disable automatic assignment of the VIC slot ID. If enabled and the server has only one VIC, the same VIC is chosen for all the vNICs. If enabled and the server has multiple VICs, the vNIC/vHBA are deployed on the first VIC. The Slot ID determines the first VIC. MLOM is the first Slot ID and the ID increments to 2, 3, and so on.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Default:     false,
+						},
 						"class_id": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
@@ -847,7 +859,7 @@ func resourceVnicEthIf() *schema.Resource {
 							Default:     "vnic.PlacementSettings",
 						},
 						"pci_link": {
-							Description:  "The PCI Link used as transport for the virtual interface. This field is applicable only for VIC 1385 model (UCSC-PCIE-C40Q-03) which support two PCI links. The value, if specified, for any other VIC model will be ignored.",
+							Description:  "The PCI Link used as transport for the virtual interface. PCI Link is only applicable for select Cisco UCS VIC 1300 models (UCSC-PCIE-C40Q-03, UCSB-MLOM-40G-03, UCSB-VIC-M83-8P) that support two PCI links. The value, if specified, for any other VIC model will be ignored.",
 							Type:         schema.TypeInt,
 							ValidateFunc: validation.IntBetween(0, 1),
 							Optional:     true,
@@ -1806,6 +1818,18 @@ func resourceVnicEthIfCreate(c context.Context, d *schema.ResourceData, meta int
 					if err == nil && x1 != nil {
 						o.AdditionalProperties = x1.(map[string]interface{})
 					}
+				}
+			}
+			if v, ok := l["auto_pci_link"]; ok {
+				{
+					x := (v.(bool))
+					o.SetAutoPciLink(x)
+				}
+			}
+			if v, ok := l["auto_slot_id"]; ok {
+				{
+					x := (v.(bool))
+					o.SetAutoSlotId(x)
 				}
 			}
 			o.SetClassId("vnic.PlacementSettings")
@@ -2835,6 +2859,18 @@ func resourceVnicEthIfUpdate(c context.Context, d *schema.ResourceData, meta int
 					if err == nil && x1 != nil {
 						o.AdditionalProperties = x1.(map[string]interface{})
 					}
+				}
+			}
+			if v, ok := l["auto_pci_link"]; ok {
+				{
+					x := (v.(bool))
+					o.SetAutoPciLink(x)
+				}
+			}
+			if v, ok := l["auto_slot_id"]; ok {
+				{
+					x := (v.(bool))
+					o.SetAutoSlotId(x)
 				}
 			}
 			o.SetClassId("vnic.PlacementSettings")

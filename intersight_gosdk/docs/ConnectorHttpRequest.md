@@ -8,12 +8,12 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "connector.HttpRequest"]
 **AssetTargetMoid** | Pointer to **string** | The Target endpoint Moid which is used to fetch the previously persisted Target information in Intersight to create HTTP request along with any authentication info specifed. | [optional] 
 **Body** | Pointer to **string** | Contents of the request body to send for PUT/PATCH/POST requests. | [optional] 
-**DialTimeout** | Pointer to **int64** | The timeout for establishing the TCP connection to the target host. If not set the request timeout value is used. | [optional] 
-**EndpointMoid** | Pointer to **string** | The MO id of the asset.EndpointConnection this request is directed to. If set plugin will insert connection details into the request, including credentials if defined. | [optional] 
-**Header** | Pointer to **interface{}** | Collection of key value pairs to set in the request header. | [optional] 
+**DialTimeout** | Pointer to **int64** | The timeout for establishing the TCP connection to the target host. If not set, the request timeout value is used. | [optional] 
+**EndpointMoid** | Pointer to **string** | The MO id of the asset.EndpointConnection this request is directed to. If set, plugin will insert connection details into the request, including credentials if defined. | [optional] 
+**Header** | Pointer to **interface{}** | Collection of key/value pairs to set in the request header. | [optional] 
 **Internal** | Pointer to **bool** | The request is for an internal platform API that requires authentication to be inserted by the platform implementation. | [optional] 
 **Method** | Pointer to **string** | Method specifies the HTTP method (GET, POST, PUT, etc.). For client requests an empty string means GET. | [optional] 
-**Timeout** | Pointer to **int64** | The timeout for the HTTP request to complete, from connection establishment to response body read complete. If not set a default timeout of five minutes is used. | [optional] 
+**Timeout** | Pointer to **int64** | The timeout for the HTTP request to complete, from connection establishment to response body read complete. If not set, a default timeout of five minutes is used. | [optional] 
 **Url** | Pointer to [**NullableConnectorUrl**](ConnectorUrl.md) |  | [optional] 
 
 ## Methods

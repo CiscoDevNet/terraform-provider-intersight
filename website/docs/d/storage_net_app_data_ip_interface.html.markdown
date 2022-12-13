@@ -26,6 +26,7 @@ The following arguments can be used to get data of already created objects in In
 * `ip_family`:(string) IP address family of interface.* `IPv4` - IP address family type is IPv4.* `IPv6` - IP address family type is IP6. 
 * `ipspace`:(string) The name of the IPspace of the IP interface. 
 * `is_home`:(bool) Reports whether the IP interface is home or has failed over to its HA peer. 
+* `location_failover`:(string) Defines where an interface may failover, [ home_port_only, default, home_node_only, sfo_partners_only, broadcast_domain_only ]. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) The name of the IP interface. 

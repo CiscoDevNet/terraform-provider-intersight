@@ -88,7 +88,7 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
   + `nr_count`:(int) The number of completion queue resources to allocate. In general, the number of completion queue resources to allocate is equal to the number of transmit queue resources plus the number of receive queue resources. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `ring_size`:(int)(ReadOnly) The number of descriptors in each completion queue. 
+  + `ring_size`:(int) The number of descriptors in each completion queue. 
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `description`:(string) Description of the policy. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 

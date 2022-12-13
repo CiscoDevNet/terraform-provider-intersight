@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -24,9 +24,13 @@ type VnicPlacementSettings struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// Enable or disable automatic assignment of the PCI Link in a dual-link adapter. This option applies only to 13xx series VICs that support dual-link. If enabled, the system determines the placement of the vNIC/vHBA on either of the PCI Links.
+	AutoPciLink *bool `json:"AutoPciLink,omitempty"`
+	// Enable or disable automatic assignment of the VIC slot ID. If enabled and the server has only one VIC, the same VIC is chosen for all the vNICs. If enabled and the server has multiple VICs, the vNIC/vHBA are deployed on the first VIC. The Slot ID determines the first VIC. MLOM is the first Slot ID and the ID increments to 2, 3, and so on.
+	AutoSlotId *bool `json:"AutoSlotId,omitempty"`
 	// PCIe Slot where the VIC adapter is installed. Supported values are (1-15) and MLOM.
 	Id *string `json:"Id,omitempty"`
-	// The PCI Link used as transport for the virtual interface. This field is applicable only for VIC 1385 model (UCSC-PCIE-C40Q-03) which support two PCI links. The value, if specified, for any other VIC model will be ignored.
+	// The PCI Link used as transport for the virtual interface. PCI Link is only applicable for select Cisco UCS VIC 1300 models (UCSC-PCIE-C40Q-03, UCSB-MLOM-40G-03, UCSB-VIC-M83-8P) that support two PCI links. The value, if specified, for any other VIC model will be ignored.
 	PciLink *int64 `json:"PciLink,omitempty"`
 	// The fabric port to which the vNICs will be associated. * `None` - Fabric Id is not set to either A or B for the standalone case where the server is not connected to Fabric Interconnects. The value 'None' should be used. * `A` - Fabric A of the FI cluster. * `B` - Fabric B of the FI cluster.
 	SwitchId *string `json:"SwitchId,omitempty"`
@@ -45,6 +49,10 @@ func NewVnicPlacementSettings(classId string, objectType string) *VnicPlacementS
 	this := VnicPlacementSettings{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var autoPciLink bool = false
+	this.AutoPciLink = &autoPciLink
+	var autoSlotId bool = false
+	this.AutoSlotId = &autoSlotId
 	var pciLink int64 = 0
 	this.PciLink = &pciLink
 	var switchId string = "None"
@@ -61,6 +69,10 @@ func NewVnicPlacementSettingsWithDefaults() *VnicPlacementSettings {
 	this.ClassId = classId
 	var objectType string = "vnic.PlacementSettings"
 	this.ObjectType = objectType
+	var autoPciLink bool = false
+	this.AutoPciLink = &autoPciLink
+	var autoSlotId bool = false
+	this.AutoSlotId = &autoSlotId
 	var pciLink int64 = 0
 	this.PciLink = &pciLink
 	var switchId string = "None"
@@ -114,6 +126,70 @@ func (o *VnicPlacementSettings) GetObjectTypeOk() (*string, bool) {
 // SetObjectType sets field value
 func (o *VnicPlacementSettings) SetObjectType(v string) {
 	o.ObjectType = v
+}
+
+// GetAutoPciLink returns the AutoPciLink field value if set, zero value otherwise.
+func (o *VnicPlacementSettings) GetAutoPciLink() bool {
+	if o == nil || o.AutoPciLink == nil {
+		var ret bool
+		return ret
+	}
+	return *o.AutoPciLink
+}
+
+// GetAutoPciLinkOk returns a tuple with the AutoPciLink field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VnicPlacementSettings) GetAutoPciLinkOk() (*bool, bool) {
+	if o == nil || o.AutoPciLink == nil {
+		return nil, false
+	}
+	return o.AutoPciLink, true
+}
+
+// HasAutoPciLink returns a boolean if a field has been set.
+func (o *VnicPlacementSettings) HasAutoPciLink() bool {
+	if o != nil && o.AutoPciLink != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAutoPciLink gets a reference to the given bool and assigns it to the AutoPciLink field.
+func (o *VnicPlacementSettings) SetAutoPciLink(v bool) {
+	o.AutoPciLink = &v
+}
+
+// GetAutoSlotId returns the AutoSlotId field value if set, zero value otherwise.
+func (o *VnicPlacementSettings) GetAutoSlotId() bool {
+	if o == nil || o.AutoSlotId == nil {
+		var ret bool
+		return ret
+	}
+	return *o.AutoSlotId
+}
+
+// GetAutoSlotIdOk returns a tuple with the AutoSlotId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VnicPlacementSettings) GetAutoSlotIdOk() (*bool, bool) {
+	if o == nil || o.AutoSlotId == nil {
+		return nil, false
+	}
+	return o.AutoSlotId, true
+}
+
+// HasAutoSlotId returns a boolean if a field has been set.
+func (o *VnicPlacementSettings) HasAutoSlotId() bool {
+	if o != nil && o.AutoSlotId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAutoSlotId gets a reference to the given bool and assigns it to the AutoSlotId field.
+func (o *VnicPlacementSettings) SetAutoSlotId(v bool) {
+	o.AutoSlotId = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
@@ -260,6 +336,12 @@ func (o VnicPlacementSettings) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.AutoPciLink != nil {
+		toSerialize["AutoPciLink"] = o.AutoPciLink
+	}
+	if o.AutoSlotId != nil {
+		toSerialize["AutoSlotId"] = o.AutoSlotId
+	}
 	if o.Id != nil {
 		toSerialize["Id"] = o.Id
 	}
@@ -286,9 +368,13 @@ func (o *VnicPlacementSettings) UnmarshalJSON(bytes []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
+		// Enable or disable automatic assignment of the PCI Link in a dual-link adapter. This option applies only to 13xx series VICs that support dual-link. If enabled, the system determines the placement of the vNIC/vHBA on either of the PCI Links.
+		AutoPciLink *bool `json:"AutoPciLink,omitempty"`
+		// Enable or disable automatic assignment of the VIC slot ID. If enabled and the server has only one VIC, the same VIC is chosen for all the vNICs. If enabled and the server has multiple VICs, the vNIC/vHBA are deployed on the first VIC. The Slot ID determines the first VIC. MLOM is the first Slot ID and the ID increments to 2, 3, and so on.
+		AutoSlotId *bool `json:"AutoSlotId,omitempty"`
 		// PCIe Slot where the VIC adapter is installed. Supported values are (1-15) and MLOM.
 		Id *string `json:"Id,omitempty"`
-		// The PCI Link used as transport for the virtual interface. This field is applicable only for VIC 1385 model (UCSC-PCIE-C40Q-03) which support two PCI links. The value, if specified, for any other VIC model will be ignored.
+		// The PCI Link used as transport for the virtual interface. PCI Link is only applicable for select Cisco UCS VIC 1300 models (UCSC-PCIE-C40Q-03, UCSB-MLOM-40G-03, UCSB-VIC-M83-8P) that support two PCI links. The value, if specified, for any other VIC model will be ignored.
 		PciLink *int64 `json:"PciLink,omitempty"`
 		// The fabric port to which the vNICs will be associated. * `None` - Fabric Id is not set to either A or B for the standalone case where the server is not connected to Fabric Interconnects. The value 'None' should be used. * `A` - Fabric A of the FI cluster. * `B` - Fabric B of the FI cluster.
 		SwitchId *string `json:"SwitchId,omitempty"`
@@ -303,6 +389,8 @@ func (o *VnicPlacementSettings) UnmarshalJSON(bytes []byte) (err error) {
 		varVnicPlacementSettings := _VnicPlacementSettings{}
 		varVnicPlacementSettings.ClassId = varVnicPlacementSettingsWithoutEmbeddedStruct.ClassId
 		varVnicPlacementSettings.ObjectType = varVnicPlacementSettingsWithoutEmbeddedStruct.ObjectType
+		varVnicPlacementSettings.AutoPciLink = varVnicPlacementSettingsWithoutEmbeddedStruct.AutoPciLink
+		varVnicPlacementSettings.AutoSlotId = varVnicPlacementSettingsWithoutEmbeddedStruct.AutoSlotId
 		varVnicPlacementSettings.Id = varVnicPlacementSettingsWithoutEmbeddedStruct.Id
 		varVnicPlacementSettings.PciLink = varVnicPlacementSettingsWithoutEmbeddedStruct.PciLink
 		varVnicPlacementSettings.SwitchId = varVnicPlacementSettingsWithoutEmbeddedStruct.SwitchId
@@ -326,6 +414,8 @@ func (o *VnicPlacementSettings) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "AutoPciLink")
+		delete(additionalProperties, "AutoSlotId")
 		delete(additionalProperties, "Id")
 		delete(additionalProperties, "PciLink")
 		delete(additionalProperties, "SwitchId")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -36,9 +36,9 @@ func (r ApiGetProcessorUnitByMoidRequest) Execute() (*ProcessorUnit, *http.Respo
 /*
 GetProcessorUnitByMoid Read a 'processor.Unit' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetProcessorUnitByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetProcessorUnitByMoidRequest
 */
 func (a *ProcessorApiService) GetProcessorUnitByMoid(ctx context.Context, moid string) ApiGetProcessorUnitByMoidRequest {
 	return ApiGetProcessorUnitByMoidRequest{
@@ -49,7 +49,8 @@ func (a *ProcessorApiService) GetProcessorUnitByMoid(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return ProcessorUnit
+//
+//	@return ProcessorUnit
 func (a *ProcessorApiService) GetProcessorUnitByMoidExecute(r ApiGetProcessorUnitByMoidRequest) (*ProcessorUnit, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -260,8 +261,8 @@ func (r ApiGetProcessorUnitListRequest) Execute() (*ProcessorUnitResponse, *http
 /*
 GetProcessorUnitList Read a 'processor.Unit' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetProcessorUnitListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetProcessorUnitListRequest
 */
 func (a *ProcessorApiService) GetProcessorUnitList(ctx context.Context) ApiGetProcessorUnitListRequest {
 	return ApiGetProcessorUnitListRequest{
@@ -271,7 +272,8 @@ func (a *ProcessorApiService) GetProcessorUnitList(ctx context.Context) ApiGetPr
 }
 
 // Execute executes the request
-//  @return ProcessorUnitResponse
+//
+//	@return ProcessorUnitResponse
 func (a *ProcessorApiService) GetProcessorUnitListExecute(r ApiGetProcessorUnitListRequest) (*ProcessorUnitResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -452,9 +454,9 @@ func (r ApiPatchProcessorUnitRequest) Execute() (*ProcessorUnit, *http.Response,
 /*
 PatchProcessorUnit Update a 'processor.Unit' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchProcessorUnitRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchProcessorUnitRequest
 */
 func (a *ProcessorApiService) PatchProcessorUnit(ctx context.Context, moid string) ApiPatchProcessorUnitRequest {
 	return ApiPatchProcessorUnitRequest{
@@ -465,7 +467,8 @@ func (a *ProcessorApiService) PatchProcessorUnit(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return ProcessorUnit
+//
+//	@return ProcessorUnit
 func (a *ProcessorApiService) PatchProcessorUnitExecute(r ApiPatchProcessorUnitRequest) (*ProcessorUnit, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -622,9 +625,9 @@ func (r ApiUpdateProcessorUnitRequest) Execute() (*ProcessorUnit, *http.Response
 /*
 UpdateProcessorUnit Update a 'processor.Unit' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateProcessorUnitRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateProcessorUnitRequest
 */
 func (a *ProcessorApiService) UpdateProcessorUnit(ctx context.Context, moid string) ApiUpdateProcessorUnitRequest {
 	return ApiUpdateProcessorUnitRequest{
@@ -635,7 +638,8 @@ func (a *ProcessorApiService) UpdateProcessorUnit(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return ProcessorUnit
+//
+//	@return ProcessorUnit
 func (a *ProcessorApiService) UpdateProcessorUnitExecute(r ApiUpdateProcessorUnitRequest) (*ProcessorUnit, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **ConfigChanges** | Pointer to [**NullablePolicyConfigChange**](PolicyConfigChange.md) |  | [optional] 
 **IsPmcDeployedSecurePassphraseSet** | Pointer to **bool** | Indicates whether the value of the &#39;pmcDeployedSecurePassphrase&#39; property has been set. | [optional] [readonly] [default to false]
 **PmcDeployedSecurePassphrase** | Pointer to **string** | Secure passphrase that is already deployed on all the Persistent Memory Modules on the server. This deployed passphrase is required during deploy of server profile if secure passphrase is changed or security is disabled in the attached persistent memory policy. | [optional] 
+**ReservationReferences** | Pointer to [**[]PoolReservationReference**](PoolReservationReference.md) |  | [optional] 
 **ServerAssignmentMode** | Pointer to **string** | Source of the server assigned to the server profile. Values can be Static, Pool or None. Static is used if a server is attached directly to server profile. Pool is used if a resource pool is attached to server profile. None is used if no server or resource pool is attached to server profile. * &#x60;None&#x60; - No server is assigned to the server profile. * &#x60;Static&#x60; - Server is directly assigned to server profile using assign server. * &#x60;Pool&#x60; - Server is assigned from a resource pool. | [optional] [default to "None"]
 **StaticUuidAddress** | Pointer to **string** | The UUID address for the server must include UUID prefix xxxxxxxx-xxxx-xxxx along with the UUID suffix of format xxxx-xxxxxxxxxxxx. | [optional] 
 **Uuid** | Pointer to **string** | The UUID address that is assigned to the server based on the UUID pool. | [optional] [readonly] 
@@ -203,6 +204,41 @@ SetPmcDeployedSecurePassphrase sets PmcDeployedSecurePassphrase field to given v
 
 HasPmcDeployedSecurePassphrase returns a boolean if a field has been set.
 
+### GetReservationReferences
+
+`func (o *ServerProfileAllOf) GetReservationReferences() []PoolReservationReference`
+
+GetReservationReferences returns the ReservationReferences field if non-nil, zero value otherwise.
+
+### GetReservationReferencesOk
+
+`func (o *ServerProfileAllOf) GetReservationReferencesOk() (*[]PoolReservationReference, bool)`
+
+GetReservationReferencesOk returns a tuple with the ReservationReferences field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReservationReferences
+
+`func (o *ServerProfileAllOf) SetReservationReferences(v []PoolReservationReference)`
+
+SetReservationReferences sets ReservationReferences field to given value.
+
+### HasReservationReferences
+
+`func (o *ServerProfileAllOf) HasReservationReferences() bool`
+
+HasReservationReferences returns a boolean if a field has been set.
+
+### SetReservationReferencesNil
+
+`func (o *ServerProfileAllOf) SetReservationReferencesNil(b bool)`
+
+ SetReservationReferencesNil sets the value for ReservationReferences to be an explicit nil
+
+### UnsetReservationReferences
+`func (o *ServerProfileAllOf) UnsetReservationReferences()`
+
+UnsetReservationReferences ensures that no value is present for ReservationReferences, not even an explicit nil
 ### GetServerAssignmentMode
 
 `func (o *ServerProfileAllOf) GetServerAssignmentMode() string`

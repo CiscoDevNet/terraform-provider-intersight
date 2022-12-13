@@ -6,11 +6,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "macpool.PoolMember"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "macpool.PoolMember"]
-**MacAddress** | Pointer to **string** | MAC Address of this pool member. | [optional] 
+**MacAddress** | Pointer to **string** | MAC Address of this pool member. | [optional] [readonly] 
 **AssignedToEntity** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 **BlockHead** | Pointer to [**MacpoolIdBlockRelationship**](MacpoolIdBlockRelationship.md) |  | [optional] 
 **Peer** | Pointer to [**MacpoolLeaseRelationship**](MacpoolLeaseRelationship.md) |  | [optional] 
 **Pool** | Pointer to [**MacpoolPoolRelationship**](MacpoolPoolRelationship.md) |  | [optional] 
+**Reservation** | Pointer to [**MacpoolReservationRelationship**](MacpoolReservationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -195,6 +196,31 @@ SetPool sets Pool field to given value.
 `func (o *MacpoolPoolMember) HasPool() bool`
 
 HasPool returns a boolean if a field has been set.
+
+### GetReservation
+
+`func (o *MacpoolPoolMember) GetReservation() MacpoolReservationRelationship`
+
+GetReservation returns the Reservation field if non-nil, zero value otherwise.
+
+### GetReservationOk
+
+`func (o *MacpoolPoolMember) GetReservationOk() (*MacpoolReservationRelationship, bool)`
+
+GetReservationOk returns a tuple with the Reservation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReservation
+
+`func (o *MacpoolPoolMember) SetReservation(v MacpoolReservationRelationship)`
+
+SetReservation sets Reservation field to given value.
+
+### HasReservation
+
+`func (o *MacpoolPoolMember) HasReservation() bool`
+
+HasReservation returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

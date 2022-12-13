@@ -165,8 +165,8 @@ func resourceIamDomainNameInfo() *schema.Resource {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
-				ConfigMode:  schema.SchemaConfigModeAttr,
 				Computed:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
@@ -564,37 +564,6 @@ func resourceIamDomainNameInfoCreate(c context.Context, d *schema.ResourceData, 
 		o.SetDomainName(x)
 	}
 
-	if v, ok := d.GetOk("failure_details"); ok {
-		p := make([]models.IamFailureDetails, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewIamFailureDetailsWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("iam.FailureDetails")
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			p = append(p, *o)
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetFailureDetails(x)
-		}
-	}
-
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
@@ -793,38 +762,6 @@ func resourceIamDomainNameInfoUpdate(c context.Context, d *schema.ResourceData, 
 		v := d.Get("domain_name")
 		x := (v.(string))
 		o.SetDomainName(x)
-	}
-
-	if d.HasChange("failure_details") {
-		v := d.Get("failure_details")
-		p := make([]models.IamFailureDetails, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.IamFailureDetails{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("iam.FailureDetails")
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			p = append(p, *o)
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetFailureDetails(x)
-		}
 	}
 
 	if d.HasChange("moid") {

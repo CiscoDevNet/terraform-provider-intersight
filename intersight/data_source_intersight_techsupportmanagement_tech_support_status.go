@@ -150,6 +150,11 @@ func getTechsupportmanagementTechSupportStatusSchema() map[string]*schema.Schema
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"file_size": {
+			Description: "Techsupport file size in bytes.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -364,6 +369,11 @@ func getTechsupportmanagementTechSupportStatusSchema() map[string]*schema.Schema
 		},
 		"techsupport_download_url": {
 			Description: "The Url to download the techsupport file.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"user_role": {
+			Description: "The name of the role granted to the user that issued the techsupport request.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -657,6 +667,11 @@ func dataSourceTechsupportmanagementTechSupportStatusRead(c context.Context, d *
 		o.SetFileName(x)
 	}
 
+	if v, ok := d.GetOkExists("file_size"); ok {
+		x := int64(v.(int))
+		o.SetFileSize(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
@@ -920,6 +935,11 @@ func dataSourceTechsupportmanagementTechSupportStatusRead(c context.Context, d *
 		o.SetTechsupportDownloadUrl(x)
 	}
 
+	if v, ok := d.GetOk("user_role"); ok {
+		x := (v.(string))
+		o.SetUserRole(x)
+	}
+
 	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
@@ -1042,6 +1062,7 @@ func dataSourceTechsupportmanagementTechSupportStatusRead(c context.Context, d *
 				temp["device_registration"] = flattenMapAssetDeviceRegistrationRelationship(s.GetDeviceRegistration(), d)
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["file_name"] = (s.GetFileName())
+				temp["file_size"] = (s.GetFileSize())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
@@ -1065,6 +1086,7 @@ func dataSourceTechsupportmanagementTechSupportStatusRead(c context.Context, d *
 
 				temp["tech_support_request"] = flattenMapTechsupportmanagementTechSupportBundleRelationship(s.GetTechSupportRequest(), d)
 				temp["techsupport_download_url"] = (s.GetTechsupportDownloadUrl())
+				temp["user_role"] = (s.GetUserRole())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				techsupportmanagementTechSupportStatusResults = append(techsupportmanagementTechSupportStatusResults, temp)

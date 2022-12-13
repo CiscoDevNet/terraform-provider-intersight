@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **NtpServers** | Pointer to **[]string** |  | [optional] 
 **Summary** | Pointer to [**NullableHyperflexSummary**](HyperflexSummary.md) |  | [optional] 
 **UpgradeStatus** | Pointer to **string** | The upgrade status of the HyperFlex cluster. * &#x60;Unknown&#x60; - The upgrade status of the HyperFlex cluster could not be determined. * &#x60;Ok&#x60; - The upgrade of the HyperFlex cluster is complete. * &#x60;InProgress&#x60; - The upgrade of the HyperFlex cluster is in-progress. * &#x60;Failed&#x60; - The upgrade of the HyperFlex cluster has failed. * &#x60;Waiting&#x60; - The upgrade of the HyperFlex cluster is waiting to continue execution. | [optional] [readonly] [default to "Unknown"]
+**UplinkSpeed** | Pointer to **string** | The uplink speed information of the HyperFlex cluster. * &#x60;Unknown&#x60; - The uplink speed could not be determined. The physical servers are potentially not claimed. * &#x60;10G&#x60; - The uplink speed is 10G. * &#x60;1G&#x60; - The uplink speed is 1G. | [optional] [readonly] [default to "Unknown"]
 **VmCount** | Pointer to **int64** | The number of virtual machines present on this cluster. | [optional] [readonly] 
 **Alarm** | Pointer to [**[]HyperflexAlarmRelationship**](HyperflexAlarmRelationship.md) | An array of relationships to hyperflexAlarm resources. | [optional] [readonly] 
 **Encryption** | Pointer to [**HyperflexEncryptionRelationship**](HyperflexEncryptionRelationship.md) |  | [optional] 
@@ -366,6 +367,31 @@ SetUpgradeStatus sets UpgradeStatus field to given value.
 `func (o *HyperflexClusterAllOf) HasUpgradeStatus() bool`
 
 HasUpgradeStatus returns a boolean if a field has been set.
+
+### GetUplinkSpeed
+
+`func (o *HyperflexClusterAllOf) GetUplinkSpeed() string`
+
+GetUplinkSpeed returns the UplinkSpeed field if non-nil, zero value otherwise.
+
+### GetUplinkSpeedOk
+
+`func (o *HyperflexClusterAllOf) GetUplinkSpeedOk() (*string, bool)`
+
+GetUplinkSpeedOk returns a tuple with the UplinkSpeed field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUplinkSpeed
+
+`func (o *HyperflexClusterAllOf) SetUplinkSpeed(v string)`
+
+SetUplinkSpeed sets UplinkSpeed field to given value.
+
+### HasUplinkSpeed
+
+`func (o *HyperflexClusterAllOf) HasUplinkSpeed() bool`
+
+HasUplinkSpeed returns a boolean if a field has been set.
 
 ### GetVmCount
 

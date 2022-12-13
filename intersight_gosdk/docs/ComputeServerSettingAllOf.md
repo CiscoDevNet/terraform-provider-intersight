@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **StorageControllerOperation** | Pointer to [**NullableComputeStorageControllerOperation**](ComputeStorageControllerOperation.md) |  | [optional] 
 **StoragePhysicalDriveOperation** | Pointer to [**NullableComputeStoragePhysicalDriveOperation**](ComputeStoragePhysicalDriveOperation.md) |  | [optional] 
 **StorageVirtualDriveOperation** | Pointer to [**NullableComputeStorageVirtualDriveOperation**](ComputeStorageVirtualDriveOperation.md) |  | [optional] 
+**TpmReset** | Pointer to **string** | Clear the configuration of TPM chip in the server. * &#x60;None&#x60; - Perform no action on the TPM. * &#x60;ClearTpm&#x60; - Clear the configuration and restore factory defaults of TPM chip in the server. | [optional] [default to "None"]
 **TunneledKvmState** | Pointer to **string** | By default, the tunneled vKVM property appears in Ready state. The property can be configured by performing allowed actions. Once the property is configured, it reverts to Ready state. * &#x60;Ready&#x60; - Tunneled vKVM is ready to be configured on the server. * &#x60;Enable&#x60; - Tunneled vKVM is enabled for the server. * &#x60;Disable&#x60; - Tunneled vKVM is disabled for the server. | [optional] [default to "Ready"]
 **LocatorLed** | Pointer to [**EquipmentLocatorLedRelationship**](EquipmentLocatorLedRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
@@ -531,6 +532,31 @@ HasStorageVirtualDriveOperation returns a boolean if a field has been set.
 `func (o *ComputeServerSettingAllOf) UnsetStorageVirtualDriveOperation()`
 
 UnsetStorageVirtualDriveOperation ensures that no value is present for StorageVirtualDriveOperation, not even an explicit nil
+### GetTpmReset
+
+`func (o *ComputeServerSettingAllOf) GetTpmReset() string`
+
+GetTpmReset returns the TpmReset field if non-nil, zero value otherwise.
+
+### GetTpmResetOk
+
+`func (o *ComputeServerSettingAllOf) GetTpmResetOk() (*string, bool)`
+
+GetTpmResetOk returns a tuple with the TpmReset field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTpmReset
+
+`func (o *ComputeServerSettingAllOf) SetTpmReset(v string)`
+
+SetTpmReset sets TpmReset field to given value.
+
+### HasTpmReset
+
+`func (o *ComputeServerSettingAllOf) HasTpmReset() bool`
+
+HasTpmReset returns a boolean if a field has been set.
+
 ### GetTunneledKvmState
 
 `func (o *ComputeServerSettingAllOf) GetTunneledKvmState() string`

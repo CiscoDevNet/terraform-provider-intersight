@@ -178,9 +178,11 @@ This complex property has following sub-properties:
 * `pin_group_name`:(string) Pingroup name associated to vNIC for static pinning. LCP deploy will resolve pingroup name and fetches the correspoding uplink port/port channel to pin the vNIC traffic. 
 * `placement`:(HashMap) - Placement Settings for the virtual interface. 
 This complex property has following sub-properties:
+  + `auto_pci_link`:(bool) Enable or disable automatic assignment of the PCI Link in a dual-link adapter. This option applies only to 13xx series VICs that support dual-link. If enabled, the system determines the placement of the vNIC/vHBA on either of the PCI Links. 
+  + `auto_slot_id`:(bool) Enable or disable automatic assignment of the VIC slot ID. If enabled and the server has only one VIC, the same VIC is chosen for all the vNICs. If enabled and the server has multiple VICs, the vNIC/vHBA are deployed on the first VIC. The Slot ID determines the first VIC. MLOM is the first Slot ID and the ID increments to 2, 3, and so on. 
   + `id`:(string) PCIe Slot where the VIC adapter is installed. Supported values are (1-15) and MLOM. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `pci_link`:(int) The PCI Link used as transport for the virtual interface. This field is applicable only for VIC 1385 model (UCSC-PCIE-C40Q-03) which support two PCI links. The value, if specified, for any other VIC model will be ignored. 
+  + `pci_link`:(int) The PCI Link used as transport for the virtual interface. PCI Link is only applicable for select Cisco UCS VIC 1300 models (UCSC-PCIE-C40Q-03, UCSB-MLOM-40G-03, UCSB-VIC-M83-8P) that support two PCI links. The value, if specified, for any other VIC model will be ignored. 
   + `switch_id`:(string) The fabric port to which the vNICs will be associated.* `None` - Fabric Id is not set to either A or B for the standalone case where the server is not connected to Fabric Interconnects. The value 'None' should be used.* `A` - Fabric A of the FI cluster.* `B` - Fabric B of the FI cluster. 
   + `uplink`:(int) Adapter port on which the virtual interface will be created. 
 * `profile`:(HashMap) - A reference to a policyAbstractConfigProfile resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

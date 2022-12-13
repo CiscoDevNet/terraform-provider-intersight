@@ -962,6 +962,12 @@ func dataSourceVnicEthAdapterPolicyInventoryRead(c context.Context, d *schema.Re
 					o.SetObjectType(x)
 				}
 			}
+			if v, ok := l["ring_size"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetRingSize(x)
+				}
+			}
 			p = append(p, *o)
 		}
 		if len(p) > 0 {

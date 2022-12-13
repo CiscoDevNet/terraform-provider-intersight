@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **Periodicity** | Pointer to **int64** | Value in seconds to specify the periodicity of the workflows. A zero value indicate the workflow will not execute periodically. A non-zero value indicate, the workflow will be executed periodically with this periodicity. | [optional] 
 **PostCoreWorkflows** | Pointer to [**[]WorkflowServiceItemActionWorkflowDefinition**](WorkflowServiceItemActionWorkflowDefinition.md) |  | [optional] 
 **PreCoreWorkflows** | Pointer to [**[]WorkflowServiceItemActionWorkflowDefinition**](WorkflowServiceItemActionWorkflowDefinition.md) |  | [optional] 
+**RestrictOnPrivateAppliance** | Pointer to **bool** | The flag to indicate that action is restricted on a Private Virtual Appliance. | [optional] [default to false]
 **StopWorkflows** | Pointer to [**[]WorkflowServiceItemActionWorkflowDefinition**](WorkflowServiceItemActionWorkflowDefinition.md) |  | [optional] 
 **ValidationInformation** | Pointer to [**NullableWorkflowValidationInformation**](WorkflowValidationInformation.md) |  | [optional] 
 **ValidationWorkflows** | Pointer to [**[]WorkflowServiceItemActionWorkflowDefinition**](WorkflowServiceItemActionWorkflowDefinition.md) |  | [optional] 
@@ -417,6 +418,31 @@ HasPreCoreWorkflows returns a boolean if a field has been set.
 `func (o *WorkflowServiceItemActionDefinition) UnsetPreCoreWorkflows()`
 
 UnsetPreCoreWorkflows ensures that no value is present for PreCoreWorkflows, not even an explicit nil
+### GetRestrictOnPrivateAppliance
+
+`func (o *WorkflowServiceItemActionDefinition) GetRestrictOnPrivateAppliance() bool`
+
+GetRestrictOnPrivateAppliance returns the RestrictOnPrivateAppliance field if non-nil, zero value otherwise.
+
+### GetRestrictOnPrivateApplianceOk
+
+`func (o *WorkflowServiceItemActionDefinition) GetRestrictOnPrivateApplianceOk() (*bool, bool)`
+
+GetRestrictOnPrivateApplianceOk returns a tuple with the RestrictOnPrivateAppliance field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRestrictOnPrivateAppliance
+
+`func (o *WorkflowServiceItemActionDefinition) SetRestrictOnPrivateAppliance(v bool)`
+
+SetRestrictOnPrivateAppliance sets RestrictOnPrivateAppliance field to given value.
+
+### HasRestrictOnPrivateAppliance
+
+`func (o *WorkflowServiceItemActionDefinition) HasRestrictOnPrivateAppliance() bool`
+
+HasRestrictOnPrivateAppliance returns a boolean if a field has been set.
+
 ### GetStopWorkflows
 
 `func (o *WorkflowServiceItemActionDefinition) GetStopWorkflows() []WorkflowServiceItemActionWorkflowDefinition`

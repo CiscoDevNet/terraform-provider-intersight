@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -56,8 +56,8 @@ func (r ApiCreateThermalPolicyRequest) Execute() (*ThermalPolicy, *http.Response
 /*
 CreateThermalPolicy Create a 'thermal.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateThermalPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateThermalPolicyRequest
 */
 func (a *ThermalApiService) CreateThermalPolicy(ctx context.Context) ApiCreateThermalPolicyRequest {
 	return ApiCreateThermalPolicyRequest{
@@ -67,7 +67,8 @@ func (a *ThermalApiService) CreateThermalPolicy(ctx context.Context) ApiCreateTh
 }
 
 // Execute executes the request
-//  @return ThermalPolicy
+//
+//	@return ThermalPolicy
 func (a *ThermalApiService) CreateThermalPolicyExecute(r ApiCreateThermalPolicyRequest) (*ThermalPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -212,9 +213,9 @@ func (r ApiDeleteThermalPolicyRequest) Execute() (*http.Response, error) {
 /*
 DeleteThermalPolicy Delete a 'thermal.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteThermalPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteThermalPolicyRequest
 */
 func (a *ThermalApiService) DeleteThermalPolicy(ctx context.Context, moid string) ApiDeleteThermalPolicyRequest {
 	return ApiDeleteThermalPolicyRequest{
@@ -349,9 +350,9 @@ func (r ApiGetThermalPolicyByMoidRequest) Execute() (*ThermalPolicy, *http.Respo
 /*
 GetThermalPolicyByMoid Read a 'thermal.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetThermalPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetThermalPolicyByMoidRequest
 */
 func (a *ThermalApiService) GetThermalPolicyByMoid(ctx context.Context, moid string) ApiGetThermalPolicyByMoidRequest {
 	return ApiGetThermalPolicyByMoidRequest{
@@ -362,7 +363,8 @@ func (a *ThermalApiService) GetThermalPolicyByMoid(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return ThermalPolicy
+//
+//	@return ThermalPolicy
 func (a *ThermalApiService) GetThermalPolicyByMoidExecute(r ApiGetThermalPolicyByMoidRequest) (*ThermalPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -573,8 +575,8 @@ func (r ApiGetThermalPolicyListRequest) Execute() (*ThermalPolicyResponse, *http
 /*
 GetThermalPolicyList Read a 'thermal.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetThermalPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetThermalPolicyListRequest
 */
 func (a *ThermalApiService) GetThermalPolicyList(ctx context.Context) ApiGetThermalPolicyListRequest {
 	return ApiGetThermalPolicyListRequest{
@@ -584,7 +586,8 @@ func (a *ThermalApiService) GetThermalPolicyList(ctx context.Context) ApiGetTher
 }
 
 // Execute executes the request
-//  @return ThermalPolicyResponse
+//
+//	@return ThermalPolicyResponse
 func (a *ThermalApiService) GetThermalPolicyListExecute(r ApiGetThermalPolicyListRequest) (*ThermalPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -765,9 +768,9 @@ func (r ApiPatchThermalPolicyRequest) Execute() (*ThermalPolicy, *http.Response,
 /*
 PatchThermalPolicy Update a 'thermal.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchThermalPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchThermalPolicyRequest
 */
 func (a *ThermalApiService) PatchThermalPolicy(ctx context.Context, moid string) ApiPatchThermalPolicyRequest {
 	return ApiPatchThermalPolicyRequest{
@@ -778,7 +781,8 @@ func (a *ThermalApiService) PatchThermalPolicy(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//  @return ThermalPolicy
+//
+//	@return ThermalPolicy
 func (a *ThermalApiService) PatchThermalPolicyExecute(r ApiPatchThermalPolicyRequest) (*ThermalPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -935,9 +939,9 @@ func (r ApiUpdateThermalPolicyRequest) Execute() (*ThermalPolicy, *http.Response
 /*
 UpdateThermalPolicy Update a 'thermal.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateThermalPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateThermalPolicyRequest
 */
 func (a *ThermalApiService) UpdateThermalPolicy(ctx context.Context, moid string) ApiUpdateThermalPolicyRequest {
 	return ApiUpdateThermalPolicyRequest{
@@ -948,7 +952,8 @@ func (a *ThermalApiService) UpdateThermalPolicy(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return ThermalPolicy
+//
+//	@return ThermalPolicy
 func (a *ThermalApiService) UpdateThermalPolicyExecute(r ApiUpdateThermalPolicyRequest) (*ThermalPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

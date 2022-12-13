@@ -6,11 +6,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iqnpool.PoolMember"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iqnpool.PoolMember"]
-**IqnAddress** | Pointer to **string** | IQN Address of this pool member. | [optional] 
+**IqnAddress** | Pointer to **string** | IQN Address of this pool member. | [optional] [readonly] 
 **AssignedToEntity** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 **BlockHead** | Pointer to [**IqnpoolBlockRelationship**](IqnpoolBlockRelationship.md) |  | [optional] 
 **Peer** | Pointer to [**IqnpoolLeaseRelationship**](IqnpoolLeaseRelationship.md) |  | [optional] 
 **Pool** | Pointer to [**IqnpoolPoolRelationship**](IqnpoolPoolRelationship.md) |  | [optional] 
+**Reservation** | Pointer to [**IqnpoolReservationRelationship**](IqnpoolReservationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -195,6 +196,31 @@ SetPool sets Pool field to given value.
 `func (o *IqnpoolPoolMember) HasPool() bool`
 
 HasPool returns a boolean if a field has been set.
+
+### GetReservation
+
+`func (o *IqnpoolPoolMember) GetReservation() IqnpoolReservationRelationship`
+
+GetReservation returns the Reservation field if non-nil, zero value otherwise.
+
+### GetReservationOk
+
+`func (o *IqnpoolPoolMember) GetReservationOk() (*IqnpoolReservationRelationship, bool)`
+
+GetReservationOk returns a tuple with the Reservation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReservation
+
+`func (o *IqnpoolPoolMember) SetReservation(v IqnpoolReservationRelationship)`
+
+SetReservation sets Reservation field to given value.
+
+### HasReservation
+
+`func (o *IqnpoolPoolMember) HasReservation() bool`
+
+HasReservation returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

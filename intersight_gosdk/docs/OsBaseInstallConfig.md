@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **InstallTarget** | Pointer to [**NullableOsInstallTarget**](OsInstallTarget.md) |  | [optional] 
 **OperState** | Pointer to **string** | Denotes API operating status as pending, in_progress, completed_ok, completed_error based on the execution status. * &#x60;Pending&#x60; - The initial value of the OperStatus. * &#x60;InProgress&#x60; - The OperStatus value will be InProgress during execution. * &#x60;CompletedOk&#x60; - The API is successful with operation then OperStatus will be marked as CompletedOk. * &#x60;CompletedError&#x60; - The API is failed with operation then OperStatus will be marked as CompletedError. * &#x60;CompletedWarning&#x60; - The API is completed with some warning then OperStatus will be CompletedWarning. | [optional] [readonly] [default to "Pending"]
 **OperatingSystemParameters** | Pointer to [**NullableOsOperatingSystemParameters**](OsOperatingSystemParameters.md) |  | [optional] 
+**OverrideSecureBoot** | Pointer to **bool** | ESXi Secure Boot installation is currently not supported. As a workaround, Secure Boot will be disabled before installation and restored after installation is complete. Enable to Override Secure Boot Configuration. | [optional] 
 
 ## Methods
 
@@ -314,6 +315,31 @@ HasOperatingSystemParameters returns a boolean if a field has been set.
 `func (o *OsBaseInstallConfig) UnsetOperatingSystemParameters()`
 
 UnsetOperatingSystemParameters ensures that no value is present for OperatingSystemParameters, not even an explicit nil
+### GetOverrideSecureBoot
+
+`func (o *OsBaseInstallConfig) GetOverrideSecureBoot() bool`
+
+GetOverrideSecureBoot returns the OverrideSecureBoot field if non-nil, zero value otherwise.
+
+### GetOverrideSecureBootOk
+
+`func (o *OsBaseInstallConfig) GetOverrideSecureBootOk() (*bool, bool)`
+
+GetOverrideSecureBootOk returns a tuple with the OverrideSecureBoot field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOverrideSecureBoot
+
+`func (o *OsBaseInstallConfig) SetOverrideSecureBoot(v bool)`
+
+SetOverrideSecureBoot sets OverrideSecureBoot field to given value.
+
+### HasOverrideSecureBoot
+
+`func (o *OsBaseInstallConfig) HasOverrideSecureBoot() bool`
+
+HasOverrideSecureBoot returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

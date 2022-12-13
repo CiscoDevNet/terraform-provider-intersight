@@ -6,10 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
-**RemoteUserLocale** | Pointer to **string** | The platform locale to assign user. A locale defines one or more organizations (domains) the user is allowed access, and access is limited to the organizations specified in the locale. | [optional] 
+**RemoteUserLocale** | Pointer to **string** | The platform locale to assign user. A locale defines one or more organizations (domains) the user is allowed access to, and access is limited to the organizations specified in the locale. | [optional] 
 **RemoteUserName** | Pointer to **string** | The user name passed to the platform for use in platform audit logs. | [optional] 
 **RemoteUserRoles** | Pointer to **string** | The list of roles to pass to the platform to validate the action against. | [optional] 
-**RemoteUserSessionId** | Pointer to **string** | The session Id passed to the platform for use in platforms auditing. | [optional] 
+**RemoteUserSessionId** | Pointer to **string** | The session Id passed to the platform for use in platform&#39;s auditing. | [optional] 
 
 ## Methods
 

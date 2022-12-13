@@ -445,7 +445,7 @@ func resourceApplianceBackup() *schema.Resource {
 			"username": {
 				Description:  "Username to authenticate the fileserver.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9_][a-zA-Z0-9_\\.\\-\\+]*$"), ""),
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9_][a-zA-Z0-9_\\.\\@\\\\\\-\\+]*$"), ""),
 				Optional:     true,
 				ForceNew:     true,
 			},

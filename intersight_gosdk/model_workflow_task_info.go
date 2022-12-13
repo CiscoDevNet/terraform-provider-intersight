@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -46,11 +46,11 @@ type WorkflowTaskInfo struct {
 	Output interface{} `json:"Output,omitempty"`
 	// The task reference name to ensure its unique inside a workflow.
 	RefName *string `json:"RefName,omitempty"`
-	// A counter for number of retries.
+	// Denotes the number of times the task has been retried.
 	RetryCount *int64 `json:"RetryCount,omitempty"`
 	// The task is disabled/enabled for rollback operation in this workflow if the task has rollback support.
 	RollbackDisabled *bool `json:"RollbackDisabled,omitempty"`
-	// The instance ID of the task that is currently being executed. When retrying a workflow with failed tasks, the task in workflow engine will have a new instance ID, but the task may still be in-progress. In this case, the task instId reflects the instance ID in the workflow engine, while runningInstId reflects the instance ID of the instance that is currently being executed.
+	// The instance ID of the task that is currently being executed. When retrying a workflow with failed tasks, the task in workflow engine will have a new instance ID, but the task may still be in progress. In this case, the task instId reflects the instance ID in the workflow engine, while runningInstId reflects the instance ID of the instance that is currently being executed.
 	RunningInstId *string `json:"RunningInstId,omitempty"`
 	// The time stamp when the task started execution.
 	StartTime *time.Time `json:"StartTime,omitempty"`
@@ -976,11 +976,11 @@ func (o *WorkflowTaskInfo) UnmarshalJSON(bytes []byte) (err error) {
 		Output interface{} `json:"Output,omitempty"`
 		// The task reference name to ensure its unique inside a workflow.
 		RefName *string `json:"RefName,omitempty"`
-		// A counter for number of retries.
+		// Denotes the number of times the task has been retried.
 		RetryCount *int64 `json:"RetryCount,omitempty"`
 		// The task is disabled/enabled for rollback operation in this workflow if the task has rollback support.
 		RollbackDisabled *bool `json:"RollbackDisabled,omitempty"`
-		// The instance ID of the task that is currently being executed. When retrying a workflow with failed tasks, the task in workflow engine will have a new instance ID, but the task may still be in-progress. In this case, the task instId reflects the instance ID in the workflow engine, while runningInstId reflects the instance ID of the instance that is currently being executed.
+		// The instance ID of the task that is currently being executed. When retrying a workflow with failed tasks, the task in workflow engine will have a new instance ID, but the task may still be in progress. In this case, the task instId reflects the instance ID in the workflow engine, while runningInstId reflects the instance ID of the instance that is currently being executed.
 		RunningInstId *string `json:"RunningInstId,omitempty"`
 		// The time stamp when the task started execution.
 		StartTime *time.Time `json:"StartTime,omitempty"`

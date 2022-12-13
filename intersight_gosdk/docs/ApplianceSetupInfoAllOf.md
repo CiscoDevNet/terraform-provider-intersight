@@ -6,13 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "appliance.SetupInfo"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "appliance.SetupInfo"]
-**BackupVersion** | Pointer to **string** | The version of Intersight Appliance backup which can restore to. | [optional] [readonly] 
 **BuildType** | Pointer to **string** | Build type of the Intersight Appliance setup (e.g. release or debug). | [optional] [readonly] 
 **Capabilities** | Pointer to [**[]ApplianceKeyValuePair**](ApplianceKeyValuePair.md) |  | [optional] 
 **CloudUrl** | Pointer to **string** | URL of the Intersight to which this Intersight Appliance is connected to. | [optional] [readonly] 
 **DeploymentMode** | Pointer to **string** | Indicates where Intersight Appliance is installed in air-gapped or connected mode. In connected mode, Intersight Appliance is claimed by Intesight SaaS. In air-gapped mode, Intersight Appliance does not connect to any Cisco services. * &#x60;Connected&#x60; - In connected mode, Intersight Appliance connects to Intersight SaaS and other cisco.com services. * &#x60;Private&#x60; - In private mode, Intersight Appliance does not connect to Intersight SaaS or any cisco.com services. | [optional] [readonly] [default to "Connected"]
 **EndTime** | Pointer to **time.Time** | End date of the Intersight Appliance&#39;s initial setup. | [optional] [readonly] 
 **LatestVersion** | Pointer to **string** | The most recent version which Intersight Appliance can upgrade to. | [optional] [readonly] 
+**MinCpu** | Pointer to **int64** | The minimum cpu required of the node in cluster. | [optional] 
+**MinRam** | Pointer to **int64** | The minimum ram required of the node in cluster. | [optional] 
 **SetupStates** | Pointer to **[]string** |  | [optional] 
 **StartTime** | Pointer to **time.Time** | Start date of the Intersight Appliance&#39;s initial setup. | [optional] [readonly] 
 **Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
@@ -75,31 +76,6 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
-
-### GetBackupVersion
-
-`func (o *ApplianceSetupInfoAllOf) GetBackupVersion() string`
-
-GetBackupVersion returns the BackupVersion field if non-nil, zero value otherwise.
-
-### GetBackupVersionOk
-
-`func (o *ApplianceSetupInfoAllOf) GetBackupVersionOk() (*string, bool)`
-
-GetBackupVersionOk returns a tuple with the BackupVersion field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetBackupVersion
-
-`func (o *ApplianceSetupInfoAllOf) SetBackupVersion(v string)`
-
-SetBackupVersion sets BackupVersion field to given value.
-
-### HasBackupVersion
-
-`func (o *ApplianceSetupInfoAllOf) HasBackupVersion() bool`
-
-HasBackupVersion returns a boolean if a field has been set.
 
 ### GetBuildType
 
@@ -260,6 +236,56 @@ SetLatestVersion sets LatestVersion field to given value.
 `func (o *ApplianceSetupInfoAllOf) HasLatestVersion() bool`
 
 HasLatestVersion returns a boolean if a field has been set.
+
+### GetMinCpu
+
+`func (o *ApplianceSetupInfoAllOf) GetMinCpu() int64`
+
+GetMinCpu returns the MinCpu field if non-nil, zero value otherwise.
+
+### GetMinCpuOk
+
+`func (o *ApplianceSetupInfoAllOf) GetMinCpuOk() (*int64, bool)`
+
+GetMinCpuOk returns a tuple with the MinCpu field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMinCpu
+
+`func (o *ApplianceSetupInfoAllOf) SetMinCpu(v int64)`
+
+SetMinCpu sets MinCpu field to given value.
+
+### HasMinCpu
+
+`func (o *ApplianceSetupInfoAllOf) HasMinCpu() bool`
+
+HasMinCpu returns a boolean if a field has been set.
+
+### GetMinRam
+
+`func (o *ApplianceSetupInfoAllOf) GetMinRam() int64`
+
+GetMinRam returns the MinRam field if non-nil, zero value otherwise.
+
+### GetMinRamOk
+
+`func (o *ApplianceSetupInfoAllOf) GetMinRamOk() (*int64, bool)`
+
+GetMinRamOk returns a tuple with the MinRam field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMinRam
+
+`func (o *ApplianceSetupInfoAllOf) SetMinRam(v int64)`
+
+SetMinRam sets MinRam field to given value.
+
+### HasMinRam
+
+`func (o *ApplianceSetupInfoAllOf) HasMinRam() bool`
+
+HasMinRam returns a boolean if a field has been set.
 
 ### GetSetupStates
 

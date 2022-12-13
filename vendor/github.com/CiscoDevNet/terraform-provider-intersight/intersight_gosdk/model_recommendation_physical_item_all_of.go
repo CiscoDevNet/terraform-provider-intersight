@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -31,13 +31,16 @@ type RecommendationPhysicalItemAllOf struct {
 	MaxCount *int64 `json:"MaxCount,omitempty"`
 	// Model of the recommended physical device which is externally identifiable.
 	Model *string `json:"Model,omitempty"`
+	// Moid of the managed object which represents the parent physical entity.
+	ParentMoid *string `json:"ParentMoid,omitempty"`
 	// Moid of the managed object which represents the existing physical entity.
 	SourceMoid *string `json:"SourceMoid,omitempty"`
-	// Unit of the new capacity. * `TB` - The Enum value TB represents that the measurement unit is in terabytes. * `MB` - The Enum value MB represents that the measurement unit is in megabytes.
+	// Unit of the new capacity. * `TB` - The Enum value TB represents that the measurement unit is in terabytes. * `MB` - The Enum value MB represents that the measurement unit is in megabytes. * `GB` - The Enum value GB represents that the measurement unit is in gigabytes. * `MHz` - The Enum value MHz represents that the measurement unit is in megahertz. * `GHz` - The Enum value GHz represents that the measurement unit is in gigahertz. * `Percentage` - The Enum value Percentage represents that the expansion request is in the percentage of resource increase. For example, a 20% increase in CPU capacity.
 	Unit *string `json:"Unit,omitempty"`
 	// Uuid of the recommended physical device.
-	Uuid           *string                                   `json:"Uuid,omitempty"`
-	CapacityRunway *RecommendationCapacityRunwayRelationship `json:"CapacityRunway,omitempty"`
+	Uuid             *string                                     `json:"Uuid,omitempty"`
+	CapacityRunway   *RecommendationCapacityRunwayRelationship   `json:"CapacityRunway,omitempty"`
+	ClusterExpansion *RecommendationClusterExpansionRelationship `json:"ClusterExpansion,omitempty"`
 	// An array of relationships to recommendationPhysicalItem resources.
 	PhysicalItem         []RecommendationPhysicalItemRelationship `json:"PhysicalItem,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -276,6 +279,38 @@ func (o *RecommendationPhysicalItemAllOf) SetModel(v string) {
 	o.Model = &v
 }
 
+// GetParentMoid returns the ParentMoid field value if set, zero value otherwise.
+func (o *RecommendationPhysicalItemAllOf) GetParentMoid() string {
+	if o == nil || o.ParentMoid == nil {
+		var ret string
+		return ret
+	}
+	return *o.ParentMoid
+}
+
+// GetParentMoidOk returns a tuple with the ParentMoid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RecommendationPhysicalItemAllOf) GetParentMoidOk() (*string, bool) {
+	if o == nil || o.ParentMoid == nil {
+		return nil, false
+	}
+	return o.ParentMoid, true
+}
+
+// HasParentMoid returns a boolean if a field has been set.
+func (o *RecommendationPhysicalItemAllOf) HasParentMoid() bool {
+	if o != nil && o.ParentMoid != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetParentMoid gets a reference to the given string and assigns it to the ParentMoid field.
+func (o *RecommendationPhysicalItemAllOf) SetParentMoid(v string) {
+	o.ParentMoid = &v
+}
+
 // GetSourceMoid returns the SourceMoid field value if set, zero value otherwise.
 func (o *RecommendationPhysicalItemAllOf) GetSourceMoid() string {
 	if o == nil || o.SourceMoid == nil {
@@ -404,6 +439,38 @@ func (o *RecommendationPhysicalItemAllOf) SetCapacityRunway(v RecommendationCapa
 	o.CapacityRunway = &v
 }
 
+// GetClusterExpansion returns the ClusterExpansion field value if set, zero value otherwise.
+func (o *RecommendationPhysicalItemAllOf) GetClusterExpansion() RecommendationClusterExpansionRelationship {
+	if o == nil || o.ClusterExpansion == nil {
+		var ret RecommendationClusterExpansionRelationship
+		return ret
+	}
+	return *o.ClusterExpansion
+}
+
+// GetClusterExpansionOk returns a tuple with the ClusterExpansion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RecommendationPhysicalItemAllOf) GetClusterExpansionOk() (*RecommendationClusterExpansionRelationship, bool) {
+	if o == nil || o.ClusterExpansion == nil {
+		return nil, false
+	}
+	return o.ClusterExpansion, true
+}
+
+// HasClusterExpansion returns a boolean if a field has been set.
+func (o *RecommendationPhysicalItemAllOf) HasClusterExpansion() bool {
+	if o != nil && o.ClusterExpansion != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetClusterExpansion gets a reference to the given RecommendationClusterExpansionRelationship and assigns it to the ClusterExpansion field.
+func (o *RecommendationPhysicalItemAllOf) SetClusterExpansion(v RecommendationClusterExpansionRelationship) {
+	o.ClusterExpansion = &v
+}
+
 // GetPhysicalItem returns the PhysicalItem field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RecommendationPhysicalItemAllOf) GetPhysicalItem() []RecommendationPhysicalItemRelationship {
 	if o == nil {
@@ -460,6 +527,9 @@ func (o RecommendationPhysicalItemAllOf) MarshalJSON() ([]byte, error) {
 	if o.Model != nil {
 		toSerialize["Model"] = o.Model
 	}
+	if o.ParentMoid != nil {
+		toSerialize["ParentMoid"] = o.ParentMoid
+	}
 	if o.SourceMoid != nil {
 		toSerialize["SourceMoid"] = o.SourceMoid
 	}
@@ -471,6 +541,9 @@ func (o RecommendationPhysicalItemAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.CapacityRunway != nil {
 		toSerialize["CapacityRunway"] = o.CapacityRunway
+	}
+	if o.ClusterExpansion != nil {
+		toSerialize["ClusterExpansion"] = o.ClusterExpansion
 	}
 	if o.PhysicalItem != nil {
 		toSerialize["PhysicalItem"] = o.PhysicalItem
@@ -500,10 +573,12 @@ func (o *RecommendationPhysicalItemAllOf) UnmarshalJSON(bytes []byte) (err error
 		delete(additionalProperties, "IsNew")
 		delete(additionalProperties, "MaxCount")
 		delete(additionalProperties, "Model")
+		delete(additionalProperties, "ParentMoid")
 		delete(additionalProperties, "SourceMoid")
 		delete(additionalProperties, "Unit")
 		delete(additionalProperties, "Uuid")
 		delete(additionalProperties, "CapacityRunway")
+		delete(additionalProperties, "ClusterExpansion")
 		delete(additionalProperties, "PhysicalItem")
 		o.AdditionalProperties = additionalProperties
 	}

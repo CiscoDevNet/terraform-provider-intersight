@@ -588,6 +588,11 @@ func getEquipmentFanModuleSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"status": {
+			Description: "This field is to abstract the status of the fan module.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -1442,6 +1447,11 @@ func dataSourceEquipmentFanModuleRead(c context.Context, d *schema.ResourceData,
 		o.SetSku(x)
 	}
 
+	if v, ok := d.GetOk("status"); ok {
+		x := (v.(string))
+		o.SetStatus(x)
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -1651,6 +1661,7 @@ func dataSourceEquipmentFanModuleRead(c context.Context, d *schema.ResourceData,
 				temp["serial"] = (s.GetSerial())
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["sku"] = (s.GetSku())
+				temp["status"] = (s.GetStatus())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["tray_id"] = (s.GetTrayId())

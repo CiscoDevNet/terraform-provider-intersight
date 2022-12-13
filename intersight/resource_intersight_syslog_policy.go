@@ -368,6 +368,17 @@ func resourceSyslogPolicy() *schema.Resource {
 							Optional:    true,
 							Default:     true,
 						},
+						"facility": {
+							Description: "This component represents the process of the system which created the message.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 						"hostname": {
 							Description: "Hostname or IP Address of the syslog server where log should be stored.",
 							Type:        schema.TypeString,
@@ -400,6 +411,17 @@ func resourceSyslogPolicy() *schema.Resource {
 							Optional:     true,
 							Default:      "udp",
 						},
+						"vrf_name": {
+							Description: "VRF name used by the syslog server.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 					},
 				},
 			},

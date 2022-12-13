@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.FlexUtilVirtualDrive"]
 **DriveStatus** | Pointer to **string** | Status of the Flex Util virtual drive. | [optional] 
 **DriveType** | Pointer to **string** | Type of virtual drive managed by flex util controller. | [optional] 
+**HostAccessible** | Pointer to **string** | Connection status of the Flex Util virtual drive to the host. | [optional] 
 **PartitionId** | Pointer to **string** | Disk Partition Id of virtual drive managed by flex util controller. | [optional] 
 **PartitionName** | Pointer to **string** | Partition name of the Flex Util virtual drive. | [optional] 
 **ResidentImage** | Pointer to **string** | The resident image on the flex util virtual Drive. | [optional] 
@@ -125,6 +126,31 @@ SetDriveType sets DriveType field to given value.
 `func (o *StorageFlexUtilVirtualDriveAllOf) HasDriveType() bool`
 
 HasDriveType returns a boolean if a field has been set.
+
+### GetHostAccessible
+
+`func (o *StorageFlexUtilVirtualDriveAllOf) GetHostAccessible() string`
+
+GetHostAccessible returns the HostAccessible field if non-nil, zero value otherwise.
+
+### GetHostAccessibleOk
+
+`func (o *StorageFlexUtilVirtualDriveAllOf) GetHostAccessibleOk() (*string, bool)`
+
+GetHostAccessibleOk returns a tuple with the HostAccessible field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHostAccessible
+
+`func (o *StorageFlexUtilVirtualDriveAllOf) SetHostAccessible(v string)`
+
+SetHostAccessible sets HostAccessible field to given value.
+
+### HasHostAccessible
+
+`func (o *StorageFlexUtilVirtualDriveAllOf) HasHostAccessible() bool`
+
+HasHostAccessible returns a boolean if a field has been set.
 
 ### GetPartitionId
 

@@ -299,6 +299,12 @@ func resourceCapabilityAdapterUnitDescriptor() *schema.Resource {
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
+			"number_of_pci_links": {
+				Description: "Indicates number of PCI Links of the adapter.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+				Default:     1,
+			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
@@ -808,6 +814,11 @@ func resourceCapabilityAdapterUnitDescriptorCreate(c context.Context, d *schema.
 		o.SetNumDcePorts(x)
 	}
 
+	if v, ok := d.GetOkExists("number_of_pci_links"); ok {
+		x := int64(v.(int))
+		o.SetNumberOfPciLinks(x)
+	}
+
 	o.SetObjectType("capability.AdapterUnitDescriptor")
 
 	if v, ok := d.GetOkExists("pci_link"); ok {
@@ -990,6 +1001,10 @@ func resourceCapabilityAdapterUnitDescriptorRead(c context.Context, d *schema.Re
 
 	if err := d.Set("num_dce_ports", (s.GetNumDcePorts())); err != nil {
 		return diag.Errorf("error occurred while setting property NumDcePorts in CapabilityAdapterUnitDescriptor object: %s", err.Error())
+	}
+
+	if err := d.Set("number_of_pci_links", (s.GetNumberOfPciLinks())); err != nil {
+		return diag.Errorf("error occurred while setting property NumberOfPciLinks in CapabilityAdapterUnitDescriptor object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
@@ -1265,6 +1280,12 @@ func resourceCapabilityAdapterUnitDescriptorUpdate(c context.Context, d *schema.
 		v := d.Get("num_dce_ports")
 		x := int64(v.(int))
 		o.SetNumDcePorts(x)
+	}
+
+	if d.HasChange("number_of_pci_links") {
+		v := d.Get("number_of_pci_links")
+		x := int64(v.(int))
+		o.SetNumberOfPciLinks(x)
 	}
 
 	o.SetObjectType("capability.AdapterUnitDescriptor")

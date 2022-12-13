@@ -158,9 +158,9 @@ func resourceOauthAuthorization() *schema.Resource {
 				},
 			},
 			"api_type": {
-				Description:  "Type of OAuth Api. For example, Smart-licensing-API.\n* `Unknown` - Unknown is the default API type.\n* `SmartLicensing-API` - Smart licensing API type.",
+				Description:  "Type of OAuth Api. For example, Smart-licensing-API.\n* `Unknown` - Unknown is the default API type.\n* `SmartLicensing-API` - Smart licensing API type.\n* `CommerceEstimate-API` - Commerce Estimate API type.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"Unknown", "SmartLicensing-API"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"Unknown", "SmartLicensing-API", "CommerceEstimate-API"}, false),
 				Optional:     true,
 				Default:      "Unknown",
 			},

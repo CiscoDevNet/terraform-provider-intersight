@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **MaxEthTxRingSize** | Pointer to **int64** | Maximum Ring Size value for vNIC Transmit Queue. | [optional] [default to 4096]
 **MaxRocev2Interfaces** | Pointer to **int64** | Maximum number of vNIC interfaces that can be RoCEv2 enabled. | [optional] [default to 2]
 **NumDcePorts** | Pointer to **int64** | Number of Dce Ports for the adapter. | [optional] 
+**NumberOfPciLinks** | Pointer to **int64** | Indicates number of PCI Links of the adapter. | [optional] [default to 1]
 **PciLink** | Pointer to **int64** | Indicates PCI Link status of adapter. | [optional] [default to 0]
 **PromCardType** | Pointer to **string** | Prom card type for the adapter. | [optional] 
 
@@ -389,6 +390,31 @@ SetNumDcePorts sets NumDcePorts field to given value.
 `func (o *CapabilityAdapterUnitDescriptorAllOf) HasNumDcePorts() bool`
 
 HasNumDcePorts returns a boolean if a field has been set.
+
+### GetNumberOfPciLinks
+
+`func (o *CapabilityAdapterUnitDescriptorAllOf) GetNumberOfPciLinks() int64`
+
+GetNumberOfPciLinks returns the NumberOfPciLinks field if non-nil, zero value otherwise.
+
+### GetNumberOfPciLinksOk
+
+`func (o *CapabilityAdapterUnitDescriptorAllOf) GetNumberOfPciLinksOk() (*int64, bool)`
+
+GetNumberOfPciLinksOk returns a tuple with the NumberOfPciLinks field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNumberOfPciLinks
+
+`func (o *CapabilityAdapterUnitDescriptorAllOf) SetNumberOfPciLinks(v int64)`
+
+SetNumberOfPciLinks sets NumberOfPciLinks field to given value.
+
+### HasNumberOfPciLinks
+
+`func (o *CapabilityAdapterUnitDescriptorAllOf) HasNumberOfPciLinks() bool`
+
+HasNumberOfPciLinks returns a boolean if a field has been set.
 
 ### GetPciLink
 

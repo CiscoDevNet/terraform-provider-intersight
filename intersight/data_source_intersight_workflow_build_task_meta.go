@@ -86,7 +86,7 @@ func getWorkflowBuildTaskMetaSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"name": {
-			Description: "Name for the BuildTaskMeta instance used to created a dynamic workflow.",
+			Description: "Name for the BuildTaskMeta instance used to create a dynamic workflow.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

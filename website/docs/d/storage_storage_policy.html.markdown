@@ -16,6 +16,7 @@ To access the ith object of the results obtained, use `data.intersight_storage_s
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `create_time`:(string) The time when this managed object was created. 
+* `default_drive_mode`:(string) Newly inserted drives or on reboot, drives will be moved to the corresponding disk state on supported storage controller based on this setting. Unused Disks State should be 'No Change' if Default Drive Mode is set to JBOD or RAID 0. This setting is applicable only to FI attached servers.* `UnconfiguredGood` - Newly inserted drives or on reboot, drives will remain the same state.* `Jbod` - Newly inserted drives or on reboot, drives will automatically move to JBOD state if drive state was UnconfiguredGood.* `RAID0` - Newly inserted drives or on reboot, virtual drives will be created, respective drives will move to Online state. 
 * `description`:(string) Description of the policy. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `global_hot_spares`:(string) A collection of disks that is to be used as hot spares, globally, for all the RAID groups. Allowed value is a number range separated by a comma or a hyphen. 

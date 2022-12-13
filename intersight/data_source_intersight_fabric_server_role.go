@@ -219,6 +219,16 @@ func getFabricServerRoleSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"preferred_device_id": {
+			Description: "Preferred device ID to be configured by user for the connected device. This ID must be specified together with the 'PreferredDeviceType' property. This ID will only takes effect if the actual connected device matches the 'PreferredDeviceType'. If the preferred ID is not available, the ID is automatically allocated and assigned by the system. If different preferred IDs are specified for the ports connected to the same device, only the preferred ID (if specified) of the port that is discovered first will be considered.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"preferred_device_type": {
+			Description: "Device type for which preferred ID to be configured. If the actual connected device does not match the specified device type, the system ignores the 'PreferredDeviceId' property.\n* `Auto` - Preferred Id will be ignored if specified with this type.\n* `RackServer` - Connected device type is Rack Unit Server.\n* `Chassis` - Connected device type is Chassis.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"shared_scope": {
 			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 			Type:        schema.TypeString,
@@ -623,6 +633,16 @@ func dataSourceFabricServerRoleRead(c context.Context, d *schema.ResourceData, m
 		}
 	}
 
+	if v, ok := d.GetOkExists("preferred_device_id"); ok {
+		x := int64(v.(int))
+		o.SetPreferredDeviceId(x)
+	}
+
+	if v, ok := d.GetOk("preferred_device_type"); ok {
+		x := (v.(string))
+		o.SetPreferredDeviceType(x)
+	}
+
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
@@ -798,6 +818,8 @@ func dataSourceFabricServerRoleRead(c context.Context, d *schema.ResourceData, m
 				temp["port_id"] = (s.GetPortId())
 
 				temp["port_policy"] = flattenMapFabricPortPolicyRelationship(s.GetPortPolicy(), d)
+				temp["preferred_device_id"] = (s.GetPreferredDeviceId())
+				temp["preferred_device_type"] = (s.GetPreferredDeviceType())
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["slot_id"] = (s.GetSlotId())
 

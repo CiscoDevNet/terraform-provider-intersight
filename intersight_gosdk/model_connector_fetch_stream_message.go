@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -20,11 +20,6 @@ import (
 // ConnectorFetchStreamMessage Retrieve a list of cached stream messages by stream id. Cloud services will request stream messages to be re-sent in case of dropped messages (the cloud service receieves an unexpected stream sequence number). On success the device connector will 'replay' the messages, publishing them to the streams response topic, they will not be returned in the response to this message. If any of the requested sequences are not present in the cache an error will be returned.
 type ConnectorFetchStreamMessage struct {
 	ConnectorStreamMessage
-	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
-	ClassId string `json:"ClassId"`
-	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType           string  `json:"ObjectType"`
-	Sequences            []int64 `json:"Sequences,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -46,92 +41,7 @@ func NewConnectorFetchStreamMessage(classId string, objectType string) *Connecto
 // but it doesn't guarantee that properties required by API are set
 func NewConnectorFetchStreamMessageWithDefaults() *ConnectorFetchStreamMessage {
 	this := ConnectorFetchStreamMessage{}
-	var classId string = "connector.FetchStreamMessage"
-	this.ClassId = classId
-	var objectType string = "connector.FetchStreamMessage"
-	this.ObjectType = objectType
 	return &this
-}
-
-// GetClassId returns the ClassId field value
-func (o *ConnectorFetchStreamMessage) GetClassId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ClassId
-}
-
-// GetClassIdOk returns a tuple with the ClassId field value
-// and a boolean to check if the value has been set.
-func (o *ConnectorFetchStreamMessage) GetClassIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ClassId, true
-}
-
-// SetClassId sets field value
-func (o *ConnectorFetchStreamMessage) SetClassId(v string) {
-	o.ClassId = v
-}
-
-// GetObjectType returns the ObjectType field value
-func (o *ConnectorFetchStreamMessage) GetObjectType() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ObjectType
-}
-
-// GetObjectTypeOk returns a tuple with the ObjectType field value
-// and a boolean to check if the value has been set.
-func (o *ConnectorFetchStreamMessage) GetObjectTypeOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ObjectType, true
-}
-
-// SetObjectType sets field value
-func (o *ConnectorFetchStreamMessage) SetObjectType(v string) {
-	o.ObjectType = v
-}
-
-// GetSequences returns the Sequences field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ConnectorFetchStreamMessage) GetSequences() []int64 {
-	if o == nil {
-		var ret []int64
-		return ret
-	}
-	return o.Sequences
-}
-
-// GetSequencesOk returns a tuple with the Sequences field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ConnectorFetchStreamMessage) GetSequencesOk() ([]int64, bool) {
-	if o == nil || o.Sequences == nil {
-		return nil, false
-	}
-	return o.Sequences, true
-}
-
-// HasSequences returns a boolean if a field has been set.
-func (o *ConnectorFetchStreamMessage) HasSequences() bool {
-	if o != nil && o.Sequences != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetSequences gets a reference to the given []int64 and assigns it to the Sequences field.
-func (o *ConnectorFetchStreamMessage) SetSequences(v []int64) {
-	o.Sequences = v
 }
 
 func (o ConnectorFetchStreamMessage) MarshalJSON() ([]byte, error) {
@@ -144,15 +54,6 @@ func (o ConnectorFetchStreamMessage) MarshalJSON() ([]byte, error) {
 	if errConnectorStreamMessage != nil {
 		return []byte{}, errConnectorStreamMessage
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Sequences != nil {
-		toSerialize["Sequences"] = o.Sequences
-	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -163,11 +64,6 @@ func (o ConnectorFetchStreamMessage) MarshalJSON() ([]byte, error) {
 
 func (o *ConnectorFetchStreamMessage) UnmarshalJSON(bytes []byte) (err error) {
 	type ConnectorFetchStreamMessageWithoutEmbeddedStruct struct {
-		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
-		ClassId string `json:"ClassId"`
-		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType string  `json:"ObjectType"`
-		Sequences  []int64 `json:"Sequences,omitempty"`
 	}
 
 	varConnectorFetchStreamMessageWithoutEmbeddedStruct := ConnectorFetchStreamMessageWithoutEmbeddedStruct{}
@@ -175,9 +71,6 @@ func (o *ConnectorFetchStreamMessage) UnmarshalJSON(bytes []byte) (err error) {
 	err = json.Unmarshal(bytes, &varConnectorFetchStreamMessageWithoutEmbeddedStruct)
 	if err == nil {
 		varConnectorFetchStreamMessage := _ConnectorFetchStreamMessage{}
-		varConnectorFetchStreamMessage.ClassId = varConnectorFetchStreamMessageWithoutEmbeddedStruct.ClassId
-		varConnectorFetchStreamMessage.ObjectType = varConnectorFetchStreamMessageWithoutEmbeddedStruct.ObjectType
-		varConnectorFetchStreamMessage.Sequences = varConnectorFetchStreamMessageWithoutEmbeddedStruct.Sequences
 		*o = ConnectorFetchStreamMessage(varConnectorFetchStreamMessage)
 	} else {
 		return err
@@ -195,9 +88,6 @@ func (o *ConnectorFetchStreamMessage) UnmarshalJSON(bytes []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "ClassId")
-		delete(additionalProperties, "ObjectType")
-		delete(additionalProperties, "Sequences")
 
 		// remove fields from embedded structs
 		reflectConnectorStreamMessage := reflect.ValueOf(o.ConnectorStreamMessage)

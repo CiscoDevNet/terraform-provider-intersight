@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -23,6 +23,497 @@ import (
 // NiatelemetryApiService NiatelemetryApi service
 type NiatelemetryApiService service
 
+type ApiCreateNiatelemetryNexusCloudAccountRequest struct {
+	ctx                           context.Context
+	ApiService                    *NiatelemetryApiService
+	niatelemetryNexusCloudAccount *NiatelemetryNexusCloudAccount
+	ifMatch                       *string
+	ifNoneMatch                   *string
+}
+
+// The &#39;niatelemetry.NexusCloudAccount&#39; resource to create.
+func (r ApiCreateNiatelemetryNexusCloudAccountRequest) NiatelemetryNexusCloudAccount(niatelemetryNexusCloudAccount NiatelemetryNexusCloudAccount) ApiCreateNiatelemetryNexusCloudAccountRequest {
+	r.niatelemetryNexusCloudAccount = &niatelemetryNexusCloudAccount
+	return r
+}
+
+// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
+func (r ApiCreateNiatelemetryNexusCloudAccountRequest) IfMatch(ifMatch string) ApiCreateNiatelemetryNexusCloudAccountRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+// For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte.
+func (r ApiCreateNiatelemetryNexusCloudAccountRequest) IfNoneMatch(ifNoneMatch string) ApiCreateNiatelemetryNexusCloudAccountRequest {
+	r.ifNoneMatch = &ifNoneMatch
+	return r
+}
+
+func (r ApiCreateNiatelemetryNexusCloudAccountRequest) Execute() (*NiatelemetryNexusCloudAccount, *http.Response, error) {
+	return r.ApiService.CreateNiatelemetryNexusCloudAccountExecute(r)
+}
+
+/*
+CreateNiatelemetryNexusCloudAccount Create a 'niatelemetry.NexusCloudAccount' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateNiatelemetryNexusCloudAccountRequest
+*/
+func (a *NiatelemetryApiService) CreateNiatelemetryNexusCloudAccount(ctx context.Context) ApiCreateNiatelemetryNexusCloudAccountRequest {
+	return ApiCreateNiatelemetryNexusCloudAccountRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return NiatelemetryNexusCloudAccount
+func (a *NiatelemetryApiService) CreateNiatelemetryNexusCloudAccountExecute(r ApiCreateNiatelemetryNexusCloudAccountRequest) (*NiatelemetryNexusCloudAccount, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryNexusCloudAccount
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.CreateNiatelemetryNexusCloudAccount")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/niatelemetry/NexusCloudAccounts"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.niatelemetryNexusCloudAccount == nil {
+		return localVarReturnValue, nil, reportError("niatelemetryNexusCloudAccount is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	if r.ifNoneMatch != nil {
+		localVarHeaderParams["If-None-Match"] = parameterToString(*r.ifNoneMatch, "")
+	}
+	// body params
+	localVarPostBody = r.niatelemetryNexusCloudAccount
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCreateNiatelemetryNexusCloudSiteRequest struct {
+	ctx                        context.Context
+	ApiService                 *NiatelemetryApiService
+	niatelemetryNexusCloudSite *NiatelemetryNexusCloudSite
+	ifMatch                    *string
+	ifNoneMatch                *string
+}
+
+// The &#39;niatelemetry.NexusCloudSite&#39; resource to create.
+func (r ApiCreateNiatelemetryNexusCloudSiteRequest) NiatelemetryNexusCloudSite(niatelemetryNexusCloudSite NiatelemetryNexusCloudSite) ApiCreateNiatelemetryNexusCloudSiteRequest {
+	r.niatelemetryNexusCloudSite = &niatelemetryNexusCloudSite
+	return r
+}
+
+// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
+func (r ApiCreateNiatelemetryNexusCloudSiteRequest) IfMatch(ifMatch string) ApiCreateNiatelemetryNexusCloudSiteRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+// For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte.
+func (r ApiCreateNiatelemetryNexusCloudSiteRequest) IfNoneMatch(ifNoneMatch string) ApiCreateNiatelemetryNexusCloudSiteRequest {
+	r.ifNoneMatch = &ifNoneMatch
+	return r
+}
+
+func (r ApiCreateNiatelemetryNexusCloudSiteRequest) Execute() (*NiatelemetryNexusCloudSite, *http.Response, error) {
+	return r.ApiService.CreateNiatelemetryNexusCloudSiteExecute(r)
+}
+
+/*
+CreateNiatelemetryNexusCloudSite Create a 'niatelemetry.NexusCloudSite' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateNiatelemetryNexusCloudSiteRequest
+*/
+func (a *NiatelemetryApiService) CreateNiatelemetryNexusCloudSite(ctx context.Context) ApiCreateNiatelemetryNexusCloudSiteRequest {
+	return ApiCreateNiatelemetryNexusCloudSiteRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return NiatelemetryNexusCloudSite
+func (a *NiatelemetryApiService) CreateNiatelemetryNexusCloudSiteExecute(r ApiCreateNiatelemetryNexusCloudSiteRequest) (*NiatelemetryNexusCloudSite, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryNexusCloudSite
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.CreateNiatelemetryNexusCloudSite")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/niatelemetry/NexusCloudSites"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.niatelemetryNexusCloudSite == nil {
+		return localVarReturnValue, nil, reportError("niatelemetryNexusCloudSite is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	if r.ifNoneMatch != nil {
+		localVarHeaderParams["If-None-Match"] = parameterToString(*r.ifNoneMatch, "")
+	}
+	// body params
+	localVarPostBody = r.niatelemetryNexusCloudSite
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiDeleteNiatelemetryNexusCloudSiteRequest struct {
+	ctx        context.Context
+	ApiService *NiatelemetryApiService
+	moid       string
+}
+
+func (r ApiDeleteNiatelemetryNexusCloudSiteRequest) Execute() (*http.Response, error) {
+	return r.ApiService.DeleteNiatelemetryNexusCloudSiteExecute(r)
+}
+
+/*
+DeleteNiatelemetryNexusCloudSite Delete a 'niatelemetry.NexusCloudSite' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteNiatelemetryNexusCloudSiteRequest
+*/
+func (a *NiatelemetryApiService) DeleteNiatelemetryNexusCloudSite(ctx context.Context, moid string) ApiDeleteNiatelemetryNexusCloudSiteRequest {
+	return ApiDeleteNiatelemetryNexusCloudSiteRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+func (a *NiatelemetryApiService) DeleteNiatelemetryNexusCloudSiteExecute(r ApiDeleteNiatelemetryNexusCloudSiteRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.DeleteNiatelemetryNexusCloudSite")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/niatelemetry/NexusCloudSites/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
 type ApiGetNiatelemetryAaaLdapProviderDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
@@ -36,9 +527,9 @@ func (r ApiGetNiatelemetryAaaLdapProviderDetailsByMoidRequest) Execute() (*Niate
 /*
 GetNiatelemetryAaaLdapProviderDetailsByMoid Read a 'niatelemetry.AaaLdapProviderDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryAaaLdapProviderDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryAaaLdapProviderDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryAaaLdapProviderDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryAaaLdapProviderDetailsByMoidRequest {
 	return ApiGetNiatelemetryAaaLdapProviderDetailsByMoidRequest{
@@ -49,7 +540,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryAaaLdapProviderDetailsByMoid(ctx
 }
 
 // Execute executes the request
-//  @return NiatelemetryAaaLdapProviderDetails
+//
+//	@return NiatelemetryAaaLdapProviderDetails
 func (a *NiatelemetryApiService) GetNiatelemetryAaaLdapProviderDetailsByMoidExecute(r ApiGetNiatelemetryAaaLdapProviderDetailsByMoidRequest) (*NiatelemetryAaaLdapProviderDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -260,8 +752,8 @@ func (r ApiGetNiatelemetryAaaLdapProviderDetailsListRequest) Execute() (*Niatele
 /*
 GetNiatelemetryAaaLdapProviderDetailsList Read a 'niatelemetry.AaaLdapProviderDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryAaaLdapProviderDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryAaaLdapProviderDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryAaaLdapProviderDetailsList(ctx context.Context) ApiGetNiatelemetryAaaLdapProviderDetailsListRequest {
 	return ApiGetNiatelemetryAaaLdapProviderDetailsListRequest{
@@ -271,7 +763,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryAaaLdapProviderDetailsList(ctx c
 }
 
 // Execute executes the request
-//  @return NiatelemetryAaaLdapProviderDetailsResponse
+//
+//	@return NiatelemetryAaaLdapProviderDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryAaaLdapProviderDetailsListExecute(r ApiGetNiatelemetryAaaLdapProviderDetailsListRequest) (*NiatelemetryAaaLdapProviderDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -438,9 +931,9 @@ func (r ApiGetNiatelemetryAaaRadiusProviderDetailsByMoidRequest) Execute() (*Nia
 /*
 GetNiatelemetryAaaRadiusProviderDetailsByMoid Read a 'niatelemetry.AaaRadiusProviderDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryAaaRadiusProviderDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryAaaRadiusProviderDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryAaaRadiusProviderDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryAaaRadiusProviderDetailsByMoidRequest {
 	return ApiGetNiatelemetryAaaRadiusProviderDetailsByMoidRequest{
@@ -451,7 +944,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryAaaRadiusProviderDetailsByMoid(c
 }
 
 // Execute executes the request
-//  @return NiatelemetryAaaRadiusProviderDetails
+//
+//	@return NiatelemetryAaaRadiusProviderDetails
 func (a *NiatelemetryApiService) GetNiatelemetryAaaRadiusProviderDetailsByMoidExecute(r ApiGetNiatelemetryAaaRadiusProviderDetailsByMoidRequest) (*NiatelemetryAaaRadiusProviderDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -662,8 +1156,8 @@ func (r ApiGetNiatelemetryAaaRadiusProviderDetailsListRequest) Execute() (*Niate
 /*
 GetNiatelemetryAaaRadiusProviderDetailsList Read a 'niatelemetry.AaaRadiusProviderDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryAaaRadiusProviderDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryAaaRadiusProviderDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryAaaRadiusProviderDetailsList(ctx context.Context) ApiGetNiatelemetryAaaRadiusProviderDetailsListRequest {
 	return ApiGetNiatelemetryAaaRadiusProviderDetailsListRequest{
@@ -673,7 +1167,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryAaaRadiusProviderDetailsList(ctx
 }
 
 // Execute executes the request
-//  @return NiatelemetryAaaRadiusProviderDetailsResponse
+//
+//	@return NiatelemetryAaaRadiusProviderDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryAaaRadiusProviderDetailsListExecute(r ApiGetNiatelemetryAaaRadiusProviderDetailsListRequest) (*NiatelemetryAaaRadiusProviderDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -840,9 +1335,9 @@ func (r ApiGetNiatelemetryAaaTacacsProviderDetailsByMoidRequest) Execute() (*Nia
 /*
 GetNiatelemetryAaaTacacsProviderDetailsByMoid Read a 'niatelemetry.AaaTacacsProviderDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryAaaTacacsProviderDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryAaaTacacsProviderDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryAaaTacacsProviderDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryAaaTacacsProviderDetailsByMoidRequest {
 	return ApiGetNiatelemetryAaaTacacsProviderDetailsByMoidRequest{
@@ -853,7 +1348,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryAaaTacacsProviderDetailsByMoid(c
 }
 
 // Execute executes the request
-//  @return NiatelemetryAaaTacacsProviderDetails
+//
+//	@return NiatelemetryAaaTacacsProviderDetails
 func (a *NiatelemetryApiService) GetNiatelemetryAaaTacacsProviderDetailsByMoidExecute(r ApiGetNiatelemetryAaaTacacsProviderDetailsByMoidRequest) (*NiatelemetryAaaTacacsProviderDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1064,8 +1560,8 @@ func (r ApiGetNiatelemetryAaaTacacsProviderDetailsListRequest) Execute() (*Niate
 /*
 GetNiatelemetryAaaTacacsProviderDetailsList Read a 'niatelemetry.AaaTacacsProviderDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryAaaTacacsProviderDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryAaaTacacsProviderDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryAaaTacacsProviderDetailsList(ctx context.Context) ApiGetNiatelemetryAaaTacacsProviderDetailsListRequest {
 	return ApiGetNiatelemetryAaaTacacsProviderDetailsListRequest{
@@ -1075,7 +1571,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryAaaTacacsProviderDetailsList(ctx
 }
 
 // Execute executes the request
-//  @return NiatelemetryAaaTacacsProviderDetailsResponse
+//
+//	@return NiatelemetryAaaTacacsProviderDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryAaaTacacsProviderDetailsListExecute(r ApiGetNiatelemetryAaaTacacsProviderDetailsListRequest) (*NiatelemetryAaaTacacsProviderDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1242,9 +1739,9 @@ func (r ApiGetNiatelemetryApicAppPluginDetailsByMoidRequest) Execute() (*Niatele
 /*
 GetNiatelemetryApicAppPluginDetailsByMoid Read a 'niatelemetry.ApicAppPluginDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryApicAppPluginDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryApicAppPluginDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicAppPluginDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryApicAppPluginDetailsByMoidRequest {
 	return ApiGetNiatelemetryApicAppPluginDetailsByMoidRequest{
@@ -1255,7 +1752,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicAppPluginDetailsByMoid(ctx c
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicAppPluginDetails
+//
+//	@return NiatelemetryApicAppPluginDetails
 func (a *NiatelemetryApiService) GetNiatelemetryApicAppPluginDetailsByMoidExecute(r ApiGetNiatelemetryApicAppPluginDetailsByMoidRequest) (*NiatelemetryApicAppPluginDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1466,8 +1964,8 @@ func (r ApiGetNiatelemetryApicAppPluginDetailsListRequest) Execute() (*Niateleme
 /*
 GetNiatelemetryApicAppPluginDetailsList Read a 'niatelemetry.ApicAppPluginDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryApicAppPluginDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryApicAppPluginDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicAppPluginDetailsList(ctx context.Context) ApiGetNiatelemetryApicAppPluginDetailsListRequest {
 	return ApiGetNiatelemetryApicAppPluginDetailsListRequest{
@@ -1477,7 +1975,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicAppPluginDetailsList(ctx con
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicAppPluginDetailsResponse
+//
+//	@return NiatelemetryApicAppPluginDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryApicAppPluginDetailsListExecute(r ApiGetNiatelemetryApicAppPluginDetailsListRequest) (*NiatelemetryApicAppPluginDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1644,9 +2143,9 @@ func (r ApiGetNiatelemetryApicCoreFileDetailsByMoidRequest) Execute() (*Niatelem
 /*
 GetNiatelemetryApicCoreFileDetailsByMoid Read a 'niatelemetry.ApicCoreFileDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryApicCoreFileDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryApicCoreFileDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicCoreFileDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryApicCoreFileDetailsByMoidRequest {
 	return ApiGetNiatelemetryApicCoreFileDetailsByMoidRequest{
@@ -1657,7 +2156,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicCoreFileDetailsByMoid(ctx co
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicCoreFileDetails
+//
+//	@return NiatelemetryApicCoreFileDetails
 func (a *NiatelemetryApiService) GetNiatelemetryApicCoreFileDetailsByMoidExecute(r ApiGetNiatelemetryApicCoreFileDetailsByMoidRequest) (*NiatelemetryApicCoreFileDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1868,8 +2368,8 @@ func (r ApiGetNiatelemetryApicCoreFileDetailsListRequest) Execute() (*Niatelemet
 /*
 GetNiatelemetryApicCoreFileDetailsList Read a 'niatelemetry.ApicCoreFileDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryApicCoreFileDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryApicCoreFileDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicCoreFileDetailsList(ctx context.Context) ApiGetNiatelemetryApicCoreFileDetailsListRequest {
 	return ApiGetNiatelemetryApicCoreFileDetailsListRequest{
@@ -1879,7 +2379,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicCoreFileDetailsList(ctx cont
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicCoreFileDetailsResponse
+//
+//	@return NiatelemetryApicCoreFileDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryApicCoreFileDetailsListExecute(r ApiGetNiatelemetryApicCoreFileDetailsListRequest) (*NiatelemetryApicCoreFileDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2046,9 +2547,9 @@ func (r ApiGetNiatelemetryApicDbgexpRsExportDestByMoidRequest) Execute() (*Niate
 /*
 GetNiatelemetryApicDbgexpRsExportDestByMoid Read a 'niatelemetry.ApicDbgexpRsExportDest' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryApicDbgexpRsExportDestByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryApicDbgexpRsExportDestByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsExportDestByMoid(ctx context.Context, moid string) ApiGetNiatelemetryApicDbgexpRsExportDestByMoidRequest {
 	return ApiGetNiatelemetryApicDbgexpRsExportDestByMoidRequest{
@@ -2059,7 +2560,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsExportDestByMoid(ctx
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicDbgexpRsExportDest
+//
+//	@return NiatelemetryApicDbgexpRsExportDest
 func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsExportDestByMoidExecute(r ApiGetNiatelemetryApicDbgexpRsExportDestByMoidRequest) (*NiatelemetryApicDbgexpRsExportDest, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2270,8 +2772,8 @@ func (r ApiGetNiatelemetryApicDbgexpRsExportDestListRequest) Execute() (*Niatele
 /*
 GetNiatelemetryApicDbgexpRsExportDestList Read a 'niatelemetry.ApicDbgexpRsExportDest' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryApicDbgexpRsExportDestListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryApicDbgexpRsExportDestListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsExportDestList(ctx context.Context) ApiGetNiatelemetryApicDbgexpRsExportDestListRequest {
 	return ApiGetNiatelemetryApicDbgexpRsExportDestListRequest{
@@ -2281,7 +2783,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsExportDestList(ctx c
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicDbgexpRsExportDestResponse
+//
+//	@return NiatelemetryApicDbgexpRsExportDestResponse
 func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsExportDestListExecute(r ApiGetNiatelemetryApicDbgexpRsExportDestListRequest) (*NiatelemetryApicDbgexpRsExportDestResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2448,9 +2951,9 @@ func (r ApiGetNiatelemetryApicDbgexpRsTsSchedulerByMoidRequest) Execute() (*Niat
 /*
 GetNiatelemetryApicDbgexpRsTsSchedulerByMoid Read a 'niatelemetry.ApicDbgexpRsTsScheduler' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryApicDbgexpRsTsSchedulerByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryApicDbgexpRsTsSchedulerByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsTsSchedulerByMoid(ctx context.Context, moid string) ApiGetNiatelemetryApicDbgexpRsTsSchedulerByMoidRequest {
 	return ApiGetNiatelemetryApicDbgexpRsTsSchedulerByMoidRequest{
@@ -2461,7 +2964,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsTsSchedulerByMoid(ct
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicDbgexpRsTsScheduler
+//
+//	@return NiatelemetryApicDbgexpRsTsScheduler
 func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsTsSchedulerByMoidExecute(r ApiGetNiatelemetryApicDbgexpRsTsSchedulerByMoidRequest) (*NiatelemetryApicDbgexpRsTsScheduler, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2672,8 +3176,8 @@ func (r ApiGetNiatelemetryApicDbgexpRsTsSchedulerListRequest) Execute() (*Niatel
 /*
 GetNiatelemetryApicDbgexpRsTsSchedulerList Read a 'niatelemetry.ApicDbgexpRsTsScheduler' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryApicDbgexpRsTsSchedulerListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryApicDbgexpRsTsSchedulerListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsTsSchedulerList(ctx context.Context) ApiGetNiatelemetryApicDbgexpRsTsSchedulerListRequest {
 	return ApiGetNiatelemetryApicDbgexpRsTsSchedulerListRequest{
@@ -2683,7 +3187,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsTsSchedulerList(ctx 
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicDbgexpRsTsSchedulerResponse
+//
+//	@return NiatelemetryApicDbgexpRsTsSchedulerResponse
 func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsTsSchedulerListExecute(r ApiGetNiatelemetryApicDbgexpRsTsSchedulerListRequest) (*NiatelemetryApicDbgexpRsTsSchedulerResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2850,9 +3355,9 @@ func (r ApiGetNiatelemetryApicFanDetailsByMoidRequest) Execute() (*NiatelemetryA
 /*
 GetNiatelemetryApicFanDetailsByMoid Read a 'niatelemetry.ApicFanDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryApicFanDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryApicFanDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicFanDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryApicFanDetailsByMoidRequest {
 	return ApiGetNiatelemetryApicFanDetailsByMoidRequest{
@@ -2863,7 +3368,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicFanDetailsByMoid(ctx context
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicFanDetails
+//
+//	@return NiatelemetryApicFanDetails
 func (a *NiatelemetryApiService) GetNiatelemetryApicFanDetailsByMoidExecute(r ApiGetNiatelemetryApicFanDetailsByMoidRequest) (*NiatelemetryApicFanDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3074,8 +3580,8 @@ func (r ApiGetNiatelemetryApicFanDetailsListRequest) Execute() (*NiatelemetryApi
 /*
 GetNiatelemetryApicFanDetailsList Read a 'niatelemetry.ApicFanDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryApicFanDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryApicFanDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicFanDetailsList(ctx context.Context) ApiGetNiatelemetryApicFanDetailsListRequest {
 	return ApiGetNiatelemetryApicFanDetailsListRequest{
@@ -3085,7 +3591,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicFanDetailsList(ctx context.C
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicFanDetailsResponse
+//
+//	@return NiatelemetryApicFanDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryApicFanDetailsListExecute(r ApiGetNiatelemetryApicFanDetailsListRequest) (*NiatelemetryApicFanDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3252,9 +3759,9 @@ func (r ApiGetNiatelemetryApicFexDetailsByMoidRequest) Execute() (*NiatelemetryA
 /*
 GetNiatelemetryApicFexDetailsByMoid Read a 'niatelemetry.ApicFexDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryApicFexDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryApicFexDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicFexDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryApicFexDetailsByMoidRequest {
 	return ApiGetNiatelemetryApicFexDetailsByMoidRequest{
@@ -3265,7 +3772,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicFexDetailsByMoid(ctx context
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicFexDetails
+//
+//	@return NiatelemetryApicFexDetails
 func (a *NiatelemetryApiService) GetNiatelemetryApicFexDetailsByMoidExecute(r ApiGetNiatelemetryApicFexDetailsByMoidRequest) (*NiatelemetryApicFexDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3476,8 +3984,8 @@ func (r ApiGetNiatelemetryApicFexDetailsListRequest) Execute() (*NiatelemetryApi
 /*
 GetNiatelemetryApicFexDetailsList Read a 'niatelemetry.ApicFexDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryApicFexDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryApicFexDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicFexDetailsList(ctx context.Context) ApiGetNiatelemetryApicFexDetailsListRequest {
 	return ApiGetNiatelemetryApicFexDetailsListRequest{
@@ -3487,7 +3995,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicFexDetailsList(ctx context.C
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicFexDetailsResponse
+//
+//	@return NiatelemetryApicFexDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryApicFexDetailsListExecute(r ApiGetNiatelemetryApicFexDetailsListRequest) (*NiatelemetryApicFexDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3654,9 +4163,9 @@ func (r ApiGetNiatelemetryApicFlashDetailsByMoidRequest) Execute() (*Niatelemetr
 /*
 GetNiatelemetryApicFlashDetailsByMoid Read a 'niatelemetry.ApicFlashDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryApicFlashDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryApicFlashDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicFlashDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryApicFlashDetailsByMoidRequest {
 	return ApiGetNiatelemetryApicFlashDetailsByMoidRequest{
@@ -3667,7 +4176,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicFlashDetailsByMoid(ctx conte
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicFlashDetails
+//
+//	@return NiatelemetryApicFlashDetails
 func (a *NiatelemetryApiService) GetNiatelemetryApicFlashDetailsByMoidExecute(r ApiGetNiatelemetryApicFlashDetailsByMoidRequest) (*NiatelemetryApicFlashDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3878,8 +4388,8 @@ func (r ApiGetNiatelemetryApicFlashDetailsListRequest) Execute() (*NiatelemetryA
 /*
 GetNiatelemetryApicFlashDetailsList Read a 'niatelemetry.ApicFlashDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryApicFlashDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryApicFlashDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicFlashDetailsList(ctx context.Context) ApiGetNiatelemetryApicFlashDetailsListRequest {
 	return ApiGetNiatelemetryApicFlashDetailsListRequest{
@@ -3889,7 +4399,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicFlashDetailsList(ctx context
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicFlashDetailsResponse
+//
+//	@return NiatelemetryApicFlashDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryApicFlashDetailsListExecute(r ApiGetNiatelemetryApicFlashDetailsListRequest) (*NiatelemetryApicFlashDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4056,9 +4567,9 @@ func (r ApiGetNiatelemetryApicNtpAuthByMoidRequest) Execute() (*NiatelemetryApic
 /*
 GetNiatelemetryApicNtpAuthByMoid Read a 'niatelemetry.ApicNtpAuth' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryApicNtpAuthByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryApicNtpAuthByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicNtpAuthByMoid(ctx context.Context, moid string) ApiGetNiatelemetryApicNtpAuthByMoidRequest {
 	return ApiGetNiatelemetryApicNtpAuthByMoidRequest{
@@ -4069,7 +4580,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicNtpAuthByMoid(ctx context.Co
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicNtpAuth
+//
+//	@return NiatelemetryApicNtpAuth
 func (a *NiatelemetryApiService) GetNiatelemetryApicNtpAuthByMoidExecute(r ApiGetNiatelemetryApicNtpAuthByMoidRequest) (*NiatelemetryApicNtpAuth, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4280,8 +4792,8 @@ func (r ApiGetNiatelemetryApicNtpAuthListRequest) Execute() (*NiatelemetryApicNt
 /*
 GetNiatelemetryApicNtpAuthList Read a 'niatelemetry.ApicNtpAuth' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryApicNtpAuthListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryApicNtpAuthListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicNtpAuthList(ctx context.Context) ApiGetNiatelemetryApicNtpAuthListRequest {
 	return ApiGetNiatelemetryApicNtpAuthListRequest{
@@ -4291,7 +4803,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicNtpAuthList(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicNtpAuthResponse
+//
+//	@return NiatelemetryApicNtpAuthResponse
 func (a *NiatelemetryApiService) GetNiatelemetryApicNtpAuthListExecute(r ApiGetNiatelemetryApicNtpAuthListRequest) (*NiatelemetryApicNtpAuthResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4458,9 +4971,9 @@ func (r ApiGetNiatelemetryApicPerformanceDataByMoidRequest) Execute() (*Niatelem
 /*
 GetNiatelemetryApicPerformanceDataByMoid Read a 'niatelemetry.ApicPerformanceData' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryApicPerformanceDataByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryApicPerformanceDataByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicPerformanceDataByMoid(ctx context.Context, moid string) ApiGetNiatelemetryApicPerformanceDataByMoidRequest {
 	return ApiGetNiatelemetryApicPerformanceDataByMoidRequest{
@@ -4471,7 +4984,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicPerformanceDataByMoid(ctx co
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicPerformanceData
+//
+//	@return NiatelemetryApicPerformanceData
 func (a *NiatelemetryApiService) GetNiatelemetryApicPerformanceDataByMoidExecute(r ApiGetNiatelemetryApicPerformanceDataByMoidRequest) (*NiatelemetryApicPerformanceData, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4682,8 +5196,8 @@ func (r ApiGetNiatelemetryApicPerformanceDataListRequest) Execute() (*Niatelemet
 /*
 GetNiatelemetryApicPerformanceDataList Read a 'niatelemetry.ApicPerformanceData' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryApicPerformanceDataListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryApicPerformanceDataListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicPerformanceDataList(ctx context.Context) ApiGetNiatelemetryApicPerformanceDataListRequest {
 	return ApiGetNiatelemetryApicPerformanceDataListRequest{
@@ -4693,7 +5207,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicPerformanceDataList(ctx cont
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicPerformanceDataResponse
+//
+//	@return NiatelemetryApicPerformanceDataResponse
 func (a *NiatelemetryApiService) GetNiatelemetryApicPerformanceDataListExecute(r ApiGetNiatelemetryApicPerformanceDataListRequest) (*NiatelemetryApicPerformanceDataResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4860,9 +5375,9 @@ func (r ApiGetNiatelemetryApicPodDataByMoidRequest) Execute() (*NiatelemetryApic
 /*
 GetNiatelemetryApicPodDataByMoid Read a 'niatelemetry.ApicPodData' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryApicPodDataByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryApicPodDataByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicPodDataByMoid(ctx context.Context, moid string) ApiGetNiatelemetryApicPodDataByMoidRequest {
 	return ApiGetNiatelemetryApicPodDataByMoidRequest{
@@ -4873,7 +5388,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicPodDataByMoid(ctx context.Co
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicPodData
+//
+//	@return NiatelemetryApicPodData
 func (a *NiatelemetryApiService) GetNiatelemetryApicPodDataByMoidExecute(r ApiGetNiatelemetryApicPodDataByMoidRequest) (*NiatelemetryApicPodData, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5084,8 +5600,8 @@ func (r ApiGetNiatelemetryApicPodDataListRequest) Execute() (*NiatelemetryApicPo
 /*
 GetNiatelemetryApicPodDataList Read a 'niatelemetry.ApicPodData' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryApicPodDataListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryApicPodDataListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicPodDataList(ctx context.Context) ApiGetNiatelemetryApicPodDataListRequest {
 	return ApiGetNiatelemetryApicPodDataListRequest{
@@ -5095,7 +5611,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicPodDataList(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicPodDataResponse
+//
+//	@return NiatelemetryApicPodDataResponse
 func (a *NiatelemetryApiService) GetNiatelemetryApicPodDataListExecute(r ApiGetNiatelemetryApicPodDataListRequest) (*NiatelemetryApicPodDataResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5262,9 +5779,9 @@ func (r ApiGetNiatelemetryApicPsuDetailsByMoidRequest) Execute() (*NiatelemetryA
 /*
 GetNiatelemetryApicPsuDetailsByMoid Read a 'niatelemetry.ApicPsuDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryApicPsuDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryApicPsuDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicPsuDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryApicPsuDetailsByMoidRequest {
 	return ApiGetNiatelemetryApicPsuDetailsByMoidRequest{
@@ -5275,7 +5792,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicPsuDetailsByMoid(ctx context
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicPsuDetails
+//
+//	@return NiatelemetryApicPsuDetails
 func (a *NiatelemetryApiService) GetNiatelemetryApicPsuDetailsByMoidExecute(r ApiGetNiatelemetryApicPsuDetailsByMoidRequest) (*NiatelemetryApicPsuDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5486,8 +6004,8 @@ func (r ApiGetNiatelemetryApicPsuDetailsListRequest) Execute() (*NiatelemetryApi
 /*
 GetNiatelemetryApicPsuDetailsList Read a 'niatelemetry.ApicPsuDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryApicPsuDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryApicPsuDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicPsuDetailsList(ctx context.Context) ApiGetNiatelemetryApicPsuDetailsListRequest {
 	return ApiGetNiatelemetryApicPsuDetailsListRequest{
@@ -5497,7 +6015,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicPsuDetailsList(ctx context.C
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicPsuDetailsResponse
+//
+//	@return NiatelemetryApicPsuDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryApicPsuDetailsListExecute(r ApiGetNiatelemetryApicPsuDetailsListRequest) (*NiatelemetryApicPsuDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5664,9 +6183,9 @@ func (r ApiGetNiatelemetryApicRealmDetailsByMoidRequest) Execute() (*Niatelemetr
 /*
 GetNiatelemetryApicRealmDetailsByMoid Read a 'niatelemetry.ApicRealmDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryApicRealmDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryApicRealmDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicRealmDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryApicRealmDetailsByMoidRequest {
 	return ApiGetNiatelemetryApicRealmDetailsByMoidRequest{
@@ -5677,7 +6196,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicRealmDetailsByMoid(ctx conte
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicRealmDetails
+//
+//	@return NiatelemetryApicRealmDetails
 func (a *NiatelemetryApiService) GetNiatelemetryApicRealmDetailsByMoidExecute(r ApiGetNiatelemetryApicRealmDetailsByMoidRequest) (*NiatelemetryApicRealmDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5888,8 +6408,8 @@ func (r ApiGetNiatelemetryApicRealmDetailsListRequest) Execute() (*NiatelemetryA
 /*
 GetNiatelemetryApicRealmDetailsList Read a 'niatelemetry.ApicRealmDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryApicRealmDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryApicRealmDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicRealmDetailsList(ctx context.Context) ApiGetNiatelemetryApicRealmDetailsListRequest {
 	return ApiGetNiatelemetryApicRealmDetailsListRequest{
@@ -5899,7 +6419,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicRealmDetailsList(ctx context
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicRealmDetailsResponse
+//
+//	@return NiatelemetryApicRealmDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryApicRealmDetailsListExecute(r ApiGetNiatelemetryApicRealmDetailsListRequest) (*NiatelemetryApicRealmDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6066,9 +6587,9 @@ func (r ApiGetNiatelemetryApicSnmpClientGrpDetailsByMoidRequest) Execute() (*Nia
 /*
 GetNiatelemetryApicSnmpClientGrpDetailsByMoid Read a 'niatelemetry.ApicSnmpClientGrpDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryApicSnmpClientGrpDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryApicSnmpClientGrpDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpClientGrpDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryApicSnmpClientGrpDetailsByMoidRequest {
 	return ApiGetNiatelemetryApicSnmpClientGrpDetailsByMoidRequest{
@@ -6079,7 +6600,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpClientGrpDetailsByMoid(c
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicSnmpClientGrpDetails
+//
+//	@return NiatelemetryApicSnmpClientGrpDetails
 func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpClientGrpDetailsByMoidExecute(r ApiGetNiatelemetryApicSnmpClientGrpDetailsByMoidRequest) (*NiatelemetryApicSnmpClientGrpDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6290,8 +6812,8 @@ func (r ApiGetNiatelemetryApicSnmpClientGrpDetailsListRequest) Execute() (*Niate
 /*
 GetNiatelemetryApicSnmpClientGrpDetailsList Read a 'niatelemetry.ApicSnmpClientGrpDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryApicSnmpClientGrpDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryApicSnmpClientGrpDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpClientGrpDetailsList(ctx context.Context) ApiGetNiatelemetryApicSnmpClientGrpDetailsListRequest {
 	return ApiGetNiatelemetryApicSnmpClientGrpDetailsListRequest{
@@ -6301,7 +6823,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpClientGrpDetailsList(ctx
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicSnmpClientGrpDetailsResponse
+//
+//	@return NiatelemetryApicSnmpClientGrpDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpClientGrpDetailsListExecute(r ApiGetNiatelemetryApicSnmpClientGrpDetailsListRequest) (*NiatelemetryApicSnmpClientGrpDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6468,9 +6991,9 @@ func (r ApiGetNiatelemetryApicSnmpCommunityAccessDetailsByMoidRequest) Execute()
 /*
 GetNiatelemetryApicSnmpCommunityAccessDetailsByMoid Read a 'niatelemetry.ApicSnmpCommunityAccessDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryApicSnmpCommunityAccessDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryApicSnmpCommunityAccessDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityAccessDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryApicSnmpCommunityAccessDetailsByMoidRequest {
 	return ApiGetNiatelemetryApicSnmpCommunityAccessDetailsByMoidRequest{
@@ -6481,7 +7004,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityAccessDetailsBy
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicSnmpCommunityAccessDetails
+//
+//	@return NiatelemetryApicSnmpCommunityAccessDetails
 func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityAccessDetailsByMoidExecute(r ApiGetNiatelemetryApicSnmpCommunityAccessDetailsByMoidRequest) (*NiatelemetryApicSnmpCommunityAccessDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6692,8 +7216,8 @@ func (r ApiGetNiatelemetryApicSnmpCommunityAccessDetailsListRequest) Execute() (
 /*
 GetNiatelemetryApicSnmpCommunityAccessDetailsList Read a 'niatelemetry.ApicSnmpCommunityAccessDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryApicSnmpCommunityAccessDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryApicSnmpCommunityAccessDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityAccessDetailsList(ctx context.Context) ApiGetNiatelemetryApicSnmpCommunityAccessDetailsListRequest {
 	return ApiGetNiatelemetryApicSnmpCommunityAccessDetailsListRequest{
@@ -6703,7 +7227,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityAccessDetailsLi
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicSnmpCommunityAccessDetailsResponse
+//
+//	@return NiatelemetryApicSnmpCommunityAccessDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityAccessDetailsListExecute(r ApiGetNiatelemetryApicSnmpCommunityAccessDetailsListRequest) (*NiatelemetryApicSnmpCommunityAccessDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6870,9 +7395,9 @@ func (r ApiGetNiatelemetryApicSnmpCommunityDetailsByMoidRequest) Execute() (*Nia
 /*
 GetNiatelemetryApicSnmpCommunityDetailsByMoid Read a 'niatelemetry.ApicSnmpCommunityDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryApicSnmpCommunityDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryApicSnmpCommunityDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryApicSnmpCommunityDetailsByMoidRequest {
 	return ApiGetNiatelemetryApicSnmpCommunityDetailsByMoidRequest{
@@ -6883,7 +7408,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityDetailsByMoid(c
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicSnmpCommunityDetails
+//
+//	@return NiatelemetryApicSnmpCommunityDetails
 func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityDetailsByMoidExecute(r ApiGetNiatelemetryApicSnmpCommunityDetailsByMoidRequest) (*NiatelemetryApicSnmpCommunityDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7094,8 +7620,8 @@ func (r ApiGetNiatelemetryApicSnmpCommunityDetailsListRequest) Execute() (*Niate
 /*
 GetNiatelemetryApicSnmpCommunityDetailsList Read a 'niatelemetry.ApicSnmpCommunityDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryApicSnmpCommunityDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryApicSnmpCommunityDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityDetailsList(ctx context.Context) ApiGetNiatelemetryApicSnmpCommunityDetailsListRequest {
 	return ApiGetNiatelemetryApicSnmpCommunityDetailsListRequest{
@@ -7105,7 +7631,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityDetailsList(ctx
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicSnmpCommunityDetailsResponse
+//
+//	@return NiatelemetryApicSnmpCommunityDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityDetailsListExecute(r ApiGetNiatelemetryApicSnmpCommunityDetailsListRequest) (*NiatelemetryApicSnmpCommunityDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7272,9 +7799,9 @@ func (r ApiGetNiatelemetryApicSnmpTrapDetailsByMoidRequest) Execute() (*Niatelem
 /*
 GetNiatelemetryApicSnmpTrapDetailsByMoid Read a 'niatelemetry.ApicSnmpTrapDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryApicSnmpTrapDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryApicSnmpTrapDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryApicSnmpTrapDetailsByMoidRequest {
 	return ApiGetNiatelemetryApicSnmpTrapDetailsByMoidRequest{
@@ -7285,7 +7812,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapDetailsByMoid(ctx co
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicSnmpTrapDetails
+//
+//	@return NiatelemetryApicSnmpTrapDetails
 func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapDetailsByMoidExecute(r ApiGetNiatelemetryApicSnmpTrapDetailsByMoidRequest) (*NiatelemetryApicSnmpTrapDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7496,8 +8024,8 @@ func (r ApiGetNiatelemetryApicSnmpTrapDetailsListRequest) Execute() (*Niatelemet
 /*
 GetNiatelemetryApicSnmpTrapDetailsList Read a 'niatelemetry.ApicSnmpTrapDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryApicSnmpTrapDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryApicSnmpTrapDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapDetailsList(ctx context.Context) ApiGetNiatelemetryApicSnmpTrapDetailsListRequest {
 	return ApiGetNiatelemetryApicSnmpTrapDetailsListRequest{
@@ -7507,7 +8035,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapDetailsList(ctx cont
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicSnmpTrapDetailsResponse
+//
+//	@return NiatelemetryApicSnmpTrapDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapDetailsListExecute(r ApiGetNiatelemetryApicSnmpTrapDetailsListRequest) (*NiatelemetryApicSnmpTrapDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7674,9 +8203,9 @@ func (r ApiGetNiatelemetryApicSnmpTrapFwdServerDetailsByMoidRequest) Execute() (
 /*
 GetNiatelemetryApicSnmpTrapFwdServerDetailsByMoid Read a 'niatelemetry.ApicSnmpTrapFwdServerDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryApicSnmpTrapFwdServerDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryApicSnmpTrapFwdServerDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapFwdServerDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryApicSnmpTrapFwdServerDetailsByMoidRequest {
 	return ApiGetNiatelemetryApicSnmpTrapFwdServerDetailsByMoidRequest{
@@ -7687,7 +8216,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapFwdServerDetailsByMo
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicSnmpTrapFwdServerDetails
+//
+//	@return NiatelemetryApicSnmpTrapFwdServerDetails
 func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapFwdServerDetailsByMoidExecute(r ApiGetNiatelemetryApicSnmpTrapFwdServerDetailsByMoidRequest) (*NiatelemetryApicSnmpTrapFwdServerDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7898,8 +8428,8 @@ func (r ApiGetNiatelemetryApicSnmpTrapFwdServerDetailsListRequest) Execute() (*N
 /*
 GetNiatelemetryApicSnmpTrapFwdServerDetailsList Read a 'niatelemetry.ApicSnmpTrapFwdServerDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryApicSnmpTrapFwdServerDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryApicSnmpTrapFwdServerDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapFwdServerDetailsList(ctx context.Context) ApiGetNiatelemetryApicSnmpTrapFwdServerDetailsListRequest {
 	return ApiGetNiatelemetryApicSnmpTrapFwdServerDetailsListRequest{
@@ -7909,7 +8439,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapFwdServerDetailsList
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicSnmpTrapFwdServerDetailsResponse
+//
+//	@return NiatelemetryApicSnmpTrapFwdServerDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapFwdServerDetailsListExecute(r ApiGetNiatelemetryApicSnmpTrapFwdServerDetailsListRequest) (*NiatelemetryApicSnmpTrapFwdServerDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8076,9 +8607,9 @@ func (r ApiGetNiatelemetryApicSnmpVersionThreeDetailsByMoidRequest) Execute() (*
 /*
 GetNiatelemetryApicSnmpVersionThreeDetailsByMoid Read a 'niatelemetry.ApicSnmpVersionThreeDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryApicSnmpVersionThreeDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryApicSnmpVersionThreeDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpVersionThreeDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryApicSnmpVersionThreeDetailsByMoidRequest {
 	return ApiGetNiatelemetryApicSnmpVersionThreeDetailsByMoidRequest{
@@ -8089,7 +8620,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpVersionThreeDetailsByMoi
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicSnmpVersionThreeDetails
+//
+//	@return NiatelemetryApicSnmpVersionThreeDetails
 func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpVersionThreeDetailsByMoidExecute(r ApiGetNiatelemetryApicSnmpVersionThreeDetailsByMoidRequest) (*NiatelemetryApicSnmpVersionThreeDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8300,8 +8832,8 @@ func (r ApiGetNiatelemetryApicSnmpVersionThreeDetailsListRequest) Execute() (*Ni
 /*
 GetNiatelemetryApicSnmpVersionThreeDetailsList Read a 'niatelemetry.ApicSnmpVersionThreeDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryApicSnmpVersionThreeDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryApicSnmpVersionThreeDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpVersionThreeDetailsList(ctx context.Context) ApiGetNiatelemetryApicSnmpVersionThreeDetailsListRequest {
 	return ApiGetNiatelemetryApicSnmpVersionThreeDetailsListRequest{
@@ -8311,7 +8843,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpVersionThreeDetailsList(
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicSnmpVersionThreeDetailsResponse
+//
+//	@return NiatelemetryApicSnmpVersionThreeDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpVersionThreeDetailsListExecute(r ApiGetNiatelemetryApicSnmpVersionThreeDetailsListRequest) (*NiatelemetryApicSnmpVersionThreeDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8478,9 +9011,9 @@ func (r ApiGetNiatelemetryApicSysLogGrpByMoidRequest) Execute() (*NiatelemetryAp
 /*
 GetNiatelemetryApicSysLogGrpByMoid Read a 'niatelemetry.ApicSysLogGrp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryApicSysLogGrpByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryApicSysLogGrpByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogGrpByMoid(ctx context.Context, moid string) ApiGetNiatelemetryApicSysLogGrpByMoidRequest {
 	return ApiGetNiatelemetryApicSysLogGrpByMoidRequest{
@@ -8491,7 +9024,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogGrpByMoid(ctx context.
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicSysLogGrp
+//
+//	@return NiatelemetryApicSysLogGrp
 func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogGrpByMoidExecute(r ApiGetNiatelemetryApicSysLogGrpByMoidRequest) (*NiatelemetryApicSysLogGrp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8702,8 +9236,8 @@ func (r ApiGetNiatelemetryApicSysLogGrpListRequest) Execute() (*NiatelemetryApic
 /*
 GetNiatelemetryApicSysLogGrpList Read a 'niatelemetry.ApicSysLogGrp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryApicSysLogGrpListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryApicSysLogGrpListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogGrpList(ctx context.Context) ApiGetNiatelemetryApicSysLogGrpListRequest {
 	return ApiGetNiatelemetryApicSysLogGrpListRequest{
@@ -8713,7 +9247,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogGrpList(ctx context.Co
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicSysLogGrpResponse
+//
+//	@return NiatelemetryApicSysLogGrpResponse
 func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogGrpListExecute(r ApiGetNiatelemetryApicSysLogGrpListRequest) (*NiatelemetryApicSysLogGrpResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8880,9 +9415,9 @@ func (r ApiGetNiatelemetryApicSysLogSrcByMoidRequest) Execute() (*NiatelemetryAp
 /*
 GetNiatelemetryApicSysLogSrcByMoid Read a 'niatelemetry.ApicSysLogSrc' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryApicSysLogSrcByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryApicSysLogSrcByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogSrcByMoid(ctx context.Context, moid string) ApiGetNiatelemetryApicSysLogSrcByMoidRequest {
 	return ApiGetNiatelemetryApicSysLogSrcByMoidRequest{
@@ -8893,7 +9428,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogSrcByMoid(ctx context.
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicSysLogSrc
+//
+//	@return NiatelemetryApicSysLogSrc
 func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogSrcByMoidExecute(r ApiGetNiatelemetryApicSysLogSrcByMoidRequest) (*NiatelemetryApicSysLogSrc, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9104,8 +9640,8 @@ func (r ApiGetNiatelemetryApicSysLogSrcListRequest) Execute() (*NiatelemetryApic
 /*
 GetNiatelemetryApicSysLogSrcList Read a 'niatelemetry.ApicSysLogSrc' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryApicSysLogSrcListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryApicSysLogSrcListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogSrcList(ctx context.Context) ApiGetNiatelemetryApicSysLogSrcListRequest {
 	return ApiGetNiatelemetryApicSysLogSrcListRequest{
@@ -9115,7 +9651,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogSrcList(ctx context.Co
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicSysLogSrcResponse
+//
+//	@return NiatelemetryApicSysLogSrcResponse
 func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogSrcListExecute(r ApiGetNiatelemetryApicSysLogSrcListRequest) (*NiatelemetryApicSysLogSrcResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9282,9 +9819,9 @@ func (r ApiGetNiatelemetryApicTransceiverDetailsByMoidRequest) Execute() (*Niate
 /*
 GetNiatelemetryApicTransceiverDetailsByMoid Read a 'niatelemetry.ApicTransceiverDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryApicTransceiverDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryApicTransceiverDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicTransceiverDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryApicTransceiverDetailsByMoidRequest {
 	return ApiGetNiatelemetryApicTransceiverDetailsByMoidRequest{
@@ -9295,7 +9832,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicTransceiverDetailsByMoid(ctx
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicTransceiverDetails
+//
+//	@return NiatelemetryApicTransceiverDetails
 func (a *NiatelemetryApiService) GetNiatelemetryApicTransceiverDetailsByMoidExecute(r ApiGetNiatelemetryApicTransceiverDetailsByMoidRequest) (*NiatelemetryApicTransceiverDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9506,8 +10044,8 @@ func (r ApiGetNiatelemetryApicTransceiverDetailsListRequest) Execute() (*Niatele
 /*
 GetNiatelemetryApicTransceiverDetailsList Read a 'niatelemetry.ApicTransceiverDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryApicTransceiverDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryApicTransceiverDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicTransceiverDetailsList(ctx context.Context) ApiGetNiatelemetryApicTransceiverDetailsListRequest {
 	return ApiGetNiatelemetryApicTransceiverDetailsListRequest{
@@ -9517,7 +10055,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicTransceiverDetailsList(ctx c
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicTransceiverDetailsResponse
+//
+//	@return NiatelemetryApicTransceiverDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryApicTransceiverDetailsListExecute(r ApiGetNiatelemetryApicTransceiverDetailsListRequest) (*NiatelemetryApicTransceiverDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9684,9 +10223,9 @@ func (r ApiGetNiatelemetryApicUiPageCountsByMoidRequest) Execute() (*Niatelemetr
 /*
 GetNiatelemetryApicUiPageCountsByMoid Read a 'niatelemetry.ApicUiPageCounts' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryApicUiPageCountsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryApicUiPageCountsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicUiPageCountsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryApicUiPageCountsByMoidRequest {
 	return ApiGetNiatelemetryApicUiPageCountsByMoidRequest{
@@ -9697,7 +10236,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicUiPageCountsByMoid(ctx conte
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicUiPageCounts
+//
+//	@return NiatelemetryApicUiPageCounts
 func (a *NiatelemetryApiService) GetNiatelemetryApicUiPageCountsByMoidExecute(r ApiGetNiatelemetryApicUiPageCountsByMoidRequest) (*NiatelemetryApicUiPageCounts, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9908,8 +10448,8 @@ func (r ApiGetNiatelemetryApicUiPageCountsListRequest) Execute() (*NiatelemetryA
 /*
 GetNiatelemetryApicUiPageCountsList Read a 'niatelemetry.ApicUiPageCounts' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryApicUiPageCountsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryApicUiPageCountsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryApicUiPageCountsList(ctx context.Context) ApiGetNiatelemetryApicUiPageCountsListRequest {
 	return ApiGetNiatelemetryApicUiPageCountsListRequest{
@@ -9919,7 +10459,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicUiPageCountsList(ctx context
 }
 
 // Execute executes the request
-//  @return NiatelemetryApicUiPageCountsResponse
+//
+//	@return NiatelemetryApicUiPageCountsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryApicUiPageCountsListExecute(r ApiGetNiatelemetryApicUiPageCountsListRequest) (*NiatelemetryApicUiPageCountsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10086,9 +10627,9 @@ func (r ApiGetNiatelemetryAppDetailsByMoidRequest) Execute() (*NiatelemetryAppDe
 /*
 GetNiatelemetryAppDetailsByMoid Read a 'niatelemetry.AppDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryAppDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryAppDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryAppDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryAppDetailsByMoidRequest {
 	return ApiGetNiatelemetryAppDetailsByMoidRequest{
@@ -10099,7 +10640,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryAppDetailsByMoid(ctx context.Con
 }
 
 // Execute executes the request
-//  @return NiatelemetryAppDetails
+//
+//	@return NiatelemetryAppDetails
 func (a *NiatelemetryApiService) GetNiatelemetryAppDetailsByMoidExecute(r ApiGetNiatelemetryAppDetailsByMoidRequest) (*NiatelemetryAppDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10310,8 +10852,8 @@ func (r ApiGetNiatelemetryAppDetailsListRequest) Execute() (*NiatelemetryAppDeta
 /*
 GetNiatelemetryAppDetailsList Read a 'niatelemetry.AppDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryAppDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryAppDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryAppDetailsList(ctx context.Context) ApiGetNiatelemetryAppDetailsListRequest {
 	return ApiGetNiatelemetryAppDetailsListRequest{
@@ -10321,7 +10863,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryAppDetailsList(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return NiatelemetryAppDetailsResponse
+//
+//	@return NiatelemetryAppDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryAppDetailsListExecute(r ApiGetNiatelemetryAppDetailsListRequest) (*NiatelemetryAppDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10488,9 +11031,9 @@ func (r ApiGetNiatelemetryCloudDetailsByMoidRequest) Execute() (*NiatelemetryClo
 /*
 GetNiatelemetryCloudDetailsByMoid Read a 'niatelemetry.CloudDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryCloudDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryCloudDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryCloudDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryCloudDetailsByMoidRequest {
 	return ApiGetNiatelemetryCloudDetailsByMoidRequest{
@@ -10501,7 +11044,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryCloudDetailsByMoid(ctx context.C
 }
 
 // Execute executes the request
-//  @return NiatelemetryCloudDetails
+//
+//	@return NiatelemetryCloudDetails
 func (a *NiatelemetryApiService) GetNiatelemetryCloudDetailsByMoidExecute(r ApiGetNiatelemetryCloudDetailsByMoidRequest) (*NiatelemetryCloudDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10712,8 +11256,8 @@ func (r ApiGetNiatelemetryCloudDetailsListRequest) Execute() (*NiatelemetryCloud
 /*
 GetNiatelemetryCloudDetailsList Read a 'niatelemetry.CloudDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryCloudDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryCloudDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryCloudDetailsList(ctx context.Context) ApiGetNiatelemetryCloudDetailsListRequest {
 	return ApiGetNiatelemetryCloudDetailsListRequest{
@@ -10723,7 +11267,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryCloudDetailsList(ctx context.Con
 }
 
 // Execute executes the request
-//  @return NiatelemetryCloudDetailsResponse
+//
+//	@return NiatelemetryCloudDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryCloudDetailsListExecute(r ApiGetNiatelemetryCloudDetailsListRequest) (*NiatelemetryCloudDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10890,9 +11435,9 @@ func (r ApiGetNiatelemetryCommonPoliciesByMoidRequest) Execute() (*NiatelemetryC
 /*
 GetNiatelemetryCommonPoliciesByMoid Read a 'niatelemetry.CommonPolicies' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryCommonPoliciesByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryCommonPoliciesByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryCommonPoliciesByMoid(ctx context.Context, moid string) ApiGetNiatelemetryCommonPoliciesByMoidRequest {
 	return ApiGetNiatelemetryCommonPoliciesByMoidRequest{
@@ -10903,7 +11448,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryCommonPoliciesByMoid(ctx context
 }
 
 // Execute executes the request
-//  @return NiatelemetryCommonPolicies
+//
+//	@return NiatelemetryCommonPolicies
 func (a *NiatelemetryApiService) GetNiatelemetryCommonPoliciesByMoidExecute(r ApiGetNiatelemetryCommonPoliciesByMoidRequest) (*NiatelemetryCommonPolicies, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -11114,8 +11660,8 @@ func (r ApiGetNiatelemetryCommonPoliciesListRequest) Execute() (*NiatelemetryCom
 /*
 GetNiatelemetryCommonPoliciesList Read a 'niatelemetry.CommonPolicies' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryCommonPoliciesListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryCommonPoliciesListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryCommonPoliciesList(ctx context.Context) ApiGetNiatelemetryCommonPoliciesListRequest {
 	return ApiGetNiatelemetryCommonPoliciesListRequest{
@@ -11125,7 +11671,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryCommonPoliciesList(ctx context.C
 }
 
 // Execute executes the request
-//  @return NiatelemetryCommonPoliciesResponse
+//
+//	@return NiatelemetryCommonPoliciesResponse
 func (a *NiatelemetryApiService) GetNiatelemetryCommonPoliciesListExecute(r ApiGetNiatelemetryCommonPoliciesListRequest) (*NiatelemetryCommonPoliciesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -11292,9 +11839,9 @@ func (r ApiGetNiatelemetryDcnmFanDetailsByMoidRequest) Execute() (*NiatelemetryD
 /*
 GetNiatelemetryDcnmFanDetailsByMoid Read a 'niatelemetry.DcnmFanDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryDcnmFanDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryDcnmFanDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryDcnmFanDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryDcnmFanDetailsByMoidRequest {
 	return ApiGetNiatelemetryDcnmFanDetailsByMoidRequest{
@@ -11305,7 +11852,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmFanDetailsByMoid(ctx context
 }
 
 // Execute executes the request
-//  @return NiatelemetryDcnmFanDetails
+//
+//	@return NiatelemetryDcnmFanDetails
 func (a *NiatelemetryApiService) GetNiatelemetryDcnmFanDetailsByMoidExecute(r ApiGetNiatelemetryDcnmFanDetailsByMoidRequest) (*NiatelemetryDcnmFanDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -11516,8 +12064,8 @@ func (r ApiGetNiatelemetryDcnmFanDetailsListRequest) Execute() (*NiatelemetryDcn
 /*
 GetNiatelemetryDcnmFanDetailsList Read a 'niatelemetry.DcnmFanDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryDcnmFanDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryDcnmFanDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryDcnmFanDetailsList(ctx context.Context) ApiGetNiatelemetryDcnmFanDetailsListRequest {
 	return ApiGetNiatelemetryDcnmFanDetailsListRequest{
@@ -11527,7 +12075,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmFanDetailsList(ctx context.C
 }
 
 // Execute executes the request
-//  @return NiatelemetryDcnmFanDetailsResponse
+//
+//	@return NiatelemetryDcnmFanDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryDcnmFanDetailsListExecute(r ApiGetNiatelemetryDcnmFanDetailsListRequest) (*NiatelemetryDcnmFanDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -11694,9 +12243,9 @@ func (r ApiGetNiatelemetryDcnmFexDetailsByMoidRequest) Execute() (*NiatelemetryD
 /*
 GetNiatelemetryDcnmFexDetailsByMoid Read a 'niatelemetry.DcnmFexDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryDcnmFexDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryDcnmFexDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryDcnmFexDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryDcnmFexDetailsByMoidRequest {
 	return ApiGetNiatelemetryDcnmFexDetailsByMoidRequest{
@@ -11707,7 +12256,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmFexDetailsByMoid(ctx context
 }
 
 // Execute executes the request
-//  @return NiatelemetryDcnmFexDetails
+//
+//	@return NiatelemetryDcnmFexDetails
 func (a *NiatelemetryApiService) GetNiatelemetryDcnmFexDetailsByMoidExecute(r ApiGetNiatelemetryDcnmFexDetailsByMoidRequest) (*NiatelemetryDcnmFexDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -11918,8 +12468,8 @@ func (r ApiGetNiatelemetryDcnmFexDetailsListRequest) Execute() (*NiatelemetryDcn
 /*
 GetNiatelemetryDcnmFexDetailsList Read a 'niatelemetry.DcnmFexDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryDcnmFexDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryDcnmFexDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryDcnmFexDetailsList(ctx context.Context) ApiGetNiatelemetryDcnmFexDetailsListRequest {
 	return ApiGetNiatelemetryDcnmFexDetailsListRequest{
@@ -11929,7 +12479,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmFexDetailsList(ctx context.C
 }
 
 // Execute executes the request
-//  @return NiatelemetryDcnmFexDetailsResponse
+//
+//	@return NiatelemetryDcnmFexDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryDcnmFexDetailsListExecute(r ApiGetNiatelemetryDcnmFexDetailsListRequest) (*NiatelemetryDcnmFexDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12096,9 +12647,9 @@ func (r ApiGetNiatelemetryDcnmModuleDetailsByMoidRequest) Execute() (*Niatelemet
 /*
 GetNiatelemetryDcnmModuleDetailsByMoid Read a 'niatelemetry.DcnmModuleDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryDcnmModuleDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryDcnmModuleDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryDcnmModuleDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryDcnmModuleDetailsByMoidRequest {
 	return ApiGetNiatelemetryDcnmModuleDetailsByMoidRequest{
@@ -12109,7 +12660,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmModuleDetailsByMoid(ctx cont
 }
 
 // Execute executes the request
-//  @return NiatelemetryDcnmModuleDetails
+//
+//	@return NiatelemetryDcnmModuleDetails
 func (a *NiatelemetryApiService) GetNiatelemetryDcnmModuleDetailsByMoidExecute(r ApiGetNiatelemetryDcnmModuleDetailsByMoidRequest) (*NiatelemetryDcnmModuleDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12320,8 +12872,8 @@ func (r ApiGetNiatelemetryDcnmModuleDetailsListRequest) Execute() (*Niatelemetry
 /*
 GetNiatelemetryDcnmModuleDetailsList Read a 'niatelemetry.DcnmModuleDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryDcnmModuleDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryDcnmModuleDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryDcnmModuleDetailsList(ctx context.Context) ApiGetNiatelemetryDcnmModuleDetailsListRequest {
 	return ApiGetNiatelemetryDcnmModuleDetailsListRequest{
@@ -12331,7 +12883,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmModuleDetailsList(ctx contex
 }
 
 // Execute executes the request
-//  @return NiatelemetryDcnmModuleDetailsResponse
+//
+//	@return NiatelemetryDcnmModuleDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryDcnmModuleDetailsListExecute(r ApiGetNiatelemetryDcnmModuleDetailsListRequest) (*NiatelemetryDcnmModuleDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12498,9 +13051,9 @@ func (r ApiGetNiatelemetryDcnmPsuDetailsByMoidRequest) Execute() (*NiatelemetryD
 /*
 GetNiatelemetryDcnmPsuDetailsByMoid Read a 'niatelemetry.DcnmPsuDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryDcnmPsuDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryDcnmPsuDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryDcnmPsuDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryDcnmPsuDetailsByMoidRequest {
 	return ApiGetNiatelemetryDcnmPsuDetailsByMoidRequest{
@@ -12511,7 +13064,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmPsuDetailsByMoid(ctx context
 }
 
 // Execute executes the request
-//  @return NiatelemetryDcnmPsuDetails
+//
+//	@return NiatelemetryDcnmPsuDetails
 func (a *NiatelemetryApiService) GetNiatelemetryDcnmPsuDetailsByMoidExecute(r ApiGetNiatelemetryDcnmPsuDetailsByMoidRequest) (*NiatelemetryDcnmPsuDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12722,8 +13276,8 @@ func (r ApiGetNiatelemetryDcnmPsuDetailsListRequest) Execute() (*NiatelemetryDcn
 /*
 GetNiatelemetryDcnmPsuDetailsList Read a 'niatelemetry.DcnmPsuDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryDcnmPsuDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryDcnmPsuDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryDcnmPsuDetailsList(ctx context.Context) ApiGetNiatelemetryDcnmPsuDetailsListRequest {
 	return ApiGetNiatelemetryDcnmPsuDetailsListRequest{
@@ -12733,7 +13287,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmPsuDetailsList(ctx context.C
 }
 
 // Execute executes the request
-//  @return NiatelemetryDcnmPsuDetailsResponse
+//
+//	@return NiatelemetryDcnmPsuDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryDcnmPsuDetailsListExecute(r ApiGetNiatelemetryDcnmPsuDetailsListRequest) (*NiatelemetryDcnmPsuDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12900,9 +13455,9 @@ func (r ApiGetNiatelemetryDcnmTransceiverDetailsByMoidRequest) Execute() (*Niate
 /*
 GetNiatelemetryDcnmTransceiverDetailsByMoid Read a 'niatelemetry.DcnmTransceiverDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryDcnmTransceiverDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryDcnmTransceiverDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryDcnmTransceiverDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryDcnmTransceiverDetailsByMoidRequest {
 	return ApiGetNiatelemetryDcnmTransceiverDetailsByMoidRequest{
@@ -12913,7 +13468,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmTransceiverDetailsByMoid(ctx
 }
 
 // Execute executes the request
-//  @return NiatelemetryDcnmTransceiverDetails
+//
+//	@return NiatelemetryDcnmTransceiverDetails
 func (a *NiatelemetryApiService) GetNiatelemetryDcnmTransceiverDetailsByMoidExecute(r ApiGetNiatelemetryDcnmTransceiverDetailsByMoidRequest) (*NiatelemetryDcnmTransceiverDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13124,8 +13680,8 @@ func (r ApiGetNiatelemetryDcnmTransceiverDetailsListRequest) Execute() (*Niatele
 /*
 GetNiatelemetryDcnmTransceiverDetailsList Read a 'niatelemetry.DcnmTransceiverDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryDcnmTransceiverDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryDcnmTransceiverDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryDcnmTransceiverDetailsList(ctx context.Context) ApiGetNiatelemetryDcnmTransceiverDetailsListRequest {
 	return ApiGetNiatelemetryDcnmTransceiverDetailsListRequest{
@@ -13135,7 +13691,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmTransceiverDetailsList(ctx c
 }
 
 // Execute executes the request
-//  @return NiatelemetryDcnmTransceiverDetailsResponse
+//
+//	@return NiatelemetryDcnmTransceiverDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryDcnmTransceiverDetailsListExecute(r ApiGetNiatelemetryDcnmTransceiverDetailsListRequest) (*NiatelemetryDcnmTransceiverDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13302,9 +13859,9 @@ func (r ApiGetNiatelemetryEpgByMoidRequest) Execute() (*NiatelemetryEpg, *http.R
 /*
 GetNiatelemetryEpgByMoid Read a 'niatelemetry.Epg' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryEpgByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryEpgByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryEpgByMoid(ctx context.Context, moid string) ApiGetNiatelemetryEpgByMoidRequest {
 	return ApiGetNiatelemetryEpgByMoidRequest{
@@ -13315,7 +13872,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryEpgByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return NiatelemetryEpg
+//
+//	@return NiatelemetryEpg
 func (a *NiatelemetryApiService) GetNiatelemetryEpgByMoidExecute(r ApiGetNiatelemetryEpgByMoidRequest) (*NiatelemetryEpg, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13526,8 +14084,8 @@ func (r ApiGetNiatelemetryEpgListRequest) Execute() (*NiatelemetryEpgResponse, *
 /*
 GetNiatelemetryEpgList Read a 'niatelemetry.Epg' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryEpgListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryEpgListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryEpgList(ctx context.Context) ApiGetNiatelemetryEpgListRequest {
 	return ApiGetNiatelemetryEpgListRequest{
@@ -13537,7 +14095,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryEpgList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return NiatelemetryEpgResponse
+//
+//	@return NiatelemetryEpgResponse
 func (a *NiatelemetryApiService) GetNiatelemetryEpgListExecute(r ApiGetNiatelemetryEpgListRequest) (*NiatelemetryEpgResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13704,9 +14263,9 @@ func (r ApiGetNiatelemetryFabricModuleDetailsByMoidRequest) Execute() (*Niatelem
 /*
 GetNiatelemetryFabricModuleDetailsByMoid Read a 'niatelemetry.FabricModuleDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryFabricModuleDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryFabricModuleDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryFabricModuleDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryFabricModuleDetailsByMoidRequest {
 	return ApiGetNiatelemetryFabricModuleDetailsByMoidRequest{
@@ -13717,7 +14276,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricModuleDetailsByMoid(ctx co
 }
 
 // Execute executes the request
-//  @return NiatelemetryFabricModuleDetails
+//
+//	@return NiatelemetryFabricModuleDetails
 func (a *NiatelemetryApiService) GetNiatelemetryFabricModuleDetailsByMoidExecute(r ApiGetNiatelemetryFabricModuleDetailsByMoidRequest) (*NiatelemetryFabricModuleDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13928,8 +14488,8 @@ func (r ApiGetNiatelemetryFabricModuleDetailsListRequest) Execute() (*Niatelemet
 /*
 GetNiatelemetryFabricModuleDetailsList Read a 'niatelemetry.FabricModuleDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryFabricModuleDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryFabricModuleDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryFabricModuleDetailsList(ctx context.Context) ApiGetNiatelemetryFabricModuleDetailsListRequest {
 	return ApiGetNiatelemetryFabricModuleDetailsListRequest{
@@ -13939,7 +14499,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricModuleDetailsList(ctx cont
 }
 
 // Execute executes the request
-//  @return NiatelemetryFabricModuleDetailsResponse
+//
+//	@return NiatelemetryFabricModuleDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryFabricModuleDetailsListExecute(r ApiGetNiatelemetryFabricModuleDetailsListRequest) (*NiatelemetryFabricModuleDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14106,9 +14667,9 @@ func (r ApiGetNiatelemetryFabricNodeControlDetailsByMoidRequest) Execute() (*Nia
 /*
 GetNiatelemetryFabricNodeControlDetailsByMoid Read a 'niatelemetry.FabricNodeControlDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryFabricNodeControlDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryFabricNodeControlDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryFabricNodeControlDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryFabricNodeControlDetailsByMoidRequest {
 	return ApiGetNiatelemetryFabricNodeControlDetailsByMoidRequest{
@@ -14119,7 +14680,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricNodeControlDetailsByMoid(c
 }
 
 // Execute executes the request
-//  @return NiatelemetryFabricNodeControlDetails
+//
+//	@return NiatelemetryFabricNodeControlDetails
 func (a *NiatelemetryApiService) GetNiatelemetryFabricNodeControlDetailsByMoidExecute(r ApiGetNiatelemetryFabricNodeControlDetailsByMoidRequest) (*NiatelemetryFabricNodeControlDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14330,8 +14892,8 @@ func (r ApiGetNiatelemetryFabricNodeControlDetailsListRequest) Execute() (*Niate
 /*
 GetNiatelemetryFabricNodeControlDetailsList Read a 'niatelemetry.FabricNodeControlDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryFabricNodeControlDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryFabricNodeControlDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryFabricNodeControlDetailsList(ctx context.Context) ApiGetNiatelemetryFabricNodeControlDetailsListRequest {
 	return ApiGetNiatelemetryFabricNodeControlDetailsListRequest{
@@ -14341,7 +14903,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricNodeControlDetailsList(ctx
 }
 
 // Execute executes the request
-//  @return NiatelemetryFabricNodeControlDetailsResponse
+//
+//	@return NiatelemetryFabricNodeControlDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryFabricNodeControlDetailsListExecute(r ApiGetNiatelemetryFabricNodeControlDetailsListRequest) (*NiatelemetryFabricNodeControlDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14508,9 +15071,9 @@ func (r ApiGetNiatelemetryFabricPodProfileByMoidRequest) Execute() (*Niatelemetr
 /*
 GetNiatelemetryFabricPodProfileByMoid Read a 'niatelemetry.FabricPodProfile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryFabricPodProfileByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryFabricPodProfileByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryFabricPodProfileByMoid(ctx context.Context, moid string) ApiGetNiatelemetryFabricPodProfileByMoidRequest {
 	return ApiGetNiatelemetryFabricPodProfileByMoidRequest{
@@ -14521,7 +15084,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricPodProfileByMoid(ctx conte
 }
 
 // Execute executes the request
-//  @return NiatelemetryFabricPodProfile
+//
+//	@return NiatelemetryFabricPodProfile
 func (a *NiatelemetryApiService) GetNiatelemetryFabricPodProfileByMoidExecute(r ApiGetNiatelemetryFabricPodProfileByMoidRequest) (*NiatelemetryFabricPodProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14732,8 +15296,8 @@ func (r ApiGetNiatelemetryFabricPodProfileListRequest) Execute() (*NiatelemetryF
 /*
 GetNiatelemetryFabricPodProfileList Read a 'niatelemetry.FabricPodProfile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryFabricPodProfileListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryFabricPodProfileListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryFabricPodProfileList(ctx context.Context) ApiGetNiatelemetryFabricPodProfileListRequest {
 	return ApiGetNiatelemetryFabricPodProfileListRequest{
@@ -14743,7 +15307,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricPodProfileList(ctx context
 }
 
 // Execute executes the request
-//  @return NiatelemetryFabricPodProfileResponse
+//
+//	@return NiatelemetryFabricPodProfileResponse
 func (a *NiatelemetryApiService) GetNiatelemetryFabricPodProfileListExecute(r ApiGetNiatelemetryFabricPodProfileListRequest) (*NiatelemetryFabricPodProfileResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14910,9 +15475,9 @@ func (r ApiGetNiatelemetryFabricPodSsByMoidRequest) Execute() (*NiatelemetryFabr
 /*
 GetNiatelemetryFabricPodSsByMoid Read a 'niatelemetry.FabricPodSs' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryFabricPodSsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryFabricPodSsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryFabricPodSsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryFabricPodSsByMoidRequest {
 	return ApiGetNiatelemetryFabricPodSsByMoidRequest{
@@ -14923,7 +15488,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricPodSsByMoid(ctx context.Co
 }
 
 // Execute executes the request
-//  @return NiatelemetryFabricPodSs
+//
+//	@return NiatelemetryFabricPodSs
 func (a *NiatelemetryApiService) GetNiatelemetryFabricPodSsByMoidExecute(r ApiGetNiatelemetryFabricPodSsByMoidRequest) (*NiatelemetryFabricPodSs, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15134,8 +15700,8 @@ func (r ApiGetNiatelemetryFabricPodSsListRequest) Execute() (*NiatelemetryFabric
 /*
 GetNiatelemetryFabricPodSsList Read a 'niatelemetry.FabricPodSs' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryFabricPodSsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryFabricPodSsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryFabricPodSsList(ctx context.Context) ApiGetNiatelemetryFabricPodSsListRequest {
 	return ApiGetNiatelemetryFabricPodSsListRequest{
@@ -15145,7 +15711,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricPodSsList(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return NiatelemetryFabricPodSsResponse
+//
+//	@return NiatelemetryFabricPodSsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryFabricPodSsListExecute(r ApiGetNiatelemetryFabricPodSsListRequest) (*NiatelemetryFabricPodSsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15312,9 +15879,9 @@ func (r ApiGetNiatelemetryFaultByMoidRequest) Execute() (*NiatelemetryFault, *ht
 /*
 GetNiatelemetryFaultByMoid Read a 'niatelemetry.Fault' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryFaultByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryFaultByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryFaultByMoid(ctx context.Context, moid string) ApiGetNiatelemetryFaultByMoidRequest {
 	return ApiGetNiatelemetryFaultByMoidRequest{
@@ -15325,7 +15892,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryFaultByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return NiatelemetryFault
+//
+//	@return NiatelemetryFault
 func (a *NiatelemetryApiService) GetNiatelemetryFaultByMoidExecute(r ApiGetNiatelemetryFaultByMoidRequest) (*NiatelemetryFault, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15536,8 +16104,8 @@ func (r ApiGetNiatelemetryFaultListRequest) Execute() (*NiatelemetryFaultRespons
 /*
 GetNiatelemetryFaultList Read a 'niatelemetry.Fault' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryFaultListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryFaultListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryFaultList(ctx context.Context) ApiGetNiatelemetryFaultListRequest {
 	return ApiGetNiatelemetryFaultListRequest{
@@ -15547,7 +16115,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryFaultList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return NiatelemetryFaultResponse
+//
+//	@return NiatelemetryFaultResponse
 func (a *NiatelemetryApiService) GetNiatelemetryFaultListExecute(r ApiGetNiatelemetryFaultListRequest) (*NiatelemetryFaultResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15714,9 +16283,9 @@ func (r ApiGetNiatelemetryHcloudDetailsByMoidRequest) Execute() (*NiatelemetryHc
 /*
 GetNiatelemetryHcloudDetailsByMoid Read a 'niatelemetry.HcloudDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryHcloudDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryHcloudDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryHcloudDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryHcloudDetailsByMoidRequest {
 	return ApiGetNiatelemetryHcloudDetailsByMoidRequest{
@@ -15727,7 +16296,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryHcloudDetailsByMoid(ctx context.
 }
 
 // Execute executes the request
-//  @return NiatelemetryHcloudDetails
+//
+//	@return NiatelemetryHcloudDetails
 func (a *NiatelemetryApiService) GetNiatelemetryHcloudDetailsByMoidExecute(r ApiGetNiatelemetryHcloudDetailsByMoidRequest) (*NiatelemetryHcloudDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15938,8 +16508,8 @@ func (r ApiGetNiatelemetryHcloudDetailsListRequest) Execute() (*NiatelemetryHclo
 /*
 GetNiatelemetryHcloudDetailsList Read a 'niatelemetry.HcloudDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryHcloudDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryHcloudDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryHcloudDetailsList(ctx context.Context) ApiGetNiatelemetryHcloudDetailsListRequest {
 	return ApiGetNiatelemetryHcloudDetailsListRequest{
@@ -15949,7 +16519,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryHcloudDetailsList(ctx context.Co
 }
 
 // Execute executes the request
-//  @return NiatelemetryHcloudDetailsResponse
+//
+//	@return NiatelemetryHcloudDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryHcloudDetailsListExecute(r ApiGetNiatelemetryHcloudDetailsListRequest) (*NiatelemetryHcloudDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16116,9 +16687,9 @@ func (r ApiGetNiatelemetryHealthInsightsDataByMoidRequest) Execute() (*Niateleme
 /*
 GetNiatelemetryHealthInsightsDataByMoid Read a 'niatelemetry.HealthInsightsData' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryHealthInsightsDataByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryHealthInsightsDataByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryHealthInsightsDataByMoid(ctx context.Context, moid string) ApiGetNiatelemetryHealthInsightsDataByMoidRequest {
 	return ApiGetNiatelemetryHealthInsightsDataByMoidRequest{
@@ -16129,7 +16700,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryHealthInsightsDataByMoid(ctx con
 }
 
 // Execute executes the request
-//  @return NiatelemetryHealthInsightsData
+//
+//	@return NiatelemetryHealthInsightsData
 func (a *NiatelemetryApiService) GetNiatelemetryHealthInsightsDataByMoidExecute(r ApiGetNiatelemetryHealthInsightsDataByMoidRequest) (*NiatelemetryHealthInsightsData, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16340,8 +16912,8 @@ func (r ApiGetNiatelemetryHealthInsightsDataListRequest) Execute() (*Niatelemetr
 /*
 GetNiatelemetryHealthInsightsDataList Read a 'niatelemetry.HealthInsightsData' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryHealthInsightsDataListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryHealthInsightsDataListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryHealthInsightsDataList(ctx context.Context) ApiGetNiatelemetryHealthInsightsDataListRequest {
 	return ApiGetNiatelemetryHealthInsightsDataListRequest{
@@ -16351,7 +16923,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryHealthInsightsDataList(ctx conte
 }
 
 // Execute executes the request
-//  @return NiatelemetryHealthInsightsDataResponse
+//
+//	@return NiatelemetryHealthInsightsDataResponse
 func (a *NiatelemetryApiService) GetNiatelemetryHealthInsightsDataListExecute(r ApiGetNiatelemetryHealthInsightsDataListRequest) (*NiatelemetryHealthInsightsDataResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16518,9 +17091,9 @@ func (r ApiGetNiatelemetryHttpsAclContractDetailsByMoidRequest) Execute() (*Niat
 /*
 GetNiatelemetryHttpsAclContractDetailsByMoid Read a 'niatelemetry.HttpsAclContractDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryHttpsAclContractDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryHttpsAclContractDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryHttpsAclContractDetailsByMoidRequest {
 	return ApiGetNiatelemetryHttpsAclContractDetailsByMoidRequest{
@@ -16531,7 +17104,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractDetailsByMoid(ct
 }
 
 // Execute executes the request
-//  @return NiatelemetryHttpsAclContractDetails
+//
+//	@return NiatelemetryHttpsAclContractDetails
 func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractDetailsByMoidExecute(r ApiGetNiatelemetryHttpsAclContractDetailsByMoidRequest) (*NiatelemetryHttpsAclContractDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16742,8 +17316,8 @@ func (r ApiGetNiatelemetryHttpsAclContractDetailsListRequest) Execute() (*Niatel
 /*
 GetNiatelemetryHttpsAclContractDetailsList Read a 'niatelemetry.HttpsAclContractDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryHttpsAclContractDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryHttpsAclContractDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractDetailsList(ctx context.Context) ApiGetNiatelemetryHttpsAclContractDetailsListRequest {
 	return ApiGetNiatelemetryHttpsAclContractDetailsListRequest{
@@ -16753,7 +17327,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractDetailsList(ctx 
 }
 
 // Execute executes the request
-//  @return NiatelemetryHttpsAclContractDetailsResponse
+//
+//	@return NiatelemetryHttpsAclContractDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractDetailsListExecute(r ApiGetNiatelemetryHttpsAclContractDetailsListRequest) (*NiatelemetryHttpsAclContractDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16920,9 +17495,9 @@ func (r ApiGetNiatelemetryHttpsAclContractFilterMapByMoidRequest) Execute() (*Ni
 /*
 GetNiatelemetryHttpsAclContractFilterMapByMoid Read a 'niatelemetry.HttpsAclContractFilterMap' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryHttpsAclContractFilterMapByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryHttpsAclContractFilterMapByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractFilterMapByMoid(ctx context.Context, moid string) ApiGetNiatelemetryHttpsAclContractFilterMapByMoidRequest {
 	return ApiGetNiatelemetryHttpsAclContractFilterMapByMoidRequest{
@@ -16933,7 +17508,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractFilterMapByMoid(
 }
 
 // Execute executes the request
-//  @return NiatelemetryHttpsAclContractFilterMap
+//
+//	@return NiatelemetryHttpsAclContractFilterMap
 func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractFilterMapByMoidExecute(r ApiGetNiatelemetryHttpsAclContractFilterMapByMoidRequest) (*NiatelemetryHttpsAclContractFilterMap, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17144,8 +17720,8 @@ func (r ApiGetNiatelemetryHttpsAclContractFilterMapListRequest) Execute() (*Niat
 /*
 GetNiatelemetryHttpsAclContractFilterMapList Read a 'niatelemetry.HttpsAclContractFilterMap' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryHttpsAclContractFilterMapListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryHttpsAclContractFilterMapListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractFilterMapList(ctx context.Context) ApiGetNiatelemetryHttpsAclContractFilterMapListRequest {
 	return ApiGetNiatelemetryHttpsAclContractFilterMapListRequest{
@@ -17155,7 +17731,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractFilterMapList(ct
 }
 
 // Execute executes the request
-//  @return NiatelemetryHttpsAclContractFilterMapResponse
+//
+//	@return NiatelemetryHttpsAclContractFilterMapResponse
 func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractFilterMapListExecute(r ApiGetNiatelemetryHttpsAclContractFilterMapListRequest) (*NiatelemetryHttpsAclContractFilterMapResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17322,9 +17899,9 @@ func (r ApiGetNiatelemetryHttpsAclEpgContractMapByMoidRequest) Execute() (*Niate
 /*
 GetNiatelemetryHttpsAclEpgContractMapByMoid Read a 'niatelemetry.HttpsAclEpgContractMap' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryHttpsAclEpgContractMapByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryHttpsAclEpgContractMapByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgContractMapByMoid(ctx context.Context, moid string) ApiGetNiatelemetryHttpsAclEpgContractMapByMoidRequest {
 	return ApiGetNiatelemetryHttpsAclEpgContractMapByMoidRequest{
@@ -17335,7 +17912,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgContractMapByMoid(ctx
 }
 
 // Execute executes the request
-//  @return NiatelemetryHttpsAclEpgContractMap
+//
+//	@return NiatelemetryHttpsAclEpgContractMap
 func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgContractMapByMoidExecute(r ApiGetNiatelemetryHttpsAclEpgContractMapByMoidRequest) (*NiatelemetryHttpsAclEpgContractMap, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17546,8 +18124,8 @@ func (r ApiGetNiatelemetryHttpsAclEpgContractMapListRequest) Execute() (*Niatele
 /*
 GetNiatelemetryHttpsAclEpgContractMapList Read a 'niatelemetry.HttpsAclEpgContractMap' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryHttpsAclEpgContractMapListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryHttpsAclEpgContractMapListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgContractMapList(ctx context.Context) ApiGetNiatelemetryHttpsAclEpgContractMapListRequest {
 	return ApiGetNiatelemetryHttpsAclEpgContractMapListRequest{
@@ -17557,7 +18135,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgContractMapList(ctx c
 }
 
 // Execute executes the request
-//  @return NiatelemetryHttpsAclEpgContractMapResponse
+//
+//	@return NiatelemetryHttpsAclEpgContractMapResponse
 func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgContractMapListExecute(r ApiGetNiatelemetryHttpsAclEpgContractMapListRequest) (*NiatelemetryHttpsAclEpgContractMapResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17724,9 +18303,9 @@ func (r ApiGetNiatelemetryHttpsAclEpgDetailsByMoidRequest) Execute() (*Niateleme
 /*
 GetNiatelemetryHttpsAclEpgDetailsByMoid Read a 'niatelemetry.HttpsAclEpgDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryHttpsAclEpgDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryHttpsAclEpgDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryHttpsAclEpgDetailsByMoidRequest {
 	return ApiGetNiatelemetryHttpsAclEpgDetailsByMoidRequest{
@@ -17737,7 +18316,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgDetailsByMoid(ctx con
 }
 
 // Execute executes the request
-//  @return NiatelemetryHttpsAclEpgDetails
+//
+//	@return NiatelemetryHttpsAclEpgDetails
 func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgDetailsByMoidExecute(r ApiGetNiatelemetryHttpsAclEpgDetailsByMoidRequest) (*NiatelemetryHttpsAclEpgDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17948,8 +18528,8 @@ func (r ApiGetNiatelemetryHttpsAclEpgDetailsListRequest) Execute() (*Niatelemetr
 /*
 GetNiatelemetryHttpsAclEpgDetailsList Read a 'niatelemetry.HttpsAclEpgDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryHttpsAclEpgDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryHttpsAclEpgDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgDetailsList(ctx context.Context) ApiGetNiatelemetryHttpsAclEpgDetailsListRequest {
 	return ApiGetNiatelemetryHttpsAclEpgDetailsListRequest{
@@ -17959,7 +18539,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgDetailsList(ctx conte
 }
 
 // Execute executes the request
-//  @return NiatelemetryHttpsAclEpgDetailsResponse
+//
+//	@return NiatelemetryHttpsAclEpgDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgDetailsListExecute(r ApiGetNiatelemetryHttpsAclEpgDetailsListRequest) (*NiatelemetryHttpsAclEpgDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18126,9 +18707,9 @@ func (r ApiGetNiatelemetryHttpsAclFilterDetailsByMoidRequest) Execute() (*Niatel
 /*
 GetNiatelemetryHttpsAclFilterDetailsByMoid Read a 'niatelemetry.HttpsAclFilterDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryHttpsAclFilterDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryHttpsAclFilterDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclFilterDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryHttpsAclFilterDetailsByMoidRequest {
 	return ApiGetNiatelemetryHttpsAclFilterDetailsByMoidRequest{
@@ -18139,7 +18720,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclFilterDetailsByMoid(ctx 
 }
 
 // Execute executes the request
-//  @return NiatelemetryHttpsAclFilterDetails
+//
+//	@return NiatelemetryHttpsAclFilterDetails
 func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclFilterDetailsByMoidExecute(r ApiGetNiatelemetryHttpsAclFilterDetailsByMoidRequest) (*NiatelemetryHttpsAclFilterDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18350,8 +18932,8 @@ func (r ApiGetNiatelemetryHttpsAclFilterDetailsListRequest) Execute() (*Niatelem
 /*
 GetNiatelemetryHttpsAclFilterDetailsList Read a 'niatelemetry.HttpsAclFilterDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryHttpsAclFilterDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryHttpsAclFilterDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclFilterDetailsList(ctx context.Context) ApiGetNiatelemetryHttpsAclFilterDetailsListRequest {
 	return ApiGetNiatelemetryHttpsAclFilterDetailsListRequest{
@@ -18361,7 +18943,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclFilterDetailsList(ctx co
 }
 
 // Execute executes the request
-//  @return NiatelemetryHttpsAclFilterDetailsResponse
+//
+//	@return NiatelemetryHttpsAclFilterDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclFilterDetailsListExecute(r ApiGetNiatelemetryHttpsAclFilterDetailsListRequest) (*NiatelemetryHttpsAclFilterDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18528,9 +19111,9 @@ func (r ApiGetNiatelemetryInsightGroupDetailsByMoidRequest) Execute() (*Niatelem
 /*
 GetNiatelemetryInsightGroupDetailsByMoid Read a 'niatelemetry.InsightGroupDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryInsightGroupDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryInsightGroupDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryInsightGroupDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryInsightGroupDetailsByMoidRequest {
 	return ApiGetNiatelemetryInsightGroupDetailsByMoidRequest{
@@ -18541,7 +19124,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryInsightGroupDetailsByMoid(ctx co
 }
 
 // Execute executes the request
-//  @return NiatelemetryInsightGroupDetails
+//
+//	@return NiatelemetryInsightGroupDetails
 func (a *NiatelemetryApiService) GetNiatelemetryInsightGroupDetailsByMoidExecute(r ApiGetNiatelemetryInsightGroupDetailsByMoidRequest) (*NiatelemetryInsightGroupDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18752,8 +19336,8 @@ func (r ApiGetNiatelemetryInsightGroupDetailsListRequest) Execute() (*Niatelemet
 /*
 GetNiatelemetryInsightGroupDetailsList Read a 'niatelemetry.InsightGroupDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryInsightGroupDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryInsightGroupDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryInsightGroupDetailsList(ctx context.Context) ApiGetNiatelemetryInsightGroupDetailsListRequest {
 	return ApiGetNiatelemetryInsightGroupDetailsListRequest{
@@ -18763,7 +19347,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryInsightGroupDetailsList(ctx cont
 }
 
 // Execute executes the request
-//  @return NiatelemetryInsightGroupDetailsResponse
+//
+//	@return NiatelemetryInsightGroupDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryInsightGroupDetailsListExecute(r ApiGetNiatelemetryInsightGroupDetailsListRequest) (*NiatelemetryInsightGroupDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18930,9 +19515,9 @@ func (r ApiGetNiatelemetryLcByMoidRequest) Execute() (*NiatelemetryLc, *http.Res
 /*
 GetNiatelemetryLcByMoid Read a 'niatelemetry.Lc' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryLcByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryLcByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryLcByMoid(ctx context.Context, moid string) ApiGetNiatelemetryLcByMoidRequest {
 	return ApiGetNiatelemetryLcByMoidRequest{
@@ -18943,7 +19528,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryLcByMoid(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return NiatelemetryLc
+//
+//	@return NiatelemetryLc
 func (a *NiatelemetryApiService) GetNiatelemetryLcByMoidExecute(r ApiGetNiatelemetryLcByMoidRequest) (*NiatelemetryLc, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -19154,8 +19740,8 @@ func (r ApiGetNiatelemetryLcListRequest) Execute() (*NiatelemetryLcResponse, *ht
 /*
 GetNiatelemetryLcList Read a 'niatelemetry.Lc' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryLcListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryLcListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryLcList(ctx context.Context) ApiGetNiatelemetryLcListRequest {
 	return ApiGetNiatelemetryLcListRequest{
@@ -19165,7 +19751,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryLcList(ctx context.Context) ApiG
 }
 
 // Execute executes the request
-//  @return NiatelemetryLcResponse
+//
+//	@return NiatelemetryLcResponse
 func (a *NiatelemetryApiService) GetNiatelemetryLcListExecute(r ApiGetNiatelemetryLcListRequest) (*NiatelemetryLcResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -19332,9 +19919,9 @@ func (r ApiGetNiatelemetryLeafPolGrpDetailsByMoidRequest) Execute() (*Niatelemet
 /*
 GetNiatelemetryLeafPolGrpDetailsByMoid Read a 'niatelemetry.LeafPolGrpDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryLeafPolGrpDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryLeafPolGrpDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryLeafPolGrpDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryLeafPolGrpDetailsByMoidRequest {
 	return ApiGetNiatelemetryLeafPolGrpDetailsByMoidRequest{
@@ -19345,7 +19932,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryLeafPolGrpDetailsByMoid(ctx cont
 }
 
 // Execute executes the request
-//  @return NiatelemetryLeafPolGrpDetails
+//
+//	@return NiatelemetryLeafPolGrpDetails
 func (a *NiatelemetryApiService) GetNiatelemetryLeafPolGrpDetailsByMoidExecute(r ApiGetNiatelemetryLeafPolGrpDetailsByMoidRequest) (*NiatelemetryLeafPolGrpDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -19556,8 +20144,8 @@ func (r ApiGetNiatelemetryLeafPolGrpDetailsListRequest) Execute() (*Niatelemetry
 /*
 GetNiatelemetryLeafPolGrpDetailsList Read a 'niatelemetry.LeafPolGrpDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryLeafPolGrpDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryLeafPolGrpDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryLeafPolGrpDetailsList(ctx context.Context) ApiGetNiatelemetryLeafPolGrpDetailsListRequest {
 	return ApiGetNiatelemetryLeafPolGrpDetailsListRequest{
@@ -19567,7 +20155,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryLeafPolGrpDetailsList(ctx contex
 }
 
 // Execute executes the request
-//  @return NiatelemetryLeafPolGrpDetailsResponse
+//
+//	@return NiatelemetryLeafPolGrpDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryLeafPolGrpDetailsListExecute(r ApiGetNiatelemetryLeafPolGrpDetailsListRequest) (*NiatelemetryLeafPolGrpDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -19721,6 +20310,410 @@ func (a *NiatelemetryApiService) GetNiatelemetryLeafPolGrpDetailsListExecute(r A
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetNiatelemetryMdsAutoClaimByMoidRequest struct {
+	ctx        context.Context
+	ApiService *NiatelemetryApiService
+	moid       string
+}
+
+func (r ApiGetNiatelemetryMdsAutoClaimByMoidRequest) Execute() (*NiatelemetryMdsAutoClaim, *http.Response, error) {
+	return r.ApiService.GetNiatelemetryMdsAutoClaimByMoidExecute(r)
+}
+
+/*
+GetNiatelemetryMdsAutoClaimByMoid Read a 'niatelemetry.MdsAutoClaim' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryMdsAutoClaimByMoidRequest
+*/
+func (a *NiatelemetryApiService) GetNiatelemetryMdsAutoClaimByMoid(ctx context.Context, moid string) ApiGetNiatelemetryMdsAutoClaimByMoidRequest {
+	return ApiGetNiatelemetryMdsAutoClaimByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//
+//	@return NiatelemetryMdsAutoClaim
+func (a *NiatelemetryApiService) GetNiatelemetryMdsAutoClaimByMoidExecute(r ApiGetNiatelemetryMdsAutoClaimByMoidRequest) (*NiatelemetryMdsAutoClaim, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryMdsAutoClaim
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryMdsAutoClaimByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/niatelemetry/MdsAutoClaims/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetNiatelemetryMdsAutoClaimListRequest struct {
+	ctx         context.Context
+	ApiService  *NiatelemetryApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetNiatelemetryMdsAutoClaimListRequest) Filter(filter string) ApiGetNiatelemetryMdsAutoClaimListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetNiatelemetryMdsAutoClaimListRequest) Orderby(orderby string) ApiGetNiatelemetryMdsAutoClaimListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetNiatelemetryMdsAutoClaimListRequest) Top(top int32) ApiGetNiatelemetryMdsAutoClaimListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetNiatelemetryMdsAutoClaimListRequest) Skip(skip int32) ApiGetNiatelemetryMdsAutoClaimListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryMdsAutoClaimListRequest) Select_(select_ string) ApiGetNiatelemetryMdsAutoClaimListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryMdsAutoClaimListRequest) Expand(expand string) ApiGetNiatelemetryMdsAutoClaimListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetNiatelemetryMdsAutoClaimListRequest) Apply(apply string) ApiGetNiatelemetryMdsAutoClaimListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetNiatelemetryMdsAutoClaimListRequest) Count(count bool) ApiGetNiatelemetryMdsAutoClaimListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetNiatelemetryMdsAutoClaimListRequest) Inlinecount(inlinecount string) ApiGetNiatelemetryMdsAutoClaimListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryMdsAutoClaimListRequest) At(at string) ApiGetNiatelemetryMdsAutoClaimListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetNiatelemetryMdsAutoClaimListRequest) Tags(tags string) ApiGetNiatelemetryMdsAutoClaimListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetNiatelemetryMdsAutoClaimListRequest) Execute() (*NiatelemetryMdsAutoClaimResponse, *http.Response, error) {
+	return r.ApiService.GetNiatelemetryMdsAutoClaimListExecute(r)
+}
+
+/*
+GetNiatelemetryMdsAutoClaimList Read a 'niatelemetry.MdsAutoClaim' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryMdsAutoClaimListRequest
+*/
+func (a *NiatelemetryApiService) GetNiatelemetryMdsAutoClaimList(ctx context.Context) ApiGetNiatelemetryMdsAutoClaimListRequest {
+	return ApiGetNiatelemetryMdsAutoClaimListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return NiatelemetryMdsAutoClaimResponse
+func (a *NiatelemetryApiService) GetNiatelemetryMdsAutoClaimListExecute(r ApiGetNiatelemetryMdsAutoClaimListRequest) (*NiatelemetryMdsAutoClaimResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryMdsAutoClaimResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryMdsAutoClaimList")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/niatelemetry/MdsAutoClaims"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetNiatelemetryMsoContractDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
@@ -19734,9 +20727,9 @@ func (r ApiGetNiatelemetryMsoContractDetailsByMoidRequest) Execute() (*Niateleme
 /*
 GetNiatelemetryMsoContractDetailsByMoid Read a 'niatelemetry.MsoContractDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryMsoContractDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryMsoContractDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryMsoContractDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryMsoContractDetailsByMoidRequest {
 	return ApiGetNiatelemetryMsoContractDetailsByMoidRequest{
@@ -19747,7 +20740,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoContractDetailsByMoid(ctx con
 }
 
 // Execute executes the request
-//  @return NiatelemetryMsoContractDetails
+//
+//	@return NiatelemetryMsoContractDetails
 func (a *NiatelemetryApiService) GetNiatelemetryMsoContractDetailsByMoidExecute(r ApiGetNiatelemetryMsoContractDetailsByMoidRequest) (*NiatelemetryMsoContractDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -19958,8 +20952,8 @@ func (r ApiGetNiatelemetryMsoContractDetailsListRequest) Execute() (*Niatelemetr
 /*
 GetNiatelemetryMsoContractDetailsList Read a 'niatelemetry.MsoContractDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryMsoContractDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryMsoContractDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryMsoContractDetailsList(ctx context.Context) ApiGetNiatelemetryMsoContractDetailsListRequest {
 	return ApiGetNiatelemetryMsoContractDetailsListRequest{
@@ -19969,7 +20963,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoContractDetailsList(ctx conte
 }
 
 // Execute executes the request
-//  @return NiatelemetryMsoContractDetailsResponse
+//
+//	@return NiatelemetryMsoContractDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryMsoContractDetailsListExecute(r ApiGetNiatelemetryMsoContractDetailsListRequest) (*NiatelemetryMsoContractDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -20136,9 +21131,9 @@ func (r ApiGetNiatelemetryMsoEpgDetailsByMoidRequest) Execute() (*NiatelemetryMs
 /*
 GetNiatelemetryMsoEpgDetailsByMoid Read a 'niatelemetry.MsoEpgDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryMsoEpgDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryMsoEpgDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryMsoEpgDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryMsoEpgDetailsByMoidRequest {
 	return ApiGetNiatelemetryMsoEpgDetailsByMoidRequest{
@@ -20149,7 +21144,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoEpgDetailsByMoid(ctx context.
 }
 
 // Execute executes the request
-//  @return NiatelemetryMsoEpgDetails
+//
+//	@return NiatelemetryMsoEpgDetails
 func (a *NiatelemetryApiService) GetNiatelemetryMsoEpgDetailsByMoidExecute(r ApiGetNiatelemetryMsoEpgDetailsByMoidRequest) (*NiatelemetryMsoEpgDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -20360,8 +21356,8 @@ func (r ApiGetNiatelemetryMsoEpgDetailsListRequest) Execute() (*NiatelemetryMsoE
 /*
 GetNiatelemetryMsoEpgDetailsList Read a 'niatelemetry.MsoEpgDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryMsoEpgDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryMsoEpgDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryMsoEpgDetailsList(ctx context.Context) ApiGetNiatelemetryMsoEpgDetailsListRequest {
 	return ApiGetNiatelemetryMsoEpgDetailsListRequest{
@@ -20371,7 +21367,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoEpgDetailsList(ctx context.Co
 }
 
 // Execute executes the request
-//  @return NiatelemetryMsoEpgDetailsResponse
+//
+//	@return NiatelemetryMsoEpgDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryMsoEpgDetailsListExecute(r ApiGetNiatelemetryMsoEpgDetailsListRequest) (*NiatelemetryMsoEpgDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -20538,9 +21535,9 @@ func (r ApiGetNiatelemetryMsoSchemaDetailsByMoidRequest) Execute() (*Niatelemetr
 /*
 GetNiatelemetryMsoSchemaDetailsByMoid Read a 'niatelemetry.MsoSchemaDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryMsoSchemaDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryMsoSchemaDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryMsoSchemaDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryMsoSchemaDetailsByMoidRequest {
 	return ApiGetNiatelemetryMsoSchemaDetailsByMoidRequest{
@@ -20551,7 +21548,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoSchemaDetailsByMoid(ctx conte
 }
 
 // Execute executes the request
-//  @return NiatelemetryMsoSchemaDetails
+//
+//	@return NiatelemetryMsoSchemaDetails
 func (a *NiatelemetryApiService) GetNiatelemetryMsoSchemaDetailsByMoidExecute(r ApiGetNiatelemetryMsoSchemaDetailsByMoidRequest) (*NiatelemetryMsoSchemaDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -20762,8 +21760,8 @@ func (r ApiGetNiatelemetryMsoSchemaDetailsListRequest) Execute() (*NiatelemetryM
 /*
 GetNiatelemetryMsoSchemaDetailsList Read a 'niatelemetry.MsoSchemaDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryMsoSchemaDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryMsoSchemaDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryMsoSchemaDetailsList(ctx context.Context) ApiGetNiatelemetryMsoSchemaDetailsListRequest {
 	return ApiGetNiatelemetryMsoSchemaDetailsListRequest{
@@ -20773,7 +21771,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoSchemaDetailsList(ctx context
 }
 
 // Execute executes the request
-//  @return NiatelemetryMsoSchemaDetailsResponse
+//
+//	@return NiatelemetryMsoSchemaDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryMsoSchemaDetailsListExecute(r ApiGetNiatelemetryMsoSchemaDetailsListRequest) (*NiatelemetryMsoSchemaDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -20940,9 +21939,9 @@ func (r ApiGetNiatelemetryMsoSiteDetailsByMoidRequest) Execute() (*NiatelemetryM
 /*
 GetNiatelemetryMsoSiteDetailsByMoid Read a 'niatelemetry.MsoSiteDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryMsoSiteDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryMsoSiteDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryMsoSiteDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryMsoSiteDetailsByMoidRequest {
 	return ApiGetNiatelemetryMsoSiteDetailsByMoidRequest{
@@ -20953,7 +21952,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoSiteDetailsByMoid(ctx context
 }
 
 // Execute executes the request
-//  @return NiatelemetryMsoSiteDetails
+//
+//	@return NiatelemetryMsoSiteDetails
 func (a *NiatelemetryApiService) GetNiatelemetryMsoSiteDetailsByMoidExecute(r ApiGetNiatelemetryMsoSiteDetailsByMoidRequest) (*NiatelemetryMsoSiteDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -21164,8 +22164,8 @@ func (r ApiGetNiatelemetryMsoSiteDetailsListRequest) Execute() (*NiatelemetryMso
 /*
 GetNiatelemetryMsoSiteDetailsList Read a 'niatelemetry.MsoSiteDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryMsoSiteDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryMsoSiteDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryMsoSiteDetailsList(ctx context.Context) ApiGetNiatelemetryMsoSiteDetailsListRequest {
 	return ApiGetNiatelemetryMsoSiteDetailsListRequest{
@@ -21175,7 +22175,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoSiteDetailsList(ctx context.C
 }
 
 // Execute executes the request
-//  @return NiatelemetryMsoSiteDetailsResponse
+//
+//	@return NiatelemetryMsoSiteDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryMsoSiteDetailsListExecute(r ApiGetNiatelemetryMsoSiteDetailsListRequest) (*NiatelemetryMsoSiteDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -21342,9 +22343,9 @@ func (r ApiGetNiatelemetryMsoTenantDetailsByMoidRequest) Execute() (*Niatelemetr
 /*
 GetNiatelemetryMsoTenantDetailsByMoid Read a 'niatelemetry.MsoTenantDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryMsoTenantDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryMsoTenantDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryMsoTenantDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryMsoTenantDetailsByMoidRequest {
 	return ApiGetNiatelemetryMsoTenantDetailsByMoidRequest{
@@ -21355,7 +22356,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoTenantDetailsByMoid(ctx conte
 }
 
 // Execute executes the request
-//  @return NiatelemetryMsoTenantDetails
+//
+//	@return NiatelemetryMsoTenantDetails
 func (a *NiatelemetryApiService) GetNiatelemetryMsoTenantDetailsByMoidExecute(r ApiGetNiatelemetryMsoTenantDetailsByMoidRequest) (*NiatelemetryMsoTenantDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -21566,8 +22568,8 @@ func (r ApiGetNiatelemetryMsoTenantDetailsListRequest) Execute() (*NiatelemetryM
 /*
 GetNiatelemetryMsoTenantDetailsList Read a 'niatelemetry.MsoTenantDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryMsoTenantDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryMsoTenantDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryMsoTenantDetailsList(ctx context.Context) ApiGetNiatelemetryMsoTenantDetailsListRequest {
 	return ApiGetNiatelemetryMsoTenantDetailsListRequest{
@@ -21577,7 +22579,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoTenantDetailsList(ctx context
 }
 
 // Execute executes the request
-//  @return NiatelemetryMsoTenantDetailsResponse
+//
+//	@return NiatelemetryMsoTenantDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryMsoTenantDetailsListExecute(r ApiGetNiatelemetryMsoTenantDetailsListRequest) (*NiatelemetryMsoTenantDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -21731,6 +22734,814 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoTenantDetailsListExecute(r Ap
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetNiatelemetryNexusCloudAccountByMoidRequest struct {
+	ctx        context.Context
+	ApiService *NiatelemetryApiService
+	moid       string
+}
+
+func (r ApiGetNiatelemetryNexusCloudAccountByMoidRequest) Execute() (*NiatelemetryNexusCloudAccount, *http.Response, error) {
+	return r.ApiService.GetNiatelemetryNexusCloudAccountByMoidExecute(r)
+}
+
+/*
+GetNiatelemetryNexusCloudAccountByMoid Read a 'niatelemetry.NexusCloudAccount' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryNexusCloudAccountByMoidRequest
+*/
+func (a *NiatelemetryApiService) GetNiatelemetryNexusCloudAccountByMoid(ctx context.Context, moid string) ApiGetNiatelemetryNexusCloudAccountByMoidRequest {
+	return ApiGetNiatelemetryNexusCloudAccountByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//
+//	@return NiatelemetryNexusCloudAccount
+func (a *NiatelemetryApiService) GetNiatelemetryNexusCloudAccountByMoidExecute(r ApiGetNiatelemetryNexusCloudAccountByMoidRequest) (*NiatelemetryNexusCloudAccount, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryNexusCloudAccount
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryNexusCloudAccountByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/niatelemetry/NexusCloudAccounts/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetNiatelemetryNexusCloudAccountListRequest struct {
+	ctx         context.Context
+	ApiService  *NiatelemetryApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetNiatelemetryNexusCloudAccountListRequest) Filter(filter string) ApiGetNiatelemetryNexusCloudAccountListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetNiatelemetryNexusCloudAccountListRequest) Orderby(orderby string) ApiGetNiatelemetryNexusCloudAccountListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetNiatelemetryNexusCloudAccountListRequest) Top(top int32) ApiGetNiatelemetryNexusCloudAccountListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetNiatelemetryNexusCloudAccountListRequest) Skip(skip int32) ApiGetNiatelemetryNexusCloudAccountListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryNexusCloudAccountListRequest) Select_(select_ string) ApiGetNiatelemetryNexusCloudAccountListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryNexusCloudAccountListRequest) Expand(expand string) ApiGetNiatelemetryNexusCloudAccountListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetNiatelemetryNexusCloudAccountListRequest) Apply(apply string) ApiGetNiatelemetryNexusCloudAccountListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetNiatelemetryNexusCloudAccountListRequest) Count(count bool) ApiGetNiatelemetryNexusCloudAccountListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetNiatelemetryNexusCloudAccountListRequest) Inlinecount(inlinecount string) ApiGetNiatelemetryNexusCloudAccountListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryNexusCloudAccountListRequest) At(at string) ApiGetNiatelemetryNexusCloudAccountListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetNiatelemetryNexusCloudAccountListRequest) Tags(tags string) ApiGetNiatelemetryNexusCloudAccountListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetNiatelemetryNexusCloudAccountListRequest) Execute() (*NiatelemetryNexusCloudAccountResponse, *http.Response, error) {
+	return r.ApiService.GetNiatelemetryNexusCloudAccountListExecute(r)
+}
+
+/*
+GetNiatelemetryNexusCloudAccountList Read a 'niatelemetry.NexusCloudAccount' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryNexusCloudAccountListRequest
+*/
+func (a *NiatelemetryApiService) GetNiatelemetryNexusCloudAccountList(ctx context.Context) ApiGetNiatelemetryNexusCloudAccountListRequest {
+	return ApiGetNiatelemetryNexusCloudAccountListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return NiatelemetryNexusCloudAccountResponse
+func (a *NiatelemetryApiService) GetNiatelemetryNexusCloudAccountListExecute(r ApiGetNiatelemetryNexusCloudAccountListRequest) (*NiatelemetryNexusCloudAccountResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryNexusCloudAccountResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryNexusCloudAccountList")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/niatelemetry/NexusCloudAccounts"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetNiatelemetryNexusCloudSiteByMoidRequest struct {
+	ctx        context.Context
+	ApiService *NiatelemetryApiService
+	moid       string
+}
+
+func (r ApiGetNiatelemetryNexusCloudSiteByMoidRequest) Execute() (*NiatelemetryNexusCloudSite, *http.Response, error) {
+	return r.ApiService.GetNiatelemetryNexusCloudSiteByMoidExecute(r)
+}
+
+/*
+GetNiatelemetryNexusCloudSiteByMoid Read a 'niatelemetry.NexusCloudSite' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryNexusCloudSiteByMoidRequest
+*/
+func (a *NiatelemetryApiService) GetNiatelemetryNexusCloudSiteByMoid(ctx context.Context, moid string) ApiGetNiatelemetryNexusCloudSiteByMoidRequest {
+	return ApiGetNiatelemetryNexusCloudSiteByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//
+//	@return NiatelemetryNexusCloudSite
+func (a *NiatelemetryApiService) GetNiatelemetryNexusCloudSiteByMoidExecute(r ApiGetNiatelemetryNexusCloudSiteByMoidRequest) (*NiatelemetryNexusCloudSite, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryNexusCloudSite
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryNexusCloudSiteByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/niatelemetry/NexusCloudSites/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetNiatelemetryNexusCloudSiteListRequest struct {
+	ctx         context.Context
+	ApiService  *NiatelemetryApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetNiatelemetryNexusCloudSiteListRequest) Filter(filter string) ApiGetNiatelemetryNexusCloudSiteListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetNiatelemetryNexusCloudSiteListRequest) Orderby(orderby string) ApiGetNiatelemetryNexusCloudSiteListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetNiatelemetryNexusCloudSiteListRequest) Top(top int32) ApiGetNiatelemetryNexusCloudSiteListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetNiatelemetryNexusCloudSiteListRequest) Skip(skip int32) ApiGetNiatelemetryNexusCloudSiteListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetNiatelemetryNexusCloudSiteListRequest) Select_(select_ string) ApiGetNiatelemetryNexusCloudSiteListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetNiatelemetryNexusCloudSiteListRequest) Expand(expand string) ApiGetNiatelemetryNexusCloudSiteListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetNiatelemetryNexusCloudSiteListRequest) Apply(apply string) ApiGetNiatelemetryNexusCloudSiteListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetNiatelemetryNexusCloudSiteListRequest) Count(count bool) ApiGetNiatelemetryNexusCloudSiteListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetNiatelemetryNexusCloudSiteListRequest) Inlinecount(inlinecount string) ApiGetNiatelemetryNexusCloudSiteListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetNiatelemetryNexusCloudSiteListRequest) At(at string) ApiGetNiatelemetryNexusCloudSiteListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetNiatelemetryNexusCloudSiteListRequest) Tags(tags string) ApiGetNiatelemetryNexusCloudSiteListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetNiatelemetryNexusCloudSiteListRequest) Execute() (*NiatelemetryNexusCloudSiteResponse, *http.Response, error) {
+	return r.ApiService.GetNiatelemetryNexusCloudSiteListExecute(r)
+}
+
+/*
+GetNiatelemetryNexusCloudSiteList Read a 'niatelemetry.NexusCloudSite' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryNexusCloudSiteListRequest
+*/
+func (a *NiatelemetryApiService) GetNiatelemetryNexusCloudSiteList(ctx context.Context) ApiGetNiatelemetryNexusCloudSiteListRequest {
+	return ApiGetNiatelemetryNexusCloudSiteListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return NiatelemetryNexusCloudSiteResponse
+func (a *NiatelemetryApiService) GetNiatelemetryNexusCloudSiteListExecute(r ApiGetNiatelemetryNexusCloudSiteListRequest) (*NiatelemetryNexusCloudSiteResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryNexusCloudSiteResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryNexusCloudSiteList")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/niatelemetry/NexusCloudSites"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetNiatelemetryNexusDashboardControllerDetailsByMoidRequest struct {
 	ctx        context.Context
 	ApiService *NiatelemetryApiService
@@ -21744,9 +23555,9 @@ func (r ApiGetNiatelemetryNexusDashboardControllerDetailsByMoidRequest) Execute(
 /*
 GetNiatelemetryNexusDashboardControllerDetailsByMoid Read a 'niatelemetry.NexusDashboardControllerDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryNexusDashboardControllerDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryNexusDashboardControllerDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardControllerDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryNexusDashboardControllerDetailsByMoidRequest {
 	return ApiGetNiatelemetryNexusDashboardControllerDetailsByMoidRequest{
@@ -21757,7 +23568,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardControllerDetailsB
 }
 
 // Execute executes the request
-//  @return NiatelemetryNexusDashboardControllerDetails
+//
+//	@return NiatelemetryNexusDashboardControllerDetails
 func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardControllerDetailsByMoidExecute(r ApiGetNiatelemetryNexusDashboardControllerDetailsByMoidRequest) (*NiatelemetryNexusDashboardControllerDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -21968,8 +23780,8 @@ func (r ApiGetNiatelemetryNexusDashboardControllerDetailsListRequest) Execute() 
 /*
 GetNiatelemetryNexusDashboardControllerDetailsList Read a 'niatelemetry.NexusDashboardControllerDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryNexusDashboardControllerDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryNexusDashboardControllerDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardControllerDetailsList(ctx context.Context) ApiGetNiatelemetryNexusDashboardControllerDetailsListRequest {
 	return ApiGetNiatelemetryNexusDashboardControllerDetailsListRequest{
@@ -21979,7 +23791,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardControllerDetailsL
 }
 
 // Execute executes the request
-//  @return NiatelemetryNexusDashboardControllerDetailsResponse
+//
+//	@return NiatelemetryNexusDashboardControllerDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardControllerDetailsListExecute(r ApiGetNiatelemetryNexusDashboardControllerDetailsListRequest) (*NiatelemetryNexusDashboardControllerDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -22146,9 +23959,9 @@ func (r ApiGetNiatelemetryNexusDashboardDetailsByMoidRequest) Execute() (*Niatel
 /*
 GetNiatelemetryNexusDashboardDetailsByMoid Read a 'niatelemetry.NexusDashboardDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryNexusDashboardDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryNexusDashboardDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryNexusDashboardDetailsByMoidRequest {
 	return ApiGetNiatelemetryNexusDashboardDetailsByMoidRequest{
@@ -22159,7 +23972,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardDetailsByMoid(ctx 
 }
 
 // Execute executes the request
-//  @return NiatelemetryNexusDashboardDetails
+//
+//	@return NiatelemetryNexusDashboardDetails
 func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardDetailsByMoidExecute(r ApiGetNiatelemetryNexusDashboardDetailsByMoidRequest) (*NiatelemetryNexusDashboardDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -22370,8 +24184,8 @@ func (r ApiGetNiatelemetryNexusDashboardDetailsListRequest) Execute() (*Niatelem
 /*
 GetNiatelemetryNexusDashboardDetailsList Read a 'niatelemetry.NexusDashboardDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryNexusDashboardDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryNexusDashboardDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardDetailsList(ctx context.Context) ApiGetNiatelemetryNexusDashboardDetailsListRequest {
 	return ApiGetNiatelemetryNexusDashboardDetailsListRequest{
@@ -22381,7 +24195,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardDetailsList(ctx co
 }
 
 // Execute executes the request
-//  @return NiatelemetryNexusDashboardDetailsResponse
+//
+//	@return NiatelemetryNexusDashboardDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardDetailsListExecute(r ApiGetNiatelemetryNexusDashboardDetailsListRequest) (*NiatelemetryNexusDashboardDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -22548,9 +24363,9 @@ func (r ApiGetNiatelemetryNexusDashboardMemoryDetailsByMoidRequest) Execute() (*
 /*
 GetNiatelemetryNexusDashboardMemoryDetailsByMoid Read a 'niatelemetry.NexusDashboardMemoryDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryNexusDashboardMemoryDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryNexusDashboardMemoryDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardMemoryDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryNexusDashboardMemoryDetailsByMoidRequest {
 	return ApiGetNiatelemetryNexusDashboardMemoryDetailsByMoidRequest{
@@ -22561,7 +24376,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardMemoryDetailsByMoi
 }
 
 // Execute executes the request
-//  @return NiatelemetryNexusDashboardMemoryDetails
+//
+//	@return NiatelemetryNexusDashboardMemoryDetails
 func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardMemoryDetailsByMoidExecute(r ApiGetNiatelemetryNexusDashboardMemoryDetailsByMoidRequest) (*NiatelemetryNexusDashboardMemoryDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -22772,8 +24588,8 @@ func (r ApiGetNiatelemetryNexusDashboardMemoryDetailsListRequest) Execute() (*Ni
 /*
 GetNiatelemetryNexusDashboardMemoryDetailsList Read a 'niatelemetry.NexusDashboardMemoryDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryNexusDashboardMemoryDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryNexusDashboardMemoryDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardMemoryDetailsList(ctx context.Context) ApiGetNiatelemetryNexusDashboardMemoryDetailsListRequest {
 	return ApiGetNiatelemetryNexusDashboardMemoryDetailsListRequest{
@@ -22783,7 +24599,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardMemoryDetailsList(
 }
 
 // Execute executes the request
-//  @return NiatelemetryNexusDashboardMemoryDetailsResponse
+//
+//	@return NiatelemetryNexusDashboardMemoryDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardMemoryDetailsListExecute(r ApiGetNiatelemetryNexusDashboardMemoryDetailsListRequest) (*NiatelemetryNexusDashboardMemoryDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -22950,9 +24767,9 @@ func (r ApiGetNiatelemetryNexusDashboardsByMoidRequest) Execute() (*Niatelemetry
 /*
 GetNiatelemetryNexusDashboardsByMoid Read a 'niatelemetry.NexusDashboards' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryNexusDashboardsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryNexusDashboardsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryNexusDashboardsByMoidRequest {
 	return ApiGetNiatelemetryNexusDashboardsByMoidRequest{
@@ -22963,7 +24780,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardsByMoid(ctx contex
 }
 
 // Execute executes the request
-//  @return NiatelemetryNexusDashboards
+//
+//	@return NiatelemetryNexusDashboards
 func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardsByMoidExecute(r ApiGetNiatelemetryNexusDashboardsByMoidRequest) (*NiatelemetryNexusDashboards, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -23174,8 +24992,8 @@ func (r ApiGetNiatelemetryNexusDashboardsListRequest) Execute() (*NiatelemetryNe
 /*
 GetNiatelemetryNexusDashboardsList Read a 'niatelemetry.NexusDashboards' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryNexusDashboardsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryNexusDashboardsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardsList(ctx context.Context) ApiGetNiatelemetryNexusDashboardsListRequest {
 	return ApiGetNiatelemetryNexusDashboardsListRequest{
@@ -23185,7 +25003,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardsList(ctx context.
 }
 
 // Execute executes the request
-//  @return NiatelemetryNexusDashboardsResponse
+//
+//	@return NiatelemetryNexusDashboardsResponse
 func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardsListExecute(r ApiGetNiatelemetryNexusDashboardsListRequest) (*NiatelemetryNexusDashboardsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -23352,9 +25171,9 @@ func (r ApiGetNiatelemetryNiaFeatureUsageByMoidRequest) Execute() (*Niatelemetry
 /*
 GetNiatelemetryNiaFeatureUsageByMoid Read a 'niatelemetry.NiaFeatureUsage' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryNiaFeatureUsageByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryNiaFeatureUsageByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryNiaFeatureUsageByMoid(ctx context.Context, moid string) ApiGetNiatelemetryNiaFeatureUsageByMoidRequest {
 	return ApiGetNiatelemetryNiaFeatureUsageByMoidRequest{
@@ -23365,7 +25184,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaFeatureUsageByMoid(ctx contex
 }
 
 // Execute executes the request
-//  @return NiatelemetryNiaFeatureUsage
+//
+//	@return NiatelemetryNiaFeatureUsage
 func (a *NiatelemetryApiService) GetNiatelemetryNiaFeatureUsageByMoidExecute(r ApiGetNiatelemetryNiaFeatureUsageByMoidRequest) (*NiatelemetryNiaFeatureUsage, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -23576,8 +25396,8 @@ func (r ApiGetNiatelemetryNiaFeatureUsageListRequest) Execute() (*NiatelemetryNi
 /*
 GetNiatelemetryNiaFeatureUsageList Read a 'niatelemetry.NiaFeatureUsage' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryNiaFeatureUsageListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryNiaFeatureUsageListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryNiaFeatureUsageList(ctx context.Context) ApiGetNiatelemetryNiaFeatureUsageListRequest {
 	return ApiGetNiatelemetryNiaFeatureUsageListRequest{
@@ -23587,7 +25407,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaFeatureUsageList(ctx context.
 }
 
 // Execute executes the request
-//  @return NiatelemetryNiaFeatureUsageResponse
+//
+//	@return NiatelemetryNiaFeatureUsageResponse
 func (a *NiatelemetryApiService) GetNiatelemetryNiaFeatureUsageListExecute(r ApiGetNiatelemetryNiaFeatureUsageListRequest) (*NiatelemetryNiaFeatureUsageResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -23754,9 +25575,9 @@ func (r ApiGetNiatelemetryNiaInventoryByMoidRequest) Execute() (*NiatelemetryNia
 /*
 GetNiatelemetryNiaInventoryByMoid Read a 'niatelemetry.NiaInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryNiaInventoryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryNiaInventoryByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryByMoid(ctx context.Context, moid string) ApiGetNiatelemetryNiaInventoryByMoidRequest {
 	return ApiGetNiatelemetryNiaInventoryByMoidRequest{
@@ -23767,7 +25588,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryByMoid(ctx context.C
 }
 
 // Execute executes the request
-//  @return NiatelemetryNiaInventory
+//
+//	@return NiatelemetryNiaInventory
 func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryByMoidExecute(r ApiGetNiatelemetryNiaInventoryByMoidRequest) (*NiatelemetryNiaInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -23902,9 +25724,9 @@ func (r ApiGetNiatelemetryNiaInventoryDcnmByMoidRequest) Execute() (*Niatelemetr
 /*
 GetNiatelemetryNiaInventoryDcnmByMoid Read a 'niatelemetry.NiaInventoryDcnm' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryNiaInventoryDcnmByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryNiaInventoryDcnmByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryDcnmByMoid(ctx context.Context, moid string) ApiGetNiatelemetryNiaInventoryDcnmByMoidRequest {
 	return ApiGetNiatelemetryNiaInventoryDcnmByMoidRequest{
@@ -23915,7 +25737,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryDcnmByMoid(ctx conte
 }
 
 // Execute executes the request
-//  @return NiatelemetryNiaInventoryDcnm
+//
+//	@return NiatelemetryNiaInventoryDcnm
 func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryDcnmByMoidExecute(r ApiGetNiatelemetryNiaInventoryDcnmByMoidRequest) (*NiatelemetryNiaInventoryDcnm, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -24126,8 +25949,8 @@ func (r ApiGetNiatelemetryNiaInventoryDcnmListRequest) Execute() (*NiatelemetryN
 /*
 GetNiatelemetryNiaInventoryDcnmList Read a 'niatelemetry.NiaInventoryDcnm' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryNiaInventoryDcnmListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryNiaInventoryDcnmListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryDcnmList(ctx context.Context) ApiGetNiatelemetryNiaInventoryDcnmListRequest {
 	return ApiGetNiatelemetryNiaInventoryDcnmListRequest{
@@ -24137,7 +25960,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryDcnmList(ctx context
 }
 
 // Execute executes the request
-//  @return NiatelemetryNiaInventoryDcnmResponse
+//
+//	@return NiatelemetryNiaInventoryDcnmResponse
 func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryDcnmListExecute(r ApiGetNiatelemetryNiaInventoryDcnmListRequest) (*NiatelemetryNiaInventoryDcnmResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -24304,9 +26128,9 @@ func (r ApiGetNiatelemetryNiaInventoryFabricByMoidRequest) Execute() (*Niateleme
 /*
 GetNiatelemetryNiaInventoryFabricByMoid Read a 'niatelemetry.NiaInventoryFabric' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryNiaInventoryFabricByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryNiaInventoryFabricByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryFabricByMoid(ctx context.Context, moid string) ApiGetNiatelemetryNiaInventoryFabricByMoidRequest {
 	return ApiGetNiatelemetryNiaInventoryFabricByMoidRequest{
@@ -24317,7 +26141,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryFabricByMoid(ctx con
 }
 
 // Execute executes the request
-//  @return NiatelemetryNiaInventoryFabric
+//
+//	@return NiatelemetryNiaInventoryFabric
 func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryFabricByMoidExecute(r ApiGetNiatelemetryNiaInventoryFabricByMoidRequest) (*NiatelemetryNiaInventoryFabric, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -24528,8 +26353,8 @@ func (r ApiGetNiatelemetryNiaInventoryFabricListRequest) Execute() (*Niatelemetr
 /*
 GetNiatelemetryNiaInventoryFabricList Read a 'niatelemetry.NiaInventoryFabric' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryNiaInventoryFabricListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryNiaInventoryFabricListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryFabricList(ctx context.Context) ApiGetNiatelemetryNiaInventoryFabricListRequest {
 	return ApiGetNiatelemetryNiaInventoryFabricListRequest{
@@ -24539,7 +26364,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryFabricList(ctx conte
 }
 
 // Execute executes the request
-//  @return NiatelemetryNiaInventoryFabricResponse
+//
+//	@return NiatelemetryNiaInventoryFabricResponse
 func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryFabricListExecute(r ApiGetNiatelemetryNiaInventoryFabricListRequest) (*NiatelemetryNiaInventoryFabricResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -24782,8 +26608,8 @@ func (r ApiGetNiatelemetryNiaInventoryListRequest) Execute() (*NiatelemetryNiaIn
 /*
 GetNiatelemetryNiaInventoryList Read a 'niatelemetry.NiaInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryNiaInventoryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryNiaInventoryListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryList(ctx context.Context) ApiGetNiatelemetryNiaInventoryListRequest {
 	return ApiGetNiatelemetryNiaInventoryListRequest{
@@ -24793,7 +26619,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryList(ctx context.Con
 }
 
 // Execute executes the request
-//  @return NiatelemetryNiaInventoryResponse
+//
+//	@return NiatelemetryNiaInventoryResponse
 func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryListExecute(r ApiGetNiatelemetryNiaInventoryListRequest) (*NiatelemetryNiaInventoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -24960,9 +26787,9 @@ func (r ApiGetNiatelemetryNiaLicenseStateByMoidRequest) Execute() (*Niatelemetry
 /*
 GetNiatelemetryNiaLicenseStateByMoid Read a 'niatelemetry.NiaLicenseState' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryNiaLicenseStateByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryNiaLicenseStateByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryNiaLicenseStateByMoid(ctx context.Context, moid string) ApiGetNiatelemetryNiaLicenseStateByMoidRequest {
 	return ApiGetNiatelemetryNiaLicenseStateByMoidRequest{
@@ -24973,7 +26800,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaLicenseStateByMoid(ctx contex
 }
 
 // Execute executes the request
-//  @return NiatelemetryNiaLicenseState
+//
+//	@return NiatelemetryNiaLicenseState
 func (a *NiatelemetryApiService) GetNiatelemetryNiaLicenseStateByMoidExecute(r ApiGetNiatelemetryNiaLicenseStateByMoidRequest) (*NiatelemetryNiaLicenseState, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -25184,8 +27012,8 @@ func (r ApiGetNiatelemetryNiaLicenseStateListRequest) Execute() (*NiatelemetryNi
 /*
 GetNiatelemetryNiaLicenseStateList Read a 'niatelemetry.NiaLicenseState' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryNiaLicenseStateListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryNiaLicenseStateListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryNiaLicenseStateList(ctx context.Context) ApiGetNiatelemetryNiaLicenseStateListRequest {
 	return ApiGetNiatelemetryNiaLicenseStateListRequest{
@@ -25195,7 +27023,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaLicenseStateList(ctx context.
 }
 
 // Execute executes the request
-//  @return NiatelemetryNiaLicenseStateResponse
+//
+//	@return NiatelemetryNiaLicenseStateResponse
 func (a *NiatelemetryApiService) GetNiatelemetryNiaLicenseStateListExecute(r ApiGetNiatelemetryNiaLicenseStateListRequest) (*NiatelemetryNiaLicenseStateResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -25362,9 +27191,9 @@ func (r ApiGetNiatelemetryPasswordStrengthCheckByMoidRequest) Execute() (*Niatel
 /*
 GetNiatelemetryPasswordStrengthCheckByMoid Read a 'niatelemetry.PasswordStrengthCheck' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryPasswordStrengthCheckByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryPasswordStrengthCheckByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryPasswordStrengthCheckByMoid(ctx context.Context, moid string) ApiGetNiatelemetryPasswordStrengthCheckByMoidRequest {
 	return ApiGetNiatelemetryPasswordStrengthCheckByMoidRequest{
@@ -25375,7 +27204,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryPasswordStrengthCheckByMoid(ctx 
 }
 
 // Execute executes the request
-//  @return NiatelemetryPasswordStrengthCheck
+//
+//	@return NiatelemetryPasswordStrengthCheck
 func (a *NiatelemetryApiService) GetNiatelemetryPasswordStrengthCheckByMoidExecute(r ApiGetNiatelemetryPasswordStrengthCheckByMoidRequest) (*NiatelemetryPasswordStrengthCheck, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -25586,8 +27416,8 @@ func (r ApiGetNiatelemetryPasswordStrengthCheckListRequest) Execute() (*Niatelem
 /*
 GetNiatelemetryPasswordStrengthCheckList Read a 'niatelemetry.PasswordStrengthCheck' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryPasswordStrengthCheckListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryPasswordStrengthCheckListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryPasswordStrengthCheckList(ctx context.Context) ApiGetNiatelemetryPasswordStrengthCheckListRequest {
 	return ApiGetNiatelemetryPasswordStrengthCheckListRequest{
@@ -25597,7 +27427,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryPasswordStrengthCheckList(ctx co
 }
 
 // Execute executes the request
-//  @return NiatelemetryPasswordStrengthCheckResponse
+//
+//	@return NiatelemetryPasswordStrengthCheckResponse
 func (a *NiatelemetryApiService) GetNiatelemetryPasswordStrengthCheckListExecute(r ApiGetNiatelemetryPasswordStrengthCheckListRequest) (*NiatelemetryPasswordStrengthCheckResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -25764,9 +27595,9 @@ func (r ApiGetNiatelemetryPodCommPoliciesByMoidRequest) Execute() (*Niatelemetry
 /*
 GetNiatelemetryPodCommPoliciesByMoid Read a 'niatelemetry.PodCommPolicies' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryPodCommPoliciesByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryPodCommPoliciesByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryPodCommPoliciesByMoid(ctx context.Context, moid string) ApiGetNiatelemetryPodCommPoliciesByMoidRequest {
 	return ApiGetNiatelemetryPodCommPoliciesByMoidRequest{
@@ -25777,7 +27608,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryPodCommPoliciesByMoid(ctx contex
 }
 
 // Execute executes the request
-//  @return NiatelemetryPodCommPolicies
+//
+//	@return NiatelemetryPodCommPolicies
 func (a *NiatelemetryApiService) GetNiatelemetryPodCommPoliciesByMoidExecute(r ApiGetNiatelemetryPodCommPoliciesByMoidRequest) (*NiatelemetryPodCommPolicies, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -25988,8 +27820,8 @@ func (r ApiGetNiatelemetryPodCommPoliciesListRequest) Execute() (*NiatelemetryPo
 /*
 GetNiatelemetryPodCommPoliciesList Read a 'niatelemetry.PodCommPolicies' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryPodCommPoliciesListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryPodCommPoliciesListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryPodCommPoliciesList(ctx context.Context) ApiGetNiatelemetryPodCommPoliciesListRequest {
 	return ApiGetNiatelemetryPodCommPoliciesListRequest{
@@ -25999,7 +27831,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryPodCommPoliciesList(ctx context.
 }
 
 // Execute executes the request
-//  @return NiatelemetryPodCommPoliciesResponse
+//
+//	@return NiatelemetryPodCommPoliciesResponse
 func (a *NiatelemetryApiService) GetNiatelemetryPodCommPoliciesListExecute(r ApiGetNiatelemetryPodCommPoliciesListRequest) (*NiatelemetryPodCommPoliciesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -26166,9 +27999,9 @@ func (r ApiGetNiatelemetryPodSnmpPoliciesByMoidRequest) Execute() (*Niatelemetry
 /*
 GetNiatelemetryPodSnmpPoliciesByMoid Read a 'niatelemetry.PodSnmpPolicies' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryPodSnmpPoliciesByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryPodSnmpPoliciesByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryPodSnmpPoliciesByMoid(ctx context.Context, moid string) ApiGetNiatelemetryPodSnmpPoliciesByMoidRequest {
 	return ApiGetNiatelemetryPodSnmpPoliciesByMoidRequest{
@@ -26179,7 +28012,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryPodSnmpPoliciesByMoid(ctx contex
 }
 
 // Execute executes the request
-//  @return NiatelemetryPodSnmpPolicies
+//
+//	@return NiatelemetryPodSnmpPolicies
 func (a *NiatelemetryApiService) GetNiatelemetryPodSnmpPoliciesByMoidExecute(r ApiGetNiatelemetryPodSnmpPoliciesByMoidRequest) (*NiatelemetryPodSnmpPolicies, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -26390,8 +28224,8 @@ func (r ApiGetNiatelemetryPodSnmpPoliciesListRequest) Execute() (*NiatelemetryPo
 /*
 GetNiatelemetryPodSnmpPoliciesList Read a 'niatelemetry.PodSnmpPolicies' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryPodSnmpPoliciesListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryPodSnmpPoliciesListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryPodSnmpPoliciesList(ctx context.Context) ApiGetNiatelemetryPodSnmpPoliciesListRequest {
 	return ApiGetNiatelemetryPodSnmpPoliciesListRequest{
@@ -26401,7 +28235,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryPodSnmpPoliciesList(ctx context.
 }
 
 // Execute executes the request
-//  @return NiatelemetryPodSnmpPoliciesResponse
+//
+//	@return NiatelemetryPodSnmpPoliciesResponse
 func (a *NiatelemetryApiService) GetNiatelemetryPodSnmpPoliciesListExecute(r ApiGetNiatelemetryPodSnmpPoliciesListRequest) (*NiatelemetryPodSnmpPoliciesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -26568,9 +28403,9 @@ func (r ApiGetNiatelemetryPodTimeServerPoliciesByMoidRequest) Execute() (*Niatel
 /*
 GetNiatelemetryPodTimeServerPoliciesByMoid Read a 'niatelemetry.PodTimeServerPolicies' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryPodTimeServerPoliciesByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryPodTimeServerPoliciesByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryPodTimeServerPoliciesByMoid(ctx context.Context, moid string) ApiGetNiatelemetryPodTimeServerPoliciesByMoidRequest {
 	return ApiGetNiatelemetryPodTimeServerPoliciesByMoidRequest{
@@ -26581,7 +28416,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryPodTimeServerPoliciesByMoid(ctx 
 }
 
 // Execute executes the request
-//  @return NiatelemetryPodTimeServerPolicies
+//
+//	@return NiatelemetryPodTimeServerPolicies
 func (a *NiatelemetryApiService) GetNiatelemetryPodTimeServerPoliciesByMoidExecute(r ApiGetNiatelemetryPodTimeServerPoliciesByMoidRequest) (*NiatelemetryPodTimeServerPolicies, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -26792,8 +28628,8 @@ func (r ApiGetNiatelemetryPodTimeServerPoliciesListRequest) Execute() (*Niatelem
 /*
 GetNiatelemetryPodTimeServerPoliciesList Read a 'niatelemetry.PodTimeServerPolicies' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryPodTimeServerPoliciesListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryPodTimeServerPoliciesListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryPodTimeServerPoliciesList(ctx context.Context) ApiGetNiatelemetryPodTimeServerPoliciesListRequest {
 	return ApiGetNiatelemetryPodTimeServerPoliciesListRequest{
@@ -26803,7 +28639,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryPodTimeServerPoliciesList(ctx co
 }
 
 // Execute executes the request
-//  @return NiatelemetryPodTimeServerPoliciesResponse
+//
+//	@return NiatelemetryPodTimeServerPoliciesResponse
 func (a *NiatelemetryApiService) GetNiatelemetryPodTimeServerPoliciesListExecute(r ApiGetNiatelemetryPodTimeServerPoliciesListRequest) (*NiatelemetryPodTimeServerPoliciesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -26970,9 +28807,9 @@ func (r ApiGetNiatelemetrySiteInventoryByMoidRequest) Execute() (*NiatelemetrySi
 /*
 GetNiatelemetrySiteInventoryByMoid Read a 'niatelemetry.SiteInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetrySiteInventoryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetrySiteInventoryByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetrySiteInventoryByMoid(ctx context.Context, moid string) ApiGetNiatelemetrySiteInventoryByMoidRequest {
 	return ApiGetNiatelemetrySiteInventoryByMoidRequest{
@@ -26983,7 +28820,8 @@ func (a *NiatelemetryApiService) GetNiatelemetrySiteInventoryByMoid(ctx context.
 }
 
 // Execute executes the request
-//  @return NiatelemetrySiteInventory
+//
+//	@return NiatelemetrySiteInventory
 func (a *NiatelemetryApiService) GetNiatelemetrySiteInventoryByMoidExecute(r ApiGetNiatelemetrySiteInventoryByMoidRequest) (*NiatelemetrySiteInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -27194,8 +29032,8 @@ func (r ApiGetNiatelemetrySiteInventoryListRequest) Execute() (*NiatelemetrySite
 /*
 GetNiatelemetrySiteInventoryList Read a 'niatelemetry.SiteInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetrySiteInventoryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetrySiteInventoryListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetrySiteInventoryList(ctx context.Context) ApiGetNiatelemetrySiteInventoryListRequest {
 	return ApiGetNiatelemetrySiteInventoryListRequest{
@@ -27205,7 +29043,8 @@ func (a *NiatelemetryApiService) GetNiatelemetrySiteInventoryList(ctx context.Co
 }
 
 // Execute executes the request
-//  @return NiatelemetrySiteInventoryResponse
+//
+//	@return NiatelemetrySiteInventoryResponse
 func (a *NiatelemetryApiService) GetNiatelemetrySiteInventoryListExecute(r ApiGetNiatelemetrySiteInventoryListRequest) (*NiatelemetrySiteInventoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -27372,9 +29211,9 @@ func (r ApiGetNiatelemetrySnmpSrcByMoidRequest) Execute() (*NiatelemetrySnmpSrc,
 /*
 GetNiatelemetrySnmpSrcByMoid Read a 'niatelemetry.SnmpSrc' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetrySnmpSrcByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetrySnmpSrcByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetrySnmpSrcByMoid(ctx context.Context, moid string) ApiGetNiatelemetrySnmpSrcByMoidRequest {
 	return ApiGetNiatelemetrySnmpSrcByMoidRequest{
@@ -27385,7 +29224,8 @@ func (a *NiatelemetryApiService) GetNiatelemetrySnmpSrcByMoid(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return NiatelemetrySnmpSrc
+//
+//	@return NiatelemetrySnmpSrc
 func (a *NiatelemetryApiService) GetNiatelemetrySnmpSrcByMoidExecute(r ApiGetNiatelemetrySnmpSrcByMoidRequest) (*NiatelemetrySnmpSrc, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -27596,8 +29436,8 @@ func (r ApiGetNiatelemetrySnmpSrcListRequest) Execute() (*NiatelemetrySnmpSrcRes
 /*
 GetNiatelemetrySnmpSrcList Read a 'niatelemetry.SnmpSrc' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetrySnmpSrcListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetrySnmpSrcListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetrySnmpSrcList(ctx context.Context) ApiGetNiatelemetrySnmpSrcListRequest {
 	return ApiGetNiatelemetrySnmpSrcListRequest{
@@ -27607,7 +29447,8 @@ func (a *NiatelemetryApiService) GetNiatelemetrySnmpSrcList(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return NiatelemetrySnmpSrcResponse
+//
+//	@return NiatelemetrySnmpSrcResponse
 func (a *NiatelemetryApiService) GetNiatelemetrySnmpSrcListExecute(r ApiGetNiatelemetrySnmpSrcListRequest) (*NiatelemetrySnmpSrcResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -27774,9 +29615,9 @@ func (r ApiGetNiatelemetrySpinePolGrpDetailsByMoidRequest) Execute() (*Niateleme
 /*
 GetNiatelemetrySpinePolGrpDetailsByMoid Read a 'niatelemetry.SpinePolGrpDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetrySpinePolGrpDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetrySpinePolGrpDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetrySpinePolGrpDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetrySpinePolGrpDetailsByMoidRequest {
 	return ApiGetNiatelemetrySpinePolGrpDetailsByMoidRequest{
@@ -27787,7 +29628,8 @@ func (a *NiatelemetryApiService) GetNiatelemetrySpinePolGrpDetailsByMoid(ctx con
 }
 
 // Execute executes the request
-//  @return NiatelemetrySpinePolGrpDetails
+//
+//	@return NiatelemetrySpinePolGrpDetails
 func (a *NiatelemetryApiService) GetNiatelemetrySpinePolGrpDetailsByMoidExecute(r ApiGetNiatelemetrySpinePolGrpDetailsByMoidRequest) (*NiatelemetrySpinePolGrpDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -27998,8 +29840,8 @@ func (r ApiGetNiatelemetrySpinePolGrpDetailsListRequest) Execute() (*Niatelemetr
 /*
 GetNiatelemetrySpinePolGrpDetailsList Read a 'niatelemetry.SpinePolGrpDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetrySpinePolGrpDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetrySpinePolGrpDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetrySpinePolGrpDetailsList(ctx context.Context) ApiGetNiatelemetrySpinePolGrpDetailsListRequest {
 	return ApiGetNiatelemetrySpinePolGrpDetailsListRequest{
@@ -28009,7 +29851,8 @@ func (a *NiatelemetryApiService) GetNiatelemetrySpinePolGrpDetailsList(ctx conte
 }
 
 // Execute executes the request
-//  @return NiatelemetrySpinePolGrpDetailsResponse
+//
+//	@return NiatelemetrySpinePolGrpDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetrySpinePolGrpDetailsListExecute(r ApiGetNiatelemetrySpinePolGrpDetailsListRequest) (*NiatelemetrySpinePolGrpDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -28176,9 +30019,9 @@ func (r ApiGetNiatelemetrySshVersionTwoByMoidRequest) Execute() (*NiatelemetrySs
 /*
 GetNiatelemetrySshVersionTwoByMoid Read a 'niatelemetry.SshVersionTwo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetrySshVersionTwoByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetrySshVersionTwoByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetrySshVersionTwoByMoid(ctx context.Context, moid string) ApiGetNiatelemetrySshVersionTwoByMoidRequest {
 	return ApiGetNiatelemetrySshVersionTwoByMoidRequest{
@@ -28189,7 +30032,8 @@ func (a *NiatelemetryApiService) GetNiatelemetrySshVersionTwoByMoid(ctx context.
 }
 
 // Execute executes the request
-//  @return NiatelemetrySshVersionTwo
+//
+//	@return NiatelemetrySshVersionTwo
 func (a *NiatelemetryApiService) GetNiatelemetrySshVersionTwoByMoidExecute(r ApiGetNiatelemetrySshVersionTwoByMoidRequest) (*NiatelemetrySshVersionTwo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -28400,8 +30244,8 @@ func (r ApiGetNiatelemetrySshVersionTwoListRequest) Execute() (*NiatelemetrySshV
 /*
 GetNiatelemetrySshVersionTwoList Read a 'niatelemetry.SshVersionTwo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetrySshVersionTwoListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetrySshVersionTwoListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetrySshVersionTwoList(ctx context.Context) ApiGetNiatelemetrySshVersionTwoListRequest {
 	return ApiGetNiatelemetrySshVersionTwoListRequest{
@@ -28411,7 +30255,8 @@ func (a *NiatelemetryApiService) GetNiatelemetrySshVersionTwoList(ctx context.Co
 }
 
 // Execute executes the request
-//  @return NiatelemetrySshVersionTwoResponse
+//
+//	@return NiatelemetrySshVersionTwoResponse
 func (a *NiatelemetryApiService) GetNiatelemetrySshVersionTwoListExecute(r ApiGetNiatelemetrySshVersionTwoListRequest) (*NiatelemetrySshVersionTwoResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -28578,9 +30423,9 @@ func (r ApiGetNiatelemetrySupervisorModuleDetailsByMoidRequest) Execute() (*Niat
 /*
 GetNiatelemetrySupervisorModuleDetailsByMoid Read a 'niatelemetry.SupervisorModuleDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetrySupervisorModuleDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetrySupervisorModuleDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetrySupervisorModuleDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetrySupervisorModuleDetailsByMoidRequest {
 	return ApiGetNiatelemetrySupervisorModuleDetailsByMoidRequest{
@@ -28591,7 +30436,8 @@ func (a *NiatelemetryApiService) GetNiatelemetrySupervisorModuleDetailsByMoid(ct
 }
 
 // Execute executes the request
-//  @return NiatelemetrySupervisorModuleDetails
+//
+//	@return NiatelemetrySupervisorModuleDetails
 func (a *NiatelemetryApiService) GetNiatelemetrySupervisorModuleDetailsByMoidExecute(r ApiGetNiatelemetrySupervisorModuleDetailsByMoidRequest) (*NiatelemetrySupervisorModuleDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -28802,8 +30648,8 @@ func (r ApiGetNiatelemetrySupervisorModuleDetailsListRequest) Execute() (*Niatel
 /*
 GetNiatelemetrySupervisorModuleDetailsList Read a 'niatelemetry.SupervisorModuleDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetrySupervisorModuleDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetrySupervisorModuleDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetrySupervisorModuleDetailsList(ctx context.Context) ApiGetNiatelemetrySupervisorModuleDetailsListRequest {
 	return ApiGetNiatelemetrySupervisorModuleDetailsListRequest{
@@ -28813,7 +30659,8 @@ func (a *NiatelemetryApiService) GetNiatelemetrySupervisorModuleDetailsList(ctx 
 }
 
 // Execute executes the request
-//  @return NiatelemetrySupervisorModuleDetailsResponse
+//
+//	@return NiatelemetrySupervisorModuleDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetrySupervisorModuleDetailsListExecute(r ApiGetNiatelemetrySupervisorModuleDetailsListRequest) (*NiatelemetrySupervisorModuleDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -28980,9 +30827,9 @@ func (r ApiGetNiatelemetrySyslogRemoteDestByMoidRequest) Execute() (*Niatelemetr
 /*
 GetNiatelemetrySyslogRemoteDestByMoid Read a 'niatelemetry.SyslogRemoteDest' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetrySyslogRemoteDestByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetrySyslogRemoteDestByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetrySyslogRemoteDestByMoid(ctx context.Context, moid string) ApiGetNiatelemetrySyslogRemoteDestByMoidRequest {
 	return ApiGetNiatelemetrySyslogRemoteDestByMoidRequest{
@@ -28993,7 +30840,8 @@ func (a *NiatelemetryApiService) GetNiatelemetrySyslogRemoteDestByMoid(ctx conte
 }
 
 // Execute executes the request
-//  @return NiatelemetrySyslogRemoteDest
+//
+//	@return NiatelemetrySyslogRemoteDest
 func (a *NiatelemetryApiService) GetNiatelemetrySyslogRemoteDestByMoidExecute(r ApiGetNiatelemetrySyslogRemoteDestByMoidRequest) (*NiatelemetrySyslogRemoteDest, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -29204,8 +31052,8 @@ func (r ApiGetNiatelemetrySyslogRemoteDestListRequest) Execute() (*NiatelemetryS
 /*
 GetNiatelemetrySyslogRemoteDestList Read a 'niatelemetry.SyslogRemoteDest' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetrySyslogRemoteDestListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetrySyslogRemoteDestListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetrySyslogRemoteDestList(ctx context.Context) ApiGetNiatelemetrySyslogRemoteDestListRequest {
 	return ApiGetNiatelemetrySyslogRemoteDestListRequest{
@@ -29215,7 +31063,8 @@ func (a *NiatelemetryApiService) GetNiatelemetrySyslogRemoteDestList(ctx context
 }
 
 // Execute executes the request
-//  @return NiatelemetrySyslogRemoteDestResponse
+//
+//	@return NiatelemetrySyslogRemoteDestResponse
 func (a *NiatelemetryApiService) GetNiatelemetrySyslogRemoteDestListExecute(r ApiGetNiatelemetrySyslogRemoteDestListRequest) (*NiatelemetrySyslogRemoteDestResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -29382,9 +31231,9 @@ func (r ApiGetNiatelemetrySyslogSysMsgByMoidRequest) Execute() (*NiatelemetrySys
 /*
 GetNiatelemetrySyslogSysMsgByMoid Read a 'niatelemetry.SyslogSysMsg' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetrySyslogSysMsgByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetrySyslogSysMsgByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgByMoid(ctx context.Context, moid string) ApiGetNiatelemetrySyslogSysMsgByMoidRequest {
 	return ApiGetNiatelemetrySyslogSysMsgByMoidRequest{
@@ -29395,7 +31244,8 @@ func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgByMoid(ctx context.C
 }
 
 // Execute executes the request
-//  @return NiatelemetrySyslogSysMsg
+//
+//	@return NiatelemetrySyslogSysMsg
 func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgByMoidExecute(r ApiGetNiatelemetrySyslogSysMsgByMoidRequest) (*NiatelemetrySyslogSysMsg, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -29530,9 +31380,9 @@ func (r ApiGetNiatelemetrySyslogSysMsgFacFilterByMoidRequest) Execute() (*Niatel
 /*
 GetNiatelemetrySyslogSysMsgFacFilterByMoid Read a 'niatelemetry.SyslogSysMsgFacFilter' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetrySyslogSysMsgFacFilterByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetrySyslogSysMsgFacFilterByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgFacFilterByMoid(ctx context.Context, moid string) ApiGetNiatelemetrySyslogSysMsgFacFilterByMoidRequest {
 	return ApiGetNiatelemetrySyslogSysMsgFacFilterByMoidRequest{
@@ -29543,7 +31393,8 @@ func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgFacFilterByMoid(ctx 
 }
 
 // Execute executes the request
-//  @return NiatelemetrySyslogSysMsgFacFilter
+//
+//	@return NiatelemetrySyslogSysMsgFacFilter
 func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgFacFilterByMoidExecute(r ApiGetNiatelemetrySyslogSysMsgFacFilterByMoidRequest) (*NiatelemetrySyslogSysMsgFacFilter, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -29754,8 +31605,8 @@ func (r ApiGetNiatelemetrySyslogSysMsgFacFilterListRequest) Execute() (*Niatelem
 /*
 GetNiatelemetrySyslogSysMsgFacFilterList Read a 'niatelemetry.SyslogSysMsgFacFilter' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetrySyslogSysMsgFacFilterListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetrySyslogSysMsgFacFilterListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgFacFilterList(ctx context.Context) ApiGetNiatelemetrySyslogSysMsgFacFilterListRequest {
 	return ApiGetNiatelemetrySyslogSysMsgFacFilterListRequest{
@@ -29765,7 +31616,8 @@ func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgFacFilterList(ctx co
 }
 
 // Execute executes the request
-//  @return NiatelemetrySyslogSysMsgFacFilterResponse
+//
+//	@return NiatelemetrySyslogSysMsgFacFilterResponse
 func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgFacFilterListExecute(r ApiGetNiatelemetrySyslogSysMsgFacFilterListRequest) (*NiatelemetrySyslogSysMsgFacFilterResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -30008,8 +31860,8 @@ func (r ApiGetNiatelemetrySyslogSysMsgListRequest) Execute() (*NiatelemetrySyslo
 /*
 GetNiatelemetrySyslogSysMsgList Read a 'niatelemetry.SyslogSysMsg' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetrySyslogSysMsgListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetrySyslogSysMsgListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgList(ctx context.Context) ApiGetNiatelemetrySyslogSysMsgListRequest {
 	return ApiGetNiatelemetrySyslogSysMsgListRequest{
@@ -30019,7 +31871,8 @@ func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgList(ctx context.Con
 }
 
 // Execute executes the request
-//  @return NiatelemetrySyslogSysMsgResponse
+//
+//	@return NiatelemetrySyslogSysMsgResponse
 func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgListExecute(r ApiGetNiatelemetrySyslogSysMsgListRequest) (*NiatelemetrySyslogSysMsgResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -30186,9 +32039,9 @@ func (r ApiGetNiatelemetrySystemControllerDetailsByMoidRequest) Execute() (*Niat
 /*
 GetNiatelemetrySystemControllerDetailsByMoid Read a 'niatelemetry.SystemControllerDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetrySystemControllerDetailsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetrySystemControllerDetailsByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetrySystemControllerDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetrySystemControllerDetailsByMoidRequest {
 	return ApiGetNiatelemetrySystemControllerDetailsByMoidRequest{
@@ -30199,7 +32052,8 @@ func (a *NiatelemetryApiService) GetNiatelemetrySystemControllerDetailsByMoid(ct
 }
 
 // Execute executes the request
-//  @return NiatelemetrySystemControllerDetails
+//
+//	@return NiatelemetrySystemControllerDetails
 func (a *NiatelemetryApiService) GetNiatelemetrySystemControllerDetailsByMoidExecute(r ApiGetNiatelemetrySystemControllerDetailsByMoidRequest) (*NiatelemetrySystemControllerDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -30410,8 +32264,8 @@ func (r ApiGetNiatelemetrySystemControllerDetailsListRequest) Execute() (*Niatel
 /*
 GetNiatelemetrySystemControllerDetailsList Read a 'niatelemetry.SystemControllerDetails' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetrySystemControllerDetailsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetrySystemControllerDetailsListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetrySystemControllerDetailsList(ctx context.Context) ApiGetNiatelemetrySystemControllerDetailsListRequest {
 	return ApiGetNiatelemetrySystemControllerDetailsListRequest{
@@ -30421,7 +32275,8 @@ func (a *NiatelemetryApiService) GetNiatelemetrySystemControllerDetailsList(ctx 
 }
 
 // Execute executes the request
-//  @return NiatelemetrySystemControllerDetailsResponse
+//
+//	@return NiatelemetrySystemControllerDetailsResponse
 func (a *NiatelemetryApiService) GetNiatelemetrySystemControllerDetailsListExecute(r ApiGetNiatelemetrySystemControllerDetailsListRequest) (*NiatelemetrySystemControllerDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -30588,9 +32443,9 @@ func (r ApiGetNiatelemetryTenantByMoidRequest) Execute() (*NiatelemetryTenant, *
 /*
 GetNiatelemetryTenantByMoid Read a 'niatelemetry.Tenant' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiatelemetryTenantByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiatelemetryTenantByMoidRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryTenantByMoid(ctx context.Context, moid string) ApiGetNiatelemetryTenantByMoidRequest {
 	return ApiGetNiatelemetryTenantByMoidRequest{
@@ -30601,7 +32456,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryTenantByMoid(ctx context.Context
 }
 
 // Execute executes the request
-//  @return NiatelemetryTenant
+//
+//	@return NiatelemetryTenant
 func (a *NiatelemetryApiService) GetNiatelemetryTenantByMoidExecute(r ApiGetNiatelemetryTenantByMoidRequest) (*NiatelemetryTenant, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -30812,8 +32668,8 @@ func (r ApiGetNiatelemetryTenantListRequest) Execute() (*NiatelemetryTenantRespo
 /*
 GetNiatelemetryTenantList Read a 'niatelemetry.Tenant' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiatelemetryTenantListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiatelemetryTenantListRequest
 */
 func (a *NiatelemetryApiService) GetNiatelemetryTenantList(ctx context.Context) ApiGetNiatelemetryTenantListRequest {
 	return ApiGetNiatelemetryTenantListRequest{
@@ -30823,7 +32679,8 @@ func (a *NiatelemetryApiService) GetNiatelemetryTenantList(ctx context.Context) 
 }
 
 // Execute executes the request
-//  @return NiatelemetryTenantResponse
+//
+//	@return NiatelemetryTenantResponse
 func (a *NiatelemetryApiService) GetNiatelemetryTenantListExecute(r ApiGetNiatelemetryTenantListRequest) (*NiatelemetryTenantResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -30893,6 +32750,1032 @@ func (a *NiatelemetryApiService) GetNiatelemetryTenantListExecute(r ApiGetNiatel
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiPatchNiatelemetryNexusCloudAccountRequest struct {
+	ctx                           context.Context
+	ApiService                    *NiatelemetryApiService
+	moid                          string
+	niatelemetryNexusCloudAccount *NiatelemetryNexusCloudAccount
+	ifMatch                       *string
+}
+
+// The &#39;niatelemetry.NexusCloudAccount&#39; resource to update.
+func (r ApiPatchNiatelemetryNexusCloudAccountRequest) NiatelemetryNexusCloudAccount(niatelemetryNexusCloudAccount NiatelemetryNexusCloudAccount) ApiPatchNiatelemetryNexusCloudAccountRequest {
+	r.niatelemetryNexusCloudAccount = &niatelemetryNexusCloudAccount
+	return r
+}
+
+// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
+func (r ApiPatchNiatelemetryNexusCloudAccountRequest) IfMatch(ifMatch string) ApiPatchNiatelemetryNexusCloudAccountRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiPatchNiatelemetryNexusCloudAccountRequest) Execute() (*NiatelemetryNexusCloudAccount, *http.Response, error) {
+	return r.ApiService.PatchNiatelemetryNexusCloudAccountExecute(r)
+}
+
+/*
+PatchNiatelemetryNexusCloudAccount Update a 'niatelemetry.NexusCloudAccount' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchNiatelemetryNexusCloudAccountRequest
+*/
+func (a *NiatelemetryApiService) PatchNiatelemetryNexusCloudAccount(ctx context.Context, moid string) ApiPatchNiatelemetryNexusCloudAccountRequest {
+	return ApiPatchNiatelemetryNexusCloudAccountRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//
+//	@return NiatelemetryNexusCloudAccount
+func (a *NiatelemetryApiService) PatchNiatelemetryNexusCloudAccountExecute(r ApiPatchNiatelemetryNexusCloudAccountRequest) (*NiatelemetryNexusCloudAccount, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryNexusCloudAccount
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.PatchNiatelemetryNexusCloudAccount")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/niatelemetry/NexusCloudAccounts/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.niatelemetryNexusCloudAccount == nil {
+		return localVarReturnValue, nil, reportError("niatelemetryNexusCloudAccount is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.niatelemetryNexusCloudAccount
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiPatchNiatelemetryNexusCloudSiteRequest struct {
+	ctx                        context.Context
+	ApiService                 *NiatelemetryApiService
+	moid                       string
+	niatelemetryNexusCloudSite *NiatelemetryNexusCloudSite
+	ifMatch                    *string
+}
+
+// The &#39;niatelemetry.NexusCloudSite&#39; resource to update.
+func (r ApiPatchNiatelemetryNexusCloudSiteRequest) NiatelemetryNexusCloudSite(niatelemetryNexusCloudSite NiatelemetryNexusCloudSite) ApiPatchNiatelemetryNexusCloudSiteRequest {
+	r.niatelemetryNexusCloudSite = &niatelemetryNexusCloudSite
+	return r
+}
+
+// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
+func (r ApiPatchNiatelemetryNexusCloudSiteRequest) IfMatch(ifMatch string) ApiPatchNiatelemetryNexusCloudSiteRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiPatchNiatelemetryNexusCloudSiteRequest) Execute() (*NiatelemetryNexusCloudSite, *http.Response, error) {
+	return r.ApiService.PatchNiatelemetryNexusCloudSiteExecute(r)
+}
+
+/*
+PatchNiatelemetryNexusCloudSite Update a 'niatelemetry.NexusCloudSite' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchNiatelemetryNexusCloudSiteRequest
+*/
+func (a *NiatelemetryApiService) PatchNiatelemetryNexusCloudSite(ctx context.Context, moid string) ApiPatchNiatelemetryNexusCloudSiteRequest {
+	return ApiPatchNiatelemetryNexusCloudSiteRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//
+//	@return NiatelemetryNexusCloudSite
+func (a *NiatelemetryApiService) PatchNiatelemetryNexusCloudSiteExecute(r ApiPatchNiatelemetryNexusCloudSiteRequest) (*NiatelemetryNexusCloudSite, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryNexusCloudSite
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.PatchNiatelemetryNexusCloudSite")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/niatelemetry/NexusCloudSites/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.niatelemetryNexusCloudSite == nil {
+		return localVarReturnValue, nil, reportError("niatelemetryNexusCloudSite is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.niatelemetryNexusCloudSite
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiPatchNiatelemetryNiaInventoryRequest struct {
+	ctx                      context.Context
+	ApiService               *NiatelemetryApiService
+	moid                     string
+	niatelemetryNiaInventory *NiatelemetryNiaInventory
+	ifMatch                  *string
+}
+
+// The &#39;niatelemetry.NiaInventory&#39; resource to update.
+func (r ApiPatchNiatelemetryNiaInventoryRequest) NiatelemetryNiaInventory(niatelemetryNiaInventory NiatelemetryNiaInventory) ApiPatchNiatelemetryNiaInventoryRequest {
+	r.niatelemetryNiaInventory = &niatelemetryNiaInventory
+	return r
+}
+
+// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
+func (r ApiPatchNiatelemetryNiaInventoryRequest) IfMatch(ifMatch string) ApiPatchNiatelemetryNiaInventoryRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiPatchNiatelemetryNiaInventoryRequest) Execute() (*NiatelemetryNiaInventory, *http.Response, error) {
+	return r.ApiService.PatchNiatelemetryNiaInventoryExecute(r)
+}
+
+/*
+PatchNiatelemetryNiaInventory Update a 'niatelemetry.NiaInventory' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchNiatelemetryNiaInventoryRequest
+*/
+func (a *NiatelemetryApiService) PatchNiatelemetryNiaInventory(ctx context.Context, moid string) ApiPatchNiatelemetryNiaInventoryRequest {
+	return ApiPatchNiatelemetryNiaInventoryRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//
+//	@return NiatelemetryNiaInventory
+func (a *NiatelemetryApiService) PatchNiatelemetryNiaInventoryExecute(r ApiPatchNiatelemetryNiaInventoryRequest) (*NiatelemetryNiaInventory, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryNiaInventory
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.PatchNiatelemetryNiaInventory")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/niatelemetry/NiaInventories/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.niatelemetryNiaInventory == nil {
+		return localVarReturnValue, nil, reportError("niatelemetryNiaInventory is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.niatelemetryNiaInventory
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateNiatelemetryNexusCloudAccountRequest struct {
+	ctx                           context.Context
+	ApiService                    *NiatelemetryApiService
+	moid                          string
+	niatelemetryNexusCloudAccount *NiatelemetryNexusCloudAccount
+	ifMatch                       *string
+}
+
+// The &#39;niatelemetry.NexusCloudAccount&#39; resource to update.
+func (r ApiUpdateNiatelemetryNexusCloudAccountRequest) NiatelemetryNexusCloudAccount(niatelemetryNexusCloudAccount NiatelemetryNexusCloudAccount) ApiUpdateNiatelemetryNexusCloudAccountRequest {
+	r.niatelemetryNexusCloudAccount = &niatelemetryNexusCloudAccount
+	return r
+}
+
+// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
+func (r ApiUpdateNiatelemetryNexusCloudAccountRequest) IfMatch(ifMatch string) ApiUpdateNiatelemetryNexusCloudAccountRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiUpdateNiatelemetryNexusCloudAccountRequest) Execute() (*NiatelemetryNexusCloudAccount, *http.Response, error) {
+	return r.ApiService.UpdateNiatelemetryNexusCloudAccountExecute(r)
+}
+
+/*
+UpdateNiatelemetryNexusCloudAccount Update a 'niatelemetry.NexusCloudAccount' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateNiatelemetryNexusCloudAccountRequest
+*/
+func (a *NiatelemetryApiService) UpdateNiatelemetryNexusCloudAccount(ctx context.Context, moid string) ApiUpdateNiatelemetryNexusCloudAccountRequest {
+	return ApiUpdateNiatelemetryNexusCloudAccountRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//
+//	@return NiatelemetryNexusCloudAccount
+func (a *NiatelemetryApiService) UpdateNiatelemetryNexusCloudAccountExecute(r ApiUpdateNiatelemetryNexusCloudAccountRequest) (*NiatelemetryNexusCloudAccount, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryNexusCloudAccount
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.UpdateNiatelemetryNexusCloudAccount")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/niatelemetry/NexusCloudAccounts/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.niatelemetryNexusCloudAccount == nil {
+		return localVarReturnValue, nil, reportError("niatelemetryNexusCloudAccount is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.niatelemetryNexusCloudAccount
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateNiatelemetryNexusCloudSiteRequest struct {
+	ctx                        context.Context
+	ApiService                 *NiatelemetryApiService
+	moid                       string
+	niatelemetryNexusCloudSite *NiatelemetryNexusCloudSite
+	ifMatch                    *string
+}
+
+// The &#39;niatelemetry.NexusCloudSite&#39; resource to update.
+func (r ApiUpdateNiatelemetryNexusCloudSiteRequest) NiatelemetryNexusCloudSite(niatelemetryNexusCloudSite NiatelemetryNexusCloudSite) ApiUpdateNiatelemetryNexusCloudSiteRequest {
+	r.niatelemetryNexusCloudSite = &niatelemetryNexusCloudSite
+	return r
+}
+
+// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
+func (r ApiUpdateNiatelemetryNexusCloudSiteRequest) IfMatch(ifMatch string) ApiUpdateNiatelemetryNexusCloudSiteRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiUpdateNiatelemetryNexusCloudSiteRequest) Execute() (*NiatelemetryNexusCloudSite, *http.Response, error) {
+	return r.ApiService.UpdateNiatelemetryNexusCloudSiteExecute(r)
+}
+
+/*
+UpdateNiatelemetryNexusCloudSite Update a 'niatelemetry.NexusCloudSite' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateNiatelemetryNexusCloudSiteRequest
+*/
+func (a *NiatelemetryApiService) UpdateNiatelemetryNexusCloudSite(ctx context.Context, moid string) ApiUpdateNiatelemetryNexusCloudSiteRequest {
+	return ApiUpdateNiatelemetryNexusCloudSiteRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//
+//	@return NiatelemetryNexusCloudSite
+func (a *NiatelemetryApiService) UpdateNiatelemetryNexusCloudSiteExecute(r ApiUpdateNiatelemetryNexusCloudSiteRequest) (*NiatelemetryNexusCloudSite, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryNexusCloudSite
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.UpdateNiatelemetryNexusCloudSite")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/niatelemetry/NexusCloudSites/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.niatelemetryNexusCloudSite == nil {
+		return localVarReturnValue, nil, reportError("niatelemetryNexusCloudSite is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.niatelemetryNexusCloudSite
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateNiatelemetryNiaInventoryRequest struct {
+	ctx                      context.Context
+	ApiService               *NiatelemetryApiService
+	moid                     string
+	niatelemetryNiaInventory *NiatelemetryNiaInventory
+	ifMatch                  *string
+}
+
+// The &#39;niatelemetry.NiaInventory&#39; resource to update.
+func (r ApiUpdateNiatelemetryNiaInventoryRequest) NiatelemetryNiaInventory(niatelemetryNiaInventory NiatelemetryNiaInventory) ApiUpdateNiatelemetryNiaInventoryRequest {
+	r.niatelemetryNiaInventory = &niatelemetryNiaInventory
+	return r
+}
+
+// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
+func (r ApiUpdateNiatelemetryNiaInventoryRequest) IfMatch(ifMatch string) ApiUpdateNiatelemetryNiaInventoryRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiUpdateNiatelemetryNiaInventoryRequest) Execute() (*NiatelemetryNiaInventory, *http.Response, error) {
+	return r.ApiService.UpdateNiatelemetryNiaInventoryExecute(r)
+}
+
+/*
+UpdateNiatelemetryNiaInventory Update a 'niatelemetry.NiaInventory' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateNiatelemetryNiaInventoryRequest
+*/
+func (a *NiatelemetryApiService) UpdateNiatelemetryNiaInventory(ctx context.Context, moid string) ApiUpdateNiatelemetryNiaInventoryRequest {
+	return ApiUpdateNiatelemetryNiaInventoryRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//
+//	@return NiatelemetryNiaInventory
+func (a *NiatelemetryApiService) UpdateNiatelemetryNiaInventoryExecute(r ApiUpdateNiatelemetryNiaInventoryRequest) (*NiatelemetryNiaInventory, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryNiaInventory
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.UpdateNiatelemetryNiaInventory")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/niatelemetry/NiaInventories/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.niatelemetryNiaInventory == nil {
+		return localVarReturnValue, nil, reportError("niatelemetryNiaInventory is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.niatelemetryNiaInventory
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **PartNumber** | Pointer to **string** | This field identifies the Part Number for this Fan Module. | [optional] [readonly] 
 **Pid** | Pointer to **string** | This field identifies the Product ID for the fan module. | [optional] [readonly] 
 **Sku** | Pointer to **string** | This field identifies the Stockkeeping Unit for this Fan Module. | [optional] [readonly] 
+**Status** | Pointer to **string** | This field is to abstract the status of the fan module. | [optional] [readonly] 
 **TrayId** | Pointer to **int64** | Tray identifier for the fan module. | [optional] [readonly] 
 **Vid** | Pointer to **string** | This field identifies the Vendor ID for this Fan Module. | [optional] [readonly] 
 **ComputeRackUnit** | Pointer to [**ComputeRackUnitRelationship**](ComputeRackUnitRelationship.md) |  | [optional] 
@@ -268,6 +269,31 @@ SetSku sets Sku field to given value.
 `func (o *EquipmentFanModule) HasSku() bool`
 
 HasSku returns a boolean if a field has been set.
+
+### GetStatus
+
+`func (o *EquipmentFanModule) GetStatus() string`
+
+GetStatus returns the Status field if non-nil, zero value otherwise.
+
+### GetStatusOk
+
+`func (o *EquipmentFanModule) GetStatusOk() (*string, bool)`
+
+GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStatus
+
+`func (o *EquipmentFanModule) SetStatus(v string)`
+
+SetStatus sets Status field to given value.
+
+### HasStatus
+
+`func (o *EquipmentFanModule) HasStatus() bool`
+
+HasStatus returns a boolean if a field has been set.
 
 ### GetTrayId
 

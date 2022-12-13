@@ -15,7 +15,7 @@ All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_hyperflex_ext_iscsi_storage_policy.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
-* `admin_state`:(bool) Enable or disable external FCoE storage configuration. 
+* `admin_state`:(bool) Enable or disable external iSCSI storage configuration. 
 * `create_time`:(string) The time when this managed object was created. 
 * `description`:(string) Description of the policy. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 

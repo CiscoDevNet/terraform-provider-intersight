@@ -36,7 +36,7 @@ resource "intersight_hyperflex_ext_iscsi_storage_policy" "hyperflex_ext_iscsi_st
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 
-* `admin_state`:(bool) Enable or disable external FCoE storage configuration. 
+* `admin_state`:(bool) Enable or disable external iSCSI storage configuration. 
 * `ancestors`:(Array)(ReadOnly) An array of relationships to moBaseMo resources. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
@@ -50,12 +50,12 @@ This complex property has following sub-properties:
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `description`:(string) Description of the policy. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
-* `exta_traffic`:(HashMap) - VLAN for the primary Fabric Interconnect external FCoE storage traffic. 
+* `exta_traffic`:(HashMap) - VLAN for the primary Fabric Interconnect external iSCSI storage traffic. 
 This complex property has following sub-properties:
   + `name`:(string) The name of the VLAN.The name can be from 1 to 32 characters long and can contain a combination of alphanumeric characters, underscores, and hyphens. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `vlan_id`:(int) The ID of the named VLAN. An ID of 0 means the traffic is untagged.The ID can be any number between 0 and 4095, inclusive. 
-* `extb_traffic`:(HashMap) - VLAN for the secondary Fabric Interconnect external FCoE storage traffic. 
+* `extb_traffic`:(HashMap) - VLAN for the secondary Fabric Interconnect external iSCSI storage traffic. 
 This complex property has following sub-properties:
   + `name`:(string) The name of the VLAN.The name can be from 1 to 32 characters long and can contain a combination of alphanumeric characters, underscores, and hyphens. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 

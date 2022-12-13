@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **IpV4Config** | Pointer to [**NullableIppoolIpV4Config**](IppoolIpV4Config.md) |  | [optional] 
 **IpV6Address** | Pointer to **string** | IPv6 Address given as a lease to an external entity like server profiles. | [optional] 
 **IpV6Config** | Pointer to [**NullableIppoolIpV6Config**](IppoolIpV6Config.md) |  | [optional] 
+**Reservation** | Pointer to [**IppoolReservationReference**](IppoolReservationReference.md) |  | [optional] 
 **AssignedToEntity** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 **BlockLease** | Pointer to [**IppoolBlockLeaseRelationship**](IppoolBlockLeaseRelationship.md) |  | [optional] 
 **Pool** | Pointer to [**IppoolPoolRelationship**](IppoolPoolRelationship.md) |  | [optional] 
@@ -222,6 +223,31 @@ HasIpV6Config returns a boolean if a field has been set.
 `func (o *IppoolIpLease) UnsetIpV6Config()`
 
 UnsetIpV6Config ensures that no value is present for IpV6Config, not even an explicit nil
+### GetReservation
+
+`func (o *IppoolIpLease) GetReservation() IppoolReservationReference`
+
+GetReservation returns the Reservation field if non-nil, zero value otherwise.
+
+### GetReservationOk
+
+`func (o *IppoolIpLease) GetReservationOk() (*IppoolReservationReference, bool)`
+
+GetReservationOk returns a tuple with the Reservation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReservation
+
+`func (o *IppoolIpLease) SetReservation(v IppoolReservationReference)`
+
+SetReservation sets Reservation field to given value.
+
+### HasReservation
+
+`func (o *IppoolIpLease) HasReservation() bool`
+
+HasReservation returns a boolean if a field has been set.
+
 ### GetAssignedToEntity
 
 `func (o *IppoolIpLease) GetAssignedToEntity() MoBaseMoRelationship`

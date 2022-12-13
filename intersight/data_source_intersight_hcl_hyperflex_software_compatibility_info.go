@@ -163,6 +163,16 @@ func getHclHyperflexSoftwareCompatibilityInfoSchema() map[string]*schema.Schema 
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"max_mgmt_version": {
+			Description: "Maximum supported HyperFlex Data Platform build version.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"min_mgmt_version": {
+			Description: "Minimum supported HyperFlex Data Platform build version.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -587,6 +597,16 @@ func dataSourceHclHyperflexSoftwareCompatibilityInfoRead(c context.Context, d *s
 		o.SetIsMgmtBuild(x)
 	}
 
+	if v, ok := d.GetOk("max_mgmt_version"); ok {
+		x := (v.(string))
+		o.SetMaxMgmtVersion(x)
+	}
+
+	if v, ok := d.GetOk("min_mgmt_version"); ok {
+		x := (v.(string))
+		o.SetMinMgmtVersion(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
@@ -864,6 +884,8 @@ func dataSourceHclHyperflexSoftwareCompatibilityInfoRead(c context.Context, d *s
 				temp["hypervisor_type"] = (s.GetHypervisorType())
 				temp["hypervisor_version"] = (s.GetHypervisorVersion())
 				temp["is_mgmt_build"] = (s.GetIsMgmtBuild())
+				temp["max_mgmt_version"] = (s.GetMaxMgmtVersion())
+				temp["min_mgmt_version"] = (s.GetMinMgmtVersion())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())

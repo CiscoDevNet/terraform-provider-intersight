@@ -543,6 +543,11 @@ func getHyperflexClusterProfileSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"is_nic_based": {
+			Description: "The NIC based setup being set/unset determined by inventory.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"local_credential": {
 			Description: "A reference to a hyperflexLocalCredentialPolicy resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -1950,6 +1955,11 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 		o.SetHypervisorType(x)
 	}
 
+	if v, ok := d.GetOkExists("is_nic_based"); ok {
+		x := (v.(bool))
+		o.SetIsNicBased(x)
+	}
+
 	if v, ok := d.GetOk("local_credential"); ok {
 		p := make([]models.HyperflexLocalCredentialPolicyRelationship, 0, 1)
 		s := v.([]interface{})
@@ -2892,6 +2902,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 				temp["httpproxypolicy"] = flattenMapCommHttpProxyPolicyRelationship(s.GetHttpproxypolicy(), d)
 				temp["hypervisor_control_ip_address"] = (s.GetHypervisorControlIpAddress())
 				temp["hypervisor_type"] = (s.GetHypervisorType())
+				temp["is_nic_based"] = (s.GetIsNicBased())
 
 				temp["local_credential"] = flattenMapHyperflexLocalCredentialPolicyRelationship(s.GetLocalCredential(), d)
 				temp["mac_address_prefix"] = (s.GetMacAddressPrefix())

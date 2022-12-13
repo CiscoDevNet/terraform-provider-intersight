@@ -40,7 +40,7 @@ func resourceHyperflexExtIscsiStoragePolicy() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"admin_state": {
-				Description: "Enable or disable external FCoE storage configuration.",
+				Description: "Enable or disable external iSCSI storage configuration.",
 				Type:        schema.TypeBool,
 				Optional:    true,
 			},
@@ -157,7 +157,7 @@ func resourceHyperflexExtIscsiStoragePolicy() *schema.Resource {
 					return
 				}},
 			"exta_traffic": {
-				Description: "VLAN for the primary Fabric Interconnect external FCoE storage traffic.",
+				Description: "VLAN for the primary Fabric Interconnect external iSCSI storage traffic.",
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
@@ -198,7 +198,7 @@ func resourceHyperflexExtIscsiStoragePolicy() *schema.Resource {
 				},
 			},
 			"extb_traffic": {
-				Description: "VLAN for the secondary Fabric Interconnect external FCoE storage traffic.",
+				Description: "VLAN for the secondary Fabric Interconnect external iSCSI storage traffic.",
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,

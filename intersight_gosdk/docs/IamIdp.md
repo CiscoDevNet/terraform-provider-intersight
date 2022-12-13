@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **LdapPolicy** | Pointer to [**IamLdapPolicyRelationship**](IamLdapPolicyRelationship.md) |  | [optional] 
 **System** | Pointer to [**IamSystemRelationship**](IamSystemRelationship.md) |  | [optional] 
 **UserPreferences** | Pointer to [**[]IamUserPreferenceRelationship**](IamUserPreferenceRelationship.md) | An array of relationships to iamUserPreference resources. | [optional] [readonly] 
+**UserSettings** | Pointer to [**[]IamUserSettingRelationship**](IamUserSettingRelationship.md) | An array of relationships to iamUserSetting resources. | [optional] [readonly] 
 **Usergroups** | Pointer to [**[]IamUserGroupRelationship**](IamUserGroupRelationship.md) | An array of relationships to iamUserGroup resources. | [optional] 
 **Users** | Pointer to [**[]IamUserRelationship**](IamUserRelationship.md) | An array of relationships to iamUser resources. | [optional] 
 
@@ -364,6 +365,41 @@ HasUserPreferences returns a boolean if a field has been set.
 `func (o *IamIdp) UnsetUserPreferences()`
 
 UnsetUserPreferences ensures that no value is present for UserPreferences, not even an explicit nil
+### GetUserSettings
+
+`func (o *IamIdp) GetUserSettings() []IamUserSettingRelationship`
+
+GetUserSettings returns the UserSettings field if non-nil, zero value otherwise.
+
+### GetUserSettingsOk
+
+`func (o *IamIdp) GetUserSettingsOk() (*[]IamUserSettingRelationship, bool)`
+
+GetUserSettingsOk returns a tuple with the UserSettings field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserSettings
+
+`func (o *IamIdp) SetUserSettings(v []IamUserSettingRelationship)`
+
+SetUserSettings sets UserSettings field to given value.
+
+### HasUserSettings
+
+`func (o *IamIdp) HasUserSettings() bool`
+
+HasUserSettings returns a boolean if a field has been set.
+
+### SetUserSettingsNil
+
+`func (o *IamIdp) SetUserSettingsNil(b bool)`
+
+ SetUserSettingsNil sets the value for UserSettings to be an explicit nil
+
+### UnsetUserSettings
+`func (o *IamIdp) UnsetUserSettings()`
+
+UnsetUserSettings ensures that no value is present for UserSettings, not even an explicit nil
 ### GetUsergroups
 
 `func (o *IamIdp) GetUsergroups() []IamUserGroupRelationship`

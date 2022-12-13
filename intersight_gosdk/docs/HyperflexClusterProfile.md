@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **HostNamePrefix** | Pointer to **string** | The node name prefix that is used to automatically generate the default hostname for each server. A dash (-) will be appended to the prefix followed by the node number to form a hostname. This default naming scheme can be manually overridden in the node configuration. The maximum length of a prefix is 60, must only contain alphanumeric characters or dash (-), and must start with an alphanumeric character. | [optional] 
 **HypervisorControlIpAddress** | Pointer to **string** | The hypervisor control virtual IP address for the HyperFlex compute cluster that is used for node/pod management. | [optional] 
 **HypervisorType** | Pointer to **string** | The hypervisor type for the HyperFlex cluster. * &#x60;ESXi&#x60; - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version. * &#x60;HyperFlexAp&#x60; - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform. * &#x60;IWE&#x60; - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine. * &#x60;Hyper-V&#x60; - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V. * &#x60;Unknown&#x60; - The hypervisor running on the HyperFlex cluster is not known. | [optional] [default to "ESXi"]
+**IsNicBased** | Pointer to **bool** | The NIC based setup being set/unset determined by inventory. | [optional] [readonly] [default to false]
 **MacAddressPrefix** | Pointer to **string** | The MAC address prefix in the form of 00:25:B5:XX. | [optional] 
 **MgmtIpAddress** | Pointer to **string** | The management IP address for the HyperFlex cluster. | [optional] 
 **MgmtPlatform** | Pointer to **string** | The management platform for the HyperFlex cluster. * &#x60;FI&#x60; - The host servers used in the cluster deployment are managed by a UCS Fabric Interconnect. * &#x60;EDGE&#x60; - The host servers used in the cluster deployment are standalone severs. * &#x60;DC-No-FI&#x60; - The host servers used in the cluster deployment are standalone servers with the DC Advantage license. | [optional] [default to "FI"]
@@ -235,6 +236,31 @@ SetHypervisorType sets HypervisorType field to given value.
 `func (o *HyperflexClusterProfile) HasHypervisorType() bool`
 
 HasHypervisorType returns a boolean if a field has been set.
+
+### GetIsNicBased
+
+`func (o *HyperflexClusterProfile) GetIsNicBased() bool`
+
+GetIsNicBased returns the IsNicBased field if non-nil, zero value otherwise.
+
+### GetIsNicBasedOk
+
+`func (o *HyperflexClusterProfile) GetIsNicBasedOk() (*bool, bool)`
+
+GetIsNicBasedOk returns a tuple with the IsNicBased field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsNicBased
+
+`func (o *HyperflexClusterProfile) SetIsNicBased(v bool)`
+
+SetIsNicBased sets IsNicBased field to given value.
+
+### HasIsNicBased
+
+`func (o *HyperflexClusterProfile) HasIsNicBased() bool`
+
+HasIsNicBased returns a boolean if a field has been set.
 
 ### GetMacAddressPrefix
 

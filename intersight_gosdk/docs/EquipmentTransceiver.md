@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "equipment.Transceiver"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "equipment.Transceiver"]
+**AggregatePortId** | Pointer to **int64** | Breakout port member in the Fabric Interconnect. | [optional] [readonly] 
 **CiscoExtendedIdNumber** | Pointer to **string** | The cisco extended Id number state of the pluggable SFP. | [optional] 
 **InterfaceType** | Pointer to **string** | Interface type of transceiver copper or fiber. | [optional] [readonly] 
 **ManufacturerPartNumber** | Pointer to **string** | The manufacturer part number of the pluggable SFP. | [optional] 
@@ -82,6 +83,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetAggregatePortId
+
+`func (o *EquipmentTransceiver) GetAggregatePortId() int64`
+
+GetAggregatePortId returns the AggregatePortId field if non-nil, zero value otherwise.
+
+### GetAggregatePortIdOk
+
+`func (o *EquipmentTransceiver) GetAggregatePortIdOk() (*int64, bool)`
+
+GetAggregatePortIdOk returns a tuple with the AggregatePortId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAggregatePortId
+
+`func (o *EquipmentTransceiver) SetAggregatePortId(v int64)`
+
+SetAggregatePortId sets AggregatePortId field to given value.
+
+### HasAggregatePortId
+
+`func (o *EquipmentTransceiver) HasAggregatePortId() bool`
+
+HasAggregatePortId returns a boolean if a field has been set.
 
 ### GetCiscoExtendedIdNumber
 

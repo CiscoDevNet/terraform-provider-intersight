@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -35,15 +35,17 @@ type WorkflowServiceItemActionDefinitionAllOf struct {
 	// The output mappings from workflows in the action definition to the service item output definition. Any output from core or post-core workflow can be mapped to service item output definition. The output can be referred using the name of the workflow definition and the output name in the following format '${<ServiceItemActionWorkflowDefinition.Name>.output.<outputName>'.
 	OutputParameters interface{} `json:"OutputParameters,omitempty"`
 	// Value in seconds to specify the periodicity of the workflows. A zero value indicate the workflow will not execute periodically. A non-zero value indicate, the workflow will be executed periodically with this periodicity.
-	Periodicity           *int64                                        `json:"Periodicity,omitempty"`
-	PostCoreWorkflows     []WorkflowServiceItemActionWorkflowDefinition `json:"PostCoreWorkflows,omitempty"`
-	PreCoreWorkflows      []WorkflowServiceItemActionWorkflowDefinition `json:"PreCoreWorkflows,omitempty"`
-	StopWorkflows         []WorkflowServiceItemActionWorkflowDefinition `json:"StopWorkflows,omitempty"`
-	ValidationInformation NullableWorkflowValidationInformation         `json:"ValidationInformation,omitempty"`
-	ValidationWorkflows   []WorkflowServiceItemActionWorkflowDefinition `json:"ValidationWorkflows,omitempty"`
-	ServiceItemDefinition *WorkflowServiceItemDefinitionRelationship    `json:"ServiceItemDefinition,omitempty"`
-	WorkflowDefinition    *WorkflowWorkflowDefinitionRelationship       `json:"WorkflowDefinition,omitempty"`
-	AdditionalProperties  map[string]interface{}
+	Periodicity       *int64                                        `json:"Periodicity,omitempty"`
+	PostCoreWorkflows []WorkflowServiceItemActionWorkflowDefinition `json:"PostCoreWorkflows,omitempty"`
+	PreCoreWorkflows  []WorkflowServiceItemActionWorkflowDefinition `json:"PreCoreWorkflows,omitempty"`
+	// The flag to indicate that action is restricted on a Private Virtual Appliance.
+	RestrictOnPrivateAppliance *bool                                         `json:"RestrictOnPrivateAppliance,omitempty"`
+	StopWorkflows              []WorkflowServiceItemActionWorkflowDefinition `json:"StopWorkflows,omitempty"`
+	ValidationInformation      NullableWorkflowValidationInformation         `json:"ValidationInformation,omitempty"`
+	ValidationWorkflows        []WorkflowServiceItemActionWorkflowDefinition `json:"ValidationWorkflows,omitempty"`
+	ServiceItemDefinition      *WorkflowServiceItemDefinitionRelationship    `json:"ServiceItemDefinition,omitempty"`
+	WorkflowDefinition         *WorkflowWorkflowDefinitionRelationship       `json:"WorkflowDefinition,omitempty"`
+	AdditionalProperties       map[string]interface{}
 }
 
 type _WorkflowServiceItemActionDefinitionAllOf WorkflowServiceItemActionDefinitionAllOf
@@ -58,6 +60,8 @@ func NewWorkflowServiceItemActionDefinitionAllOf(classId string, objectType stri
 	this.ObjectType = objectType
 	var actionType string = "External"
 	this.ActionType = &actionType
+	var restrictOnPrivateAppliance bool = false
+	this.RestrictOnPrivateAppliance = &restrictOnPrivateAppliance
 	return &this
 }
 
@@ -72,6 +76,8 @@ func NewWorkflowServiceItemActionDefinitionAllOfWithDefaults() *WorkflowServiceI
 	this.ObjectType = objectType
 	var actionType string = "External"
 	this.ActionType = &actionType
+	var restrictOnPrivateAppliance bool = false
+	this.RestrictOnPrivateAppliance = &restrictOnPrivateAppliance
 	return &this
 }
 
@@ -481,6 +487,38 @@ func (o *WorkflowServiceItemActionDefinitionAllOf) SetPreCoreWorkflows(v []Workf
 	o.PreCoreWorkflows = v
 }
 
+// GetRestrictOnPrivateAppliance returns the RestrictOnPrivateAppliance field value if set, zero value otherwise.
+func (o *WorkflowServiceItemActionDefinitionAllOf) GetRestrictOnPrivateAppliance() bool {
+	if o == nil || o.RestrictOnPrivateAppliance == nil {
+		var ret bool
+		return ret
+	}
+	return *o.RestrictOnPrivateAppliance
+}
+
+// GetRestrictOnPrivateApplianceOk returns a tuple with the RestrictOnPrivateAppliance field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowServiceItemActionDefinitionAllOf) GetRestrictOnPrivateApplianceOk() (*bool, bool) {
+	if o == nil || o.RestrictOnPrivateAppliance == nil {
+		return nil, false
+	}
+	return o.RestrictOnPrivateAppliance, true
+}
+
+// HasRestrictOnPrivateAppliance returns a boolean if a field has been set.
+func (o *WorkflowServiceItemActionDefinitionAllOf) HasRestrictOnPrivateAppliance() bool {
+	if o != nil && o.RestrictOnPrivateAppliance != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRestrictOnPrivateAppliance gets a reference to the given bool and assigns it to the RestrictOnPrivateAppliance field.
+func (o *WorkflowServiceItemActionDefinitionAllOf) SetRestrictOnPrivateAppliance(v bool) {
+	o.RestrictOnPrivateAppliance = &v
+}
+
 // GetStopWorkflows returns the StopWorkflows field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowServiceItemActionDefinitionAllOf) GetStopWorkflows() []WorkflowServiceItemActionWorkflowDefinition {
 	if o == nil {
@@ -695,6 +733,9 @@ func (o WorkflowServiceItemActionDefinitionAllOf) MarshalJSON() ([]byte, error) 
 	if o.PreCoreWorkflows != nil {
 		toSerialize["PreCoreWorkflows"] = o.PreCoreWorkflows
 	}
+	if o.RestrictOnPrivateAppliance != nil {
+		toSerialize["RestrictOnPrivateAppliance"] = o.RestrictOnPrivateAppliance
+	}
 	if o.StopWorkflows != nil {
 		toSerialize["StopWorkflows"] = o.StopWorkflows
 	}
@@ -741,6 +782,7 @@ func (o *WorkflowServiceItemActionDefinitionAllOf) UnmarshalJSON(bytes []byte) (
 		delete(additionalProperties, "Periodicity")
 		delete(additionalProperties, "PostCoreWorkflows")
 		delete(additionalProperties, "PreCoreWorkflows")
+		delete(additionalProperties, "RestrictOnPrivateAppliance")
 		delete(additionalProperties, "StopWorkflows")
 		delete(additionalProperties, "ValidationInformation")
 		delete(additionalProperties, "ValidationWorkflows")

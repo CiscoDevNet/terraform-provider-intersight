@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.NetAppNtpServer"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.NetAppNtpServer"]
-**AuthenticationEnabled** | Pointer to **bool** | Indicates whether or not NTP symmetric authentication is enabled. | [optional] [readonly] 
+**AuthenticationEnabled** | Pointer to **bool** | Indicates that NTP symmetric authentication is enabled. | [optional] [readonly] 
 **AuthenticationKeyId** | Pointer to **string** | NTP symmetric authentication key identifier or index number (ID). | [optional] [readonly] 
 **Server** | Pointer to **string** | NTP server host name, IPv4, or IPv6 address. | [optional] [readonly] 
 **Version** | Pointer to **string** | NTP protocol version for server. Valid versions are 3, 4, or auto. * &#x60;none&#x60; - Default unknown NTP protocol version. * &#x60;3&#x60; - NTP protocol version is 3. * &#x60;4&#x60; - NTP protocol version is 4. * &#x60;auto&#x60; - NTP protocol version is auto. | [optional] [readonly] [default to "none"]

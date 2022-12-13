@@ -18,9 +18,11 @@ The following arguments can be used to get data of already created objects in In
 * `admin_evac_state`:(string) Administratively configured state of Fabric Evacuation feature, for this switch. 
 * `admin_inband_interface_state`:(string) The administrative state of the network Element inband management interface. 
 * `available_memory`:(string) Available memory (un-used) on this switch platform. 
+* `bundle_version`:(string) Running firmware bundle information. 
 * `chassis`:(string) Chassis IP of the switch. 
 * `conf_mod_ts`:(string) Configuration modified timestamp of the switch. 
 * `conf_mod_ts_backup`:(string) Configuration modified backup timestamp of the switch. 
+* `connection_status`:(string) Connection status of the switch. 
 * `create_time`:(string) The time when this managed object was created. 
 * `default_domain`:(string) The default domain name configured on the switch. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
@@ -32,6 +34,7 @@ The following arguments can be used to get data of already created objects in In
 * `fc_mode`:(string) The user configured FC operational mode for this switch (End-Host or Switching). 
 * `fc_switching_mode`:(string) The user configured FC operational mode for this switch (End-Host or Switching).* `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer.* `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode. 
 * `firmware`:(string) Running firmware information. 
+* `firmware_version`:(string) Running firmware information. 
 * `inband_ip_address`:(string) The IP address of the network Element inband management interface. 
 * `inband_ip_gateway`:(string) The default gateway of the network Element inband management interface. 
 * `inband_ip_mask`:(string) The network mask of the network Element inband management interface. 

@@ -184,18 +184,18 @@ server. Multiple SSH operations can be run sequentially over a single SSH sessio
 * `file_transfer_to_remote`:(HashMap) - Message to transfer a file from Intersight connected device to remote server. 
 This complex property has following sub-properties:
   + `destination_file_path`:(string) Destination file path on the target server. 
-  + `encrypted_aes_key`:(string) The secure properties that have large text content as value can be encrypted using AES key. In these cases, the AES key needs to be encrypted using the device connector public key and passed as the value for this property.The secure properties that are encrypted using the AES key are mapped against the property name with prefix 'AES' in SecureProperties dictionary. 
-  + `encryption_key`:(string) The public key that was used to encrypt the values present in SecureProperties dictionary.If the given public key is not same as device connector's public key, an error reponse with appropriate error message is thrown back. 
+  + `encrypted_aes_key`:(string) The secure properties that have large text content as value can be encrypted using AES key. In these cases, the AES key needs to be encrypted using the device connector's public key and passed as the value for this property.The secure properties that are encrypted using the AES key are mapped against the property name with prefix 'AES' in SecureProperties dictionary. 
+  + `encryption_key`:(string) The public key that was used to encrypt the values present in SecureProperties dictionary.If the given public key is not the same as device connector's public key, an error reponse with appropriate error message is thrown back. 
   + `file_mode`:(int) File permission to set on the transferred file. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `secure_properties`:(JSON as string) A dictionary of encrypted secure values mapped against the secure property name. The values that are encrypted using AES key must be mapped against the secure property name with a 'AES' prefixDevice connector expects the message body to be a golang template and the template can use the secure property names as placeholders. 
+  + `secure_properties`:(JSON as string) A dictionary of encrypted secure values mapped against the secure property name. The values that are encrypted using the AES key must be mapped against the secure property name with an 'AES' prefixDevice connector expects the message body to be a golang template and the template can use the secure property names as placeholders. 
   + `source_file_path`:(string) Source file path on the Intersight connected device. 
 * `message_type`:(string) The type of SSH message to be sent to the remote server.* `ExecuteCommand` - Execute a SSH command on the remote server.* `NewSession` - Open a new SSH connection to the remote server.* `FileTransfer` - Transfer a file from Intersight connected device to the remote server.* `CloseSession` - Close the SSH connection to the remote server. 
 * `ssh_command`:(JSON as string) SSH command to execute on the remote server. 
 * `ssh_configuration`:(HashMap) - Carries the SSH session details for opening a new connection. 
 This complex property has following sub-properties:
-  + `encrypted_aes_key`:(string) The secure properties that have large text content as value can be encrypted using AES key. In these cases, the AES key needs to be encrypted using the device connector public key and passed as the value for this property.The secure properties that are encrypted using the AES key are mapped against the property name with prefix 'AES' in SecureProperties dictionary. 
-  + `encryption_key`:(string) The public key that was used to encrypt the values present in SecureProperties dictionary.If the given public key is not same as device connector's public key, an error reponse with appropriate error message is thrown back. 
+  + `encrypted_aes_key`:(string) The secure properties that have large text content as value can be encrypted using AES key. In these cases, the AES key needs to be encrypted using the device connector's public key and passed as the value for this property.The secure properties that are encrypted using the AES key are mapped against the property name with prefix 'AES' in SecureProperties dictionary. 
+  + `encryption_key`:(string) The public key that was used to encrypt the values present in SecureProperties dictionary.If the given public key is not the same as device connector's public key, an error reponse with appropriate error message is thrown back. 
   + `is_passphrase_set`:(bool)(ReadOnly) Indicates whether the value of the 'passphrase' property has been set. 
   + `is_password_set`:(bool)(ReadOnly) Indicates whether the value of the 'password' property has been set. 
   + `is_private_key_set`:(bool)(ReadOnly) Indicates whether the value of the 'privateKey' property has been set. 
@@ -203,7 +203,7 @@ This complex property has following sub-properties:
   + `passphrase`:(string) Optional passphrase if provided while creating the private key. 
   + `password`:(string) Password to use in the SSH connection credentials (If empty, private key will be used). 
   + `private_key`:(string) PEM encoded private key to be used in the SSH connection credentials (Optional if password is given). 
-  + `secure_properties`:(JSON as string) A dictionary of encrypted secure values mapped against the secure property name. The values that are encrypted using AES key must be mapped against the secure property name with a 'AES' prefixDevice connector expects the message body to be a golang template and the template can use the secure property names as placeholders. 
+  + `secure_properties`:(JSON as string) A dictionary of encrypted secure values mapped against the secure property name. The values that are encrypted using the AES key must be mapped against the secure property name with an 'AES' prefixDevice connector expects the message body to be a golang template and the template can use the secure property names as placeholders. 
   + `target`:(string) The remote server to connect to. IPv4 address represented in dot decimal notation or hostname can bespecified. 
   + `user`:(string) Username for the remote SSH connection. 
 * `ssh_op_timeout`:(string) SSH operation timeout value in seconds. The provided string value should be able to convert torespective integer value. 
@@ -277,18 +277,18 @@ server. Multiple SSH operations can be run sequentially over a single SSH sessio
 * `file_transfer_to_remote`:(HashMap) - Message to transfer a file from Intersight connected device to remote server. 
 This complex property has following sub-properties:
   + `destination_file_path`:(string) Destination file path on the target server. 
-  + `encrypted_aes_key`:(string) The secure properties that have large text content as value can be encrypted using AES key. In these cases, the AES key needs to be encrypted using the device connector public key and passed as the value for this property.The secure properties that are encrypted using the AES key are mapped against the property name with prefix 'AES' in SecureProperties dictionary. 
-  + `encryption_key`:(string) The public key that was used to encrypt the values present in SecureProperties dictionary.If the given public key is not same as device connector's public key, an error reponse with appropriate error message is thrown back. 
+  + `encrypted_aes_key`:(string) The secure properties that have large text content as value can be encrypted using AES key. In these cases, the AES key needs to be encrypted using the device connector's public key and passed as the value for this property.The secure properties that are encrypted using the AES key are mapped against the property name with prefix 'AES' in SecureProperties dictionary. 
+  + `encryption_key`:(string) The public key that was used to encrypt the values present in SecureProperties dictionary.If the given public key is not the same as device connector's public key, an error reponse with appropriate error message is thrown back. 
   + `file_mode`:(int) File permission to set on the transferred file. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `secure_properties`:(JSON as string) A dictionary of encrypted secure values mapped against the secure property name. The values that are encrypted using AES key must be mapped against the secure property name with a 'AES' prefixDevice connector expects the message body to be a golang template and the template can use the secure property names as placeholders. 
+  + `secure_properties`:(JSON as string) A dictionary of encrypted secure values mapped against the secure property name. The values that are encrypted using the AES key must be mapped against the secure property name with an 'AES' prefixDevice connector expects the message body to be a golang template and the template can use the secure property names as placeholders. 
   + `source_file_path`:(string) Source file path on the Intersight connected device. 
 * `message_type`:(string) The type of SSH message to be sent to the remote server.* `ExecuteCommand` - Execute a SSH command on the remote server.* `NewSession` - Open a new SSH connection to the remote server.* `FileTransfer` - Transfer a file from Intersight connected device to the remote server.* `CloseSession` - Close the SSH connection to the remote server. 
 * `ssh_command`:(JSON as string) SSH command to execute on the remote server. 
 * `ssh_configuration`:(HashMap) - Carries the SSH session details for opening a new connection. 
 This complex property has following sub-properties:
-  + `encrypted_aes_key`:(string) The secure properties that have large text content as value can be encrypted using AES key. In these cases, the AES key needs to be encrypted using the device connector public key and passed as the value for this property.The secure properties that are encrypted using the AES key are mapped against the property name with prefix 'AES' in SecureProperties dictionary. 
-  + `encryption_key`:(string) The public key that was used to encrypt the values present in SecureProperties dictionary.If the given public key is not same as device connector's public key, an error reponse with appropriate error message is thrown back. 
+  + `encrypted_aes_key`:(string) The secure properties that have large text content as value can be encrypted using AES key. In these cases, the AES key needs to be encrypted using the device connector's public key and passed as the value for this property.The secure properties that are encrypted using the AES key are mapped against the property name with prefix 'AES' in SecureProperties dictionary. 
+  + `encryption_key`:(string) The public key that was used to encrypt the values present in SecureProperties dictionary.If the given public key is not the same as device connector's public key, an error reponse with appropriate error message is thrown back. 
   + `is_passphrase_set`:(bool)(ReadOnly) Indicates whether the value of the 'passphrase' property has been set. 
   + `is_password_set`:(bool)(ReadOnly) Indicates whether the value of the 'password' property has been set. 
   + `is_private_key_set`:(bool)(ReadOnly) Indicates whether the value of the 'privateKey' property has been set. 
@@ -296,7 +296,7 @@ This complex property has following sub-properties:
   + `passphrase`:(string) Optional passphrase if provided while creating the private key. 
   + `password`:(string) Password to use in the SSH connection credentials (If empty, private key will be used). 
   + `private_key`:(string) PEM encoded private key to be used in the SSH connection credentials (Optional if password is given). 
-  + `secure_properties`:(JSON as string) A dictionary of encrypted secure values mapped against the secure property name. The values that are encrypted using AES key must be mapped against the secure property name with a 'AES' prefixDevice connector expects the message body to be a golang template and the template can use the secure property names as placeholders. 
+  + `secure_properties`:(JSON as string) A dictionary of encrypted secure values mapped against the secure property name. The values that are encrypted using the AES key must be mapped against the secure property name with an 'AES' prefixDevice connector expects the message body to be a golang template and the template can use the secure property names as placeholders. 
   + `target`:(string) The remote server to connect to. IPv4 address represented in dot decimal notation or hostname can bespecified. 
   + `user`:(string) Username for the remote SSH connection. 
 * `ssh_op_timeout`:(string) SSH operation timeout value in seconds. The provided string value should be able to convert torespective integer value. 

@@ -232,6 +232,11 @@ func getCapabilityAdapterUnitDescriptorSchema() map[string]*schema.Schema {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"number_of_pci_links": {
+			Description: "Indicates number of PCI Links of the adapter.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"object_type": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 			Type:        schema.TypeString,
@@ -755,6 +760,11 @@ func dataSourceCapabilityAdapterUnitDescriptorRead(c context.Context, d *schema.
 		o.SetNumDcePorts(x)
 	}
 
+	if v, ok := d.GetOkExists("number_of_pci_links"); ok {
+		x := int64(v.(int))
+		o.SetNumberOfPciLinks(x)
+	}
+
 	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
@@ -1049,6 +1059,7 @@ func dataSourceCapabilityAdapterUnitDescriptorRead(c context.Context, d *schema.
 				temp["model"] = (s.GetModel())
 				temp["moid"] = (s.GetMoid())
 				temp["num_dce_ports"] = (s.GetNumDcePorts())
+				temp["number_of_pci_links"] = (s.GetNumberOfPciLinks())
 				temp["object_type"] = (s.GetObjectType())
 				temp["owners"] = (s.GetOwners())
 

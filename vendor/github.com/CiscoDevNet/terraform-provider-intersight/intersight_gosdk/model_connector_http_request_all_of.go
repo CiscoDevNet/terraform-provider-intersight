@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -25,17 +25,17 @@ type ConnectorHttpRequestAllOf struct {
 	AssetTargetMoid *string `json:"AssetTargetMoid,omitempty"`
 	// Contents of the request body to send for PUT/PATCH/POST requests.
 	Body *string `json:"Body,omitempty"`
-	// The timeout for establishing the TCP connection to the target host. If not set the request timeout value is used.
+	// The timeout for establishing the TCP connection to the target host. If not set, the request timeout value is used.
 	DialTimeout *int64 `json:"DialTimeout,omitempty"`
-	// The MO id of the asset.EndpointConnection this request is directed to. If set plugin will insert connection details into the request, including credentials if defined.
+	// The MO id of the asset.EndpointConnection this request is directed to. If set, plugin will insert connection details into the request, including credentials if defined.
 	EndpointMoid *string `json:"EndpointMoid,omitempty"`
-	// Collection of key value pairs to set in the request header.
+	// Collection of key/value pairs to set in the request header.
 	Header interface{} `json:"Header,omitempty"`
 	// The request is for an internal platform API that requires authentication to be inserted by the platform implementation.
 	Internal *bool `json:"Internal,omitempty"`
 	// Method specifies the HTTP method (GET, POST, PUT, etc.). For client requests an empty string means GET.
 	Method *string `json:"Method,omitempty"`
-	// The timeout for the HTTP request to complete, from connection establishment to response body read complete. If not set a default timeout of five minutes is used.
+	// The timeout for the HTTP request to complete, from connection establishment to response body read complete. If not set, a default timeout of five minutes is used.
 	Timeout              *int64               `json:"Timeout,omitempty"`
 	Url                  NullableConnectorUrl `json:"Url,omitempty"`
 	AdditionalProperties map[string]interface{}

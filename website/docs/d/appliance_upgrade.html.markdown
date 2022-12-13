@@ -24,6 +24,7 @@ To access the ith object of the results obtained, use `data.intersight_appliance
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `active`:(bool) Indicates if the software upgrade is active or not. 
+* `all_nodes_pingable`:(bool) True if all nodes in cluster are pingable, otherwise false. 
 * `auto_created`:(bool) Indicates that the request was automatically created by the system. 
 * `create_time`:(string) The time when this managed object was created. 
 * `description`:(string) Description of the software upgrade. 
@@ -41,6 +42,7 @@ The following arguments can be used to get data of already created objects in In
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `start_time`:(string) Start date of the software upgrade. UI can modify startTime to re-schedule an upgrade. 
 * `status`:(string) Status of the Intersight Appliance's software upgrade. 
+* `total_nodes`:(int) Total number of nodes this upgrade will run on. 
 * `total_phases`:(int) TotalPhase represents the total number of the upgradePhases for one upgrade. 
 * `nr_version`:(string) Software upgrade manifest's version. 
  

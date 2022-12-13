@@ -78,7 +78,7 @@ func getFirmwareUnsupportedVersionUpgradeSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"hash_algorithm": {
-						Description: "The hash algorithm used to calculate the checksum.\n* `crc` - A CRC hash as definded by RFC 3385. Generated with the IEEE polynomial.\n* `sha256` - A SHA256 hash as defined by RFC 4634.",
+						Description: "The hash algorithm used to calculate the checksum.\n* `crc` - A CRC hash as definded by RFC 3385. Generated with the IEEE polynomial.\n* `sha256` - An SHA256 hash as defined by RFC 4634.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -181,7 +181,7 @@ func getFirmwareUnsupportedVersionUpgradeSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"download_progress": {
-			Description: "The download progress of the file represented as a percentage between 0% and 100%. If progress reporting is not possible a value of -1 is sent.",
+			Description: "The download progress of the file represented as a percentage between 0% and 100%. If progress reporting is not possible, a value of -1 is sent.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},

@@ -333,6 +333,11 @@ func getComputePhysicalSummarySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"nr_lifecycle": {
+			Description: "The lifecycle state of the server. This will map to the discovery lifecycle as represented in the server Identity object.\n* `None` - Default state of an equipment. This should be an initial state when no state is defined for an equipment.\n* `Active` - Default Lifecycle State for a physical entity.\n* `Decommissioned` - Decommission Lifecycle state.\n* `DiscoveryInProgress` - DiscoveryInProgress Lifecycle state.\n* `DiscoveryFailed` - DiscoveryFailed Lifecycle state.\n* `FirmwareUpgradeInProgress` - Firmware upgrade is in progress on given physical entity.\n* `BladeMigrationInProgress` - Server slot migration is in progress on given physical entity.\n* `SlotMismatch` - The blade server is detected in a different chassis/slot than it was previously.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"management_mode": {
 			Description: "The management mode of the server.\n* `IntersightStandalone` - Intersight Standalone mode of operation.\n* `UCSM` - Unified Computing System Manager mode of operation.\n* `Intersight` - Intersight managed mode of operation.",
 			Type:        schema.TypeString,
@@ -1081,6 +1086,11 @@ func dataSourceComputePhysicalSummaryRead(c context.Context, d *schema.ResourceD
 		o.SetKvmVendor(x)
 	}
 
+	if v, ok := d.GetOk("nr_lifecycle"); ok {
+		x := (v.(string))
+		o.SetLifecycle(x)
+	}
+
 	if v, ok := d.GetOk("management_mode"); ok {
 		x := (v.(string))
 		o.SetManagementMode(x)
@@ -1582,6 +1592,7 @@ func dataSourceComputePhysicalSummaryRead(c context.Context, d *schema.ResourceD
 				temp["kvm_ip_addresses"] = flattenListComputeIpAddress(s.GetKvmIpAddresses(), d)
 				temp["kvm_server_state_enabled"] = (s.GetKvmServerStateEnabled())
 				temp["kvm_vendor"] = (s.GetKvmVendor())
+				temp["nr_lifecycle"] = (s.GetLifecycle())
 				temp["management_mode"] = (s.GetManagementMode())
 				temp["memory_speed"] = (s.GetMemorySpeed())
 				temp["mgmt_ip_address"] = (s.GetMgmtIpAddress())

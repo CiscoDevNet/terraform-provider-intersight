@@ -70,6 +70,11 @@ func getStorageStoragePolicySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"default_drive_mode": {
+			Description: "Newly inserted drives or on reboot, drives will be moved to the corresponding disk state on supported storage controller based on this setting. Unused Disks State should be 'No Change' if Default Drive Mode is set to JBOD or RAID 0. This setting is applicable only to FI attached servers.\n* `UnconfiguredGood` - Newly inserted drives or on reboot, drives will remain the same state.\n* `Jbod` - Newly inserted drives or on reboot, drives will automatically move to JBOD state if drive state was UnconfiguredGood.\n* `RAID0` - Newly inserted drives or on reboot, virtual drives will be created, respective drives will move to Online state.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"description": {
 			Description: "Description of the policy.",
 			Type:        schema.TypeString,
@@ -639,6 +644,11 @@ func dataSourceStorageStoragePolicyRead(c context.Context, d *schema.ResourceDat
 		o.SetCreateTime(x)
 	}
 
+	if v, ok := d.GetOk("default_drive_mode"); ok {
+		x := (v.(string))
+		o.SetDefaultDriveMode(x)
+	}
+
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
@@ -1203,6 +1213,7 @@ func dataSourceStorageStoragePolicyRead(c context.Context, d *schema.ResourceDat
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
+				temp["default_drive_mode"] = (s.GetDefaultDriveMode())
 				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 

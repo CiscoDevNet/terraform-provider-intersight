@@ -281,6 +281,18 @@ func resourceFabricServerRole() *schema.Resource {
 					},
 				},
 			},
+			"preferred_device_id": {
+				Description: "Preferred device ID to be configured by user for the connected device. This ID must be specified together with the 'PreferredDeviceType' property. This ID will only takes effect if the actual connected device matches the 'PreferredDeviceType'. If the preferred ID is not available, the ID is automatically allocated and assigned by the system. If different preferred IDs are specified for the ports connected to the same device, only the preferred ID (if specified) of the port that is discovered first will be considered.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"preferred_device_type": {
+				Description:  "Device type for which preferred ID to be configured. If the actual connected device does not match the specified device type, the system ignores the 'PreferredDeviceId' property.\n* `Auto` - Preferred Id will be ignored if specified with this type.\n* `RackServer` - Connected device type is Rack Unit Server.\n* `Chassis` - Connected device type is Chassis.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Auto", "RackServer", "Chassis"}, false),
+				Optional:     true,
+				Default:      "Auto",
+			},
 			"shared_scope": {
 				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 				Type:        schema.TypeString,
@@ -556,6 +568,16 @@ func resourceFabricServerRoleCreate(c context.Context, d *schema.ResourceData, m
 		}
 	}
 
+	if v, ok := d.GetOkExists("preferred_device_id"); ok {
+		x := int64(v.(int))
+		o.SetPreferredDeviceId(x)
+	}
+
+	if v, ok := d.GetOk("preferred_device_type"); ok {
+		x := (v.(string))
+		o.SetPreferredDeviceType(x)
+	}
+
 	if v, ok := d.GetOkExists("slot_id"); ok {
 		x := int64(v.(int))
 		o.SetSlotId(x)
@@ -699,6 +721,14 @@ func resourceFabricServerRoleRead(c context.Context, d *schema.ResourceData, met
 		return diag.Errorf("error occurred while setting property PortPolicy in FabricServerRole object: %s", err.Error())
 	}
 
+	if err := d.Set("preferred_device_id", (s.GetPreferredDeviceId())); err != nil {
+		return diag.Errorf("error occurred while setting property PreferredDeviceId in FabricServerRole object: %s", err.Error())
+	}
+
+	if err := d.Set("preferred_device_type", (s.GetPreferredDeviceType())); err != nil {
+		return diag.Errorf("error occurred while setting property PreferredDeviceType in FabricServerRole object: %s", err.Error())
+	}
+
 	if err := d.Set("shared_scope", (s.GetSharedScope())); err != nil {
 		return diag.Errorf("error occurred while setting property SharedScope in FabricServerRole object: %s", err.Error())
 	}
@@ -812,6 +842,18 @@ func resourceFabricServerRoleUpdate(c context.Context, d *schema.ResourceData, m
 			x := p[0]
 			o.SetPortPolicy(x)
 		}
+	}
+
+	if d.HasChange("preferred_device_id") {
+		v := d.Get("preferred_device_id")
+		x := int64(v.(int))
+		o.SetPreferredDeviceId(x)
+	}
+
+	if d.HasChange("preferred_device_type") {
+		v := d.Get("preferred_device_type")
+		x := (v.(string))
+		o.SetPreferredDeviceType(x)
 	}
 
 	if d.HasChange("slot_id") {

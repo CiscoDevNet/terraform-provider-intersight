@@ -68,6 +68,7 @@ Name | Type | Description | Notes
 **ManagementOverV6Count** | Pointer to **int64** | Management over IPv6 feature usage. This determines the total number of IPv6 configurtaions in the fabric. | [optional] 
 **MicrosoftUsegVmmEpPdCount** | Pointer to **int64** | Number of Microsoft microsegmentation VmmEpPD objects. Ensures that Microsoft was configured. | [optional] 
 **NetFlowCount** | Pointer to **int64** | Number of Netflow monitor policies. | [optional] 
+**NiccVersion** | Pointer to **string** | NICC version. | [optional] 
 **Nir** | Pointer to **string** | NIR application usage. This determines if the fabric has NIR application installed. | [optional] 
 **OpenStack** | Pointer to **string** | Open stack feature usage. | [optional] 
 **OpflexKubernetesCount** | Pointer to **int64** | Opflex for Kubernetes feature usage. This determines the total number of VMM sessions of type kubernetes. | [optional] 
@@ -1728,6 +1729,31 @@ SetNetFlowCount sets NetFlowCount field to given value.
 `func (o *NiatelemetryNiaFeatureUsage) HasNetFlowCount() bool`
 
 HasNetFlowCount returns a boolean if a field has been set.
+
+### GetNiccVersion
+
+`func (o *NiatelemetryNiaFeatureUsage) GetNiccVersion() string`
+
+GetNiccVersion returns the NiccVersion field if non-nil, zero value otherwise.
+
+### GetNiccVersionOk
+
+`func (o *NiatelemetryNiaFeatureUsage) GetNiccVersionOk() (*string, bool)`
+
+GetNiccVersionOk returns a tuple with the NiccVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNiccVersion
+
+`func (o *NiatelemetryNiaFeatureUsage) SetNiccVersion(v string)`
+
+SetNiccVersion sets NiccVersion field to given value.
+
+### HasNiccVersion
+
+`func (o *NiatelemetryNiaFeatureUsage) HasNiccVersion() bool`
+
+HasNiccVersion returns a boolean if a field has been set.
 
 ### GetNir
 

@@ -249,7 +249,7 @@ func getWorkflowSolutionActionDefinitionSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"label": {
-						Description: "Descriptive label for the data type. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), space ( ) or an underscore (_). The first and last character in label must be an alphanumeric character.",
+						Description: "Descriptive label for the data type. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), space ( ), forward slash (/) or an underscore (_). The first and last character in label must be an alphanumeric character.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},

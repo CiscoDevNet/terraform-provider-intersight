@@ -6,13 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "ippool.PoolMember"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "ippool.PoolMember"]
-**IpType** | Pointer to **string** | Type of the IP address requested. * &#x60;IPv4&#x60; - IP V4 address type requested. * &#x60;IPv6&#x60; - IP V6 address type requested. | [optional] [default to "IPv4"]
-**IpV4Address** | Pointer to **string** | IPv4 Address of this pool member. | [optional] 
-**IpV6Address** | Pointer to **string** | IPv6 Address of this pool member. | [optional] 
+**IpType** | Pointer to **string** | Type of the IP address requested. * &#x60;IPv4&#x60; - IP V4 address type requested. * &#x60;IPv6&#x60; - IP V6 address type requested. | [optional] [readonly] [default to "IPv4"]
+**IpV4Address** | Pointer to **string** | IPv4 Address of this pool member. | [optional] [readonly] 
+**IpV6Address** | Pointer to **string** | IPv6 Address of this pool member. | [optional] [readonly] 
 **AssignedToEntity** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 **IpBlock** | Pointer to [**IppoolShadowBlockRelationship**](IppoolShadowBlockRelationship.md) |  | [optional] 
 **Peer** | Pointer to [**IppoolIpLeaseRelationship**](IppoolIpLeaseRelationship.md) |  | [optional] 
 **Pool** | Pointer to [**IppoolShadowPoolRelationship**](IppoolShadowPoolRelationship.md) |  | [optional] 
+**Reservation** | Pointer to [**IppoolReservationRelationship**](IppoolReservationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -247,6 +248,31 @@ SetPool sets Pool field to given value.
 `func (o *IppoolPoolMember) HasPool() bool`
 
 HasPool returns a boolean if a field has been set.
+
+### GetReservation
+
+`func (o *IppoolPoolMember) GetReservation() IppoolReservationRelationship`
+
+GetReservation returns the Reservation field if non-nil, zero value otherwise.
+
+### GetReservationOk
+
+`func (o *IppoolPoolMember) GetReservationOk() (*IppoolReservationRelationship, bool)`
+
+GetReservationOk returns a tuple with the Reservation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReservation
+
+`func (o *IppoolPoolMember) SetReservation(v IppoolReservationRelationship)`
+
+SetReservation sets Reservation field to given value.
+
+### HasReservation
+
+`func (o *IppoolPoolMember) HasReservation() bool`
+
+HasReservation returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

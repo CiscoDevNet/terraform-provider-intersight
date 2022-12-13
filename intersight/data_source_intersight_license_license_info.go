@@ -100,6 +100,11 @@ func getLicenseLicenseInfoSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"balance": {
+			Description: "The total balance we have for licenses.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 			Type:        schema.TypeString,
@@ -166,7 +171,7 @@ func getLicenseLicenseInfoSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"license_type": {
-			Description: "The name of the Intersight license entitlement.\nFor example, this property may be set to 'Essential'.\n* `Base` - Base as a License type. It is default license type.\n* `Essential` - Essential as a License type.\n* `Standard` - Standard as a License type.\n* `Advantage` - Advantage as a License type.\n* `Premier` - Premier as a License type.\n* `IWO-Essential` - IWO-Essential as a License type.\n* `IWO-Advantage` - IWO-Advantage as a License type.\n* `IWO-Premier` - IWO-Premier as a License type.\n* `IKS-Advantage` - IKS-Advantage as a License type.",
+			Description: "The name of the Intersight license entitlement.\nFor example, this property may be set to 'Essential'.\n* `Base` - Base as a License type. It is default license type.\n* `Essential` - Essential as a License type.\n* `Standard` - Standard as a License type.\n* `Advantage` - Advantage as a License type.\n* `Premier` - Premier as a License type.\n* `IWO-Essential` - IWO-Essential as a License type.\n* `IWO-Advantage` - IWO-Advantage as a License type.\n* `IWO-Premier` - IWO-Premier as a License type.\n* `IKS-Advantage` - IKS-Advantage as a License type.\n* `INC-Premier-1GFixed` - Premier 1G Fixed license tier for Intersight Nexus Cloud.\n* `INC-Premier-10GFixed` - Premier 10G Fixed license tier for Intersight Nexus Cloud.\n* `INC-Premier-100GFixed` - Premier 100G Fixed license tier for Intersight Nexus Cloud.\n* `INC-Premier-Mod4Slot` - Premier Modular 4 slot license tier for Intersight Nexus Cloud.\n* `INC-Premier-Mod8Slot` - Premier Modular 8 slot license tier for Intersight Nexus Cloud.\n* `INC-Premier-D2OpsFixed` - Premier D2Ops fixed license tier for Intersight Nexus Cloud.\n* `INC-Premier-D2OpsMod` - Premier D2Ops modular license tier for Intersight Nexus Cloud.\n* `IntersightTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode Intersight tiers.\n* `IWOTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode IKS tiers.\n* `IKSTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode IWO tiers.\n* `INCTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode Nexus tiers.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -178,6 +183,11 @@ func getLicenseLicenseInfoSchema() map[string]*schema.Schema {
 		"moid": {
 			Description: "The unique identifier of this Managed Object instance.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"net_substitution": {
+			Description: "The total number of substituted licenses added or removed.",
+			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"object_type": {
@@ -268,6 +278,49 @@ func getLicenseLicenseInfoSchema() map[string]*schema.Schema {
 			Description: "The date and time when the licenseState entered the TrialPeriod or OutOfCompliance state.",
 			Type:        schema.TypeString,
 			Optional:    true,
+		},
+		"subscription_id": {
+			Description: "The id of license subscription.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"substituted_license": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"substituted_license": {
+						Description: "The substitute license that is used.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"substituted_quantity": {
+						Description: "The number of substitute licenses that are used.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"substitution_type": {
+						Description: "The substitution from lower or from higher tier.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"tags": {
 			Type:     schema.TypeList,
@@ -529,6 +582,11 @@ func dataSourceLicenseLicenseInfoRead(c context.Context, d *schema.ResourceData,
 		o.SetAncestors(x)
 	}
 
+	if v, ok := d.GetOkExists("balance"); ok {
+		x := int64(v.(int))
+		o.SetBalance(x)
+	}
+
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
@@ -607,6 +665,11 @@ func dataSourceLicenseLicenseInfoRead(c context.Context, d *schema.ResourceData,
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
+	}
+
+	if v, ok := d.GetOkExists("net_substitution"); ok {
+		x := int64(v.(int))
+		o.SetNetSubstitution(x)
 	}
 
 	if v, ok := d.GetOk("object_type"); ok {
@@ -716,6 +779,39 @@ func dataSourceLicenseLicenseInfoRead(c context.Context, d *schema.ResourceData,
 	if v, ok := d.GetOk("start_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetStartTime(x)
+	}
+
+	if v, ok := d.GetOk("subscription_id"); ok {
+		x := (v.(string))
+		o.SetSubscriptionId(x)
+	}
+
+	if v, ok := d.GetOk("substituted_license"); ok {
+		x := make([]models.LicenseSubstituteLicense, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.LicenseSubstituteLicense{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("license.SubstituteLicense")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetSubstitutedLicense(x)
 	}
 
 	if v, ok := d.GetOk("tags"); ok {
@@ -872,6 +968,7 @@ func dataSourceLicenseLicenseInfoRead(c context.Context, d *schema.ResourceData,
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
+				temp["balance"] = (s.GetBalance())
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
@@ -892,6 +989,7 @@ func dataSourceLicenseLicenseInfoRead(c context.Context, d *schema.ResourceData,
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
+				temp["net_substitution"] = (s.GetNetSubstitution())
 				temp["object_type"] = (s.GetObjectType())
 				temp["owners"] = (s.GetOwners())
 
@@ -901,6 +999,9 @@ func dataSourceLicenseLicenseInfoRead(c context.Context, d *schema.ResourceData,
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["start_time"] = (s.GetStartTime()).String()
+				temp["subscription_id"] = (s.GetSubscriptionId())
+
+				temp["substituted_license"] = flattenListLicenseSubstituteLicense(s.GetSubstitutedLicense(), d)
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["trial_admin"] = (s.GetTrialAdmin())

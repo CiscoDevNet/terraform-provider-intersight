@@ -6,11 +6,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fcpool.PoolMember"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fcpool.PoolMember"]
-**WwnId** | Pointer to **string** | WWN ID of this pool member. | [optional] 
+**WwnId** | Pointer to **string** | WWN ID of this pool member. | [optional] [readonly] 
 **AssignedToEntity** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 **BlockHead** | Pointer to [**FcpoolFcBlockRelationship**](FcpoolFcBlockRelationship.md) |  | [optional] 
 **Peer** | Pointer to [**FcpoolLeaseRelationship**](FcpoolLeaseRelationship.md) |  | [optional] 
 **Pool** | Pointer to [**FcpoolPoolRelationship**](FcpoolPoolRelationship.md) |  | [optional] 
+**Reservation** | Pointer to [**FcpoolReservationRelationship**](FcpoolReservationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -195,6 +196,31 @@ SetPool sets Pool field to given value.
 `func (o *FcpoolPoolMember) HasPool() bool`
 
 HasPool returns a boolean if a field has been set.
+
+### GetReservation
+
+`func (o *FcpoolPoolMember) GetReservation() FcpoolReservationRelationship`
+
+GetReservation returns the Reservation field if non-nil, zero value otherwise.
+
+### GetReservationOk
+
+`func (o *FcpoolPoolMember) GetReservationOk() (*FcpoolReservationRelationship, bool)`
+
+GetReservationOk returns a tuple with the Reservation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReservation
+
+`func (o *FcpoolPoolMember) SetReservation(v FcpoolReservationRelationship)`
+
+SetReservation sets Reservation field to given value.
+
+### HasReservation
+
+`func (o *FcpoolPoolMember) HasReservation() bool`
+
+HasReservation returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

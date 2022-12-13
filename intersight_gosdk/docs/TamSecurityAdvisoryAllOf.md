@@ -14,7 +14,9 @@ Name | Type | Description | Notes
 **DatePublished** | Pointer to **time.Time** | Date when the security advisory was first published by Cisco. | [optional] 
 **DateUpdated** | Pointer to **time.Time** | Date when the security advisory was last updated by Cisco. | [optional] 
 **EnvironmentalScore** | Pointer to **float32** | CVSS version 3 environmental score for the security Advisory. | [optional] 
+**ExecuteOnPod** | Pointer to **string** | Orion pod on which this advisory should process. * &#x60;tier1&#x60; - Advisory processing will be taken care in first advisory driver of multinode cluster. * &#x60;tier2&#x60; - Advisory processing will be taken care in second advisory driver of multinode cluster. | [optional] [default to "tier1"]
 **ExternalUrl** | Pointer to **string** | A link to an external URL describing security Advisory in more details. | [optional] 
+**OtherRefUrls** | Pointer to **[]string** |  | [optional] 
 **Recommendation** | Pointer to **string** | Recommended action to resolve the security advisory. | [optional] 
 **Status** | Pointer to **string** | Cisco assigned status of the published advisory based on whether the investigation is complete or on-going. * &#x60;interim&#x60; - The Cisco investigation for the advisory is ongoing. Cisco will issue revisions to the advisory when additional information, including fixed software release data, becomes available. * &#x60;final&#x60; - Cisco has completed its evaluation of the vulnerability described in the advisory. There will be no further updates unless there is a material change in the nature of the vulnerability. | [optional] [default to "interim"]
 **TemporalScore** | Pointer to **float32** | CVSS version 3 temporal score for the security Advisory. | [optional] 
@@ -311,6 +313,31 @@ SetEnvironmentalScore sets EnvironmentalScore field to given value.
 
 HasEnvironmentalScore returns a boolean if a field has been set.
 
+### GetExecuteOnPod
+
+`func (o *TamSecurityAdvisoryAllOf) GetExecuteOnPod() string`
+
+GetExecuteOnPod returns the ExecuteOnPod field if non-nil, zero value otherwise.
+
+### GetExecuteOnPodOk
+
+`func (o *TamSecurityAdvisoryAllOf) GetExecuteOnPodOk() (*string, bool)`
+
+GetExecuteOnPodOk returns a tuple with the ExecuteOnPod field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExecuteOnPod
+
+`func (o *TamSecurityAdvisoryAllOf) SetExecuteOnPod(v string)`
+
+SetExecuteOnPod sets ExecuteOnPod field to given value.
+
+### HasExecuteOnPod
+
+`func (o *TamSecurityAdvisoryAllOf) HasExecuteOnPod() bool`
+
+HasExecuteOnPod returns a boolean if a field has been set.
+
 ### GetExternalUrl
 
 `func (o *TamSecurityAdvisoryAllOf) GetExternalUrl() string`
@@ -336,6 +363,41 @@ SetExternalUrl sets ExternalUrl field to given value.
 
 HasExternalUrl returns a boolean if a field has been set.
 
+### GetOtherRefUrls
+
+`func (o *TamSecurityAdvisoryAllOf) GetOtherRefUrls() []string`
+
+GetOtherRefUrls returns the OtherRefUrls field if non-nil, zero value otherwise.
+
+### GetOtherRefUrlsOk
+
+`func (o *TamSecurityAdvisoryAllOf) GetOtherRefUrlsOk() (*[]string, bool)`
+
+GetOtherRefUrlsOk returns a tuple with the OtherRefUrls field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOtherRefUrls
+
+`func (o *TamSecurityAdvisoryAllOf) SetOtherRefUrls(v []string)`
+
+SetOtherRefUrls sets OtherRefUrls field to given value.
+
+### HasOtherRefUrls
+
+`func (o *TamSecurityAdvisoryAllOf) HasOtherRefUrls() bool`
+
+HasOtherRefUrls returns a boolean if a field has been set.
+
+### SetOtherRefUrlsNil
+
+`func (o *TamSecurityAdvisoryAllOf) SetOtherRefUrlsNil(b bool)`
+
+ SetOtherRefUrlsNil sets the value for OtherRefUrls to be an explicit nil
+
+### UnsetOtherRefUrls
+`func (o *TamSecurityAdvisoryAllOf) UnsetOtherRefUrls()`
+
+UnsetOtherRefUrls ensures that no value is present for OtherRefUrls, not even an explicit nil
 ### GetRecommendation
 
 `func (o *TamSecurityAdvisoryAllOf) GetRecommendation() string`

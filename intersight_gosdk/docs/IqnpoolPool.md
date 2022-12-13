@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **Prefix** | Pointer to **string** | The prefix for any IQN blocks created for this pool. IQN Prefix must have the following format \&quot;iqn.yyyy-mm.naming-authority\&quot;, where naming-authority is usually the reverse syntax of the Internet domain name of the naming authority. | [optional] 
 **BlockHeads** | Pointer to [**[]IqnpoolBlockRelationship**](IqnpoolBlockRelationship.md) | An array of relationships to iqnpoolBlock resources. | [optional] [readonly] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**Reservations** | Pointer to [**[]IqnpoolReservationRelationship**](IqnpoolReservationRelationship.md) | An array of relationships to iqnpoolReservation resources. | [optional] 
 
 ## Methods
 
@@ -190,6 +191,41 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### GetReservations
+
+`func (o *IqnpoolPool) GetReservations() []IqnpoolReservationRelationship`
+
+GetReservations returns the Reservations field if non-nil, zero value otherwise.
+
+### GetReservationsOk
+
+`func (o *IqnpoolPool) GetReservationsOk() (*[]IqnpoolReservationRelationship, bool)`
+
+GetReservationsOk returns a tuple with the Reservations field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReservations
+
+`func (o *IqnpoolPool) SetReservations(v []IqnpoolReservationRelationship)`
+
+SetReservations sets Reservations field to given value.
+
+### HasReservations
+
+`func (o *IqnpoolPool) HasReservations() bool`
+
+HasReservations returns a boolean if a field has been set.
+
+### SetReservationsNil
+
+`func (o *IqnpoolPool) SetReservationsNil(b bool)`
+
+ SetReservationsNil sets the value for Reservations to be an explicit nil
+
+### UnsetReservations
+`func (o *IqnpoolPool) UnsetReservations()`
+
+UnsetReservations ensures that no value is present for Reservations, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -27,7 +27,11 @@ type FabricServerRole struct {
 	// Auto negotiation configuration for server port. This configuration is required only for FEX Model N9K-C93180YC-FX3 connected with 100G speed port on UCS-FI-6536 and should be set as True.
 	AutoNegotiationDisabled *bool `json:"AutoNegotiationDisabled,omitempty"`
 	// Forward error correction configuration for server port. This configuration is required only for FEX Model N9K-C93180YC-FX3 connected with 25G speed ports on UCS-FI-6454/UCS-FI-64108 and should be set as Cl74. * `Auto` - Forward error correction option 'Auto'. * `Cl91` - Forward error correction option 'cl91'. * `Cl74` - Forward error correction option 'cl74'.
-	Fec                  *string `json:"Fec,omitempty"`
+	Fec *string `json:"Fec,omitempty"`
+	// Preferred device ID to be configured by user for the connected device. This ID must be specified together with the 'PreferredDeviceType' property. This ID will only takes effect if the actual connected device matches the 'PreferredDeviceType'. If the preferred ID is not available, the ID is automatically allocated and assigned by the system. If different preferred IDs are specified for the ports connected to the same device, only the preferred ID (if specified) of the port that is discovered first will be considered.
+	PreferredDeviceId *int64 `json:"PreferredDeviceId,omitempty"`
+	// Device type for which preferred ID to be configured. If the actual connected device does not match the specified device type, the system ignores the 'PreferredDeviceId' property. * `Auto` - Preferred Id will be ignored if specified with this type. * `RackServer` - Connected device type is Rack Unit Server. * `Chassis` - Connected device type is Chassis.
+	PreferredDeviceType  *string `json:"PreferredDeviceType,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -45,6 +49,8 @@ func NewFabricServerRole(classId string, objectType string) *FabricServerRole {
 	this.AutoNegotiationDisabled = &autoNegotiationDisabled
 	var fec string = "Auto"
 	this.Fec = &fec
+	var preferredDeviceType string = "Auto"
+	this.PreferredDeviceType = &preferredDeviceType
 	return &this
 }
 
@@ -61,6 +67,8 @@ func NewFabricServerRoleWithDefaults() *FabricServerRole {
 	this.AutoNegotiationDisabled = &autoNegotiationDisabled
 	var fec string = "Auto"
 	this.Fec = &fec
+	var preferredDeviceType string = "Auto"
+	this.PreferredDeviceType = &preferredDeviceType
 	return &this
 }
 
@@ -176,6 +184,70 @@ func (o *FabricServerRole) SetFec(v string) {
 	o.Fec = &v
 }
 
+// GetPreferredDeviceId returns the PreferredDeviceId field value if set, zero value otherwise.
+func (o *FabricServerRole) GetPreferredDeviceId() int64 {
+	if o == nil || o.PreferredDeviceId == nil {
+		var ret int64
+		return ret
+	}
+	return *o.PreferredDeviceId
+}
+
+// GetPreferredDeviceIdOk returns a tuple with the PreferredDeviceId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FabricServerRole) GetPreferredDeviceIdOk() (*int64, bool) {
+	if o == nil || o.PreferredDeviceId == nil {
+		return nil, false
+	}
+	return o.PreferredDeviceId, true
+}
+
+// HasPreferredDeviceId returns a boolean if a field has been set.
+func (o *FabricServerRole) HasPreferredDeviceId() bool {
+	if o != nil && o.PreferredDeviceId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPreferredDeviceId gets a reference to the given int64 and assigns it to the PreferredDeviceId field.
+func (o *FabricServerRole) SetPreferredDeviceId(v int64) {
+	o.PreferredDeviceId = &v
+}
+
+// GetPreferredDeviceType returns the PreferredDeviceType field value if set, zero value otherwise.
+func (o *FabricServerRole) GetPreferredDeviceType() string {
+	if o == nil || o.PreferredDeviceType == nil {
+		var ret string
+		return ret
+	}
+	return *o.PreferredDeviceType
+}
+
+// GetPreferredDeviceTypeOk returns a tuple with the PreferredDeviceType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FabricServerRole) GetPreferredDeviceTypeOk() (*string, bool) {
+	if o == nil || o.PreferredDeviceType == nil {
+		return nil, false
+	}
+	return o.PreferredDeviceType, true
+}
+
+// HasPreferredDeviceType returns a boolean if a field has been set.
+func (o *FabricServerRole) HasPreferredDeviceType() bool {
+	if o != nil && o.PreferredDeviceType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPreferredDeviceType gets a reference to the given string and assigns it to the PreferredDeviceType field.
+func (o *FabricServerRole) SetPreferredDeviceType(v string) {
+	o.PreferredDeviceType = &v
+}
+
 func (o FabricServerRole) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	serializedFabricPortRole, errFabricPortRole := json.Marshal(o.FabricPortRole)
@@ -198,6 +270,12 @@ func (o FabricServerRole) MarshalJSON() ([]byte, error) {
 	if o.Fec != nil {
 		toSerialize["Fec"] = o.Fec
 	}
+	if o.PreferredDeviceId != nil {
+		toSerialize["PreferredDeviceId"] = o.PreferredDeviceId
+	}
+	if o.PreferredDeviceType != nil {
+		toSerialize["PreferredDeviceType"] = o.PreferredDeviceType
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -216,6 +294,10 @@ func (o *FabricServerRole) UnmarshalJSON(bytes []byte) (err error) {
 		AutoNegotiationDisabled *bool `json:"AutoNegotiationDisabled,omitempty"`
 		// Forward error correction configuration for server port. This configuration is required only for FEX Model N9K-C93180YC-FX3 connected with 25G speed ports on UCS-FI-6454/UCS-FI-64108 and should be set as Cl74. * `Auto` - Forward error correction option 'Auto'. * `Cl91` - Forward error correction option 'cl91'. * `Cl74` - Forward error correction option 'cl74'.
 		Fec *string `json:"Fec,omitempty"`
+		// Preferred device ID to be configured by user for the connected device. This ID must be specified together with the 'PreferredDeviceType' property. This ID will only takes effect if the actual connected device matches the 'PreferredDeviceType'. If the preferred ID is not available, the ID is automatically allocated and assigned by the system. If different preferred IDs are specified for the ports connected to the same device, only the preferred ID (if specified) of the port that is discovered first will be considered.
+		PreferredDeviceId *int64 `json:"PreferredDeviceId,omitempty"`
+		// Device type for which preferred ID to be configured. If the actual connected device does not match the specified device type, the system ignores the 'PreferredDeviceId' property. * `Auto` - Preferred Id will be ignored if specified with this type. * `RackServer` - Connected device type is Rack Unit Server. * `Chassis` - Connected device type is Chassis.
+		PreferredDeviceType *string `json:"PreferredDeviceType,omitempty"`
 	}
 
 	varFabricServerRoleWithoutEmbeddedStruct := FabricServerRoleWithoutEmbeddedStruct{}
@@ -227,6 +309,8 @@ func (o *FabricServerRole) UnmarshalJSON(bytes []byte) (err error) {
 		varFabricServerRole.ObjectType = varFabricServerRoleWithoutEmbeddedStruct.ObjectType
 		varFabricServerRole.AutoNegotiationDisabled = varFabricServerRoleWithoutEmbeddedStruct.AutoNegotiationDisabled
 		varFabricServerRole.Fec = varFabricServerRoleWithoutEmbeddedStruct.Fec
+		varFabricServerRole.PreferredDeviceId = varFabricServerRoleWithoutEmbeddedStruct.PreferredDeviceId
+		varFabricServerRole.PreferredDeviceType = varFabricServerRoleWithoutEmbeddedStruct.PreferredDeviceType
 		*o = FabricServerRole(varFabricServerRole)
 	} else {
 		return err
@@ -248,6 +332,8 @@ func (o *FabricServerRole) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AutoNegotiationDisabled")
 		delete(additionalProperties, "Fec")
+		delete(additionalProperties, "PreferredDeviceId")
+		delete(additionalProperties, "PreferredDeviceType")
 
 		// remove fields from embedded structs
 		reflectFabricPortRole := reflect.ValueOf(o.FabricPortRole)

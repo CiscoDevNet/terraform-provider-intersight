@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -37,13 +37,13 @@ type LicenseAccountLicenseData struct {
 	AuthNextTime *string `json:"AuthNextTime,omitempty"`
 	// Account license data category name.
 	Category *string `json:"Category,omitempty"`
-	// Default license tier set by user. * `Base` - Base as a License type. It is default license type. * `Essential` - Essential as a License type. * `Standard` - Standard as a License type. * `Advantage` - Advantage as a License type. * `Premier` - Premier as a License type. * `IWO-Essential` - IWO-Essential as a License type. * `IWO-Advantage` - IWO-Advantage as a License type. * `IWO-Premier` - IWO-Premier as a License type. * `IKS-Advantage` - IKS-Advantage as a License type.
+	// Default license tier set by user. * `Base` - Base as a License type. It is default license type. * `Essential` - Essential as a License type. * `Standard` - Standard as a License type. * `Advantage` - Advantage as a License type. * `Premier` - Premier as a License type. * `IWO-Essential` - IWO-Essential as a License type. * `IWO-Advantage` - IWO-Advantage as a License type. * `IWO-Premier` - IWO-Premier as a License type. * `IKS-Advantage` - IKS-Advantage as a License type. * `INC-Premier-1GFixed` - Premier 1G Fixed license tier for Intersight Nexus Cloud. * `INC-Premier-10GFixed` - Premier 10G Fixed license tier for Intersight Nexus Cloud. * `INC-Premier-100GFixed` - Premier 100G Fixed license tier for Intersight Nexus Cloud. * `INC-Premier-Mod4Slot` - Premier Modular 4 slot license tier for Intersight Nexus Cloud. * `INC-Premier-Mod8Slot` - Premier Modular 8 slot license tier for Intersight Nexus Cloud. * `INC-Premier-D2OpsFixed` - Premier D2Ops fixed license tier for Intersight Nexus Cloud. * `INC-Premier-D2OpsMod` - Premier D2Ops modular license tier for Intersight Nexus Cloud. * `IntersightTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode Intersight tiers. * `IWOTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode IKS tiers. * `IKSTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode IWO tiers. * `INCTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode Nexus tiers.
 	DefaultLicenseType *string `json:"DefaultLicenseType,omitempty"`
 	// The detailed error message when there is any error related to license sync of this account.
 	ErrorDesc *string `json:"ErrorDesc,omitempty"`
 	// Account license data group name.
 	Group *string `json:"Group,omitempty"`
-	// The highest license tier which is in compliant of this account. * `Base` - Base as a License type. It is default license type. * `Essential` - Essential as a License type. * `Standard` - Standard as a License type. * `Advantage` - Advantage as a License type. * `Premier` - Premier as a License type. * `IWO-Essential` - IWO-Essential as a License type. * `IWO-Advantage` - IWO-Advantage as a License type. * `IWO-Premier` - IWO-Premier as a License type. * `IKS-Advantage` - IKS-Advantage as a License type.
+	// The highest license tier which is in compliant of this account. * `Base` - Base as a License type. It is default license type. * `Essential` - Essential as a License type. * `Standard` - Standard as a License type. * `Advantage` - Advantage as a License type. * `Premier` - Premier as a License type. * `IWO-Essential` - IWO-Essential as a License type. * `IWO-Advantage` - IWO-Advantage as a License type. * `IWO-Premier` - IWO-Premier as a License type. * `IKS-Advantage` - IKS-Advantage as a License type. * `INC-Premier-1GFixed` - Premier 1G Fixed license tier for Intersight Nexus Cloud. * `INC-Premier-10GFixed` - Premier 10G Fixed license tier for Intersight Nexus Cloud. * `INC-Premier-100GFixed` - Premier 100G Fixed license tier for Intersight Nexus Cloud. * `INC-Premier-Mod4Slot` - Premier Modular 4 slot license tier for Intersight Nexus Cloud. * `INC-Premier-Mod8Slot` - Premier Modular 8 slot license tier for Intersight Nexus Cloud. * `INC-Premier-D2OpsFixed` - Premier D2Ops fixed license tier for Intersight Nexus Cloud. * `INC-Premier-D2OpsMod` - Premier D2Ops modular license tier for Intersight Nexus Cloud. * `IntersightTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode Intersight tiers. * `IWOTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode IKS tiers. * `IKSTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode IWO tiers. * `INCTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode Nexus tiers.
 	HighestCompliantLicenseTier *string `json:"HighestCompliantLicenseTier,omitempty"`
 	// Specifies last sync time with CSSM.
 	LastCssmSync *time.Time `json:"LastCssmSync,omitempty"`
@@ -78,13 +78,17 @@ type LicenseAccountLicenseData struct {
 	// Current sync status for the account.
 	SyncStatus *string `json:"SyncStatus,omitempty"`
 	// Name of the virtual account.
-	VirtualAccount  *string                             `json:"VirtualAccount,omitempty"`
-	Account         *IamAccountRelationship             `json:"Account,omitempty"`
-	CustomerOp      *LicenseCustomerOpRelationship      `json:"CustomerOp,omitempty"`
-	IksCustomerOp   *LicenseIksCustomerOpRelationship   `json:"IksCustomerOp,omitempty"`
-	IksLicenseCount *LicenseIksLicenseCountRelationship `json:"IksLicenseCount,omitempty"`
-	IwoCustomerOp   *LicenseIwoCustomerOpRelationship   `json:"IwoCustomerOp,omitempty"`
-	IwoLicenseCount *LicenseIwoLicenseCountRelationship `json:"IwoLicenseCount,omitempty"`
+	VirtualAccount            *string                                       `json:"VirtualAccount,omitempty"`
+	Account                   *IamAccountRelationship                       `json:"Account,omitempty"`
+	CustomerOp                *LicenseCustomerOpRelationship                `json:"CustomerOp,omitempty"`
+	IksCustomerOp             *LicenseIksCustomerOpRelationship             `json:"IksCustomerOp,omitempty"`
+	IksLicenseCount           *LicenseIksLicenseCountRelationship           `json:"IksLicenseCount,omitempty"`
+	IncCustomerOp             *LicenseIncCustomerOpRelationship             `json:"IncCustomerOp,omitempty"`
+	IncLicenseCount           *LicenseIncLicenseCountRelationship           `json:"IncLicenseCount,omitempty"`
+	IwoCustomerOp             *LicenseIwoCustomerOpRelationship             `json:"IwoCustomerOp,omitempty"`
+	IwoLicenseCount           *LicenseIwoLicenseCountRelationship           `json:"IwoLicenseCount,omitempty"`
+	LicenseInfoView           *LicenseLicenseInfoViewRelationship           `json:"LicenseInfoView,omitempty"`
+	LicenseRegistrationStatus *LicenseLicenseRegistrationStatusRelationship `json:"LicenseRegistrationStatus,omitempty"`
 	// An array of relationships to licenseLicenseInfo resources.
 	Licenseinfos         []LicenseLicenseInfoRelationship      `json:"Licenseinfos,omitempty"`
 	SmartlicenseToken    *LicenseSmartlicenseTokenRelationship `json:"SmartlicenseToken,omitempty"`
@@ -1160,6 +1164,70 @@ func (o *LicenseAccountLicenseData) SetIksLicenseCount(v LicenseIksLicenseCountR
 	o.IksLicenseCount = &v
 }
 
+// GetIncCustomerOp returns the IncCustomerOp field value if set, zero value otherwise.
+func (o *LicenseAccountLicenseData) GetIncCustomerOp() LicenseIncCustomerOpRelationship {
+	if o == nil || o.IncCustomerOp == nil {
+		var ret LicenseIncCustomerOpRelationship
+		return ret
+	}
+	return *o.IncCustomerOp
+}
+
+// GetIncCustomerOpOk returns a tuple with the IncCustomerOp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LicenseAccountLicenseData) GetIncCustomerOpOk() (*LicenseIncCustomerOpRelationship, bool) {
+	if o == nil || o.IncCustomerOp == nil {
+		return nil, false
+	}
+	return o.IncCustomerOp, true
+}
+
+// HasIncCustomerOp returns a boolean if a field has been set.
+func (o *LicenseAccountLicenseData) HasIncCustomerOp() bool {
+	if o != nil && o.IncCustomerOp != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIncCustomerOp gets a reference to the given LicenseIncCustomerOpRelationship and assigns it to the IncCustomerOp field.
+func (o *LicenseAccountLicenseData) SetIncCustomerOp(v LicenseIncCustomerOpRelationship) {
+	o.IncCustomerOp = &v
+}
+
+// GetIncLicenseCount returns the IncLicenseCount field value if set, zero value otherwise.
+func (o *LicenseAccountLicenseData) GetIncLicenseCount() LicenseIncLicenseCountRelationship {
+	if o == nil || o.IncLicenseCount == nil {
+		var ret LicenseIncLicenseCountRelationship
+		return ret
+	}
+	return *o.IncLicenseCount
+}
+
+// GetIncLicenseCountOk returns a tuple with the IncLicenseCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LicenseAccountLicenseData) GetIncLicenseCountOk() (*LicenseIncLicenseCountRelationship, bool) {
+	if o == nil || o.IncLicenseCount == nil {
+		return nil, false
+	}
+	return o.IncLicenseCount, true
+}
+
+// HasIncLicenseCount returns a boolean if a field has been set.
+func (o *LicenseAccountLicenseData) HasIncLicenseCount() bool {
+	if o != nil && o.IncLicenseCount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIncLicenseCount gets a reference to the given LicenseIncLicenseCountRelationship and assigns it to the IncLicenseCount field.
+func (o *LicenseAccountLicenseData) SetIncLicenseCount(v LicenseIncLicenseCountRelationship) {
+	o.IncLicenseCount = &v
+}
+
 // GetIwoCustomerOp returns the IwoCustomerOp field value if set, zero value otherwise.
 func (o *LicenseAccountLicenseData) GetIwoCustomerOp() LicenseIwoCustomerOpRelationship {
 	if o == nil || o.IwoCustomerOp == nil {
@@ -1222,6 +1290,70 @@ func (o *LicenseAccountLicenseData) HasIwoLicenseCount() bool {
 // SetIwoLicenseCount gets a reference to the given LicenseIwoLicenseCountRelationship and assigns it to the IwoLicenseCount field.
 func (o *LicenseAccountLicenseData) SetIwoLicenseCount(v LicenseIwoLicenseCountRelationship) {
 	o.IwoLicenseCount = &v
+}
+
+// GetLicenseInfoView returns the LicenseInfoView field value if set, zero value otherwise.
+func (o *LicenseAccountLicenseData) GetLicenseInfoView() LicenseLicenseInfoViewRelationship {
+	if o == nil || o.LicenseInfoView == nil {
+		var ret LicenseLicenseInfoViewRelationship
+		return ret
+	}
+	return *o.LicenseInfoView
+}
+
+// GetLicenseInfoViewOk returns a tuple with the LicenseInfoView field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LicenseAccountLicenseData) GetLicenseInfoViewOk() (*LicenseLicenseInfoViewRelationship, bool) {
+	if o == nil || o.LicenseInfoView == nil {
+		return nil, false
+	}
+	return o.LicenseInfoView, true
+}
+
+// HasLicenseInfoView returns a boolean if a field has been set.
+func (o *LicenseAccountLicenseData) HasLicenseInfoView() bool {
+	if o != nil && o.LicenseInfoView != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLicenseInfoView gets a reference to the given LicenseLicenseInfoViewRelationship and assigns it to the LicenseInfoView field.
+func (o *LicenseAccountLicenseData) SetLicenseInfoView(v LicenseLicenseInfoViewRelationship) {
+	o.LicenseInfoView = &v
+}
+
+// GetLicenseRegistrationStatus returns the LicenseRegistrationStatus field value if set, zero value otherwise.
+func (o *LicenseAccountLicenseData) GetLicenseRegistrationStatus() LicenseLicenseRegistrationStatusRelationship {
+	if o == nil || o.LicenseRegistrationStatus == nil {
+		var ret LicenseLicenseRegistrationStatusRelationship
+		return ret
+	}
+	return *o.LicenseRegistrationStatus
+}
+
+// GetLicenseRegistrationStatusOk returns a tuple with the LicenseRegistrationStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LicenseAccountLicenseData) GetLicenseRegistrationStatusOk() (*LicenseLicenseRegistrationStatusRelationship, bool) {
+	if o == nil || o.LicenseRegistrationStatus == nil {
+		return nil, false
+	}
+	return o.LicenseRegistrationStatus, true
+}
+
+// HasLicenseRegistrationStatus returns a boolean if a field has been set.
+func (o *LicenseAccountLicenseData) HasLicenseRegistrationStatus() bool {
+	if o != nil && o.LicenseRegistrationStatus != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLicenseRegistrationStatus gets a reference to the given LicenseLicenseRegistrationStatusRelationship and assigns it to the LicenseRegistrationStatus field.
+func (o *LicenseAccountLicenseData) SetLicenseRegistrationStatus(v LicenseLicenseRegistrationStatusRelationship) {
+	o.LicenseRegistrationStatus = &v
 }
 
 // GetLicenseinfos returns the Licenseinfos field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1398,11 +1530,23 @@ func (o LicenseAccountLicenseData) MarshalJSON() ([]byte, error) {
 	if o.IksLicenseCount != nil {
 		toSerialize["IksLicenseCount"] = o.IksLicenseCount
 	}
+	if o.IncCustomerOp != nil {
+		toSerialize["IncCustomerOp"] = o.IncCustomerOp
+	}
+	if o.IncLicenseCount != nil {
+		toSerialize["IncLicenseCount"] = o.IncLicenseCount
+	}
 	if o.IwoCustomerOp != nil {
 		toSerialize["IwoCustomerOp"] = o.IwoCustomerOp
 	}
 	if o.IwoLicenseCount != nil {
 		toSerialize["IwoLicenseCount"] = o.IwoLicenseCount
+	}
+	if o.LicenseInfoView != nil {
+		toSerialize["LicenseInfoView"] = o.LicenseInfoView
+	}
+	if o.LicenseRegistrationStatus != nil {
+		toSerialize["LicenseRegistrationStatus"] = o.LicenseRegistrationStatus
 	}
 	if o.Licenseinfos != nil {
 		toSerialize["Licenseinfos"] = o.Licenseinfos
@@ -1436,13 +1580,13 @@ func (o *LicenseAccountLicenseData) UnmarshalJSON(bytes []byte) (err error) {
 		AuthNextTime *string `json:"AuthNextTime,omitempty"`
 		// Account license data category name.
 		Category *string `json:"Category,omitempty"`
-		// Default license tier set by user. * `Base` - Base as a License type. It is default license type. * `Essential` - Essential as a License type. * `Standard` - Standard as a License type. * `Advantage` - Advantage as a License type. * `Premier` - Premier as a License type. * `IWO-Essential` - IWO-Essential as a License type. * `IWO-Advantage` - IWO-Advantage as a License type. * `IWO-Premier` - IWO-Premier as a License type. * `IKS-Advantage` - IKS-Advantage as a License type.
+		// Default license tier set by user. * `Base` - Base as a License type. It is default license type. * `Essential` - Essential as a License type. * `Standard` - Standard as a License type. * `Advantage` - Advantage as a License type. * `Premier` - Premier as a License type. * `IWO-Essential` - IWO-Essential as a License type. * `IWO-Advantage` - IWO-Advantage as a License type. * `IWO-Premier` - IWO-Premier as a License type. * `IKS-Advantage` - IKS-Advantage as a License type. * `INC-Premier-1GFixed` - Premier 1G Fixed license tier for Intersight Nexus Cloud. * `INC-Premier-10GFixed` - Premier 10G Fixed license tier for Intersight Nexus Cloud. * `INC-Premier-100GFixed` - Premier 100G Fixed license tier for Intersight Nexus Cloud. * `INC-Premier-Mod4Slot` - Premier Modular 4 slot license tier for Intersight Nexus Cloud. * `INC-Premier-Mod8Slot` - Premier Modular 8 slot license tier for Intersight Nexus Cloud. * `INC-Premier-D2OpsFixed` - Premier D2Ops fixed license tier for Intersight Nexus Cloud. * `INC-Premier-D2OpsMod` - Premier D2Ops modular license tier for Intersight Nexus Cloud. * `IntersightTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode Intersight tiers. * `IWOTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode IKS tiers. * `IKSTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode IWO tiers. * `INCTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode Nexus tiers.
 		DefaultLicenseType *string `json:"DefaultLicenseType,omitempty"`
 		// The detailed error message when there is any error related to license sync of this account.
 		ErrorDesc *string `json:"ErrorDesc,omitempty"`
 		// Account license data group name.
 		Group *string `json:"Group,omitempty"`
-		// The highest license tier which is in compliant of this account. * `Base` - Base as a License type. It is default license type. * `Essential` - Essential as a License type. * `Standard` - Standard as a License type. * `Advantage` - Advantage as a License type. * `Premier` - Premier as a License type. * `IWO-Essential` - IWO-Essential as a License type. * `IWO-Advantage` - IWO-Advantage as a License type. * `IWO-Premier` - IWO-Premier as a License type. * `IKS-Advantage` - IKS-Advantage as a License type.
+		// The highest license tier which is in compliant of this account. * `Base` - Base as a License type. It is default license type. * `Essential` - Essential as a License type. * `Standard` - Standard as a License type. * `Advantage` - Advantage as a License type. * `Premier` - Premier as a License type. * `IWO-Essential` - IWO-Essential as a License type. * `IWO-Advantage` - IWO-Advantage as a License type. * `IWO-Premier` - IWO-Premier as a License type. * `IKS-Advantage` - IKS-Advantage as a License type. * `INC-Premier-1GFixed` - Premier 1G Fixed license tier for Intersight Nexus Cloud. * `INC-Premier-10GFixed` - Premier 10G Fixed license tier for Intersight Nexus Cloud. * `INC-Premier-100GFixed` - Premier 100G Fixed license tier for Intersight Nexus Cloud. * `INC-Premier-Mod4Slot` - Premier Modular 4 slot license tier for Intersight Nexus Cloud. * `INC-Premier-Mod8Slot` - Premier Modular 8 slot license tier for Intersight Nexus Cloud. * `INC-Premier-D2OpsFixed` - Premier D2Ops fixed license tier for Intersight Nexus Cloud. * `INC-Premier-D2OpsMod` - Premier D2Ops modular license tier for Intersight Nexus Cloud. * `IntersightTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode Intersight tiers. * `IWOTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode IKS tiers. * `IKSTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode IWO tiers. * `INCTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode Nexus tiers.
 		HighestCompliantLicenseTier *string `json:"HighestCompliantLicenseTier,omitempty"`
 		// Specifies last sync time with CSSM.
 		LastCssmSync *time.Time `json:"LastCssmSync,omitempty"`
@@ -1477,13 +1621,17 @@ func (o *LicenseAccountLicenseData) UnmarshalJSON(bytes []byte) (err error) {
 		// Current sync status for the account.
 		SyncStatus *string `json:"SyncStatus,omitempty"`
 		// Name of the virtual account.
-		VirtualAccount  *string                             `json:"VirtualAccount,omitempty"`
-		Account         *IamAccountRelationship             `json:"Account,omitempty"`
-		CustomerOp      *LicenseCustomerOpRelationship      `json:"CustomerOp,omitempty"`
-		IksCustomerOp   *LicenseIksCustomerOpRelationship   `json:"IksCustomerOp,omitempty"`
-		IksLicenseCount *LicenseIksLicenseCountRelationship `json:"IksLicenseCount,omitempty"`
-		IwoCustomerOp   *LicenseIwoCustomerOpRelationship   `json:"IwoCustomerOp,omitempty"`
-		IwoLicenseCount *LicenseIwoLicenseCountRelationship `json:"IwoLicenseCount,omitempty"`
+		VirtualAccount            *string                                       `json:"VirtualAccount,omitempty"`
+		Account                   *IamAccountRelationship                       `json:"Account,omitempty"`
+		CustomerOp                *LicenseCustomerOpRelationship                `json:"CustomerOp,omitempty"`
+		IksCustomerOp             *LicenseIksCustomerOpRelationship             `json:"IksCustomerOp,omitempty"`
+		IksLicenseCount           *LicenseIksLicenseCountRelationship           `json:"IksLicenseCount,omitempty"`
+		IncCustomerOp             *LicenseIncCustomerOpRelationship             `json:"IncCustomerOp,omitempty"`
+		IncLicenseCount           *LicenseIncLicenseCountRelationship           `json:"IncLicenseCount,omitempty"`
+		IwoCustomerOp             *LicenseIwoCustomerOpRelationship             `json:"IwoCustomerOp,omitempty"`
+		IwoLicenseCount           *LicenseIwoLicenseCountRelationship           `json:"IwoLicenseCount,omitempty"`
+		LicenseInfoView           *LicenseLicenseInfoViewRelationship           `json:"LicenseInfoView,omitempty"`
+		LicenseRegistrationStatus *LicenseLicenseRegistrationStatusRelationship `json:"LicenseRegistrationStatus,omitempty"`
 		// An array of relationships to licenseLicenseInfo resources.
 		Licenseinfos      []LicenseLicenseInfoRelationship      `json:"Licenseinfos,omitempty"`
 		SmartlicenseToken *LicenseSmartlicenseTokenRelationship `json:"SmartlicenseToken,omitempty"`
@@ -1527,8 +1675,12 @@ func (o *LicenseAccountLicenseData) UnmarshalJSON(bytes []byte) (err error) {
 		varLicenseAccountLicenseData.CustomerOp = varLicenseAccountLicenseDataWithoutEmbeddedStruct.CustomerOp
 		varLicenseAccountLicenseData.IksCustomerOp = varLicenseAccountLicenseDataWithoutEmbeddedStruct.IksCustomerOp
 		varLicenseAccountLicenseData.IksLicenseCount = varLicenseAccountLicenseDataWithoutEmbeddedStruct.IksLicenseCount
+		varLicenseAccountLicenseData.IncCustomerOp = varLicenseAccountLicenseDataWithoutEmbeddedStruct.IncCustomerOp
+		varLicenseAccountLicenseData.IncLicenseCount = varLicenseAccountLicenseDataWithoutEmbeddedStruct.IncLicenseCount
 		varLicenseAccountLicenseData.IwoCustomerOp = varLicenseAccountLicenseDataWithoutEmbeddedStruct.IwoCustomerOp
 		varLicenseAccountLicenseData.IwoLicenseCount = varLicenseAccountLicenseDataWithoutEmbeddedStruct.IwoLicenseCount
+		varLicenseAccountLicenseData.LicenseInfoView = varLicenseAccountLicenseDataWithoutEmbeddedStruct.LicenseInfoView
+		varLicenseAccountLicenseData.LicenseRegistrationStatus = varLicenseAccountLicenseDataWithoutEmbeddedStruct.LicenseRegistrationStatus
 		varLicenseAccountLicenseData.Licenseinfos = varLicenseAccountLicenseDataWithoutEmbeddedStruct.Licenseinfos
 		varLicenseAccountLicenseData.SmartlicenseToken = varLicenseAccountLicenseDataWithoutEmbeddedStruct.SmartlicenseToken
 		*o = LicenseAccountLicenseData(varLicenseAccountLicenseData)
@@ -1581,8 +1733,12 @@ func (o *LicenseAccountLicenseData) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "CustomerOp")
 		delete(additionalProperties, "IksCustomerOp")
 		delete(additionalProperties, "IksLicenseCount")
+		delete(additionalProperties, "IncCustomerOp")
+		delete(additionalProperties, "IncLicenseCount")
 		delete(additionalProperties, "IwoCustomerOp")
 		delete(additionalProperties, "IwoLicenseCount")
+		delete(additionalProperties, "LicenseInfoView")
+		delete(additionalProperties, "LicenseRegistrationStatus")
 		delete(additionalProperties, "Licenseinfos")
 		delete(additionalProperties, "SmartlicenseToken")
 

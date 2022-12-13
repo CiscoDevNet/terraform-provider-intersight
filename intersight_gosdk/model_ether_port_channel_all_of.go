@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -27,8 +27,24 @@ type EtherPortChannelAllOf struct {
 	AdminState *string `json:"AdminState,omitempty"`
 	// Allowed VLANs on this port-channel, on this FI.
 	AllowedVlans *string `json:"AllowedVlans,omitempty"`
+	// Bandwidth of this port-channel.
+	BandWidth *string `json:"BandWidth,omitempty"`
+	// Description of this port-channel.
+	Description *string `json:"Description,omitempty"`
+	// IP address of this port-channel.
+	IpAddress *string `json:"IpAddress,omitempty"`
+	// IP address mask of this port-channel.
+	IpAddressMask *int64 `json:"IpAddressMask,omitempty"`
+	// IPv6 subnet in CIDR notation of this port-channel. Ex. 2000::/8.
+	Ipv6SubnetCidr *string `json:"Ipv6SubnetCidr,omitempty"`
+	// MAC address of this port-channel.
+	MacAddress *string `json:"MacAddress,omitempty"`
 	// Operating mode of this port-channel.
 	Mode *string `json:"Mode,omitempty"`
+	// Maximum transmission unit of this port-channel.
+	Mtu *int64 `json:"Mtu,omitempty"`
+	// Name of the port channel.
+	Name *string `json:"Name,omitempty"`
 	// Native VLAN for this port-channel, on this FI.
 	NativeVlan *string `json:"NativeVlan,omitempty"`
 	// Operational speed of this port-channel.
@@ -41,9 +57,12 @@ type EtherPortChannelAllOf struct {
 	PortChannelId *int64 `json:"PortChannelId,omitempty"`
 	// This port-channel's configured role (uplink, server, etc.).
 	Role *string `json:"Role,omitempty"`
+	// Detailed status of this port-channel.
+	Status *string `json:"Status,omitempty"`
 	// Switch Identifier that is local to a cluster.
 	SwitchId             *string                              `json:"SwitchId,omitempty"`
 	EquipmentSwitchCard  *EquipmentSwitchCardRelationship     `json:"EquipmentSwitchCard,omitempty"`
+	NetworkElement       *NetworkElementRelationship          `json:"NetworkElement,omitempty"`
 	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -217,6 +236,198 @@ func (o *EtherPortChannelAllOf) SetAllowedVlans(v string) {
 	o.AllowedVlans = &v
 }
 
+// GetBandWidth returns the BandWidth field value if set, zero value otherwise.
+func (o *EtherPortChannelAllOf) GetBandWidth() string {
+	if o == nil || o.BandWidth == nil {
+		var ret string
+		return ret
+	}
+	return *o.BandWidth
+}
+
+// GetBandWidthOk returns a tuple with the BandWidth field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EtherPortChannelAllOf) GetBandWidthOk() (*string, bool) {
+	if o == nil || o.BandWidth == nil {
+		return nil, false
+	}
+	return o.BandWidth, true
+}
+
+// HasBandWidth returns a boolean if a field has been set.
+func (o *EtherPortChannelAllOf) HasBandWidth() bool {
+	if o != nil && o.BandWidth != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetBandWidth gets a reference to the given string and assigns it to the BandWidth field.
+func (o *EtherPortChannelAllOf) SetBandWidth(v string) {
+	o.BandWidth = &v
+}
+
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *EtherPortChannelAllOf) GetDescription() string {
+	if o == nil || o.Description == nil {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EtherPortChannelAllOf) GetDescriptionOk() (*string, bool) {
+	if o == nil || o.Description == nil {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *EtherPortChannelAllOf) HasDescription() bool {
+	if o != nil && o.Description != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *EtherPortChannelAllOf) SetDescription(v string) {
+	o.Description = &v
+}
+
+// GetIpAddress returns the IpAddress field value if set, zero value otherwise.
+func (o *EtherPortChannelAllOf) GetIpAddress() string {
+	if o == nil || o.IpAddress == nil {
+		var ret string
+		return ret
+	}
+	return *o.IpAddress
+}
+
+// GetIpAddressOk returns a tuple with the IpAddress field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EtherPortChannelAllOf) GetIpAddressOk() (*string, bool) {
+	if o == nil || o.IpAddress == nil {
+		return nil, false
+	}
+	return o.IpAddress, true
+}
+
+// HasIpAddress returns a boolean if a field has been set.
+func (o *EtherPortChannelAllOf) HasIpAddress() bool {
+	if o != nil && o.IpAddress != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIpAddress gets a reference to the given string and assigns it to the IpAddress field.
+func (o *EtherPortChannelAllOf) SetIpAddress(v string) {
+	o.IpAddress = &v
+}
+
+// GetIpAddressMask returns the IpAddressMask field value if set, zero value otherwise.
+func (o *EtherPortChannelAllOf) GetIpAddressMask() int64 {
+	if o == nil || o.IpAddressMask == nil {
+		var ret int64
+		return ret
+	}
+	return *o.IpAddressMask
+}
+
+// GetIpAddressMaskOk returns a tuple with the IpAddressMask field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EtherPortChannelAllOf) GetIpAddressMaskOk() (*int64, bool) {
+	if o == nil || o.IpAddressMask == nil {
+		return nil, false
+	}
+	return o.IpAddressMask, true
+}
+
+// HasIpAddressMask returns a boolean if a field has been set.
+func (o *EtherPortChannelAllOf) HasIpAddressMask() bool {
+	if o != nil && o.IpAddressMask != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIpAddressMask gets a reference to the given int64 and assigns it to the IpAddressMask field.
+func (o *EtherPortChannelAllOf) SetIpAddressMask(v int64) {
+	o.IpAddressMask = &v
+}
+
+// GetIpv6SubnetCidr returns the Ipv6SubnetCidr field value if set, zero value otherwise.
+func (o *EtherPortChannelAllOf) GetIpv6SubnetCidr() string {
+	if o == nil || o.Ipv6SubnetCidr == nil {
+		var ret string
+		return ret
+	}
+	return *o.Ipv6SubnetCidr
+}
+
+// GetIpv6SubnetCidrOk returns a tuple with the Ipv6SubnetCidr field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EtherPortChannelAllOf) GetIpv6SubnetCidrOk() (*string, bool) {
+	if o == nil || o.Ipv6SubnetCidr == nil {
+		return nil, false
+	}
+	return o.Ipv6SubnetCidr, true
+}
+
+// HasIpv6SubnetCidr returns a boolean if a field has been set.
+func (o *EtherPortChannelAllOf) HasIpv6SubnetCidr() bool {
+	if o != nil && o.Ipv6SubnetCidr != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIpv6SubnetCidr gets a reference to the given string and assigns it to the Ipv6SubnetCidr field.
+func (o *EtherPortChannelAllOf) SetIpv6SubnetCidr(v string) {
+	o.Ipv6SubnetCidr = &v
+}
+
+// GetMacAddress returns the MacAddress field value if set, zero value otherwise.
+func (o *EtherPortChannelAllOf) GetMacAddress() string {
+	if o == nil || o.MacAddress == nil {
+		var ret string
+		return ret
+	}
+	return *o.MacAddress
+}
+
+// GetMacAddressOk returns a tuple with the MacAddress field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EtherPortChannelAllOf) GetMacAddressOk() (*string, bool) {
+	if o == nil || o.MacAddress == nil {
+		return nil, false
+	}
+	return o.MacAddress, true
+}
+
+// HasMacAddress returns a boolean if a field has been set.
+func (o *EtherPortChannelAllOf) HasMacAddress() bool {
+	if o != nil && o.MacAddress != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMacAddress gets a reference to the given string and assigns it to the MacAddress field.
+func (o *EtherPortChannelAllOf) SetMacAddress(v string) {
+	o.MacAddress = &v
+}
+
 // GetMode returns the Mode field value if set, zero value otherwise.
 func (o *EtherPortChannelAllOf) GetMode() string {
 	if o == nil || o.Mode == nil {
@@ -247,6 +458,70 @@ func (o *EtherPortChannelAllOf) HasMode() bool {
 // SetMode gets a reference to the given string and assigns it to the Mode field.
 func (o *EtherPortChannelAllOf) SetMode(v string) {
 	o.Mode = &v
+}
+
+// GetMtu returns the Mtu field value if set, zero value otherwise.
+func (o *EtherPortChannelAllOf) GetMtu() int64 {
+	if o == nil || o.Mtu == nil {
+		var ret int64
+		return ret
+	}
+	return *o.Mtu
+}
+
+// GetMtuOk returns a tuple with the Mtu field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EtherPortChannelAllOf) GetMtuOk() (*int64, bool) {
+	if o == nil || o.Mtu == nil {
+		return nil, false
+	}
+	return o.Mtu, true
+}
+
+// HasMtu returns a boolean if a field has been set.
+func (o *EtherPortChannelAllOf) HasMtu() bool {
+	if o != nil && o.Mtu != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMtu gets a reference to the given int64 and assigns it to the Mtu field.
+func (o *EtherPortChannelAllOf) SetMtu(v int64) {
+	o.Mtu = &v
+}
+
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *EtherPortChannelAllOf) GetName() string {
+	if o == nil || o.Name == nil {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EtherPortChannelAllOf) GetNameOk() (*string, bool) {
+	if o == nil || o.Name == nil {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *EtherPortChannelAllOf) HasName() bool {
+	if o != nil && o.Name != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *EtherPortChannelAllOf) SetName(v string) {
+	o.Name = &v
 }
 
 // GetNativeVlan returns the NativeVlan field value if set, zero value otherwise.
@@ -441,6 +716,38 @@ func (o *EtherPortChannelAllOf) SetRole(v string) {
 	o.Role = &v
 }
 
+// GetStatus returns the Status field value if set, zero value otherwise.
+func (o *EtherPortChannelAllOf) GetStatus() string {
+	if o == nil || o.Status == nil {
+		var ret string
+		return ret
+	}
+	return *o.Status
+}
+
+// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EtherPortChannelAllOf) GetStatusOk() (*string, bool) {
+	if o == nil || o.Status == nil {
+		return nil, false
+	}
+	return o.Status, true
+}
+
+// HasStatus returns a boolean if a field has been set.
+func (o *EtherPortChannelAllOf) HasStatus() bool {
+	if o != nil && o.Status != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStatus gets a reference to the given string and assigns it to the Status field.
+func (o *EtherPortChannelAllOf) SetStatus(v string) {
+	o.Status = &v
+}
+
 // GetSwitchId returns the SwitchId field value if set, zero value otherwise.
 func (o *EtherPortChannelAllOf) GetSwitchId() string {
 	if o == nil || o.SwitchId == nil {
@@ -505,6 +812,38 @@ func (o *EtherPortChannelAllOf) SetEquipmentSwitchCard(v EquipmentSwitchCardRela
 	o.EquipmentSwitchCard = &v
 }
 
+// GetNetworkElement returns the NetworkElement field value if set, zero value otherwise.
+func (o *EtherPortChannelAllOf) GetNetworkElement() NetworkElementRelationship {
+	if o == nil || o.NetworkElement == nil {
+		var ret NetworkElementRelationship
+		return ret
+	}
+	return *o.NetworkElement
+}
+
+// GetNetworkElementOk returns a tuple with the NetworkElement field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EtherPortChannelAllOf) GetNetworkElementOk() (*NetworkElementRelationship, bool) {
+	if o == nil || o.NetworkElement == nil {
+		return nil, false
+	}
+	return o.NetworkElement, true
+}
+
+// HasNetworkElement returns a boolean if a field has been set.
+func (o *EtherPortChannelAllOf) HasNetworkElement() bool {
+	if o != nil && o.NetworkElement != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNetworkElement gets a reference to the given NetworkElementRelationship and assigns it to the NetworkElement field.
+func (o *EtherPortChannelAllOf) SetNetworkElement(v NetworkElementRelationship) {
+	o.NetworkElement = &v
+}
+
 // GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
 func (o *EtherPortChannelAllOf) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
 	if o == nil || o.RegisteredDevice == nil {
@@ -554,8 +893,32 @@ func (o EtherPortChannelAllOf) MarshalJSON() ([]byte, error) {
 	if o.AllowedVlans != nil {
 		toSerialize["AllowedVlans"] = o.AllowedVlans
 	}
+	if o.BandWidth != nil {
+		toSerialize["BandWidth"] = o.BandWidth
+	}
+	if o.Description != nil {
+		toSerialize["Description"] = o.Description
+	}
+	if o.IpAddress != nil {
+		toSerialize["IpAddress"] = o.IpAddress
+	}
+	if o.IpAddressMask != nil {
+		toSerialize["IpAddressMask"] = o.IpAddressMask
+	}
+	if o.Ipv6SubnetCidr != nil {
+		toSerialize["Ipv6SubnetCidr"] = o.Ipv6SubnetCidr
+	}
+	if o.MacAddress != nil {
+		toSerialize["MacAddress"] = o.MacAddress
+	}
 	if o.Mode != nil {
 		toSerialize["Mode"] = o.Mode
+	}
+	if o.Mtu != nil {
+		toSerialize["Mtu"] = o.Mtu
+	}
+	if o.Name != nil {
+		toSerialize["Name"] = o.Name
 	}
 	if o.NativeVlan != nil {
 		toSerialize["NativeVlan"] = o.NativeVlan
@@ -575,11 +938,17 @@ func (o EtherPortChannelAllOf) MarshalJSON() ([]byte, error) {
 	if o.Role != nil {
 		toSerialize["Role"] = o.Role
 	}
+	if o.Status != nil {
+		toSerialize["Status"] = o.Status
+	}
 	if o.SwitchId != nil {
 		toSerialize["SwitchId"] = o.SwitchId
 	}
 	if o.EquipmentSwitchCard != nil {
 		toSerialize["EquipmentSwitchCard"] = o.EquipmentSwitchCard
+	}
+	if o.NetworkElement != nil {
+		toSerialize["NetworkElement"] = o.NetworkElement
 	}
 	if o.RegisteredDevice != nil {
 		toSerialize["RegisteredDevice"] = o.RegisteredDevice
@@ -607,15 +976,25 @@ func (o *EtherPortChannelAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "AccessVlan")
 		delete(additionalProperties, "AdminState")
 		delete(additionalProperties, "AllowedVlans")
+		delete(additionalProperties, "BandWidth")
+		delete(additionalProperties, "Description")
+		delete(additionalProperties, "IpAddress")
+		delete(additionalProperties, "IpAddressMask")
+		delete(additionalProperties, "Ipv6SubnetCidr")
+		delete(additionalProperties, "MacAddress")
 		delete(additionalProperties, "Mode")
+		delete(additionalProperties, "Mtu")
+		delete(additionalProperties, "Name")
 		delete(additionalProperties, "NativeVlan")
 		delete(additionalProperties, "OperSpeed")
 		delete(additionalProperties, "OperState")
 		delete(additionalProperties, "OperStateQual")
 		delete(additionalProperties, "PortChannelId")
 		delete(additionalProperties, "Role")
+		delete(additionalProperties, "Status")
 		delete(additionalProperties, "SwitchId")
 		delete(additionalProperties, "EquipmentSwitchCard")
+		delete(additionalProperties, "NetworkElement")
 		delete(additionalProperties, "RegisteredDevice")
 		o.AdditionalProperties = additionalProperties
 	}

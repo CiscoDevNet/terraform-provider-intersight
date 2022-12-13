@@ -148,6 +148,11 @@ func getResourcepoolLeaseSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"is_exclusive_at_assigned_entity": {
+			Description: "Indicates whether a lease allocation is exclusive based on the Assigned Entity, if the AssignedEntity holds any lease then not allowed to create new lease later.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"lease_parameters": {
 			Description: "The lease specific parameters.",
 			Type:        schema.TypeList,
@@ -1015,6 +1020,11 @@ func dataSourceResourcepoolLeaseRead(c context.Context, d *schema.ResourceData, 
 		o.SetFeature(x)
 	}
 
+	if v, ok := d.GetOkExists("is_exclusive_at_assigned_entity"); ok {
+		x := (v.(bool))
+		o.SetIsExclusiveAtAssignedEntity(x)
+	}
+
 	if v, ok := d.GetOk("lease_parameters"); ok {
 		p := make([]models.ResourcepoolLeaseParameters, 0, 1)
 		s := v.([]interface{})
@@ -1566,6 +1576,7 @@ func dataSourceResourcepoolLeaseRead(c context.Context, d *schema.ResourceData, 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["feature"] = (s.GetFeature())
+				temp["is_exclusive_at_assigned_entity"] = (s.GetIsExclusiveAtAssignedEntity())
 
 				temp["lease_parameters"] = flattenMapResourcepoolLeaseParameters(s.GetLeaseParameters(), d)
 

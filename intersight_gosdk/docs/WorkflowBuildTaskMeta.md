@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.BuildTaskMeta"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.BuildTaskMeta"]
-**Name** | Pointer to **string** | Name for the BuildTaskMeta instance used to created a dynamic workflow. | [optional] [readonly] 
+**Name** | Pointer to **string** | Name for the BuildTaskMeta instance used to create a dynamic workflow. | [optional] [readonly] 
 **Src** | Pointer to **string** | Microservice owner for the task in this workflow. | [optional] [readonly] 
 **TaskList** | Pointer to **interface{}** | Task list used to build the dynamic workflow. | [optional] [readonly] 
 **TaskType** | Pointer to **string** | The type of the task within this workflow. | [optional] [readonly] 

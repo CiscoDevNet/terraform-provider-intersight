@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **AutoAllowOnUplinks** | Pointer to **bool** | Enable to automatically allow this VLAN on all uplinks. Disable must be specified for Disjoint Layer 2 VLAN configuration. Default VLAN-1 cannot be configured as Disjoint Layer 2 VLAN. | [optional] [default to true]
 **IsNative** | Pointer to **bool** | Used to define whether this VLAN is to be classified as &#39;native&#39; for traffic in this FI. | [optional] 
 **Name** | Pointer to **string** | The &#39;name&#39; used to identify this VLAN. | [optional] 
+**PrimaryVlanId** | Pointer to **int64** | The Primary VLAN ID of the VLAN, if the sharing type of the VLAN is Isolated or Community. | [optional] [default to 0]
+**SharingType** | Pointer to **string** | The sharing type of this VLAN. * &#x60;None&#x60; - This represents a regular VLAN. * &#x60;Primary&#x60; - This represents a primary VLAN. * &#x60;Isolated&#x60; - This represents an isolated VLAN. * &#x60;Community&#x60; - This represents a community VLAN. | [optional] [default to "None"]
 **VlanId** | Pointer to **int64** | The identifier for this Virtual LAN. | [optional] 
 **EthNetworkPolicy** | Pointer to [**FabricEthNetworkPolicyRelationship**](FabricEthNetworkPolicyRelationship.md) |  | [optional] 
 **MulticastPolicy** | Pointer to [**FabricMulticastPolicyRelationship**](FabricMulticastPolicyRelationship.md) |  | [optional] 
@@ -147,6 +149,56 @@ SetName sets Name field to given value.
 `func (o *FabricVlan) HasName() bool`
 
 HasName returns a boolean if a field has been set.
+
+### GetPrimaryVlanId
+
+`func (o *FabricVlan) GetPrimaryVlanId() int64`
+
+GetPrimaryVlanId returns the PrimaryVlanId field if non-nil, zero value otherwise.
+
+### GetPrimaryVlanIdOk
+
+`func (o *FabricVlan) GetPrimaryVlanIdOk() (*int64, bool)`
+
+GetPrimaryVlanIdOk returns a tuple with the PrimaryVlanId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrimaryVlanId
+
+`func (o *FabricVlan) SetPrimaryVlanId(v int64)`
+
+SetPrimaryVlanId sets PrimaryVlanId field to given value.
+
+### HasPrimaryVlanId
+
+`func (o *FabricVlan) HasPrimaryVlanId() bool`
+
+HasPrimaryVlanId returns a boolean if a field has been set.
+
+### GetSharingType
+
+`func (o *FabricVlan) GetSharingType() string`
+
+GetSharingType returns the SharingType field if non-nil, zero value otherwise.
+
+### GetSharingTypeOk
+
+`func (o *FabricVlan) GetSharingTypeOk() (*string, bool)`
+
+GetSharingTypeOk returns a tuple with the SharingType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSharingType
+
+`func (o *FabricVlan) SetSharingType(v string)`
+
+SetSharingType sets SharingType field to given value.
+
+### HasSharingType
+
+`func (o *FabricVlan) HasSharingType() bool`
+
+HasSharingType returns a boolean if a field has been set.
 
 ### GetVlanId
 

@@ -194,6 +194,11 @@ func getNetworkSupervisorCardSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"oper_reason": {
+			Description: "The health issue of the supervisor card.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"oper_state": {
 			Description: "The operational status of the supervisor card.",
 			Type:        schema.TypeString,
@@ -753,6 +758,11 @@ func dataSourceNetworkSupervisorCardRead(c context.Context, d *schema.ResourceDa
 		o.SetObjectType(x)
 	}
 
+	if v, ok := d.GetOk("oper_reason"); ok {
+		x := (v.(string))
+		o.SetOperReason(x)
+	}
+
 	if v, ok := d.GetOk("oper_state"); ok {
 		x := (v.(string))
 		o.SetOperState(x)
@@ -1158,6 +1168,7 @@ func dataSourceNetworkSupervisorCardRead(c context.Context, d *schema.ResourceDa
 				temp["network_element"] = flattenMapNetworkElementRelationship(s.GetNetworkElement(), d)
 				temp["number_of_ports"] = (s.GetNumberOfPorts())
 				temp["object_type"] = (s.GetObjectType())
+				temp["oper_reason"] = (s.GetOperReason())
 				temp["oper_state"] = (s.GetOperState())
 				temp["owners"] = (s.GetOwners())
 

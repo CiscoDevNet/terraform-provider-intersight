@@ -239,7 +239,13 @@ func resourceAssetDeviceClaim() *schema.Resource {
 							Description: "The domain group id to which the device belongs.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}, ForceNew: true,
 						},
 						"evict": {
 							Description: "Flag to force any open connections to be evicted. Used in case device has been deleted or blacklisted.",
@@ -247,8 +253,20 @@ func resourceAssetDeviceClaim() *schema.Resource {
 							Optional:    true,
 							ForceNew:    true,
 						},
+						"internal_connection_id": {
+							Description: "Uniquely identifies a specific connection this control message is addressed to. Each connection to the gateway is associated with a unique connection id, which is used to identify the connection across any number of connection or connection attempts from the same device endpoint. When an evict message is published from device service to the gateway it may be tagged to a specific connection using this field.\ne.g. The device re-connects to Intersight before the previous connection has received a close or timeout, in which case we may send an evict specifically to the previous connection, with the new connection ignoring the message.\nIf empty, the control message will be processed by any connections associated with the deviceId.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}, ForceNew: true,
+						},
 						"leadership": {
-							Description:  "The current leadership of a device cluster member.\n* `Unknown` - The node is unable to complete election or determine the current state. If the device has been registered before and the node has access to the current credentials it will establish a connection to Intersight with limited capabilities that can be used to debug the HA failure from Intersight.\n* `Primary` - The node has been elected as the primary and will establish a connection to the Intersight service and accept all message types enabled for a primary node. There can only be one primary in a given cluster, while the underlying platform may be active-active only one connector will assume the primary role.\n* `Secondary` - The node has been elected as a secondary node in the cluster. The device connector will establish a connection to the Intersight service with limited capabilities. e.g. file upload will be enabled, but requests to the underlying platform management will be disabled.",
+							Description:  "The current leadership of a device cluster member.\n* `Unknown` - The node is unable to complete election or determine the current state. If the device has been registered before and the node has access to the current credentials, it will establish a connection to Intersight with limited capabilities that can be used to debug the HA failure from Intersight.\n* `Primary` - The node has been elected as the primary and will establish a connection to the Intersight service and accept all message types enabled for a primary node. There can only be one primary node in a given cluster, while the underlying platform may be active. If it is active, only one connector will assume the primary role.\n* `Secondary` - The node has been elected as a secondary node in the cluster. The device connector will establish a connection to the Intersight service with limited capabilities. E.g. file upload will be enabled, but requests to the underlying platform management will be disabled.",
 							Type:         schema.TypeString,
 							ValidateFunc: validation.StringInSlice([]string{"Unknown", "Primary", "Secondary"}, false),
 							Optional:     true,
@@ -730,12 +748,6 @@ func resourceAssetDeviceClaimCreate(c context.Context, d *schema.ResourceData, m
 				{
 					x := (v.(string))
 					o.SetDeviceId(x)
-				}
-			}
-			if v, ok := l["domain_group"]; ok {
-				{
-					x := (v.(string))
-					o.SetDomainGroup(x)
 				}
 			}
 			if v, ok := l["evict"]; ok {

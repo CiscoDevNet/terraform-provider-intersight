@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -55,8 +55,8 @@ func (r ApiCreateTaskFabricMosScopedInventoryRequest) Execute() (*TaskFabricMosS
 /*
 CreateTaskFabricMosScopedInventory Create a 'task.FabricMosScopedInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateTaskFabricMosScopedInventoryRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateTaskFabricMosScopedInventoryRequest
 */
 func (a *TaskApiService) CreateTaskFabricMosScopedInventory(ctx context.Context) ApiCreateTaskFabricMosScopedInventoryRequest {
 	return ApiCreateTaskFabricMosScopedInventoryRequest{
@@ -66,7 +66,8 @@ func (a *TaskApiService) CreateTaskFabricMosScopedInventory(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return TaskFabricMosScopedInventory
+//
+//	@return TaskFabricMosScopedInventory
 func (a *TaskApiService) CreateTaskFabricMosScopedInventoryExecute(r ApiCreateTaskFabricMosScopedInventoryRequest) (*TaskFabricMosScopedInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -231,8 +232,8 @@ func (r ApiCreateTaskHitachiScopedInventoryRequest) Execute() (*TaskHitachiScope
 /*
 CreateTaskHitachiScopedInventory Create a 'task.HitachiScopedInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateTaskHitachiScopedInventoryRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateTaskHitachiScopedInventoryRequest
 */
 func (a *TaskApiService) CreateTaskHitachiScopedInventory(ctx context.Context) ApiCreateTaskHitachiScopedInventoryRequest {
 	return ApiCreateTaskHitachiScopedInventoryRequest{
@@ -242,7 +243,8 @@ func (a *TaskApiService) CreateTaskHitachiScopedInventory(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return TaskHitachiScopedInventory
+//
+//	@return TaskHitachiScopedInventory
 func (a *TaskApiService) CreateTaskHitachiScopedInventoryExecute(r ApiCreateTaskHitachiScopedInventoryRequest) (*TaskHitachiScopedInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -407,8 +409,8 @@ func (r ApiCreateTaskHyperFlexManagementScopedInventoryRequest) Execute() (*Task
 /*
 CreateTaskHyperFlexManagementScopedInventory Create a 'task.HyperFlexManagementScopedInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateTaskHyperFlexManagementScopedInventoryRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateTaskHyperFlexManagementScopedInventoryRequest
 */
 func (a *TaskApiService) CreateTaskHyperFlexManagementScopedInventory(ctx context.Context) ApiCreateTaskHyperFlexManagementScopedInventoryRequest {
 	return ApiCreateTaskHyperFlexManagementScopedInventoryRequest{
@@ -418,7 +420,8 @@ func (a *TaskApiService) CreateTaskHyperFlexManagementScopedInventory(ctx contex
 }
 
 // Execute executes the request
-//  @return TaskHyperFlexManagementScopedInventory
+//
+//	@return TaskHyperFlexManagementScopedInventory
 func (a *TaskApiService) CreateTaskHyperFlexManagementScopedInventoryExecute(r ApiCreateTaskHyperFlexManagementScopedInventoryRequest) (*TaskHyperFlexManagementScopedInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -583,8 +586,8 @@ func (r ApiCreateTaskHyperflexScopedInventoryRequest) Execute() (*TaskHyperflexS
 /*
 CreateTaskHyperflexScopedInventory Create a 'task.HyperflexScopedInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateTaskHyperflexScopedInventoryRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateTaskHyperflexScopedInventoryRequest
 */
 func (a *TaskApiService) CreateTaskHyperflexScopedInventory(ctx context.Context) ApiCreateTaskHyperflexScopedInventoryRequest {
 	return ApiCreateTaskHyperflexScopedInventoryRequest{
@@ -594,7 +597,8 @@ func (a *TaskApiService) CreateTaskHyperflexScopedInventory(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return TaskHyperflexScopedInventory
+//
+//	@return TaskHyperflexScopedInventory
 func (a *TaskApiService) CreateTaskHyperflexScopedInventoryExecute(r ApiCreateTaskHyperflexScopedInventoryRequest) (*TaskHyperflexScopedInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -759,8 +763,8 @@ func (r ApiCreateTaskIweScopedInventoryRequest) Execute() (*TaskIweScopedInvento
 /*
 CreateTaskIweScopedInventory Create a 'task.IweScopedInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateTaskIweScopedInventoryRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateTaskIweScopedInventoryRequest
 */
 func (a *TaskApiService) CreateTaskIweScopedInventory(ctx context.Context) ApiCreateTaskIweScopedInventoryRequest {
 	return ApiCreateTaskIweScopedInventoryRequest{
@@ -770,7 +774,8 @@ func (a *TaskApiService) CreateTaskIweScopedInventory(ctx context.Context) ApiCr
 }
 
 // Execute executes the request
-//  @return TaskIweScopedInventory
+//
+//	@return TaskIweScopedInventory
 func (a *TaskApiService) CreateTaskIweScopedInventoryExecute(r ApiCreateTaskIweScopedInventoryRequest) (*TaskIweScopedInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -935,8 +940,8 @@ func (r ApiCreateTaskMdsScopedInventoryRequest) Execute() (*TaskMdsScopedInvento
 /*
 CreateTaskMdsScopedInventory Create a 'task.MdsScopedInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateTaskMdsScopedInventoryRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateTaskMdsScopedInventoryRequest
 */
 func (a *TaskApiService) CreateTaskMdsScopedInventory(ctx context.Context) ApiCreateTaskMdsScopedInventoryRequest {
 	return ApiCreateTaskMdsScopedInventoryRequest{
@@ -946,7 +951,8 @@ func (a *TaskApiService) CreateTaskMdsScopedInventory(ctx context.Context) ApiCr
 }
 
 // Execute executes the request
-//  @return TaskMdsScopedInventory
+//
+//	@return TaskMdsScopedInventory
 func (a *TaskApiService) CreateTaskMdsScopedInventoryExecute(r ApiCreateTaskMdsScopedInventoryRequest) (*TaskMdsScopedInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1111,8 +1117,8 @@ func (r ApiCreateTaskMdsSystemScopedInventoryRequest) Execute() (*TaskMdsSystemS
 /*
 CreateTaskMdsSystemScopedInventory Create a 'task.MdsSystemScopedInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateTaskMdsSystemScopedInventoryRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateTaskMdsSystemScopedInventoryRequest
 */
 func (a *TaskApiService) CreateTaskMdsSystemScopedInventory(ctx context.Context) ApiCreateTaskMdsSystemScopedInventoryRequest {
 	return ApiCreateTaskMdsSystemScopedInventoryRequest{
@@ -1122,7 +1128,8 @@ func (a *TaskApiService) CreateTaskMdsSystemScopedInventory(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return TaskMdsSystemScopedInventory
+//
+//	@return TaskMdsSystemScopedInventory
 func (a *TaskApiService) CreateTaskMdsSystemScopedInventoryExecute(r ApiCreateTaskMdsSystemScopedInventoryRequest) (*TaskMdsSystemScopedInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1287,8 +1294,8 @@ func (r ApiCreateTaskNetAppScopedInventoryRequest) Execute() (*TaskNetAppScopedI
 /*
 CreateTaskNetAppScopedInventory Create a 'task.NetAppScopedInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateTaskNetAppScopedInventoryRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateTaskNetAppScopedInventoryRequest
 */
 func (a *TaskApiService) CreateTaskNetAppScopedInventory(ctx context.Context) ApiCreateTaskNetAppScopedInventoryRequest {
 	return ApiCreateTaskNetAppScopedInventoryRequest{
@@ -1298,7 +1305,8 @@ func (a *TaskApiService) CreateTaskNetAppScopedInventory(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return TaskNetAppScopedInventory
+//
+//	@return TaskNetAppScopedInventory
 func (a *TaskApiService) CreateTaskNetAppScopedInventoryExecute(r ApiCreateTaskNetAppScopedInventoryRequest) (*TaskNetAppScopedInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1463,8 +1471,8 @@ func (r ApiCreateTaskNexusScopedInventoryRequest) Execute() (*TaskNexusScopedInv
 /*
 CreateTaskNexusScopedInventory Create a 'task.NexusScopedInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateTaskNexusScopedInventoryRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateTaskNexusScopedInventoryRequest
 */
 func (a *TaskApiService) CreateTaskNexusScopedInventory(ctx context.Context) ApiCreateTaskNexusScopedInventoryRequest {
 	return ApiCreateTaskNexusScopedInventoryRequest{
@@ -1474,7 +1482,8 @@ func (a *TaskApiService) CreateTaskNexusScopedInventory(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return TaskNexusScopedInventory
+//
+//	@return TaskNexusScopedInventory
 func (a *TaskApiService) CreateTaskNexusScopedInventoryExecute(r ApiCreateTaskNexusScopedInventoryRequest) (*TaskNexusScopedInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1606,6 +1615,183 @@ func (a *TaskApiService) CreateTaskNexusScopedInventoryExecute(r ApiCreateTaskNe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiCreateTaskNexusSystemScopedInventoryRequest struct {
+	ctx                            context.Context
+	ApiService                     *TaskApiService
+	taskNexusSystemScopedInventory *TaskNexusSystemScopedInventory
+	ifMatch                        *string
+	ifNoneMatch                    *string
+}
+
+// The &#39;task.NexusSystemScopedInventory&#39; resource to create.
+func (r ApiCreateTaskNexusSystemScopedInventoryRequest) TaskNexusSystemScopedInventory(taskNexusSystemScopedInventory TaskNexusSystemScopedInventory) ApiCreateTaskNexusSystemScopedInventoryRequest {
+	r.taskNexusSystemScopedInventory = &taskNexusSystemScopedInventory
+	return r
+}
+
+// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
+func (r ApiCreateTaskNexusSystemScopedInventoryRequest) IfMatch(ifMatch string) ApiCreateTaskNexusSystemScopedInventoryRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+// For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte.
+func (r ApiCreateTaskNexusSystemScopedInventoryRequest) IfNoneMatch(ifNoneMatch string) ApiCreateTaskNexusSystemScopedInventoryRequest {
+	r.ifNoneMatch = &ifNoneMatch
+	return r
+}
+
+func (r ApiCreateTaskNexusSystemScopedInventoryRequest) Execute() (*TaskNexusSystemScopedInventory, *http.Response, error) {
+	return r.ApiService.CreateTaskNexusSystemScopedInventoryExecute(r)
+}
+
+/*
+CreateTaskNexusSystemScopedInventory Create a 'task.NexusSystemScopedInventory' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateTaskNexusSystemScopedInventoryRequest
+*/
+func (a *TaskApiService) CreateTaskNexusSystemScopedInventory(ctx context.Context) ApiCreateTaskNexusSystemScopedInventoryRequest {
+	return ApiCreateTaskNexusSystemScopedInventoryRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return TaskNexusSystemScopedInventory
+func (a *TaskApiService) CreateTaskNexusSystemScopedInventoryExecute(r ApiCreateTaskNexusSystemScopedInventoryRequest) (*TaskNexusSystemScopedInventory, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TaskNexusSystemScopedInventory
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TaskApiService.CreateTaskNexusSystemScopedInventory")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/task/NexusSystemScopedInventories"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.taskNexusSystemScopedInventory == nil {
+		return localVarReturnValue, nil, reportError("taskNexusSystemScopedInventory is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	if r.ifNoneMatch != nil {
+		localVarHeaderParams["If-None-Match"] = parameterToString(*r.ifNoneMatch, "")
+	}
+	// body params
+	localVarPostBody = r.taskNexusSystemScopedInventory
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiCreateTaskNexusVlanScopedInventoryRequest struct {
 	ctx                          context.Context
 	ApiService                   *TaskApiService
@@ -1639,8 +1825,8 @@ func (r ApiCreateTaskNexusVlanScopedInventoryRequest) Execute() (*TaskNexusVlanS
 /*
 CreateTaskNexusVlanScopedInventory Create a 'task.NexusVlanScopedInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateTaskNexusVlanScopedInventoryRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateTaskNexusVlanScopedInventoryRequest
 */
 func (a *TaskApiService) CreateTaskNexusVlanScopedInventory(ctx context.Context) ApiCreateTaskNexusVlanScopedInventoryRequest {
 	return ApiCreateTaskNexusVlanScopedInventoryRequest{
@@ -1650,7 +1836,8 @@ func (a *TaskApiService) CreateTaskNexusVlanScopedInventory(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return TaskNexusVlanScopedInventory
+//
+//	@return TaskNexusVlanScopedInventory
 func (a *TaskApiService) CreateTaskNexusVlanScopedInventoryExecute(r ApiCreateTaskNexusVlanScopedInventoryRequest) (*TaskNexusVlanScopedInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1815,8 +2002,8 @@ func (r ApiCreateTaskPublicCloudScopedInventoryRequest) Execute() (*TaskPublicCl
 /*
 CreateTaskPublicCloudScopedInventory Create a 'task.PublicCloudScopedInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateTaskPublicCloudScopedInventoryRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateTaskPublicCloudScopedInventoryRequest
 */
 func (a *TaskApiService) CreateTaskPublicCloudScopedInventory(ctx context.Context) ApiCreateTaskPublicCloudScopedInventoryRequest {
 	return ApiCreateTaskPublicCloudScopedInventoryRequest{
@@ -1826,7 +2013,8 @@ func (a *TaskApiService) CreateTaskPublicCloudScopedInventory(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return TaskPublicCloudScopedInventory
+//
+//	@return TaskPublicCloudScopedInventory
 func (a *TaskApiService) CreateTaskPublicCloudScopedInventoryExecute(r ApiCreateTaskPublicCloudScopedInventoryRequest) (*TaskPublicCloudScopedInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1991,8 +2179,8 @@ func (r ApiCreateTaskPureScopedInventoryRequest) Execute() (*TaskPureScopedInven
 /*
 CreateTaskPureScopedInventory Create a 'task.PureScopedInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateTaskPureScopedInventoryRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateTaskPureScopedInventoryRequest
 */
 func (a *TaskApiService) CreateTaskPureScopedInventory(ctx context.Context) ApiCreateTaskPureScopedInventoryRequest {
 	return ApiCreateTaskPureScopedInventoryRequest{
@@ -2002,7 +2190,8 @@ func (a *TaskApiService) CreateTaskPureScopedInventory(ctx context.Context) ApiC
 }
 
 // Execute executes the request
-//  @return TaskPureScopedInventory
+//
+//	@return TaskPureScopedInventory
 func (a *TaskApiService) CreateTaskPureScopedInventoryExecute(r ApiCreateTaskPureScopedInventoryRequest) (*TaskPureScopedInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2167,8 +2356,8 @@ func (r ApiCreateTaskServerScopedInventoryRequest) Execute() (*TaskServerScopedI
 /*
 CreateTaskServerScopedInventory Create a 'task.ServerScopedInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateTaskServerScopedInventoryRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateTaskServerScopedInventoryRequest
 */
 func (a *TaskApiService) CreateTaskServerScopedInventory(ctx context.Context) ApiCreateTaskServerScopedInventoryRequest {
 	return ApiCreateTaskServerScopedInventoryRequest{
@@ -2178,7 +2367,8 @@ func (a *TaskApiService) CreateTaskServerScopedInventory(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return TaskServerScopedInventory
+//
+//	@return TaskServerScopedInventory
 func (a *TaskApiService) CreateTaskServerScopedInventoryExecute(r ApiCreateTaskServerScopedInventoryRequest) (*TaskServerScopedInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

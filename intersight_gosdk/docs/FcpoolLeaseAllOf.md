@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fcpool.Lease"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fcpool.Lease"]
 **PoolPurpose** | Pointer to **string** | Purpose of this WWN pool. | [optional] 
+**Reservation** | Pointer to [**FcpoolReservationReference**](FcpoolReservationReference.md) |  | [optional] 
 **WwnId** | Pointer to **string** | WWN ID allocated for pool based allocation. | [optional] 
 **AssignedToEntity** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 **Pool** | Pointer to [**FcpoolPoolRelationship**](FcpoolPoolRelationship.md) |  | [optional] 
@@ -96,6 +97,31 @@ SetPoolPurpose sets PoolPurpose field to given value.
 `func (o *FcpoolLeaseAllOf) HasPoolPurpose() bool`
 
 HasPoolPurpose returns a boolean if a field has been set.
+
+### GetReservation
+
+`func (o *FcpoolLeaseAllOf) GetReservation() FcpoolReservationReference`
+
+GetReservation returns the Reservation field if non-nil, zero value otherwise.
+
+### GetReservationOk
+
+`func (o *FcpoolLeaseAllOf) GetReservationOk() (*FcpoolReservationReference, bool)`
+
+GetReservationOk returns a tuple with the Reservation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReservation
+
+`func (o *FcpoolLeaseAllOf) SetReservation(v FcpoolReservationReference)`
+
+SetReservation sets Reservation field to given value.
+
+### HasReservation
+
+`func (o *FcpoolLeaseAllOf) HasReservation() bool`
+
+HasReservation returns a boolean if a field has been set.
 
 ### GetWwnId
 

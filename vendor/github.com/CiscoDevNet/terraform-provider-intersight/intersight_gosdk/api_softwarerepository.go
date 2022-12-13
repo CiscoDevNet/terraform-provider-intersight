@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -56,8 +56,8 @@ func (r ApiCreateSoftwarerepositoryAuthorizationRequest) Execute() (*Softwarerep
 /*
 CreateSoftwarerepositoryAuthorization Create a 'softwarerepository.Authorization' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateSoftwarerepositoryAuthorizationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateSoftwarerepositoryAuthorizationRequest
 */
 func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryAuthorization(ctx context.Context) ApiCreateSoftwarerepositoryAuthorizationRequest {
 	return ApiCreateSoftwarerepositoryAuthorizationRequest{
@@ -67,7 +67,8 @@ func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryAuthorization(ctx
 }
 
 // Execute executes the request
-//  @return SoftwarerepositoryAuthorization
+//
+//	@return SoftwarerepositoryAuthorization
 func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryAuthorizationExecute(r ApiCreateSoftwarerepositoryAuthorizationRequest) (*SoftwarerepositoryAuthorization, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -232,8 +233,8 @@ func (r ApiCreateSoftwarerepositoryCategoryMapperRequest) Execute() (*Softwarere
 /*
 CreateSoftwarerepositoryCategoryMapper Create a 'softwarerepository.CategoryMapper' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateSoftwarerepositoryCategoryMapperRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateSoftwarerepositoryCategoryMapperRequest
 */
 func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryCategoryMapper(ctx context.Context) ApiCreateSoftwarerepositoryCategoryMapperRequest {
 	return ApiCreateSoftwarerepositoryCategoryMapperRequest{
@@ -243,7 +244,8 @@ func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryCategoryMapper(ct
 }
 
 // Execute executes the request
-//  @return SoftwarerepositoryCategoryMapper
+//
+//	@return SoftwarerepositoryCategoryMapper
 func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryCategoryMapperExecute(r ApiCreateSoftwarerepositoryCategoryMapperRequest) (*SoftwarerepositoryCategoryMapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -408,8 +410,8 @@ func (r ApiCreateSoftwarerepositoryCategoryMapperModelRequest) Execute() (*Softw
 /*
 CreateSoftwarerepositoryCategoryMapperModel Create a 'softwarerepository.CategoryMapperModel' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateSoftwarerepositoryCategoryMapperModelRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateSoftwarerepositoryCategoryMapperModelRequest
 */
 func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryCategoryMapperModel(ctx context.Context) ApiCreateSoftwarerepositoryCategoryMapperModelRequest {
 	return ApiCreateSoftwarerepositoryCategoryMapperModelRequest{
@@ -419,7 +421,8 @@ func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryCategoryMapperMod
 }
 
 // Execute executes the request
-//  @return SoftwarerepositoryCategoryMapperModel
+//
+//	@return SoftwarerepositoryCategoryMapperModel
 func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryCategoryMapperModelExecute(r ApiCreateSoftwarerepositoryCategoryMapperModelRequest) (*SoftwarerepositoryCategoryMapperModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -584,8 +587,8 @@ func (r ApiCreateSoftwarerepositoryCategorySupportConstraintRequest) Execute() (
 /*
 CreateSoftwarerepositoryCategorySupportConstraint Create a 'softwarerepository.CategorySupportConstraint' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateSoftwarerepositoryCategorySupportConstraintRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateSoftwarerepositoryCategorySupportConstraintRequest
 */
 func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryCategorySupportConstraint(ctx context.Context) ApiCreateSoftwarerepositoryCategorySupportConstraintRequest {
 	return ApiCreateSoftwarerepositoryCategorySupportConstraintRequest{
@@ -595,7 +598,8 @@ func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryCategorySupportCo
 }
 
 // Execute executes the request
-//  @return SoftwarerepositoryCategorySupportConstraint
+//
+//	@return SoftwarerepositoryCategorySupportConstraint
 func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryCategorySupportConstraintExecute(r ApiCreateSoftwarerepositoryCategorySupportConstraintRequest) (*SoftwarerepositoryCategorySupportConstraint, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -760,8 +764,8 @@ func (r ApiCreateSoftwarerepositoryOperatingSystemFileRequest) Execute() (*Softw
 /*
 CreateSoftwarerepositoryOperatingSystemFile Create a 'softwarerepository.OperatingSystemFile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateSoftwarerepositoryOperatingSystemFileRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateSoftwarerepositoryOperatingSystemFileRequest
 */
 func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryOperatingSystemFile(ctx context.Context) ApiCreateSoftwarerepositoryOperatingSystemFileRequest {
 	return ApiCreateSoftwarerepositoryOperatingSystemFileRequest{
@@ -771,7 +775,8 @@ func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryOperatingSystemFi
 }
 
 // Execute executes the request
-//  @return SoftwarerepositoryOperatingSystemFile
+//
+//	@return SoftwarerepositoryOperatingSystemFile
 func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryOperatingSystemFileExecute(r ApiCreateSoftwarerepositoryOperatingSystemFileRequest) (*SoftwarerepositoryOperatingSystemFile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -936,8 +941,8 @@ func (r ApiCreateSoftwarerepositoryReleaseRequest) Execute() (*Softwarerepositor
 /*
 CreateSoftwarerepositoryRelease Create a 'softwarerepository.Release' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateSoftwarerepositoryReleaseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateSoftwarerepositoryReleaseRequest
 */
 func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryRelease(ctx context.Context) ApiCreateSoftwarerepositoryReleaseRequest {
 	return ApiCreateSoftwarerepositoryReleaseRequest{
@@ -947,7 +952,8 @@ func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryRelease(ctx conte
 }
 
 // Execute executes the request
-//  @return SoftwarerepositoryRelease
+//
+//	@return SoftwarerepositoryRelease
 func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryReleaseExecute(r ApiCreateSoftwarerepositoryReleaseRequest) (*SoftwarerepositoryRelease, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1092,9 +1098,9 @@ func (r ApiDeleteSoftwarerepositoryCategoryMapperRequest) Execute() (*http.Respo
 /*
 DeleteSoftwarerepositoryCategoryMapper Delete a 'softwarerepository.CategoryMapper' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteSoftwarerepositoryCategoryMapperRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteSoftwarerepositoryCategoryMapperRequest
 */
 func (a *SoftwarerepositoryApiService) DeleteSoftwarerepositoryCategoryMapper(ctx context.Context, moid string) ApiDeleteSoftwarerepositoryCategoryMapperRequest {
 	return ApiDeleteSoftwarerepositoryCategoryMapperRequest{
@@ -1229,9 +1235,9 @@ func (r ApiDeleteSoftwarerepositoryCategoryMapperModelRequest) Execute() (*http.
 /*
 DeleteSoftwarerepositoryCategoryMapperModel Delete a 'softwarerepository.CategoryMapperModel' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteSoftwarerepositoryCategoryMapperModelRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteSoftwarerepositoryCategoryMapperModelRequest
 */
 func (a *SoftwarerepositoryApiService) DeleteSoftwarerepositoryCategoryMapperModel(ctx context.Context, moid string) ApiDeleteSoftwarerepositoryCategoryMapperModelRequest {
 	return ApiDeleteSoftwarerepositoryCategoryMapperModelRequest{
@@ -1366,9 +1372,9 @@ func (r ApiDeleteSoftwarerepositoryCategorySupportConstraintRequest) Execute() (
 /*
 DeleteSoftwarerepositoryCategorySupportConstraint Delete a 'softwarerepository.CategorySupportConstraint' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteSoftwarerepositoryCategorySupportConstraintRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteSoftwarerepositoryCategorySupportConstraintRequest
 */
 func (a *SoftwarerepositoryApiService) DeleteSoftwarerepositoryCategorySupportConstraint(ctx context.Context, moid string) ApiDeleteSoftwarerepositoryCategorySupportConstraintRequest {
 	return ApiDeleteSoftwarerepositoryCategorySupportConstraintRequest{
@@ -1503,9 +1509,9 @@ func (r ApiDeleteSoftwarerepositoryOperatingSystemFileRequest) Execute() (*http.
 /*
 DeleteSoftwarerepositoryOperatingSystemFile Delete a 'softwarerepository.OperatingSystemFile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteSoftwarerepositoryOperatingSystemFileRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteSoftwarerepositoryOperatingSystemFileRequest
 */
 func (a *SoftwarerepositoryApiService) DeleteSoftwarerepositoryOperatingSystemFile(ctx context.Context, moid string) ApiDeleteSoftwarerepositoryOperatingSystemFileRequest {
 	return ApiDeleteSoftwarerepositoryOperatingSystemFileRequest{
@@ -1640,9 +1646,9 @@ func (r ApiDeleteSoftwarerepositoryReleaseRequest) Execute() (*http.Response, er
 /*
 DeleteSoftwarerepositoryRelease Delete a 'softwarerepository.Release' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteSoftwarerepositoryReleaseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteSoftwarerepositoryReleaseRequest
 */
 func (a *SoftwarerepositoryApiService) DeleteSoftwarerepositoryRelease(ctx context.Context, moid string) ApiDeleteSoftwarerepositoryReleaseRequest {
 	return ApiDeleteSoftwarerepositoryReleaseRequest{
@@ -1777,9 +1783,9 @@ func (r ApiGetSoftwarerepositoryAuthorizationByMoidRequest) Execute() (*Software
 /*
 GetSoftwarerepositoryAuthorizationByMoid Read a 'softwarerepository.Authorization' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetSoftwarerepositoryAuthorizationByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetSoftwarerepositoryAuthorizationByMoidRequest
 */
 func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryAuthorizationByMoid(ctx context.Context, moid string) ApiGetSoftwarerepositoryAuthorizationByMoidRequest {
 	return ApiGetSoftwarerepositoryAuthorizationByMoidRequest{
@@ -1790,7 +1796,8 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryAuthorizationByMoid(
 }
 
 // Execute executes the request
-//  @return SoftwarerepositoryAuthorization
+//
+//	@return SoftwarerepositoryAuthorization
 func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryAuthorizationByMoidExecute(r ApiGetSoftwarerepositoryAuthorizationByMoidRequest) (*SoftwarerepositoryAuthorization, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2001,8 +2008,8 @@ func (r ApiGetSoftwarerepositoryAuthorizationListRequest) Execute() (*Softwarere
 /*
 GetSoftwarerepositoryAuthorizationList Read a 'softwarerepository.Authorization' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetSoftwarerepositoryAuthorizationListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetSoftwarerepositoryAuthorizationListRequest
 */
 func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryAuthorizationList(ctx context.Context) ApiGetSoftwarerepositoryAuthorizationListRequest {
 	return ApiGetSoftwarerepositoryAuthorizationListRequest{
@@ -2012,7 +2019,8 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryAuthorizationList(ct
 }
 
 // Execute executes the request
-//  @return SoftwarerepositoryAuthorizationResponse
+//
+//	@return SoftwarerepositoryAuthorizationResponse
 func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryAuthorizationListExecute(r ApiGetSoftwarerepositoryAuthorizationListRequest) (*SoftwarerepositoryAuthorizationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2179,9 +2187,9 @@ func (r ApiGetSoftwarerepositoryCachedImageByMoidRequest) Execute() (*Softwarere
 /*
 GetSoftwarerepositoryCachedImageByMoid Read a 'softwarerepository.CachedImage' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetSoftwarerepositoryCachedImageByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetSoftwarerepositoryCachedImageByMoidRequest
 */
 func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCachedImageByMoid(ctx context.Context, moid string) ApiGetSoftwarerepositoryCachedImageByMoidRequest {
 	return ApiGetSoftwarerepositoryCachedImageByMoidRequest{
@@ -2192,7 +2200,8 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCachedImageByMoid(ct
 }
 
 // Execute executes the request
-//  @return SoftwarerepositoryCachedImage
+//
+//	@return SoftwarerepositoryCachedImage
 func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCachedImageByMoidExecute(r ApiGetSoftwarerepositoryCachedImageByMoidRequest) (*SoftwarerepositoryCachedImage, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2403,8 +2412,8 @@ func (r ApiGetSoftwarerepositoryCachedImageListRequest) Execute() (*Softwarerepo
 /*
 GetSoftwarerepositoryCachedImageList Read a 'softwarerepository.CachedImage' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetSoftwarerepositoryCachedImageListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetSoftwarerepositoryCachedImageListRequest
 */
 func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCachedImageList(ctx context.Context) ApiGetSoftwarerepositoryCachedImageListRequest {
 	return ApiGetSoftwarerepositoryCachedImageListRequest{
@@ -2414,7 +2423,8 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCachedImageList(ctx 
 }
 
 // Execute executes the request
-//  @return SoftwarerepositoryCachedImageResponse
+//
+//	@return SoftwarerepositoryCachedImageResponse
 func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCachedImageListExecute(r ApiGetSoftwarerepositoryCachedImageListRequest) (*SoftwarerepositoryCachedImageResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2581,9 +2591,9 @@ func (r ApiGetSoftwarerepositoryCatalogByMoidRequest) Execute() (*Softwarereposi
 /*
 GetSoftwarerepositoryCatalogByMoid Read a 'softwarerepository.Catalog' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetSoftwarerepositoryCatalogByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetSoftwarerepositoryCatalogByMoidRequest
 */
 func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCatalogByMoid(ctx context.Context, moid string) ApiGetSoftwarerepositoryCatalogByMoidRequest {
 	return ApiGetSoftwarerepositoryCatalogByMoidRequest{
@@ -2594,7 +2604,8 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCatalogByMoid(ctx co
 }
 
 // Execute executes the request
-//  @return SoftwarerepositoryCatalog
+//
+//	@return SoftwarerepositoryCatalog
 func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCatalogByMoidExecute(r ApiGetSoftwarerepositoryCatalogByMoidRequest) (*SoftwarerepositoryCatalog, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2805,8 +2816,8 @@ func (r ApiGetSoftwarerepositoryCatalogListRequest) Execute() (*Softwarereposito
 /*
 GetSoftwarerepositoryCatalogList Read a 'softwarerepository.Catalog' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetSoftwarerepositoryCatalogListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetSoftwarerepositoryCatalogListRequest
 */
 func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCatalogList(ctx context.Context) ApiGetSoftwarerepositoryCatalogListRequest {
 	return ApiGetSoftwarerepositoryCatalogListRequest{
@@ -2816,7 +2827,8 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCatalogList(ctx cont
 }
 
 // Execute executes the request
-//  @return SoftwarerepositoryCatalogResponse
+//
+//	@return SoftwarerepositoryCatalogResponse
 func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCatalogListExecute(r ApiGetSoftwarerepositoryCatalogListRequest) (*SoftwarerepositoryCatalogResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2983,9 +2995,9 @@ func (r ApiGetSoftwarerepositoryCategoryMapperByMoidRequest) Execute() (*Softwar
 /*
 GetSoftwarerepositoryCategoryMapperByMoid Read a 'softwarerepository.CategoryMapper' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetSoftwarerepositoryCategoryMapperByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetSoftwarerepositoryCategoryMapperByMoidRequest
 */
 func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategoryMapperByMoid(ctx context.Context, moid string) ApiGetSoftwarerepositoryCategoryMapperByMoidRequest {
 	return ApiGetSoftwarerepositoryCategoryMapperByMoidRequest{
@@ -2996,7 +3008,8 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategoryMapperByMoid
 }
 
 // Execute executes the request
-//  @return SoftwarerepositoryCategoryMapper
+//
+//	@return SoftwarerepositoryCategoryMapper
 func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategoryMapperByMoidExecute(r ApiGetSoftwarerepositoryCategoryMapperByMoidRequest) (*SoftwarerepositoryCategoryMapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3207,8 +3220,8 @@ func (r ApiGetSoftwarerepositoryCategoryMapperListRequest) Execute() (*Softwarer
 /*
 GetSoftwarerepositoryCategoryMapperList Read a 'softwarerepository.CategoryMapper' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetSoftwarerepositoryCategoryMapperListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetSoftwarerepositoryCategoryMapperListRequest
 */
 func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategoryMapperList(ctx context.Context) ApiGetSoftwarerepositoryCategoryMapperListRequest {
 	return ApiGetSoftwarerepositoryCategoryMapperListRequest{
@@ -3218,7 +3231,8 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategoryMapperList(c
 }
 
 // Execute executes the request
-//  @return SoftwarerepositoryCategoryMapperResponse
+//
+//	@return SoftwarerepositoryCategoryMapperResponse
 func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategoryMapperListExecute(r ApiGetSoftwarerepositoryCategoryMapperListRequest) (*SoftwarerepositoryCategoryMapperResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3385,9 +3399,9 @@ func (r ApiGetSoftwarerepositoryCategoryMapperModelByMoidRequest) Execute() (*So
 /*
 GetSoftwarerepositoryCategoryMapperModelByMoid Read a 'softwarerepository.CategoryMapperModel' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetSoftwarerepositoryCategoryMapperModelByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetSoftwarerepositoryCategoryMapperModelByMoidRequest
 */
 func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategoryMapperModelByMoid(ctx context.Context, moid string) ApiGetSoftwarerepositoryCategoryMapperModelByMoidRequest {
 	return ApiGetSoftwarerepositoryCategoryMapperModelByMoidRequest{
@@ -3398,7 +3412,8 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategoryMapperModelB
 }
 
 // Execute executes the request
-//  @return SoftwarerepositoryCategoryMapperModel
+//
+//	@return SoftwarerepositoryCategoryMapperModel
 func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategoryMapperModelByMoidExecute(r ApiGetSoftwarerepositoryCategoryMapperModelByMoidRequest) (*SoftwarerepositoryCategoryMapperModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3609,8 +3624,8 @@ func (r ApiGetSoftwarerepositoryCategoryMapperModelListRequest) Execute() (*Soft
 /*
 GetSoftwarerepositoryCategoryMapperModelList Read a 'softwarerepository.CategoryMapperModel' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetSoftwarerepositoryCategoryMapperModelListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetSoftwarerepositoryCategoryMapperModelListRequest
 */
 func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategoryMapperModelList(ctx context.Context) ApiGetSoftwarerepositoryCategoryMapperModelListRequest {
 	return ApiGetSoftwarerepositoryCategoryMapperModelListRequest{
@@ -3620,7 +3635,8 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategoryMapperModelL
 }
 
 // Execute executes the request
-//  @return SoftwarerepositoryCategoryMapperModelResponse
+//
+//	@return SoftwarerepositoryCategoryMapperModelResponse
 func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategoryMapperModelListExecute(r ApiGetSoftwarerepositoryCategoryMapperModelListRequest) (*SoftwarerepositoryCategoryMapperModelResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3787,9 +3803,9 @@ func (r ApiGetSoftwarerepositoryCategorySupportConstraintByMoidRequest) Execute(
 /*
 GetSoftwarerepositoryCategorySupportConstraintByMoid Read a 'softwarerepository.CategorySupportConstraint' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetSoftwarerepositoryCategorySupportConstraintByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetSoftwarerepositoryCategorySupportConstraintByMoidRequest
 */
 func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategorySupportConstraintByMoid(ctx context.Context, moid string) ApiGetSoftwarerepositoryCategorySupportConstraintByMoidRequest {
 	return ApiGetSoftwarerepositoryCategorySupportConstraintByMoidRequest{
@@ -3800,7 +3816,8 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategorySupportConst
 }
 
 // Execute executes the request
-//  @return SoftwarerepositoryCategorySupportConstraint
+//
+//	@return SoftwarerepositoryCategorySupportConstraint
 func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategorySupportConstraintByMoidExecute(r ApiGetSoftwarerepositoryCategorySupportConstraintByMoidRequest) (*SoftwarerepositoryCategorySupportConstraint, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4011,8 +4028,8 @@ func (r ApiGetSoftwarerepositoryCategorySupportConstraintListRequest) Execute() 
 /*
 GetSoftwarerepositoryCategorySupportConstraintList Read a 'softwarerepository.CategorySupportConstraint' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetSoftwarerepositoryCategorySupportConstraintListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetSoftwarerepositoryCategorySupportConstraintListRequest
 */
 func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategorySupportConstraintList(ctx context.Context) ApiGetSoftwarerepositoryCategorySupportConstraintListRequest {
 	return ApiGetSoftwarerepositoryCategorySupportConstraintListRequest{
@@ -4022,7 +4039,8 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategorySupportConst
 }
 
 // Execute executes the request
-//  @return SoftwarerepositoryCategorySupportConstraintResponse
+//
+//	@return SoftwarerepositoryCategorySupportConstraintResponse
 func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategorySupportConstraintListExecute(r ApiGetSoftwarerepositoryCategorySupportConstraintListRequest) (*SoftwarerepositoryCategorySupportConstraintResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4189,9 +4207,9 @@ func (r ApiGetSoftwarerepositoryDownloadSpecByMoidRequest) Execute() (*Softwarer
 /*
 GetSoftwarerepositoryDownloadSpecByMoid Read a 'softwarerepository.DownloadSpec' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetSoftwarerepositoryDownloadSpecByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetSoftwarerepositoryDownloadSpecByMoidRequest
 */
 func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryDownloadSpecByMoid(ctx context.Context, moid string) ApiGetSoftwarerepositoryDownloadSpecByMoidRequest {
 	return ApiGetSoftwarerepositoryDownloadSpecByMoidRequest{
@@ -4202,7 +4220,8 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryDownloadSpecByMoid(c
 }
 
 // Execute executes the request
-//  @return SoftwarerepositoryDownloadSpec
+//
+//	@return SoftwarerepositoryDownloadSpec
 func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryDownloadSpecByMoidExecute(r ApiGetSoftwarerepositoryDownloadSpecByMoidRequest) (*SoftwarerepositoryDownloadSpec, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4413,8 +4432,8 @@ func (r ApiGetSoftwarerepositoryDownloadSpecListRequest) Execute() (*Softwarerep
 /*
 GetSoftwarerepositoryDownloadSpecList Read a 'softwarerepository.DownloadSpec' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetSoftwarerepositoryDownloadSpecListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetSoftwarerepositoryDownloadSpecListRequest
 */
 func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryDownloadSpecList(ctx context.Context) ApiGetSoftwarerepositoryDownloadSpecListRequest {
 	return ApiGetSoftwarerepositoryDownloadSpecListRequest{
@@ -4424,7 +4443,8 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryDownloadSpecList(ctx
 }
 
 // Execute executes the request
-//  @return SoftwarerepositoryDownloadSpecResponse
+//
+//	@return SoftwarerepositoryDownloadSpecResponse
 func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryDownloadSpecListExecute(r ApiGetSoftwarerepositoryDownloadSpecListRequest) (*SoftwarerepositoryDownloadSpecResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4591,9 +4611,9 @@ func (r ApiGetSoftwarerepositoryOperatingSystemFileByMoidRequest) Execute() (*So
 /*
 GetSoftwarerepositoryOperatingSystemFileByMoid Read a 'softwarerepository.OperatingSystemFile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetSoftwarerepositoryOperatingSystemFileByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetSoftwarerepositoryOperatingSystemFileByMoidRequest
 */
 func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryOperatingSystemFileByMoid(ctx context.Context, moid string) ApiGetSoftwarerepositoryOperatingSystemFileByMoidRequest {
 	return ApiGetSoftwarerepositoryOperatingSystemFileByMoidRequest{
@@ -4604,7 +4624,8 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryOperatingSystemFileB
 }
 
 // Execute executes the request
-//  @return SoftwarerepositoryOperatingSystemFile
+//
+//	@return SoftwarerepositoryOperatingSystemFile
 func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryOperatingSystemFileByMoidExecute(r ApiGetSoftwarerepositoryOperatingSystemFileByMoidRequest) (*SoftwarerepositoryOperatingSystemFile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4815,8 +4836,8 @@ func (r ApiGetSoftwarerepositoryOperatingSystemFileListRequest) Execute() (*Soft
 /*
 GetSoftwarerepositoryOperatingSystemFileList Read a 'softwarerepository.OperatingSystemFile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetSoftwarerepositoryOperatingSystemFileListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetSoftwarerepositoryOperatingSystemFileListRequest
 */
 func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryOperatingSystemFileList(ctx context.Context) ApiGetSoftwarerepositoryOperatingSystemFileListRequest {
 	return ApiGetSoftwarerepositoryOperatingSystemFileListRequest{
@@ -4826,7 +4847,8 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryOperatingSystemFileL
 }
 
 // Execute executes the request
-//  @return SoftwarerepositoryOperatingSystemFileResponse
+//
+//	@return SoftwarerepositoryOperatingSystemFileResponse
 func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryOperatingSystemFileListExecute(r ApiGetSoftwarerepositoryOperatingSystemFileListRequest) (*SoftwarerepositoryOperatingSystemFileResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4993,9 +5015,9 @@ func (r ApiGetSoftwarerepositoryReleaseByMoidRequest) Execute() (*Softwarereposi
 /*
 GetSoftwarerepositoryReleaseByMoid Read a 'softwarerepository.Release' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetSoftwarerepositoryReleaseByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetSoftwarerepositoryReleaseByMoidRequest
 */
 func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryReleaseByMoid(ctx context.Context, moid string) ApiGetSoftwarerepositoryReleaseByMoidRequest {
 	return ApiGetSoftwarerepositoryReleaseByMoidRequest{
@@ -5006,7 +5028,8 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryReleaseByMoid(ctx co
 }
 
 // Execute executes the request
-//  @return SoftwarerepositoryRelease
+//
+//	@return SoftwarerepositoryRelease
 func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryReleaseByMoidExecute(r ApiGetSoftwarerepositoryReleaseByMoidRequest) (*SoftwarerepositoryRelease, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5217,8 +5240,8 @@ func (r ApiGetSoftwarerepositoryReleaseListRequest) Execute() (*Softwarereposito
 /*
 GetSoftwarerepositoryReleaseList Read a 'softwarerepository.Release' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetSoftwarerepositoryReleaseListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetSoftwarerepositoryReleaseListRequest
 */
 func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryReleaseList(ctx context.Context) ApiGetSoftwarerepositoryReleaseListRequest {
 	return ApiGetSoftwarerepositoryReleaseListRequest{
@@ -5228,7 +5251,8 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryReleaseList(ctx cont
 }
 
 // Execute executes the request
-//  @return SoftwarerepositoryReleaseResponse
+//
+//	@return SoftwarerepositoryReleaseResponse
 func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryReleaseListExecute(r ApiGetSoftwarerepositoryReleaseListRequest) (*SoftwarerepositoryReleaseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5409,9 +5433,9 @@ func (r ApiPatchSoftwarerepositoryAuthorizationRequest) Execute() (*Softwarerepo
 /*
 PatchSoftwarerepositoryAuthorization Update a 'softwarerepository.Authorization' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchSoftwarerepositoryAuthorizationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchSoftwarerepositoryAuthorizationRequest
 */
 func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryAuthorization(ctx context.Context, moid string) ApiPatchSoftwarerepositoryAuthorizationRequest {
 	return ApiPatchSoftwarerepositoryAuthorizationRequest{
@@ -5422,7 +5446,8 @@ func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryAuthorization(ctx 
 }
 
 // Execute executes the request
-//  @return SoftwarerepositoryAuthorization
+//
+//	@return SoftwarerepositoryAuthorization
 func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryAuthorizationExecute(r ApiPatchSoftwarerepositoryAuthorizationRequest) (*SoftwarerepositoryAuthorization, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -5579,9 +5604,9 @@ func (r ApiPatchSoftwarerepositoryCategoryMapperRequest) Execute() (*Softwarerep
 /*
 PatchSoftwarerepositoryCategoryMapper Update a 'softwarerepository.CategoryMapper' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchSoftwarerepositoryCategoryMapperRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchSoftwarerepositoryCategoryMapperRequest
 */
 func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryCategoryMapper(ctx context.Context, moid string) ApiPatchSoftwarerepositoryCategoryMapperRequest {
 	return ApiPatchSoftwarerepositoryCategoryMapperRequest{
@@ -5592,7 +5617,8 @@ func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryCategoryMapper(ctx
 }
 
 // Execute executes the request
-//  @return SoftwarerepositoryCategoryMapper
+//
+//	@return SoftwarerepositoryCategoryMapper
 func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryCategoryMapperExecute(r ApiPatchSoftwarerepositoryCategoryMapperRequest) (*SoftwarerepositoryCategoryMapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -5749,9 +5775,9 @@ func (r ApiPatchSoftwarerepositoryCategoryMapperModelRequest) Execute() (*Softwa
 /*
 PatchSoftwarerepositoryCategoryMapperModel Update a 'softwarerepository.CategoryMapperModel' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchSoftwarerepositoryCategoryMapperModelRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchSoftwarerepositoryCategoryMapperModelRequest
 */
 func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryCategoryMapperModel(ctx context.Context, moid string) ApiPatchSoftwarerepositoryCategoryMapperModelRequest {
 	return ApiPatchSoftwarerepositoryCategoryMapperModelRequest{
@@ -5762,7 +5788,8 @@ func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryCategoryMapperMode
 }
 
 // Execute executes the request
-//  @return SoftwarerepositoryCategoryMapperModel
+//
+//	@return SoftwarerepositoryCategoryMapperModel
 func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryCategoryMapperModelExecute(r ApiPatchSoftwarerepositoryCategoryMapperModelRequest) (*SoftwarerepositoryCategoryMapperModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -5919,9 +5946,9 @@ func (r ApiPatchSoftwarerepositoryCategorySupportConstraintRequest) Execute() (*
 /*
 PatchSoftwarerepositoryCategorySupportConstraint Update a 'softwarerepository.CategorySupportConstraint' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchSoftwarerepositoryCategorySupportConstraintRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchSoftwarerepositoryCategorySupportConstraintRequest
 */
 func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryCategorySupportConstraint(ctx context.Context, moid string) ApiPatchSoftwarerepositoryCategorySupportConstraintRequest {
 	return ApiPatchSoftwarerepositoryCategorySupportConstraintRequest{
@@ -5932,7 +5959,8 @@ func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryCategorySupportCon
 }
 
 // Execute executes the request
-//  @return SoftwarerepositoryCategorySupportConstraint
+//
+//	@return SoftwarerepositoryCategorySupportConstraint
 func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryCategorySupportConstraintExecute(r ApiPatchSoftwarerepositoryCategorySupportConstraintRequest) (*SoftwarerepositoryCategorySupportConstraint, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -6089,9 +6117,9 @@ func (r ApiPatchSoftwarerepositoryOperatingSystemFileRequest) Execute() (*Softwa
 /*
 PatchSoftwarerepositoryOperatingSystemFile Update a 'softwarerepository.OperatingSystemFile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchSoftwarerepositoryOperatingSystemFileRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchSoftwarerepositoryOperatingSystemFileRequest
 */
 func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryOperatingSystemFile(ctx context.Context, moid string) ApiPatchSoftwarerepositoryOperatingSystemFileRequest {
 	return ApiPatchSoftwarerepositoryOperatingSystemFileRequest{
@@ -6102,7 +6130,8 @@ func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryOperatingSystemFil
 }
 
 // Execute executes the request
-//  @return SoftwarerepositoryOperatingSystemFile
+//
+//	@return SoftwarerepositoryOperatingSystemFile
 func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryOperatingSystemFileExecute(r ApiPatchSoftwarerepositoryOperatingSystemFileRequest) (*SoftwarerepositoryOperatingSystemFile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -6259,9 +6288,9 @@ func (r ApiPatchSoftwarerepositoryReleaseRequest) Execute() (*Softwarerepository
 /*
 PatchSoftwarerepositoryRelease Update a 'softwarerepository.Release' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchSoftwarerepositoryReleaseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchSoftwarerepositoryReleaseRequest
 */
 func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryRelease(ctx context.Context, moid string) ApiPatchSoftwarerepositoryReleaseRequest {
 	return ApiPatchSoftwarerepositoryReleaseRequest{
@@ -6272,7 +6301,8 @@ func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryRelease(ctx contex
 }
 
 // Execute executes the request
-//  @return SoftwarerepositoryRelease
+//
+//	@return SoftwarerepositoryRelease
 func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryReleaseExecute(r ApiPatchSoftwarerepositoryReleaseRequest) (*SoftwarerepositoryRelease, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -6429,9 +6459,9 @@ func (r ApiUpdateSoftwarerepositoryAuthorizationRequest) Execute() (*Softwarerep
 /*
 UpdateSoftwarerepositoryAuthorization Update a 'softwarerepository.Authorization' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateSoftwarerepositoryAuthorizationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateSoftwarerepositoryAuthorizationRequest
 */
 func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryAuthorization(ctx context.Context, moid string) ApiUpdateSoftwarerepositoryAuthorizationRequest {
 	return ApiUpdateSoftwarerepositoryAuthorizationRequest{
@@ -6442,7 +6472,8 @@ func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryAuthorization(ctx
 }
 
 // Execute executes the request
-//  @return SoftwarerepositoryAuthorization
+//
+//	@return SoftwarerepositoryAuthorization
 func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryAuthorizationExecute(r ApiUpdateSoftwarerepositoryAuthorizationRequest) (*SoftwarerepositoryAuthorization, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -6599,9 +6630,9 @@ func (r ApiUpdateSoftwarerepositoryCategoryMapperRequest) Execute() (*Softwarere
 /*
 UpdateSoftwarerepositoryCategoryMapper Update a 'softwarerepository.CategoryMapper' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateSoftwarerepositoryCategoryMapperRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateSoftwarerepositoryCategoryMapperRequest
 */
 func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryCategoryMapper(ctx context.Context, moid string) ApiUpdateSoftwarerepositoryCategoryMapperRequest {
 	return ApiUpdateSoftwarerepositoryCategoryMapperRequest{
@@ -6612,7 +6643,8 @@ func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryCategoryMapper(ct
 }
 
 // Execute executes the request
-//  @return SoftwarerepositoryCategoryMapper
+//
+//	@return SoftwarerepositoryCategoryMapper
 func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryCategoryMapperExecute(r ApiUpdateSoftwarerepositoryCategoryMapperRequest) (*SoftwarerepositoryCategoryMapper, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -6769,9 +6801,9 @@ func (r ApiUpdateSoftwarerepositoryCategoryMapperModelRequest) Execute() (*Softw
 /*
 UpdateSoftwarerepositoryCategoryMapperModel Update a 'softwarerepository.CategoryMapperModel' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateSoftwarerepositoryCategoryMapperModelRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateSoftwarerepositoryCategoryMapperModelRequest
 */
 func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryCategoryMapperModel(ctx context.Context, moid string) ApiUpdateSoftwarerepositoryCategoryMapperModelRequest {
 	return ApiUpdateSoftwarerepositoryCategoryMapperModelRequest{
@@ -6782,7 +6814,8 @@ func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryCategoryMapperMod
 }
 
 // Execute executes the request
-//  @return SoftwarerepositoryCategoryMapperModel
+//
+//	@return SoftwarerepositoryCategoryMapperModel
 func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryCategoryMapperModelExecute(r ApiUpdateSoftwarerepositoryCategoryMapperModelRequest) (*SoftwarerepositoryCategoryMapperModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -6939,9 +6972,9 @@ func (r ApiUpdateSoftwarerepositoryCategorySupportConstraintRequest) Execute() (
 /*
 UpdateSoftwarerepositoryCategorySupportConstraint Update a 'softwarerepository.CategorySupportConstraint' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateSoftwarerepositoryCategorySupportConstraintRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateSoftwarerepositoryCategorySupportConstraintRequest
 */
 func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryCategorySupportConstraint(ctx context.Context, moid string) ApiUpdateSoftwarerepositoryCategorySupportConstraintRequest {
 	return ApiUpdateSoftwarerepositoryCategorySupportConstraintRequest{
@@ -6952,7 +6985,8 @@ func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryCategorySupportCo
 }
 
 // Execute executes the request
-//  @return SoftwarerepositoryCategorySupportConstraint
+//
+//	@return SoftwarerepositoryCategorySupportConstraint
 func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryCategorySupportConstraintExecute(r ApiUpdateSoftwarerepositoryCategorySupportConstraintRequest) (*SoftwarerepositoryCategorySupportConstraint, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -7109,9 +7143,9 @@ func (r ApiUpdateSoftwarerepositoryOperatingSystemFileRequest) Execute() (*Softw
 /*
 UpdateSoftwarerepositoryOperatingSystemFile Update a 'softwarerepository.OperatingSystemFile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateSoftwarerepositoryOperatingSystemFileRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateSoftwarerepositoryOperatingSystemFileRequest
 */
 func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryOperatingSystemFile(ctx context.Context, moid string) ApiUpdateSoftwarerepositoryOperatingSystemFileRequest {
 	return ApiUpdateSoftwarerepositoryOperatingSystemFileRequest{
@@ -7122,7 +7156,8 @@ func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryOperatingSystemFi
 }
 
 // Execute executes the request
-//  @return SoftwarerepositoryOperatingSystemFile
+//
+//	@return SoftwarerepositoryOperatingSystemFile
 func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryOperatingSystemFileExecute(r ApiUpdateSoftwarerepositoryOperatingSystemFileRequest) (*SoftwarerepositoryOperatingSystemFile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -7279,9 +7314,9 @@ func (r ApiUpdateSoftwarerepositoryReleaseRequest) Execute() (*Softwarerepositor
 /*
 UpdateSoftwarerepositoryRelease Update a 'softwarerepository.Release' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateSoftwarerepositoryReleaseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateSoftwarerepositoryReleaseRequest
 */
 func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryRelease(ctx context.Context, moid string) ApiUpdateSoftwarerepositoryReleaseRequest {
 	return ApiUpdateSoftwarerepositoryReleaseRequest{
@@ -7292,7 +7327,8 @@ func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryRelease(ctx conte
 }
 
 // Execute executes the request
-//  @return SoftwarerepositoryRelease
+//
+//	@return SoftwarerepositoryRelease
 func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryReleaseExecute(r ApiUpdateSoftwarerepositoryReleaseRequest) (*SoftwarerepositoryRelease, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

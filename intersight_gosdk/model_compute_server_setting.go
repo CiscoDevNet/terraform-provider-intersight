@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -47,6 +47,8 @@ type ComputeServerSetting struct {
 	StorageControllerOperation    NullableComputeStorageControllerOperation    `json:"StorageControllerOperation,omitempty"`
 	StoragePhysicalDriveOperation NullableComputeStoragePhysicalDriveOperation `json:"StoragePhysicalDriveOperation,omitempty"`
 	StorageVirtualDriveOperation  NullableComputeStorageVirtualDriveOperation  `json:"StorageVirtualDriveOperation,omitempty"`
+	// Clear the configuration of TPM chip in the server. * `None` - Perform no action on the TPM. * `ClearTpm` - Clear the configuration and restore factory defaults of TPM chip in the server.
+	TpmReset *string `json:"TpmReset,omitempty"`
 	// By default, the tunneled vKVM property appears in Ready state. The property can be configured by performing allowed actions. Once the property is configured, it reverts to Ready state. * `Ready` - Tunneled vKVM is ready to be configured on the server. * `Enable` - Tunneled vKVM is enabled for the server. * `Disable` - Tunneled vKVM is disabled for the server.
 	TunneledKvmState     *string                              `json:"TunneledKvmState,omitempty"`
 	LocatorLed           *EquipmentLocatorLedRelationship     `json:"LocatorLed,omitempty"`
@@ -76,6 +78,8 @@ func NewComputeServerSetting(classId string, objectType string) *ComputeServerSe
 	this.FrontPanelLockState = &frontPanelLockState
 	var kvmReset string = "Ready"
 	this.KvmReset = &kvmReset
+	var tpmReset string = "None"
+	this.TpmReset = &tpmReset
 	var tunneledKvmState string = "Ready"
 	this.TunneledKvmState = &tunneledKvmState
 	return &this
@@ -100,6 +104,8 @@ func NewComputeServerSettingWithDefaults() *ComputeServerSetting {
 	this.FrontPanelLockState = &frontPanelLockState
 	var kvmReset string = "Ready"
 	this.KvmReset = &kvmReset
+	var tpmReset string = "None"
+	this.TpmReset = &tpmReset
 	var tunneledKvmState string = "Ready"
 	this.TunneledKvmState = &tunneledKvmState
 	return &this
@@ -700,6 +706,38 @@ func (o *ComputeServerSetting) UnsetStorageVirtualDriveOperation() {
 	o.StorageVirtualDriveOperation.Unset()
 }
 
+// GetTpmReset returns the TpmReset field value if set, zero value otherwise.
+func (o *ComputeServerSetting) GetTpmReset() string {
+	if o == nil || o.TpmReset == nil {
+		var ret string
+		return ret
+	}
+	return *o.TpmReset
+}
+
+// GetTpmResetOk returns a tuple with the TpmReset field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ComputeServerSetting) GetTpmResetOk() (*string, bool) {
+	if o == nil || o.TpmReset == nil {
+		return nil, false
+	}
+	return o.TpmReset, true
+}
+
+// HasTpmReset returns a boolean if a field has been set.
+func (o *ComputeServerSetting) HasTpmReset() bool {
+	if o != nil && o.TpmReset != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTpmReset gets a reference to the given string and assigns it to the TpmReset field.
+func (o *ComputeServerSetting) SetTpmReset(v string) {
+	o.TpmReset = &v
+}
+
 // GetTunneledKvmState returns the TunneledKvmState field value if set, zero value otherwise.
 func (o *ComputeServerSetting) GetTunneledKvmState() string {
 	if o == nil || o.TunneledKvmState == nil {
@@ -921,6 +959,9 @@ func (o ComputeServerSetting) MarshalJSON() ([]byte, error) {
 	if o.StorageVirtualDriveOperation.IsSet() {
 		toSerialize["StorageVirtualDriveOperation"] = o.StorageVirtualDriveOperation.Get()
 	}
+	if o.TpmReset != nil {
+		toSerialize["TpmReset"] = o.TpmReset
+	}
 	if o.TunneledKvmState != nil {
 		toSerialize["TunneledKvmState"] = o.TunneledKvmState
 	}
@@ -973,6 +1014,8 @@ func (o *ComputeServerSetting) UnmarshalJSON(bytes []byte) (err error) {
 		StorageControllerOperation    NullableComputeStorageControllerOperation    `json:"StorageControllerOperation,omitempty"`
 		StoragePhysicalDriveOperation NullableComputeStoragePhysicalDriveOperation `json:"StoragePhysicalDriveOperation,omitempty"`
 		StorageVirtualDriveOperation  NullableComputeStorageVirtualDriveOperation  `json:"StorageVirtualDriveOperation,omitempty"`
+		// Clear the configuration of TPM chip in the server. * `None` - Perform no action on the TPM. * `ClearTpm` - Clear the configuration and restore factory defaults of TPM chip in the server.
+		TpmReset *string `json:"TpmReset,omitempty"`
 		// By default, the tunneled vKVM property appears in Ready state. The property can be configured by performing allowed actions. Once the property is configured, it reverts to Ready state. * `Ready` - Tunneled vKVM is ready to be configured on the server. * `Enable` - Tunneled vKVM is enabled for the server. * `Disable` - Tunneled vKVM is disabled for the server.
 		TunneledKvmState *string                              `json:"TunneledKvmState,omitempty"`
 		LocatorLed       *EquipmentLocatorLedRelationship     `json:"LocatorLed,omitempty"`
@@ -1003,6 +1046,7 @@ func (o *ComputeServerSetting) UnmarshalJSON(bytes []byte) (err error) {
 		varComputeServerSetting.StorageControllerOperation = varComputeServerSettingWithoutEmbeddedStruct.StorageControllerOperation
 		varComputeServerSetting.StoragePhysicalDriveOperation = varComputeServerSettingWithoutEmbeddedStruct.StoragePhysicalDriveOperation
 		varComputeServerSetting.StorageVirtualDriveOperation = varComputeServerSettingWithoutEmbeddedStruct.StorageVirtualDriveOperation
+		varComputeServerSetting.TpmReset = varComputeServerSettingWithoutEmbeddedStruct.TpmReset
 		varComputeServerSetting.TunneledKvmState = varComputeServerSettingWithoutEmbeddedStruct.TunneledKvmState
 		varComputeServerSetting.LocatorLed = varComputeServerSettingWithoutEmbeddedStruct.LocatorLed
 		varComputeServerSetting.RegisteredDevice = varComputeServerSettingWithoutEmbeddedStruct.RegisteredDevice
@@ -1042,6 +1086,7 @@ func (o *ComputeServerSetting) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "StorageControllerOperation")
 		delete(additionalProperties, "StoragePhysicalDriveOperation")
 		delete(additionalProperties, "StorageVirtualDriveOperation")
+		delete(additionalProperties, "TpmReset")
 		delete(additionalProperties, "TunneledKvmState")
 		delete(additionalProperties, "LocatorLed")
 		delete(additionalProperties, "RegisteredDevice")

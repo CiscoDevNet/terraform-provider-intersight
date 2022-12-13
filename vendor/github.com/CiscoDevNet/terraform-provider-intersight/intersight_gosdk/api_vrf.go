@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -56,8 +56,8 @@ func (r ApiCreateVrfVrfRequest) Execute() (*VrfVrf, *http.Response, error) {
 /*
 CreateVrfVrf Create a 'vrf.Vrf' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateVrfVrfRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateVrfVrfRequest
 */
 func (a *VrfApiService) CreateVrfVrf(ctx context.Context) ApiCreateVrfVrfRequest {
 	return ApiCreateVrfVrfRequest{
@@ -67,7 +67,8 @@ func (a *VrfApiService) CreateVrfVrf(ctx context.Context) ApiCreateVrfVrfRequest
 }
 
 // Execute executes the request
-//  @return VrfVrf
+//
+//	@return VrfVrf
 func (a *VrfApiService) CreateVrfVrfExecute(r ApiCreateVrfVrfRequest) (*VrfVrf, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -212,9 +213,9 @@ func (r ApiDeleteVrfVrfRequest) Execute() (*http.Response, error) {
 /*
 DeleteVrfVrf Delete a 'vrf.Vrf' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteVrfVrfRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteVrfVrfRequest
 */
 func (a *VrfApiService) DeleteVrfVrf(ctx context.Context, moid string) ApiDeleteVrfVrfRequest {
 	return ApiDeleteVrfVrfRequest{
@@ -349,9 +350,9 @@ func (r ApiGetVrfVrfByMoidRequest) Execute() (*VrfVrf, *http.Response, error) {
 /*
 GetVrfVrfByMoid Read a 'vrf.Vrf' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVrfVrfByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVrfVrfByMoidRequest
 */
 func (a *VrfApiService) GetVrfVrfByMoid(ctx context.Context, moid string) ApiGetVrfVrfByMoidRequest {
 	return ApiGetVrfVrfByMoidRequest{
@@ -362,7 +363,8 @@ func (a *VrfApiService) GetVrfVrfByMoid(ctx context.Context, moid string) ApiGet
 }
 
 // Execute executes the request
-//  @return VrfVrf
+//
+//	@return VrfVrf
 func (a *VrfApiService) GetVrfVrfByMoidExecute(r ApiGetVrfVrfByMoidRequest) (*VrfVrf, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -573,8 +575,8 @@ func (r ApiGetVrfVrfListRequest) Execute() (*VrfVrfResponse, *http.Response, err
 /*
 GetVrfVrfList Read a 'vrf.Vrf' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVrfVrfListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVrfVrfListRequest
 */
 func (a *VrfApiService) GetVrfVrfList(ctx context.Context) ApiGetVrfVrfListRequest {
 	return ApiGetVrfVrfListRequest{
@@ -584,7 +586,8 @@ func (a *VrfApiService) GetVrfVrfList(ctx context.Context) ApiGetVrfVrfListReque
 }
 
 // Execute executes the request
-//  @return VrfVrfResponse
+//
+//	@return VrfVrfResponse
 func (a *VrfApiService) GetVrfVrfListExecute(r ApiGetVrfVrfListRequest) (*VrfVrfResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -765,9 +768,9 @@ func (r ApiPatchVrfVrfRequest) Execute() (*VrfVrf, *http.Response, error) {
 /*
 PatchVrfVrf Update a 'vrf.Vrf' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchVrfVrfRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchVrfVrfRequest
 */
 func (a *VrfApiService) PatchVrfVrf(ctx context.Context, moid string) ApiPatchVrfVrfRequest {
 	return ApiPatchVrfVrfRequest{
@@ -778,7 +781,8 @@ func (a *VrfApiService) PatchVrfVrf(ctx context.Context, moid string) ApiPatchVr
 }
 
 // Execute executes the request
-//  @return VrfVrf
+//
+//	@return VrfVrf
 func (a *VrfApiService) PatchVrfVrfExecute(r ApiPatchVrfVrfRequest) (*VrfVrf, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -935,9 +939,9 @@ func (r ApiUpdateVrfVrfRequest) Execute() (*VrfVrf, *http.Response, error) {
 /*
 UpdateVrfVrf Update a 'vrf.Vrf' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateVrfVrfRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateVrfVrfRequest
 */
 func (a *VrfApiService) UpdateVrfVrf(ctx context.Context, moid string) ApiUpdateVrfVrfRequest {
 	return ApiUpdateVrfVrfRequest{
@@ -948,7 +952,8 @@ func (a *VrfApiService) UpdateVrfVrf(ctx context.Context, moid string) ApiUpdate
 }
 
 // Execute executes the request
-//  @return VrfVrf
+//
+//	@return VrfVrf
 func (a *VrfApiService) UpdateVrfVrfExecute(r ApiUpdateVrfVrfRequest) (*VrfVrf, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

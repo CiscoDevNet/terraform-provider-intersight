@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -22,6 +22,183 @@ import (
 
 // CapabilityApiService CapabilityApi service
 type CapabilityApiService service
+
+type ApiCreateCapabilityActionsMetaDataRequest struct {
+	ctx                       context.Context
+	ApiService                *CapabilityApiService
+	capabilityActionsMetaData *CapabilityActionsMetaData
+	ifMatch                   *string
+	ifNoneMatch               *string
+}
+
+// The &#39;capability.ActionsMetaData&#39; resource to create.
+func (r ApiCreateCapabilityActionsMetaDataRequest) CapabilityActionsMetaData(capabilityActionsMetaData CapabilityActionsMetaData) ApiCreateCapabilityActionsMetaDataRequest {
+	r.capabilityActionsMetaData = &capabilityActionsMetaData
+	return r
+}
+
+// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
+func (r ApiCreateCapabilityActionsMetaDataRequest) IfMatch(ifMatch string) ApiCreateCapabilityActionsMetaDataRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+// For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte.
+func (r ApiCreateCapabilityActionsMetaDataRequest) IfNoneMatch(ifNoneMatch string) ApiCreateCapabilityActionsMetaDataRequest {
+	r.ifNoneMatch = &ifNoneMatch
+	return r
+}
+
+func (r ApiCreateCapabilityActionsMetaDataRequest) Execute() (*CapabilityActionsMetaData, *http.Response, error) {
+	return r.ApiService.CreateCapabilityActionsMetaDataExecute(r)
+}
+
+/*
+CreateCapabilityActionsMetaData Create a 'capability.ActionsMetaData' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateCapabilityActionsMetaDataRequest
+*/
+func (a *CapabilityApiService) CreateCapabilityActionsMetaData(ctx context.Context) ApiCreateCapabilityActionsMetaDataRequest {
+	return ApiCreateCapabilityActionsMetaDataRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return CapabilityActionsMetaData
+func (a *CapabilityApiService) CreateCapabilityActionsMetaDataExecute(r ApiCreateCapabilityActionsMetaDataRequest) (*CapabilityActionsMetaData, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CapabilityActionsMetaData
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.CreateCapabilityActionsMetaData")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/capability/ActionsMetaData"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.capabilityActionsMetaData == nil {
+		return localVarReturnValue, nil, reportError("capabilityActionsMetaData is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	if r.ifNoneMatch != nil {
+		localVarHeaderParams["If-None-Match"] = parameterToString(*r.ifNoneMatch, "")
+	}
+	// body params
+	localVarPostBody = r.capabilityActionsMetaData
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
 
 type ApiCreateCapabilityAdapterDeprecatedDefRequest struct {
 	ctx                            context.Context
@@ -56,8 +233,8 @@ func (r ApiCreateCapabilityAdapterDeprecatedDefRequest) Execute() (*CapabilityAd
 /*
 CreateCapabilityAdapterDeprecatedDef Create a 'capability.AdapterDeprecatedDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateCapabilityAdapterDeprecatedDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateCapabilityAdapterDeprecatedDefRequest
 */
 func (a *CapabilityApiService) CreateCapabilityAdapterDeprecatedDef(ctx context.Context) ApiCreateCapabilityAdapterDeprecatedDefRequest {
 	return ApiCreateCapabilityAdapterDeprecatedDefRequest{
@@ -67,7 +244,8 @@ func (a *CapabilityApiService) CreateCapabilityAdapterDeprecatedDef(ctx context.
 }
 
 // Execute executes the request
-//  @return CapabilityAdapterDeprecatedDef
+//
+//	@return CapabilityAdapterDeprecatedDef
 func (a *CapabilityApiService) CreateCapabilityAdapterDeprecatedDefExecute(r ApiCreateCapabilityAdapterDeprecatedDefRequest) (*CapabilityAdapterDeprecatedDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -232,8 +410,8 @@ func (r ApiCreateCapabilityAdapterUnitDescriptorRequest) Execute() (*CapabilityA
 /*
 CreateCapabilityAdapterUnitDescriptor Create a 'capability.AdapterUnitDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateCapabilityAdapterUnitDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateCapabilityAdapterUnitDescriptorRequest
 */
 func (a *CapabilityApiService) CreateCapabilityAdapterUnitDescriptor(ctx context.Context) ApiCreateCapabilityAdapterUnitDescriptorRequest {
 	return ApiCreateCapabilityAdapterUnitDescriptorRequest{
@@ -243,7 +421,8 @@ func (a *CapabilityApiService) CreateCapabilityAdapterUnitDescriptor(ctx context
 }
 
 // Execute executes the request
-//  @return CapabilityAdapterUnitDescriptor
+//
+//	@return CapabilityAdapterUnitDescriptor
 func (a *CapabilityApiService) CreateCapabilityAdapterUnitDescriptorExecute(r ApiCreateCapabilityAdapterUnitDescriptorRequest) (*CapabilityAdapterUnitDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -408,8 +587,8 @@ func (r ApiCreateCapabilityChassisDescriptorRequest) Execute() (*CapabilityChass
 /*
 CreateCapabilityChassisDescriptor Create a 'capability.ChassisDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateCapabilityChassisDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateCapabilityChassisDescriptorRequest
 */
 func (a *CapabilityApiService) CreateCapabilityChassisDescriptor(ctx context.Context) ApiCreateCapabilityChassisDescriptorRequest {
 	return ApiCreateCapabilityChassisDescriptorRequest{
@@ -419,7 +598,8 @@ func (a *CapabilityApiService) CreateCapabilityChassisDescriptor(ctx context.Con
 }
 
 // Execute executes the request
-//  @return CapabilityChassisDescriptor
+//
+//	@return CapabilityChassisDescriptor
 func (a *CapabilityApiService) CreateCapabilityChassisDescriptorExecute(r ApiCreateCapabilityChassisDescriptorRequest) (*CapabilityChassisDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -584,8 +764,8 @@ func (r ApiCreateCapabilityChassisManufacturingDefRequest) Execute() (*Capabilit
 /*
 CreateCapabilityChassisManufacturingDef Create a 'capability.ChassisManufacturingDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateCapabilityChassisManufacturingDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateCapabilityChassisManufacturingDefRequest
 */
 func (a *CapabilityApiService) CreateCapabilityChassisManufacturingDef(ctx context.Context) ApiCreateCapabilityChassisManufacturingDefRequest {
 	return ApiCreateCapabilityChassisManufacturingDefRequest{
@@ -595,7 +775,8 @@ func (a *CapabilityApiService) CreateCapabilityChassisManufacturingDef(ctx conte
 }
 
 // Execute executes the request
-//  @return CapabilityChassisManufacturingDef
+//
+//	@return CapabilityChassisManufacturingDef
 func (a *CapabilityApiService) CreateCapabilityChassisManufacturingDefExecute(r ApiCreateCapabilityChassisManufacturingDefRequest) (*CapabilityChassisManufacturingDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -760,8 +941,8 @@ func (r ApiCreateCapabilityCimcFirmwareDescriptorRequest) Execute() (*Capability
 /*
 CreateCapabilityCimcFirmwareDescriptor Create a 'capability.CimcFirmwareDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateCapabilityCimcFirmwareDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateCapabilityCimcFirmwareDescriptorRequest
 */
 func (a *CapabilityApiService) CreateCapabilityCimcFirmwareDescriptor(ctx context.Context) ApiCreateCapabilityCimcFirmwareDescriptorRequest {
 	return ApiCreateCapabilityCimcFirmwareDescriptorRequest{
@@ -771,7 +952,8 @@ func (a *CapabilityApiService) CreateCapabilityCimcFirmwareDescriptor(ctx contex
 }
 
 // Execute executes the request
-//  @return CapabilityCimcFirmwareDescriptor
+//
+//	@return CapabilityCimcFirmwareDescriptor
 func (a *CapabilityApiService) CreateCapabilityCimcFirmwareDescriptorExecute(r ApiCreateCapabilityCimcFirmwareDescriptorRequest) (*CapabilityCimcFirmwareDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -936,8 +1118,8 @@ func (r ApiCreateCapabilityEquipmentPhysicalDefRequest) Execute() (*CapabilityEq
 /*
 CreateCapabilityEquipmentPhysicalDef Create a 'capability.EquipmentPhysicalDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateCapabilityEquipmentPhysicalDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateCapabilityEquipmentPhysicalDefRequest
 */
 func (a *CapabilityApiService) CreateCapabilityEquipmentPhysicalDef(ctx context.Context) ApiCreateCapabilityEquipmentPhysicalDefRequest {
 	return ApiCreateCapabilityEquipmentPhysicalDefRequest{
@@ -947,7 +1129,8 @@ func (a *CapabilityApiService) CreateCapabilityEquipmentPhysicalDef(ctx context.
 }
 
 // Execute executes the request
-//  @return CapabilityEquipmentPhysicalDef
+//
+//	@return CapabilityEquipmentPhysicalDef
 func (a *CapabilityApiService) CreateCapabilityEquipmentPhysicalDefExecute(r ApiCreateCapabilityEquipmentPhysicalDefRequest) (*CapabilityEquipmentPhysicalDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1112,8 +1295,8 @@ func (r ApiCreateCapabilityEquipmentSlotArrayRequest) Execute() (*CapabilityEqui
 /*
 CreateCapabilityEquipmentSlotArray Create a 'capability.EquipmentSlotArray' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateCapabilityEquipmentSlotArrayRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateCapabilityEquipmentSlotArrayRequest
 */
 func (a *CapabilityApiService) CreateCapabilityEquipmentSlotArray(ctx context.Context) ApiCreateCapabilityEquipmentSlotArrayRequest {
 	return ApiCreateCapabilityEquipmentSlotArrayRequest{
@@ -1123,7 +1306,8 @@ func (a *CapabilityApiService) CreateCapabilityEquipmentSlotArray(ctx context.Co
 }
 
 // Execute executes the request
-//  @return CapabilityEquipmentSlotArray
+//
+//	@return CapabilityEquipmentSlotArray
 func (a *CapabilityApiService) CreateCapabilityEquipmentSlotArrayExecute(r ApiCreateCapabilityEquipmentSlotArrayRequest) (*CapabilityEquipmentSlotArray, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1288,8 +1472,8 @@ func (r ApiCreateCapabilityFanModuleDescriptorRequest) Execute() (*CapabilityFan
 /*
 CreateCapabilityFanModuleDescriptor Create a 'capability.FanModuleDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateCapabilityFanModuleDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateCapabilityFanModuleDescriptorRequest
 */
 func (a *CapabilityApiService) CreateCapabilityFanModuleDescriptor(ctx context.Context) ApiCreateCapabilityFanModuleDescriptorRequest {
 	return ApiCreateCapabilityFanModuleDescriptorRequest{
@@ -1299,7 +1483,8 @@ func (a *CapabilityApiService) CreateCapabilityFanModuleDescriptor(ctx context.C
 }
 
 // Execute executes the request
-//  @return CapabilityFanModuleDescriptor
+//
+//	@return CapabilityFanModuleDescriptor
 func (a *CapabilityApiService) CreateCapabilityFanModuleDescriptorExecute(r ApiCreateCapabilityFanModuleDescriptorRequest) (*CapabilityFanModuleDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1464,8 +1649,8 @@ func (r ApiCreateCapabilityFanModuleManufacturingDefRequest) Execute() (*Capabil
 /*
 CreateCapabilityFanModuleManufacturingDef Create a 'capability.FanModuleManufacturingDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateCapabilityFanModuleManufacturingDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateCapabilityFanModuleManufacturingDefRequest
 */
 func (a *CapabilityApiService) CreateCapabilityFanModuleManufacturingDef(ctx context.Context) ApiCreateCapabilityFanModuleManufacturingDefRequest {
 	return ApiCreateCapabilityFanModuleManufacturingDefRequest{
@@ -1475,7 +1660,8 @@ func (a *CapabilityApiService) CreateCapabilityFanModuleManufacturingDef(ctx con
 }
 
 // Execute executes the request
-//  @return CapabilityFanModuleManufacturingDef
+//
+//	@return CapabilityFanModuleManufacturingDef
 func (a *CapabilityApiService) CreateCapabilityFanModuleManufacturingDefExecute(r ApiCreateCapabilityFanModuleManufacturingDefRequest) (*CapabilityFanModuleManufacturingDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1607,6 +1793,183 @@ func (a *CapabilityApiService) CreateCapabilityFanModuleManufacturingDefExecute(
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiCreateCapabilityFexCapabilityDefRequest struct {
+	ctx                        context.Context
+	ApiService                 *CapabilityApiService
+	capabilityFexCapabilityDef *CapabilityFexCapabilityDef
+	ifMatch                    *string
+	ifNoneMatch                *string
+}
+
+// The &#39;capability.FexCapabilityDef&#39; resource to create.
+func (r ApiCreateCapabilityFexCapabilityDefRequest) CapabilityFexCapabilityDef(capabilityFexCapabilityDef CapabilityFexCapabilityDef) ApiCreateCapabilityFexCapabilityDefRequest {
+	r.capabilityFexCapabilityDef = &capabilityFexCapabilityDef
+	return r
+}
+
+// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
+func (r ApiCreateCapabilityFexCapabilityDefRequest) IfMatch(ifMatch string) ApiCreateCapabilityFexCapabilityDefRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+// For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte.
+func (r ApiCreateCapabilityFexCapabilityDefRequest) IfNoneMatch(ifNoneMatch string) ApiCreateCapabilityFexCapabilityDefRequest {
+	r.ifNoneMatch = &ifNoneMatch
+	return r
+}
+
+func (r ApiCreateCapabilityFexCapabilityDefRequest) Execute() (*CapabilityFexCapabilityDef, *http.Response, error) {
+	return r.ApiService.CreateCapabilityFexCapabilityDefExecute(r)
+}
+
+/*
+CreateCapabilityFexCapabilityDef Create a 'capability.FexCapabilityDef' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateCapabilityFexCapabilityDefRequest
+*/
+func (a *CapabilityApiService) CreateCapabilityFexCapabilityDef(ctx context.Context) ApiCreateCapabilityFexCapabilityDefRequest {
+	return ApiCreateCapabilityFexCapabilityDefRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return CapabilityFexCapabilityDef
+func (a *CapabilityApiService) CreateCapabilityFexCapabilityDefExecute(r ApiCreateCapabilityFexCapabilityDefRequest) (*CapabilityFexCapabilityDef, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CapabilityFexCapabilityDef
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.CreateCapabilityFexCapabilityDef")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/capability/FexCapabilityDefs"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.capabilityFexCapabilityDef == nil {
+		return localVarReturnValue, nil, reportError("capabilityFexCapabilityDef is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	if r.ifNoneMatch != nil {
+		localVarHeaderParams["If-None-Match"] = parameterToString(*r.ifNoneMatch, "")
+	}
+	// body params
+	localVarPostBody = r.capabilityFexCapabilityDef
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiCreateCapabilityFexDescriptorRequest struct {
 	ctx                     context.Context
 	ApiService              *CapabilityApiService
@@ -1640,8 +2003,8 @@ func (r ApiCreateCapabilityFexDescriptorRequest) Execute() (*CapabilityFexDescri
 /*
 CreateCapabilityFexDescriptor Create a 'capability.FexDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateCapabilityFexDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateCapabilityFexDescriptorRequest
 */
 func (a *CapabilityApiService) CreateCapabilityFexDescriptor(ctx context.Context) ApiCreateCapabilityFexDescriptorRequest {
 	return ApiCreateCapabilityFexDescriptorRequest{
@@ -1651,7 +2014,8 @@ func (a *CapabilityApiService) CreateCapabilityFexDescriptor(ctx context.Context
 }
 
 // Execute executes the request
-//  @return CapabilityFexDescriptor
+//
+//	@return CapabilityFexDescriptor
 func (a *CapabilityApiService) CreateCapabilityFexDescriptorExecute(r ApiCreateCapabilityFexDescriptorRequest) (*CapabilityFexDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1816,8 +2180,8 @@ func (r ApiCreateCapabilityFexManufacturingDefRequest) Execute() (*CapabilityFex
 /*
 CreateCapabilityFexManufacturingDef Create a 'capability.FexManufacturingDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateCapabilityFexManufacturingDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateCapabilityFexManufacturingDefRequest
 */
 func (a *CapabilityApiService) CreateCapabilityFexManufacturingDef(ctx context.Context) ApiCreateCapabilityFexManufacturingDefRequest {
 	return ApiCreateCapabilityFexManufacturingDefRequest{
@@ -1827,7 +2191,8 @@ func (a *CapabilityApiService) CreateCapabilityFexManufacturingDef(ctx context.C
 }
 
 // Execute executes the request
-//  @return CapabilityFexManufacturingDef
+//
+//	@return CapabilityFexManufacturingDef
 func (a *CapabilityApiService) CreateCapabilityFexManufacturingDefExecute(r ApiCreateCapabilityFexManufacturingDefRequest) (*CapabilityFexManufacturingDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1992,8 +2357,8 @@ func (r ApiCreateCapabilityIoCardCapabilityDefRequest) Execute() (*CapabilityIoC
 /*
 CreateCapabilityIoCardCapabilityDef Create a 'capability.IoCardCapabilityDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateCapabilityIoCardCapabilityDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateCapabilityIoCardCapabilityDefRequest
 */
 func (a *CapabilityApiService) CreateCapabilityIoCardCapabilityDef(ctx context.Context) ApiCreateCapabilityIoCardCapabilityDefRequest {
 	return ApiCreateCapabilityIoCardCapabilityDefRequest{
@@ -2003,7 +2368,8 @@ func (a *CapabilityApiService) CreateCapabilityIoCardCapabilityDef(ctx context.C
 }
 
 // Execute executes the request
-//  @return CapabilityIoCardCapabilityDef
+//
+//	@return CapabilityIoCardCapabilityDef
 func (a *CapabilityApiService) CreateCapabilityIoCardCapabilityDefExecute(r ApiCreateCapabilityIoCardCapabilityDefRequest) (*CapabilityIoCardCapabilityDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2168,8 +2534,8 @@ func (r ApiCreateCapabilityIoCardDescriptorRequest) Execute() (*CapabilityIoCard
 /*
 CreateCapabilityIoCardDescriptor Create a 'capability.IoCardDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateCapabilityIoCardDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateCapabilityIoCardDescriptorRequest
 */
 func (a *CapabilityApiService) CreateCapabilityIoCardDescriptor(ctx context.Context) ApiCreateCapabilityIoCardDescriptorRequest {
 	return ApiCreateCapabilityIoCardDescriptorRequest{
@@ -2179,7 +2545,8 @@ func (a *CapabilityApiService) CreateCapabilityIoCardDescriptor(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return CapabilityIoCardDescriptor
+//
+//	@return CapabilityIoCardDescriptor
 func (a *CapabilityApiService) CreateCapabilityIoCardDescriptorExecute(r ApiCreateCapabilityIoCardDescriptorRequest) (*CapabilityIoCardDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2344,8 +2711,8 @@ func (r ApiCreateCapabilityIoCardManufacturingDefRequest) Execute() (*Capability
 /*
 CreateCapabilityIoCardManufacturingDef Create a 'capability.IoCardManufacturingDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateCapabilityIoCardManufacturingDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateCapabilityIoCardManufacturingDefRequest
 */
 func (a *CapabilityApiService) CreateCapabilityIoCardManufacturingDef(ctx context.Context) ApiCreateCapabilityIoCardManufacturingDefRequest {
 	return ApiCreateCapabilityIoCardManufacturingDefRequest{
@@ -2355,7 +2722,8 @@ func (a *CapabilityApiService) CreateCapabilityIoCardManufacturingDef(ctx contex
 }
 
 // Execute executes the request
-//  @return CapabilityIoCardManufacturingDef
+//
+//	@return CapabilityIoCardManufacturingDef
 func (a *CapabilityApiService) CreateCapabilityIoCardManufacturingDefExecute(r ApiCreateCapabilityIoCardManufacturingDefRequest) (*CapabilityIoCardManufacturingDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2520,8 +2888,8 @@ func (r ApiCreateCapabilityPortGroupAggregationDefRequest) Execute() (*Capabilit
 /*
 CreateCapabilityPortGroupAggregationDef Create a 'capability.PortGroupAggregationDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateCapabilityPortGroupAggregationDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateCapabilityPortGroupAggregationDefRequest
 */
 func (a *CapabilityApiService) CreateCapabilityPortGroupAggregationDef(ctx context.Context) ApiCreateCapabilityPortGroupAggregationDefRequest {
 	return ApiCreateCapabilityPortGroupAggregationDefRequest{
@@ -2531,7 +2899,8 @@ func (a *CapabilityApiService) CreateCapabilityPortGroupAggregationDef(ctx conte
 }
 
 // Execute executes the request
-//  @return CapabilityPortGroupAggregationDef
+//
+//	@return CapabilityPortGroupAggregationDef
 func (a *CapabilityApiService) CreateCapabilityPortGroupAggregationDefExecute(r ApiCreateCapabilityPortGroupAggregationDefRequest) (*CapabilityPortGroupAggregationDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2696,8 +3065,8 @@ func (r ApiCreateCapabilityPsuDescriptorRequest) Execute() (*CapabilityPsuDescri
 /*
 CreateCapabilityPsuDescriptor Create a 'capability.PsuDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateCapabilityPsuDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateCapabilityPsuDescriptorRequest
 */
 func (a *CapabilityApiService) CreateCapabilityPsuDescriptor(ctx context.Context) ApiCreateCapabilityPsuDescriptorRequest {
 	return ApiCreateCapabilityPsuDescriptorRequest{
@@ -2707,7 +3076,8 @@ func (a *CapabilityApiService) CreateCapabilityPsuDescriptor(ctx context.Context
 }
 
 // Execute executes the request
-//  @return CapabilityPsuDescriptor
+//
+//	@return CapabilityPsuDescriptor
 func (a *CapabilityApiService) CreateCapabilityPsuDescriptorExecute(r ApiCreateCapabilityPsuDescriptorRequest) (*CapabilityPsuDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2872,8 +3242,8 @@ func (r ApiCreateCapabilityPsuManufacturingDefRequest) Execute() (*CapabilityPsu
 /*
 CreateCapabilityPsuManufacturingDef Create a 'capability.PsuManufacturingDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateCapabilityPsuManufacturingDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateCapabilityPsuManufacturingDefRequest
 */
 func (a *CapabilityApiService) CreateCapabilityPsuManufacturingDef(ctx context.Context) ApiCreateCapabilityPsuManufacturingDefRequest {
 	return ApiCreateCapabilityPsuManufacturingDefRequest{
@@ -2883,7 +3253,8 @@ func (a *CapabilityApiService) CreateCapabilityPsuManufacturingDef(ctx context.C
 }
 
 // Execute executes the request
-//  @return CapabilityPsuManufacturingDef
+//
+//	@return CapabilityPsuManufacturingDef
 func (a *CapabilityApiService) CreateCapabilityPsuManufacturingDefExecute(r ApiCreateCapabilityPsuManufacturingDefRequest) (*CapabilityPsuManufacturingDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3048,8 +3419,8 @@ func (r ApiCreateCapabilityServerDescriptorRequest) Execute() (*CapabilityServer
 /*
 CreateCapabilityServerDescriptor Create a 'capability.ServerDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateCapabilityServerDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateCapabilityServerDescriptorRequest
 */
 func (a *CapabilityApiService) CreateCapabilityServerDescriptor(ctx context.Context) ApiCreateCapabilityServerDescriptorRequest {
 	return ApiCreateCapabilityServerDescriptorRequest{
@@ -3059,7 +3430,8 @@ func (a *CapabilityApiService) CreateCapabilityServerDescriptor(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return CapabilityServerDescriptor
+//
+//	@return CapabilityServerDescriptor
 func (a *CapabilityApiService) CreateCapabilityServerDescriptorExecute(r ApiCreateCapabilityServerDescriptorRequest) (*CapabilityServerDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3224,8 +3596,8 @@ func (r ApiCreateCapabilityServerModelsCapabilityDefRequest) Execute() (*Capabil
 /*
 CreateCapabilityServerModelsCapabilityDef Create a 'capability.ServerModelsCapabilityDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateCapabilityServerModelsCapabilityDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateCapabilityServerModelsCapabilityDefRequest
 */
 func (a *CapabilityApiService) CreateCapabilityServerModelsCapabilityDef(ctx context.Context) ApiCreateCapabilityServerModelsCapabilityDefRequest {
 	return ApiCreateCapabilityServerModelsCapabilityDefRequest{
@@ -3235,7 +3607,8 @@ func (a *CapabilityApiService) CreateCapabilityServerModelsCapabilityDef(ctx con
 }
 
 // Execute executes the request
-//  @return CapabilityServerModelsCapabilityDef
+//
+//	@return CapabilityServerModelsCapabilityDef
 func (a *CapabilityApiService) CreateCapabilityServerModelsCapabilityDefExecute(r ApiCreateCapabilityServerModelsCapabilityDefRequest) (*CapabilityServerModelsCapabilityDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3400,8 +3773,8 @@ func (r ApiCreateCapabilityServerSchemaDescriptorRequest) Execute() (*Capability
 /*
 CreateCapabilityServerSchemaDescriptor Create a 'capability.ServerSchemaDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateCapabilityServerSchemaDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateCapabilityServerSchemaDescriptorRequest
 */
 func (a *CapabilityApiService) CreateCapabilityServerSchemaDescriptor(ctx context.Context) ApiCreateCapabilityServerSchemaDescriptorRequest {
 	return ApiCreateCapabilityServerSchemaDescriptorRequest{
@@ -3411,7 +3784,8 @@ func (a *CapabilityApiService) CreateCapabilityServerSchemaDescriptor(ctx contex
 }
 
 // Execute executes the request
-//  @return CapabilityServerSchemaDescriptor
+//
+//	@return CapabilityServerSchemaDescriptor
 func (a *CapabilityApiService) CreateCapabilityServerSchemaDescriptorExecute(r ApiCreateCapabilityServerSchemaDescriptorRequest) (*CapabilityServerSchemaDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3576,8 +3950,8 @@ func (r ApiCreateCapabilitySiocModuleCapabilityDefRequest) Execute() (*Capabilit
 /*
 CreateCapabilitySiocModuleCapabilityDef Create a 'capability.SiocModuleCapabilityDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateCapabilitySiocModuleCapabilityDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateCapabilitySiocModuleCapabilityDefRequest
 */
 func (a *CapabilityApiService) CreateCapabilitySiocModuleCapabilityDef(ctx context.Context) ApiCreateCapabilitySiocModuleCapabilityDefRequest {
 	return ApiCreateCapabilitySiocModuleCapabilityDefRequest{
@@ -3587,7 +3961,8 @@ func (a *CapabilityApiService) CreateCapabilitySiocModuleCapabilityDef(ctx conte
 }
 
 // Execute executes the request
-//  @return CapabilitySiocModuleCapabilityDef
+//
+//	@return CapabilitySiocModuleCapabilityDef
 func (a *CapabilityApiService) CreateCapabilitySiocModuleCapabilityDefExecute(r ApiCreateCapabilitySiocModuleCapabilityDefRequest) (*CapabilitySiocModuleCapabilityDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3752,8 +4127,8 @@ func (r ApiCreateCapabilitySiocModuleDescriptorRequest) Execute() (*CapabilitySi
 /*
 CreateCapabilitySiocModuleDescriptor Create a 'capability.SiocModuleDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateCapabilitySiocModuleDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateCapabilitySiocModuleDescriptorRequest
 */
 func (a *CapabilityApiService) CreateCapabilitySiocModuleDescriptor(ctx context.Context) ApiCreateCapabilitySiocModuleDescriptorRequest {
 	return ApiCreateCapabilitySiocModuleDescriptorRequest{
@@ -3763,7 +4138,8 @@ func (a *CapabilityApiService) CreateCapabilitySiocModuleDescriptor(ctx context.
 }
 
 // Execute executes the request
-//  @return CapabilitySiocModuleDescriptor
+//
+//	@return CapabilitySiocModuleDescriptor
 func (a *CapabilityApiService) CreateCapabilitySiocModuleDescriptorExecute(r ApiCreateCapabilitySiocModuleDescriptorRequest) (*CapabilitySiocModuleDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3928,8 +4304,8 @@ func (r ApiCreateCapabilitySiocModuleManufacturingDefRequest) Execute() (*Capabi
 /*
 CreateCapabilitySiocModuleManufacturingDef Create a 'capability.SiocModuleManufacturingDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateCapabilitySiocModuleManufacturingDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateCapabilitySiocModuleManufacturingDefRequest
 */
 func (a *CapabilityApiService) CreateCapabilitySiocModuleManufacturingDef(ctx context.Context) ApiCreateCapabilitySiocModuleManufacturingDefRequest {
 	return ApiCreateCapabilitySiocModuleManufacturingDefRequest{
@@ -3939,7 +4315,8 @@ func (a *CapabilityApiService) CreateCapabilitySiocModuleManufacturingDef(ctx co
 }
 
 // Execute executes the request
-//  @return CapabilitySiocModuleManufacturingDef
+//
+//	@return CapabilitySiocModuleManufacturingDef
 func (a *CapabilityApiService) CreateCapabilitySiocModuleManufacturingDefExecute(r ApiCreateCapabilitySiocModuleManufacturingDefRequest) (*CapabilitySiocModuleManufacturingDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4104,8 +4481,8 @@ func (r ApiCreateCapabilitySwitchCapabilityRequest) Execute() (*CapabilitySwitch
 /*
 CreateCapabilitySwitchCapability Create a 'capability.SwitchCapability' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateCapabilitySwitchCapabilityRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateCapabilitySwitchCapabilityRequest
 */
 func (a *CapabilityApiService) CreateCapabilitySwitchCapability(ctx context.Context) ApiCreateCapabilitySwitchCapabilityRequest {
 	return ApiCreateCapabilitySwitchCapabilityRequest{
@@ -4115,7 +4492,8 @@ func (a *CapabilityApiService) CreateCapabilitySwitchCapability(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return CapabilitySwitchCapability
+//
+//	@return CapabilitySwitchCapability
 func (a *CapabilityApiService) CreateCapabilitySwitchCapabilityExecute(r ApiCreateCapabilitySwitchCapabilityRequest) (*CapabilitySwitchCapability, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4280,8 +4658,8 @@ func (r ApiCreateCapabilitySwitchDescriptorRequest) Execute() (*CapabilitySwitch
 /*
 CreateCapabilitySwitchDescriptor Create a 'capability.SwitchDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateCapabilitySwitchDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateCapabilitySwitchDescriptorRequest
 */
 func (a *CapabilityApiService) CreateCapabilitySwitchDescriptor(ctx context.Context) ApiCreateCapabilitySwitchDescriptorRequest {
 	return ApiCreateCapabilitySwitchDescriptorRequest{
@@ -4291,7 +4669,8 @@ func (a *CapabilityApiService) CreateCapabilitySwitchDescriptor(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return CapabilitySwitchDescriptor
+//
+//	@return CapabilitySwitchDescriptor
 func (a *CapabilityApiService) CreateCapabilitySwitchDescriptorExecute(r ApiCreateCapabilitySwitchDescriptorRequest) (*CapabilitySwitchDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4456,8 +4835,8 @@ func (r ApiCreateCapabilitySwitchManufacturingDefRequest) Execute() (*Capability
 /*
 CreateCapabilitySwitchManufacturingDef Create a 'capability.SwitchManufacturingDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateCapabilitySwitchManufacturingDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateCapabilitySwitchManufacturingDefRequest
 */
 func (a *CapabilityApiService) CreateCapabilitySwitchManufacturingDef(ctx context.Context) ApiCreateCapabilitySwitchManufacturingDefRequest {
 	return ApiCreateCapabilitySwitchManufacturingDefRequest{
@@ -4467,7 +4846,8 @@ func (a *CapabilityApiService) CreateCapabilitySwitchManufacturingDef(ctx contex
 }
 
 // Execute executes the request
-//  @return CapabilitySwitchManufacturingDef
+//
+//	@return CapabilitySwitchManufacturingDef
 func (a *CapabilityApiService) CreateCapabilitySwitchManufacturingDefExecute(r ApiCreateCapabilitySwitchManufacturingDefRequest) (*CapabilitySwitchManufacturingDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4599,6 +4979,143 @@ func (a *CapabilityApiService) CreateCapabilitySwitchManufacturingDefExecute(r A
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiDeleteCapabilityActionsMetaDataRequest struct {
+	ctx        context.Context
+	ApiService *CapabilityApiService
+	moid       string
+}
+
+func (r ApiDeleteCapabilityActionsMetaDataRequest) Execute() (*http.Response, error) {
+	return r.ApiService.DeleteCapabilityActionsMetaDataExecute(r)
+}
+
+/*
+DeleteCapabilityActionsMetaData Delete a 'capability.ActionsMetaData' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteCapabilityActionsMetaDataRequest
+*/
+func (a *CapabilityApiService) DeleteCapabilityActionsMetaData(ctx context.Context, moid string) ApiDeleteCapabilityActionsMetaDataRequest {
+	return ApiDeleteCapabilityActionsMetaDataRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+func (a *CapabilityApiService) DeleteCapabilityActionsMetaDataExecute(r ApiDeleteCapabilityActionsMetaDataRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.DeleteCapabilityActionsMetaData")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/capability/ActionsMetaData/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
 type ApiDeleteCapabilityAdapterDeprecatedDefRequest struct {
 	ctx        context.Context
 	ApiService *CapabilityApiService
@@ -4612,9 +5129,9 @@ func (r ApiDeleteCapabilityAdapterDeprecatedDefRequest) Execute() (*http.Respons
 /*
 DeleteCapabilityAdapterDeprecatedDef Delete a 'capability.AdapterDeprecatedDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteCapabilityAdapterDeprecatedDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteCapabilityAdapterDeprecatedDefRequest
 */
 func (a *CapabilityApiService) DeleteCapabilityAdapterDeprecatedDef(ctx context.Context, moid string) ApiDeleteCapabilityAdapterDeprecatedDefRequest {
 	return ApiDeleteCapabilityAdapterDeprecatedDefRequest{
@@ -4749,9 +5266,9 @@ func (r ApiDeleteCapabilityAdapterUnitDescriptorRequest) Execute() (*http.Respon
 /*
 DeleteCapabilityAdapterUnitDescriptor Delete a 'capability.AdapterUnitDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteCapabilityAdapterUnitDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteCapabilityAdapterUnitDescriptorRequest
 */
 func (a *CapabilityApiService) DeleteCapabilityAdapterUnitDescriptor(ctx context.Context, moid string) ApiDeleteCapabilityAdapterUnitDescriptorRequest {
 	return ApiDeleteCapabilityAdapterUnitDescriptorRequest{
@@ -4886,9 +5403,9 @@ func (r ApiDeleteCapabilityChassisDescriptorRequest) Execute() (*http.Response, 
 /*
 DeleteCapabilityChassisDescriptor Delete a 'capability.ChassisDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteCapabilityChassisDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteCapabilityChassisDescriptorRequest
 */
 func (a *CapabilityApiService) DeleteCapabilityChassisDescriptor(ctx context.Context, moid string) ApiDeleteCapabilityChassisDescriptorRequest {
 	return ApiDeleteCapabilityChassisDescriptorRequest{
@@ -5023,9 +5540,9 @@ func (r ApiDeleteCapabilityChassisManufacturingDefRequest) Execute() (*http.Resp
 /*
 DeleteCapabilityChassisManufacturingDef Delete a 'capability.ChassisManufacturingDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteCapabilityChassisManufacturingDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteCapabilityChassisManufacturingDefRequest
 */
 func (a *CapabilityApiService) DeleteCapabilityChassisManufacturingDef(ctx context.Context, moid string) ApiDeleteCapabilityChassisManufacturingDefRequest {
 	return ApiDeleteCapabilityChassisManufacturingDefRequest{
@@ -5160,9 +5677,9 @@ func (r ApiDeleteCapabilityCimcFirmwareDescriptorRequest) Execute() (*http.Respo
 /*
 DeleteCapabilityCimcFirmwareDescriptor Delete a 'capability.CimcFirmwareDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteCapabilityCimcFirmwareDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteCapabilityCimcFirmwareDescriptorRequest
 */
 func (a *CapabilityApiService) DeleteCapabilityCimcFirmwareDescriptor(ctx context.Context, moid string) ApiDeleteCapabilityCimcFirmwareDescriptorRequest {
 	return ApiDeleteCapabilityCimcFirmwareDescriptorRequest{
@@ -5297,9 +5814,9 @@ func (r ApiDeleteCapabilityEquipmentPhysicalDefRequest) Execute() (*http.Respons
 /*
 DeleteCapabilityEquipmentPhysicalDef Delete a 'capability.EquipmentPhysicalDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteCapabilityEquipmentPhysicalDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteCapabilityEquipmentPhysicalDefRequest
 */
 func (a *CapabilityApiService) DeleteCapabilityEquipmentPhysicalDef(ctx context.Context, moid string) ApiDeleteCapabilityEquipmentPhysicalDefRequest {
 	return ApiDeleteCapabilityEquipmentPhysicalDefRequest{
@@ -5434,9 +5951,9 @@ func (r ApiDeleteCapabilityEquipmentSlotArrayRequest) Execute() (*http.Response,
 /*
 DeleteCapabilityEquipmentSlotArray Delete a 'capability.EquipmentSlotArray' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteCapabilityEquipmentSlotArrayRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteCapabilityEquipmentSlotArrayRequest
 */
 func (a *CapabilityApiService) DeleteCapabilityEquipmentSlotArray(ctx context.Context, moid string) ApiDeleteCapabilityEquipmentSlotArrayRequest {
 	return ApiDeleteCapabilityEquipmentSlotArrayRequest{
@@ -5571,9 +6088,9 @@ func (r ApiDeleteCapabilityFanModuleDescriptorRequest) Execute() (*http.Response
 /*
 DeleteCapabilityFanModuleDescriptor Delete a 'capability.FanModuleDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteCapabilityFanModuleDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteCapabilityFanModuleDescriptorRequest
 */
 func (a *CapabilityApiService) DeleteCapabilityFanModuleDescriptor(ctx context.Context, moid string) ApiDeleteCapabilityFanModuleDescriptorRequest {
 	return ApiDeleteCapabilityFanModuleDescriptorRequest{
@@ -5708,9 +6225,9 @@ func (r ApiDeleteCapabilityFanModuleManufacturingDefRequest) Execute() (*http.Re
 /*
 DeleteCapabilityFanModuleManufacturingDef Delete a 'capability.FanModuleManufacturingDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteCapabilityFanModuleManufacturingDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteCapabilityFanModuleManufacturingDefRequest
 */
 func (a *CapabilityApiService) DeleteCapabilityFanModuleManufacturingDef(ctx context.Context, moid string) ApiDeleteCapabilityFanModuleManufacturingDefRequest {
 	return ApiDeleteCapabilityFanModuleManufacturingDefRequest{
@@ -5832,6 +6349,143 @@ func (a *CapabilityApiService) DeleteCapabilityFanModuleManufacturingDefExecute(
 	return localVarHTTPResponse, nil
 }
 
+type ApiDeleteCapabilityFexCapabilityDefRequest struct {
+	ctx        context.Context
+	ApiService *CapabilityApiService
+	moid       string
+}
+
+func (r ApiDeleteCapabilityFexCapabilityDefRequest) Execute() (*http.Response, error) {
+	return r.ApiService.DeleteCapabilityFexCapabilityDefExecute(r)
+}
+
+/*
+DeleteCapabilityFexCapabilityDef Delete a 'capability.FexCapabilityDef' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteCapabilityFexCapabilityDefRequest
+*/
+func (a *CapabilityApiService) DeleteCapabilityFexCapabilityDef(ctx context.Context, moid string) ApiDeleteCapabilityFexCapabilityDefRequest {
+	return ApiDeleteCapabilityFexCapabilityDefRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+func (a *CapabilityApiService) DeleteCapabilityFexCapabilityDefExecute(r ApiDeleteCapabilityFexCapabilityDefRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.DeleteCapabilityFexCapabilityDef")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/capability/FexCapabilityDefs/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
 type ApiDeleteCapabilityFexDescriptorRequest struct {
 	ctx        context.Context
 	ApiService *CapabilityApiService
@@ -5845,9 +6499,9 @@ func (r ApiDeleteCapabilityFexDescriptorRequest) Execute() (*http.Response, erro
 /*
 DeleteCapabilityFexDescriptor Delete a 'capability.FexDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteCapabilityFexDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteCapabilityFexDescriptorRequest
 */
 func (a *CapabilityApiService) DeleteCapabilityFexDescriptor(ctx context.Context, moid string) ApiDeleteCapabilityFexDescriptorRequest {
 	return ApiDeleteCapabilityFexDescriptorRequest{
@@ -5982,9 +6636,9 @@ func (r ApiDeleteCapabilityFexManufacturingDefRequest) Execute() (*http.Response
 /*
 DeleteCapabilityFexManufacturingDef Delete a 'capability.FexManufacturingDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteCapabilityFexManufacturingDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteCapabilityFexManufacturingDefRequest
 */
 func (a *CapabilityApiService) DeleteCapabilityFexManufacturingDef(ctx context.Context, moid string) ApiDeleteCapabilityFexManufacturingDefRequest {
 	return ApiDeleteCapabilityFexManufacturingDefRequest{
@@ -6119,9 +6773,9 @@ func (r ApiDeleteCapabilityIoCardCapabilityDefRequest) Execute() (*http.Response
 /*
 DeleteCapabilityIoCardCapabilityDef Delete a 'capability.IoCardCapabilityDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteCapabilityIoCardCapabilityDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteCapabilityIoCardCapabilityDefRequest
 */
 func (a *CapabilityApiService) DeleteCapabilityIoCardCapabilityDef(ctx context.Context, moid string) ApiDeleteCapabilityIoCardCapabilityDefRequest {
 	return ApiDeleteCapabilityIoCardCapabilityDefRequest{
@@ -6256,9 +6910,9 @@ func (r ApiDeleteCapabilityIoCardDescriptorRequest) Execute() (*http.Response, e
 /*
 DeleteCapabilityIoCardDescriptor Delete a 'capability.IoCardDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteCapabilityIoCardDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteCapabilityIoCardDescriptorRequest
 */
 func (a *CapabilityApiService) DeleteCapabilityIoCardDescriptor(ctx context.Context, moid string) ApiDeleteCapabilityIoCardDescriptorRequest {
 	return ApiDeleteCapabilityIoCardDescriptorRequest{
@@ -6393,9 +7047,9 @@ func (r ApiDeleteCapabilityIoCardManufacturingDefRequest) Execute() (*http.Respo
 /*
 DeleteCapabilityIoCardManufacturingDef Delete a 'capability.IoCardManufacturingDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteCapabilityIoCardManufacturingDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteCapabilityIoCardManufacturingDefRequest
 */
 func (a *CapabilityApiService) DeleteCapabilityIoCardManufacturingDef(ctx context.Context, moid string) ApiDeleteCapabilityIoCardManufacturingDefRequest {
 	return ApiDeleteCapabilityIoCardManufacturingDefRequest{
@@ -6530,9 +7184,9 @@ func (r ApiDeleteCapabilityPortGroupAggregationDefRequest) Execute() (*http.Resp
 /*
 DeleteCapabilityPortGroupAggregationDef Delete a 'capability.PortGroupAggregationDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteCapabilityPortGroupAggregationDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteCapabilityPortGroupAggregationDefRequest
 */
 func (a *CapabilityApiService) DeleteCapabilityPortGroupAggregationDef(ctx context.Context, moid string) ApiDeleteCapabilityPortGroupAggregationDefRequest {
 	return ApiDeleteCapabilityPortGroupAggregationDefRequest{
@@ -6667,9 +7321,9 @@ func (r ApiDeleteCapabilityPsuDescriptorRequest) Execute() (*http.Response, erro
 /*
 DeleteCapabilityPsuDescriptor Delete a 'capability.PsuDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteCapabilityPsuDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteCapabilityPsuDescriptorRequest
 */
 func (a *CapabilityApiService) DeleteCapabilityPsuDescriptor(ctx context.Context, moid string) ApiDeleteCapabilityPsuDescriptorRequest {
 	return ApiDeleteCapabilityPsuDescriptorRequest{
@@ -6804,9 +7458,9 @@ func (r ApiDeleteCapabilityPsuManufacturingDefRequest) Execute() (*http.Response
 /*
 DeleteCapabilityPsuManufacturingDef Delete a 'capability.PsuManufacturingDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteCapabilityPsuManufacturingDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteCapabilityPsuManufacturingDefRequest
 */
 func (a *CapabilityApiService) DeleteCapabilityPsuManufacturingDef(ctx context.Context, moid string) ApiDeleteCapabilityPsuManufacturingDefRequest {
 	return ApiDeleteCapabilityPsuManufacturingDefRequest{
@@ -6941,9 +7595,9 @@ func (r ApiDeleteCapabilityServerDescriptorRequest) Execute() (*http.Response, e
 /*
 DeleteCapabilityServerDescriptor Delete a 'capability.ServerDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteCapabilityServerDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteCapabilityServerDescriptorRequest
 */
 func (a *CapabilityApiService) DeleteCapabilityServerDescriptor(ctx context.Context, moid string) ApiDeleteCapabilityServerDescriptorRequest {
 	return ApiDeleteCapabilityServerDescriptorRequest{
@@ -7078,9 +7732,9 @@ func (r ApiDeleteCapabilityServerModelsCapabilityDefRequest) Execute() (*http.Re
 /*
 DeleteCapabilityServerModelsCapabilityDef Delete a 'capability.ServerModelsCapabilityDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteCapabilityServerModelsCapabilityDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteCapabilityServerModelsCapabilityDefRequest
 */
 func (a *CapabilityApiService) DeleteCapabilityServerModelsCapabilityDef(ctx context.Context, moid string) ApiDeleteCapabilityServerModelsCapabilityDefRequest {
 	return ApiDeleteCapabilityServerModelsCapabilityDefRequest{
@@ -7215,9 +7869,9 @@ func (r ApiDeleteCapabilityServerSchemaDescriptorRequest) Execute() (*http.Respo
 /*
 DeleteCapabilityServerSchemaDescriptor Delete a 'capability.ServerSchemaDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteCapabilityServerSchemaDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteCapabilityServerSchemaDescriptorRequest
 */
 func (a *CapabilityApiService) DeleteCapabilityServerSchemaDescriptor(ctx context.Context, moid string) ApiDeleteCapabilityServerSchemaDescriptorRequest {
 	return ApiDeleteCapabilityServerSchemaDescriptorRequest{
@@ -7352,9 +8006,9 @@ func (r ApiDeleteCapabilitySiocModuleCapabilityDefRequest) Execute() (*http.Resp
 /*
 DeleteCapabilitySiocModuleCapabilityDef Delete a 'capability.SiocModuleCapabilityDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteCapabilitySiocModuleCapabilityDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteCapabilitySiocModuleCapabilityDefRequest
 */
 func (a *CapabilityApiService) DeleteCapabilitySiocModuleCapabilityDef(ctx context.Context, moid string) ApiDeleteCapabilitySiocModuleCapabilityDefRequest {
 	return ApiDeleteCapabilitySiocModuleCapabilityDefRequest{
@@ -7489,9 +8143,9 @@ func (r ApiDeleteCapabilitySiocModuleDescriptorRequest) Execute() (*http.Respons
 /*
 DeleteCapabilitySiocModuleDescriptor Delete a 'capability.SiocModuleDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteCapabilitySiocModuleDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteCapabilitySiocModuleDescriptorRequest
 */
 func (a *CapabilityApiService) DeleteCapabilitySiocModuleDescriptor(ctx context.Context, moid string) ApiDeleteCapabilitySiocModuleDescriptorRequest {
 	return ApiDeleteCapabilitySiocModuleDescriptorRequest{
@@ -7626,9 +8280,9 @@ func (r ApiDeleteCapabilitySiocModuleManufacturingDefRequest) Execute() (*http.R
 /*
 DeleteCapabilitySiocModuleManufacturingDef Delete a 'capability.SiocModuleManufacturingDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteCapabilitySiocModuleManufacturingDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteCapabilitySiocModuleManufacturingDefRequest
 */
 func (a *CapabilityApiService) DeleteCapabilitySiocModuleManufacturingDef(ctx context.Context, moid string) ApiDeleteCapabilitySiocModuleManufacturingDefRequest {
 	return ApiDeleteCapabilitySiocModuleManufacturingDefRequest{
@@ -7763,9 +8417,9 @@ func (r ApiDeleteCapabilitySwitchCapabilityRequest) Execute() (*http.Response, e
 /*
 DeleteCapabilitySwitchCapability Delete a 'capability.SwitchCapability' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteCapabilitySwitchCapabilityRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteCapabilitySwitchCapabilityRequest
 */
 func (a *CapabilityApiService) DeleteCapabilitySwitchCapability(ctx context.Context, moid string) ApiDeleteCapabilitySwitchCapabilityRequest {
 	return ApiDeleteCapabilitySwitchCapabilityRequest{
@@ -7900,9 +8554,9 @@ func (r ApiDeleteCapabilitySwitchDescriptorRequest) Execute() (*http.Response, e
 /*
 DeleteCapabilitySwitchDescriptor Delete a 'capability.SwitchDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteCapabilitySwitchDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteCapabilitySwitchDescriptorRequest
 */
 func (a *CapabilityApiService) DeleteCapabilitySwitchDescriptor(ctx context.Context, moid string) ApiDeleteCapabilitySwitchDescriptorRequest {
 	return ApiDeleteCapabilitySwitchDescriptorRequest{
@@ -8037,9 +8691,9 @@ func (r ApiDeleteCapabilitySwitchManufacturingDefRequest) Execute() (*http.Respo
 /*
 DeleteCapabilitySwitchManufacturingDef Delete a 'capability.SwitchManufacturingDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteCapabilitySwitchManufacturingDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteCapabilitySwitchManufacturingDefRequest
 */
 func (a *CapabilityApiService) DeleteCapabilitySwitchManufacturingDef(ctx context.Context, moid string) ApiDeleteCapabilitySwitchManufacturingDefRequest {
 	return ApiDeleteCapabilitySwitchManufacturingDefRequest{
@@ -8161,6 +8815,410 @@ func (a *CapabilityApiService) DeleteCapabilitySwitchManufacturingDefExecute(r A
 	return localVarHTTPResponse, nil
 }
 
+type ApiGetCapabilityActionsMetaDataByMoidRequest struct {
+	ctx        context.Context
+	ApiService *CapabilityApiService
+	moid       string
+}
+
+func (r ApiGetCapabilityActionsMetaDataByMoidRequest) Execute() (*CapabilityActionsMetaData, *http.Response, error) {
+	return r.ApiService.GetCapabilityActionsMetaDataByMoidExecute(r)
+}
+
+/*
+GetCapabilityActionsMetaDataByMoid Read a 'capability.ActionsMetaData' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCapabilityActionsMetaDataByMoidRequest
+*/
+func (a *CapabilityApiService) GetCapabilityActionsMetaDataByMoid(ctx context.Context, moid string) ApiGetCapabilityActionsMetaDataByMoidRequest {
+	return ApiGetCapabilityActionsMetaDataByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//
+//	@return CapabilityActionsMetaData
+func (a *CapabilityApiService) GetCapabilityActionsMetaDataByMoidExecute(r ApiGetCapabilityActionsMetaDataByMoidRequest) (*CapabilityActionsMetaData, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CapabilityActionsMetaData
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilityActionsMetaDataByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/capability/ActionsMetaData/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetCapabilityActionsMetaDataListRequest struct {
+	ctx         context.Context
+	ApiService  *CapabilityApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetCapabilityActionsMetaDataListRequest) Filter(filter string) ApiGetCapabilityActionsMetaDataListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetCapabilityActionsMetaDataListRequest) Orderby(orderby string) ApiGetCapabilityActionsMetaDataListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetCapabilityActionsMetaDataListRequest) Top(top int32) ApiGetCapabilityActionsMetaDataListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetCapabilityActionsMetaDataListRequest) Skip(skip int32) ApiGetCapabilityActionsMetaDataListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetCapabilityActionsMetaDataListRequest) Select_(select_ string) ApiGetCapabilityActionsMetaDataListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetCapabilityActionsMetaDataListRequest) Expand(expand string) ApiGetCapabilityActionsMetaDataListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetCapabilityActionsMetaDataListRequest) Apply(apply string) ApiGetCapabilityActionsMetaDataListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetCapabilityActionsMetaDataListRequest) Count(count bool) ApiGetCapabilityActionsMetaDataListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetCapabilityActionsMetaDataListRequest) Inlinecount(inlinecount string) ApiGetCapabilityActionsMetaDataListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetCapabilityActionsMetaDataListRequest) At(at string) ApiGetCapabilityActionsMetaDataListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetCapabilityActionsMetaDataListRequest) Tags(tags string) ApiGetCapabilityActionsMetaDataListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetCapabilityActionsMetaDataListRequest) Execute() (*CapabilityActionsMetaDataResponse, *http.Response, error) {
+	return r.ApiService.GetCapabilityActionsMetaDataListExecute(r)
+}
+
+/*
+GetCapabilityActionsMetaDataList Read a 'capability.ActionsMetaData' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCapabilityActionsMetaDataListRequest
+*/
+func (a *CapabilityApiService) GetCapabilityActionsMetaDataList(ctx context.Context) ApiGetCapabilityActionsMetaDataListRequest {
+	return ApiGetCapabilityActionsMetaDataListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return CapabilityActionsMetaDataResponse
+func (a *CapabilityApiService) GetCapabilityActionsMetaDataListExecute(r ApiGetCapabilityActionsMetaDataListRequest) (*CapabilityActionsMetaDataResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CapabilityActionsMetaDataResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilityActionsMetaDataList")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/capability/ActionsMetaData"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetCapabilityAdapterDeprecatedDefByMoidRequest struct {
 	ctx        context.Context
 	ApiService *CapabilityApiService
@@ -8174,9 +9232,9 @@ func (r ApiGetCapabilityAdapterDeprecatedDefByMoidRequest) Execute() (*Capabilit
 /*
 GetCapabilityAdapterDeprecatedDefByMoid Read a 'capability.AdapterDeprecatedDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCapabilityAdapterDeprecatedDefByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCapabilityAdapterDeprecatedDefByMoidRequest
 */
 func (a *CapabilityApiService) GetCapabilityAdapterDeprecatedDefByMoid(ctx context.Context, moid string) ApiGetCapabilityAdapterDeprecatedDefByMoidRequest {
 	return ApiGetCapabilityAdapterDeprecatedDefByMoidRequest{
@@ -8187,7 +9245,8 @@ func (a *CapabilityApiService) GetCapabilityAdapterDeprecatedDefByMoid(ctx conte
 }
 
 // Execute executes the request
-//  @return CapabilityAdapterDeprecatedDef
+//
+//	@return CapabilityAdapterDeprecatedDef
 func (a *CapabilityApiService) GetCapabilityAdapterDeprecatedDefByMoidExecute(r ApiGetCapabilityAdapterDeprecatedDefByMoidRequest) (*CapabilityAdapterDeprecatedDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8398,8 +9457,8 @@ func (r ApiGetCapabilityAdapterDeprecatedDefListRequest) Execute() (*CapabilityA
 /*
 GetCapabilityAdapterDeprecatedDefList Read a 'capability.AdapterDeprecatedDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCapabilityAdapterDeprecatedDefListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCapabilityAdapterDeprecatedDefListRequest
 */
 func (a *CapabilityApiService) GetCapabilityAdapterDeprecatedDefList(ctx context.Context) ApiGetCapabilityAdapterDeprecatedDefListRequest {
 	return ApiGetCapabilityAdapterDeprecatedDefListRequest{
@@ -8409,7 +9468,8 @@ func (a *CapabilityApiService) GetCapabilityAdapterDeprecatedDefList(ctx context
 }
 
 // Execute executes the request
-//  @return CapabilityAdapterDeprecatedDefResponse
+//
+//	@return CapabilityAdapterDeprecatedDefResponse
 func (a *CapabilityApiService) GetCapabilityAdapterDeprecatedDefListExecute(r ApiGetCapabilityAdapterDeprecatedDefListRequest) (*CapabilityAdapterDeprecatedDefResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8576,9 +9636,9 @@ func (r ApiGetCapabilityAdapterUnitDescriptorByMoidRequest) Execute() (*Capabili
 /*
 GetCapabilityAdapterUnitDescriptorByMoid Read a 'capability.AdapterUnitDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCapabilityAdapterUnitDescriptorByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCapabilityAdapterUnitDescriptorByMoidRequest
 */
 func (a *CapabilityApiService) GetCapabilityAdapterUnitDescriptorByMoid(ctx context.Context, moid string) ApiGetCapabilityAdapterUnitDescriptorByMoidRequest {
 	return ApiGetCapabilityAdapterUnitDescriptorByMoidRequest{
@@ -8589,7 +9649,8 @@ func (a *CapabilityApiService) GetCapabilityAdapterUnitDescriptorByMoid(ctx cont
 }
 
 // Execute executes the request
-//  @return CapabilityAdapterUnitDescriptor
+//
+//	@return CapabilityAdapterUnitDescriptor
 func (a *CapabilityApiService) GetCapabilityAdapterUnitDescriptorByMoidExecute(r ApiGetCapabilityAdapterUnitDescriptorByMoidRequest) (*CapabilityAdapterUnitDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8800,8 +9861,8 @@ func (r ApiGetCapabilityAdapterUnitDescriptorListRequest) Execute() (*Capability
 /*
 GetCapabilityAdapterUnitDescriptorList Read a 'capability.AdapterUnitDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCapabilityAdapterUnitDescriptorListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCapabilityAdapterUnitDescriptorListRequest
 */
 func (a *CapabilityApiService) GetCapabilityAdapterUnitDescriptorList(ctx context.Context) ApiGetCapabilityAdapterUnitDescriptorListRequest {
 	return ApiGetCapabilityAdapterUnitDescriptorListRequest{
@@ -8811,7 +9872,8 @@ func (a *CapabilityApiService) GetCapabilityAdapterUnitDescriptorList(ctx contex
 }
 
 // Execute executes the request
-//  @return CapabilityAdapterUnitDescriptorResponse
+//
+//	@return CapabilityAdapterUnitDescriptorResponse
 func (a *CapabilityApiService) GetCapabilityAdapterUnitDescriptorListExecute(r ApiGetCapabilityAdapterUnitDescriptorListRequest) (*CapabilityAdapterUnitDescriptorResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8978,9 +10040,9 @@ func (r ApiGetCapabilityCatalogByMoidRequest) Execute() (*CapabilityCatalog, *ht
 /*
 GetCapabilityCatalogByMoid Read a 'capability.Catalog' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCapabilityCatalogByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCapabilityCatalogByMoidRequest
 */
 func (a *CapabilityApiService) GetCapabilityCatalogByMoid(ctx context.Context, moid string) ApiGetCapabilityCatalogByMoidRequest {
 	return ApiGetCapabilityCatalogByMoidRequest{
@@ -8991,7 +10053,8 @@ func (a *CapabilityApiService) GetCapabilityCatalogByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return CapabilityCatalog
+//
+//	@return CapabilityCatalog
 func (a *CapabilityApiService) GetCapabilityCatalogByMoidExecute(r ApiGetCapabilityCatalogByMoidRequest) (*CapabilityCatalog, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9202,8 +10265,8 @@ func (r ApiGetCapabilityCatalogListRequest) Execute() (*CapabilityCatalogRespons
 /*
 GetCapabilityCatalogList Read a 'capability.Catalog' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCapabilityCatalogListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCapabilityCatalogListRequest
 */
 func (a *CapabilityApiService) GetCapabilityCatalogList(ctx context.Context) ApiGetCapabilityCatalogListRequest {
 	return ApiGetCapabilityCatalogListRequest{
@@ -9213,7 +10276,8 @@ func (a *CapabilityApiService) GetCapabilityCatalogList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return CapabilityCatalogResponse
+//
+//	@return CapabilityCatalogResponse
 func (a *CapabilityApiService) GetCapabilityCatalogListExecute(r ApiGetCapabilityCatalogListRequest) (*CapabilityCatalogResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9380,9 +10444,9 @@ func (r ApiGetCapabilityChassisDescriptorByMoidRequest) Execute() (*CapabilityCh
 /*
 GetCapabilityChassisDescriptorByMoid Read a 'capability.ChassisDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCapabilityChassisDescriptorByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCapabilityChassisDescriptorByMoidRequest
 */
 func (a *CapabilityApiService) GetCapabilityChassisDescriptorByMoid(ctx context.Context, moid string) ApiGetCapabilityChassisDescriptorByMoidRequest {
 	return ApiGetCapabilityChassisDescriptorByMoidRequest{
@@ -9393,7 +10457,8 @@ func (a *CapabilityApiService) GetCapabilityChassisDescriptorByMoid(ctx context.
 }
 
 // Execute executes the request
-//  @return CapabilityChassisDescriptor
+//
+//	@return CapabilityChassisDescriptor
 func (a *CapabilityApiService) GetCapabilityChassisDescriptorByMoidExecute(r ApiGetCapabilityChassisDescriptorByMoidRequest) (*CapabilityChassisDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9604,8 +10669,8 @@ func (r ApiGetCapabilityChassisDescriptorListRequest) Execute() (*CapabilityChas
 /*
 GetCapabilityChassisDescriptorList Read a 'capability.ChassisDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCapabilityChassisDescriptorListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCapabilityChassisDescriptorListRequest
 */
 func (a *CapabilityApiService) GetCapabilityChassisDescriptorList(ctx context.Context) ApiGetCapabilityChassisDescriptorListRequest {
 	return ApiGetCapabilityChassisDescriptorListRequest{
@@ -9615,7 +10680,8 @@ func (a *CapabilityApiService) GetCapabilityChassisDescriptorList(ctx context.Co
 }
 
 // Execute executes the request
-//  @return CapabilityChassisDescriptorResponse
+//
+//	@return CapabilityChassisDescriptorResponse
 func (a *CapabilityApiService) GetCapabilityChassisDescriptorListExecute(r ApiGetCapabilityChassisDescriptorListRequest) (*CapabilityChassisDescriptorResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9782,9 +10848,9 @@ func (r ApiGetCapabilityChassisManufacturingDefByMoidRequest) Execute() (*Capabi
 /*
 GetCapabilityChassisManufacturingDefByMoid Read a 'capability.ChassisManufacturingDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCapabilityChassisManufacturingDefByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCapabilityChassisManufacturingDefByMoidRequest
 */
 func (a *CapabilityApiService) GetCapabilityChassisManufacturingDefByMoid(ctx context.Context, moid string) ApiGetCapabilityChassisManufacturingDefByMoidRequest {
 	return ApiGetCapabilityChassisManufacturingDefByMoidRequest{
@@ -9795,7 +10861,8 @@ func (a *CapabilityApiService) GetCapabilityChassisManufacturingDefByMoid(ctx co
 }
 
 // Execute executes the request
-//  @return CapabilityChassisManufacturingDef
+//
+//	@return CapabilityChassisManufacturingDef
 func (a *CapabilityApiService) GetCapabilityChassisManufacturingDefByMoidExecute(r ApiGetCapabilityChassisManufacturingDefByMoidRequest) (*CapabilityChassisManufacturingDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10006,8 +11073,8 @@ func (r ApiGetCapabilityChassisManufacturingDefListRequest) Execute() (*Capabili
 /*
 GetCapabilityChassisManufacturingDefList Read a 'capability.ChassisManufacturingDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCapabilityChassisManufacturingDefListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCapabilityChassisManufacturingDefListRequest
 */
 func (a *CapabilityApiService) GetCapabilityChassisManufacturingDefList(ctx context.Context) ApiGetCapabilityChassisManufacturingDefListRequest {
 	return ApiGetCapabilityChassisManufacturingDefListRequest{
@@ -10017,7 +11084,8 @@ func (a *CapabilityApiService) GetCapabilityChassisManufacturingDefList(ctx cont
 }
 
 // Execute executes the request
-//  @return CapabilityChassisManufacturingDefResponse
+//
+//	@return CapabilityChassisManufacturingDefResponse
 func (a *CapabilityApiService) GetCapabilityChassisManufacturingDefListExecute(r ApiGetCapabilityChassisManufacturingDefListRequest) (*CapabilityChassisManufacturingDefResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10184,9 +11252,9 @@ func (r ApiGetCapabilityCimcFirmwareDescriptorByMoidRequest) Execute() (*Capabil
 /*
 GetCapabilityCimcFirmwareDescriptorByMoid Read a 'capability.CimcFirmwareDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCapabilityCimcFirmwareDescriptorByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCapabilityCimcFirmwareDescriptorByMoidRequest
 */
 func (a *CapabilityApiService) GetCapabilityCimcFirmwareDescriptorByMoid(ctx context.Context, moid string) ApiGetCapabilityCimcFirmwareDescriptorByMoidRequest {
 	return ApiGetCapabilityCimcFirmwareDescriptorByMoidRequest{
@@ -10197,7 +11265,8 @@ func (a *CapabilityApiService) GetCapabilityCimcFirmwareDescriptorByMoid(ctx con
 }
 
 // Execute executes the request
-//  @return CapabilityCimcFirmwareDescriptor
+//
+//	@return CapabilityCimcFirmwareDescriptor
 func (a *CapabilityApiService) GetCapabilityCimcFirmwareDescriptorByMoidExecute(r ApiGetCapabilityCimcFirmwareDescriptorByMoidRequest) (*CapabilityCimcFirmwareDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10408,8 +11477,8 @@ func (r ApiGetCapabilityCimcFirmwareDescriptorListRequest) Execute() (*Capabilit
 /*
 GetCapabilityCimcFirmwareDescriptorList Read a 'capability.CimcFirmwareDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCapabilityCimcFirmwareDescriptorListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCapabilityCimcFirmwareDescriptorListRequest
 */
 func (a *CapabilityApiService) GetCapabilityCimcFirmwareDescriptorList(ctx context.Context) ApiGetCapabilityCimcFirmwareDescriptorListRequest {
 	return ApiGetCapabilityCimcFirmwareDescriptorListRequest{
@@ -10419,7 +11488,8 @@ func (a *CapabilityApiService) GetCapabilityCimcFirmwareDescriptorList(ctx conte
 }
 
 // Execute executes the request
-//  @return CapabilityCimcFirmwareDescriptorResponse
+//
+//	@return CapabilityCimcFirmwareDescriptorResponse
 func (a *CapabilityApiService) GetCapabilityCimcFirmwareDescriptorListExecute(r ApiGetCapabilityCimcFirmwareDescriptorListRequest) (*CapabilityCimcFirmwareDescriptorResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10586,9 +11656,9 @@ func (r ApiGetCapabilityEquipmentPhysicalDefByMoidRequest) Execute() (*Capabilit
 /*
 GetCapabilityEquipmentPhysicalDefByMoid Read a 'capability.EquipmentPhysicalDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCapabilityEquipmentPhysicalDefByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCapabilityEquipmentPhysicalDefByMoidRequest
 */
 func (a *CapabilityApiService) GetCapabilityEquipmentPhysicalDefByMoid(ctx context.Context, moid string) ApiGetCapabilityEquipmentPhysicalDefByMoidRequest {
 	return ApiGetCapabilityEquipmentPhysicalDefByMoidRequest{
@@ -10599,7 +11669,8 @@ func (a *CapabilityApiService) GetCapabilityEquipmentPhysicalDefByMoid(ctx conte
 }
 
 // Execute executes the request
-//  @return CapabilityEquipmentPhysicalDef
+//
+//	@return CapabilityEquipmentPhysicalDef
 func (a *CapabilityApiService) GetCapabilityEquipmentPhysicalDefByMoidExecute(r ApiGetCapabilityEquipmentPhysicalDefByMoidRequest) (*CapabilityEquipmentPhysicalDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10810,8 +11881,8 @@ func (r ApiGetCapabilityEquipmentPhysicalDefListRequest) Execute() (*CapabilityE
 /*
 GetCapabilityEquipmentPhysicalDefList Read a 'capability.EquipmentPhysicalDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCapabilityEquipmentPhysicalDefListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCapabilityEquipmentPhysicalDefListRequest
 */
 func (a *CapabilityApiService) GetCapabilityEquipmentPhysicalDefList(ctx context.Context) ApiGetCapabilityEquipmentPhysicalDefListRequest {
 	return ApiGetCapabilityEquipmentPhysicalDefListRequest{
@@ -10821,7 +11892,8 @@ func (a *CapabilityApiService) GetCapabilityEquipmentPhysicalDefList(ctx context
 }
 
 // Execute executes the request
-//  @return CapabilityEquipmentPhysicalDefResponse
+//
+//	@return CapabilityEquipmentPhysicalDefResponse
 func (a *CapabilityApiService) GetCapabilityEquipmentPhysicalDefListExecute(r ApiGetCapabilityEquipmentPhysicalDefListRequest) (*CapabilityEquipmentPhysicalDefResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10988,9 +12060,9 @@ func (r ApiGetCapabilityEquipmentSlotArrayByMoidRequest) Execute() (*CapabilityE
 /*
 GetCapabilityEquipmentSlotArrayByMoid Read a 'capability.EquipmentSlotArray' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCapabilityEquipmentSlotArrayByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCapabilityEquipmentSlotArrayByMoidRequest
 */
 func (a *CapabilityApiService) GetCapabilityEquipmentSlotArrayByMoid(ctx context.Context, moid string) ApiGetCapabilityEquipmentSlotArrayByMoidRequest {
 	return ApiGetCapabilityEquipmentSlotArrayByMoidRequest{
@@ -11001,7 +12073,8 @@ func (a *CapabilityApiService) GetCapabilityEquipmentSlotArrayByMoid(ctx context
 }
 
 // Execute executes the request
-//  @return CapabilityEquipmentSlotArray
+//
+//	@return CapabilityEquipmentSlotArray
 func (a *CapabilityApiService) GetCapabilityEquipmentSlotArrayByMoidExecute(r ApiGetCapabilityEquipmentSlotArrayByMoidRequest) (*CapabilityEquipmentSlotArray, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -11212,8 +12285,8 @@ func (r ApiGetCapabilityEquipmentSlotArrayListRequest) Execute() (*CapabilityEqu
 /*
 GetCapabilityEquipmentSlotArrayList Read a 'capability.EquipmentSlotArray' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCapabilityEquipmentSlotArrayListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCapabilityEquipmentSlotArrayListRequest
 */
 func (a *CapabilityApiService) GetCapabilityEquipmentSlotArrayList(ctx context.Context) ApiGetCapabilityEquipmentSlotArrayListRequest {
 	return ApiGetCapabilityEquipmentSlotArrayListRequest{
@@ -11223,7 +12296,8 @@ func (a *CapabilityApiService) GetCapabilityEquipmentSlotArrayList(ctx context.C
 }
 
 // Execute executes the request
-//  @return CapabilityEquipmentSlotArrayResponse
+//
+//	@return CapabilityEquipmentSlotArrayResponse
 func (a *CapabilityApiService) GetCapabilityEquipmentSlotArrayListExecute(r ApiGetCapabilityEquipmentSlotArrayListRequest) (*CapabilityEquipmentSlotArrayResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -11390,9 +12464,9 @@ func (r ApiGetCapabilityFanModuleDescriptorByMoidRequest) Execute() (*Capability
 /*
 GetCapabilityFanModuleDescriptorByMoid Read a 'capability.FanModuleDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCapabilityFanModuleDescriptorByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCapabilityFanModuleDescriptorByMoidRequest
 */
 func (a *CapabilityApiService) GetCapabilityFanModuleDescriptorByMoid(ctx context.Context, moid string) ApiGetCapabilityFanModuleDescriptorByMoidRequest {
 	return ApiGetCapabilityFanModuleDescriptorByMoidRequest{
@@ -11403,7 +12477,8 @@ func (a *CapabilityApiService) GetCapabilityFanModuleDescriptorByMoid(ctx contex
 }
 
 // Execute executes the request
-//  @return CapabilityFanModuleDescriptor
+//
+//	@return CapabilityFanModuleDescriptor
 func (a *CapabilityApiService) GetCapabilityFanModuleDescriptorByMoidExecute(r ApiGetCapabilityFanModuleDescriptorByMoidRequest) (*CapabilityFanModuleDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -11614,8 +12689,8 @@ func (r ApiGetCapabilityFanModuleDescriptorListRequest) Execute() (*CapabilityFa
 /*
 GetCapabilityFanModuleDescriptorList Read a 'capability.FanModuleDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCapabilityFanModuleDescriptorListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCapabilityFanModuleDescriptorListRequest
 */
 func (a *CapabilityApiService) GetCapabilityFanModuleDescriptorList(ctx context.Context) ApiGetCapabilityFanModuleDescriptorListRequest {
 	return ApiGetCapabilityFanModuleDescriptorListRequest{
@@ -11625,7 +12700,8 @@ func (a *CapabilityApiService) GetCapabilityFanModuleDescriptorList(ctx context.
 }
 
 // Execute executes the request
-//  @return CapabilityFanModuleDescriptorResponse
+//
+//	@return CapabilityFanModuleDescriptorResponse
 func (a *CapabilityApiService) GetCapabilityFanModuleDescriptorListExecute(r ApiGetCapabilityFanModuleDescriptorListRequest) (*CapabilityFanModuleDescriptorResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -11792,9 +12868,9 @@ func (r ApiGetCapabilityFanModuleManufacturingDefByMoidRequest) Execute() (*Capa
 /*
 GetCapabilityFanModuleManufacturingDefByMoid Read a 'capability.FanModuleManufacturingDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCapabilityFanModuleManufacturingDefByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCapabilityFanModuleManufacturingDefByMoidRequest
 */
 func (a *CapabilityApiService) GetCapabilityFanModuleManufacturingDefByMoid(ctx context.Context, moid string) ApiGetCapabilityFanModuleManufacturingDefByMoidRequest {
 	return ApiGetCapabilityFanModuleManufacturingDefByMoidRequest{
@@ -11805,7 +12881,8 @@ func (a *CapabilityApiService) GetCapabilityFanModuleManufacturingDefByMoid(ctx 
 }
 
 // Execute executes the request
-//  @return CapabilityFanModuleManufacturingDef
+//
+//	@return CapabilityFanModuleManufacturingDef
 func (a *CapabilityApiService) GetCapabilityFanModuleManufacturingDefByMoidExecute(r ApiGetCapabilityFanModuleManufacturingDefByMoidRequest) (*CapabilityFanModuleManufacturingDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12016,8 +13093,8 @@ func (r ApiGetCapabilityFanModuleManufacturingDefListRequest) Execute() (*Capabi
 /*
 GetCapabilityFanModuleManufacturingDefList Read a 'capability.FanModuleManufacturingDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCapabilityFanModuleManufacturingDefListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCapabilityFanModuleManufacturingDefListRequest
 */
 func (a *CapabilityApiService) GetCapabilityFanModuleManufacturingDefList(ctx context.Context) ApiGetCapabilityFanModuleManufacturingDefListRequest {
 	return ApiGetCapabilityFanModuleManufacturingDefListRequest{
@@ -12027,7 +13104,8 @@ func (a *CapabilityApiService) GetCapabilityFanModuleManufacturingDefList(ctx co
 }
 
 // Execute executes the request
-//  @return CapabilityFanModuleManufacturingDefResponse
+//
+//	@return CapabilityFanModuleManufacturingDefResponse
 func (a *CapabilityApiService) GetCapabilityFanModuleManufacturingDefListExecute(r ApiGetCapabilityFanModuleManufacturingDefListRequest) (*CapabilityFanModuleManufacturingDefResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12181,6 +13259,410 @@ func (a *CapabilityApiService) GetCapabilityFanModuleManufacturingDefListExecute
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetCapabilityFexCapabilityDefByMoidRequest struct {
+	ctx        context.Context
+	ApiService *CapabilityApiService
+	moid       string
+}
+
+func (r ApiGetCapabilityFexCapabilityDefByMoidRequest) Execute() (*CapabilityFexCapabilityDef, *http.Response, error) {
+	return r.ApiService.GetCapabilityFexCapabilityDefByMoidExecute(r)
+}
+
+/*
+GetCapabilityFexCapabilityDefByMoid Read a 'capability.FexCapabilityDef' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCapabilityFexCapabilityDefByMoidRequest
+*/
+func (a *CapabilityApiService) GetCapabilityFexCapabilityDefByMoid(ctx context.Context, moid string) ApiGetCapabilityFexCapabilityDefByMoidRequest {
+	return ApiGetCapabilityFexCapabilityDefByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//
+//	@return CapabilityFexCapabilityDef
+func (a *CapabilityApiService) GetCapabilityFexCapabilityDefByMoidExecute(r ApiGetCapabilityFexCapabilityDefByMoidRequest) (*CapabilityFexCapabilityDef, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CapabilityFexCapabilityDef
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilityFexCapabilityDefByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/capability/FexCapabilityDefs/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetCapabilityFexCapabilityDefListRequest struct {
+	ctx         context.Context
+	ApiService  *CapabilityApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetCapabilityFexCapabilityDefListRequest) Filter(filter string) ApiGetCapabilityFexCapabilityDefListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetCapabilityFexCapabilityDefListRequest) Orderby(orderby string) ApiGetCapabilityFexCapabilityDefListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetCapabilityFexCapabilityDefListRequest) Top(top int32) ApiGetCapabilityFexCapabilityDefListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetCapabilityFexCapabilityDefListRequest) Skip(skip int32) ApiGetCapabilityFexCapabilityDefListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetCapabilityFexCapabilityDefListRequest) Select_(select_ string) ApiGetCapabilityFexCapabilityDefListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetCapabilityFexCapabilityDefListRequest) Expand(expand string) ApiGetCapabilityFexCapabilityDefListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetCapabilityFexCapabilityDefListRequest) Apply(apply string) ApiGetCapabilityFexCapabilityDefListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetCapabilityFexCapabilityDefListRequest) Count(count bool) ApiGetCapabilityFexCapabilityDefListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetCapabilityFexCapabilityDefListRequest) Inlinecount(inlinecount string) ApiGetCapabilityFexCapabilityDefListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetCapabilityFexCapabilityDefListRequest) At(at string) ApiGetCapabilityFexCapabilityDefListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetCapabilityFexCapabilityDefListRequest) Tags(tags string) ApiGetCapabilityFexCapabilityDefListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetCapabilityFexCapabilityDefListRequest) Execute() (*CapabilityFexCapabilityDefResponse, *http.Response, error) {
+	return r.ApiService.GetCapabilityFexCapabilityDefListExecute(r)
+}
+
+/*
+GetCapabilityFexCapabilityDefList Read a 'capability.FexCapabilityDef' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCapabilityFexCapabilityDefListRequest
+*/
+func (a *CapabilityApiService) GetCapabilityFexCapabilityDefList(ctx context.Context) ApiGetCapabilityFexCapabilityDefListRequest {
+	return ApiGetCapabilityFexCapabilityDefListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return CapabilityFexCapabilityDefResponse
+func (a *CapabilityApiService) GetCapabilityFexCapabilityDefListExecute(r ApiGetCapabilityFexCapabilityDefListRequest) (*CapabilityFexCapabilityDefResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CapabilityFexCapabilityDefResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilityFexCapabilityDefList")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/capability/FexCapabilityDefs"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetCapabilityFexDescriptorByMoidRequest struct {
 	ctx        context.Context
 	ApiService *CapabilityApiService
@@ -12194,9 +13676,9 @@ func (r ApiGetCapabilityFexDescriptorByMoidRequest) Execute() (*CapabilityFexDes
 /*
 GetCapabilityFexDescriptorByMoid Read a 'capability.FexDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCapabilityFexDescriptorByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCapabilityFexDescriptorByMoidRequest
 */
 func (a *CapabilityApiService) GetCapabilityFexDescriptorByMoid(ctx context.Context, moid string) ApiGetCapabilityFexDescriptorByMoidRequest {
 	return ApiGetCapabilityFexDescriptorByMoidRequest{
@@ -12207,7 +13689,8 @@ func (a *CapabilityApiService) GetCapabilityFexDescriptorByMoid(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return CapabilityFexDescriptor
+//
+//	@return CapabilityFexDescriptor
 func (a *CapabilityApiService) GetCapabilityFexDescriptorByMoidExecute(r ApiGetCapabilityFexDescriptorByMoidRequest) (*CapabilityFexDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12418,8 +13901,8 @@ func (r ApiGetCapabilityFexDescriptorListRequest) Execute() (*CapabilityFexDescr
 /*
 GetCapabilityFexDescriptorList Read a 'capability.FexDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCapabilityFexDescriptorListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCapabilityFexDescriptorListRequest
 */
 func (a *CapabilityApiService) GetCapabilityFexDescriptorList(ctx context.Context) ApiGetCapabilityFexDescriptorListRequest {
 	return ApiGetCapabilityFexDescriptorListRequest{
@@ -12429,7 +13912,8 @@ func (a *CapabilityApiService) GetCapabilityFexDescriptorList(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return CapabilityFexDescriptorResponse
+//
+//	@return CapabilityFexDescriptorResponse
 func (a *CapabilityApiService) GetCapabilityFexDescriptorListExecute(r ApiGetCapabilityFexDescriptorListRequest) (*CapabilityFexDescriptorResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12596,9 +14080,9 @@ func (r ApiGetCapabilityFexManufacturingDefByMoidRequest) Execute() (*Capability
 /*
 GetCapabilityFexManufacturingDefByMoid Read a 'capability.FexManufacturingDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCapabilityFexManufacturingDefByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCapabilityFexManufacturingDefByMoidRequest
 */
 func (a *CapabilityApiService) GetCapabilityFexManufacturingDefByMoid(ctx context.Context, moid string) ApiGetCapabilityFexManufacturingDefByMoidRequest {
 	return ApiGetCapabilityFexManufacturingDefByMoidRequest{
@@ -12609,7 +14093,8 @@ func (a *CapabilityApiService) GetCapabilityFexManufacturingDefByMoid(ctx contex
 }
 
 // Execute executes the request
-//  @return CapabilityFexManufacturingDef
+//
+//	@return CapabilityFexManufacturingDef
 func (a *CapabilityApiService) GetCapabilityFexManufacturingDefByMoidExecute(r ApiGetCapabilityFexManufacturingDefByMoidRequest) (*CapabilityFexManufacturingDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12820,8 +14305,8 @@ func (r ApiGetCapabilityFexManufacturingDefListRequest) Execute() (*CapabilityFe
 /*
 GetCapabilityFexManufacturingDefList Read a 'capability.FexManufacturingDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCapabilityFexManufacturingDefListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCapabilityFexManufacturingDefListRequest
 */
 func (a *CapabilityApiService) GetCapabilityFexManufacturingDefList(ctx context.Context) ApiGetCapabilityFexManufacturingDefListRequest {
 	return ApiGetCapabilityFexManufacturingDefListRequest{
@@ -12831,7 +14316,8 @@ func (a *CapabilityApiService) GetCapabilityFexManufacturingDefList(ctx context.
 }
 
 // Execute executes the request
-//  @return CapabilityFexManufacturingDefResponse
+//
+//	@return CapabilityFexManufacturingDefResponse
 func (a *CapabilityApiService) GetCapabilityFexManufacturingDefListExecute(r ApiGetCapabilityFexManufacturingDefListRequest) (*CapabilityFexManufacturingDefResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12998,9 +14484,9 @@ func (r ApiGetCapabilityIoCardCapabilityDefByMoidRequest) Execute() (*Capability
 /*
 GetCapabilityIoCardCapabilityDefByMoid Read a 'capability.IoCardCapabilityDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCapabilityIoCardCapabilityDefByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCapabilityIoCardCapabilityDefByMoidRequest
 */
 func (a *CapabilityApiService) GetCapabilityIoCardCapabilityDefByMoid(ctx context.Context, moid string) ApiGetCapabilityIoCardCapabilityDefByMoidRequest {
 	return ApiGetCapabilityIoCardCapabilityDefByMoidRequest{
@@ -13011,7 +14497,8 @@ func (a *CapabilityApiService) GetCapabilityIoCardCapabilityDefByMoid(ctx contex
 }
 
 // Execute executes the request
-//  @return CapabilityIoCardCapabilityDef
+//
+//	@return CapabilityIoCardCapabilityDef
 func (a *CapabilityApiService) GetCapabilityIoCardCapabilityDefByMoidExecute(r ApiGetCapabilityIoCardCapabilityDefByMoidRequest) (*CapabilityIoCardCapabilityDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13222,8 +14709,8 @@ func (r ApiGetCapabilityIoCardCapabilityDefListRequest) Execute() (*CapabilityIo
 /*
 GetCapabilityIoCardCapabilityDefList Read a 'capability.IoCardCapabilityDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCapabilityIoCardCapabilityDefListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCapabilityIoCardCapabilityDefListRequest
 */
 func (a *CapabilityApiService) GetCapabilityIoCardCapabilityDefList(ctx context.Context) ApiGetCapabilityIoCardCapabilityDefListRequest {
 	return ApiGetCapabilityIoCardCapabilityDefListRequest{
@@ -13233,7 +14720,8 @@ func (a *CapabilityApiService) GetCapabilityIoCardCapabilityDefList(ctx context.
 }
 
 // Execute executes the request
-//  @return CapabilityIoCardCapabilityDefResponse
+//
+//	@return CapabilityIoCardCapabilityDefResponse
 func (a *CapabilityApiService) GetCapabilityIoCardCapabilityDefListExecute(r ApiGetCapabilityIoCardCapabilityDefListRequest) (*CapabilityIoCardCapabilityDefResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13400,9 +14888,9 @@ func (r ApiGetCapabilityIoCardDescriptorByMoidRequest) Execute() (*CapabilityIoC
 /*
 GetCapabilityIoCardDescriptorByMoid Read a 'capability.IoCardDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCapabilityIoCardDescriptorByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCapabilityIoCardDescriptorByMoidRequest
 */
 func (a *CapabilityApiService) GetCapabilityIoCardDescriptorByMoid(ctx context.Context, moid string) ApiGetCapabilityIoCardDescriptorByMoidRequest {
 	return ApiGetCapabilityIoCardDescriptorByMoidRequest{
@@ -13413,7 +14901,8 @@ func (a *CapabilityApiService) GetCapabilityIoCardDescriptorByMoid(ctx context.C
 }
 
 // Execute executes the request
-//  @return CapabilityIoCardDescriptor
+//
+//	@return CapabilityIoCardDescriptor
 func (a *CapabilityApiService) GetCapabilityIoCardDescriptorByMoidExecute(r ApiGetCapabilityIoCardDescriptorByMoidRequest) (*CapabilityIoCardDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13624,8 +15113,8 @@ func (r ApiGetCapabilityIoCardDescriptorListRequest) Execute() (*CapabilityIoCar
 /*
 GetCapabilityIoCardDescriptorList Read a 'capability.IoCardDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCapabilityIoCardDescriptorListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCapabilityIoCardDescriptorListRequest
 */
 func (a *CapabilityApiService) GetCapabilityIoCardDescriptorList(ctx context.Context) ApiGetCapabilityIoCardDescriptorListRequest {
 	return ApiGetCapabilityIoCardDescriptorListRequest{
@@ -13635,7 +15124,8 @@ func (a *CapabilityApiService) GetCapabilityIoCardDescriptorList(ctx context.Con
 }
 
 // Execute executes the request
-//  @return CapabilityIoCardDescriptorResponse
+//
+//	@return CapabilityIoCardDescriptorResponse
 func (a *CapabilityApiService) GetCapabilityIoCardDescriptorListExecute(r ApiGetCapabilityIoCardDescriptorListRequest) (*CapabilityIoCardDescriptorResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13802,9 +15292,9 @@ func (r ApiGetCapabilityIoCardManufacturingDefByMoidRequest) Execute() (*Capabil
 /*
 GetCapabilityIoCardManufacturingDefByMoid Read a 'capability.IoCardManufacturingDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCapabilityIoCardManufacturingDefByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCapabilityIoCardManufacturingDefByMoidRequest
 */
 func (a *CapabilityApiService) GetCapabilityIoCardManufacturingDefByMoid(ctx context.Context, moid string) ApiGetCapabilityIoCardManufacturingDefByMoidRequest {
 	return ApiGetCapabilityIoCardManufacturingDefByMoidRequest{
@@ -13815,7 +15305,8 @@ func (a *CapabilityApiService) GetCapabilityIoCardManufacturingDefByMoid(ctx con
 }
 
 // Execute executes the request
-//  @return CapabilityIoCardManufacturingDef
+//
+//	@return CapabilityIoCardManufacturingDef
 func (a *CapabilityApiService) GetCapabilityIoCardManufacturingDefByMoidExecute(r ApiGetCapabilityIoCardManufacturingDefByMoidRequest) (*CapabilityIoCardManufacturingDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14026,8 +15517,8 @@ func (r ApiGetCapabilityIoCardManufacturingDefListRequest) Execute() (*Capabilit
 /*
 GetCapabilityIoCardManufacturingDefList Read a 'capability.IoCardManufacturingDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCapabilityIoCardManufacturingDefListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCapabilityIoCardManufacturingDefListRequest
 */
 func (a *CapabilityApiService) GetCapabilityIoCardManufacturingDefList(ctx context.Context) ApiGetCapabilityIoCardManufacturingDefListRequest {
 	return ApiGetCapabilityIoCardManufacturingDefListRequest{
@@ -14037,7 +15528,8 @@ func (a *CapabilityApiService) GetCapabilityIoCardManufacturingDefList(ctx conte
 }
 
 // Execute executes the request
-//  @return CapabilityIoCardManufacturingDefResponse
+//
+//	@return CapabilityIoCardManufacturingDefResponse
 func (a *CapabilityApiService) GetCapabilityIoCardManufacturingDefListExecute(r ApiGetCapabilityIoCardManufacturingDefListRequest) (*CapabilityIoCardManufacturingDefResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14204,9 +15696,9 @@ func (r ApiGetCapabilityPortGroupAggregationDefByMoidRequest) Execute() (*Capabi
 /*
 GetCapabilityPortGroupAggregationDefByMoid Read a 'capability.PortGroupAggregationDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCapabilityPortGroupAggregationDefByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCapabilityPortGroupAggregationDefByMoidRequest
 */
 func (a *CapabilityApiService) GetCapabilityPortGroupAggregationDefByMoid(ctx context.Context, moid string) ApiGetCapabilityPortGroupAggregationDefByMoidRequest {
 	return ApiGetCapabilityPortGroupAggregationDefByMoidRequest{
@@ -14217,7 +15709,8 @@ func (a *CapabilityApiService) GetCapabilityPortGroupAggregationDefByMoid(ctx co
 }
 
 // Execute executes the request
-//  @return CapabilityPortGroupAggregationDef
+//
+//	@return CapabilityPortGroupAggregationDef
 func (a *CapabilityApiService) GetCapabilityPortGroupAggregationDefByMoidExecute(r ApiGetCapabilityPortGroupAggregationDefByMoidRequest) (*CapabilityPortGroupAggregationDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14428,8 +15921,8 @@ func (r ApiGetCapabilityPortGroupAggregationDefListRequest) Execute() (*Capabili
 /*
 GetCapabilityPortGroupAggregationDefList Read a 'capability.PortGroupAggregationDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCapabilityPortGroupAggregationDefListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCapabilityPortGroupAggregationDefListRequest
 */
 func (a *CapabilityApiService) GetCapabilityPortGroupAggregationDefList(ctx context.Context) ApiGetCapabilityPortGroupAggregationDefListRequest {
 	return ApiGetCapabilityPortGroupAggregationDefListRequest{
@@ -14439,7 +15932,8 @@ func (a *CapabilityApiService) GetCapabilityPortGroupAggregationDefList(ctx cont
 }
 
 // Execute executes the request
-//  @return CapabilityPortGroupAggregationDefResponse
+//
+//	@return CapabilityPortGroupAggregationDefResponse
 func (a *CapabilityApiService) GetCapabilityPortGroupAggregationDefListExecute(r ApiGetCapabilityPortGroupAggregationDefListRequest) (*CapabilityPortGroupAggregationDefResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14606,9 +16100,9 @@ func (r ApiGetCapabilityPsuDescriptorByMoidRequest) Execute() (*CapabilityPsuDes
 /*
 GetCapabilityPsuDescriptorByMoid Read a 'capability.PsuDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCapabilityPsuDescriptorByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCapabilityPsuDescriptorByMoidRequest
 */
 func (a *CapabilityApiService) GetCapabilityPsuDescriptorByMoid(ctx context.Context, moid string) ApiGetCapabilityPsuDescriptorByMoidRequest {
 	return ApiGetCapabilityPsuDescriptorByMoidRequest{
@@ -14619,7 +16113,8 @@ func (a *CapabilityApiService) GetCapabilityPsuDescriptorByMoid(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return CapabilityPsuDescriptor
+//
+//	@return CapabilityPsuDescriptor
 func (a *CapabilityApiService) GetCapabilityPsuDescriptorByMoidExecute(r ApiGetCapabilityPsuDescriptorByMoidRequest) (*CapabilityPsuDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14830,8 +16325,8 @@ func (r ApiGetCapabilityPsuDescriptorListRequest) Execute() (*CapabilityPsuDescr
 /*
 GetCapabilityPsuDescriptorList Read a 'capability.PsuDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCapabilityPsuDescriptorListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCapabilityPsuDescriptorListRequest
 */
 func (a *CapabilityApiService) GetCapabilityPsuDescriptorList(ctx context.Context) ApiGetCapabilityPsuDescriptorListRequest {
 	return ApiGetCapabilityPsuDescriptorListRequest{
@@ -14841,7 +16336,8 @@ func (a *CapabilityApiService) GetCapabilityPsuDescriptorList(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return CapabilityPsuDescriptorResponse
+//
+//	@return CapabilityPsuDescriptorResponse
 func (a *CapabilityApiService) GetCapabilityPsuDescriptorListExecute(r ApiGetCapabilityPsuDescriptorListRequest) (*CapabilityPsuDescriptorResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15008,9 +16504,9 @@ func (r ApiGetCapabilityPsuManufacturingDefByMoidRequest) Execute() (*Capability
 /*
 GetCapabilityPsuManufacturingDefByMoid Read a 'capability.PsuManufacturingDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCapabilityPsuManufacturingDefByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCapabilityPsuManufacturingDefByMoidRequest
 */
 func (a *CapabilityApiService) GetCapabilityPsuManufacturingDefByMoid(ctx context.Context, moid string) ApiGetCapabilityPsuManufacturingDefByMoidRequest {
 	return ApiGetCapabilityPsuManufacturingDefByMoidRequest{
@@ -15021,7 +16517,8 @@ func (a *CapabilityApiService) GetCapabilityPsuManufacturingDefByMoid(ctx contex
 }
 
 // Execute executes the request
-//  @return CapabilityPsuManufacturingDef
+//
+//	@return CapabilityPsuManufacturingDef
 func (a *CapabilityApiService) GetCapabilityPsuManufacturingDefByMoidExecute(r ApiGetCapabilityPsuManufacturingDefByMoidRequest) (*CapabilityPsuManufacturingDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15232,8 +16729,8 @@ func (r ApiGetCapabilityPsuManufacturingDefListRequest) Execute() (*CapabilityPs
 /*
 GetCapabilityPsuManufacturingDefList Read a 'capability.PsuManufacturingDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCapabilityPsuManufacturingDefListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCapabilityPsuManufacturingDefListRequest
 */
 func (a *CapabilityApiService) GetCapabilityPsuManufacturingDefList(ctx context.Context) ApiGetCapabilityPsuManufacturingDefListRequest {
 	return ApiGetCapabilityPsuManufacturingDefListRequest{
@@ -15243,7 +16740,8 @@ func (a *CapabilityApiService) GetCapabilityPsuManufacturingDefList(ctx context.
 }
 
 // Execute executes the request
-//  @return CapabilityPsuManufacturingDefResponse
+//
+//	@return CapabilityPsuManufacturingDefResponse
 func (a *CapabilityApiService) GetCapabilityPsuManufacturingDefListExecute(r ApiGetCapabilityPsuManufacturingDefListRequest) (*CapabilityPsuManufacturingDefResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15410,9 +16908,9 @@ func (r ApiGetCapabilityServerDescriptorByMoidRequest) Execute() (*CapabilitySer
 /*
 GetCapabilityServerDescriptorByMoid Read a 'capability.ServerDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCapabilityServerDescriptorByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCapabilityServerDescriptorByMoidRequest
 */
 func (a *CapabilityApiService) GetCapabilityServerDescriptorByMoid(ctx context.Context, moid string) ApiGetCapabilityServerDescriptorByMoidRequest {
 	return ApiGetCapabilityServerDescriptorByMoidRequest{
@@ -15423,7 +16921,8 @@ func (a *CapabilityApiService) GetCapabilityServerDescriptorByMoid(ctx context.C
 }
 
 // Execute executes the request
-//  @return CapabilityServerDescriptor
+//
+//	@return CapabilityServerDescriptor
 func (a *CapabilityApiService) GetCapabilityServerDescriptorByMoidExecute(r ApiGetCapabilityServerDescriptorByMoidRequest) (*CapabilityServerDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15634,8 +17133,8 @@ func (r ApiGetCapabilityServerDescriptorListRequest) Execute() (*CapabilityServe
 /*
 GetCapabilityServerDescriptorList Read a 'capability.ServerDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCapabilityServerDescriptorListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCapabilityServerDescriptorListRequest
 */
 func (a *CapabilityApiService) GetCapabilityServerDescriptorList(ctx context.Context) ApiGetCapabilityServerDescriptorListRequest {
 	return ApiGetCapabilityServerDescriptorListRequest{
@@ -15645,7 +17144,8 @@ func (a *CapabilityApiService) GetCapabilityServerDescriptorList(ctx context.Con
 }
 
 // Execute executes the request
-//  @return CapabilityServerDescriptorResponse
+//
+//	@return CapabilityServerDescriptorResponse
 func (a *CapabilityApiService) GetCapabilityServerDescriptorListExecute(r ApiGetCapabilityServerDescriptorListRequest) (*CapabilityServerDescriptorResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15812,9 +17312,9 @@ func (r ApiGetCapabilityServerModelsCapabilityDefByMoidRequest) Execute() (*Capa
 /*
 GetCapabilityServerModelsCapabilityDefByMoid Read a 'capability.ServerModelsCapabilityDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCapabilityServerModelsCapabilityDefByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCapabilityServerModelsCapabilityDefByMoidRequest
 */
 func (a *CapabilityApiService) GetCapabilityServerModelsCapabilityDefByMoid(ctx context.Context, moid string) ApiGetCapabilityServerModelsCapabilityDefByMoidRequest {
 	return ApiGetCapabilityServerModelsCapabilityDefByMoidRequest{
@@ -15825,7 +17325,8 @@ func (a *CapabilityApiService) GetCapabilityServerModelsCapabilityDefByMoid(ctx 
 }
 
 // Execute executes the request
-//  @return CapabilityServerModelsCapabilityDef
+//
+//	@return CapabilityServerModelsCapabilityDef
 func (a *CapabilityApiService) GetCapabilityServerModelsCapabilityDefByMoidExecute(r ApiGetCapabilityServerModelsCapabilityDefByMoidRequest) (*CapabilityServerModelsCapabilityDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16036,8 +17537,8 @@ func (r ApiGetCapabilityServerModelsCapabilityDefListRequest) Execute() (*Capabi
 /*
 GetCapabilityServerModelsCapabilityDefList Read a 'capability.ServerModelsCapabilityDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCapabilityServerModelsCapabilityDefListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCapabilityServerModelsCapabilityDefListRequest
 */
 func (a *CapabilityApiService) GetCapabilityServerModelsCapabilityDefList(ctx context.Context) ApiGetCapabilityServerModelsCapabilityDefListRequest {
 	return ApiGetCapabilityServerModelsCapabilityDefListRequest{
@@ -16047,7 +17548,8 @@ func (a *CapabilityApiService) GetCapabilityServerModelsCapabilityDefList(ctx co
 }
 
 // Execute executes the request
-//  @return CapabilityServerModelsCapabilityDefResponse
+//
+//	@return CapabilityServerModelsCapabilityDefResponse
 func (a *CapabilityApiService) GetCapabilityServerModelsCapabilityDefListExecute(r ApiGetCapabilityServerModelsCapabilityDefListRequest) (*CapabilityServerModelsCapabilityDefResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16214,9 +17716,9 @@ func (r ApiGetCapabilityServerSchemaDescriptorByMoidRequest) Execute() (*Capabil
 /*
 GetCapabilityServerSchemaDescriptorByMoid Read a 'capability.ServerSchemaDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCapabilityServerSchemaDescriptorByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCapabilityServerSchemaDescriptorByMoidRequest
 */
 func (a *CapabilityApiService) GetCapabilityServerSchemaDescriptorByMoid(ctx context.Context, moid string) ApiGetCapabilityServerSchemaDescriptorByMoidRequest {
 	return ApiGetCapabilityServerSchemaDescriptorByMoidRequest{
@@ -16227,7 +17729,8 @@ func (a *CapabilityApiService) GetCapabilityServerSchemaDescriptorByMoid(ctx con
 }
 
 // Execute executes the request
-//  @return CapabilityServerSchemaDescriptor
+//
+//	@return CapabilityServerSchemaDescriptor
 func (a *CapabilityApiService) GetCapabilityServerSchemaDescriptorByMoidExecute(r ApiGetCapabilityServerSchemaDescriptorByMoidRequest) (*CapabilityServerSchemaDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16438,8 +17941,8 @@ func (r ApiGetCapabilityServerSchemaDescriptorListRequest) Execute() (*Capabilit
 /*
 GetCapabilityServerSchemaDescriptorList Read a 'capability.ServerSchemaDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCapabilityServerSchemaDescriptorListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCapabilityServerSchemaDescriptorListRequest
 */
 func (a *CapabilityApiService) GetCapabilityServerSchemaDescriptorList(ctx context.Context) ApiGetCapabilityServerSchemaDescriptorListRequest {
 	return ApiGetCapabilityServerSchemaDescriptorListRequest{
@@ -16449,7 +17952,8 @@ func (a *CapabilityApiService) GetCapabilityServerSchemaDescriptorList(ctx conte
 }
 
 // Execute executes the request
-//  @return CapabilityServerSchemaDescriptorResponse
+//
+//	@return CapabilityServerSchemaDescriptorResponse
 func (a *CapabilityApiService) GetCapabilityServerSchemaDescriptorListExecute(r ApiGetCapabilityServerSchemaDescriptorListRequest) (*CapabilityServerSchemaDescriptorResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16616,9 +18120,9 @@ func (r ApiGetCapabilitySiocModuleCapabilityDefByMoidRequest) Execute() (*Capabi
 /*
 GetCapabilitySiocModuleCapabilityDefByMoid Read a 'capability.SiocModuleCapabilityDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCapabilitySiocModuleCapabilityDefByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCapabilitySiocModuleCapabilityDefByMoidRequest
 */
 func (a *CapabilityApiService) GetCapabilitySiocModuleCapabilityDefByMoid(ctx context.Context, moid string) ApiGetCapabilitySiocModuleCapabilityDefByMoidRequest {
 	return ApiGetCapabilitySiocModuleCapabilityDefByMoidRequest{
@@ -16629,7 +18133,8 @@ func (a *CapabilityApiService) GetCapabilitySiocModuleCapabilityDefByMoid(ctx co
 }
 
 // Execute executes the request
-//  @return CapabilitySiocModuleCapabilityDef
+//
+//	@return CapabilitySiocModuleCapabilityDef
 func (a *CapabilityApiService) GetCapabilitySiocModuleCapabilityDefByMoidExecute(r ApiGetCapabilitySiocModuleCapabilityDefByMoidRequest) (*CapabilitySiocModuleCapabilityDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16840,8 +18345,8 @@ func (r ApiGetCapabilitySiocModuleCapabilityDefListRequest) Execute() (*Capabili
 /*
 GetCapabilitySiocModuleCapabilityDefList Read a 'capability.SiocModuleCapabilityDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCapabilitySiocModuleCapabilityDefListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCapabilitySiocModuleCapabilityDefListRequest
 */
 func (a *CapabilityApiService) GetCapabilitySiocModuleCapabilityDefList(ctx context.Context) ApiGetCapabilitySiocModuleCapabilityDefListRequest {
 	return ApiGetCapabilitySiocModuleCapabilityDefListRequest{
@@ -16851,7 +18356,8 @@ func (a *CapabilityApiService) GetCapabilitySiocModuleCapabilityDefList(ctx cont
 }
 
 // Execute executes the request
-//  @return CapabilitySiocModuleCapabilityDefResponse
+//
+//	@return CapabilitySiocModuleCapabilityDefResponse
 func (a *CapabilityApiService) GetCapabilitySiocModuleCapabilityDefListExecute(r ApiGetCapabilitySiocModuleCapabilityDefListRequest) (*CapabilitySiocModuleCapabilityDefResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17018,9 +18524,9 @@ func (r ApiGetCapabilitySiocModuleDescriptorByMoidRequest) Execute() (*Capabilit
 /*
 GetCapabilitySiocModuleDescriptorByMoid Read a 'capability.SiocModuleDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCapabilitySiocModuleDescriptorByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCapabilitySiocModuleDescriptorByMoidRequest
 */
 func (a *CapabilityApiService) GetCapabilitySiocModuleDescriptorByMoid(ctx context.Context, moid string) ApiGetCapabilitySiocModuleDescriptorByMoidRequest {
 	return ApiGetCapabilitySiocModuleDescriptorByMoidRequest{
@@ -17031,7 +18537,8 @@ func (a *CapabilityApiService) GetCapabilitySiocModuleDescriptorByMoid(ctx conte
 }
 
 // Execute executes the request
-//  @return CapabilitySiocModuleDescriptor
+//
+//	@return CapabilitySiocModuleDescriptor
 func (a *CapabilityApiService) GetCapabilitySiocModuleDescriptorByMoidExecute(r ApiGetCapabilitySiocModuleDescriptorByMoidRequest) (*CapabilitySiocModuleDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17242,8 +18749,8 @@ func (r ApiGetCapabilitySiocModuleDescriptorListRequest) Execute() (*CapabilityS
 /*
 GetCapabilitySiocModuleDescriptorList Read a 'capability.SiocModuleDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCapabilitySiocModuleDescriptorListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCapabilitySiocModuleDescriptorListRequest
 */
 func (a *CapabilityApiService) GetCapabilitySiocModuleDescriptorList(ctx context.Context) ApiGetCapabilitySiocModuleDescriptorListRequest {
 	return ApiGetCapabilitySiocModuleDescriptorListRequest{
@@ -17253,7 +18760,8 @@ func (a *CapabilityApiService) GetCapabilitySiocModuleDescriptorList(ctx context
 }
 
 // Execute executes the request
-//  @return CapabilitySiocModuleDescriptorResponse
+//
+//	@return CapabilitySiocModuleDescriptorResponse
 func (a *CapabilityApiService) GetCapabilitySiocModuleDescriptorListExecute(r ApiGetCapabilitySiocModuleDescriptorListRequest) (*CapabilitySiocModuleDescriptorResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17420,9 +18928,9 @@ func (r ApiGetCapabilitySiocModuleManufacturingDefByMoidRequest) Execute() (*Cap
 /*
 GetCapabilitySiocModuleManufacturingDefByMoid Read a 'capability.SiocModuleManufacturingDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCapabilitySiocModuleManufacturingDefByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCapabilitySiocModuleManufacturingDefByMoidRequest
 */
 func (a *CapabilityApiService) GetCapabilitySiocModuleManufacturingDefByMoid(ctx context.Context, moid string) ApiGetCapabilitySiocModuleManufacturingDefByMoidRequest {
 	return ApiGetCapabilitySiocModuleManufacturingDefByMoidRequest{
@@ -17433,7 +18941,8 @@ func (a *CapabilityApiService) GetCapabilitySiocModuleManufacturingDefByMoid(ctx
 }
 
 // Execute executes the request
-//  @return CapabilitySiocModuleManufacturingDef
+//
+//	@return CapabilitySiocModuleManufacturingDef
 func (a *CapabilityApiService) GetCapabilitySiocModuleManufacturingDefByMoidExecute(r ApiGetCapabilitySiocModuleManufacturingDefByMoidRequest) (*CapabilitySiocModuleManufacturingDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17644,8 +19153,8 @@ func (r ApiGetCapabilitySiocModuleManufacturingDefListRequest) Execute() (*Capab
 /*
 GetCapabilitySiocModuleManufacturingDefList Read a 'capability.SiocModuleManufacturingDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCapabilitySiocModuleManufacturingDefListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCapabilitySiocModuleManufacturingDefListRequest
 */
 func (a *CapabilityApiService) GetCapabilitySiocModuleManufacturingDefList(ctx context.Context) ApiGetCapabilitySiocModuleManufacturingDefListRequest {
 	return ApiGetCapabilitySiocModuleManufacturingDefListRequest{
@@ -17655,7 +19164,8 @@ func (a *CapabilityApiService) GetCapabilitySiocModuleManufacturingDefList(ctx c
 }
 
 // Execute executes the request
-//  @return CapabilitySiocModuleManufacturingDefResponse
+//
+//	@return CapabilitySiocModuleManufacturingDefResponse
 func (a *CapabilityApiService) GetCapabilitySiocModuleManufacturingDefListExecute(r ApiGetCapabilitySiocModuleManufacturingDefListRequest) (*CapabilitySiocModuleManufacturingDefResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17822,9 +19332,9 @@ func (r ApiGetCapabilitySwitchCapabilityByMoidRequest) Execute() (*CapabilitySwi
 /*
 GetCapabilitySwitchCapabilityByMoid Read a 'capability.SwitchCapability' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCapabilitySwitchCapabilityByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCapabilitySwitchCapabilityByMoidRequest
 */
 func (a *CapabilityApiService) GetCapabilitySwitchCapabilityByMoid(ctx context.Context, moid string) ApiGetCapabilitySwitchCapabilityByMoidRequest {
 	return ApiGetCapabilitySwitchCapabilityByMoidRequest{
@@ -17835,7 +19345,8 @@ func (a *CapabilityApiService) GetCapabilitySwitchCapabilityByMoid(ctx context.C
 }
 
 // Execute executes the request
-//  @return CapabilitySwitchCapability
+//
+//	@return CapabilitySwitchCapability
 func (a *CapabilityApiService) GetCapabilitySwitchCapabilityByMoidExecute(r ApiGetCapabilitySwitchCapabilityByMoidRequest) (*CapabilitySwitchCapability, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18046,8 +19557,8 @@ func (r ApiGetCapabilitySwitchCapabilityListRequest) Execute() (*CapabilitySwitc
 /*
 GetCapabilitySwitchCapabilityList Read a 'capability.SwitchCapability' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCapabilitySwitchCapabilityListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCapabilitySwitchCapabilityListRequest
 */
 func (a *CapabilityApiService) GetCapabilitySwitchCapabilityList(ctx context.Context) ApiGetCapabilitySwitchCapabilityListRequest {
 	return ApiGetCapabilitySwitchCapabilityListRequest{
@@ -18057,7 +19568,8 @@ func (a *CapabilityApiService) GetCapabilitySwitchCapabilityList(ctx context.Con
 }
 
 // Execute executes the request
-//  @return CapabilitySwitchCapabilityResponse
+//
+//	@return CapabilitySwitchCapabilityResponse
 func (a *CapabilityApiService) GetCapabilitySwitchCapabilityListExecute(r ApiGetCapabilitySwitchCapabilityListRequest) (*CapabilitySwitchCapabilityResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18224,9 +19736,9 @@ func (r ApiGetCapabilitySwitchDescriptorByMoidRequest) Execute() (*CapabilitySwi
 /*
 GetCapabilitySwitchDescriptorByMoid Read a 'capability.SwitchDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCapabilitySwitchDescriptorByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCapabilitySwitchDescriptorByMoidRequest
 */
 func (a *CapabilityApiService) GetCapabilitySwitchDescriptorByMoid(ctx context.Context, moid string) ApiGetCapabilitySwitchDescriptorByMoidRequest {
 	return ApiGetCapabilitySwitchDescriptorByMoidRequest{
@@ -18237,7 +19749,8 @@ func (a *CapabilityApiService) GetCapabilitySwitchDescriptorByMoid(ctx context.C
 }
 
 // Execute executes the request
-//  @return CapabilitySwitchDescriptor
+//
+//	@return CapabilitySwitchDescriptor
 func (a *CapabilityApiService) GetCapabilitySwitchDescriptorByMoidExecute(r ApiGetCapabilitySwitchDescriptorByMoidRequest) (*CapabilitySwitchDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18448,8 +19961,8 @@ func (r ApiGetCapabilitySwitchDescriptorListRequest) Execute() (*CapabilitySwitc
 /*
 GetCapabilitySwitchDescriptorList Read a 'capability.SwitchDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCapabilitySwitchDescriptorListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCapabilitySwitchDescriptorListRequest
 */
 func (a *CapabilityApiService) GetCapabilitySwitchDescriptorList(ctx context.Context) ApiGetCapabilitySwitchDescriptorListRequest {
 	return ApiGetCapabilitySwitchDescriptorListRequest{
@@ -18459,7 +19972,8 @@ func (a *CapabilityApiService) GetCapabilitySwitchDescriptorList(ctx context.Con
 }
 
 // Execute executes the request
-//  @return CapabilitySwitchDescriptorResponse
+//
+//	@return CapabilitySwitchDescriptorResponse
 func (a *CapabilityApiService) GetCapabilitySwitchDescriptorListExecute(r ApiGetCapabilitySwitchDescriptorListRequest) (*CapabilitySwitchDescriptorResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18626,9 +20140,9 @@ func (r ApiGetCapabilitySwitchManufacturingDefByMoidRequest) Execute() (*Capabil
 /*
 GetCapabilitySwitchManufacturingDefByMoid Read a 'capability.SwitchManufacturingDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCapabilitySwitchManufacturingDefByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCapabilitySwitchManufacturingDefByMoidRequest
 */
 func (a *CapabilityApiService) GetCapabilitySwitchManufacturingDefByMoid(ctx context.Context, moid string) ApiGetCapabilitySwitchManufacturingDefByMoidRequest {
 	return ApiGetCapabilitySwitchManufacturingDefByMoidRequest{
@@ -18639,7 +20153,8 @@ func (a *CapabilityApiService) GetCapabilitySwitchManufacturingDefByMoid(ctx con
 }
 
 // Execute executes the request
-//  @return CapabilitySwitchManufacturingDef
+//
+//	@return CapabilitySwitchManufacturingDef
 func (a *CapabilityApiService) GetCapabilitySwitchManufacturingDefByMoidExecute(r ApiGetCapabilitySwitchManufacturingDefByMoidRequest) (*CapabilitySwitchManufacturingDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18850,8 +20365,8 @@ func (r ApiGetCapabilitySwitchManufacturingDefListRequest) Execute() (*Capabilit
 /*
 GetCapabilitySwitchManufacturingDefList Read a 'capability.SwitchManufacturingDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCapabilitySwitchManufacturingDefListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCapabilitySwitchManufacturingDefListRequest
 */
 func (a *CapabilityApiService) GetCapabilitySwitchManufacturingDefList(ctx context.Context) ApiGetCapabilitySwitchManufacturingDefListRequest {
 	return ApiGetCapabilitySwitchManufacturingDefListRequest{
@@ -18861,7 +20376,8 @@ func (a *CapabilityApiService) GetCapabilitySwitchManufacturingDefList(ctx conte
 }
 
 // Execute executes the request
-//  @return CapabilitySwitchManufacturingDefResponse
+//
+//	@return CapabilitySwitchManufacturingDefResponse
 func (a *CapabilityApiService) GetCapabilitySwitchManufacturingDefListExecute(r ApiGetCapabilitySwitchManufacturingDefListRequest) (*CapabilitySwitchManufacturingDefResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -19015,6 +20531,177 @@ func (a *CapabilityApiService) GetCapabilitySwitchManufacturingDefListExecute(r 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiPatchCapabilityActionsMetaDataRequest struct {
+	ctx                       context.Context
+	ApiService                *CapabilityApiService
+	moid                      string
+	capabilityActionsMetaData *CapabilityActionsMetaData
+	ifMatch                   *string
+}
+
+// The &#39;capability.ActionsMetaData&#39; resource to update.
+func (r ApiPatchCapabilityActionsMetaDataRequest) CapabilityActionsMetaData(capabilityActionsMetaData CapabilityActionsMetaData) ApiPatchCapabilityActionsMetaDataRequest {
+	r.capabilityActionsMetaData = &capabilityActionsMetaData
+	return r
+}
+
+// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
+func (r ApiPatchCapabilityActionsMetaDataRequest) IfMatch(ifMatch string) ApiPatchCapabilityActionsMetaDataRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiPatchCapabilityActionsMetaDataRequest) Execute() (*CapabilityActionsMetaData, *http.Response, error) {
+	return r.ApiService.PatchCapabilityActionsMetaDataExecute(r)
+}
+
+/*
+PatchCapabilityActionsMetaData Update a 'capability.ActionsMetaData' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchCapabilityActionsMetaDataRequest
+*/
+func (a *CapabilityApiService) PatchCapabilityActionsMetaData(ctx context.Context, moid string) ApiPatchCapabilityActionsMetaDataRequest {
+	return ApiPatchCapabilityActionsMetaDataRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//
+//	@return CapabilityActionsMetaData
+func (a *CapabilityApiService) PatchCapabilityActionsMetaDataExecute(r ApiPatchCapabilityActionsMetaDataRequest) (*CapabilityActionsMetaData, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CapabilityActionsMetaData
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.PatchCapabilityActionsMetaData")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/capability/ActionsMetaData/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.capabilityActionsMetaData == nil {
+		return localVarReturnValue, nil, reportError("capabilityActionsMetaData is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.capabilityActionsMetaData
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiPatchCapabilityAdapterDeprecatedDefRequest struct {
 	ctx                            context.Context
 	ApiService                     *CapabilityApiService
@@ -19042,9 +20729,9 @@ func (r ApiPatchCapabilityAdapterDeprecatedDefRequest) Execute() (*CapabilityAda
 /*
 PatchCapabilityAdapterDeprecatedDef Update a 'capability.AdapterDeprecatedDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchCapabilityAdapterDeprecatedDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchCapabilityAdapterDeprecatedDefRequest
 */
 func (a *CapabilityApiService) PatchCapabilityAdapterDeprecatedDef(ctx context.Context, moid string) ApiPatchCapabilityAdapterDeprecatedDefRequest {
 	return ApiPatchCapabilityAdapterDeprecatedDefRequest{
@@ -19055,7 +20742,8 @@ func (a *CapabilityApiService) PatchCapabilityAdapterDeprecatedDef(ctx context.C
 }
 
 // Execute executes the request
-//  @return CapabilityAdapterDeprecatedDef
+//
+//	@return CapabilityAdapterDeprecatedDef
 func (a *CapabilityApiService) PatchCapabilityAdapterDeprecatedDefExecute(r ApiPatchCapabilityAdapterDeprecatedDefRequest) (*CapabilityAdapterDeprecatedDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -19212,9 +20900,9 @@ func (r ApiPatchCapabilityAdapterUnitDescriptorRequest) Execute() (*CapabilityAd
 /*
 PatchCapabilityAdapterUnitDescriptor Update a 'capability.AdapterUnitDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchCapabilityAdapterUnitDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchCapabilityAdapterUnitDescriptorRequest
 */
 func (a *CapabilityApiService) PatchCapabilityAdapterUnitDescriptor(ctx context.Context, moid string) ApiPatchCapabilityAdapterUnitDescriptorRequest {
 	return ApiPatchCapabilityAdapterUnitDescriptorRequest{
@@ -19225,7 +20913,8 @@ func (a *CapabilityApiService) PatchCapabilityAdapterUnitDescriptor(ctx context.
 }
 
 // Execute executes the request
-//  @return CapabilityAdapterUnitDescriptor
+//
+//	@return CapabilityAdapterUnitDescriptor
 func (a *CapabilityApiService) PatchCapabilityAdapterUnitDescriptorExecute(r ApiPatchCapabilityAdapterUnitDescriptorRequest) (*CapabilityAdapterUnitDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -19382,9 +21071,9 @@ func (r ApiPatchCapabilityCatalogRequest) Execute() (*CapabilityCatalog, *http.R
 /*
 PatchCapabilityCatalog Update a 'capability.Catalog' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchCapabilityCatalogRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchCapabilityCatalogRequest
 */
 func (a *CapabilityApiService) PatchCapabilityCatalog(ctx context.Context, moid string) ApiPatchCapabilityCatalogRequest {
 	return ApiPatchCapabilityCatalogRequest{
@@ -19395,7 +21084,8 @@ func (a *CapabilityApiService) PatchCapabilityCatalog(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return CapabilityCatalog
+//
+//	@return CapabilityCatalog
 func (a *CapabilityApiService) PatchCapabilityCatalogExecute(r ApiPatchCapabilityCatalogRequest) (*CapabilityCatalog, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -19552,9 +21242,9 @@ func (r ApiPatchCapabilityChassisDescriptorRequest) Execute() (*CapabilityChassi
 /*
 PatchCapabilityChassisDescriptor Update a 'capability.ChassisDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchCapabilityChassisDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchCapabilityChassisDescriptorRequest
 */
 func (a *CapabilityApiService) PatchCapabilityChassisDescriptor(ctx context.Context, moid string) ApiPatchCapabilityChassisDescriptorRequest {
 	return ApiPatchCapabilityChassisDescriptorRequest{
@@ -19565,7 +21255,8 @@ func (a *CapabilityApiService) PatchCapabilityChassisDescriptor(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return CapabilityChassisDescriptor
+//
+//	@return CapabilityChassisDescriptor
 func (a *CapabilityApiService) PatchCapabilityChassisDescriptorExecute(r ApiPatchCapabilityChassisDescriptorRequest) (*CapabilityChassisDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -19722,9 +21413,9 @@ func (r ApiPatchCapabilityChassisManufacturingDefRequest) Execute() (*Capability
 /*
 PatchCapabilityChassisManufacturingDef Update a 'capability.ChassisManufacturingDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchCapabilityChassisManufacturingDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchCapabilityChassisManufacturingDefRequest
 */
 func (a *CapabilityApiService) PatchCapabilityChassisManufacturingDef(ctx context.Context, moid string) ApiPatchCapabilityChassisManufacturingDefRequest {
 	return ApiPatchCapabilityChassisManufacturingDefRequest{
@@ -19735,7 +21426,8 @@ func (a *CapabilityApiService) PatchCapabilityChassisManufacturingDef(ctx contex
 }
 
 // Execute executes the request
-//  @return CapabilityChassisManufacturingDef
+//
+//	@return CapabilityChassisManufacturingDef
 func (a *CapabilityApiService) PatchCapabilityChassisManufacturingDefExecute(r ApiPatchCapabilityChassisManufacturingDefRequest) (*CapabilityChassisManufacturingDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -19892,9 +21584,9 @@ func (r ApiPatchCapabilityCimcFirmwareDescriptorRequest) Execute() (*CapabilityC
 /*
 PatchCapabilityCimcFirmwareDescriptor Update a 'capability.CimcFirmwareDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchCapabilityCimcFirmwareDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchCapabilityCimcFirmwareDescriptorRequest
 */
 func (a *CapabilityApiService) PatchCapabilityCimcFirmwareDescriptor(ctx context.Context, moid string) ApiPatchCapabilityCimcFirmwareDescriptorRequest {
 	return ApiPatchCapabilityCimcFirmwareDescriptorRequest{
@@ -19905,7 +21597,8 @@ func (a *CapabilityApiService) PatchCapabilityCimcFirmwareDescriptor(ctx context
 }
 
 // Execute executes the request
-//  @return CapabilityCimcFirmwareDescriptor
+//
+//	@return CapabilityCimcFirmwareDescriptor
 func (a *CapabilityApiService) PatchCapabilityCimcFirmwareDescriptorExecute(r ApiPatchCapabilityCimcFirmwareDescriptorRequest) (*CapabilityCimcFirmwareDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -20062,9 +21755,9 @@ func (r ApiPatchCapabilityEquipmentPhysicalDefRequest) Execute() (*CapabilityEqu
 /*
 PatchCapabilityEquipmentPhysicalDef Update a 'capability.EquipmentPhysicalDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchCapabilityEquipmentPhysicalDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchCapabilityEquipmentPhysicalDefRequest
 */
 func (a *CapabilityApiService) PatchCapabilityEquipmentPhysicalDef(ctx context.Context, moid string) ApiPatchCapabilityEquipmentPhysicalDefRequest {
 	return ApiPatchCapabilityEquipmentPhysicalDefRequest{
@@ -20075,7 +21768,8 @@ func (a *CapabilityApiService) PatchCapabilityEquipmentPhysicalDef(ctx context.C
 }
 
 // Execute executes the request
-//  @return CapabilityEquipmentPhysicalDef
+//
+//	@return CapabilityEquipmentPhysicalDef
 func (a *CapabilityApiService) PatchCapabilityEquipmentPhysicalDefExecute(r ApiPatchCapabilityEquipmentPhysicalDefRequest) (*CapabilityEquipmentPhysicalDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -20232,9 +21926,9 @@ func (r ApiPatchCapabilityEquipmentSlotArrayRequest) Execute() (*CapabilityEquip
 /*
 PatchCapabilityEquipmentSlotArray Update a 'capability.EquipmentSlotArray' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchCapabilityEquipmentSlotArrayRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchCapabilityEquipmentSlotArrayRequest
 */
 func (a *CapabilityApiService) PatchCapabilityEquipmentSlotArray(ctx context.Context, moid string) ApiPatchCapabilityEquipmentSlotArrayRequest {
 	return ApiPatchCapabilityEquipmentSlotArrayRequest{
@@ -20245,7 +21939,8 @@ func (a *CapabilityApiService) PatchCapabilityEquipmentSlotArray(ctx context.Con
 }
 
 // Execute executes the request
-//  @return CapabilityEquipmentSlotArray
+//
+//	@return CapabilityEquipmentSlotArray
 func (a *CapabilityApiService) PatchCapabilityEquipmentSlotArrayExecute(r ApiPatchCapabilityEquipmentSlotArrayRequest) (*CapabilityEquipmentSlotArray, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -20402,9 +22097,9 @@ func (r ApiPatchCapabilityFanModuleDescriptorRequest) Execute() (*CapabilityFanM
 /*
 PatchCapabilityFanModuleDescriptor Update a 'capability.FanModuleDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchCapabilityFanModuleDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchCapabilityFanModuleDescriptorRequest
 */
 func (a *CapabilityApiService) PatchCapabilityFanModuleDescriptor(ctx context.Context, moid string) ApiPatchCapabilityFanModuleDescriptorRequest {
 	return ApiPatchCapabilityFanModuleDescriptorRequest{
@@ -20415,7 +22110,8 @@ func (a *CapabilityApiService) PatchCapabilityFanModuleDescriptor(ctx context.Co
 }
 
 // Execute executes the request
-//  @return CapabilityFanModuleDescriptor
+//
+//	@return CapabilityFanModuleDescriptor
 func (a *CapabilityApiService) PatchCapabilityFanModuleDescriptorExecute(r ApiPatchCapabilityFanModuleDescriptorRequest) (*CapabilityFanModuleDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -20572,9 +22268,9 @@ func (r ApiPatchCapabilityFanModuleManufacturingDefRequest) Execute() (*Capabili
 /*
 PatchCapabilityFanModuleManufacturingDef Update a 'capability.FanModuleManufacturingDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchCapabilityFanModuleManufacturingDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchCapabilityFanModuleManufacturingDefRequest
 */
 func (a *CapabilityApiService) PatchCapabilityFanModuleManufacturingDef(ctx context.Context, moid string) ApiPatchCapabilityFanModuleManufacturingDefRequest {
 	return ApiPatchCapabilityFanModuleManufacturingDefRequest{
@@ -20585,7 +22281,8 @@ func (a *CapabilityApiService) PatchCapabilityFanModuleManufacturingDef(ctx cont
 }
 
 // Execute executes the request
-//  @return CapabilityFanModuleManufacturingDef
+//
+//	@return CapabilityFanModuleManufacturingDef
 func (a *CapabilityApiService) PatchCapabilityFanModuleManufacturingDefExecute(r ApiPatchCapabilityFanModuleManufacturingDefRequest) (*CapabilityFanModuleManufacturingDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -20715,6 +22412,177 @@ func (a *CapabilityApiService) PatchCapabilityFanModuleManufacturingDefExecute(r
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiPatchCapabilityFexCapabilityDefRequest struct {
+	ctx                        context.Context
+	ApiService                 *CapabilityApiService
+	moid                       string
+	capabilityFexCapabilityDef *CapabilityFexCapabilityDef
+	ifMatch                    *string
+}
+
+// The &#39;capability.FexCapabilityDef&#39; resource to update.
+func (r ApiPatchCapabilityFexCapabilityDefRequest) CapabilityFexCapabilityDef(capabilityFexCapabilityDef CapabilityFexCapabilityDef) ApiPatchCapabilityFexCapabilityDefRequest {
+	r.capabilityFexCapabilityDef = &capabilityFexCapabilityDef
+	return r
+}
+
+// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
+func (r ApiPatchCapabilityFexCapabilityDefRequest) IfMatch(ifMatch string) ApiPatchCapabilityFexCapabilityDefRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiPatchCapabilityFexCapabilityDefRequest) Execute() (*CapabilityFexCapabilityDef, *http.Response, error) {
+	return r.ApiService.PatchCapabilityFexCapabilityDefExecute(r)
+}
+
+/*
+PatchCapabilityFexCapabilityDef Update a 'capability.FexCapabilityDef' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchCapabilityFexCapabilityDefRequest
+*/
+func (a *CapabilityApiService) PatchCapabilityFexCapabilityDef(ctx context.Context, moid string) ApiPatchCapabilityFexCapabilityDefRequest {
+	return ApiPatchCapabilityFexCapabilityDefRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//
+//	@return CapabilityFexCapabilityDef
+func (a *CapabilityApiService) PatchCapabilityFexCapabilityDefExecute(r ApiPatchCapabilityFexCapabilityDefRequest) (*CapabilityFexCapabilityDef, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CapabilityFexCapabilityDef
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.PatchCapabilityFexCapabilityDef")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/capability/FexCapabilityDefs/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.capabilityFexCapabilityDef == nil {
+		return localVarReturnValue, nil, reportError("capabilityFexCapabilityDef is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.capabilityFexCapabilityDef
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiPatchCapabilityFexDescriptorRequest struct {
 	ctx                     context.Context
 	ApiService              *CapabilityApiService
@@ -20742,9 +22610,9 @@ func (r ApiPatchCapabilityFexDescriptorRequest) Execute() (*CapabilityFexDescrip
 /*
 PatchCapabilityFexDescriptor Update a 'capability.FexDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchCapabilityFexDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchCapabilityFexDescriptorRequest
 */
 func (a *CapabilityApiService) PatchCapabilityFexDescriptor(ctx context.Context, moid string) ApiPatchCapabilityFexDescriptorRequest {
 	return ApiPatchCapabilityFexDescriptorRequest{
@@ -20755,7 +22623,8 @@ func (a *CapabilityApiService) PatchCapabilityFexDescriptor(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return CapabilityFexDescriptor
+//
+//	@return CapabilityFexDescriptor
 func (a *CapabilityApiService) PatchCapabilityFexDescriptorExecute(r ApiPatchCapabilityFexDescriptorRequest) (*CapabilityFexDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -20912,9 +22781,9 @@ func (r ApiPatchCapabilityFexManufacturingDefRequest) Execute() (*CapabilityFexM
 /*
 PatchCapabilityFexManufacturingDef Update a 'capability.FexManufacturingDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchCapabilityFexManufacturingDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchCapabilityFexManufacturingDefRequest
 */
 func (a *CapabilityApiService) PatchCapabilityFexManufacturingDef(ctx context.Context, moid string) ApiPatchCapabilityFexManufacturingDefRequest {
 	return ApiPatchCapabilityFexManufacturingDefRequest{
@@ -20925,7 +22794,8 @@ func (a *CapabilityApiService) PatchCapabilityFexManufacturingDef(ctx context.Co
 }
 
 // Execute executes the request
-//  @return CapabilityFexManufacturingDef
+//
+//	@return CapabilityFexManufacturingDef
 func (a *CapabilityApiService) PatchCapabilityFexManufacturingDefExecute(r ApiPatchCapabilityFexManufacturingDefRequest) (*CapabilityFexManufacturingDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -21082,9 +22952,9 @@ func (r ApiPatchCapabilityIoCardCapabilityDefRequest) Execute() (*CapabilityIoCa
 /*
 PatchCapabilityIoCardCapabilityDef Update a 'capability.IoCardCapabilityDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchCapabilityIoCardCapabilityDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchCapabilityIoCardCapabilityDefRequest
 */
 func (a *CapabilityApiService) PatchCapabilityIoCardCapabilityDef(ctx context.Context, moid string) ApiPatchCapabilityIoCardCapabilityDefRequest {
 	return ApiPatchCapabilityIoCardCapabilityDefRequest{
@@ -21095,7 +22965,8 @@ func (a *CapabilityApiService) PatchCapabilityIoCardCapabilityDef(ctx context.Co
 }
 
 // Execute executes the request
-//  @return CapabilityIoCardCapabilityDef
+//
+//	@return CapabilityIoCardCapabilityDef
 func (a *CapabilityApiService) PatchCapabilityIoCardCapabilityDefExecute(r ApiPatchCapabilityIoCardCapabilityDefRequest) (*CapabilityIoCardCapabilityDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -21252,9 +23123,9 @@ func (r ApiPatchCapabilityIoCardDescriptorRequest) Execute() (*CapabilityIoCardD
 /*
 PatchCapabilityIoCardDescriptor Update a 'capability.IoCardDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchCapabilityIoCardDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchCapabilityIoCardDescriptorRequest
 */
 func (a *CapabilityApiService) PatchCapabilityIoCardDescriptor(ctx context.Context, moid string) ApiPatchCapabilityIoCardDescriptorRequest {
 	return ApiPatchCapabilityIoCardDescriptorRequest{
@@ -21265,7 +23136,8 @@ func (a *CapabilityApiService) PatchCapabilityIoCardDescriptor(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return CapabilityIoCardDescriptor
+//
+//	@return CapabilityIoCardDescriptor
 func (a *CapabilityApiService) PatchCapabilityIoCardDescriptorExecute(r ApiPatchCapabilityIoCardDescriptorRequest) (*CapabilityIoCardDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -21422,9 +23294,9 @@ func (r ApiPatchCapabilityIoCardManufacturingDefRequest) Execute() (*CapabilityI
 /*
 PatchCapabilityIoCardManufacturingDef Update a 'capability.IoCardManufacturingDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchCapabilityIoCardManufacturingDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchCapabilityIoCardManufacturingDefRequest
 */
 func (a *CapabilityApiService) PatchCapabilityIoCardManufacturingDef(ctx context.Context, moid string) ApiPatchCapabilityIoCardManufacturingDefRequest {
 	return ApiPatchCapabilityIoCardManufacturingDefRequest{
@@ -21435,7 +23307,8 @@ func (a *CapabilityApiService) PatchCapabilityIoCardManufacturingDef(ctx context
 }
 
 // Execute executes the request
-//  @return CapabilityIoCardManufacturingDef
+//
+//	@return CapabilityIoCardManufacturingDef
 func (a *CapabilityApiService) PatchCapabilityIoCardManufacturingDefExecute(r ApiPatchCapabilityIoCardManufacturingDefRequest) (*CapabilityIoCardManufacturingDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -21592,9 +23465,9 @@ func (r ApiPatchCapabilityPortGroupAggregationDefRequest) Execute() (*Capability
 /*
 PatchCapabilityPortGroupAggregationDef Update a 'capability.PortGroupAggregationDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchCapabilityPortGroupAggregationDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchCapabilityPortGroupAggregationDefRequest
 */
 func (a *CapabilityApiService) PatchCapabilityPortGroupAggregationDef(ctx context.Context, moid string) ApiPatchCapabilityPortGroupAggregationDefRequest {
 	return ApiPatchCapabilityPortGroupAggregationDefRequest{
@@ -21605,7 +23478,8 @@ func (a *CapabilityApiService) PatchCapabilityPortGroupAggregationDef(ctx contex
 }
 
 // Execute executes the request
-//  @return CapabilityPortGroupAggregationDef
+//
+//	@return CapabilityPortGroupAggregationDef
 func (a *CapabilityApiService) PatchCapabilityPortGroupAggregationDefExecute(r ApiPatchCapabilityPortGroupAggregationDefRequest) (*CapabilityPortGroupAggregationDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -21762,9 +23636,9 @@ func (r ApiPatchCapabilityPsuDescriptorRequest) Execute() (*CapabilityPsuDescrip
 /*
 PatchCapabilityPsuDescriptor Update a 'capability.PsuDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchCapabilityPsuDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchCapabilityPsuDescriptorRequest
 */
 func (a *CapabilityApiService) PatchCapabilityPsuDescriptor(ctx context.Context, moid string) ApiPatchCapabilityPsuDescriptorRequest {
 	return ApiPatchCapabilityPsuDescriptorRequest{
@@ -21775,7 +23649,8 @@ func (a *CapabilityApiService) PatchCapabilityPsuDescriptor(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return CapabilityPsuDescriptor
+//
+//	@return CapabilityPsuDescriptor
 func (a *CapabilityApiService) PatchCapabilityPsuDescriptorExecute(r ApiPatchCapabilityPsuDescriptorRequest) (*CapabilityPsuDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -21932,9 +23807,9 @@ func (r ApiPatchCapabilityPsuManufacturingDefRequest) Execute() (*CapabilityPsuM
 /*
 PatchCapabilityPsuManufacturingDef Update a 'capability.PsuManufacturingDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchCapabilityPsuManufacturingDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchCapabilityPsuManufacturingDefRequest
 */
 func (a *CapabilityApiService) PatchCapabilityPsuManufacturingDef(ctx context.Context, moid string) ApiPatchCapabilityPsuManufacturingDefRequest {
 	return ApiPatchCapabilityPsuManufacturingDefRequest{
@@ -21945,7 +23820,8 @@ func (a *CapabilityApiService) PatchCapabilityPsuManufacturingDef(ctx context.Co
 }
 
 // Execute executes the request
-//  @return CapabilityPsuManufacturingDef
+//
+//	@return CapabilityPsuManufacturingDef
 func (a *CapabilityApiService) PatchCapabilityPsuManufacturingDefExecute(r ApiPatchCapabilityPsuManufacturingDefRequest) (*CapabilityPsuManufacturingDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -22102,9 +23978,9 @@ func (r ApiPatchCapabilityServerDescriptorRequest) Execute() (*CapabilityServerD
 /*
 PatchCapabilityServerDescriptor Update a 'capability.ServerDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchCapabilityServerDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchCapabilityServerDescriptorRequest
 */
 func (a *CapabilityApiService) PatchCapabilityServerDescriptor(ctx context.Context, moid string) ApiPatchCapabilityServerDescriptorRequest {
 	return ApiPatchCapabilityServerDescriptorRequest{
@@ -22115,7 +23991,8 @@ func (a *CapabilityApiService) PatchCapabilityServerDescriptor(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return CapabilityServerDescriptor
+//
+//	@return CapabilityServerDescriptor
 func (a *CapabilityApiService) PatchCapabilityServerDescriptorExecute(r ApiPatchCapabilityServerDescriptorRequest) (*CapabilityServerDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -22272,9 +24149,9 @@ func (r ApiPatchCapabilityServerModelsCapabilityDefRequest) Execute() (*Capabili
 /*
 PatchCapabilityServerModelsCapabilityDef Update a 'capability.ServerModelsCapabilityDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchCapabilityServerModelsCapabilityDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchCapabilityServerModelsCapabilityDefRequest
 */
 func (a *CapabilityApiService) PatchCapabilityServerModelsCapabilityDef(ctx context.Context, moid string) ApiPatchCapabilityServerModelsCapabilityDefRequest {
 	return ApiPatchCapabilityServerModelsCapabilityDefRequest{
@@ -22285,7 +24162,8 @@ func (a *CapabilityApiService) PatchCapabilityServerModelsCapabilityDef(ctx cont
 }
 
 // Execute executes the request
-//  @return CapabilityServerModelsCapabilityDef
+//
+//	@return CapabilityServerModelsCapabilityDef
 func (a *CapabilityApiService) PatchCapabilityServerModelsCapabilityDefExecute(r ApiPatchCapabilityServerModelsCapabilityDefRequest) (*CapabilityServerModelsCapabilityDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -22442,9 +24320,9 @@ func (r ApiPatchCapabilityServerSchemaDescriptorRequest) Execute() (*CapabilityS
 /*
 PatchCapabilityServerSchemaDescriptor Update a 'capability.ServerSchemaDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchCapabilityServerSchemaDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchCapabilityServerSchemaDescriptorRequest
 */
 func (a *CapabilityApiService) PatchCapabilityServerSchemaDescriptor(ctx context.Context, moid string) ApiPatchCapabilityServerSchemaDescriptorRequest {
 	return ApiPatchCapabilityServerSchemaDescriptorRequest{
@@ -22455,7 +24333,8 @@ func (a *CapabilityApiService) PatchCapabilityServerSchemaDescriptor(ctx context
 }
 
 // Execute executes the request
-//  @return CapabilityServerSchemaDescriptor
+//
+//	@return CapabilityServerSchemaDescriptor
 func (a *CapabilityApiService) PatchCapabilityServerSchemaDescriptorExecute(r ApiPatchCapabilityServerSchemaDescriptorRequest) (*CapabilityServerSchemaDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -22612,9 +24491,9 @@ func (r ApiPatchCapabilitySiocModuleCapabilityDefRequest) Execute() (*Capability
 /*
 PatchCapabilitySiocModuleCapabilityDef Update a 'capability.SiocModuleCapabilityDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchCapabilitySiocModuleCapabilityDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchCapabilitySiocModuleCapabilityDefRequest
 */
 func (a *CapabilityApiService) PatchCapabilitySiocModuleCapabilityDef(ctx context.Context, moid string) ApiPatchCapabilitySiocModuleCapabilityDefRequest {
 	return ApiPatchCapabilitySiocModuleCapabilityDefRequest{
@@ -22625,7 +24504,8 @@ func (a *CapabilityApiService) PatchCapabilitySiocModuleCapabilityDef(ctx contex
 }
 
 // Execute executes the request
-//  @return CapabilitySiocModuleCapabilityDef
+//
+//	@return CapabilitySiocModuleCapabilityDef
 func (a *CapabilityApiService) PatchCapabilitySiocModuleCapabilityDefExecute(r ApiPatchCapabilitySiocModuleCapabilityDefRequest) (*CapabilitySiocModuleCapabilityDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -22782,9 +24662,9 @@ func (r ApiPatchCapabilitySiocModuleDescriptorRequest) Execute() (*CapabilitySio
 /*
 PatchCapabilitySiocModuleDescriptor Update a 'capability.SiocModuleDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchCapabilitySiocModuleDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchCapabilitySiocModuleDescriptorRequest
 */
 func (a *CapabilityApiService) PatchCapabilitySiocModuleDescriptor(ctx context.Context, moid string) ApiPatchCapabilitySiocModuleDescriptorRequest {
 	return ApiPatchCapabilitySiocModuleDescriptorRequest{
@@ -22795,7 +24675,8 @@ func (a *CapabilityApiService) PatchCapabilitySiocModuleDescriptor(ctx context.C
 }
 
 // Execute executes the request
-//  @return CapabilitySiocModuleDescriptor
+//
+//	@return CapabilitySiocModuleDescriptor
 func (a *CapabilityApiService) PatchCapabilitySiocModuleDescriptorExecute(r ApiPatchCapabilitySiocModuleDescriptorRequest) (*CapabilitySiocModuleDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -22952,9 +24833,9 @@ func (r ApiPatchCapabilitySiocModuleManufacturingDefRequest) Execute() (*Capabil
 /*
 PatchCapabilitySiocModuleManufacturingDef Update a 'capability.SiocModuleManufacturingDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchCapabilitySiocModuleManufacturingDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchCapabilitySiocModuleManufacturingDefRequest
 */
 func (a *CapabilityApiService) PatchCapabilitySiocModuleManufacturingDef(ctx context.Context, moid string) ApiPatchCapabilitySiocModuleManufacturingDefRequest {
 	return ApiPatchCapabilitySiocModuleManufacturingDefRequest{
@@ -22965,7 +24846,8 @@ func (a *CapabilityApiService) PatchCapabilitySiocModuleManufacturingDef(ctx con
 }
 
 // Execute executes the request
-//  @return CapabilitySiocModuleManufacturingDef
+//
+//	@return CapabilitySiocModuleManufacturingDef
 func (a *CapabilityApiService) PatchCapabilitySiocModuleManufacturingDefExecute(r ApiPatchCapabilitySiocModuleManufacturingDefRequest) (*CapabilitySiocModuleManufacturingDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -23122,9 +25004,9 @@ func (r ApiPatchCapabilitySwitchCapabilityRequest) Execute() (*CapabilitySwitchC
 /*
 PatchCapabilitySwitchCapability Update a 'capability.SwitchCapability' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchCapabilitySwitchCapabilityRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchCapabilitySwitchCapabilityRequest
 */
 func (a *CapabilityApiService) PatchCapabilitySwitchCapability(ctx context.Context, moid string) ApiPatchCapabilitySwitchCapabilityRequest {
 	return ApiPatchCapabilitySwitchCapabilityRequest{
@@ -23135,7 +25017,8 @@ func (a *CapabilityApiService) PatchCapabilitySwitchCapability(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return CapabilitySwitchCapability
+//
+//	@return CapabilitySwitchCapability
 func (a *CapabilityApiService) PatchCapabilitySwitchCapabilityExecute(r ApiPatchCapabilitySwitchCapabilityRequest) (*CapabilitySwitchCapability, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -23292,9 +25175,9 @@ func (r ApiPatchCapabilitySwitchDescriptorRequest) Execute() (*CapabilitySwitchD
 /*
 PatchCapabilitySwitchDescriptor Update a 'capability.SwitchDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchCapabilitySwitchDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchCapabilitySwitchDescriptorRequest
 */
 func (a *CapabilityApiService) PatchCapabilitySwitchDescriptor(ctx context.Context, moid string) ApiPatchCapabilitySwitchDescriptorRequest {
 	return ApiPatchCapabilitySwitchDescriptorRequest{
@@ -23305,7 +25188,8 @@ func (a *CapabilityApiService) PatchCapabilitySwitchDescriptor(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return CapabilitySwitchDescriptor
+//
+//	@return CapabilitySwitchDescriptor
 func (a *CapabilityApiService) PatchCapabilitySwitchDescriptorExecute(r ApiPatchCapabilitySwitchDescriptorRequest) (*CapabilitySwitchDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -23462,9 +25346,9 @@ func (r ApiPatchCapabilitySwitchManufacturingDefRequest) Execute() (*CapabilityS
 /*
 PatchCapabilitySwitchManufacturingDef Update a 'capability.SwitchManufacturingDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchCapabilitySwitchManufacturingDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchCapabilitySwitchManufacturingDefRequest
 */
 func (a *CapabilityApiService) PatchCapabilitySwitchManufacturingDef(ctx context.Context, moid string) ApiPatchCapabilitySwitchManufacturingDefRequest {
 	return ApiPatchCapabilitySwitchManufacturingDefRequest{
@@ -23475,7 +25359,8 @@ func (a *CapabilityApiService) PatchCapabilitySwitchManufacturingDef(ctx context
 }
 
 // Execute executes the request
-//  @return CapabilitySwitchManufacturingDef
+//
+//	@return CapabilitySwitchManufacturingDef
 func (a *CapabilityApiService) PatchCapabilitySwitchManufacturingDefExecute(r ApiPatchCapabilitySwitchManufacturingDefRequest) (*CapabilitySwitchManufacturingDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -23605,6 +25490,177 @@ func (a *CapabilityApiService) PatchCapabilitySwitchManufacturingDefExecute(r Ap
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiUpdateCapabilityActionsMetaDataRequest struct {
+	ctx                       context.Context
+	ApiService                *CapabilityApiService
+	moid                      string
+	capabilityActionsMetaData *CapabilityActionsMetaData
+	ifMatch                   *string
+}
+
+// The &#39;capability.ActionsMetaData&#39; resource to update.
+func (r ApiUpdateCapabilityActionsMetaDataRequest) CapabilityActionsMetaData(capabilityActionsMetaData CapabilityActionsMetaData) ApiUpdateCapabilityActionsMetaDataRequest {
+	r.capabilityActionsMetaData = &capabilityActionsMetaData
+	return r
+}
+
+// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
+func (r ApiUpdateCapabilityActionsMetaDataRequest) IfMatch(ifMatch string) ApiUpdateCapabilityActionsMetaDataRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiUpdateCapabilityActionsMetaDataRequest) Execute() (*CapabilityActionsMetaData, *http.Response, error) {
+	return r.ApiService.UpdateCapabilityActionsMetaDataExecute(r)
+}
+
+/*
+UpdateCapabilityActionsMetaData Update a 'capability.ActionsMetaData' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateCapabilityActionsMetaDataRequest
+*/
+func (a *CapabilityApiService) UpdateCapabilityActionsMetaData(ctx context.Context, moid string) ApiUpdateCapabilityActionsMetaDataRequest {
+	return ApiUpdateCapabilityActionsMetaDataRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//
+//	@return CapabilityActionsMetaData
+func (a *CapabilityApiService) UpdateCapabilityActionsMetaDataExecute(r ApiUpdateCapabilityActionsMetaDataRequest) (*CapabilityActionsMetaData, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CapabilityActionsMetaData
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.UpdateCapabilityActionsMetaData")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/capability/ActionsMetaData/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.capabilityActionsMetaData == nil {
+		return localVarReturnValue, nil, reportError("capabilityActionsMetaData is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.capabilityActionsMetaData
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiUpdateCapabilityAdapterDeprecatedDefRequest struct {
 	ctx                            context.Context
 	ApiService                     *CapabilityApiService
@@ -23632,9 +25688,9 @@ func (r ApiUpdateCapabilityAdapterDeprecatedDefRequest) Execute() (*CapabilityAd
 /*
 UpdateCapabilityAdapterDeprecatedDef Update a 'capability.AdapterDeprecatedDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateCapabilityAdapterDeprecatedDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateCapabilityAdapterDeprecatedDefRequest
 */
 func (a *CapabilityApiService) UpdateCapabilityAdapterDeprecatedDef(ctx context.Context, moid string) ApiUpdateCapabilityAdapterDeprecatedDefRequest {
 	return ApiUpdateCapabilityAdapterDeprecatedDefRequest{
@@ -23645,7 +25701,8 @@ func (a *CapabilityApiService) UpdateCapabilityAdapterDeprecatedDef(ctx context.
 }
 
 // Execute executes the request
-//  @return CapabilityAdapterDeprecatedDef
+//
+//	@return CapabilityAdapterDeprecatedDef
 func (a *CapabilityApiService) UpdateCapabilityAdapterDeprecatedDefExecute(r ApiUpdateCapabilityAdapterDeprecatedDefRequest) (*CapabilityAdapterDeprecatedDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -23802,9 +25859,9 @@ func (r ApiUpdateCapabilityAdapterUnitDescriptorRequest) Execute() (*CapabilityA
 /*
 UpdateCapabilityAdapterUnitDescriptor Update a 'capability.AdapterUnitDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateCapabilityAdapterUnitDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateCapabilityAdapterUnitDescriptorRequest
 */
 func (a *CapabilityApiService) UpdateCapabilityAdapterUnitDescriptor(ctx context.Context, moid string) ApiUpdateCapabilityAdapterUnitDescriptorRequest {
 	return ApiUpdateCapabilityAdapterUnitDescriptorRequest{
@@ -23815,7 +25872,8 @@ func (a *CapabilityApiService) UpdateCapabilityAdapterUnitDescriptor(ctx context
 }
 
 // Execute executes the request
-//  @return CapabilityAdapterUnitDescriptor
+//
+//	@return CapabilityAdapterUnitDescriptor
 func (a *CapabilityApiService) UpdateCapabilityAdapterUnitDescriptorExecute(r ApiUpdateCapabilityAdapterUnitDescriptorRequest) (*CapabilityAdapterUnitDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -23972,9 +26030,9 @@ func (r ApiUpdateCapabilityCatalogRequest) Execute() (*CapabilityCatalog, *http.
 /*
 UpdateCapabilityCatalog Update a 'capability.Catalog' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateCapabilityCatalogRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateCapabilityCatalogRequest
 */
 func (a *CapabilityApiService) UpdateCapabilityCatalog(ctx context.Context, moid string) ApiUpdateCapabilityCatalogRequest {
 	return ApiUpdateCapabilityCatalogRequest{
@@ -23985,7 +26043,8 @@ func (a *CapabilityApiService) UpdateCapabilityCatalog(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return CapabilityCatalog
+//
+//	@return CapabilityCatalog
 func (a *CapabilityApiService) UpdateCapabilityCatalogExecute(r ApiUpdateCapabilityCatalogRequest) (*CapabilityCatalog, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -24142,9 +26201,9 @@ func (r ApiUpdateCapabilityChassisDescriptorRequest) Execute() (*CapabilityChass
 /*
 UpdateCapabilityChassisDescriptor Update a 'capability.ChassisDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateCapabilityChassisDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateCapabilityChassisDescriptorRequest
 */
 func (a *CapabilityApiService) UpdateCapabilityChassisDescriptor(ctx context.Context, moid string) ApiUpdateCapabilityChassisDescriptorRequest {
 	return ApiUpdateCapabilityChassisDescriptorRequest{
@@ -24155,7 +26214,8 @@ func (a *CapabilityApiService) UpdateCapabilityChassisDescriptor(ctx context.Con
 }
 
 // Execute executes the request
-//  @return CapabilityChassisDescriptor
+//
+//	@return CapabilityChassisDescriptor
 func (a *CapabilityApiService) UpdateCapabilityChassisDescriptorExecute(r ApiUpdateCapabilityChassisDescriptorRequest) (*CapabilityChassisDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -24312,9 +26372,9 @@ func (r ApiUpdateCapabilityChassisManufacturingDefRequest) Execute() (*Capabilit
 /*
 UpdateCapabilityChassisManufacturingDef Update a 'capability.ChassisManufacturingDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateCapabilityChassisManufacturingDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateCapabilityChassisManufacturingDefRequest
 */
 func (a *CapabilityApiService) UpdateCapabilityChassisManufacturingDef(ctx context.Context, moid string) ApiUpdateCapabilityChassisManufacturingDefRequest {
 	return ApiUpdateCapabilityChassisManufacturingDefRequest{
@@ -24325,7 +26385,8 @@ func (a *CapabilityApiService) UpdateCapabilityChassisManufacturingDef(ctx conte
 }
 
 // Execute executes the request
-//  @return CapabilityChassisManufacturingDef
+//
+//	@return CapabilityChassisManufacturingDef
 func (a *CapabilityApiService) UpdateCapabilityChassisManufacturingDefExecute(r ApiUpdateCapabilityChassisManufacturingDefRequest) (*CapabilityChassisManufacturingDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -24482,9 +26543,9 @@ func (r ApiUpdateCapabilityCimcFirmwareDescriptorRequest) Execute() (*Capability
 /*
 UpdateCapabilityCimcFirmwareDescriptor Update a 'capability.CimcFirmwareDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateCapabilityCimcFirmwareDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateCapabilityCimcFirmwareDescriptorRequest
 */
 func (a *CapabilityApiService) UpdateCapabilityCimcFirmwareDescriptor(ctx context.Context, moid string) ApiUpdateCapabilityCimcFirmwareDescriptorRequest {
 	return ApiUpdateCapabilityCimcFirmwareDescriptorRequest{
@@ -24495,7 +26556,8 @@ func (a *CapabilityApiService) UpdateCapabilityCimcFirmwareDescriptor(ctx contex
 }
 
 // Execute executes the request
-//  @return CapabilityCimcFirmwareDescriptor
+//
+//	@return CapabilityCimcFirmwareDescriptor
 func (a *CapabilityApiService) UpdateCapabilityCimcFirmwareDescriptorExecute(r ApiUpdateCapabilityCimcFirmwareDescriptorRequest) (*CapabilityCimcFirmwareDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -24652,9 +26714,9 @@ func (r ApiUpdateCapabilityEquipmentPhysicalDefRequest) Execute() (*CapabilityEq
 /*
 UpdateCapabilityEquipmentPhysicalDef Update a 'capability.EquipmentPhysicalDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateCapabilityEquipmentPhysicalDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateCapabilityEquipmentPhysicalDefRequest
 */
 func (a *CapabilityApiService) UpdateCapabilityEquipmentPhysicalDef(ctx context.Context, moid string) ApiUpdateCapabilityEquipmentPhysicalDefRequest {
 	return ApiUpdateCapabilityEquipmentPhysicalDefRequest{
@@ -24665,7 +26727,8 @@ func (a *CapabilityApiService) UpdateCapabilityEquipmentPhysicalDef(ctx context.
 }
 
 // Execute executes the request
-//  @return CapabilityEquipmentPhysicalDef
+//
+//	@return CapabilityEquipmentPhysicalDef
 func (a *CapabilityApiService) UpdateCapabilityEquipmentPhysicalDefExecute(r ApiUpdateCapabilityEquipmentPhysicalDefRequest) (*CapabilityEquipmentPhysicalDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -24822,9 +26885,9 @@ func (r ApiUpdateCapabilityEquipmentSlotArrayRequest) Execute() (*CapabilityEqui
 /*
 UpdateCapabilityEquipmentSlotArray Update a 'capability.EquipmentSlotArray' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateCapabilityEquipmentSlotArrayRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateCapabilityEquipmentSlotArrayRequest
 */
 func (a *CapabilityApiService) UpdateCapabilityEquipmentSlotArray(ctx context.Context, moid string) ApiUpdateCapabilityEquipmentSlotArrayRequest {
 	return ApiUpdateCapabilityEquipmentSlotArrayRequest{
@@ -24835,7 +26898,8 @@ func (a *CapabilityApiService) UpdateCapabilityEquipmentSlotArray(ctx context.Co
 }
 
 // Execute executes the request
-//  @return CapabilityEquipmentSlotArray
+//
+//	@return CapabilityEquipmentSlotArray
 func (a *CapabilityApiService) UpdateCapabilityEquipmentSlotArrayExecute(r ApiUpdateCapabilityEquipmentSlotArrayRequest) (*CapabilityEquipmentSlotArray, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -24992,9 +27056,9 @@ func (r ApiUpdateCapabilityFanModuleDescriptorRequest) Execute() (*CapabilityFan
 /*
 UpdateCapabilityFanModuleDescriptor Update a 'capability.FanModuleDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateCapabilityFanModuleDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateCapabilityFanModuleDescriptorRequest
 */
 func (a *CapabilityApiService) UpdateCapabilityFanModuleDescriptor(ctx context.Context, moid string) ApiUpdateCapabilityFanModuleDescriptorRequest {
 	return ApiUpdateCapabilityFanModuleDescriptorRequest{
@@ -25005,7 +27069,8 @@ func (a *CapabilityApiService) UpdateCapabilityFanModuleDescriptor(ctx context.C
 }
 
 // Execute executes the request
-//  @return CapabilityFanModuleDescriptor
+//
+//	@return CapabilityFanModuleDescriptor
 func (a *CapabilityApiService) UpdateCapabilityFanModuleDescriptorExecute(r ApiUpdateCapabilityFanModuleDescriptorRequest) (*CapabilityFanModuleDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -25162,9 +27227,9 @@ func (r ApiUpdateCapabilityFanModuleManufacturingDefRequest) Execute() (*Capabil
 /*
 UpdateCapabilityFanModuleManufacturingDef Update a 'capability.FanModuleManufacturingDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateCapabilityFanModuleManufacturingDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateCapabilityFanModuleManufacturingDefRequest
 */
 func (a *CapabilityApiService) UpdateCapabilityFanModuleManufacturingDef(ctx context.Context, moid string) ApiUpdateCapabilityFanModuleManufacturingDefRequest {
 	return ApiUpdateCapabilityFanModuleManufacturingDefRequest{
@@ -25175,7 +27240,8 @@ func (a *CapabilityApiService) UpdateCapabilityFanModuleManufacturingDef(ctx con
 }
 
 // Execute executes the request
-//  @return CapabilityFanModuleManufacturingDef
+//
+//	@return CapabilityFanModuleManufacturingDef
 func (a *CapabilityApiService) UpdateCapabilityFanModuleManufacturingDefExecute(r ApiUpdateCapabilityFanModuleManufacturingDefRequest) (*CapabilityFanModuleManufacturingDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -25305,6 +27371,177 @@ func (a *CapabilityApiService) UpdateCapabilityFanModuleManufacturingDefExecute(
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiUpdateCapabilityFexCapabilityDefRequest struct {
+	ctx                        context.Context
+	ApiService                 *CapabilityApiService
+	moid                       string
+	capabilityFexCapabilityDef *CapabilityFexCapabilityDef
+	ifMatch                    *string
+}
+
+// The &#39;capability.FexCapabilityDef&#39; resource to update.
+func (r ApiUpdateCapabilityFexCapabilityDefRequest) CapabilityFexCapabilityDef(capabilityFexCapabilityDef CapabilityFexCapabilityDef) ApiUpdateCapabilityFexCapabilityDefRequest {
+	r.capabilityFexCapabilityDef = &capabilityFexCapabilityDef
+	return r
+}
+
+// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
+func (r ApiUpdateCapabilityFexCapabilityDefRequest) IfMatch(ifMatch string) ApiUpdateCapabilityFexCapabilityDefRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiUpdateCapabilityFexCapabilityDefRequest) Execute() (*CapabilityFexCapabilityDef, *http.Response, error) {
+	return r.ApiService.UpdateCapabilityFexCapabilityDefExecute(r)
+}
+
+/*
+UpdateCapabilityFexCapabilityDef Update a 'capability.FexCapabilityDef' resource.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateCapabilityFexCapabilityDefRequest
+*/
+func (a *CapabilityApiService) UpdateCapabilityFexCapabilityDef(ctx context.Context, moid string) ApiUpdateCapabilityFexCapabilityDefRequest {
+	return ApiUpdateCapabilityFexCapabilityDefRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//
+//	@return CapabilityFexCapabilityDef
+func (a *CapabilityApiService) UpdateCapabilityFexCapabilityDefExecute(r ApiUpdateCapabilityFexCapabilityDefRequest) (*CapabilityFexCapabilityDef, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CapabilityFexCapabilityDef
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.UpdateCapabilityFexCapabilityDef")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/capability/FexCapabilityDefs/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.capabilityFexCapabilityDef == nil {
+		return localVarReturnValue, nil, reportError("capabilityFexCapabilityDef is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.capabilityFexCapabilityDef
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiUpdateCapabilityFexDescriptorRequest struct {
 	ctx                     context.Context
 	ApiService              *CapabilityApiService
@@ -25332,9 +27569,9 @@ func (r ApiUpdateCapabilityFexDescriptorRequest) Execute() (*CapabilityFexDescri
 /*
 UpdateCapabilityFexDescriptor Update a 'capability.FexDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateCapabilityFexDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateCapabilityFexDescriptorRequest
 */
 func (a *CapabilityApiService) UpdateCapabilityFexDescriptor(ctx context.Context, moid string) ApiUpdateCapabilityFexDescriptorRequest {
 	return ApiUpdateCapabilityFexDescriptorRequest{
@@ -25345,7 +27582,8 @@ func (a *CapabilityApiService) UpdateCapabilityFexDescriptor(ctx context.Context
 }
 
 // Execute executes the request
-//  @return CapabilityFexDescriptor
+//
+//	@return CapabilityFexDescriptor
 func (a *CapabilityApiService) UpdateCapabilityFexDescriptorExecute(r ApiUpdateCapabilityFexDescriptorRequest) (*CapabilityFexDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -25502,9 +27740,9 @@ func (r ApiUpdateCapabilityFexManufacturingDefRequest) Execute() (*CapabilityFex
 /*
 UpdateCapabilityFexManufacturingDef Update a 'capability.FexManufacturingDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateCapabilityFexManufacturingDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateCapabilityFexManufacturingDefRequest
 */
 func (a *CapabilityApiService) UpdateCapabilityFexManufacturingDef(ctx context.Context, moid string) ApiUpdateCapabilityFexManufacturingDefRequest {
 	return ApiUpdateCapabilityFexManufacturingDefRequest{
@@ -25515,7 +27753,8 @@ func (a *CapabilityApiService) UpdateCapabilityFexManufacturingDef(ctx context.C
 }
 
 // Execute executes the request
-//  @return CapabilityFexManufacturingDef
+//
+//	@return CapabilityFexManufacturingDef
 func (a *CapabilityApiService) UpdateCapabilityFexManufacturingDefExecute(r ApiUpdateCapabilityFexManufacturingDefRequest) (*CapabilityFexManufacturingDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -25672,9 +27911,9 @@ func (r ApiUpdateCapabilityIoCardCapabilityDefRequest) Execute() (*CapabilityIoC
 /*
 UpdateCapabilityIoCardCapabilityDef Update a 'capability.IoCardCapabilityDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateCapabilityIoCardCapabilityDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateCapabilityIoCardCapabilityDefRequest
 */
 func (a *CapabilityApiService) UpdateCapabilityIoCardCapabilityDef(ctx context.Context, moid string) ApiUpdateCapabilityIoCardCapabilityDefRequest {
 	return ApiUpdateCapabilityIoCardCapabilityDefRequest{
@@ -25685,7 +27924,8 @@ func (a *CapabilityApiService) UpdateCapabilityIoCardCapabilityDef(ctx context.C
 }
 
 // Execute executes the request
-//  @return CapabilityIoCardCapabilityDef
+//
+//	@return CapabilityIoCardCapabilityDef
 func (a *CapabilityApiService) UpdateCapabilityIoCardCapabilityDefExecute(r ApiUpdateCapabilityIoCardCapabilityDefRequest) (*CapabilityIoCardCapabilityDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -25842,9 +28082,9 @@ func (r ApiUpdateCapabilityIoCardDescriptorRequest) Execute() (*CapabilityIoCard
 /*
 UpdateCapabilityIoCardDescriptor Update a 'capability.IoCardDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateCapabilityIoCardDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateCapabilityIoCardDescriptorRequest
 */
 func (a *CapabilityApiService) UpdateCapabilityIoCardDescriptor(ctx context.Context, moid string) ApiUpdateCapabilityIoCardDescriptorRequest {
 	return ApiUpdateCapabilityIoCardDescriptorRequest{
@@ -25855,7 +28095,8 @@ func (a *CapabilityApiService) UpdateCapabilityIoCardDescriptor(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return CapabilityIoCardDescriptor
+//
+//	@return CapabilityIoCardDescriptor
 func (a *CapabilityApiService) UpdateCapabilityIoCardDescriptorExecute(r ApiUpdateCapabilityIoCardDescriptorRequest) (*CapabilityIoCardDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -26012,9 +28253,9 @@ func (r ApiUpdateCapabilityIoCardManufacturingDefRequest) Execute() (*Capability
 /*
 UpdateCapabilityIoCardManufacturingDef Update a 'capability.IoCardManufacturingDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateCapabilityIoCardManufacturingDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateCapabilityIoCardManufacturingDefRequest
 */
 func (a *CapabilityApiService) UpdateCapabilityIoCardManufacturingDef(ctx context.Context, moid string) ApiUpdateCapabilityIoCardManufacturingDefRequest {
 	return ApiUpdateCapabilityIoCardManufacturingDefRequest{
@@ -26025,7 +28266,8 @@ func (a *CapabilityApiService) UpdateCapabilityIoCardManufacturingDef(ctx contex
 }
 
 // Execute executes the request
-//  @return CapabilityIoCardManufacturingDef
+//
+//	@return CapabilityIoCardManufacturingDef
 func (a *CapabilityApiService) UpdateCapabilityIoCardManufacturingDefExecute(r ApiUpdateCapabilityIoCardManufacturingDefRequest) (*CapabilityIoCardManufacturingDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -26182,9 +28424,9 @@ func (r ApiUpdateCapabilityPortGroupAggregationDefRequest) Execute() (*Capabilit
 /*
 UpdateCapabilityPortGroupAggregationDef Update a 'capability.PortGroupAggregationDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateCapabilityPortGroupAggregationDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateCapabilityPortGroupAggregationDefRequest
 */
 func (a *CapabilityApiService) UpdateCapabilityPortGroupAggregationDef(ctx context.Context, moid string) ApiUpdateCapabilityPortGroupAggregationDefRequest {
 	return ApiUpdateCapabilityPortGroupAggregationDefRequest{
@@ -26195,7 +28437,8 @@ func (a *CapabilityApiService) UpdateCapabilityPortGroupAggregationDef(ctx conte
 }
 
 // Execute executes the request
-//  @return CapabilityPortGroupAggregationDef
+//
+//	@return CapabilityPortGroupAggregationDef
 func (a *CapabilityApiService) UpdateCapabilityPortGroupAggregationDefExecute(r ApiUpdateCapabilityPortGroupAggregationDefRequest) (*CapabilityPortGroupAggregationDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -26352,9 +28595,9 @@ func (r ApiUpdateCapabilityPsuDescriptorRequest) Execute() (*CapabilityPsuDescri
 /*
 UpdateCapabilityPsuDescriptor Update a 'capability.PsuDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateCapabilityPsuDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateCapabilityPsuDescriptorRequest
 */
 func (a *CapabilityApiService) UpdateCapabilityPsuDescriptor(ctx context.Context, moid string) ApiUpdateCapabilityPsuDescriptorRequest {
 	return ApiUpdateCapabilityPsuDescriptorRequest{
@@ -26365,7 +28608,8 @@ func (a *CapabilityApiService) UpdateCapabilityPsuDescriptor(ctx context.Context
 }
 
 // Execute executes the request
-//  @return CapabilityPsuDescriptor
+//
+//	@return CapabilityPsuDescriptor
 func (a *CapabilityApiService) UpdateCapabilityPsuDescriptorExecute(r ApiUpdateCapabilityPsuDescriptorRequest) (*CapabilityPsuDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -26522,9 +28766,9 @@ func (r ApiUpdateCapabilityPsuManufacturingDefRequest) Execute() (*CapabilityPsu
 /*
 UpdateCapabilityPsuManufacturingDef Update a 'capability.PsuManufacturingDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateCapabilityPsuManufacturingDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateCapabilityPsuManufacturingDefRequest
 */
 func (a *CapabilityApiService) UpdateCapabilityPsuManufacturingDef(ctx context.Context, moid string) ApiUpdateCapabilityPsuManufacturingDefRequest {
 	return ApiUpdateCapabilityPsuManufacturingDefRequest{
@@ -26535,7 +28779,8 @@ func (a *CapabilityApiService) UpdateCapabilityPsuManufacturingDef(ctx context.C
 }
 
 // Execute executes the request
-//  @return CapabilityPsuManufacturingDef
+//
+//	@return CapabilityPsuManufacturingDef
 func (a *CapabilityApiService) UpdateCapabilityPsuManufacturingDefExecute(r ApiUpdateCapabilityPsuManufacturingDefRequest) (*CapabilityPsuManufacturingDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -26692,9 +28937,9 @@ func (r ApiUpdateCapabilityServerDescriptorRequest) Execute() (*CapabilityServer
 /*
 UpdateCapabilityServerDescriptor Update a 'capability.ServerDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateCapabilityServerDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateCapabilityServerDescriptorRequest
 */
 func (a *CapabilityApiService) UpdateCapabilityServerDescriptor(ctx context.Context, moid string) ApiUpdateCapabilityServerDescriptorRequest {
 	return ApiUpdateCapabilityServerDescriptorRequest{
@@ -26705,7 +28950,8 @@ func (a *CapabilityApiService) UpdateCapabilityServerDescriptor(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return CapabilityServerDescriptor
+//
+//	@return CapabilityServerDescriptor
 func (a *CapabilityApiService) UpdateCapabilityServerDescriptorExecute(r ApiUpdateCapabilityServerDescriptorRequest) (*CapabilityServerDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -26862,9 +29108,9 @@ func (r ApiUpdateCapabilityServerModelsCapabilityDefRequest) Execute() (*Capabil
 /*
 UpdateCapabilityServerModelsCapabilityDef Update a 'capability.ServerModelsCapabilityDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateCapabilityServerModelsCapabilityDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateCapabilityServerModelsCapabilityDefRequest
 */
 func (a *CapabilityApiService) UpdateCapabilityServerModelsCapabilityDef(ctx context.Context, moid string) ApiUpdateCapabilityServerModelsCapabilityDefRequest {
 	return ApiUpdateCapabilityServerModelsCapabilityDefRequest{
@@ -26875,7 +29121,8 @@ func (a *CapabilityApiService) UpdateCapabilityServerModelsCapabilityDef(ctx con
 }
 
 // Execute executes the request
-//  @return CapabilityServerModelsCapabilityDef
+//
+//	@return CapabilityServerModelsCapabilityDef
 func (a *CapabilityApiService) UpdateCapabilityServerModelsCapabilityDefExecute(r ApiUpdateCapabilityServerModelsCapabilityDefRequest) (*CapabilityServerModelsCapabilityDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -27032,9 +29279,9 @@ func (r ApiUpdateCapabilityServerSchemaDescriptorRequest) Execute() (*Capability
 /*
 UpdateCapabilityServerSchemaDescriptor Update a 'capability.ServerSchemaDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateCapabilityServerSchemaDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateCapabilityServerSchemaDescriptorRequest
 */
 func (a *CapabilityApiService) UpdateCapabilityServerSchemaDescriptor(ctx context.Context, moid string) ApiUpdateCapabilityServerSchemaDescriptorRequest {
 	return ApiUpdateCapabilityServerSchemaDescriptorRequest{
@@ -27045,7 +29292,8 @@ func (a *CapabilityApiService) UpdateCapabilityServerSchemaDescriptor(ctx contex
 }
 
 // Execute executes the request
-//  @return CapabilityServerSchemaDescriptor
+//
+//	@return CapabilityServerSchemaDescriptor
 func (a *CapabilityApiService) UpdateCapabilityServerSchemaDescriptorExecute(r ApiUpdateCapabilityServerSchemaDescriptorRequest) (*CapabilityServerSchemaDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -27202,9 +29450,9 @@ func (r ApiUpdateCapabilitySiocModuleCapabilityDefRequest) Execute() (*Capabilit
 /*
 UpdateCapabilitySiocModuleCapabilityDef Update a 'capability.SiocModuleCapabilityDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateCapabilitySiocModuleCapabilityDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateCapabilitySiocModuleCapabilityDefRequest
 */
 func (a *CapabilityApiService) UpdateCapabilitySiocModuleCapabilityDef(ctx context.Context, moid string) ApiUpdateCapabilitySiocModuleCapabilityDefRequest {
 	return ApiUpdateCapabilitySiocModuleCapabilityDefRequest{
@@ -27215,7 +29463,8 @@ func (a *CapabilityApiService) UpdateCapabilitySiocModuleCapabilityDef(ctx conte
 }
 
 // Execute executes the request
-//  @return CapabilitySiocModuleCapabilityDef
+//
+//	@return CapabilitySiocModuleCapabilityDef
 func (a *CapabilityApiService) UpdateCapabilitySiocModuleCapabilityDefExecute(r ApiUpdateCapabilitySiocModuleCapabilityDefRequest) (*CapabilitySiocModuleCapabilityDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -27372,9 +29621,9 @@ func (r ApiUpdateCapabilitySiocModuleDescriptorRequest) Execute() (*CapabilitySi
 /*
 UpdateCapabilitySiocModuleDescriptor Update a 'capability.SiocModuleDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateCapabilitySiocModuleDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateCapabilitySiocModuleDescriptorRequest
 */
 func (a *CapabilityApiService) UpdateCapabilitySiocModuleDescriptor(ctx context.Context, moid string) ApiUpdateCapabilitySiocModuleDescriptorRequest {
 	return ApiUpdateCapabilitySiocModuleDescriptorRequest{
@@ -27385,7 +29634,8 @@ func (a *CapabilityApiService) UpdateCapabilitySiocModuleDescriptor(ctx context.
 }
 
 // Execute executes the request
-//  @return CapabilitySiocModuleDescriptor
+//
+//	@return CapabilitySiocModuleDescriptor
 func (a *CapabilityApiService) UpdateCapabilitySiocModuleDescriptorExecute(r ApiUpdateCapabilitySiocModuleDescriptorRequest) (*CapabilitySiocModuleDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -27542,9 +29792,9 @@ func (r ApiUpdateCapabilitySiocModuleManufacturingDefRequest) Execute() (*Capabi
 /*
 UpdateCapabilitySiocModuleManufacturingDef Update a 'capability.SiocModuleManufacturingDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateCapabilitySiocModuleManufacturingDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateCapabilitySiocModuleManufacturingDefRequest
 */
 func (a *CapabilityApiService) UpdateCapabilitySiocModuleManufacturingDef(ctx context.Context, moid string) ApiUpdateCapabilitySiocModuleManufacturingDefRequest {
 	return ApiUpdateCapabilitySiocModuleManufacturingDefRequest{
@@ -27555,7 +29805,8 @@ func (a *CapabilityApiService) UpdateCapabilitySiocModuleManufacturingDef(ctx co
 }
 
 // Execute executes the request
-//  @return CapabilitySiocModuleManufacturingDef
+//
+//	@return CapabilitySiocModuleManufacturingDef
 func (a *CapabilityApiService) UpdateCapabilitySiocModuleManufacturingDefExecute(r ApiUpdateCapabilitySiocModuleManufacturingDefRequest) (*CapabilitySiocModuleManufacturingDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -27712,9 +29963,9 @@ func (r ApiUpdateCapabilitySwitchCapabilityRequest) Execute() (*CapabilitySwitch
 /*
 UpdateCapabilitySwitchCapability Update a 'capability.SwitchCapability' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateCapabilitySwitchCapabilityRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateCapabilitySwitchCapabilityRequest
 */
 func (a *CapabilityApiService) UpdateCapabilitySwitchCapability(ctx context.Context, moid string) ApiUpdateCapabilitySwitchCapabilityRequest {
 	return ApiUpdateCapabilitySwitchCapabilityRequest{
@@ -27725,7 +29976,8 @@ func (a *CapabilityApiService) UpdateCapabilitySwitchCapability(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return CapabilitySwitchCapability
+//
+//	@return CapabilitySwitchCapability
 func (a *CapabilityApiService) UpdateCapabilitySwitchCapabilityExecute(r ApiUpdateCapabilitySwitchCapabilityRequest) (*CapabilitySwitchCapability, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -27882,9 +30134,9 @@ func (r ApiUpdateCapabilitySwitchDescriptorRequest) Execute() (*CapabilitySwitch
 /*
 UpdateCapabilitySwitchDescriptor Update a 'capability.SwitchDescriptor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateCapabilitySwitchDescriptorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateCapabilitySwitchDescriptorRequest
 */
 func (a *CapabilityApiService) UpdateCapabilitySwitchDescriptor(ctx context.Context, moid string) ApiUpdateCapabilitySwitchDescriptorRequest {
 	return ApiUpdateCapabilitySwitchDescriptorRequest{
@@ -27895,7 +30147,8 @@ func (a *CapabilityApiService) UpdateCapabilitySwitchDescriptor(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return CapabilitySwitchDescriptor
+//
+//	@return CapabilitySwitchDescriptor
 func (a *CapabilityApiService) UpdateCapabilitySwitchDescriptorExecute(r ApiUpdateCapabilitySwitchDescriptorRequest) (*CapabilitySwitchDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -28052,9 +30305,9 @@ func (r ApiUpdateCapabilitySwitchManufacturingDefRequest) Execute() (*Capability
 /*
 UpdateCapabilitySwitchManufacturingDef Update a 'capability.SwitchManufacturingDef' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateCapabilitySwitchManufacturingDefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateCapabilitySwitchManufacturingDefRequest
 */
 func (a *CapabilityApiService) UpdateCapabilitySwitchManufacturingDef(ctx context.Context, moid string) ApiUpdateCapabilitySwitchManufacturingDefRequest {
 	return ApiUpdateCapabilitySwitchManufacturingDefRequest{
@@ -28065,7 +30318,8 @@ func (a *CapabilityApiService) UpdateCapabilitySwitchManufacturingDef(ctx contex
 }
 
 // Execute executes the request
-//  @return CapabilitySwitchManufacturingDef
+//
+//	@return CapabilitySwitchManufacturingDef
 func (a *CapabilityApiService) UpdateCapabilitySwitchManufacturingDefExecute(r ApiUpdateCapabilitySwitchManufacturingDefRequest) (*CapabilitySwitchManufacturingDef, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

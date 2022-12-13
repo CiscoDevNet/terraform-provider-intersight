@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -24,11 +24,10 @@ type WorkflowPendingDynamicWorkflowInfo struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
-	// The inputs of the workflow.
+	// The input data provided for workflow execution.
 	Input interface{} `json:"Input,omitempty"`
 	// A name for the pending dynamic workflow.
-	Name            *string  `json:"Name,omitempty"`
-	PendingServices []string `json:"PendingServices,omitempty"`
+	Name *string `json:"Name,omitempty"`
 	// The src is workflow owner service.
 	Src *string `json:"Src,omitempty"`
 	// The current status of the PendingDynamicWorkflowInfo. * `GatheringTasks` - Dynamic workflow is gathering tasks before workflow can start execution. * `Waiting` - Dynamic workflow is in waiting state and not yet started execution. * `RateLimit` - Dynamic workflow is rate limited and hasn't started execution.
@@ -37,8 +36,6 @@ type WorkflowPendingDynamicWorkflowInfo struct {
 	WaitOnDuplicate         *bool                                   `json:"WaitOnDuplicate,omitempty"`
 	WorkflowActionTaskLists []WorkflowDynamicWorkflowActionTaskList `json:"WorkflowActionTaskLists,omitempty"`
 	WorkflowCtx             NullableWorkflowWorkflowCtx             `json:"WorkflowCtx,omitempty"`
-	// This key contains workflow, initiator and target name. Workflow engine uses the key to do workflow dedup.
-	WorkflowKey *string `json:"WorkflowKey,omitempty"`
 	// The metadata of the workflow.
 	WorkflowMeta         interface{}                       `json:"WorkflowMeta,omitempty"`
 	WorkflowInfo         *WorkflowWorkflowInfoRelationship `json:"WorkflowInfo,omitempty"`
@@ -55,8 +52,6 @@ func NewWorkflowPendingDynamicWorkflowInfo(classId string, objectType string) *W
 	this := WorkflowPendingDynamicWorkflowInfo{}
 	this.ClassId = classId
 	this.ObjectType = objectType
-	var status string = "GatheringTasks"
-	this.Status = &status
 	return &this
 }
 
@@ -69,8 +64,6 @@ func NewWorkflowPendingDynamicWorkflowInfoWithDefaults() *WorkflowPendingDynamic
 	this.ClassId = classId
 	var objectType string = "workflow.PendingDynamicWorkflowInfo"
 	this.ObjectType = objectType
-	var status string = "GatheringTasks"
-	this.Status = &status
 	return &this
 }
 
@@ -185,39 +178,6 @@ func (o *WorkflowPendingDynamicWorkflowInfo) HasName() bool {
 // SetName gets a reference to the given string and assigns it to the Name field.
 func (o *WorkflowPendingDynamicWorkflowInfo) SetName(v string) {
 	o.Name = &v
-}
-
-// GetPendingServices returns the PendingServices field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *WorkflowPendingDynamicWorkflowInfo) GetPendingServices() []string {
-	if o == nil {
-		var ret []string
-		return ret
-	}
-	return o.PendingServices
-}
-
-// GetPendingServicesOk returns a tuple with the PendingServices field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *WorkflowPendingDynamicWorkflowInfo) GetPendingServicesOk() ([]string, bool) {
-	if o == nil || o.PendingServices == nil {
-		return nil, false
-	}
-	return o.PendingServices, true
-}
-
-// HasPendingServices returns a boolean if a field has been set.
-func (o *WorkflowPendingDynamicWorkflowInfo) HasPendingServices() bool {
-	if o != nil && o.PendingServices != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetPendingServices gets a reference to the given []string and assigns it to the PendingServices field.
-func (o *WorkflowPendingDynamicWorkflowInfo) SetPendingServices(v []string) {
-	o.PendingServices = v
 }
 
 // GetSrc returns the Src field value if set, zero value otherwise.
@@ -392,38 +352,6 @@ func (o *WorkflowPendingDynamicWorkflowInfo) UnsetWorkflowCtx() {
 	o.WorkflowCtx.Unset()
 }
 
-// GetWorkflowKey returns the WorkflowKey field value if set, zero value otherwise.
-func (o *WorkflowPendingDynamicWorkflowInfo) GetWorkflowKey() string {
-	if o == nil || o.WorkflowKey == nil {
-		var ret string
-		return ret
-	}
-	return *o.WorkflowKey
-}
-
-// GetWorkflowKeyOk returns a tuple with the WorkflowKey field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *WorkflowPendingDynamicWorkflowInfo) GetWorkflowKeyOk() (*string, bool) {
-	if o == nil || o.WorkflowKey == nil {
-		return nil, false
-	}
-	return o.WorkflowKey, true
-}
-
-// HasWorkflowKey returns a boolean if a field has been set.
-func (o *WorkflowPendingDynamicWorkflowInfo) HasWorkflowKey() bool {
-	if o != nil && o.WorkflowKey != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetWorkflowKey gets a reference to the given string and assigns it to the WorkflowKey field.
-func (o *WorkflowPendingDynamicWorkflowInfo) SetWorkflowKey(v string) {
-	o.WorkflowKey = &v
-}
-
 // GetWorkflowMeta returns the WorkflowMeta field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowPendingDynamicWorkflowInfo) GetWorkflowMeta() interface{} {
 	if o == nil {
@@ -511,9 +439,6 @@ func (o WorkflowPendingDynamicWorkflowInfo) MarshalJSON() ([]byte, error) {
 	if o.Name != nil {
 		toSerialize["Name"] = o.Name
 	}
-	if o.PendingServices != nil {
-		toSerialize["PendingServices"] = o.PendingServices
-	}
 	if o.Src != nil {
 		toSerialize["Src"] = o.Src
 	}
@@ -528,9 +453,6 @@ func (o WorkflowPendingDynamicWorkflowInfo) MarshalJSON() ([]byte, error) {
 	}
 	if o.WorkflowCtx.IsSet() {
 		toSerialize["WorkflowCtx"] = o.WorkflowCtx.Get()
-	}
-	if o.WorkflowKey != nil {
-		toSerialize["WorkflowKey"] = o.WorkflowKey
 	}
 	if o.WorkflowMeta != nil {
 		toSerialize["WorkflowMeta"] = o.WorkflowMeta
@@ -552,11 +474,10 @@ func (o *WorkflowPendingDynamicWorkflowInfo) UnmarshalJSON(bytes []byte) (err er
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
-		// The inputs of the workflow.
+		// The input data provided for workflow execution.
 		Input interface{} `json:"Input,omitempty"`
 		// A name for the pending dynamic workflow.
-		Name            *string  `json:"Name,omitempty"`
-		PendingServices []string `json:"PendingServices,omitempty"`
+		Name *string `json:"Name,omitempty"`
 		// The src is workflow owner service.
 		Src *string `json:"Src,omitempty"`
 		// The current status of the PendingDynamicWorkflowInfo. * `GatheringTasks` - Dynamic workflow is gathering tasks before workflow can start execution. * `Waiting` - Dynamic workflow is in waiting state and not yet started execution. * `RateLimit` - Dynamic workflow is rate limited and hasn't started execution.
@@ -565,8 +486,6 @@ func (o *WorkflowPendingDynamicWorkflowInfo) UnmarshalJSON(bytes []byte) (err er
 		WaitOnDuplicate         *bool                                   `json:"WaitOnDuplicate,omitempty"`
 		WorkflowActionTaskLists []WorkflowDynamicWorkflowActionTaskList `json:"WorkflowActionTaskLists,omitempty"`
 		WorkflowCtx             NullableWorkflowWorkflowCtx             `json:"WorkflowCtx,omitempty"`
-		// This key contains workflow, initiator and target name. Workflow engine uses the key to do workflow dedup.
-		WorkflowKey *string `json:"WorkflowKey,omitempty"`
 		// The metadata of the workflow.
 		WorkflowMeta interface{}                       `json:"WorkflowMeta,omitempty"`
 		WorkflowInfo *WorkflowWorkflowInfoRelationship `json:"WorkflowInfo,omitempty"`
@@ -581,13 +500,11 @@ func (o *WorkflowPendingDynamicWorkflowInfo) UnmarshalJSON(bytes []byte) (err er
 		varWorkflowPendingDynamicWorkflowInfo.ObjectType = varWorkflowPendingDynamicWorkflowInfoWithoutEmbeddedStruct.ObjectType
 		varWorkflowPendingDynamicWorkflowInfo.Input = varWorkflowPendingDynamicWorkflowInfoWithoutEmbeddedStruct.Input
 		varWorkflowPendingDynamicWorkflowInfo.Name = varWorkflowPendingDynamicWorkflowInfoWithoutEmbeddedStruct.Name
-		varWorkflowPendingDynamicWorkflowInfo.PendingServices = varWorkflowPendingDynamicWorkflowInfoWithoutEmbeddedStruct.PendingServices
 		varWorkflowPendingDynamicWorkflowInfo.Src = varWorkflowPendingDynamicWorkflowInfoWithoutEmbeddedStruct.Src
 		varWorkflowPendingDynamicWorkflowInfo.Status = varWorkflowPendingDynamicWorkflowInfoWithoutEmbeddedStruct.Status
 		varWorkflowPendingDynamicWorkflowInfo.WaitOnDuplicate = varWorkflowPendingDynamicWorkflowInfoWithoutEmbeddedStruct.WaitOnDuplicate
 		varWorkflowPendingDynamicWorkflowInfo.WorkflowActionTaskLists = varWorkflowPendingDynamicWorkflowInfoWithoutEmbeddedStruct.WorkflowActionTaskLists
 		varWorkflowPendingDynamicWorkflowInfo.WorkflowCtx = varWorkflowPendingDynamicWorkflowInfoWithoutEmbeddedStruct.WorkflowCtx
-		varWorkflowPendingDynamicWorkflowInfo.WorkflowKey = varWorkflowPendingDynamicWorkflowInfoWithoutEmbeddedStruct.WorkflowKey
 		varWorkflowPendingDynamicWorkflowInfo.WorkflowMeta = varWorkflowPendingDynamicWorkflowInfoWithoutEmbeddedStruct.WorkflowMeta
 		varWorkflowPendingDynamicWorkflowInfo.WorkflowInfo = varWorkflowPendingDynamicWorkflowInfoWithoutEmbeddedStruct.WorkflowInfo
 		*o = WorkflowPendingDynamicWorkflowInfo(varWorkflowPendingDynamicWorkflowInfo)
@@ -611,13 +528,11 @@ func (o *WorkflowPendingDynamicWorkflowInfo) UnmarshalJSON(bytes []byte) (err er
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Input")
 		delete(additionalProperties, "Name")
-		delete(additionalProperties, "PendingServices")
 		delete(additionalProperties, "Src")
 		delete(additionalProperties, "Status")
 		delete(additionalProperties, "WaitOnDuplicate")
 		delete(additionalProperties, "WorkflowActionTaskLists")
 		delete(additionalProperties, "WorkflowCtx")
-		delete(additionalProperties, "WorkflowKey")
 		delete(additionalProperties, "WorkflowMeta")
 		delete(additionalProperties, "WorkflowInfo")
 

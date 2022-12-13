@@ -19,7 +19,7 @@ var (
 )
 
 // SuppressDiffAdditionProps Suppress Difference functions for additional properties
-//old is from tfstate file
+// old is from tfstate file
 // new is from tf config file
 func SuppressDiffAdditionProps(k, old, new string, d *schema.ResourceData) bool {
 	if old == "" && new == "" {

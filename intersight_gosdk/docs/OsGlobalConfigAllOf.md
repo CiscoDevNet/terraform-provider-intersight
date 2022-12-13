@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **InstallTargetType** | Pointer to **string** | The Prefill install Target Name. | [optional] [readonly] 
 **OperatingSystemParameters** | Pointer to [**NullableOsOperatingSystemParameters**](OsOperatingSystemParameters.md) |  | [optional] 
 **OsImageName** | Pointer to **string** | The Operating System Image name. | [optional] [readonly] 
+**OverrideSecureBoot** | Pointer to **bool** | ESXi Secure Boot installation is currently not supported. As a workaround, Secure Boot will be disabled before installation and restored after installation is complete. Enable to Override Secure Boot Configuration. | [optional] [default to false]
 **ScuImageName** | Pointer to **string** | The name of the Server Configuration Utilities Image. | [optional] [readonly] 
 **WindowsEdition** | Pointer to **string** | The Windows OS edition, this property required only for Windows server. | [optional] [readonly] 
 
@@ -233,6 +234,31 @@ SetOsImageName sets OsImageName field to given value.
 `func (o *OsGlobalConfigAllOf) HasOsImageName() bool`
 
 HasOsImageName returns a boolean if a field has been set.
+
+### GetOverrideSecureBoot
+
+`func (o *OsGlobalConfigAllOf) GetOverrideSecureBoot() bool`
+
+GetOverrideSecureBoot returns the OverrideSecureBoot field if non-nil, zero value otherwise.
+
+### GetOverrideSecureBootOk
+
+`func (o *OsGlobalConfigAllOf) GetOverrideSecureBootOk() (*bool, bool)`
+
+GetOverrideSecureBootOk returns a tuple with the OverrideSecureBoot field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOverrideSecureBoot
+
+`func (o *OsGlobalConfigAllOf) SetOverrideSecureBoot(v bool)`
+
+SetOverrideSecureBoot sets OverrideSecureBoot field to given value.
+
+### HasOverrideSecureBoot
+
+`func (o *OsGlobalConfigAllOf) HasOverrideSecureBoot() bool`
+
+HasOverrideSecureBoot returns a boolean if a field has been set.
 
 ### GetScuImageName
 

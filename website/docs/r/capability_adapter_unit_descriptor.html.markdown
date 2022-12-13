@@ -71,6 +71,7 @@ This complex property has following sub-properties:
 * `model`:(string) The model of the endpoint, for which this capability information is applicable. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `num_dce_ports`:(int) Number of Dce Ports for the adapter. 
+* `number_of_pci_links`:(int) Indicates number of PCI Links of the adapter. 
 * `owners`:
                 (Array of schema.TypeString) -(ReadOnly)
 * `parent`:(HashMap) -(ReadOnly) A reference to a moBaseMo resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

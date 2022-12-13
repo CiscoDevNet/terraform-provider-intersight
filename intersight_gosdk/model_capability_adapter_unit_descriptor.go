@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -47,6 +47,8 @@ type CapabilityAdapterUnitDescriptor struct {
 	MaxRocev2Interfaces *int64 `json:"MaxRocev2Interfaces,omitempty"`
 	// Number of Dce Ports for the adapter.
 	NumDcePorts *int64 `json:"NumDcePorts,omitempty"`
+	// Indicates number of PCI Links of the adapter.
+	NumberOfPciLinks *int64 `json:"NumberOfPciLinks,omitempty"`
 	// Indicates PCI Link status of adapter.
 	PciLink *int64 `json:"PciLink,omitempty"`
 	// Prom card type for the adapter.
@@ -76,6 +78,8 @@ func NewCapabilityAdapterUnitDescriptor(classId string, objectType string) *Capa
 	this.MaxEthTxRingSize = &maxEthTxRingSize
 	var maxRocev2Interfaces int64 = 2
 	this.MaxRocev2Interfaces = &maxRocev2Interfaces
+	var numberOfPciLinks int64 = 1
+	this.NumberOfPciLinks = &numberOfPciLinks
 	var pciLink int64 = 0
 	this.PciLink = &pciLink
 	return &this
@@ -102,6 +106,8 @@ func NewCapabilityAdapterUnitDescriptorWithDefaults() *CapabilityAdapterUnitDesc
 	this.MaxEthTxRingSize = &maxEthTxRingSize
 	var maxRocev2Interfaces int64 = 2
 	this.MaxRocev2Interfaces = &maxRocev2Interfaces
+	var numberOfPciLinks int64 = 1
+	this.NumberOfPciLinks = &numberOfPciLinks
 	var pciLink int64 = 0
 	this.PciLink = &pciLink
 	return &this
@@ -540,6 +546,38 @@ func (o *CapabilityAdapterUnitDescriptor) SetNumDcePorts(v int64) {
 	o.NumDcePorts = &v
 }
 
+// GetNumberOfPciLinks returns the NumberOfPciLinks field value if set, zero value otherwise.
+func (o *CapabilityAdapterUnitDescriptor) GetNumberOfPciLinks() int64 {
+	if o == nil || o.NumberOfPciLinks == nil {
+		var ret int64
+		return ret
+	}
+	return *o.NumberOfPciLinks
+}
+
+// GetNumberOfPciLinksOk returns a tuple with the NumberOfPciLinks field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CapabilityAdapterUnitDescriptor) GetNumberOfPciLinksOk() (*int64, bool) {
+	if o == nil || o.NumberOfPciLinks == nil {
+		return nil, false
+	}
+	return o.NumberOfPciLinks, true
+}
+
+// HasNumberOfPciLinks returns a boolean if a field has been set.
+func (o *CapabilityAdapterUnitDescriptor) HasNumberOfPciLinks() bool {
+	if o != nil && o.NumberOfPciLinks != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNumberOfPciLinks gets a reference to the given int64 and assigns it to the NumberOfPciLinks field.
+func (o *CapabilityAdapterUnitDescriptor) SetNumberOfPciLinks(v int64) {
+	o.NumberOfPciLinks = &v
+}
+
 // GetPciLink returns the PciLink field value if set, zero value otherwise.
 func (o *CapabilityAdapterUnitDescriptor) GetPciLink() int64 {
 	if o == nil || o.PciLink == nil {
@@ -656,6 +694,9 @@ func (o CapabilityAdapterUnitDescriptor) MarshalJSON() ([]byte, error) {
 	if o.NumDcePorts != nil {
 		toSerialize["NumDcePorts"] = o.NumDcePorts
 	}
+	if o.NumberOfPciLinks != nil {
+		toSerialize["NumberOfPciLinks"] = o.NumberOfPciLinks
+	}
 	if o.PciLink != nil {
 		toSerialize["PciLink"] = o.PciLink
 	}
@@ -699,6 +740,8 @@ func (o *CapabilityAdapterUnitDescriptor) UnmarshalJSON(bytes []byte) (err error
 		MaxRocev2Interfaces *int64 `json:"MaxRocev2Interfaces,omitempty"`
 		// Number of Dce Ports for the adapter.
 		NumDcePorts *int64 `json:"NumDcePorts,omitempty"`
+		// Indicates number of PCI Links of the adapter.
+		NumberOfPciLinks *int64 `json:"NumberOfPciLinks,omitempty"`
 		// Indicates PCI Link status of adapter.
 		PciLink *int64 `json:"PciLink,omitempty"`
 		// Prom card type for the adapter.
@@ -724,6 +767,7 @@ func (o *CapabilityAdapterUnitDescriptor) UnmarshalJSON(bytes []byte) (err error
 		varCapabilityAdapterUnitDescriptor.MaxEthTxRingSize = varCapabilityAdapterUnitDescriptorWithoutEmbeddedStruct.MaxEthTxRingSize
 		varCapabilityAdapterUnitDescriptor.MaxRocev2Interfaces = varCapabilityAdapterUnitDescriptorWithoutEmbeddedStruct.MaxRocev2Interfaces
 		varCapabilityAdapterUnitDescriptor.NumDcePorts = varCapabilityAdapterUnitDescriptorWithoutEmbeddedStruct.NumDcePorts
+		varCapabilityAdapterUnitDescriptor.NumberOfPciLinks = varCapabilityAdapterUnitDescriptorWithoutEmbeddedStruct.NumberOfPciLinks
 		varCapabilityAdapterUnitDescriptor.PciLink = varCapabilityAdapterUnitDescriptorWithoutEmbeddedStruct.PciLink
 		varCapabilityAdapterUnitDescriptor.PromCardType = varCapabilityAdapterUnitDescriptorWithoutEmbeddedStruct.PromCardType
 		*o = CapabilityAdapterUnitDescriptor(varCapabilityAdapterUnitDescriptor)
@@ -757,6 +801,7 @@ func (o *CapabilityAdapterUnitDescriptor) UnmarshalJSON(bytes []byte) (err error
 		delete(additionalProperties, "MaxEthTxRingSize")
 		delete(additionalProperties, "MaxRocev2Interfaces")
 		delete(additionalProperties, "NumDcePorts")
+		delete(additionalProperties, "NumberOfPciLinks")
 		delete(additionalProperties, "PciLink")
 		delete(additionalProperties, "PromCardType")
 

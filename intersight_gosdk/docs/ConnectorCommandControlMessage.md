@@ -6,11 +6,11 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "connector.CommandControlMessage"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "connector.CommandControlMessage"]
-**Dir** | Pointer to **string** | The working directory of the command. If empty command is executed in the same directory the device connector process was called. | [optional] 
+**Dir** | Pointer to **string** | The working directory of the command. If empty, the command is executed in the same directory where the device connector process was called. | [optional] 
 **MsgType** | Pointer to **string** | Message carrying the operation to perform. | [optional] 
-**Stream** | Pointer to **string** | The command to execute. Commands must be whitelisted by platform implementation, if a command does not match any whitelisted command patterns an error will be returned to the requesting service on command start. | [optional] 
-**Terminal** | Pointer to **bool** | Indicates that a pseudo terminal should be attached to the command. Used for interactive commands. e.g A cross launch cli. | [optional] 
-**Timeout** | Pointer to **int64** | The timeout for the command to complete and exit after starting or receiving input. If timeout is not set a default of 10 minutes will be used. If there is input to the command stream the timeout is extended. | [optional] 
+**Stream** | Pointer to **string** | The command to execute. Commands must be in the list allowed by platform implementation, if a command does not match any allowed list command patterns, an error will be returned to the requesting service on command start. | [optional] 
+**Terminal** | Pointer to **bool** | Indicates that a pseudo terminal should be attached to the command. Used for interactive commands, e.g a cross launch CLI. | [optional] 
+**Timeout** | Pointer to **int64** | The timeout for the command to complete and exit after starting or receiving input. If timeout is not set, a default of 10 minutes will be used. If there is input to the command stream, the timeout is extended. | [optional] 
 
 ## Methods
 

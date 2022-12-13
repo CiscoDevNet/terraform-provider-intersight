@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -56,8 +56,8 @@ func (r ApiCreateCloudCollectInventoryRequest) Execute() (*CloudCollectInventory
 /*
 CreateCloudCollectInventory Create a 'cloud.CollectInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateCloudCollectInventoryRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateCloudCollectInventoryRequest
 */
 func (a *CloudApiService) CreateCloudCollectInventory(ctx context.Context) ApiCreateCloudCollectInventoryRequest {
 	return ApiCreateCloudCollectInventoryRequest{
@@ -67,7 +67,8 @@ func (a *CloudApiService) CreateCloudCollectInventory(ctx context.Context) ApiCr
 }
 
 // Execute executes the request
-//  @return CloudCollectInventory
+//
+//	@return CloudCollectInventory
 func (a *CloudApiService) CreateCloudCollectInventoryExecute(r ApiCreateCloudCollectInventoryRequest) (*CloudCollectInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -212,9 +213,9 @@ func (r ApiGetCloudAwsBillingUnitByMoidRequest) Execute() (*CloudAwsBillingUnit,
 /*
 GetCloudAwsBillingUnitByMoid Read a 'cloud.AwsBillingUnit' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCloudAwsBillingUnitByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCloudAwsBillingUnitByMoidRequest
 */
 func (a *CloudApiService) GetCloudAwsBillingUnitByMoid(ctx context.Context, moid string) ApiGetCloudAwsBillingUnitByMoidRequest {
 	return ApiGetCloudAwsBillingUnitByMoidRequest{
@@ -225,7 +226,8 @@ func (a *CloudApiService) GetCloudAwsBillingUnitByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return CloudAwsBillingUnit
+//
+//	@return CloudAwsBillingUnit
 func (a *CloudApiService) GetCloudAwsBillingUnitByMoidExecute(r ApiGetCloudAwsBillingUnitByMoidRequest) (*CloudAwsBillingUnit, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -436,8 +438,8 @@ func (r ApiGetCloudAwsBillingUnitListRequest) Execute() (*CloudAwsBillingUnitRes
 /*
 GetCloudAwsBillingUnitList Read a 'cloud.AwsBillingUnit' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCloudAwsBillingUnitListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCloudAwsBillingUnitListRequest
 */
 func (a *CloudApiService) GetCloudAwsBillingUnitList(ctx context.Context) ApiGetCloudAwsBillingUnitListRequest {
 	return ApiGetCloudAwsBillingUnitListRequest{
@@ -447,7 +449,8 @@ func (a *CloudApiService) GetCloudAwsBillingUnitList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//  @return CloudAwsBillingUnitResponse
+//
+//	@return CloudAwsBillingUnitResponse
 func (a *CloudApiService) GetCloudAwsBillingUnitListExecute(r ApiGetCloudAwsBillingUnitListRequest) (*CloudAwsBillingUnitResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -614,9 +617,9 @@ func (r ApiGetCloudAwsKeyPairByMoidRequest) Execute() (*CloudAwsKeyPair, *http.R
 /*
 GetCloudAwsKeyPairByMoid Read a 'cloud.AwsKeyPair' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCloudAwsKeyPairByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCloudAwsKeyPairByMoidRequest
 */
 func (a *CloudApiService) GetCloudAwsKeyPairByMoid(ctx context.Context, moid string) ApiGetCloudAwsKeyPairByMoidRequest {
 	return ApiGetCloudAwsKeyPairByMoidRequest{
@@ -627,7 +630,8 @@ func (a *CloudApiService) GetCloudAwsKeyPairByMoid(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return CloudAwsKeyPair
+//
+//	@return CloudAwsKeyPair
 func (a *CloudApiService) GetCloudAwsKeyPairByMoidExecute(r ApiGetCloudAwsKeyPairByMoidRequest) (*CloudAwsKeyPair, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -838,8 +842,8 @@ func (r ApiGetCloudAwsKeyPairListRequest) Execute() (*CloudAwsKeyPairResponse, *
 /*
 GetCloudAwsKeyPairList Read a 'cloud.AwsKeyPair' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCloudAwsKeyPairListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCloudAwsKeyPairListRequest
 */
 func (a *CloudApiService) GetCloudAwsKeyPairList(ctx context.Context) ApiGetCloudAwsKeyPairListRequest {
 	return ApiGetCloudAwsKeyPairListRequest{
@@ -849,7 +853,8 @@ func (a *CloudApiService) GetCloudAwsKeyPairList(ctx context.Context) ApiGetClou
 }
 
 // Execute executes the request
-//  @return CloudAwsKeyPairResponse
+//
+//	@return CloudAwsKeyPairResponse
 func (a *CloudApiService) GetCloudAwsKeyPairListExecute(r ApiGetCloudAwsKeyPairListRequest) (*CloudAwsKeyPairResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1016,9 +1021,9 @@ func (r ApiGetCloudAwsNetworkInterfaceByMoidRequest) Execute() (*CloudAwsNetwork
 /*
 GetCloudAwsNetworkInterfaceByMoid Read a 'cloud.AwsNetworkInterface' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCloudAwsNetworkInterfaceByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCloudAwsNetworkInterfaceByMoidRequest
 */
 func (a *CloudApiService) GetCloudAwsNetworkInterfaceByMoid(ctx context.Context, moid string) ApiGetCloudAwsNetworkInterfaceByMoidRequest {
 	return ApiGetCloudAwsNetworkInterfaceByMoidRequest{
@@ -1029,7 +1034,8 @@ func (a *CloudApiService) GetCloudAwsNetworkInterfaceByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return CloudAwsNetworkInterface
+//
+//	@return CloudAwsNetworkInterface
 func (a *CloudApiService) GetCloudAwsNetworkInterfaceByMoidExecute(r ApiGetCloudAwsNetworkInterfaceByMoidRequest) (*CloudAwsNetworkInterface, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1240,8 +1246,8 @@ func (r ApiGetCloudAwsNetworkInterfaceListRequest) Execute() (*CloudAwsNetworkIn
 /*
 GetCloudAwsNetworkInterfaceList Read a 'cloud.AwsNetworkInterface' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCloudAwsNetworkInterfaceListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCloudAwsNetworkInterfaceListRequest
 */
 func (a *CloudApiService) GetCloudAwsNetworkInterfaceList(ctx context.Context) ApiGetCloudAwsNetworkInterfaceListRequest {
 	return ApiGetCloudAwsNetworkInterfaceListRequest{
@@ -1251,7 +1257,8 @@ func (a *CloudApiService) GetCloudAwsNetworkInterfaceList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return CloudAwsNetworkInterfaceResponse
+//
+//	@return CloudAwsNetworkInterfaceResponse
 func (a *CloudApiService) GetCloudAwsNetworkInterfaceListExecute(r ApiGetCloudAwsNetworkInterfaceListRequest) (*CloudAwsNetworkInterfaceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1418,9 +1425,9 @@ func (r ApiGetCloudAwsOrganizationalUnitByMoidRequest) Execute() (*CloudAwsOrgan
 /*
 GetCloudAwsOrganizationalUnitByMoid Read a 'cloud.AwsOrganizationalUnit' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCloudAwsOrganizationalUnitByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCloudAwsOrganizationalUnitByMoidRequest
 */
 func (a *CloudApiService) GetCloudAwsOrganizationalUnitByMoid(ctx context.Context, moid string) ApiGetCloudAwsOrganizationalUnitByMoidRequest {
 	return ApiGetCloudAwsOrganizationalUnitByMoidRequest{
@@ -1431,7 +1438,8 @@ func (a *CloudApiService) GetCloudAwsOrganizationalUnitByMoid(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return CloudAwsOrganizationalUnit
+//
+//	@return CloudAwsOrganizationalUnit
 func (a *CloudApiService) GetCloudAwsOrganizationalUnitByMoidExecute(r ApiGetCloudAwsOrganizationalUnitByMoidRequest) (*CloudAwsOrganizationalUnit, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1642,8 +1650,8 @@ func (r ApiGetCloudAwsOrganizationalUnitListRequest) Execute() (*CloudAwsOrganiz
 /*
 GetCloudAwsOrganizationalUnitList Read a 'cloud.AwsOrganizationalUnit' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCloudAwsOrganizationalUnitListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCloudAwsOrganizationalUnitListRequest
 */
 func (a *CloudApiService) GetCloudAwsOrganizationalUnitList(ctx context.Context) ApiGetCloudAwsOrganizationalUnitListRequest {
 	return ApiGetCloudAwsOrganizationalUnitListRequest{
@@ -1653,7 +1661,8 @@ func (a *CloudApiService) GetCloudAwsOrganizationalUnitList(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return CloudAwsOrganizationalUnitResponse
+//
+//	@return CloudAwsOrganizationalUnitResponse
 func (a *CloudApiService) GetCloudAwsOrganizationalUnitListExecute(r ApiGetCloudAwsOrganizationalUnitListRequest) (*CloudAwsOrganizationalUnitResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1820,9 +1829,9 @@ func (r ApiGetCloudAwsSecurityGroupByMoidRequest) Execute() (*CloudAwsSecurityGr
 /*
 GetCloudAwsSecurityGroupByMoid Read a 'cloud.AwsSecurityGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCloudAwsSecurityGroupByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCloudAwsSecurityGroupByMoidRequest
 */
 func (a *CloudApiService) GetCloudAwsSecurityGroupByMoid(ctx context.Context, moid string) ApiGetCloudAwsSecurityGroupByMoidRequest {
 	return ApiGetCloudAwsSecurityGroupByMoidRequest{
@@ -1833,7 +1842,8 @@ func (a *CloudApiService) GetCloudAwsSecurityGroupByMoid(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return CloudAwsSecurityGroup
+//
+//	@return CloudAwsSecurityGroup
 func (a *CloudApiService) GetCloudAwsSecurityGroupByMoidExecute(r ApiGetCloudAwsSecurityGroupByMoidRequest) (*CloudAwsSecurityGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2044,8 +2054,8 @@ func (r ApiGetCloudAwsSecurityGroupListRequest) Execute() (*CloudAwsSecurityGrou
 /*
 GetCloudAwsSecurityGroupList Read a 'cloud.AwsSecurityGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCloudAwsSecurityGroupListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCloudAwsSecurityGroupListRequest
 */
 func (a *CloudApiService) GetCloudAwsSecurityGroupList(ctx context.Context) ApiGetCloudAwsSecurityGroupListRequest {
 	return ApiGetCloudAwsSecurityGroupListRequest{
@@ -2055,7 +2065,8 @@ func (a *CloudApiService) GetCloudAwsSecurityGroupList(ctx context.Context) ApiG
 }
 
 // Execute executes the request
-//  @return CloudAwsSecurityGroupResponse
+//
+//	@return CloudAwsSecurityGroupResponse
 func (a *CloudApiService) GetCloudAwsSecurityGroupListExecute(r ApiGetCloudAwsSecurityGroupListRequest) (*CloudAwsSecurityGroupResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2222,9 +2233,9 @@ func (r ApiGetCloudAwsSubnetByMoidRequest) Execute() (*CloudAwsSubnet, *http.Res
 /*
 GetCloudAwsSubnetByMoid Read a 'cloud.AwsSubnet' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCloudAwsSubnetByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCloudAwsSubnetByMoidRequest
 */
 func (a *CloudApiService) GetCloudAwsSubnetByMoid(ctx context.Context, moid string) ApiGetCloudAwsSubnetByMoidRequest {
 	return ApiGetCloudAwsSubnetByMoidRequest{
@@ -2235,7 +2246,8 @@ func (a *CloudApiService) GetCloudAwsSubnetByMoid(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return CloudAwsSubnet
+//
+//	@return CloudAwsSubnet
 func (a *CloudApiService) GetCloudAwsSubnetByMoidExecute(r ApiGetCloudAwsSubnetByMoidRequest) (*CloudAwsSubnet, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2446,8 +2458,8 @@ func (r ApiGetCloudAwsSubnetListRequest) Execute() (*CloudAwsSubnetResponse, *ht
 /*
 GetCloudAwsSubnetList Read a 'cloud.AwsSubnet' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCloudAwsSubnetListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCloudAwsSubnetListRequest
 */
 func (a *CloudApiService) GetCloudAwsSubnetList(ctx context.Context) ApiGetCloudAwsSubnetListRequest {
 	return ApiGetCloudAwsSubnetListRequest{
@@ -2457,7 +2469,8 @@ func (a *CloudApiService) GetCloudAwsSubnetList(ctx context.Context) ApiGetCloud
 }
 
 // Execute executes the request
-//  @return CloudAwsSubnetResponse
+//
+//	@return CloudAwsSubnetResponse
 func (a *CloudApiService) GetCloudAwsSubnetListExecute(r ApiGetCloudAwsSubnetListRequest) (*CloudAwsSubnetResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2624,9 +2637,9 @@ func (r ApiGetCloudAwsVirtualMachineByMoidRequest) Execute() (*CloudAwsVirtualMa
 /*
 GetCloudAwsVirtualMachineByMoid Read a 'cloud.AwsVirtualMachine' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCloudAwsVirtualMachineByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCloudAwsVirtualMachineByMoidRequest
 */
 func (a *CloudApiService) GetCloudAwsVirtualMachineByMoid(ctx context.Context, moid string) ApiGetCloudAwsVirtualMachineByMoidRequest {
 	return ApiGetCloudAwsVirtualMachineByMoidRequest{
@@ -2637,7 +2650,8 @@ func (a *CloudApiService) GetCloudAwsVirtualMachineByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return CloudAwsVirtualMachine
+//
+//	@return CloudAwsVirtualMachine
 func (a *CloudApiService) GetCloudAwsVirtualMachineByMoidExecute(r ApiGetCloudAwsVirtualMachineByMoidRequest) (*CloudAwsVirtualMachine, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2848,8 +2862,8 @@ func (r ApiGetCloudAwsVirtualMachineListRequest) Execute() (*CloudAwsVirtualMach
 /*
 GetCloudAwsVirtualMachineList Read a 'cloud.AwsVirtualMachine' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCloudAwsVirtualMachineListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCloudAwsVirtualMachineListRequest
 */
 func (a *CloudApiService) GetCloudAwsVirtualMachineList(ctx context.Context) ApiGetCloudAwsVirtualMachineListRequest {
 	return ApiGetCloudAwsVirtualMachineListRequest{
@@ -2859,7 +2873,8 @@ func (a *CloudApiService) GetCloudAwsVirtualMachineList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return CloudAwsVirtualMachineResponse
+//
+//	@return CloudAwsVirtualMachineResponse
 func (a *CloudApiService) GetCloudAwsVirtualMachineListExecute(r ApiGetCloudAwsVirtualMachineListRequest) (*CloudAwsVirtualMachineResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3026,9 +3041,9 @@ func (r ApiGetCloudAwsVolumeByMoidRequest) Execute() (*CloudAwsVolume, *http.Res
 /*
 GetCloudAwsVolumeByMoid Read a 'cloud.AwsVolume' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCloudAwsVolumeByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCloudAwsVolumeByMoidRequest
 */
 func (a *CloudApiService) GetCloudAwsVolumeByMoid(ctx context.Context, moid string) ApiGetCloudAwsVolumeByMoidRequest {
 	return ApiGetCloudAwsVolumeByMoidRequest{
@@ -3039,7 +3054,8 @@ func (a *CloudApiService) GetCloudAwsVolumeByMoid(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return CloudAwsVolume
+//
+//	@return CloudAwsVolume
 func (a *CloudApiService) GetCloudAwsVolumeByMoidExecute(r ApiGetCloudAwsVolumeByMoidRequest) (*CloudAwsVolume, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3250,8 +3266,8 @@ func (r ApiGetCloudAwsVolumeListRequest) Execute() (*CloudAwsVolumeResponse, *ht
 /*
 GetCloudAwsVolumeList Read a 'cloud.AwsVolume' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCloudAwsVolumeListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCloudAwsVolumeListRequest
 */
 func (a *CloudApiService) GetCloudAwsVolumeList(ctx context.Context) ApiGetCloudAwsVolumeListRequest {
 	return ApiGetCloudAwsVolumeListRequest{
@@ -3261,7 +3277,8 @@ func (a *CloudApiService) GetCloudAwsVolumeList(ctx context.Context) ApiGetCloud
 }
 
 // Execute executes the request
-//  @return CloudAwsVolumeResponse
+//
+//	@return CloudAwsVolumeResponse
 func (a *CloudApiService) GetCloudAwsVolumeListExecute(r ApiGetCloudAwsVolumeListRequest) (*CloudAwsVolumeResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3428,9 +3445,9 @@ func (r ApiGetCloudAwsVpcByMoidRequest) Execute() (*CloudAwsVpc, *http.Response,
 /*
 GetCloudAwsVpcByMoid Read a 'cloud.AwsVpc' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCloudAwsVpcByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCloudAwsVpcByMoidRequest
 */
 func (a *CloudApiService) GetCloudAwsVpcByMoid(ctx context.Context, moid string) ApiGetCloudAwsVpcByMoidRequest {
 	return ApiGetCloudAwsVpcByMoidRequest{
@@ -3441,7 +3458,8 @@ func (a *CloudApiService) GetCloudAwsVpcByMoid(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//  @return CloudAwsVpc
+//
+//	@return CloudAwsVpc
 func (a *CloudApiService) GetCloudAwsVpcByMoidExecute(r ApiGetCloudAwsVpcByMoidRequest) (*CloudAwsVpc, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3652,8 +3670,8 @@ func (r ApiGetCloudAwsVpcListRequest) Execute() (*CloudAwsVpcResponse, *http.Res
 /*
 GetCloudAwsVpcList Read a 'cloud.AwsVpc' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCloudAwsVpcListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCloudAwsVpcListRequest
 */
 func (a *CloudApiService) GetCloudAwsVpcList(ctx context.Context) ApiGetCloudAwsVpcListRequest {
 	return ApiGetCloudAwsVpcListRequest{
@@ -3663,7 +3681,8 @@ func (a *CloudApiService) GetCloudAwsVpcList(ctx context.Context) ApiGetCloudAws
 }
 
 // Execute executes the request
-//  @return CloudAwsVpcResponse
+//
+//	@return CloudAwsVpcResponse
 func (a *CloudApiService) GetCloudAwsVpcListExecute(r ApiGetCloudAwsVpcListRequest) (*CloudAwsVpcResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3830,9 +3849,9 @@ func (r ApiGetCloudRegionsByMoidRequest) Execute() (*CloudRegions, *http.Respons
 /*
 GetCloudRegionsByMoid Read a 'cloud.Regions' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCloudRegionsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCloudRegionsByMoidRequest
 */
 func (a *CloudApiService) GetCloudRegionsByMoid(ctx context.Context, moid string) ApiGetCloudRegionsByMoidRequest {
 	return ApiGetCloudRegionsByMoidRequest{
@@ -3843,7 +3862,8 @@ func (a *CloudApiService) GetCloudRegionsByMoid(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return CloudRegions
+//
+//	@return CloudRegions
 func (a *CloudApiService) GetCloudRegionsByMoidExecute(r ApiGetCloudRegionsByMoidRequest) (*CloudRegions, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4054,8 +4074,8 @@ func (r ApiGetCloudRegionsListRequest) Execute() (*CloudRegionsResponse, *http.R
 /*
 GetCloudRegionsList Read a 'cloud.Regions' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCloudRegionsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCloudRegionsListRequest
 */
 func (a *CloudApiService) GetCloudRegionsList(ctx context.Context) ApiGetCloudRegionsListRequest {
 	return ApiGetCloudRegionsListRequest{
@@ -4065,7 +4085,8 @@ func (a *CloudApiService) GetCloudRegionsList(ctx context.Context) ApiGetCloudRe
 }
 
 // Execute executes the request
-//  @return CloudRegionsResponse
+//
+//	@return CloudRegionsResponse
 func (a *CloudApiService) GetCloudRegionsListExecute(r ApiGetCloudRegionsListRequest) (*CloudRegionsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4232,9 +4253,9 @@ func (r ApiGetCloudSkuContainerTypeByMoidRequest) Execute() (*CloudSkuContainerT
 /*
 GetCloudSkuContainerTypeByMoid Read a 'cloud.SkuContainerType' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCloudSkuContainerTypeByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCloudSkuContainerTypeByMoidRequest
 */
 func (a *CloudApiService) GetCloudSkuContainerTypeByMoid(ctx context.Context, moid string) ApiGetCloudSkuContainerTypeByMoidRequest {
 	return ApiGetCloudSkuContainerTypeByMoidRequest{
@@ -4245,7 +4266,8 @@ func (a *CloudApiService) GetCloudSkuContainerTypeByMoid(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return CloudSkuContainerType
+//
+//	@return CloudSkuContainerType
 func (a *CloudApiService) GetCloudSkuContainerTypeByMoidExecute(r ApiGetCloudSkuContainerTypeByMoidRequest) (*CloudSkuContainerType, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4456,8 +4478,8 @@ func (r ApiGetCloudSkuContainerTypeListRequest) Execute() (*CloudSkuContainerTyp
 /*
 GetCloudSkuContainerTypeList Read a 'cloud.SkuContainerType' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCloudSkuContainerTypeListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCloudSkuContainerTypeListRequest
 */
 func (a *CloudApiService) GetCloudSkuContainerTypeList(ctx context.Context) ApiGetCloudSkuContainerTypeListRequest {
 	return ApiGetCloudSkuContainerTypeListRequest{
@@ -4467,7 +4489,8 @@ func (a *CloudApiService) GetCloudSkuContainerTypeList(ctx context.Context) ApiG
 }
 
 // Execute executes the request
-//  @return CloudSkuContainerTypeResponse
+//
+//	@return CloudSkuContainerTypeResponse
 func (a *CloudApiService) GetCloudSkuContainerTypeListExecute(r ApiGetCloudSkuContainerTypeListRequest) (*CloudSkuContainerTypeResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4634,9 +4657,9 @@ func (r ApiGetCloudSkuDatabaseTypeByMoidRequest) Execute() (*CloudSkuDatabaseTyp
 /*
 GetCloudSkuDatabaseTypeByMoid Read a 'cloud.SkuDatabaseType' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCloudSkuDatabaseTypeByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCloudSkuDatabaseTypeByMoidRequest
 */
 func (a *CloudApiService) GetCloudSkuDatabaseTypeByMoid(ctx context.Context, moid string) ApiGetCloudSkuDatabaseTypeByMoidRequest {
 	return ApiGetCloudSkuDatabaseTypeByMoidRequest{
@@ -4647,7 +4670,8 @@ func (a *CloudApiService) GetCloudSkuDatabaseTypeByMoid(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return CloudSkuDatabaseType
+//
+//	@return CloudSkuDatabaseType
 func (a *CloudApiService) GetCloudSkuDatabaseTypeByMoidExecute(r ApiGetCloudSkuDatabaseTypeByMoidRequest) (*CloudSkuDatabaseType, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4858,8 +4882,8 @@ func (r ApiGetCloudSkuDatabaseTypeListRequest) Execute() (*CloudSkuDatabaseTypeR
 /*
 GetCloudSkuDatabaseTypeList Read a 'cloud.SkuDatabaseType' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCloudSkuDatabaseTypeListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCloudSkuDatabaseTypeListRequest
 */
 func (a *CloudApiService) GetCloudSkuDatabaseTypeList(ctx context.Context) ApiGetCloudSkuDatabaseTypeListRequest {
 	return ApiGetCloudSkuDatabaseTypeListRequest{
@@ -4869,7 +4893,8 @@ func (a *CloudApiService) GetCloudSkuDatabaseTypeList(ctx context.Context) ApiGe
 }
 
 // Execute executes the request
-//  @return CloudSkuDatabaseTypeResponse
+//
+//	@return CloudSkuDatabaseTypeResponse
 func (a *CloudApiService) GetCloudSkuDatabaseTypeListExecute(r ApiGetCloudSkuDatabaseTypeListRequest) (*CloudSkuDatabaseTypeResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5036,9 +5061,9 @@ func (r ApiGetCloudSkuInstanceTypeByMoidRequest) Execute() (*CloudSkuInstanceTyp
 /*
 GetCloudSkuInstanceTypeByMoid Read a 'cloud.SkuInstanceType' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCloudSkuInstanceTypeByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCloudSkuInstanceTypeByMoidRequest
 */
 func (a *CloudApiService) GetCloudSkuInstanceTypeByMoid(ctx context.Context, moid string) ApiGetCloudSkuInstanceTypeByMoidRequest {
 	return ApiGetCloudSkuInstanceTypeByMoidRequest{
@@ -5049,7 +5074,8 @@ func (a *CloudApiService) GetCloudSkuInstanceTypeByMoid(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return CloudSkuInstanceType
+//
+//	@return CloudSkuInstanceType
 func (a *CloudApiService) GetCloudSkuInstanceTypeByMoidExecute(r ApiGetCloudSkuInstanceTypeByMoidRequest) (*CloudSkuInstanceType, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5260,8 +5286,8 @@ func (r ApiGetCloudSkuInstanceTypeListRequest) Execute() (*CloudSkuInstanceTypeR
 /*
 GetCloudSkuInstanceTypeList Read a 'cloud.SkuInstanceType' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCloudSkuInstanceTypeListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCloudSkuInstanceTypeListRequest
 */
 func (a *CloudApiService) GetCloudSkuInstanceTypeList(ctx context.Context) ApiGetCloudSkuInstanceTypeListRequest {
 	return ApiGetCloudSkuInstanceTypeListRequest{
@@ -5271,7 +5297,8 @@ func (a *CloudApiService) GetCloudSkuInstanceTypeList(ctx context.Context) ApiGe
 }
 
 // Execute executes the request
-//  @return CloudSkuInstanceTypeResponse
+//
+//	@return CloudSkuInstanceTypeResponse
 func (a *CloudApiService) GetCloudSkuInstanceTypeListExecute(r ApiGetCloudSkuInstanceTypeListRequest) (*CloudSkuInstanceTypeResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5438,9 +5465,9 @@ func (r ApiGetCloudSkuNetworkTypeByMoidRequest) Execute() (*CloudSkuNetworkType,
 /*
 GetCloudSkuNetworkTypeByMoid Read a 'cloud.SkuNetworkType' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCloudSkuNetworkTypeByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCloudSkuNetworkTypeByMoidRequest
 */
 func (a *CloudApiService) GetCloudSkuNetworkTypeByMoid(ctx context.Context, moid string) ApiGetCloudSkuNetworkTypeByMoidRequest {
 	return ApiGetCloudSkuNetworkTypeByMoidRequest{
@@ -5451,7 +5478,8 @@ func (a *CloudApiService) GetCloudSkuNetworkTypeByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return CloudSkuNetworkType
+//
+//	@return CloudSkuNetworkType
 func (a *CloudApiService) GetCloudSkuNetworkTypeByMoidExecute(r ApiGetCloudSkuNetworkTypeByMoidRequest) (*CloudSkuNetworkType, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5662,8 +5690,8 @@ func (r ApiGetCloudSkuNetworkTypeListRequest) Execute() (*CloudSkuNetworkTypeRes
 /*
 GetCloudSkuNetworkTypeList Read a 'cloud.SkuNetworkType' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCloudSkuNetworkTypeListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCloudSkuNetworkTypeListRequest
 */
 func (a *CloudApiService) GetCloudSkuNetworkTypeList(ctx context.Context) ApiGetCloudSkuNetworkTypeListRequest {
 	return ApiGetCloudSkuNetworkTypeListRequest{
@@ -5673,7 +5701,8 @@ func (a *CloudApiService) GetCloudSkuNetworkTypeList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//  @return CloudSkuNetworkTypeResponse
+//
+//	@return CloudSkuNetworkTypeResponse
 func (a *CloudApiService) GetCloudSkuNetworkTypeListExecute(r ApiGetCloudSkuNetworkTypeListRequest) (*CloudSkuNetworkTypeResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5840,9 +5869,9 @@ func (r ApiGetCloudSkuRegionRateCardsByMoidRequest) Execute() (*CloudSkuRegionRa
 /*
 GetCloudSkuRegionRateCardsByMoid Read a 'cloud.SkuRegionRateCards' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCloudSkuRegionRateCardsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCloudSkuRegionRateCardsByMoidRequest
 */
 func (a *CloudApiService) GetCloudSkuRegionRateCardsByMoid(ctx context.Context, moid string) ApiGetCloudSkuRegionRateCardsByMoidRequest {
 	return ApiGetCloudSkuRegionRateCardsByMoidRequest{
@@ -5853,7 +5882,8 @@ func (a *CloudApiService) GetCloudSkuRegionRateCardsByMoid(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return CloudSkuRegionRateCards
+//
+//	@return CloudSkuRegionRateCards
 func (a *CloudApiService) GetCloudSkuRegionRateCardsByMoidExecute(r ApiGetCloudSkuRegionRateCardsByMoidRequest) (*CloudSkuRegionRateCards, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6064,8 +6094,8 @@ func (r ApiGetCloudSkuRegionRateCardsListRequest) Execute() (*CloudSkuRegionRate
 /*
 GetCloudSkuRegionRateCardsList Read a 'cloud.SkuRegionRateCards' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCloudSkuRegionRateCardsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCloudSkuRegionRateCardsListRequest
 */
 func (a *CloudApiService) GetCloudSkuRegionRateCardsList(ctx context.Context) ApiGetCloudSkuRegionRateCardsListRequest {
 	return ApiGetCloudSkuRegionRateCardsListRequest{
@@ -6075,7 +6105,8 @@ func (a *CloudApiService) GetCloudSkuRegionRateCardsList(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return CloudSkuRegionRateCardsResponse
+//
+//	@return CloudSkuRegionRateCardsResponse
 func (a *CloudApiService) GetCloudSkuRegionRateCardsListExecute(r ApiGetCloudSkuRegionRateCardsListRequest) (*CloudSkuRegionRateCardsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6242,9 +6273,9 @@ func (r ApiGetCloudSkuVolumeTypeByMoidRequest) Execute() (*CloudSkuVolumeType, *
 /*
 GetCloudSkuVolumeTypeByMoid Read a 'cloud.SkuVolumeType' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCloudSkuVolumeTypeByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCloudSkuVolumeTypeByMoidRequest
 */
 func (a *CloudApiService) GetCloudSkuVolumeTypeByMoid(ctx context.Context, moid string) ApiGetCloudSkuVolumeTypeByMoidRequest {
 	return ApiGetCloudSkuVolumeTypeByMoidRequest{
@@ -6255,7 +6286,8 @@ func (a *CloudApiService) GetCloudSkuVolumeTypeByMoid(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return CloudSkuVolumeType
+//
+//	@return CloudSkuVolumeType
 func (a *CloudApiService) GetCloudSkuVolumeTypeByMoidExecute(r ApiGetCloudSkuVolumeTypeByMoidRequest) (*CloudSkuVolumeType, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6466,8 +6498,8 @@ func (r ApiGetCloudSkuVolumeTypeListRequest) Execute() (*CloudSkuVolumeTypeRespo
 /*
 GetCloudSkuVolumeTypeList Read a 'cloud.SkuVolumeType' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCloudSkuVolumeTypeListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCloudSkuVolumeTypeListRequest
 */
 func (a *CloudApiService) GetCloudSkuVolumeTypeList(ctx context.Context) ApiGetCloudSkuVolumeTypeListRequest {
 	return ApiGetCloudSkuVolumeTypeListRequest{
@@ -6477,7 +6509,8 @@ func (a *CloudApiService) GetCloudSkuVolumeTypeList(ctx context.Context) ApiGetC
 }
 
 // Execute executes the request
-//  @return CloudSkuVolumeTypeResponse
+//
+//	@return CloudSkuVolumeTypeResponse
 func (a *CloudApiService) GetCloudSkuVolumeTypeListExecute(r ApiGetCloudSkuVolumeTypeListRequest) (*CloudSkuVolumeTypeResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6644,9 +6677,9 @@ func (r ApiGetCloudTfcAgentpoolByMoidRequest) Execute() (*CloudTfcAgentpool, *ht
 /*
 GetCloudTfcAgentpoolByMoid Read a 'cloud.TfcAgentpool' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCloudTfcAgentpoolByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCloudTfcAgentpoolByMoidRequest
 */
 func (a *CloudApiService) GetCloudTfcAgentpoolByMoid(ctx context.Context, moid string) ApiGetCloudTfcAgentpoolByMoidRequest {
 	return ApiGetCloudTfcAgentpoolByMoidRequest{
@@ -6657,7 +6690,8 @@ func (a *CloudApiService) GetCloudTfcAgentpoolByMoid(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return CloudTfcAgentpool
+//
+//	@return CloudTfcAgentpool
 func (a *CloudApiService) GetCloudTfcAgentpoolByMoidExecute(r ApiGetCloudTfcAgentpoolByMoidRequest) (*CloudTfcAgentpool, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6868,8 +6902,8 @@ func (r ApiGetCloudTfcAgentpoolListRequest) Execute() (*CloudTfcAgentpoolRespons
 /*
 GetCloudTfcAgentpoolList Read a 'cloud.TfcAgentpool' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCloudTfcAgentpoolListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCloudTfcAgentpoolListRequest
 */
 func (a *CloudApiService) GetCloudTfcAgentpoolList(ctx context.Context) ApiGetCloudTfcAgentpoolListRequest {
 	return ApiGetCloudTfcAgentpoolListRequest{
@@ -6879,7 +6913,8 @@ func (a *CloudApiService) GetCloudTfcAgentpoolList(ctx context.Context) ApiGetCl
 }
 
 // Execute executes the request
-//  @return CloudTfcAgentpoolResponse
+//
+//	@return CloudTfcAgentpoolResponse
 func (a *CloudApiService) GetCloudTfcAgentpoolListExecute(r ApiGetCloudTfcAgentpoolListRequest) (*CloudTfcAgentpoolResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7046,9 +7081,9 @@ func (r ApiGetCloudTfcOrganizationByMoidRequest) Execute() (*CloudTfcOrganizatio
 /*
 GetCloudTfcOrganizationByMoid Read a 'cloud.TfcOrganization' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCloudTfcOrganizationByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCloudTfcOrganizationByMoidRequest
 */
 func (a *CloudApiService) GetCloudTfcOrganizationByMoid(ctx context.Context, moid string) ApiGetCloudTfcOrganizationByMoidRequest {
 	return ApiGetCloudTfcOrganizationByMoidRequest{
@@ -7059,7 +7094,8 @@ func (a *CloudApiService) GetCloudTfcOrganizationByMoid(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return CloudTfcOrganization
+//
+//	@return CloudTfcOrganization
 func (a *CloudApiService) GetCloudTfcOrganizationByMoidExecute(r ApiGetCloudTfcOrganizationByMoidRequest) (*CloudTfcOrganization, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7270,8 +7306,8 @@ func (r ApiGetCloudTfcOrganizationListRequest) Execute() (*CloudTfcOrganizationR
 /*
 GetCloudTfcOrganizationList Read a 'cloud.TfcOrganization' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCloudTfcOrganizationListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCloudTfcOrganizationListRequest
 */
 func (a *CloudApiService) GetCloudTfcOrganizationList(ctx context.Context) ApiGetCloudTfcOrganizationListRequest {
 	return ApiGetCloudTfcOrganizationListRequest{
@@ -7281,7 +7317,8 @@ func (a *CloudApiService) GetCloudTfcOrganizationList(ctx context.Context) ApiGe
 }
 
 // Execute executes the request
-//  @return CloudTfcOrganizationResponse
+//
+//	@return CloudTfcOrganizationResponse
 func (a *CloudApiService) GetCloudTfcOrganizationListExecute(r ApiGetCloudTfcOrganizationListRequest) (*CloudTfcOrganizationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7448,9 +7485,9 @@ func (r ApiGetCloudTfcWorkspaceByMoidRequest) Execute() (*CloudTfcWorkspace, *ht
 /*
 GetCloudTfcWorkspaceByMoid Read a 'cloud.TfcWorkspace' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCloudTfcWorkspaceByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCloudTfcWorkspaceByMoidRequest
 */
 func (a *CloudApiService) GetCloudTfcWorkspaceByMoid(ctx context.Context, moid string) ApiGetCloudTfcWorkspaceByMoidRequest {
 	return ApiGetCloudTfcWorkspaceByMoidRequest{
@@ -7461,7 +7498,8 @@ func (a *CloudApiService) GetCloudTfcWorkspaceByMoid(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return CloudTfcWorkspace
+//
+//	@return CloudTfcWorkspace
 func (a *CloudApiService) GetCloudTfcWorkspaceByMoidExecute(r ApiGetCloudTfcWorkspaceByMoidRequest) (*CloudTfcWorkspace, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7672,8 +7710,8 @@ func (r ApiGetCloudTfcWorkspaceListRequest) Execute() (*CloudTfcWorkspaceRespons
 /*
 GetCloudTfcWorkspaceList Read a 'cloud.TfcWorkspace' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCloudTfcWorkspaceListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCloudTfcWorkspaceListRequest
 */
 func (a *CloudApiService) GetCloudTfcWorkspaceList(ctx context.Context) ApiGetCloudTfcWorkspaceListRequest {
 	return ApiGetCloudTfcWorkspaceListRequest{
@@ -7683,7 +7721,8 @@ func (a *CloudApiService) GetCloudTfcWorkspaceList(ctx context.Context) ApiGetCl
 }
 
 // Execute executes the request
-//  @return CloudTfcWorkspaceResponse
+//
+//	@return CloudTfcWorkspaceResponse
 func (a *CloudApiService) GetCloudTfcWorkspaceListExecute(r ApiGetCloudTfcWorkspaceListRequest) (*CloudTfcWorkspaceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7864,9 +7903,9 @@ func (r ApiPatchCloudAwsVirtualMachineRequest) Execute() (*CloudAwsVirtualMachin
 /*
 PatchCloudAwsVirtualMachine Update a 'cloud.AwsVirtualMachine' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchCloudAwsVirtualMachineRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchCloudAwsVirtualMachineRequest
 */
 func (a *CloudApiService) PatchCloudAwsVirtualMachine(ctx context.Context, moid string) ApiPatchCloudAwsVirtualMachineRequest {
 	return ApiPatchCloudAwsVirtualMachineRequest{
@@ -7877,7 +7916,8 @@ func (a *CloudApiService) PatchCloudAwsVirtualMachine(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return CloudAwsVirtualMachine
+//
+//	@return CloudAwsVirtualMachine
 func (a *CloudApiService) PatchCloudAwsVirtualMachineExecute(r ApiPatchCloudAwsVirtualMachineRequest) (*CloudAwsVirtualMachine, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -8034,9 +8074,9 @@ func (r ApiPatchCloudRegionsRequest) Execute() (*CloudRegions, *http.Response, e
 /*
 PatchCloudRegions Update a 'cloud.Regions' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchCloudRegionsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchCloudRegionsRequest
 */
 func (a *CloudApiService) PatchCloudRegions(ctx context.Context, moid string) ApiPatchCloudRegionsRequest {
 	return ApiPatchCloudRegionsRequest{
@@ -8047,7 +8087,8 @@ func (a *CloudApiService) PatchCloudRegions(ctx context.Context, moid string) Ap
 }
 
 // Execute executes the request
-//  @return CloudRegions
+//
+//	@return CloudRegions
 func (a *CloudApiService) PatchCloudRegionsExecute(r ApiPatchCloudRegionsRequest) (*CloudRegions, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -8204,9 +8245,9 @@ func (r ApiUpdateCloudAwsVirtualMachineRequest) Execute() (*CloudAwsVirtualMachi
 /*
 UpdateCloudAwsVirtualMachine Update a 'cloud.AwsVirtualMachine' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateCloudAwsVirtualMachineRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateCloudAwsVirtualMachineRequest
 */
 func (a *CloudApiService) UpdateCloudAwsVirtualMachine(ctx context.Context, moid string) ApiUpdateCloudAwsVirtualMachineRequest {
 	return ApiUpdateCloudAwsVirtualMachineRequest{
@@ -8217,7 +8258,8 @@ func (a *CloudApiService) UpdateCloudAwsVirtualMachine(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return CloudAwsVirtualMachine
+//
+//	@return CloudAwsVirtualMachine
 func (a *CloudApiService) UpdateCloudAwsVirtualMachineExecute(r ApiUpdateCloudAwsVirtualMachineRequest) (*CloudAwsVirtualMachine, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -8374,9 +8416,9 @@ func (r ApiUpdateCloudRegionsRequest) Execute() (*CloudRegions, *http.Response, 
 /*
 UpdateCloudRegions Update a 'cloud.Regions' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateCloudRegionsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateCloudRegionsRequest
 */
 func (a *CloudApiService) UpdateCloudRegions(ctx context.Context, moid string) ApiUpdateCloudRegionsRequest {
 	return ApiUpdateCloudRegionsRequest{
@@ -8387,7 +8429,8 @@ func (a *CloudApiService) UpdateCloudRegions(ctx context.Context, moid string) A
 }
 
 // Execute executes the request
-//  @return CloudRegions
+//
+//	@return CloudRegions
 func (a *CloudApiService) UpdateCloudRegionsExecute(r ApiUpdateCloudRegionsRequest) (*CloudRegions, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

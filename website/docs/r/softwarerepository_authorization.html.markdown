@@ -44,7 +44,6 @@ This complex property has following sub-properties:
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
 * `is_password_set`:(bool)(ReadOnly) Indicates whether the value of the 'password' property has been set. 
-* `is_user_id_set`:(bool)(ReadOnly) Indicates whether the value of the 'userId' property has been set. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `owners`:

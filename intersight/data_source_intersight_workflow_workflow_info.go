@@ -171,7 +171,7 @@ func getWorkflowWorkflowInfoSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"input": {
-			Description: "All the given inputs for the workflow.",
+			Description: "The input data provided for the workflow execution.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -206,7 +206,7 @@ func getWorkflowWorkflowInfoSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"message": {
-						Description: "An i18n message that can be translated in multiple languages to support internationalization.",
+						Description: "An i18n message that can be translated into multiple languages to support internationalization.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -284,7 +284,7 @@ func getWorkflowWorkflowInfoSchema() map[string]*schema.Schema {
 			},
 		},
 		"output": {
-			Description: "All the generated outputs for the workflow.",
+			Description: "The output generated at the end of the workflow execution.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -473,7 +473,7 @@ func getWorkflowWorkflowInfoSchema() map[string]*schema.Schema {
 			},
 		},
 		"progress": {
-			Description: "This field indicates percentage of workflow task execution.",
+			Description: "The progress of a workflow is calculated based on the total number of tasks in the workflow and the number of tasks completed. A task is considered as completed if the task status is either \"NO_OP\" or \"COMPLETED\". If the task status is \"SKIP_TO_FAIL\", the workflow will be terminated and the progress of the workflow will be set to 100.",
 			Type:        schema.TypeFloat,
 			Optional:    true,
 		},
@@ -540,12 +540,12 @@ func getWorkflowWorkflowInfoSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"retryable": {
-						Description: "When true, this workflow can be retried if has not been modified for more than a period of 2 weeks.",
+						Description: "When true, this workflow can be retried within 2 weeks from the last failure.",
 						Type:        schema.TypeBool,
 						Optional:    true,
 					},
 					"rollback_action": {
-						Description: "Status of rollback for this workflow instance. The rollback action of the workflow can be enabled, disabled, completed.\n* `Disabled` - Status of the rollback action when workflow is disabled for rollback.\n* `Enabled` - Status of the rollback action when workflow is enabled for rollback.\n* `Completed` - Status of the rollback action once workflow completes the rollback for all eligible tasks.",
+						Description: "Status of rollback for this workflow instance. The rollback action can be enabled, disabled or completed.\n* `Disabled` - Status of the rollback action when workflow is disabled for rollback.\n* `Enabled` - Status of the rollback action when workflow is enabled for rollback.\n* `Completed` - Status of the rollback action once workflow completes the rollback for all eligible tasks.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -573,7 +573,7 @@ func getWorkflowWorkflowInfoSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"src": {
-			Description: "The source microservice name which is the owner for this workflow.",
+			Description: "The source microservice name which is the owner of this workflow.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -660,7 +660,7 @@ func getWorkflowWorkflowInfoSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"user_action_required": {
-			Description: "Property will be set when an user action is required on the workflow. This can be because the workflow is waiting for a wait task to be updated, workflow is paused or workflow launched by a configuration object has failed and needs to be retried in order to complete successfully.",
+			Description: "Property will be set when a user action is required on the workflow. This can be because the workflow is waiting for a wait task to be updated, workflow is paused or workflow launched by a configuration object has failed and needs to be retried in order to complete successfully.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
@@ -945,16 +945,6 @@ func getWorkflowWorkflowInfoSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
-		"workflow_task_count": {
-			Description: "Total number of workflow tasks in this workflow.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
-		"workflow_worker_task_count": {
-			Description: "Total number of worker tasks in this workflow. This count doesn't include the control tasks in the workflow.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
 	}
 	return schemaMap
 }
@@ -1199,22 +1189,10 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 				}
 			}
 			o.SetClassId("workflow.Message")
-			if v, ok := l["message"]; ok {
-				{
-					x := (v.(string))
-					o.SetMessage(x)
-				}
-			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["severity"]; ok {
-				{
-					x := (v.(string))
-					o.SetSeverity(x)
 				}
 			}
 			x = append(x, *o)
@@ -1556,12 +1534,6 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 					o.SetObjectType(x)
 				}
 			}
-			if v, ok := l["retryable"]; ok {
-				{
-					x := (v.(bool))
-					o.SetRetryable(x)
-				}
-			}
 			p = append(p, *o)
 		}
 		if len(p) > 0 {
@@ -1879,24 +1851,6 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 								o.SetObjectType(x)
 							}
 						}
-						if v, ok := l["target_moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetTargetMoid(x)
-							}
-						}
-						if v, ok := l["target_name"]; ok {
-							{
-								x := (v.(string))
-								o.SetTargetName(x)
-							}
-						}
-						if v, ok := l["target_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetTargetType(x)
-							}
-						}
 						x = append(x, *o)
 					}
 					if len(x) > 0 {
@@ -1976,16 +1930,6 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 	if v, ok := d.GetOk("workflow_meta_type"); ok {
 		x := (v.(string))
 		o.SetWorkflowMetaType(x)
-	}
-
-	if v, ok := d.GetOkExists("workflow_task_count"); ok {
-		x := int64(v.(int))
-		o.SetWorkflowTaskCount(x)
-	}
-
-	if v, ok := d.GetOkExists("workflow_worker_task_count"); ok {
-		x := int64(v.(int))
-		o.SetWorkflowWorkerTaskCount(x)
 	}
 
 	data, err := o.MarshalJSON()
@@ -2096,8 +2040,6 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 
 				temp["workflow_definition"] = flattenMapWorkflowWorkflowDefinitionRelationship(s.GetWorkflowDefinition(), d)
 				temp["workflow_meta_type"] = (s.GetWorkflowMetaType())
-				temp["workflow_task_count"] = (s.GetWorkflowTaskCount())
-				temp["workflow_worker_task_count"] = (s.GetWorkflowWorkerTaskCount())
 				workflowWorkflowInfoResults = append(workflowWorkflowInfoResults, temp)
 			}
 		}

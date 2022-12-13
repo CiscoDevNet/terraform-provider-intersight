@@ -665,6 +665,17 @@ func resourceHyperflexClusterProfile() *schema.Resource {
 				Optional:     true,
 				Default:      "ESXi",
 			},
+			"is_nic_based": {
+				Description: "The NIC based setup being set/unset determined by inventory.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"local_credential": {
 				Description: "A reference to a hyperflexLocalCredentialPolicy resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -2923,6 +2934,10 @@ func resourceHyperflexClusterProfileRead(c context.Context, d *schema.ResourceDa
 
 	if err := d.Set("hypervisor_type", (s.GetHypervisorType())); err != nil {
 		return diag.Errorf("error occurred while setting property HypervisorType in HyperflexClusterProfile object: %s", err.Error())
+	}
+
+	if err := d.Set("is_nic_based", (s.GetIsNicBased())); err != nil {
+		return diag.Errorf("error occurred while setting property IsNicBased in HyperflexClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("local_credential", flattenMapHyperflexLocalCredentialPolicyRelationship(s.GetLocalCredential(), d)); err != nil {

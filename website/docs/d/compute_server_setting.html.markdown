@@ -31,5 +31,6 @@ The following arguments can be used to get data of already created objects in In
 * `one_time_boot_device`:(string) The name of the device chosen by user for configuring One-Time Boot device. 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
+* `tpm_reset`:(string) Clear the configuration of TPM chip in the server.* `None` - Perform no action on the TPM.* `ClearTpm` - Clear the configuration and restore factory defaults of TPM chip in the server. 
 * `tunneled_kvm_state`:(string) By default, the tunneled vKVM property appears in Ready state. The property can be configured by performing allowed actions. Once the property is configured, it reverts to Ready state.* `Ready` - Tunneled vKVM is ready to be configured on the server.* `Enable` - Tunneled vKVM is enabled for the server.* `Disable` - Tunneled vKVM is disabled for the server. 
  

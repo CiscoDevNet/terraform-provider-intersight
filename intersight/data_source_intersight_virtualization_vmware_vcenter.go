@@ -66,8 +66,13 @@ func getVirtualizationVmwareVcenterSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"class_id": {
-			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"cluster_count": {
+			Description: "Count of all Clusters associated with the vcenter.",
+			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"create_time": {
@@ -75,9 +80,39 @@ func getVirtualizationVmwareVcenterSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"datacenter_count": {
+			Description: "Count of all Datacenters in the vcenter.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"datastore_count": {
+			Description: "Count of all Datastores Templates associated with the vcenter.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"distributed_virtual_switch_count": {
+			Description: "Count of all Distributed Virtual Switches associated with vcenter.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"ds_cluster_count": {
+			Description: "Count of all Datastore cluster associated with the vcenter.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"external_ip": {
+			Description: "External Ip address fot the vcenter.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"host_count": {
+			Description: "Count of all Hosts associated with the vcenter.",
+			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"identity": {
@@ -85,6 +120,11 @@ func getVirtualizationVmwareVcenterSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"ip_address": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -101,7 +141,7 @@ func getVirtualizationVmwareVcenterSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"object_type": {
-			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -242,6 +282,11 @@ func getVirtualizationVmwareVcenterSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"target_name": {
+			Description: "Name of th Target with which the vcenter was claimed.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"nr_version": {
 			Description: "Release version of the Hypervisor Manger (VMware vCenter Server 6.0.0 build-4541947).",
 			Type:        schema.TypeString,
@@ -355,6 +400,16 @@ func getVirtualizationVmwareVcenterSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"vm_count": {
+			Description: "Count of all Virtual Machines associated with the vcenter.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"vm_templates_count": {
+			Description: "Count of all VM Templates associated with the vcenter.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 	}
 	return schemaMap
 }
@@ -441,9 +496,29 @@ func dataSourceVirtualizationVmwareVcenterRead(c context.Context, d *schema.Reso
 		o.SetClassId(x)
 	}
 
+	if v, ok := d.GetOkExists("cluster_count"); ok {
+		x := int64(v.(int))
+		o.SetClusterCount(x)
+	}
+
 	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
+	}
+
+	if v, ok := d.GetOkExists("datacenter_count"); ok {
+		x := int64(v.(int))
+		o.SetDatacenterCount(x)
+	}
+
+	if v, ok := d.GetOkExists("datastore_count"); ok {
+		x := int64(v.(int))
+		o.SetDatastoreCount(x)
+	}
+
+	if v, ok := d.GetOkExists("distributed_virtual_switch_count"); ok {
+		x := int64(v.(int))
+		o.SetDistributedVirtualSwitchCount(x)
 	}
 
 	if v, ok := d.GetOk("domain_group_moid"); ok {
@@ -451,9 +526,35 @@ func dataSourceVirtualizationVmwareVcenterRead(c context.Context, d *schema.Reso
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOkExists("ds_cluster_count"); ok {
+		x := int64(v.(int))
+		o.SetDsClusterCount(x)
+	}
+
+	if v, ok := d.GetOk("external_ip"); ok {
+		x := (v.(string))
+		o.SetExternalIp(x)
+	}
+
+	if v, ok := d.GetOkExists("host_count"); ok {
+		x := int64(v.(int))
+		o.SetHostCount(x)
+	}
+
 	if v, ok := d.GetOk("identity"); ok {
 		x := (v.(string))
 		o.SetIdentity(x)
+	}
+
+	if v, ok := d.GetOk("ip_address"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetIpAddress(x)
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
@@ -651,6 +752,11 @@ func dataSourceVirtualizationVmwareVcenterRead(c context.Context, d *schema.Reso
 		o.SetTags(x)
 	}
 
+	if v, ok := d.GetOk("target_name"); ok {
+		x := (v.(string))
+		o.SetTargetName(x)
+	}
+
 	if v, ok := d.GetOk("nr_version"); ok {
 		x := (v.(string))
 		o.SetVersion(x)
@@ -730,6 +836,16 @@ func dataSourceVirtualizationVmwareVcenterRead(c context.Context, d *schema.Reso
 		}
 	}
 
+	if v, ok := d.GetOkExists("vm_count"); ok {
+		x := int64(v.(int))
+		o.SetVmCount(x)
+	}
+
+	if v, ok := d.GetOkExists("vm_templates_count"); ok {
+		x := int64(v.(int))
+		o.SetVmTemplatesCount(x)
+	}
+
 	data, err := o.MarshalJSON()
 	if err != nil {
 		return diag.Errorf("json marshal of VirtualizationVmwareVcenter object failed with error : %s", err.Error())
@@ -771,10 +887,18 @@ func dataSourceVirtualizationVmwareVcenterRead(c context.Context, d *schema.Reso
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["build"] = (s.GetBuild())
 				temp["class_id"] = (s.GetClassId())
+				temp["cluster_count"] = (s.GetClusterCount())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
+				temp["datacenter_count"] = (s.GetDatacenterCount())
+				temp["datastore_count"] = (s.GetDatastoreCount())
+				temp["distributed_virtual_switch_count"] = (s.GetDistributedVirtualSwitchCount())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["ds_cluster_count"] = (s.GetDsClusterCount())
+				temp["external_ip"] = (s.GetExternalIp())
+				temp["host_count"] = (s.GetHostCount())
 				temp["identity"] = (s.GetIdentity())
+				temp["ip_address"] = (s.GetIpAddress())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
@@ -790,9 +914,12 @@ func dataSourceVirtualizationVmwareVcenterRead(c context.Context, d *schema.Reso
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["target_name"] = (s.GetTargetName())
 				temp["nr_version"] = (s.GetVersion())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
+				temp["vm_count"] = (s.GetVmCount())
+				temp["vm_templates_count"] = (s.GetVmTemplatesCount())
 				virtualizationVmwareVcenterResults = append(virtualizationVmwareVcenterResults, temp)
 			}
 		}

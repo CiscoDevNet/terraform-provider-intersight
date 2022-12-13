@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-7766
+API version: 1.0.11-9661
 Contact: intersight@cisco.com
 */
 
@@ -21,15 +21,15 @@ type ConnectorCommandControlMessageAllOf struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
-	// The working directory of the command. If empty command is executed in the same directory the device connector process was called.
+	// The working directory of the command. If empty, the command is executed in the same directory where the device connector process was called.
 	Dir *string `json:"Dir,omitempty"`
 	// Message carrying the operation to perform.
 	MsgType *string `json:"MsgType,omitempty"`
-	// The command to execute. Commands must be whitelisted by platform implementation, if a command does not match any whitelisted command patterns an error will be returned to the requesting service on command start.
+	// The command to execute. Commands must be in the list allowed by platform implementation, if a command does not match any allowed list command patterns, an error will be returned to the requesting service on command start.
 	Stream *string `json:"Stream,omitempty"`
-	// Indicates that a pseudo terminal should be attached to the command. Used for interactive commands. e.g A cross launch cli.
+	// Indicates that a pseudo terminal should be attached to the command. Used for interactive commands, e.g a cross launch CLI.
 	Terminal *bool `json:"Terminal,omitempty"`
-	// The timeout for the command to complete and exit after starting or receiving input. If timeout is not set a default of 10 minutes will be used. If there is input to the command stream the timeout is extended.
+	// The timeout for the command to complete and exit after starting or receiving input. If timeout is not set, a default of 10 minutes will be used. If there is input to the command stream, the timeout is extended.
 	Timeout              *int64 `json:"Timeout,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
