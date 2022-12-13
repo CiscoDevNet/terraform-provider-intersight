@@ -79,7 +79,17 @@ func getCondAlarmAggregationSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"critical": {
-						Description: "The count of alarms that have severity type Critical.",
+						Description: "The count of active alarms that have severity type Critical.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"health": {
+						Description: "Health of the managed end point. The highest severity computed from alarmSummary property is set as the health.\n* `Healthy` - The Enum value represents that the entity is healthy.\n* `Warning` - The Enum value Warning represents that the entity has one or more active warnings on it.\n* `Critical` - The Enum value Critical represents that the entity is in a critical state.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"info": {
+						Description: "The count of active alarms that have severity type Info.",
 						Type:        schema.TypeInt,
 						Optional:    true,
 					},
@@ -89,7 +99,7 @@ func getCondAlarmAggregationSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"warning": {
-						Description: "The count of alarms that have severity type Warning.",
+						Description: "The count of active alarms that have severity type Warning.",
 						Type:        schema.TypeInt,
 						Optional:    true,
 					},

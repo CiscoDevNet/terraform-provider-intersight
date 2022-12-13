@@ -515,8 +515,8 @@ func resourceFabricVlan() *schema.Resource {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
-				Computed:    true,
 				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
@@ -727,6 +727,49 @@ func resourceFabricVlanCreate(c context.Context, d *schema.ResourceData, meta in
 	if v, ok := d.GetOkExists("vlan_id"); ok {
 		x := int64(v.(int))
 		o.SetVlanId(x)
+	}
+
+	if v, ok := d.GetOk("vlan_set"); ok {
+		p := make([]models.FabricVlanSetRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewMoMoRefWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsFabricVlanSetRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetVlanSet(x)
+		}
 	}
 
 	r := conn.ApiClient.FabricApi.CreateFabricVlan(conn.ctx).FabricVlan(*o)
@@ -1047,6 +1090,50 @@ func resourceFabricVlanUpdate(c context.Context, d *schema.ResourceData, meta in
 		v := d.Get("vlan_id")
 		x := int64(v.(int))
 		o.SetVlanId(x)
+	}
+
+	if d.HasChange("vlan_set") {
+		v := d.Get("vlan_set")
+		p := make([]models.FabricVlanSetRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsFabricVlanSetRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetVlanSet(x)
+		}
 	}
 
 	r := conn.ApiClient.FabricApi.UpdateFabricVlan(conn.ctx, d.Id()).FabricVlan(*o)

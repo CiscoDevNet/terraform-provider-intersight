@@ -9842,6 +9842,8 @@ func flattenMapCondAlarmSummary(p models.CondAlarmSummary, d *schema.ResourceDat
 	condalarmsummary["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
 	condalarmsummary["class_id"] = item.GetClassId()
 	condalarmsummary["critical"] = item.GetCritical()
+	condalarmsummary["health"] = item.GetHealth()
+	condalarmsummary["info"] = item.GetInfo()
 	condalarmsummary["object_type"] = item.GetObjectType()
 	condalarmsummary["warning"] = item.GetWarning()
 
@@ -11377,6 +11379,8 @@ func flattenMapHyperflexAlarmSummary(p models.HyperflexAlarmSummary, d *schema.R
 	hyperflexalarmsummary["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
 	hyperflexalarmsummary["class_id"] = item.GetClassId()
 	hyperflexalarmsummary["critical"] = item.GetCritical()
+	hyperflexalarmsummary["health"] = item.GetHealth()
+	hyperflexalarmsummary["info"] = item.GetInfo()
 	hyperflexalarmsummary["object_type"] = item.GetObjectType()
 	hyperflexalarmsummary["warning"] = item.GetWarning()
 
@@ -14711,7 +14715,7 @@ func flattenMapKubernetesProxyConfig(p models.KubernetesProxyConfig, d *schema.R
 	kubernetesproxyconfig["hostname"] = item.GetHostname()
 	kubernetesproxyconfig["is_password_set"] = item.GetIsPasswordSet()
 	kubernetesproxyconfig["object_type"] = item.GetObjectType()
-	password_x, exists := d.GetOk("docker_http_proxy")
+	password_x, exists := d.GetOk("http_proxy")
 	if exists && password_x != nil {
 		password_y := password_x.([]interface{})[0].(map[string]interface{})
 		kubernetesproxyconfig["password"] = password_y["password"]
