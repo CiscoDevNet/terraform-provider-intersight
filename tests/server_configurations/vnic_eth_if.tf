@@ -1,77 +1,77 @@
-resource "intersight_vnic_eth_adapter_policy" "tf_v_eth_adapter" {
-  name = "tf_v_eth_adapter"
-  rss_settings = true
-  uplink_failback_timeout = 5
-  organization {
-    moid = data.intersight_organization_organization.default.results.0.moid
-  }
-  vxlan_settings {
-    enabled = false
-  }
+# resource "intersight_vnic_eth_adapter_policy" "tf_v_eth_adapter" {
+#   name = "tf_v_eth_adapter"
+#   rss_settings = true
+#   uplink_failback_timeout = 5
+#   organization {
+#     moid = data.intersight_organization_organization.default.results.0.moid
+#   }
+#   vxlan_settings {
+#     enabled = false
+#   }
 
-  nvgre_settings {
-    enabled = true
-  }
+#   nvgre_settings {
+#     enabled = true
+#   }
 
-  arfs_settings {
-    enabled = true
-  }
+#   arfs_settings {
+#     enabled = true
+#   }
 
-  interrupt_settings {
-    coalescing_time = 125
-    coalescing_type = "MIN"
-    nr_count = 4
-    mode = "MSI"
-  }
-  completion_queue_settings {
-    nr_count = 4
-    ring_size = 1
-  }
-  rx_queue_settings {
-    nr_count = 4
-    ring_size = 512
-  }
-  tx_queue_settings {
-    nr_count = 4
-    ring_size = 512
-  }
-  tcp_offload_settings {
-    large_receive = true
-    large_send = true
-    rx_checksum = true
-    tx_checksum = true
-  }
-}
+#   interrupt_settings {
+#     coalescing_time = 125
+#     coalescing_type = "MIN"
+#     nr_count = 4
+#     mode = "MSI"
+#   }
+#   completion_queue_settings {
+#     nr_count = 4
+#     ring_size = 1
+#   }
+#   rx_queue_settings {
+#     nr_count = 4
+#     ring_size = 512
+#   }
+#   tx_queue_settings {
+#     nr_count = 4
+#     ring_size = 512
+#   }
+#   tcp_offload_settings {
+#     large_receive = true
+#     large_send = true
+#     rx_checksum = true
+#     tx_checksum = true
+#   }
+# }
 
-resource "intersight_vnic_eth_network_policy" "tf_v_eth_network" {
-  name = "tf_v_eth_network"
-  organization {
-    moid = data.intersight_organization_organization.default.results.0.moid
-  }
-  vlan_settings {
-    object_type = "vnic.VlanSettings"
-    default_vlan = 1
-    mode = "ACCESS"
-  }
-}
+# resource "intersight_vnic_eth_network_policy" "tf_v_eth_network" {
+#   name = "tf_v_eth_network"
+#   organization {
+#     moid = data.intersight_organization_organization.default.results.0.moid
+#   }
+#   vlan_settings {
+#     object_type = "vnic.VlanSettings"
+#     default_vlan = 1
+#     mode = "ACCESS"
+#   }
+# }
 
-resource "intersight_vnic_eth_qos_policy" "tf_v_eth_qos" {
-  name = "tf_v_eth_qos"
-  mtu = 1500
-  rate_limit = 0
-  cos = 0
-  trust_host_cos = false
-  organization {
-    moid = data.intersight_organization_organization.default.results.0.moid
-  }
-}
+# resource "intersight_vnic_eth_qos_policy" "tf_v_eth_qos" {
+#   name = "tf_v_eth_qos"
+#   mtu = 1500
+#   rate_limit = 0
+#   cos = 0
+#   trust_host_cos = false
+#   organization {
+#     moid = data.intersight_organization_organization.default.results.0.moid
+#   }
+# }
 
-resource "intersight_vnic_lan_connectivity_policy" "tf_vnic_lan" {
-  name = "tf_vnic_lan"
-  organization {
-    moid = data.intersight_organization_organization.default.results.0.moid
-  }
-}
+# resource "intersight_vnic_lan_connectivity_policy" "tf_vnic_lan" {
+#   name = "tf_vnic_lan"
+#   organization {
+#     moid = data.intersight_organization_organization.default.results.0.moid
+#   }
+# }
 
 # resource "intersight_vnic_eth_if" "tf_eth1" {
 #   name = "eth0"
