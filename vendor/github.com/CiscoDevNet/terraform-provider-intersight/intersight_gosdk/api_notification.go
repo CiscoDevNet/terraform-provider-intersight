@@ -56,8 +56,8 @@ func (r ApiCreateNotificationAccountSubscriptionRequest) Execute() (*Notificatio
 /*
 CreateNotificationAccountSubscription Create a 'notification.AccountSubscription' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateNotificationAccountSubscriptionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateNotificationAccountSubscriptionRequest
 */
 func (a *NotificationApiService) CreateNotificationAccountSubscription(ctx context.Context) ApiCreateNotificationAccountSubscriptionRequest {
 	return ApiCreateNotificationAccountSubscriptionRequest{
@@ -67,7 +67,8 @@ func (a *NotificationApiService) CreateNotificationAccountSubscription(ctx conte
 }
 
 // Execute executes the request
-//  @return NotificationAccountSubscription
+//
+//	@return NotificationAccountSubscription
 func (a *NotificationApiService) CreateNotificationAccountSubscriptionExecute(r ApiCreateNotificationAccountSubscriptionRequest) (*NotificationAccountSubscription, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -212,9 +213,9 @@ func (r ApiDeleteNotificationAccountSubscriptionRequest) Execute() (*http.Respon
 /*
 DeleteNotificationAccountSubscription Delete a 'notification.AccountSubscription' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteNotificationAccountSubscriptionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteNotificationAccountSubscriptionRequest
 */
 func (a *NotificationApiService) DeleteNotificationAccountSubscription(ctx context.Context, moid string) ApiDeleteNotificationAccountSubscriptionRequest {
 	return ApiDeleteNotificationAccountSubscriptionRequest{
@@ -349,9 +350,9 @@ func (r ApiGetNotificationAccountSubscriptionByMoidRequest) Execute() (*Notifica
 /*
 GetNotificationAccountSubscriptionByMoid Read a 'notification.AccountSubscription' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNotificationAccountSubscriptionByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNotificationAccountSubscriptionByMoidRequest
 */
 func (a *NotificationApiService) GetNotificationAccountSubscriptionByMoid(ctx context.Context, moid string) ApiGetNotificationAccountSubscriptionByMoidRequest {
 	return ApiGetNotificationAccountSubscriptionByMoidRequest{
@@ -362,7 +363,8 @@ func (a *NotificationApiService) GetNotificationAccountSubscriptionByMoid(ctx co
 }
 
 // Execute executes the request
-//  @return NotificationAccountSubscription
+//
+//	@return NotificationAccountSubscription
 func (a *NotificationApiService) GetNotificationAccountSubscriptionByMoidExecute(r ApiGetNotificationAccountSubscriptionByMoidRequest) (*NotificationAccountSubscription, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -573,8 +575,8 @@ func (r ApiGetNotificationAccountSubscriptionListRequest) Execute() (*Notificati
 /*
 GetNotificationAccountSubscriptionList Read a 'notification.AccountSubscription' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNotificationAccountSubscriptionListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNotificationAccountSubscriptionListRequest
 */
 func (a *NotificationApiService) GetNotificationAccountSubscriptionList(ctx context.Context) ApiGetNotificationAccountSubscriptionListRequest {
 	return ApiGetNotificationAccountSubscriptionListRequest{
@@ -584,7 +586,8 @@ func (a *NotificationApiService) GetNotificationAccountSubscriptionList(ctx cont
 }
 
 // Execute executes the request
-//  @return NotificationAccountSubscriptionResponse
+//
+//	@return NotificationAccountSubscriptionResponse
 func (a *NotificationApiService) GetNotificationAccountSubscriptionListExecute(r ApiGetNotificationAccountSubscriptionListRequest) (*NotificationAccountSubscriptionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -765,9 +768,9 @@ func (r ApiPatchNotificationAccountSubscriptionRequest) Execute() (*Notification
 /*
 PatchNotificationAccountSubscription Update a 'notification.AccountSubscription' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchNotificationAccountSubscriptionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchNotificationAccountSubscriptionRequest
 */
 func (a *NotificationApiService) PatchNotificationAccountSubscription(ctx context.Context, moid string) ApiPatchNotificationAccountSubscriptionRequest {
 	return ApiPatchNotificationAccountSubscriptionRequest{
@@ -778,7 +781,8 @@ func (a *NotificationApiService) PatchNotificationAccountSubscription(ctx contex
 }
 
 // Execute executes the request
-//  @return NotificationAccountSubscription
+//
+//	@return NotificationAccountSubscription
 func (a *NotificationApiService) PatchNotificationAccountSubscriptionExecute(r ApiPatchNotificationAccountSubscriptionRequest) (*NotificationAccountSubscription, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -935,9 +939,9 @@ func (r ApiUpdateNotificationAccountSubscriptionRequest) Execute() (*Notificatio
 /*
 UpdateNotificationAccountSubscription Update a 'notification.AccountSubscription' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateNotificationAccountSubscriptionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateNotificationAccountSubscriptionRequest
 */
 func (a *NotificationApiService) UpdateNotificationAccountSubscription(ctx context.Context, moid string) ApiUpdateNotificationAccountSubscriptionRequest {
 	return ApiUpdateNotificationAccountSubscriptionRequest{
@@ -948,7 +952,8 @@ func (a *NotificationApiService) UpdateNotificationAccountSubscription(ctx conte
 }
 
 // Execute executes the request
-//  @return NotificationAccountSubscription
+//
+//	@return NotificationAccountSubscription
 func (a *NotificationApiService) UpdateNotificationAccountSubscriptionExecute(r ApiUpdateNotificationAccountSubscriptionRequest) (*NotificationAccountSubscription, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

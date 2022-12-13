@@ -2,8 +2,10 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"reflect"
+	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -11,12 +13,19 @@ import (
 
 func flattenAdditionalProperties(m interface{}) string {
 	var s string
-	if m != nil && reflect.ValueOf(m).Len() > 0 {
-		j, err := json.Marshal(m)
-		if err != nil {
-			log.Printf("Error occurred while flattening and json parsing: %s", err)
-		} else {
-			s = string(j)
+	switch m.(type) {
+	case int, int32, int64, bool, time.Time:
+		s = fmt.Sprint(m)
+	case float32, float64:
+		s = fmt.Sprintf("%f", m)
+	default:
+		if m != nil && reflect.ValueOf(m).Len() > 0 {
+			j, err := json.Marshal(m)
+			if err != nil {
+				log.Printf("Error occurred while flattening and json parsing: %s", err)
+			} else {
+				s = string(j)
+			}
 		}
 	}
 	return s

@@ -55,8 +55,8 @@ func (r ApiCreateFeedbackFeedbackPostRequest) Execute() (*FeedbackFeedbackPost, 
 /*
 CreateFeedbackFeedbackPost Create a 'feedback.FeedbackPost' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFeedbackFeedbackPostRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFeedbackFeedbackPostRequest
 */
 func (a *FeedbackApiService) CreateFeedbackFeedbackPost(ctx context.Context) ApiCreateFeedbackFeedbackPostRequest {
 	return ApiCreateFeedbackFeedbackPostRequest{
@@ -66,7 +66,8 @@ func (a *FeedbackApiService) CreateFeedbackFeedbackPost(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return FeedbackFeedbackPost
+//
+//	@return FeedbackFeedbackPost
 func (a *FeedbackApiService) CreateFeedbackFeedbackPostExecute(r ApiCreateFeedbackFeedbackPostRequest) (*FeedbackFeedbackPost, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

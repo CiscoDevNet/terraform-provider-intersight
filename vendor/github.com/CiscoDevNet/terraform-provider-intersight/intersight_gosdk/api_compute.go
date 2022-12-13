@@ -36,9 +36,9 @@ func (r ApiDeleteComputeRackUnitRequest) Execute() (*http.Response, error) {
 /*
 DeleteComputeRackUnit Delete a 'compute.RackUnit' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteComputeRackUnitRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteComputeRackUnitRequest
 */
 func (a *ComputeApiService) DeleteComputeRackUnit(ctx context.Context, moid string) ApiDeleteComputeRackUnitRequest {
 	return ApiDeleteComputeRackUnitRequest{
@@ -173,9 +173,9 @@ func (r ApiDeleteComputeRackUnitIdentityRequest) Execute() (*http.Response, erro
 /*
 DeleteComputeRackUnitIdentity Delete a 'compute.RackUnitIdentity' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteComputeRackUnitIdentityRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteComputeRackUnitIdentityRequest
 */
 func (a *ComputeApiService) DeleteComputeRackUnitIdentity(ctx context.Context, moid string) ApiDeleteComputeRackUnitIdentityRequest {
 	return ApiDeleteComputeRackUnitIdentityRequest{
@@ -310,9 +310,9 @@ func (r ApiDeleteComputeServerPowerPolicyRequest) Execute() (*http.Response, err
 /*
 DeleteComputeServerPowerPolicy Delete a 'compute.ServerPowerPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteComputeServerPowerPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteComputeServerPowerPolicyRequest
 */
 func (a *ComputeApiService) DeleteComputeServerPowerPolicy(ctx context.Context, moid string) ApiDeleteComputeServerPowerPolicyRequest {
 	return ApiDeleteComputeServerPowerPolicyRequest{
@@ -447,9 +447,9 @@ func (r ApiGetComputeBladeByMoidRequest) Execute() (*ComputeBlade, *http.Respons
 /*
 GetComputeBladeByMoid Read a 'compute.Blade' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetComputeBladeByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetComputeBladeByMoidRequest
 */
 func (a *ComputeApiService) GetComputeBladeByMoid(ctx context.Context, moid string) ApiGetComputeBladeByMoidRequest {
 	return ApiGetComputeBladeByMoidRequest{
@@ -460,7 +460,8 @@ func (a *ComputeApiService) GetComputeBladeByMoid(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return ComputeBlade
+//
+//	@return ComputeBlade
 func (a *ComputeApiService) GetComputeBladeByMoidExecute(r ApiGetComputeBladeByMoidRequest) (*ComputeBlade, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -595,9 +596,9 @@ func (r ApiGetComputeBladeIdentityByMoidRequest) Execute() (*ComputeBladeIdentit
 /*
 GetComputeBladeIdentityByMoid Read a 'compute.BladeIdentity' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetComputeBladeIdentityByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetComputeBladeIdentityByMoidRequest
 */
 func (a *ComputeApiService) GetComputeBladeIdentityByMoid(ctx context.Context, moid string) ApiGetComputeBladeIdentityByMoidRequest {
 	return ApiGetComputeBladeIdentityByMoidRequest{
@@ -608,7 +609,8 @@ func (a *ComputeApiService) GetComputeBladeIdentityByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return ComputeBladeIdentity
+//
+//	@return ComputeBladeIdentity
 func (a *ComputeApiService) GetComputeBladeIdentityByMoidExecute(r ApiGetComputeBladeIdentityByMoidRequest) (*ComputeBladeIdentity, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -819,8 +821,8 @@ func (r ApiGetComputeBladeIdentityListRequest) Execute() (*ComputeBladeIdentityR
 /*
 GetComputeBladeIdentityList Read a 'compute.BladeIdentity' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetComputeBladeIdentityListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetComputeBladeIdentityListRequest
 */
 func (a *ComputeApiService) GetComputeBladeIdentityList(ctx context.Context) ApiGetComputeBladeIdentityListRequest {
 	return ApiGetComputeBladeIdentityListRequest{
@@ -830,7 +832,8 @@ func (a *ComputeApiService) GetComputeBladeIdentityList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return ComputeBladeIdentityResponse
+//
+//	@return ComputeBladeIdentityResponse
 func (a *ComputeApiService) GetComputeBladeIdentityListExecute(r ApiGetComputeBladeIdentityListRequest) (*ComputeBladeIdentityResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1073,8 +1076,8 @@ func (r ApiGetComputeBladeListRequest) Execute() (*ComputeBladeResponse, *http.R
 /*
 GetComputeBladeList Read a 'compute.Blade' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetComputeBladeListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetComputeBladeListRequest
 */
 func (a *ComputeApiService) GetComputeBladeList(ctx context.Context) ApiGetComputeBladeListRequest {
 	return ApiGetComputeBladeListRequest{
@@ -1084,7 +1087,8 @@ func (a *ComputeApiService) GetComputeBladeList(ctx context.Context) ApiGetCompu
 }
 
 // Execute executes the request
-//  @return ComputeBladeResponse
+//
+//	@return ComputeBladeResponse
 func (a *ComputeApiService) GetComputeBladeListExecute(r ApiGetComputeBladeListRequest) (*ComputeBladeResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1251,9 +1255,9 @@ func (r ApiGetComputeBoardByMoidRequest) Execute() (*ComputeBoard, *http.Respons
 /*
 GetComputeBoardByMoid Read a 'compute.Board' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetComputeBoardByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetComputeBoardByMoidRequest
 */
 func (a *ComputeApiService) GetComputeBoardByMoid(ctx context.Context, moid string) ApiGetComputeBoardByMoidRequest {
 	return ApiGetComputeBoardByMoidRequest{
@@ -1264,7 +1268,8 @@ func (a *ComputeApiService) GetComputeBoardByMoid(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return ComputeBoard
+//
+//	@return ComputeBoard
 func (a *ComputeApiService) GetComputeBoardByMoidExecute(r ApiGetComputeBoardByMoidRequest) (*ComputeBoard, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1475,8 +1480,8 @@ func (r ApiGetComputeBoardListRequest) Execute() (*ComputeBoardResponse, *http.R
 /*
 GetComputeBoardList Read a 'compute.Board' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetComputeBoardListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetComputeBoardListRequest
 */
 func (a *ComputeApiService) GetComputeBoardList(ctx context.Context) ApiGetComputeBoardListRequest {
 	return ApiGetComputeBoardListRequest{
@@ -1486,7 +1491,8 @@ func (a *ComputeApiService) GetComputeBoardList(ctx context.Context) ApiGetCompu
 }
 
 // Execute executes the request
-//  @return ComputeBoardResponse
+//
+//	@return ComputeBoardResponse
 func (a *ComputeApiService) GetComputeBoardListExecute(r ApiGetComputeBoardListRequest) (*ComputeBoardResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1653,9 +1659,9 @@ func (r ApiGetComputeMappingByMoidRequest) Execute() (*ComputeMapping, *http.Res
 /*
 GetComputeMappingByMoid Read a 'compute.Mapping' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetComputeMappingByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetComputeMappingByMoidRequest
 */
 func (a *ComputeApiService) GetComputeMappingByMoid(ctx context.Context, moid string) ApiGetComputeMappingByMoidRequest {
 	return ApiGetComputeMappingByMoidRequest{
@@ -1666,7 +1672,8 @@ func (a *ComputeApiService) GetComputeMappingByMoid(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return ComputeMapping
+//
+//	@return ComputeMapping
 func (a *ComputeApiService) GetComputeMappingByMoidExecute(r ApiGetComputeMappingByMoidRequest) (*ComputeMapping, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1877,8 +1884,8 @@ func (r ApiGetComputeMappingListRequest) Execute() (*ComputeMappingResponse, *ht
 /*
 GetComputeMappingList Read a 'compute.Mapping' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetComputeMappingListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetComputeMappingListRequest
 */
 func (a *ComputeApiService) GetComputeMappingList(ctx context.Context) ApiGetComputeMappingListRequest {
 	return ApiGetComputeMappingListRequest{
@@ -1888,7 +1895,8 @@ func (a *ComputeApiService) GetComputeMappingList(ctx context.Context) ApiGetCom
 }
 
 // Execute executes the request
-//  @return ComputeMappingResponse
+//
+//	@return ComputeMappingResponse
 func (a *ComputeApiService) GetComputeMappingListExecute(r ApiGetComputeMappingListRequest) (*ComputeMappingResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2055,9 +2063,9 @@ func (r ApiGetComputePhysicalSummaryByMoidRequest) Execute() (*ComputePhysicalSu
 /*
 GetComputePhysicalSummaryByMoid Read a 'compute.PhysicalSummary' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetComputePhysicalSummaryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetComputePhysicalSummaryByMoidRequest
 */
 func (a *ComputeApiService) GetComputePhysicalSummaryByMoid(ctx context.Context, moid string) ApiGetComputePhysicalSummaryByMoidRequest {
 	return ApiGetComputePhysicalSummaryByMoidRequest{
@@ -2068,7 +2076,8 @@ func (a *ComputeApiService) GetComputePhysicalSummaryByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return ComputePhysicalSummary
+//
+//	@return ComputePhysicalSummary
 func (a *ComputeApiService) GetComputePhysicalSummaryByMoidExecute(r ApiGetComputePhysicalSummaryByMoidRequest) (*ComputePhysicalSummary, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2279,8 +2288,8 @@ func (r ApiGetComputePhysicalSummaryListRequest) Execute() (*ComputePhysicalSumm
 /*
 GetComputePhysicalSummaryList Read a 'compute.PhysicalSummary' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetComputePhysicalSummaryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetComputePhysicalSummaryListRequest
 */
 func (a *ComputeApiService) GetComputePhysicalSummaryList(ctx context.Context) ApiGetComputePhysicalSummaryListRequest {
 	return ApiGetComputePhysicalSummaryListRequest{
@@ -2290,7 +2299,8 @@ func (a *ComputeApiService) GetComputePhysicalSummaryList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return ComputePhysicalSummaryResponse
+//
+//	@return ComputePhysicalSummaryResponse
 func (a *ComputeApiService) GetComputePhysicalSummaryListExecute(r ApiGetComputePhysicalSummaryListRequest) (*ComputePhysicalSummaryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2457,9 +2467,9 @@ func (r ApiGetComputeRackUnitByMoidRequest) Execute() (*ComputeRackUnit, *http.R
 /*
 GetComputeRackUnitByMoid Read a 'compute.RackUnit' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetComputeRackUnitByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetComputeRackUnitByMoidRequest
 */
 func (a *ComputeApiService) GetComputeRackUnitByMoid(ctx context.Context, moid string) ApiGetComputeRackUnitByMoidRequest {
 	return ApiGetComputeRackUnitByMoidRequest{
@@ -2470,7 +2480,8 @@ func (a *ComputeApiService) GetComputeRackUnitByMoid(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return ComputeRackUnit
+//
+//	@return ComputeRackUnit
 func (a *ComputeApiService) GetComputeRackUnitByMoidExecute(r ApiGetComputeRackUnitByMoidRequest) (*ComputeRackUnit, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2605,9 +2616,9 @@ func (r ApiGetComputeRackUnitIdentityByMoidRequest) Execute() (*ComputeRackUnitI
 /*
 GetComputeRackUnitIdentityByMoid Read a 'compute.RackUnitIdentity' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetComputeRackUnitIdentityByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetComputeRackUnitIdentityByMoidRequest
 */
 func (a *ComputeApiService) GetComputeRackUnitIdentityByMoid(ctx context.Context, moid string) ApiGetComputeRackUnitIdentityByMoidRequest {
 	return ApiGetComputeRackUnitIdentityByMoidRequest{
@@ -2618,7 +2629,8 @@ func (a *ComputeApiService) GetComputeRackUnitIdentityByMoid(ctx context.Context
 }
 
 // Execute executes the request
-//  @return ComputeRackUnitIdentity
+//
+//	@return ComputeRackUnitIdentity
 func (a *ComputeApiService) GetComputeRackUnitIdentityByMoidExecute(r ApiGetComputeRackUnitIdentityByMoidRequest) (*ComputeRackUnitIdentity, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2829,8 +2841,8 @@ func (r ApiGetComputeRackUnitIdentityListRequest) Execute() (*ComputeRackUnitIde
 /*
 GetComputeRackUnitIdentityList Read a 'compute.RackUnitIdentity' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetComputeRackUnitIdentityListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetComputeRackUnitIdentityListRequest
 */
 func (a *ComputeApiService) GetComputeRackUnitIdentityList(ctx context.Context) ApiGetComputeRackUnitIdentityListRequest {
 	return ApiGetComputeRackUnitIdentityListRequest{
@@ -2840,7 +2852,8 @@ func (a *ComputeApiService) GetComputeRackUnitIdentityList(ctx context.Context) 
 }
 
 // Execute executes the request
-//  @return ComputeRackUnitIdentityResponse
+//
+//	@return ComputeRackUnitIdentityResponse
 func (a *ComputeApiService) GetComputeRackUnitIdentityListExecute(r ApiGetComputeRackUnitIdentityListRequest) (*ComputeRackUnitIdentityResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3083,8 +3096,8 @@ func (r ApiGetComputeRackUnitListRequest) Execute() (*ComputeRackUnitResponse, *
 /*
 GetComputeRackUnitList Read a 'compute.RackUnit' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetComputeRackUnitListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetComputeRackUnitListRequest
 */
 func (a *ComputeApiService) GetComputeRackUnitList(ctx context.Context) ApiGetComputeRackUnitListRequest {
 	return ApiGetComputeRackUnitListRequest{
@@ -3094,7 +3107,8 @@ func (a *ComputeApiService) GetComputeRackUnitList(ctx context.Context) ApiGetCo
 }
 
 // Execute executes the request
-//  @return ComputeRackUnitResponse
+//
+//	@return ComputeRackUnitResponse
 func (a *ComputeApiService) GetComputeRackUnitListExecute(r ApiGetComputeRackUnitListRequest) (*ComputeRackUnitResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3261,9 +3275,9 @@ func (r ApiGetComputeServerIdPoolByMoidRequest) Execute() (*ComputeServerIdPool,
 /*
 GetComputeServerIdPoolByMoid Read a 'compute.ServerIdPool' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetComputeServerIdPoolByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetComputeServerIdPoolByMoidRequest
 */
 func (a *ComputeApiService) GetComputeServerIdPoolByMoid(ctx context.Context, moid string) ApiGetComputeServerIdPoolByMoidRequest {
 	return ApiGetComputeServerIdPoolByMoidRequest{
@@ -3274,7 +3288,8 @@ func (a *ComputeApiService) GetComputeServerIdPoolByMoid(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return ComputeServerIdPool
+//
+//	@return ComputeServerIdPool
 func (a *ComputeApiService) GetComputeServerIdPoolByMoidExecute(r ApiGetComputeServerIdPoolByMoidRequest) (*ComputeServerIdPool, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3485,8 +3500,8 @@ func (r ApiGetComputeServerIdPoolListRequest) Execute() (*ComputeServerIdPoolRes
 /*
 GetComputeServerIdPoolList Read a 'compute.ServerIdPool' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetComputeServerIdPoolListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetComputeServerIdPoolListRequest
 */
 func (a *ComputeApiService) GetComputeServerIdPoolList(ctx context.Context) ApiGetComputeServerIdPoolListRequest {
 	return ApiGetComputeServerIdPoolListRequest{
@@ -3496,7 +3511,8 @@ func (a *ComputeApiService) GetComputeServerIdPoolList(ctx context.Context) ApiG
 }
 
 // Execute executes the request
-//  @return ComputeServerIdPoolResponse
+//
+//	@return ComputeServerIdPoolResponse
 func (a *ComputeApiService) GetComputeServerIdPoolListExecute(r ApiGetComputeServerIdPoolListRequest) (*ComputeServerIdPoolResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3663,9 +3679,9 @@ func (r ApiGetComputeServerPowerPolicyByMoidRequest) Execute() (*ComputeServerPo
 /*
 GetComputeServerPowerPolicyByMoid Read a 'compute.ServerPowerPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetComputeServerPowerPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetComputeServerPowerPolicyByMoidRequest
 */
 func (a *ComputeApiService) GetComputeServerPowerPolicyByMoid(ctx context.Context, moid string) ApiGetComputeServerPowerPolicyByMoidRequest {
 	return ApiGetComputeServerPowerPolicyByMoidRequest{
@@ -3676,7 +3692,8 @@ func (a *ComputeApiService) GetComputeServerPowerPolicyByMoid(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return ComputeServerPowerPolicy
+//
+//	@return ComputeServerPowerPolicy
 func (a *ComputeApiService) GetComputeServerPowerPolicyByMoidExecute(r ApiGetComputeServerPowerPolicyByMoidRequest) (*ComputeServerPowerPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3887,8 +3904,8 @@ func (r ApiGetComputeServerPowerPolicyListRequest) Execute() (*ComputeServerPowe
 /*
 GetComputeServerPowerPolicyList Read a 'compute.ServerPowerPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetComputeServerPowerPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetComputeServerPowerPolicyListRequest
 */
 func (a *ComputeApiService) GetComputeServerPowerPolicyList(ctx context.Context) ApiGetComputeServerPowerPolicyListRequest {
 	return ApiGetComputeServerPowerPolicyListRequest{
@@ -3898,7 +3915,8 @@ func (a *ComputeApiService) GetComputeServerPowerPolicyList(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return ComputeServerPowerPolicyResponse
+//
+//	@return ComputeServerPowerPolicyResponse
 func (a *ComputeApiService) GetComputeServerPowerPolicyListExecute(r ApiGetComputeServerPowerPolicyListRequest) (*ComputeServerPowerPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4065,9 +4083,9 @@ func (r ApiGetComputeServerSettingByMoidRequest) Execute() (*ComputeServerSettin
 /*
 GetComputeServerSettingByMoid Read a 'compute.ServerSetting' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetComputeServerSettingByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetComputeServerSettingByMoidRequest
 */
 func (a *ComputeApiService) GetComputeServerSettingByMoid(ctx context.Context, moid string) ApiGetComputeServerSettingByMoidRequest {
 	return ApiGetComputeServerSettingByMoidRequest{
@@ -4078,7 +4096,8 @@ func (a *ComputeApiService) GetComputeServerSettingByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return ComputeServerSetting
+//
+//	@return ComputeServerSetting
 func (a *ComputeApiService) GetComputeServerSettingByMoidExecute(r ApiGetComputeServerSettingByMoidRequest) (*ComputeServerSetting, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4289,8 +4308,8 @@ func (r ApiGetComputeServerSettingListRequest) Execute() (*ComputeServerSettingR
 /*
 GetComputeServerSettingList Read a 'compute.ServerSetting' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetComputeServerSettingListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetComputeServerSettingListRequest
 */
 func (a *ComputeApiService) GetComputeServerSettingList(ctx context.Context) ApiGetComputeServerSettingListRequest {
 	return ApiGetComputeServerSettingListRequest{
@@ -4300,7 +4319,8 @@ func (a *ComputeApiService) GetComputeServerSettingList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return ComputeServerSettingResponse
+//
+//	@return ComputeServerSettingResponse
 func (a *ComputeApiService) GetComputeServerSettingListExecute(r ApiGetComputeServerSettingListRequest) (*ComputeServerSettingResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4467,9 +4487,9 @@ func (r ApiGetComputeVmediaByMoidRequest) Execute() (*ComputeVmedia, *http.Respo
 /*
 GetComputeVmediaByMoid Read a 'compute.Vmedia' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetComputeVmediaByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetComputeVmediaByMoidRequest
 */
 func (a *ComputeApiService) GetComputeVmediaByMoid(ctx context.Context, moid string) ApiGetComputeVmediaByMoidRequest {
 	return ApiGetComputeVmediaByMoidRequest{
@@ -4480,7 +4500,8 @@ func (a *ComputeApiService) GetComputeVmediaByMoid(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return ComputeVmedia
+//
+//	@return ComputeVmedia
 func (a *ComputeApiService) GetComputeVmediaByMoidExecute(r ApiGetComputeVmediaByMoidRequest) (*ComputeVmedia, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4691,8 +4712,8 @@ func (r ApiGetComputeVmediaListRequest) Execute() (*ComputeVmediaResponse, *http
 /*
 GetComputeVmediaList Read a 'compute.Vmedia' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetComputeVmediaListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetComputeVmediaListRequest
 */
 func (a *ComputeApiService) GetComputeVmediaList(ctx context.Context) ApiGetComputeVmediaListRequest {
 	return ApiGetComputeVmediaListRequest{
@@ -4702,7 +4723,8 @@ func (a *ComputeApiService) GetComputeVmediaList(ctx context.Context) ApiGetComp
 }
 
 // Execute executes the request
-//  @return ComputeVmediaResponse
+//
+//	@return ComputeVmediaResponse
 func (a *ComputeApiService) GetComputeVmediaListExecute(r ApiGetComputeVmediaListRequest) (*ComputeVmediaResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4883,9 +4905,9 @@ func (r ApiPatchComputeBladeRequest) Execute() (*ComputeBlade, *http.Response, e
 /*
 PatchComputeBlade Update a 'compute.Blade' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchComputeBladeRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchComputeBladeRequest
 */
 func (a *ComputeApiService) PatchComputeBlade(ctx context.Context, moid string) ApiPatchComputeBladeRequest {
 	return ApiPatchComputeBladeRequest{
@@ -4896,7 +4918,8 @@ func (a *ComputeApiService) PatchComputeBlade(ctx context.Context, moid string) 
 }
 
 // Execute executes the request
-//  @return ComputeBlade
+//
+//	@return ComputeBlade
 func (a *ComputeApiService) PatchComputeBladeExecute(r ApiPatchComputeBladeRequest) (*ComputeBlade, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -5053,9 +5076,9 @@ func (r ApiPatchComputeBladeIdentityRequest) Execute() (*ComputeBladeIdentity, *
 /*
 PatchComputeBladeIdentity Update a 'compute.BladeIdentity' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchComputeBladeIdentityRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchComputeBladeIdentityRequest
 */
 func (a *ComputeApiService) PatchComputeBladeIdentity(ctx context.Context, moid string) ApiPatchComputeBladeIdentityRequest {
 	return ApiPatchComputeBladeIdentityRequest{
@@ -5066,7 +5089,8 @@ func (a *ComputeApiService) PatchComputeBladeIdentity(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return ComputeBladeIdentity
+//
+//	@return ComputeBladeIdentity
 func (a *ComputeApiService) PatchComputeBladeIdentityExecute(r ApiPatchComputeBladeIdentityRequest) (*ComputeBladeIdentity, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -5223,9 +5247,9 @@ func (r ApiPatchComputeBoardRequest) Execute() (*ComputeBoard, *http.Response, e
 /*
 PatchComputeBoard Update a 'compute.Board' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchComputeBoardRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchComputeBoardRequest
 */
 func (a *ComputeApiService) PatchComputeBoard(ctx context.Context, moid string) ApiPatchComputeBoardRequest {
 	return ApiPatchComputeBoardRequest{
@@ -5236,7 +5260,8 @@ func (a *ComputeApiService) PatchComputeBoard(ctx context.Context, moid string) 
 }
 
 // Execute executes the request
-//  @return ComputeBoard
+//
+//	@return ComputeBoard
 func (a *ComputeApiService) PatchComputeBoardExecute(r ApiPatchComputeBoardRequest) (*ComputeBoard, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -5393,9 +5418,9 @@ func (r ApiPatchComputeMappingRequest) Execute() (*ComputeMapping, *http.Respons
 /*
 PatchComputeMapping Update a 'compute.Mapping' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchComputeMappingRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchComputeMappingRequest
 */
 func (a *ComputeApiService) PatchComputeMapping(ctx context.Context, moid string) ApiPatchComputeMappingRequest {
 	return ApiPatchComputeMappingRequest{
@@ -5406,7 +5431,8 @@ func (a *ComputeApiService) PatchComputeMapping(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return ComputeMapping
+//
+//	@return ComputeMapping
 func (a *ComputeApiService) PatchComputeMappingExecute(r ApiPatchComputeMappingRequest) (*ComputeMapping, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -5563,9 +5589,9 @@ func (r ApiPatchComputeRackUnitRequest) Execute() (*ComputeRackUnit, *http.Respo
 /*
 PatchComputeRackUnit Update a 'compute.RackUnit' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchComputeRackUnitRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchComputeRackUnitRequest
 */
 func (a *ComputeApiService) PatchComputeRackUnit(ctx context.Context, moid string) ApiPatchComputeRackUnitRequest {
 	return ApiPatchComputeRackUnitRequest{
@@ -5576,7 +5602,8 @@ func (a *ComputeApiService) PatchComputeRackUnit(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return ComputeRackUnit
+//
+//	@return ComputeRackUnit
 func (a *ComputeApiService) PatchComputeRackUnitExecute(r ApiPatchComputeRackUnitRequest) (*ComputeRackUnit, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -5733,9 +5760,9 @@ func (r ApiPatchComputeRackUnitIdentityRequest) Execute() (*ComputeRackUnitIdent
 /*
 PatchComputeRackUnitIdentity Update a 'compute.RackUnitIdentity' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchComputeRackUnitIdentityRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchComputeRackUnitIdentityRequest
 */
 func (a *ComputeApiService) PatchComputeRackUnitIdentity(ctx context.Context, moid string) ApiPatchComputeRackUnitIdentityRequest {
 	return ApiPatchComputeRackUnitIdentityRequest{
@@ -5746,7 +5773,8 @@ func (a *ComputeApiService) PatchComputeRackUnitIdentity(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return ComputeRackUnitIdentity
+//
+//	@return ComputeRackUnitIdentity
 func (a *ComputeApiService) PatchComputeRackUnitIdentityExecute(r ApiPatchComputeRackUnitIdentityRequest) (*ComputeRackUnitIdentity, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -5903,9 +5931,9 @@ func (r ApiPatchComputeServerPowerPolicyRequest) Execute() (*ComputeServerPowerP
 /*
 PatchComputeServerPowerPolicy Update a 'compute.ServerPowerPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchComputeServerPowerPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchComputeServerPowerPolicyRequest
 */
 func (a *ComputeApiService) PatchComputeServerPowerPolicy(ctx context.Context, moid string) ApiPatchComputeServerPowerPolicyRequest {
 	return ApiPatchComputeServerPowerPolicyRequest{
@@ -5916,7 +5944,8 @@ func (a *ComputeApiService) PatchComputeServerPowerPolicy(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return ComputeServerPowerPolicy
+//
+//	@return ComputeServerPowerPolicy
 func (a *ComputeApiService) PatchComputeServerPowerPolicyExecute(r ApiPatchComputeServerPowerPolicyRequest) (*ComputeServerPowerPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -6073,9 +6102,9 @@ func (r ApiPatchComputeServerSettingRequest) Execute() (*ComputeServerSetting, *
 /*
 PatchComputeServerSetting Update a 'compute.ServerSetting' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchComputeServerSettingRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchComputeServerSettingRequest
 */
 func (a *ComputeApiService) PatchComputeServerSetting(ctx context.Context, moid string) ApiPatchComputeServerSettingRequest {
 	return ApiPatchComputeServerSettingRequest{
@@ -6086,7 +6115,8 @@ func (a *ComputeApiService) PatchComputeServerSetting(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return ComputeServerSetting
+//
+//	@return ComputeServerSetting
 func (a *ComputeApiService) PatchComputeServerSettingExecute(r ApiPatchComputeServerSettingRequest) (*ComputeServerSetting, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -6243,9 +6273,9 @@ func (r ApiUpdateComputeBladeRequest) Execute() (*ComputeBlade, *http.Response, 
 /*
 UpdateComputeBlade Update a 'compute.Blade' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateComputeBladeRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateComputeBladeRequest
 */
 func (a *ComputeApiService) UpdateComputeBlade(ctx context.Context, moid string) ApiUpdateComputeBladeRequest {
 	return ApiUpdateComputeBladeRequest{
@@ -6256,7 +6286,8 @@ func (a *ComputeApiService) UpdateComputeBlade(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//  @return ComputeBlade
+//
+//	@return ComputeBlade
 func (a *ComputeApiService) UpdateComputeBladeExecute(r ApiUpdateComputeBladeRequest) (*ComputeBlade, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -6413,9 +6444,9 @@ func (r ApiUpdateComputeBladeIdentityRequest) Execute() (*ComputeBladeIdentity, 
 /*
 UpdateComputeBladeIdentity Update a 'compute.BladeIdentity' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateComputeBladeIdentityRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateComputeBladeIdentityRequest
 */
 func (a *ComputeApiService) UpdateComputeBladeIdentity(ctx context.Context, moid string) ApiUpdateComputeBladeIdentityRequest {
 	return ApiUpdateComputeBladeIdentityRequest{
@@ -6426,7 +6457,8 @@ func (a *ComputeApiService) UpdateComputeBladeIdentity(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return ComputeBladeIdentity
+//
+//	@return ComputeBladeIdentity
 func (a *ComputeApiService) UpdateComputeBladeIdentityExecute(r ApiUpdateComputeBladeIdentityRequest) (*ComputeBladeIdentity, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -6583,9 +6615,9 @@ func (r ApiUpdateComputeBoardRequest) Execute() (*ComputeBoard, *http.Response, 
 /*
 UpdateComputeBoard Update a 'compute.Board' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateComputeBoardRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateComputeBoardRequest
 */
 func (a *ComputeApiService) UpdateComputeBoard(ctx context.Context, moid string) ApiUpdateComputeBoardRequest {
 	return ApiUpdateComputeBoardRequest{
@@ -6596,7 +6628,8 @@ func (a *ComputeApiService) UpdateComputeBoard(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//  @return ComputeBoard
+//
+//	@return ComputeBoard
 func (a *ComputeApiService) UpdateComputeBoardExecute(r ApiUpdateComputeBoardRequest) (*ComputeBoard, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -6753,9 +6786,9 @@ func (r ApiUpdateComputeMappingRequest) Execute() (*ComputeMapping, *http.Respon
 /*
 UpdateComputeMapping Update a 'compute.Mapping' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateComputeMappingRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateComputeMappingRequest
 */
 func (a *ComputeApiService) UpdateComputeMapping(ctx context.Context, moid string) ApiUpdateComputeMappingRequest {
 	return ApiUpdateComputeMappingRequest{
@@ -6766,7 +6799,8 @@ func (a *ComputeApiService) UpdateComputeMapping(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return ComputeMapping
+//
+//	@return ComputeMapping
 func (a *ComputeApiService) UpdateComputeMappingExecute(r ApiUpdateComputeMappingRequest) (*ComputeMapping, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -6923,9 +6957,9 @@ func (r ApiUpdateComputeRackUnitRequest) Execute() (*ComputeRackUnit, *http.Resp
 /*
 UpdateComputeRackUnit Update a 'compute.RackUnit' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateComputeRackUnitRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateComputeRackUnitRequest
 */
 func (a *ComputeApiService) UpdateComputeRackUnit(ctx context.Context, moid string) ApiUpdateComputeRackUnitRequest {
 	return ApiUpdateComputeRackUnitRequest{
@@ -6936,7 +6970,8 @@ func (a *ComputeApiService) UpdateComputeRackUnit(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return ComputeRackUnit
+//
+//	@return ComputeRackUnit
 func (a *ComputeApiService) UpdateComputeRackUnitExecute(r ApiUpdateComputeRackUnitRequest) (*ComputeRackUnit, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -7093,9 +7128,9 @@ func (r ApiUpdateComputeRackUnitIdentityRequest) Execute() (*ComputeRackUnitIden
 /*
 UpdateComputeRackUnitIdentity Update a 'compute.RackUnitIdentity' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateComputeRackUnitIdentityRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateComputeRackUnitIdentityRequest
 */
 func (a *ComputeApiService) UpdateComputeRackUnitIdentity(ctx context.Context, moid string) ApiUpdateComputeRackUnitIdentityRequest {
 	return ApiUpdateComputeRackUnitIdentityRequest{
@@ -7106,7 +7141,8 @@ func (a *ComputeApiService) UpdateComputeRackUnitIdentity(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return ComputeRackUnitIdentity
+//
+//	@return ComputeRackUnitIdentity
 func (a *ComputeApiService) UpdateComputeRackUnitIdentityExecute(r ApiUpdateComputeRackUnitIdentityRequest) (*ComputeRackUnitIdentity, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -7263,9 +7299,9 @@ func (r ApiUpdateComputeServerPowerPolicyRequest) Execute() (*ComputeServerPower
 /*
 UpdateComputeServerPowerPolicy Update a 'compute.ServerPowerPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateComputeServerPowerPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateComputeServerPowerPolicyRequest
 */
 func (a *ComputeApiService) UpdateComputeServerPowerPolicy(ctx context.Context, moid string) ApiUpdateComputeServerPowerPolicyRequest {
 	return ApiUpdateComputeServerPowerPolicyRequest{
@@ -7276,7 +7312,8 @@ func (a *ComputeApiService) UpdateComputeServerPowerPolicy(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return ComputeServerPowerPolicy
+//
+//	@return ComputeServerPowerPolicy
 func (a *ComputeApiService) UpdateComputeServerPowerPolicyExecute(r ApiUpdateComputeServerPowerPolicyRequest) (*ComputeServerPowerPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -7433,9 +7470,9 @@ func (r ApiUpdateComputeServerSettingRequest) Execute() (*ComputeServerSetting, 
 /*
 UpdateComputeServerSetting Update a 'compute.ServerSetting' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateComputeServerSettingRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateComputeServerSettingRequest
 */
 func (a *ComputeApiService) UpdateComputeServerSetting(ctx context.Context, moid string) ApiUpdateComputeServerSettingRequest {
 	return ApiUpdateComputeServerSettingRequest{
@@ -7446,7 +7483,8 @@ func (a *ComputeApiService) UpdateComputeServerSetting(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return ComputeServerSetting
+//
+//	@return ComputeServerSetting
 func (a *ComputeApiService) UpdateComputeServerSettingExecute(r ApiUpdateComputeServerSettingRequest) (*ComputeServerSetting, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

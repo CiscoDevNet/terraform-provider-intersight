@@ -36,9 +36,9 @@ func (r ApiGetNetworkElementByMoidRequest) Execute() (*NetworkElement, *http.Res
 /*
 GetNetworkElementByMoid Read a 'network.Element' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNetworkElementByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNetworkElementByMoidRequest
 */
 func (a *NetworkApiService) GetNetworkElementByMoid(ctx context.Context, moid string) ApiGetNetworkElementByMoidRequest {
 	return ApiGetNetworkElementByMoidRequest{
@@ -49,7 +49,8 @@ func (a *NetworkApiService) GetNetworkElementByMoid(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return NetworkElement
+//
+//	@return NetworkElement
 func (a *NetworkApiService) GetNetworkElementByMoidExecute(r ApiGetNetworkElementByMoidRequest) (*NetworkElement, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -260,8 +261,8 @@ func (r ApiGetNetworkElementListRequest) Execute() (*NetworkElementResponse, *ht
 /*
 GetNetworkElementList Read a 'network.Element' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNetworkElementListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNetworkElementListRequest
 */
 func (a *NetworkApiService) GetNetworkElementList(ctx context.Context) ApiGetNetworkElementListRequest {
 	return ApiGetNetworkElementListRequest{
@@ -271,7 +272,8 @@ func (a *NetworkApiService) GetNetworkElementList(ctx context.Context) ApiGetNet
 }
 
 // Execute executes the request
-//  @return NetworkElementResponse
+//
+//	@return NetworkElementResponse
 func (a *NetworkApiService) GetNetworkElementListExecute(r ApiGetNetworkElementListRequest) (*NetworkElementResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -438,9 +440,9 @@ func (r ApiGetNetworkElementSummaryByMoidRequest) Execute() (*NetworkElementSumm
 /*
 GetNetworkElementSummaryByMoid Read a 'network.ElementSummary' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNetworkElementSummaryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNetworkElementSummaryByMoidRequest
 */
 func (a *NetworkApiService) GetNetworkElementSummaryByMoid(ctx context.Context, moid string) ApiGetNetworkElementSummaryByMoidRequest {
 	return ApiGetNetworkElementSummaryByMoidRequest{
@@ -451,7 +453,8 @@ func (a *NetworkApiService) GetNetworkElementSummaryByMoid(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return NetworkElementSummary
+//
+//	@return NetworkElementSummary
 func (a *NetworkApiService) GetNetworkElementSummaryByMoidExecute(r ApiGetNetworkElementSummaryByMoidRequest) (*NetworkElementSummary, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -662,8 +665,8 @@ func (r ApiGetNetworkElementSummaryListRequest) Execute() (*NetworkElementSummar
 /*
 GetNetworkElementSummaryList Read a 'network.ElementSummary' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNetworkElementSummaryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNetworkElementSummaryListRequest
 */
 func (a *NetworkApiService) GetNetworkElementSummaryList(ctx context.Context) ApiGetNetworkElementSummaryListRequest {
 	return ApiGetNetworkElementSummaryListRequest{
@@ -673,7 +676,8 @@ func (a *NetworkApiService) GetNetworkElementSummaryList(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return NetworkElementSummaryResponse
+//
+//	@return NetworkElementSummaryResponse
 func (a *NetworkApiService) GetNetworkElementSummaryListExecute(r ApiGetNetworkElementSummaryListRequest) (*NetworkElementSummaryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -840,9 +844,9 @@ func (r ApiGetNetworkFcZoneInfoByMoidRequest) Execute() (*NetworkFcZoneInfo, *ht
 /*
 GetNetworkFcZoneInfoByMoid Read a 'network.FcZoneInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNetworkFcZoneInfoByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNetworkFcZoneInfoByMoidRequest
 */
 func (a *NetworkApiService) GetNetworkFcZoneInfoByMoid(ctx context.Context, moid string) ApiGetNetworkFcZoneInfoByMoidRequest {
 	return ApiGetNetworkFcZoneInfoByMoidRequest{
@@ -853,7 +857,8 @@ func (a *NetworkApiService) GetNetworkFcZoneInfoByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return NetworkFcZoneInfo
+//
+//	@return NetworkFcZoneInfo
 func (a *NetworkApiService) GetNetworkFcZoneInfoByMoidExecute(r ApiGetNetworkFcZoneInfoByMoidRequest) (*NetworkFcZoneInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1064,8 +1069,8 @@ func (r ApiGetNetworkFcZoneInfoListRequest) Execute() (*NetworkFcZoneInfoRespons
 /*
 GetNetworkFcZoneInfoList Read a 'network.FcZoneInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNetworkFcZoneInfoListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNetworkFcZoneInfoListRequest
 */
 func (a *NetworkApiService) GetNetworkFcZoneInfoList(ctx context.Context) ApiGetNetworkFcZoneInfoListRequest {
 	return ApiGetNetworkFcZoneInfoListRequest{
@@ -1075,7 +1080,8 @@ func (a *NetworkApiService) GetNetworkFcZoneInfoList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//  @return NetworkFcZoneInfoResponse
+//
+//	@return NetworkFcZoneInfoResponse
 func (a *NetworkApiService) GetNetworkFcZoneInfoListExecute(r ApiGetNetworkFcZoneInfoListRequest) (*NetworkFcZoneInfoResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1242,9 +1248,9 @@ func (r ApiGetNetworkFeatureControlByMoidRequest) Execute() (*NetworkFeatureCont
 /*
 GetNetworkFeatureControlByMoid Read a 'network.FeatureControl' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNetworkFeatureControlByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNetworkFeatureControlByMoidRequest
 */
 func (a *NetworkApiService) GetNetworkFeatureControlByMoid(ctx context.Context, moid string) ApiGetNetworkFeatureControlByMoidRequest {
 	return ApiGetNetworkFeatureControlByMoidRequest{
@@ -1255,7 +1261,8 @@ func (a *NetworkApiService) GetNetworkFeatureControlByMoid(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return NetworkFeatureControl
+//
+//	@return NetworkFeatureControl
 func (a *NetworkApiService) GetNetworkFeatureControlByMoidExecute(r ApiGetNetworkFeatureControlByMoidRequest) (*NetworkFeatureControl, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1466,8 +1473,8 @@ func (r ApiGetNetworkFeatureControlListRequest) Execute() (*NetworkFeatureContro
 /*
 GetNetworkFeatureControlList Read a 'network.FeatureControl' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNetworkFeatureControlListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNetworkFeatureControlListRequest
 */
 func (a *NetworkApiService) GetNetworkFeatureControlList(ctx context.Context) ApiGetNetworkFeatureControlListRequest {
 	return ApiGetNetworkFeatureControlListRequest{
@@ -1477,7 +1484,8 @@ func (a *NetworkApiService) GetNetworkFeatureControlList(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return NetworkFeatureControlResponse
+//
+//	@return NetworkFeatureControlResponse
 func (a *NetworkApiService) GetNetworkFeatureControlListExecute(r ApiGetNetworkFeatureControlListRequest) (*NetworkFeatureControlResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1644,9 +1652,9 @@ func (r ApiGetNetworkInterfaceListByMoidRequest) Execute() (*NetworkInterfaceLis
 /*
 GetNetworkInterfaceListByMoid Read a 'network.InterfaceList' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNetworkInterfaceListByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNetworkInterfaceListByMoidRequest
 */
 func (a *NetworkApiService) GetNetworkInterfaceListByMoid(ctx context.Context, moid string) ApiGetNetworkInterfaceListByMoidRequest {
 	return ApiGetNetworkInterfaceListByMoidRequest{
@@ -1657,7 +1665,8 @@ func (a *NetworkApiService) GetNetworkInterfaceListByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return NetworkInterfaceList
+//
+//	@return NetworkInterfaceList
 func (a *NetworkApiService) GetNetworkInterfaceListByMoidExecute(r ApiGetNetworkInterfaceListByMoidRequest) (*NetworkInterfaceList, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1868,8 +1877,8 @@ func (r ApiGetNetworkInterfaceListListRequest) Execute() (*NetworkInterfaceListR
 /*
 GetNetworkInterfaceListList Read a 'network.InterfaceList' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNetworkInterfaceListListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNetworkInterfaceListListRequest
 */
 func (a *NetworkApiService) GetNetworkInterfaceListList(ctx context.Context) ApiGetNetworkInterfaceListListRequest {
 	return ApiGetNetworkInterfaceListListRequest{
@@ -1879,7 +1888,8 @@ func (a *NetworkApiService) GetNetworkInterfaceListList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return NetworkInterfaceListResponse
+//
+//	@return NetworkInterfaceListResponse
 func (a *NetworkApiService) GetNetworkInterfaceListListExecute(r ApiGetNetworkInterfaceListListRequest) (*NetworkInterfaceListResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2046,9 +2056,9 @@ func (r ApiGetNetworkLicenseFileByMoidRequest) Execute() (*NetworkLicenseFile, *
 /*
 GetNetworkLicenseFileByMoid Read a 'network.LicenseFile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNetworkLicenseFileByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNetworkLicenseFileByMoidRequest
 */
 func (a *NetworkApiService) GetNetworkLicenseFileByMoid(ctx context.Context, moid string) ApiGetNetworkLicenseFileByMoidRequest {
 	return ApiGetNetworkLicenseFileByMoidRequest{
@@ -2059,7 +2069,8 @@ func (a *NetworkApiService) GetNetworkLicenseFileByMoid(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return NetworkLicenseFile
+//
+//	@return NetworkLicenseFile
 func (a *NetworkApiService) GetNetworkLicenseFileByMoidExecute(r ApiGetNetworkLicenseFileByMoidRequest) (*NetworkLicenseFile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2270,8 +2281,8 @@ func (r ApiGetNetworkLicenseFileListRequest) Execute() (*NetworkLicenseFileRespo
 /*
 GetNetworkLicenseFileList Read a 'network.LicenseFile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNetworkLicenseFileListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNetworkLicenseFileListRequest
 */
 func (a *NetworkApiService) GetNetworkLicenseFileList(ctx context.Context) ApiGetNetworkLicenseFileListRequest {
 	return ApiGetNetworkLicenseFileListRequest{
@@ -2281,7 +2292,8 @@ func (a *NetworkApiService) GetNetworkLicenseFileList(ctx context.Context) ApiGe
 }
 
 // Execute executes the request
-//  @return NetworkLicenseFileResponse
+//
+//	@return NetworkLicenseFileResponse
 func (a *NetworkApiService) GetNetworkLicenseFileListExecute(r ApiGetNetworkLicenseFileListRequest) (*NetworkLicenseFileResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2448,9 +2460,9 @@ func (r ApiGetNetworkSupervisorCardByMoidRequest) Execute() (*NetworkSupervisorC
 /*
 GetNetworkSupervisorCardByMoid Read a 'network.SupervisorCard' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNetworkSupervisorCardByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNetworkSupervisorCardByMoidRequest
 */
 func (a *NetworkApiService) GetNetworkSupervisorCardByMoid(ctx context.Context, moid string) ApiGetNetworkSupervisorCardByMoidRequest {
 	return ApiGetNetworkSupervisorCardByMoidRequest{
@@ -2461,7 +2473,8 @@ func (a *NetworkApiService) GetNetworkSupervisorCardByMoid(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return NetworkSupervisorCard
+//
+//	@return NetworkSupervisorCard
 func (a *NetworkApiService) GetNetworkSupervisorCardByMoidExecute(r ApiGetNetworkSupervisorCardByMoidRequest) (*NetworkSupervisorCard, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2672,8 +2685,8 @@ func (r ApiGetNetworkSupervisorCardListRequest) Execute() (*NetworkSupervisorCar
 /*
 GetNetworkSupervisorCardList Read a 'network.SupervisorCard' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNetworkSupervisorCardListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNetworkSupervisorCardListRequest
 */
 func (a *NetworkApiService) GetNetworkSupervisorCardList(ctx context.Context) ApiGetNetworkSupervisorCardListRequest {
 	return ApiGetNetworkSupervisorCardListRequest{
@@ -2683,7 +2696,8 @@ func (a *NetworkApiService) GetNetworkSupervisorCardList(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return NetworkSupervisorCardResponse
+//
+//	@return NetworkSupervisorCardResponse
 func (a *NetworkApiService) GetNetworkSupervisorCardListExecute(r ApiGetNetworkSupervisorCardListRequest) (*NetworkSupervisorCardResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2850,9 +2864,9 @@ func (r ApiGetNetworkVlanPortInfoByMoidRequest) Execute() (*NetworkVlanPortInfo,
 /*
 GetNetworkVlanPortInfoByMoid Read a 'network.VlanPortInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNetworkVlanPortInfoByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNetworkVlanPortInfoByMoidRequest
 */
 func (a *NetworkApiService) GetNetworkVlanPortInfoByMoid(ctx context.Context, moid string) ApiGetNetworkVlanPortInfoByMoidRequest {
 	return ApiGetNetworkVlanPortInfoByMoidRequest{
@@ -2863,7 +2877,8 @@ func (a *NetworkApiService) GetNetworkVlanPortInfoByMoid(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return NetworkVlanPortInfo
+//
+//	@return NetworkVlanPortInfo
 func (a *NetworkApiService) GetNetworkVlanPortInfoByMoidExecute(r ApiGetNetworkVlanPortInfoByMoidRequest) (*NetworkVlanPortInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3074,8 +3089,8 @@ func (r ApiGetNetworkVlanPortInfoListRequest) Execute() (*NetworkVlanPortInfoRes
 /*
 GetNetworkVlanPortInfoList Read a 'network.VlanPortInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNetworkVlanPortInfoListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNetworkVlanPortInfoListRequest
 */
 func (a *NetworkApiService) GetNetworkVlanPortInfoList(ctx context.Context) ApiGetNetworkVlanPortInfoListRequest {
 	return ApiGetNetworkVlanPortInfoListRequest{
@@ -3085,7 +3100,8 @@ func (a *NetworkApiService) GetNetworkVlanPortInfoList(ctx context.Context) ApiG
 }
 
 // Execute executes the request
-//  @return NetworkVlanPortInfoResponse
+//
+//	@return NetworkVlanPortInfoResponse
 func (a *NetworkApiService) GetNetworkVlanPortInfoListExecute(r ApiGetNetworkVlanPortInfoListRequest) (*NetworkVlanPortInfoResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3252,9 +3268,9 @@ func (r ApiGetNetworkVrfByMoidRequest) Execute() (*NetworkVrf, *http.Response, e
 /*
 GetNetworkVrfByMoid Read a 'network.Vrf' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNetworkVrfByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNetworkVrfByMoidRequest
 */
 func (a *NetworkApiService) GetNetworkVrfByMoid(ctx context.Context, moid string) ApiGetNetworkVrfByMoidRequest {
 	return ApiGetNetworkVrfByMoidRequest{
@@ -3265,7 +3281,8 @@ func (a *NetworkApiService) GetNetworkVrfByMoid(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return NetworkVrf
+//
+//	@return NetworkVrf
 func (a *NetworkApiService) GetNetworkVrfByMoidExecute(r ApiGetNetworkVrfByMoidRequest) (*NetworkVrf, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3476,8 +3493,8 @@ func (r ApiGetNetworkVrfListRequest) Execute() (*NetworkVrfResponse, *http.Respo
 /*
 GetNetworkVrfList Read a 'network.Vrf' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNetworkVrfListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNetworkVrfListRequest
 */
 func (a *NetworkApiService) GetNetworkVrfList(ctx context.Context) ApiGetNetworkVrfListRequest {
 	return ApiGetNetworkVrfListRequest{
@@ -3487,7 +3504,8 @@ func (a *NetworkApiService) GetNetworkVrfList(ctx context.Context) ApiGetNetwork
 }
 
 // Execute executes the request
-//  @return NetworkVrfResponse
+//
+//	@return NetworkVrfResponse
 func (a *NetworkApiService) GetNetworkVrfListExecute(r ApiGetNetworkVrfListRequest) (*NetworkVrfResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3668,9 +3686,9 @@ func (r ApiPatchNetworkElementRequest) Execute() (*NetworkElement, *http.Respons
 /*
 PatchNetworkElement Update a 'network.Element' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchNetworkElementRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchNetworkElementRequest
 */
 func (a *NetworkApiService) PatchNetworkElement(ctx context.Context, moid string) ApiPatchNetworkElementRequest {
 	return ApiPatchNetworkElementRequest{
@@ -3681,7 +3699,8 @@ func (a *NetworkApiService) PatchNetworkElement(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return NetworkElement
+//
+//	@return NetworkElement
 func (a *NetworkApiService) PatchNetworkElementExecute(r ApiPatchNetworkElementRequest) (*NetworkElement, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -3838,9 +3857,9 @@ func (r ApiPatchNetworkFcZoneInfoRequest) Execute() (*NetworkFcZoneInfo, *http.R
 /*
 PatchNetworkFcZoneInfo Update a 'network.FcZoneInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchNetworkFcZoneInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchNetworkFcZoneInfoRequest
 */
 func (a *NetworkApiService) PatchNetworkFcZoneInfo(ctx context.Context, moid string) ApiPatchNetworkFcZoneInfoRequest {
 	return ApiPatchNetworkFcZoneInfoRequest{
@@ -3851,7 +3870,8 @@ func (a *NetworkApiService) PatchNetworkFcZoneInfo(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return NetworkFcZoneInfo
+//
+//	@return NetworkFcZoneInfo
 func (a *NetworkApiService) PatchNetworkFcZoneInfoExecute(r ApiPatchNetworkFcZoneInfoRequest) (*NetworkFcZoneInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -4008,9 +4028,9 @@ func (r ApiPatchNetworkVlanPortInfoRequest) Execute() (*NetworkVlanPortInfo, *ht
 /*
 PatchNetworkVlanPortInfo Update a 'network.VlanPortInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchNetworkVlanPortInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchNetworkVlanPortInfoRequest
 */
 func (a *NetworkApiService) PatchNetworkVlanPortInfo(ctx context.Context, moid string) ApiPatchNetworkVlanPortInfoRequest {
 	return ApiPatchNetworkVlanPortInfoRequest{
@@ -4021,7 +4041,8 @@ func (a *NetworkApiService) PatchNetworkVlanPortInfo(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return NetworkVlanPortInfo
+//
+//	@return NetworkVlanPortInfo
 func (a *NetworkApiService) PatchNetworkVlanPortInfoExecute(r ApiPatchNetworkVlanPortInfoRequest) (*NetworkVlanPortInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -4178,9 +4199,9 @@ func (r ApiUpdateNetworkElementRequest) Execute() (*NetworkElement, *http.Respon
 /*
 UpdateNetworkElement Update a 'network.Element' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateNetworkElementRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateNetworkElementRequest
 */
 func (a *NetworkApiService) UpdateNetworkElement(ctx context.Context, moid string) ApiUpdateNetworkElementRequest {
 	return ApiUpdateNetworkElementRequest{
@@ -4191,7 +4212,8 @@ func (a *NetworkApiService) UpdateNetworkElement(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return NetworkElement
+//
+//	@return NetworkElement
 func (a *NetworkApiService) UpdateNetworkElementExecute(r ApiUpdateNetworkElementRequest) (*NetworkElement, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4348,9 +4370,9 @@ func (r ApiUpdateNetworkFcZoneInfoRequest) Execute() (*NetworkFcZoneInfo, *http.
 /*
 UpdateNetworkFcZoneInfo Update a 'network.FcZoneInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateNetworkFcZoneInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateNetworkFcZoneInfoRequest
 */
 func (a *NetworkApiService) UpdateNetworkFcZoneInfo(ctx context.Context, moid string) ApiUpdateNetworkFcZoneInfoRequest {
 	return ApiUpdateNetworkFcZoneInfoRequest{
@@ -4361,7 +4383,8 @@ func (a *NetworkApiService) UpdateNetworkFcZoneInfo(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return NetworkFcZoneInfo
+//
+//	@return NetworkFcZoneInfo
 func (a *NetworkApiService) UpdateNetworkFcZoneInfoExecute(r ApiUpdateNetworkFcZoneInfoRequest) (*NetworkFcZoneInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4518,9 +4541,9 @@ func (r ApiUpdateNetworkVlanPortInfoRequest) Execute() (*NetworkVlanPortInfo, *h
 /*
 UpdateNetworkVlanPortInfo Update a 'network.VlanPortInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateNetworkVlanPortInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateNetworkVlanPortInfoRequest
 */
 func (a *NetworkApiService) UpdateNetworkVlanPortInfo(ctx context.Context, moid string) ApiUpdateNetworkVlanPortInfoRequest {
 	return ApiUpdateNetworkVlanPortInfoRequest{
@@ -4531,7 +4554,8 @@ func (a *NetworkApiService) UpdateNetworkVlanPortInfo(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return NetworkVlanPortInfo
+//
+//	@return NetworkVlanPortInfo
 func (a *NetworkApiService) UpdateNetworkVlanPortInfoExecute(r ApiUpdateNetworkVlanPortInfoRequest) (*NetworkVlanPortInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

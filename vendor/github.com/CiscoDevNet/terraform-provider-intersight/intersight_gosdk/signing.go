@@ -100,7 +100,8 @@ var supportedSigningSchemes = map[string]bool{
 // ASCII space, and the :path pseudo-headers.
 //
 // For example, SignedHeaders can be set to:
-//   (request-target) (created) date host digest
+//
+//	(request-target) (created) date host digest
 //
 // When SignedHeaders is not specified, the client defaults to a single value, '(created)',
 // in the list of HTTP headers.

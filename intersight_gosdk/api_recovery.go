@@ -56,8 +56,8 @@ func (r ApiCreateRecoveryBackupConfigPolicyRequest) Execute() (*RecoveryBackupCo
 /*
 CreateRecoveryBackupConfigPolicy Create a 'recovery.BackupConfigPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateRecoveryBackupConfigPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateRecoveryBackupConfigPolicyRequest
 */
 func (a *RecoveryApiService) CreateRecoveryBackupConfigPolicy(ctx context.Context) ApiCreateRecoveryBackupConfigPolicyRequest {
 	return ApiCreateRecoveryBackupConfigPolicyRequest{
@@ -67,7 +67,8 @@ func (a *RecoveryApiService) CreateRecoveryBackupConfigPolicy(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return RecoveryBackupConfigPolicy
+//
+//	@return RecoveryBackupConfigPolicy
 func (a *RecoveryApiService) CreateRecoveryBackupConfigPolicyExecute(r ApiCreateRecoveryBackupConfigPolicyRequest) (*RecoveryBackupConfigPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -232,8 +233,8 @@ func (r ApiCreateRecoveryBackupProfileRequest) Execute() (*RecoveryBackupProfile
 /*
 CreateRecoveryBackupProfile Create a 'recovery.BackupProfile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateRecoveryBackupProfileRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateRecoveryBackupProfileRequest
 */
 func (a *RecoveryApiService) CreateRecoveryBackupProfile(ctx context.Context) ApiCreateRecoveryBackupProfileRequest {
 	return ApiCreateRecoveryBackupProfileRequest{
@@ -243,7 +244,8 @@ func (a *RecoveryApiService) CreateRecoveryBackupProfile(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return RecoveryBackupProfile
+//
+//	@return RecoveryBackupProfile
 func (a *RecoveryApiService) CreateRecoveryBackupProfileExecute(r ApiCreateRecoveryBackupProfileRequest) (*RecoveryBackupProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -408,8 +410,8 @@ func (r ApiCreateRecoveryOnDemandBackupRequest) Execute() (*RecoveryOnDemandBack
 /*
 CreateRecoveryOnDemandBackup Create a 'recovery.OnDemandBackup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateRecoveryOnDemandBackupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateRecoveryOnDemandBackupRequest
 */
 func (a *RecoveryApiService) CreateRecoveryOnDemandBackup(ctx context.Context) ApiCreateRecoveryOnDemandBackupRequest {
 	return ApiCreateRecoveryOnDemandBackupRequest{
@@ -419,7 +421,8 @@ func (a *RecoveryApiService) CreateRecoveryOnDemandBackup(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return RecoveryOnDemandBackup
+//
+//	@return RecoveryOnDemandBackup
 func (a *RecoveryApiService) CreateRecoveryOnDemandBackupExecute(r ApiCreateRecoveryOnDemandBackupRequest) (*RecoveryOnDemandBackup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -584,8 +587,8 @@ func (r ApiCreateRecoveryRestoreRequest) Execute() (*RecoveryRestore, *http.Resp
 /*
 CreateRecoveryRestore Create a 'recovery.Restore' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateRecoveryRestoreRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateRecoveryRestoreRequest
 */
 func (a *RecoveryApiService) CreateRecoveryRestore(ctx context.Context) ApiCreateRecoveryRestoreRequest {
 	return ApiCreateRecoveryRestoreRequest{
@@ -595,7 +598,8 @@ func (a *RecoveryApiService) CreateRecoveryRestore(ctx context.Context) ApiCreat
 }
 
 // Execute executes the request
-//  @return RecoveryRestore
+//
+//	@return RecoveryRestore
 func (a *RecoveryApiService) CreateRecoveryRestoreExecute(r ApiCreateRecoveryRestoreRequest) (*RecoveryRestore, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -760,8 +764,8 @@ func (r ApiCreateRecoveryScheduleConfigPolicyRequest) Execute() (*RecoverySchedu
 /*
 CreateRecoveryScheduleConfigPolicy Create a 'recovery.ScheduleConfigPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateRecoveryScheduleConfigPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateRecoveryScheduleConfigPolicyRequest
 */
 func (a *RecoveryApiService) CreateRecoveryScheduleConfigPolicy(ctx context.Context) ApiCreateRecoveryScheduleConfigPolicyRequest {
 	return ApiCreateRecoveryScheduleConfigPolicyRequest{
@@ -771,7 +775,8 @@ func (a *RecoveryApiService) CreateRecoveryScheduleConfigPolicy(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return RecoveryScheduleConfigPolicy
+//
+//	@return RecoveryScheduleConfigPolicy
 func (a *RecoveryApiService) CreateRecoveryScheduleConfigPolicyExecute(r ApiCreateRecoveryScheduleConfigPolicyRequest) (*RecoveryScheduleConfigPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -916,9 +921,9 @@ func (r ApiDeleteRecoveryBackupConfigPolicyRequest) Execute() (*http.Response, e
 /*
 DeleteRecoveryBackupConfigPolicy Delete a 'recovery.BackupConfigPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteRecoveryBackupConfigPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteRecoveryBackupConfigPolicyRequest
 */
 func (a *RecoveryApiService) DeleteRecoveryBackupConfigPolicy(ctx context.Context, moid string) ApiDeleteRecoveryBackupConfigPolicyRequest {
 	return ApiDeleteRecoveryBackupConfigPolicyRequest{
@@ -1053,9 +1058,9 @@ func (r ApiDeleteRecoveryBackupProfileRequest) Execute() (*http.Response, error)
 /*
 DeleteRecoveryBackupProfile Delete a 'recovery.BackupProfile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteRecoveryBackupProfileRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteRecoveryBackupProfileRequest
 */
 func (a *RecoveryApiService) DeleteRecoveryBackupProfile(ctx context.Context, moid string) ApiDeleteRecoveryBackupProfileRequest {
 	return ApiDeleteRecoveryBackupProfileRequest{
@@ -1190,9 +1195,9 @@ func (r ApiDeleteRecoveryOnDemandBackupRequest) Execute() (*http.Response, error
 /*
 DeleteRecoveryOnDemandBackup Delete a 'recovery.OnDemandBackup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteRecoveryOnDemandBackupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteRecoveryOnDemandBackupRequest
 */
 func (a *RecoveryApiService) DeleteRecoveryOnDemandBackup(ctx context.Context, moid string) ApiDeleteRecoveryOnDemandBackupRequest {
 	return ApiDeleteRecoveryOnDemandBackupRequest{
@@ -1327,9 +1332,9 @@ func (r ApiDeleteRecoveryRestoreRequest) Execute() (*http.Response, error) {
 /*
 DeleteRecoveryRestore Delete a 'recovery.Restore' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteRecoveryRestoreRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteRecoveryRestoreRequest
 */
 func (a *RecoveryApiService) DeleteRecoveryRestore(ctx context.Context, moid string) ApiDeleteRecoveryRestoreRequest {
 	return ApiDeleteRecoveryRestoreRequest{
@@ -1464,9 +1469,9 @@ func (r ApiDeleteRecoveryScheduleConfigPolicyRequest) Execute() (*http.Response,
 /*
 DeleteRecoveryScheduleConfigPolicy Delete a 'recovery.ScheduleConfigPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteRecoveryScheduleConfigPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteRecoveryScheduleConfigPolicyRequest
 */
 func (a *RecoveryApiService) DeleteRecoveryScheduleConfigPolicy(ctx context.Context, moid string) ApiDeleteRecoveryScheduleConfigPolicyRequest {
 	return ApiDeleteRecoveryScheduleConfigPolicyRequest{
@@ -1601,9 +1606,9 @@ func (r ApiGetRecoveryBackupConfigPolicyByMoidRequest) Execute() (*RecoveryBacku
 /*
 GetRecoveryBackupConfigPolicyByMoid Read a 'recovery.BackupConfigPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetRecoveryBackupConfigPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetRecoveryBackupConfigPolicyByMoidRequest
 */
 func (a *RecoveryApiService) GetRecoveryBackupConfigPolicyByMoid(ctx context.Context, moid string) ApiGetRecoveryBackupConfigPolicyByMoidRequest {
 	return ApiGetRecoveryBackupConfigPolicyByMoidRequest{
@@ -1614,7 +1619,8 @@ func (a *RecoveryApiService) GetRecoveryBackupConfigPolicyByMoid(ctx context.Con
 }
 
 // Execute executes the request
-//  @return RecoveryBackupConfigPolicy
+//
+//	@return RecoveryBackupConfigPolicy
 func (a *RecoveryApiService) GetRecoveryBackupConfigPolicyByMoidExecute(r ApiGetRecoveryBackupConfigPolicyByMoidRequest) (*RecoveryBackupConfigPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1825,8 +1831,8 @@ func (r ApiGetRecoveryBackupConfigPolicyListRequest) Execute() (*RecoveryBackupC
 /*
 GetRecoveryBackupConfigPolicyList Read a 'recovery.BackupConfigPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetRecoveryBackupConfigPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetRecoveryBackupConfigPolicyListRequest
 */
 func (a *RecoveryApiService) GetRecoveryBackupConfigPolicyList(ctx context.Context) ApiGetRecoveryBackupConfigPolicyListRequest {
 	return ApiGetRecoveryBackupConfigPolicyListRequest{
@@ -1836,7 +1842,8 @@ func (a *RecoveryApiService) GetRecoveryBackupConfigPolicyList(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return RecoveryBackupConfigPolicyResponse
+//
+//	@return RecoveryBackupConfigPolicyResponse
 func (a *RecoveryApiService) GetRecoveryBackupConfigPolicyListExecute(r ApiGetRecoveryBackupConfigPolicyListRequest) (*RecoveryBackupConfigPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2003,9 +2010,9 @@ func (r ApiGetRecoveryBackupProfileByMoidRequest) Execute() (*RecoveryBackupProf
 /*
 GetRecoveryBackupProfileByMoid Read a 'recovery.BackupProfile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetRecoveryBackupProfileByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetRecoveryBackupProfileByMoidRequest
 */
 func (a *RecoveryApiService) GetRecoveryBackupProfileByMoid(ctx context.Context, moid string) ApiGetRecoveryBackupProfileByMoidRequest {
 	return ApiGetRecoveryBackupProfileByMoidRequest{
@@ -2016,7 +2023,8 @@ func (a *RecoveryApiService) GetRecoveryBackupProfileByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return RecoveryBackupProfile
+//
+//	@return RecoveryBackupProfile
 func (a *RecoveryApiService) GetRecoveryBackupProfileByMoidExecute(r ApiGetRecoveryBackupProfileByMoidRequest) (*RecoveryBackupProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2227,8 +2235,8 @@ func (r ApiGetRecoveryBackupProfileListRequest) Execute() (*RecoveryBackupProfil
 /*
 GetRecoveryBackupProfileList Read a 'recovery.BackupProfile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetRecoveryBackupProfileListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetRecoveryBackupProfileListRequest
 */
 func (a *RecoveryApiService) GetRecoveryBackupProfileList(ctx context.Context) ApiGetRecoveryBackupProfileListRequest {
 	return ApiGetRecoveryBackupProfileListRequest{
@@ -2238,7 +2246,8 @@ func (a *RecoveryApiService) GetRecoveryBackupProfileList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return RecoveryBackupProfileResponse
+//
+//	@return RecoveryBackupProfileResponse
 func (a *RecoveryApiService) GetRecoveryBackupProfileListExecute(r ApiGetRecoveryBackupProfileListRequest) (*RecoveryBackupProfileResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2405,9 +2414,9 @@ func (r ApiGetRecoveryConfigResultByMoidRequest) Execute() (*RecoveryConfigResul
 /*
 GetRecoveryConfigResultByMoid Read a 'recovery.ConfigResult' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetRecoveryConfigResultByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetRecoveryConfigResultByMoidRequest
 */
 func (a *RecoveryApiService) GetRecoveryConfigResultByMoid(ctx context.Context, moid string) ApiGetRecoveryConfigResultByMoidRequest {
 	return ApiGetRecoveryConfigResultByMoidRequest{
@@ -2418,7 +2427,8 @@ func (a *RecoveryApiService) GetRecoveryConfigResultByMoid(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return RecoveryConfigResult
+//
+//	@return RecoveryConfigResult
 func (a *RecoveryApiService) GetRecoveryConfigResultByMoidExecute(r ApiGetRecoveryConfigResultByMoidRequest) (*RecoveryConfigResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2553,9 +2563,9 @@ func (r ApiGetRecoveryConfigResultEntryByMoidRequest) Execute() (*RecoveryConfig
 /*
 GetRecoveryConfigResultEntryByMoid Read a 'recovery.ConfigResultEntry' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetRecoveryConfigResultEntryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetRecoveryConfigResultEntryByMoidRequest
 */
 func (a *RecoveryApiService) GetRecoveryConfigResultEntryByMoid(ctx context.Context, moid string) ApiGetRecoveryConfigResultEntryByMoidRequest {
 	return ApiGetRecoveryConfigResultEntryByMoidRequest{
@@ -2566,7 +2576,8 @@ func (a *RecoveryApiService) GetRecoveryConfigResultEntryByMoid(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return RecoveryConfigResultEntry
+//
+//	@return RecoveryConfigResultEntry
 func (a *RecoveryApiService) GetRecoveryConfigResultEntryByMoidExecute(r ApiGetRecoveryConfigResultEntryByMoidRequest) (*RecoveryConfigResultEntry, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2777,8 +2788,8 @@ func (r ApiGetRecoveryConfigResultEntryListRequest) Execute() (*RecoveryConfigRe
 /*
 GetRecoveryConfigResultEntryList Read a 'recovery.ConfigResultEntry' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetRecoveryConfigResultEntryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetRecoveryConfigResultEntryListRequest
 */
 func (a *RecoveryApiService) GetRecoveryConfigResultEntryList(ctx context.Context) ApiGetRecoveryConfigResultEntryListRequest {
 	return ApiGetRecoveryConfigResultEntryListRequest{
@@ -2788,7 +2799,8 @@ func (a *RecoveryApiService) GetRecoveryConfigResultEntryList(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return RecoveryConfigResultEntryResponse
+//
+//	@return RecoveryConfigResultEntryResponse
 func (a *RecoveryApiService) GetRecoveryConfigResultEntryListExecute(r ApiGetRecoveryConfigResultEntryListRequest) (*RecoveryConfigResultEntryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3031,8 +3043,8 @@ func (r ApiGetRecoveryConfigResultListRequest) Execute() (*RecoveryConfigResultR
 /*
 GetRecoveryConfigResultList Read a 'recovery.ConfigResult' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetRecoveryConfigResultListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetRecoveryConfigResultListRequest
 */
 func (a *RecoveryApiService) GetRecoveryConfigResultList(ctx context.Context) ApiGetRecoveryConfigResultListRequest {
 	return ApiGetRecoveryConfigResultListRequest{
@@ -3042,7 +3054,8 @@ func (a *RecoveryApiService) GetRecoveryConfigResultList(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return RecoveryConfigResultResponse
+//
+//	@return RecoveryConfigResultResponse
 func (a *RecoveryApiService) GetRecoveryConfigResultListExecute(r ApiGetRecoveryConfigResultListRequest) (*RecoveryConfigResultResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3209,9 +3222,9 @@ func (r ApiGetRecoveryOnDemandBackupByMoidRequest) Execute() (*RecoveryOnDemandB
 /*
 GetRecoveryOnDemandBackupByMoid Read a 'recovery.OnDemandBackup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetRecoveryOnDemandBackupByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetRecoveryOnDemandBackupByMoidRequest
 */
 func (a *RecoveryApiService) GetRecoveryOnDemandBackupByMoid(ctx context.Context, moid string) ApiGetRecoveryOnDemandBackupByMoidRequest {
 	return ApiGetRecoveryOnDemandBackupByMoidRequest{
@@ -3222,7 +3235,8 @@ func (a *RecoveryApiService) GetRecoveryOnDemandBackupByMoid(ctx context.Context
 }
 
 // Execute executes the request
-//  @return RecoveryOnDemandBackup
+//
+//	@return RecoveryOnDemandBackup
 func (a *RecoveryApiService) GetRecoveryOnDemandBackupByMoidExecute(r ApiGetRecoveryOnDemandBackupByMoidRequest) (*RecoveryOnDemandBackup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3433,8 +3447,8 @@ func (r ApiGetRecoveryOnDemandBackupListRequest) Execute() (*RecoveryOnDemandBac
 /*
 GetRecoveryOnDemandBackupList Read a 'recovery.OnDemandBackup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetRecoveryOnDemandBackupListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetRecoveryOnDemandBackupListRequest
 */
 func (a *RecoveryApiService) GetRecoveryOnDemandBackupList(ctx context.Context) ApiGetRecoveryOnDemandBackupListRequest {
 	return ApiGetRecoveryOnDemandBackupListRequest{
@@ -3444,7 +3458,8 @@ func (a *RecoveryApiService) GetRecoveryOnDemandBackupList(ctx context.Context) 
 }
 
 // Execute executes the request
-//  @return RecoveryOnDemandBackupResponse
+//
+//	@return RecoveryOnDemandBackupResponse
 func (a *RecoveryApiService) GetRecoveryOnDemandBackupListExecute(r ApiGetRecoveryOnDemandBackupListRequest) (*RecoveryOnDemandBackupResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3611,9 +3626,9 @@ func (r ApiGetRecoveryRestoreByMoidRequest) Execute() (*RecoveryRestore, *http.R
 /*
 GetRecoveryRestoreByMoid Read a 'recovery.Restore' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetRecoveryRestoreByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetRecoveryRestoreByMoidRequest
 */
 func (a *RecoveryApiService) GetRecoveryRestoreByMoid(ctx context.Context, moid string) ApiGetRecoveryRestoreByMoidRequest {
 	return ApiGetRecoveryRestoreByMoidRequest{
@@ -3624,7 +3639,8 @@ func (a *RecoveryApiService) GetRecoveryRestoreByMoid(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return RecoveryRestore
+//
+//	@return RecoveryRestore
 func (a *RecoveryApiService) GetRecoveryRestoreByMoidExecute(r ApiGetRecoveryRestoreByMoidRequest) (*RecoveryRestore, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3835,8 +3851,8 @@ func (r ApiGetRecoveryRestoreListRequest) Execute() (*RecoveryRestoreResponse, *
 /*
 GetRecoveryRestoreList Read a 'recovery.Restore' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetRecoveryRestoreListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetRecoveryRestoreListRequest
 */
 func (a *RecoveryApiService) GetRecoveryRestoreList(ctx context.Context) ApiGetRecoveryRestoreListRequest {
 	return ApiGetRecoveryRestoreListRequest{
@@ -3846,7 +3862,8 @@ func (a *RecoveryApiService) GetRecoveryRestoreList(ctx context.Context) ApiGetR
 }
 
 // Execute executes the request
-//  @return RecoveryRestoreResponse
+//
+//	@return RecoveryRestoreResponse
 func (a *RecoveryApiService) GetRecoveryRestoreListExecute(r ApiGetRecoveryRestoreListRequest) (*RecoveryRestoreResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4013,9 +4030,9 @@ func (r ApiGetRecoveryScheduleConfigPolicyByMoidRequest) Execute() (*RecoverySch
 /*
 GetRecoveryScheduleConfigPolicyByMoid Read a 'recovery.ScheduleConfigPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetRecoveryScheduleConfigPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetRecoveryScheduleConfigPolicyByMoidRequest
 */
 func (a *RecoveryApiService) GetRecoveryScheduleConfigPolicyByMoid(ctx context.Context, moid string) ApiGetRecoveryScheduleConfigPolicyByMoidRequest {
 	return ApiGetRecoveryScheduleConfigPolicyByMoidRequest{
@@ -4026,7 +4043,8 @@ func (a *RecoveryApiService) GetRecoveryScheduleConfigPolicyByMoid(ctx context.C
 }
 
 // Execute executes the request
-//  @return RecoveryScheduleConfigPolicy
+//
+//	@return RecoveryScheduleConfigPolicy
 func (a *RecoveryApiService) GetRecoveryScheduleConfigPolicyByMoidExecute(r ApiGetRecoveryScheduleConfigPolicyByMoidRequest) (*RecoveryScheduleConfigPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4237,8 +4255,8 @@ func (r ApiGetRecoveryScheduleConfigPolicyListRequest) Execute() (*RecoverySched
 /*
 GetRecoveryScheduleConfigPolicyList Read a 'recovery.ScheduleConfigPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetRecoveryScheduleConfigPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetRecoveryScheduleConfigPolicyListRequest
 */
 func (a *RecoveryApiService) GetRecoveryScheduleConfigPolicyList(ctx context.Context) ApiGetRecoveryScheduleConfigPolicyListRequest {
 	return ApiGetRecoveryScheduleConfigPolicyListRequest{
@@ -4248,7 +4266,8 @@ func (a *RecoveryApiService) GetRecoveryScheduleConfigPolicyList(ctx context.Con
 }
 
 // Execute executes the request
-//  @return RecoveryScheduleConfigPolicyResponse
+//
+//	@return RecoveryScheduleConfigPolicyResponse
 func (a *RecoveryApiService) GetRecoveryScheduleConfigPolicyListExecute(r ApiGetRecoveryScheduleConfigPolicyListRequest) (*RecoveryScheduleConfigPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4429,9 +4448,9 @@ func (r ApiPatchRecoveryBackupConfigPolicyRequest) Execute() (*RecoveryBackupCon
 /*
 PatchRecoveryBackupConfigPolicy Update a 'recovery.BackupConfigPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchRecoveryBackupConfigPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchRecoveryBackupConfigPolicyRequest
 */
 func (a *RecoveryApiService) PatchRecoveryBackupConfigPolicy(ctx context.Context, moid string) ApiPatchRecoveryBackupConfigPolicyRequest {
 	return ApiPatchRecoveryBackupConfigPolicyRequest{
@@ -4442,7 +4461,8 @@ func (a *RecoveryApiService) PatchRecoveryBackupConfigPolicy(ctx context.Context
 }
 
 // Execute executes the request
-//  @return RecoveryBackupConfigPolicy
+//
+//	@return RecoveryBackupConfigPolicy
 func (a *RecoveryApiService) PatchRecoveryBackupConfigPolicyExecute(r ApiPatchRecoveryBackupConfigPolicyRequest) (*RecoveryBackupConfigPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -4599,9 +4619,9 @@ func (r ApiPatchRecoveryBackupProfileRequest) Execute() (*RecoveryBackupProfile,
 /*
 PatchRecoveryBackupProfile Update a 'recovery.BackupProfile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchRecoveryBackupProfileRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchRecoveryBackupProfileRequest
 */
 func (a *RecoveryApiService) PatchRecoveryBackupProfile(ctx context.Context, moid string) ApiPatchRecoveryBackupProfileRequest {
 	return ApiPatchRecoveryBackupProfileRequest{
@@ -4612,7 +4632,8 @@ func (a *RecoveryApiService) PatchRecoveryBackupProfile(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return RecoveryBackupProfile
+//
+//	@return RecoveryBackupProfile
 func (a *RecoveryApiService) PatchRecoveryBackupProfileExecute(r ApiPatchRecoveryBackupProfileRequest) (*RecoveryBackupProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -4769,9 +4790,9 @@ func (r ApiPatchRecoveryOnDemandBackupRequest) Execute() (*RecoveryOnDemandBacku
 /*
 PatchRecoveryOnDemandBackup Update a 'recovery.OnDemandBackup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchRecoveryOnDemandBackupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchRecoveryOnDemandBackupRequest
 */
 func (a *RecoveryApiService) PatchRecoveryOnDemandBackup(ctx context.Context, moid string) ApiPatchRecoveryOnDemandBackupRequest {
 	return ApiPatchRecoveryOnDemandBackupRequest{
@@ -4782,7 +4803,8 @@ func (a *RecoveryApiService) PatchRecoveryOnDemandBackup(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return RecoveryOnDemandBackup
+//
+//	@return RecoveryOnDemandBackup
 func (a *RecoveryApiService) PatchRecoveryOnDemandBackupExecute(r ApiPatchRecoveryOnDemandBackupRequest) (*RecoveryOnDemandBackup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -4939,9 +4961,9 @@ func (r ApiPatchRecoveryScheduleConfigPolicyRequest) Execute() (*RecoverySchedul
 /*
 PatchRecoveryScheduleConfigPolicy Update a 'recovery.ScheduleConfigPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchRecoveryScheduleConfigPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchRecoveryScheduleConfigPolicyRequest
 */
 func (a *RecoveryApiService) PatchRecoveryScheduleConfigPolicy(ctx context.Context, moid string) ApiPatchRecoveryScheduleConfigPolicyRequest {
 	return ApiPatchRecoveryScheduleConfigPolicyRequest{
@@ -4952,7 +4974,8 @@ func (a *RecoveryApiService) PatchRecoveryScheduleConfigPolicy(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return RecoveryScheduleConfigPolicy
+//
+//	@return RecoveryScheduleConfigPolicy
 func (a *RecoveryApiService) PatchRecoveryScheduleConfigPolicyExecute(r ApiPatchRecoveryScheduleConfigPolicyRequest) (*RecoveryScheduleConfigPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -5109,9 +5132,9 @@ func (r ApiUpdateRecoveryBackupConfigPolicyRequest) Execute() (*RecoveryBackupCo
 /*
 UpdateRecoveryBackupConfigPolicy Update a 'recovery.BackupConfigPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateRecoveryBackupConfigPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateRecoveryBackupConfigPolicyRequest
 */
 func (a *RecoveryApiService) UpdateRecoveryBackupConfigPolicy(ctx context.Context, moid string) ApiUpdateRecoveryBackupConfigPolicyRequest {
 	return ApiUpdateRecoveryBackupConfigPolicyRequest{
@@ -5122,7 +5145,8 @@ func (a *RecoveryApiService) UpdateRecoveryBackupConfigPolicy(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return RecoveryBackupConfigPolicy
+//
+//	@return RecoveryBackupConfigPolicy
 func (a *RecoveryApiService) UpdateRecoveryBackupConfigPolicyExecute(r ApiUpdateRecoveryBackupConfigPolicyRequest) (*RecoveryBackupConfigPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -5279,9 +5303,9 @@ func (r ApiUpdateRecoveryBackupProfileRequest) Execute() (*RecoveryBackupProfile
 /*
 UpdateRecoveryBackupProfile Update a 'recovery.BackupProfile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateRecoveryBackupProfileRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateRecoveryBackupProfileRequest
 */
 func (a *RecoveryApiService) UpdateRecoveryBackupProfile(ctx context.Context, moid string) ApiUpdateRecoveryBackupProfileRequest {
 	return ApiUpdateRecoveryBackupProfileRequest{
@@ -5292,7 +5316,8 @@ func (a *RecoveryApiService) UpdateRecoveryBackupProfile(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return RecoveryBackupProfile
+//
+//	@return RecoveryBackupProfile
 func (a *RecoveryApiService) UpdateRecoveryBackupProfileExecute(r ApiUpdateRecoveryBackupProfileRequest) (*RecoveryBackupProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -5449,9 +5474,9 @@ func (r ApiUpdateRecoveryOnDemandBackupRequest) Execute() (*RecoveryOnDemandBack
 /*
 UpdateRecoveryOnDemandBackup Update a 'recovery.OnDemandBackup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateRecoveryOnDemandBackupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateRecoveryOnDemandBackupRequest
 */
 func (a *RecoveryApiService) UpdateRecoveryOnDemandBackup(ctx context.Context, moid string) ApiUpdateRecoveryOnDemandBackupRequest {
 	return ApiUpdateRecoveryOnDemandBackupRequest{
@@ -5462,7 +5487,8 @@ func (a *RecoveryApiService) UpdateRecoveryOnDemandBackup(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return RecoveryOnDemandBackup
+//
+//	@return RecoveryOnDemandBackup
 func (a *RecoveryApiService) UpdateRecoveryOnDemandBackupExecute(r ApiUpdateRecoveryOnDemandBackupRequest) (*RecoveryOnDemandBackup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -5619,9 +5645,9 @@ func (r ApiUpdateRecoveryScheduleConfigPolicyRequest) Execute() (*RecoverySchedu
 /*
 UpdateRecoveryScheduleConfigPolicy Update a 'recovery.ScheduleConfigPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateRecoveryScheduleConfigPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateRecoveryScheduleConfigPolicyRequest
 */
 func (a *RecoveryApiService) UpdateRecoveryScheduleConfigPolicy(ctx context.Context, moid string) ApiUpdateRecoveryScheduleConfigPolicyRequest {
 	return ApiUpdateRecoveryScheduleConfigPolicyRequest{
@@ -5632,7 +5658,8 @@ func (a *RecoveryApiService) UpdateRecoveryScheduleConfigPolicy(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return RecoveryScheduleConfigPolicy
+//
+//	@return RecoveryScheduleConfigPolicy
 func (a *RecoveryApiService) UpdateRecoveryScheduleConfigPolicyExecute(r ApiUpdateRecoveryScheduleConfigPolicyRequest) (*RecoveryScheduleConfigPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

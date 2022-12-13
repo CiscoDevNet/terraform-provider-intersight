@@ -56,8 +56,8 @@ func (r ApiCreateDeviceconnectorPolicyRequest) Execute() (*DeviceconnectorPolicy
 /*
 CreateDeviceconnectorPolicy Create a 'deviceconnector.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateDeviceconnectorPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateDeviceconnectorPolicyRequest
 */
 func (a *DeviceconnectorApiService) CreateDeviceconnectorPolicy(ctx context.Context) ApiCreateDeviceconnectorPolicyRequest {
 	return ApiCreateDeviceconnectorPolicyRequest{
@@ -67,7 +67,8 @@ func (a *DeviceconnectorApiService) CreateDeviceconnectorPolicy(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return DeviceconnectorPolicy
+//
+//	@return DeviceconnectorPolicy
 func (a *DeviceconnectorApiService) CreateDeviceconnectorPolicyExecute(r ApiCreateDeviceconnectorPolicyRequest) (*DeviceconnectorPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -212,9 +213,9 @@ func (r ApiDeleteDeviceconnectorPolicyRequest) Execute() (*http.Response, error)
 /*
 DeleteDeviceconnectorPolicy Delete a 'deviceconnector.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteDeviceconnectorPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteDeviceconnectorPolicyRequest
 */
 func (a *DeviceconnectorApiService) DeleteDeviceconnectorPolicy(ctx context.Context, moid string) ApiDeleteDeviceconnectorPolicyRequest {
 	return ApiDeleteDeviceconnectorPolicyRequest{
@@ -349,9 +350,9 @@ func (r ApiGetDeviceconnectorPolicyByMoidRequest) Execute() (*DeviceconnectorPol
 /*
 GetDeviceconnectorPolicyByMoid Read a 'deviceconnector.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetDeviceconnectorPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetDeviceconnectorPolicyByMoidRequest
 */
 func (a *DeviceconnectorApiService) GetDeviceconnectorPolicyByMoid(ctx context.Context, moid string) ApiGetDeviceconnectorPolicyByMoidRequest {
 	return ApiGetDeviceconnectorPolicyByMoidRequest{
@@ -362,7 +363,8 @@ func (a *DeviceconnectorApiService) GetDeviceconnectorPolicyByMoid(ctx context.C
 }
 
 // Execute executes the request
-//  @return DeviceconnectorPolicy
+//
+//	@return DeviceconnectorPolicy
 func (a *DeviceconnectorApiService) GetDeviceconnectorPolicyByMoidExecute(r ApiGetDeviceconnectorPolicyByMoidRequest) (*DeviceconnectorPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -573,8 +575,8 @@ func (r ApiGetDeviceconnectorPolicyListRequest) Execute() (*DeviceconnectorPolic
 /*
 GetDeviceconnectorPolicyList Read a 'deviceconnector.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetDeviceconnectorPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetDeviceconnectorPolicyListRequest
 */
 func (a *DeviceconnectorApiService) GetDeviceconnectorPolicyList(ctx context.Context) ApiGetDeviceconnectorPolicyListRequest {
 	return ApiGetDeviceconnectorPolicyListRequest{
@@ -584,7 +586,8 @@ func (a *DeviceconnectorApiService) GetDeviceconnectorPolicyList(ctx context.Con
 }
 
 // Execute executes the request
-//  @return DeviceconnectorPolicyResponse
+//
+//	@return DeviceconnectorPolicyResponse
 func (a *DeviceconnectorApiService) GetDeviceconnectorPolicyListExecute(r ApiGetDeviceconnectorPolicyListRequest) (*DeviceconnectorPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -765,9 +768,9 @@ func (r ApiPatchDeviceconnectorPolicyRequest) Execute() (*DeviceconnectorPolicy,
 /*
 PatchDeviceconnectorPolicy Update a 'deviceconnector.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchDeviceconnectorPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchDeviceconnectorPolicyRequest
 */
 func (a *DeviceconnectorApiService) PatchDeviceconnectorPolicy(ctx context.Context, moid string) ApiPatchDeviceconnectorPolicyRequest {
 	return ApiPatchDeviceconnectorPolicyRequest{
@@ -778,7 +781,8 @@ func (a *DeviceconnectorApiService) PatchDeviceconnectorPolicy(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return DeviceconnectorPolicy
+//
+//	@return DeviceconnectorPolicy
 func (a *DeviceconnectorApiService) PatchDeviceconnectorPolicyExecute(r ApiPatchDeviceconnectorPolicyRequest) (*DeviceconnectorPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -935,9 +939,9 @@ func (r ApiUpdateDeviceconnectorPolicyRequest) Execute() (*DeviceconnectorPolicy
 /*
 UpdateDeviceconnectorPolicy Update a 'deviceconnector.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateDeviceconnectorPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateDeviceconnectorPolicyRequest
 */
 func (a *DeviceconnectorApiService) UpdateDeviceconnectorPolicy(ctx context.Context, moid string) ApiUpdateDeviceconnectorPolicyRequest {
 	return ApiUpdateDeviceconnectorPolicyRequest{
@@ -948,7 +952,8 @@ func (a *DeviceconnectorApiService) UpdateDeviceconnectorPolicy(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return DeviceconnectorPolicy
+//
+//	@return DeviceconnectorPolicy
 func (a *DeviceconnectorApiService) UpdateDeviceconnectorPolicyExecute(r ApiUpdateDeviceconnectorPolicyRequest) (*DeviceconnectorPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

@@ -36,9 +36,9 @@ func (r ApiGetEquipmentChassisByMoidRequest) Execute() (*EquipmentChassis, *http
 /*
 GetEquipmentChassisByMoid Read a 'equipment.Chassis' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetEquipmentChassisByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetEquipmentChassisByMoidRequest
 */
 func (a *EquipmentApiService) GetEquipmentChassisByMoid(ctx context.Context, moid string) ApiGetEquipmentChassisByMoidRequest {
 	return ApiGetEquipmentChassisByMoidRequest{
@@ -49,7 +49,8 @@ func (a *EquipmentApiService) GetEquipmentChassisByMoid(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return EquipmentChassis
+//
+//	@return EquipmentChassis
 func (a *EquipmentApiService) GetEquipmentChassisByMoidExecute(r ApiGetEquipmentChassisByMoidRequest) (*EquipmentChassis, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -184,9 +185,9 @@ func (r ApiGetEquipmentChassisIdPoolByMoidRequest) Execute() (*EquipmentChassisI
 /*
 GetEquipmentChassisIdPoolByMoid Read a 'equipment.ChassisIdPool' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetEquipmentChassisIdPoolByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetEquipmentChassisIdPoolByMoidRequest
 */
 func (a *EquipmentApiService) GetEquipmentChassisIdPoolByMoid(ctx context.Context, moid string) ApiGetEquipmentChassisIdPoolByMoidRequest {
 	return ApiGetEquipmentChassisIdPoolByMoidRequest{
@@ -197,7 +198,8 @@ func (a *EquipmentApiService) GetEquipmentChassisIdPoolByMoid(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return EquipmentChassisIdPool
+//
+//	@return EquipmentChassisIdPool
 func (a *EquipmentApiService) GetEquipmentChassisIdPoolByMoidExecute(r ApiGetEquipmentChassisIdPoolByMoidRequest) (*EquipmentChassisIdPool, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -408,8 +410,8 @@ func (r ApiGetEquipmentChassisIdPoolListRequest) Execute() (*EquipmentChassisIdP
 /*
 GetEquipmentChassisIdPoolList Read a 'equipment.ChassisIdPool' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetEquipmentChassisIdPoolListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetEquipmentChassisIdPoolListRequest
 */
 func (a *EquipmentApiService) GetEquipmentChassisIdPoolList(ctx context.Context) ApiGetEquipmentChassisIdPoolListRequest {
 	return ApiGetEquipmentChassisIdPoolListRequest{
@@ -419,7 +421,8 @@ func (a *EquipmentApiService) GetEquipmentChassisIdPoolList(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return EquipmentChassisIdPoolResponse
+//
+//	@return EquipmentChassisIdPoolResponse
 func (a *EquipmentApiService) GetEquipmentChassisIdPoolListExecute(r ApiGetEquipmentChassisIdPoolListRequest) (*EquipmentChassisIdPoolResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -586,9 +589,9 @@ func (r ApiGetEquipmentChassisIdentityByMoidRequest) Execute() (*EquipmentChassi
 /*
 GetEquipmentChassisIdentityByMoid Read a 'equipment.ChassisIdentity' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetEquipmentChassisIdentityByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetEquipmentChassisIdentityByMoidRequest
 */
 func (a *EquipmentApiService) GetEquipmentChassisIdentityByMoid(ctx context.Context, moid string) ApiGetEquipmentChassisIdentityByMoidRequest {
 	return ApiGetEquipmentChassisIdentityByMoidRequest{
@@ -599,7 +602,8 @@ func (a *EquipmentApiService) GetEquipmentChassisIdentityByMoid(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return EquipmentChassisIdentity
+//
+//	@return EquipmentChassisIdentity
 func (a *EquipmentApiService) GetEquipmentChassisIdentityByMoidExecute(r ApiGetEquipmentChassisIdentityByMoidRequest) (*EquipmentChassisIdentity, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -810,8 +814,8 @@ func (r ApiGetEquipmentChassisIdentityListRequest) Execute() (*EquipmentChassisI
 /*
 GetEquipmentChassisIdentityList Read a 'equipment.ChassisIdentity' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetEquipmentChassisIdentityListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetEquipmentChassisIdentityListRequest
 */
 func (a *EquipmentApiService) GetEquipmentChassisIdentityList(ctx context.Context) ApiGetEquipmentChassisIdentityListRequest {
 	return ApiGetEquipmentChassisIdentityListRequest{
@@ -821,7 +825,8 @@ func (a *EquipmentApiService) GetEquipmentChassisIdentityList(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return EquipmentChassisIdentityResponse
+//
+//	@return EquipmentChassisIdentityResponse
 func (a *EquipmentApiService) GetEquipmentChassisIdentityListExecute(r ApiGetEquipmentChassisIdentityListRequest) (*EquipmentChassisIdentityResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1064,8 +1069,8 @@ func (r ApiGetEquipmentChassisListRequest) Execute() (*EquipmentChassisResponse,
 /*
 GetEquipmentChassisList Read a 'equipment.Chassis' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetEquipmentChassisListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetEquipmentChassisListRequest
 */
 func (a *EquipmentApiService) GetEquipmentChassisList(ctx context.Context) ApiGetEquipmentChassisListRequest {
 	return ApiGetEquipmentChassisListRequest{
@@ -1075,7 +1080,8 @@ func (a *EquipmentApiService) GetEquipmentChassisList(ctx context.Context) ApiGe
 }
 
 // Execute executes the request
-//  @return EquipmentChassisResponse
+//
+//	@return EquipmentChassisResponse
 func (a *EquipmentApiService) GetEquipmentChassisListExecute(r ApiGetEquipmentChassisListRequest) (*EquipmentChassisResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1242,9 +1248,9 @@ func (r ApiGetEquipmentChassisOperationByMoidRequest) Execute() (*EquipmentChass
 /*
 GetEquipmentChassisOperationByMoid Read a 'equipment.ChassisOperation' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetEquipmentChassisOperationByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetEquipmentChassisOperationByMoidRequest
 */
 func (a *EquipmentApiService) GetEquipmentChassisOperationByMoid(ctx context.Context, moid string) ApiGetEquipmentChassisOperationByMoidRequest {
 	return ApiGetEquipmentChassisOperationByMoidRequest{
@@ -1255,7 +1261,8 @@ func (a *EquipmentApiService) GetEquipmentChassisOperationByMoid(ctx context.Con
 }
 
 // Execute executes the request
-//  @return EquipmentChassisOperation
+//
+//	@return EquipmentChassisOperation
 func (a *EquipmentApiService) GetEquipmentChassisOperationByMoidExecute(r ApiGetEquipmentChassisOperationByMoidRequest) (*EquipmentChassisOperation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1466,8 +1473,8 @@ func (r ApiGetEquipmentChassisOperationListRequest) Execute() (*EquipmentChassis
 /*
 GetEquipmentChassisOperationList Read a 'equipment.ChassisOperation' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetEquipmentChassisOperationListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetEquipmentChassisOperationListRequest
 */
 func (a *EquipmentApiService) GetEquipmentChassisOperationList(ctx context.Context) ApiGetEquipmentChassisOperationListRequest {
 	return ApiGetEquipmentChassisOperationListRequest{
@@ -1477,7 +1484,8 @@ func (a *EquipmentApiService) GetEquipmentChassisOperationList(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return EquipmentChassisOperationResponse
+//
+//	@return EquipmentChassisOperationResponse
 func (a *EquipmentApiService) GetEquipmentChassisOperationListExecute(r ApiGetEquipmentChassisOperationListRequest) (*EquipmentChassisOperationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1644,9 +1652,9 @@ func (r ApiGetEquipmentDeviceSummaryByMoidRequest) Execute() (*EquipmentDeviceSu
 /*
 GetEquipmentDeviceSummaryByMoid Read a 'equipment.DeviceSummary' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetEquipmentDeviceSummaryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetEquipmentDeviceSummaryByMoidRequest
 */
 func (a *EquipmentApiService) GetEquipmentDeviceSummaryByMoid(ctx context.Context, moid string) ApiGetEquipmentDeviceSummaryByMoidRequest {
 	return ApiGetEquipmentDeviceSummaryByMoidRequest{
@@ -1657,7 +1665,8 @@ func (a *EquipmentApiService) GetEquipmentDeviceSummaryByMoid(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return EquipmentDeviceSummary
+//
+//	@return EquipmentDeviceSummary
 func (a *EquipmentApiService) GetEquipmentDeviceSummaryByMoidExecute(r ApiGetEquipmentDeviceSummaryByMoidRequest) (*EquipmentDeviceSummary, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1868,8 +1877,8 @@ func (r ApiGetEquipmentDeviceSummaryListRequest) Execute() (*EquipmentDeviceSumm
 /*
 GetEquipmentDeviceSummaryList Read a 'equipment.DeviceSummary' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetEquipmentDeviceSummaryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetEquipmentDeviceSummaryListRequest
 */
 func (a *EquipmentApiService) GetEquipmentDeviceSummaryList(ctx context.Context) ApiGetEquipmentDeviceSummaryListRequest {
 	return ApiGetEquipmentDeviceSummaryListRequest{
@@ -1879,7 +1888,8 @@ func (a *EquipmentApiService) GetEquipmentDeviceSummaryList(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return EquipmentDeviceSummaryResponse
+//
+//	@return EquipmentDeviceSummaryResponse
 func (a *EquipmentApiService) GetEquipmentDeviceSummaryListExecute(r ApiGetEquipmentDeviceSummaryListRequest) (*EquipmentDeviceSummaryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2046,9 +2056,9 @@ func (r ApiGetEquipmentExpanderModuleByMoidRequest) Execute() (*EquipmentExpande
 /*
 GetEquipmentExpanderModuleByMoid Read a 'equipment.ExpanderModule' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetEquipmentExpanderModuleByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetEquipmentExpanderModuleByMoidRequest
 */
 func (a *EquipmentApiService) GetEquipmentExpanderModuleByMoid(ctx context.Context, moid string) ApiGetEquipmentExpanderModuleByMoidRequest {
 	return ApiGetEquipmentExpanderModuleByMoidRequest{
@@ -2059,7 +2069,8 @@ func (a *EquipmentApiService) GetEquipmentExpanderModuleByMoid(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return EquipmentExpanderModule
+//
+//	@return EquipmentExpanderModule
 func (a *EquipmentApiService) GetEquipmentExpanderModuleByMoidExecute(r ApiGetEquipmentExpanderModuleByMoidRequest) (*EquipmentExpanderModule, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2270,8 +2281,8 @@ func (r ApiGetEquipmentExpanderModuleListRequest) Execute() (*EquipmentExpanderM
 /*
 GetEquipmentExpanderModuleList Read a 'equipment.ExpanderModule' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetEquipmentExpanderModuleListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetEquipmentExpanderModuleListRequest
 */
 func (a *EquipmentApiService) GetEquipmentExpanderModuleList(ctx context.Context) ApiGetEquipmentExpanderModuleListRequest {
 	return ApiGetEquipmentExpanderModuleListRequest{
@@ -2281,7 +2292,8 @@ func (a *EquipmentApiService) GetEquipmentExpanderModuleList(ctx context.Context
 }
 
 // Execute executes the request
-//  @return EquipmentExpanderModuleResponse
+//
+//	@return EquipmentExpanderModuleResponse
 func (a *EquipmentApiService) GetEquipmentExpanderModuleListExecute(r ApiGetEquipmentExpanderModuleListRequest) (*EquipmentExpanderModuleResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2448,9 +2460,9 @@ func (r ApiGetEquipmentFanByMoidRequest) Execute() (*EquipmentFan, *http.Respons
 /*
 GetEquipmentFanByMoid Read a 'equipment.Fan' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetEquipmentFanByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetEquipmentFanByMoidRequest
 */
 func (a *EquipmentApiService) GetEquipmentFanByMoid(ctx context.Context, moid string) ApiGetEquipmentFanByMoidRequest {
 	return ApiGetEquipmentFanByMoidRequest{
@@ -2461,7 +2473,8 @@ func (a *EquipmentApiService) GetEquipmentFanByMoid(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return EquipmentFan
+//
+//	@return EquipmentFan
 func (a *EquipmentApiService) GetEquipmentFanByMoidExecute(r ApiGetEquipmentFanByMoidRequest) (*EquipmentFan, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2596,9 +2609,9 @@ func (r ApiGetEquipmentFanControlByMoidRequest) Execute() (*EquipmentFanControl,
 /*
 GetEquipmentFanControlByMoid Read a 'equipment.FanControl' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetEquipmentFanControlByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetEquipmentFanControlByMoidRequest
 */
 func (a *EquipmentApiService) GetEquipmentFanControlByMoid(ctx context.Context, moid string) ApiGetEquipmentFanControlByMoidRequest {
 	return ApiGetEquipmentFanControlByMoidRequest{
@@ -2609,7 +2622,8 @@ func (a *EquipmentApiService) GetEquipmentFanControlByMoid(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return EquipmentFanControl
+//
+//	@return EquipmentFanControl
 func (a *EquipmentApiService) GetEquipmentFanControlByMoidExecute(r ApiGetEquipmentFanControlByMoidRequest) (*EquipmentFanControl, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2820,8 +2834,8 @@ func (r ApiGetEquipmentFanControlListRequest) Execute() (*EquipmentFanControlRes
 /*
 GetEquipmentFanControlList Read a 'equipment.FanControl' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetEquipmentFanControlListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetEquipmentFanControlListRequest
 */
 func (a *EquipmentApiService) GetEquipmentFanControlList(ctx context.Context) ApiGetEquipmentFanControlListRequest {
 	return ApiGetEquipmentFanControlListRequest{
@@ -2831,7 +2845,8 @@ func (a *EquipmentApiService) GetEquipmentFanControlList(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return EquipmentFanControlResponse
+//
+//	@return EquipmentFanControlResponse
 func (a *EquipmentApiService) GetEquipmentFanControlListExecute(r ApiGetEquipmentFanControlListRequest) (*EquipmentFanControlResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3074,8 +3089,8 @@ func (r ApiGetEquipmentFanListRequest) Execute() (*EquipmentFanResponse, *http.R
 /*
 GetEquipmentFanList Read a 'equipment.Fan' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetEquipmentFanListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetEquipmentFanListRequest
 */
 func (a *EquipmentApiService) GetEquipmentFanList(ctx context.Context) ApiGetEquipmentFanListRequest {
 	return ApiGetEquipmentFanListRequest{
@@ -3085,7 +3100,8 @@ func (a *EquipmentApiService) GetEquipmentFanList(ctx context.Context) ApiGetEqu
 }
 
 // Execute executes the request
-//  @return EquipmentFanResponse
+//
+//	@return EquipmentFanResponse
 func (a *EquipmentApiService) GetEquipmentFanListExecute(r ApiGetEquipmentFanListRequest) (*EquipmentFanResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3252,9 +3268,9 @@ func (r ApiGetEquipmentFanModuleByMoidRequest) Execute() (*EquipmentFanModule, *
 /*
 GetEquipmentFanModuleByMoid Read a 'equipment.FanModule' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetEquipmentFanModuleByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetEquipmentFanModuleByMoidRequest
 */
 func (a *EquipmentApiService) GetEquipmentFanModuleByMoid(ctx context.Context, moid string) ApiGetEquipmentFanModuleByMoidRequest {
 	return ApiGetEquipmentFanModuleByMoidRequest{
@@ -3265,7 +3281,8 @@ func (a *EquipmentApiService) GetEquipmentFanModuleByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return EquipmentFanModule
+//
+//	@return EquipmentFanModule
 func (a *EquipmentApiService) GetEquipmentFanModuleByMoidExecute(r ApiGetEquipmentFanModuleByMoidRequest) (*EquipmentFanModule, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3476,8 +3493,8 @@ func (r ApiGetEquipmentFanModuleListRequest) Execute() (*EquipmentFanModuleRespo
 /*
 GetEquipmentFanModuleList Read a 'equipment.FanModule' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetEquipmentFanModuleListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetEquipmentFanModuleListRequest
 */
 func (a *EquipmentApiService) GetEquipmentFanModuleList(ctx context.Context) ApiGetEquipmentFanModuleListRequest {
 	return ApiGetEquipmentFanModuleListRequest{
@@ -3487,7 +3504,8 @@ func (a *EquipmentApiService) GetEquipmentFanModuleList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return EquipmentFanModuleResponse
+//
+//	@return EquipmentFanModuleResponse
 func (a *EquipmentApiService) GetEquipmentFanModuleListExecute(r ApiGetEquipmentFanModuleListRequest) (*EquipmentFanModuleResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3654,9 +3672,9 @@ func (r ApiGetEquipmentFexByMoidRequest) Execute() (*EquipmentFex, *http.Respons
 /*
 GetEquipmentFexByMoid Read a 'equipment.Fex' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetEquipmentFexByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetEquipmentFexByMoidRequest
 */
 func (a *EquipmentApiService) GetEquipmentFexByMoid(ctx context.Context, moid string) ApiGetEquipmentFexByMoidRequest {
 	return ApiGetEquipmentFexByMoidRequest{
@@ -3667,7 +3685,8 @@ func (a *EquipmentApiService) GetEquipmentFexByMoid(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return EquipmentFex
+//
+//	@return EquipmentFex
 func (a *EquipmentApiService) GetEquipmentFexByMoidExecute(r ApiGetEquipmentFexByMoidRequest) (*EquipmentFex, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3802,9 +3821,9 @@ func (r ApiGetEquipmentFexIdentityByMoidRequest) Execute() (*EquipmentFexIdentit
 /*
 GetEquipmentFexIdentityByMoid Read a 'equipment.FexIdentity' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetEquipmentFexIdentityByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetEquipmentFexIdentityByMoidRequest
 */
 func (a *EquipmentApiService) GetEquipmentFexIdentityByMoid(ctx context.Context, moid string) ApiGetEquipmentFexIdentityByMoidRequest {
 	return ApiGetEquipmentFexIdentityByMoidRequest{
@@ -3815,7 +3834,8 @@ func (a *EquipmentApiService) GetEquipmentFexIdentityByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return EquipmentFexIdentity
+//
+//	@return EquipmentFexIdentity
 func (a *EquipmentApiService) GetEquipmentFexIdentityByMoidExecute(r ApiGetEquipmentFexIdentityByMoidRequest) (*EquipmentFexIdentity, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4026,8 +4046,8 @@ func (r ApiGetEquipmentFexIdentityListRequest) Execute() (*EquipmentFexIdentityR
 /*
 GetEquipmentFexIdentityList Read a 'equipment.FexIdentity' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetEquipmentFexIdentityListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetEquipmentFexIdentityListRequest
 */
 func (a *EquipmentApiService) GetEquipmentFexIdentityList(ctx context.Context) ApiGetEquipmentFexIdentityListRequest {
 	return ApiGetEquipmentFexIdentityListRequest{
@@ -4037,7 +4057,8 @@ func (a *EquipmentApiService) GetEquipmentFexIdentityList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return EquipmentFexIdentityResponse
+//
+//	@return EquipmentFexIdentityResponse
 func (a *EquipmentApiService) GetEquipmentFexIdentityListExecute(r ApiGetEquipmentFexIdentityListRequest) (*EquipmentFexIdentityResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4280,8 +4301,8 @@ func (r ApiGetEquipmentFexListRequest) Execute() (*EquipmentFexResponse, *http.R
 /*
 GetEquipmentFexList Read a 'equipment.Fex' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetEquipmentFexListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetEquipmentFexListRequest
 */
 func (a *EquipmentApiService) GetEquipmentFexList(ctx context.Context) ApiGetEquipmentFexListRequest {
 	return ApiGetEquipmentFexListRequest{
@@ -4291,7 +4312,8 @@ func (a *EquipmentApiService) GetEquipmentFexList(ctx context.Context) ApiGetEqu
 }
 
 // Execute executes the request
-//  @return EquipmentFexResponse
+//
+//	@return EquipmentFexResponse
 func (a *EquipmentApiService) GetEquipmentFexListExecute(r ApiGetEquipmentFexListRequest) (*EquipmentFexResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4458,9 +4480,9 @@ func (r ApiGetEquipmentFexOperationByMoidRequest) Execute() (*EquipmentFexOperat
 /*
 GetEquipmentFexOperationByMoid Read a 'equipment.FexOperation' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetEquipmentFexOperationByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetEquipmentFexOperationByMoidRequest
 */
 func (a *EquipmentApiService) GetEquipmentFexOperationByMoid(ctx context.Context, moid string) ApiGetEquipmentFexOperationByMoidRequest {
 	return ApiGetEquipmentFexOperationByMoidRequest{
@@ -4471,7 +4493,8 @@ func (a *EquipmentApiService) GetEquipmentFexOperationByMoid(ctx context.Context
 }
 
 // Execute executes the request
-//  @return EquipmentFexOperation
+//
+//	@return EquipmentFexOperation
 func (a *EquipmentApiService) GetEquipmentFexOperationByMoidExecute(r ApiGetEquipmentFexOperationByMoidRequest) (*EquipmentFexOperation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4682,8 +4705,8 @@ func (r ApiGetEquipmentFexOperationListRequest) Execute() (*EquipmentFexOperatio
 /*
 GetEquipmentFexOperationList Read a 'equipment.FexOperation' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetEquipmentFexOperationListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetEquipmentFexOperationListRequest
 */
 func (a *EquipmentApiService) GetEquipmentFexOperationList(ctx context.Context) ApiGetEquipmentFexOperationListRequest {
 	return ApiGetEquipmentFexOperationListRequest{
@@ -4693,7 +4716,8 @@ func (a *EquipmentApiService) GetEquipmentFexOperationList(ctx context.Context) 
 }
 
 // Execute executes the request
-//  @return EquipmentFexOperationResponse
+//
+//	@return EquipmentFexOperationResponse
 func (a *EquipmentApiService) GetEquipmentFexOperationListExecute(r ApiGetEquipmentFexOperationListRequest) (*EquipmentFexOperationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4860,9 +4884,9 @@ func (r ApiGetEquipmentFruByMoidRequest) Execute() (*EquipmentFru, *http.Respons
 /*
 GetEquipmentFruByMoid Read a 'equipment.Fru' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetEquipmentFruByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetEquipmentFruByMoidRequest
 */
 func (a *EquipmentApiService) GetEquipmentFruByMoid(ctx context.Context, moid string) ApiGetEquipmentFruByMoidRequest {
 	return ApiGetEquipmentFruByMoidRequest{
@@ -4873,7 +4897,8 @@ func (a *EquipmentApiService) GetEquipmentFruByMoid(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return EquipmentFru
+//
+//	@return EquipmentFru
 func (a *EquipmentApiService) GetEquipmentFruByMoidExecute(r ApiGetEquipmentFruByMoidRequest) (*EquipmentFru, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5084,8 +5109,8 @@ func (r ApiGetEquipmentFruListRequest) Execute() (*EquipmentFruResponse, *http.R
 /*
 GetEquipmentFruList Read a 'equipment.Fru' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetEquipmentFruListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetEquipmentFruListRequest
 */
 func (a *EquipmentApiService) GetEquipmentFruList(ctx context.Context) ApiGetEquipmentFruListRequest {
 	return ApiGetEquipmentFruListRequest{
@@ -5095,7 +5120,8 @@ func (a *EquipmentApiService) GetEquipmentFruList(ctx context.Context) ApiGetEqu
 }
 
 // Execute executes the request
-//  @return EquipmentFruResponse
+//
+//	@return EquipmentFruResponse
 func (a *EquipmentApiService) GetEquipmentFruListExecute(r ApiGetEquipmentFruListRequest) (*EquipmentFruResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5262,9 +5288,9 @@ func (r ApiGetEquipmentIdentitySummaryByMoidRequest) Execute() (*EquipmentIdenti
 /*
 GetEquipmentIdentitySummaryByMoid Read a 'equipment.IdentitySummary' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetEquipmentIdentitySummaryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetEquipmentIdentitySummaryByMoidRequest
 
 Deprecated
 */
@@ -5277,7 +5303,9 @@ func (a *EquipmentApiService) GetEquipmentIdentitySummaryByMoid(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return EquipmentIdentitySummary
+//
+//	@return EquipmentIdentitySummary
+//
 // Deprecated
 func (a *EquipmentApiService) GetEquipmentIdentitySummaryByMoidExecute(r ApiGetEquipmentIdentitySummaryByMoidRequest) (*EquipmentIdentitySummary, *http.Response, error) {
 	var (
@@ -5489,8 +5517,8 @@ func (r ApiGetEquipmentIdentitySummaryListRequest) Execute() (*EquipmentIdentity
 /*
 GetEquipmentIdentitySummaryList Read a 'equipment.IdentitySummary' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetEquipmentIdentitySummaryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetEquipmentIdentitySummaryListRequest
 
 Deprecated
 */
@@ -5502,7 +5530,9 @@ func (a *EquipmentApiService) GetEquipmentIdentitySummaryList(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return EquipmentIdentitySummaryResponse
+//
+//	@return EquipmentIdentitySummaryResponse
+//
 // Deprecated
 func (a *EquipmentApiService) GetEquipmentIdentitySummaryListExecute(r ApiGetEquipmentIdentitySummaryListRequest) (*EquipmentIdentitySummaryResponse, *http.Response, error) {
 	var (
@@ -5670,9 +5700,9 @@ func (r ApiGetEquipmentIoCardByMoidRequest) Execute() (*EquipmentIoCard, *http.R
 /*
 GetEquipmentIoCardByMoid Read a 'equipment.IoCard' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetEquipmentIoCardByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetEquipmentIoCardByMoidRequest
 */
 func (a *EquipmentApiService) GetEquipmentIoCardByMoid(ctx context.Context, moid string) ApiGetEquipmentIoCardByMoidRequest {
 	return ApiGetEquipmentIoCardByMoidRequest{
@@ -5683,7 +5713,8 @@ func (a *EquipmentApiService) GetEquipmentIoCardByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return EquipmentIoCard
+//
+//	@return EquipmentIoCard
 func (a *EquipmentApiService) GetEquipmentIoCardByMoidExecute(r ApiGetEquipmentIoCardByMoidRequest) (*EquipmentIoCard, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5894,8 +5925,8 @@ func (r ApiGetEquipmentIoCardListRequest) Execute() (*EquipmentIoCardResponse, *
 /*
 GetEquipmentIoCardList Read a 'equipment.IoCard' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetEquipmentIoCardListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetEquipmentIoCardListRequest
 */
 func (a *EquipmentApiService) GetEquipmentIoCardList(ctx context.Context) ApiGetEquipmentIoCardListRequest {
 	return ApiGetEquipmentIoCardListRequest{
@@ -5905,7 +5936,8 @@ func (a *EquipmentApiService) GetEquipmentIoCardList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//  @return EquipmentIoCardResponse
+//
+//	@return EquipmentIoCardResponse
 func (a *EquipmentApiService) GetEquipmentIoCardListExecute(r ApiGetEquipmentIoCardListRequest) (*EquipmentIoCardResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6072,9 +6104,9 @@ func (r ApiGetEquipmentIoCardOperationByMoidRequest) Execute() (*EquipmentIoCard
 /*
 GetEquipmentIoCardOperationByMoid Read a 'equipment.IoCardOperation' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetEquipmentIoCardOperationByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetEquipmentIoCardOperationByMoidRequest
 */
 func (a *EquipmentApiService) GetEquipmentIoCardOperationByMoid(ctx context.Context, moid string) ApiGetEquipmentIoCardOperationByMoidRequest {
 	return ApiGetEquipmentIoCardOperationByMoidRequest{
@@ -6085,7 +6117,8 @@ func (a *EquipmentApiService) GetEquipmentIoCardOperationByMoid(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return EquipmentIoCardOperation
+//
+//	@return EquipmentIoCardOperation
 func (a *EquipmentApiService) GetEquipmentIoCardOperationByMoidExecute(r ApiGetEquipmentIoCardOperationByMoidRequest) (*EquipmentIoCardOperation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6296,8 +6329,8 @@ func (r ApiGetEquipmentIoCardOperationListRequest) Execute() (*EquipmentIoCardOp
 /*
 GetEquipmentIoCardOperationList Read a 'equipment.IoCardOperation' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetEquipmentIoCardOperationListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetEquipmentIoCardOperationListRequest
 */
 func (a *EquipmentApiService) GetEquipmentIoCardOperationList(ctx context.Context) ApiGetEquipmentIoCardOperationListRequest {
 	return ApiGetEquipmentIoCardOperationListRequest{
@@ -6307,7 +6340,8 @@ func (a *EquipmentApiService) GetEquipmentIoCardOperationList(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return EquipmentIoCardOperationResponse
+//
+//	@return EquipmentIoCardOperationResponse
 func (a *EquipmentApiService) GetEquipmentIoCardOperationListExecute(r ApiGetEquipmentIoCardOperationListRequest) (*EquipmentIoCardOperationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6474,9 +6508,9 @@ func (r ApiGetEquipmentIoExpanderByMoidRequest) Execute() (*EquipmentIoExpander,
 /*
 GetEquipmentIoExpanderByMoid Read a 'equipment.IoExpander' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetEquipmentIoExpanderByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetEquipmentIoExpanderByMoidRequest
 */
 func (a *EquipmentApiService) GetEquipmentIoExpanderByMoid(ctx context.Context, moid string) ApiGetEquipmentIoExpanderByMoidRequest {
 	return ApiGetEquipmentIoExpanderByMoidRequest{
@@ -6487,7 +6521,8 @@ func (a *EquipmentApiService) GetEquipmentIoExpanderByMoid(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return EquipmentIoExpander
+//
+//	@return EquipmentIoExpander
 func (a *EquipmentApiService) GetEquipmentIoExpanderByMoidExecute(r ApiGetEquipmentIoExpanderByMoidRequest) (*EquipmentIoExpander, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6698,8 +6733,8 @@ func (r ApiGetEquipmentIoExpanderListRequest) Execute() (*EquipmentIoExpanderRes
 /*
 GetEquipmentIoExpanderList Read a 'equipment.IoExpander' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetEquipmentIoExpanderListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetEquipmentIoExpanderListRequest
 */
 func (a *EquipmentApiService) GetEquipmentIoExpanderList(ctx context.Context) ApiGetEquipmentIoExpanderListRequest {
 	return ApiGetEquipmentIoExpanderListRequest{
@@ -6709,7 +6744,8 @@ func (a *EquipmentApiService) GetEquipmentIoExpanderList(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return EquipmentIoExpanderResponse
+//
+//	@return EquipmentIoExpanderResponse
 func (a *EquipmentApiService) GetEquipmentIoExpanderListExecute(r ApiGetEquipmentIoExpanderListRequest) (*EquipmentIoExpanderResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6876,9 +6912,9 @@ func (r ApiGetEquipmentLocatorLedByMoidRequest) Execute() (*EquipmentLocatorLed,
 /*
 GetEquipmentLocatorLedByMoid Read a 'equipment.LocatorLed' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetEquipmentLocatorLedByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetEquipmentLocatorLedByMoidRequest
 */
 func (a *EquipmentApiService) GetEquipmentLocatorLedByMoid(ctx context.Context, moid string) ApiGetEquipmentLocatorLedByMoidRequest {
 	return ApiGetEquipmentLocatorLedByMoidRequest{
@@ -6889,7 +6925,8 @@ func (a *EquipmentApiService) GetEquipmentLocatorLedByMoid(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return EquipmentLocatorLed
+//
+//	@return EquipmentLocatorLed
 func (a *EquipmentApiService) GetEquipmentLocatorLedByMoidExecute(r ApiGetEquipmentLocatorLedByMoidRequest) (*EquipmentLocatorLed, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7100,8 +7137,8 @@ func (r ApiGetEquipmentLocatorLedListRequest) Execute() (*EquipmentLocatorLedRes
 /*
 GetEquipmentLocatorLedList Read a 'equipment.LocatorLed' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetEquipmentLocatorLedListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetEquipmentLocatorLedListRequest
 */
 func (a *EquipmentApiService) GetEquipmentLocatorLedList(ctx context.Context) ApiGetEquipmentLocatorLedListRequest {
 	return ApiGetEquipmentLocatorLedListRequest{
@@ -7111,7 +7148,8 @@ func (a *EquipmentApiService) GetEquipmentLocatorLedList(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return EquipmentLocatorLedResponse
+//
+//	@return EquipmentLocatorLedResponse
 func (a *EquipmentApiService) GetEquipmentLocatorLedListExecute(r ApiGetEquipmentLocatorLedListRequest) (*EquipmentLocatorLedResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7278,9 +7316,9 @@ func (r ApiGetEquipmentPsuByMoidRequest) Execute() (*EquipmentPsu, *http.Respons
 /*
 GetEquipmentPsuByMoid Read a 'equipment.Psu' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetEquipmentPsuByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetEquipmentPsuByMoidRequest
 */
 func (a *EquipmentApiService) GetEquipmentPsuByMoid(ctx context.Context, moid string) ApiGetEquipmentPsuByMoidRequest {
 	return ApiGetEquipmentPsuByMoidRequest{
@@ -7291,7 +7329,8 @@ func (a *EquipmentApiService) GetEquipmentPsuByMoid(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return EquipmentPsu
+//
+//	@return EquipmentPsu
 func (a *EquipmentApiService) GetEquipmentPsuByMoidExecute(r ApiGetEquipmentPsuByMoidRequest) (*EquipmentPsu, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7426,9 +7465,9 @@ func (r ApiGetEquipmentPsuControlByMoidRequest) Execute() (*EquipmentPsuControl,
 /*
 GetEquipmentPsuControlByMoid Read a 'equipment.PsuControl' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetEquipmentPsuControlByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetEquipmentPsuControlByMoidRequest
 */
 func (a *EquipmentApiService) GetEquipmentPsuControlByMoid(ctx context.Context, moid string) ApiGetEquipmentPsuControlByMoidRequest {
 	return ApiGetEquipmentPsuControlByMoidRequest{
@@ -7439,7 +7478,8 @@ func (a *EquipmentApiService) GetEquipmentPsuControlByMoid(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return EquipmentPsuControl
+//
+//	@return EquipmentPsuControl
 func (a *EquipmentApiService) GetEquipmentPsuControlByMoidExecute(r ApiGetEquipmentPsuControlByMoidRequest) (*EquipmentPsuControl, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7650,8 +7690,8 @@ func (r ApiGetEquipmentPsuControlListRequest) Execute() (*EquipmentPsuControlRes
 /*
 GetEquipmentPsuControlList Read a 'equipment.PsuControl' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetEquipmentPsuControlListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetEquipmentPsuControlListRequest
 */
 func (a *EquipmentApiService) GetEquipmentPsuControlList(ctx context.Context) ApiGetEquipmentPsuControlListRequest {
 	return ApiGetEquipmentPsuControlListRequest{
@@ -7661,7 +7701,8 @@ func (a *EquipmentApiService) GetEquipmentPsuControlList(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return EquipmentPsuControlResponse
+//
+//	@return EquipmentPsuControlResponse
 func (a *EquipmentApiService) GetEquipmentPsuControlListExecute(r ApiGetEquipmentPsuControlListRequest) (*EquipmentPsuControlResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7904,8 +7945,8 @@ func (r ApiGetEquipmentPsuListRequest) Execute() (*EquipmentPsuResponse, *http.R
 /*
 GetEquipmentPsuList Read a 'equipment.Psu' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetEquipmentPsuListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetEquipmentPsuListRequest
 */
 func (a *EquipmentApiService) GetEquipmentPsuList(ctx context.Context) ApiGetEquipmentPsuListRequest {
 	return ApiGetEquipmentPsuListRequest{
@@ -7915,7 +7956,8 @@ func (a *EquipmentApiService) GetEquipmentPsuList(ctx context.Context) ApiGetEqu
 }
 
 // Execute executes the request
-//  @return EquipmentPsuResponse
+//
+//	@return EquipmentPsuResponse
 func (a *EquipmentApiService) GetEquipmentPsuListExecute(r ApiGetEquipmentPsuListRequest) (*EquipmentPsuResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8082,9 +8124,9 @@ func (r ApiGetEquipmentRackEnclosureByMoidRequest) Execute() (*EquipmentRackEncl
 /*
 GetEquipmentRackEnclosureByMoid Read a 'equipment.RackEnclosure' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetEquipmentRackEnclosureByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetEquipmentRackEnclosureByMoidRequest
 */
 func (a *EquipmentApiService) GetEquipmentRackEnclosureByMoid(ctx context.Context, moid string) ApiGetEquipmentRackEnclosureByMoidRequest {
 	return ApiGetEquipmentRackEnclosureByMoidRequest{
@@ -8095,7 +8137,8 @@ func (a *EquipmentApiService) GetEquipmentRackEnclosureByMoid(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return EquipmentRackEnclosure
+//
+//	@return EquipmentRackEnclosure
 func (a *EquipmentApiService) GetEquipmentRackEnclosureByMoidExecute(r ApiGetEquipmentRackEnclosureByMoidRequest) (*EquipmentRackEnclosure, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8306,8 +8349,8 @@ func (r ApiGetEquipmentRackEnclosureListRequest) Execute() (*EquipmentRackEnclos
 /*
 GetEquipmentRackEnclosureList Read a 'equipment.RackEnclosure' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetEquipmentRackEnclosureListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetEquipmentRackEnclosureListRequest
 */
 func (a *EquipmentApiService) GetEquipmentRackEnclosureList(ctx context.Context) ApiGetEquipmentRackEnclosureListRequest {
 	return ApiGetEquipmentRackEnclosureListRequest{
@@ -8317,7 +8360,8 @@ func (a *EquipmentApiService) GetEquipmentRackEnclosureList(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return EquipmentRackEnclosureResponse
+//
+//	@return EquipmentRackEnclosureResponse
 func (a *EquipmentApiService) GetEquipmentRackEnclosureListExecute(r ApiGetEquipmentRackEnclosureListRequest) (*EquipmentRackEnclosureResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8484,9 +8528,9 @@ func (r ApiGetEquipmentRackEnclosureSlotByMoidRequest) Execute() (*EquipmentRack
 /*
 GetEquipmentRackEnclosureSlotByMoid Read a 'equipment.RackEnclosureSlot' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetEquipmentRackEnclosureSlotByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetEquipmentRackEnclosureSlotByMoidRequest
 */
 func (a *EquipmentApiService) GetEquipmentRackEnclosureSlotByMoid(ctx context.Context, moid string) ApiGetEquipmentRackEnclosureSlotByMoidRequest {
 	return ApiGetEquipmentRackEnclosureSlotByMoidRequest{
@@ -8497,7 +8541,8 @@ func (a *EquipmentApiService) GetEquipmentRackEnclosureSlotByMoid(ctx context.Co
 }
 
 // Execute executes the request
-//  @return EquipmentRackEnclosureSlot
+//
+//	@return EquipmentRackEnclosureSlot
 func (a *EquipmentApiService) GetEquipmentRackEnclosureSlotByMoidExecute(r ApiGetEquipmentRackEnclosureSlotByMoidRequest) (*EquipmentRackEnclosureSlot, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8708,8 +8753,8 @@ func (r ApiGetEquipmentRackEnclosureSlotListRequest) Execute() (*EquipmentRackEn
 /*
 GetEquipmentRackEnclosureSlotList Read a 'equipment.RackEnclosureSlot' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetEquipmentRackEnclosureSlotListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetEquipmentRackEnclosureSlotListRequest
 */
 func (a *EquipmentApiService) GetEquipmentRackEnclosureSlotList(ctx context.Context) ApiGetEquipmentRackEnclosureSlotListRequest {
 	return ApiGetEquipmentRackEnclosureSlotListRequest{
@@ -8719,7 +8764,8 @@ func (a *EquipmentApiService) GetEquipmentRackEnclosureSlotList(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return EquipmentRackEnclosureSlotResponse
+//
+//	@return EquipmentRackEnclosureSlotResponse
 func (a *EquipmentApiService) GetEquipmentRackEnclosureSlotListExecute(r ApiGetEquipmentRackEnclosureSlotListRequest) (*EquipmentRackEnclosureSlotResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8886,9 +8932,9 @@ func (r ApiGetEquipmentSharedIoModuleByMoidRequest) Execute() (*EquipmentSharedI
 /*
 GetEquipmentSharedIoModuleByMoid Read a 'equipment.SharedIoModule' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetEquipmentSharedIoModuleByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetEquipmentSharedIoModuleByMoidRequest
 */
 func (a *EquipmentApiService) GetEquipmentSharedIoModuleByMoid(ctx context.Context, moid string) ApiGetEquipmentSharedIoModuleByMoidRequest {
 	return ApiGetEquipmentSharedIoModuleByMoidRequest{
@@ -8899,7 +8945,8 @@ func (a *EquipmentApiService) GetEquipmentSharedIoModuleByMoid(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return EquipmentSharedIoModule
+//
+//	@return EquipmentSharedIoModule
 func (a *EquipmentApiService) GetEquipmentSharedIoModuleByMoidExecute(r ApiGetEquipmentSharedIoModuleByMoidRequest) (*EquipmentSharedIoModule, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9110,8 +9157,8 @@ func (r ApiGetEquipmentSharedIoModuleListRequest) Execute() (*EquipmentSharedIoM
 /*
 GetEquipmentSharedIoModuleList Read a 'equipment.SharedIoModule' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetEquipmentSharedIoModuleListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetEquipmentSharedIoModuleListRequest
 */
 func (a *EquipmentApiService) GetEquipmentSharedIoModuleList(ctx context.Context) ApiGetEquipmentSharedIoModuleListRequest {
 	return ApiGetEquipmentSharedIoModuleListRequest{
@@ -9121,7 +9168,8 @@ func (a *EquipmentApiService) GetEquipmentSharedIoModuleList(ctx context.Context
 }
 
 // Execute executes the request
-//  @return EquipmentSharedIoModuleResponse
+//
+//	@return EquipmentSharedIoModuleResponse
 func (a *EquipmentApiService) GetEquipmentSharedIoModuleListExecute(r ApiGetEquipmentSharedIoModuleListRequest) (*EquipmentSharedIoModuleResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9288,9 +9336,9 @@ func (r ApiGetEquipmentSwitchCardByMoidRequest) Execute() (*EquipmentSwitchCard,
 /*
 GetEquipmentSwitchCardByMoid Read a 'equipment.SwitchCard' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetEquipmentSwitchCardByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetEquipmentSwitchCardByMoidRequest
 */
 func (a *EquipmentApiService) GetEquipmentSwitchCardByMoid(ctx context.Context, moid string) ApiGetEquipmentSwitchCardByMoidRequest {
 	return ApiGetEquipmentSwitchCardByMoidRequest{
@@ -9301,7 +9349,8 @@ func (a *EquipmentApiService) GetEquipmentSwitchCardByMoid(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return EquipmentSwitchCard
+//
+//	@return EquipmentSwitchCard
 func (a *EquipmentApiService) GetEquipmentSwitchCardByMoidExecute(r ApiGetEquipmentSwitchCardByMoidRequest) (*EquipmentSwitchCard, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9512,8 +9561,8 @@ func (r ApiGetEquipmentSwitchCardListRequest) Execute() (*EquipmentSwitchCardRes
 /*
 GetEquipmentSwitchCardList Read a 'equipment.SwitchCard' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetEquipmentSwitchCardListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetEquipmentSwitchCardListRequest
 */
 func (a *EquipmentApiService) GetEquipmentSwitchCardList(ctx context.Context) ApiGetEquipmentSwitchCardListRequest {
 	return ApiGetEquipmentSwitchCardListRequest{
@@ -9523,7 +9572,8 @@ func (a *EquipmentApiService) GetEquipmentSwitchCardList(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return EquipmentSwitchCardResponse
+//
+//	@return EquipmentSwitchCardResponse
 func (a *EquipmentApiService) GetEquipmentSwitchCardListExecute(r ApiGetEquipmentSwitchCardListRequest) (*EquipmentSwitchCardResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9690,9 +9740,9 @@ func (r ApiGetEquipmentSystemIoControllerByMoidRequest) Execute() (*EquipmentSys
 /*
 GetEquipmentSystemIoControllerByMoid Read a 'equipment.SystemIoController' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetEquipmentSystemIoControllerByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetEquipmentSystemIoControllerByMoidRequest
 */
 func (a *EquipmentApiService) GetEquipmentSystemIoControllerByMoid(ctx context.Context, moid string) ApiGetEquipmentSystemIoControllerByMoidRequest {
 	return ApiGetEquipmentSystemIoControllerByMoidRequest{
@@ -9703,7 +9753,8 @@ func (a *EquipmentApiService) GetEquipmentSystemIoControllerByMoid(ctx context.C
 }
 
 // Execute executes the request
-//  @return EquipmentSystemIoController
+//
+//	@return EquipmentSystemIoController
 func (a *EquipmentApiService) GetEquipmentSystemIoControllerByMoidExecute(r ApiGetEquipmentSystemIoControllerByMoidRequest) (*EquipmentSystemIoController, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9914,8 +9965,8 @@ func (r ApiGetEquipmentSystemIoControllerListRequest) Execute() (*EquipmentSyste
 /*
 GetEquipmentSystemIoControllerList Read a 'equipment.SystemIoController' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetEquipmentSystemIoControllerListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetEquipmentSystemIoControllerListRequest
 */
 func (a *EquipmentApiService) GetEquipmentSystemIoControllerList(ctx context.Context) ApiGetEquipmentSystemIoControllerListRequest {
 	return ApiGetEquipmentSystemIoControllerListRequest{
@@ -9925,7 +9976,8 @@ func (a *EquipmentApiService) GetEquipmentSystemIoControllerList(ctx context.Con
 }
 
 // Execute executes the request
-//  @return EquipmentSystemIoControllerResponse
+//
+//	@return EquipmentSystemIoControllerResponse
 func (a *EquipmentApiService) GetEquipmentSystemIoControllerListExecute(r ApiGetEquipmentSystemIoControllerListRequest) (*EquipmentSystemIoControllerResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10092,9 +10144,9 @@ func (r ApiGetEquipmentTpmByMoidRequest) Execute() (*EquipmentTpm, *http.Respons
 /*
 GetEquipmentTpmByMoid Read a 'equipment.Tpm' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetEquipmentTpmByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetEquipmentTpmByMoidRequest
 */
 func (a *EquipmentApiService) GetEquipmentTpmByMoid(ctx context.Context, moid string) ApiGetEquipmentTpmByMoidRequest {
 	return ApiGetEquipmentTpmByMoidRequest{
@@ -10105,7 +10157,8 @@ func (a *EquipmentApiService) GetEquipmentTpmByMoid(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return EquipmentTpm
+//
+//	@return EquipmentTpm
 func (a *EquipmentApiService) GetEquipmentTpmByMoidExecute(r ApiGetEquipmentTpmByMoidRequest) (*EquipmentTpm, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10316,8 +10369,8 @@ func (r ApiGetEquipmentTpmListRequest) Execute() (*EquipmentTpmResponse, *http.R
 /*
 GetEquipmentTpmList Read a 'equipment.Tpm' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetEquipmentTpmListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetEquipmentTpmListRequest
 */
 func (a *EquipmentApiService) GetEquipmentTpmList(ctx context.Context) ApiGetEquipmentTpmListRequest {
 	return ApiGetEquipmentTpmListRequest{
@@ -10327,7 +10380,8 @@ func (a *EquipmentApiService) GetEquipmentTpmList(ctx context.Context) ApiGetEqu
 }
 
 // Execute executes the request
-//  @return EquipmentTpmResponse
+//
+//	@return EquipmentTpmResponse
 func (a *EquipmentApiService) GetEquipmentTpmListExecute(r ApiGetEquipmentTpmListRequest) (*EquipmentTpmResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10494,9 +10548,9 @@ func (r ApiGetEquipmentTransceiverByMoidRequest) Execute() (*EquipmentTransceive
 /*
 GetEquipmentTransceiverByMoid Read a 'equipment.Transceiver' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetEquipmentTransceiverByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetEquipmentTransceiverByMoidRequest
 */
 func (a *EquipmentApiService) GetEquipmentTransceiverByMoid(ctx context.Context, moid string) ApiGetEquipmentTransceiverByMoidRequest {
 	return ApiGetEquipmentTransceiverByMoidRequest{
@@ -10507,7 +10561,8 @@ func (a *EquipmentApiService) GetEquipmentTransceiverByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return EquipmentTransceiver
+//
+//	@return EquipmentTransceiver
 func (a *EquipmentApiService) GetEquipmentTransceiverByMoidExecute(r ApiGetEquipmentTransceiverByMoidRequest) (*EquipmentTransceiver, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10718,8 +10773,8 @@ func (r ApiGetEquipmentTransceiverListRequest) Execute() (*EquipmentTransceiverR
 /*
 GetEquipmentTransceiverList Read a 'equipment.Transceiver' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetEquipmentTransceiverListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetEquipmentTransceiverListRequest
 */
 func (a *EquipmentApiService) GetEquipmentTransceiverList(ctx context.Context) ApiGetEquipmentTransceiverListRequest {
 	return ApiGetEquipmentTransceiverListRequest{
@@ -10729,7 +10784,8 @@ func (a *EquipmentApiService) GetEquipmentTransceiverList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return EquipmentTransceiverResponse
+//
+//	@return EquipmentTransceiverResponse
 func (a *EquipmentApiService) GetEquipmentTransceiverListExecute(r ApiGetEquipmentTransceiverListRequest) (*EquipmentTransceiverResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10910,9 +10966,9 @@ func (r ApiPatchEquipmentChassisRequest) Execute() (*EquipmentChassis, *http.Res
 /*
 PatchEquipmentChassis Update a 'equipment.Chassis' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchEquipmentChassisRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchEquipmentChassisRequest
 */
 func (a *EquipmentApiService) PatchEquipmentChassis(ctx context.Context, moid string) ApiPatchEquipmentChassisRequest {
 	return ApiPatchEquipmentChassisRequest{
@@ -10923,7 +10979,8 @@ func (a *EquipmentApiService) PatchEquipmentChassis(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return EquipmentChassis
+//
+//	@return EquipmentChassis
 func (a *EquipmentApiService) PatchEquipmentChassisExecute(r ApiPatchEquipmentChassisRequest) (*EquipmentChassis, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -11080,9 +11137,9 @@ func (r ApiPatchEquipmentChassisIdentityRequest) Execute() (*EquipmentChassisIde
 /*
 PatchEquipmentChassisIdentity Update a 'equipment.ChassisIdentity' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchEquipmentChassisIdentityRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchEquipmentChassisIdentityRequest
 */
 func (a *EquipmentApiService) PatchEquipmentChassisIdentity(ctx context.Context, moid string) ApiPatchEquipmentChassisIdentityRequest {
 	return ApiPatchEquipmentChassisIdentityRequest{
@@ -11093,7 +11150,8 @@ func (a *EquipmentApiService) PatchEquipmentChassisIdentity(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return EquipmentChassisIdentity
+//
+//	@return EquipmentChassisIdentity
 func (a *EquipmentApiService) PatchEquipmentChassisIdentityExecute(r ApiPatchEquipmentChassisIdentityRequest) (*EquipmentChassisIdentity, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -11250,9 +11308,9 @@ func (r ApiPatchEquipmentChassisOperationRequest) Execute() (*EquipmentChassisOp
 /*
 PatchEquipmentChassisOperation Update a 'equipment.ChassisOperation' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchEquipmentChassisOperationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchEquipmentChassisOperationRequest
 */
 func (a *EquipmentApiService) PatchEquipmentChassisOperation(ctx context.Context, moid string) ApiPatchEquipmentChassisOperationRequest {
 	return ApiPatchEquipmentChassisOperationRequest{
@@ -11263,7 +11321,8 @@ func (a *EquipmentApiService) PatchEquipmentChassisOperation(ctx context.Context
 }
 
 // Execute executes the request
-//  @return EquipmentChassisOperation
+//
+//	@return EquipmentChassisOperation
 func (a *EquipmentApiService) PatchEquipmentChassisOperationExecute(r ApiPatchEquipmentChassisOperationRequest) (*EquipmentChassisOperation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -11420,9 +11479,9 @@ func (r ApiPatchEquipmentExpanderModuleRequest) Execute() (*EquipmentExpanderMod
 /*
 PatchEquipmentExpanderModule Update a 'equipment.ExpanderModule' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchEquipmentExpanderModuleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchEquipmentExpanderModuleRequest
 */
 func (a *EquipmentApiService) PatchEquipmentExpanderModule(ctx context.Context, moid string) ApiPatchEquipmentExpanderModuleRequest {
 	return ApiPatchEquipmentExpanderModuleRequest{
@@ -11433,7 +11492,8 @@ func (a *EquipmentApiService) PatchEquipmentExpanderModule(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return EquipmentExpanderModule
+//
+//	@return EquipmentExpanderModule
 func (a *EquipmentApiService) PatchEquipmentExpanderModuleExecute(r ApiPatchEquipmentExpanderModuleRequest) (*EquipmentExpanderModule, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -11590,9 +11650,9 @@ func (r ApiPatchEquipmentFanRequest) Execute() (*EquipmentFan, *http.Response, e
 /*
 PatchEquipmentFan Update a 'equipment.Fan' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchEquipmentFanRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchEquipmentFanRequest
 */
 func (a *EquipmentApiService) PatchEquipmentFan(ctx context.Context, moid string) ApiPatchEquipmentFanRequest {
 	return ApiPatchEquipmentFanRequest{
@@ -11603,7 +11663,8 @@ func (a *EquipmentApiService) PatchEquipmentFan(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return EquipmentFan
+//
+//	@return EquipmentFan
 func (a *EquipmentApiService) PatchEquipmentFanExecute(r ApiPatchEquipmentFanRequest) (*EquipmentFan, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -11760,9 +11821,9 @@ func (r ApiPatchEquipmentFanControlRequest) Execute() (*EquipmentFanControl, *ht
 /*
 PatchEquipmentFanControl Update a 'equipment.FanControl' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchEquipmentFanControlRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchEquipmentFanControlRequest
 */
 func (a *EquipmentApiService) PatchEquipmentFanControl(ctx context.Context, moid string) ApiPatchEquipmentFanControlRequest {
 	return ApiPatchEquipmentFanControlRequest{
@@ -11773,7 +11834,8 @@ func (a *EquipmentApiService) PatchEquipmentFanControl(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return EquipmentFanControl
+//
+//	@return EquipmentFanControl
 func (a *EquipmentApiService) PatchEquipmentFanControlExecute(r ApiPatchEquipmentFanControlRequest) (*EquipmentFanControl, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -11930,9 +11992,9 @@ func (r ApiPatchEquipmentFanModuleRequest) Execute() (*EquipmentFanModule, *http
 /*
 PatchEquipmentFanModule Update a 'equipment.FanModule' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchEquipmentFanModuleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchEquipmentFanModuleRequest
 */
 func (a *EquipmentApiService) PatchEquipmentFanModule(ctx context.Context, moid string) ApiPatchEquipmentFanModuleRequest {
 	return ApiPatchEquipmentFanModuleRequest{
@@ -11943,7 +12005,8 @@ func (a *EquipmentApiService) PatchEquipmentFanModule(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return EquipmentFanModule
+//
+//	@return EquipmentFanModule
 func (a *EquipmentApiService) PatchEquipmentFanModuleExecute(r ApiPatchEquipmentFanModuleRequest) (*EquipmentFanModule, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -12100,9 +12163,9 @@ func (r ApiPatchEquipmentFexRequest) Execute() (*EquipmentFex, *http.Response, e
 /*
 PatchEquipmentFex Update a 'equipment.Fex' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchEquipmentFexRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchEquipmentFexRequest
 */
 func (a *EquipmentApiService) PatchEquipmentFex(ctx context.Context, moid string) ApiPatchEquipmentFexRequest {
 	return ApiPatchEquipmentFexRequest{
@@ -12113,7 +12176,8 @@ func (a *EquipmentApiService) PatchEquipmentFex(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return EquipmentFex
+//
+//	@return EquipmentFex
 func (a *EquipmentApiService) PatchEquipmentFexExecute(r ApiPatchEquipmentFexRequest) (*EquipmentFex, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -12270,9 +12334,9 @@ func (r ApiPatchEquipmentFexIdentityRequest) Execute() (*EquipmentFexIdentity, *
 /*
 PatchEquipmentFexIdentity Update a 'equipment.FexIdentity' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchEquipmentFexIdentityRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchEquipmentFexIdentityRequest
 */
 func (a *EquipmentApiService) PatchEquipmentFexIdentity(ctx context.Context, moid string) ApiPatchEquipmentFexIdentityRequest {
 	return ApiPatchEquipmentFexIdentityRequest{
@@ -12283,7 +12347,8 @@ func (a *EquipmentApiService) PatchEquipmentFexIdentity(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return EquipmentFexIdentity
+//
+//	@return EquipmentFexIdentity
 func (a *EquipmentApiService) PatchEquipmentFexIdentityExecute(r ApiPatchEquipmentFexIdentityRequest) (*EquipmentFexIdentity, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -12440,9 +12505,9 @@ func (r ApiPatchEquipmentFexOperationRequest) Execute() (*EquipmentFexOperation,
 /*
 PatchEquipmentFexOperation Update a 'equipment.FexOperation' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchEquipmentFexOperationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchEquipmentFexOperationRequest
 */
 func (a *EquipmentApiService) PatchEquipmentFexOperation(ctx context.Context, moid string) ApiPatchEquipmentFexOperationRequest {
 	return ApiPatchEquipmentFexOperationRequest{
@@ -12453,7 +12518,8 @@ func (a *EquipmentApiService) PatchEquipmentFexOperation(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return EquipmentFexOperation
+//
+//	@return EquipmentFexOperation
 func (a *EquipmentApiService) PatchEquipmentFexOperationExecute(r ApiPatchEquipmentFexOperationRequest) (*EquipmentFexOperation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -12610,9 +12676,9 @@ func (r ApiPatchEquipmentFruRequest) Execute() (*EquipmentFru, *http.Response, e
 /*
 PatchEquipmentFru Update a 'equipment.Fru' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchEquipmentFruRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchEquipmentFruRequest
 */
 func (a *EquipmentApiService) PatchEquipmentFru(ctx context.Context, moid string) ApiPatchEquipmentFruRequest {
 	return ApiPatchEquipmentFruRequest{
@@ -12623,7 +12689,8 @@ func (a *EquipmentApiService) PatchEquipmentFru(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return EquipmentFru
+//
+//	@return EquipmentFru
 func (a *EquipmentApiService) PatchEquipmentFruExecute(r ApiPatchEquipmentFruRequest) (*EquipmentFru, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -12780,9 +12847,9 @@ func (r ApiPatchEquipmentIoCardRequest) Execute() (*EquipmentIoCard, *http.Respo
 /*
 PatchEquipmentIoCard Update a 'equipment.IoCard' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchEquipmentIoCardRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchEquipmentIoCardRequest
 */
 func (a *EquipmentApiService) PatchEquipmentIoCard(ctx context.Context, moid string) ApiPatchEquipmentIoCardRequest {
 	return ApiPatchEquipmentIoCardRequest{
@@ -12793,7 +12860,8 @@ func (a *EquipmentApiService) PatchEquipmentIoCard(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return EquipmentIoCard
+//
+//	@return EquipmentIoCard
 func (a *EquipmentApiService) PatchEquipmentIoCardExecute(r ApiPatchEquipmentIoCardRequest) (*EquipmentIoCard, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -12950,9 +13018,9 @@ func (r ApiPatchEquipmentIoCardOperationRequest) Execute() (*EquipmentIoCardOper
 /*
 PatchEquipmentIoCardOperation Update a 'equipment.IoCardOperation' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchEquipmentIoCardOperationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchEquipmentIoCardOperationRequest
 */
 func (a *EquipmentApiService) PatchEquipmentIoCardOperation(ctx context.Context, moid string) ApiPatchEquipmentIoCardOperationRequest {
 	return ApiPatchEquipmentIoCardOperationRequest{
@@ -12963,7 +13031,8 @@ func (a *EquipmentApiService) PatchEquipmentIoCardOperation(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return EquipmentIoCardOperation
+//
+//	@return EquipmentIoCardOperation
 func (a *EquipmentApiService) PatchEquipmentIoCardOperationExecute(r ApiPatchEquipmentIoCardOperationRequest) (*EquipmentIoCardOperation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -13120,9 +13189,9 @@ func (r ApiPatchEquipmentIoExpanderRequest) Execute() (*EquipmentIoExpander, *ht
 /*
 PatchEquipmentIoExpander Update a 'equipment.IoExpander' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchEquipmentIoExpanderRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchEquipmentIoExpanderRequest
 */
 func (a *EquipmentApiService) PatchEquipmentIoExpander(ctx context.Context, moid string) ApiPatchEquipmentIoExpanderRequest {
 	return ApiPatchEquipmentIoExpanderRequest{
@@ -13133,7 +13202,8 @@ func (a *EquipmentApiService) PatchEquipmentIoExpander(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return EquipmentIoExpander
+//
+//	@return EquipmentIoExpander
 func (a *EquipmentApiService) PatchEquipmentIoExpanderExecute(r ApiPatchEquipmentIoExpanderRequest) (*EquipmentIoExpander, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -13290,9 +13360,9 @@ func (r ApiPatchEquipmentLocatorLedRequest) Execute() (*EquipmentLocatorLed, *ht
 /*
 PatchEquipmentLocatorLed Update a 'equipment.LocatorLed' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchEquipmentLocatorLedRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchEquipmentLocatorLedRequest
 */
 func (a *EquipmentApiService) PatchEquipmentLocatorLed(ctx context.Context, moid string) ApiPatchEquipmentLocatorLedRequest {
 	return ApiPatchEquipmentLocatorLedRequest{
@@ -13303,7 +13373,8 @@ func (a *EquipmentApiService) PatchEquipmentLocatorLed(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return EquipmentLocatorLed
+//
+//	@return EquipmentLocatorLed
 func (a *EquipmentApiService) PatchEquipmentLocatorLedExecute(r ApiPatchEquipmentLocatorLedRequest) (*EquipmentLocatorLed, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -13460,9 +13531,9 @@ func (r ApiPatchEquipmentPsuRequest) Execute() (*EquipmentPsu, *http.Response, e
 /*
 PatchEquipmentPsu Update a 'equipment.Psu' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchEquipmentPsuRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchEquipmentPsuRequest
 */
 func (a *EquipmentApiService) PatchEquipmentPsu(ctx context.Context, moid string) ApiPatchEquipmentPsuRequest {
 	return ApiPatchEquipmentPsuRequest{
@@ -13473,7 +13544,8 @@ func (a *EquipmentApiService) PatchEquipmentPsu(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return EquipmentPsu
+//
+//	@return EquipmentPsu
 func (a *EquipmentApiService) PatchEquipmentPsuExecute(r ApiPatchEquipmentPsuRequest) (*EquipmentPsu, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -13630,9 +13702,9 @@ func (r ApiPatchEquipmentPsuControlRequest) Execute() (*EquipmentPsuControl, *ht
 /*
 PatchEquipmentPsuControl Update a 'equipment.PsuControl' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchEquipmentPsuControlRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchEquipmentPsuControlRequest
 */
 func (a *EquipmentApiService) PatchEquipmentPsuControl(ctx context.Context, moid string) ApiPatchEquipmentPsuControlRequest {
 	return ApiPatchEquipmentPsuControlRequest{
@@ -13643,7 +13715,8 @@ func (a *EquipmentApiService) PatchEquipmentPsuControl(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return EquipmentPsuControl
+//
+//	@return EquipmentPsuControl
 func (a *EquipmentApiService) PatchEquipmentPsuControlExecute(r ApiPatchEquipmentPsuControlRequest) (*EquipmentPsuControl, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -13800,9 +13873,9 @@ func (r ApiPatchEquipmentRackEnclosureRequest) Execute() (*EquipmentRackEnclosur
 /*
 PatchEquipmentRackEnclosure Update a 'equipment.RackEnclosure' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchEquipmentRackEnclosureRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchEquipmentRackEnclosureRequest
 */
 func (a *EquipmentApiService) PatchEquipmentRackEnclosure(ctx context.Context, moid string) ApiPatchEquipmentRackEnclosureRequest {
 	return ApiPatchEquipmentRackEnclosureRequest{
@@ -13813,7 +13886,8 @@ func (a *EquipmentApiService) PatchEquipmentRackEnclosure(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return EquipmentRackEnclosure
+//
+//	@return EquipmentRackEnclosure
 func (a *EquipmentApiService) PatchEquipmentRackEnclosureExecute(r ApiPatchEquipmentRackEnclosureRequest) (*EquipmentRackEnclosure, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -13970,9 +14044,9 @@ func (r ApiPatchEquipmentRackEnclosureSlotRequest) Execute() (*EquipmentRackEncl
 /*
 PatchEquipmentRackEnclosureSlot Update a 'equipment.RackEnclosureSlot' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchEquipmentRackEnclosureSlotRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchEquipmentRackEnclosureSlotRequest
 */
 func (a *EquipmentApiService) PatchEquipmentRackEnclosureSlot(ctx context.Context, moid string) ApiPatchEquipmentRackEnclosureSlotRequest {
 	return ApiPatchEquipmentRackEnclosureSlotRequest{
@@ -13983,7 +14057,8 @@ func (a *EquipmentApiService) PatchEquipmentRackEnclosureSlot(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return EquipmentRackEnclosureSlot
+//
+//	@return EquipmentRackEnclosureSlot
 func (a *EquipmentApiService) PatchEquipmentRackEnclosureSlotExecute(r ApiPatchEquipmentRackEnclosureSlotRequest) (*EquipmentRackEnclosureSlot, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -14140,9 +14215,9 @@ func (r ApiPatchEquipmentSharedIoModuleRequest) Execute() (*EquipmentSharedIoMod
 /*
 PatchEquipmentSharedIoModule Update a 'equipment.SharedIoModule' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchEquipmentSharedIoModuleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchEquipmentSharedIoModuleRequest
 */
 func (a *EquipmentApiService) PatchEquipmentSharedIoModule(ctx context.Context, moid string) ApiPatchEquipmentSharedIoModuleRequest {
 	return ApiPatchEquipmentSharedIoModuleRequest{
@@ -14153,7 +14228,8 @@ func (a *EquipmentApiService) PatchEquipmentSharedIoModule(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return EquipmentSharedIoModule
+//
+//	@return EquipmentSharedIoModule
 func (a *EquipmentApiService) PatchEquipmentSharedIoModuleExecute(r ApiPatchEquipmentSharedIoModuleRequest) (*EquipmentSharedIoModule, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -14310,9 +14386,9 @@ func (r ApiPatchEquipmentSwitchCardRequest) Execute() (*EquipmentSwitchCard, *ht
 /*
 PatchEquipmentSwitchCard Update a 'equipment.SwitchCard' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchEquipmentSwitchCardRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchEquipmentSwitchCardRequest
 */
 func (a *EquipmentApiService) PatchEquipmentSwitchCard(ctx context.Context, moid string) ApiPatchEquipmentSwitchCardRequest {
 	return ApiPatchEquipmentSwitchCardRequest{
@@ -14323,7 +14399,8 @@ func (a *EquipmentApiService) PatchEquipmentSwitchCard(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return EquipmentSwitchCard
+//
+//	@return EquipmentSwitchCard
 func (a *EquipmentApiService) PatchEquipmentSwitchCardExecute(r ApiPatchEquipmentSwitchCardRequest) (*EquipmentSwitchCard, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -14480,9 +14557,9 @@ func (r ApiPatchEquipmentSystemIoControllerRequest) Execute() (*EquipmentSystemI
 /*
 PatchEquipmentSystemIoController Update a 'equipment.SystemIoController' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchEquipmentSystemIoControllerRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchEquipmentSystemIoControllerRequest
 */
 func (a *EquipmentApiService) PatchEquipmentSystemIoController(ctx context.Context, moid string) ApiPatchEquipmentSystemIoControllerRequest {
 	return ApiPatchEquipmentSystemIoControllerRequest{
@@ -14493,7 +14570,8 @@ func (a *EquipmentApiService) PatchEquipmentSystemIoController(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return EquipmentSystemIoController
+//
+//	@return EquipmentSystemIoController
 func (a *EquipmentApiService) PatchEquipmentSystemIoControllerExecute(r ApiPatchEquipmentSystemIoControllerRequest) (*EquipmentSystemIoController, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -14650,9 +14728,9 @@ func (r ApiPatchEquipmentTpmRequest) Execute() (*EquipmentTpm, *http.Response, e
 /*
 PatchEquipmentTpm Update a 'equipment.Tpm' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchEquipmentTpmRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchEquipmentTpmRequest
 */
 func (a *EquipmentApiService) PatchEquipmentTpm(ctx context.Context, moid string) ApiPatchEquipmentTpmRequest {
 	return ApiPatchEquipmentTpmRequest{
@@ -14663,7 +14741,8 @@ func (a *EquipmentApiService) PatchEquipmentTpm(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return EquipmentTpm
+//
+//	@return EquipmentTpm
 func (a *EquipmentApiService) PatchEquipmentTpmExecute(r ApiPatchEquipmentTpmRequest) (*EquipmentTpm, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -14820,9 +14899,9 @@ func (r ApiPatchEquipmentTransceiverRequest) Execute() (*EquipmentTransceiver, *
 /*
 PatchEquipmentTransceiver Update a 'equipment.Transceiver' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchEquipmentTransceiverRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchEquipmentTransceiverRequest
 */
 func (a *EquipmentApiService) PatchEquipmentTransceiver(ctx context.Context, moid string) ApiPatchEquipmentTransceiverRequest {
 	return ApiPatchEquipmentTransceiverRequest{
@@ -14833,7 +14912,8 @@ func (a *EquipmentApiService) PatchEquipmentTransceiver(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return EquipmentTransceiver
+//
+//	@return EquipmentTransceiver
 func (a *EquipmentApiService) PatchEquipmentTransceiverExecute(r ApiPatchEquipmentTransceiverRequest) (*EquipmentTransceiver, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -14990,9 +15070,9 @@ func (r ApiUpdateEquipmentChassisRequest) Execute() (*EquipmentChassis, *http.Re
 /*
 UpdateEquipmentChassis Update a 'equipment.Chassis' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateEquipmentChassisRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateEquipmentChassisRequest
 */
 func (a *EquipmentApiService) UpdateEquipmentChassis(ctx context.Context, moid string) ApiUpdateEquipmentChassisRequest {
 	return ApiUpdateEquipmentChassisRequest{
@@ -15003,7 +15083,8 @@ func (a *EquipmentApiService) UpdateEquipmentChassis(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return EquipmentChassis
+//
+//	@return EquipmentChassis
 func (a *EquipmentApiService) UpdateEquipmentChassisExecute(r ApiUpdateEquipmentChassisRequest) (*EquipmentChassis, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -15160,9 +15241,9 @@ func (r ApiUpdateEquipmentChassisIdentityRequest) Execute() (*EquipmentChassisId
 /*
 UpdateEquipmentChassisIdentity Update a 'equipment.ChassisIdentity' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateEquipmentChassisIdentityRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateEquipmentChassisIdentityRequest
 */
 func (a *EquipmentApiService) UpdateEquipmentChassisIdentity(ctx context.Context, moid string) ApiUpdateEquipmentChassisIdentityRequest {
 	return ApiUpdateEquipmentChassisIdentityRequest{
@@ -15173,7 +15254,8 @@ func (a *EquipmentApiService) UpdateEquipmentChassisIdentity(ctx context.Context
 }
 
 // Execute executes the request
-//  @return EquipmentChassisIdentity
+//
+//	@return EquipmentChassisIdentity
 func (a *EquipmentApiService) UpdateEquipmentChassisIdentityExecute(r ApiUpdateEquipmentChassisIdentityRequest) (*EquipmentChassisIdentity, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -15330,9 +15412,9 @@ func (r ApiUpdateEquipmentChassisOperationRequest) Execute() (*EquipmentChassisO
 /*
 UpdateEquipmentChassisOperation Update a 'equipment.ChassisOperation' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateEquipmentChassisOperationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateEquipmentChassisOperationRequest
 */
 func (a *EquipmentApiService) UpdateEquipmentChassisOperation(ctx context.Context, moid string) ApiUpdateEquipmentChassisOperationRequest {
 	return ApiUpdateEquipmentChassisOperationRequest{
@@ -15343,7 +15425,8 @@ func (a *EquipmentApiService) UpdateEquipmentChassisOperation(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return EquipmentChassisOperation
+//
+//	@return EquipmentChassisOperation
 func (a *EquipmentApiService) UpdateEquipmentChassisOperationExecute(r ApiUpdateEquipmentChassisOperationRequest) (*EquipmentChassisOperation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -15500,9 +15583,9 @@ func (r ApiUpdateEquipmentExpanderModuleRequest) Execute() (*EquipmentExpanderMo
 /*
 UpdateEquipmentExpanderModule Update a 'equipment.ExpanderModule' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateEquipmentExpanderModuleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateEquipmentExpanderModuleRequest
 */
 func (a *EquipmentApiService) UpdateEquipmentExpanderModule(ctx context.Context, moid string) ApiUpdateEquipmentExpanderModuleRequest {
 	return ApiUpdateEquipmentExpanderModuleRequest{
@@ -15513,7 +15596,8 @@ func (a *EquipmentApiService) UpdateEquipmentExpanderModule(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return EquipmentExpanderModule
+//
+//	@return EquipmentExpanderModule
 func (a *EquipmentApiService) UpdateEquipmentExpanderModuleExecute(r ApiUpdateEquipmentExpanderModuleRequest) (*EquipmentExpanderModule, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -15670,9 +15754,9 @@ func (r ApiUpdateEquipmentFanRequest) Execute() (*EquipmentFan, *http.Response, 
 /*
 UpdateEquipmentFan Update a 'equipment.Fan' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateEquipmentFanRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateEquipmentFanRequest
 */
 func (a *EquipmentApiService) UpdateEquipmentFan(ctx context.Context, moid string) ApiUpdateEquipmentFanRequest {
 	return ApiUpdateEquipmentFanRequest{
@@ -15683,7 +15767,8 @@ func (a *EquipmentApiService) UpdateEquipmentFan(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return EquipmentFan
+//
+//	@return EquipmentFan
 func (a *EquipmentApiService) UpdateEquipmentFanExecute(r ApiUpdateEquipmentFanRequest) (*EquipmentFan, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -15840,9 +15925,9 @@ func (r ApiUpdateEquipmentFanControlRequest) Execute() (*EquipmentFanControl, *h
 /*
 UpdateEquipmentFanControl Update a 'equipment.FanControl' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateEquipmentFanControlRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateEquipmentFanControlRequest
 */
 func (a *EquipmentApiService) UpdateEquipmentFanControl(ctx context.Context, moid string) ApiUpdateEquipmentFanControlRequest {
 	return ApiUpdateEquipmentFanControlRequest{
@@ -15853,7 +15938,8 @@ func (a *EquipmentApiService) UpdateEquipmentFanControl(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return EquipmentFanControl
+//
+//	@return EquipmentFanControl
 func (a *EquipmentApiService) UpdateEquipmentFanControlExecute(r ApiUpdateEquipmentFanControlRequest) (*EquipmentFanControl, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -16010,9 +16096,9 @@ func (r ApiUpdateEquipmentFanModuleRequest) Execute() (*EquipmentFanModule, *htt
 /*
 UpdateEquipmentFanModule Update a 'equipment.FanModule' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateEquipmentFanModuleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateEquipmentFanModuleRequest
 */
 func (a *EquipmentApiService) UpdateEquipmentFanModule(ctx context.Context, moid string) ApiUpdateEquipmentFanModuleRequest {
 	return ApiUpdateEquipmentFanModuleRequest{
@@ -16023,7 +16109,8 @@ func (a *EquipmentApiService) UpdateEquipmentFanModule(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return EquipmentFanModule
+//
+//	@return EquipmentFanModule
 func (a *EquipmentApiService) UpdateEquipmentFanModuleExecute(r ApiUpdateEquipmentFanModuleRequest) (*EquipmentFanModule, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -16180,9 +16267,9 @@ func (r ApiUpdateEquipmentFexRequest) Execute() (*EquipmentFex, *http.Response, 
 /*
 UpdateEquipmentFex Update a 'equipment.Fex' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateEquipmentFexRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateEquipmentFexRequest
 */
 func (a *EquipmentApiService) UpdateEquipmentFex(ctx context.Context, moid string) ApiUpdateEquipmentFexRequest {
 	return ApiUpdateEquipmentFexRequest{
@@ -16193,7 +16280,8 @@ func (a *EquipmentApiService) UpdateEquipmentFex(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return EquipmentFex
+//
+//	@return EquipmentFex
 func (a *EquipmentApiService) UpdateEquipmentFexExecute(r ApiUpdateEquipmentFexRequest) (*EquipmentFex, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -16350,9 +16438,9 @@ func (r ApiUpdateEquipmentFexIdentityRequest) Execute() (*EquipmentFexIdentity, 
 /*
 UpdateEquipmentFexIdentity Update a 'equipment.FexIdentity' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateEquipmentFexIdentityRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateEquipmentFexIdentityRequest
 */
 func (a *EquipmentApiService) UpdateEquipmentFexIdentity(ctx context.Context, moid string) ApiUpdateEquipmentFexIdentityRequest {
 	return ApiUpdateEquipmentFexIdentityRequest{
@@ -16363,7 +16451,8 @@ func (a *EquipmentApiService) UpdateEquipmentFexIdentity(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return EquipmentFexIdentity
+//
+//	@return EquipmentFexIdentity
 func (a *EquipmentApiService) UpdateEquipmentFexIdentityExecute(r ApiUpdateEquipmentFexIdentityRequest) (*EquipmentFexIdentity, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -16520,9 +16609,9 @@ func (r ApiUpdateEquipmentFexOperationRequest) Execute() (*EquipmentFexOperation
 /*
 UpdateEquipmentFexOperation Update a 'equipment.FexOperation' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateEquipmentFexOperationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateEquipmentFexOperationRequest
 */
 func (a *EquipmentApiService) UpdateEquipmentFexOperation(ctx context.Context, moid string) ApiUpdateEquipmentFexOperationRequest {
 	return ApiUpdateEquipmentFexOperationRequest{
@@ -16533,7 +16622,8 @@ func (a *EquipmentApiService) UpdateEquipmentFexOperation(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return EquipmentFexOperation
+//
+//	@return EquipmentFexOperation
 func (a *EquipmentApiService) UpdateEquipmentFexOperationExecute(r ApiUpdateEquipmentFexOperationRequest) (*EquipmentFexOperation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -16690,9 +16780,9 @@ func (r ApiUpdateEquipmentFruRequest) Execute() (*EquipmentFru, *http.Response, 
 /*
 UpdateEquipmentFru Update a 'equipment.Fru' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateEquipmentFruRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateEquipmentFruRequest
 */
 func (a *EquipmentApiService) UpdateEquipmentFru(ctx context.Context, moid string) ApiUpdateEquipmentFruRequest {
 	return ApiUpdateEquipmentFruRequest{
@@ -16703,7 +16793,8 @@ func (a *EquipmentApiService) UpdateEquipmentFru(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return EquipmentFru
+//
+//	@return EquipmentFru
 func (a *EquipmentApiService) UpdateEquipmentFruExecute(r ApiUpdateEquipmentFruRequest) (*EquipmentFru, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -16860,9 +16951,9 @@ func (r ApiUpdateEquipmentIoCardRequest) Execute() (*EquipmentIoCard, *http.Resp
 /*
 UpdateEquipmentIoCard Update a 'equipment.IoCard' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateEquipmentIoCardRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateEquipmentIoCardRequest
 */
 func (a *EquipmentApiService) UpdateEquipmentIoCard(ctx context.Context, moid string) ApiUpdateEquipmentIoCardRequest {
 	return ApiUpdateEquipmentIoCardRequest{
@@ -16873,7 +16964,8 @@ func (a *EquipmentApiService) UpdateEquipmentIoCard(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return EquipmentIoCard
+//
+//	@return EquipmentIoCard
 func (a *EquipmentApiService) UpdateEquipmentIoCardExecute(r ApiUpdateEquipmentIoCardRequest) (*EquipmentIoCard, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -17030,9 +17122,9 @@ func (r ApiUpdateEquipmentIoCardOperationRequest) Execute() (*EquipmentIoCardOpe
 /*
 UpdateEquipmentIoCardOperation Update a 'equipment.IoCardOperation' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateEquipmentIoCardOperationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateEquipmentIoCardOperationRequest
 */
 func (a *EquipmentApiService) UpdateEquipmentIoCardOperation(ctx context.Context, moid string) ApiUpdateEquipmentIoCardOperationRequest {
 	return ApiUpdateEquipmentIoCardOperationRequest{
@@ -17043,7 +17135,8 @@ func (a *EquipmentApiService) UpdateEquipmentIoCardOperation(ctx context.Context
 }
 
 // Execute executes the request
-//  @return EquipmentIoCardOperation
+//
+//	@return EquipmentIoCardOperation
 func (a *EquipmentApiService) UpdateEquipmentIoCardOperationExecute(r ApiUpdateEquipmentIoCardOperationRequest) (*EquipmentIoCardOperation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -17200,9 +17293,9 @@ func (r ApiUpdateEquipmentIoExpanderRequest) Execute() (*EquipmentIoExpander, *h
 /*
 UpdateEquipmentIoExpander Update a 'equipment.IoExpander' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateEquipmentIoExpanderRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateEquipmentIoExpanderRequest
 */
 func (a *EquipmentApiService) UpdateEquipmentIoExpander(ctx context.Context, moid string) ApiUpdateEquipmentIoExpanderRequest {
 	return ApiUpdateEquipmentIoExpanderRequest{
@@ -17213,7 +17306,8 @@ func (a *EquipmentApiService) UpdateEquipmentIoExpander(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return EquipmentIoExpander
+//
+//	@return EquipmentIoExpander
 func (a *EquipmentApiService) UpdateEquipmentIoExpanderExecute(r ApiUpdateEquipmentIoExpanderRequest) (*EquipmentIoExpander, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -17370,9 +17464,9 @@ func (r ApiUpdateEquipmentLocatorLedRequest) Execute() (*EquipmentLocatorLed, *h
 /*
 UpdateEquipmentLocatorLed Update a 'equipment.LocatorLed' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateEquipmentLocatorLedRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateEquipmentLocatorLedRequest
 */
 func (a *EquipmentApiService) UpdateEquipmentLocatorLed(ctx context.Context, moid string) ApiUpdateEquipmentLocatorLedRequest {
 	return ApiUpdateEquipmentLocatorLedRequest{
@@ -17383,7 +17477,8 @@ func (a *EquipmentApiService) UpdateEquipmentLocatorLed(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return EquipmentLocatorLed
+//
+//	@return EquipmentLocatorLed
 func (a *EquipmentApiService) UpdateEquipmentLocatorLedExecute(r ApiUpdateEquipmentLocatorLedRequest) (*EquipmentLocatorLed, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -17540,9 +17635,9 @@ func (r ApiUpdateEquipmentPsuRequest) Execute() (*EquipmentPsu, *http.Response, 
 /*
 UpdateEquipmentPsu Update a 'equipment.Psu' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateEquipmentPsuRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateEquipmentPsuRequest
 */
 func (a *EquipmentApiService) UpdateEquipmentPsu(ctx context.Context, moid string) ApiUpdateEquipmentPsuRequest {
 	return ApiUpdateEquipmentPsuRequest{
@@ -17553,7 +17648,8 @@ func (a *EquipmentApiService) UpdateEquipmentPsu(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return EquipmentPsu
+//
+//	@return EquipmentPsu
 func (a *EquipmentApiService) UpdateEquipmentPsuExecute(r ApiUpdateEquipmentPsuRequest) (*EquipmentPsu, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -17710,9 +17806,9 @@ func (r ApiUpdateEquipmentPsuControlRequest) Execute() (*EquipmentPsuControl, *h
 /*
 UpdateEquipmentPsuControl Update a 'equipment.PsuControl' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateEquipmentPsuControlRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateEquipmentPsuControlRequest
 */
 func (a *EquipmentApiService) UpdateEquipmentPsuControl(ctx context.Context, moid string) ApiUpdateEquipmentPsuControlRequest {
 	return ApiUpdateEquipmentPsuControlRequest{
@@ -17723,7 +17819,8 @@ func (a *EquipmentApiService) UpdateEquipmentPsuControl(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return EquipmentPsuControl
+//
+//	@return EquipmentPsuControl
 func (a *EquipmentApiService) UpdateEquipmentPsuControlExecute(r ApiUpdateEquipmentPsuControlRequest) (*EquipmentPsuControl, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -17880,9 +17977,9 @@ func (r ApiUpdateEquipmentRackEnclosureRequest) Execute() (*EquipmentRackEnclosu
 /*
 UpdateEquipmentRackEnclosure Update a 'equipment.RackEnclosure' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateEquipmentRackEnclosureRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateEquipmentRackEnclosureRequest
 */
 func (a *EquipmentApiService) UpdateEquipmentRackEnclosure(ctx context.Context, moid string) ApiUpdateEquipmentRackEnclosureRequest {
 	return ApiUpdateEquipmentRackEnclosureRequest{
@@ -17893,7 +17990,8 @@ func (a *EquipmentApiService) UpdateEquipmentRackEnclosure(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return EquipmentRackEnclosure
+//
+//	@return EquipmentRackEnclosure
 func (a *EquipmentApiService) UpdateEquipmentRackEnclosureExecute(r ApiUpdateEquipmentRackEnclosureRequest) (*EquipmentRackEnclosure, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -18050,9 +18148,9 @@ func (r ApiUpdateEquipmentRackEnclosureSlotRequest) Execute() (*EquipmentRackEnc
 /*
 UpdateEquipmentRackEnclosureSlot Update a 'equipment.RackEnclosureSlot' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateEquipmentRackEnclosureSlotRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateEquipmentRackEnclosureSlotRequest
 */
 func (a *EquipmentApiService) UpdateEquipmentRackEnclosureSlot(ctx context.Context, moid string) ApiUpdateEquipmentRackEnclosureSlotRequest {
 	return ApiUpdateEquipmentRackEnclosureSlotRequest{
@@ -18063,7 +18161,8 @@ func (a *EquipmentApiService) UpdateEquipmentRackEnclosureSlot(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return EquipmentRackEnclosureSlot
+//
+//	@return EquipmentRackEnclosureSlot
 func (a *EquipmentApiService) UpdateEquipmentRackEnclosureSlotExecute(r ApiUpdateEquipmentRackEnclosureSlotRequest) (*EquipmentRackEnclosureSlot, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -18220,9 +18319,9 @@ func (r ApiUpdateEquipmentSharedIoModuleRequest) Execute() (*EquipmentSharedIoMo
 /*
 UpdateEquipmentSharedIoModule Update a 'equipment.SharedIoModule' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateEquipmentSharedIoModuleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateEquipmentSharedIoModuleRequest
 */
 func (a *EquipmentApiService) UpdateEquipmentSharedIoModule(ctx context.Context, moid string) ApiUpdateEquipmentSharedIoModuleRequest {
 	return ApiUpdateEquipmentSharedIoModuleRequest{
@@ -18233,7 +18332,8 @@ func (a *EquipmentApiService) UpdateEquipmentSharedIoModule(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return EquipmentSharedIoModule
+//
+//	@return EquipmentSharedIoModule
 func (a *EquipmentApiService) UpdateEquipmentSharedIoModuleExecute(r ApiUpdateEquipmentSharedIoModuleRequest) (*EquipmentSharedIoModule, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -18390,9 +18490,9 @@ func (r ApiUpdateEquipmentSwitchCardRequest) Execute() (*EquipmentSwitchCard, *h
 /*
 UpdateEquipmentSwitchCard Update a 'equipment.SwitchCard' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateEquipmentSwitchCardRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateEquipmentSwitchCardRequest
 */
 func (a *EquipmentApiService) UpdateEquipmentSwitchCard(ctx context.Context, moid string) ApiUpdateEquipmentSwitchCardRequest {
 	return ApiUpdateEquipmentSwitchCardRequest{
@@ -18403,7 +18503,8 @@ func (a *EquipmentApiService) UpdateEquipmentSwitchCard(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return EquipmentSwitchCard
+//
+//	@return EquipmentSwitchCard
 func (a *EquipmentApiService) UpdateEquipmentSwitchCardExecute(r ApiUpdateEquipmentSwitchCardRequest) (*EquipmentSwitchCard, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -18560,9 +18661,9 @@ func (r ApiUpdateEquipmentSystemIoControllerRequest) Execute() (*EquipmentSystem
 /*
 UpdateEquipmentSystemIoController Update a 'equipment.SystemIoController' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateEquipmentSystemIoControllerRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateEquipmentSystemIoControllerRequest
 */
 func (a *EquipmentApiService) UpdateEquipmentSystemIoController(ctx context.Context, moid string) ApiUpdateEquipmentSystemIoControllerRequest {
 	return ApiUpdateEquipmentSystemIoControllerRequest{
@@ -18573,7 +18674,8 @@ func (a *EquipmentApiService) UpdateEquipmentSystemIoController(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return EquipmentSystemIoController
+//
+//	@return EquipmentSystemIoController
 func (a *EquipmentApiService) UpdateEquipmentSystemIoControllerExecute(r ApiUpdateEquipmentSystemIoControllerRequest) (*EquipmentSystemIoController, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -18730,9 +18832,9 @@ func (r ApiUpdateEquipmentTpmRequest) Execute() (*EquipmentTpm, *http.Response, 
 /*
 UpdateEquipmentTpm Update a 'equipment.Tpm' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateEquipmentTpmRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateEquipmentTpmRequest
 */
 func (a *EquipmentApiService) UpdateEquipmentTpm(ctx context.Context, moid string) ApiUpdateEquipmentTpmRequest {
 	return ApiUpdateEquipmentTpmRequest{
@@ -18743,7 +18845,8 @@ func (a *EquipmentApiService) UpdateEquipmentTpm(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return EquipmentTpm
+//
+//	@return EquipmentTpm
 func (a *EquipmentApiService) UpdateEquipmentTpmExecute(r ApiUpdateEquipmentTpmRequest) (*EquipmentTpm, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -18900,9 +19003,9 @@ func (r ApiUpdateEquipmentTransceiverRequest) Execute() (*EquipmentTransceiver, 
 /*
 UpdateEquipmentTransceiver Update a 'equipment.Transceiver' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateEquipmentTransceiverRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateEquipmentTransceiverRequest
 */
 func (a *EquipmentApiService) UpdateEquipmentTransceiver(ctx context.Context, moid string) ApiUpdateEquipmentTransceiverRequest {
 	return ApiUpdateEquipmentTransceiverRequest{
@@ -18913,7 +19016,8 @@ func (a *EquipmentApiService) UpdateEquipmentTransceiver(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return EquipmentTransceiver
+//
+//	@return EquipmentTransceiver
 func (a *EquipmentApiService) UpdateEquipmentTransceiverExecute(r ApiUpdateEquipmentTransceiverRequest) (*EquipmentTransceiver, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

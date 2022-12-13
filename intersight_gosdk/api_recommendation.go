@@ -36,9 +36,9 @@ func (r ApiGetRecommendationCapacityRunwayByMoidRequest) Execute() (*Recommendat
 /*
 GetRecommendationCapacityRunwayByMoid Read a 'recommendation.CapacityRunway' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetRecommendationCapacityRunwayByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetRecommendationCapacityRunwayByMoidRequest
 */
 func (a *RecommendationApiService) GetRecommendationCapacityRunwayByMoid(ctx context.Context, moid string) ApiGetRecommendationCapacityRunwayByMoidRequest {
 	return ApiGetRecommendationCapacityRunwayByMoidRequest{
@@ -49,7 +49,8 @@ func (a *RecommendationApiService) GetRecommendationCapacityRunwayByMoid(ctx con
 }
 
 // Execute executes the request
-//  @return RecommendationCapacityRunway
+//
+//	@return RecommendationCapacityRunway
 func (a *RecommendationApiService) GetRecommendationCapacityRunwayByMoidExecute(r ApiGetRecommendationCapacityRunwayByMoidRequest) (*RecommendationCapacityRunway, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -260,8 +261,8 @@ func (r ApiGetRecommendationCapacityRunwayListRequest) Execute() (*Recommendatio
 /*
 GetRecommendationCapacityRunwayList Read a 'recommendation.CapacityRunway' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetRecommendationCapacityRunwayListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetRecommendationCapacityRunwayListRequest
 */
 func (a *RecommendationApiService) GetRecommendationCapacityRunwayList(ctx context.Context) ApiGetRecommendationCapacityRunwayListRequest {
 	return ApiGetRecommendationCapacityRunwayListRequest{
@@ -271,7 +272,8 @@ func (a *RecommendationApiService) GetRecommendationCapacityRunwayList(ctx conte
 }
 
 // Execute executes the request
-//  @return RecommendationCapacityRunwayResponse
+//
+//	@return RecommendationCapacityRunwayResponse
 func (a *RecommendationApiService) GetRecommendationCapacityRunwayListExecute(r ApiGetRecommendationCapacityRunwayListRequest) (*RecommendationCapacityRunwayResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -438,9 +440,9 @@ func (r ApiGetRecommendationPhysicalItemByMoidRequest) Execute() (*Recommendatio
 /*
 GetRecommendationPhysicalItemByMoid Read a 'recommendation.PhysicalItem' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetRecommendationPhysicalItemByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetRecommendationPhysicalItemByMoidRequest
 */
 func (a *RecommendationApiService) GetRecommendationPhysicalItemByMoid(ctx context.Context, moid string) ApiGetRecommendationPhysicalItemByMoidRequest {
 	return ApiGetRecommendationPhysicalItemByMoidRequest{
@@ -451,7 +453,8 @@ func (a *RecommendationApiService) GetRecommendationPhysicalItemByMoid(ctx conte
 }
 
 // Execute executes the request
-//  @return RecommendationPhysicalItem
+//
+//	@return RecommendationPhysicalItem
 func (a *RecommendationApiService) GetRecommendationPhysicalItemByMoidExecute(r ApiGetRecommendationPhysicalItemByMoidRequest) (*RecommendationPhysicalItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -662,8 +665,8 @@ func (r ApiGetRecommendationPhysicalItemListRequest) Execute() (*RecommendationP
 /*
 GetRecommendationPhysicalItemList Read a 'recommendation.PhysicalItem' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetRecommendationPhysicalItemListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetRecommendationPhysicalItemListRequest
 */
 func (a *RecommendationApiService) GetRecommendationPhysicalItemList(ctx context.Context) ApiGetRecommendationPhysicalItemListRequest {
 	return ApiGetRecommendationPhysicalItemListRequest{
@@ -673,7 +676,8 @@ func (a *RecommendationApiService) GetRecommendationPhysicalItemList(ctx context
 }
 
 // Execute executes the request
-//  @return RecommendationPhysicalItemResponse
+//
+//	@return RecommendationPhysicalItemResponse
 func (a *RecommendationApiService) GetRecommendationPhysicalItemListExecute(r ApiGetRecommendationPhysicalItemListRequest) (*RecommendationPhysicalItemResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet

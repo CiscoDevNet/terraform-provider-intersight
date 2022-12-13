@@ -56,8 +56,8 @@ func (r ApiCreateOrganizationOrganizationRequest) Execute() (*OrganizationOrgani
 /*
 CreateOrganizationOrganization Create a 'organization.Organization' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateOrganizationOrganizationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateOrganizationOrganizationRequest
 */
 func (a *OrganizationApiService) CreateOrganizationOrganization(ctx context.Context) ApiCreateOrganizationOrganizationRequest {
 	return ApiCreateOrganizationOrganizationRequest{
@@ -67,7 +67,8 @@ func (a *OrganizationApiService) CreateOrganizationOrganization(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return OrganizationOrganization
+//
+//	@return OrganizationOrganization
 func (a *OrganizationApiService) CreateOrganizationOrganizationExecute(r ApiCreateOrganizationOrganizationRequest) (*OrganizationOrganization, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -212,9 +213,9 @@ func (r ApiDeleteOrganizationOrganizationRequest) Execute() (*http.Response, err
 /*
 DeleteOrganizationOrganization Delete a 'organization.Organization' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteOrganizationOrganizationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteOrganizationOrganizationRequest
 */
 func (a *OrganizationApiService) DeleteOrganizationOrganization(ctx context.Context, moid string) ApiDeleteOrganizationOrganizationRequest {
 	return ApiDeleteOrganizationOrganizationRequest{
@@ -349,9 +350,9 @@ func (r ApiGetOrganizationOrganizationByMoidRequest) Execute() (*OrganizationOrg
 /*
 GetOrganizationOrganizationByMoid Read a 'organization.Organization' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetOrganizationOrganizationByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetOrganizationOrganizationByMoidRequest
 */
 func (a *OrganizationApiService) GetOrganizationOrganizationByMoid(ctx context.Context, moid string) ApiGetOrganizationOrganizationByMoidRequest {
 	return ApiGetOrganizationOrganizationByMoidRequest{
@@ -362,7 +363,8 @@ func (a *OrganizationApiService) GetOrganizationOrganizationByMoid(ctx context.C
 }
 
 // Execute executes the request
-//  @return OrganizationOrganization
+//
+//	@return OrganizationOrganization
 func (a *OrganizationApiService) GetOrganizationOrganizationByMoidExecute(r ApiGetOrganizationOrganizationByMoidRequest) (*OrganizationOrganization, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -573,8 +575,8 @@ func (r ApiGetOrganizationOrganizationListRequest) Execute() (*OrganizationOrgan
 /*
 GetOrganizationOrganizationList Read a 'organization.Organization' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetOrganizationOrganizationListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetOrganizationOrganizationListRequest
 */
 func (a *OrganizationApiService) GetOrganizationOrganizationList(ctx context.Context) ApiGetOrganizationOrganizationListRequest {
 	return ApiGetOrganizationOrganizationListRequest{
@@ -584,7 +586,8 @@ func (a *OrganizationApiService) GetOrganizationOrganizationList(ctx context.Con
 }
 
 // Execute executes the request
-//  @return OrganizationOrganizationResponse
+//
+//	@return OrganizationOrganizationResponse
 func (a *OrganizationApiService) GetOrganizationOrganizationListExecute(r ApiGetOrganizationOrganizationListRequest) (*OrganizationOrganizationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -765,9 +768,9 @@ func (r ApiPatchOrganizationOrganizationRequest) Execute() (*OrganizationOrganiz
 /*
 PatchOrganizationOrganization Update a 'organization.Organization' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchOrganizationOrganizationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchOrganizationOrganizationRequest
 */
 func (a *OrganizationApiService) PatchOrganizationOrganization(ctx context.Context, moid string) ApiPatchOrganizationOrganizationRequest {
 	return ApiPatchOrganizationOrganizationRequest{
@@ -778,7 +781,8 @@ func (a *OrganizationApiService) PatchOrganizationOrganization(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return OrganizationOrganization
+//
+//	@return OrganizationOrganization
 func (a *OrganizationApiService) PatchOrganizationOrganizationExecute(r ApiPatchOrganizationOrganizationRequest) (*OrganizationOrganization, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -935,9 +939,9 @@ func (r ApiUpdateOrganizationOrganizationRequest) Execute() (*OrganizationOrgani
 /*
 UpdateOrganizationOrganization Update a 'organization.Organization' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateOrganizationOrganizationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateOrganizationOrganizationRequest
 */
 func (a *OrganizationApiService) UpdateOrganizationOrganization(ctx context.Context, moid string) ApiUpdateOrganizationOrganizationRequest {
 	return ApiUpdateOrganizationOrganizationRequest{
@@ -948,7 +952,8 @@ func (a *OrganizationApiService) UpdateOrganizationOrganization(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return OrganizationOrganization
+//
+//	@return OrganizationOrganization
 func (a *OrganizationApiService) UpdateOrganizationOrganizationExecute(r ApiUpdateOrganizationOrganizationRequest) (*OrganizationOrganization, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

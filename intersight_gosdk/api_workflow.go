@@ -56,8 +56,8 @@ func (r ApiCreateWorkflowAnsibleBatchExecutorRequest) Execute() (*WorkflowAnsibl
 /*
 CreateWorkflowAnsibleBatchExecutor Create a 'workflow.AnsibleBatchExecutor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateWorkflowAnsibleBatchExecutorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateWorkflowAnsibleBatchExecutorRequest
 */
 func (a *WorkflowApiService) CreateWorkflowAnsibleBatchExecutor(ctx context.Context) ApiCreateWorkflowAnsibleBatchExecutorRequest {
 	return ApiCreateWorkflowAnsibleBatchExecutorRequest{
@@ -67,7 +67,8 @@ func (a *WorkflowApiService) CreateWorkflowAnsibleBatchExecutor(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return WorkflowAnsibleBatchExecutor
+//
+//	@return WorkflowAnsibleBatchExecutor
 func (a *WorkflowApiService) CreateWorkflowAnsibleBatchExecutorExecute(r ApiCreateWorkflowAnsibleBatchExecutorRequest) (*WorkflowAnsibleBatchExecutor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -232,8 +233,8 @@ func (r ApiCreateWorkflowBatchApiExecutorRequest) Execute() (*WorkflowBatchApiEx
 /*
 CreateWorkflowBatchApiExecutor Create a 'workflow.BatchApiExecutor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateWorkflowBatchApiExecutorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateWorkflowBatchApiExecutorRequest
 */
 func (a *WorkflowApiService) CreateWorkflowBatchApiExecutor(ctx context.Context) ApiCreateWorkflowBatchApiExecutorRequest {
 	return ApiCreateWorkflowBatchApiExecutorRequest{
@@ -243,7 +244,8 @@ func (a *WorkflowApiService) CreateWorkflowBatchApiExecutor(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return WorkflowBatchApiExecutor
+//
+//	@return WorkflowBatchApiExecutor
 func (a *WorkflowApiService) CreateWorkflowBatchApiExecutorExecute(r ApiCreateWorkflowBatchApiExecutorRequest) (*WorkflowBatchApiExecutor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -408,8 +410,8 @@ func (r ApiCreateWorkflowCustomDataTypeDefinitionRequest) Execute() (*WorkflowCu
 /*
 CreateWorkflowCustomDataTypeDefinition Create a 'workflow.CustomDataTypeDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateWorkflowCustomDataTypeDefinitionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateWorkflowCustomDataTypeDefinitionRequest
 */
 func (a *WorkflowApiService) CreateWorkflowCustomDataTypeDefinition(ctx context.Context) ApiCreateWorkflowCustomDataTypeDefinitionRequest {
 	return ApiCreateWorkflowCustomDataTypeDefinitionRequest{
@@ -419,7 +421,8 @@ func (a *WorkflowApiService) CreateWorkflowCustomDataTypeDefinition(ctx context.
 }
 
 // Execute executes the request
-//  @return WorkflowCustomDataTypeDefinition
+//
+//	@return WorkflowCustomDataTypeDefinition
 func (a *WorkflowApiService) CreateWorkflowCustomDataTypeDefinitionExecute(r ApiCreateWorkflowCustomDataTypeDefinitionRequest) (*WorkflowCustomDataTypeDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -584,8 +587,8 @@ func (r ApiCreateWorkflowErrorResponseHandlerRequest) Execute() (*WorkflowErrorR
 /*
 CreateWorkflowErrorResponseHandler Create a 'workflow.ErrorResponseHandler' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateWorkflowErrorResponseHandlerRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateWorkflowErrorResponseHandlerRequest
 */
 func (a *WorkflowApiService) CreateWorkflowErrorResponseHandler(ctx context.Context) ApiCreateWorkflowErrorResponseHandlerRequest {
 	return ApiCreateWorkflowErrorResponseHandlerRequest{
@@ -595,7 +598,8 @@ func (a *WorkflowApiService) CreateWorkflowErrorResponseHandler(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return WorkflowErrorResponseHandler
+//
+//	@return WorkflowErrorResponseHandler
 func (a *WorkflowApiService) CreateWorkflowErrorResponseHandlerExecute(r ApiCreateWorkflowErrorResponseHandlerRequest) (*WorkflowErrorResponseHandler, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -760,8 +764,8 @@ func (r ApiCreateWorkflowPowerShellBatchApiExecutorRequest) Execute() (*Workflow
 /*
 CreateWorkflowPowerShellBatchApiExecutor Create a 'workflow.PowerShellBatchApiExecutor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateWorkflowPowerShellBatchApiExecutorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateWorkflowPowerShellBatchApiExecutorRequest
 */
 func (a *WorkflowApiService) CreateWorkflowPowerShellBatchApiExecutor(ctx context.Context) ApiCreateWorkflowPowerShellBatchApiExecutorRequest {
 	return ApiCreateWorkflowPowerShellBatchApiExecutorRequest{
@@ -771,7 +775,8 @@ func (a *WorkflowApiService) CreateWorkflowPowerShellBatchApiExecutor(ctx contex
 }
 
 // Execute executes the request
-//  @return WorkflowPowerShellBatchApiExecutor
+//
+//	@return WorkflowPowerShellBatchApiExecutor
 func (a *WorkflowApiService) CreateWorkflowPowerShellBatchApiExecutorExecute(r ApiCreateWorkflowPowerShellBatchApiExecutorRequest) (*WorkflowPowerShellBatchApiExecutor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -936,8 +941,8 @@ func (r ApiCreateWorkflowRollbackWorkflowRequest) Execute() (*WorkflowRollbackWo
 /*
 CreateWorkflowRollbackWorkflow Create a 'workflow.RollbackWorkflow' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateWorkflowRollbackWorkflowRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateWorkflowRollbackWorkflowRequest
 */
 func (a *WorkflowApiService) CreateWorkflowRollbackWorkflow(ctx context.Context) ApiCreateWorkflowRollbackWorkflowRequest {
 	return ApiCreateWorkflowRollbackWorkflowRequest{
@@ -947,7 +952,8 @@ func (a *WorkflowApiService) CreateWorkflowRollbackWorkflow(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return WorkflowRollbackWorkflow
+//
+//	@return WorkflowRollbackWorkflow
 func (a *WorkflowApiService) CreateWorkflowRollbackWorkflowExecute(r ApiCreateWorkflowRollbackWorkflowRequest) (*WorkflowRollbackWorkflow, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1112,8 +1118,8 @@ func (r ApiCreateWorkflowServiceItemActionDefinitionRequest) Execute() (*Workflo
 /*
 CreateWorkflowServiceItemActionDefinition Create a 'workflow.ServiceItemActionDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateWorkflowServiceItemActionDefinitionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateWorkflowServiceItemActionDefinitionRequest
 */
 func (a *WorkflowApiService) CreateWorkflowServiceItemActionDefinition(ctx context.Context) ApiCreateWorkflowServiceItemActionDefinitionRequest {
 	return ApiCreateWorkflowServiceItemActionDefinitionRequest{
@@ -1123,7 +1129,8 @@ func (a *WorkflowApiService) CreateWorkflowServiceItemActionDefinition(ctx conte
 }
 
 // Execute executes the request
-//  @return WorkflowServiceItemActionDefinition
+//
+//	@return WorkflowServiceItemActionDefinition
 func (a *WorkflowApiService) CreateWorkflowServiceItemActionDefinitionExecute(r ApiCreateWorkflowServiceItemActionDefinitionRequest) (*WorkflowServiceItemActionDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1288,8 +1295,8 @@ func (r ApiCreateWorkflowServiceItemActionInstanceRequest) Execute() (*WorkflowS
 /*
 CreateWorkflowServiceItemActionInstance Create a 'workflow.ServiceItemActionInstance' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateWorkflowServiceItemActionInstanceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateWorkflowServiceItemActionInstanceRequest
 */
 func (a *WorkflowApiService) CreateWorkflowServiceItemActionInstance(ctx context.Context) ApiCreateWorkflowServiceItemActionInstanceRequest {
 	return ApiCreateWorkflowServiceItemActionInstanceRequest{
@@ -1299,7 +1306,8 @@ func (a *WorkflowApiService) CreateWorkflowServiceItemActionInstance(ctx context
 }
 
 // Execute executes the request
-//  @return WorkflowServiceItemActionInstance
+//
+//	@return WorkflowServiceItemActionInstance
 func (a *WorkflowApiService) CreateWorkflowServiceItemActionInstanceExecute(r ApiCreateWorkflowServiceItemActionInstanceRequest) (*WorkflowServiceItemActionInstance, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1464,8 +1472,8 @@ func (r ApiCreateWorkflowServiceItemDefinitionRequest) Execute() (*WorkflowServi
 /*
 CreateWorkflowServiceItemDefinition Create a 'workflow.ServiceItemDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateWorkflowServiceItemDefinitionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateWorkflowServiceItemDefinitionRequest
 */
 func (a *WorkflowApiService) CreateWorkflowServiceItemDefinition(ctx context.Context) ApiCreateWorkflowServiceItemDefinitionRequest {
 	return ApiCreateWorkflowServiceItemDefinitionRequest{
@@ -1475,7 +1483,8 @@ func (a *WorkflowApiService) CreateWorkflowServiceItemDefinition(ctx context.Con
 }
 
 // Execute executes the request
-//  @return WorkflowServiceItemDefinition
+//
+//	@return WorkflowServiceItemDefinition
 func (a *WorkflowApiService) CreateWorkflowServiceItemDefinitionExecute(r ApiCreateWorkflowServiceItemDefinitionRequest) (*WorkflowServiceItemDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1640,8 +1649,8 @@ func (r ApiCreateWorkflowServiceItemHealthCheckDefinitionRequest) Execute() (*Wo
 /*
 CreateWorkflowServiceItemHealthCheckDefinition Create a 'workflow.ServiceItemHealthCheckDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateWorkflowServiceItemHealthCheckDefinitionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateWorkflowServiceItemHealthCheckDefinitionRequest
 */
 func (a *WorkflowApiService) CreateWorkflowServiceItemHealthCheckDefinition(ctx context.Context) ApiCreateWorkflowServiceItemHealthCheckDefinitionRequest {
 	return ApiCreateWorkflowServiceItemHealthCheckDefinitionRequest{
@@ -1651,7 +1660,8 @@ func (a *WorkflowApiService) CreateWorkflowServiceItemHealthCheckDefinition(ctx 
 }
 
 // Execute executes the request
-//  @return WorkflowServiceItemHealthCheckDefinition
+//
+//	@return WorkflowServiceItemHealthCheckDefinition
 func (a *WorkflowApiService) CreateWorkflowServiceItemHealthCheckDefinitionExecute(r ApiCreateWorkflowServiceItemHealthCheckDefinitionRequest) (*WorkflowServiceItemHealthCheckDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1816,8 +1826,8 @@ func (r ApiCreateWorkflowServiceItemInstanceRequest) Execute() (*WorkflowService
 /*
 CreateWorkflowServiceItemInstance Create a 'workflow.ServiceItemInstance' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateWorkflowServiceItemInstanceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateWorkflowServiceItemInstanceRequest
 */
 func (a *WorkflowApiService) CreateWorkflowServiceItemInstance(ctx context.Context) ApiCreateWorkflowServiceItemInstanceRequest {
 	return ApiCreateWorkflowServiceItemInstanceRequest{
@@ -1827,7 +1837,8 @@ func (a *WorkflowApiService) CreateWorkflowServiceItemInstance(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return WorkflowServiceItemInstance
+//
+//	@return WorkflowServiceItemInstance
 func (a *WorkflowApiService) CreateWorkflowServiceItemInstanceExecute(r ApiCreateWorkflowServiceItemInstanceRequest) (*WorkflowServiceItemInstance, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1992,8 +2003,8 @@ func (r ApiCreateWorkflowServiceItemOutputRequest) Execute() (*WorkflowServiceIt
 /*
 CreateWorkflowServiceItemOutput Create a 'workflow.ServiceItemOutput' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateWorkflowServiceItemOutputRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateWorkflowServiceItemOutputRequest
 */
 func (a *WorkflowApiService) CreateWorkflowServiceItemOutput(ctx context.Context) ApiCreateWorkflowServiceItemOutputRequest {
 	return ApiCreateWorkflowServiceItemOutputRequest{
@@ -2003,7 +2014,8 @@ func (a *WorkflowApiService) CreateWorkflowServiceItemOutput(ctx context.Context
 }
 
 // Execute executes the request
-//  @return WorkflowServiceItemOutput
+//
+//	@return WorkflowServiceItemOutput
 func (a *WorkflowApiService) CreateWorkflowServiceItemOutputExecute(r ApiCreateWorkflowServiceItemOutputRequest) (*WorkflowServiceItemOutput, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2168,8 +2180,8 @@ func (r ApiCreateWorkflowSolutionActionDefinitionRequest) Execute() (*WorkflowSo
 /*
 CreateWorkflowSolutionActionDefinition Create a 'workflow.SolutionActionDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateWorkflowSolutionActionDefinitionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateWorkflowSolutionActionDefinitionRequest
 */
 func (a *WorkflowApiService) CreateWorkflowSolutionActionDefinition(ctx context.Context) ApiCreateWorkflowSolutionActionDefinitionRequest {
 	return ApiCreateWorkflowSolutionActionDefinitionRequest{
@@ -2179,7 +2191,8 @@ func (a *WorkflowApiService) CreateWorkflowSolutionActionDefinition(ctx context.
 }
 
 // Execute executes the request
-//  @return WorkflowSolutionActionDefinition
+//
+//	@return WorkflowSolutionActionDefinition
 func (a *WorkflowApiService) CreateWorkflowSolutionActionDefinitionExecute(r ApiCreateWorkflowSolutionActionDefinitionRequest) (*WorkflowSolutionActionDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2344,8 +2357,8 @@ func (r ApiCreateWorkflowSolutionDefinitionRequest) Execute() (*WorkflowSolution
 /*
 CreateWorkflowSolutionDefinition Create a 'workflow.SolutionDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateWorkflowSolutionDefinitionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateWorkflowSolutionDefinitionRequest
 */
 func (a *WorkflowApiService) CreateWorkflowSolutionDefinition(ctx context.Context) ApiCreateWorkflowSolutionDefinitionRequest {
 	return ApiCreateWorkflowSolutionDefinitionRequest{
@@ -2355,7 +2368,8 @@ func (a *WorkflowApiService) CreateWorkflowSolutionDefinition(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return WorkflowSolutionDefinition
+//
+//	@return WorkflowSolutionDefinition
 func (a *WorkflowApiService) CreateWorkflowSolutionDefinitionExecute(r ApiCreateWorkflowSolutionDefinitionRequest) (*WorkflowSolutionDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2520,8 +2534,8 @@ func (r ApiCreateWorkflowSshBatchExecutorRequest) Execute() (*WorkflowSshBatchEx
 /*
 CreateWorkflowSshBatchExecutor Create a 'workflow.SshBatchExecutor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateWorkflowSshBatchExecutorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateWorkflowSshBatchExecutorRequest
 */
 func (a *WorkflowApiService) CreateWorkflowSshBatchExecutor(ctx context.Context) ApiCreateWorkflowSshBatchExecutorRequest {
 	return ApiCreateWorkflowSshBatchExecutorRequest{
@@ -2531,7 +2545,8 @@ func (a *WorkflowApiService) CreateWorkflowSshBatchExecutor(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return WorkflowSshBatchExecutor
+//
+//	@return WorkflowSshBatchExecutor
 func (a *WorkflowApiService) CreateWorkflowSshBatchExecutorExecute(r ApiCreateWorkflowSshBatchExecutorRequest) (*WorkflowSshBatchExecutor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2696,8 +2711,8 @@ func (r ApiCreateWorkflowTaskDefinitionRequest) Execute() (*WorkflowTaskDefiniti
 /*
 CreateWorkflowTaskDefinition Create a 'workflow.TaskDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateWorkflowTaskDefinitionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateWorkflowTaskDefinitionRequest
 */
 func (a *WorkflowApiService) CreateWorkflowTaskDefinition(ctx context.Context) ApiCreateWorkflowTaskDefinitionRequest {
 	return ApiCreateWorkflowTaskDefinitionRequest{
@@ -2707,7 +2722,8 @@ func (a *WorkflowApiService) CreateWorkflowTaskDefinition(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return WorkflowTaskDefinition
+//
+//	@return WorkflowTaskDefinition
 func (a *WorkflowApiService) CreateWorkflowTaskDefinitionExecute(r ApiCreateWorkflowTaskDefinitionRequest) (*WorkflowTaskDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2872,8 +2888,8 @@ func (r ApiCreateWorkflowTaskNotificationRequest) Execute() (*WorkflowTaskNotifi
 /*
 CreateWorkflowTaskNotification Create a 'workflow.TaskNotification' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateWorkflowTaskNotificationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateWorkflowTaskNotificationRequest
 */
 func (a *WorkflowApiService) CreateWorkflowTaskNotification(ctx context.Context) ApiCreateWorkflowTaskNotificationRequest {
 	return ApiCreateWorkflowTaskNotificationRequest{
@@ -2883,7 +2899,8 @@ func (a *WorkflowApiService) CreateWorkflowTaskNotification(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return WorkflowTaskNotification
+//
+//	@return WorkflowTaskNotification
 func (a *WorkflowApiService) CreateWorkflowTaskNotificationExecute(r ApiCreateWorkflowTaskNotificationRequest) (*WorkflowTaskNotification, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3048,8 +3065,8 @@ func (r ApiCreateWorkflowTemplateEvaluationRequest) Execute() (*WorkflowTemplate
 /*
 CreateWorkflowTemplateEvaluation Create a 'workflow.TemplateEvaluation' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateWorkflowTemplateEvaluationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateWorkflowTemplateEvaluationRequest
 */
 func (a *WorkflowApiService) CreateWorkflowTemplateEvaluation(ctx context.Context) ApiCreateWorkflowTemplateEvaluationRequest {
 	return ApiCreateWorkflowTemplateEvaluationRequest{
@@ -3059,7 +3076,8 @@ func (a *WorkflowApiService) CreateWorkflowTemplateEvaluation(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return WorkflowTemplateEvaluation
+//
+//	@return WorkflowTemplateEvaluation
 func (a *WorkflowApiService) CreateWorkflowTemplateEvaluationExecute(r ApiCreateWorkflowTemplateEvaluationRequest) (*WorkflowTemplateEvaluation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3224,8 +3242,8 @@ func (r ApiCreateWorkflowTemplateParserRequest) Execute() (*WorkflowTemplatePars
 /*
 CreateWorkflowTemplateParser Create a 'workflow.TemplateParser' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateWorkflowTemplateParserRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateWorkflowTemplateParserRequest
 */
 func (a *WorkflowApiService) CreateWorkflowTemplateParser(ctx context.Context) ApiCreateWorkflowTemplateParserRequest {
 	return ApiCreateWorkflowTemplateParserRequest{
@@ -3235,7 +3253,8 @@ func (a *WorkflowApiService) CreateWorkflowTemplateParser(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return WorkflowTemplateParser
+//
+//	@return WorkflowTemplateParser
 func (a *WorkflowApiService) CreateWorkflowTemplateParserExecute(r ApiCreateWorkflowTemplateParserRequest) (*WorkflowTemplateParser, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3400,8 +3419,8 @@ func (r ApiCreateWorkflowWorkflowDefinitionRequest) Execute() (*WorkflowWorkflow
 /*
 CreateWorkflowWorkflowDefinition Create a 'workflow.WorkflowDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateWorkflowWorkflowDefinitionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateWorkflowWorkflowDefinitionRequest
 */
 func (a *WorkflowApiService) CreateWorkflowWorkflowDefinition(ctx context.Context) ApiCreateWorkflowWorkflowDefinitionRequest {
 	return ApiCreateWorkflowWorkflowDefinitionRequest{
@@ -3411,7 +3430,8 @@ func (a *WorkflowApiService) CreateWorkflowWorkflowDefinition(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return WorkflowWorkflowDefinition
+//
+//	@return WorkflowWorkflowDefinition
 func (a *WorkflowApiService) CreateWorkflowWorkflowDefinitionExecute(r ApiCreateWorkflowWorkflowDefinitionRequest) (*WorkflowWorkflowDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3576,8 +3596,8 @@ func (r ApiCreateWorkflowWorkflowInfoRequest) Execute() (*WorkflowWorkflowInfo, 
 /*
 CreateWorkflowWorkflowInfo Create a 'workflow.WorkflowInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateWorkflowWorkflowInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateWorkflowWorkflowInfoRequest
 */
 func (a *WorkflowApiService) CreateWorkflowWorkflowInfo(ctx context.Context) ApiCreateWorkflowWorkflowInfoRequest {
 	return ApiCreateWorkflowWorkflowInfoRequest{
@@ -3587,7 +3607,8 @@ func (a *WorkflowApiService) CreateWorkflowWorkflowInfo(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return WorkflowWorkflowInfo
+//
+//	@return WorkflowWorkflowInfo
 func (a *WorkflowApiService) CreateWorkflowWorkflowInfoExecute(r ApiCreateWorkflowWorkflowInfoRequest) (*WorkflowWorkflowInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3752,8 +3773,8 @@ func (r ApiCreateWorkflowWorkflowNotificationRequest) Execute() (*WorkflowWorkfl
 /*
 CreateWorkflowWorkflowNotification Create a 'workflow.WorkflowNotification' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateWorkflowWorkflowNotificationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateWorkflowWorkflowNotificationRequest
 */
 func (a *WorkflowApiService) CreateWorkflowWorkflowNotification(ctx context.Context) ApiCreateWorkflowWorkflowNotificationRequest {
 	return ApiCreateWorkflowWorkflowNotificationRequest{
@@ -3763,7 +3784,8 @@ func (a *WorkflowApiService) CreateWorkflowWorkflowNotification(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return WorkflowWorkflowNotification
+//
+//	@return WorkflowWorkflowNotification
 func (a *WorkflowApiService) CreateWorkflowWorkflowNotificationExecute(r ApiCreateWorkflowWorkflowNotificationRequest) (*WorkflowWorkflowNotification, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3908,9 +3930,9 @@ func (r ApiDeleteWorkflowAnsibleBatchExecutorRequest) Execute() (*http.Response,
 /*
 DeleteWorkflowAnsibleBatchExecutor Delete a 'workflow.AnsibleBatchExecutor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteWorkflowAnsibleBatchExecutorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteWorkflowAnsibleBatchExecutorRequest
 */
 func (a *WorkflowApiService) DeleteWorkflowAnsibleBatchExecutor(ctx context.Context, moid string) ApiDeleteWorkflowAnsibleBatchExecutorRequest {
 	return ApiDeleteWorkflowAnsibleBatchExecutorRequest{
@@ -4045,9 +4067,9 @@ func (r ApiDeleteWorkflowBatchApiExecutorRequest) Execute() (*http.Response, err
 /*
 DeleteWorkflowBatchApiExecutor Delete a 'workflow.BatchApiExecutor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteWorkflowBatchApiExecutorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteWorkflowBatchApiExecutorRequest
 */
 func (a *WorkflowApiService) DeleteWorkflowBatchApiExecutor(ctx context.Context, moid string) ApiDeleteWorkflowBatchApiExecutorRequest {
 	return ApiDeleteWorkflowBatchApiExecutorRequest{
@@ -4182,9 +4204,9 @@ func (r ApiDeleteWorkflowCustomDataTypeDefinitionRequest) Execute() (*http.Respo
 /*
 DeleteWorkflowCustomDataTypeDefinition Delete a 'workflow.CustomDataTypeDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteWorkflowCustomDataTypeDefinitionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteWorkflowCustomDataTypeDefinitionRequest
 */
 func (a *WorkflowApiService) DeleteWorkflowCustomDataTypeDefinition(ctx context.Context, moid string) ApiDeleteWorkflowCustomDataTypeDefinitionRequest {
 	return ApiDeleteWorkflowCustomDataTypeDefinitionRequest{
@@ -4319,9 +4341,9 @@ func (r ApiDeleteWorkflowErrorResponseHandlerRequest) Execute() (*http.Response,
 /*
 DeleteWorkflowErrorResponseHandler Delete a 'workflow.ErrorResponseHandler' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteWorkflowErrorResponseHandlerRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteWorkflowErrorResponseHandlerRequest
 */
 func (a *WorkflowApiService) DeleteWorkflowErrorResponseHandler(ctx context.Context, moid string) ApiDeleteWorkflowErrorResponseHandlerRequest {
 	return ApiDeleteWorkflowErrorResponseHandlerRequest{
@@ -4456,9 +4478,9 @@ func (r ApiDeleteWorkflowPowerShellBatchApiExecutorRequest) Execute() (*http.Res
 /*
 DeleteWorkflowPowerShellBatchApiExecutor Delete a 'workflow.PowerShellBatchApiExecutor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteWorkflowPowerShellBatchApiExecutorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteWorkflowPowerShellBatchApiExecutorRequest
 */
 func (a *WorkflowApiService) DeleteWorkflowPowerShellBatchApiExecutor(ctx context.Context, moid string) ApiDeleteWorkflowPowerShellBatchApiExecutorRequest {
 	return ApiDeleteWorkflowPowerShellBatchApiExecutorRequest{
@@ -4593,9 +4615,9 @@ func (r ApiDeleteWorkflowRollbackWorkflowRequest) Execute() (*http.Response, err
 /*
 DeleteWorkflowRollbackWorkflow Delete a 'workflow.RollbackWorkflow' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteWorkflowRollbackWorkflowRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteWorkflowRollbackWorkflowRequest
 */
 func (a *WorkflowApiService) DeleteWorkflowRollbackWorkflow(ctx context.Context, moid string) ApiDeleteWorkflowRollbackWorkflowRequest {
 	return ApiDeleteWorkflowRollbackWorkflowRequest{
@@ -4730,9 +4752,9 @@ func (r ApiDeleteWorkflowServiceItemActionDefinitionRequest) Execute() (*http.Re
 /*
 DeleteWorkflowServiceItemActionDefinition Delete a 'workflow.ServiceItemActionDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteWorkflowServiceItemActionDefinitionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteWorkflowServiceItemActionDefinitionRequest
 */
 func (a *WorkflowApiService) DeleteWorkflowServiceItemActionDefinition(ctx context.Context, moid string) ApiDeleteWorkflowServiceItemActionDefinitionRequest {
 	return ApiDeleteWorkflowServiceItemActionDefinitionRequest{
@@ -4867,9 +4889,9 @@ func (r ApiDeleteWorkflowServiceItemActionInstanceRequest) Execute() (*http.Resp
 /*
 DeleteWorkflowServiceItemActionInstance Delete a 'workflow.ServiceItemActionInstance' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteWorkflowServiceItemActionInstanceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteWorkflowServiceItemActionInstanceRequest
 */
 func (a *WorkflowApiService) DeleteWorkflowServiceItemActionInstance(ctx context.Context, moid string) ApiDeleteWorkflowServiceItemActionInstanceRequest {
 	return ApiDeleteWorkflowServiceItemActionInstanceRequest{
@@ -5004,9 +5026,9 @@ func (r ApiDeleteWorkflowServiceItemDefinitionRequest) Execute() (*http.Response
 /*
 DeleteWorkflowServiceItemDefinition Delete a 'workflow.ServiceItemDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteWorkflowServiceItemDefinitionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteWorkflowServiceItemDefinitionRequest
 */
 func (a *WorkflowApiService) DeleteWorkflowServiceItemDefinition(ctx context.Context, moid string) ApiDeleteWorkflowServiceItemDefinitionRequest {
 	return ApiDeleteWorkflowServiceItemDefinitionRequest{
@@ -5141,9 +5163,9 @@ func (r ApiDeleteWorkflowServiceItemHealthCheckDefinitionRequest) Execute() (*ht
 /*
 DeleteWorkflowServiceItemHealthCheckDefinition Delete a 'workflow.ServiceItemHealthCheckDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteWorkflowServiceItemHealthCheckDefinitionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteWorkflowServiceItemHealthCheckDefinitionRequest
 */
 func (a *WorkflowApiService) DeleteWorkflowServiceItemHealthCheckDefinition(ctx context.Context, moid string) ApiDeleteWorkflowServiceItemHealthCheckDefinitionRequest {
 	return ApiDeleteWorkflowServiceItemHealthCheckDefinitionRequest{
@@ -5278,9 +5300,9 @@ func (r ApiDeleteWorkflowServiceItemInstanceRequest) Execute() (*http.Response, 
 /*
 DeleteWorkflowServiceItemInstance Delete a 'workflow.ServiceItemInstance' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteWorkflowServiceItemInstanceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteWorkflowServiceItemInstanceRequest
 */
 func (a *WorkflowApiService) DeleteWorkflowServiceItemInstance(ctx context.Context, moid string) ApiDeleteWorkflowServiceItemInstanceRequest {
 	return ApiDeleteWorkflowServiceItemInstanceRequest{
@@ -5415,9 +5437,9 @@ func (r ApiDeleteWorkflowServiceItemOutputRequest) Execute() (*http.Response, er
 /*
 DeleteWorkflowServiceItemOutput Delete a 'workflow.ServiceItemOutput' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteWorkflowServiceItemOutputRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteWorkflowServiceItemOutputRequest
 */
 func (a *WorkflowApiService) DeleteWorkflowServiceItemOutput(ctx context.Context, moid string) ApiDeleteWorkflowServiceItemOutputRequest {
 	return ApiDeleteWorkflowServiceItemOutputRequest{
@@ -5552,9 +5574,9 @@ func (r ApiDeleteWorkflowSolutionActionDefinitionRequest) Execute() (*http.Respo
 /*
 DeleteWorkflowSolutionActionDefinition Delete a 'workflow.SolutionActionDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteWorkflowSolutionActionDefinitionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteWorkflowSolutionActionDefinitionRequest
 */
 func (a *WorkflowApiService) DeleteWorkflowSolutionActionDefinition(ctx context.Context, moid string) ApiDeleteWorkflowSolutionActionDefinitionRequest {
 	return ApiDeleteWorkflowSolutionActionDefinitionRequest{
@@ -5689,9 +5711,9 @@ func (r ApiDeleteWorkflowSolutionDefinitionRequest) Execute() (*http.Response, e
 /*
 DeleteWorkflowSolutionDefinition Delete a 'workflow.SolutionDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteWorkflowSolutionDefinitionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteWorkflowSolutionDefinitionRequest
 */
 func (a *WorkflowApiService) DeleteWorkflowSolutionDefinition(ctx context.Context, moid string) ApiDeleteWorkflowSolutionDefinitionRequest {
 	return ApiDeleteWorkflowSolutionDefinitionRequest{
@@ -5826,9 +5848,9 @@ func (r ApiDeleteWorkflowSshBatchExecutorRequest) Execute() (*http.Response, err
 /*
 DeleteWorkflowSshBatchExecutor Delete a 'workflow.SshBatchExecutor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteWorkflowSshBatchExecutorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteWorkflowSshBatchExecutorRequest
 */
 func (a *WorkflowApiService) DeleteWorkflowSshBatchExecutor(ctx context.Context, moid string) ApiDeleteWorkflowSshBatchExecutorRequest {
 	return ApiDeleteWorkflowSshBatchExecutorRequest{
@@ -5963,9 +5985,9 @@ func (r ApiDeleteWorkflowTaskDefinitionRequest) Execute() (*http.Response, error
 /*
 DeleteWorkflowTaskDefinition Delete a 'workflow.TaskDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteWorkflowTaskDefinitionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteWorkflowTaskDefinitionRequest
 */
 func (a *WorkflowApiService) DeleteWorkflowTaskDefinition(ctx context.Context, moid string) ApiDeleteWorkflowTaskDefinitionRequest {
 	return ApiDeleteWorkflowTaskDefinitionRequest{
@@ -6100,9 +6122,9 @@ func (r ApiDeleteWorkflowWorkflowDefinitionRequest) Execute() (*http.Response, e
 /*
 DeleteWorkflowWorkflowDefinition Delete a 'workflow.WorkflowDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteWorkflowWorkflowDefinitionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteWorkflowWorkflowDefinitionRequest
 */
 func (a *WorkflowApiService) DeleteWorkflowWorkflowDefinition(ctx context.Context, moid string) ApiDeleteWorkflowWorkflowDefinitionRequest {
 	return ApiDeleteWorkflowWorkflowDefinitionRequest{
@@ -6237,9 +6259,9 @@ func (r ApiDeleteWorkflowWorkflowInfoRequest) Execute() (*http.Response, error) 
 /*
 DeleteWorkflowWorkflowInfo Delete a 'workflow.WorkflowInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteWorkflowWorkflowInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteWorkflowWorkflowInfoRequest
 */
 func (a *WorkflowApiService) DeleteWorkflowWorkflowInfo(ctx context.Context, moid string) ApiDeleteWorkflowWorkflowInfoRequest {
 	return ApiDeleteWorkflowWorkflowInfoRequest{
@@ -6374,9 +6396,9 @@ func (r ApiGetWorkflowAnsibleBatchExecutorByMoidRequest) Execute() (*WorkflowAns
 /*
 GetWorkflowAnsibleBatchExecutorByMoid Read a 'workflow.AnsibleBatchExecutor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetWorkflowAnsibleBatchExecutorByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetWorkflowAnsibleBatchExecutorByMoidRequest
 */
 func (a *WorkflowApiService) GetWorkflowAnsibleBatchExecutorByMoid(ctx context.Context, moid string) ApiGetWorkflowAnsibleBatchExecutorByMoidRequest {
 	return ApiGetWorkflowAnsibleBatchExecutorByMoidRequest{
@@ -6387,7 +6409,8 @@ func (a *WorkflowApiService) GetWorkflowAnsibleBatchExecutorByMoid(ctx context.C
 }
 
 // Execute executes the request
-//  @return WorkflowAnsibleBatchExecutor
+//
+//	@return WorkflowAnsibleBatchExecutor
 func (a *WorkflowApiService) GetWorkflowAnsibleBatchExecutorByMoidExecute(r ApiGetWorkflowAnsibleBatchExecutorByMoidRequest) (*WorkflowAnsibleBatchExecutor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6598,8 +6621,8 @@ func (r ApiGetWorkflowAnsibleBatchExecutorListRequest) Execute() (*WorkflowAnsib
 /*
 GetWorkflowAnsibleBatchExecutorList Read a 'workflow.AnsibleBatchExecutor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetWorkflowAnsibleBatchExecutorListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetWorkflowAnsibleBatchExecutorListRequest
 */
 func (a *WorkflowApiService) GetWorkflowAnsibleBatchExecutorList(ctx context.Context) ApiGetWorkflowAnsibleBatchExecutorListRequest {
 	return ApiGetWorkflowAnsibleBatchExecutorListRequest{
@@ -6609,7 +6632,8 @@ func (a *WorkflowApiService) GetWorkflowAnsibleBatchExecutorList(ctx context.Con
 }
 
 // Execute executes the request
-//  @return WorkflowAnsibleBatchExecutorResponse
+//
+//	@return WorkflowAnsibleBatchExecutorResponse
 func (a *WorkflowApiService) GetWorkflowAnsibleBatchExecutorListExecute(r ApiGetWorkflowAnsibleBatchExecutorListRequest) (*WorkflowAnsibleBatchExecutorResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6776,9 +6800,9 @@ func (r ApiGetWorkflowBatchApiExecutorByMoidRequest) Execute() (*WorkflowBatchAp
 /*
 GetWorkflowBatchApiExecutorByMoid Read a 'workflow.BatchApiExecutor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetWorkflowBatchApiExecutorByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetWorkflowBatchApiExecutorByMoidRequest
 */
 func (a *WorkflowApiService) GetWorkflowBatchApiExecutorByMoid(ctx context.Context, moid string) ApiGetWorkflowBatchApiExecutorByMoidRequest {
 	return ApiGetWorkflowBatchApiExecutorByMoidRequest{
@@ -6789,7 +6813,8 @@ func (a *WorkflowApiService) GetWorkflowBatchApiExecutorByMoid(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return WorkflowBatchApiExecutor
+//
+//	@return WorkflowBatchApiExecutor
 func (a *WorkflowApiService) GetWorkflowBatchApiExecutorByMoidExecute(r ApiGetWorkflowBatchApiExecutorByMoidRequest) (*WorkflowBatchApiExecutor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7000,8 +7025,8 @@ func (r ApiGetWorkflowBatchApiExecutorListRequest) Execute() (*WorkflowBatchApiE
 /*
 GetWorkflowBatchApiExecutorList Read a 'workflow.BatchApiExecutor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetWorkflowBatchApiExecutorListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetWorkflowBatchApiExecutorListRequest
 */
 func (a *WorkflowApiService) GetWorkflowBatchApiExecutorList(ctx context.Context) ApiGetWorkflowBatchApiExecutorListRequest {
 	return ApiGetWorkflowBatchApiExecutorListRequest{
@@ -7011,7 +7036,8 @@ func (a *WorkflowApiService) GetWorkflowBatchApiExecutorList(ctx context.Context
 }
 
 // Execute executes the request
-//  @return WorkflowBatchApiExecutorResponse
+//
+//	@return WorkflowBatchApiExecutorResponse
 func (a *WorkflowApiService) GetWorkflowBatchApiExecutorListExecute(r ApiGetWorkflowBatchApiExecutorListRequest) (*WorkflowBatchApiExecutorResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7178,9 +7204,9 @@ func (r ApiGetWorkflowBuildTaskMetaByMoidRequest) Execute() (*WorkflowBuildTaskM
 /*
 GetWorkflowBuildTaskMetaByMoid Read a 'workflow.BuildTaskMeta' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetWorkflowBuildTaskMetaByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetWorkflowBuildTaskMetaByMoidRequest
 */
 func (a *WorkflowApiService) GetWorkflowBuildTaskMetaByMoid(ctx context.Context, moid string) ApiGetWorkflowBuildTaskMetaByMoidRequest {
 	return ApiGetWorkflowBuildTaskMetaByMoidRequest{
@@ -7191,7 +7217,8 @@ func (a *WorkflowApiService) GetWorkflowBuildTaskMetaByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return WorkflowBuildTaskMeta
+//
+//	@return WorkflowBuildTaskMeta
 func (a *WorkflowApiService) GetWorkflowBuildTaskMetaByMoidExecute(r ApiGetWorkflowBuildTaskMetaByMoidRequest) (*WorkflowBuildTaskMeta, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7402,8 +7429,8 @@ func (r ApiGetWorkflowBuildTaskMetaListRequest) Execute() (*WorkflowBuildTaskMet
 /*
 GetWorkflowBuildTaskMetaList Read a 'workflow.BuildTaskMeta' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetWorkflowBuildTaskMetaListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetWorkflowBuildTaskMetaListRequest
 */
 func (a *WorkflowApiService) GetWorkflowBuildTaskMetaList(ctx context.Context) ApiGetWorkflowBuildTaskMetaListRequest {
 	return ApiGetWorkflowBuildTaskMetaListRequest{
@@ -7413,7 +7440,8 @@ func (a *WorkflowApiService) GetWorkflowBuildTaskMetaList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return WorkflowBuildTaskMetaResponse
+//
+//	@return WorkflowBuildTaskMetaResponse
 func (a *WorkflowApiService) GetWorkflowBuildTaskMetaListExecute(r ApiGetWorkflowBuildTaskMetaListRequest) (*WorkflowBuildTaskMetaResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7580,9 +7608,9 @@ func (r ApiGetWorkflowBuildTaskMetaOwnerByMoidRequest) Execute() (*WorkflowBuild
 /*
 GetWorkflowBuildTaskMetaOwnerByMoid Read a 'workflow.BuildTaskMetaOwner' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetWorkflowBuildTaskMetaOwnerByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetWorkflowBuildTaskMetaOwnerByMoidRequest
 */
 func (a *WorkflowApiService) GetWorkflowBuildTaskMetaOwnerByMoid(ctx context.Context, moid string) ApiGetWorkflowBuildTaskMetaOwnerByMoidRequest {
 	return ApiGetWorkflowBuildTaskMetaOwnerByMoidRequest{
@@ -7593,7 +7621,8 @@ func (a *WorkflowApiService) GetWorkflowBuildTaskMetaOwnerByMoid(ctx context.Con
 }
 
 // Execute executes the request
-//  @return WorkflowBuildTaskMetaOwner
+//
+//	@return WorkflowBuildTaskMetaOwner
 func (a *WorkflowApiService) GetWorkflowBuildTaskMetaOwnerByMoidExecute(r ApiGetWorkflowBuildTaskMetaOwnerByMoidRequest) (*WorkflowBuildTaskMetaOwner, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7804,8 +7833,8 @@ func (r ApiGetWorkflowBuildTaskMetaOwnerListRequest) Execute() (*WorkflowBuildTa
 /*
 GetWorkflowBuildTaskMetaOwnerList Read a 'workflow.BuildTaskMetaOwner' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetWorkflowBuildTaskMetaOwnerListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetWorkflowBuildTaskMetaOwnerListRequest
 */
 func (a *WorkflowApiService) GetWorkflowBuildTaskMetaOwnerList(ctx context.Context) ApiGetWorkflowBuildTaskMetaOwnerListRequest {
 	return ApiGetWorkflowBuildTaskMetaOwnerListRequest{
@@ -7815,7 +7844,8 @@ func (a *WorkflowApiService) GetWorkflowBuildTaskMetaOwnerList(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return WorkflowBuildTaskMetaOwnerResponse
+//
+//	@return WorkflowBuildTaskMetaOwnerResponse
 func (a *WorkflowApiService) GetWorkflowBuildTaskMetaOwnerListExecute(r ApiGetWorkflowBuildTaskMetaOwnerListRequest) (*WorkflowBuildTaskMetaOwnerResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7982,9 +8012,9 @@ func (r ApiGetWorkflowCatalogByMoidRequest) Execute() (*WorkflowCatalog, *http.R
 /*
 GetWorkflowCatalogByMoid Read a 'workflow.Catalog' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetWorkflowCatalogByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetWorkflowCatalogByMoidRequest
 */
 func (a *WorkflowApiService) GetWorkflowCatalogByMoid(ctx context.Context, moid string) ApiGetWorkflowCatalogByMoidRequest {
 	return ApiGetWorkflowCatalogByMoidRequest{
@@ -7995,7 +8025,8 @@ func (a *WorkflowApiService) GetWorkflowCatalogByMoid(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return WorkflowCatalog
+//
+//	@return WorkflowCatalog
 func (a *WorkflowApiService) GetWorkflowCatalogByMoidExecute(r ApiGetWorkflowCatalogByMoidRequest) (*WorkflowCatalog, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8206,8 +8237,8 @@ func (r ApiGetWorkflowCatalogListRequest) Execute() (*WorkflowCatalogResponse, *
 /*
 GetWorkflowCatalogList Read a 'workflow.Catalog' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetWorkflowCatalogListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetWorkflowCatalogListRequest
 */
 func (a *WorkflowApiService) GetWorkflowCatalogList(ctx context.Context) ApiGetWorkflowCatalogListRequest {
 	return ApiGetWorkflowCatalogListRequest{
@@ -8217,7 +8248,8 @@ func (a *WorkflowApiService) GetWorkflowCatalogList(ctx context.Context) ApiGetW
 }
 
 // Execute executes the request
-//  @return WorkflowCatalogResponse
+//
+//	@return WorkflowCatalogResponse
 func (a *WorkflowApiService) GetWorkflowCatalogListExecute(r ApiGetWorkflowCatalogListRequest) (*WorkflowCatalogResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8384,9 +8416,9 @@ func (r ApiGetWorkflowCustomDataTypeDefinitionByMoidRequest) Execute() (*Workflo
 /*
 GetWorkflowCustomDataTypeDefinitionByMoid Read a 'workflow.CustomDataTypeDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetWorkflowCustomDataTypeDefinitionByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetWorkflowCustomDataTypeDefinitionByMoidRequest
 */
 func (a *WorkflowApiService) GetWorkflowCustomDataTypeDefinitionByMoid(ctx context.Context, moid string) ApiGetWorkflowCustomDataTypeDefinitionByMoidRequest {
 	return ApiGetWorkflowCustomDataTypeDefinitionByMoidRequest{
@@ -8397,7 +8429,8 @@ func (a *WorkflowApiService) GetWorkflowCustomDataTypeDefinitionByMoid(ctx conte
 }
 
 // Execute executes the request
-//  @return WorkflowCustomDataTypeDefinition
+//
+//	@return WorkflowCustomDataTypeDefinition
 func (a *WorkflowApiService) GetWorkflowCustomDataTypeDefinitionByMoidExecute(r ApiGetWorkflowCustomDataTypeDefinitionByMoidRequest) (*WorkflowCustomDataTypeDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8608,8 +8641,8 @@ func (r ApiGetWorkflowCustomDataTypeDefinitionListRequest) Execute() (*WorkflowC
 /*
 GetWorkflowCustomDataTypeDefinitionList Read a 'workflow.CustomDataTypeDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetWorkflowCustomDataTypeDefinitionListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetWorkflowCustomDataTypeDefinitionListRequest
 */
 func (a *WorkflowApiService) GetWorkflowCustomDataTypeDefinitionList(ctx context.Context) ApiGetWorkflowCustomDataTypeDefinitionListRequest {
 	return ApiGetWorkflowCustomDataTypeDefinitionListRequest{
@@ -8619,7 +8652,8 @@ func (a *WorkflowApiService) GetWorkflowCustomDataTypeDefinitionList(ctx context
 }
 
 // Execute executes the request
-//  @return WorkflowCustomDataTypeDefinitionResponse
+//
+//	@return WorkflowCustomDataTypeDefinitionResponse
 func (a *WorkflowApiService) GetWorkflowCustomDataTypeDefinitionListExecute(r ApiGetWorkflowCustomDataTypeDefinitionListRequest) (*WorkflowCustomDataTypeDefinitionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8786,9 +8820,9 @@ func (r ApiGetWorkflowErrorResponseHandlerByMoidRequest) Execute() (*WorkflowErr
 /*
 GetWorkflowErrorResponseHandlerByMoid Read a 'workflow.ErrorResponseHandler' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetWorkflowErrorResponseHandlerByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetWorkflowErrorResponseHandlerByMoidRequest
 */
 func (a *WorkflowApiService) GetWorkflowErrorResponseHandlerByMoid(ctx context.Context, moid string) ApiGetWorkflowErrorResponseHandlerByMoidRequest {
 	return ApiGetWorkflowErrorResponseHandlerByMoidRequest{
@@ -8799,7 +8833,8 @@ func (a *WorkflowApiService) GetWorkflowErrorResponseHandlerByMoid(ctx context.C
 }
 
 // Execute executes the request
-//  @return WorkflowErrorResponseHandler
+//
+//	@return WorkflowErrorResponseHandler
 func (a *WorkflowApiService) GetWorkflowErrorResponseHandlerByMoidExecute(r ApiGetWorkflowErrorResponseHandlerByMoidRequest) (*WorkflowErrorResponseHandler, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9010,8 +9045,8 @@ func (r ApiGetWorkflowErrorResponseHandlerListRequest) Execute() (*WorkflowError
 /*
 GetWorkflowErrorResponseHandlerList Read a 'workflow.ErrorResponseHandler' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetWorkflowErrorResponseHandlerListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetWorkflowErrorResponseHandlerListRequest
 */
 func (a *WorkflowApiService) GetWorkflowErrorResponseHandlerList(ctx context.Context) ApiGetWorkflowErrorResponseHandlerListRequest {
 	return ApiGetWorkflowErrorResponseHandlerListRequest{
@@ -9021,7 +9056,8 @@ func (a *WorkflowApiService) GetWorkflowErrorResponseHandlerList(ctx context.Con
 }
 
 // Execute executes the request
-//  @return WorkflowErrorResponseHandlerResponse
+//
+//	@return WorkflowErrorResponseHandlerResponse
 func (a *WorkflowApiService) GetWorkflowErrorResponseHandlerListExecute(r ApiGetWorkflowErrorResponseHandlerListRequest) (*WorkflowErrorResponseHandlerResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9188,9 +9224,9 @@ func (r ApiGetWorkflowPendingDynamicWorkflowInfoByMoidRequest) Execute() (*Workf
 /*
 GetWorkflowPendingDynamicWorkflowInfoByMoid Read a 'workflow.PendingDynamicWorkflowInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetWorkflowPendingDynamicWorkflowInfoByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetWorkflowPendingDynamicWorkflowInfoByMoidRequest
 */
 func (a *WorkflowApiService) GetWorkflowPendingDynamicWorkflowInfoByMoid(ctx context.Context, moid string) ApiGetWorkflowPendingDynamicWorkflowInfoByMoidRequest {
 	return ApiGetWorkflowPendingDynamicWorkflowInfoByMoidRequest{
@@ -9201,7 +9237,8 @@ func (a *WorkflowApiService) GetWorkflowPendingDynamicWorkflowInfoByMoid(ctx con
 }
 
 // Execute executes the request
-//  @return WorkflowPendingDynamicWorkflowInfo
+//
+//	@return WorkflowPendingDynamicWorkflowInfo
 func (a *WorkflowApiService) GetWorkflowPendingDynamicWorkflowInfoByMoidExecute(r ApiGetWorkflowPendingDynamicWorkflowInfoByMoidRequest) (*WorkflowPendingDynamicWorkflowInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9412,8 +9449,8 @@ func (r ApiGetWorkflowPendingDynamicWorkflowInfoListRequest) Execute() (*Workflo
 /*
 GetWorkflowPendingDynamicWorkflowInfoList Read a 'workflow.PendingDynamicWorkflowInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetWorkflowPendingDynamicWorkflowInfoListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetWorkflowPendingDynamicWorkflowInfoListRequest
 */
 func (a *WorkflowApiService) GetWorkflowPendingDynamicWorkflowInfoList(ctx context.Context) ApiGetWorkflowPendingDynamicWorkflowInfoListRequest {
 	return ApiGetWorkflowPendingDynamicWorkflowInfoListRequest{
@@ -9423,7 +9460,8 @@ func (a *WorkflowApiService) GetWorkflowPendingDynamicWorkflowInfoList(ctx conte
 }
 
 // Execute executes the request
-//  @return WorkflowPendingDynamicWorkflowInfoResponse
+//
+//	@return WorkflowPendingDynamicWorkflowInfoResponse
 func (a *WorkflowApiService) GetWorkflowPendingDynamicWorkflowInfoListExecute(r ApiGetWorkflowPendingDynamicWorkflowInfoListRequest) (*WorkflowPendingDynamicWorkflowInfoResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9590,9 +9628,9 @@ func (r ApiGetWorkflowPowerShellBatchApiExecutorByMoidRequest) Execute() (*Workf
 /*
 GetWorkflowPowerShellBatchApiExecutorByMoid Read a 'workflow.PowerShellBatchApiExecutor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetWorkflowPowerShellBatchApiExecutorByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetWorkflowPowerShellBatchApiExecutorByMoidRequest
 */
 func (a *WorkflowApiService) GetWorkflowPowerShellBatchApiExecutorByMoid(ctx context.Context, moid string) ApiGetWorkflowPowerShellBatchApiExecutorByMoidRequest {
 	return ApiGetWorkflowPowerShellBatchApiExecutorByMoidRequest{
@@ -9603,7 +9641,8 @@ func (a *WorkflowApiService) GetWorkflowPowerShellBatchApiExecutorByMoid(ctx con
 }
 
 // Execute executes the request
-//  @return WorkflowPowerShellBatchApiExecutor
+//
+//	@return WorkflowPowerShellBatchApiExecutor
 func (a *WorkflowApiService) GetWorkflowPowerShellBatchApiExecutorByMoidExecute(r ApiGetWorkflowPowerShellBatchApiExecutorByMoidRequest) (*WorkflowPowerShellBatchApiExecutor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9814,8 +9853,8 @@ func (r ApiGetWorkflowPowerShellBatchApiExecutorListRequest) Execute() (*Workflo
 /*
 GetWorkflowPowerShellBatchApiExecutorList Read a 'workflow.PowerShellBatchApiExecutor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetWorkflowPowerShellBatchApiExecutorListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetWorkflowPowerShellBatchApiExecutorListRequest
 */
 func (a *WorkflowApiService) GetWorkflowPowerShellBatchApiExecutorList(ctx context.Context) ApiGetWorkflowPowerShellBatchApiExecutorListRequest {
 	return ApiGetWorkflowPowerShellBatchApiExecutorListRequest{
@@ -9825,7 +9864,8 @@ func (a *WorkflowApiService) GetWorkflowPowerShellBatchApiExecutorList(ctx conte
 }
 
 // Execute executes the request
-//  @return WorkflowPowerShellBatchApiExecutorResponse
+//
+//	@return WorkflowPowerShellBatchApiExecutorResponse
 func (a *WorkflowApiService) GetWorkflowPowerShellBatchApiExecutorListExecute(r ApiGetWorkflowPowerShellBatchApiExecutorListRequest) (*WorkflowPowerShellBatchApiExecutorResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9992,9 +10032,9 @@ func (r ApiGetWorkflowRollbackWorkflowByMoidRequest) Execute() (*WorkflowRollbac
 /*
 GetWorkflowRollbackWorkflowByMoid Read a 'workflow.RollbackWorkflow' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetWorkflowRollbackWorkflowByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetWorkflowRollbackWorkflowByMoidRequest
 */
 func (a *WorkflowApiService) GetWorkflowRollbackWorkflowByMoid(ctx context.Context, moid string) ApiGetWorkflowRollbackWorkflowByMoidRequest {
 	return ApiGetWorkflowRollbackWorkflowByMoidRequest{
@@ -10005,7 +10045,8 @@ func (a *WorkflowApiService) GetWorkflowRollbackWorkflowByMoid(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return WorkflowRollbackWorkflow
+//
+//	@return WorkflowRollbackWorkflow
 func (a *WorkflowApiService) GetWorkflowRollbackWorkflowByMoidExecute(r ApiGetWorkflowRollbackWorkflowByMoidRequest) (*WorkflowRollbackWorkflow, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10216,8 +10257,8 @@ func (r ApiGetWorkflowRollbackWorkflowListRequest) Execute() (*WorkflowRollbackW
 /*
 GetWorkflowRollbackWorkflowList Read a 'workflow.RollbackWorkflow' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetWorkflowRollbackWorkflowListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetWorkflowRollbackWorkflowListRequest
 */
 func (a *WorkflowApiService) GetWorkflowRollbackWorkflowList(ctx context.Context) ApiGetWorkflowRollbackWorkflowListRequest {
 	return ApiGetWorkflowRollbackWorkflowListRequest{
@@ -10227,7 +10268,8 @@ func (a *WorkflowApiService) GetWorkflowRollbackWorkflowList(ctx context.Context
 }
 
 // Execute executes the request
-//  @return WorkflowRollbackWorkflowResponse
+//
+//	@return WorkflowRollbackWorkflowResponse
 func (a *WorkflowApiService) GetWorkflowRollbackWorkflowListExecute(r ApiGetWorkflowRollbackWorkflowListRequest) (*WorkflowRollbackWorkflowResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10394,9 +10436,9 @@ func (r ApiGetWorkflowServiceItemActionDefinitionByMoidRequest) Execute() (*Work
 /*
 GetWorkflowServiceItemActionDefinitionByMoid Read a 'workflow.ServiceItemActionDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetWorkflowServiceItemActionDefinitionByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetWorkflowServiceItemActionDefinitionByMoidRequest
 */
 func (a *WorkflowApiService) GetWorkflowServiceItemActionDefinitionByMoid(ctx context.Context, moid string) ApiGetWorkflowServiceItemActionDefinitionByMoidRequest {
 	return ApiGetWorkflowServiceItemActionDefinitionByMoidRequest{
@@ -10407,7 +10449,8 @@ func (a *WorkflowApiService) GetWorkflowServiceItemActionDefinitionByMoid(ctx co
 }
 
 // Execute executes the request
-//  @return WorkflowServiceItemActionDefinition
+//
+//	@return WorkflowServiceItemActionDefinition
 func (a *WorkflowApiService) GetWorkflowServiceItemActionDefinitionByMoidExecute(r ApiGetWorkflowServiceItemActionDefinitionByMoidRequest) (*WorkflowServiceItemActionDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10618,8 +10661,8 @@ func (r ApiGetWorkflowServiceItemActionDefinitionListRequest) Execute() (*Workfl
 /*
 GetWorkflowServiceItemActionDefinitionList Read a 'workflow.ServiceItemActionDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetWorkflowServiceItemActionDefinitionListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetWorkflowServiceItemActionDefinitionListRequest
 */
 func (a *WorkflowApiService) GetWorkflowServiceItemActionDefinitionList(ctx context.Context) ApiGetWorkflowServiceItemActionDefinitionListRequest {
 	return ApiGetWorkflowServiceItemActionDefinitionListRequest{
@@ -10629,7 +10672,8 @@ func (a *WorkflowApiService) GetWorkflowServiceItemActionDefinitionList(ctx cont
 }
 
 // Execute executes the request
-//  @return WorkflowServiceItemActionDefinitionResponse
+//
+//	@return WorkflowServiceItemActionDefinitionResponse
 func (a *WorkflowApiService) GetWorkflowServiceItemActionDefinitionListExecute(r ApiGetWorkflowServiceItemActionDefinitionListRequest) (*WorkflowServiceItemActionDefinitionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10796,9 +10840,9 @@ func (r ApiGetWorkflowServiceItemActionInstanceByMoidRequest) Execute() (*Workfl
 /*
 GetWorkflowServiceItemActionInstanceByMoid Read a 'workflow.ServiceItemActionInstance' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetWorkflowServiceItemActionInstanceByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetWorkflowServiceItemActionInstanceByMoidRequest
 */
 func (a *WorkflowApiService) GetWorkflowServiceItemActionInstanceByMoid(ctx context.Context, moid string) ApiGetWorkflowServiceItemActionInstanceByMoidRequest {
 	return ApiGetWorkflowServiceItemActionInstanceByMoidRequest{
@@ -10809,7 +10853,8 @@ func (a *WorkflowApiService) GetWorkflowServiceItemActionInstanceByMoid(ctx cont
 }
 
 // Execute executes the request
-//  @return WorkflowServiceItemActionInstance
+//
+//	@return WorkflowServiceItemActionInstance
 func (a *WorkflowApiService) GetWorkflowServiceItemActionInstanceByMoidExecute(r ApiGetWorkflowServiceItemActionInstanceByMoidRequest) (*WorkflowServiceItemActionInstance, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -11020,8 +11065,8 @@ func (r ApiGetWorkflowServiceItemActionInstanceListRequest) Execute() (*Workflow
 /*
 GetWorkflowServiceItemActionInstanceList Read a 'workflow.ServiceItemActionInstance' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetWorkflowServiceItemActionInstanceListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetWorkflowServiceItemActionInstanceListRequest
 */
 func (a *WorkflowApiService) GetWorkflowServiceItemActionInstanceList(ctx context.Context) ApiGetWorkflowServiceItemActionInstanceListRequest {
 	return ApiGetWorkflowServiceItemActionInstanceListRequest{
@@ -11031,7 +11076,8 @@ func (a *WorkflowApiService) GetWorkflowServiceItemActionInstanceList(ctx contex
 }
 
 // Execute executes the request
-//  @return WorkflowServiceItemActionInstanceResponse
+//
+//	@return WorkflowServiceItemActionInstanceResponse
 func (a *WorkflowApiService) GetWorkflowServiceItemActionInstanceListExecute(r ApiGetWorkflowServiceItemActionInstanceListRequest) (*WorkflowServiceItemActionInstanceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -11198,9 +11244,9 @@ func (r ApiGetWorkflowServiceItemDefinitionByMoidRequest) Execute() (*WorkflowSe
 /*
 GetWorkflowServiceItemDefinitionByMoid Read a 'workflow.ServiceItemDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetWorkflowServiceItemDefinitionByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetWorkflowServiceItemDefinitionByMoidRequest
 */
 func (a *WorkflowApiService) GetWorkflowServiceItemDefinitionByMoid(ctx context.Context, moid string) ApiGetWorkflowServiceItemDefinitionByMoidRequest {
 	return ApiGetWorkflowServiceItemDefinitionByMoidRequest{
@@ -11211,7 +11257,8 @@ func (a *WorkflowApiService) GetWorkflowServiceItemDefinitionByMoid(ctx context.
 }
 
 // Execute executes the request
-//  @return WorkflowServiceItemDefinition
+//
+//	@return WorkflowServiceItemDefinition
 func (a *WorkflowApiService) GetWorkflowServiceItemDefinitionByMoidExecute(r ApiGetWorkflowServiceItemDefinitionByMoidRequest) (*WorkflowServiceItemDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -11422,8 +11469,8 @@ func (r ApiGetWorkflowServiceItemDefinitionListRequest) Execute() (*WorkflowServ
 /*
 GetWorkflowServiceItemDefinitionList Read a 'workflow.ServiceItemDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetWorkflowServiceItemDefinitionListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetWorkflowServiceItemDefinitionListRequest
 */
 func (a *WorkflowApiService) GetWorkflowServiceItemDefinitionList(ctx context.Context) ApiGetWorkflowServiceItemDefinitionListRequest {
 	return ApiGetWorkflowServiceItemDefinitionListRequest{
@@ -11433,7 +11480,8 @@ func (a *WorkflowApiService) GetWorkflowServiceItemDefinitionList(ctx context.Co
 }
 
 // Execute executes the request
-//  @return WorkflowServiceItemDefinitionResponse
+//
+//	@return WorkflowServiceItemDefinitionResponse
 func (a *WorkflowApiService) GetWorkflowServiceItemDefinitionListExecute(r ApiGetWorkflowServiceItemDefinitionListRequest) (*WorkflowServiceItemDefinitionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -11600,9 +11648,9 @@ func (r ApiGetWorkflowServiceItemHealthCheckDefinitionByMoidRequest) Execute() (
 /*
 GetWorkflowServiceItemHealthCheckDefinitionByMoid Read a 'workflow.ServiceItemHealthCheckDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetWorkflowServiceItemHealthCheckDefinitionByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetWorkflowServiceItemHealthCheckDefinitionByMoidRequest
 */
 func (a *WorkflowApiService) GetWorkflowServiceItemHealthCheckDefinitionByMoid(ctx context.Context, moid string) ApiGetWorkflowServiceItemHealthCheckDefinitionByMoidRequest {
 	return ApiGetWorkflowServiceItemHealthCheckDefinitionByMoidRequest{
@@ -11613,7 +11661,8 @@ func (a *WorkflowApiService) GetWorkflowServiceItemHealthCheckDefinitionByMoid(c
 }
 
 // Execute executes the request
-//  @return WorkflowServiceItemHealthCheckDefinition
+//
+//	@return WorkflowServiceItemHealthCheckDefinition
 func (a *WorkflowApiService) GetWorkflowServiceItemHealthCheckDefinitionByMoidExecute(r ApiGetWorkflowServiceItemHealthCheckDefinitionByMoidRequest) (*WorkflowServiceItemHealthCheckDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -11824,8 +11873,8 @@ func (r ApiGetWorkflowServiceItemHealthCheckDefinitionListRequest) Execute() (*W
 /*
 GetWorkflowServiceItemHealthCheckDefinitionList Read a 'workflow.ServiceItemHealthCheckDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetWorkflowServiceItemHealthCheckDefinitionListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetWorkflowServiceItemHealthCheckDefinitionListRequest
 */
 func (a *WorkflowApiService) GetWorkflowServiceItemHealthCheckDefinitionList(ctx context.Context) ApiGetWorkflowServiceItemHealthCheckDefinitionListRequest {
 	return ApiGetWorkflowServiceItemHealthCheckDefinitionListRequest{
@@ -11835,7 +11884,8 @@ func (a *WorkflowApiService) GetWorkflowServiceItemHealthCheckDefinitionList(ctx
 }
 
 // Execute executes the request
-//  @return WorkflowServiceItemHealthCheckDefinitionResponse
+//
+//	@return WorkflowServiceItemHealthCheckDefinitionResponse
 func (a *WorkflowApiService) GetWorkflowServiceItemHealthCheckDefinitionListExecute(r ApiGetWorkflowServiceItemHealthCheckDefinitionListRequest) (*WorkflowServiceItemHealthCheckDefinitionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12002,9 +12052,9 @@ func (r ApiGetWorkflowServiceItemHealthCheckExecutionByMoidRequest) Execute() (*
 /*
 GetWorkflowServiceItemHealthCheckExecutionByMoid Read a 'workflow.ServiceItemHealthCheckExecution' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetWorkflowServiceItemHealthCheckExecutionByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetWorkflowServiceItemHealthCheckExecutionByMoidRequest
 */
 func (a *WorkflowApiService) GetWorkflowServiceItemHealthCheckExecutionByMoid(ctx context.Context, moid string) ApiGetWorkflowServiceItemHealthCheckExecutionByMoidRequest {
 	return ApiGetWorkflowServiceItemHealthCheckExecutionByMoidRequest{
@@ -12015,7 +12065,8 @@ func (a *WorkflowApiService) GetWorkflowServiceItemHealthCheckExecutionByMoid(ct
 }
 
 // Execute executes the request
-//  @return WorkflowServiceItemHealthCheckExecution
+//
+//	@return WorkflowServiceItemHealthCheckExecution
 func (a *WorkflowApiService) GetWorkflowServiceItemHealthCheckExecutionByMoidExecute(r ApiGetWorkflowServiceItemHealthCheckExecutionByMoidRequest) (*WorkflowServiceItemHealthCheckExecution, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12226,8 +12277,8 @@ func (r ApiGetWorkflowServiceItemHealthCheckExecutionListRequest) Execute() (*Wo
 /*
 GetWorkflowServiceItemHealthCheckExecutionList Read a 'workflow.ServiceItemHealthCheckExecution' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetWorkflowServiceItemHealthCheckExecutionListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetWorkflowServiceItemHealthCheckExecutionListRequest
 */
 func (a *WorkflowApiService) GetWorkflowServiceItemHealthCheckExecutionList(ctx context.Context) ApiGetWorkflowServiceItemHealthCheckExecutionListRequest {
 	return ApiGetWorkflowServiceItemHealthCheckExecutionListRequest{
@@ -12237,7 +12288,8 @@ func (a *WorkflowApiService) GetWorkflowServiceItemHealthCheckExecutionList(ctx 
 }
 
 // Execute executes the request
-//  @return WorkflowServiceItemHealthCheckExecutionResponse
+//
+//	@return WorkflowServiceItemHealthCheckExecutionResponse
 func (a *WorkflowApiService) GetWorkflowServiceItemHealthCheckExecutionListExecute(r ApiGetWorkflowServiceItemHealthCheckExecutionListRequest) (*WorkflowServiceItemHealthCheckExecutionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12404,9 +12456,9 @@ func (r ApiGetWorkflowServiceItemInstanceByMoidRequest) Execute() (*WorkflowServ
 /*
 GetWorkflowServiceItemInstanceByMoid Read a 'workflow.ServiceItemInstance' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetWorkflowServiceItemInstanceByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetWorkflowServiceItemInstanceByMoidRequest
 */
 func (a *WorkflowApiService) GetWorkflowServiceItemInstanceByMoid(ctx context.Context, moid string) ApiGetWorkflowServiceItemInstanceByMoidRequest {
 	return ApiGetWorkflowServiceItemInstanceByMoidRequest{
@@ -12417,7 +12469,8 @@ func (a *WorkflowApiService) GetWorkflowServiceItemInstanceByMoid(ctx context.Co
 }
 
 // Execute executes the request
-//  @return WorkflowServiceItemInstance
+//
+//	@return WorkflowServiceItemInstance
 func (a *WorkflowApiService) GetWorkflowServiceItemInstanceByMoidExecute(r ApiGetWorkflowServiceItemInstanceByMoidRequest) (*WorkflowServiceItemInstance, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12628,8 +12681,8 @@ func (r ApiGetWorkflowServiceItemInstanceListRequest) Execute() (*WorkflowServic
 /*
 GetWorkflowServiceItemInstanceList Read a 'workflow.ServiceItemInstance' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetWorkflowServiceItemInstanceListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetWorkflowServiceItemInstanceListRequest
 */
 func (a *WorkflowApiService) GetWorkflowServiceItemInstanceList(ctx context.Context) ApiGetWorkflowServiceItemInstanceListRequest {
 	return ApiGetWorkflowServiceItemInstanceListRequest{
@@ -12639,7 +12692,8 @@ func (a *WorkflowApiService) GetWorkflowServiceItemInstanceList(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return WorkflowServiceItemInstanceResponse
+//
+//	@return WorkflowServiceItemInstanceResponse
 func (a *WorkflowApiService) GetWorkflowServiceItemInstanceListExecute(r ApiGetWorkflowServiceItemInstanceListRequest) (*WorkflowServiceItemInstanceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12806,9 +12860,9 @@ func (r ApiGetWorkflowServiceItemOutputByMoidRequest) Execute() (*WorkflowServic
 /*
 GetWorkflowServiceItemOutputByMoid Read a 'workflow.ServiceItemOutput' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetWorkflowServiceItemOutputByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetWorkflowServiceItemOutputByMoidRequest
 */
 func (a *WorkflowApiService) GetWorkflowServiceItemOutputByMoid(ctx context.Context, moid string) ApiGetWorkflowServiceItemOutputByMoidRequest {
 	return ApiGetWorkflowServiceItemOutputByMoidRequest{
@@ -12819,7 +12873,8 @@ func (a *WorkflowApiService) GetWorkflowServiceItemOutputByMoid(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return WorkflowServiceItemOutput
+//
+//	@return WorkflowServiceItemOutput
 func (a *WorkflowApiService) GetWorkflowServiceItemOutputByMoidExecute(r ApiGetWorkflowServiceItemOutputByMoidRequest) (*WorkflowServiceItemOutput, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13030,8 +13085,8 @@ func (r ApiGetWorkflowServiceItemOutputListRequest) Execute() (*WorkflowServiceI
 /*
 GetWorkflowServiceItemOutputList Read a 'workflow.ServiceItemOutput' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetWorkflowServiceItemOutputListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetWorkflowServiceItemOutputListRequest
 */
 func (a *WorkflowApiService) GetWorkflowServiceItemOutputList(ctx context.Context) ApiGetWorkflowServiceItemOutputListRequest {
 	return ApiGetWorkflowServiceItemOutputListRequest{
@@ -13041,7 +13096,8 @@ func (a *WorkflowApiService) GetWorkflowServiceItemOutputList(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return WorkflowServiceItemOutputResponse
+//
+//	@return WorkflowServiceItemOutputResponse
 func (a *WorkflowApiService) GetWorkflowServiceItemOutputListExecute(r ApiGetWorkflowServiceItemOutputListRequest) (*WorkflowServiceItemOutputResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13208,9 +13264,9 @@ func (r ApiGetWorkflowSolutionActionDefinitionByMoidRequest) Execute() (*Workflo
 /*
 GetWorkflowSolutionActionDefinitionByMoid Read a 'workflow.SolutionActionDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetWorkflowSolutionActionDefinitionByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetWorkflowSolutionActionDefinitionByMoidRequest
 */
 func (a *WorkflowApiService) GetWorkflowSolutionActionDefinitionByMoid(ctx context.Context, moid string) ApiGetWorkflowSolutionActionDefinitionByMoidRequest {
 	return ApiGetWorkflowSolutionActionDefinitionByMoidRequest{
@@ -13221,7 +13277,8 @@ func (a *WorkflowApiService) GetWorkflowSolutionActionDefinitionByMoid(ctx conte
 }
 
 // Execute executes the request
-//  @return WorkflowSolutionActionDefinition
+//
+//	@return WorkflowSolutionActionDefinition
 func (a *WorkflowApiService) GetWorkflowSolutionActionDefinitionByMoidExecute(r ApiGetWorkflowSolutionActionDefinitionByMoidRequest) (*WorkflowSolutionActionDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13432,8 +13489,8 @@ func (r ApiGetWorkflowSolutionActionDefinitionListRequest) Execute() (*WorkflowS
 /*
 GetWorkflowSolutionActionDefinitionList Read a 'workflow.SolutionActionDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetWorkflowSolutionActionDefinitionListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetWorkflowSolutionActionDefinitionListRequest
 */
 func (a *WorkflowApiService) GetWorkflowSolutionActionDefinitionList(ctx context.Context) ApiGetWorkflowSolutionActionDefinitionListRequest {
 	return ApiGetWorkflowSolutionActionDefinitionListRequest{
@@ -13443,7 +13500,8 @@ func (a *WorkflowApiService) GetWorkflowSolutionActionDefinitionList(ctx context
 }
 
 // Execute executes the request
-//  @return WorkflowSolutionActionDefinitionResponse
+//
+//	@return WorkflowSolutionActionDefinitionResponse
 func (a *WorkflowApiService) GetWorkflowSolutionActionDefinitionListExecute(r ApiGetWorkflowSolutionActionDefinitionListRequest) (*WorkflowSolutionActionDefinitionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13610,9 +13668,9 @@ func (r ApiGetWorkflowSolutionActionInstanceByMoidRequest) Execute() (*WorkflowS
 /*
 GetWorkflowSolutionActionInstanceByMoid Read a 'workflow.SolutionActionInstance' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetWorkflowSolutionActionInstanceByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetWorkflowSolutionActionInstanceByMoidRequest
 */
 func (a *WorkflowApiService) GetWorkflowSolutionActionInstanceByMoid(ctx context.Context, moid string) ApiGetWorkflowSolutionActionInstanceByMoidRequest {
 	return ApiGetWorkflowSolutionActionInstanceByMoidRequest{
@@ -13623,7 +13681,8 @@ func (a *WorkflowApiService) GetWorkflowSolutionActionInstanceByMoid(ctx context
 }
 
 // Execute executes the request
-//  @return WorkflowSolutionActionInstance
+//
+//	@return WorkflowSolutionActionInstance
 func (a *WorkflowApiService) GetWorkflowSolutionActionInstanceByMoidExecute(r ApiGetWorkflowSolutionActionInstanceByMoidRequest) (*WorkflowSolutionActionInstance, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13834,8 +13893,8 @@ func (r ApiGetWorkflowSolutionActionInstanceListRequest) Execute() (*WorkflowSol
 /*
 GetWorkflowSolutionActionInstanceList Read a 'workflow.SolutionActionInstance' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetWorkflowSolutionActionInstanceListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetWorkflowSolutionActionInstanceListRequest
 */
 func (a *WorkflowApiService) GetWorkflowSolutionActionInstanceList(ctx context.Context) ApiGetWorkflowSolutionActionInstanceListRequest {
 	return ApiGetWorkflowSolutionActionInstanceListRequest{
@@ -13845,7 +13904,8 @@ func (a *WorkflowApiService) GetWorkflowSolutionActionInstanceList(ctx context.C
 }
 
 // Execute executes the request
-//  @return WorkflowSolutionActionInstanceResponse
+//
+//	@return WorkflowSolutionActionInstanceResponse
 func (a *WorkflowApiService) GetWorkflowSolutionActionInstanceListExecute(r ApiGetWorkflowSolutionActionInstanceListRequest) (*WorkflowSolutionActionInstanceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14012,9 +14072,9 @@ func (r ApiGetWorkflowSolutionDefinitionByMoidRequest) Execute() (*WorkflowSolut
 /*
 GetWorkflowSolutionDefinitionByMoid Read a 'workflow.SolutionDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetWorkflowSolutionDefinitionByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetWorkflowSolutionDefinitionByMoidRequest
 */
 func (a *WorkflowApiService) GetWorkflowSolutionDefinitionByMoid(ctx context.Context, moid string) ApiGetWorkflowSolutionDefinitionByMoidRequest {
 	return ApiGetWorkflowSolutionDefinitionByMoidRequest{
@@ -14025,7 +14085,8 @@ func (a *WorkflowApiService) GetWorkflowSolutionDefinitionByMoid(ctx context.Con
 }
 
 // Execute executes the request
-//  @return WorkflowSolutionDefinition
+//
+//	@return WorkflowSolutionDefinition
 func (a *WorkflowApiService) GetWorkflowSolutionDefinitionByMoidExecute(r ApiGetWorkflowSolutionDefinitionByMoidRequest) (*WorkflowSolutionDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14236,8 +14297,8 @@ func (r ApiGetWorkflowSolutionDefinitionListRequest) Execute() (*WorkflowSolutio
 /*
 GetWorkflowSolutionDefinitionList Read a 'workflow.SolutionDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetWorkflowSolutionDefinitionListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetWorkflowSolutionDefinitionListRequest
 */
 func (a *WorkflowApiService) GetWorkflowSolutionDefinitionList(ctx context.Context) ApiGetWorkflowSolutionDefinitionListRequest {
 	return ApiGetWorkflowSolutionDefinitionListRequest{
@@ -14247,7 +14308,8 @@ func (a *WorkflowApiService) GetWorkflowSolutionDefinitionList(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return WorkflowSolutionDefinitionResponse
+//
+//	@return WorkflowSolutionDefinitionResponse
 func (a *WorkflowApiService) GetWorkflowSolutionDefinitionListExecute(r ApiGetWorkflowSolutionDefinitionListRequest) (*WorkflowSolutionDefinitionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14414,9 +14476,9 @@ func (r ApiGetWorkflowSolutionInstanceByMoidRequest) Execute() (*WorkflowSolutio
 /*
 GetWorkflowSolutionInstanceByMoid Read a 'workflow.SolutionInstance' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetWorkflowSolutionInstanceByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetWorkflowSolutionInstanceByMoidRequest
 */
 func (a *WorkflowApiService) GetWorkflowSolutionInstanceByMoid(ctx context.Context, moid string) ApiGetWorkflowSolutionInstanceByMoidRequest {
 	return ApiGetWorkflowSolutionInstanceByMoidRequest{
@@ -14427,7 +14489,8 @@ func (a *WorkflowApiService) GetWorkflowSolutionInstanceByMoid(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return WorkflowSolutionInstance
+//
+//	@return WorkflowSolutionInstance
 func (a *WorkflowApiService) GetWorkflowSolutionInstanceByMoidExecute(r ApiGetWorkflowSolutionInstanceByMoidRequest) (*WorkflowSolutionInstance, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14638,8 +14701,8 @@ func (r ApiGetWorkflowSolutionInstanceListRequest) Execute() (*WorkflowSolutionI
 /*
 GetWorkflowSolutionInstanceList Read a 'workflow.SolutionInstance' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetWorkflowSolutionInstanceListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetWorkflowSolutionInstanceListRequest
 */
 func (a *WorkflowApiService) GetWorkflowSolutionInstanceList(ctx context.Context) ApiGetWorkflowSolutionInstanceListRequest {
 	return ApiGetWorkflowSolutionInstanceListRequest{
@@ -14649,7 +14712,8 @@ func (a *WorkflowApiService) GetWorkflowSolutionInstanceList(ctx context.Context
 }
 
 // Execute executes the request
-//  @return WorkflowSolutionInstanceResponse
+//
+//	@return WorkflowSolutionInstanceResponse
 func (a *WorkflowApiService) GetWorkflowSolutionInstanceListExecute(r ApiGetWorkflowSolutionInstanceListRequest) (*WorkflowSolutionInstanceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14816,9 +14880,9 @@ func (r ApiGetWorkflowSolutionOutputByMoidRequest) Execute() (*WorkflowSolutionO
 /*
 GetWorkflowSolutionOutputByMoid Read a 'workflow.SolutionOutput' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetWorkflowSolutionOutputByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetWorkflowSolutionOutputByMoidRequest
 */
 func (a *WorkflowApiService) GetWorkflowSolutionOutputByMoid(ctx context.Context, moid string) ApiGetWorkflowSolutionOutputByMoidRequest {
 	return ApiGetWorkflowSolutionOutputByMoidRequest{
@@ -14829,7 +14893,8 @@ func (a *WorkflowApiService) GetWorkflowSolutionOutputByMoid(ctx context.Context
 }
 
 // Execute executes the request
-//  @return WorkflowSolutionOutput
+//
+//	@return WorkflowSolutionOutput
 func (a *WorkflowApiService) GetWorkflowSolutionOutputByMoidExecute(r ApiGetWorkflowSolutionOutputByMoidRequest) (*WorkflowSolutionOutput, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15040,8 +15105,8 @@ func (r ApiGetWorkflowSolutionOutputListRequest) Execute() (*WorkflowSolutionOut
 /*
 GetWorkflowSolutionOutputList Read a 'workflow.SolutionOutput' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetWorkflowSolutionOutputListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetWorkflowSolutionOutputListRequest
 */
 func (a *WorkflowApiService) GetWorkflowSolutionOutputList(ctx context.Context) ApiGetWorkflowSolutionOutputListRequest {
 	return ApiGetWorkflowSolutionOutputListRequest{
@@ -15051,7 +15116,8 @@ func (a *WorkflowApiService) GetWorkflowSolutionOutputList(ctx context.Context) 
 }
 
 // Execute executes the request
-//  @return WorkflowSolutionOutputResponse
+//
+//	@return WorkflowSolutionOutputResponse
 func (a *WorkflowApiService) GetWorkflowSolutionOutputListExecute(r ApiGetWorkflowSolutionOutputListRequest) (*WorkflowSolutionOutputResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15218,9 +15284,9 @@ func (r ApiGetWorkflowSshBatchExecutorByMoidRequest) Execute() (*WorkflowSshBatc
 /*
 GetWorkflowSshBatchExecutorByMoid Read a 'workflow.SshBatchExecutor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetWorkflowSshBatchExecutorByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetWorkflowSshBatchExecutorByMoidRequest
 */
 func (a *WorkflowApiService) GetWorkflowSshBatchExecutorByMoid(ctx context.Context, moid string) ApiGetWorkflowSshBatchExecutorByMoidRequest {
 	return ApiGetWorkflowSshBatchExecutorByMoidRequest{
@@ -15231,7 +15297,8 @@ func (a *WorkflowApiService) GetWorkflowSshBatchExecutorByMoid(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return WorkflowSshBatchExecutor
+//
+//	@return WorkflowSshBatchExecutor
 func (a *WorkflowApiService) GetWorkflowSshBatchExecutorByMoidExecute(r ApiGetWorkflowSshBatchExecutorByMoidRequest) (*WorkflowSshBatchExecutor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15442,8 +15509,8 @@ func (r ApiGetWorkflowSshBatchExecutorListRequest) Execute() (*WorkflowSshBatchE
 /*
 GetWorkflowSshBatchExecutorList Read a 'workflow.SshBatchExecutor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetWorkflowSshBatchExecutorListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetWorkflowSshBatchExecutorListRequest
 */
 func (a *WorkflowApiService) GetWorkflowSshBatchExecutorList(ctx context.Context) ApiGetWorkflowSshBatchExecutorListRequest {
 	return ApiGetWorkflowSshBatchExecutorListRequest{
@@ -15453,7 +15520,8 @@ func (a *WorkflowApiService) GetWorkflowSshBatchExecutorList(ctx context.Context
 }
 
 // Execute executes the request
-//  @return WorkflowSshBatchExecutorResponse
+//
+//	@return WorkflowSshBatchExecutorResponse
 func (a *WorkflowApiService) GetWorkflowSshBatchExecutorListExecute(r ApiGetWorkflowSshBatchExecutorListRequest) (*WorkflowSshBatchExecutorResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15620,9 +15688,9 @@ func (r ApiGetWorkflowTaskDebugLogByMoidRequest) Execute() (*WorkflowTaskDebugLo
 /*
 GetWorkflowTaskDebugLogByMoid Read a 'workflow.TaskDebugLog' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetWorkflowTaskDebugLogByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetWorkflowTaskDebugLogByMoidRequest
 */
 func (a *WorkflowApiService) GetWorkflowTaskDebugLogByMoid(ctx context.Context, moid string) ApiGetWorkflowTaskDebugLogByMoidRequest {
 	return ApiGetWorkflowTaskDebugLogByMoidRequest{
@@ -15633,7 +15701,8 @@ func (a *WorkflowApiService) GetWorkflowTaskDebugLogByMoid(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return WorkflowTaskDebugLog
+//
+//	@return WorkflowTaskDebugLog
 func (a *WorkflowApiService) GetWorkflowTaskDebugLogByMoidExecute(r ApiGetWorkflowTaskDebugLogByMoidRequest) (*WorkflowTaskDebugLog, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15844,8 +15913,8 @@ func (r ApiGetWorkflowTaskDebugLogListRequest) Execute() (*WorkflowTaskDebugLogR
 /*
 GetWorkflowTaskDebugLogList Read a 'workflow.TaskDebugLog' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetWorkflowTaskDebugLogListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetWorkflowTaskDebugLogListRequest
 */
 func (a *WorkflowApiService) GetWorkflowTaskDebugLogList(ctx context.Context) ApiGetWorkflowTaskDebugLogListRequest {
 	return ApiGetWorkflowTaskDebugLogListRequest{
@@ -15855,7 +15924,8 @@ func (a *WorkflowApiService) GetWorkflowTaskDebugLogList(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return WorkflowTaskDebugLogResponse
+//
+//	@return WorkflowTaskDebugLogResponse
 func (a *WorkflowApiService) GetWorkflowTaskDebugLogListExecute(r ApiGetWorkflowTaskDebugLogListRequest) (*WorkflowTaskDebugLogResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16022,9 +16092,9 @@ func (r ApiGetWorkflowTaskDefinitionByMoidRequest) Execute() (*WorkflowTaskDefin
 /*
 GetWorkflowTaskDefinitionByMoid Read a 'workflow.TaskDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetWorkflowTaskDefinitionByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetWorkflowTaskDefinitionByMoidRequest
 */
 func (a *WorkflowApiService) GetWorkflowTaskDefinitionByMoid(ctx context.Context, moid string) ApiGetWorkflowTaskDefinitionByMoidRequest {
 	return ApiGetWorkflowTaskDefinitionByMoidRequest{
@@ -16035,7 +16105,8 @@ func (a *WorkflowApiService) GetWorkflowTaskDefinitionByMoid(ctx context.Context
 }
 
 // Execute executes the request
-//  @return WorkflowTaskDefinition
+//
+//	@return WorkflowTaskDefinition
 func (a *WorkflowApiService) GetWorkflowTaskDefinitionByMoidExecute(r ApiGetWorkflowTaskDefinitionByMoidRequest) (*WorkflowTaskDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16246,8 +16317,8 @@ func (r ApiGetWorkflowTaskDefinitionListRequest) Execute() (*WorkflowTaskDefinit
 /*
 GetWorkflowTaskDefinitionList Read a 'workflow.TaskDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetWorkflowTaskDefinitionListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetWorkflowTaskDefinitionListRequest
 */
 func (a *WorkflowApiService) GetWorkflowTaskDefinitionList(ctx context.Context) ApiGetWorkflowTaskDefinitionListRequest {
 	return ApiGetWorkflowTaskDefinitionListRequest{
@@ -16257,7 +16328,8 @@ func (a *WorkflowApiService) GetWorkflowTaskDefinitionList(ctx context.Context) 
 }
 
 // Execute executes the request
-//  @return WorkflowTaskDefinitionResponse
+//
+//	@return WorkflowTaskDefinitionResponse
 func (a *WorkflowApiService) GetWorkflowTaskDefinitionListExecute(r ApiGetWorkflowTaskDefinitionListRequest) (*WorkflowTaskDefinitionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16424,9 +16496,9 @@ func (r ApiGetWorkflowTaskInfoByMoidRequest) Execute() (*WorkflowTaskInfo, *http
 /*
 GetWorkflowTaskInfoByMoid Read a 'workflow.TaskInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetWorkflowTaskInfoByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetWorkflowTaskInfoByMoidRequest
 */
 func (a *WorkflowApiService) GetWorkflowTaskInfoByMoid(ctx context.Context, moid string) ApiGetWorkflowTaskInfoByMoidRequest {
 	return ApiGetWorkflowTaskInfoByMoidRequest{
@@ -16437,7 +16509,8 @@ func (a *WorkflowApiService) GetWorkflowTaskInfoByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return WorkflowTaskInfo
+//
+//	@return WorkflowTaskInfo
 func (a *WorkflowApiService) GetWorkflowTaskInfoByMoidExecute(r ApiGetWorkflowTaskInfoByMoidRequest) (*WorkflowTaskInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16648,8 +16721,8 @@ func (r ApiGetWorkflowTaskInfoListRequest) Execute() (*WorkflowTaskInfoResponse,
 /*
 GetWorkflowTaskInfoList Read a 'workflow.TaskInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetWorkflowTaskInfoListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetWorkflowTaskInfoListRequest
 */
 func (a *WorkflowApiService) GetWorkflowTaskInfoList(ctx context.Context) ApiGetWorkflowTaskInfoListRequest {
 	return ApiGetWorkflowTaskInfoListRequest{
@@ -16659,7 +16732,8 @@ func (a *WorkflowApiService) GetWorkflowTaskInfoList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//  @return WorkflowTaskInfoResponse
+//
+//	@return WorkflowTaskInfoResponse
 func (a *WorkflowApiService) GetWorkflowTaskInfoListExecute(r ApiGetWorkflowTaskInfoListRequest) (*WorkflowTaskInfoResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16826,9 +16900,9 @@ func (r ApiGetWorkflowTaskMetadataByMoidRequest) Execute() (*WorkflowTaskMetadat
 /*
 GetWorkflowTaskMetadataByMoid Read a 'workflow.TaskMetadata' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetWorkflowTaskMetadataByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetWorkflowTaskMetadataByMoidRequest
 */
 func (a *WorkflowApiService) GetWorkflowTaskMetadataByMoid(ctx context.Context, moid string) ApiGetWorkflowTaskMetadataByMoidRequest {
 	return ApiGetWorkflowTaskMetadataByMoidRequest{
@@ -16839,7 +16913,8 @@ func (a *WorkflowApiService) GetWorkflowTaskMetadataByMoid(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return WorkflowTaskMetadata
+//
+//	@return WorkflowTaskMetadata
 func (a *WorkflowApiService) GetWorkflowTaskMetadataByMoidExecute(r ApiGetWorkflowTaskMetadataByMoidRequest) (*WorkflowTaskMetadata, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17050,8 +17125,8 @@ func (r ApiGetWorkflowTaskMetadataListRequest) Execute() (*WorkflowTaskMetadataR
 /*
 GetWorkflowTaskMetadataList Read a 'workflow.TaskMetadata' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetWorkflowTaskMetadataListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetWorkflowTaskMetadataListRequest
 */
 func (a *WorkflowApiService) GetWorkflowTaskMetadataList(ctx context.Context) ApiGetWorkflowTaskMetadataListRequest {
 	return ApiGetWorkflowTaskMetadataListRequest{
@@ -17061,7 +17136,8 @@ func (a *WorkflowApiService) GetWorkflowTaskMetadataList(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return WorkflowTaskMetadataResponse
+//
+//	@return WorkflowTaskMetadataResponse
 func (a *WorkflowApiService) GetWorkflowTaskMetadataListExecute(r ApiGetWorkflowTaskMetadataListRequest) (*WorkflowTaskMetadataResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17228,9 +17304,9 @@ func (r ApiGetWorkflowTemplateFunctionMetaByMoidRequest) Execute() (*WorkflowTem
 /*
 GetWorkflowTemplateFunctionMetaByMoid Read a 'workflow.TemplateFunctionMeta' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetWorkflowTemplateFunctionMetaByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetWorkflowTemplateFunctionMetaByMoidRequest
 */
 func (a *WorkflowApiService) GetWorkflowTemplateFunctionMetaByMoid(ctx context.Context, moid string) ApiGetWorkflowTemplateFunctionMetaByMoidRequest {
 	return ApiGetWorkflowTemplateFunctionMetaByMoidRequest{
@@ -17241,7 +17317,8 @@ func (a *WorkflowApiService) GetWorkflowTemplateFunctionMetaByMoid(ctx context.C
 }
 
 // Execute executes the request
-//  @return WorkflowTemplateFunctionMeta
+//
+//	@return WorkflowTemplateFunctionMeta
 func (a *WorkflowApiService) GetWorkflowTemplateFunctionMetaByMoidExecute(r ApiGetWorkflowTemplateFunctionMetaByMoidRequest) (*WorkflowTemplateFunctionMeta, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17452,8 +17529,8 @@ func (r ApiGetWorkflowTemplateFunctionMetaListRequest) Execute() (*WorkflowTempl
 /*
 GetWorkflowTemplateFunctionMetaList Read a 'workflow.TemplateFunctionMeta' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetWorkflowTemplateFunctionMetaListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetWorkflowTemplateFunctionMetaListRequest
 */
 func (a *WorkflowApiService) GetWorkflowTemplateFunctionMetaList(ctx context.Context) ApiGetWorkflowTemplateFunctionMetaListRequest {
 	return ApiGetWorkflowTemplateFunctionMetaListRequest{
@@ -17463,7 +17540,8 @@ func (a *WorkflowApiService) GetWorkflowTemplateFunctionMetaList(ctx context.Con
 }
 
 // Execute executes the request
-//  @return WorkflowTemplateFunctionMetaResponse
+//
+//	@return WorkflowTemplateFunctionMetaResponse
 func (a *WorkflowApiService) GetWorkflowTemplateFunctionMetaListExecute(r ApiGetWorkflowTemplateFunctionMetaListRequest) (*WorkflowTemplateFunctionMetaResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17630,9 +17708,9 @@ func (r ApiGetWorkflowWorkflowDefinitionByMoidRequest) Execute() (*WorkflowWorkf
 /*
 GetWorkflowWorkflowDefinitionByMoid Read a 'workflow.WorkflowDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetWorkflowWorkflowDefinitionByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetWorkflowWorkflowDefinitionByMoidRequest
 */
 func (a *WorkflowApiService) GetWorkflowWorkflowDefinitionByMoid(ctx context.Context, moid string) ApiGetWorkflowWorkflowDefinitionByMoidRequest {
 	return ApiGetWorkflowWorkflowDefinitionByMoidRequest{
@@ -17643,7 +17721,8 @@ func (a *WorkflowApiService) GetWorkflowWorkflowDefinitionByMoid(ctx context.Con
 }
 
 // Execute executes the request
-//  @return WorkflowWorkflowDefinition
+//
+//	@return WorkflowWorkflowDefinition
 func (a *WorkflowApiService) GetWorkflowWorkflowDefinitionByMoidExecute(r ApiGetWorkflowWorkflowDefinitionByMoidRequest) (*WorkflowWorkflowDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17854,8 +17933,8 @@ func (r ApiGetWorkflowWorkflowDefinitionListRequest) Execute() (*WorkflowWorkflo
 /*
 GetWorkflowWorkflowDefinitionList Read a 'workflow.WorkflowDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetWorkflowWorkflowDefinitionListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetWorkflowWorkflowDefinitionListRequest
 */
 func (a *WorkflowApiService) GetWorkflowWorkflowDefinitionList(ctx context.Context) ApiGetWorkflowWorkflowDefinitionListRequest {
 	return ApiGetWorkflowWorkflowDefinitionListRequest{
@@ -17865,7 +17944,8 @@ func (a *WorkflowApiService) GetWorkflowWorkflowDefinitionList(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return WorkflowWorkflowDefinitionResponse
+//
+//	@return WorkflowWorkflowDefinitionResponse
 func (a *WorkflowApiService) GetWorkflowWorkflowDefinitionListExecute(r ApiGetWorkflowWorkflowDefinitionListRequest) (*WorkflowWorkflowDefinitionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18032,9 +18112,9 @@ func (r ApiGetWorkflowWorkflowInfoByMoidRequest) Execute() (*WorkflowWorkflowInf
 /*
 GetWorkflowWorkflowInfoByMoid Read a 'workflow.WorkflowInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetWorkflowWorkflowInfoByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetWorkflowWorkflowInfoByMoidRequest
 */
 func (a *WorkflowApiService) GetWorkflowWorkflowInfoByMoid(ctx context.Context, moid string) ApiGetWorkflowWorkflowInfoByMoidRequest {
 	return ApiGetWorkflowWorkflowInfoByMoidRequest{
@@ -18045,7 +18125,8 @@ func (a *WorkflowApiService) GetWorkflowWorkflowInfoByMoid(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return WorkflowWorkflowInfo
+//
+//	@return WorkflowWorkflowInfo
 func (a *WorkflowApiService) GetWorkflowWorkflowInfoByMoidExecute(r ApiGetWorkflowWorkflowInfoByMoidRequest) (*WorkflowWorkflowInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18256,8 +18337,8 @@ func (r ApiGetWorkflowWorkflowInfoListRequest) Execute() (*WorkflowWorkflowInfoR
 /*
 GetWorkflowWorkflowInfoList Read a 'workflow.WorkflowInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetWorkflowWorkflowInfoListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetWorkflowWorkflowInfoListRequest
 */
 func (a *WorkflowApiService) GetWorkflowWorkflowInfoList(ctx context.Context) ApiGetWorkflowWorkflowInfoListRequest {
 	return ApiGetWorkflowWorkflowInfoListRequest{
@@ -18267,7 +18348,8 @@ func (a *WorkflowApiService) GetWorkflowWorkflowInfoList(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return WorkflowWorkflowInfoResponse
+//
+//	@return WorkflowWorkflowInfoResponse
 func (a *WorkflowApiService) GetWorkflowWorkflowInfoListExecute(r ApiGetWorkflowWorkflowInfoListRequest) (*WorkflowWorkflowInfoResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18434,9 +18516,9 @@ func (r ApiGetWorkflowWorkflowMetaByMoidRequest) Execute() (*WorkflowWorkflowMet
 /*
 GetWorkflowWorkflowMetaByMoid Read a 'workflow.WorkflowMeta' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetWorkflowWorkflowMetaByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetWorkflowWorkflowMetaByMoidRequest
 
 Deprecated
 */
@@ -18449,7 +18531,9 @@ func (a *WorkflowApiService) GetWorkflowWorkflowMetaByMoid(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return WorkflowWorkflowMeta
+//
+//	@return WorkflowWorkflowMeta
+//
 // Deprecated
 func (a *WorkflowApiService) GetWorkflowWorkflowMetaByMoidExecute(r ApiGetWorkflowWorkflowMetaByMoidRequest) (*WorkflowWorkflowMeta, *http.Response, error) {
 	var (
@@ -18661,8 +18745,8 @@ func (r ApiGetWorkflowWorkflowMetaListRequest) Execute() (*WorkflowWorkflowMetaR
 /*
 GetWorkflowWorkflowMetaList Read a 'workflow.WorkflowMeta' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetWorkflowWorkflowMetaListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetWorkflowWorkflowMetaListRequest
 
 Deprecated
 */
@@ -18674,7 +18758,9 @@ func (a *WorkflowApiService) GetWorkflowWorkflowMetaList(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return WorkflowWorkflowMetaResponse
+//
+//	@return WorkflowWorkflowMetaResponse
+//
 // Deprecated
 func (a *WorkflowApiService) GetWorkflowWorkflowMetaListExecute(r ApiGetWorkflowWorkflowMetaListRequest) (*WorkflowWorkflowMetaResponse, *http.Response, error) {
 	var (
@@ -18842,9 +18928,9 @@ func (r ApiGetWorkflowWorkflowMetadataByMoidRequest) Execute() (*WorkflowWorkflo
 /*
 GetWorkflowWorkflowMetadataByMoid Read a 'workflow.WorkflowMetadata' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetWorkflowWorkflowMetadataByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetWorkflowWorkflowMetadataByMoidRequest
 */
 func (a *WorkflowApiService) GetWorkflowWorkflowMetadataByMoid(ctx context.Context, moid string) ApiGetWorkflowWorkflowMetadataByMoidRequest {
 	return ApiGetWorkflowWorkflowMetadataByMoidRequest{
@@ -18855,7 +18941,8 @@ func (a *WorkflowApiService) GetWorkflowWorkflowMetadataByMoid(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return WorkflowWorkflowMetadata
+//
+//	@return WorkflowWorkflowMetadata
 func (a *WorkflowApiService) GetWorkflowWorkflowMetadataByMoidExecute(r ApiGetWorkflowWorkflowMetadataByMoidRequest) (*WorkflowWorkflowMetadata, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -19066,8 +19153,8 @@ func (r ApiGetWorkflowWorkflowMetadataListRequest) Execute() (*WorkflowWorkflowM
 /*
 GetWorkflowWorkflowMetadataList Read a 'workflow.WorkflowMetadata' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetWorkflowWorkflowMetadataListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetWorkflowWorkflowMetadataListRequest
 */
 func (a *WorkflowApiService) GetWorkflowWorkflowMetadataList(ctx context.Context) ApiGetWorkflowWorkflowMetadataListRequest {
 	return ApiGetWorkflowWorkflowMetadataListRequest{
@@ -19077,7 +19164,8 @@ func (a *WorkflowApiService) GetWorkflowWorkflowMetadataList(ctx context.Context
 }
 
 // Execute executes the request
-//  @return WorkflowWorkflowMetadataResponse
+//
+//	@return WorkflowWorkflowMetadataResponse
 func (a *WorkflowApiService) GetWorkflowWorkflowMetadataListExecute(r ApiGetWorkflowWorkflowMetadataListRequest) (*WorkflowWorkflowMetadataResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -19258,9 +19346,9 @@ func (r ApiPatchWorkflowAnsibleBatchExecutorRequest) Execute() (*WorkflowAnsible
 /*
 PatchWorkflowAnsibleBatchExecutor Update a 'workflow.AnsibleBatchExecutor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchWorkflowAnsibleBatchExecutorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchWorkflowAnsibleBatchExecutorRequest
 */
 func (a *WorkflowApiService) PatchWorkflowAnsibleBatchExecutor(ctx context.Context, moid string) ApiPatchWorkflowAnsibleBatchExecutorRequest {
 	return ApiPatchWorkflowAnsibleBatchExecutorRequest{
@@ -19271,7 +19359,8 @@ func (a *WorkflowApiService) PatchWorkflowAnsibleBatchExecutor(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return WorkflowAnsibleBatchExecutor
+//
+//	@return WorkflowAnsibleBatchExecutor
 func (a *WorkflowApiService) PatchWorkflowAnsibleBatchExecutorExecute(r ApiPatchWorkflowAnsibleBatchExecutorRequest) (*WorkflowAnsibleBatchExecutor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -19428,9 +19517,9 @@ func (r ApiPatchWorkflowBatchApiExecutorRequest) Execute() (*WorkflowBatchApiExe
 /*
 PatchWorkflowBatchApiExecutor Update a 'workflow.BatchApiExecutor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchWorkflowBatchApiExecutorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchWorkflowBatchApiExecutorRequest
 */
 func (a *WorkflowApiService) PatchWorkflowBatchApiExecutor(ctx context.Context, moid string) ApiPatchWorkflowBatchApiExecutorRequest {
 	return ApiPatchWorkflowBatchApiExecutorRequest{
@@ -19441,7 +19530,8 @@ func (a *WorkflowApiService) PatchWorkflowBatchApiExecutor(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return WorkflowBatchApiExecutor
+//
+//	@return WorkflowBatchApiExecutor
 func (a *WorkflowApiService) PatchWorkflowBatchApiExecutorExecute(r ApiPatchWorkflowBatchApiExecutorRequest) (*WorkflowBatchApiExecutor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -19598,9 +19688,9 @@ func (r ApiPatchWorkflowCustomDataTypeDefinitionRequest) Execute() (*WorkflowCus
 /*
 PatchWorkflowCustomDataTypeDefinition Update a 'workflow.CustomDataTypeDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchWorkflowCustomDataTypeDefinitionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchWorkflowCustomDataTypeDefinitionRequest
 */
 func (a *WorkflowApiService) PatchWorkflowCustomDataTypeDefinition(ctx context.Context, moid string) ApiPatchWorkflowCustomDataTypeDefinitionRequest {
 	return ApiPatchWorkflowCustomDataTypeDefinitionRequest{
@@ -19611,7 +19701,8 @@ func (a *WorkflowApiService) PatchWorkflowCustomDataTypeDefinition(ctx context.C
 }
 
 // Execute executes the request
-//  @return WorkflowCustomDataTypeDefinition
+//
+//	@return WorkflowCustomDataTypeDefinition
 func (a *WorkflowApiService) PatchWorkflowCustomDataTypeDefinitionExecute(r ApiPatchWorkflowCustomDataTypeDefinitionRequest) (*WorkflowCustomDataTypeDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -19768,9 +19859,9 @@ func (r ApiPatchWorkflowErrorResponseHandlerRequest) Execute() (*WorkflowErrorRe
 /*
 PatchWorkflowErrorResponseHandler Update a 'workflow.ErrorResponseHandler' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchWorkflowErrorResponseHandlerRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchWorkflowErrorResponseHandlerRequest
 */
 func (a *WorkflowApiService) PatchWorkflowErrorResponseHandler(ctx context.Context, moid string) ApiPatchWorkflowErrorResponseHandlerRequest {
 	return ApiPatchWorkflowErrorResponseHandlerRequest{
@@ -19781,7 +19872,8 @@ func (a *WorkflowApiService) PatchWorkflowErrorResponseHandler(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return WorkflowErrorResponseHandler
+//
+//	@return WorkflowErrorResponseHandler
 func (a *WorkflowApiService) PatchWorkflowErrorResponseHandlerExecute(r ApiPatchWorkflowErrorResponseHandlerRequest) (*WorkflowErrorResponseHandler, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -19938,9 +20030,9 @@ func (r ApiPatchWorkflowPowerShellBatchApiExecutorRequest) Execute() (*WorkflowP
 /*
 PatchWorkflowPowerShellBatchApiExecutor Update a 'workflow.PowerShellBatchApiExecutor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchWorkflowPowerShellBatchApiExecutorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchWorkflowPowerShellBatchApiExecutorRequest
 */
 func (a *WorkflowApiService) PatchWorkflowPowerShellBatchApiExecutor(ctx context.Context, moid string) ApiPatchWorkflowPowerShellBatchApiExecutorRequest {
 	return ApiPatchWorkflowPowerShellBatchApiExecutorRequest{
@@ -19951,7 +20043,8 @@ func (a *WorkflowApiService) PatchWorkflowPowerShellBatchApiExecutor(ctx context
 }
 
 // Execute executes the request
-//  @return WorkflowPowerShellBatchApiExecutor
+//
+//	@return WorkflowPowerShellBatchApiExecutor
 func (a *WorkflowApiService) PatchWorkflowPowerShellBatchApiExecutorExecute(r ApiPatchWorkflowPowerShellBatchApiExecutorRequest) (*WorkflowPowerShellBatchApiExecutor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -20108,9 +20201,9 @@ func (r ApiPatchWorkflowRollbackWorkflowRequest) Execute() (*WorkflowRollbackWor
 /*
 PatchWorkflowRollbackWorkflow Update a 'workflow.RollbackWorkflow' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchWorkflowRollbackWorkflowRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchWorkflowRollbackWorkflowRequest
 */
 func (a *WorkflowApiService) PatchWorkflowRollbackWorkflow(ctx context.Context, moid string) ApiPatchWorkflowRollbackWorkflowRequest {
 	return ApiPatchWorkflowRollbackWorkflowRequest{
@@ -20121,7 +20214,8 @@ func (a *WorkflowApiService) PatchWorkflowRollbackWorkflow(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return WorkflowRollbackWorkflow
+//
+//	@return WorkflowRollbackWorkflow
 func (a *WorkflowApiService) PatchWorkflowRollbackWorkflowExecute(r ApiPatchWorkflowRollbackWorkflowRequest) (*WorkflowRollbackWorkflow, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -20278,9 +20372,9 @@ func (r ApiPatchWorkflowServiceItemActionDefinitionRequest) Execute() (*Workflow
 /*
 PatchWorkflowServiceItemActionDefinition Update a 'workflow.ServiceItemActionDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchWorkflowServiceItemActionDefinitionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchWorkflowServiceItemActionDefinitionRequest
 */
 func (a *WorkflowApiService) PatchWorkflowServiceItemActionDefinition(ctx context.Context, moid string) ApiPatchWorkflowServiceItemActionDefinitionRequest {
 	return ApiPatchWorkflowServiceItemActionDefinitionRequest{
@@ -20291,7 +20385,8 @@ func (a *WorkflowApiService) PatchWorkflowServiceItemActionDefinition(ctx contex
 }
 
 // Execute executes the request
-//  @return WorkflowServiceItemActionDefinition
+//
+//	@return WorkflowServiceItemActionDefinition
 func (a *WorkflowApiService) PatchWorkflowServiceItemActionDefinitionExecute(r ApiPatchWorkflowServiceItemActionDefinitionRequest) (*WorkflowServiceItemActionDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -20448,9 +20543,9 @@ func (r ApiPatchWorkflowServiceItemActionInstanceRequest) Execute() (*WorkflowSe
 /*
 PatchWorkflowServiceItemActionInstance Update a 'workflow.ServiceItemActionInstance' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchWorkflowServiceItemActionInstanceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchWorkflowServiceItemActionInstanceRequest
 */
 func (a *WorkflowApiService) PatchWorkflowServiceItemActionInstance(ctx context.Context, moid string) ApiPatchWorkflowServiceItemActionInstanceRequest {
 	return ApiPatchWorkflowServiceItemActionInstanceRequest{
@@ -20461,7 +20556,8 @@ func (a *WorkflowApiService) PatchWorkflowServiceItemActionInstance(ctx context.
 }
 
 // Execute executes the request
-//  @return WorkflowServiceItemActionInstance
+//
+//	@return WorkflowServiceItemActionInstance
 func (a *WorkflowApiService) PatchWorkflowServiceItemActionInstanceExecute(r ApiPatchWorkflowServiceItemActionInstanceRequest) (*WorkflowServiceItemActionInstance, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -20618,9 +20714,9 @@ func (r ApiPatchWorkflowServiceItemDefinitionRequest) Execute() (*WorkflowServic
 /*
 PatchWorkflowServiceItemDefinition Update a 'workflow.ServiceItemDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchWorkflowServiceItemDefinitionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchWorkflowServiceItemDefinitionRequest
 */
 func (a *WorkflowApiService) PatchWorkflowServiceItemDefinition(ctx context.Context, moid string) ApiPatchWorkflowServiceItemDefinitionRequest {
 	return ApiPatchWorkflowServiceItemDefinitionRequest{
@@ -20631,7 +20727,8 @@ func (a *WorkflowApiService) PatchWorkflowServiceItemDefinition(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return WorkflowServiceItemDefinition
+//
+//	@return WorkflowServiceItemDefinition
 func (a *WorkflowApiService) PatchWorkflowServiceItemDefinitionExecute(r ApiPatchWorkflowServiceItemDefinitionRequest) (*WorkflowServiceItemDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -20788,9 +20885,9 @@ func (r ApiPatchWorkflowServiceItemHealthCheckDefinitionRequest) Execute() (*Wor
 /*
 PatchWorkflowServiceItemHealthCheckDefinition Update a 'workflow.ServiceItemHealthCheckDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchWorkflowServiceItemHealthCheckDefinitionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchWorkflowServiceItemHealthCheckDefinitionRequest
 */
 func (a *WorkflowApiService) PatchWorkflowServiceItemHealthCheckDefinition(ctx context.Context, moid string) ApiPatchWorkflowServiceItemHealthCheckDefinitionRequest {
 	return ApiPatchWorkflowServiceItemHealthCheckDefinitionRequest{
@@ -20801,7 +20898,8 @@ func (a *WorkflowApiService) PatchWorkflowServiceItemHealthCheckDefinition(ctx c
 }
 
 // Execute executes the request
-//  @return WorkflowServiceItemHealthCheckDefinition
+//
+//	@return WorkflowServiceItemHealthCheckDefinition
 func (a *WorkflowApiService) PatchWorkflowServiceItemHealthCheckDefinitionExecute(r ApiPatchWorkflowServiceItemHealthCheckDefinitionRequest) (*WorkflowServiceItemHealthCheckDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -20958,9 +21056,9 @@ func (r ApiPatchWorkflowServiceItemInstanceRequest) Execute() (*WorkflowServiceI
 /*
 PatchWorkflowServiceItemInstance Update a 'workflow.ServiceItemInstance' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchWorkflowServiceItemInstanceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchWorkflowServiceItemInstanceRequest
 */
 func (a *WorkflowApiService) PatchWorkflowServiceItemInstance(ctx context.Context, moid string) ApiPatchWorkflowServiceItemInstanceRequest {
 	return ApiPatchWorkflowServiceItemInstanceRequest{
@@ -20971,7 +21069,8 @@ func (a *WorkflowApiService) PatchWorkflowServiceItemInstance(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return WorkflowServiceItemInstance
+//
+//	@return WorkflowServiceItemInstance
 func (a *WorkflowApiService) PatchWorkflowServiceItemInstanceExecute(r ApiPatchWorkflowServiceItemInstanceRequest) (*WorkflowServiceItemInstance, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -21128,9 +21227,9 @@ func (r ApiPatchWorkflowServiceItemOutputRequest) Execute() (*WorkflowServiceIte
 /*
 PatchWorkflowServiceItemOutput Update a 'workflow.ServiceItemOutput' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchWorkflowServiceItemOutputRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchWorkflowServiceItemOutputRequest
 */
 func (a *WorkflowApiService) PatchWorkflowServiceItemOutput(ctx context.Context, moid string) ApiPatchWorkflowServiceItemOutputRequest {
 	return ApiPatchWorkflowServiceItemOutputRequest{
@@ -21141,7 +21240,8 @@ func (a *WorkflowApiService) PatchWorkflowServiceItemOutput(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return WorkflowServiceItemOutput
+//
+//	@return WorkflowServiceItemOutput
 func (a *WorkflowApiService) PatchWorkflowServiceItemOutputExecute(r ApiPatchWorkflowServiceItemOutputRequest) (*WorkflowServiceItemOutput, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -21298,9 +21398,9 @@ func (r ApiPatchWorkflowSolutionActionDefinitionRequest) Execute() (*WorkflowSol
 /*
 PatchWorkflowSolutionActionDefinition Update a 'workflow.SolutionActionDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchWorkflowSolutionActionDefinitionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchWorkflowSolutionActionDefinitionRequest
 */
 func (a *WorkflowApiService) PatchWorkflowSolutionActionDefinition(ctx context.Context, moid string) ApiPatchWorkflowSolutionActionDefinitionRequest {
 	return ApiPatchWorkflowSolutionActionDefinitionRequest{
@@ -21311,7 +21411,8 @@ func (a *WorkflowApiService) PatchWorkflowSolutionActionDefinition(ctx context.C
 }
 
 // Execute executes the request
-//  @return WorkflowSolutionActionDefinition
+//
+//	@return WorkflowSolutionActionDefinition
 func (a *WorkflowApiService) PatchWorkflowSolutionActionDefinitionExecute(r ApiPatchWorkflowSolutionActionDefinitionRequest) (*WorkflowSolutionActionDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -21468,9 +21569,9 @@ func (r ApiPatchWorkflowSolutionDefinitionRequest) Execute() (*WorkflowSolutionD
 /*
 PatchWorkflowSolutionDefinition Update a 'workflow.SolutionDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchWorkflowSolutionDefinitionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchWorkflowSolutionDefinitionRequest
 */
 func (a *WorkflowApiService) PatchWorkflowSolutionDefinition(ctx context.Context, moid string) ApiPatchWorkflowSolutionDefinitionRequest {
 	return ApiPatchWorkflowSolutionDefinitionRequest{
@@ -21481,7 +21582,8 @@ func (a *WorkflowApiService) PatchWorkflowSolutionDefinition(ctx context.Context
 }
 
 // Execute executes the request
-//  @return WorkflowSolutionDefinition
+//
+//	@return WorkflowSolutionDefinition
 func (a *WorkflowApiService) PatchWorkflowSolutionDefinitionExecute(r ApiPatchWorkflowSolutionDefinitionRequest) (*WorkflowSolutionDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -21638,9 +21740,9 @@ func (r ApiPatchWorkflowSshBatchExecutorRequest) Execute() (*WorkflowSshBatchExe
 /*
 PatchWorkflowSshBatchExecutor Update a 'workflow.SshBatchExecutor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchWorkflowSshBatchExecutorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchWorkflowSshBatchExecutorRequest
 */
 func (a *WorkflowApiService) PatchWorkflowSshBatchExecutor(ctx context.Context, moid string) ApiPatchWorkflowSshBatchExecutorRequest {
 	return ApiPatchWorkflowSshBatchExecutorRequest{
@@ -21651,7 +21753,8 @@ func (a *WorkflowApiService) PatchWorkflowSshBatchExecutor(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return WorkflowSshBatchExecutor
+//
+//	@return WorkflowSshBatchExecutor
 func (a *WorkflowApiService) PatchWorkflowSshBatchExecutorExecute(r ApiPatchWorkflowSshBatchExecutorRequest) (*WorkflowSshBatchExecutor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -21808,9 +21911,9 @@ func (r ApiPatchWorkflowTaskDefinitionRequest) Execute() (*WorkflowTaskDefinitio
 /*
 PatchWorkflowTaskDefinition Update a 'workflow.TaskDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchWorkflowTaskDefinitionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchWorkflowTaskDefinitionRequest
 */
 func (a *WorkflowApiService) PatchWorkflowTaskDefinition(ctx context.Context, moid string) ApiPatchWorkflowTaskDefinitionRequest {
 	return ApiPatchWorkflowTaskDefinitionRequest{
@@ -21821,7 +21924,8 @@ func (a *WorkflowApiService) PatchWorkflowTaskDefinition(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return WorkflowTaskDefinition
+//
+//	@return WorkflowTaskDefinition
 func (a *WorkflowApiService) PatchWorkflowTaskDefinitionExecute(r ApiPatchWorkflowTaskDefinitionRequest) (*WorkflowTaskDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -21978,9 +22082,9 @@ func (r ApiPatchWorkflowTaskInfoRequest) Execute() (*WorkflowTaskInfo, *http.Res
 /*
 PatchWorkflowTaskInfo Update a 'workflow.TaskInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchWorkflowTaskInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchWorkflowTaskInfoRequest
 */
 func (a *WorkflowApiService) PatchWorkflowTaskInfo(ctx context.Context, moid string) ApiPatchWorkflowTaskInfoRequest {
 	return ApiPatchWorkflowTaskInfoRequest{
@@ -21991,7 +22095,8 @@ func (a *WorkflowApiService) PatchWorkflowTaskInfo(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return WorkflowTaskInfo
+//
+//	@return WorkflowTaskInfo
 func (a *WorkflowApiService) PatchWorkflowTaskInfoExecute(r ApiPatchWorkflowTaskInfoRequest) (*WorkflowTaskInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -22148,9 +22253,9 @@ func (r ApiPatchWorkflowWorkflowDefinitionRequest) Execute() (*WorkflowWorkflowD
 /*
 PatchWorkflowWorkflowDefinition Update a 'workflow.WorkflowDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchWorkflowWorkflowDefinitionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchWorkflowWorkflowDefinitionRequest
 */
 func (a *WorkflowApiService) PatchWorkflowWorkflowDefinition(ctx context.Context, moid string) ApiPatchWorkflowWorkflowDefinitionRequest {
 	return ApiPatchWorkflowWorkflowDefinitionRequest{
@@ -22161,7 +22266,8 @@ func (a *WorkflowApiService) PatchWorkflowWorkflowDefinition(ctx context.Context
 }
 
 // Execute executes the request
-//  @return WorkflowWorkflowDefinition
+//
+//	@return WorkflowWorkflowDefinition
 func (a *WorkflowApiService) PatchWorkflowWorkflowDefinitionExecute(r ApiPatchWorkflowWorkflowDefinitionRequest) (*WorkflowWorkflowDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -22318,9 +22424,9 @@ func (r ApiPatchWorkflowWorkflowInfoRequest) Execute() (*WorkflowWorkflowInfo, *
 /*
 PatchWorkflowWorkflowInfo Update a 'workflow.WorkflowInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchWorkflowWorkflowInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchWorkflowWorkflowInfoRequest
 */
 func (a *WorkflowApiService) PatchWorkflowWorkflowInfo(ctx context.Context, moid string) ApiPatchWorkflowWorkflowInfoRequest {
 	return ApiPatchWorkflowWorkflowInfoRequest{
@@ -22331,7 +22437,8 @@ func (a *WorkflowApiService) PatchWorkflowWorkflowInfo(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return WorkflowWorkflowInfo
+//
+//	@return WorkflowWorkflowInfo
 func (a *WorkflowApiService) PatchWorkflowWorkflowInfoExecute(r ApiPatchWorkflowWorkflowInfoRequest) (*WorkflowWorkflowInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -22488,9 +22595,9 @@ func (r ApiUpdateWorkflowAnsibleBatchExecutorRequest) Execute() (*WorkflowAnsibl
 /*
 UpdateWorkflowAnsibleBatchExecutor Update a 'workflow.AnsibleBatchExecutor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateWorkflowAnsibleBatchExecutorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateWorkflowAnsibleBatchExecutorRequest
 */
 func (a *WorkflowApiService) UpdateWorkflowAnsibleBatchExecutor(ctx context.Context, moid string) ApiUpdateWorkflowAnsibleBatchExecutorRequest {
 	return ApiUpdateWorkflowAnsibleBatchExecutorRequest{
@@ -22501,7 +22608,8 @@ func (a *WorkflowApiService) UpdateWorkflowAnsibleBatchExecutor(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return WorkflowAnsibleBatchExecutor
+//
+//	@return WorkflowAnsibleBatchExecutor
 func (a *WorkflowApiService) UpdateWorkflowAnsibleBatchExecutorExecute(r ApiUpdateWorkflowAnsibleBatchExecutorRequest) (*WorkflowAnsibleBatchExecutor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -22658,9 +22766,9 @@ func (r ApiUpdateWorkflowBatchApiExecutorRequest) Execute() (*WorkflowBatchApiEx
 /*
 UpdateWorkflowBatchApiExecutor Update a 'workflow.BatchApiExecutor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateWorkflowBatchApiExecutorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateWorkflowBatchApiExecutorRequest
 */
 func (a *WorkflowApiService) UpdateWorkflowBatchApiExecutor(ctx context.Context, moid string) ApiUpdateWorkflowBatchApiExecutorRequest {
 	return ApiUpdateWorkflowBatchApiExecutorRequest{
@@ -22671,7 +22779,8 @@ func (a *WorkflowApiService) UpdateWorkflowBatchApiExecutor(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return WorkflowBatchApiExecutor
+//
+//	@return WorkflowBatchApiExecutor
 func (a *WorkflowApiService) UpdateWorkflowBatchApiExecutorExecute(r ApiUpdateWorkflowBatchApiExecutorRequest) (*WorkflowBatchApiExecutor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -22828,9 +22937,9 @@ func (r ApiUpdateWorkflowCustomDataTypeDefinitionRequest) Execute() (*WorkflowCu
 /*
 UpdateWorkflowCustomDataTypeDefinition Update a 'workflow.CustomDataTypeDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateWorkflowCustomDataTypeDefinitionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateWorkflowCustomDataTypeDefinitionRequest
 */
 func (a *WorkflowApiService) UpdateWorkflowCustomDataTypeDefinition(ctx context.Context, moid string) ApiUpdateWorkflowCustomDataTypeDefinitionRequest {
 	return ApiUpdateWorkflowCustomDataTypeDefinitionRequest{
@@ -22841,7 +22950,8 @@ func (a *WorkflowApiService) UpdateWorkflowCustomDataTypeDefinition(ctx context.
 }
 
 // Execute executes the request
-//  @return WorkflowCustomDataTypeDefinition
+//
+//	@return WorkflowCustomDataTypeDefinition
 func (a *WorkflowApiService) UpdateWorkflowCustomDataTypeDefinitionExecute(r ApiUpdateWorkflowCustomDataTypeDefinitionRequest) (*WorkflowCustomDataTypeDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -22998,9 +23108,9 @@ func (r ApiUpdateWorkflowErrorResponseHandlerRequest) Execute() (*WorkflowErrorR
 /*
 UpdateWorkflowErrorResponseHandler Update a 'workflow.ErrorResponseHandler' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateWorkflowErrorResponseHandlerRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateWorkflowErrorResponseHandlerRequest
 */
 func (a *WorkflowApiService) UpdateWorkflowErrorResponseHandler(ctx context.Context, moid string) ApiUpdateWorkflowErrorResponseHandlerRequest {
 	return ApiUpdateWorkflowErrorResponseHandlerRequest{
@@ -23011,7 +23121,8 @@ func (a *WorkflowApiService) UpdateWorkflowErrorResponseHandler(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return WorkflowErrorResponseHandler
+//
+//	@return WorkflowErrorResponseHandler
 func (a *WorkflowApiService) UpdateWorkflowErrorResponseHandlerExecute(r ApiUpdateWorkflowErrorResponseHandlerRequest) (*WorkflowErrorResponseHandler, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -23168,9 +23279,9 @@ func (r ApiUpdateWorkflowPowerShellBatchApiExecutorRequest) Execute() (*Workflow
 /*
 UpdateWorkflowPowerShellBatchApiExecutor Update a 'workflow.PowerShellBatchApiExecutor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateWorkflowPowerShellBatchApiExecutorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateWorkflowPowerShellBatchApiExecutorRequest
 */
 func (a *WorkflowApiService) UpdateWorkflowPowerShellBatchApiExecutor(ctx context.Context, moid string) ApiUpdateWorkflowPowerShellBatchApiExecutorRequest {
 	return ApiUpdateWorkflowPowerShellBatchApiExecutorRequest{
@@ -23181,7 +23292,8 @@ func (a *WorkflowApiService) UpdateWorkflowPowerShellBatchApiExecutor(ctx contex
 }
 
 // Execute executes the request
-//  @return WorkflowPowerShellBatchApiExecutor
+//
+//	@return WorkflowPowerShellBatchApiExecutor
 func (a *WorkflowApiService) UpdateWorkflowPowerShellBatchApiExecutorExecute(r ApiUpdateWorkflowPowerShellBatchApiExecutorRequest) (*WorkflowPowerShellBatchApiExecutor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -23338,9 +23450,9 @@ func (r ApiUpdateWorkflowRollbackWorkflowRequest) Execute() (*WorkflowRollbackWo
 /*
 UpdateWorkflowRollbackWorkflow Update a 'workflow.RollbackWorkflow' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateWorkflowRollbackWorkflowRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateWorkflowRollbackWorkflowRequest
 */
 func (a *WorkflowApiService) UpdateWorkflowRollbackWorkflow(ctx context.Context, moid string) ApiUpdateWorkflowRollbackWorkflowRequest {
 	return ApiUpdateWorkflowRollbackWorkflowRequest{
@@ -23351,7 +23463,8 @@ func (a *WorkflowApiService) UpdateWorkflowRollbackWorkflow(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return WorkflowRollbackWorkflow
+//
+//	@return WorkflowRollbackWorkflow
 func (a *WorkflowApiService) UpdateWorkflowRollbackWorkflowExecute(r ApiUpdateWorkflowRollbackWorkflowRequest) (*WorkflowRollbackWorkflow, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -23508,9 +23621,9 @@ func (r ApiUpdateWorkflowServiceItemActionDefinitionRequest) Execute() (*Workflo
 /*
 UpdateWorkflowServiceItemActionDefinition Update a 'workflow.ServiceItemActionDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateWorkflowServiceItemActionDefinitionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateWorkflowServiceItemActionDefinitionRequest
 */
 func (a *WorkflowApiService) UpdateWorkflowServiceItemActionDefinition(ctx context.Context, moid string) ApiUpdateWorkflowServiceItemActionDefinitionRequest {
 	return ApiUpdateWorkflowServiceItemActionDefinitionRequest{
@@ -23521,7 +23634,8 @@ func (a *WorkflowApiService) UpdateWorkflowServiceItemActionDefinition(ctx conte
 }
 
 // Execute executes the request
-//  @return WorkflowServiceItemActionDefinition
+//
+//	@return WorkflowServiceItemActionDefinition
 func (a *WorkflowApiService) UpdateWorkflowServiceItemActionDefinitionExecute(r ApiUpdateWorkflowServiceItemActionDefinitionRequest) (*WorkflowServiceItemActionDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -23678,9 +23792,9 @@ func (r ApiUpdateWorkflowServiceItemActionInstanceRequest) Execute() (*WorkflowS
 /*
 UpdateWorkflowServiceItemActionInstance Update a 'workflow.ServiceItemActionInstance' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateWorkflowServiceItemActionInstanceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateWorkflowServiceItemActionInstanceRequest
 */
 func (a *WorkflowApiService) UpdateWorkflowServiceItemActionInstance(ctx context.Context, moid string) ApiUpdateWorkflowServiceItemActionInstanceRequest {
 	return ApiUpdateWorkflowServiceItemActionInstanceRequest{
@@ -23691,7 +23805,8 @@ func (a *WorkflowApiService) UpdateWorkflowServiceItemActionInstance(ctx context
 }
 
 // Execute executes the request
-//  @return WorkflowServiceItemActionInstance
+//
+//	@return WorkflowServiceItemActionInstance
 func (a *WorkflowApiService) UpdateWorkflowServiceItemActionInstanceExecute(r ApiUpdateWorkflowServiceItemActionInstanceRequest) (*WorkflowServiceItemActionInstance, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -23848,9 +23963,9 @@ func (r ApiUpdateWorkflowServiceItemDefinitionRequest) Execute() (*WorkflowServi
 /*
 UpdateWorkflowServiceItemDefinition Update a 'workflow.ServiceItemDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateWorkflowServiceItemDefinitionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateWorkflowServiceItemDefinitionRequest
 */
 func (a *WorkflowApiService) UpdateWorkflowServiceItemDefinition(ctx context.Context, moid string) ApiUpdateWorkflowServiceItemDefinitionRequest {
 	return ApiUpdateWorkflowServiceItemDefinitionRequest{
@@ -23861,7 +23976,8 @@ func (a *WorkflowApiService) UpdateWorkflowServiceItemDefinition(ctx context.Con
 }
 
 // Execute executes the request
-//  @return WorkflowServiceItemDefinition
+//
+//	@return WorkflowServiceItemDefinition
 func (a *WorkflowApiService) UpdateWorkflowServiceItemDefinitionExecute(r ApiUpdateWorkflowServiceItemDefinitionRequest) (*WorkflowServiceItemDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -24018,9 +24134,9 @@ func (r ApiUpdateWorkflowServiceItemHealthCheckDefinitionRequest) Execute() (*Wo
 /*
 UpdateWorkflowServiceItemHealthCheckDefinition Update a 'workflow.ServiceItemHealthCheckDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateWorkflowServiceItemHealthCheckDefinitionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateWorkflowServiceItemHealthCheckDefinitionRequest
 */
 func (a *WorkflowApiService) UpdateWorkflowServiceItemHealthCheckDefinition(ctx context.Context, moid string) ApiUpdateWorkflowServiceItemHealthCheckDefinitionRequest {
 	return ApiUpdateWorkflowServiceItemHealthCheckDefinitionRequest{
@@ -24031,7 +24147,8 @@ func (a *WorkflowApiService) UpdateWorkflowServiceItemHealthCheckDefinition(ctx 
 }
 
 // Execute executes the request
-//  @return WorkflowServiceItemHealthCheckDefinition
+//
+//	@return WorkflowServiceItemHealthCheckDefinition
 func (a *WorkflowApiService) UpdateWorkflowServiceItemHealthCheckDefinitionExecute(r ApiUpdateWorkflowServiceItemHealthCheckDefinitionRequest) (*WorkflowServiceItemHealthCheckDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -24188,9 +24305,9 @@ func (r ApiUpdateWorkflowServiceItemInstanceRequest) Execute() (*WorkflowService
 /*
 UpdateWorkflowServiceItemInstance Update a 'workflow.ServiceItemInstance' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateWorkflowServiceItemInstanceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateWorkflowServiceItemInstanceRequest
 */
 func (a *WorkflowApiService) UpdateWorkflowServiceItemInstance(ctx context.Context, moid string) ApiUpdateWorkflowServiceItemInstanceRequest {
 	return ApiUpdateWorkflowServiceItemInstanceRequest{
@@ -24201,7 +24318,8 @@ func (a *WorkflowApiService) UpdateWorkflowServiceItemInstance(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return WorkflowServiceItemInstance
+//
+//	@return WorkflowServiceItemInstance
 func (a *WorkflowApiService) UpdateWorkflowServiceItemInstanceExecute(r ApiUpdateWorkflowServiceItemInstanceRequest) (*WorkflowServiceItemInstance, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -24358,9 +24476,9 @@ func (r ApiUpdateWorkflowServiceItemOutputRequest) Execute() (*WorkflowServiceIt
 /*
 UpdateWorkflowServiceItemOutput Update a 'workflow.ServiceItemOutput' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateWorkflowServiceItemOutputRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateWorkflowServiceItemOutputRequest
 */
 func (a *WorkflowApiService) UpdateWorkflowServiceItemOutput(ctx context.Context, moid string) ApiUpdateWorkflowServiceItemOutputRequest {
 	return ApiUpdateWorkflowServiceItemOutputRequest{
@@ -24371,7 +24489,8 @@ func (a *WorkflowApiService) UpdateWorkflowServiceItemOutput(ctx context.Context
 }
 
 // Execute executes the request
-//  @return WorkflowServiceItemOutput
+//
+//	@return WorkflowServiceItemOutput
 func (a *WorkflowApiService) UpdateWorkflowServiceItemOutputExecute(r ApiUpdateWorkflowServiceItemOutputRequest) (*WorkflowServiceItemOutput, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -24528,9 +24647,9 @@ func (r ApiUpdateWorkflowSolutionActionDefinitionRequest) Execute() (*WorkflowSo
 /*
 UpdateWorkflowSolutionActionDefinition Update a 'workflow.SolutionActionDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateWorkflowSolutionActionDefinitionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateWorkflowSolutionActionDefinitionRequest
 */
 func (a *WorkflowApiService) UpdateWorkflowSolutionActionDefinition(ctx context.Context, moid string) ApiUpdateWorkflowSolutionActionDefinitionRequest {
 	return ApiUpdateWorkflowSolutionActionDefinitionRequest{
@@ -24541,7 +24660,8 @@ func (a *WorkflowApiService) UpdateWorkflowSolutionActionDefinition(ctx context.
 }
 
 // Execute executes the request
-//  @return WorkflowSolutionActionDefinition
+//
+//	@return WorkflowSolutionActionDefinition
 func (a *WorkflowApiService) UpdateWorkflowSolutionActionDefinitionExecute(r ApiUpdateWorkflowSolutionActionDefinitionRequest) (*WorkflowSolutionActionDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -24698,9 +24818,9 @@ func (r ApiUpdateWorkflowSolutionDefinitionRequest) Execute() (*WorkflowSolution
 /*
 UpdateWorkflowSolutionDefinition Update a 'workflow.SolutionDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateWorkflowSolutionDefinitionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateWorkflowSolutionDefinitionRequest
 */
 func (a *WorkflowApiService) UpdateWorkflowSolutionDefinition(ctx context.Context, moid string) ApiUpdateWorkflowSolutionDefinitionRequest {
 	return ApiUpdateWorkflowSolutionDefinitionRequest{
@@ -24711,7 +24831,8 @@ func (a *WorkflowApiService) UpdateWorkflowSolutionDefinition(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return WorkflowSolutionDefinition
+//
+//	@return WorkflowSolutionDefinition
 func (a *WorkflowApiService) UpdateWorkflowSolutionDefinitionExecute(r ApiUpdateWorkflowSolutionDefinitionRequest) (*WorkflowSolutionDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -24868,9 +24989,9 @@ func (r ApiUpdateWorkflowSshBatchExecutorRequest) Execute() (*WorkflowSshBatchEx
 /*
 UpdateWorkflowSshBatchExecutor Update a 'workflow.SshBatchExecutor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateWorkflowSshBatchExecutorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateWorkflowSshBatchExecutorRequest
 */
 func (a *WorkflowApiService) UpdateWorkflowSshBatchExecutor(ctx context.Context, moid string) ApiUpdateWorkflowSshBatchExecutorRequest {
 	return ApiUpdateWorkflowSshBatchExecutorRequest{
@@ -24881,7 +25002,8 @@ func (a *WorkflowApiService) UpdateWorkflowSshBatchExecutor(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return WorkflowSshBatchExecutor
+//
+//	@return WorkflowSshBatchExecutor
 func (a *WorkflowApiService) UpdateWorkflowSshBatchExecutorExecute(r ApiUpdateWorkflowSshBatchExecutorRequest) (*WorkflowSshBatchExecutor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -25038,9 +25160,9 @@ func (r ApiUpdateWorkflowTaskDefinitionRequest) Execute() (*WorkflowTaskDefiniti
 /*
 UpdateWorkflowTaskDefinition Update a 'workflow.TaskDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateWorkflowTaskDefinitionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateWorkflowTaskDefinitionRequest
 */
 func (a *WorkflowApiService) UpdateWorkflowTaskDefinition(ctx context.Context, moid string) ApiUpdateWorkflowTaskDefinitionRequest {
 	return ApiUpdateWorkflowTaskDefinitionRequest{
@@ -25051,7 +25173,8 @@ func (a *WorkflowApiService) UpdateWorkflowTaskDefinition(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return WorkflowTaskDefinition
+//
+//	@return WorkflowTaskDefinition
 func (a *WorkflowApiService) UpdateWorkflowTaskDefinitionExecute(r ApiUpdateWorkflowTaskDefinitionRequest) (*WorkflowTaskDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -25208,9 +25331,9 @@ func (r ApiUpdateWorkflowTaskInfoRequest) Execute() (*WorkflowTaskInfo, *http.Re
 /*
 UpdateWorkflowTaskInfo Update a 'workflow.TaskInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateWorkflowTaskInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateWorkflowTaskInfoRequest
 */
 func (a *WorkflowApiService) UpdateWorkflowTaskInfo(ctx context.Context, moid string) ApiUpdateWorkflowTaskInfoRequest {
 	return ApiUpdateWorkflowTaskInfoRequest{
@@ -25221,7 +25344,8 @@ func (a *WorkflowApiService) UpdateWorkflowTaskInfo(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return WorkflowTaskInfo
+//
+//	@return WorkflowTaskInfo
 func (a *WorkflowApiService) UpdateWorkflowTaskInfoExecute(r ApiUpdateWorkflowTaskInfoRequest) (*WorkflowTaskInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -25378,9 +25502,9 @@ func (r ApiUpdateWorkflowWorkflowDefinitionRequest) Execute() (*WorkflowWorkflow
 /*
 UpdateWorkflowWorkflowDefinition Update a 'workflow.WorkflowDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateWorkflowWorkflowDefinitionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateWorkflowWorkflowDefinitionRequest
 */
 func (a *WorkflowApiService) UpdateWorkflowWorkflowDefinition(ctx context.Context, moid string) ApiUpdateWorkflowWorkflowDefinitionRequest {
 	return ApiUpdateWorkflowWorkflowDefinitionRequest{
@@ -25391,7 +25515,8 @@ func (a *WorkflowApiService) UpdateWorkflowWorkflowDefinition(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return WorkflowWorkflowDefinition
+//
+//	@return WorkflowWorkflowDefinition
 func (a *WorkflowApiService) UpdateWorkflowWorkflowDefinitionExecute(r ApiUpdateWorkflowWorkflowDefinitionRequest) (*WorkflowWorkflowDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -25548,9 +25673,9 @@ func (r ApiUpdateWorkflowWorkflowInfoRequest) Execute() (*WorkflowWorkflowInfo, 
 /*
 UpdateWorkflowWorkflowInfo Update a 'workflow.WorkflowInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateWorkflowWorkflowInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateWorkflowWorkflowInfoRequest
 */
 func (a *WorkflowApiService) UpdateWorkflowWorkflowInfo(ctx context.Context, moid string) ApiUpdateWorkflowWorkflowInfoRequest {
 	return ApiUpdateWorkflowWorkflowInfoRequest{
@@ -25561,7 +25686,8 @@ func (a *WorkflowApiService) UpdateWorkflowWorkflowInfo(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return WorkflowWorkflowInfo
+//
+//	@return WorkflowWorkflowInfo
 func (a *WorkflowApiService) UpdateWorkflowWorkflowInfoExecute(r ApiUpdateWorkflowWorkflowInfoRequest) (*WorkflowWorkflowInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

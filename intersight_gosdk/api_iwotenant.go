@@ -36,9 +36,9 @@ func (r ApiGetIwotenantTenantStatusByMoidRequest) Execute() (*IwotenantTenantSta
 /*
 GetIwotenantTenantStatusByMoid Read a 'iwotenant.TenantStatus' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIwotenantTenantStatusByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIwotenantTenantStatusByMoidRequest
 */
 func (a *IwotenantApiService) GetIwotenantTenantStatusByMoid(ctx context.Context, moid string) ApiGetIwotenantTenantStatusByMoidRequest {
 	return ApiGetIwotenantTenantStatusByMoidRequest{
@@ -49,7 +49,8 @@ func (a *IwotenantApiService) GetIwotenantTenantStatusByMoid(ctx context.Context
 }
 
 // Execute executes the request
-//  @return IwotenantTenantStatus
+//
+//	@return IwotenantTenantStatus
 func (a *IwotenantApiService) GetIwotenantTenantStatusByMoidExecute(r ApiGetIwotenantTenantStatusByMoidRequest) (*IwotenantTenantStatus, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -260,8 +261,8 @@ func (r ApiGetIwotenantTenantStatusListRequest) Execute() (*IwotenantTenantStatu
 /*
 GetIwotenantTenantStatusList Read a 'iwotenant.TenantStatus' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIwotenantTenantStatusListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIwotenantTenantStatusListRequest
 */
 func (a *IwotenantApiService) GetIwotenantTenantStatusList(ctx context.Context) ApiGetIwotenantTenantStatusListRequest {
 	return ApiGetIwotenantTenantStatusListRequest{
@@ -271,7 +272,8 @@ func (a *IwotenantApiService) GetIwotenantTenantStatusList(ctx context.Context) 
 }
 
 // Execute executes the request
-//  @return IwotenantTenantStatusResponse
+//
+//	@return IwotenantTenantStatusResponse
 func (a *IwotenantApiService) GetIwotenantTenantStatusListExecute(r ApiGetIwotenantTenantStatusListRequest) (*IwotenantTenantStatusResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet

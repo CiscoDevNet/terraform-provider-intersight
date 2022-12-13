@@ -56,8 +56,8 @@ func (r ApiCreateApplianceAutoRmaPolicyRequest) Execute() (*ApplianceAutoRmaPoli
 /*
 CreateApplianceAutoRmaPolicy Create a 'appliance.AutoRmaPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateApplianceAutoRmaPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateApplianceAutoRmaPolicyRequest
 */
 func (a *ApplianceApiService) CreateApplianceAutoRmaPolicy(ctx context.Context) ApiCreateApplianceAutoRmaPolicyRequest {
 	return ApiCreateApplianceAutoRmaPolicyRequest{
@@ -67,7 +67,8 @@ func (a *ApplianceApiService) CreateApplianceAutoRmaPolicy(ctx context.Context) 
 }
 
 // Execute executes the request
-//  @return ApplianceAutoRmaPolicy
+//
+//	@return ApplianceAutoRmaPolicy
 func (a *ApplianceApiService) CreateApplianceAutoRmaPolicyExecute(r ApiCreateApplianceAutoRmaPolicyRequest) (*ApplianceAutoRmaPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -232,8 +233,8 @@ func (r ApiCreateApplianceBackupRequest) Execute() (*ApplianceBackup, *http.Resp
 /*
 CreateApplianceBackup Create a 'appliance.Backup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateApplianceBackupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateApplianceBackupRequest
 */
 func (a *ApplianceApiService) CreateApplianceBackup(ctx context.Context) ApiCreateApplianceBackupRequest {
 	return ApiCreateApplianceBackupRequest{
@@ -243,7 +244,8 @@ func (a *ApplianceApiService) CreateApplianceBackup(ctx context.Context) ApiCrea
 }
 
 // Execute executes the request
-//  @return ApplianceBackup
+//
+//	@return ApplianceBackup
 func (a *ApplianceApiService) CreateApplianceBackupExecute(r ApiCreateApplianceBackupRequest) (*ApplianceBackup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -408,8 +410,8 @@ func (r ApiCreateApplianceBackupPolicyRequest) Execute() (*ApplianceBackupPolicy
 /*
 CreateApplianceBackupPolicy Create a 'appliance.BackupPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateApplianceBackupPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateApplianceBackupPolicyRequest
 */
 func (a *ApplianceApiService) CreateApplianceBackupPolicy(ctx context.Context) ApiCreateApplianceBackupPolicyRequest {
 	return ApiCreateApplianceBackupPolicyRequest{
@@ -419,7 +421,8 @@ func (a *ApplianceApiService) CreateApplianceBackupPolicy(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return ApplianceBackupPolicy
+//
+//	@return ApplianceBackupPolicy
 func (a *ApplianceApiService) CreateApplianceBackupPolicyExecute(r ApiCreateApplianceBackupPolicyRequest) (*ApplianceBackupPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -584,8 +587,8 @@ func (r ApiCreateApplianceDataExportPolicyRequest) Execute() (*ApplianceDataExpo
 /*
 CreateApplianceDataExportPolicy Create a 'appliance.DataExportPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateApplianceDataExportPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateApplianceDataExportPolicyRequest
 */
 func (a *ApplianceApiService) CreateApplianceDataExportPolicy(ctx context.Context) ApiCreateApplianceDataExportPolicyRequest {
 	return ApiCreateApplianceDataExportPolicyRequest{
@@ -595,7 +598,8 @@ func (a *ApplianceApiService) CreateApplianceDataExportPolicy(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return ApplianceDataExportPolicy
+//
+//	@return ApplianceDataExportPolicy
 func (a *ApplianceApiService) CreateApplianceDataExportPolicyExecute(r ApiCreateApplianceDataExportPolicyRequest) (*ApplianceDataExportPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -760,8 +764,8 @@ func (r ApiCreateApplianceDeviceClaimRequest) Execute() (*ApplianceDeviceClaim, 
 /*
 CreateApplianceDeviceClaim Create a 'appliance.DeviceClaim' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateApplianceDeviceClaimRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateApplianceDeviceClaimRequest
 */
 func (a *ApplianceApiService) CreateApplianceDeviceClaim(ctx context.Context) ApiCreateApplianceDeviceClaimRequest {
 	return ApiCreateApplianceDeviceClaimRequest{
@@ -771,7 +775,8 @@ func (a *ApplianceApiService) CreateApplianceDeviceClaim(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return ApplianceDeviceClaim
+//
+//	@return ApplianceDeviceClaim
 func (a *ApplianceApiService) CreateApplianceDeviceClaimExecute(r ApiCreateApplianceDeviceClaimRequest) (*ApplianceDeviceClaim, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -936,8 +941,8 @@ func (r ApiCreateApplianceDiagSettingRequest) Execute() (*ApplianceDiagSetting, 
 /*
 CreateApplianceDiagSetting Create a 'appliance.DiagSetting' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateApplianceDiagSettingRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateApplianceDiagSettingRequest
 */
 func (a *ApplianceApiService) CreateApplianceDiagSetting(ctx context.Context) ApiCreateApplianceDiagSettingRequest {
 	return ApiCreateApplianceDiagSettingRequest{
@@ -947,7 +952,8 @@ func (a *ApplianceApiService) CreateApplianceDiagSetting(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return ApplianceDiagSetting
+//
+//	@return ApplianceDiagSetting
 func (a *ApplianceApiService) CreateApplianceDiagSettingExecute(r ApiCreateApplianceDiagSettingRequest) (*ApplianceDiagSetting, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1112,8 +1118,8 @@ func (r ApiCreateApplianceRemoteFileImportRequest) Execute() (*ApplianceRemoteFi
 /*
 CreateApplianceRemoteFileImport Create a 'appliance.RemoteFileImport' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateApplianceRemoteFileImportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateApplianceRemoteFileImportRequest
 */
 func (a *ApplianceApiService) CreateApplianceRemoteFileImport(ctx context.Context) ApiCreateApplianceRemoteFileImportRequest {
 	return ApiCreateApplianceRemoteFileImportRequest{
@@ -1123,7 +1129,8 @@ func (a *ApplianceApiService) CreateApplianceRemoteFileImport(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return ApplianceRemoteFileImport
+//
+//	@return ApplianceRemoteFileImport
 func (a *ApplianceApiService) CreateApplianceRemoteFileImportExecute(r ApiCreateApplianceRemoteFileImportRequest) (*ApplianceRemoteFileImport, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1288,8 +1295,8 @@ func (r ApiCreateApplianceRestoreRequest) Execute() (*ApplianceRestore, *http.Re
 /*
 CreateApplianceRestore Create a 'appliance.Restore' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateApplianceRestoreRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateApplianceRestoreRequest
 */
 func (a *ApplianceApiService) CreateApplianceRestore(ctx context.Context) ApiCreateApplianceRestoreRequest {
 	return ApiCreateApplianceRestoreRequest{
@@ -1299,7 +1306,8 @@ func (a *ApplianceApiService) CreateApplianceRestore(ctx context.Context) ApiCre
 }
 
 // Execute executes the request
-//  @return ApplianceRestore
+//
+//	@return ApplianceRestore
 func (a *ApplianceApiService) CreateApplianceRestoreExecute(r ApiCreateApplianceRestoreRequest) (*ApplianceRestore, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1444,9 +1452,9 @@ func (r ApiDeleteApplianceBackupRequest) Execute() (*http.Response, error) {
 /*
 DeleteApplianceBackup Delete a 'appliance.Backup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteApplianceBackupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteApplianceBackupRequest
 */
 func (a *ApplianceApiService) DeleteApplianceBackup(ctx context.Context, moid string) ApiDeleteApplianceBackupRequest {
 	return ApiDeleteApplianceBackupRequest{
@@ -1581,9 +1589,9 @@ func (r ApiDeleteApplianceRestoreRequest) Execute() (*http.Response, error) {
 /*
 DeleteApplianceRestore Delete a 'appliance.Restore' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteApplianceRestoreRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteApplianceRestoreRequest
 */
 func (a *ApplianceApiService) DeleteApplianceRestore(ctx context.Context, moid string) ApiDeleteApplianceRestoreRequest {
 	return ApiDeleteApplianceRestoreRequest{
@@ -1718,9 +1726,9 @@ func (r ApiDeleteApplianceUpgradeRequest) Execute() (*http.Response, error) {
 /*
 DeleteApplianceUpgrade Delete a 'appliance.Upgrade' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteApplianceUpgradeRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteApplianceUpgradeRequest
 */
 func (a *ApplianceApiService) DeleteApplianceUpgrade(ctx context.Context, moid string) ApiDeleteApplianceUpgradeRequest {
 	return ApiDeleteApplianceUpgradeRequest{
@@ -1855,9 +1863,9 @@ func (r ApiGetApplianceAppStatusByMoidRequest) Execute() (*ApplianceAppStatus, *
 /*
 GetApplianceAppStatusByMoid Read a 'appliance.AppStatus' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetApplianceAppStatusByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetApplianceAppStatusByMoidRequest
 */
 func (a *ApplianceApiService) GetApplianceAppStatusByMoid(ctx context.Context, moid string) ApiGetApplianceAppStatusByMoidRequest {
 	return ApiGetApplianceAppStatusByMoidRequest{
@@ -1868,7 +1876,8 @@ func (a *ApplianceApiService) GetApplianceAppStatusByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return ApplianceAppStatus
+//
+//	@return ApplianceAppStatus
 func (a *ApplianceApiService) GetApplianceAppStatusByMoidExecute(r ApiGetApplianceAppStatusByMoidRequest) (*ApplianceAppStatus, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2079,8 +2088,8 @@ func (r ApiGetApplianceAppStatusListRequest) Execute() (*ApplianceAppStatusRespo
 /*
 GetApplianceAppStatusList Read a 'appliance.AppStatus' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetApplianceAppStatusListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetApplianceAppStatusListRequest
 */
 func (a *ApplianceApiService) GetApplianceAppStatusList(ctx context.Context) ApiGetApplianceAppStatusListRequest {
 	return ApiGetApplianceAppStatusListRequest{
@@ -2090,7 +2099,8 @@ func (a *ApplianceApiService) GetApplianceAppStatusList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return ApplianceAppStatusResponse
+//
+//	@return ApplianceAppStatusResponse
 func (a *ApplianceApiService) GetApplianceAppStatusListExecute(r ApiGetApplianceAppStatusListRequest) (*ApplianceAppStatusResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2257,9 +2267,9 @@ func (r ApiGetApplianceAutoRmaPolicyByMoidRequest) Execute() (*ApplianceAutoRmaP
 /*
 GetApplianceAutoRmaPolicyByMoid Read a 'appliance.AutoRmaPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetApplianceAutoRmaPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetApplianceAutoRmaPolicyByMoidRequest
 */
 func (a *ApplianceApiService) GetApplianceAutoRmaPolicyByMoid(ctx context.Context, moid string) ApiGetApplianceAutoRmaPolicyByMoidRequest {
 	return ApiGetApplianceAutoRmaPolicyByMoidRequest{
@@ -2270,7 +2280,8 @@ func (a *ApplianceApiService) GetApplianceAutoRmaPolicyByMoid(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return ApplianceAutoRmaPolicy
+//
+//	@return ApplianceAutoRmaPolicy
 func (a *ApplianceApiService) GetApplianceAutoRmaPolicyByMoidExecute(r ApiGetApplianceAutoRmaPolicyByMoidRequest) (*ApplianceAutoRmaPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2481,8 +2492,8 @@ func (r ApiGetApplianceAutoRmaPolicyListRequest) Execute() (*ApplianceAutoRmaPol
 /*
 GetApplianceAutoRmaPolicyList Read a 'appliance.AutoRmaPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetApplianceAutoRmaPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetApplianceAutoRmaPolicyListRequest
 */
 func (a *ApplianceApiService) GetApplianceAutoRmaPolicyList(ctx context.Context) ApiGetApplianceAutoRmaPolicyListRequest {
 	return ApiGetApplianceAutoRmaPolicyListRequest{
@@ -2492,7 +2503,8 @@ func (a *ApplianceApiService) GetApplianceAutoRmaPolicyList(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return ApplianceAutoRmaPolicyResponse
+//
+//	@return ApplianceAutoRmaPolicyResponse
 func (a *ApplianceApiService) GetApplianceAutoRmaPolicyListExecute(r ApiGetApplianceAutoRmaPolicyListRequest) (*ApplianceAutoRmaPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2659,9 +2671,9 @@ func (r ApiGetApplianceBackupByMoidRequest) Execute() (*ApplianceBackup, *http.R
 /*
 GetApplianceBackupByMoid Read a 'appliance.Backup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetApplianceBackupByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetApplianceBackupByMoidRequest
 */
 func (a *ApplianceApiService) GetApplianceBackupByMoid(ctx context.Context, moid string) ApiGetApplianceBackupByMoidRequest {
 	return ApiGetApplianceBackupByMoidRequest{
@@ -2672,7 +2684,8 @@ func (a *ApplianceApiService) GetApplianceBackupByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return ApplianceBackup
+//
+//	@return ApplianceBackup
 func (a *ApplianceApiService) GetApplianceBackupByMoidExecute(r ApiGetApplianceBackupByMoidRequest) (*ApplianceBackup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2883,8 +2896,8 @@ func (r ApiGetApplianceBackupListRequest) Execute() (*ApplianceBackupResponse, *
 /*
 GetApplianceBackupList Read a 'appliance.Backup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetApplianceBackupListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetApplianceBackupListRequest
 */
 func (a *ApplianceApiService) GetApplianceBackupList(ctx context.Context) ApiGetApplianceBackupListRequest {
 	return ApiGetApplianceBackupListRequest{
@@ -2894,7 +2907,8 @@ func (a *ApplianceApiService) GetApplianceBackupList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//  @return ApplianceBackupResponse
+//
+//	@return ApplianceBackupResponse
 func (a *ApplianceApiService) GetApplianceBackupListExecute(r ApiGetApplianceBackupListRequest) (*ApplianceBackupResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3061,9 +3075,9 @@ func (r ApiGetApplianceBackupPolicyByMoidRequest) Execute() (*ApplianceBackupPol
 /*
 GetApplianceBackupPolicyByMoid Read a 'appliance.BackupPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetApplianceBackupPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetApplianceBackupPolicyByMoidRequest
 */
 func (a *ApplianceApiService) GetApplianceBackupPolicyByMoid(ctx context.Context, moid string) ApiGetApplianceBackupPolicyByMoidRequest {
 	return ApiGetApplianceBackupPolicyByMoidRequest{
@@ -3074,7 +3088,8 @@ func (a *ApplianceApiService) GetApplianceBackupPolicyByMoid(ctx context.Context
 }
 
 // Execute executes the request
-//  @return ApplianceBackupPolicy
+//
+//	@return ApplianceBackupPolicy
 func (a *ApplianceApiService) GetApplianceBackupPolicyByMoidExecute(r ApiGetApplianceBackupPolicyByMoidRequest) (*ApplianceBackupPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3285,8 +3300,8 @@ func (r ApiGetApplianceBackupPolicyListRequest) Execute() (*ApplianceBackupPolic
 /*
 GetApplianceBackupPolicyList Read a 'appliance.BackupPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetApplianceBackupPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetApplianceBackupPolicyListRequest
 */
 func (a *ApplianceApiService) GetApplianceBackupPolicyList(ctx context.Context) ApiGetApplianceBackupPolicyListRequest {
 	return ApiGetApplianceBackupPolicyListRequest{
@@ -3296,7 +3311,8 @@ func (a *ApplianceApiService) GetApplianceBackupPolicyList(ctx context.Context) 
 }
 
 // Execute executes the request
-//  @return ApplianceBackupPolicyResponse
+//
+//	@return ApplianceBackupPolicyResponse
 func (a *ApplianceApiService) GetApplianceBackupPolicyListExecute(r ApiGetApplianceBackupPolicyListRequest) (*ApplianceBackupPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3463,9 +3479,9 @@ func (r ApiGetApplianceCertificateSettingByMoidRequest) Execute() (*ApplianceCer
 /*
 GetApplianceCertificateSettingByMoid Read a 'appliance.CertificateSetting' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetApplianceCertificateSettingByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetApplianceCertificateSettingByMoidRequest
 */
 func (a *ApplianceApiService) GetApplianceCertificateSettingByMoid(ctx context.Context, moid string) ApiGetApplianceCertificateSettingByMoidRequest {
 	return ApiGetApplianceCertificateSettingByMoidRequest{
@@ -3476,7 +3492,8 @@ func (a *ApplianceApiService) GetApplianceCertificateSettingByMoid(ctx context.C
 }
 
 // Execute executes the request
-//  @return ApplianceCertificateSetting
+//
+//	@return ApplianceCertificateSetting
 func (a *ApplianceApiService) GetApplianceCertificateSettingByMoidExecute(r ApiGetApplianceCertificateSettingByMoidRequest) (*ApplianceCertificateSetting, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3687,8 +3704,8 @@ func (r ApiGetApplianceCertificateSettingListRequest) Execute() (*ApplianceCerti
 /*
 GetApplianceCertificateSettingList Read a 'appliance.CertificateSetting' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetApplianceCertificateSettingListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetApplianceCertificateSettingListRequest
 */
 func (a *ApplianceApiService) GetApplianceCertificateSettingList(ctx context.Context) ApiGetApplianceCertificateSettingListRequest {
 	return ApiGetApplianceCertificateSettingListRequest{
@@ -3698,7 +3715,8 @@ func (a *ApplianceApiService) GetApplianceCertificateSettingList(ctx context.Con
 }
 
 // Execute executes the request
-//  @return ApplianceCertificateSettingResponse
+//
+//	@return ApplianceCertificateSettingResponse
 func (a *ApplianceApiService) GetApplianceCertificateSettingListExecute(r ApiGetApplianceCertificateSettingListRequest) (*ApplianceCertificateSettingResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3865,9 +3883,9 @@ func (r ApiGetApplianceDataExportPolicyByMoidRequest) Execute() (*ApplianceDataE
 /*
 GetApplianceDataExportPolicyByMoid Read a 'appliance.DataExportPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetApplianceDataExportPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetApplianceDataExportPolicyByMoidRequest
 */
 func (a *ApplianceApiService) GetApplianceDataExportPolicyByMoid(ctx context.Context, moid string) ApiGetApplianceDataExportPolicyByMoidRequest {
 	return ApiGetApplianceDataExportPolicyByMoidRequest{
@@ -3878,7 +3896,8 @@ func (a *ApplianceApiService) GetApplianceDataExportPolicyByMoid(ctx context.Con
 }
 
 // Execute executes the request
-//  @return ApplianceDataExportPolicy
+//
+//	@return ApplianceDataExportPolicy
 func (a *ApplianceApiService) GetApplianceDataExportPolicyByMoidExecute(r ApiGetApplianceDataExportPolicyByMoidRequest) (*ApplianceDataExportPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4089,8 +4108,8 @@ func (r ApiGetApplianceDataExportPolicyListRequest) Execute() (*ApplianceDataExp
 /*
 GetApplianceDataExportPolicyList Read a 'appliance.DataExportPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetApplianceDataExportPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetApplianceDataExportPolicyListRequest
 */
 func (a *ApplianceApiService) GetApplianceDataExportPolicyList(ctx context.Context) ApiGetApplianceDataExportPolicyListRequest {
 	return ApiGetApplianceDataExportPolicyListRequest{
@@ -4100,7 +4119,8 @@ func (a *ApplianceApiService) GetApplianceDataExportPolicyList(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return ApplianceDataExportPolicyResponse
+//
+//	@return ApplianceDataExportPolicyResponse
 func (a *ApplianceApiService) GetApplianceDataExportPolicyListExecute(r ApiGetApplianceDataExportPolicyListRequest) (*ApplianceDataExportPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4267,9 +4287,9 @@ func (r ApiGetApplianceDeviceCertificateByMoidRequest) Execute() (*ApplianceDevi
 /*
 GetApplianceDeviceCertificateByMoid Read a 'appliance.DeviceCertificate' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetApplianceDeviceCertificateByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetApplianceDeviceCertificateByMoidRequest
 */
 func (a *ApplianceApiService) GetApplianceDeviceCertificateByMoid(ctx context.Context, moid string) ApiGetApplianceDeviceCertificateByMoidRequest {
 	return ApiGetApplianceDeviceCertificateByMoidRequest{
@@ -4280,7 +4300,8 @@ func (a *ApplianceApiService) GetApplianceDeviceCertificateByMoid(ctx context.Co
 }
 
 // Execute executes the request
-//  @return ApplianceDeviceCertificate
+//
+//	@return ApplianceDeviceCertificate
 func (a *ApplianceApiService) GetApplianceDeviceCertificateByMoidExecute(r ApiGetApplianceDeviceCertificateByMoidRequest) (*ApplianceDeviceCertificate, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4491,8 +4512,8 @@ func (r ApiGetApplianceDeviceCertificateListRequest) Execute() (*ApplianceDevice
 /*
 GetApplianceDeviceCertificateList Read a 'appliance.DeviceCertificate' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetApplianceDeviceCertificateListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetApplianceDeviceCertificateListRequest
 */
 func (a *ApplianceApiService) GetApplianceDeviceCertificateList(ctx context.Context) ApiGetApplianceDeviceCertificateListRequest {
 	return ApiGetApplianceDeviceCertificateListRequest{
@@ -4502,7 +4523,8 @@ func (a *ApplianceApiService) GetApplianceDeviceCertificateList(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return ApplianceDeviceCertificateResponse
+//
+//	@return ApplianceDeviceCertificateResponse
 func (a *ApplianceApiService) GetApplianceDeviceCertificateListExecute(r ApiGetApplianceDeviceCertificateListRequest) (*ApplianceDeviceCertificateResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4669,9 +4691,9 @@ func (r ApiGetApplianceDeviceClaimByMoidRequest) Execute() (*ApplianceDeviceClai
 /*
 GetApplianceDeviceClaimByMoid Read a 'appliance.DeviceClaim' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetApplianceDeviceClaimByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetApplianceDeviceClaimByMoidRequest
 */
 func (a *ApplianceApiService) GetApplianceDeviceClaimByMoid(ctx context.Context, moid string) ApiGetApplianceDeviceClaimByMoidRequest {
 	return ApiGetApplianceDeviceClaimByMoidRequest{
@@ -4682,7 +4704,8 @@ func (a *ApplianceApiService) GetApplianceDeviceClaimByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return ApplianceDeviceClaim
+//
+//	@return ApplianceDeviceClaim
 func (a *ApplianceApiService) GetApplianceDeviceClaimByMoidExecute(r ApiGetApplianceDeviceClaimByMoidRequest) (*ApplianceDeviceClaim, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4893,8 +4916,8 @@ func (r ApiGetApplianceDeviceClaimListRequest) Execute() (*ApplianceDeviceClaimR
 /*
 GetApplianceDeviceClaimList Read a 'appliance.DeviceClaim' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetApplianceDeviceClaimListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetApplianceDeviceClaimListRequest
 */
 func (a *ApplianceApiService) GetApplianceDeviceClaimList(ctx context.Context) ApiGetApplianceDeviceClaimListRequest {
 	return ApiGetApplianceDeviceClaimListRequest{
@@ -4904,7 +4927,8 @@ func (a *ApplianceApiService) GetApplianceDeviceClaimList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return ApplianceDeviceClaimResponse
+//
+//	@return ApplianceDeviceClaimResponse
 func (a *ApplianceApiService) GetApplianceDeviceClaimListExecute(r ApiGetApplianceDeviceClaimListRequest) (*ApplianceDeviceClaimResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5071,9 +5095,9 @@ func (r ApiGetApplianceDeviceUpgradePolicyByMoidRequest) Execute() (*ApplianceDe
 /*
 GetApplianceDeviceUpgradePolicyByMoid Read a 'appliance.DeviceUpgradePolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetApplianceDeviceUpgradePolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetApplianceDeviceUpgradePolicyByMoidRequest
 */
 func (a *ApplianceApiService) GetApplianceDeviceUpgradePolicyByMoid(ctx context.Context, moid string) ApiGetApplianceDeviceUpgradePolicyByMoidRequest {
 	return ApiGetApplianceDeviceUpgradePolicyByMoidRequest{
@@ -5084,7 +5108,8 @@ func (a *ApplianceApiService) GetApplianceDeviceUpgradePolicyByMoid(ctx context.
 }
 
 // Execute executes the request
-//  @return ApplianceDeviceUpgradePolicy
+//
+//	@return ApplianceDeviceUpgradePolicy
 func (a *ApplianceApiService) GetApplianceDeviceUpgradePolicyByMoidExecute(r ApiGetApplianceDeviceUpgradePolicyByMoidRequest) (*ApplianceDeviceUpgradePolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5295,8 +5320,8 @@ func (r ApiGetApplianceDeviceUpgradePolicyListRequest) Execute() (*ApplianceDevi
 /*
 GetApplianceDeviceUpgradePolicyList Read a 'appliance.DeviceUpgradePolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetApplianceDeviceUpgradePolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetApplianceDeviceUpgradePolicyListRequest
 */
 func (a *ApplianceApiService) GetApplianceDeviceUpgradePolicyList(ctx context.Context) ApiGetApplianceDeviceUpgradePolicyListRequest {
 	return ApiGetApplianceDeviceUpgradePolicyListRequest{
@@ -5306,7 +5331,8 @@ func (a *ApplianceApiService) GetApplianceDeviceUpgradePolicyList(ctx context.Co
 }
 
 // Execute executes the request
-//  @return ApplianceDeviceUpgradePolicyResponse
+//
+//	@return ApplianceDeviceUpgradePolicyResponse
 func (a *ApplianceApiService) GetApplianceDeviceUpgradePolicyListExecute(r ApiGetApplianceDeviceUpgradePolicyListRequest) (*ApplianceDeviceUpgradePolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5473,9 +5499,9 @@ func (r ApiGetApplianceDiagSettingByMoidRequest) Execute() (*ApplianceDiagSettin
 /*
 GetApplianceDiagSettingByMoid Read a 'appliance.DiagSetting' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetApplianceDiagSettingByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetApplianceDiagSettingByMoidRequest
 */
 func (a *ApplianceApiService) GetApplianceDiagSettingByMoid(ctx context.Context, moid string) ApiGetApplianceDiagSettingByMoidRequest {
 	return ApiGetApplianceDiagSettingByMoidRequest{
@@ -5486,7 +5512,8 @@ func (a *ApplianceApiService) GetApplianceDiagSettingByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return ApplianceDiagSetting
+//
+//	@return ApplianceDiagSetting
 func (a *ApplianceApiService) GetApplianceDiagSettingByMoidExecute(r ApiGetApplianceDiagSettingByMoidRequest) (*ApplianceDiagSetting, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5697,8 +5724,8 @@ func (r ApiGetApplianceDiagSettingListRequest) Execute() (*ApplianceDiagSettingR
 /*
 GetApplianceDiagSettingList Read a 'appliance.DiagSetting' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetApplianceDiagSettingListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetApplianceDiagSettingListRequest
 */
 func (a *ApplianceApiService) GetApplianceDiagSettingList(ctx context.Context) ApiGetApplianceDiagSettingListRequest {
 	return ApiGetApplianceDiagSettingListRequest{
@@ -5708,7 +5735,8 @@ func (a *ApplianceApiService) GetApplianceDiagSettingList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return ApplianceDiagSettingResponse
+//
+//	@return ApplianceDiagSettingResponse
 func (a *ApplianceApiService) GetApplianceDiagSettingListExecute(r ApiGetApplianceDiagSettingListRequest) (*ApplianceDiagSettingResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5875,9 +5903,9 @@ func (r ApiGetApplianceExternalSyslogSettingByMoidRequest) Execute() (*Appliance
 /*
 GetApplianceExternalSyslogSettingByMoid Read a 'appliance.ExternalSyslogSetting' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetApplianceExternalSyslogSettingByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetApplianceExternalSyslogSettingByMoidRequest
 */
 func (a *ApplianceApiService) GetApplianceExternalSyslogSettingByMoid(ctx context.Context, moid string) ApiGetApplianceExternalSyslogSettingByMoidRequest {
 	return ApiGetApplianceExternalSyslogSettingByMoidRequest{
@@ -5888,7 +5916,8 @@ func (a *ApplianceApiService) GetApplianceExternalSyslogSettingByMoid(ctx contex
 }
 
 // Execute executes the request
-//  @return ApplianceExternalSyslogSetting
+//
+//	@return ApplianceExternalSyslogSetting
 func (a *ApplianceApiService) GetApplianceExternalSyslogSettingByMoidExecute(r ApiGetApplianceExternalSyslogSettingByMoidRequest) (*ApplianceExternalSyslogSetting, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6099,8 +6128,8 @@ func (r ApiGetApplianceExternalSyslogSettingListRequest) Execute() (*ApplianceEx
 /*
 GetApplianceExternalSyslogSettingList Read a 'appliance.ExternalSyslogSetting' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetApplianceExternalSyslogSettingListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetApplianceExternalSyslogSettingListRequest
 */
 func (a *ApplianceApiService) GetApplianceExternalSyslogSettingList(ctx context.Context) ApiGetApplianceExternalSyslogSettingListRequest {
 	return ApiGetApplianceExternalSyslogSettingListRequest{
@@ -6110,7 +6139,8 @@ func (a *ApplianceApiService) GetApplianceExternalSyslogSettingList(ctx context.
 }
 
 // Execute executes the request
-//  @return ApplianceExternalSyslogSettingResponse
+//
+//	@return ApplianceExternalSyslogSettingResponse
 func (a *ApplianceApiService) GetApplianceExternalSyslogSettingListExecute(r ApiGetApplianceExternalSyslogSettingListRequest) (*ApplianceExternalSyslogSettingResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6277,9 +6307,9 @@ func (r ApiGetApplianceFileGatewayByMoidRequest) Execute() (*ApplianceFileGatewa
 /*
 GetApplianceFileGatewayByMoid Read a 'appliance.FileGateway' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetApplianceFileGatewayByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetApplianceFileGatewayByMoidRequest
 */
 func (a *ApplianceApiService) GetApplianceFileGatewayByMoid(ctx context.Context, moid string) ApiGetApplianceFileGatewayByMoidRequest {
 	return ApiGetApplianceFileGatewayByMoidRequest{
@@ -6290,7 +6320,8 @@ func (a *ApplianceApiService) GetApplianceFileGatewayByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return ApplianceFileGateway
+//
+//	@return ApplianceFileGateway
 func (a *ApplianceApiService) GetApplianceFileGatewayByMoidExecute(r ApiGetApplianceFileGatewayByMoidRequest) (*ApplianceFileGateway, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6501,8 +6532,8 @@ func (r ApiGetApplianceFileGatewayListRequest) Execute() (*ApplianceFileGatewayR
 /*
 GetApplianceFileGatewayList Read a 'appliance.FileGateway' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetApplianceFileGatewayListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetApplianceFileGatewayListRequest
 */
 func (a *ApplianceApiService) GetApplianceFileGatewayList(ctx context.Context) ApiGetApplianceFileGatewayListRequest {
 	return ApiGetApplianceFileGatewayListRequest{
@@ -6512,7 +6543,8 @@ func (a *ApplianceApiService) GetApplianceFileGatewayList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return ApplianceFileGatewayResponse
+//
+//	@return ApplianceFileGatewayResponse
 func (a *ApplianceApiService) GetApplianceFileGatewayListExecute(r ApiGetApplianceFileGatewayListRequest) (*ApplianceFileGatewayResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6679,9 +6711,9 @@ func (r ApiGetApplianceFileSystemStatusByMoidRequest) Execute() (*ApplianceFileS
 /*
 GetApplianceFileSystemStatusByMoid Read a 'appliance.FileSystemStatus' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetApplianceFileSystemStatusByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetApplianceFileSystemStatusByMoidRequest
 */
 func (a *ApplianceApiService) GetApplianceFileSystemStatusByMoid(ctx context.Context, moid string) ApiGetApplianceFileSystemStatusByMoidRequest {
 	return ApiGetApplianceFileSystemStatusByMoidRequest{
@@ -6692,7 +6724,8 @@ func (a *ApplianceApiService) GetApplianceFileSystemStatusByMoid(ctx context.Con
 }
 
 // Execute executes the request
-//  @return ApplianceFileSystemStatus
+//
+//	@return ApplianceFileSystemStatus
 func (a *ApplianceApiService) GetApplianceFileSystemStatusByMoidExecute(r ApiGetApplianceFileSystemStatusByMoidRequest) (*ApplianceFileSystemStatus, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6903,8 +6936,8 @@ func (r ApiGetApplianceFileSystemStatusListRequest) Execute() (*ApplianceFileSys
 /*
 GetApplianceFileSystemStatusList Read a 'appliance.FileSystemStatus' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetApplianceFileSystemStatusListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetApplianceFileSystemStatusListRequest
 */
 func (a *ApplianceApiService) GetApplianceFileSystemStatusList(ctx context.Context) ApiGetApplianceFileSystemStatusListRequest {
 	return ApiGetApplianceFileSystemStatusListRequest{
@@ -6914,7 +6947,8 @@ func (a *ApplianceApiService) GetApplianceFileSystemStatusList(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return ApplianceFileSystemStatusResponse
+//
+//	@return ApplianceFileSystemStatusResponse
 func (a *ApplianceApiService) GetApplianceFileSystemStatusListExecute(r ApiGetApplianceFileSystemStatusListRequest) (*ApplianceFileSystemStatusResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7081,9 +7115,9 @@ func (r ApiGetApplianceGroupStatusByMoidRequest) Execute() (*ApplianceGroupStatu
 /*
 GetApplianceGroupStatusByMoid Read a 'appliance.GroupStatus' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetApplianceGroupStatusByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetApplianceGroupStatusByMoidRequest
 */
 func (a *ApplianceApiService) GetApplianceGroupStatusByMoid(ctx context.Context, moid string) ApiGetApplianceGroupStatusByMoidRequest {
 	return ApiGetApplianceGroupStatusByMoidRequest{
@@ -7094,7 +7128,8 @@ func (a *ApplianceApiService) GetApplianceGroupStatusByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return ApplianceGroupStatus
+//
+//	@return ApplianceGroupStatus
 func (a *ApplianceApiService) GetApplianceGroupStatusByMoidExecute(r ApiGetApplianceGroupStatusByMoidRequest) (*ApplianceGroupStatus, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7305,8 +7340,8 @@ func (r ApiGetApplianceGroupStatusListRequest) Execute() (*ApplianceGroupStatusR
 /*
 GetApplianceGroupStatusList Read a 'appliance.GroupStatus' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetApplianceGroupStatusListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetApplianceGroupStatusListRequest
 */
 func (a *ApplianceApiService) GetApplianceGroupStatusList(ctx context.Context) ApiGetApplianceGroupStatusListRequest {
 	return ApiGetApplianceGroupStatusListRequest{
@@ -7316,7 +7351,8 @@ func (a *ApplianceApiService) GetApplianceGroupStatusList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return ApplianceGroupStatusResponse
+//
+//	@return ApplianceGroupStatusResponse
 func (a *ApplianceApiService) GetApplianceGroupStatusListExecute(r ApiGetApplianceGroupStatusListRequest) (*ApplianceGroupStatusResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7483,9 +7519,9 @@ func (r ApiGetApplianceImageBundleByMoidRequest) Execute() (*ApplianceImageBundl
 /*
 GetApplianceImageBundleByMoid Read a 'appliance.ImageBundle' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetApplianceImageBundleByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetApplianceImageBundleByMoidRequest
 */
 func (a *ApplianceApiService) GetApplianceImageBundleByMoid(ctx context.Context, moid string) ApiGetApplianceImageBundleByMoidRequest {
 	return ApiGetApplianceImageBundleByMoidRequest{
@@ -7496,7 +7532,8 @@ func (a *ApplianceApiService) GetApplianceImageBundleByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return ApplianceImageBundle
+//
+//	@return ApplianceImageBundle
 func (a *ApplianceApiService) GetApplianceImageBundleByMoidExecute(r ApiGetApplianceImageBundleByMoidRequest) (*ApplianceImageBundle, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7707,8 +7744,8 @@ func (r ApiGetApplianceImageBundleListRequest) Execute() (*ApplianceImageBundleR
 /*
 GetApplianceImageBundleList Read a 'appliance.ImageBundle' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetApplianceImageBundleListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetApplianceImageBundleListRequest
 */
 func (a *ApplianceApiService) GetApplianceImageBundleList(ctx context.Context) ApiGetApplianceImageBundleListRequest {
 	return ApiGetApplianceImageBundleListRequest{
@@ -7718,7 +7755,8 @@ func (a *ApplianceApiService) GetApplianceImageBundleList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return ApplianceImageBundleResponse
+//
+//	@return ApplianceImageBundleResponse
 func (a *ApplianceApiService) GetApplianceImageBundleListExecute(r ApiGetApplianceImageBundleListRequest) (*ApplianceImageBundleResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7885,9 +7923,9 @@ func (r ApiGetApplianceMetaManifestByMoidRequest) Execute() (*ApplianceMetaManif
 /*
 GetApplianceMetaManifestByMoid Read a 'appliance.MetaManifest' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetApplianceMetaManifestByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetApplianceMetaManifestByMoidRequest
 */
 func (a *ApplianceApiService) GetApplianceMetaManifestByMoid(ctx context.Context, moid string) ApiGetApplianceMetaManifestByMoidRequest {
 	return ApiGetApplianceMetaManifestByMoidRequest{
@@ -7898,7 +7936,8 @@ func (a *ApplianceApiService) GetApplianceMetaManifestByMoid(ctx context.Context
 }
 
 // Execute executes the request
-//  @return ApplianceMetaManifest
+//
+//	@return ApplianceMetaManifest
 func (a *ApplianceApiService) GetApplianceMetaManifestByMoidExecute(r ApiGetApplianceMetaManifestByMoidRequest) (*ApplianceMetaManifest, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8109,8 +8148,8 @@ func (r ApiGetApplianceMetaManifestListRequest) Execute() (*ApplianceMetaManifes
 /*
 GetApplianceMetaManifestList Read a 'appliance.MetaManifest' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetApplianceMetaManifestListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetApplianceMetaManifestListRequest
 */
 func (a *ApplianceApiService) GetApplianceMetaManifestList(ctx context.Context) ApiGetApplianceMetaManifestListRequest {
 	return ApiGetApplianceMetaManifestListRequest{
@@ -8120,7 +8159,8 @@ func (a *ApplianceApiService) GetApplianceMetaManifestList(ctx context.Context) 
 }
 
 // Execute executes the request
-//  @return ApplianceMetaManifestResponse
+//
+//	@return ApplianceMetaManifestResponse
 func (a *ApplianceApiService) GetApplianceMetaManifestListExecute(r ApiGetApplianceMetaManifestListRequest) (*ApplianceMetaManifestResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8287,9 +8327,9 @@ func (r ApiGetApplianceNodeInfoByMoidRequest) Execute() (*ApplianceNodeInfo, *ht
 /*
 GetApplianceNodeInfoByMoid Read a 'appliance.NodeInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetApplianceNodeInfoByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetApplianceNodeInfoByMoidRequest
 */
 func (a *ApplianceApiService) GetApplianceNodeInfoByMoid(ctx context.Context, moid string) ApiGetApplianceNodeInfoByMoidRequest {
 	return ApiGetApplianceNodeInfoByMoidRequest{
@@ -8300,7 +8340,8 @@ func (a *ApplianceApiService) GetApplianceNodeInfoByMoid(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return ApplianceNodeInfo
+//
+//	@return ApplianceNodeInfo
 func (a *ApplianceApiService) GetApplianceNodeInfoByMoidExecute(r ApiGetApplianceNodeInfoByMoidRequest) (*ApplianceNodeInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8511,8 +8552,8 @@ func (r ApiGetApplianceNodeInfoListRequest) Execute() (*ApplianceNodeInfoRespons
 /*
 GetApplianceNodeInfoList Read a 'appliance.NodeInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetApplianceNodeInfoListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetApplianceNodeInfoListRequest
 */
 func (a *ApplianceApiService) GetApplianceNodeInfoList(ctx context.Context) ApiGetApplianceNodeInfoListRequest {
 	return ApiGetApplianceNodeInfoListRequest{
@@ -8522,7 +8563,8 @@ func (a *ApplianceApiService) GetApplianceNodeInfoList(ctx context.Context) ApiG
 }
 
 // Execute executes the request
-//  @return ApplianceNodeInfoResponse
+//
+//	@return ApplianceNodeInfoResponse
 func (a *ApplianceApiService) GetApplianceNodeInfoListExecute(r ApiGetApplianceNodeInfoListRequest) (*ApplianceNodeInfoResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8689,9 +8731,9 @@ func (r ApiGetApplianceNodeStatusByMoidRequest) Execute() (*ApplianceNodeStatus,
 /*
 GetApplianceNodeStatusByMoid Read a 'appliance.NodeStatus' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetApplianceNodeStatusByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetApplianceNodeStatusByMoidRequest
 */
 func (a *ApplianceApiService) GetApplianceNodeStatusByMoid(ctx context.Context, moid string) ApiGetApplianceNodeStatusByMoidRequest {
 	return ApiGetApplianceNodeStatusByMoidRequest{
@@ -8702,7 +8744,8 @@ func (a *ApplianceApiService) GetApplianceNodeStatusByMoid(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return ApplianceNodeStatus
+//
+//	@return ApplianceNodeStatus
 func (a *ApplianceApiService) GetApplianceNodeStatusByMoidExecute(r ApiGetApplianceNodeStatusByMoidRequest) (*ApplianceNodeStatus, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8913,8 +8956,8 @@ func (r ApiGetApplianceNodeStatusListRequest) Execute() (*ApplianceNodeStatusRes
 /*
 GetApplianceNodeStatusList Read a 'appliance.NodeStatus' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetApplianceNodeStatusListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetApplianceNodeStatusListRequest
 */
 func (a *ApplianceApiService) GetApplianceNodeStatusList(ctx context.Context) ApiGetApplianceNodeStatusListRequest {
 	return ApiGetApplianceNodeStatusListRequest{
@@ -8924,7 +8967,8 @@ func (a *ApplianceApiService) GetApplianceNodeStatusList(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return ApplianceNodeStatusResponse
+//
+//	@return ApplianceNodeStatusResponse
 func (a *ApplianceApiService) GetApplianceNodeStatusListExecute(r ApiGetApplianceNodeStatusListRequest) (*ApplianceNodeStatusResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9091,9 +9135,9 @@ func (r ApiGetApplianceReleaseNoteByMoidRequest) Execute() (*ApplianceReleaseNot
 /*
 GetApplianceReleaseNoteByMoid Read a 'appliance.ReleaseNote' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetApplianceReleaseNoteByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetApplianceReleaseNoteByMoidRequest
 */
 func (a *ApplianceApiService) GetApplianceReleaseNoteByMoid(ctx context.Context, moid string) ApiGetApplianceReleaseNoteByMoidRequest {
 	return ApiGetApplianceReleaseNoteByMoidRequest{
@@ -9104,7 +9148,8 @@ func (a *ApplianceApiService) GetApplianceReleaseNoteByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return ApplianceReleaseNote
+//
+//	@return ApplianceReleaseNote
 func (a *ApplianceApiService) GetApplianceReleaseNoteByMoidExecute(r ApiGetApplianceReleaseNoteByMoidRequest) (*ApplianceReleaseNote, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9315,8 +9360,8 @@ func (r ApiGetApplianceReleaseNoteListRequest) Execute() (*ApplianceReleaseNoteR
 /*
 GetApplianceReleaseNoteList Read a 'appliance.ReleaseNote' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetApplianceReleaseNoteListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetApplianceReleaseNoteListRequest
 */
 func (a *ApplianceApiService) GetApplianceReleaseNoteList(ctx context.Context) ApiGetApplianceReleaseNoteListRequest {
 	return ApiGetApplianceReleaseNoteListRequest{
@@ -9326,7 +9371,8 @@ func (a *ApplianceApiService) GetApplianceReleaseNoteList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return ApplianceReleaseNoteResponse
+//
+//	@return ApplianceReleaseNoteResponse
 func (a *ApplianceApiService) GetApplianceReleaseNoteListExecute(r ApiGetApplianceReleaseNoteListRequest) (*ApplianceReleaseNoteResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9493,9 +9539,9 @@ func (r ApiGetApplianceRemoteFileImportByMoidRequest) Execute() (*ApplianceRemot
 /*
 GetApplianceRemoteFileImportByMoid Read a 'appliance.RemoteFileImport' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetApplianceRemoteFileImportByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetApplianceRemoteFileImportByMoidRequest
 */
 func (a *ApplianceApiService) GetApplianceRemoteFileImportByMoid(ctx context.Context, moid string) ApiGetApplianceRemoteFileImportByMoidRequest {
 	return ApiGetApplianceRemoteFileImportByMoidRequest{
@@ -9506,7 +9552,8 @@ func (a *ApplianceApiService) GetApplianceRemoteFileImportByMoid(ctx context.Con
 }
 
 // Execute executes the request
-//  @return ApplianceRemoteFileImport
+//
+//	@return ApplianceRemoteFileImport
 func (a *ApplianceApiService) GetApplianceRemoteFileImportByMoidExecute(r ApiGetApplianceRemoteFileImportByMoidRequest) (*ApplianceRemoteFileImport, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9717,8 +9764,8 @@ func (r ApiGetApplianceRemoteFileImportListRequest) Execute() (*ApplianceRemoteF
 /*
 GetApplianceRemoteFileImportList Read a 'appliance.RemoteFileImport' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetApplianceRemoteFileImportListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetApplianceRemoteFileImportListRequest
 */
 func (a *ApplianceApiService) GetApplianceRemoteFileImportList(ctx context.Context) ApiGetApplianceRemoteFileImportListRequest {
 	return ApiGetApplianceRemoteFileImportListRequest{
@@ -9728,7 +9775,8 @@ func (a *ApplianceApiService) GetApplianceRemoteFileImportList(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return ApplianceRemoteFileImportResponse
+//
+//	@return ApplianceRemoteFileImportResponse
 func (a *ApplianceApiService) GetApplianceRemoteFileImportListExecute(r ApiGetApplianceRemoteFileImportListRequest) (*ApplianceRemoteFileImportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9895,9 +9943,9 @@ func (r ApiGetApplianceRestoreByMoidRequest) Execute() (*ApplianceRestore, *http
 /*
 GetApplianceRestoreByMoid Read a 'appliance.Restore' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetApplianceRestoreByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetApplianceRestoreByMoidRequest
 */
 func (a *ApplianceApiService) GetApplianceRestoreByMoid(ctx context.Context, moid string) ApiGetApplianceRestoreByMoidRequest {
 	return ApiGetApplianceRestoreByMoidRequest{
@@ -9908,7 +9956,8 @@ func (a *ApplianceApiService) GetApplianceRestoreByMoid(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return ApplianceRestore
+//
+//	@return ApplianceRestore
 func (a *ApplianceApiService) GetApplianceRestoreByMoidExecute(r ApiGetApplianceRestoreByMoidRequest) (*ApplianceRestore, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10119,8 +10168,8 @@ func (r ApiGetApplianceRestoreListRequest) Execute() (*ApplianceRestoreResponse,
 /*
 GetApplianceRestoreList Read a 'appliance.Restore' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetApplianceRestoreListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetApplianceRestoreListRequest
 */
 func (a *ApplianceApiService) GetApplianceRestoreList(ctx context.Context) ApiGetApplianceRestoreListRequest {
 	return ApiGetApplianceRestoreListRequest{
@@ -10130,7 +10179,8 @@ func (a *ApplianceApiService) GetApplianceRestoreList(ctx context.Context) ApiGe
 }
 
 // Execute executes the request
-//  @return ApplianceRestoreResponse
+//
+//	@return ApplianceRestoreResponse
 func (a *ApplianceApiService) GetApplianceRestoreListExecute(r ApiGetApplianceRestoreListRequest) (*ApplianceRestoreResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10297,9 +10347,9 @@ func (r ApiGetApplianceSetupInfoByMoidRequest) Execute() (*ApplianceSetupInfo, *
 /*
 GetApplianceSetupInfoByMoid Read a 'appliance.SetupInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetApplianceSetupInfoByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetApplianceSetupInfoByMoidRequest
 */
 func (a *ApplianceApiService) GetApplianceSetupInfoByMoid(ctx context.Context, moid string) ApiGetApplianceSetupInfoByMoidRequest {
 	return ApiGetApplianceSetupInfoByMoidRequest{
@@ -10310,7 +10360,8 @@ func (a *ApplianceApiService) GetApplianceSetupInfoByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return ApplianceSetupInfo
+//
+//	@return ApplianceSetupInfo
 func (a *ApplianceApiService) GetApplianceSetupInfoByMoidExecute(r ApiGetApplianceSetupInfoByMoidRequest) (*ApplianceSetupInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10521,8 +10572,8 @@ func (r ApiGetApplianceSetupInfoListRequest) Execute() (*ApplianceSetupInfoRespo
 /*
 GetApplianceSetupInfoList Read a 'appliance.SetupInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetApplianceSetupInfoListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetApplianceSetupInfoListRequest
 */
 func (a *ApplianceApiService) GetApplianceSetupInfoList(ctx context.Context) ApiGetApplianceSetupInfoListRequest {
 	return ApiGetApplianceSetupInfoListRequest{
@@ -10532,7 +10583,8 @@ func (a *ApplianceApiService) GetApplianceSetupInfoList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return ApplianceSetupInfoResponse
+//
+//	@return ApplianceSetupInfoResponse
 func (a *ApplianceApiService) GetApplianceSetupInfoListExecute(r ApiGetApplianceSetupInfoListRequest) (*ApplianceSetupInfoResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10699,9 +10751,9 @@ func (r ApiGetApplianceSystemInfoByMoidRequest) Execute() (*ApplianceSystemInfo,
 /*
 GetApplianceSystemInfoByMoid Read a 'appliance.SystemInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetApplianceSystemInfoByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetApplianceSystemInfoByMoidRequest
 */
 func (a *ApplianceApiService) GetApplianceSystemInfoByMoid(ctx context.Context, moid string) ApiGetApplianceSystemInfoByMoidRequest {
 	return ApiGetApplianceSystemInfoByMoidRequest{
@@ -10712,7 +10764,8 @@ func (a *ApplianceApiService) GetApplianceSystemInfoByMoid(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return ApplianceSystemInfo
+//
+//	@return ApplianceSystemInfo
 func (a *ApplianceApiService) GetApplianceSystemInfoByMoidExecute(r ApiGetApplianceSystemInfoByMoidRequest) (*ApplianceSystemInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10923,8 +10976,8 @@ func (r ApiGetApplianceSystemInfoListRequest) Execute() (*ApplianceSystemInfoRes
 /*
 GetApplianceSystemInfoList Read a 'appliance.SystemInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetApplianceSystemInfoListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetApplianceSystemInfoListRequest
 */
 func (a *ApplianceApiService) GetApplianceSystemInfoList(ctx context.Context) ApiGetApplianceSystemInfoListRequest {
 	return ApiGetApplianceSystemInfoListRequest{
@@ -10934,7 +10987,8 @@ func (a *ApplianceApiService) GetApplianceSystemInfoList(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return ApplianceSystemInfoResponse
+//
+//	@return ApplianceSystemInfoResponse
 func (a *ApplianceApiService) GetApplianceSystemInfoListExecute(r ApiGetApplianceSystemInfoListRequest) (*ApplianceSystemInfoResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -11101,9 +11155,9 @@ func (r ApiGetApplianceSystemStatusByMoidRequest) Execute() (*ApplianceSystemSta
 /*
 GetApplianceSystemStatusByMoid Read a 'appliance.SystemStatus' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetApplianceSystemStatusByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetApplianceSystemStatusByMoidRequest
 */
 func (a *ApplianceApiService) GetApplianceSystemStatusByMoid(ctx context.Context, moid string) ApiGetApplianceSystemStatusByMoidRequest {
 	return ApiGetApplianceSystemStatusByMoidRequest{
@@ -11114,7 +11168,8 @@ func (a *ApplianceApiService) GetApplianceSystemStatusByMoid(ctx context.Context
 }
 
 // Execute executes the request
-//  @return ApplianceSystemStatus
+//
+//	@return ApplianceSystemStatus
 func (a *ApplianceApiService) GetApplianceSystemStatusByMoidExecute(r ApiGetApplianceSystemStatusByMoidRequest) (*ApplianceSystemStatus, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -11325,8 +11380,8 @@ func (r ApiGetApplianceSystemStatusListRequest) Execute() (*ApplianceSystemStatu
 /*
 GetApplianceSystemStatusList Read a 'appliance.SystemStatus' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetApplianceSystemStatusListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetApplianceSystemStatusListRequest
 */
 func (a *ApplianceApiService) GetApplianceSystemStatusList(ctx context.Context) ApiGetApplianceSystemStatusListRequest {
 	return ApiGetApplianceSystemStatusListRequest{
@@ -11336,7 +11391,8 @@ func (a *ApplianceApiService) GetApplianceSystemStatusList(ctx context.Context) 
 }
 
 // Execute executes the request
-//  @return ApplianceSystemStatusResponse
+//
+//	@return ApplianceSystemStatusResponse
 func (a *ApplianceApiService) GetApplianceSystemStatusListExecute(r ApiGetApplianceSystemStatusListRequest) (*ApplianceSystemStatusResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -11503,9 +11559,9 @@ func (r ApiGetApplianceUpgradeByMoidRequest) Execute() (*ApplianceUpgrade, *http
 /*
 GetApplianceUpgradeByMoid Read a 'appliance.Upgrade' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetApplianceUpgradeByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetApplianceUpgradeByMoidRequest
 */
 func (a *ApplianceApiService) GetApplianceUpgradeByMoid(ctx context.Context, moid string) ApiGetApplianceUpgradeByMoidRequest {
 	return ApiGetApplianceUpgradeByMoidRequest{
@@ -11516,7 +11572,8 @@ func (a *ApplianceApiService) GetApplianceUpgradeByMoid(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return ApplianceUpgrade
+//
+//	@return ApplianceUpgrade
 func (a *ApplianceApiService) GetApplianceUpgradeByMoidExecute(r ApiGetApplianceUpgradeByMoidRequest) (*ApplianceUpgrade, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -11727,8 +11784,8 @@ func (r ApiGetApplianceUpgradeListRequest) Execute() (*ApplianceUpgradeResponse,
 /*
 GetApplianceUpgradeList Read a 'appliance.Upgrade' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetApplianceUpgradeListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetApplianceUpgradeListRequest
 */
 func (a *ApplianceApiService) GetApplianceUpgradeList(ctx context.Context) ApiGetApplianceUpgradeListRequest {
 	return ApiGetApplianceUpgradeListRequest{
@@ -11738,7 +11795,8 @@ func (a *ApplianceApiService) GetApplianceUpgradeList(ctx context.Context) ApiGe
 }
 
 // Execute executes the request
-//  @return ApplianceUpgradeResponse
+//
+//	@return ApplianceUpgradeResponse
 func (a *ApplianceApiService) GetApplianceUpgradeListExecute(r ApiGetApplianceUpgradeListRequest) (*ApplianceUpgradeResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -11905,9 +11963,9 @@ func (r ApiGetApplianceUpgradePolicyByMoidRequest) Execute() (*ApplianceUpgradeP
 /*
 GetApplianceUpgradePolicyByMoid Read a 'appliance.UpgradePolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetApplianceUpgradePolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetApplianceUpgradePolicyByMoidRequest
 */
 func (a *ApplianceApiService) GetApplianceUpgradePolicyByMoid(ctx context.Context, moid string) ApiGetApplianceUpgradePolicyByMoidRequest {
 	return ApiGetApplianceUpgradePolicyByMoidRequest{
@@ -11918,7 +11976,8 @@ func (a *ApplianceApiService) GetApplianceUpgradePolicyByMoid(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return ApplianceUpgradePolicy
+//
+//	@return ApplianceUpgradePolicy
 func (a *ApplianceApiService) GetApplianceUpgradePolicyByMoidExecute(r ApiGetApplianceUpgradePolicyByMoidRequest) (*ApplianceUpgradePolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12129,8 +12188,8 @@ func (r ApiGetApplianceUpgradePolicyListRequest) Execute() (*ApplianceUpgradePol
 /*
 GetApplianceUpgradePolicyList Read a 'appliance.UpgradePolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetApplianceUpgradePolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetApplianceUpgradePolicyListRequest
 */
 func (a *ApplianceApiService) GetApplianceUpgradePolicyList(ctx context.Context) ApiGetApplianceUpgradePolicyListRequest {
 	return ApiGetApplianceUpgradePolicyListRequest{
@@ -12140,7 +12199,8 @@ func (a *ApplianceApiService) GetApplianceUpgradePolicyList(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return ApplianceUpgradePolicyResponse
+//
+//	@return ApplianceUpgradePolicyResponse
 func (a *ApplianceApiService) GetApplianceUpgradePolicyListExecute(r ApiGetApplianceUpgradePolicyListRequest) (*ApplianceUpgradePolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12321,9 +12381,9 @@ func (r ApiPatchApplianceAutoRmaPolicyRequest) Execute() (*ApplianceAutoRmaPolic
 /*
 PatchApplianceAutoRmaPolicy Update a 'appliance.AutoRmaPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchApplianceAutoRmaPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchApplianceAutoRmaPolicyRequest
 */
 func (a *ApplianceApiService) PatchApplianceAutoRmaPolicy(ctx context.Context, moid string) ApiPatchApplianceAutoRmaPolicyRequest {
 	return ApiPatchApplianceAutoRmaPolicyRequest{
@@ -12334,7 +12394,8 @@ func (a *ApplianceApiService) PatchApplianceAutoRmaPolicy(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return ApplianceAutoRmaPolicy
+//
+//	@return ApplianceAutoRmaPolicy
 func (a *ApplianceApiService) PatchApplianceAutoRmaPolicyExecute(r ApiPatchApplianceAutoRmaPolicyRequest) (*ApplianceAutoRmaPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -12491,9 +12552,9 @@ func (r ApiPatchApplianceBackupPolicyRequest) Execute() (*ApplianceBackupPolicy,
 /*
 PatchApplianceBackupPolicy Update a 'appliance.BackupPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchApplianceBackupPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchApplianceBackupPolicyRequest
 */
 func (a *ApplianceApiService) PatchApplianceBackupPolicy(ctx context.Context, moid string) ApiPatchApplianceBackupPolicyRequest {
 	return ApiPatchApplianceBackupPolicyRequest{
@@ -12504,7 +12565,8 @@ func (a *ApplianceApiService) PatchApplianceBackupPolicy(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return ApplianceBackupPolicy
+//
+//	@return ApplianceBackupPolicy
 func (a *ApplianceApiService) PatchApplianceBackupPolicyExecute(r ApiPatchApplianceBackupPolicyRequest) (*ApplianceBackupPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -12661,9 +12723,9 @@ func (r ApiPatchApplianceCertificateSettingRequest) Execute() (*ApplianceCertifi
 /*
 PatchApplianceCertificateSetting Update a 'appliance.CertificateSetting' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchApplianceCertificateSettingRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchApplianceCertificateSettingRequest
 */
 func (a *ApplianceApiService) PatchApplianceCertificateSetting(ctx context.Context, moid string) ApiPatchApplianceCertificateSettingRequest {
 	return ApiPatchApplianceCertificateSettingRequest{
@@ -12674,7 +12736,8 @@ func (a *ApplianceApiService) PatchApplianceCertificateSetting(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return ApplianceCertificateSetting
+//
+//	@return ApplianceCertificateSetting
 func (a *ApplianceApiService) PatchApplianceCertificateSettingExecute(r ApiPatchApplianceCertificateSettingRequest) (*ApplianceCertificateSetting, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -12831,9 +12894,9 @@ func (r ApiPatchApplianceDataExportPolicyRequest) Execute() (*ApplianceDataExpor
 /*
 PatchApplianceDataExportPolicy Update a 'appliance.DataExportPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchApplianceDataExportPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchApplianceDataExportPolicyRequest
 */
 func (a *ApplianceApiService) PatchApplianceDataExportPolicy(ctx context.Context, moid string) ApiPatchApplianceDataExportPolicyRequest {
 	return ApiPatchApplianceDataExportPolicyRequest{
@@ -12844,7 +12907,8 @@ func (a *ApplianceApiService) PatchApplianceDataExportPolicy(ctx context.Context
 }
 
 // Execute executes the request
-//  @return ApplianceDataExportPolicy
+//
+//	@return ApplianceDataExportPolicy
 func (a *ApplianceApiService) PatchApplianceDataExportPolicyExecute(r ApiPatchApplianceDataExportPolicyRequest) (*ApplianceDataExportPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -13001,9 +13065,9 @@ func (r ApiPatchApplianceDeviceClaimRequest) Execute() (*ApplianceDeviceClaim, *
 /*
 PatchApplianceDeviceClaim Update a 'appliance.DeviceClaim' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchApplianceDeviceClaimRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchApplianceDeviceClaimRequest
 */
 func (a *ApplianceApiService) PatchApplianceDeviceClaim(ctx context.Context, moid string) ApiPatchApplianceDeviceClaimRequest {
 	return ApiPatchApplianceDeviceClaimRequest{
@@ -13014,7 +13078,8 @@ func (a *ApplianceApiService) PatchApplianceDeviceClaim(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return ApplianceDeviceClaim
+//
+//	@return ApplianceDeviceClaim
 func (a *ApplianceApiService) PatchApplianceDeviceClaimExecute(r ApiPatchApplianceDeviceClaimRequest) (*ApplianceDeviceClaim, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -13171,9 +13236,9 @@ func (r ApiPatchApplianceDeviceUpgradePolicyRequest) Execute() (*ApplianceDevice
 /*
 PatchApplianceDeviceUpgradePolicy Update a 'appliance.DeviceUpgradePolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchApplianceDeviceUpgradePolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchApplianceDeviceUpgradePolicyRequest
 */
 func (a *ApplianceApiService) PatchApplianceDeviceUpgradePolicy(ctx context.Context, moid string) ApiPatchApplianceDeviceUpgradePolicyRequest {
 	return ApiPatchApplianceDeviceUpgradePolicyRequest{
@@ -13184,7 +13249,8 @@ func (a *ApplianceApiService) PatchApplianceDeviceUpgradePolicy(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return ApplianceDeviceUpgradePolicy
+//
+//	@return ApplianceDeviceUpgradePolicy
 func (a *ApplianceApiService) PatchApplianceDeviceUpgradePolicyExecute(r ApiPatchApplianceDeviceUpgradePolicyRequest) (*ApplianceDeviceUpgradePolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -13341,9 +13407,9 @@ func (r ApiPatchApplianceDiagSettingRequest) Execute() (*ApplianceDiagSetting, *
 /*
 PatchApplianceDiagSetting Update a 'appliance.DiagSetting' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchApplianceDiagSettingRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchApplianceDiagSettingRequest
 */
 func (a *ApplianceApiService) PatchApplianceDiagSetting(ctx context.Context, moid string) ApiPatchApplianceDiagSettingRequest {
 	return ApiPatchApplianceDiagSettingRequest{
@@ -13354,7 +13420,8 @@ func (a *ApplianceApiService) PatchApplianceDiagSetting(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return ApplianceDiagSetting
+//
+//	@return ApplianceDiagSetting
 func (a *ApplianceApiService) PatchApplianceDiagSettingExecute(r ApiPatchApplianceDiagSettingRequest) (*ApplianceDiagSetting, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -13511,9 +13578,9 @@ func (r ApiPatchApplianceExternalSyslogSettingRequest) Execute() (*ApplianceExte
 /*
 PatchApplianceExternalSyslogSetting Update a 'appliance.ExternalSyslogSetting' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchApplianceExternalSyslogSettingRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchApplianceExternalSyslogSettingRequest
 */
 func (a *ApplianceApiService) PatchApplianceExternalSyslogSetting(ctx context.Context, moid string) ApiPatchApplianceExternalSyslogSettingRequest {
 	return ApiPatchApplianceExternalSyslogSettingRequest{
@@ -13524,7 +13591,8 @@ func (a *ApplianceApiService) PatchApplianceExternalSyslogSetting(ctx context.Co
 }
 
 // Execute executes the request
-//  @return ApplianceExternalSyslogSetting
+//
+//	@return ApplianceExternalSyslogSetting
 func (a *ApplianceApiService) PatchApplianceExternalSyslogSettingExecute(r ApiPatchApplianceExternalSyslogSettingRequest) (*ApplianceExternalSyslogSetting, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -13681,9 +13749,9 @@ func (r ApiPatchApplianceSetupInfoRequest) Execute() (*ApplianceSetupInfo, *http
 /*
 PatchApplianceSetupInfo Update a 'appliance.SetupInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchApplianceSetupInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchApplianceSetupInfoRequest
 */
 func (a *ApplianceApiService) PatchApplianceSetupInfo(ctx context.Context, moid string) ApiPatchApplianceSetupInfoRequest {
 	return ApiPatchApplianceSetupInfoRequest{
@@ -13694,7 +13762,8 @@ func (a *ApplianceApiService) PatchApplianceSetupInfo(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return ApplianceSetupInfo
+//
+//	@return ApplianceSetupInfo
 func (a *ApplianceApiService) PatchApplianceSetupInfoExecute(r ApiPatchApplianceSetupInfoRequest) (*ApplianceSetupInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -13851,9 +13920,9 @@ func (r ApiPatchApplianceUpgradeRequest) Execute() (*ApplianceUpgrade, *http.Res
 /*
 PatchApplianceUpgrade Update a 'appliance.Upgrade' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchApplianceUpgradeRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchApplianceUpgradeRequest
 */
 func (a *ApplianceApiService) PatchApplianceUpgrade(ctx context.Context, moid string) ApiPatchApplianceUpgradeRequest {
 	return ApiPatchApplianceUpgradeRequest{
@@ -13864,7 +13933,8 @@ func (a *ApplianceApiService) PatchApplianceUpgrade(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return ApplianceUpgrade
+//
+//	@return ApplianceUpgrade
 func (a *ApplianceApiService) PatchApplianceUpgradeExecute(r ApiPatchApplianceUpgradeRequest) (*ApplianceUpgrade, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -14021,9 +14091,9 @@ func (r ApiPatchApplianceUpgradePolicyRequest) Execute() (*ApplianceUpgradePolic
 /*
 PatchApplianceUpgradePolicy Update a 'appliance.UpgradePolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchApplianceUpgradePolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchApplianceUpgradePolicyRequest
 */
 func (a *ApplianceApiService) PatchApplianceUpgradePolicy(ctx context.Context, moid string) ApiPatchApplianceUpgradePolicyRequest {
 	return ApiPatchApplianceUpgradePolicyRequest{
@@ -14034,7 +14104,8 @@ func (a *ApplianceApiService) PatchApplianceUpgradePolicy(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return ApplianceUpgradePolicy
+//
+//	@return ApplianceUpgradePolicy
 func (a *ApplianceApiService) PatchApplianceUpgradePolicyExecute(r ApiPatchApplianceUpgradePolicyRequest) (*ApplianceUpgradePolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -14191,9 +14262,9 @@ func (r ApiUpdateApplianceAutoRmaPolicyRequest) Execute() (*ApplianceAutoRmaPoli
 /*
 UpdateApplianceAutoRmaPolicy Update a 'appliance.AutoRmaPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateApplianceAutoRmaPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateApplianceAutoRmaPolicyRequest
 */
 func (a *ApplianceApiService) UpdateApplianceAutoRmaPolicy(ctx context.Context, moid string) ApiUpdateApplianceAutoRmaPolicyRequest {
 	return ApiUpdateApplianceAutoRmaPolicyRequest{
@@ -14204,7 +14275,8 @@ func (a *ApplianceApiService) UpdateApplianceAutoRmaPolicy(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return ApplianceAutoRmaPolicy
+//
+//	@return ApplianceAutoRmaPolicy
 func (a *ApplianceApiService) UpdateApplianceAutoRmaPolicyExecute(r ApiUpdateApplianceAutoRmaPolicyRequest) (*ApplianceAutoRmaPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -14361,9 +14433,9 @@ func (r ApiUpdateApplianceBackupPolicyRequest) Execute() (*ApplianceBackupPolicy
 /*
 UpdateApplianceBackupPolicy Update a 'appliance.BackupPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateApplianceBackupPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateApplianceBackupPolicyRequest
 */
 func (a *ApplianceApiService) UpdateApplianceBackupPolicy(ctx context.Context, moid string) ApiUpdateApplianceBackupPolicyRequest {
 	return ApiUpdateApplianceBackupPolicyRequest{
@@ -14374,7 +14446,8 @@ func (a *ApplianceApiService) UpdateApplianceBackupPolicy(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return ApplianceBackupPolicy
+//
+//	@return ApplianceBackupPolicy
 func (a *ApplianceApiService) UpdateApplianceBackupPolicyExecute(r ApiUpdateApplianceBackupPolicyRequest) (*ApplianceBackupPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -14531,9 +14604,9 @@ func (r ApiUpdateApplianceCertificateSettingRequest) Execute() (*ApplianceCertif
 /*
 UpdateApplianceCertificateSetting Update a 'appliance.CertificateSetting' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateApplianceCertificateSettingRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateApplianceCertificateSettingRequest
 */
 func (a *ApplianceApiService) UpdateApplianceCertificateSetting(ctx context.Context, moid string) ApiUpdateApplianceCertificateSettingRequest {
 	return ApiUpdateApplianceCertificateSettingRequest{
@@ -14544,7 +14617,8 @@ func (a *ApplianceApiService) UpdateApplianceCertificateSetting(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return ApplianceCertificateSetting
+//
+//	@return ApplianceCertificateSetting
 func (a *ApplianceApiService) UpdateApplianceCertificateSettingExecute(r ApiUpdateApplianceCertificateSettingRequest) (*ApplianceCertificateSetting, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -14701,9 +14775,9 @@ func (r ApiUpdateApplianceDataExportPolicyRequest) Execute() (*ApplianceDataExpo
 /*
 UpdateApplianceDataExportPolicy Update a 'appliance.DataExportPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateApplianceDataExportPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateApplianceDataExportPolicyRequest
 */
 func (a *ApplianceApiService) UpdateApplianceDataExportPolicy(ctx context.Context, moid string) ApiUpdateApplianceDataExportPolicyRequest {
 	return ApiUpdateApplianceDataExportPolicyRequest{
@@ -14714,7 +14788,8 @@ func (a *ApplianceApiService) UpdateApplianceDataExportPolicy(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return ApplianceDataExportPolicy
+//
+//	@return ApplianceDataExportPolicy
 func (a *ApplianceApiService) UpdateApplianceDataExportPolicyExecute(r ApiUpdateApplianceDataExportPolicyRequest) (*ApplianceDataExportPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -14871,9 +14946,9 @@ func (r ApiUpdateApplianceDeviceClaimRequest) Execute() (*ApplianceDeviceClaim, 
 /*
 UpdateApplianceDeviceClaim Update a 'appliance.DeviceClaim' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateApplianceDeviceClaimRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateApplianceDeviceClaimRequest
 */
 func (a *ApplianceApiService) UpdateApplianceDeviceClaim(ctx context.Context, moid string) ApiUpdateApplianceDeviceClaimRequest {
 	return ApiUpdateApplianceDeviceClaimRequest{
@@ -14884,7 +14959,8 @@ func (a *ApplianceApiService) UpdateApplianceDeviceClaim(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return ApplianceDeviceClaim
+//
+//	@return ApplianceDeviceClaim
 func (a *ApplianceApiService) UpdateApplianceDeviceClaimExecute(r ApiUpdateApplianceDeviceClaimRequest) (*ApplianceDeviceClaim, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -15041,9 +15117,9 @@ func (r ApiUpdateApplianceDeviceUpgradePolicyRequest) Execute() (*ApplianceDevic
 /*
 UpdateApplianceDeviceUpgradePolicy Update a 'appliance.DeviceUpgradePolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateApplianceDeviceUpgradePolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateApplianceDeviceUpgradePolicyRequest
 */
 func (a *ApplianceApiService) UpdateApplianceDeviceUpgradePolicy(ctx context.Context, moid string) ApiUpdateApplianceDeviceUpgradePolicyRequest {
 	return ApiUpdateApplianceDeviceUpgradePolicyRequest{
@@ -15054,7 +15130,8 @@ func (a *ApplianceApiService) UpdateApplianceDeviceUpgradePolicy(ctx context.Con
 }
 
 // Execute executes the request
-//  @return ApplianceDeviceUpgradePolicy
+//
+//	@return ApplianceDeviceUpgradePolicy
 func (a *ApplianceApiService) UpdateApplianceDeviceUpgradePolicyExecute(r ApiUpdateApplianceDeviceUpgradePolicyRequest) (*ApplianceDeviceUpgradePolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -15211,9 +15288,9 @@ func (r ApiUpdateApplianceDiagSettingRequest) Execute() (*ApplianceDiagSetting, 
 /*
 UpdateApplianceDiagSetting Update a 'appliance.DiagSetting' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateApplianceDiagSettingRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateApplianceDiagSettingRequest
 */
 func (a *ApplianceApiService) UpdateApplianceDiagSetting(ctx context.Context, moid string) ApiUpdateApplianceDiagSettingRequest {
 	return ApiUpdateApplianceDiagSettingRequest{
@@ -15224,7 +15301,8 @@ func (a *ApplianceApiService) UpdateApplianceDiagSetting(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return ApplianceDiagSetting
+//
+//	@return ApplianceDiagSetting
 func (a *ApplianceApiService) UpdateApplianceDiagSettingExecute(r ApiUpdateApplianceDiagSettingRequest) (*ApplianceDiagSetting, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -15381,9 +15459,9 @@ func (r ApiUpdateApplianceExternalSyslogSettingRequest) Execute() (*ApplianceExt
 /*
 UpdateApplianceExternalSyslogSetting Update a 'appliance.ExternalSyslogSetting' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateApplianceExternalSyslogSettingRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateApplianceExternalSyslogSettingRequest
 */
 func (a *ApplianceApiService) UpdateApplianceExternalSyslogSetting(ctx context.Context, moid string) ApiUpdateApplianceExternalSyslogSettingRequest {
 	return ApiUpdateApplianceExternalSyslogSettingRequest{
@@ -15394,7 +15472,8 @@ func (a *ApplianceApiService) UpdateApplianceExternalSyslogSetting(ctx context.C
 }
 
 // Execute executes the request
-//  @return ApplianceExternalSyslogSetting
+//
+//	@return ApplianceExternalSyslogSetting
 func (a *ApplianceApiService) UpdateApplianceExternalSyslogSettingExecute(r ApiUpdateApplianceExternalSyslogSettingRequest) (*ApplianceExternalSyslogSetting, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -15551,9 +15630,9 @@ func (r ApiUpdateApplianceSetupInfoRequest) Execute() (*ApplianceSetupInfo, *htt
 /*
 UpdateApplianceSetupInfo Update a 'appliance.SetupInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateApplianceSetupInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateApplianceSetupInfoRequest
 */
 func (a *ApplianceApiService) UpdateApplianceSetupInfo(ctx context.Context, moid string) ApiUpdateApplianceSetupInfoRequest {
 	return ApiUpdateApplianceSetupInfoRequest{
@@ -15564,7 +15643,8 @@ func (a *ApplianceApiService) UpdateApplianceSetupInfo(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return ApplianceSetupInfo
+//
+//	@return ApplianceSetupInfo
 func (a *ApplianceApiService) UpdateApplianceSetupInfoExecute(r ApiUpdateApplianceSetupInfoRequest) (*ApplianceSetupInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -15721,9 +15801,9 @@ func (r ApiUpdateApplianceUpgradeRequest) Execute() (*ApplianceUpgrade, *http.Re
 /*
 UpdateApplianceUpgrade Update a 'appliance.Upgrade' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateApplianceUpgradeRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateApplianceUpgradeRequest
 */
 func (a *ApplianceApiService) UpdateApplianceUpgrade(ctx context.Context, moid string) ApiUpdateApplianceUpgradeRequest {
 	return ApiUpdateApplianceUpgradeRequest{
@@ -15734,7 +15814,8 @@ func (a *ApplianceApiService) UpdateApplianceUpgrade(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return ApplianceUpgrade
+//
+//	@return ApplianceUpgrade
 func (a *ApplianceApiService) UpdateApplianceUpgradeExecute(r ApiUpdateApplianceUpgradeRequest) (*ApplianceUpgrade, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -15891,9 +15972,9 @@ func (r ApiUpdateApplianceUpgradePolicyRequest) Execute() (*ApplianceUpgradePoli
 /*
 UpdateApplianceUpgradePolicy Update a 'appliance.UpgradePolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateApplianceUpgradePolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateApplianceUpgradePolicyRequest
 */
 func (a *ApplianceApiService) UpdateApplianceUpgradePolicy(ctx context.Context, moid string) ApiUpdateApplianceUpgradePolicyRequest {
 	return ApiUpdateApplianceUpgradePolicyRequest{
@@ -15904,7 +15985,8 @@ func (a *ApplianceApiService) UpdateApplianceUpgradePolicy(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return ApplianceUpgradePolicy
+//
+//	@return ApplianceUpgradePolicy
 func (a *ApplianceApiService) UpdateApplianceUpgradePolicyExecute(r ApiUpdateApplianceUpgradePolicyRequest) (*ApplianceUpgradePolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

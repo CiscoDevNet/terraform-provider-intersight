@@ -56,8 +56,8 @@ func (r ApiCreateConnectorpackConnectorPackUpgradeRequest) Execute() (*Connector
 /*
 CreateConnectorpackConnectorPackUpgrade Create a 'connectorpack.ConnectorPackUpgrade' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateConnectorpackConnectorPackUpgradeRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateConnectorpackConnectorPackUpgradeRequest
 */
 func (a *ConnectorpackApiService) CreateConnectorpackConnectorPackUpgrade(ctx context.Context) ApiCreateConnectorpackConnectorPackUpgradeRequest {
 	return ApiCreateConnectorpackConnectorPackUpgradeRequest{
@@ -67,7 +67,8 @@ func (a *ConnectorpackApiService) CreateConnectorpackConnectorPackUpgrade(ctx co
 }
 
 // Execute executes the request
-//  @return ConnectorpackConnectorPackUpgrade
+//
+//	@return ConnectorpackConnectorPackUpgrade
 func (a *ConnectorpackApiService) CreateConnectorpackConnectorPackUpgradeExecute(r ApiCreateConnectorpackConnectorPackUpgradeRequest) (*ConnectorpackConnectorPackUpgrade, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -212,9 +213,9 @@ func (r ApiDeleteConnectorpackConnectorPackUpgradeRequest) Execute() (*http.Resp
 /*
 DeleteConnectorpackConnectorPackUpgrade Delete a 'connectorpack.ConnectorPackUpgrade' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteConnectorpackConnectorPackUpgradeRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteConnectorpackConnectorPackUpgradeRequest
 */
 func (a *ConnectorpackApiService) DeleteConnectorpackConnectorPackUpgrade(ctx context.Context, moid string) ApiDeleteConnectorpackConnectorPackUpgradeRequest {
 	return ApiDeleteConnectorpackConnectorPackUpgradeRequest{
@@ -349,9 +350,9 @@ func (r ApiGetConnectorpackConnectorPackUpgradeByMoidRequest) Execute() (*Connec
 /*
 GetConnectorpackConnectorPackUpgradeByMoid Read a 'connectorpack.ConnectorPackUpgrade' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetConnectorpackConnectorPackUpgradeByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetConnectorpackConnectorPackUpgradeByMoidRequest
 */
 func (a *ConnectorpackApiService) GetConnectorpackConnectorPackUpgradeByMoid(ctx context.Context, moid string) ApiGetConnectorpackConnectorPackUpgradeByMoidRequest {
 	return ApiGetConnectorpackConnectorPackUpgradeByMoidRequest{
@@ -362,7 +363,8 @@ func (a *ConnectorpackApiService) GetConnectorpackConnectorPackUpgradeByMoid(ctx
 }
 
 // Execute executes the request
-//  @return ConnectorpackConnectorPackUpgrade
+//
+//	@return ConnectorpackConnectorPackUpgrade
 func (a *ConnectorpackApiService) GetConnectorpackConnectorPackUpgradeByMoidExecute(r ApiGetConnectorpackConnectorPackUpgradeByMoidRequest) (*ConnectorpackConnectorPackUpgrade, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -573,8 +575,8 @@ func (r ApiGetConnectorpackConnectorPackUpgradeListRequest) Execute() (*Connecto
 /*
 GetConnectorpackConnectorPackUpgradeList Read a 'connectorpack.ConnectorPackUpgrade' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetConnectorpackConnectorPackUpgradeListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetConnectorpackConnectorPackUpgradeListRequest
 */
 func (a *ConnectorpackApiService) GetConnectorpackConnectorPackUpgradeList(ctx context.Context) ApiGetConnectorpackConnectorPackUpgradeListRequest {
 	return ApiGetConnectorpackConnectorPackUpgradeListRequest{
@@ -584,7 +586,8 @@ func (a *ConnectorpackApiService) GetConnectorpackConnectorPackUpgradeList(ctx c
 }
 
 // Execute executes the request
-//  @return ConnectorpackConnectorPackUpgradeResponse
+//
+//	@return ConnectorpackConnectorPackUpgradeResponse
 func (a *ConnectorpackApiService) GetConnectorpackConnectorPackUpgradeListExecute(r ApiGetConnectorpackConnectorPackUpgradeListRequest) (*ConnectorpackConnectorPackUpgradeResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -751,9 +754,9 @@ func (r ApiGetConnectorpackUpgradeImpactByMoidRequest) Execute() (*Connectorpack
 /*
 GetConnectorpackUpgradeImpactByMoid Read a 'connectorpack.UpgradeImpact' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetConnectorpackUpgradeImpactByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetConnectorpackUpgradeImpactByMoidRequest
 */
 func (a *ConnectorpackApiService) GetConnectorpackUpgradeImpactByMoid(ctx context.Context, moid string) ApiGetConnectorpackUpgradeImpactByMoidRequest {
 	return ApiGetConnectorpackUpgradeImpactByMoidRequest{
@@ -764,7 +767,8 @@ func (a *ConnectorpackApiService) GetConnectorpackUpgradeImpactByMoid(ctx contex
 }
 
 // Execute executes the request
-//  @return ConnectorpackUpgradeImpact
+//
+//	@return ConnectorpackUpgradeImpact
 func (a *ConnectorpackApiService) GetConnectorpackUpgradeImpactByMoidExecute(r ApiGetConnectorpackUpgradeImpactByMoidRequest) (*ConnectorpackUpgradeImpact, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -975,8 +979,8 @@ func (r ApiGetConnectorpackUpgradeImpactListRequest) Execute() (*ConnectorpackUp
 /*
 GetConnectorpackUpgradeImpactList Read a 'connectorpack.UpgradeImpact' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetConnectorpackUpgradeImpactListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetConnectorpackUpgradeImpactListRequest
 */
 func (a *ConnectorpackApiService) GetConnectorpackUpgradeImpactList(ctx context.Context) ApiGetConnectorpackUpgradeImpactListRequest {
 	return ApiGetConnectorpackUpgradeImpactListRequest{
@@ -986,7 +990,8 @@ func (a *ConnectorpackApiService) GetConnectorpackUpgradeImpactList(ctx context.
 }
 
 // Execute executes the request
-//  @return ConnectorpackUpgradeImpactResponse
+//
+//	@return ConnectorpackUpgradeImpactResponse
 func (a *ConnectorpackApiService) GetConnectorpackUpgradeImpactListExecute(r ApiGetConnectorpackUpgradeImpactListRequest) (*ConnectorpackUpgradeImpactResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet

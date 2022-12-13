@@ -36,9 +36,9 @@ func (r ApiGetFcNeighborByMoidRequest) Execute() (*FcNeighbor, *http.Response, e
 /*
 GetFcNeighborByMoid Read a 'fc.Neighbor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFcNeighborByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFcNeighborByMoidRequest
 */
 func (a *FcApiService) GetFcNeighborByMoid(ctx context.Context, moid string) ApiGetFcNeighborByMoidRequest {
 	return ApiGetFcNeighborByMoidRequest{
@@ -49,7 +49,8 @@ func (a *FcApiService) GetFcNeighborByMoid(ctx context.Context, moid string) Api
 }
 
 // Execute executes the request
-//  @return FcNeighbor
+//
+//	@return FcNeighbor
 func (a *FcApiService) GetFcNeighborByMoidExecute(r ApiGetFcNeighborByMoidRequest) (*FcNeighbor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -260,8 +261,8 @@ func (r ApiGetFcNeighborListRequest) Execute() (*FcNeighborResponse, *http.Respo
 /*
 GetFcNeighborList Read a 'fc.Neighbor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFcNeighborListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFcNeighborListRequest
 */
 func (a *FcApiService) GetFcNeighborList(ctx context.Context) ApiGetFcNeighborListRequest {
 	return ApiGetFcNeighborListRequest{
@@ -271,7 +272,8 @@ func (a *FcApiService) GetFcNeighborList(ctx context.Context) ApiGetFcNeighborLi
 }
 
 // Execute executes the request
-//  @return FcNeighborResponse
+//
+//	@return FcNeighborResponse
 func (a *FcApiService) GetFcNeighborListExecute(r ApiGetFcNeighborListRequest) (*FcNeighborResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -438,9 +440,9 @@ func (r ApiGetFcPhysicalPortByMoidRequest) Execute() (*FcPhysicalPort, *http.Res
 /*
 GetFcPhysicalPortByMoid Read a 'fc.PhysicalPort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFcPhysicalPortByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFcPhysicalPortByMoidRequest
 */
 func (a *FcApiService) GetFcPhysicalPortByMoid(ctx context.Context, moid string) ApiGetFcPhysicalPortByMoidRequest {
 	return ApiGetFcPhysicalPortByMoidRequest{
@@ -451,7 +453,8 @@ func (a *FcApiService) GetFcPhysicalPortByMoid(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//  @return FcPhysicalPort
+//
+//	@return FcPhysicalPort
 func (a *FcApiService) GetFcPhysicalPortByMoidExecute(r ApiGetFcPhysicalPortByMoidRequest) (*FcPhysicalPort, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -662,8 +665,8 @@ func (r ApiGetFcPhysicalPortListRequest) Execute() (*FcPhysicalPortResponse, *ht
 /*
 GetFcPhysicalPortList Read a 'fc.PhysicalPort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFcPhysicalPortListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFcPhysicalPortListRequest
 */
 func (a *FcApiService) GetFcPhysicalPortList(ctx context.Context) ApiGetFcPhysicalPortListRequest {
 	return ApiGetFcPhysicalPortListRequest{
@@ -673,7 +676,8 @@ func (a *FcApiService) GetFcPhysicalPortList(ctx context.Context) ApiGetFcPhysic
 }
 
 // Execute executes the request
-//  @return FcPhysicalPortResponse
+//
+//	@return FcPhysicalPortResponse
 func (a *FcApiService) GetFcPhysicalPortListExecute(r ApiGetFcPhysicalPortListRequest) (*FcPhysicalPortResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -840,9 +844,9 @@ func (r ApiGetFcPortChannelByMoidRequest) Execute() (*FcPortChannel, *http.Respo
 /*
 GetFcPortChannelByMoid Read a 'fc.PortChannel' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFcPortChannelByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFcPortChannelByMoidRequest
 */
 func (a *FcApiService) GetFcPortChannelByMoid(ctx context.Context, moid string) ApiGetFcPortChannelByMoidRequest {
 	return ApiGetFcPortChannelByMoidRequest{
@@ -853,7 +857,8 @@ func (a *FcApiService) GetFcPortChannelByMoid(ctx context.Context, moid string) 
 }
 
 // Execute executes the request
-//  @return FcPortChannel
+//
+//	@return FcPortChannel
 func (a *FcApiService) GetFcPortChannelByMoidExecute(r ApiGetFcPortChannelByMoidRequest) (*FcPortChannel, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1064,8 +1069,8 @@ func (r ApiGetFcPortChannelListRequest) Execute() (*FcPortChannelResponse, *http
 /*
 GetFcPortChannelList Read a 'fc.PortChannel' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFcPortChannelListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFcPortChannelListRequest
 */
 func (a *FcApiService) GetFcPortChannelList(ctx context.Context) ApiGetFcPortChannelListRequest {
 	return ApiGetFcPortChannelListRequest{
@@ -1075,7 +1080,8 @@ func (a *FcApiService) GetFcPortChannelList(ctx context.Context) ApiGetFcPortCha
 }
 
 // Execute executes the request
-//  @return FcPortChannelResponse
+//
+//	@return FcPortChannelResponse
 func (a *FcApiService) GetFcPortChannelListExecute(r ApiGetFcPortChannelListRequest) (*FcPortChannelResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1256,9 +1262,9 @@ func (r ApiPatchFcPhysicalPortRequest) Execute() (*FcPhysicalPort, *http.Respons
 /*
 PatchFcPhysicalPort Update a 'fc.PhysicalPort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchFcPhysicalPortRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchFcPhysicalPortRequest
 */
 func (a *FcApiService) PatchFcPhysicalPort(ctx context.Context, moid string) ApiPatchFcPhysicalPortRequest {
 	return ApiPatchFcPhysicalPortRequest{
@@ -1269,7 +1275,8 @@ func (a *FcApiService) PatchFcPhysicalPort(ctx context.Context, moid string) Api
 }
 
 // Execute executes the request
-//  @return FcPhysicalPort
+//
+//	@return FcPhysicalPort
 func (a *FcApiService) PatchFcPhysicalPortExecute(r ApiPatchFcPhysicalPortRequest) (*FcPhysicalPort, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -1426,9 +1433,9 @@ func (r ApiUpdateFcPhysicalPortRequest) Execute() (*FcPhysicalPort, *http.Respon
 /*
 UpdateFcPhysicalPort Update a 'fc.PhysicalPort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateFcPhysicalPortRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateFcPhysicalPortRequest
 */
 func (a *FcApiService) UpdateFcPhysicalPort(ctx context.Context, moid string) ApiUpdateFcPhysicalPortRequest {
 	return ApiUpdateFcPhysicalPortRequest{
@@ -1439,7 +1446,8 @@ func (a *FcApiService) UpdateFcPhysicalPort(ctx context.Context, moid string) Ap
 }
 
 // Execute executes the request
-//  @return FcPhysicalPort
+//
+//	@return FcPhysicalPort
 func (a *FcApiService) UpdateFcPhysicalPortExecute(r ApiUpdateFcPhysicalPortRequest) (*FcPhysicalPort, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

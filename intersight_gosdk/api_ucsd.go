@@ -36,9 +36,9 @@ func (r ApiDeleteUcsdBackupInfoRequest) Execute() (*http.Response, error) {
 /*
 DeleteUcsdBackupInfo Delete a 'ucsd.BackupInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteUcsdBackupInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteUcsdBackupInfoRequest
 */
 func (a *UcsdApiService) DeleteUcsdBackupInfo(ctx context.Context, moid string) ApiDeleteUcsdBackupInfoRequest {
 	return ApiDeleteUcsdBackupInfoRequest{
@@ -173,9 +173,9 @@ func (r ApiGetUcsdBackupInfoByMoidRequest) Execute() (*UcsdBackupInfo, *http.Res
 /*
 GetUcsdBackupInfoByMoid Read a 'ucsd.BackupInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetUcsdBackupInfoByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetUcsdBackupInfoByMoidRequest
 */
 func (a *UcsdApiService) GetUcsdBackupInfoByMoid(ctx context.Context, moid string) ApiGetUcsdBackupInfoByMoidRequest {
 	return ApiGetUcsdBackupInfoByMoidRequest{
@@ -186,7 +186,8 @@ func (a *UcsdApiService) GetUcsdBackupInfoByMoid(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return UcsdBackupInfo
+//
+//	@return UcsdBackupInfo
 func (a *UcsdApiService) GetUcsdBackupInfoByMoidExecute(r ApiGetUcsdBackupInfoByMoidRequest) (*UcsdBackupInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -397,8 +398,8 @@ func (r ApiGetUcsdBackupInfoListRequest) Execute() (*UcsdBackupInfoResponse, *ht
 /*
 GetUcsdBackupInfoList Read a 'ucsd.BackupInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetUcsdBackupInfoListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetUcsdBackupInfoListRequest
 */
 func (a *UcsdApiService) GetUcsdBackupInfoList(ctx context.Context) ApiGetUcsdBackupInfoListRequest {
 	return ApiGetUcsdBackupInfoListRequest{
@@ -408,7 +409,8 @@ func (a *UcsdApiService) GetUcsdBackupInfoList(ctx context.Context) ApiGetUcsdBa
 }
 
 // Execute executes the request
-//  @return UcsdBackupInfoResponse
+//
+//	@return UcsdBackupInfoResponse
 func (a *UcsdApiService) GetUcsdBackupInfoListExecute(r ApiGetUcsdBackupInfoListRequest) (*UcsdBackupInfoResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet

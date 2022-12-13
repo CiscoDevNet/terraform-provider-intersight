@@ -56,8 +56,8 @@ func (r ApiCreateSoftwareApplianceDistributableRequest) Execute() (*SoftwareAppl
 /*
 CreateSoftwareApplianceDistributable Create a 'software.ApplianceDistributable' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateSoftwareApplianceDistributableRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateSoftwareApplianceDistributableRequest
 */
 func (a *SoftwareApiService) CreateSoftwareApplianceDistributable(ctx context.Context) ApiCreateSoftwareApplianceDistributableRequest {
 	return ApiCreateSoftwareApplianceDistributableRequest{
@@ -67,7 +67,8 @@ func (a *SoftwareApiService) CreateSoftwareApplianceDistributable(ctx context.Co
 }
 
 // Execute executes the request
-//  @return SoftwareApplianceDistributable
+//
+//	@return SoftwareApplianceDistributable
 func (a *SoftwareApiService) CreateSoftwareApplianceDistributableExecute(r ApiCreateSoftwareApplianceDistributableRequest) (*SoftwareApplianceDistributable, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -232,8 +233,8 @@ func (r ApiCreateSoftwareHclMetaRequest) Execute() (*SoftwareHclMeta, *http.Resp
 /*
 CreateSoftwareHclMeta Create a 'software.HclMeta' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateSoftwareHclMetaRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateSoftwareHclMetaRequest
 */
 func (a *SoftwareApiService) CreateSoftwareHclMeta(ctx context.Context) ApiCreateSoftwareHclMetaRequest {
 	return ApiCreateSoftwareHclMetaRequest{
@@ -243,7 +244,8 @@ func (a *SoftwareApiService) CreateSoftwareHclMeta(ctx context.Context) ApiCreat
 }
 
 // Execute executes the request
-//  @return SoftwareHclMeta
+//
+//	@return SoftwareHclMeta
 func (a *SoftwareApiService) CreateSoftwareHclMetaExecute(r ApiCreateSoftwareHclMetaRequest) (*SoftwareHclMeta, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -408,8 +410,8 @@ func (r ApiCreateSoftwareHyperflexBundleDistributableRequest) Execute() (*Softwa
 /*
 CreateSoftwareHyperflexBundleDistributable Create a 'software.HyperflexBundleDistributable' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateSoftwareHyperflexBundleDistributableRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateSoftwareHyperflexBundleDistributableRequest
 */
 func (a *SoftwareApiService) CreateSoftwareHyperflexBundleDistributable(ctx context.Context) ApiCreateSoftwareHyperflexBundleDistributableRequest {
 	return ApiCreateSoftwareHyperflexBundleDistributableRequest{
@@ -419,7 +421,8 @@ func (a *SoftwareApiService) CreateSoftwareHyperflexBundleDistributable(ctx cont
 }
 
 // Execute executes the request
-//  @return SoftwareHyperflexBundleDistributable
+//
+//	@return SoftwareHyperflexBundleDistributable
 func (a *SoftwareApiService) CreateSoftwareHyperflexBundleDistributableExecute(r ApiCreateSoftwareHyperflexBundleDistributableRequest) (*SoftwareHyperflexBundleDistributable, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -584,8 +587,8 @@ func (r ApiCreateSoftwareHyperflexDistributableRequest) Execute() (*SoftwareHype
 /*
 CreateSoftwareHyperflexDistributable Create a 'software.HyperflexDistributable' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateSoftwareHyperflexDistributableRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateSoftwareHyperflexDistributableRequest
 */
 func (a *SoftwareApiService) CreateSoftwareHyperflexDistributable(ctx context.Context) ApiCreateSoftwareHyperflexDistributableRequest {
 	return ApiCreateSoftwareHyperflexDistributableRequest{
@@ -595,7 +598,8 @@ func (a *SoftwareApiService) CreateSoftwareHyperflexDistributable(ctx context.Co
 }
 
 // Execute executes the request
-//  @return SoftwareHyperflexDistributable
+//
+//	@return SoftwareHyperflexDistributable
 func (a *SoftwareApiService) CreateSoftwareHyperflexDistributableExecute(r ApiCreateSoftwareHyperflexDistributableRequest) (*SoftwareHyperflexDistributable, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -760,8 +764,8 @@ func (r ApiCreateSoftwareIksBundleDistributableRequest) Execute() (*SoftwareIksB
 /*
 CreateSoftwareIksBundleDistributable Create a 'software.IksBundleDistributable' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateSoftwareIksBundleDistributableRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateSoftwareIksBundleDistributableRequest
 */
 func (a *SoftwareApiService) CreateSoftwareIksBundleDistributable(ctx context.Context) ApiCreateSoftwareIksBundleDistributableRequest {
 	return ApiCreateSoftwareIksBundleDistributableRequest{
@@ -771,7 +775,8 @@ func (a *SoftwareApiService) CreateSoftwareIksBundleDistributable(ctx context.Co
 }
 
 // Execute executes the request
-//  @return SoftwareIksBundleDistributable
+//
+//	@return SoftwareIksBundleDistributable
 func (a *SoftwareApiService) CreateSoftwareIksBundleDistributableExecute(r ApiCreateSoftwareIksBundleDistributableRequest) (*SoftwareIksBundleDistributable, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -936,8 +941,8 @@ func (r ApiCreateSoftwareReleaseMetaRequest) Execute() (*SoftwareReleaseMeta, *h
 /*
 CreateSoftwareReleaseMeta Create a 'software.ReleaseMeta' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateSoftwareReleaseMetaRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateSoftwareReleaseMetaRequest
 */
 func (a *SoftwareApiService) CreateSoftwareReleaseMeta(ctx context.Context) ApiCreateSoftwareReleaseMetaRequest {
 	return ApiCreateSoftwareReleaseMetaRequest{
@@ -947,7 +952,8 @@ func (a *SoftwareApiService) CreateSoftwareReleaseMeta(ctx context.Context) ApiC
 }
 
 // Execute executes the request
-//  @return SoftwareReleaseMeta
+//
+//	@return SoftwareReleaseMeta
 func (a *SoftwareApiService) CreateSoftwareReleaseMetaExecute(r ApiCreateSoftwareReleaseMetaRequest) (*SoftwareReleaseMeta, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1112,8 +1118,8 @@ func (r ApiCreateSoftwareSolutionDistributableRequest) Execute() (*SoftwareSolut
 /*
 CreateSoftwareSolutionDistributable Create a 'software.SolutionDistributable' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateSoftwareSolutionDistributableRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateSoftwareSolutionDistributableRequest
 */
 func (a *SoftwareApiService) CreateSoftwareSolutionDistributable(ctx context.Context) ApiCreateSoftwareSolutionDistributableRequest {
 	return ApiCreateSoftwareSolutionDistributableRequest{
@@ -1123,7 +1129,8 @@ func (a *SoftwareApiService) CreateSoftwareSolutionDistributable(ctx context.Con
 }
 
 // Execute executes the request
-//  @return SoftwareSolutionDistributable
+//
+//	@return SoftwareSolutionDistributable
 func (a *SoftwareApiService) CreateSoftwareSolutionDistributableExecute(r ApiCreateSoftwareSolutionDistributableRequest) (*SoftwareSolutionDistributable, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1288,8 +1295,8 @@ func (r ApiCreateSoftwareUcsdBundleDistributableRequest) Execute() (*SoftwareUcs
 /*
 CreateSoftwareUcsdBundleDistributable Create a 'software.UcsdBundleDistributable' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateSoftwareUcsdBundleDistributableRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateSoftwareUcsdBundleDistributableRequest
 */
 func (a *SoftwareApiService) CreateSoftwareUcsdBundleDistributable(ctx context.Context) ApiCreateSoftwareUcsdBundleDistributableRequest {
 	return ApiCreateSoftwareUcsdBundleDistributableRequest{
@@ -1299,7 +1306,8 @@ func (a *SoftwareApiService) CreateSoftwareUcsdBundleDistributable(ctx context.C
 }
 
 // Execute executes the request
-//  @return SoftwareUcsdBundleDistributable
+//
+//	@return SoftwareUcsdBundleDistributable
 func (a *SoftwareApiService) CreateSoftwareUcsdBundleDistributableExecute(r ApiCreateSoftwareUcsdBundleDistributableRequest) (*SoftwareUcsdBundleDistributable, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1464,8 +1472,8 @@ func (r ApiCreateSoftwareUcsdDistributableRequest) Execute() (*SoftwareUcsdDistr
 /*
 CreateSoftwareUcsdDistributable Create a 'software.UcsdDistributable' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateSoftwareUcsdDistributableRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateSoftwareUcsdDistributableRequest
 */
 func (a *SoftwareApiService) CreateSoftwareUcsdDistributable(ctx context.Context) ApiCreateSoftwareUcsdDistributableRequest {
 	return ApiCreateSoftwareUcsdDistributableRequest{
@@ -1475,7 +1483,8 @@ func (a *SoftwareApiService) CreateSoftwareUcsdDistributable(ctx context.Context
 }
 
 // Execute executes the request
-//  @return SoftwareUcsdDistributable
+//
+//	@return SoftwareUcsdDistributable
 func (a *SoftwareApiService) CreateSoftwareUcsdDistributableExecute(r ApiCreateSoftwareUcsdDistributableRequest) (*SoftwareUcsdDistributable, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1620,9 +1629,9 @@ func (r ApiDeleteSoftwareApplianceDistributableRequest) Execute() (*http.Respons
 /*
 DeleteSoftwareApplianceDistributable Delete a 'software.ApplianceDistributable' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteSoftwareApplianceDistributableRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteSoftwareApplianceDistributableRequest
 */
 func (a *SoftwareApiService) DeleteSoftwareApplianceDistributable(ctx context.Context, moid string) ApiDeleteSoftwareApplianceDistributableRequest {
 	return ApiDeleteSoftwareApplianceDistributableRequest{
@@ -1757,9 +1766,9 @@ func (r ApiDeleteSoftwareHclMetaRequest) Execute() (*http.Response, error) {
 /*
 DeleteSoftwareHclMeta Delete a 'software.HclMeta' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteSoftwareHclMetaRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteSoftwareHclMetaRequest
 */
 func (a *SoftwareApiService) DeleteSoftwareHclMeta(ctx context.Context, moid string) ApiDeleteSoftwareHclMetaRequest {
 	return ApiDeleteSoftwareHclMetaRequest{
@@ -1894,9 +1903,9 @@ func (r ApiDeleteSoftwareHyperflexBundleDistributableRequest) Execute() (*http.R
 /*
 DeleteSoftwareHyperflexBundleDistributable Delete a 'software.HyperflexBundleDistributable' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteSoftwareHyperflexBundleDistributableRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteSoftwareHyperflexBundleDistributableRequest
 */
 func (a *SoftwareApiService) DeleteSoftwareHyperflexBundleDistributable(ctx context.Context, moid string) ApiDeleteSoftwareHyperflexBundleDistributableRequest {
 	return ApiDeleteSoftwareHyperflexBundleDistributableRequest{
@@ -2031,9 +2040,9 @@ func (r ApiDeleteSoftwareHyperflexDistributableRequest) Execute() (*http.Respons
 /*
 DeleteSoftwareHyperflexDistributable Delete a 'software.HyperflexDistributable' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteSoftwareHyperflexDistributableRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteSoftwareHyperflexDistributableRequest
 */
 func (a *SoftwareApiService) DeleteSoftwareHyperflexDistributable(ctx context.Context, moid string) ApiDeleteSoftwareHyperflexDistributableRequest {
 	return ApiDeleteSoftwareHyperflexDistributableRequest{
@@ -2168,9 +2177,9 @@ func (r ApiDeleteSoftwareIksBundleDistributableRequest) Execute() (*http.Respons
 /*
 DeleteSoftwareIksBundleDistributable Delete a 'software.IksBundleDistributable' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteSoftwareIksBundleDistributableRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteSoftwareIksBundleDistributableRequest
 */
 func (a *SoftwareApiService) DeleteSoftwareIksBundleDistributable(ctx context.Context, moid string) ApiDeleteSoftwareIksBundleDistributableRequest {
 	return ApiDeleteSoftwareIksBundleDistributableRequest{
@@ -2305,9 +2314,9 @@ func (r ApiDeleteSoftwareReleaseMetaRequest) Execute() (*http.Response, error) {
 /*
 DeleteSoftwareReleaseMeta Delete a 'software.ReleaseMeta' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteSoftwareReleaseMetaRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteSoftwareReleaseMetaRequest
 */
 func (a *SoftwareApiService) DeleteSoftwareReleaseMeta(ctx context.Context, moid string) ApiDeleteSoftwareReleaseMetaRequest {
 	return ApiDeleteSoftwareReleaseMetaRequest{
@@ -2442,9 +2451,9 @@ func (r ApiDeleteSoftwareSolutionDistributableRequest) Execute() (*http.Response
 /*
 DeleteSoftwareSolutionDistributable Delete a 'software.SolutionDistributable' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteSoftwareSolutionDistributableRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteSoftwareSolutionDistributableRequest
 */
 func (a *SoftwareApiService) DeleteSoftwareSolutionDistributable(ctx context.Context, moid string) ApiDeleteSoftwareSolutionDistributableRequest {
 	return ApiDeleteSoftwareSolutionDistributableRequest{
@@ -2579,9 +2588,9 @@ func (r ApiDeleteSoftwareUcsdBundleDistributableRequest) Execute() (*http.Respon
 /*
 DeleteSoftwareUcsdBundleDistributable Delete a 'software.UcsdBundleDistributable' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteSoftwareUcsdBundleDistributableRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteSoftwareUcsdBundleDistributableRequest
 */
 func (a *SoftwareApiService) DeleteSoftwareUcsdBundleDistributable(ctx context.Context, moid string) ApiDeleteSoftwareUcsdBundleDistributableRequest {
 	return ApiDeleteSoftwareUcsdBundleDistributableRequest{
@@ -2716,9 +2725,9 @@ func (r ApiDeleteSoftwareUcsdDistributableRequest) Execute() (*http.Response, er
 /*
 DeleteSoftwareUcsdDistributable Delete a 'software.UcsdDistributable' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteSoftwareUcsdDistributableRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteSoftwareUcsdDistributableRequest
 */
 func (a *SoftwareApiService) DeleteSoftwareUcsdDistributable(ctx context.Context, moid string) ApiDeleteSoftwareUcsdDistributableRequest {
 	return ApiDeleteSoftwareUcsdDistributableRequest{
@@ -2853,9 +2862,9 @@ func (r ApiGetSoftwareApplianceDistributableByMoidRequest) Execute() (*SoftwareA
 /*
 GetSoftwareApplianceDistributableByMoid Read a 'software.ApplianceDistributable' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetSoftwareApplianceDistributableByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetSoftwareApplianceDistributableByMoidRequest
 */
 func (a *SoftwareApiService) GetSoftwareApplianceDistributableByMoid(ctx context.Context, moid string) ApiGetSoftwareApplianceDistributableByMoidRequest {
 	return ApiGetSoftwareApplianceDistributableByMoidRequest{
@@ -2866,7 +2875,8 @@ func (a *SoftwareApiService) GetSoftwareApplianceDistributableByMoid(ctx context
 }
 
 // Execute executes the request
-//  @return SoftwareApplianceDistributable
+//
+//	@return SoftwareApplianceDistributable
 func (a *SoftwareApiService) GetSoftwareApplianceDistributableByMoidExecute(r ApiGetSoftwareApplianceDistributableByMoidRequest) (*SoftwareApplianceDistributable, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3077,8 +3087,8 @@ func (r ApiGetSoftwareApplianceDistributableListRequest) Execute() (*SoftwareApp
 /*
 GetSoftwareApplianceDistributableList Read a 'software.ApplianceDistributable' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetSoftwareApplianceDistributableListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetSoftwareApplianceDistributableListRequest
 */
 func (a *SoftwareApiService) GetSoftwareApplianceDistributableList(ctx context.Context) ApiGetSoftwareApplianceDistributableListRequest {
 	return ApiGetSoftwareApplianceDistributableListRequest{
@@ -3088,7 +3098,8 @@ func (a *SoftwareApiService) GetSoftwareApplianceDistributableList(ctx context.C
 }
 
 // Execute executes the request
-//  @return SoftwareApplianceDistributableResponse
+//
+//	@return SoftwareApplianceDistributableResponse
 func (a *SoftwareApiService) GetSoftwareApplianceDistributableListExecute(r ApiGetSoftwareApplianceDistributableListRequest) (*SoftwareApplianceDistributableResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3255,9 +3266,9 @@ func (r ApiGetSoftwareDownloadHistoryByMoidRequest) Execute() (*SoftwareDownload
 /*
 GetSoftwareDownloadHistoryByMoid Read a 'software.DownloadHistory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetSoftwareDownloadHistoryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetSoftwareDownloadHistoryByMoidRequest
 */
 func (a *SoftwareApiService) GetSoftwareDownloadHistoryByMoid(ctx context.Context, moid string) ApiGetSoftwareDownloadHistoryByMoidRequest {
 	return ApiGetSoftwareDownloadHistoryByMoidRequest{
@@ -3268,7 +3279,8 @@ func (a *SoftwareApiService) GetSoftwareDownloadHistoryByMoid(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return SoftwareDownloadHistory
+//
+//	@return SoftwareDownloadHistory
 func (a *SoftwareApiService) GetSoftwareDownloadHistoryByMoidExecute(r ApiGetSoftwareDownloadHistoryByMoidRequest) (*SoftwareDownloadHistory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3479,8 +3491,8 @@ func (r ApiGetSoftwareDownloadHistoryListRequest) Execute() (*SoftwareDownloadHi
 /*
 GetSoftwareDownloadHistoryList Read a 'software.DownloadHistory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetSoftwareDownloadHistoryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetSoftwareDownloadHistoryListRequest
 */
 func (a *SoftwareApiService) GetSoftwareDownloadHistoryList(ctx context.Context) ApiGetSoftwareDownloadHistoryListRequest {
 	return ApiGetSoftwareDownloadHistoryListRequest{
@@ -3490,7 +3502,8 @@ func (a *SoftwareApiService) GetSoftwareDownloadHistoryList(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return SoftwareDownloadHistoryResponse
+//
+//	@return SoftwareDownloadHistoryResponse
 func (a *SoftwareApiService) GetSoftwareDownloadHistoryListExecute(r ApiGetSoftwareDownloadHistoryListRequest) (*SoftwareDownloadHistoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3657,9 +3670,9 @@ func (r ApiGetSoftwareHclMetaByMoidRequest) Execute() (*SoftwareHclMeta, *http.R
 /*
 GetSoftwareHclMetaByMoid Read a 'software.HclMeta' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetSoftwareHclMetaByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetSoftwareHclMetaByMoidRequest
 */
 func (a *SoftwareApiService) GetSoftwareHclMetaByMoid(ctx context.Context, moid string) ApiGetSoftwareHclMetaByMoidRequest {
 	return ApiGetSoftwareHclMetaByMoidRequest{
@@ -3670,7 +3683,8 @@ func (a *SoftwareApiService) GetSoftwareHclMetaByMoid(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return SoftwareHclMeta
+//
+//	@return SoftwareHclMeta
 func (a *SoftwareApiService) GetSoftwareHclMetaByMoidExecute(r ApiGetSoftwareHclMetaByMoidRequest) (*SoftwareHclMeta, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3881,8 +3895,8 @@ func (r ApiGetSoftwareHclMetaListRequest) Execute() (*SoftwareHclMetaResponse, *
 /*
 GetSoftwareHclMetaList Read a 'software.HclMeta' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetSoftwareHclMetaListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetSoftwareHclMetaListRequest
 */
 func (a *SoftwareApiService) GetSoftwareHclMetaList(ctx context.Context) ApiGetSoftwareHclMetaListRequest {
 	return ApiGetSoftwareHclMetaListRequest{
@@ -3892,7 +3906,8 @@ func (a *SoftwareApiService) GetSoftwareHclMetaList(ctx context.Context) ApiGetS
 }
 
 // Execute executes the request
-//  @return SoftwareHclMetaResponse
+//
+//	@return SoftwareHclMetaResponse
 func (a *SoftwareApiService) GetSoftwareHclMetaListExecute(r ApiGetSoftwareHclMetaListRequest) (*SoftwareHclMetaResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4059,9 +4074,9 @@ func (r ApiGetSoftwareHyperflexBundleDistributableByMoidRequest) Execute() (*Sof
 /*
 GetSoftwareHyperflexBundleDistributableByMoid Read a 'software.HyperflexBundleDistributable' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetSoftwareHyperflexBundleDistributableByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetSoftwareHyperflexBundleDistributableByMoidRequest
 */
 func (a *SoftwareApiService) GetSoftwareHyperflexBundleDistributableByMoid(ctx context.Context, moid string) ApiGetSoftwareHyperflexBundleDistributableByMoidRequest {
 	return ApiGetSoftwareHyperflexBundleDistributableByMoidRequest{
@@ -4072,7 +4087,8 @@ func (a *SoftwareApiService) GetSoftwareHyperflexBundleDistributableByMoid(ctx c
 }
 
 // Execute executes the request
-//  @return SoftwareHyperflexBundleDistributable
+//
+//	@return SoftwareHyperflexBundleDistributable
 func (a *SoftwareApiService) GetSoftwareHyperflexBundleDistributableByMoidExecute(r ApiGetSoftwareHyperflexBundleDistributableByMoidRequest) (*SoftwareHyperflexBundleDistributable, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4283,8 +4299,8 @@ func (r ApiGetSoftwareHyperflexBundleDistributableListRequest) Execute() (*Softw
 /*
 GetSoftwareHyperflexBundleDistributableList Read a 'software.HyperflexBundleDistributable' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetSoftwareHyperflexBundleDistributableListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetSoftwareHyperflexBundleDistributableListRequest
 */
 func (a *SoftwareApiService) GetSoftwareHyperflexBundleDistributableList(ctx context.Context) ApiGetSoftwareHyperflexBundleDistributableListRequest {
 	return ApiGetSoftwareHyperflexBundleDistributableListRequest{
@@ -4294,7 +4310,8 @@ func (a *SoftwareApiService) GetSoftwareHyperflexBundleDistributableList(ctx con
 }
 
 // Execute executes the request
-//  @return SoftwareHyperflexBundleDistributableResponse
+//
+//	@return SoftwareHyperflexBundleDistributableResponse
 func (a *SoftwareApiService) GetSoftwareHyperflexBundleDistributableListExecute(r ApiGetSoftwareHyperflexBundleDistributableListRequest) (*SoftwareHyperflexBundleDistributableResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4461,9 +4478,9 @@ func (r ApiGetSoftwareHyperflexDistributableByMoidRequest) Execute() (*SoftwareH
 /*
 GetSoftwareHyperflexDistributableByMoid Read a 'software.HyperflexDistributable' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetSoftwareHyperflexDistributableByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetSoftwareHyperflexDistributableByMoidRequest
 */
 func (a *SoftwareApiService) GetSoftwareHyperflexDistributableByMoid(ctx context.Context, moid string) ApiGetSoftwareHyperflexDistributableByMoidRequest {
 	return ApiGetSoftwareHyperflexDistributableByMoidRequest{
@@ -4474,7 +4491,8 @@ func (a *SoftwareApiService) GetSoftwareHyperflexDistributableByMoid(ctx context
 }
 
 // Execute executes the request
-//  @return SoftwareHyperflexDistributable
+//
+//	@return SoftwareHyperflexDistributable
 func (a *SoftwareApiService) GetSoftwareHyperflexDistributableByMoidExecute(r ApiGetSoftwareHyperflexDistributableByMoidRequest) (*SoftwareHyperflexDistributable, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4685,8 +4703,8 @@ func (r ApiGetSoftwareHyperflexDistributableListRequest) Execute() (*SoftwareHyp
 /*
 GetSoftwareHyperflexDistributableList Read a 'software.HyperflexDistributable' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetSoftwareHyperflexDistributableListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetSoftwareHyperflexDistributableListRequest
 */
 func (a *SoftwareApiService) GetSoftwareHyperflexDistributableList(ctx context.Context) ApiGetSoftwareHyperflexDistributableListRequest {
 	return ApiGetSoftwareHyperflexDistributableListRequest{
@@ -4696,7 +4714,8 @@ func (a *SoftwareApiService) GetSoftwareHyperflexDistributableList(ctx context.C
 }
 
 // Execute executes the request
-//  @return SoftwareHyperflexDistributableResponse
+//
+//	@return SoftwareHyperflexDistributableResponse
 func (a *SoftwareApiService) GetSoftwareHyperflexDistributableListExecute(r ApiGetSoftwareHyperflexDistributableListRequest) (*SoftwareHyperflexDistributableResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4863,9 +4882,9 @@ func (r ApiGetSoftwareIksBundleDistributableByMoidRequest) Execute() (*SoftwareI
 /*
 GetSoftwareIksBundleDistributableByMoid Read a 'software.IksBundleDistributable' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetSoftwareIksBundleDistributableByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetSoftwareIksBundleDistributableByMoidRequest
 */
 func (a *SoftwareApiService) GetSoftwareIksBundleDistributableByMoid(ctx context.Context, moid string) ApiGetSoftwareIksBundleDistributableByMoidRequest {
 	return ApiGetSoftwareIksBundleDistributableByMoidRequest{
@@ -4876,7 +4895,8 @@ func (a *SoftwareApiService) GetSoftwareIksBundleDistributableByMoid(ctx context
 }
 
 // Execute executes the request
-//  @return SoftwareIksBundleDistributable
+//
+//	@return SoftwareIksBundleDistributable
 func (a *SoftwareApiService) GetSoftwareIksBundleDistributableByMoidExecute(r ApiGetSoftwareIksBundleDistributableByMoidRequest) (*SoftwareIksBundleDistributable, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5087,8 +5107,8 @@ func (r ApiGetSoftwareIksBundleDistributableListRequest) Execute() (*SoftwareIks
 /*
 GetSoftwareIksBundleDistributableList Read a 'software.IksBundleDistributable' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetSoftwareIksBundleDistributableListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetSoftwareIksBundleDistributableListRequest
 */
 func (a *SoftwareApiService) GetSoftwareIksBundleDistributableList(ctx context.Context) ApiGetSoftwareIksBundleDistributableListRequest {
 	return ApiGetSoftwareIksBundleDistributableListRequest{
@@ -5098,7 +5118,8 @@ func (a *SoftwareApiService) GetSoftwareIksBundleDistributableList(ctx context.C
 }
 
 // Execute executes the request
-//  @return SoftwareIksBundleDistributableResponse
+//
+//	@return SoftwareIksBundleDistributableResponse
 func (a *SoftwareApiService) GetSoftwareIksBundleDistributableListExecute(r ApiGetSoftwareIksBundleDistributableListRequest) (*SoftwareIksBundleDistributableResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5265,9 +5286,9 @@ func (r ApiGetSoftwareReleaseMetaByMoidRequest) Execute() (*SoftwareReleaseMeta,
 /*
 GetSoftwareReleaseMetaByMoid Read a 'software.ReleaseMeta' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetSoftwareReleaseMetaByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetSoftwareReleaseMetaByMoidRequest
 */
 func (a *SoftwareApiService) GetSoftwareReleaseMetaByMoid(ctx context.Context, moid string) ApiGetSoftwareReleaseMetaByMoidRequest {
 	return ApiGetSoftwareReleaseMetaByMoidRequest{
@@ -5278,7 +5299,8 @@ func (a *SoftwareApiService) GetSoftwareReleaseMetaByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return SoftwareReleaseMeta
+//
+//	@return SoftwareReleaseMeta
 func (a *SoftwareApiService) GetSoftwareReleaseMetaByMoidExecute(r ApiGetSoftwareReleaseMetaByMoidRequest) (*SoftwareReleaseMeta, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5489,8 +5511,8 @@ func (r ApiGetSoftwareReleaseMetaListRequest) Execute() (*SoftwareReleaseMetaRes
 /*
 GetSoftwareReleaseMetaList Read a 'software.ReleaseMeta' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetSoftwareReleaseMetaListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetSoftwareReleaseMetaListRequest
 */
 func (a *SoftwareApiService) GetSoftwareReleaseMetaList(ctx context.Context) ApiGetSoftwareReleaseMetaListRequest {
 	return ApiGetSoftwareReleaseMetaListRequest{
@@ -5500,7 +5522,8 @@ func (a *SoftwareApiService) GetSoftwareReleaseMetaList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return SoftwareReleaseMetaResponse
+//
+//	@return SoftwareReleaseMetaResponse
 func (a *SoftwareApiService) GetSoftwareReleaseMetaListExecute(r ApiGetSoftwareReleaseMetaListRequest) (*SoftwareReleaseMetaResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5667,9 +5690,9 @@ func (r ApiGetSoftwareSolutionDistributableByMoidRequest) Execute() (*SoftwareSo
 /*
 GetSoftwareSolutionDistributableByMoid Read a 'software.SolutionDistributable' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetSoftwareSolutionDistributableByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetSoftwareSolutionDistributableByMoidRequest
 */
 func (a *SoftwareApiService) GetSoftwareSolutionDistributableByMoid(ctx context.Context, moid string) ApiGetSoftwareSolutionDistributableByMoidRequest {
 	return ApiGetSoftwareSolutionDistributableByMoidRequest{
@@ -5680,7 +5703,8 @@ func (a *SoftwareApiService) GetSoftwareSolutionDistributableByMoid(ctx context.
 }
 
 // Execute executes the request
-//  @return SoftwareSolutionDistributable
+//
+//	@return SoftwareSolutionDistributable
 func (a *SoftwareApiService) GetSoftwareSolutionDistributableByMoidExecute(r ApiGetSoftwareSolutionDistributableByMoidRequest) (*SoftwareSolutionDistributable, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5891,8 +5915,8 @@ func (r ApiGetSoftwareSolutionDistributableListRequest) Execute() (*SoftwareSolu
 /*
 GetSoftwareSolutionDistributableList Read a 'software.SolutionDistributable' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetSoftwareSolutionDistributableListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetSoftwareSolutionDistributableListRequest
 */
 func (a *SoftwareApiService) GetSoftwareSolutionDistributableList(ctx context.Context) ApiGetSoftwareSolutionDistributableListRequest {
 	return ApiGetSoftwareSolutionDistributableListRequest{
@@ -5902,7 +5926,8 @@ func (a *SoftwareApiService) GetSoftwareSolutionDistributableList(ctx context.Co
 }
 
 // Execute executes the request
-//  @return SoftwareSolutionDistributableResponse
+//
+//	@return SoftwareSolutionDistributableResponse
 func (a *SoftwareApiService) GetSoftwareSolutionDistributableListExecute(r ApiGetSoftwareSolutionDistributableListRequest) (*SoftwareSolutionDistributableResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6069,9 +6094,9 @@ func (r ApiGetSoftwareUcsdBundleDistributableByMoidRequest) Execute() (*Software
 /*
 GetSoftwareUcsdBundleDistributableByMoid Read a 'software.UcsdBundleDistributable' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetSoftwareUcsdBundleDistributableByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetSoftwareUcsdBundleDistributableByMoidRequest
 */
 func (a *SoftwareApiService) GetSoftwareUcsdBundleDistributableByMoid(ctx context.Context, moid string) ApiGetSoftwareUcsdBundleDistributableByMoidRequest {
 	return ApiGetSoftwareUcsdBundleDistributableByMoidRequest{
@@ -6082,7 +6107,8 @@ func (a *SoftwareApiService) GetSoftwareUcsdBundleDistributableByMoid(ctx contex
 }
 
 // Execute executes the request
-//  @return SoftwareUcsdBundleDistributable
+//
+//	@return SoftwareUcsdBundleDistributable
 func (a *SoftwareApiService) GetSoftwareUcsdBundleDistributableByMoidExecute(r ApiGetSoftwareUcsdBundleDistributableByMoidRequest) (*SoftwareUcsdBundleDistributable, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6293,8 +6319,8 @@ func (r ApiGetSoftwareUcsdBundleDistributableListRequest) Execute() (*SoftwareUc
 /*
 GetSoftwareUcsdBundleDistributableList Read a 'software.UcsdBundleDistributable' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetSoftwareUcsdBundleDistributableListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetSoftwareUcsdBundleDistributableListRequest
 */
 func (a *SoftwareApiService) GetSoftwareUcsdBundleDistributableList(ctx context.Context) ApiGetSoftwareUcsdBundleDistributableListRequest {
 	return ApiGetSoftwareUcsdBundleDistributableListRequest{
@@ -6304,7 +6330,8 @@ func (a *SoftwareApiService) GetSoftwareUcsdBundleDistributableList(ctx context.
 }
 
 // Execute executes the request
-//  @return SoftwareUcsdBundleDistributableResponse
+//
+//	@return SoftwareUcsdBundleDistributableResponse
 func (a *SoftwareApiService) GetSoftwareUcsdBundleDistributableListExecute(r ApiGetSoftwareUcsdBundleDistributableListRequest) (*SoftwareUcsdBundleDistributableResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6471,9 +6498,9 @@ func (r ApiGetSoftwareUcsdDistributableByMoidRequest) Execute() (*SoftwareUcsdDi
 /*
 GetSoftwareUcsdDistributableByMoid Read a 'software.UcsdDistributable' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetSoftwareUcsdDistributableByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetSoftwareUcsdDistributableByMoidRequest
 */
 func (a *SoftwareApiService) GetSoftwareUcsdDistributableByMoid(ctx context.Context, moid string) ApiGetSoftwareUcsdDistributableByMoidRequest {
 	return ApiGetSoftwareUcsdDistributableByMoidRequest{
@@ -6484,7 +6511,8 @@ func (a *SoftwareApiService) GetSoftwareUcsdDistributableByMoid(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return SoftwareUcsdDistributable
+//
+//	@return SoftwareUcsdDistributable
 func (a *SoftwareApiService) GetSoftwareUcsdDistributableByMoidExecute(r ApiGetSoftwareUcsdDistributableByMoidRequest) (*SoftwareUcsdDistributable, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6695,8 +6723,8 @@ func (r ApiGetSoftwareUcsdDistributableListRequest) Execute() (*SoftwareUcsdDist
 /*
 GetSoftwareUcsdDistributableList Read a 'software.UcsdDistributable' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetSoftwareUcsdDistributableListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetSoftwareUcsdDistributableListRequest
 */
 func (a *SoftwareApiService) GetSoftwareUcsdDistributableList(ctx context.Context) ApiGetSoftwareUcsdDistributableListRequest {
 	return ApiGetSoftwareUcsdDistributableListRequest{
@@ -6706,7 +6734,8 @@ func (a *SoftwareApiService) GetSoftwareUcsdDistributableList(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return SoftwareUcsdDistributableResponse
+//
+//	@return SoftwareUcsdDistributableResponse
 func (a *SoftwareApiService) GetSoftwareUcsdDistributableListExecute(r ApiGetSoftwareUcsdDistributableListRequest) (*SoftwareUcsdDistributableResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6887,9 +6916,9 @@ func (r ApiPatchSoftwareApplianceDistributableRequest) Execute() (*SoftwareAppli
 /*
 PatchSoftwareApplianceDistributable Update a 'software.ApplianceDistributable' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchSoftwareApplianceDistributableRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchSoftwareApplianceDistributableRequest
 */
 func (a *SoftwareApiService) PatchSoftwareApplianceDistributable(ctx context.Context, moid string) ApiPatchSoftwareApplianceDistributableRequest {
 	return ApiPatchSoftwareApplianceDistributableRequest{
@@ -6900,7 +6929,8 @@ func (a *SoftwareApiService) PatchSoftwareApplianceDistributable(ctx context.Con
 }
 
 // Execute executes the request
-//  @return SoftwareApplianceDistributable
+//
+//	@return SoftwareApplianceDistributable
 func (a *SoftwareApiService) PatchSoftwareApplianceDistributableExecute(r ApiPatchSoftwareApplianceDistributableRequest) (*SoftwareApplianceDistributable, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -7057,9 +7087,9 @@ func (r ApiPatchSoftwareHclMetaRequest) Execute() (*SoftwareHclMeta, *http.Respo
 /*
 PatchSoftwareHclMeta Update a 'software.HclMeta' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchSoftwareHclMetaRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchSoftwareHclMetaRequest
 */
 func (a *SoftwareApiService) PatchSoftwareHclMeta(ctx context.Context, moid string) ApiPatchSoftwareHclMetaRequest {
 	return ApiPatchSoftwareHclMetaRequest{
@@ -7070,7 +7100,8 @@ func (a *SoftwareApiService) PatchSoftwareHclMeta(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return SoftwareHclMeta
+//
+//	@return SoftwareHclMeta
 func (a *SoftwareApiService) PatchSoftwareHclMetaExecute(r ApiPatchSoftwareHclMetaRequest) (*SoftwareHclMeta, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -7227,9 +7258,9 @@ func (r ApiPatchSoftwareHyperflexBundleDistributableRequest) Execute() (*Softwar
 /*
 PatchSoftwareHyperflexBundleDistributable Update a 'software.HyperflexBundleDistributable' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchSoftwareHyperflexBundleDistributableRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchSoftwareHyperflexBundleDistributableRequest
 */
 func (a *SoftwareApiService) PatchSoftwareHyperflexBundleDistributable(ctx context.Context, moid string) ApiPatchSoftwareHyperflexBundleDistributableRequest {
 	return ApiPatchSoftwareHyperflexBundleDistributableRequest{
@@ -7240,7 +7271,8 @@ func (a *SoftwareApiService) PatchSoftwareHyperflexBundleDistributable(ctx conte
 }
 
 // Execute executes the request
-//  @return SoftwareHyperflexBundleDistributable
+//
+//	@return SoftwareHyperflexBundleDistributable
 func (a *SoftwareApiService) PatchSoftwareHyperflexBundleDistributableExecute(r ApiPatchSoftwareHyperflexBundleDistributableRequest) (*SoftwareHyperflexBundleDistributable, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -7397,9 +7429,9 @@ func (r ApiPatchSoftwareHyperflexDistributableRequest) Execute() (*SoftwareHyper
 /*
 PatchSoftwareHyperflexDistributable Update a 'software.HyperflexDistributable' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchSoftwareHyperflexDistributableRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchSoftwareHyperflexDistributableRequest
 */
 func (a *SoftwareApiService) PatchSoftwareHyperflexDistributable(ctx context.Context, moid string) ApiPatchSoftwareHyperflexDistributableRequest {
 	return ApiPatchSoftwareHyperflexDistributableRequest{
@@ -7410,7 +7442,8 @@ func (a *SoftwareApiService) PatchSoftwareHyperflexDistributable(ctx context.Con
 }
 
 // Execute executes the request
-//  @return SoftwareHyperflexDistributable
+//
+//	@return SoftwareHyperflexDistributable
 func (a *SoftwareApiService) PatchSoftwareHyperflexDistributableExecute(r ApiPatchSoftwareHyperflexDistributableRequest) (*SoftwareHyperflexDistributable, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -7567,9 +7600,9 @@ func (r ApiPatchSoftwareIksBundleDistributableRequest) Execute() (*SoftwareIksBu
 /*
 PatchSoftwareIksBundleDistributable Update a 'software.IksBundleDistributable' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchSoftwareIksBundleDistributableRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchSoftwareIksBundleDistributableRequest
 */
 func (a *SoftwareApiService) PatchSoftwareIksBundleDistributable(ctx context.Context, moid string) ApiPatchSoftwareIksBundleDistributableRequest {
 	return ApiPatchSoftwareIksBundleDistributableRequest{
@@ -7580,7 +7613,8 @@ func (a *SoftwareApiService) PatchSoftwareIksBundleDistributable(ctx context.Con
 }
 
 // Execute executes the request
-//  @return SoftwareIksBundleDistributable
+//
+//	@return SoftwareIksBundleDistributable
 func (a *SoftwareApiService) PatchSoftwareIksBundleDistributableExecute(r ApiPatchSoftwareIksBundleDistributableRequest) (*SoftwareIksBundleDistributable, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -7737,9 +7771,9 @@ func (r ApiPatchSoftwareReleaseMetaRequest) Execute() (*SoftwareReleaseMeta, *ht
 /*
 PatchSoftwareReleaseMeta Update a 'software.ReleaseMeta' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchSoftwareReleaseMetaRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchSoftwareReleaseMetaRequest
 */
 func (a *SoftwareApiService) PatchSoftwareReleaseMeta(ctx context.Context, moid string) ApiPatchSoftwareReleaseMetaRequest {
 	return ApiPatchSoftwareReleaseMetaRequest{
@@ -7750,7 +7784,8 @@ func (a *SoftwareApiService) PatchSoftwareReleaseMeta(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return SoftwareReleaseMeta
+//
+//	@return SoftwareReleaseMeta
 func (a *SoftwareApiService) PatchSoftwareReleaseMetaExecute(r ApiPatchSoftwareReleaseMetaRequest) (*SoftwareReleaseMeta, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -7907,9 +7942,9 @@ func (r ApiPatchSoftwareSolutionDistributableRequest) Execute() (*SoftwareSoluti
 /*
 PatchSoftwareSolutionDistributable Update a 'software.SolutionDistributable' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchSoftwareSolutionDistributableRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchSoftwareSolutionDistributableRequest
 */
 func (a *SoftwareApiService) PatchSoftwareSolutionDistributable(ctx context.Context, moid string) ApiPatchSoftwareSolutionDistributableRequest {
 	return ApiPatchSoftwareSolutionDistributableRequest{
@@ -7920,7 +7955,8 @@ func (a *SoftwareApiService) PatchSoftwareSolutionDistributable(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return SoftwareSolutionDistributable
+//
+//	@return SoftwareSolutionDistributable
 func (a *SoftwareApiService) PatchSoftwareSolutionDistributableExecute(r ApiPatchSoftwareSolutionDistributableRequest) (*SoftwareSolutionDistributable, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -8077,9 +8113,9 @@ func (r ApiPatchSoftwareUcsdBundleDistributableRequest) Execute() (*SoftwareUcsd
 /*
 PatchSoftwareUcsdBundleDistributable Update a 'software.UcsdBundleDistributable' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchSoftwareUcsdBundleDistributableRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchSoftwareUcsdBundleDistributableRequest
 */
 func (a *SoftwareApiService) PatchSoftwareUcsdBundleDistributable(ctx context.Context, moid string) ApiPatchSoftwareUcsdBundleDistributableRequest {
 	return ApiPatchSoftwareUcsdBundleDistributableRequest{
@@ -8090,7 +8126,8 @@ func (a *SoftwareApiService) PatchSoftwareUcsdBundleDistributable(ctx context.Co
 }
 
 // Execute executes the request
-//  @return SoftwareUcsdBundleDistributable
+//
+//	@return SoftwareUcsdBundleDistributable
 func (a *SoftwareApiService) PatchSoftwareUcsdBundleDistributableExecute(r ApiPatchSoftwareUcsdBundleDistributableRequest) (*SoftwareUcsdBundleDistributable, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -8247,9 +8284,9 @@ func (r ApiPatchSoftwareUcsdDistributableRequest) Execute() (*SoftwareUcsdDistri
 /*
 PatchSoftwareUcsdDistributable Update a 'software.UcsdDistributable' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchSoftwareUcsdDistributableRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchSoftwareUcsdDistributableRequest
 */
 func (a *SoftwareApiService) PatchSoftwareUcsdDistributable(ctx context.Context, moid string) ApiPatchSoftwareUcsdDistributableRequest {
 	return ApiPatchSoftwareUcsdDistributableRequest{
@@ -8260,7 +8297,8 @@ func (a *SoftwareApiService) PatchSoftwareUcsdDistributable(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return SoftwareUcsdDistributable
+//
+//	@return SoftwareUcsdDistributable
 func (a *SoftwareApiService) PatchSoftwareUcsdDistributableExecute(r ApiPatchSoftwareUcsdDistributableRequest) (*SoftwareUcsdDistributable, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -8417,9 +8455,9 @@ func (r ApiUpdateSoftwareApplianceDistributableRequest) Execute() (*SoftwareAppl
 /*
 UpdateSoftwareApplianceDistributable Update a 'software.ApplianceDistributable' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateSoftwareApplianceDistributableRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateSoftwareApplianceDistributableRequest
 */
 func (a *SoftwareApiService) UpdateSoftwareApplianceDistributable(ctx context.Context, moid string) ApiUpdateSoftwareApplianceDistributableRequest {
 	return ApiUpdateSoftwareApplianceDistributableRequest{
@@ -8430,7 +8468,8 @@ func (a *SoftwareApiService) UpdateSoftwareApplianceDistributable(ctx context.Co
 }
 
 // Execute executes the request
-//  @return SoftwareApplianceDistributable
+//
+//	@return SoftwareApplianceDistributable
 func (a *SoftwareApiService) UpdateSoftwareApplianceDistributableExecute(r ApiUpdateSoftwareApplianceDistributableRequest) (*SoftwareApplianceDistributable, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -8587,9 +8626,9 @@ func (r ApiUpdateSoftwareHclMetaRequest) Execute() (*SoftwareHclMeta, *http.Resp
 /*
 UpdateSoftwareHclMeta Update a 'software.HclMeta' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateSoftwareHclMetaRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateSoftwareHclMetaRequest
 */
 func (a *SoftwareApiService) UpdateSoftwareHclMeta(ctx context.Context, moid string) ApiUpdateSoftwareHclMetaRequest {
 	return ApiUpdateSoftwareHclMetaRequest{
@@ -8600,7 +8639,8 @@ func (a *SoftwareApiService) UpdateSoftwareHclMeta(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return SoftwareHclMeta
+//
+//	@return SoftwareHclMeta
 func (a *SoftwareApiService) UpdateSoftwareHclMetaExecute(r ApiUpdateSoftwareHclMetaRequest) (*SoftwareHclMeta, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -8757,9 +8797,9 @@ func (r ApiUpdateSoftwareHyperflexBundleDistributableRequest) Execute() (*Softwa
 /*
 UpdateSoftwareHyperflexBundleDistributable Update a 'software.HyperflexBundleDistributable' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateSoftwareHyperflexBundleDistributableRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateSoftwareHyperflexBundleDistributableRequest
 */
 func (a *SoftwareApiService) UpdateSoftwareHyperflexBundleDistributable(ctx context.Context, moid string) ApiUpdateSoftwareHyperflexBundleDistributableRequest {
 	return ApiUpdateSoftwareHyperflexBundleDistributableRequest{
@@ -8770,7 +8810,8 @@ func (a *SoftwareApiService) UpdateSoftwareHyperflexBundleDistributable(ctx cont
 }
 
 // Execute executes the request
-//  @return SoftwareHyperflexBundleDistributable
+//
+//	@return SoftwareHyperflexBundleDistributable
 func (a *SoftwareApiService) UpdateSoftwareHyperflexBundleDistributableExecute(r ApiUpdateSoftwareHyperflexBundleDistributableRequest) (*SoftwareHyperflexBundleDistributable, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -8927,9 +8968,9 @@ func (r ApiUpdateSoftwareHyperflexDistributableRequest) Execute() (*SoftwareHype
 /*
 UpdateSoftwareHyperflexDistributable Update a 'software.HyperflexDistributable' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateSoftwareHyperflexDistributableRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateSoftwareHyperflexDistributableRequest
 */
 func (a *SoftwareApiService) UpdateSoftwareHyperflexDistributable(ctx context.Context, moid string) ApiUpdateSoftwareHyperflexDistributableRequest {
 	return ApiUpdateSoftwareHyperflexDistributableRequest{
@@ -8940,7 +8981,8 @@ func (a *SoftwareApiService) UpdateSoftwareHyperflexDistributable(ctx context.Co
 }
 
 // Execute executes the request
-//  @return SoftwareHyperflexDistributable
+//
+//	@return SoftwareHyperflexDistributable
 func (a *SoftwareApiService) UpdateSoftwareHyperflexDistributableExecute(r ApiUpdateSoftwareHyperflexDistributableRequest) (*SoftwareHyperflexDistributable, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -9097,9 +9139,9 @@ func (r ApiUpdateSoftwareIksBundleDistributableRequest) Execute() (*SoftwareIksB
 /*
 UpdateSoftwareIksBundleDistributable Update a 'software.IksBundleDistributable' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateSoftwareIksBundleDistributableRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateSoftwareIksBundleDistributableRequest
 */
 func (a *SoftwareApiService) UpdateSoftwareIksBundleDistributable(ctx context.Context, moid string) ApiUpdateSoftwareIksBundleDistributableRequest {
 	return ApiUpdateSoftwareIksBundleDistributableRequest{
@@ -9110,7 +9152,8 @@ func (a *SoftwareApiService) UpdateSoftwareIksBundleDistributable(ctx context.Co
 }
 
 // Execute executes the request
-//  @return SoftwareIksBundleDistributable
+//
+//	@return SoftwareIksBundleDistributable
 func (a *SoftwareApiService) UpdateSoftwareIksBundleDistributableExecute(r ApiUpdateSoftwareIksBundleDistributableRequest) (*SoftwareIksBundleDistributable, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -9267,9 +9310,9 @@ func (r ApiUpdateSoftwareReleaseMetaRequest) Execute() (*SoftwareReleaseMeta, *h
 /*
 UpdateSoftwareReleaseMeta Update a 'software.ReleaseMeta' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateSoftwareReleaseMetaRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateSoftwareReleaseMetaRequest
 */
 func (a *SoftwareApiService) UpdateSoftwareReleaseMeta(ctx context.Context, moid string) ApiUpdateSoftwareReleaseMetaRequest {
 	return ApiUpdateSoftwareReleaseMetaRequest{
@@ -9280,7 +9323,8 @@ func (a *SoftwareApiService) UpdateSoftwareReleaseMeta(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return SoftwareReleaseMeta
+//
+//	@return SoftwareReleaseMeta
 func (a *SoftwareApiService) UpdateSoftwareReleaseMetaExecute(r ApiUpdateSoftwareReleaseMetaRequest) (*SoftwareReleaseMeta, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -9437,9 +9481,9 @@ func (r ApiUpdateSoftwareSolutionDistributableRequest) Execute() (*SoftwareSolut
 /*
 UpdateSoftwareSolutionDistributable Update a 'software.SolutionDistributable' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateSoftwareSolutionDistributableRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateSoftwareSolutionDistributableRequest
 */
 func (a *SoftwareApiService) UpdateSoftwareSolutionDistributable(ctx context.Context, moid string) ApiUpdateSoftwareSolutionDistributableRequest {
 	return ApiUpdateSoftwareSolutionDistributableRequest{
@@ -9450,7 +9494,8 @@ func (a *SoftwareApiService) UpdateSoftwareSolutionDistributable(ctx context.Con
 }
 
 // Execute executes the request
-//  @return SoftwareSolutionDistributable
+//
+//	@return SoftwareSolutionDistributable
 func (a *SoftwareApiService) UpdateSoftwareSolutionDistributableExecute(r ApiUpdateSoftwareSolutionDistributableRequest) (*SoftwareSolutionDistributable, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -9607,9 +9652,9 @@ func (r ApiUpdateSoftwareUcsdBundleDistributableRequest) Execute() (*SoftwareUcs
 /*
 UpdateSoftwareUcsdBundleDistributable Update a 'software.UcsdBundleDistributable' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateSoftwareUcsdBundleDistributableRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateSoftwareUcsdBundleDistributableRequest
 */
 func (a *SoftwareApiService) UpdateSoftwareUcsdBundleDistributable(ctx context.Context, moid string) ApiUpdateSoftwareUcsdBundleDistributableRequest {
 	return ApiUpdateSoftwareUcsdBundleDistributableRequest{
@@ -9620,7 +9665,8 @@ func (a *SoftwareApiService) UpdateSoftwareUcsdBundleDistributable(ctx context.C
 }
 
 // Execute executes the request
-//  @return SoftwareUcsdBundleDistributable
+//
+//	@return SoftwareUcsdBundleDistributable
 func (a *SoftwareApiService) UpdateSoftwareUcsdBundleDistributableExecute(r ApiUpdateSoftwareUcsdBundleDistributableRequest) (*SoftwareUcsdBundleDistributable, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -9777,9 +9823,9 @@ func (r ApiUpdateSoftwareUcsdDistributableRequest) Execute() (*SoftwareUcsdDistr
 /*
 UpdateSoftwareUcsdDistributable Update a 'software.UcsdDistributable' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateSoftwareUcsdDistributableRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateSoftwareUcsdDistributableRequest
 */
 func (a *SoftwareApiService) UpdateSoftwareUcsdDistributable(ctx context.Context, moid string) ApiUpdateSoftwareUcsdDistributableRequest {
 	return ApiUpdateSoftwareUcsdDistributableRequest{
@@ -9790,7 +9836,8 @@ func (a *SoftwareApiService) UpdateSoftwareUcsdDistributable(ctx context.Context
 }
 
 // Execute executes the request
-//  @return SoftwareUcsdDistributable
+//
+//	@return SoftwareUcsdDistributable
 func (a *SoftwareApiService) UpdateSoftwareUcsdDistributableExecute(r ApiUpdateSoftwareUcsdDistributableRequest) (*SoftwareUcsdDistributable, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

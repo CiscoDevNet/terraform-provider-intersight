@@ -56,8 +56,8 @@ func (r ApiCreateNetworkconfigPolicyRequest) Execute() (*NetworkconfigPolicy, *h
 /*
 CreateNetworkconfigPolicy Create a 'networkconfig.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateNetworkconfigPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateNetworkconfigPolicyRequest
 */
 func (a *NetworkconfigApiService) CreateNetworkconfigPolicy(ctx context.Context) ApiCreateNetworkconfigPolicyRequest {
 	return ApiCreateNetworkconfigPolicyRequest{
@@ -67,7 +67,8 @@ func (a *NetworkconfigApiService) CreateNetworkconfigPolicy(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return NetworkconfigPolicy
+//
+//	@return NetworkconfigPolicy
 func (a *NetworkconfigApiService) CreateNetworkconfigPolicyExecute(r ApiCreateNetworkconfigPolicyRequest) (*NetworkconfigPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -212,9 +213,9 @@ func (r ApiDeleteNetworkconfigPolicyRequest) Execute() (*http.Response, error) {
 /*
 DeleteNetworkconfigPolicy Delete a 'networkconfig.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteNetworkconfigPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteNetworkconfigPolicyRequest
 */
 func (a *NetworkconfigApiService) DeleteNetworkconfigPolicy(ctx context.Context, moid string) ApiDeleteNetworkconfigPolicyRequest {
 	return ApiDeleteNetworkconfigPolicyRequest{
@@ -349,9 +350,9 @@ func (r ApiGetNetworkconfigPolicyByMoidRequest) Execute() (*NetworkconfigPolicy,
 /*
 GetNetworkconfigPolicyByMoid Read a 'networkconfig.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNetworkconfigPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNetworkconfigPolicyByMoidRequest
 */
 func (a *NetworkconfigApiService) GetNetworkconfigPolicyByMoid(ctx context.Context, moid string) ApiGetNetworkconfigPolicyByMoidRequest {
 	return ApiGetNetworkconfigPolicyByMoidRequest{
@@ -362,7 +363,8 @@ func (a *NetworkconfigApiService) GetNetworkconfigPolicyByMoid(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return NetworkconfigPolicy
+//
+//	@return NetworkconfigPolicy
 func (a *NetworkconfigApiService) GetNetworkconfigPolicyByMoidExecute(r ApiGetNetworkconfigPolicyByMoidRequest) (*NetworkconfigPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -497,9 +499,9 @@ func (r ApiGetNetworkconfigPolicyInventoryByMoidRequest) Execute() (*Networkconf
 /*
 GetNetworkconfigPolicyInventoryByMoid Read a 'networkconfig.PolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNetworkconfigPolicyInventoryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNetworkconfigPolicyInventoryByMoidRequest
 */
 func (a *NetworkconfigApiService) GetNetworkconfigPolicyInventoryByMoid(ctx context.Context, moid string) ApiGetNetworkconfigPolicyInventoryByMoidRequest {
 	return ApiGetNetworkconfigPolicyInventoryByMoidRequest{
@@ -510,7 +512,8 @@ func (a *NetworkconfigApiService) GetNetworkconfigPolicyInventoryByMoid(ctx cont
 }
 
 // Execute executes the request
-//  @return NetworkconfigPolicyInventory
+//
+//	@return NetworkconfigPolicyInventory
 func (a *NetworkconfigApiService) GetNetworkconfigPolicyInventoryByMoidExecute(r ApiGetNetworkconfigPolicyInventoryByMoidRequest) (*NetworkconfigPolicyInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -721,8 +724,8 @@ func (r ApiGetNetworkconfigPolicyInventoryListRequest) Execute() (*Networkconfig
 /*
 GetNetworkconfigPolicyInventoryList Read a 'networkconfig.PolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNetworkconfigPolicyInventoryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNetworkconfigPolicyInventoryListRequest
 */
 func (a *NetworkconfigApiService) GetNetworkconfigPolicyInventoryList(ctx context.Context) ApiGetNetworkconfigPolicyInventoryListRequest {
 	return ApiGetNetworkconfigPolicyInventoryListRequest{
@@ -732,7 +735,8 @@ func (a *NetworkconfigApiService) GetNetworkconfigPolicyInventoryList(ctx contex
 }
 
 // Execute executes the request
-//  @return NetworkconfigPolicyInventoryResponse
+//
+//	@return NetworkconfigPolicyInventoryResponse
 func (a *NetworkconfigApiService) GetNetworkconfigPolicyInventoryListExecute(r ApiGetNetworkconfigPolicyInventoryListRequest) (*NetworkconfigPolicyInventoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -975,8 +979,8 @@ func (r ApiGetNetworkconfigPolicyListRequest) Execute() (*NetworkconfigPolicyRes
 /*
 GetNetworkconfigPolicyList Read a 'networkconfig.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNetworkconfigPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNetworkconfigPolicyListRequest
 */
 func (a *NetworkconfigApiService) GetNetworkconfigPolicyList(ctx context.Context) ApiGetNetworkconfigPolicyListRequest {
 	return ApiGetNetworkconfigPolicyListRequest{
@@ -986,7 +990,8 @@ func (a *NetworkconfigApiService) GetNetworkconfigPolicyList(ctx context.Context
 }
 
 // Execute executes the request
-//  @return NetworkconfigPolicyResponse
+//
+//	@return NetworkconfigPolicyResponse
 func (a *NetworkconfigApiService) GetNetworkconfigPolicyListExecute(r ApiGetNetworkconfigPolicyListRequest) (*NetworkconfigPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1167,9 +1172,9 @@ func (r ApiPatchNetworkconfigPolicyRequest) Execute() (*NetworkconfigPolicy, *ht
 /*
 PatchNetworkconfigPolicy Update a 'networkconfig.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchNetworkconfigPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchNetworkconfigPolicyRequest
 */
 func (a *NetworkconfigApiService) PatchNetworkconfigPolicy(ctx context.Context, moid string) ApiPatchNetworkconfigPolicyRequest {
 	return ApiPatchNetworkconfigPolicyRequest{
@@ -1180,7 +1185,8 @@ func (a *NetworkconfigApiService) PatchNetworkconfigPolicy(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return NetworkconfigPolicy
+//
+//	@return NetworkconfigPolicy
 func (a *NetworkconfigApiService) PatchNetworkconfigPolicyExecute(r ApiPatchNetworkconfigPolicyRequest) (*NetworkconfigPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -1337,9 +1343,9 @@ func (r ApiUpdateNetworkconfigPolicyRequest) Execute() (*NetworkconfigPolicy, *h
 /*
 UpdateNetworkconfigPolicy Update a 'networkconfig.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateNetworkconfigPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateNetworkconfigPolicyRequest
 */
 func (a *NetworkconfigApiService) UpdateNetworkconfigPolicy(ctx context.Context, moid string) ApiUpdateNetworkconfigPolicyRequest {
 	return ApiUpdateNetworkconfigPolicyRequest{
@@ -1350,7 +1356,8 @@ func (a *NetworkconfigApiService) UpdateNetworkconfigPolicy(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return NetworkconfigPolicy
+//
+//	@return NetworkconfigPolicy
 func (a *NetworkconfigApiService) UpdateNetworkconfigPolicyExecute(r ApiUpdateNetworkconfigPolicyRequest) (*NetworkconfigPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

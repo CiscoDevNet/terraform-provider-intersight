@@ -36,9 +36,9 @@ func (r ApiGetProcessorUnitByMoidRequest) Execute() (*ProcessorUnit, *http.Respo
 /*
 GetProcessorUnitByMoid Read a 'processor.Unit' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetProcessorUnitByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetProcessorUnitByMoidRequest
 */
 func (a *ProcessorApiService) GetProcessorUnitByMoid(ctx context.Context, moid string) ApiGetProcessorUnitByMoidRequest {
 	return ApiGetProcessorUnitByMoidRequest{
@@ -49,7 +49,8 @@ func (a *ProcessorApiService) GetProcessorUnitByMoid(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return ProcessorUnit
+//
+//	@return ProcessorUnit
 func (a *ProcessorApiService) GetProcessorUnitByMoidExecute(r ApiGetProcessorUnitByMoidRequest) (*ProcessorUnit, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -260,8 +261,8 @@ func (r ApiGetProcessorUnitListRequest) Execute() (*ProcessorUnitResponse, *http
 /*
 GetProcessorUnitList Read a 'processor.Unit' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetProcessorUnitListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetProcessorUnitListRequest
 */
 func (a *ProcessorApiService) GetProcessorUnitList(ctx context.Context) ApiGetProcessorUnitListRequest {
 	return ApiGetProcessorUnitListRequest{
@@ -271,7 +272,8 @@ func (a *ProcessorApiService) GetProcessorUnitList(ctx context.Context) ApiGetPr
 }
 
 // Execute executes the request
-//  @return ProcessorUnitResponse
+//
+//	@return ProcessorUnitResponse
 func (a *ProcessorApiService) GetProcessorUnitListExecute(r ApiGetProcessorUnitListRequest) (*ProcessorUnitResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -452,9 +454,9 @@ func (r ApiPatchProcessorUnitRequest) Execute() (*ProcessorUnit, *http.Response,
 /*
 PatchProcessorUnit Update a 'processor.Unit' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchProcessorUnitRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchProcessorUnitRequest
 */
 func (a *ProcessorApiService) PatchProcessorUnit(ctx context.Context, moid string) ApiPatchProcessorUnitRequest {
 	return ApiPatchProcessorUnitRequest{
@@ -465,7 +467,8 @@ func (a *ProcessorApiService) PatchProcessorUnit(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return ProcessorUnit
+//
+//	@return ProcessorUnit
 func (a *ProcessorApiService) PatchProcessorUnitExecute(r ApiPatchProcessorUnitRequest) (*ProcessorUnit, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -622,9 +625,9 @@ func (r ApiUpdateProcessorUnitRequest) Execute() (*ProcessorUnit, *http.Response
 /*
 UpdateProcessorUnit Update a 'processor.Unit' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateProcessorUnitRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateProcessorUnitRequest
 */
 func (a *ProcessorApiService) UpdateProcessorUnit(ctx context.Context, moid string) ApiUpdateProcessorUnitRequest {
 	return ApiUpdateProcessorUnitRequest{
@@ -635,7 +638,8 @@ func (a *ProcessorApiService) UpdateProcessorUnit(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return ProcessorUnit
+//
+//	@return ProcessorUnit
 func (a *ProcessorApiService) UpdateProcessorUnitExecute(r ApiUpdateProcessorUnitRequest) (*ProcessorUnit, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

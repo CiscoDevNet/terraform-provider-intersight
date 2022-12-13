@@ -56,8 +56,8 @@ func (r ApiCreateSyslogPolicyRequest) Execute() (*SyslogPolicy, *http.Response, 
 /*
 CreateSyslogPolicy Create a 'syslog.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateSyslogPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateSyslogPolicyRequest
 */
 func (a *SyslogApiService) CreateSyslogPolicy(ctx context.Context) ApiCreateSyslogPolicyRequest {
 	return ApiCreateSyslogPolicyRequest{
@@ -67,7 +67,8 @@ func (a *SyslogApiService) CreateSyslogPolicy(ctx context.Context) ApiCreateSysl
 }
 
 // Execute executes the request
-//  @return SyslogPolicy
+//
+//	@return SyslogPolicy
 func (a *SyslogApiService) CreateSyslogPolicyExecute(r ApiCreateSyslogPolicyRequest) (*SyslogPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -212,9 +213,9 @@ func (r ApiDeleteSyslogPolicyRequest) Execute() (*http.Response, error) {
 /*
 DeleteSyslogPolicy Delete a 'syslog.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteSyslogPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteSyslogPolicyRequest
 */
 func (a *SyslogApiService) DeleteSyslogPolicy(ctx context.Context, moid string) ApiDeleteSyslogPolicyRequest {
 	return ApiDeleteSyslogPolicyRequest{
@@ -349,9 +350,9 @@ func (r ApiGetSyslogPolicyByMoidRequest) Execute() (*SyslogPolicy, *http.Respons
 /*
 GetSyslogPolicyByMoid Read a 'syslog.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetSyslogPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetSyslogPolicyByMoidRequest
 */
 func (a *SyslogApiService) GetSyslogPolicyByMoid(ctx context.Context, moid string) ApiGetSyslogPolicyByMoidRequest {
 	return ApiGetSyslogPolicyByMoidRequest{
@@ -362,7 +363,8 @@ func (a *SyslogApiService) GetSyslogPolicyByMoid(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return SyslogPolicy
+//
+//	@return SyslogPolicy
 func (a *SyslogApiService) GetSyslogPolicyByMoidExecute(r ApiGetSyslogPolicyByMoidRequest) (*SyslogPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -497,9 +499,9 @@ func (r ApiGetSyslogPolicyInventoryByMoidRequest) Execute() (*SyslogPolicyInvent
 /*
 GetSyslogPolicyInventoryByMoid Read a 'syslog.PolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetSyslogPolicyInventoryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetSyslogPolicyInventoryByMoidRequest
 */
 func (a *SyslogApiService) GetSyslogPolicyInventoryByMoid(ctx context.Context, moid string) ApiGetSyslogPolicyInventoryByMoidRequest {
 	return ApiGetSyslogPolicyInventoryByMoidRequest{
@@ -510,7 +512,8 @@ func (a *SyslogApiService) GetSyslogPolicyInventoryByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return SyslogPolicyInventory
+//
+//	@return SyslogPolicyInventory
 func (a *SyslogApiService) GetSyslogPolicyInventoryByMoidExecute(r ApiGetSyslogPolicyInventoryByMoidRequest) (*SyslogPolicyInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -721,8 +724,8 @@ func (r ApiGetSyslogPolicyInventoryListRequest) Execute() (*SyslogPolicyInventor
 /*
 GetSyslogPolicyInventoryList Read a 'syslog.PolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetSyslogPolicyInventoryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetSyslogPolicyInventoryListRequest
 */
 func (a *SyslogApiService) GetSyslogPolicyInventoryList(ctx context.Context) ApiGetSyslogPolicyInventoryListRequest {
 	return ApiGetSyslogPolicyInventoryListRequest{
@@ -732,7 +735,8 @@ func (a *SyslogApiService) GetSyslogPolicyInventoryList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return SyslogPolicyInventoryResponse
+//
+//	@return SyslogPolicyInventoryResponse
 func (a *SyslogApiService) GetSyslogPolicyInventoryListExecute(r ApiGetSyslogPolicyInventoryListRequest) (*SyslogPolicyInventoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -975,8 +979,8 @@ func (r ApiGetSyslogPolicyListRequest) Execute() (*SyslogPolicyResponse, *http.R
 /*
 GetSyslogPolicyList Read a 'syslog.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetSyslogPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetSyslogPolicyListRequest
 */
 func (a *SyslogApiService) GetSyslogPolicyList(ctx context.Context) ApiGetSyslogPolicyListRequest {
 	return ApiGetSyslogPolicyListRequest{
@@ -986,7 +990,8 @@ func (a *SyslogApiService) GetSyslogPolicyList(ctx context.Context) ApiGetSyslog
 }
 
 // Execute executes the request
-//  @return SyslogPolicyResponse
+//
+//	@return SyslogPolicyResponse
 func (a *SyslogApiService) GetSyslogPolicyListExecute(r ApiGetSyslogPolicyListRequest) (*SyslogPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1167,9 +1172,9 @@ func (r ApiPatchSyslogPolicyRequest) Execute() (*SyslogPolicy, *http.Response, e
 /*
 PatchSyslogPolicy Update a 'syslog.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchSyslogPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchSyslogPolicyRequest
 */
 func (a *SyslogApiService) PatchSyslogPolicy(ctx context.Context, moid string) ApiPatchSyslogPolicyRequest {
 	return ApiPatchSyslogPolicyRequest{
@@ -1180,7 +1185,8 @@ func (a *SyslogApiService) PatchSyslogPolicy(ctx context.Context, moid string) A
 }
 
 // Execute executes the request
-//  @return SyslogPolicy
+//
+//	@return SyslogPolicy
 func (a *SyslogApiService) PatchSyslogPolicyExecute(r ApiPatchSyslogPolicyRequest) (*SyslogPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -1337,9 +1343,9 @@ func (r ApiUpdateSyslogPolicyRequest) Execute() (*SyslogPolicy, *http.Response, 
 /*
 UpdateSyslogPolicy Update a 'syslog.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateSyslogPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateSyslogPolicyRequest
 */
 func (a *SyslogApiService) UpdateSyslogPolicy(ctx context.Context, moid string) ApiUpdateSyslogPolicyRequest {
 	return ApiUpdateSyslogPolicyRequest{
@@ -1350,7 +1356,8 @@ func (a *SyslogApiService) UpdateSyslogPolicy(ctx context.Context, moid string) 
 }
 
 // Execute executes the request
-//  @return SyslogPolicy
+//
+//	@return SyslogPolicy
 func (a *SyslogApiService) UpdateSyslogPolicyExecute(r ApiUpdateSyslogPolicyRequest) (*SyslogPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

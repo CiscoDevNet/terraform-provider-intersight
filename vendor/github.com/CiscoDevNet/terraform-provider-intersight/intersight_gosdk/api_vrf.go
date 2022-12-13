@@ -56,8 +56,8 @@ func (r ApiCreateVrfVrfRequest) Execute() (*VrfVrf, *http.Response, error) {
 /*
 CreateVrfVrf Create a 'vrf.Vrf' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateVrfVrfRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateVrfVrfRequest
 */
 func (a *VrfApiService) CreateVrfVrf(ctx context.Context) ApiCreateVrfVrfRequest {
 	return ApiCreateVrfVrfRequest{
@@ -67,7 +67,8 @@ func (a *VrfApiService) CreateVrfVrf(ctx context.Context) ApiCreateVrfVrfRequest
 }
 
 // Execute executes the request
-//  @return VrfVrf
+//
+//	@return VrfVrf
 func (a *VrfApiService) CreateVrfVrfExecute(r ApiCreateVrfVrfRequest) (*VrfVrf, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -212,9 +213,9 @@ func (r ApiDeleteVrfVrfRequest) Execute() (*http.Response, error) {
 /*
 DeleteVrfVrf Delete a 'vrf.Vrf' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteVrfVrfRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteVrfVrfRequest
 */
 func (a *VrfApiService) DeleteVrfVrf(ctx context.Context, moid string) ApiDeleteVrfVrfRequest {
 	return ApiDeleteVrfVrfRequest{
@@ -349,9 +350,9 @@ func (r ApiGetVrfVrfByMoidRequest) Execute() (*VrfVrf, *http.Response, error) {
 /*
 GetVrfVrfByMoid Read a 'vrf.Vrf' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVrfVrfByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVrfVrfByMoidRequest
 */
 func (a *VrfApiService) GetVrfVrfByMoid(ctx context.Context, moid string) ApiGetVrfVrfByMoidRequest {
 	return ApiGetVrfVrfByMoidRequest{
@@ -362,7 +363,8 @@ func (a *VrfApiService) GetVrfVrfByMoid(ctx context.Context, moid string) ApiGet
 }
 
 // Execute executes the request
-//  @return VrfVrf
+//
+//	@return VrfVrf
 func (a *VrfApiService) GetVrfVrfByMoidExecute(r ApiGetVrfVrfByMoidRequest) (*VrfVrf, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -573,8 +575,8 @@ func (r ApiGetVrfVrfListRequest) Execute() (*VrfVrfResponse, *http.Response, err
 /*
 GetVrfVrfList Read a 'vrf.Vrf' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVrfVrfListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVrfVrfListRequest
 */
 func (a *VrfApiService) GetVrfVrfList(ctx context.Context) ApiGetVrfVrfListRequest {
 	return ApiGetVrfVrfListRequest{
@@ -584,7 +586,8 @@ func (a *VrfApiService) GetVrfVrfList(ctx context.Context) ApiGetVrfVrfListReque
 }
 
 // Execute executes the request
-//  @return VrfVrfResponse
+//
+//	@return VrfVrfResponse
 func (a *VrfApiService) GetVrfVrfListExecute(r ApiGetVrfVrfListRequest) (*VrfVrfResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -765,9 +768,9 @@ func (r ApiPatchVrfVrfRequest) Execute() (*VrfVrf, *http.Response, error) {
 /*
 PatchVrfVrf Update a 'vrf.Vrf' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchVrfVrfRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchVrfVrfRequest
 */
 func (a *VrfApiService) PatchVrfVrf(ctx context.Context, moid string) ApiPatchVrfVrfRequest {
 	return ApiPatchVrfVrfRequest{
@@ -778,7 +781,8 @@ func (a *VrfApiService) PatchVrfVrf(ctx context.Context, moid string) ApiPatchVr
 }
 
 // Execute executes the request
-//  @return VrfVrf
+//
+//	@return VrfVrf
 func (a *VrfApiService) PatchVrfVrfExecute(r ApiPatchVrfVrfRequest) (*VrfVrf, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -935,9 +939,9 @@ func (r ApiUpdateVrfVrfRequest) Execute() (*VrfVrf, *http.Response, error) {
 /*
 UpdateVrfVrf Update a 'vrf.Vrf' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateVrfVrfRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateVrfVrfRequest
 */
 func (a *VrfApiService) UpdateVrfVrf(ctx context.Context, moid string) ApiUpdateVrfVrfRequest {
 	return ApiUpdateVrfVrfRequest{
@@ -948,7 +952,8 @@ func (a *VrfApiService) UpdateVrfVrf(ctx context.Context, moid string) ApiUpdate
 }
 
 // Execute executes the request
-//  @return VrfVrf
+//
+//	@return VrfVrf
 func (a *VrfApiService) UpdateVrfVrfExecute(r ApiUpdateVrfVrfRequest) (*VrfVrf, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

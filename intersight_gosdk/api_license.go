@@ -56,8 +56,8 @@ func (r ApiCreateLicenseIksLicenseCountRequest) Execute() (*LicenseIksLicenseCou
 /*
 CreateLicenseIksLicenseCount Create a 'license.IksLicenseCount' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateLicenseIksLicenseCountRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateLicenseIksLicenseCountRequest
 */
 func (a *LicenseApiService) CreateLicenseIksLicenseCount(ctx context.Context) ApiCreateLicenseIksLicenseCountRequest {
 	return ApiCreateLicenseIksLicenseCountRequest{
@@ -67,7 +67,8 @@ func (a *LicenseApiService) CreateLicenseIksLicenseCount(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return LicenseIksLicenseCount
+//
+//	@return LicenseIksLicenseCount
 func (a *LicenseApiService) CreateLicenseIksLicenseCountExecute(r ApiCreateLicenseIksLicenseCountRequest) (*LicenseIksLicenseCount, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -232,8 +233,8 @@ func (r ApiCreateLicenseIwoLicenseCountRequest) Execute() (*LicenseIwoLicenseCou
 /*
 CreateLicenseIwoLicenseCount Create a 'license.IwoLicenseCount' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateLicenseIwoLicenseCountRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateLicenseIwoLicenseCountRequest
 */
 func (a *LicenseApiService) CreateLicenseIwoLicenseCount(ctx context.Context) ApiCreateLicenseIwoLicenseCountRequest {
 	return ApiCreateLicenseIwoLicenseCountRequest{
@@ -243,7 +244,8 @@ func (a *LicenseApiService) CreateLicenseIwoLicenseCount(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return LicenseIwoLicenseCount
+//
+//	@return LicenseIwoLicenseCount
 func (a *LicenseApiService) CreateLicenseIwoLicenseCountExecute(r ApiCreateLicenseIwoLicenseCountRequest) (*LicenseIwoLicenseCount, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -408,8 +410,8 @@ func (r ApiCreateLicenseLicenseInfoRequest) Execute() (*LicenseLicenseInfo, *htt
 /*
 CreateLicenseLicenseInfo Create a 'license.LicenseInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateLicenseLicenseInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateLicenseLicenseInfoRequest
 */
 func (a *LicenseApiService) CreateLicenseLicenseInfo(ctx context.Context) ApiCreateLicenseLicenseInfoRequest {
 	return ApiCreateLicenseLicenseInfoRequest{
@@ -419,7 +421,8 @@ func (a *LicenseApiService) CreateLicenseLicenseInfo(ctx context.Context) ApiCre
 }
 
 // Execute executes the request
-//  @return LicenseLicenseInfo
+//
+//	@return LicenseLicenseInfo
 func (a *LicenseApiService) CreateLicenseLicenseInfoExecute(r ApiCreateLicenseLicenseInfoRequest) (*LicenseLicenseInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -584,8 +587,8 @@ func (r ApiCreateLicenseLicenseReservationOpRequest) Execute() (*LicenseLicenseR
 /*
 CreateLicenseLicenseReservationOp Create a 'license.LicenseReservationOp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateLicenseLicenseReservationOpRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateLicenseLicenseReservationOpRequest
 */
 func (a *LicenseApiService) CreateLicenseLicenseReservationOp(ctx context.Context) ApiCreateLicenseLicenseReservationOpRequest {
 	return ApiCreateLicenseLicenseReservationOpRequest{
@@ -595,7 +598,8 @@ func (a *LicenseApiService) CreateLicenseLicenseReservationOp(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return LicenseLicenseReservationOp
+//
+//	@return LicenseLicenseReservationOp
 func (a *LicenseApiService) CreateLicenseLicenseReservationOpExecute(r ApiCreateLicenseLicenseReservationOpRequest) (*LicenseLicenseReservationOp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -740,9 +744,9 @@ func (r ApiGetLicenseAccountLicenseDataByMoidRequest) Execute() (*LicenseAccount
 /*
 GetLicenseAccountLicenseDataByMoid Read a 'license.AccountLicenseData' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetLicenseAccountLicenseDataByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetLicenseAccountLicenseDataByMoidRequest
 */
 func (a *LicenseApiService) GetLicenseAccountLicenseDataByMoid(ctx context.Context, moid string) ApiGetLicenseAccountLicenseDataByMoidRequest {
 	return ApiGetLicenseAccountLicenseDataByMoidRequest{
@@ -753,7 +757,8 @@ func (a *LicenseApiService) GetLicenseAccountLicenseDataByMoid(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return LicenseAccountLicenseData
+//
+//	@return LicenseAccountLicenseData
 func (a *LicenseApiService) GetLicenseAccountLicenseDataByMoidExecute(r ApiGetLicenseAccountLicenseDataByMoidRequest) (*LicenseAccountLicenseData, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -964,8 +969,8 @@ func (r ApiGetLicenseAccountLicenseDataListRequest) Execute() (*LicenseAccountLi
 /*
 GetLicenseAccountLicenseDataList Read a 'license.AccountLicenseData' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetLicenseAccountLicenseDataListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetLicenseAccountLicenseDataListRequest
 */
 func (a *LicenseApiService) GetLicenseAccountLicenseDataList(ctx context.Context) ApiGetLicenseAccountLicenseDataListRequest {
 	return ApiGetLicenseAccountLicenseDataListRequest{
@@ -975,7 +980,8 @@ func (a *LicenseApiService) GetLicenseAccountLicenseDataList(ctx context.Context
 }
 
 // Execute executes the request
-//  @return LicenseAccountLicenseDataResponse
+//
+//	@return LicenseAccountLicenseDataResponse
 func (a *LicenseApiService) GetLicenseAccountLicenseDataListExecute(r ApiGetLicenseAccountLicenseDataListRequest) (*LicenseAccountLicenseDataResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1142,9 +1148,9 @@ func (r ApiGetLicenseCustomerOpByMoidRequest) Execute() (*LicenseCustomerOp, *ht
 /*
 GetLicenseCustomerOpByMoid Read a 'license.CustomerOp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetLicenseCustomerOpByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetLicenseCustomerOpByMoidRequest
 */
 func (a *LicenseApiService) GetLicenseCustomerOpByMoid(ctx context.Context, moid string) ApiGetLicenseCustomerOpByMoidRequest {
 	return ApiGetLicenseCustomerOpByMoidRequest{
@@ -1155,7 +1161,8 @@ func (a *LicenseApiService) GetLicenseCustomerOpByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return LicenseCustomerOp
+//
+//	@return LicenseCustomerOp
 func (a *LicenseApiService) GetLicenseCustomerOpByMoidExecute(r ApiGetLicenseCustomerOpByMoidRequest) (*LicenseCustomerOp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1366,8 +1373,8 @@ func (r ApiGetLicenseCustomerOpListRequest) Execute() (*LicenseCustomerOpRespons
 /*
 GetLicenseCustomerOpList Read a 'license.CustomerOp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetLicenseCustomerOpListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetLicenseCustomerOpListRequest
 */
 func (a *LicenseApiService) GetLicenseCustomerOpList(ctx context.Context) ApiGetLicenseCustomerOpListRequest {
 	return ApiGetLicenseCustomerOpListRequest{
@@ -1377,7 +1384,8 @@ func (a *LicenseApiService) GetLicenseCustomerOpList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//  @return LicenseCustomerOpResponse
+//
+//	@return LicenseCustomerOpResponse
 func (a *LicenseApiService) GetLicenseCustomerOpListExecute(r ApiGetLicenseCustomerOpListRequest) (*LicenseCustomerOpResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1544,9 +1552,9 @@ func (r ApiGetLicenseIksCustomerOpByMoidRequest) Execute() (*LicenseIksCustomerO
 /*
 GetLicenseIksCustomerOpByMoid Read a 'license.IksCustomerOp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetLicenseIksCustomerOpByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetLicenseIksCustomerOpByMoidRequest
 */
 func (a *LicenseApiService) GetLicenseIksCustomerOpByMoid(ctx context.Context, moid string) ApiGetLicenseIksCustomerOpByMoidRequest {
 	return ApiGetLicenseIksCustomerOpByMoidRequest{
@@ -1557,7 +1565,8 @@ func (a *LicenseApiService) GetLicenseIksCustomerOpByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return LicenseIksCustomerOp
+//
+//	@return LicenseIksCustomerOp
 func (a *LicenseApiService) GetLicenseIksCustomerOpByMoidExecute(r ApiGetLicenseIksCustomerOpByMoidRequest) (*LicenseIksCustomerOp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1768,8 +1777,8 @@ func (r ApiGetLicenseIksCustomerOpListRequest) Execute() (*LicenseIksCustomerOpR
 /*
 GetLicenseIksCustomerOpList Read a 'license.IksCustomerOp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetLicenseIksCustomerOpListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetLicenseIksCustomerOpListRequest
 */
 func (a *LicenseApiService) GetLicenseIksCustomerOpList(ctx context.Context) ApiGetLicenseIksCustomerOpListRequest {
 	return ApiGetLicenseIksCustomerOpListRequest{
@@ -1779,7 +1788,8 @@ func (a *LicenseApiService) GetLicenseIksCustomerOpList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return LicenseIksCustomerOpResponse
+//
+//	@return LicenseIksCustomerOpResponse
 func (a *LicenseApiService) GetLicenseIksCustomerOpListExecute(r ApiGetLicenseIksCustomerOpListRequest) (*LicenseIksCustomerOpResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1946,9 +1956,9 @@ func (r ApiGetLicenseIksLicenseCountByMoidRequest) Execute() (*LicenseIksLicense
 /*
 GetLicenseIksLicenseCountByMoid Read a 'license.IksLicenseCount' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetLicenseIksLicenseCountByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetLicenseIksLicenseCountByMoidRequest
 */
 func (a *LicenseApiService) GetLicenseIksLicenseCountByMoid(ctx context.Context, moid string) ApiGetLicenseIksLicenseCountByMoidRequest {
 	return ApiGetLicenseIksLicenseCountByMoidRequest{
@@ -1959,7 +1969,8 @@ func (a *LicenseApiService) GetLicenseIksLicenseCountByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return LicenseIksLicenseCount
+//
+//	@return LicenseIksLicenseCount
 func (a *LicenseApiService) GetLicenseIksLicenseCountByMoidExecute(r ApiGetLicenseIksLicenseCountByMoidRequest) (*LicenseIksLicenseCount, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2170,8 +2181,8 @@ func (r ApiGetLicenseIksLicenseCountListRequest) Execute() (*LicenseIksLicenseCo
 /*
 GetLicenseIksLicenseCountList Read a 'license.IksLicenseCount' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetLicenseIksLicenseCountListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetLicenseIksLicenseCountListRequest
 */
 func (a *LicenseApiService) GetLicenseIksLicenseCountList(ctx context.Context) ApiGetLicenseIksLicenseCountListRequest {
 	return ApiGetLicenseIksLicenseCountListRequest{
@@ -2181,7 +2192,8 @@ func (a *LicenseApiService) GetLicenseIksLicenseCountList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return LicenseIksLicenseCountResponse
+//
+//	@return LicenseIksLicenseCountResponse
 func (a *LicenseApiService) GetLicenseIksLicenseCountListExecute(r ApiGetLicenseIksLicenseCountListRequest) (*LicenseIksLicenseCountResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2348,9 +2360,9 @@ func (r ApiGetLicenseIwoCustomerOpByMoidRequest) Execute() (*LicenseIwoCustomerO
 /*
 GetLicenseIwoCustomerOpByMoid Read a 'license.IwoCustomerOp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetLicenseIwoCustomerOpByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetLicenseIwoCustomerOpByMoidRequest
 */
 func (a *LicenseApiService) GetLicenseIwoCustomerOpByMoid(ctx context.Context, moid string) ApiGetLicenseIwoCustomerOpByMoidRequest {
 	return ApiGetLicenseIwoCustomerOpByMoidRequest{
@@ -2361,7 +2373,8 @@ func (a *LicenseApiService) GetLicenseIwoCustomerOpByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return LicenseIwoCustomerOp
+//
+//	@return LicenseIwoCustomerOp
 func (a *LicenseApiService) GetLicenseIwoCustomerOpByMoidExecute(r ApiGetLicenseIwoCustomerOpByMoidRequest) (*LicenseIwoCustomerOp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2572,8 +2585,8 @@ func (r ApiGetLicenseIwoCustomerOpListRequest) Execute() (*LicenseIwoCustomerOpR
 /*
 GetLicenseIwoCustomerOpList Read a 'license.IwoCustomerOp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetLicenseIwoCustomerOpListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetLicenseIwoCustomerOpListRequest
 */
 func (a *LicenseApiService) GetLicenseIwoCustomerOpList(ctx context.Context) ApiGetLicenseIwoCustomerOpListRequest {
 	return ApiGetLicenseIwoCustomerOpListRequest{
@@ -2583,7 +2596,8 @@ func (a *LicenseApiService) GetLicenseIwoCustomerOpList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return LicenseIwoCustomerOpResponse
+//
+//	@return LicenseIwoCustomerOpResponse
 func (a *LicenseApiService) GetLicenseIwoCustomerOpListExecute(r ApiGetLicenseIwoCustomerOpListRequest) (*LicenseIwoCustomerOpResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2750,9 +2764,9 @@ func (r ApiGetLicenseIwoLicenseCountByMoidRequest) Execute() (*LicenseIwoLicense
 /*
 GetLicenseIwoLicenseCountByMoid Read a 'license.IwoLicenseCount' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetLicenseIwoLicenseCountByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetLicenseIwoLicenseCountByMoidRequest
 */
 func (a *LicenseApiService) GetLicenseIwoLicenseCountByMoid(ctx context.Context, moid string) ApiGetLicenseIwoLicenseCountByMoidRequest {
 	return ApiGetLicenseIwoLicenseCountByMoidRequest{
@@ -2763,7 +2777,8 @@ func (a *LicenseApiService) GetLicenseIwoLicenseCountByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return LicenseIwoLicenseCount
+//
+//	@return LicenseIwoLicenseCount
 func (a *LicenseApiService) GetLicenseIwoLicenseCountByMoidExecute(r ApiGetLicenseIwoLicenseCountByMoidRequest) (*LicenseIwoLicenseCount, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2974,8 +2989,8 @@ func (r ApiGetLicenseIwoLicenseCountListRequest) Execute() (*LicenseIwoLicenseCo
 /*
 GetLicenseIwoLicenseCountList Read a 'license.IwoLicenseCount' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetLicenseIwoLicenseCountListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetLicenseIwoLicenseCountListRequest
 */
 func (a *LicenseApiService) GetLicenseIwoLicenseCountList(ctx context.Context) ApiGetLicenseIwoLicenseCountListRequest {
 	return ApiGetLicenseIwoLicenseCountListRequest{
@@ -2985,7 +3000,8 @@ func (a *LicenseApiService) GetLicenseIwoLicenseCountList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return LicenseIwoLicenseCountResponse
+//
+//	@return LicenseIwoLicenseCountResponse
 func (a *LicenseApiService) GetLicenseIwoLicenseCountListExecute(r ApiGetLicenseIwoLicenseCountListRequest) (*LicenseIwoLicenseCountResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3152,9 +3168,9 @@ func (r ApiGetLicenseLicenseInfoByMoidRequest) Execute() (*LicenseLicenseInfo, *
 /*
 GetLicenseLicenseInfoByMoid Read a 'license.LicenseInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetLicenseLicenseInfoByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetLicenseLicenseInfoByMoidRequest
 */
 func (a *LicenseApiService) GetLicenseLicenseInfoByMoid(ctx context.Context, moid string) ApiGetLicenseLicenseInfoByMoidRequest {
 	return ApiGetLicenseLicenseInfoByMoidRequest{
@@ -3165,7 +3181,8 @@ func (a *LicenseApiService) GetLicenseLicenseInfoByMoid(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return LicenseLicenseInfo
+//
+//	@return LicenseLicenseInfo
 func (a *LicenseApiService) GetLicenseLicenseInfoByMoidExecute(r ApiGetLicenseLicenseInfoByMoidRequest) (*LicenseLicenseInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3376,8 +3393,8 @@ func (r ApiGetLicenseLicenseInfoListRequest) Execute() (*LicenseLicenseInfoRespo
 /*
 GetLicenseLicenseInfoList Read a 'license.LicenseInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetLicenseLicenseInfoListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetLicenseLicenseInfoListRequest
 */
 func (a *LicenseApiService) GetLicenseLicenseInfoList(ctx context.Context) ApiGetLicenseLicenseInfoListRequest {
 	return ApiGetLicenseLicenseInfoListRequest{
@@ -3387,7 +3404,8 @@ func (a *LicenseApiService) GetLicenseLicenseInfoList(ctx context.Context) ApiGe
 }
 
 // Execute executes the request
-//  @return LicenseLicenseInfoResponse
+//
+//	@return LicenseLicenseInfoResponse
 func (a *LicenseApiService) GetLicenseLicenseInfoListExecute(r ApiGetLicenseLicenseInfoListRequest) (*LicenseLicenseInfoResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3554,9 +3572,9 @@ func (r ApiGetLicenseLicenseReservationOpByMoidRequest) Execute() (*LicenseLicen
 /*
 GetLicenseLicenseReservationOpByMoid Read a 'license.LicenseReservationOp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetLicenseLicenseReservationOpByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetLicenseLicenseReservationOpByMoidRequest
 */
 func (a *LicenseApiService) GetLicenseLicenseReservationOpByMoid(ctx context.Context, moid string) ApiGetLicenseLicenseReservationOpByMoidRequest {
 	return ApiGetLicenseLicenseReservationOpByMoidRequest{
@@ -3567,7 +3585,8 @@ func (a *LicenseApiService) GetLicenseLicenseReservationOpByMoid(ctx context.Con
 }
 
 // Execute executes the request
-//  @return LicenseLicenseReservationOp
+//
+//	@return LicenseLicenseReservationOp
 func (a *LicenseApiService) GetLicenseLicenseReservationOpByMoidExecute(r ApiGetLicenseLicenseReservationOpByMoidRequest) (*LicenseLicenseReservationOp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3778,8 +3797,8 @@ func (r ApiGetLicenseLicenseReservationOpListRequest) Execute() (*LicenseLicense
 /*
 GetLicenseLicenseReservationOpList Read a 'license.LicenseReservationOp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetLicenseLicenseReservationOpListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetLicenseLicenseReservationOpListRequest
 */
 func (a *LicenseApiService) GetLicenseLicenseReservationOpList(ctx context.Context) ApiGetLicenseLicenseReservationOpListRequest {
 	return ApiGetLicenseLicenseReservationOpListRequest{
@@ -3789,7 +3808,8 @@ func (a *LicenseApiService) GetLicenseLicenseReservationOpList(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return LicenseLicenseReservationOpResponse
+//
+//	@return LicenseLicenseReservationOpResponse
 func (a *LicenseApiService) GetLicenseLicenseReservationOpListExecute(r ApiGetLicenseLicenseReservationOpListRequest) (*LicenseLicenseReservationOpResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3956,9 +3976,9 @@ func (r ApiGetLicenseSmartlicenseTokenByMoidRequest) Execute() (*LicenseSmartlic
 /*
 GetLicenseSmartlicenseTokenByMoid Read a 'license.SmartlicenseToken' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetLicenseSmartlicenseTokenByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetLicenseSmartlicenseTokenByMoidRequest
 */
 func (a *LicenseApiService) GetLicenseSmartlicenseTokenByMoid(ctx context.Context, moid string) ApiGetLicenseSmartlicenseTokenByMoidRequest {
 	return ApiGetLicenseSmartlicenseTokenByMoidRequest{
@@ -3969,7 +3989,8 @@ func (a *LicenseApiService) GetLicenseSmartlicenseTokenByMoid(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return LicenseSmartlicenseToken
+//
+//	@return LicenseSmartlicenseToken
 func (a *LicenseApiService) GetLicenseSmartlicenseTokenByMoidExecute(r ApiGetLicenseSmartlicenseTokenByMoidRequest) (*LicenseSmartlicenseToken, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4180,8 +4201,8 @@ func (r ApiGetLicenseSmartlicenseTokenListRequest) Execute() (*LicenseSmartlicen
 /*
 GetLicenseSmartlicenseTokenList Read a 'license.SmartlicenseToken' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetLicenseSmartlicenseTokenListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetLicenseSmartlicenseTokenListRequest
 */
 func (a *LicenseApiService) GetLicenseSmartlicenseTokenList(ctx context.Context) ApiGetLicenseSmartlicenseTokenListRequest {
 	return ApiGetLicenseSmartlicenseTokenListRequest{
@@ -4191,7 +4212,8 @@ func (a *LicenseApiService) GetLicenseSmartlicenseTokenList(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return LicenseSmartlicenseTokenResponse
+//
+//	@return LicenseSmartlicenseTokenResponse
 func (a *LicenseApiService) GetLicenseSmartlicenseTokenListExecute(r ApiGetLicenseSmartlicenseTokenListRequest) (*LicenseSmartlicenseTokenResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4372,9 +4394,9 @@ func (r ApiPatchLicenseAccountLicenseDataRequest) Execute() (*LicenseAccountLice
 /*
 PatchLicenseAccountLicenseData Update a 'license.AccountLicenseData' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchLicenseAccountLicenseDataRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchLicenseAccountLicenseDataRequest
 */
 func (a *LicenseApiService) PatchLicenseAccountLicenseData(ctx context.Context, moid string) ApiPatchLicenseAccountLicenseDataRequest {
 	return ApiPatchLicenseAccountLicenseDataRequest{
@@ -4385,7 +4407,8 @@ func (a *LicenseApiService) PatchLicenseAccountLicenseData(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return LicenseAccountLicenseData
+//
+//	@return LicenseAccountLicenseData
 func (a *LicenseApiService) PatchLicenseAccountLicenseDataExecute(r ApiPatchLicenseAccountLicenseDataRequest) (*LicenseAccountLicenseData, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -4542,9 +4565,9 @@ func (r ApiPatchLicenseCustomerOpRequest) Execute() (*LicenseCustomerOp, *http.R
 /*
 PatchLicenseCustomerOp Update a 'license.CustomerOp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchLicenseCustomerOpRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchLicenseCustomerOpRequest
 */
 func (a *LicenseApiService) PatchLicenseCustomerOp(ctx context.Context, moid string) ApiPatchLicenseCustomerOpRequest {
 	return ApiPatchLicenseCustomerOpRequest{
@@ -4555,7 +4578,8 @@ func (a *LicenseApiService) PatchLicenseCustomerOp(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return LicenseCustomerOp
+//
+//	@return LicenseCustomerOp
 func (a *LicenseApiService) PatchLicenseCustomerOpExecute(r ApiPatchLicenseCustomerOpRequest) (*LicenseCustomerOp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -4712,9 +4736,9 @@ func (r ApiPatchLicenseIksCustomerOpRequest) Execute() (*LicenseIksCustomerOp, *
 /*
 PatchLicenseIksCustomerOp Update a 'license.IksCustomerOp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchLicenseIksCustomerOpRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchLicenseIksCustomerOpRequest
 */
 func (a *LicenseApiService) PatchLicenseIksCustomerOp(ctx context.Context, moid string) ApiPatchLicenseIksCustomerOpRequest {
 	return ApiPatchLicenseIksCustomerOpRequest{
@@ -4725,7 +4749,8 @@ func (a *LicenseApiService) PatchLicenseIksCustomerOp(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return LicenseIksCustomerOp
+//
+//	@return LicenseIksCustomerOp
 func (a *LicenseApiService) PatchLicenseIksCustomerOpExecute(r ApiPatchLicenseIksCustomerOpRequest) (*LicenseIksCustomerOp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -4882,9 +4907,9 @@ func (r ApiPatchLicenseIksLicenseCountRequest) Execute() (*LicenseIksLicenseCoun
 /*
 PatchLicenseIksLicenseCount Update a 'license.IksLicenseCount' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchLicenseIksLicenseCountRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchLicenseIksLicenseCountRequest
 */
 func (a *LicenseApiService) PatchLicenseIksLicenseCount(ctx context.Context, moid string) ApiPatchLicenseIksLicenseCountRequest {
 	return ApiPatchLicenseIksLicenseCountRequest{
@@ -4895,7 +4920,8 @@ func (a *LicenseApiService) PatchLicenseIksLicenseCount(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return LicenseIksLicenseCount
+//
+//	@return LicenseIksLicenseCount
 func (a *LicenseApiService) PatchLicenseIksLicenseCountExecute(r ApiPatchLicenseIksLicenseCountRequest) (*LicenseIksLicenseCount, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -5052,9 +5078,9 @@ func (r ApiPatchLicenseIwoCustomerOpRequest) Execute() (*LicenseIwoCustomerOp, *
 /*
 PatchLicenseIwoCustomerOp Update a 'license.IwoCustomerOp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchLicenseIwoCustomerOpRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchLicenseIwoCustomerOpRequest
 */
 func (a *LicenseApiService) PatchLicenseIwoCustomerOp(ctx context.Context, moid string) ApiPatchLicenseIwoCustomerOpRequest {
 	return ApiPatchLicenseIwoCustomerOpRequest{
@@ -5065,7 +5091,8 @@ func (a *LicenseApiService) PatchLicenseIwoCustomerOp(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return LicenseIwoCustomerOp
+//
+//	@return LicenseIwoCustomerOp
 func (a *LicenseApiService) PatchLicenseIwoCustomerOpExecute(r ApiPatchLicenseIwoCustomerOpRequest) (*LicenseIwoCustomerOp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -5222,9 +5249,9 @@ func (r ApiPatchLicenseIwoLicenseCountRequest) Execute() (*LicenseIwoLicenseCoun
 /*
 PatchLicenseIwoLicenseCount Update a 'license.IwoLicenseCount' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchLicenseIwoLicenseCountRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchLicenseIwoLicenseCountRequest
 */
 func (a *LicenseApiService) PatchLicenseIwoLicenseCount(ctx context.Context, moid string) ApiPatchLicenseIwoLicenseCountRequest {
 	return ApiPatchLicenseIwoLicenseCountRequest{
@@ -5235,7 +5262,8 @@ func (a *LicenseApiService) PatchLicenseIwoLicenseCount(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return LicenseIwoLicenseCount
+//
+//	@return LicenseIwoLicenseCount
 func (a *LicenseApiService) PatchLicenseIwoLicenseCountExecute(r ApiPatchLicenseIwoLicenseCountRequest) (*LicenseIwoLicenseCount, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -5392,9 +5420,9 @@ func (r ApiPatchLicenseLicenseInfoRequest) Execute() (*LicenseLicenseInfo, *http
 /*
 PatchLicenseLicenseInfo Update a 'license.LicenseInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchLicenseLicenseInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchLicenseLicenseInfoRequest
 */
 func (a *LicenseApiService) PatchLicenseLicenseInfo(ctx context.Context, moid string) ApiPatchLicenseLicenseInfoRequest {
 	return ApiPatchLicenseLicenseInfoRequest{
@@ -5405,7 +5433,8 @@ func (a *LicenseApiService) PatchLicenseLicenseInfo(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return LicenseLicenseInfo
+//
+//	@return LicenseLicenseInfo
 func (a *LicenseApiService) PatchLicenseLicenseInfoExecute(r ApiPatchLicenseLicenseInfoRequest) (*LicenseLicenseInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -5562,9 +5591,9 @@ func (r ApiPatchLicenseLicenseReservationOpRequest) Execute() (*LicenseLicenseRe
 /*
 PatchLicenseLicenseReservationOp Update a 'license.LicenseReservationOp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchLicenseLicenseReservationOpRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchLicenseLicenseReservationOpRequest
 */
 func (a *LicenseApiService) PatchLicenseLicenseReservationOp(ctx context.Context, moid string) ApiPatchLicenseLicenseReservationOpRequest {
 	return ApiPatchLicenseLicenseReservationOpRequest{
@@ -5575,7 +5604,8 @@ func (a *LicenseApiService) PatchLicenseLicenseReservationOp(ctx context.Context
 }
 
 // Execute executes the request
-//  @return LicenseLicenseReservationOp
+//
+//	@return LicenseLicenseReservationOp
 func (a *LicenseApiService) PatchLicenseLicenseReservationOpExecute(r ApiPatchLicenseLicenseReservationOpRequest) (*LicenseLicenseReservationOp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -5732,9 +5762,9 @@ func (r ApiPatchLicenseSmartlicenseTokenRequest) Execute() (*LicenseSmartlicense
 /*
 PatchLicenseSmartlicenseToken Update a 'license.SmartlicenseToken' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchLicenseSmartlicenseTokenRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchLicenseSmartlicenseTokenRequest
 */
 func (a *LicenseApiService) PatchLicenseSmartlicenseToken(ctx context.Context, moid string) ApiPatchLicenseSmartlicenseTokenRequest {
 	return ApiPatchLicenseSmartlicenseTokenRequest{
@@ -5745,7 +5775,8 @@ func (a *LicenseApiService) PatchLicenseSmartlicenseToken(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return LicenseSmartlicenseToken
+//
+//	@return LicenseSmartlicenseToken
 func (a *LicenseApiService) PatchLicenseSmartlicenseTokenExecute(r ApiPatchLicenseSmartlicenseTokenRequest) (*LicenseSmartlicenseToken, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -5902,9 +5933,9 @@ func (r ApiUpdateLicenseAccountLicenseDataRequest) Execute() (*LicenseAccountLic
 /*
 UpdateLicenseAccountLicenseData Update a 'license.AccountLicenseData' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateLicenseAccountLicenseDataRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateLicenseAccountLicenseDataRequest
 */
 func (a *LicenseApiService) UpdateLicenseAccountLicenseData(ctx context.Context, moid string) ApiUpdateLicenseAccountLicenseDataRequest {
 	return ApiUpdateLicenseAccountLicenseDataRequest{
@@ -5915,7 +5946,8 @@ func (a *LicenseApiService) UpdateLicenseAccountLicenseData(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return LicenseAccountLicenseData
+//
+//	@return LicenseAccountLicenseData
 func (a *LicenseApiService) UpdateLicenseAccountLicenseDataExecute(r ApiUpdateLicenseAccountLicenseDataRequest) (*LicenseAccountLicenseData, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -6072,9 +6104,9 @@ func (r ApiUpdateLicenseCustomerOpRequest) Execute() (*LicenseCustomerOp, *http.
 /*
 UpdateLicenseCustomerOp Update a 'license.CustomerOp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateLicenseCustomerOpRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateLicenseCustomerOpRequest
 */
 func (a *LicenseApiService) UpdateLicenseCustomerOp(ctx context.Context, moid string) ApiUpdateLicenseCustomerOpRequest {
 	return ApiUpdateLicenseCustomerOpRequest{
@@ -6085,7 +6117,8 @@ func (a *LicenseApiService) UpdateLicenseCustomerOp(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return LicenseCustomerOp
+//
+//	@return LicenseCustomerOp
 func (a *LicenseApiService) UpdateLicenseCustomerOpExecute(r ApiUpdateLicenseCustomerOpRequest) (*LicenseCustomerOp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -6242,9 +6275,9 @@ func (r ApiUpdateLicenseIksCustomerOpRequest) Execute() (*LicenseIksCustomerOp, 
 /*
 UpdateLicenseIksCustomerOp Update a 'license.IksCustomerOp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateLicenseIksCustomerOpRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateLicenseIksCustomerOpRequest
 */
 func (a *LicenseApiService) UpdateLicenseIksCustomerOp(ctx context.Context, moid string) ApiUpdateLicenseIksCustomerOpRequest {
 	return ApiUpdateLicenseIksCustomerOpRequest{
@@ -6255,7 +6288,8 @@ func (a *LicenseApiService) UpdateLicenseIksCustomerOp(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return LicenseIksCustomerOp
+//
+//	@return LicenseIksCustomerOp
 func (a *LicenseApiService) UpdateLicenseIksCustomerOpExecute(r ApiUpdateLicenseIksCustomerOpRequest) (*LicenseIksCustomerOp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -6412,9 +6446,9 @@ func (r ApiUpdateLicenseIksLicenseCountRequest) Execute() (*LicenseIksLicenseCou
 /*
 UpdateLicenseIksLicenseCount Update a 'license.IksLicenseCount' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateLicenseIksLicenseCountRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateLicenseIksLicenseCountRequest
 */
 func (a *LicenseApiService) UpdateLicenseIksLicenseCount(ctx context.Context, moid string) ApiUpdateLicenseIksLicenseCountRequest {
 	return ApiUpdateLicenseIksLicenseCountRequest{
@@ -6425,7 +6459,8 @@ func (a *LicenseApiService) UpdateLicenseIksLicenseCount(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return LicenseIksLicenseCount
+//
+//	@return LicenseIksLicenseCount
 func (a *LicenseApiService) UpdateLicenseIksLicenseCountExecute(r ApiUpdateLicenseIksLicenseCountRequest) (*LicenseIksLicenseCount, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -6582,9 +6617,9 @@ func (r ApiUpdateLicenseIwoCustomerOpRequest) Execute() (*LicenseIwoCustomerOp, 
 /*
 UpdateLicenseIwoCustomerOp Update a 'license.IwoCustomerOp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateLicenseIwoCustomerOpRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateLicenseIwoCustomerOpRequest
 */
 func (a *LicenseApiService) UpdateLicenseIwoCustomerOp(ctx context.Context, moid string) ApiUpdateLicenseIwoCustomerOpRequest {
 	return ApiUpdateLicenseIwoCustomerOpRequest{
@@ -6595,7 +6630,8 @@ func (a *LicenseApiService) UpdateLicenseIwoCustomerOp(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return LicenseIwoCustomerOp
+//
+//	@return LicenseIwoCustomerOp
 func (a *LicenseApiService) UpdateLicenseIwoCustomerOpExecute(r ApiUpdateLicenseIwoCustomerOpRequest) (*LicenseIwoCustomerOp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -6752,9 +6788,9 @@ func (r ApiUpdateLicenseIwoLicenseCountRequest) Execute() (*LicenseIwoLicenseCou
 /*
 UpdateLicenseIwoLicenseCount Update a 'license.IwoLicenseCount' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateLicenseIwoLicenseCountRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateLicenseIwoLicenseCountRequest
 */
 func (a *LicenseApiService) UpdateLicenseIwoLicenseCount(ctx context.Context, moid string) ApiUpdateLicenseIwoLicenseCountRequest {
 	return ApiUpdateLicenseIwoLicenseCountRequest{
@@ -6765,7 +6801,8 @@ func (a *LicenseApiService) UpdateLicenseIwoLicenseCount(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return LicenseIwoLicenseCount
+//
+//	@return LicenseIwoLicenseCount
 func (a *LicenseApiService) UpdateLicenseIwoLicenseCountExecute(r ApiUpdateLicenseIwoLicenseCountRequest) (*LicenseIwoLicenseCount, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -6922,9 +6959,9 @@ func (r ApiUpdateLicenseLicenseInfoRequest) Execute() (*LicenseLicenseInfo, *htt
 /*
 UpdateLicenseLicenseInfo Update a 'license.LicenseInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateLicenseLicenseInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateLicenseLicenseInfoRequest
 */
 func (a *LicenseApiService) UpdateLicenseLicenseInfo(ctx context.Context, moid string) ApiUpdateLicenseLicenseInfoRequest {
 	return ApiUpdateLicenseLicenseInfoRequest{
@@ -6935,7 +6972,8 @@ func (a *LicenseApiService) UpdateLicenseLicenseInfo(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return LicenseLicenseInfo
+//
+//	@return LicenseLicenseInfo
 func (a *LicenseApiService) UpdateLicenseLicenseInfoExecute(r ApiUpdateLicenseLicenseInfoRequest) (*LicenseLicenseInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -7092,9 +7130,9 @@ func (r ApiUpdateLicenseLicenseReservationOpRequest) Execute() (*LicenseLicenseR
 /*
 UpdateLicenseLicenseReservationOp Update a 'license.LicenseReservationOp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateLicenseLicenseReservationOpRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateLicenseLicenseReservationOpRequest
 */
 func (a *LicenseApiService) UpdateLicenseLicenseReservationOp(ctx context.Context, moid string) ApiUpdateLicenseLicenseReservationOpRequest {
 	return ApiUpdateLicenseLicenseReservationOpRequest{
@@ -7105,7 +7143,8 @@ func (a *LicenseApiService) UpdateLicenseLicenseReservationOp(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return LicenseLicenseReservationOp
+//
+//	@return LicenseLicenseReservationOp
 func (a *LicenseApiService) UpdateLicenseLicenseReservationOpExecute(r ApiUpdateLicenseLicenseReservationOpRequest) (*LicenseLicenseReservationOp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -7262,9 +7301,9 @@ func (r ApiUpdateLicenseSmartlicenseTokenRequest) Execute() (*LicenseSmartlicens
 /*
 UpdateLicenseSmartlicenseToken Update a 'license.SmartlicenseToken' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateLicenseSmartlicenseTokenRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateLicenseSmartlicenseTokenRequest
 */
 func (a *LicenseApiService) UpdateLicenseSmartlicenseToken(ctx context.Context, moid string) ApiUpdateLicenseSmartlicenseTokenRequest {
 	return ApiUpdateLicenseSmartlicenseTokenRequest{
@@ -7275,7 +7314,8 @@ func (a *LicenseApiService) UpdateLicenseSmartlicenseToken(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return LicenseSmartlicenseToken
+//
+//	@return LicenseSmartlicenseToken
 func (a *LicenseApiService) UpdateLicenseSmartlicenseTokenExecute(r ApiUpdateLicenseSmartlicenseTokenRequest) (*LicenseSmartlicenseToken, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

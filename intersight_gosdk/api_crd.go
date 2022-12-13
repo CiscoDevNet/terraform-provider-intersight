@@ -56,8 +56,8 @@ func (r ApiCreateCrdCustomResourceRequest) Execute() (*CrdCustomResource, *http.
 /*
 CreateCrdCustomResource Create a 'crd.CustomResource' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateCrdCustomResourceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateCrdCustomResourceRequest
 */
 func (a *CrdApiService) CreateCrdCustomResource(ctx context.Context) ApiCreateCrdCustomResourceRequest {
 	return ApiCreateCrdCustomResourceRequest{
@@ -67,7 +67,8 @@ func (a *CrdApiService) CreateCrdCustomResource(ctx context.Context) ApiCreateCr
 }
 
 // Execute executes the request
-//  @return CrdCustomResource
+//
+//	@return CrdCustomResource
 func (a *CrdApiService) CreateCrdCustomResourceExecute(r ApiCreateCrdCustomResourceRequest) (*CrdCustomResource, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -212,9 +213,9 @@ func (r ApiDeleteCrdCustomResourceRequest) Execute() (*http.Response, error) {
 /*
 DeleteCrdCustomResource Delete a 'crd.CustomResource' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteCrdCustomResourceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteCrdCustomResourceRequest
 */
 func (a *CrdApiService) DeleteCrdCustomResource(ctx context.Context, moid string) ApiDeleteCrdCustomResourceRequest {
 	return ApiDeleteCrdCustomResourceRequest{
@@ -349,9 +350,9 @@ func (r ApiGetCrdCustomResourceByMoidRequest) Execute() (*CrdCustomResource, *ht
 /*
 GetCrdCustomResourceByMoid Read a 'crd.CustomResource' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCrdCustomResourceByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCrdCustomResourceByMoidRequest
 */
 func (a *CrdApiService) GetCrdCustomResourceByMoid(ctx context.Context, moid string) ApiGetCrdCustomResourceByMoidRequest {
 	return ApiGetCrdCustomResourceByMoidRequest{
@@ -362,7 +363,8 @@ func (a *CrdApiService) GetCrdCustomResourceByMoid(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return CrdCustomResource
+//
+//	@return CrdCustomResource
 func (a *CrdApiService) GetCrdCustomResourceByMoidExecute(r ApiGetCrdCustomResourceByMoidRequest) (*CrdCustomResource, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -573,8 +575,8 @@ func (r ApiGetCrdCustomResourceListRequest) Execute() (*CrdCustomResourceRespons
 /*
 GetCrdCustomResourceList Read a 'crd.CustomResource' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCrdCustomResourceListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCrdCustomResourceListRequest
 */
 func (a *CrdApiService) GetCrdCustomResourceList(ctx context.Context) ApiGetCrdCustomResourceListRequest {
 	return ApiGetCrdCustomResourceListRequest{
@@ -584,7 +586,8 @@ func (a *CrdApiService) GetCrdCustomResourceList(ctx context.Context) ApiGetCrdC
 }
 
 // Execute executes the request
-//  @return CrdCustomResourceResponse
+//
+//	@return CrdCustomResourceResponse
 func (a *CrdApiService) GetCrdCustomResourceListExecute(r ApiGetCrdCustomResourceListRequest) (*CrdCustomResourceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -765,9 +768,9 @@ func (r ApiPatchCrdCustomResourceRequest) Execute() (*CrdCustomResource, *http.R
 /*
 PatchCrdCustomResource Update a 'crd.CustomResource' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchCrdCustomResourceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchCrdCustomResourceRequest
 */
 func (a *CrdApiService) PatchCrdCustomResource(ctx context.Context, moid string) ApiPatchCrdCustomResourceRequest {
 	return ApiPatchCrdCustomResourceRequest{
@@ -778,7 +781,8 @@ func (a *CrdApiService) PatchCrdCustomResource(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//  @return CrdCustomResource
+//
+//	@return CrdCustomResource
 func (a *CrdApiService) PatchCrdCustomResourceExecute(r ApiPatchCrdCustomResourceRequest) (*CrdCustomResource, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -935,9 +939,9 @@ func (r ApiUpdateCrdCustomResourceRequest) Execute() (*CrdCustomResource, *http.
 /*
 UpdateCrdCustomResource Update a 'crd.CustomResource' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateCrdCustomResourceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateCrdCustomResourceRequest
 */
 func (a *CrdApiService) UpdateCrdCustomResource(ctx context.Context, moid string) ApiUpdateCrdCustomResourceRequest {
 	return ApiUpdateCrdCustomResourceRequest{
@@ -948,7 +952,8 @@ func (a *CrdApiService) UpdateCrdCustomResource(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return CrdCustomResource
+//
+//	@return CrdCustomResource
 func (a *CrdApiService) UpdateCrdCustomResourceExecute(r ApiUpdateCrdCustomResourceRequest) (*CrdCustomResource, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

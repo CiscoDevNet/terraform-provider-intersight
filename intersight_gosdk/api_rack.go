@@ -36,9 +36,9 @@ func (r ApiGetRackUnitPersonalityByMoidRequest) Execute() (*RackUnitPersonality,
 /*
 GetRackUnitPersonalityByMoid Read a 'rack.UnitPersonality' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetRackUnitPersonalityByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetRackUnitPersonalityByMoidRequest
 */
 func (a *RackApiService) GetRackUnitPersonalityByMoid(ctx context.Context, moid string) ApiGetRackUnitPersonalityByMoidRequest {
 	return ApiGetRackUnitPersonalityByMoidRequest{
@@ -49,7 +49,8 @@ func (a *RackApiService) GetRackUnitPersonalityByMoid(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return RackUnitPersonality
+//
+//	@return RackUnitPersonality
 func (a *RackApiService) GetRackUnitPersonalityByMoidExecute(r ApiGetRackUnitPersonalityByMoidRequest) (*RackUnitPersonality, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -260,8 +261,8 @@ func (r ApiGetRackUnitPersonalityListRequest) Execute() (*RackUnitPersonalityRes
 /*
 GetRackUnitPersonalityList Read a 'rack.UnitPersonality' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetRackUnitPersonalityListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetRackUnitPersonalityListRequest
 */
 func (a *RackApiService) GetRackUnitPersonalityList(ctx context.Context) ApiGetRackUnitPersonalityListRequest {
 	return ApiGetRackUnitPersonalityListRequest{
@@ -271,7 +272,8 @@ func (a *RackApiService) GetRackUnitPersonalityList(ctx context.Context) ApiGetR
 }
 
 // Execute executes the request
-//  @return RackUnitPersonalityResponse
+//
+//	@return RackUnitPersonalityResponse
 func (a *RackApiService) GetRackUnitPersonalityListExecute(r ApiGetRackUnitPersonalityListRequest) (*RackUnitPersonalityResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -452,9 +454,9 @@ func (r ApiPatchRackUnitPersonalityRequest) Execute() (*RackUnitPersonality, *ht
 /*
 PatchRackUnitPersonality Update a 'rack.UnitPersonality' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchRackUnitPersonalityRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchRackUnitPersonalityRequest
 */
 func (a *RackApiService) PatchRackUnitPersonality(ctx context.Context, moid string) ApiPatchRackUnitPersonalityRequest {
 	return ApiPatchRackUnitPersonalityRequest{
@@ -465,7 +467,8 @@ func (a *RackApiService) PatchRackUnitPersonality(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return RackUnitPersonality
+//
+//	@return RackUnitPersonality
 func (a *RackApiService) PatchRackUnitPersonalityExecute(r ApiPatchRackUnitPersonalityRequest) (*RackUnitPersonality, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -622,9 +625,9 @@ func (r ApiUpdateRackUnitPersonalityRequest) Execute() (*RackUnitPersonality, *h
 /*
 UpdateRackUnitPersonality Update a 'rack.UnitPersonality' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateRackUnitPersonalityRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateRackUnitPersonalityRequest
 */
 func (a *RackApiService) UpdateRackUnitPersonality(ctx context.Context, moid string) ApiUpdateRackUnitPersonalityRequest {
 	return ApiUpdateRackUnitPersonalityRequest{
@@ -635,7 +638,8 @@ func (a *RackApiService) UpdateRackUnitPersonality(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return RackUnitPersonality
+//
+//	@return RackUnitPersonality
 func (a *RackApiService) UpdateRackUnitPersonalityExecute(r ApiUpdateRackUnitPersonalityRequest) (*RackUnitPersonality, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

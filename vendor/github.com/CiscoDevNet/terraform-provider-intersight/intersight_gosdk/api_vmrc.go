@@ -56,8 +56,8 @@ func (r ApiCreateVmrcConsoleRequest) Execute() (*VmrcConsole, *http.Response, er
 /*
 CreateVmrcConsole Create a 'vmrc.Console' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateVmrcConsoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateVmrcConsoleRequest
 */
 func (a *VmrcApiService) CreateVmrcConsole(ctx context.Context) ApiCreateVmrcConsoleRequest {
 	return ApiCreateVmrcConsoleRequest{
@@ -67,7 +67,8 @@ func (a *VmrcApiService) CreateVmrcConsole(ctx context.Context) ApiCreateVmrcCon
 }
 
 // Execute executes the request
-//  @return VmrcConsole
+//
+//	@return VmrcConsole
 func (a *VmrcApiService) CreateVmrcConsoleExecute(r ApiCreateVmrcConsoleRequest) (*VmrcConsole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -212,9 +213,9 @@ func (r ApiGetVmrcConsoleByMoidRequest) Execute() (*VmrcConsole, *http.Response,
 /*
 GetVmrcConsoleByMoid Read a 'vmrc.Console' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVmrcConsoleByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVmrcConsoleByMoidRequest
 */
 func (a *VmrcApiService) GetVmrcConsoleByMoid(ctx context.Context, moid string) ApiGetVmrcConsoleByMoidRequest {
 	return ApiGetVmrcConsoleByMoidRequest{
@@ -225,7 +226,8 @@ func (a *VmrcApiService) GetVmrcConsoleByMoid(ctx context.Context, moid string) 
 }
 
 // Execute executes the request
-//  @return VmrcConsole
+//
+//	@return VmrcConsole
 func (a *VmrcApiService) GetVmrcConsoleByMoidExecute(r ApiGetVmrcConsoleByMoidRequest) (*VmrcConsole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -436,8 +438,8 @@ func (r ApiGetVmrcConsoleListRequest) Execute() (*VmrcConsoleResponse, *http.Res
 /*
 GetVmrcConsoleList Read a 'vmrc.Console' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVmrcConsoleListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVmrcConsoleListRequest
 */
 func (a *VmrcApiService) GetVmrcConsoleList(ctx context.Context) ApiGetVmrcConsoleListRequest {
 	return ApiGetVmrcConsoleListRequest{
@@ -447,7 +449,8 @@ func (a *VmrcApiService) GetVmrcConsoleList(ctx context.Context) ApiGetVmrcConso
 }
 
 // Execute executes the request
-//  @return VmrcConsoleResponse
+//
+//	@return VmrcConsoleResponse
 func (a *VmrcApiService) GetVmrcConsoleListExecute(r ApiGetVmrcConsoleListRequest) (*VmrcConsoleResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -628,9 +631,9 @@ func (r ApiPatchVmrcConsoleRequest) Execute() (*VmrcConsole, *http.Response, err
 /*
 PatchVmrcConsole Update a 'vmrc.Console' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchVmrcConsoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchVmrcConsoleRequest
 */
 func (a *VmrcApiService) PatchVmrcConsole(ctx context.Context, moid string) ApiPatchVmrcConsoleRequest {
 	return ApiPatchVmrcConsoleRequest{
@@ -641,7 +644,8 @@ func (a *VmrcApiService) PatchVmrcConsole(ctx context.Context, moid string) ApiP
 }
 
 // Execute executes the request
-//  @return VmrcConsole
+//
+//	@return VmrcConsole
 func (a *VmrcApiService) PatchVmrcConsoleExecute(r ApiPatchVmrcConsoleRequest) (*VmrcConsole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -798,9 +802,9 @@ func (r ApiUpdateVmrcConsoleRequest) Execute() (*VmrcConsole, *http.Response, er
 /*
 UpdateVmrcConsole Update a 'vmrc.Console' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateVmrcConsoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateVmrcConsoleRequest
 */
 func (a *VmrcApiService) UpdateVmrcConsole(ctx context.Context, moid string) ApiUpdateVmrcConsoleRequest {
 	return ApiUpdateVmrcConsoleRequest{
@@ -811,7 +815,8 @@ func (a *VmrcApiService) UpdateVmrcConsole(ctx context.Context, moid string) Api
 }
 
 // Execute executes the request
-//  @return VmrcConsole
+//
+//	@return VmrcConsole
 func (a *VmrcApiService) UpdateVmrcConsoleExecute(r ApiUpdateVmrcConsoleRequest) (*VmrcConsole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

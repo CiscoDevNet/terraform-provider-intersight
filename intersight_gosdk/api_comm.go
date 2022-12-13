@@ -56,8 +56,8 @@ func (r ApiCreateCommHttpProxyPolicyRequest) Execute() (*CommHttpProxyPolicy, *h
 /*
 CreateCommHttpProxyPolicy Create a 'comm.HttpProxyPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateCommHttpProxyPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateCommHttpProxyPolicyRequest
 */
 func (a *CommApiService) CreateCommHttpProxyPolicy(ctx context.Context) ApiCreateCommHttpProxyPolicyRequest {
 	return ApiCreateCommHttpProxyPolicyRequest{
@@ -67,7 +67,8 @@ func (a *CommApiService) CreateCommHttpProxyPolicy(ctx context.Context) ApiCreat
 }
 
 // Execute executes the request
-//  @return CommHttpProxyPolicy
+//
+//	@return CommHttpProxyPolicy
 func (a *CommApiService) CreateCommHttpProxyPolicyExecute(r ApiCreateCommHttpProxyPolicyRequest) (*CommHttpProxyPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -212,9 +213,9 @@ func (r ApiDeleteCommHttpProxyPolicyRequest) Execute() (*http.Response, error) {
 /*
 DeleteCommHttpProxyPolicy Delete a 'comm.HttpProxyPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteCommHttpProxyPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteCommHttpProxyPolicyRequest
 */
 func (a *CommApiService) DeleteCommHttpProxyPolicy(ctx context.Context, moid string) ApiDeleteCommHttpProxyPolicyRequest {
 	return ApiDeleteCommHttpProxyPolicyRequest{
@@ -349,9 +350,9 @@ func (r ApiGetCommHttpProxyPolicyByMoidRequest) Execute() (*CommHttpProxyPolicy,
 /*
 GetCommHttpProxyPolicyByMoid Read a 'comm.HttpProxyPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCommHttpProxyPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCommHttpProxyPolicyByMoidRequest
 */
 func (a *CommApiService) GetCommHttpProxyPolicyByMoid(ctx context.Context, moid string) ApiGetCommHttpProxyPolicyByMoidRequest {
 	return ApiGetCommHttpProxyPolicyByMoidRequest{
@@ -362,7 +363,8 @@ func (a *CommApiService) GetCommHttpProxyPolicyByMoid(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return CommHttpProxyPolicy
+//
+//	@return CommHttpProxyPolicy
 func (a *CommApiService) GetCommHttpProxyPolicyByMoidExecute(r ApiGetCommHttpProxyPolicyByMoidRequest) (*CommHttpProxyPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -573,8 +575,8 @@ func (r ApiGetCommHttpProxyPolicyListRequest) Execute() (*CommHttpProxyPolicyRes
 /*
 GetCommHttpProxyPolicyList Read a 'comm.HttpProxyPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCommHttpProxyPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCommHttpProxyPolicyListRequest
 */
 func (a *CommApiService) GetCommHttpProxyPolicyList(ctx context.Context) ApiGetCommHttpProxyPolicyListRequest {
 	return ApiGetCommHttpProxyPolicyListRequest{
@@ -584,7 +586,8 @@ func (a *CommApiService) GetCommHttpProxyPolicyList(ctx context.Context) ApiGetC
 }
 
 // Execute executes the request
-//  @return CommHttpProxyPolicyResponse
+//
+//	@return CommHttpProxyPolicyResponse
 func (a *CommApiService) GetCommHttpProxyPolicyListExecute(r ApiGetCommHttpProxyPolicyListRequest) (*CommHttpProxyPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -765,9 +768,9 @@ func (r ApiPatchCommHttpProxyPolicyRequest) Execute() (*CommHttpProxyPolicy, *ht
 /*
 PatchCommHttpProxyPolicy Update a 'comm.HttpProxyPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchCommHttpProxyPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchCommHttpProxyPolicyRequest
 */
 func (a *CommApiService) PatchCommHttpProxyPolicy(ctx context.Context, moid string) ApiPatchCommHttpProxyPolicyRequest {
 	return ApiPatchCommHttpProxyPolicyRequest{
@@ -778,7 +781,8 @@ func (a *CommApiService) PatchCommHttpProxyPolicy(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return CommHttpProxyPolicy
+//
+//	@return CommHttpProxyPolicy
 func (a *CommApiService) PatchCommHttpProxyPolicyExecute(r ApiPatchCommHttpProxyPolicyRequest) (*CommHttpProxyPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -935,9 +939,9 @@ func (r ApiUpdateCommHttpProxyPolicyRequest) Execute() (*CommHttpProxyPolicy, *h
 /*
 UpdateCommHttpProxyPolicy Update a 'comm.HttpProxyPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateCommHttpProxyPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateCommHttpProxyPolicyRequest
 */
 func (a *CommApiService) UpdateCommHttpProxyPolicy(ctx context.Context, moid string) ApiUpdateCommHttpProxyPolicyRequest {
 	return ApiUpdateCommHttpProxyPolicyRequest{
@@ -948,7 +952,8 @@ func (a *CommApiService) UpdateCommHttpProxyPolicy(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return CommHttpProxyPolicy
+//
+//	@return CommHttpProxyPolicy
 func (a *CommApiService) UpdateCommHttpProxyPolicyExecute(r ApiUpdateCommHttpProxyPolicyRequest) (*CommHttpProxyPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

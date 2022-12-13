@@ -56,8 +56,8 @@ func (r ApiCreateSdcardPolicyRequest) Execute() (*SdcardPolicy, *http.Response, 
 /*
 CreateSdcardPolicy Create a 'sdcard.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateSdcardPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateSdcardPolicyRequest
 */
 func (a *SdcardApiService) CreateSdcardPolicy(ctx context.Context) ApiCreateSdcardPolicyRequest {
 	return ApiCreateSdcardPolicyRequest{
@@ -67,7 +67,8 @@ func (a *SdcardApiService) CreateSdcardPolicy(ctx context.Context) ApiCreateSdca
 }
 
 // Execute executes the request
-//  @return SdcardPolicy
+//
+//	@return SdcardPolicy
 func (a *SdcardApiService) CreateSdcardPolicyExecute(r ApiCreateSdcardPolicyRequest) (*SdcardPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -212,9 +213,9 @@ func (r ApiDeleteSdcardPolicyRequest) Execute() (*http.Response, error) {
 /*
 DeleteSdcardPolicy Delete a 'sdcard.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteSdcardPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteSdcardPolicyRequest
 */
 func (a *SdcardApiService) DeleteSdcardPolicy(ctx context.Context, moid string) ApiDeleteSdcardPolicyRequest {
 	return ApiDeleteSdcardPolicyRequest{
@@ -349,9 +350,9 @@ func (r ApiGetSdcardPolicyByMoidRequest) Execute() (*SdcardPolicy, *http.Respons
 /*
 GetSdcardPolicyByMoid Read a 'sdcard.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetSdcardPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetSdcardPolicyByMoidRequest
 */
 func (a *SdcardApiService) GetSdcardPolicyByMoid(ctx context.Context, moid string) ApiGetSdcardPolicyByMoidRequest {
 	return ApiGetSdcardPolicyByMoidRequest{
@@ -362,7 +363,8 @@ func (a *SdcardApiService) GetSdcardPolicyByMoid(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return SdcardPolicy
+//
+//	@return SdcardPolicy
 func (a *SdcardApiService) GetSdcardPolicyByMoidExecute(r ApiGetSdcardPolicyByMoidRequest) (*SdcardPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -497,9 +499,9 @@ func (r ApiGetSdcardPolicyInventoryByMoidRequest) Execute() (*SdcardPolicyInvent
 /*
 GetSdcardPolicyInventoryByMoid Read a 'sdcard.PolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetSdcardPolicyInventoryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetSdcardPolicyInventoryByMoidRequest
 */
 func (a *SdcardApiService) GetSdcardPolicyInventoryByMoid(ctx context.Context, moid string) ApiGetSdcardPolicyInventoryByMoidRequest {
 	return ApiGetSdcardPolicyInventoryByMoidRequest{
@@ -510,7 +512,8 @@ func (a *SdcardApiService) GetSdcardPolicyInventoryByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return SdcardPolicyInventory
+//
+//	@return SdcardPolicyInventory
 func (a *SdcardApiService) GetSdcardPolicyInventoryByMoidExecute(r ApiGetSdcardPolicyInventoryByMoidRequest) (*SdcardPolicyInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -721,8 +724,8 @@ func (r ApiGetSdcardPolicyInventoryListRequest) Execute() (*SdcardPolicyInventor
 /*
 GetSdcardPolicyInventoryList Read a 'sdcard.PolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetSdcardPolicyInventoryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetSdcardPolicyInventoryListRequest
 */
 func (a *SdcardApiService) GetSdcardPolicyInventoryList(ctx context.Context) ApiGetSdcardPolicyInventoryListRequest {
 	return ApiGetSdcardPolicyInventoryListRequest{
@@ -732,7 +735,8 @@ func (a *SdcardApiService) GetSdcardPolicyInventoryList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return SdcardPolicyInventoryResponse
+//
+//	@return SdcardPolicyInventoryResponse
 func (a *SdcardApiService) GetSdcardPolicyInventoryListExecute(r ApiGetSdcardPolicyInventoryListRequest) (*SdcardPolicyInventoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -975,8 +979,8 @@ func (r ApiGetSdcardPolicyListRequest) Execute() (*SdcardPolicyResponse, *http.R
 /*
 GetSdcardPolicyList Read a 'sdcard.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetSdcardPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetSdcardPolicyListRequest
 */
 func (a *SdcardApiService) GetSdcardPolicyList(ctx context.Context) ApiGetSdcardPolicyListRequest {
 	return ApiGetSdcardPolicyListRequest{
@@ -986,7 +990,8 @@ func (a *SdcardApiService) GetSdcardPolicyList(ctx context.Context) ApiGetSdcard
 }
 
 // Execute executes the request
-//  @return SdcardPolicyResponse
+//
+//	@return SdcardPolicyResponse
 func (a *SdcardApiService) GetSdcardPolicyListExecute(r ApiGetSdcardPolicyListRequest) (*SdcardPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1167,9 +1172,9 @@ func (r ApiPatchSdcardPolicyRequest) Execute() (*SdcardPolicy, *http.Response, e
 /*
 PatchSdcardPolicy Update a 'sdcard.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchSdcardPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchSdcardPolicyRequest
 */
 func (a *SdcardApiService) PatchSdcardPolicy(ctx context.Context, moid string) ApiPatchSdcardPolicyRequest {
 	return ApiPatchSdcardPolicyRequest{
@@ -1180,7 +1185,8 @@ func (a *SdcardApiService) PatchSdcardPolicy(ctx context.Context, moid string) A
 }
 
 // Execute executes the request
-//  @return SdcardPolicy
+//
+//	@return SdcardPolicy
 func (a *SdcardApiService) PatchSdcardPolicyExecute(r ApiPatchSdcardPolicyRequest) (*SdcardPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -1337,9 +1343,9 @@ func (r ApiUpdateSdcardPolicyRequest) Execute() (*SdcardPolicy, *http.Response, 
 /*
 UpdateSdcardPolicy Update a 'sdcard.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateSdcardPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateSdcardPolicyRequest
 */
 func (a *SdcardApiService) UpdateSdcardPolicy(ctx context.Context, moid string) ApiUpdateSdcardPolicyRequest {
 	return ApiUpdateSdcardPolicyRequest{
@@ -1350,7 +1356,8 @@ func (a *SdcardApiService) UpdateSdcardPolicy(ctx context.Context, moid string) 
 }
 
 // Execute executes the request
-//  @return SdcardPolicy
+//
+//	@return SdcardPolicy
 func (a *SdcardApiService) UpdateSdcardPolicyExecute(r ApiUpdateSdcardPolicyRequest) (*SdcardPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

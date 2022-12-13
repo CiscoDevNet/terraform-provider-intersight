@@ -56,8 +56,8 @@ func (r ApiCreateCertificatemanagementPolicyRequest) Execute() (*Certificatemana
 /*
 CreateCertificatemanagementPolicy Create a 'certificatemanagement.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateCertificatemanagementPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateCertificatemanagementPolicyRequest
 */
 func (a *CertificatemanagementApiService) CreateCertificatemanagementPolicy(ctx context.Context) ApiCreateCertificatemanagementPolicyRequest {
 	return ApiCreateCertificatemanagementPolicyRequest{
@@ -67,7 +67,8 @@ func (a *CertificatemanagementApiService) CreateCertificatemanagementPolicy(ctx 
 }
 
 // Execute executes the request
-//  @return CertificatemanagementPolicy
+//
+//	@return CertificatemanagementPolicy
 func (a *CertificatemanagementApiService) CreateCertificatemanagementPolicyExecute(r ApiCreateCertificatemanagementPolicyRequest) (*CertificatemanagementPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -212,9 +213,9 @@ func (r ApiDeleteCertificatemanagementPolicyRequest) Execute() (*http.Response, 
 /*
 DeleteCertificatemanagementPolicy Delete a 'certificatemanagement.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteCertificatemanagementPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteCertificatemanagementPolicyRequest
 */
 func (a *CertificatemanagementApiService) DeleteCertificatemanagementPolicy(ctx context.Context, moid string) ApiDeleteCertificatemanagementPolicyRequest {
 	return ApiDeleteCertificatemanagementPolicyRequest{
@@ -349,9 +350,9 @@ func (r ApiGetCertificatemanagementPolicyByMoidRequest) Execute() (*Certificatem
 /*
 GetCertificatemanagementPolicyByMoid Read a 'certificatemanagement.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCertificatemanagementPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCertificatemanagementPolicyByMoidRequest
 */
 func (a *CertificatemanagementApiService) GetCertificatemanagementPolicyByMoid(ctx context.Context, moid string) ApiGetCertificatemanagementPolicyByMoidRequest {
 	return ApiGetCertificatemanagementPolicyByMoidRequest{
@@ -362,7 +363,8 @@ func (a *CertificatemanagementApiService) GetCertificatemanagementPolicyByMoid(c
 }
 
 // Execute executes the request
-//  @return CertificatemanagementPolicy
+//
+//	@return CertificatemanagementPolicy
 func (a *CertificatemanagementApiService) GetCertificatemanagementPolicyByMoidExecute(r ApiGetCertificatemanagementPolicyByMoidRequest) (*CertificatemanagementPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -497,9 +499,9 @@ func (r ApiGetCertificatemanagementPolicyInventoryByMoidRequest) Execute() (*Cer
 /*
 GetCertificatemanagementPolicyInventoryByMoid Read a 'certificatemanagement.PolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCertificatemanagementPolicyInventoryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCertificatemanagementPolicyInventoryByMoidRequest
 */
 func (a *CertificatemanagementApiService) GetCertificatemanagementPolicyInventoryByMoid(ctx context.Context, moid string) ApiGetCertificatemanagementPolicyInventoryByMoidRequest {
 	return ApiGetCertificatemanagementPolicyInventoryByMoidRequest{
@@ -510,7 +512,8 @@ func (a *CertificatemanagementApiService) GetCertificatemanagementPolicyInventor
 }
 
 // Execute executes the request
-//  @return CertificatemanagementPolicyInventory
+//
+//	@return CertificatemanagementPolicyInventory
 func (a *CertificatemanagementApiService) GetCertificatemanagementPolicyInventoryByMoidExecute(r ApiGetCertificatemanagementPolicyInventoryByMoidRequest) (*CertificatemanagementPolicyInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -721,8 +724,8 @@ func (r ApiGetCertificatemanagementPolicyInventoryListRequest) Execute() (*Certi
 /*
 GetCertificatemanagementPolicyInventoryList Read a 'certificatemanagement.PolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCertificatemanagementPolicyInventoryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCertificatemanagementPolicyInventoryListRequest
 */
 func (a *CertificatemanagementApiService) GetCertificatemanagementPolicyInventoryList(ctx context.Context) ApiGetCertificatemanagementPolicyInventoryListRequest {
 	return ApiGetCertificatemanagementPolicyInventoryListRequest{
@@ -732,7 +735,8 @@ func (a *CertificatemanagementApiService) GetCertificatemanagementPolicyInventor
 }
 
 // Execute executes the request
-//  @return CertificatemanagementPolicyInventoryResponse
+//
+//	@return CertificatemanagementPolicyInventoryResponse
 func (a *CertificatemanagementApiService) GetCertificatemanagementPolicyInventoryListExecute(r ApiGetCertificatemanagementPolicyInventoryListRequest) (*CertificatemanagementPolicyInventoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -975,8 +979,8 @@ func (r ApiGetCertificatemanagementPolicyListRequest) Execute() (*Certificateman
 /*
 GetCertificatemanagementPolicyList Read a 'certificatemanagement.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCertificatemanagementPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCertificatemanagementPolicyListRequest
 */
 func (a *CertificatemanagementApiService) GetCertificatemanagementPolicyList(ctx context.Context) ApiGetCertificatemanagementPolicyListRequest {
 	return ApiGetCertificatemanagementPolicyListRequest{
@@ -986,7 +990,8 @@ func (a *CertificatemanagementApiService) GetCertificatemanagementPolicyList(ctx
 }
 
 // Execute executes the request
-//  @return CertificatemanagementPolicyResponse
+//
+//	@return CertificatemanagementPolicyResponse
 func (a *CertificatemanagementApiService) GetCertificatemanagementPolicyListExecute(r ApiGetCertificatemanagementPolicyListRequest) (*CertificatemanagementPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1167,9 +1172,9 @@ func (r ApiPatchCertificatemanagementPolicyRequest) Execute() (*Certificatemanag
 /*
 PatchCertificatemanagementPolicy Update a 'certificatemanagement.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchCertificatemanagementPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchCertificatemanagementPolicyRequest
 */
 func (a *CertificatemanagementApiService) PatchCertificatemanagementPolicy(ctx context.Context, moid string) ApiPatchCertificatemanagementPolicyRequest {
 	return ApiPatchCertificatemanagementPolicyRequest{
@@ -1180,7 +1185,8 @@ func (a *CertificatemanagementApiService) PatchCertificatemanagementPolicy(ctx c
 }
 
 // Execute executes the request
-//  @return CertificatemanagementPolicy
+//
+//	@return CertificatemanagementPolicy
 func (a *CertificatemanagementApiService) PatchCertificatemanagementPolicyExecute(r ApiPatchCertificatemanagementPolicyRequest) (*CertificatemanagementPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -1337,9 +1343,9 @@ func (r ApiUpdateCertificatemanagementPolicyRequest) Execute() (*Certificatemana
 /*
 UpdateCertificatemanagementPolicy Update a 'certificatemanagement.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateCertificatemanagementPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateCertificatemanagementPolicyRequest
 */
 func (a *CertificatemanagementApiService) UpdateCertificatemanagementPolicy(ctx context.Context, moid string) ApiUpdateCertificatemanagementPolicyRequest {
 	return ApiUpdateCertificatemanagementPolicyRequest{
@@ -1350,7 +1356,8 @@ func (a *CertificatemanagementApiService) UpdateCertificatemanagementPolicy(ctx 
 }
 
 // Execute executes the request
-//  @return CertificatemanagementPolicy
+//
+//	@return CertificatemanagementPolicy
 func (a *CertificatemanagementApiService) UpdateCertificatemanagementPolicyExecute(r ApiUpdateCertificatemanagementPolicyRequest) (*CertificatemanagementPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

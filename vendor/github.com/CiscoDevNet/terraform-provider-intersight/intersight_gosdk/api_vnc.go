@@ -56,8 +56,8 @@ func (r ApiCreateVncConsoleRequest) Execute() (*VncConsole, *http.Response, erro
 /*
 CreateVncConsole Create a 'vnc.Console' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateVncConsoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateVncConsoleRequest
 */
 func (a *VncApiService) CreateVncConsole(ctx context.Context) ApiCreateVncConsoleRequest {
 	return ApiCreateVncConsoleRequest{
@@ -67,7 +67,8 @@ func (a *VncApiService) CreateVncConsole(ctx context.Context) ApiCreateVncConsol
 }
 
 // Execute executes the request
-//  @return VncConsole
+//
+//	@return VncConsole
 func (a *VncApiService) CreateVncConsoleExecute(r ApiCreateVncConsoleRequest) (*VncConsole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -212,9 +213,9 @@ func (r ApiGetVncConsoleByMoidRequest) Execute() (*VncConsole, *http.Response, e
 /*
 GetVncConsoleByMoid Read a 'vnc.Console' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVncConsoleByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVncConsoleByMoidRequest
 */
 func (a *VncApiService) GetVncConsoleByMoid(ctx context.Context, moid string) ApiGetVncConsoleByMoidRequest {
 	return ApiGetVncConsoleByMoidRequest{
@@ -225,7 +226,8 @@ func (a *VncApiService) GetVncConsoleByMoid(ctx context.Context, moid string) Ap
 }
 
 // Execute executes the request
-//  @return VncConsole
+//
+//	@return VncConsole
 func (a *VncApiService) GetVncConsoleByMoidExecute(r ApiGetVncConsoleByMoidRequest) (*VncConsole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -436,8 +438,8 @@ func (r ApiGetVncConsoleListRequest) Execute() (*VncConsoleResponse, *http.Respo
 /*
 GetVncConsoleList Read a 'vnc.Console' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVncConsoleListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVncConsoleListRequest
 */
 func (a *VncApiService) GetVncConsoleList(ctx context.Context) ApiGetVncConsoleListRequest {
 	return ApiGetVncConsoleListRequest{
@@ -447,7 +449,8 @@ func (a *VncApiService) GetVncConsoleList(ctx context.Context) ApiGetVncConsoleL
 }
 
 // Execute executes the request
-//  @return VncConsoleResponse
+//
+//	@return VncConsoleResponse
 func (a *VncApiService) GetVncConsoleListExecute(r ApiGetVncConsoleListRequest) (*VncConsoleResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -628,9 +631,9 @@ func (r ApiPatchVncConsoleRequest) Execute() (*VncConsole, *http.Response, error
 /*
 PatchVncConsole Update a 'vnc.Console' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchVncConsoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchVncConsoleRequest
 */
 func (a *VncApiService) PatchVncConsole(ctx context.Context, moid string) ApiPatchVncConsoleRequest {
 	return ApiPatchVncConsoleRequest{
@@ -641,7 +644,8 @@ func (a *VncApiService) PatchVncConsole(ctx context.Context, moid string) ApiPat
 }
 
 // Execute executes the request
-//  @return VncConsole
+//
+//	@return VncConsole
 func (a *VncApiService) PatchVncConsoleExecute(r ApiPatchVncConsoleRequest) (*VncConsole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -798,9 +802,9 @@ func (r ApiUpdateVncConsoleRequest) Execute() (*VncConsole, *http.Response, erro
 /*
 UpdateVncConsole Update a 'vnc.Console' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateVncConsoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateVncConsoleRequest
 */
 func (a *VncApiService) UpdateVncConsole(ctx context.Context, moid string) ApiUpdateVncConsoleRequest {
 	return ApiUpdateVncConsoleRequest{
@@ -811,7 +815,8 @@ func (a *VncApiService) UpdateVncConsole(ctx context.Context, moid string) ApiUp
 }
 
 // Execute executes the request
-//  @return VncConsole
+//
+//	@return VncConsole
 func (a *VncApiService) UpdateVncConsoleExecute(r ApiUpdateVncConsoleRequest) (*VncConsole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

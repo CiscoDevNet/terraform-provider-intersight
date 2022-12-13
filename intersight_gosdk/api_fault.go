@@ -36,9 +36,9 @@ func (r ApiGetFaultInstanceByMoidRequest) Execute() (*FaultInstance, *http.Respo
 /*
 GetFaultInstanceByMoid Read a 'fault.Instance' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFaultInstanceByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFaultInstanceByMoidRequest
 */
 func (a *FaultApiService) GetFaultInstanceByMoid(ctx context.Context, moid string) ApiGetFaultInstanceByMoidRequest {
 	return ApiGetFaultInstanceByMoidRequest{
@@ -49,7 +49,8 @@ func (a *FaultApiService) GetFaultInstanceByMoid(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return FaultInstance
+//
+//	@return FaultInstance
 func (a *FaultApiService) GetFaultInstanceByMoidExecute(r ApiGetFaultInstanceByMoidRequest) (*FaultInstance, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -260,8 +261,8 @@ func (r ApiGetFaultInstanceListRequest) Execute() (*FaultInstanceResponse, *http
 /*
 GetFaultInstanceList Read a 'fault.Instance' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFaultInstanceListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFaultInstanceListRequest
 */
 func (a *FaultApiService) GetFaultInstanceList(ctx context.Context) ApiGetFaultInstanceListRequest {
 	return ApiGetFaultInstanceListRequest{
@@ -271,7 +272,8 @@ func (a *FaultApiService) GetFaultInstanceList(ctx context.Context) ApiGetFaultI
 }
 
 // Execute executes the request
-//  @return FaultInstanceResponse
+//
+//	@return FaultInstanceResponse
 func (a *FaultApiService) GetFaultInstanceListExecute(r ApiGetFaultInstanceListRequest) (*FaultInstanceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -452,9 +454,9 @@ func (r ApiPatchFaultInstanceRequest) Execute() (*FaultInstance, *http.Response,
 /*
 PatchFaultInstance Update a 'fault.Instance' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchFaultInstanceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchFaultInstanceRequest
 */
 func (a *FaultApiService) PatchFaultInstance(ctx context.Context, moid string) ApiPatchFaultInstanceRequest {
 	return ApiPatchFaultInstanceRequest{
@@ -465,7 +467,8 @@ func (a *FaultApiService) PatchFaultInstance(ctx context.Context, moid string) A
 }
 
 // Execute executes the request
-//  @return FaultInstance
+//
+//	@return FaultInstance
 func (a *FaultApiService) PatchFaultInstanceExecute(r ApiPatchFaultInstanceRequest) (*FaultInstance, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -622,9 +625,9 @@ func (r ApiUpdateFaultInstanceRequest) Execute() (*FaultInstance, *http.Response
 /*
 UpdateFaultInstance Update a 'fault.Instance' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateFaultInstanceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateFaultInstanceRequest
 */
 func (a *FaultApiService) UpdateFaultInstance(ctx context.Context, moid string) ApiUpdateFaultInstanceRequest {
 	return ApiUpdateFaultInstanceRequest{
@@ -635,7 +638,8 @@ func (a *FaultApiService) UpdateFaultInstance(ctx context.Context, moid string) 
 }
 
 // Execute executes the request
-//  @return FaultInstance
+//
+//	@return FaultInstance
 func (a *FaultApiService) UpdateFaultInstanceExecute(r ApiUpdateFaultInstanceRequest) (*FaultInstance, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

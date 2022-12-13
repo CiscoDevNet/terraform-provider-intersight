@@ -36,9 +36,9 @@ func (r ApiGetViewHealthStatusByMoidRequest) Execute() (*ViewHealthStatus, *http
 /*
 GetViewHealthStatusByMoid Read a 'view.HealthStatus' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetViewHealthStatusByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetViewHealthStatusByMoidRequest
 */
 func (a *ViewApiService) GetViewHealthStatusByMoid(ctx context.Context, moid string) ApiGetViewHealthStatusByMoidRequest {
 	return ApiGetViewHealthStatusByMoidRequest{
@@ -49,7 +49,8 @@ func (a *ViewApiService) GetViewHealthStatusByMoid(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return ViewHealthStatus
+//
+//	@return ViewHealthStatus
 func (a *ViewApiService) GetViewHealthStatusByMoidExecute(r ApiGetViewHealthStatusByMoidRequest) (*ViewHealthStatus, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -260,8 +261,8 @@ func (r ApiGetViewHealthStatusListRequest) Execute() (*ViewHealthStatusResponse,
 /*
 GetViewHealthStatusList Read a 'view.HealthStatus' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetViewHealthStatusListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetViewHealthStatusListRequest
 */
 func (a *ViewApiService) GetViewHealthStatusList(ctx context.Context) ApiGetViewHealthStatusListRequest {
 	return ApiGetViewHealthStatusListRequest{
@@ -271,7 +272,8 @@ func (a *ViewApiService) GetViewHealthStatusList(ctx context.Context) ApiGetView
 }
 
 // Execute executes the request
-//  @return ViewHealthStatusResponse
+//
+//	@return ViewHealthStatusResponse
 func (a *ViewApiService) GetViewHealthStatusListExecute(r ApiGetViewHealthStatusListRequest) (*ViewHealthStatusResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -438,9 +440,9 @@ func (r ApiGetViewServerByMoidRequest) Execute() (*ViewServer, *http.Response, e
 /*
 GetViewServerByMoid Read a 'view.Server' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetViewServerByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetViewServerByMoidRequest
 */
 func (a *ViewApiService) GetViewServerByMoid(ctx context.Context, moid string) ApiGetViewServerByMoidRequest {
 	return ApiGetViewServerByMoidRequest{
@@ -451,7 +453,8 @@ func (a *ViewApiService) GetViewServerByMoid(ctx context.Context, moid string) A
 }
 
 // Execute executes the request
-//  @return ViewServer
+//
+//	@return ViewServer
 func (a *ViewApiService) GetViewServerByMoidExecute(r ApiGetViewServerByMoidRequest) (*ViewServer, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -662,8 +665,8 @@ func (r ApiGetViewServerListRequest) Execute() (*ViewServerResponse, *http.Respo
 /*
 GetViewServerList Read a 'view.Server' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetViewServerListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetViewServerListRequest
 */
 func (a *ViewApiService) GetViewServerList(ctx context.Context) ApiGetViewServerListRequest {
 	return ApiGetViewServerListRequest{
@@ -673,7 +676,8 @@ func (a *ViewApiService) GetViewServerList(ctx context.Context) ApiGetViewServer
 }
 
 // Execute executes the request
-//  @return ViewServerResponse
+//
+//	@return ViewServerResponse
 func (a *ViewApiService) GetViewServerListExecute(r ApiGetViewServerListRequest) (*ViewServerResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet

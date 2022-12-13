@@ -56,8 +56,8 @@ func (r ApiCreateTerraformExecutorRequest) Execute() (*TerraformExecutor, *http.
 /*
 CreateTerraformExecutor Create a 'terraform.Executor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateTerraformExecutorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateTerraformExecutorRequest
 */
 func (a *TerraformApiService) CreateTerraformExecutor(ctx context.Context) ApiCreateTerraformExecutorRequest {
 	return ApiCreateTerraformExecutorRequest{
@@ -67,7 +67,8 @@ func (a *TerraformApiService) CreateTerraformExecutor(ctx context.Context) ApiCr
 }
 
 // Execute executes the request
-//  @return TerraformExecutor
+//
+//	@return TerraformExecutor
 func (a *TerraformApiService) CreateTerraformExecutorExecute(r ApiCreateTerraformExecutorRequest) (*TerraformExecutor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -212,9 +213,9 @@ func (r ApiDeleteTerraformExecutorRequest) Execute() (*http.Response, error) {
 /*
 DeleteTerraformExecutor Delete a 'terraform.Executor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteTerraformExecutorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteTerraformExecutorRequest
 */
 func (a *TerraformApiService) DeleteTerraformExecutor(ctx context.Context, moid string) ApiDeleteTerraformExecutorRequest {
 	return ApiDeleteTerraformExecutorRequest{
@@ -349,9 +350,9 @@ func (r ApiGetTerraformExecutorByMoidRequest) Execute() (*TerraformExecutor, *ht
 /*
 GetTerraformExecutorByMoid Read a 'terraform.Executor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetTerraformExecutorByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetTerraformExecutorByMoidRequest
 */
 func (a *TerraformApiService) GetTerraformExecutorByMoid(ctx context.Context, moid string) ApiGetTerraformExecutorByMoidRequest {
 	return ApiGetTerraformExecutorByMoidRequest{
@@ -362,7 +363,8 @@ func (a *TerraformApiService) GetTerraformExecutorByMoid(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return TerraformExecutor
+//
+//	@return TerraformExecutor
 func (a *TerraformApiService) GetTerraformExecutorByMoidExecute(r ApiGetTerraformExecutorByMoidRequest) (*TerraformExecutor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -573,8 +575,8 @@ func (r ApiGetTerraformExecutorListRequest) Execute() (*TerraformExecutorRespons
 /*
 GetTerraformExecutorList Read a 'terraform.Executor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetTerraformExecutorListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetTerraformExecutorListRequest
 */
 func (a *TerraformApiService) GetTerraformExecutorList(ctx context.Context) ApiGetTerraformExecutorListRequest {
 	return ApiGetTerraformExecutorListRequest{
@@ -584,7 +586,8 @@ func (a *TerraformApiService) GetTerraformExecutorList(ctx context.Context) ApiG
 }
 
 // Execute executes the request
-//  @return TerraformExecutorResponse
+//
+//	@return TerraformExecutorResponse
 func (a *TerraformApiService) GetTerraformExecutorListExecute(r ApiGetTerraformExecutorListRequest) (*TerraformExecutorResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -765,9 +768,9 @@ func (r ApiPatchTerraformExecutorRequest) Execute() (*TerraformExecutor, *http.R
 /*
 PatchTerraformExecutor Update a 'terraform.Executor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchTerraformExecutorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchTerraformExecutorRequest
 */
 func (a *TerraformApiService) PatchTerraformExecutor(ctx context.Context, moid string) ApiPatchTerraformExecutorRequest {
 	return ApiPatchTerraformExecutorRequest{
@@ -778,7 +781,8 @@ func (a *TerraformApiService) PatchTerraformExecutor(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return TerraformExecutor
+//
+//	@return TerraformExecutor
 func (a *TerraformApiService) PatchTerraformExecutorExecute(r ApiPatchTerraformExecutorRequest) (*TerraformExecutor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -935,9 +939,9 @@ func (r ApiUpdateTerraformExecutorRequest) Execute() (*TerraformExecutor, *http.
 /*
 UpdateTerraformExecutor Update a 'terraform.Executor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateTerraformExecutorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateTerraformExecutorRequest
 */
 func (a *TerraformApiService) UpdateTerraformExecutor(ctx context.Context, moid string) ApiUpdateTerraformExecutorRequest {
 	return ApiUpdateTerraformExecutorRequest{
@@ -948,7 +952,8 @@ func (a *TerraformApiService) UpdateTerraformExecutor(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return TerraformExecutor
+//
+//	@return TerraformExecutor
 func (a *TerraformApiService) UpdateTerraformExecutorExecute(r ApiUpdateTerraformExecutorRequest) (*TerraformExecutor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

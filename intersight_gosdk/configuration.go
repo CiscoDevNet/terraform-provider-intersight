@@ -109,7 +109,7 @@ func NewConfiguration() *Configuration {
 				URL:         "https://{server}",
 				Description: "The Intersight URL for the cloud-based infrastructure management APIs.",
 				Variables: map[string]ServerVariable{
-					"server": ServerVariable{
+					"server": {
 						Description:  "No description provided",
 						DefaultValue: "intersight.com",
 					},

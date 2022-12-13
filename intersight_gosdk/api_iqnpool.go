@@ -56,8 +56,8 @@ func (r ApiCreateIqnpoolPoolRequest) Execute() (*IqnpoolPool, *http.Response, er
 /*
 CreateIqnpoolPool Create a 'iqnpool.Pool' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateIqnpoolPoolRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateIqnpoolPoolRequest
 */
 func (a *IqnpoolApiService) CreateIqnpoolPool(ctx context.Context) ApiCreateIqnpoolPoolRequest {
 	return ApiCreateIqnpoolPoolRequest{
@@ -67,7 +67,8 @@ func (a *IqnpoolApiService) CreateIqnpoolPool(ctx context.Context) ApiCreateIqnp
 }
 
 // Execute executes the request
-//  @return IqnpoolPool
+//
+//	@return IqnpoolPool
 func (a *IqnpoolApiService) CreateIqnpoolPoolExecute(r ApiCreateIqnpoolPoolRequest) (*IqnpoolPool, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -212,9 +213,9 @@ func (r ApiDeleteIqnpoolLeaseRequest) Execute() (*http.Response, error) {
 /*
 DeleteIqnpoolLease Delete a 'iqnpool.Lease' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteIqnpoolLeaseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteIqnpoolLeaseRequest
 */
 func (a *IqnpoolApiService) DeleteIqnpoolLease(ctx context.Context, moid string) ApiDeleteIqnpoolLeaseRequest {
 	return ApiDeleteIqnpoolLeaseRequest{
@@ -349,9 +350,9 @@ func (r ApiDeleteIqnpoolPoolRequest) Execute() (*http.Response, error) {
 /*
 DeleteIqnpoolPool Delete a 'iqnpool.Pool' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteIqnpoolPoolRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteIqnpoolPoolRequest
 */
 func (a *IqnpoolApiService) DeleteIqnpoolPool(ctx context.Context, moid string) ApiDeleteIqnpoolPoolRequest {
 	return ApiDeleteIqnpoolPoolRequest{
@@ -486,9 +487,9 @@ func (r ApiGetIqnpoolBlockByMoidRequest) Execute() (*IqnpoolBlock, *http.Respons
 /*
 GetIqnpoolBlockByMoid Read a 'iqnpool.Block' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIqnpoolBlockByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIqnpoolBlockByMoidRequest
 */
 func (a *IqnpoolApiService) GetIqnpoolBlockByMoid(ctx context.Context, moid string) ApiGetIqnpoolBlockByMoidRequest {
 	return ApiGetIqnpoolBlockByMoidRequest{
@@ -499,7 +500,8 @@ func (a *IqnpoolApiService) GetIqnpoolBlockByMoid(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return IqnpoolBlock
+//
+//	@return IqnpoolBlock
 func (a *IqnpoolApiService) GetIqnpoolBlockByMoidExecute(r ApiGetIqnpoolBlockByMoidRequest) (*IqnpoolBlock, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -710,8 +712,8 @@ func (r ApiGetIqnpoolBlockListRequest) Execute() (*IqnpoolBlockResponse, *http.R
 /*
 GetIqnpoolBlockList Read a 'iqnpool.Block' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIqnpoolBlockListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIqnpoolBlockListRequest
 */
 func (a *IqnpoolApiService) GetIqnpoolBlockList(ctx context.Context) ApiGetIqnpoolBlockListRequest {
 	return ApiGetIqnpoolBlockListRequest{
@@ -721,7 +723,8 @@ func (a *IqnpoolApiService) GetIqnpoolBlockList(ctx context.Context) ApiGetIqnpo
 }
 
 // Execute executes the request
-//  @return IqnpoolBlockResponse
+//
+//	@return IqnpoolBlockResponse
 func (a *IqnpoolApiService) GetIqnpoolBlockListExecute(r ApiGetIqnpoolBlockListRequest) (*IqnpoolBlockResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -888,9 +891,9 @@ func (r ApiGetIqnpoolLeaseByMoidRequest) Execute() (*IqnpoolLease, *http.Respons
 /*
 GetIqnpoolLeaseByMoid Read a 'iqnpool.Lease' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIqnpoolLeaseByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIqnpoolLeaseByMoidRequest
 */
 func (a *IqnpoolApiService) GetIqnpoolLeaseByMoid(ctx context.Context, moid string) ApiGetIqnpoolLeaseByMoidRequest {
 	return ApiGetIqnpoolLeaseByMoidRequest{
@@ -901,7 +904,8 @@ func (a *IqnpoolApiService) GetIqnpoolLeaseByMoid(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return IqnpoolLease
+//
+//	@return IqnpoolLease
 func (a *IqnpoolApiService) GetIqnpoolLeaseByMoidExecute(r ApiGetIqnpoolLeaseByMoidRequest) (*IqnpoolLease, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1112,8 +1116,8 @@ func (r ApiGetIqnpoolLeaseListRequest) Execute() (*IqnpoolLeaseResponse, *http.R
 /*
 GetIqnpoolLeaseList Read a 'iqnpool.Lease' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIqnpoolLeaseListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIqnpoolLeaseListRequest
 */
 func (a *IqnpoolApiService) GetIqnpoolLeaseList(ctx context.Context) ApiGetIqnpoolLeaseListRequest {
 	return ApiGetIqnpoolLeaseListRequest{
@@ -1123,7 +1127,8 @@ func (a *IqnpoolApiService) GetIqnpoolLeaseList(ctx context.Context) ApiGetIqnpo
 }
 
 // Execute executes the request
-//  @return IqnpoolLeaseResponse
+//
+//	@return IqnpoolLeaseResponse
 func (a *IqnpoolApiService) GetIqnpoolLeaseListExecute(r ApiGetIqnpoolLeaseListRequest) (*IqnpoolLeaseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1290,9 +1295,9 @@ func (r ApiGetIqnpoolPoolByMoidRequest) Execute() (*IqnpoolPool, *http.Response,
 /*
 GetIqnpoolPoolByMoid Read a 'iqnpool.Pool' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIqnpoolPoolByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIqnpoolPoolByMoidRequest
 */
 func (a *IqnpoolApiService) GetIqnpoolPoolByMoid(ctx context.Context, moid string) ApiGetIqnpoolPoolByMoidRequest {
 	return ApiGetIqnpoolPoolByMoidRequest{
@@ -1303,7 +1308,8 @@ func (a *IqnpoolApiService) GetIqnpoolPoolByMoid(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return IqnpoolPool
+//
+//	@return IqnpoolPool
 func (a *IqnpoolApiService) GetIqnpoolPoolByMoidExecute(r ApiGetIqnpoolPoolByMoidRequest) (*IqnpoolPool, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1514,8 +1520,8 @@ func (r ApiGetIqnpoolPoolListRequest) Execute() (*IqnpoolPoolResponse, *http.Res
 /*
 GetIqnpoolPoolList Read a 'iqnpool.Pool' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIqnpoolPoolListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIqnpoolPoolListRequest
 */
 func (a *IqnpoolApiService) GetIqnpoolPoolList(ctx context.Context) ApiGetIqnpoolPoolListRequest {
 	return ApiGetIqnpoolPoolListRequest{
@@ -1525,7 +1531,8 @@ func (a *IqnpoolApiService) GetIqnpoolPoolList(ctx context.Context) ApiGetIqnpoo
 }
 
 // Execute executes the request
-//  @return IqnpoolPoolResponse
+//
+//	@return IqnpoolPoolResponse
 func (a *IqnpoolApiService) GetIqnpoolPoolListExecute(r ApiGetIqnpoolPoolListRequest) (*IqnpoolPoolResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1692,9 +1699,9 @@ func (r ApiGetIqnpoolPoolMemberByMoidRequest) Execute() (*IqnpoolPoolMember, *ht
 /*
 GetIqnpoolPoolMemberByMoid Read a 'iqnpool.PoolMember' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIqnpoolPoolMemberByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIqnpoolPoolMemberByMoidRequest
 */
 func (a *IqnpoolApiService) GetIqnpoolPoolMemberByMoid(ctx context.Context, moid string) ApiGetIqnpoolPoolMemberByMoidRequest {
 	return ApiGetIqnpoolPoolMemberByMoidRequest{
@@ -1705,7 +1712,8 @@ func (a *IqnpoolApiService) GetIqnpoolPoolMemberByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return IqnpoolPoolMember
+//
+//	@return IqnpoolPoolMember
 func (a *IqnpoolApiService) GetIqnpoolPoolMemberByMoidExecute(r ApiGetIqnpoolPoolMemberByMoidRequest) (*IqnpoolPoolMember, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1916,8 +1924,8 @@ func (r ApiGetIqnpoolPoolMemberListRequest) Execute() (*IqnpoolPoolMemberRespons
 /*
 GetIqnpoolPoolMemberList Read a 'iqnpool.PoolMember' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIqnpoolPoolMemberListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIqnpoolPoolMemberListRequest
 */
 func (a *IqnpoolApiService) GetIqnpoolPoolMemberList(ctx context.Context) ApiGetIqnpoolPoolMemberListRequest {
 	return ApiGetIqnpoolPoolMemberListRequest{
@@ -1927,7 +1935,8 @@ func (a *IqnpoolApiService) GetIqnpoolPoolMemberList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//  @return IqnpoolPoolMemberResponse
+//
+//	@return IqnpoolPoolMemberResponse
 func (a *IqnpoolApiService) GetIqnpoolPoolMemberListExecute(r ApiGetIqnpoolPoolMemberListRequest) (*IqnpoolPoolMemberResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2094,9 +2103,9 @@ func (r ApiGetIqnpoolUniverseByMoidRequest) Execute() (*IqnpoolUniverse, *http.R
 /*
 GetIqnpoolUniverseByMoid Read a 'iqnpool.Universe' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIqnpoolUniverseByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetIqnpoolUniverseByMoidRequest
 */
 func (a *IqnpoolApiService) GetIqnpoolUniverseByMoid(ctx context.Context, moid string) ApiGetIqnpoolUniverseByMoidRequest {
 	return ApiGetIqnpoolUniverseByMoidRequest{
@@ -2107,7 +2116,8 @@ func (a *IqnpoolApiService) GetIqnpoolUniverseByMoid(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return IqnpoolUniverse
+//
+//	@return IqnpoolUniverse
 func (a *IqnpoolApiService) GetIqnpoolUniverseByMoidExecute(r ApiGetIqnpoolUniverseByMoidRequest) (*IqnpoolUniverse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2318,8 +2328,8 @@ func (r ApiGetIqnpoolUniverseListRequest) Execute() (*IqnpoolUniverseResponse, *
 /*
 GetIqnpoolUniverseList Read a 'iqnpool.Universe' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetIqnpoolUniverseListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIqnpoolUniverseListRequest
 */
 func (a *IqnpoolApiService) GetIqnpoolUniverseList(ctx context.Context) ApiGetIqnpoolUniverseListRequest {
 	return ApiGetIqnpoolUniverseListRequest{
@@ -2329,7 +2339,8 @@ func (a *IqnpoolApiService) GetIqnpoolUniverseList(ctx context.Context) ApiGetIq
 }
 
 // Execute executes the request
-//  @return IqnpoolUniverseResponse
+//
+//	@return IqnpoolUniverseResponse
 func (a *IqnpoolApiService) GetIqnpoolUniverseListExecute(r ApiGetIqnpoolUniverseListRequest) (*IqnpoolUniverseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2510,9 +2521,9 @@ func (r ApiPatchIqnpoolPoolRequest) Execute() (*IqnpoolPool, *http.Response, err
 /*
 PatchIqnpoolPool Update a 'iqnpool.Pool' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchIqnpoolPoolRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchIqnpoolPoolRequest
 */
 func (a *IqnpoolApiService) PatchIqnpoolPool(ctx context.Context, moid string) ApiPatchIqnpoolPoolRequest {
 	return ApiPatchIqnpoolPoolRequest{
@@ -2523,7 +2534,8 @@ func (a *IqnpoolApiService) PatchIqnpoolPool(ctx context.Context, moid string) A
 }
 
 // Execute executes the request
-//  @return IqnpoolPool
+//
+//	@return IqnpoolPool
 func (a *IqnpoolApiService) PatchIqnpoolPoolExecute(r ApiPatchIqnpoolPoolRequest) (*IqnpoolPool, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -2680,9 +2692,9 @@ func (r ApiUpdateIqnpoolPoolRequest) Execute() (*IqnpoolPool, *http.Response, er
 /*
 UpdateIqnpoolPool Update a 'iqnpool.Pool' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateIqnpoolPoolRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateIqnpoolPoolRequest
 */
 func (a *IqnpoolApiService) UpdateIqnpoolPool(ctx context.Context, moid string) ApiUpdateIqnpoolPoolRequest {
 	return ApiUpdateIqnpoolPoolRequest{
@@ -2693,7 +2705,8 @@ func (a *IqnpoolApiService) UpdateIqnpoolPool(ctx context.Context, moid string) 
 }
 
 // Execute executes the request
-//  @return IqnpoolPool
+//
+//	@return IqnpoolPool
 func (a *IqnpoolApiService) UpdateIqnpoolPoolExecute(r ApiUpdateIqnpoolPoolRequest) (*IqnpoolPool, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
