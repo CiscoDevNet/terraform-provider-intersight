@@ -19,6 +19,7 @@ default: build
 build: fmt fmtcheck
 	go get -v golang.org/x/tools/cmd/goimports
 	goimports -w ./intersight
+	go mod tidy
 	go mod vendor
 	go install
 	GOOS=linux GOARCH=amd64 $(GO_BUILD) -o .build/linux_amd64/terraform-provider-intersight_v$(VERSION)
