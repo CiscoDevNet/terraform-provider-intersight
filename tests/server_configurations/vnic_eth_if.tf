@@ -73,149 +73,149 @@ resource "intersight_vnic_lan_connectivity_policy" "tf_vnic_lan" {
   }
 }
 
-resource "intersight_vnic_eth_if" "tf_eth1" {
-  name = "eth0"
-  order = 0
-  placement {
-    id = "1"
-    pci_link = 0
-    uplink = 0
-  }
-  cdn {
-    value = "VIC-1-eth00"
-    nr_source = "user"
-  }
-  usnic_settings {
-    cos = 5
-    nr_count = 0
-  }
-  vmq_settings {
-    enabled = true
-    multi_queue_support = false
-    num_interrupts = 1
-    num_vmqs = 1
-  }
-  lan_connectivity_policy {
-    moid = intersight_vnic_lan_connectivity_policy.tf_vnic_lan.id
-    object_type = "vnic.LanConnectivityPolicy"
-  }
-  eth_network_policy {
-    moid = intersight_vnic_eth_network_policy.tf_v_eth_network.id
-  }
-  eth_adapter_policy {
-    moid = intersight_vnic_eth_adapter_policy.tf_v_eth_adapter.id
-  }
-  eth_qos_policy {
-    moid = intersight_vnic_eth_qos_policy.tf_v_eth_qos.id
-  }
-}
+# resource "intersight_vnic_eth_if" "tf_eth1" {
+#   name = "eth0"
+#   order = 0
+#   placement {
+#     id = "1"
+#     pci_link = 0
+#     uplink = 0
+#   }
+#   cdn {
+#     value = "VIC-1-eth00"
+#     nr_source = "user"
+#   }
+#   usnic_settings {
+#     cos = 5
+#     nr_count = 0
+#   }
+#   vmq_settings {
+#     enabled = true
+#     multi_queue_support = false
+#     num_interrupts = 1
+#     num_vmqs = 1
+#   }
+#   lan_connectivity_policy {
+#     moid = intersight_vnic_lan_connectivity_policy.tf_vnic_lan.id
+#     object_type = "vnic.LanConnectivityPolicy"
+#   }
+#   eth_network_policy {
+#     moid = intersight_vnic_eth_network_policy.tf_v_eth_network.id
+#   }
+#   eth_adapter_policy {
+#     moid = intersight_vnic_eth_adapter_policy.tf_v_eth_adapter.id
+#   }
+#   eth_qos_policy {
+#     moid = intersight_vnic_eth_qos_policy.tf_v_eth_qos.id
+#   }
+# }
 
-resource "intersight_vnic_eth_if" "tf_eth2" {
-  name = "eth1"
-  order = 0
-  placement {
-    id = "1"
-    pci_link = 1
-    uplink = 0
-  }
-  cdn {
-    value = "VIC-1-eth1"
-    nr_source = "vnic"
-  }
-  usnic_settings {
-    cos = 5
-    nr_count = 0
-  }
-  vmq_settings {
-    enabled = true
-    multi_queue_support = false
-    num_interrupts = 1
-    num_vmqs = 1
-  }
-  lan_connectivity_policy {
-    moid = intersight_vnic_lan_connectivity_policy.tf_vnic_lan.id
-    object_type = "vnic.LanConnectivityPolicy"
-  }
-  eth_network_policy {
-    moid = intersight_vnic_eth_network_policy.tf_v_eth_network.id
-  }
-  eth_adapter_policy {
-    moid = intersight_vnic_eth_adapter_policy.tf_v_eth_adapter.id
-  }
-  eth_qos_policy {
-    moid = intersight_vnic_eth_qos_policy.tf_v_eth_qos.id
-  }
-}
+# resource "intersight_vnic_eth_if" "tf_eth2" {
+#   name = "eth1"
+#   order = 0
+#   placement {
+#     id = "1"
+#     pci_link = 1
+#     uplink = 0
+#   }
+#   cdn {
+#     value = "VIC-1-eth1"
+#     nr_source = "vnic"
+#   }
+#   usnic_settings {
+#     cos = 5
+#     nr_count = 0
+#   }
+#   vmq_settings {
+#     enabled = true
+#     multi_queue_support = false
+#     num_interrupts = 1
+#     num_vmqs = 1
+#   }
+#   lan_connectivity_policy {
+#     moid = intersight_vnic_lan_connectivity_policy.tf_vnic_lan.id
+#     object_type = "vnic.LanConnectivityPolicy"
+#   }
+#   eth_network_policy {
+#     moid = intersight_vnic_eth_network_policy.tf_v_eth_network.id
+#   }
+#   eth_adapter_policy {
+#     moid = intersight_vnic_eth_adapter_policy.tf_v_eth_adapter.id
+#   }
+#   eth_qos_policy {
+#     moid = intersight_vnic_eth_qos_policy.tf_v_eth_qos.id
+#   }
+# }
 
-resource "intersight_vnic_eth_if" "tf_eth3" {
-  name = "eth0"
-  order = 0
-  placement {
-    id = "MLOM"
-    pci_link = 0
-    uplink = 1
-  }
-  cdn {
-    value = "VIC-MLOM-eth0"
-    nr_source = "vnic"
-  }
-  usnic_settings {
-    cos = 5
-    nr_count = 0
-  }
-  vmq_settings {
-    enabled = false
-    num_interrupts = 16
-    num_sub_vnics = 64
-    num_vmqs = 4
-  }
-  lan_connectivity_policy {
-    moid = intersight_vnic_lan_connectivity_policy.tf_vnic_lan.id
-    object_type = "vnic.LanConnectivityPolicy"
-  }
-  eth_network_policy {
-    moid = intersight_vnic_eth_network_policy.tf_v_eth_network.id
-  }
-  eth_adapter_policy {
-    moid = intersight_vnic_eth_adapter_policy.tf_v_eth_adapter.id
-  }
-  eth_qos_policy {
-    moid = intersight_vnic_eth_qos_policy.tf_v_eth_qos.id
-  }
-}
+# resource "intersight_vnic_eth_if" "tf_eth3" {
+#   name = "eth0"
+#   order = 0
+#   placement {
+#     id = "MLOM"
+#     pci_link = 0
+#     uplink = 1
+#   }
+#   cdn {
+#     value = "VIC-MLOM-eth0"
+#     nr_source = "vnic"
+#   }
+#   usnic_settings {
+#     cos = 5
+#     nr_count = 0
+#   }
+#   vmq_settings {
+#     enabled = false
+#     num_interrupts = 16
+#     num_sub_vnics = 64
+#     num_vmqs = 4
+#   }
+#   lan_connectivity_policy {
+#     moid = intersight_vnic_lan_connectivity_policy.tf_vnic_lan.id
+#     object_type = "vnic.LanConnectivityPolicy"
+#   }
+#   eth_network_policy {
+#     moid = intersight_vnic_eth_network_policy.tf_v_eth_network.id
+#   }
+#   eth_adapter_policy {
+#     moid = intersight_vnic_eth_adapter_policy.tf_v_eth_adapter.id
+#   }
+#   eth_qos_policy {
+#     moid = intersight_vnic_eth_qos_policy.tf_v_eth_qos.id
+#   }
+# }
 
-resource "intersight_vnic_eth_if" "tf_eth4" {
-  name = "eth1"
-  order = 1
-  placement {
-    id = "MLOM"
-    pci_link = 0
-    uplink = 1
-  }
-  cdn {
-    value = "VIC-MLOM-eth1"
-    nr_source = "vnic"
-  }
-  usnic_settings {
-    cos = 5
-    nr_count = 0
-  }
-  vmq_settings {
-    enabled = true
-    num_interrupts = 1
-    num_vmqs = 1
-  }
-  lan_connectivity_policy {
-    moid = intersight_vnic_lan_connectivity_policy.tf_vnic_lan.id
-    object_type = "vnic.LanConnectivityPolicy"
-  }
-  eth_network_policy {
-    moid = intersight_vnic_eth_network_policy.tf_v_eth_network.id
-  }
-  eth_adapter_policy {
-    moid = intersight_vnic_eth_adapter_policy.tf_v_eth_adapter.id
-  }
-  eth_qos_policy {
-    moid = intersight_vnic_eth_qos_policy.tf_v_eth_qos.id
-  }
-}
+# resource "intersight_vnic_eth_if" "tf_eth4" {
+#   name = "eth1"
+#   order = 1
+#   placement {
+#     id = "MLOM"
+#     pci_link = 0
+#     uplink = 1
+#   }
+#   cdn {
+#     value = "VIC-MLOM-eth1"
+#     nr_source = "vnic"
+#   }
+#   usnic_settings {
+#     cos = 5
+#     nr_count = 0
+#   }
+#   vmq_settings {
+#     enabled = true
+#     num_interrupts = 1
+#     num_vmqs = 1
+#   }
+#   lan_connectivity_policy {
+#     moid = intersight_vnic_lan_connectivity_policy.tf_vnic_lan.id
+#     object_type = "vnic.LanConnectivityPolicy"
+#   }
+#   eth_network_policy {
+#     moid = intersight_vnic_eth_network_policy.tf_v_eth_network.id
+#   }
+#   eth_adapter_policy {
+#     moid = intersight_vnic_eth_adapter_policy.tf_v_eth_adapter.id
+#   }
+#   eth_qos_policy {
+#     moid = intersight_vnic_eth_qos_policy.tf_v_eth_qos.id
+#   }
+# }

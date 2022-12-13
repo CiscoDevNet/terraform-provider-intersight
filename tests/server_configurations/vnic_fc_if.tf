@@ -75,95 +75,95 @@ resource "intersight_vnic_san_connectivity_policy" "tf_vnic_san" {
   }
 }
 
-resource "intersight_vnic_fc_if" "tf_fc1" {
-  name = "fc0"
-  order = 1
-  placement {
-    id = "1"
-    pci_link = 0
-    uplink = 0
-  }
-  persistent_bindings = true
-  san_connectivity_policy {
-    moid = intersight_vnic_san_connectivity_policy.tf_vnic_san.id
-  }
-  fc_network_policy {
-    moid = intersight_vnic_fc_network_policy.tf_fc_network.id
-  }
-  fc_adapter_policy {
-    moid = intersight_vnic_fc_adapter_policy.tf_fc_adapter.id
-  }
-  fc_qos_policy {
-    moid = intersight_vnic_fc_qos_policy.tf_fc_qos.id
-  }
-}
+# resource "intersight_vnic_fc_if" "tf_fc1" {
+#   name = "fc0"
+#   order = 1
+#   placement {
+#     id = "1"
+#     pci_link = 0
+#     uplink = 0
+#   }
+#   persistent_bindings = true
+#   san_connectivity_policy {
+#     moid = intersight_vnic_san_connectivity_policy.tf_vnic_san.id
+#   }
+#   fc_network_policy {
+#     moid = intersight_vnic_fc_network_policy.tf_fc_network.id
+#   }
+#   fc_adapter_policy {
+#     moid = intersight_vnic_fc_adapter_policy.tf_fc_adapter.id
+#   }
+#   fc_qos_policy {
+#     moid = intersight_vnic_fc_qos_policy.tf_fc_qos.id
+#   }
+# }
 
-resource "intersight_vnic_fc_if" "tf_fc2" {
-  name = "fc0"
-  order = 2
-  placement {
-    id = "MLOM"
-    pci_link = 0
-    uplink = 0
-  }
-  persistent_bindings = true
-  san_connectivity_policy {
-    moid = intersight_vnic_san_connectivity_policy.tf_vnic_san.id
-  }
-  fc_network_policy {
-    moid = intersight_vnic_fc_network_policy.tf_fc_network.id
-  }
-  fc_adapter_policy {
-    moid = intersight_vnic_fc_adapter_policy.tf_fc_adapter.id
-  }
-  fc_qos_policy {
-    moid = intersight_vnic_fc_qos_policy.tf_fc_qos.id
-  }
-}
+# resource "intersight_vnic_fc_if" "tf_fc2" {
+#   name = "fc0"
+#   order = 2
+#   placement {
+#     id = "MLOM"
+#     pci_link = 0
+#     uplink = 0
+#   }
+#   persistent_bindings = true
+#   san_connectivity_policy {
+#     moid = intersight_vnic_san_connectivity_policy.tf_vnic_san.id
+#   }
+#   fc_network_policy {
+#     moid = intersight_vnic_fc_network_policy.tf_fc_network.id
+#   }
+#   fc_adapter_policy {
+#     moid = intersight_vnic_fc_adapter_policy.tf_fc_adapter.id
+#   }
+#   fc_qos_policy {
+#     moid = intersight_vnic_fc_qos_policy.tf_fc_qos.id
+#   }
+# }
 
-resource "intersight_vnic_fc_if" "tf_fc3" {
-  name = "fc1"
-  order = 3
-  placement {
-    id = "MLOM"
-    pci_link = 0
-    uplink = 1
-  }
-  persistent_bindings = true
-  san_connectivity_policy {
-    moid = intersight_vnic_san_connectivity_policy.tf_vnic_san.id
-    object_type = "vnic.SanConnectivityPolicy"
-  }
-  fc_network_policy {
-    moid = intersight_vnic_fc_network_policy.tf_fc_network.id
-  }
-  fc_adapter_policy {
-    moid = intersight_vnic_fc_adapter_policy.tf_fc_adapter.id
-  }
-  fc_qos_policy {
-    moid = intersight_vnic_fc_qos_policy.tf_fc_qos.id
-  }
-}
+# resource "intersight_vnic_fc_if" "tf_fc3" {
+#   name = "fc1"
+#   order = 3
+#   placement {
+#     id = "MLOM"
+#     pci_link = 0
+#     uplink = 1
+#   }
+#   persistent_bindings = true
+#   san_connectivity_policy {
+#     moid = intersight_vnic_san_connectivity_policy.tf_vnic_san.id
+#     object_type = "vnic.SanConnectivityPolicy"
+#   }
+#   fc_network_policy {
+#     moid = intersight_vnic_fc_network_policy.tf_fc_network.id
+#   }
+#   fc_adapter_policy {
+#     moid = intersight_vnic_fc_adapter_policy.tf_fc_adapter.id
+#   }
+#   fc_qos_policy {
+#     moid = intersight_vnic_fc_qos_policy.tf_fc_qos.id
+#   }
+# }
 
-resource "intersight_vnic_fc_if" "tf_fc4" {
-  name = "fc1"
-  order = 1
-  placement {
-    id = "1"
-    pci_link = 1
-    uplink = 1
-  }
-  persistent_bindings = true
-  san_connectivity_policy {
-    moid = intersight_vnic_san_connectivity_policy.tf_vnic_san.id
-  }
-  fc_network_policy {
-    moid = intersight_vnic_fc_network_policy.tf_fc_network.id
-  }
-  fc_adapter_policy {
-    moid = intersight_vnic_fc_adapter_policy.tf_fc_adapter.id
-  }
-  fc_qos_policy {
-    moid = intersight_vnic_fc_qos_policy.tf_fc_qos.id
-  }
-}
+# resource "intersight_vnic_fc_if" "tf_fc4" {
+#   name = "fc1"
+#   order = 1
+#   placement {
+#     id = "1"
+#     pci_link = 1
+#     uplink = 1
+#   }
+#   persistent_bindings = true
+#   san_connectivity_policy {
+#     moid = intersight_vnic_san_connectivity_policy.tf_vnic_san.id
+#   }
+#   fc_network_policy {
+#     moid = intersight_vnic_fc_network_policy.tf_fc_network.id
+#   }
+#   fc_adapter_policy {
+#     moid = intersight_vnic_fc_adapter_policy.tf_fc_adapter.id
+#   }
+#   fc_qos_policy {
+#     moid = intersight_vnic_fc_qos_policy.tf_fc_qos.id
+#   }
+# }
