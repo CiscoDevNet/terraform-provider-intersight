@@ -396,7 +396,7 @@ func getNiatelemetryNiaFeatureUsageSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"nicc_version": {
-			Description: "NICC version.",
+			Description: "NICC version. NiccVersion is used to check the compatibility.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
