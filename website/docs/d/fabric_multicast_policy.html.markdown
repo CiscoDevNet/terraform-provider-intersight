@@ -26,4 +26,5 @@ The following arguments can be used to get data of already created objects in In
 * `querier_state`:(string) Administrative state of the IGMP Querier for this VLAN.* `Disabled` - Admin configured Disabled State.* `Enabled` - Admin configured Enabled State. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `snooping_state`:(string) Administrative state of the IGMP Snooping for this VLAN.* `Enabled` - Admin configured Enabled State.* `Disabled` - Admin configured Disabled State. 
+* `src_ip_proxy`:(string) Administrative state of the IGMP source IP proxy for this VLAN.* `Enabled` - Admin configured Enabled State.* `Disabled` - Admin configured Disabled State. 
  

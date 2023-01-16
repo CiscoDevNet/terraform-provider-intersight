@@ -136,7 +136,7 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
   + `nr_count`:(int)(ReadOnly) The number of queue resources to allocate. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `ring_size`:(int) The number of descriptors in each queue. 
+  + `ring_size`:(int) The number of descriptors in each queue. The maximum value for Transmit queue is 128 and for Receive queue is 2048. 
 * `scsi_queue_settings`:(HashMap) - SCSI Input/Output Queue Settings. 
 This complex property has following sub-properties:
   + `nr_count`:(int) The number of SCSI I/O queue resources the system should allocate. 
@@ -151,7 +151,7 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
   + `nr_count`:(int)(ReadOnly) The number of queue resources to allocate. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `ring_size`:(int) The number of descriptors in each queue. 
+  + `ring_size`:(int) The number of descriptors in each queue. The maximum value for Transmit queue is 128 and for Receive queue is 2048. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
 This complex property has following sub-properties:
   + `interested_mos`:(Array)

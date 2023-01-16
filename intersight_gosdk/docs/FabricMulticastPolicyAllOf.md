@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **QuerierIpAddressPeer** | Pointer to **string** | Used to define the IGMP Querier IP address of the peer switch. | [optional] 
 **QuerierState** | Pointer to **string** | Administrative state of the IGMP Querier for this VLAN. * &#x60;Disabled&#x60; - Admin configured Disabled State. * &#x60;Enabled&#x60; - Admin configured Enabled State. | [optional] [default to "Disabled"]
 **SnoopingState** | Pointer to **string** | Administrative state of the IGMP Snooping for this VLAN. * &#x60;Enabled&#x60; - Admin configured Enabled State. * &#x60;Disabled&#x60; - Admin configured Disabled State. | [optional] [default to "Enabled"]
+**SrcIpProxy** | Pointer to **string** | Administrative state of the IGMP source IP proxy for this VLAN. * &#x60;Enabled&#x60; - Admin configured Enabled State. * &#x60;Disabled&#x60; - Admin configured Disabled State. | [optional] [default to "Enabled"]
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
 ## Methods
@@ -170,6 +171,31 @@ SetSnoopingState sets SnoopingState field to given value.
 `func (o *FabricMulticastPolicyAllOf) HasSnoopingState() bool`
 
 HasSnoopingState returns a boolean if a field has been set.
+
+### GetSrcIpProxy
+
+`func (o *FabricMulticastPolicyAllOf) GetSrcIpProxy() string`
+
+GetSrcIpProxy returns the SrcIpProxy field if non-nil, zero value otherwise.
+
+### GetSrcIpProxyOk
+
+`func (o *FabricMulticastPolicyAllOf) GetSrcIpProxyOk() (*string, bool)`
+
+GetSrcIpProxyOk returns a tuple with the SrcIpProxy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSrcIpProxy
+
+`func (o *FabricMulticastPolicyAllOf) SetSrcIpProxy(v string)`
+
+SetSrcIpProxy sets SrcIpProxy field to given value.
+
+### HasSrcIpProxy
+
+`func (o *FabricMulticastPolicyAllOf) HasSrcIpProxy() bool`
+
+HasSrcIpProxy returns a boolean if a field has been set.
 
 ### GetOrganization
 

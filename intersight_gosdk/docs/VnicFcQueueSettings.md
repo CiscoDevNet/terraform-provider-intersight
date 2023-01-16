@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "vnic.FcQueueSettings"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "vnic.FcQueueSettings"]
 **Count** | Pointer to **int64** | The number of queue resources to allocate. | [optional] [readonly] [default to 1]
-**RingSize** | Pointer to **int64** | The number of descriptors in each queue. | [optional] [default to 64]
+**RingSize** | Pointer to **int64** | The number of descriptors in each queue. The maximum value for Transmit queue is 128 and for Receive queue is 2048. | [optional] [default to 64]
 
 ## Methods
 

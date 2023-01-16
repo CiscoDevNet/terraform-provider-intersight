@@ -412,7 +412,7 @@ func getVnicFcAdapterPolicySchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"ring_size": {
-						Description: "The number of descriptors in each queue.",
+						Description: "The number of descriptors in each queue. The maximum value for Transmit queue is 128 and for Receive queue is 2048.",
 						Type:        schema.TypeInt,
 						Optional:    true,
 					},
@@ -510,7 +510,7 @@ func getVnicFcAdapterPolicySchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"ring_size": {
-						Description: "The number of descriptors in each queue.",
+						Description: "The number of descriptors in each queue. The maximum value for Transmit queue is 128 and for Receive queue is 2048.",
 						Type:        schema.TypeInt,
 						Optional:    true,
 					},

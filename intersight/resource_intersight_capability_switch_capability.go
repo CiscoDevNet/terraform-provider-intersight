@@ -187,6 +187,17 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
+			"min_version_with_locator_led_support": {
+				Description: "Minimum firmware version supported for locator leds on this switch.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
@@ -2303,6 +2314,10 @@ func resourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resourc
 
 	if err := d.Set("max_slots", (s.GetMaxSlots())); err != nil {
 		return diag.Errorf("error occurred while setting property MaxSlots in CapabilitySwitchCapability object: %s", err.Error())
+	}
+
+	if err := d.Set("min_version_with_locator_led_support", (s.GetMinVersionWithLocatorLedSupport())); err != nil {
+		return diag.Errorf("error occurred while setting property MinVersionWithLocatorLedSupport in CapabilitySwitchCapability object: %s", err.Error())
 	}
 
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {

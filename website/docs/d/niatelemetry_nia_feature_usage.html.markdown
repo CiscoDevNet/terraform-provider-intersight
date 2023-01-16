@@ -81,7 +81,6 @@ The following arguments can be used to get data of already created objects in In
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `net_flow_count`:(int) Number of Netflow monitor policies. 
-* `nicc_version`:(string) NICC version. NiccVersion is used to check the compatibility. 
 * `nir`:(string) NIR application usage. This determines if the fabric has NIR application installed. 
 * `open_stack`:(string) Open stack feature usage. 
 * `opflex_kubernetes_count`:(int) Opflex for Kubernetes feature usage. This determines the total number of VMM sessions of type kubernetes. 

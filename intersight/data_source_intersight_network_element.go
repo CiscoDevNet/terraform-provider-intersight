@@ -58,6 +58,16 @@ func getNetworkElementSchema() map[string]*schema.Schema {
 						Type:        schema.TypeInt,
 						Optional:    true,
 					},
+					"health": {
+						Description: "Health of the managed end point. The highest severity computed from alarmSummary property is set as the health.\n* `Healthy` - The Enum value represents that the entity is healthy.\n* `Warning` - The Enum value Warning represents that the entity has one or more active warnings on it.\n* `Critical` - The Enum value Critical represents that the entity is in a critical state.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"info": {
+						Description: "The count of alarms that have severity type Info.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 						Type:        schema.TypeString,
@@ -583,6 +593,41 @@ func getNetworkElementSchema() map[string]*schema.Schema {
 		"lldp_neighbor": {
 			Description: "An array of relationships to networkDiscoveredNeighbor resources.",
 			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"locator_led": {
+			Description: "A reference to a equipmentLocatorLed resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
 			Optional:    true,
 			Elem: &schema.Resource{
 				Schema: map[string]*schema.Schema{
@@ -1692,22 +1737,10 @@ func dataSourceNetworkElementRead(c context.Context, d *schema.ResourceData, met
 				}
 			}
 			o.SetClassId("compute.AlarmSummary")
-			if v, ok := l["critical"]; ok {
-				{
-					x := int64(v.(int))
-					o.SetCritical(x)
-				}
-			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["warning"]; ok {
-				{
-					x := int64(v.(int))
-					o.SetWarning(x)
 				}
 			}
 			p = append(p, *o)
@@ -2339,6 +2372,49 @@ func dataSourceNetworkElementRead(c context.Context, d *schema.ResourceData, met
 			x = append(x, models.MoMoRefAsNetworkDiscoveredNeighborRelationship(o))
 		}
 		o.SetLldpNeighbor(x)
+	}
+
+	if v, ok := d.GetOk("locator_led"); ok {
+		p := make([]models.EquipmentLocatorLedRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsEquipmentLocatorLedRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetLocatorLed(x)
+		}
 	}
 
 	if v, ok := d.GetOk("management_controller"); ok {
@@ -3572,6 +3648,8 @@ func dataSourceNetworkElementRead(c context.Context, d *schema.ResourceData, met
 				temp["license_file"] = flattenListNetworkLicenseFileRelationship(s.GetLicenseFile(), d)
 
 				temp["lldp_neighbor"] = flattenListNetworkDiscoveredNeighborRelationship(s.GetLldpNeighbor(), d)
+
+				temp["locator_led"] = flattenMapEquipmentLocatorLedRelationship(s.GetLocatorLed(), d)
 
 				temp["management_controller"] = flattenMapManagementControllerRelationship(s.GetManagementController(), d)
 

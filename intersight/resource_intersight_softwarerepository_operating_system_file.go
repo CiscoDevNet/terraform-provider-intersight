@@ -162,6 +162,17 @@ func resourceSoftwarerepositoryOperatingSystemFile() *schema.Resource {
 					}
 					return
 				}},
+			"feature_source": {
+				Description: "The name of the feature to which the uploaded file belongs.\n* `System` - This indicates system initiated file uploads.\n* `OpenAPIImport` - This indicates an OpenAPI file upload.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"import_action": {
 				Description:  "The action to be performed on the imported file. If 'PreCache' is set, the image will be cached in Appliance. Applicable in Intersight appliance deployment. If 'Evict' is set, the cached file will be removed. Applicable in Intersight appliance deployment. If 'GeneratePreSignedUploadUrl' is set, generates pre signed URL (s) for the file to be imported into the repository. Applicable for local machine source. The URL (s) will be populated under LocalMachine file server. If 'CompleteImportProcess' is set, the ImportState is marked as 'Imported'. Applicable for local machine source. If 'Cancel' is set, the ImportState is marked as 'Failed'. Applicable for local machine source.\n* `None` - No action should be taken on the imported file.\n* `GeneratePreSignedUploadUrl` - Generate pre signed URL of file for importing into the repository.\n* `GeneratePreSignedDownloadUrl` - Generate pre signed URL of file in the repository to download.\n* `CompleteImportProcess` - Mark that the import process of the file into the repository is complete.\n* `MarkImportFailed` - Mark to indicate that the import process of the file into the repository failed.\n* `PreCache` - Cache the file into the Intersight Appliance.\n* `Cancel` - The cancel import process for the file into the repository.\n* `Extract` - The action to extract the file in the external repository.\n* `Evict` - Evict the cached file from the Intersight Appliance.",
 				Type:         schema.TypeString,
@@ -830,6 +841,10 @@ func resourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *sch
 
 	if err := d.Set("download_count", (s.GetDownloadCount())); err != nil {
 		return diag.Errorf("error occurred while setting property DownloadCount in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
+	}
+
+	if err := d.Set("feature_source", (s.GetFeatureSource())); err != nil {
+		return diag.Errorf("error occurred while setting property FeatureSource in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
 	}
 
 	if err := d.Set("import_action", (s.GetImportAction())); err != nil {

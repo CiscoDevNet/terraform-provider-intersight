@@ -129,6 +129,16 @@ func getCapabilityIoCardDescriptorSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"native_hif_port_channel_required": {
+			Description: "Identifies whether host port-channel is required to be configured for the iocard module.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"native_speed_master_port_num": {
+			Description: "Master port number for native speed configuration for the iocard module.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"num_hif_ports": {
 			Description: "Number of hif ports per blade for the iocard module.",
 			Type:        schema.TypeInt,
@@ -520,6 +530,16 @@ func dataSourceCapabilityIoCardDescriptorRead(c context.Context, d *schema.Resou
 		o.SetMoid(x)
 	}
 
+	if v, ok := d.GetOkExists("native_hif_port_channel_required"); ok {
+		x := (v.(bool))
+		o.SetNativeHifPortChannelRequired(x)
+	}
+
+	if v, ok := d.GetOkExists("native_speed_master_port_num"); ok {
+		x := int64(v.(int))
+		o.SetNativeSpeedMasterPortNum(x)
+	}
+
 	if v, ok := d.GetOkExists("num_hif_ports"); ok {
 		x := int64(v.(int))
 		o.SetNumHifPorts(x)
@@ -806,6 +826,8 @@ func dataSourceCapabilityIoCardDescriptorRead(c context.Context, d *schema.Resou
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["model"] = (s.GetModel())
 				temp["moid"] = (s.GetMoid())
+				temp["native_hif_port_channel_required"] = (s.GetNativeHifPortChannelRequired())
+				temp["native_speed_master_port_num"] = (s.GetNativeSpeedMasterPortNum())
 				temp["num_hif_ports"] = (s.GetNumHifPorts())
 				temp["object_type"] = (s.GetObjectType())
 				temp["owners"] = (s.GetOwners())

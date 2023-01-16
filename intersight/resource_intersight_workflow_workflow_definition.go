@@ -406,7 +406,7 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 			"label": {
 				Description:  "A user friendly short name to identify the workflow. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), forward slash (/), or an underscore (_).",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9]+[\\sa-zA-Z0-9_./:-]{1,92}$"), ""),
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9]{1}[\\sa-zA-Z0-9_./:-]{0,91}$"), ""),
 				Optional:     true,
 			},
 			"license_entitlement": {
@@ -463,7 +463,7 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 			"name": {
 				Description:  "The name for this workflow. You can have multiple versions of the workflow with the same name. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.) or an underscore (_).",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.-]{1,64}$"), ""),
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9]{1}[a-zA-Z0-9_.-]{0,63}$"), ""),
 				Optional:     true,
 				ForceNew:     true,
 			},

@@ -47,6 +47,7 @@ This complex property has following sub-properties:
 * `locator_beacon_supported`:(bool) Locator Beacon LED support on this switch. 
 * `max_ports`:(int) Maximum allowed physical ports on this switch. 
 * `max_slots`:(int) Maximum allowed physical slots on this switch. 
+* `min_version_with_locator_led_support`:(string)(ReadOnly) Minimum firmware version supported for locator leds on this switch. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) An unique identifer for a capability descriptor. 

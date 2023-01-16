@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-9783
+API version: 1.0.11-10371
 Contact: intersight@cisco.com
 */
 
@@ -21,6 +21,8 @@ type IamSsoSessionAttributesAllOf struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// Captures if the user is allowed to switch roles or accounts after login and is used by UI to show/hide Switch Role  Or Account option. It is set to true when Intersight identifies that the user has multiple roles or accounts during login based on user attributes and Intersight account IAM configuration. For IdP initiated SSO logins, this field is always set to false.  Any changes to user roles or accounts after a session is created will not change this field. If switch role/account option  is selected, user is re-authenticated with IdP and user roles and accounts are identified and AllowSwitchRoleOrAccount property is updated accordingly.
+	AllowSwitchRoleOrAccount *bool `json:"AllowSwitchRoleOrAccount,omitempty"`
 	// SAML SessionNotOnOrAfter attribute sent by IdP in the assertion. IdP uses this to control for how long SP session maybe. SP does not issue SLO if the session is not valid.
 	IdpSessionExpiration *string `json:"IdpSessionExpiration,omitempty"`
 	// SAML SessionIndex attribute sent by IdP in the assertion. This has to be sent back to IdP in LogoutRequest.
@@ -103,6 +105,38 @@ func (o *IamSsoSessionAttributesAllOf) GetObjectTypeOk() (*string, bool) {
 // SetObjectType sets field value
 func (o *IamSsoSessionAttributesAllOf) SetObjectType(v string) {
 	o.ObjectType = v
+}
+
+// GetAllowSwitchRoleOrAccount returns the AllowSwitchRoleOrAccount field value if set, zero value otherwise.
+func (o *IamSsoSessionAttributesAllOf) GetAllowSwitchRoleOrAccount() bool {
+	if o == nil || o.AllowSwitchRoleOrAccount == nil {
+		var ret bool
+		return ret
+	}
+	return *o.AllowSwitchRoleOrAccount
+}
+
+// GetAllowSwitchRoleOrAccountOk returns a tuple with the AllowSwitchRoleOrAccount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamSsoSessionAttributesAllOf) GetAllowSwitchRoleOrAccountOk() (*bool, bool) {
+	if o == nil || o.AllowSwitchRoleOrAccount == nil {
+		return nil, false
+	}
+	return o.AllowSwitchRoleOrAccount, true
+}
+
+// HasAllowSwitchRoleOrAccount returns a boolean if a field has been set.
+func (o *IamSsoSessionAttributesAllOf) HasAllowSwitchRoleOrAccount() bool {
+	if o != nil && o.AllowSwitchRoleOrAccount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAllowSwitchRoleOrAccount gets a reference to the given bool and assigns it to the AllowSwitchRoleOrAccount field.
+func (o *IamSsoSessionAttributesAllOf) SetAllowSwitchRoleOrAccount(v bool) {
+	o.AllowSwitchRoleOrAccount = &v
 }
 
 // GetIdpSessionExpiration returns the IdpSessionExpiration field value if set, zero value otherwise.
@@ -241,6 +275,9 @@ func (o IamSsoSessionAttributesAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.AllowSwitchRoleOrAccount != nil {
+		toSerialize["AllowSwitchRoleOrAccount"] = o.AllowSwitchRoleOrAccount
+	}
 	if o.IdpSessionExpiration != nil {
 		toSerialize["IdpSessionExpiration"] = o.IdpSessionExpiration
 	}
@@ -273,6 +310,7 @@ func (o *IamSsoSessionAttributesAllOf) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "AllowSwitchRoleOrAccount")
 		delete(additionalProperties, "IdpSessionExpiration")
 		delete(additionalProperties, "IdpSessionIndex")
 		delete(additionalProperties, "IsIdpInitiatedSso")

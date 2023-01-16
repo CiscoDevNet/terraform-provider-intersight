@@ -303,6 +303,17 @@ func resourceSoftwareHyperflexDistributable() *schema.Resource {
 					}
 					return
 				}},
+			"feature_source": {
+				Description: "The name of the feature to which the uploaded file belongs.\n* `System` - This indicates system initiated file uploads.\n* `OpenAPIImport` - This indicates an OpenAPI file upload.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"guid": {
 				Description: "The unique identifier for an image in a Cisco repository.",
 				Type:        schema.TypeString,
@@ -1318,6 +1329,10 @@ func resourceSoftwareHyperflexDistributableRead(c context.Context, d *schema.Res
 
 	if err := d.Set("download_count", (s.GetDownloadCount())); err != nil {
 		return diag.Errorf("error occurred while setting property DownloadCount in SoftwareHyperflexDistributable object: %s", err.Error())
+	}
+
+	if err := d.Set("feature_source", (s.GetFeatureSource())); err != nil {
+		return diag.Errorf("error occurred while setting property FeatureSource in SoftwareHyperflexDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("guid", (s.GetGuid())); err != nil {

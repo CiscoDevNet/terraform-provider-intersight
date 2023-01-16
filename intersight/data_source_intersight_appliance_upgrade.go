@@ -161,13 +161,18 @@ func getApplianceUpgradeSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"name": {
-						Description: "Name of the upgrade phase.\n* `init` - Upgrade service initialization phase.\n* `CheckCluster` - For a multinode system, check that all nodes in the cluster are connected and running.\n* `SyncImages` - For a multinode system, sync image files between nodes.\n* `Prepare` - Upgrade service prepares folders and templated files.\n* `ServiceLoad` - Upgrade service loads the service images into the local docker cache.\n* `UiLoad` - Upgrade service loads the UI packages into the local cache.\n* `GenerateConfig` - Upgrade service generates the Kubernetes configuration files.\n* `DeployService` - Upgrade service deploys the Kubernetes services.\n* `UpgradeOS` - Run /opt/cisco/bin/onprem-upgrade-start.sh for each node.\n* `UpgradeServices` - Run /opt/cisco/bin/onprem-upgrade-start.sh per node.\n* `FinishUpgrade` - Run /opt/cisco/bin/onprem-upgrade-finish.sh for each node.\n* `Success` - Upgrade completed successfully.\n* `Fail` - Indicates that the upgrade process has failed.\n* `Cancel` - Indicates that the upgrade was canceled by the Intersight Appliance.\n* `Telemetry` - Upgrade service sends basic telemetry data to the Intersight.",
+						Description: "Name of the upgrade phase.\n* `init` - Upgrade service initialization phase.\n* `CheckCluster` - For a multinode system, check that all nodes in the cluster are connected and running.\n* `SyncImages` - For a multinode system, sync image files between nodes.\n* `Prepare` - Upgrade service prepares folders and templated files.\n* `ServiceLoad` - Upgrade service loads the service images into the local docker cache.\n* `UiLoad` - Upgrade service loads the UI packages into the local cache.\n* `GenerateConfig` - Upgrade service generates the Kubernetes configuration files.\n* `DeployService` - Upgrade service deploys the Kubernetes services.\n* `UpgradeOS` - Run /opt/cisco/bin/onprem-upgrade-start.sh for each node.\n* `UpgradeServices` - Run /opt/cisco/bin/onprem-upgrade-start.sh per node.\n* `VerifyPlaybookSuccess` - Verify the upgrade playbook for UpgradeOS or UpgradeServices completed successfully.\n* `FinishUpgrade` - Run /opt/cisco/bin/onprem-upgrade-finish.sh for each node.\n* `Success` - Upgrade completed successfully.\n* `Fail` - Indicates that the upgrade process has failed.\n* `Cancel` - Indicates that the upgrade was canceled by the Intersight Appliance.\n* `Telemetry` - Upgrade service sends basic telemetry data to the Intersight.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"retry_count": {
+						Description: "Retry count of the upgrade phase.",
+						Type:        schema.TypeInt,
 						Optional:    true,
 					},
 					"start_time": {
@@ -236,13 +241,18 @@ func getApplianceUpgradeSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"name": {
-						Description: "Name of the upgrade phase.\n* `init` - Upgrade service initialization phase.\n* `CheckCluster` - For a multinode system, check that all nodes in the cluster are connected and running.\n* `SyncImages` - For a multinode system, sync image files between nodes.\n* `Prepare` - Upgrade service prepares folders and templated files.\n* `ServiceLoad` - Upgrade service loads the service images into the local docker cache.\n* `UiLoad` - Upgrade service loads the UI packages into the local cache.\n* `GenerateConfig` - Upgrade service generates the Kubernetes configuration files.\n* `DeployService` - Upgrade service deploys the Kubernetes services.\n* `UpgradeOS` - Run /opt/cisco/bin/onprem-upgrade-start.sh for each node.\n* `UpgradeServices` - Run /opt/cisco/bin/onprem-upgrade-start.sh per node.\n* `FinishUpgrade` - Run /opt/cisco/bin/onprem-upgrade-finish.sh for each node.\n* `Success` - Upgrade completed successfully.\n* `Fail` - Indicates that the upgrade process has failed.\n* `Cancel` - Indicates that the upgrade was canceled by the Intersight Appliance.\n* `Telemetry` - Upgrade service sends basic telemetry data to the Intersight.",
+						Description: "Name of the upgrade phase.\n* `init` - Upgrade service initialization phase.\n* `CheckCluster` - For a multinode system, check that all nodes in the cluster are connected and running.\n* `SyncImages` - For a multinode system, sync image files between nodes.\n* `Prepare` - Upgrade service prepares folders and templated files.\n* `ServiceLoad` - Upgrade service loads the service images into the local docker cache.\n* `UiLoad` - Upgrade service loads the UI packages into the local cache.\n* `GenerateConfig` - Upgrade service generates the Kubernetes configuration files.\n* `DeployService` - Upgrade service deploys the Kubernetes services.\n* `UpgradeOS` - Run /opt/cisco/bin/onprem-upgrade-start.sh for each node.\n* `UpgradeServices` - Run /opt/cisco/bin/onprem-upgrade-start.sh per node.\n* `VerifyPlaybookSuccess` - Verify the upgrade playbook for UpgradeOS or UpgradeServices completed successfully.\n* `FinishUpgrade` - Run /opt/cisco/bin/onprem-upgrade-finish.sh for each node.\n* `Success` - Upgrade completed successfully.\n* `Fail` - Indicates that the upgrade process has failed.\n* `Cancel` - Indicates that the upgrade was canceled by the Intersight Appliance.\n* `Telemetry` - Upgrade service sends basic telemetry data to the Intersight.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"retry_count": {
+						Description: "Retry count of the upgrade phase.",
+						Type:        schema.TypeInt,
 						Optional:    true,
 					},
 					"start_time": {
@@ -536,13 +546,18 @@ func getApplianceUpgradeSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"name": {
-						Description: "Name of the upgrade phase.\n* `init` - Upgrade service initialization phase.\n* `CheckCluster` - For a multinode system, check that all nodes in the cluster are connected and running.\n* `SyncImages` - For a multinode system, sync image files between nodes.\n* `Prepare` - Upgrade service prepares folders and templated files.\n* `ServiceLoad` - Upgrade service loads the service images into the local docker cache.\n* `UiLoad` - Upgrade service loads the UI packages into the local cache.\n* `GenerateConfig` - Upgrade service generates the Kubernetes configuration files.\n* `DeployService` - Upgrade service deploys the Kubernetes services.\n* `UpgradeOS` - Run /opt/cisco/bin/onprem-upgrade-start.sh for each node.\n* `UpgradeServices` - Run /opt/cisco/bin/onprem-upgrade-start.sh per node.\n* `FinishUpgrade` - Run /opt/cisco/bin/onprem-upgrade-finish.sh for each node.\n* `Success` - Upgrade completed successfully.\n* `Fail` - Indicates that the upgrade process has failed.\n* `Cancel` - Indicates that the upgrade was canceled by the Intersight Appliance.\n* `Telemetry` - Upgrade service sends basic telemetry data to the Intersight.",
+						Description: "Name of the upgrade phase.\n* `init` - Upgrade service initialization phase.\n* `CheckCluster` - For a multinode system, check that all nodes in the cluster are connected and running.\n* `SyncImages` - For a multinode system, sync image files between nodes.\n* `Prepare` - Upgrade service prepares folders and templated files.\n* `ServiceLoad` - Upgrade service loads the service images into the local docker cache.\n* `UiLoad` - Upgrade service loads the UI packages into the local cache.\n* `GenerateConfig` - Upgrade service generates the Kubernetes configuration files.\n* `DeployService` - Upgrade service deploys the Kubernetes services.\n* `UpgradeOS` - Run /opt/cisco/bin/onprem-upgrade-start.sh for each node.\n* `UpgradeServices` - Run /opt/cisco/bin/onprem-upgrade-start.sh per node.\n* `VerifyPlaybookSuccess` - Verify the upgrade playbook for UpgradeOS or UpgradeServices completed successfully.\n* `FinishUpgrade` - Run /opt/cisco/bin/onprem-upgrade-finish.sh for each node.\n* `Success` - Upgrade completed successfully.\n* `Fail` - Indicates that the upgrade process has failed.\n* `Cancel` - Indicates that the upgrade was canceled by the Intersight Appliance.\n* `Telemetry` - Upgrade service sends basic telemetry data to the Intersight.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"retry_count": {
+						Description: "Retry count of the upgrade phase.",
+						Type:        schema.TypeInt,
 						Optional:    true,
 					},
 					"start_time": {

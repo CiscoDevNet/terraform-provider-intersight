@@ -234,6 +234,11 @@ func getFabricMulticastPolicySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"src_ip_proxy": {
+			Description: "Administrative state of the IGMP source IP proxy for this VLAN.\n* `Enabled` - Admin configured Enabled State.\n* `Disabled` - Admin configured Disabled State.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -643,6 +648,11 @@ func dataSourceFabricMulticastPolicyRead(c context.Context, d *schema.ResourceDa
 		o.SetSnoopingState(x)
 	}
 
+	if v, ok := d.GetOk("src_ip_proxy"); ok {
+		x := (v.(string))
+		o.SetSrcIpProxy(x)
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -811,6 +821,7 @@ func dataSourceFabricMulticastPolicyRead(c context.Context, d *schema.ResourceDa
 				temp["querier_state"] = (s.GetQuerierState())
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["snooping_state"] = (s.GetSnoopingState())
+				temp["src_ip_proxy"] = (s.GetSrcIpProxy())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 

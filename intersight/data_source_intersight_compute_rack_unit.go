@@ -87,6 +87,16 @@ func getComputeRackUnitSchema() map[string]*schema.Schema {
 						Type:        schema.TypeInt,
 						Optional:    true,
 					},
+					"health": {
+						Description: "Health of the managed end point. The highest severity computed from alarmSummary property is set as the health.\n* `Healthy` - The Enum value represents that the entity is healthy.\n* `Warning` - The Enum value Warning represents that the entity has one or more active warnings on it.\n* `Critical` - The Enum value Critical represents that the entity is in a critical state.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"info": {
+						Description: "The count of alarms that have severity type Info.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 						Type:        schema.TypeString,
@@ -2091,22 +2101,10 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 				}
 			}
 			o.SetClassId("compute.AlarmSummary")
-			if v, ok := l["critical"]; ok {
-				{
-					x := int64(v.(int))
-					o.SetCritical(x)
-				}
-			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["warning"]; ok {
-				{
-					x := int64(v.(int))
-					o.SetWarning(x)
 				}
 			}
 			p = append(p, *o)

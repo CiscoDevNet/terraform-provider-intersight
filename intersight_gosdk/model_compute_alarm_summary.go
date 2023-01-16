@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-9783
+API version: 1.0.11-10371
 Contact: intersight@cisco.com
 */
 
@@ -26,6 +26,10 @@ type ComputeAlarmSummary struct {
 	ObjectType string `json:"ObjectType"`
 	// The count of alarms that have severity type Critical.
 	Critical *int64 `json:"Critical,omitempty"`
+	// Health of the managed end point. The highest severity computed from alarmSummary property is set as the health. * `Healthy` - The Enum value represents that the entity is healthy. * `Warning` - The Enum value Warning represents that the entity has one or more active warnings on it. * `Critical` - The Enum value Critical represents that the entity is in a critical state.
+	Health *string `json:"Health,omitempty"`
+	// The count of alarms that have severity type Info.
+	Info *int64 `json:"Info,omitempty"`
 	// The count of alarms that have severity type Warning.
 	Warning              *int64 `json:"Warning,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -136,6 +140,70 @@ func (o *ComputeAlarmSummary) SetCritical(v int64) {
 	o.Critical = &v
 }
 
+// GetHealth returns the Health field value if set, zero value otherwise.
+func (o *ComputeAlarmSummary) GetHealth() string {
+	if o == nil || o.Health == nil {
+		var ret string
+		return ret
+	}
+	return *o.Health
+}
+
+// GetHealthOk returns a tuple with the Health field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ComputeAlarmSummary) GetHealthOk() (*string, bool) {
+	if o == nil || o.Health == nil {
+		return nil, false
+	}
+	return o.Health, true
+}
+
+// HasHealth returns a boolean if a field has been set.
+func (o *ComputeAlarmSummary) HasHealth() bool {
+	if o != nil && o.Health != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetHealth gets a reference to the given string and assigns it to the Health field.
+func (o *ComputeAlarmSummary) SetHealth(v string) {
+	o.Health = &v
+}
+
+// GetInfo returns the Info field value if set, zero value otherwise.
+func (o *ComputeAlarmSummary) GetInfo() int64 {
+	if o == nil || o.Info == nil {
+		var ret int64
+		return ret
+	}
+	return *o.Info
+}
+
+// GetInfoOk returns a tuple with the Info field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ComputeAlarmSummary) GetInfoOk() (*int64, bool) {
+	if o == nil || o.Info == nil {
+		return nil, false
+	}
+	return o.Info, true
+}
+
+// HasInfo returns a boolean if a field has been set.
+func (o *ComputeAlarmSummary) HasInfo() bool {
+	if o != nil && o.Info != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetInfo gets a reference to the given int64 and assigns it to the Info field.
+func (o *ComputeAlarmSummary) SetInfo(v int64) {
+	o.Info = &v
+}
+
 // GetWarning returns the Warning field value if set, zero value otherwise.
 func (o *ComputeAlarmSummary) GetWarning() int64 {
 	if o == nil || o.Warning == nil {
@@ -187,6 +255,12 @@ func (o ComputeAlarmSummary) MarshalJSON() ([]byte, error) {
 	if o.Critical != nil {
 		toSerialize["Critical"] = o.Critical
 	}
+	if o.Health != nil {
+		toSerialize["Health"] = o.Health
+	}
+	if o.Info != nil {
+		toSerialize["Info"] = o.Info
+	}
 	if o.Warning != nil {
 		toSerialize["Warning"] = o.Warning
 	}
@@ -206,6 +280,10 @@ func (o *ComputeAlarmSummary) UnmarshalJSON(bytes []byte) (err error) {
 		ObjectType string `json:"ObjectType"`
 		// The count of alarms that have severity type Critical.
 		Critical *int64 `json:"Critical,omitempty"`
+		// Health of the managed end point. The highest severity computed from alarmSummary property is set as the health. * `Healthy` - The Enum value represents that the entity is healthy. * `Warning` - The Enum value Warning represents that the entity has one or more active warnings on it. * `Critical` - The Enum value Critical represents that the entity is in a critical state.
+		Health *string `json:"Health,omitempty"`
+		// The count of alarms that have severity type Info.
+		Info *int64 `json:"Info,omitempty"`
 		// The count of alarms that have severity type Warning.
 		Warning *int64 `json:"Warning,omitempty"`
 	}
@@ -218,6 +296,8 @@ func (o *ComputeAlarmSummary) UnmarshalJSON(bytes []byte) (err error) {
 		varComputeAlarmSummary.ClassId = varComputeAlarmSummaryWithoutEmbeddedStruct.ClassId
 		varComputeAlarmSummary.ObjectType = varComputeAlarmSummaryWithoutEmbeddedStruct.ObjectType
 		varComputeAlarmSummary.Critical = varComputeAlarmSummaryWithoutEmbeddedStruct.Critical
+		varComputeAlarmSummary.Health = varComputeAlarmSummaryWithoutEmbeddedStruct.Health
+		varComputeAlarmSummary.Info = varComputeAlarmSummaryWithoutEmbeddedStruct.Info
 		varComputeAlarmSummary.Warning = varComputeAlarmSummaryWithoutEmbeddedStruct.Warning
 		*o = ComputeAlarmSummary(varComputeAlarmSummary)
 	} else {
@@ -239,6 +319,8 @@ func (o *ComputeAlarmSummary) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Critical")
+		delete(additionalProperties, "Health")
+		delete(additionalProperties, "Info")
 		delete(additionalProperties, "Warning")
 
 		// remove fields from embedded structs

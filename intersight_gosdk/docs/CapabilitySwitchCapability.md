@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **LocatorBeaconSupported** | Pointer to **bool** | Locator Beacon LED support on this switch. | [optional] 
 **MaxPorts** | Pointer to **int64** | Maximum allowed physical ports on this switch. | [optional] 
 **MaxSlots** | Pointer to **int64** | Maximum allowed physical slots on this switch. | [optional] 
+**MinVersionWithLocatorLedSupport** | Pointer to **string** | Minimum firmware version supported for locator leds on this switch. | [optional] [readonly] 
 **NetworkLimits** | Pointer to [**NullableCapabilitySwitchNetworkLimits**](CapabilitySwitchNetworkLimits.md) |  | [optional] 
 **PortsSupporting100gSpeed** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
 **PortsSupporting10gSpeed** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
@@ -299,6 +300,31 @@ SetMaxSlots sets MaxSlots field to given value.
 `func (o *CapabilitySwitchCapability) HasMaxSlots() bool`
 
 HasMaxSlots returns a boolean if a field has been set.
+
+### GetMinVersionWithLocatorLedSupport
+
+`func (o *CapabilitySwitchCapability) GetMinVersionWithLocatorLedSupport() string`
+
+GetMinVersionWithLocatorLedSupport returns the MinVersionWithLocatorLedSupport field if non-nil, zero value otherwise.
+
+### GetMinVersionWithLocatorLedSupportOk
+
+`func (o *CapabilitySwitchCapability) GetMinVersionWithLocatorLedSupportOk() (*string, bool)`
+
+GetMinVersionWithLocatorLedSupportOk returns a tuple with the MinVersionWithLocatorLedSupport field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMinVersionWithLocatorLedSupport
+
+`func (o *CapabilitySwitchCapability) SetMinVersionWithLocatorLedSupport(v string)`
+
+SetMinVersionWithLocatorLedSupport sets MinVersionWithLocatorLedSupport field to given value.
+
+### HasMinVersionWithLocatorLedSupport
+
+`func (o *CapabilitySwitchCapability) HasMinVersionWithLocatorLedSupport() bool`
+
+HasMinVersionWithLocatorLedSupport returns a boolean if a field has been set.
 
 ### GetNetworkLimits
 

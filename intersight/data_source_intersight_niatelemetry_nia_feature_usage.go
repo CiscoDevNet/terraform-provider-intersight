@@ -395,11 +395,6 @@ func getNiatelemetryNiaFeatureUsageSchema() map[string]*schema.Schema {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
-		"nicc_version": {
-			Description: "NICC version. NiccVersion is used to check the compatibility.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
 		"nir": {
 			Description: "NIR application usage. This determines if the fabric has NIR application installed.",
 			Type:        schema.TypeString,
@@ -1351,11 +1346,6 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 		o.SetNetFlowCount(x)
 	}
 
-	if v, ok := d.GetOk("nicc_version"); ok {
-		x := (v.(string))
-		o.SetNiccVersion(x)
-	}
-
 	if v, ok := d.GetOk("nir"); ok {
 		x := (v.(string))
 		o.SetNir(x)
@@ -2018,7 +2008,6 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
 				temp["net_flow_count"] = (s.GetNetFlowCount())
-				temp["nicc_version"] = (s.GetNiccVersion())
 				temp["nir"] = (s.GetNir())
 				temp["object_type"] = (s.GetObjectType())
 				temp["open_stack"] = (s.GetOpenStack())
