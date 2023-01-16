@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **UpgradeStatus** | Pointer to **string** | The upgrade status of the HyperFlex cluster. * &#x60;Unknown&#x60; - The upgrade status of the HyperFlex cluster could not be determined. * &#x60;Ok&#x60; - The upgrade of the HyperFlex cluster is complete. * &#x60;InProgress&#x60; - The upgrade of the HyperFlex cluster is in-progress. * &#x60;Failed&#x60; - The upgrade of the HyperFlex cluster has failed. * &#x60;Waiting&#x60; - The upgrade of the HyperFlex cluster is waiting to continue execution. | [optional] [readonly] [default to "Unknown"]
 **UplinkSpeed** | Pointer to **string** | The uplink speed information of the HyperFlex cluster. * &#x60;Unknown&#x60; - The uplink speed could not be determined. The physical servers are potentially not claimed. * &#x60;10G&#x60; - The uplink speed is 10G. * &#x60;1G&#x60; - The uplink speed is 1G. | [optional] [readonly] [default to "Unknown"]
 **VmCount** | Pointer to **int64** | The number of virtual machines present on this cluster. | [optional] [readonly] 
+**ZoneType** | Pointer to **string** | The type of availability zone used by the cluster. Physical zones are always used in HyperFlex  Stretched Clusters. Logical zones may be used if a cluster has Logical Availability Zones (LAZ)  enabled. * &#x60;UNKNOWN&#x60; - The type of zone configured on the HyperFlex cluster is not known. * &#x60;NOT_CONFIGURED&#x60; - The zone type is not configured. * &#x60;LOGICAL&#x60; - The zone is a logical zone created when the logical availability zones (LAZ) feature is enabled on the HyperFlex cluster. * &#x60;PHYSICAL&#x60; - The zone is a physical zone configured on a stretched HyperFlex cluster. | [optional] [readonly] [default to "UNKNOWN"]
 **Alarm** | Pointer to [**[]HyperflexAlarmRelationship**](HyperflexAlarmRelationship.md) | An array of relationships to hyperflexAlarm resources. | [optional] [readonly] 
 **Encryption** | Pointer to [**HyperflexEncryptionRelationship**](HyperflexEncryptionRelationship.md) |  | [optional] 
 **Health** | Pointer to [**HyperflexHealthRelationship**](HyperflexHealthRelationship.md) |  | [optional] 
@@ -417,6 +418,31 @@ SetVmCount sets VmCount field to given value.
 `func (o *HyperflexClusterAllOf) HasVmCount() bool`
 
 HasVmCount returns a boolean if a field has been set.
+
+### GetZoneType
+
+`func (o *HyperflexClusterAllOf) GetZoneType() string`
+
+GetZoneType returns the ZoneType field if non-nil, zero value otherwise.
+
+### GetZoneTypeOk
+
+`func (o *HyperflexClusterAllOf) GetZoneTypeOk() (*string, bool)`
+
+GetZoneTypeOk returns a tuple with the ZoneType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetZoneType
+
+`func (o *HyperflexClusterAllOf) SetZoneType(v string)`
+
+SetZoneType sets ZoneType field to given value.
+
+### HasZoneType
+
+`func (o *HyperflexClusterAllOf) HasZoneType() bool`
+
+HasZoneType returns a boolean if a field has been set.
 
 ### GetAlarm
 

@@ -49,6 +49,8 @@ This complex property has following sub-properties:
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `model`:(string) The model of the endpoint, for which this capability information is applicable. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
+* `native_hif_port_channel_required`:(bool) Identifies whether host port-channel is required to be configured for the iocard module. 
+* `native_speed_master_port_num`:(int) Master port number for native speed configuration for the iocard module. 
 * `num_hif_ports`:(int) Number of hif ports per blade for the iocard module. 
 * `owners`:
                 (Array of schema.TypeString) -(ReadOnly)

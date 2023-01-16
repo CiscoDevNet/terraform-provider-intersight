@@ -385,25 +385,13 @@ func resourceHclCompatibilityStatus() *schema.Resource {
 													Description: "Protocol for which the driver is provided. E.g.  enic, fnic, lsi_mr3.",
 													Type:        schema.TypeString,
 													Optional:    true,
-													Computed:    true,
-													ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
-														if val != nil {
-															warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
-														}
-														return
-													}, ForceNew: true,
+													ForceNew:    true,
 												},
 												"driver_version": {
 													Description: "Version of the Driver supported.",
 													Type:        schema.TypeString,
 													Optional:    true,
-													Computed:    true,
-													ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
-														if val != nil {
-															warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
-														}
-														return
-													}, ForceNew: true,
+													ForceNew:    true,
 												},
 												"error_code": {
 													Description: "Error code for the support status.\n* `Success` - The input combination is valid.\n* `Unknown` - Unknown API request to the service.\n* `UnknownServer` - An invalid server model is given API requests or the server model is not present in the HCL database.\n* `InvalidUcsVersion` - UCS Version is not in expected format.\n* `ProcessorNotSupported` - Processor is not supported with the given Server or the Processor does not exist in the HCL database.\n* `OSNotSupported` - OS version is not supported with the given server, processor combination or OS information is not present in the HCL database.\n* `OSUnknown` - OS vendor or version is not known as per the HCL database.\n* `UCSVersionNotSupported` - UCS Version is not supported with the given server, processor and OS combination or the UCS version is not present in the HCL database.\n* `UcsVersionServerOSCombinationNotSupported` - Combination of UCS version, server (model and processor) and os version is not supported.\n* `ProductUnknown` - Product is not known as per the HCL database.\n* `ProductNotSupported` - Product is not supported in the given UCS version, server (model and processor) and operating system version.\n* `DriverNameNotSupported` - Driver protocol or name is not supported for the given product.\n* `FirmwareVersionNotSupported` - Firmware version not supported for the component and the server, operating system combination.\n* `DriverVersionNotSupported` - Driver version not supported for the component and the server, operating system combination.\n* `FirmwareVersionDriverVersionCombinationNotSupported` - Both Firmware and Driver versions are not supported for the component and the server, operating system combination.\n* `FirmwareVersionAndDriverVersionNotSupported` - Firmware and Driver version combination not supported for the component and the server, operating system combination.\n* `FirmwareVersionAndDriverNameNotSupported` - Firmware Version and Driver name or not supported with the component and the server, operating system combination.\n* `InternalError` - API requests to the service have either failed or timed out.\n* `MarshallingError` - Error in JSON marshalling.\n* `Exempted` - An exempted error code means that the product is part of the exempted Catalog and should be ignored for HCL validation purposes.",
@@ -421,25 +409,13 @@ func resourceHclCompatibilityStatus() *schema.Resource {
 													Description: "Firmware version of the product/adapter supported.",
 													Type:        schema.TypeString,
 													Optional:    true,
-													Computed:    true,
-													ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
-														if val != nil {
-															warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
-														}
-														return
-													}, ForceNew: true,
+													ForceNew:    true,
 												},
 												"id": {
 													Description: "Identifier of the firmware.",
 													Type:        schema.TypeString,
 													Optional:    true,
-													Computed:    true,
-													ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
-														if val != nil {
-															warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
-														}
-														return
-													}, ForceNew: true,
+													ForceNew:    true,
 												},
 												"latest_driver": {
 													Description: "True if the driver is latest recommended driver.",
@@ -480,13 +456,7 @@ func resourceHclCompatibilityStatus() *schema.Resource {
 										Description: "Identifier of the product.",
 										Type:        schema.TypeString,
 										Optional:    true,
-										Computed:    true,
-										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
-											if val != nil {
-												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
-											}
-											return
-										}, ForceNew: true,
+										ForceNew:    true,
 									},
 									"model": {
 										Description: "Model/PID of the product/adapter.",
@@ -505,37 +475,21 @@ func resourceHclCompatibilityStatus() *schema.Resource {
 										Description: "Revision of the adapter model.",
 										Type:        schema.TypeString,
 										Optional:    true,
-										Computed:    true,
-										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
-											if val != nil {
-												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
-											}
-											return
-										}, ForceNew: true,
+										ForceNew:    true,
 									},
 									"type": {
-										Description: "Type of the product/adapter say OCP, PT, GPU.\n* `` - Default type of the Product.\n* `Adapter` - Represents network adapter cards.\n* `StorageController` - Represents storage controllers.\n* `GPU` - Represents graphics cards.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Computed:    true,
-										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
-											if val != nil {
-												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
-											}
-											return
-										}, ForceNew: true,
+										Description:  "Type of the product/adapter say OCP, PT, GPU.\n* `` - Default type of the Product.\n* `Adapter` - Represents network adapter cards.\n* `StorageController` - Represents storage controllers.\n* `GPU` - Represents graphics cards.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringInSlice([]string{"", "Adapter", "StorageController", "GPU"}, false),
+										Optional:     true,
+										Default:      "",
+										ForceNew:     true,
 									},
 									"vendor": {
 										Description: "Vendor of the product or adapter.",
 										Type:        schema.TypeString,
 										Optional:    true,
-										Computed:    true,
-										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
-											if val != nil {
-												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
-											}
-											return
-										}, ForceNew: true,
+										ForceNew:    true,
 									},
 								},
 							},
@@ -918,6 +872,30 @@ func resourceHclCompatibilityStatusCreate(c context.Context, d *schema.ResourceD
 										}
 									}
 									o.SetClassId("hcl.Firmware")
+									if v, ok := l["driver_name"]; ok {
+										{
+											x := (v.(string))
+											o.SetDriverName(x)
+										}
+									}
+									if v, ok := l["driver_version"]; ok {
+										{
+											x := (v.(string))
+											o.SetDriverVersion(x)
+										}
+									}
+									if v, ok := l["firmware_version"]; ok {
+										{
+											x := (v.(string))
+											o.SetFirmwareVersion(x)
+										}
+									}
+									if v, ok := l["id"]; ok {
+										{
+											x := (v.(string))
+											o.SetId(x)
+										}
+									}
 									if v, ok := l["object_type"]; ok {
 										{
 											x := (v.(string))
@@ -931,6 +909,12 @@ func resourceHclCompatibilityStatusCreate(c context.Context, d *schema.ResourceD
 								}
 							}
 						}
+						if v, ok := l["id"]; ok {
+							{
+								x := (v.(string))
+								o.SetId(x)
+							}
+						}
 						if v, ok := l["model"]; ok {
 							{
 								x := (v.(string))
@@ -941,6 +925,24 @@ func resourceHclCompatibilityStatusCreate(c context.Context, d *schema.ResourceD
 							{
 								x := (v.(string))
 								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["revision"]; ok {
+							{
+								x := (v.(string))
+								o.SetRevision(x)
+							}
+						}
+						if v, ok := l["type"]; ok {
+							{
+								x := (v.(string))
+								o.SetType(x)
+							}
+						}
+						if v, ok := l["vendor"]; ok {
+							{
+								x := (v.(string))
+								o.SetVendor(x)
 							}
 						}
 						x = append(x, *o)

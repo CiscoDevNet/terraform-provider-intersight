@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **EquipmentChassis** | Pointer to [**EquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
 **EquipmentFex** | Pointer to [**EquipmentFexRelationship**](EquipmentFexRelationship.md) |  | [optional] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**NetworkElement** | Pointer to [**NetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 **StoragePhysicalDisk** | Pointer to [**StoragePhysicalDiskRelationship**](StoragePhysicalDiskRelationship.md) |  | [optional] 
 
@@ -249,6 +250,31 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 `func (o *EquipmentLocatorLedAllOf) HasInventoryDeviceInfo() bool`
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
+
+### GetNetworkElement
+
+`func (o *EquipmentLocatorLedAllOf) GetNetworkElement() NetworkElementRelationship`
+
+GetNetworkElement returns the NetworkElement field if non-nil, zero value otherwise.
+
+### GetNetworkElementOk
+
+`func (o *EquipmentLocatorLedAllOf) GetNetworkElementOk() (*NetworkElementRelationship, bool)`
+
+GetNetworkElementOk returns a tuple with the NetworkElement field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNetworkElement
+
+`func (o *EquipmentLocatorLedAllOf) SetNetworkElement(v NetworkElementRelationship)`
+
+SetNetworkElement sets NetworkElement field to given value.
+
+### HasNetworkElement
+
+`func (o *EquipmentLocatorLedAllOf) HasNetworkElement() bool`
+
+HasNetworkElement returns a boolean if a field has been set.
 
 ### GetRegisteredDevice
 

@@ -527,7 +527,7 @@ func resourceVnicFcAdapterPolicy() *schema.Resource {
 							Default:     "vnic.FcQueueSettings",
 						},
 						"ring_size": {
-							Description:  "The number of descriptors in each queue.",
+							Description:  "The number of descriptors in each queue. The maximum value for Transmit queue is 128 and for Receive queue is 2048.",
 							Type:         schema.TypeInt,
 							ValidateFunc: validation.IntAtLeast(64),
 							Optional:     true,
@@ -655,7 +655,7 @@ func resourceVnicFcAdapterPolicy() *schema.Resource {
 							Default:     "vnic.FcQueueSettings",
 						},
 						"ring_size": {
-							Description:  "The number of descriptors in each queue.",
+							Description:  "The number of descriptors in each queue. The maximum value for Transmit queue is 128 and for Receive queue is 2048.",
 							Type:         schema.TypeInt,
 							ValidateFunc: validation.IntAtLeast(64),
 							Optional:     true,

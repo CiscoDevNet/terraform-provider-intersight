@@ -568,7 +568,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 								}
 								return false
 							},
-							Default: 4,
+							Default: 2,
 						},
 						"nr_version": {
 							Description:  "Configure RDMA over Converged Ethernet (RoCE) version on the virtual interface. Only RoCEv1 is supported on Cisco VIC 13xx series adapters and only RoCEv2 is supported on Cisco VIC 14xx series adapters.\n* `1` - RDMA over Converged Ethernet Protocol Version 1.\n* `2` - RDMA over Converged Ethernet Protocol Version 2.",

@@ -100,7 +100,9 @@ This complex property has following sub-properties:
   + `nr_source`:(string) Answer values can be provided from three sources - Embedded in OS image, static file,or as placeholder values for an answer file template.Source of the answers is given as value, Embedded/File/Template.'Embedded' option indicates that the answer file is embedded within the OS Image. 'File'option indicates that the answers are provided as a file. 'Template' indicates that theplaceholders in the selected os.ConfigurationFile MO are replaced with values providedas os.Answers MO.* `None` - Indicates that answers is not sent and values must be populated from Install Template.  * `Embedded` - Indicates that the answer file is embedded within OS image.* `File` - Indicates that the answer file is a static content that has all thevalues populated.* `Template` - Indicates that the given answers are used to populate the answer filetemplate. The template allows the users to refer some server specificanswers as fields/placeholders and replace these placeholders with theactual values for each Server during OS installation using 'Answers' and'AdditionalParameters' properties in os.Install MO.The answer file templates can be created by users as os.ConfigurationFile objects. 
   + `error_msgs`:
                 (Array of schema.TypeString) -
+  + `initiator_wwpn`:(string)(ReadOnly) The WWPN Address of the underlying fibre channel interface at the host side used for SAN accesss. Value must be in hexadecimal format xx:xx:xx:xx:xx:xx:xx:xx.  For example, 20:00:D4:C9:3C:35:02:01. 
   + `install_target`:(string)(ReadOnly) The target in which OS installation triggered, the value represented is StorageControllerID follwed by PhysicalDisk SerialNumber in case of Physcial disk or VirtualDriveId for virtual drive. 
+  + `lun_id`:(int)(ReadOnly) The Logical Unit Number (LUN) of the install target. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `operating_system_parameters`:(HashMap) -(ReadOnly) Parameters specific to selected OS. 
 This complex property has following sub-properties:
@@ -109,6 +111,9 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `serial_number`:(string)(ReadOnly) The Serial Number of the server. 
+  + `target_iqn`:(string)(ReadOnly) IQN (iSCSI qualified name) of Storage iSCSI target. Can be up to 255 characters long and has the following format, iqn.yyyy-mm.naming-authority:unique_name. 
+  + `target_wwpn`:(string)(ReadOnly) The WWPN Address of the underlying fibre channel interface at the target used by the storage. Value must be in hexadecimal format xx:xx:xx:xx:xx:xx:xx:xx.  For example, 51:4F:0C:50:14:1F:AF:01. 
+  + `vnic_mac`:(string)(ReadOnly) MAC address of the VNIC used as iSCSI initiator interface. 
 * `servers`:(Array) An array of relationships to computePhysical resources. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 

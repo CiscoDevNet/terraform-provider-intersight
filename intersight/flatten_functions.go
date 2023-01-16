@@ -5244,11 +5244,83 @@ func flattenListOnpremUpgradePhase(p []models.OnpremUpgradePhase, d *schema.Reso
 		onpremupgradephase["message"] = item.GetMessage()
 		onpremupgradephase["name"] = item.GetName()
 		onpremupgradephase["object_type"] = item.GetObjectType()
+		onpremupgradephase["retry_count"] = item.GetRetryCount()
 		onpremupgradephase["start_time"] = item.GetStartTime().String()
 		onpremupgradephase["status"] = item.GetStatus()
 		onpremupgradephases = append(onpremupgradephases, onpremupgradephase)
 	}
 	return onpremupgradephases
+}
+func flattenListOpenapiApiInfo(p []models.OpenapiApiInfo, d *schema.ResourceData) []map[string]interface{} {
+	var openapiapiinfos []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		openapiapiinfo := make(map[string]interface{})
+		openapiapiinfo["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		openapiapiinfo["api_path_object_identifier"] = (func(p models.MoMoRef, d *schema.ResourceData) []map[string]interface{} {
+			var momorefs []map[string]interface{}
+			var ret models.MoMoRef
+			if reflect.DeepEqual(ret, p) {
+				return nil
+			}
+			item := p
+			momoref := make(map[string]interface{})
+			momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			momoref["class_id"] = item.GetClassId()
+			momoref["moid"] = item.GetMoid()
+			momoref["object_type"] = item.GetObjectType()
+			momoref["selector"] = item.GetSelector()
+
+			momorefs = append(momorefs, momoref)
+			return momorefs
+		})(item.GetApiPathObjectIdentifier(), d)
+		openapiapiinfo["class_id"] = item.GetClassId()
+		openapiapiinfo["description"] = item.GetDescription()
+		openapiapiinfo["display_label"] = item.GetDisplayLabel()
+		openapiapiinfo["method"] = item.GetMethod()
+		openapiapiinfo["name"] = item.GetName()
+		openapiapiinfo["object_type"] = item.GetObjectType()
+		openapiapiinfo["path"] = item.GetPath()
+		openapiapiinfo["validation_error"] = item.GetValidationError()
+		openapiapiinfo["validation_status"] = item.GetValidationStatus()
+		openapiapiinfos = append(openapiapiinfos, openapiapiinfo)
+	}
+	return openapiapiinfos
+}
+func flattenListOpenapiFailedTask(p []models.OpenapiFailedTask, d *schema.ResourceData) []map[string]interface{} {
+	var openapifailedtasks []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		openapifailedtask := make(map[string]interface{})
+		openapifailedtask["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		openapifailedtask["class_id"] = item.GetClassId()
+		openapifailedtask["name"] = item.GetName()
+		openapifailedtask["object_type"] = item.GetObjectType()
+		openapifailedtask["path"] = item.GetPath()
+		openapifailedtask["reason"] = item.GetReason()
+		openapifailedtasks = append(openapifailedtasks, openapifailedtask)
+	}
+	return openapifailedtasks
+}
+func flattenListOpenapiKeyValuePair(p []models.OpenapiKeyValuePair, d *schema.ResourceData) []map[string]interface{} {
+	var openapikeyvaluepairs []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		openapikeyvaluepair := make(map[string]interface{})
+		openapikeyvaluepair["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		openapikeyvaluepair["class_id"] = item.GetClassId()
+		openapikeyvaluepair["key"] = item.GetKey()
+		openapikeyvaluepair["object_type"] = item.GetObjectType()
+		openapikeyvaluepair["value"] = item.GetValue()
+		openapikeyvaluepairs = append(openapikeyvaluepairs, openapikeyvaluepair)
+	}
+	return openapikeyvaluepairs
 }
 func flattenListOprsKvpair(p []models.OprsKvpair, d *schema.ResourceData) []map[string]interface{} {
 	var oprskvpairs []map[string]interface{}
@@ -5395,7 +5467,9 @@ func flattenListOsServerConfig(p []models.OsServerConfig, d *schema.ResourceData
 		})(item.GetAnswers(), d)
 		osserverconfig["class_id"] = item.GetClassId()
 		osserverconfig["error_msgs"] = item.GetErrorMsgs()
+		osserverconfig["initiator_wwpn"] = item.GetInitiatorWwpn()
 		osserverconfig["install_target"] = item.GetInstallTarget()
+		osserverconfig["lun_id"] = item.GetLunId()
 		osserverconfig["object_type"] = item.GetObjectType()
 		osserverconfig["operating_system_parameters"] = (func(p models.OsOperatingSystemParameters, d *schema.ResourceData) []map[string]interface{} {
 			var osoperatingsystemparameterss []map[string]interface{}
@@ -5428,6 +5502,9 @@ func flattenListOsServerConfig(p []models.OsServerConfig, d *schema.ResourceData
 			return osinstalltargets
 		})(item.GetProcessedInstallTarget(), d)
 		osserverconfig["serial_number"] = item.GetSerialNumber()
+		osserverconfig["target_iqn"] = item.GetTargetIqn()
+		osserverconfig["target_wwpn"] = item.GetTargetWwpn()
+		osserverconfig["vnic_mac"] = item.GetVnicMac()
 		osserverconfigs = append(osserverconfigs, osserverconfig)
 	}
 	return osserverconfigs
@@ -9563,6 +9640,8 @@ func flattenMapComputeAlarmSummary(p models.ComputeAlarmSummary, d *schema.Resou
 	computealarmsummary["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
 	computealarmsummary["class_id"] = item.GetClassId()
 	computealarmsummary["critical"] = item.GetCritical()
+	computealarmsummary["health"] = item.GetHealth()
+	computealarmsummary["info"] = item.GetInfo()
 	computealarmsummary["object_type"] = item.GetObjectType()
 	computealarmsummary["warning"] = item.GetWarning()
 
@@ -16356,11 +16435,66 @@ func flattenMapOnpremUpgradePhase(p models.OnpremUpgradePhase, d *schema.Resourc
 	onpremupgradephase["message"] = item.GetMessage()
 	onpremupgradephase["name"] = item.GetName()
 	onpremupgradephase["object_type"] = item.GetObjectType()
+	onpremupgradephase["retry_count"] = item.GetRetryCount()
 	onpremupgradephase["start_time"] = item.GetStartTime().String()
 	onpremupgradephase["status"] = item.GetStatus()
 
 	onpremupgradephases = append(onpremupgradephases, onpremupgradephase)
 	return onpremupgradephases
+}
+func flattenMapOpenapiOpenApiSpecificationRelationship(p models.OpenapiOpenApiSpecificationRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var openapiopenapispecificationrelationships []map[string]interface{}
+	var ret models.OpenapiOpenApiSpecificationRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	openapiopenapispecificationrelationship := make(map[string]interface{})
+	openapiopenapispecificationrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	openapiopenapispecificationrelationship["class_id"] = item.GetClassId()
+	openapiopenapispecificationrelationship["moid"] = item.GetMoid()
+	openapiopenapispecificationrelationship["object_type"] = item.GetObjectType()
+	openapiopenapispecificationrelationship["selector"] = item.GetSelector()
+
+	openapiopenapispecificationrelationships = append(openapiopenapispecificationrelationships, openapiopenapispecificationrelationship)
+	return openapiopenapispecificationrelationships
+}
+func flattenMapOpenapiProcessFileRelationship(p models.OpenapiProcessFileRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var openapiprocessfilerelationships []map[string]interface{}
+	var ret models.OpenapiProcessFileRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	openapiprocessfilerelationship := make(map[string]interface{})
+	openapiprocessfilerelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	openapiprocessfilerelationship["class_id"] = item.GetClassId()
+	openapiprocessfilerelationship["moid"] = item.GetMoid()
+	openapiprocessfilerelationship["object_type"] = item.GetObjectType()
+	openapiprocessfilerelationship["selector"] = item.GetSelector()
+
+	openapiprocessfilerelationships = append(openapiprocessfilerelationships, openapiprocessfilerelationship)
+	return openapiprocessfilerelationships
+}
+func flattenMapOpenapiTaskGenerationRequestRelationship(p models.OpenapiTaskGenerationRequestRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var openapitaskgenerationrequestrelationships []map[string]interface{}
+	var ret models.OpenapiTaskGenerationRequestRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	openapitaskgenerationrequestrelationship := make(map[string]interface{})
+	openapitaskgenerationrequestrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	openapitaskgenerationrequestrelationship["class_id"] = item.GetClassId()
+	openapitaskgenerationrequestrelationship["moid"] = item.GetMoid()
+	openapitaskgenerationrequestrelationship["object_type"] = item.GetObjectType()
+	openapitaskgenerationrequestrelationship["selector"] = item.GetSelector()
+
+	openapitaskgenerationrequestrelationships = append(openapitaskgenerationrequestrelationships, openapitaskgenerationrequestrelationship)
+	return openapitaskgenerationrequestrelationships
 }
 func flattenMapOrganizationOrganizationRelationship(p models.OrganizationOrganizationRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var organizationorganizationrelationships []map[string]interface{}

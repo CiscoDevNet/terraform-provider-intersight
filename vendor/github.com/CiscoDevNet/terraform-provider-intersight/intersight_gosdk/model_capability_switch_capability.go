@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-9783
+API version: 1.0.11-10371
 Contact: intersight@cisco.com
 */
 
@@ -38,17 +38,19 @@ type CapabilitySwitchCapability struct {
 	// Maximum allowed physical ports on this switch.
 	MaxPorts *int64 `json:"MaxPorts,omitempty"`
 	// Maximum allowed physical slots on this switch.
-	MaxSlots                  *int64                                `json:"MaxSlots,omitempty"`
-	NetworkLimits             NullableCapabilitySwitchNetworkLimits `json:"NetworkLimits,omitempty"`
-	PortsSupporting100gSpeed  []CapabilityPortRange                 `json:"PortsSupporting100gSpeed,omitempty"`
-	PortsSupporting10gSpeed   []CapabilityPortRange                 `json:"PortsSupporting10gSpeed,omitempty"`
-	PortsSupporting1gSpeed    []CapabilityPortRange                 `json:"PortsSupporting1gSpeed,omitempty"`
-	PortsSupporting25gSpeed   []CapabilityPortRange                 `json:"PortsSupporting25gSpeed,omitempty"`
-	PortsSupporting40gSpeed   []CapabilityPortRange                 `json:"PortsSupporting40gSpeed,omitempty"`
-	PortsSupportingBreakout   []CapabilityPortRange                 `json:"PortsSupportingBreakout,omitempty"`
-	PortsSupportingFcoe       []CapabilityPortRange                 `json:"PortsSupportingFcoe,omitempty"`
-	PortsSupportingServerRole []CapabilityPortRange                 `json:"PortsSupportingServerRole,omitempty"`
-	ReservedVsans             []CapabilityPortRange                 `json:"ReservedVsans,omitempty"`
+	MaxSlots *int64 `json:"MaxSlots,omitempty"`
+	// Minimum firmware version supported for locator leds on this switch.
+	MinVersionWithLocatorLedSupport *string                               `json:"MinVersionWithLocatorLedSupport,omitempty"`
+	NetworkLimits                   NullableCapabilitySwitchNetworkLimits `json:"NetworkLimits,omitempty"`
+	PortsSupporting100gSpeed        []CapabilityPortRange                 `json:"PortsSupporting100gSpeed,omitempty"`
+	PortsSupporting10gSpeed         []CapabilityPortRange                 `json:"PortsSupporting10gSpeed,omitempty"`
+	PortsSupporting1gSpeed          []CapabilityPortRange                 `json:"PortsSupporting1gSpeed,omitempty"`
+	PortsSupporting25gSpeed         []CapabilityPortRange                 `json:"PortsSupporting25gSpeed,omitempty"`
+	PortsSupporting40gSpeed         []CapabilityPortRange                 `json:"PortsSupporting40gSpeed,omitempty"`
+	PortsSupportingBreakout         []CapabilityPortRange                 `json:"PortsSupportingBreakout,omitempty"`
+	PortsSupportingFcoe             []CapabilityPortRange                 `json:"PortsSupportingFcoe,omitempty"`
+	PortsSupportingServerRole       []CapabilityPortRange                 `json:"PortsSupportingServerRole,omitempty"`
+	ReservedVsans                   []CapabilityPortRange                 `json:"ReservedVsans,omitempty"`
 	// Sereno Adaptor with Netflow support on this switch.
 	SerenoNetflowSupported    *bool                                 `json:"SerenoNetflowSupported,omitempty"`
 	StorageLimits             NullableCapabilitySwitchStorageLimits `json:"StorageLimits,omitempty"`
@@ -390,6 +392,38 @@ func (o *CapabilitySwitchCapability) HasMaxSlots() bool {
 // SetMaxSlots gets a reference to the given int64 and assigns it to the MaxSlots field.
 func (o *CapabilitySwitchCapability) SetMaxSlots(v int64) {
 	o.MaxSlots = &v
+}
+
+// GetMinVersionWithLocatorLedSupport returns the MinVersionWithLocatorLedSupport field value if set, zero value otherwise.
+func (o *CapabilitySwitchCapability) GetMinVersionWithLocatorLedSupport() string {
+	if o == nil || o.MinVersionWithLocatorLedSupport == nil {
+		var ret string
+		return ret
+	}
+	return *o.MinVersionWithLocatorLedSupport
+}
+
+// GetMinVersionWithLocatorLedSupportOk returns a tuple with the MinVersionWithLocatorLedSupport field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CapabilitySwitchCapability) GetMinVersionWithLocatorLedSupportOk() (*string, bool) {
+	if o == nil || o.MinVersionWithLocatorLedSupport == nil {
+		return nil, false
+	}
+	return o.MinVersionWithLocatorLedSupport, true
+}
+
+// HasMinVersionWithLocatorLedSupport returns a boolean if a field has been set.
+func (o *CapabilitySwitchCapability) HasMinVersionWithLocatorLedSupport() bool {
+	if o != nil && o.MinVersionWithLocatorLedSupport != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMinVersionWithLocatorLedSupport gets a reference to the given string and assigns it to the MinVersionWithLocatorLedSupport field.
+func (o *CapabilitySwitchCapability) SetMinVersionWithLocatorLedSupport(v string) {
+	o.MinVersionWithLocatorLedSupport = &v
 }
 
 // GetNetworkLimits returns the NetworkLimits field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -988,6 +1022,9 @@ func (o CapabilitySwitchCapability) MarshalJSON() ([]byte, error) {
 	if o.MaxSlots != nil {
 		toSerialize["MaxSlots"] = o.MaxSlots
 	}
+	if o.MinVersionWithLocatorLedSupport != nil {
+		toSerialize["MinVersionWithLocatorLedSupport"] = o.MinVersionWithLocatorLedSupport
+	}
 	if o.NetworkLimits.IsSet() {
 		toSerialize["NetworkLimits"] = o.NetworkLimits.Get()
 	}
@@ -1064,17 +1101,19 @@ func (o *CapabilitySwitchCapability) UnmarshalJSON(bytes []byte) (err error) {
 		// Maximum allowed physical ports on this switch.
 		MaxPorts *int64 `json:"MaxPorts,omitempty"`
 		// Maximum allowed physical slots on this switch.
-		MaxSlots                  *int64                                `json:"MaxSlots,omitempty"`
-		NetworkLimits             NullableCapabilitySwitchNetworkLimits `json:"NetworkLimits,omitempty"`
-		PortsSupporting100gSpeed  []CapabilityPortRange                 `json:"PortsSupporting100gSpeed,omitempty"`
-		PortsSupporting10gSpeed   []CapabilityPortRange                 `json:"PortsSupporting10gSpeed,omitempty"`
-		PortsSupporting1gSpeed    []CapabilityPortRange                 `json:"PortsSupporting1gSpeed,omitempty"`
-		PortsSupporting25gSpeed   []CapabilityPortRange                 `json:"PortsSupporting25gSpeed,omitempty"`
-		PortsSupporting40gSpeed   []CapabilityPortRange                 `json:"PortsSupporting40gSpeed,omitempty"`
-		PortsSupportingBreakout   []CapabilityPortRange                 `json:"PortsSupportingBreakout,omitempty"`
-		PortsSupportingFcoe       []CapabilityPortRange                 `json:"PortsSupportingFcoe,omitempty"`
-		PortsSupportingServerRole []CapabilityPortRange                 `json:"PortsSupportingServerRole,omitempty"`
-		ReservedVsans             []CapabilityPortRange                 `json:"ReservedVsans,omitempty"`
+		MaxSlots *int64 `json:"MaxSlots,omitempty"`
+		// Minimum firmware version supported for locator leds on this switch.
+		MinVersionWithLocatorLedSupport *string                               `json:"MinVersionWithLocatorLedSupport,omitempty"`
+		NetworkLimits                   NullableCapabilitySwitchNetworkLimits `json:"NetworkLimits,omitempty"`
+		PortsSupporting100gSpeed        []CapabilityPortRange                 `json:"PortsSupporting100gSpeed,omitempty"`
+		PortsSupporting10gSpeed         []CapabilityPortRange                 `json:"PortsSupporting10gSpeed,omitempty"`
+		PortsSupporting1gSpeed          []CapabilityPortRange                 `json:"PortsSupporting1gSpeed,omitempty"`
+		PortsSupporting25gSpeed         []CapabilityPortRange                 `json:"PortsSupporting25gSpeed,omitempty"`
+		PortsSupporting40gSpeed         []CapabilityPortRange                 `json:"PortsSupporting40gSpeed,omitempty"`
+		PortsSupportingBreakout         []CapabilityPortRange                 `json:"PortsSupportingBreakout,omitempty"`
+		PortsSupportingFcoe             []CapabilityPortRange                 `json:"PortsSupportingFcoe,omitempty"`
+		PortsSupportingServerRole       []CapabilityPortRange                 `json:"PortsSupportingServerRole,omitempty"`
+		ReservedVsans                   []CapabilityPortRange                 `json:"ReservedVsans,omitempty"`
 		// Sereno Adaptor with Netflow support on this switch.
 		SerenoNetflowSupported    *bool                                 `json:"SerenoNetflowSupported,omitempty"`
 		StorageLimits             NullableCapabilitySwitchStorageLimits `json:"StorageLimits,omitempty"`
@@ -1100,6 +1139,7 @@ func (o *CapabilitySwitchCapability) UnmarshalJSON(bytes []byte) (err error) {
 		varCapabilitySwitchCapability.LocatorBeaconSupported = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.LocatorBeaconSupported
 		varCapabilitySwitchCapability.MaxPorts = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.MaxPorts
 		varCapabilitySwitchCapability.MaxSlots = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.MaxSlots
+		varCapabilitySwitchCapability.MinVersionWithLocatorLedSupport = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.MinVersionWithLocatorLedSupport
 		varCapabilitySwitchCapability.NetworkLimits = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.NetworkLimits
 		varCapabilitySwitchCapability.PortsSupporting100gSpeed = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.PortsSupporting100gSpeed
 		varCapabilitySwitchCapability.PortsSupporting10gSpeed = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.PortsSupporting10gSpeed
@@ -1143,6 +1183,7 @@ func (o *CapabilitySwitchCapability) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "LocatorBeaconSupported")
 		delete(additionalProperties, "MaxPorts")
 		delete(additionalProperties, "MaxSlots")
+		delete(additionalProperties, "MinVersionWithLocatorLedSupport")
 		delete(additionalProperties, "NetworkLimits")
 		delete(additionalProperties, "PortsSupporting100gSpeed")
 		delete(additionalProperties, "PortsSupporting10gSpeed")

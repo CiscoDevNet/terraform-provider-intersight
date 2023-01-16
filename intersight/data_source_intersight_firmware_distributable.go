@@ -237,6 +237,11 @@ func getFirmwareDistributableSchema() map[string]*schema.Schema {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"feature_source": {
+			Description: "The name of the feature to which the uploaded file belongs.\n* `System` - This indicates system initiated file uploads.\n* `OpenAPIImport` - This indicates an OpenAPI file upload.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"file_location": {
 			Description: "The file location of the distributable.",
 			Type:        schema.TypeString,
@@ -938,6 +943,11 @@ func dataSourceFirmwareDistributableRead(c context.Context, d *schema.ResourceDa
 		o.SetDownloadCount(x)
 	}
 
+	if v, ok := d.GetOk("feature_source"); ok {
+		x := (v.(string))
+		o.SetFeatureSource(x)
+	}
+
 	if v, ok := d.GetOk("file_location"); ok {
 		x := (v.(string))
 		o.SetFileLocation(x)
@@ -1416,6 +1426,7 @@ func dataSourceFirmwareDistributableRead(c context.Context, d *schema.ResourceDa
 				temp["distributable_metas"] = flattenListFirmwareDistributableMetaRelationship(s.GetDistributableMetas(), d)
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["download_count"] = (s.GetDownloadCount())
+				temp["feature_source"] = (s.GetFeatureSource())
 				temp["file_location"] = (s.GetFileLocation())
 				temp["guid"] = (s.GetGuid())
 				temp["image_category"] = (s.GetImageCategory())

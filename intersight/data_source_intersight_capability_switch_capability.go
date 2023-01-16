@@ -153,6 +153,11 @@ func getCapabilitySwitchCapabilitySchema() map[string]*schema.Schema {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"min_version_with_locator_led_support": {
+			Description: "Minimum firmware version supported for locator leds on this switch.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -1237,6 +1242,11 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 	if v, ok := d.GetOkExists("max_slots"); ok {
 		x := int64(v.(int))
 		o.SetMaxSlots(x)
+	}
+
+	if v, ok := d.GetOk("min_version_with_locator_led_support"); ok {
+		x := (v.(string))
+		o.SetMinVersionWithLocatorLedSupport(x)
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
@@ -2333,6 +2343,7 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 				temp["locator_beacon_supported"] = (s.GetLocatorBeaconSupported())
 				temp["max_ports"] = (s.GetMaxPorts())
 				temp["max_slots"] = (s.GetMaxSlots())
+				temp["min_version_with_locator_led_support"] = (s.GetMinVersionWithLocatorLedSupport())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())

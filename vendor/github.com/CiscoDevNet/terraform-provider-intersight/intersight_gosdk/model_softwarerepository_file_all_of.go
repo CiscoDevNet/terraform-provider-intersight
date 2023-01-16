@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-9783
+API version: 1.0.11-10371
 Contact: intersight@cisco.com
 */
 
@@ -26,6 +26,8 @@ type SoftwarerepositoryFileAllOf struct {
 	Description *string `json:"Description,omitempty"`
 	// The number of times this file has been downloaded from the local repository. It is used by the repository monitoring process to determine the files that are to be evicted from the cache.
 	DownloadCount *int64 `json:"DownloadCount,omitempty"`
+	// The name of the feature to which the uploaded file belongs. * `System` - This indicates system initiated file uploads. * `OpenAPIImport` - This indicates an OpenAPI file upload.
+	FeatureSource *string `json:"FeatureSource,omitempty"`
 	// The action to be performed on the imported file. If 'PreCache' is set, the image will be cached in Appliance. Applicable in Intersight appliance deployment. If 'Evict' is set, the cached file will be removed. Applicable in Intersight appliance deployment. If 'GeneratePreSignedUploadUrl' is set, generates pre signed URL (s) for the file to be imported into the repository. Applicable for local machine source. The URL (s) will be populated under LocalMachine file server. If 'CompleteImportProcess' is set, the ImportState is marked as 'Imported'. Applicable for local machine source. If 'Cancel' is set, the ImportState is marked as 'Failed'. Applicable for local machine source. * `None` - No action should be taken on the imported file. * `GeneratePreSignedUploadUrl` - Generate pre signed URL of file for importing into the repository. * `GeneratePreSignedDownloadUrl` - Generate pre signed URL of file in the repository to download. * `CompleteImportProcess` - Mark that the import process of the file into the repository is complete. * `MarkImportFailed` - Mark to indicate that the import process of the file into the repository failed. * `PreCache` - Cache the file into the Intersight Appliance. * `Cancel` - The cancel import process for the file into the repository. * `Extract` - The action to extract the file in the external repository. * `Evict` - Evict the cached file from the Intersight Appliance.
 	ImportAction *string `json:"ImportAction,omitempty"`
 	// The state  of this file in the repository or Appliance. The importState is updated during the import operation and as part of the repository monitoring process. * `ReadyForImport` - The image is ready to be imported into the repository. * `Importing` - The image is being imported into the repository. * `Imported` - The image has been extracted and imported into the repository. * `PendingExtraction` - Indicates that the image has been imported but not extracted in the repository. * `Extracting` - Indicates that the image is being extracted into the repository. * `Extracted` - Indicates that the image has been extracted into the repository. * `Failed` - The image import from an external source to the repository has failed. * `MetaOnly` - The image is present in an external repository. * `ReadyForCache` - The image is ready to be cached into the Intersight Appliance. * `Caching` - Indicates that the image is being cached into the Intersight Appliance or endpoint cache. * `Cached` - Indicates that the image has been cached into the Intersight Appliance or endpoint cache. * `CachingFailed` - Indicates that the image caching into the Intersight Appliance failed or endpoint cache. * `Corrupted` - Indicates that the image in the local repository (or endpoint cache) has been corrupted after it was cached. * `Evicted` - Indicates that the image has been evicted from the Intersight Appliance (or endpoint cache) to reclaim storage space. * `Invalid` - Indicates that the corresponding distributable MO has been removed from the backend. This can be due to unpublishing of an image.
@@ -189,6 +191,38 @@ func (o *SoftwarerepositoryFileAllOf) HasDownloadCount() bool {
 // SetDownloadCount gets a reference to the given int64 and assigns it to the DownloadCount field.
 func (o *SoftwarerepositoryFileAllOf) SetDownloadCount(v int64) {
 	o.DownloadCount = &v
+}
+
+// GetFeatureSource returns the FeatureSource field value if set, zero value otherwise.
+func (o *SoftwarerepositoryFileAllOf) GetFeatureSource() string {
+	if o == nil || o.FeatureSource == nil {
+		var ret string
+		return ret
+	}
+	return *o.FeatureSource
+}
+
+// GetFeatureSourceOk returns a tuple with the FeatureSource field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SoftwarerepositoryFileAllOf) GetFeatureSourceOk() (*string, bool) {
+	if o == nil || o.FeatureSource == nil {
+		return nil, false
+	}
+	return o.FeatureSource, true
+}
+
+// HasFeatureSource returns a boolean if a field has been set.
+func (o *SoftwarerepositoryFileAllOf) HasFeatureSource() bool {
+	if o != nil && o.FeatureSource != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetFeatureSource gets a reference to the given string and assigns it to the FeatureSource field.
+func (o *SoftwarerepositoryFileAllOf) SetFeatureSource(v string) {
+	o.FeatureSource = &v
 }
 
 // GetImportAction returns the ImportAction field value if set, zero value otherwise.
@@ -632,6 +666,9 @@ func (o SoftwarerepositoryFileAllOf) MarshalJSON() ([]byte, error) {
 	if o.DownloadCount != nil {
 		toSerialize["DownloadCount"] = o.DownloadCount
 	}
+	if o.FeatureSource != nil {
+		toSerialize["FeatureSource"] = o.FeatureSource
+	}
 	if o.ImportAction != nil {
 		toSerialize["ImportAction"] = o.ImportAction
 	}
@@ -693,6 +730,7 @@ func (o *SoftwarerepositoryFileAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Description")
 		delete(additionalProperties, "DownloadCount")
+		delete(additionalProperties, "FeatureSource")
 		delete(additionalProperties, "ImportAction")
 		delete(additionalProperties, "ImportState")
 		delete(additionalProperties, "ImportedTime")

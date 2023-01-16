@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-9783
+API version: 1.0.11-10371
 Contact: intersight@cisco.com
 */
 
@@ -24,6 +24,10 @@ type CapabilityIoCardDescriptor struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// Identifies whether host port-channel is required to be configured for the iocard module.
+	NativeHifPortChannelRequired *bool `json:"NativeHifPortChannelRequired,omitempty"`
+	// Master port number for native speed configuration for the iocard module.
+	NativeSpeedMasterPortNum *int64 `json:"NativeSpeedMasterPortNum,omitempty"`
 	// Number of hif ports per blade for the iocard module.
 	NumHifPorts *int64 `json:"NumHifPorts,omitempty"`
 	// Revision for the iocard module.
@@ -43,6 +47,8 @@ func NewCapabilityIoCardDescriptor(classId string, objectType string) *Capabilit
 	this := CapabilityIoCardDescriptor{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var nativeHifPortChannelRequired bool = true
+	this.NativeHifPortChannelRequired = &nativeHifPortChannelRequired
 	var uifConnectivity string = "inline"
 	this.UifConnectivity = &uifConnectivity
 	return &this
@@ -57,6 +63,8 @@ func NewCapabilityIoCardDescriptorWithDefaults() *CapabilityIoCardDescriptor {
 	this.ClassId = classId
 	var objectType string = "capability.IoCardDescriptor"
 	this.ObjectType = objectType
+	var nativeHifPortChannelRequired bool = true
+	this.NativeHifPortChannelRequired = &nativeHifPortChannelRequired
 	var uifConnectivity string = "inline"
 	this.UifConnectivity = &uifConnectivity
 	return &this
@@ -108,6 +116,70 @@ func (o *CapabilityIoCardDescriptor) GetObjectTypeOk() (*string, bool) {
 // SetObjectType sets field value
 func (o *CapabilityIoCardDescriptor) SetObjectType(v string) {
 	o.ObjectType = v
+}
+
+// GetNativeHifPortChannelRequired returns the NativeHifPortChannelRequired field value if set, zero value otherwise.
+func (o *CapabilityIoCardDescriptor) GetNativeHifPortChannelRequired() bool {
+	if o == nil || o.NativeHifPortChannelRequired == nil {
+		var ret bool
+		return ret
+	}
+	return *o.NativeHifPortChannelRequired
+}
+
+// GetNativeHifPortChannelRequiredOk returns a tuple with the NativeHifPortChannelRequired field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CapabilityIoCardDescriptor) GetNativeHifPortChannelRequiredOk() (*bool, bool) {
+	if o == nil || o.NativeHifPortChannelRequired == nil {
+		return nil, false
+	}
+	return o.NativeHifPortChannelRequired, true
+}
+
+// HasNativeHifPortChannelRequired returns a boolean if a field has been set.
+func (o *CapabilityIoCardDescriptor) HasNativeHifPortChannelRequired() bool {
+	if o != nil && o.NativeHifPortChannelRequired != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNativeHifPortChannelRequired gets a reference to the given bool and assigns it to the NativeHifPortChannelRequired field.
+func (o *CapabilityIoCardDescriptor) SetNativeHifPortChannelRequired(v bool) {
+	o.NativeHifPortChannelRequired = &v
+}
+
+// GetNativeSpeedMasterPortNum returns the NativeSpeedMasterPortNum field value if set, zero value otherwise.
+func (o *CapabilityIoCardDescriptor) GetNativeSpeedMasterPortNum() int64 {
+	if o == nil || o.NativeSpeedMasterPortNum == nil {
+		var ret int64
+		return ret
+	}
+	return *o.NativeSpeedMasterPortNum
+}
+
+// GetNativeSpeedMasterPortNumOk returns a tuple with the NativeSpeedMasterPortNum field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CapabilityIoCardDescriptor) GetNativeSpeedMasterPortNumOk() (*int64, bool) {
+	if o == nil || o.NativeSpeedMasterPortNum == nil {
+		return nil, false
+	}
+	return o.NativeSpeedMasterPortNum, true
+}
+
+// HasNativeSpeedMasterPortNum returns a boolean if a field has been set.
+func (o *CapabilityIoCardDescriptor) HasNativeSpeedMasterPortNum() bool {
+	if o != nil && o.NativeSpeedMasterPortNum != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNativeSpeedMasterPortNum gets a reference to the given int64 and assigns it to the NativeSpeedMasterPortNum field.
+func (o *CapabilityIoCardDescriptor) SetNativeSpeedMasterPortNum(v int64) {
+	o.NativeSpeedMasterPortNum = &v
 }
 
 // GetNumHifPorts returns the NumHifPorts field value if set, zero value otherwise.
@@ -222,6 +294,12 @@ func (o CapabilityIoCardDescriptor) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.NativeHifPortChannelRequired != nil {
+		toSerialize["NativeHifPortChannelRequired"] = o.NativeHifPortChannelRequired
+	}
+	if o.NativeSpeedMasterPortNum != nil {
+		toSerialize["NativeSpeedMasterPortNum"] = o.NativeSpeedMasterPortNum
+	}
 	if o.NumHifPorts != nil {
 		toSerialize["NumHifPorts"] = o.NumHifPorts
 	}
@@ -245,6 +323,10 @@ func (o *CapabilityIoCardDescriptor) UnmarshalJSON(bytes []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
+		// Identifies whether host port-channel is required to be configured for the iocard module.
+		NativeHifPortChannelRequired *bool `json:"NativeHifPortChannelRequired,omitempty"`
+		// Master port number for native speed configuration for the iocard module.
+		NativeSpeedMasterPortNum *int64 `json:"NativeSpeedMasterPortNum,omitempty"`
 		// Number of hif ports per blade for the iocard module.
 		NumHifPorts *int64 `json:"NumHifPorts,omitempty"`
 		// Revision for the iocard module.
@@ -260,6 +342,8 @@ func (o *CapabilityIoCardDescriptor) UnmarshalJSON(bytes []byte) (err error) {
 		varCapabilityIoCardDescriptor := _CapabilityIoCardDescriptor{}
 		varCapabilityIoCardDescriptor.ClassId = varCapabilityIoCardDescriptorWithoutEmbeddedStruct.ClassId
 		varCapabilityIoCardDescriptor.ObjectType = varCapabilityIoCardDescriptorWithoutEmbeddedStruct.ObjectType
+		varCapabilityIoCardDescriptor.NativeHifPortChannelRequired = varCapabilityIoCardDescriptorWithoutEmbeddedStruct.NativeHifPortChannelRequired
+		varCapabilityIoCardDescriptor.NativeSpeedMasterPortNum = varCapabilityIoCardDescriptorWithoutEmbeddedStruct.NativeSpeedMasterPortNum
 		varCapabilityIoCardDescriptor.NumHifPorts = varCapabilityIoCardDescriptorWithoutEmbeddedStruct.NumHifPorts
 		varCapabilityIoCardDescriptor.Revision = varCapabilityIoCardDescriptorWithoutEmbeddedStruct.Revision
 		varCapabilityIoCardDescriptor.UifConnectivity = varCapabilityIoCardDescriptorWithoutEmbeddedStruct.UifConnectivity
@@ -282,6 +366,8 @@ func (o *CapabilityIoCardDescriptor) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "NativeHifPortChannelRequired")
+		delete(additionalProperties, "NativeSpeedMasterPortNum")
 		delete(additionalProperties, "NumHifPorts")
 		delete(additionalProperties, "Revision")
 		delete(additionalProperties, "UifConnectivity")

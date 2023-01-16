@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **StopWorkflows** | Pointer to [**[]WorkflowServiceItemActionWorkflowDefinition**](WorkflowServiceItemActionWorkflowDefinition.md) |  | [optional] 
 **ValidationInformation** | Pointer to [**NullableWorkflowValidationInformation**](WorkflowValidationInformation.md) |  | [optional] 
 **ValidationWorkflows** | Pointer to [**[]WorkflowServiceItemActionWorkflowDefinition**](WorkflowServiceItemActionWorkflowDefinition.md) |  | [optional] 
+**AssociatedRoles** | Pointer to [**[]IamRoleRelationship**](IamRoleRelationship.md) | An array of relationships to iamRole resources. | [optional] 
 **ServiceItemDefinition** | Pointer to [**WorkflowServiceItemDefinitionRelationship**](WorkflowServiceItemDefinitionRelationship.md) |  | [optional] 
 **WorkflowDefinition** | Pointer to [**WorkflowWorkflowDefinitionRelationship**](WorkflowWorkflowDefinitionRelationship.md) |  | [optional] 
 
@@ -548,6 +549,41 @@ HasValidationWorkflows returns a boolean if a field has been set.
 `func (o *WorkflowServiceItemActionDefinition) UnsetValidationWorkflows()`
 
 UnsetValidationWorkflows ensures that no value is present for ValidationWorkflows, not even an explicit nil
+### GetAssociatedRoles
+
+`func (o *WorkflowServiceItemActionDefinition) GetAssociatedRoles() []IamRoleRelationship`
+
+GetAssociatedRoles returns the AssociatedRoles field if non-nil, zero value otherwise.
+
+### GetAssociatedRolesOk
+
+`func (o *WorkflowServiceItemActionDefinition) GetAssociatedRolesOk() (*[]IamRoleRelationship, bool)`
+
+GetAssociatedRolesOk returns a tuple with the AssociatedRoles field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAssociatedRoles
+
+`func (o *WorkflowServiceItemActionDefinition) SetAssociatedRoles(v []IamRoleRelationship)`
+
+SetAssociatedRoles sets AssociatedRoles field to given value.
+
+### HasAssociatedRoles
+
+`func (o *WorkflowServiceItemActionDefinition) HasAssociatedRoles() bool`
+
+HasAssociatedRoles returns a boolean if a field has been set.
+
+### SetAssociatedRolesNil
+
+`func (o *WorkflowServiceItemActionDefinition) SetAssociatedRolesNil(b bool)`
+
+ SetAssociatedRolesNil sets the value for AssociatedRoles to be an explicit nil
+
+### UnsetAssociatedRoles
+`func (o *WorkflowServiceItemActionDefinition) UnsetAssociatedRoles()`
+
+UnsetAssociatedRoles ensures that no value is present for AssociatedRoles, not even an explicit nil
 ### GetServiceItemDefinition
 
 `func (o *WorkflowServiceItemActionDefinition) GetServiceItemDefinition() WorkflowServiceItemDefinitionRelationship`

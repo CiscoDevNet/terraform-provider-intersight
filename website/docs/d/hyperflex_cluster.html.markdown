@@ -49,4 +49,5 @@ The following arguments can be used to get data of already created objects in In
 * `utilization_percentage`:(float) The storage utilization percentage is computed based on total capacity and current capacity utilization. 
 * `utilization_trend_percentage`:(float) The storage utilization trend percentage represents the trend in percentage computed using the first and last point from historical data. 
 * `vm_count`:(int) The number of virtual machines present on this cluster. 
+* `zone_type`:(string) The type of availability zone used by the cluster. Physical zones are always used in HyperFlex Stretched Clusters. Logical zones may be used if a cluster has Logical Availability Zones (LAZ) enabled.* `UNKNOWN` - The type of zone configured on the HyperFlex cluster is not known.* `NOT_CONFIGURED` - The zone type is not configured.* `LOGICAL` - The zone is a logical zone created when the logical availability zones (LAZ) feature is enabled on the HyperFlex cluster.* `PHYSICAL` - The zone is a physical zone configured on a stretched HyperFlex cluster. 
  

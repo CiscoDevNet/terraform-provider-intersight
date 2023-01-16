@@ -846,9 +846,33 @@ func resourceOsBulkInstallInfo() *schema.Resource {
 								Type: schema.TypeString,
 							}, ForceNew: true,
 						},
+						"initiator_wwpn": {
+							Description: "The WWPN Address of the underlying fibre channel interface at the host side used for SAN accesss. Value must be in hexadecimal format xx:xx:xx:xx:xx:xx:xx:xx.  For example, 20:00:D4:C9:3C:35:02:01.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}, ForceNew: true,
+						},
 						"install_target": {
 							Description: "The target in which OS installation triggered, the value represented is StorageControllerID follwed by PhysicalDisk SerialNumber in case of Physcial disk or VirtualDriveId for virtual drive.",
 							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}, ForceNew: true,
+						},
+						"lun_id": {
+							Description: "The Logical Unit Number (LUN) of the install target.",
+							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
 							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
@@ -933,6 +957,42 @@ func resourceOsBulkInstallInfo() *schema.Resource {
 						},
 						"serial_number": {
 							Description: "The Serial Number of the server.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}, ForceNew: true,
+						},
+						"target_iqn": {
+							Description: "IQN (iSCSI qualified name) of Storage iSCSI target. Can be up to 255 characters long and has the following format, iqn.yyyy-mm.naming-authority:unique_name.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}, ForceNew: true,
+						},
+						"target_wwpn": {
+							Description: "The WWPN Address of the underlying fibre channel interface at the target used by the storage. Value must be in hexadecimal format xx:xx:xx:xx:xx:xx:xx:xx.  For example, 51:4F:0C:50:14:1F:AF:01.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}, ForceNew: true,
+						},
+						"vnic_mac": {
+							Description: "MAC address of the VNIC used as iSCSI initiator interface.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,

@@ -12,7 +12,8 @@ Name | Type | Description | Notes
 **EndTime** | Pointer to **time.Time** | End date of the software upgrade phase. | [optional] [readonly] 
 **Failed** | Pointer to **bool** | Indicates if the upgrade phase has failed or not. | [optional] [readonly] 
 **Message** | Pointer to **string** | Status message set during the upgrade phase. | [optional] [readonly] 
-**Name** | Pointer to **string** | Name of the upgrade phase. * &#x60;init&#x60; - Upgrade service initialization phase. * &#x60;CheckCluster&#x60; - For a multinode system, check that all nodes in the cluster are connected and running. * &#x60;SyncImages&#x60; - For a multinode system, sync image files between nodes. * &#x60;Prepare&#x60; - Upgrade service prepares folders and templated files. * &#x60;ServiceLoad&#x60; - Upgrade service loads the service images into the local docker cache. * &#x60;UiLoad&#x60; - Upgrade service loads the UI packages into the local cache. * &#x60;GenerateConfig&#x60; - Upgrade service generates the Kubernetes configuration files. * &#x60;DeployService&#x60; - Upgrade service deploys the Kubernetes services. * &#x60;UpgradeOS&#x60; - Run /opt/cisco/bin/onprem-upgrade-start.sh for each node. * &#x60;UpgradeServices&#x60; - Run /opt/cisco/bin/onprem-upgrade-start.sh per node. * &#x60;FinishUpgrade&#x60; - Run /opt/cisco/bin/onprem-upgrade-finish.sh for each node. * &#x60;Success&#x60; - Upgrade completed successfully. * &#x60;Fail&#x60; - Indicates that the upgrade process has failed. * &#x60;Cancel&#x60; - Indicates that the upgrade was canceled by the Intersight Appliance. * &#x60;Telemetry&#x60; - Upgrade service sends basic telemetry data to the Intersight. | [optional] [readonly] [default to "init"]
+**Name** | Pointer to **string** | Name of the upgrade phase. * &#x60;init&#x60; - Upgrade service initialization phase. * &#x60;CheckCluster&#x60; - For a multinode system, check that all nodes in the cluster are connected and running. * &#x60;SyncImages&#x60; - For a multinode system, sync image files between nodes. * &#x60;Prepare&#x60; - Upgrade service prepares folders and templated files. * &#x60;ServiceLoad&#x60; - Upgrade service loads the service images into the local docker cache. * &#x60;UiLoad&#x60; - Upgrade service loads the UI packages into the local cache. * &#x60;GenerateConfig&#x60; - Upgrade service generates the Kubernetes configuration files. * &#x60;DeployService&#x60; - Upgrade service deploys the Kubernetes services. * &#x60;UpgradeOS&#x60; - Run /opt/cisco/bin/onprem-upgrade-start.sh for each node. * &#x60;UpgradeServices&#x60; - Run /opt/cisco/bin/onprem-upgrade-start.sh per node. * &#x60;VerifyPlaybookSuccess&#x60; - Verify the upgrade playbook for UpgradeOS or UpgradeServices completed successfully. * &#x60;FinishUpgrade&#x60; - Run /opt/cisco/bin/onprem-upgrade-finish.sh for each node. * &#x60;Success&#x60; - Upgrade completed successfully. * &#x60;Fail&#x60; - Indicates that the upgrade process has failed. * &#x60;Cancel&#x60; - Indicates that the upgrade was canceled by the Intersight Appliance. * &#x60;Telemetry&#x60; - Upgrade service sends basic telemetry data to the Intersight. | [optional] [readonly] [default to "init"]
+**RetryCount** | Pointer to **int64** | Retry count of the upgrade phase. | [optional] [readonly] 
 **StartTime** | Pointer to **time.Time** | Start date of the software upgrade phase. | [optional] [readonly] 
 **Status** | Pointer to **string** | Status of the upgrade phase. | [optional] [readonly] 
 
@@ -249,6 +250,31 @@ SetName sets Name field to given value.
 `func (o *OnpremUpgradePhaseAllOf) HasName() bool`
 
 HasName returns a boolean if a field has been set.
+
+### GetRetryCount
+
+`func (o *OnpremUpgradePhaseAllOf) GetRetryCount() int64`
+
+GetRetryCount returns the RetryCount field if non-nil, zero value otherwise.
+
+### GetRetryCountOk
+
+`func (o *OnpremUpgradePhaseAllOf) GetRetryCountOk() (*int64, bool)`
+
+GetRetryCountOk returns a tuple with the RetryCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRetryCount
+
+`func (o *OnpremUpgradePhaseAllOf) SetRetryCount(v int64)`
+
+SetRetryCount sets RetryCount field to given value.
+
+### HasRetryCount
+
+`func (o *OnpremUpgradePhaseAllOf) HasRetryCount() bool`
+
+HasRetryCount returns a boolean if a field has been set.
 
 ### GetStartTime
 

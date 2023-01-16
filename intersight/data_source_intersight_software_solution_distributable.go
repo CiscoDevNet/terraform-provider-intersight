@@ -237,6 +237,11 @@ func getSoftwareSolutionDistributableSchema() map[string]*schema.Schema {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"feature_source": {
+			Description: "The name of the feature to which the uploaded file belongs.\n* `System` - This indicates system initiated file uploads.\n* `OpenAPIImport` - This indicates an OpenAPI file upload.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"file_path": {
 			Description: "The path of the file in S3/minio bucket.",
 			Type:        schema.TypeString,
@@ -938,6 +943,11 @@ func dataSourceSoftwareSolutionDistributableRead(c context.Context, d *schema.Re
 		o.SetDownloadCount(x)
 	}
 
+	if v, ok := d.GetOk("feature_source"); ok {
+		x := (v.(string))
+		o.SetFeatureSource(x)
+	}
+
 	if v, ok := d.GetOk("file_path"); ok {
 		x := (v.(string))
 		o.SetFilePath(x)
@@ -1416,6 +1426,7 @@ func dataSourceSoftwareSolutionDistributableRead(c context.Context, d *schema.Re
 				temp["distributable_metas"] = flattenListFirmwareDistributableMetaRelationship(s.GetDistributableMetas(), d)
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["download_count"] = (s.GetDownloadCount())
+				temp["feature_source"] = (s.GetFeatureSource())
 				temp["file_path"] = (s.GetFilePath())
 				temp["guid"] = (s.GetGuid())
 				temp["image_type"] = (s.GetImageType())

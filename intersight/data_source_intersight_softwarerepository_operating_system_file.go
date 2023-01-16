@@ -120,6 +120,11 @@ func getSoftwarerepositoryOperatingSystemFileSchema() map[string]*schema.Schema 
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"feature_source": {
+			Description: "The name of the feature to which the uploaded file belongs.\n* `System` - This indicates system initiated file uploads.\n* `OpenAPIImport` - This indicates an OpenAPI file upload.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"import_action": {
 			Description: "The action to be performed on the imported file. If 'PreCache' is set, the image will be cached in Appliance. Applicable in Intersight appliance deployment. If 'Evict' is set, the cached file will be removed. Applicable in Intersight appliance deployment. If 'GeneratePreSignedUploadUrl' is set, generates pre signed URL (s) for the file to be imported into the repository. Applicable for local machine source. The URL (s) will be populated under LocalMachine file server. If 'CompleteImportProcess' is set, the ImportState is marked as 'Imported'. Applicable for local machine source. If 'Cancel' is set, the ImportState is marked as 'Failed'. Applicable for local machine source.\n* `None` - No action should be taken on the imported file.\n* `GeneratePreSignedUploadUrl` - Generate pre signed URL of file for importing into the repository.\n* `GeneratePreSignedDownloadUrl` - Generate pre signed URL of file in the repository to download.\n* `CompleteImportProcess` - Mark that the import process of the file into the repository is complete.\n* `MarkImportFailed` - Mark to indicate that the import process of the file into the repository failed.\n* `PreCache` - Cache the file into the Intersight Appliance.\n* `Cancel` - The cancel import process for the file into the repository.\n* `Extract` - The action to extract the file in the external repository.\n* `Evict` - Evict the cached file from the Intersight Appliance.",
 			Type:        schema.TypeString,
@@ -579,6 +584,11 @@ func dataSourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *s
 		o.SetDownloadCount(x)
 	}
 
+	if v, ok := d.GetOk("feature_source"); ok {
+		x := (v.(string))
+		o.SetFeatureSource(x)
+	}
+
 	if v, ok := d.GetOk("import_action"); ok {
 		x := (v.(string))
 		o.SetImportAction(x)
@@ -943,6 +953,7 @@ func dataSourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *s
 				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["download_count"] = (s.GetDownloadCount())
+				temp["feature_source"] = (s.GetFeatureSource())
 				temp["import_action"] = (s.GetImportAction())
 				temp["import_state"] = (s.GetImportState())
 

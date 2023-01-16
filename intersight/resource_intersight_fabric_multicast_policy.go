@@ -307,6 +307,13 @@ func resourceFabricMulticastPolicy() *schema.Resource {
 				Optional:     true,
 				Default:      "Enabled",
 			},
+			"src_ip_proxy": {
+				Description:  "Administrative state of the IGMP source IP proxy for this VLAN.\n* `Enabled` - Admin configured Enabled State.\n* `Disabled` - Admin configured Disabled State.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Enabled", "Disabled"}, false),
+				Optional:     true,
+				Default:      "Enabled",
+			},
 			"tags": {
 				Type:       schema.TypeList,
 				Optional:   true,
@@ -575,6 +582,11 @@ func resourceFabricMulticastPolicyCreate(c context.Context, d *schema.ResourceDa
 		o.SetSnoopingState(x)
 	}
 
+	if v, ok := d.GetOk("src_ip_proxy"); ok {
+		x := (v.(string))
+		o.SetSrcIpProxy(x)
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -725,6 +737,10 @@ func resourceFabricMulticastPolicyRead(c context.Context, d *schema.ResourceData
 		return diag.Errorf("error occurred while setting property SnoopingState in FabricMulticastPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("src_ip_proxy", (s.GetSrcIpProxy())); err != nil {
+		return diag.Errorf("error occurred while setting property SrcIpProxy in FabricMulticastPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Tags in FabricMulticastPolicy object: %s", err.Error())
 	}
@@ -842,6 +858,12 @@ func resourceFabricMulticastPolicyUpdate(c context.Context, d *schema.ResourceDa
 		v := d.Get("snooping_state")
 		x := (v.(string))
 		o.SetSnoopingState(x)
+	}
+
+	if d.HasChange("src_ip_proxy") {
+		v := d.Get("src_ip_proxy")
+		x := (v.(string))
+		o.SetSrcIpProxy(x)
 	}
 
 	if d.HasChange("tags") {

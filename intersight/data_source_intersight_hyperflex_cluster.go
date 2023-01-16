@@ -1174,6 +1174,11 @@ func getHyperflexClusterSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"zone_type": {
+			Description: "The type of availability zone used by the cluster. Physical zones are always used in HyperFlex \nStretched Clusters. Logical zones may be used if a cluster has Logical Availability Zones (LAZ) \nenabled.\n* `UNKNOWN` - The type of zone configured on the HyperFlex cluster is not known.\n* `NOT_CONFIGURED` - The zone type is not configured.\n* `LOGICAL` - The zone is a logical zone created when the logical availability zones (LAZ) feature is enabled on the HyperFlex cluster.\n* `PHYSICAL` - The zone is a physical zone configured on a stretched HyperFlex cluster.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 	}
 	return schemaMap
 }
@@ -2246,6 +2251,11 @@ func dataSourceHyperflexClusterRead(c context.Context, d *schema.ResourceData, m
 		o.SetVolumes(x)
 	}
 
+	if v, ok := d.GetOk("zone_type"); ok {
+		x := (v.(string))
+		o.SetZoneType(x)
+	}
+
 	data, err := o.MarshalJSON()
 	if err != nil {
 		return diag.Errorf("json marshal of HyperflexCluster object failed with error : %s", err.Error())
@@ -2362,6 +2372,7 @@ func dataSourceHyperflexClusterRead(c context.Context, d *schema.ResourceData, m
 				temp["vm_count"] = (s.GetVmCount())
 
 				temp["volumes"] = flattenListStorageHyperFlexVolumeRelationship(s.GetVolumes(), d)
+				temp["zone_type"] = (s.GetZoneType())
 				hyperflexClusterResults = append(hyperflexClusterResults, temp)
 			}
 		}

@@ -172,6 +172,17 @@ func resourceCapabilityIoCardDescriptor() *schema.Resource {
 				Computed:    true,
 				ForceNew:    true,
 			},
+			"native_hif_port_channel_required": {
+				Description: "Identifies whether host port-channel is required to be configured for the iocard module.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     true,
+			},
+			"native_speed_master_port_num": {
+				Description: "Master port number for native speed configuration for the iocard module.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
 			"num_hif_ports": {
 				Description: "Number of hif ports per blade for the iocard module.",
 				Type:        schema.TypeInt,
@@ -548,6 +559,16 @@ func resourceCapabilityIoCardDescriptorCreate(c context.Context, d *schema.Resou
 		o.SetMoid(x)
 	}
 
+	if v, ok := d.GetOkExists("native_hif_port_channel_required"); ok {
+		x := (v.(bool))
+		o.SetNativeHifPortChannelRequired(x)
+	}
+
+	if v, ok := d.GetOkExists("native_speed_master_port_num"); ok {
+		x := int64(v.(int))
+		o.SetNativeSpeedMasterPortNum(x)
+	}
+
 	if v, ok := d.GetOkExists("num_hif_ports"); ok {
 		x := int64(v.(int))
 		o.SetNumHifPorts(x)
@@ -689,6 +710,14 @@ func resourceCapabilityIoCardDescriptorRead(c context.Context, d *schema.Resourc
 		return diag.Errorf("error occurred while setting property Moid in CapabilityIoCardDescriptor object: %s", err.Error())
 	}
 
+	if err := d.Set("native_hif_port_channel_required", (s.GetNativeHifPortChannelRequired())); err != nil {
+		return diag.Errorf("error occurred while setting property NativeHifPortChannelRequired in CapabilityIoCardDescriptor object: %s", err.Error())
+	}
+
+	if err := d.Set("native_speed_master_port_num", (s.GetNativeSpeedMasterPortNum())); err != nil {
+		return diag.Errorf("error occurred while setting property NativeSpeedMasterPortNum in CapabilityIoCardDescriptor object: %s", err.Error())
+	}
+
 	if err := d.Set("num_hif_ports", (s.GetNumHifPorts())); err != nil {
 		return diag.Errorf("error occurred while setting property NumHifPorts in CapabilityIoCardDescriptor object: %s", err.Error())
 	}
@@ -817,6 +846,18 @@ func resourceCapabilityIoCardDescriptorUpdate(c context.Context, d *schema.Resou
 		v := d.Get("moid")
 		x := (v.(string))
 		o.SetMoid(x)
+	}
+
+	if d.HasChange("native_hif_port_channel_required") {
+		v := d.Get("native_hif_port_channel_required")
+		x := (v.(bool))
+		o.SetNativeHifPortChannelRequired(x)
+	}
+
+	if d.HasChange("native_speed_master_port_num") {
+		v := d.Get("native_speed_master_port_num")
+		x := int64(v.(int))
+		o.SetNativeSpeedMasterPortNum(x)
 	}
 
 	if d.HasChange("num_hif_ports") {

@@ -57,6 +57,7 @@ Name | Type | Description | Notes
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **LicenseFile** | Pointer to [**[]NetworkLicenseFileRelationship**](NetworkLicenseFileRelationship.md) | An array of relationships to networkLicenseFile resources. | [optional] 
 **LldpNeighbor** | Pointer to [**[]NetworkDiscoveredNeighborRelationship**](NetworkDiscoveredNeighborRelationship.md) | An array of relationships to networkDiscoveredNeighbor resources. | [optional] [readonly] 
+**LocatorLed** | Pointer to [**EquipmentLocatorLedRelationship**](EquipmentLocatorLedRelationship.md) |  | [optional] 
 **ManagementController** | Pointer to [**ManagementControllerRelationship**](ManagementControllerRelationship.md) |  | [optional] 
 **ManagementEntity** | Pointer to [**ManagementEntityRelationship**](ManagementEntityRelationship.md) |  | [optional] 
 **NetworkFcZoneInfo** | Pointer to [**NetworkFcZoneInfoRelationship**](NetworkFcZoneInfoRelationship.md) |  | [optional] 
@@ -1530,6 +1531,31 @@ HasLldpNeighbor returns a boolean if a field has been set.
 `func (o *NetworkElement) UnsetLldpNeighbor()`
 
 UnsetLldpNeighbor ensures that no value is present for LldpNeighbor, not even an explicit nil
+### GetLocatorLed
+
+`func (o *NetworkElement) GetLocatorLed() EquipmentLocatorLedRelationship`
+
+GetLocatorLed returns the LocatorLed field if non-nil, zero value otherwise.
+
+### GetLocatorLedOk
+
+`func (o *NetworkElement) GetLocatorLedOk() (*EquipmentLocatorLedRelationship, bool)`
+
+GetLocatorLedOk returns a tuple with the LocatorLed field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLocatorLed
+
+`func (o *NetworkElement) SetLocatorLed(v EquipmentLocatorLedRelationship)`
+
+SetLocatorLed sets LocatorLed field to given value.
+
+### HasLocatorLed
+
+`func (o *NetworkElement) HasLocatorLed() bool`
+
+HasLocatorLed returns a boolean if a field has been set.
+
 ### GetManagementController
 
 `func (o *NetworkElement) GetManagementController() ManagementControllerRelationship`

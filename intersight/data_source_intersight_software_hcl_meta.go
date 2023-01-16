@@ -242,6 +242,11 @@ func getSoftwareHclMetaSchema() map[string]*schema.Schema {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"feature_source": {
+			Description: "The name of the feature to which the uploaded file belongs.\n* `System` - This indicates system initiated file uploads.\n* `OpenAPIImport` - This indicates an OpenAPI file upload.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"guid": {
 			Description: "The unique identifier for an image in a Cisco repository.",
 			Type:        schema.TypeString,
@@ -933,6 +938,11 @@ func dataSourceSoftwareHclMetaRead(c context.Context, d *schema.ResourceData, me
 		o.SetDownloadCount(x)
 	}
 
+	if v, ok := d.GetOk("feature_source"); ok {
+		x := (v.(string))
+		o.SetFeatureSource(x)
+	}
+
 	if v, ok := d.GetOk("guid"); ok {
 		x := (v.(string))
 		o.SetGuid(x)
@@ -1397,6 +1407,7 @@ func dataSourceSoftwareHclMetaRead(c context.Context, d *schema.ResourceData, me
 				temp["distributable_metas"] = flattenListFirmwareDistributableMetaRelationship(s.GetDistributableMetas(), d)
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["download_count"] = (s.GetDownloadCount())
+				temp["feature_source"] = (s.GetFeatureSource())
 				temp["guid"] = (s.GetGuid())
 				temp["image_type"] = (s.GetImageType())
 				temp["import_action"] = (s.GetImportAction())

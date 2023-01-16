@@ -6,6 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "capability.IoCardDescriptor"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "capability.IoCardDescriptor"]
+**NativeHifPortChannelRequired** | Pointer to **bool** | Identifies whether host port-channel is required to be configured for the iocard module. | [optional] [default to true]
+**NativeSpeedMasterPortNum** | Pointer to **int64** | Master port number for native speed configuration for the iocard module. | [optional] 
 **NumHifPorts** | Pointer to **int64** | Number of hif ports per blade for the iocard module. | [optional] 
 **Revision** | Pointer to **string** | Revision for the iocard module. | [optional] 
 **UifConnectivity** | Pointer to **string** | Connectivity information between UIF Uplink ports and IOM ports. * &#x60;inline&#x60; - UIF uplink ports and IOM ports are connected inline. * &#x60;cross-connected&#x60; - UIF uplink ports and IOM ports are cross-connected, a case in washington chassis. | [optional] [default to "inline"]
@@ -68,6 +70,56 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetNativeHifPortChannelRequired
+
+`func (o *CapabilityIoCardDescriptor) GetNativeHifPortChannelRequired() bool`
+
+GetNativeHifPortChannelRequired returns the NativeHifPortChannelRequired field if non-nil, zero value otherwise.
+
+### GetNativeHifPortChannelRequiredOk
+
+`func (o *CapabilityIoCardDescriptor) GetNativeHifPortChannelRequiredOk() (*bool, bool)`
+
+GetNativeHifPortChannelRequiredOk returns a tuple with the NativeHifPortChannelRequired field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNativeHifPortChannelRequired
+
+`func (o *CapabilityIoCardDescriptor) SetNativeHifPortChannelRequired(v bool)`
+
+SetNativeHifPortChannelRequired sets NativeHifPortChannelRequired field to given value.
+
+### HasNativeHifPortChannelRequired
+
+`func (o *CapabilityIoCardDescriptor) HasNativeHifPortChannelRequired() bool`
+
+HasNativeHifPortChannelRequired returns a boolean if a field has been set.
+
+### GetNativeSpeedMasterPortNum
+
+`func (o *CapabilityIoCardDescriptor) GetNativeSpeedMasterPortNum() int64`
+
+GetNativeSpeedMasterPortNum returns the NativeSpeedMasterPortNum field if non-nil, zero value otherwise.
+
+### GetNativeSpeedMasterPortNumOk
+
+`func (o *CapabilityIoCardDescriptor) GetNativeSpeedMasterPortNumOk() (*int64, bool)`
+
+GetNativeSpeedMasterPortNumOk returns a tuple with the NativeSpeedMasterPortNum field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNativeSpeedMasterPortNum
+
+`func (o *CapabilityIoCardDescriptor) SetNativeSpeedMasterPortNum(v int64)`
+
+SetNativeSpeedMasterPortNum sets NativeSpeedMasterPortNum field to given value.
+
+### HasNativeSpeedMasterPortNum
+
+`func (o *CapabilityIoCardDescriptor) HasNativeSpeedMasterPortNum() bool`
+
+HasNativeSpeedMasterPortNum returns a boolean if a field has been set.
 
 ### GetNumHifPorts
 

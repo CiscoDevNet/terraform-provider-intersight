@@ -303,6 +303,17 @@ func resourceSoftwareSolutionDistributable() *schema.Resource {
 					}
 					return
 				}},
+			"feature_source": {
+				Description: "The name of the feature to which the uploaded file belongs.\n* `System` - This indicates system initiated file uploads.\n* `OpenAPIImport` - This indicates an OpenAPI file upload.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"file_path": {
 				Description: "The path of the file in S3/minio bucket.",
 				Type:        schema.TypeString,
@@ -1351,6 +1362,10 @@ func resourceSoftwareSolutionDistributableRead(c context.Context, d *schema.Reso
 
 	if err := d.Set("download_count", (s.GetDownloadCount())); err != nil {
 		return diag.Errorf("error occurred while setting property DownloadCount in SoftwareSolutionDistributable object: %s", err.Error())
+	}
+
+	if err := d.Set("feature_source", (s.GetFeatureSource())); err != nil {
+		return diag.Errorf("error occurred while setting property FeatureSource in SoftwareSolutionDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("file_path", (s.GetFilePath())); err != nil {
