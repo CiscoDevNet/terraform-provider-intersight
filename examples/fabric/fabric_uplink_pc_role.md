@@ -2,6 +2,7 @@
 
 ```hcl
 resource "intersight_fabric_uplink_pc_role" "fabric_uplink_pc_role1" {
+  pc_id               = 100
   ports {
     port_id           = 1
     aggregate_port_id = 0
