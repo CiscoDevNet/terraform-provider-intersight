@@ -149,6 +149,11 @@ func getStorageNetAppFcInterfaceSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"interface_state": {
+			Description: "The state of the FC interface.\n* `Down` - The state is set to down if the interface is not enabled.\n* `Up` - The state is set to up if the interface is enabled.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"iqn": {
 			Description: "ISCSI qualified name applicable for ethernet port. Example - 'iqn.2008-05.com.storage:fnm00151300643-514f0c50141faf05'.",
 			Type:        schema.TypeString,
@@ -303,6 +308,11 @@ func getStorageNetAppFcInterfaceSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"svm_name": {
+			Description: "The storage virtual machine name for the interface.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -367,7 +377,7 @@ func getStorageNetAppFcInterfaceSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"uuid": {
-			Description: "Uuid of  NetApp FC Interface.",
+			Description: "Uuid of NetApp FC Interface.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -420,6 +430,11 @@ func getStorageNetAppFcInterfaceSchema() map[string]*schema.Schema {
 								},
 							},
 						},
+					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -478,6 +493,11 @@ func getStorageNetAppFcInterfaceSchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"volume_name": {
+			Description: "The parent volume name for the interface.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"wwn": {
 			Description: "World wide name of FC port. It is a combination of WWNN and WWPN represented in 128 bit hexadecimal formatted with colon.\nExample: '51:4f:0c:50:14:1f:af:01:51:4f:0c:51:14:1f:af:01'.",
@@ -673,6 +693,11 @@ func dataSourceStorageNetAppFcInterfaceRead(c context.Context, d *schema.Resourc
 		o.SetEvents(x)
 	}
 
+	if v, ok := d.GetOk("interface_state"); ok {
+		x := (v.(string))
+		o.SetInterfaceState(x)
+	}
+
 	if v, ok := d.GetOk("iqn"); ok {
 		x := (v.(string))
 		o.SetIqn(x)
@@ -855,6 +880,11 @@ func dataSourceStorageNetAppFcInterfaceRead(c context.Context, d *schema.Resourc
 		o.SetStatus(x)
 	}
 
+	if v, ok := d.GetOk("svm_name"); ok {
+		x := (v.(string))
+		o.SetSvmName(x)
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -1015,6 +1045,11 @@ func dataSourceStorageNetAppFcInterfaceRead(c context.Context, d *schema.Resourc
 		}
 	}
 
+	if v, ok := d.GetOk("volume_name"); ok {
+		x := (v.(string))
+		o.SetVolumeName(x)
+	}
+
 	if v, ok := d.GetOk("wwn"); ok {
 		x := (v.(string))
 		o.SetWwn(x)
@@ -1078,6 +1113,7 @@ func dataSourceStorageNetAppFcInterfaceRead(c context.Context, d *schema.Resourc
 				temp["enabled"] = (s.GetEnabled())
 
 				temp["events"] = flattenListStorageNetAppFcInterfaceEventRelationship(s.GetEvents(), d)
+				temp["interface_state"] = (s.GetInterfaceState())
 				temp["iqn"] = (s.GetIqn())
 
 				temp["mod_time"] = (s.GetModTime()).String()
@@ -1095,6 +1131,7 @@ func dataSourceStorageNetAppFcInterfaceRead(c context.Context, d *schema.Resourc
 				temp["speed"] = (s.GetSpeed())
 				temp["state"] = (s.GetState())
 				temp["status"] = (s.GetStatus())
+				temp["svm_name"] = (s.GetSvmName())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 
@@ -1103,6 +1140,7 @@ func dataSourceStorageNetAppFcInterfaceRead(c context.Context, d *schema.Resourc
 				temp["uuid"] = (s.GetUuid())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
+				temp["volume_name"] = (s.GetVolumeName())
 				temp["wwn"] = (s.GetWwn())
 				temp["wwnn"] = (s.GetWwnn())
 				temp["wwpn"] = (s.GetWwpn())

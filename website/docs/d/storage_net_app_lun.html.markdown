@@ -15,10 +15,11 @@ All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_storage_net_app_lun.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
+* `container_state`:(string) The state of the volume and aggregate that contain the LUN. LUNs are only available when their containers are available. 
 * `create_time`:(string) The time when this managed object was created. 
 * `description`:(string) Short description about the volume. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
-* `key`:(string) Unique identifier of Lun across data center. 
+* `key`:(string) Unique identifier of LUN across data center. 
 * `mapped`:(bool) Reports if the LUN is mapped to one or more initiator groups. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
@@ -30,5 +31,7 @@ The following arguments can be used to get data of already created objects in In
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `size`:(int) User provisioned volume size. It is the size exposed to host. 
 * `state`:(string) The administrative state of a LUN.* `offline` - The LUN is administratively offline, or a more detailed offline reason is not available.* `online` - The state of the LUN is online. 
+* `svm_name`:(string) The storage virtual machine name for the lun. 
 * `uuid`:(string) Universally unique identifier of the LUN. 
+* `volume_name`:(string) The parent volume name for the lun. 
  

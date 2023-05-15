@@ -24,6 +24,8 @@ This complex property has following sub-properties:
   + `additional_properties`:(JSON as string) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [workflow.ArrayDataType](#workflowArrayDataType)
 [workflow.CustomDataType](#workflowCustomDataType)
 [workflow.DynamicTemplateParserDataType](#workflowDynamicTemplateParserDataType)
+[workflow.MoInventoryDataType](#workflowMoInventoryDataType)
+[workflow.MoReferenceAutoDataType](#workflowMoReferenceAutoDataType)
 [workflow.MoReferenceDataType](#workflowMoReferenceDataType)
 [workflow.PrimitiveDataType](#workflowPrimitiveDataType)
 [workflow.TargetDataType](#workflowTargetDataType)
@@ -79,6 +81,7 @@ This complex property has following sub-properties:
     + `moid`:(string) The Moid of the referenced REST resource. 
     + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
     + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+  + `marked_for_deletion`:(bool)(ReadOnly) The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `ref_mo`:(HashMap) -(ReadOnly) A reference to the original Managed Object. 
 This complex property has following sub-properties:
@@ -118,6 +121,30 @@ This complex property has following sub-properties:
 Data type to fetch a generic template from given selector and parse it using an api to give an array of secure and non-secure keys for form generation. URL used to fetch the template object is based on the templateType. Final input passed to the workflow using this data type is a JSON containing {'Template':'<template string value>', 'Keys':[{'<key1>':'<val 1>'}], 'SecureKeys':[{'<key2>':'<val2>'}]}.
 * `is_template_secure`:(bool) When set to true, the template is marked as secure and the content is encrypted and stored. 
 * `template_type`:(string) Template type decides on the API to be used to fetch the placeholders present inside the template.* `OsInstall` - This refers to the OS configuration template MO. 
+
+### [workflow.MoInventoryDataType](#argument-reference)
+The data type to represent the selected properties of an Intersight managed object. This data type is used only in Service items to define the schema of resources and their attributes.
+* `properties`:(Array)
+This complex property has following sub-properties:
+  + `attributes`:
+                (Array of schema.TypeString) -
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `reference_object_type`:(string) ObjectType for which the attributes need to be collected. 
+  + `reference_type`:(string) Defines how the reference to the shadow resource is done. Base case is via an Moid, but reference via a selector is also possible.* `Moid` - The reference to the original resource is via an Moid.* `Selector` - The reference to the original resource is via a selector query. This can potentially lead to tracking data for multiple resources. 
+
+### [workflow.MoReferenceAutoDataType](#argument-reference)
+The data type to capture an Intersight managed object reference that is automatically selected by the system based on a given selection criteria.
+* `properties`:(Array)
+This complex property has following sub-properties:
+  + `display_attributes`:
+                (Array of schema.TypeString) -
+  + `filters`:
+                (Array of schema.TypeString) -
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `order_by`:(string) Determines  properties that are used to sort the collection of resources. 
+  + `rule`:(HashMap) - The rule can be obtained directly from a Resource Selection Criteria or provided as inline resource filter conditions. 
+This complex property has following sub-properties:
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 
 ### [workflow.MoReferenceDataType](#argument-reference)
 Data type to capture an Intersight Managed object reference.

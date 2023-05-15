@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **Label** | Pointer to **string** | A user defined label identifier of the workflow used for UI display. | [optional] 
 **Name** | Pointer to **string** | The name of the workflow, this name must be unique across all the workflow definition used within the action definitions. | [optional] 
 **Version** | Pointer to **int64** | The workflow definition version to use as subworkflow. When no version is specified then the default version of the workflow at the time of creating or updating this workflow is used. | [optional] 
+**WorkflowDefinition** | Pointer to [**MoMoRef**](MoMoRef.md) |  | [optional] 
 **WorkflowDefinitionName** | Pointer to **string** | The qualified name of workflow that should be executed. | [optional] 
 
 ## Methods
@@ -232,6 +233,31 @@ SetVersion sets Version field to given value.
 `func (o *WorkflowServiceItemActionWorkflowDefinitionAllOf) HasVersion() bool`
 
 HasVersion returns a boolean if a field has been set.
+
+### GetWorkflowDefinition
+
+`func (o *WorkflowServiceItemActionWorkflowDefinitionAllOf) GetWorkflowDefinition() MoMoRef`
+
+GetWorkflowDefinition returns the WorkflowDefinition field if non-nil, zero value otherwise.
+
+### GetWorkflowDefinitionOk
+
+`func (o *WorkflowServiceItemActionWorkflowDefinitionAllOf) GetWorkflowDefinitionOk() (*MoMoRef, bool)`
+
+GetWorkflowDefinitionOk returns a tuple with the WorkflowDefinition field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWorkflowDefinition
+
+`func (o *WorkflowServiceItemActionWorkflowDefinitionAllOf) SetWorkflowDefinition(v MoMoRef)`
+
+SetWorkflowDefinition sets WorkflowDefinition field to given value.
+
+### HasWorkflowDefinition
+
+`func (o *WorkflowServiceItemActionWorkflowDefinitionAllOf) HasWorkflowDefinition() bool`
+
+HasWorkflowDefinition returns a boolean if a field has been set.
 
 ### GetWorkflowDefinitionName
 

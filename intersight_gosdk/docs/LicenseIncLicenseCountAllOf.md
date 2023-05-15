@@ -9,8 +9,10 @@ Name | Type | Description | Notes
 **Premier100GfxCount** | Pointer to **int64** | The total number of devices claimed in the premier 100G fixed tier Intersight Nexus Cloud. | [optional] [readonly] 
 **Premier10GfxCount** | Pointer to **int64** | The total number of devices claimed in the premier 10G fixed tier Intersight Nexus Cloud. | [optional] [readonly] 
 **Premier1GfxCount** | Pointer to **int64** | The total number of devices claimed in the premier 1G fixed tier Intersight Nexus Cloud. | [optional] [readonly] 
+**PremierCentralizedMod8SlotCount** | Pointer to **int64** | The total number of devices claimed in the CentralizedMod8Slot premier tier Intersight Nexus Cloud. | [optional] [readonly] 
 **PremierD2OpsFixedCount** | Pointer to **int64** | The total number of devices claimed in the D2Ops Fixed premier tier Intersight Nexus Cloud. | [optional] [readonly] 
 **PremierD2OpsModCount** | Pointer to **int64** | The total number of devices claimed in the D2Ops modular premier tier Intersight Nexus Cloud. | [optional] [readonly] 
+**PremierDistributedMod8SlotCount** | Pointer to **int64** | The total number of devices claimed in the DistributedMod8Slot premier tier Intersight Nexus Cloud. | [optional] [readonly] 
 **PremierMod4SlotCount** | Pointer to **int64** | The total number of devices claimed in the modular 4 slot premier tier Intersight Nexus Cloud. | [optional] [readonly] 
 **PremierMod8SlotCount** | Pointer to **int64** | The total number of devices claimed in the modular 8 slot premier tier Intersight Nexus Cloud. | [optional] [readonly] 
 **AccountLicenseData** | Pointer to [**LicenseAccountLicenseDataRelationship**](LicenseAccountLicenseDataRelationship.md) |  | [optional] 
@@ -149,6 +151,31 @@ SetPremier1GfxCount sets Premier1GfxCount field to given value.
 
 HasPremier1GfxCount returns a boolean if a field has been set.
 
+### GetPremierCentralizedMod8SlotCount
+
+`func (o *LicenseIncLicenseCountAllOf) GetPremierCentralizedMod8SlotCount() int64`
+
+GetPremierCentralizedMod8SlotCount returns the PremierCentralizedMod8SlotCount field if non-nil, zero value otherwise.
+
+### GetPremierCentralizedMod8SlotCountOk
+
+`func (o *LicenseIncLicenseCountAllOf) GetPremierCentralizedMod8SlotCountOk() (*int64, bool)`
+
+GetPremierCentralizedMod8SlotCountOk returns a tuple with the PremierCentralizedMod8SlotCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPremierCentralizedMod8SlotCount
+
+`func (o *LicenseIncLicenseCountAllOf) SetPremierCentralizedMod8SlotCount(v int64)`
+
+SetPremierCentralizedMod8SlotCount sets PremierCentralizedMod8SlotCount field to given value.
+
+### HasPremierCentralizedMod8SlotCount
+
+`func (o *LicenseIncLicenseCountAllOf) HasPremierCentralizedMod8SlotCount() bool`
+
+HasPremierCentralizedMod8SlotCount returns a boolean if a field has been set.
+
 ### GetPremierD2OpsFixedCount
 
 `func (o *LicenseIncLicenseCountAllOf) GetPremierD2OpsFixedCount() int64`
@@ -198,6 +225,31 @@ SetPremierD2OpsModCount sets PremierD2OpsModCount field to given value.
 `func (o *LicenseIncLicenseCountAllOf) HasPremierD2OpsModCount() bool`
 
 HasPremierD2OpsModCount returns a boolean if a field has been set.
+
+### GetPremierDistributedMod8SlotCount
+
+`func (o *LicenseIncLicenseCountAllOf) GetPremierDistributedMod8SlotCount() int64`
+
+GetPremierDistributedMod8SlotCount returns the PremierDistributedMod8SlotCount field if non-nil, zero value otherwise.
+
+### GetPremierDistributedMod8SlotCountOk
+
+`func (o *LicenseIncLicenseCountAllOf) GetPremierDistributedMod8SlotCountOk() (*int64, bool)`
+
+GetPremierDistributedMod8SlotCountOk returns a tuple with the PremierDistributedMod8SlotCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPremierDistributedMod8SlotCount
+
+`func (o *LicenseIncLicenseCountAllOf) SetPremierDistributedMod8SlotCount(v int64)`
+
+SetPremierDistributedMod8SlotCount sets PremierDistributedMod8SlotCount field to given value.
+
+### HasPremierDistributedMod8SlotCount
+
+`func (o *LicenseIncLicenseCountAllOf) HasPremierDistributedMod8SlotCount() bool`
+
+HasPremierDistributedMod8SlotCount returns a boolean if a field has been set.
 
 ### GetPremierMod4SlotCount
 

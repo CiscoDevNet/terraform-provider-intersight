@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-10371
+API version: 1.0.11-11765
 Contact: intersight@cisco.com
 */
 
@@ -24,6 +24,8 @@ type AssetWorkloadOptimizerDynatraceOptions struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// Overwrite Hypervisor or Cloud Provider Virtual Machine metrics with data from the target.
+	CollectVmMetrics *bool `json:"CollectVmMetrics,omitempty"`
 	// Each environment monitored with Dynatrace is identified with a unique character string—the environment ID. The Dynatrace API relies heavily on environment IDs to ensure that it pulls monitoring data from and pushes relevant external events to the correct Dynatrace environments.
 	EnvironmentId        *string `json:"EnvironmentId,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -102,6 +104,38 @@ func (o *AssetWorkloadOptimizerDynatraceOptions) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
+// GetCollectVmMetrics returns the CollectVmMetrics field value if set, zero value otherwise.
+func (o *AssetWorkloadOptimizerDynatraceOptions) GetCollectVmMetrics() bool {
+	if o == nil || o.CollectVmMetrics == nil {
+		var ret bool
+		return ret
+	}
+	return *o.CollectVmMetrics
+}
+
+// GetCollectVmMetricsOk returns a tuple with the CollectVmMetrics field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssetWorkloadOptimizerDynatraceOptions) GetCollectVmMetricsOk() (*bool, bool) {
+	if o == nil || o.CollectVmMetrics == nil {
+		return nil, false
+	}
+	return o.CollectVmMetrics, true
+}
+
+// HasCollectVmMetrics returns a boolean if a field has been set.
+func (o *AssetWorkloadOptimizerDynatraceOptions) HasCollectVmMetrics() bool {
+	if o != nil && o.CollectVmMetrics != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCollectVmMetrics gets a reference to the given bool and assigns it to the CollectVmMetrics field.
+func (o *AssetWorkloadOptimizerDynatraceOptions) SetCollectVmMetrics(v bool) {
+	o.CollectVmMetrics = &v
+}
+
 // GetEnvironmentId returns the EnvironmentId field value if set, zero value otherwise.
 func (o *AssetWorkloadOptimizerDynatraceOptions) GetEnvironmentId() string {
 	if o == nil || o.EnvironmentId == nil {
@@ -150,6 +184,9 @@ func (o AssetWorkloadOptimizerDynatraceOptions) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.CollectVmMetrics != nil {
+		toSerialize["CollectVmMetrics"] = o.CollectVmMetrics
+	}
 	if o.EnvironmentId != nil {
 		toSerialize["EnvironmentId"] = o.EnvironmentId
 	}
@@ -167,6 +204,8 @@ func (o *AssetWorkloadOptimizerDynatraceOptions) UnmarshalJSON(bytes []byte) (er
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
+		// Overwrite Hypervisor or Cloud Provider Virtual Machine metrics with data from the target.
+		CollectVmMetrics *bool `json:"CollectVmMetrics,omitempty"`
 		// Each environment monitored with Dynatrace is identified with a unique character string—the environment ID. The Dynatrace API relies heavily on environment IDs to ensure that it pulls monitoring data from and pushes relevant external events to the correct Dynatrace environments.
 		EnvironmentId *string `json:"EnvironmentId,omitempty"`
 	}
@@ -178,6 +217,7 @@ func (o *AssetWorkloadOptimizerDynatraceOptions) UnmarshalJSON(bytes []byte) (er
 		varAssetWorkloadOptimizerDynatraceOptions := _AssetWorkloadOptimizerDynatraceOptions{}
 		varAssetWorkloadOptimizerDynatraceOptions.ClassId = varAssetWorkloadOptimizerDynatraceOptionsWithoutEmbeddedStruct.ClassId
 		varAssetWorkloadOptimizerDynatraceOptions.ObjectType = varAssetWorkloadOptimizerDynatraceOptionsWithoutEmbeddedStruct.ObjectType
+		varAssetWorkloadOptimizerDynatraceOptions.CollectVmMetrics = varAssetWorkloadOptimizerDynatraceOptionsWithoutEmbeddedStruct.CollectVmMetrics
 		varAssetWorkloadOptimizerDynatraceOptions.EnvironmentId = varAssetWorkloadOptimizerDynatraceOptionsWithoutEmbeddedStruct.EnvironmentId
 		*o = AssetWorkloadOptimizerDynatraceOptions(varAssetWorkloadOptimizerDynatraceOptions)
 	} else {
@@ -198,6 +238,7 @@ func (o *AssetWorkloadOptimizerDynatraceOptions) UnmarshalJSON(bytes []byte) (er
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "CollectVmMetrics")
 		delete(additionalProperties, "EnvironmentId")
 
 		// remove fields from embedded structs

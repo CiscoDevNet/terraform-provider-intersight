@@ -22,8 +22,10 @@ The following arguments can be used to get data of already created objects in In
 * `premier100_gfx_count`:(int) The total number of devices claimed in the premier 100G fixed tier Intersight Nexus Cloud. 
 * `premier10_gfx_count`:(int) The total number of devices claimed in the premier 10G fixed tier Intersight Nexus Cloud. 
 * `premier1_gfx_count`:(int) The total number of devices claimed in the premier 1G fixed tier Intersight Nexus Cloud. 
+* `premier_centralized_mod8_slot_count`:(int) The total number of devices claimed in the CentralizedMod8Slot premier tier Intersight Nexus Cloud. 
 * `premier_d2_ops_fixed_count`:(int) The total number of devices claimed in the D2Ops Fixed premier tier Intersight Nexus Cloud. 
 * `premier_d2_ops_mod_count`:(int) The total number of devices claimed in the D2Ops modular premier tier Intersight Nexus Cloud. 
+* `premier_distributed_mod8_slot_count`:(int) The total number of devices claimed in the DistributedMod8Slot premier tier Intersight Nexus Cloud. 
 * `premier_mod4_slot_count`:(int) The total number of devices claimed in the modular 4 slot premier tier Intersight Nexus Cloud. 
 * `premier_mod8_slot_count`:(int) The total number of devices claimed in the modular 8 slot premier tier Intersight Nexus Cloud. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 

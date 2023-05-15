@@ -9,7 +9,9 @@ Name | Type | Description | Notes
 **AdminLocatorLedState** | Pointer to **string** | User configured state of the locator LED for the server. * &#x60;None&#x60; - No operation property for locator led. * &#x60;On&#x60; - The Locator Led is turned on. * &#x60;Off&#x60; - The Locator Led is turned off. | [optional] [default to "None"]
 **AdminPowerState** | Pointer to **string** | User configured power state of the server. * &#x60;Policy&#x60; - Power state is set to the default value in the policy. * &#x60;PowerOn&#x60; - Power state of the server is set to On. * &#x60;PowerOff&#x60; - Power state is the server set to Off. * &#x60;PowerCycle&#x60; - Power state the server is reset. * &#x60;HardReset&#x60; - Power state the server is hard reset. * &#x60;Shutdown&#x60; - Operating system on the server is shut down. * &#x60;Reboot&#x60; - Power state of IMC is rebooted. | [optional] [default to "Policy"]
 **CertificatesAction** | Pointer to [**NullableCertificatemanagementCertificateBase**](CertificatemanagementCertificateBase.md) |  | [optional] 
+**ClearSel** | Pointer to **string** | Clear system event log on a server. * &#x60;Ready&#x60; - Clear system event log operation is allowed on the server in this state. * &#x60;Clear&#x60; - Trigger a clear system event log operation on a server. | [optional] [default to "Ready"]
 **CmosReset** | Pointer to **string** | The allowed actions on the CMOS Reset. * &#x60;Ready&#x60; - CMOS Reset operation is allowed to be done on the server in this state. * &#x60;Pending&#x60; - The identifier to state that the previous CMOS Reset operation on this server has not completed due to a pending power cycle. CMOS Reset operation cannot be done on the server when in this state. * &#x60;Reset&#x60; - The value that the UI/API needs to provide to trigger a CMOS Reset operation on a server. | [optional] [default to "Ready"]
+**CollectSel** | Pointer to **string** | Collect system event log from a server. * &#x60;Ready&#x60; - Collect system event log operation is allowed on the server in this state. * &#x60;Collect&#x60; - Trigger a collect system event log operation on a server. | [optional] [default to "Ready"]
 **ConfigState** | Pointer to **string** | The configured state of these settings in the target server. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the settings are applied successfully in the target server. Applying - This state denotes that the settings are being applied in the target server. Failed - This state denotes that the settings could not be applied in the target server. * &#x60;Applied&#x60; - User configured settings are in applied state. * &#x60;Applying&#x60; - User settings are being applied on the target server. * &#x60;Scheduled&#x60; - User configured settings are scheduled to be applied. * &#x60;Failed&#x60; - User configured settings could not be applied. | [optional] [readonly] [default to "Applied"]
 **FrontPanelLockState** | Pointer to **string** | The allowed actions on the Front Panel Lock. * &#x60;Unlock&#x60; - Front Panel of the server is set to Unlocked state. * &#x60;Lock&#x60; - Front Panel of the server is set to Locked state. | [optional] [default to "Unlock"]
 **KvmReset** | Pointer to **string** | The allowed actions on the vKVM Reset. * &#x60;Ready&#x60; - Reset vKVM operation is allowed to be done on the server in this state. * &#x60;Reset&#x60; - The value that the UI/API needs to provide to trigger a Reset vKVM operation on a server. | [optional] [default to "Ready"]
@@ -172,6 +174,31 @@ HasCertificatesAction returns a boolean if a field has been set.
 `func (o *ComputeServerSettingAllOf) UnsetCertificatesAction()`
 
 UnsetCertificatesAction ensures that no value is present for CertificatesAction, not even an explicit nil
+### GetClearSel
+
+`func (o *ComputeServerSettingAllOf) GetClearSel() string`
+
+GetClearSel returns the ClearSel field if non-nil, zero value otherwise.
+
+### GetClearSelOk
+
+`func (o *ComputeServerSettingAllOf) GetClearSelOk() (*string, bool)`
+
+GetClearSelOk returns a tuple with the ClearSel field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClearSel
+
+`func (o *ComputeServerSettingAllOf) SetClearSel(v string)`
+
+SetClearSel sets ClearSel field to given value.
+
+### HasClearSel
+
+`func (o *ComputeServerSettingAllOf) HasClearSel() bool`
+
+HasClearSel returns a boolean if a field has been set.
+
 ### GetCmosReset
 
 `func (o *ComputeServerSettingAllOf) GetCmosReset() string`
@@ -196,6 +223,31 @@ SetCmosReset sets CmosReset field to given value.
 `func (o *ComputeServerSettingAllOf) HasCmosReset() bool`
 
 HasCmosReset returns a boolean if a field has been set.
+
+### GetCollectSel
+
+`func (o *ComputeServerSettingAllOf) GetCollectSel() string`
+
+GetCollectSel returns the CollectSel field if non-nil, zero value otherwise.
+
+### GetCollectSelOk
+
+`func (o *ComputeServerSettingAllOf) GetCollectSelOk() (*string, bool)`
+
+GetCollectSelOk returns a tuple with the CollectSel field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCollectSel
+
+`func (o *ComputeServerSettingAllOf) SetCollectSel(v string)`
+
+SetCollectSel sets CollectSel field to given value.
+
+### HasCollectSel
+
+`func (o *ComputeServerSettingAllOf) HasCollectSel() bool`
+
+HasCollectSel returns a boolean if a field has been set.
 
 ### GetConfigState
 

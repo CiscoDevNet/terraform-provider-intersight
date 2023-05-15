@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-10371
+API version: 1.0.11-11765
 Contact: intersight@cisco.com
 */
 
@@ -26,6 +26,8 @@ type StorageNetAppInitiatorGroup struct {
 	ObjectType string `json:"ObjectType"`
 	// Initiator group protocol. * `FCP` - Fibre channel initiator type which contains WWN of an HBA on the host. * `iSCSI` - An iSCSI initiator type used by the host. * `mixed` - For systems using both FC and iSCSI connections to the same LUN, create two igroups, one for FC and one for iSCSI. Then map the LUN to both igroups.
 	Protocol *string `json:"Protocol,omitempty"`
+	// The storage virtual machine name for the initiator group.
+	SvmName *string `json:"SvmName,omitempty"`
 	// Universally unique identifier of the LUN.
 	Uuid                 *string                             `json:"Uuid,omitempty"`
 	Tenant               *StorageNetAppStorageVmRelationship `json:"Tenant,omitempty"`
@@ -137,6 +139,38 @@ func (o *StorageNetAppInitiatorGroup) SetProtocol(v string) {
 	o.Protocol = &v
 }
 
+// GetSvmName returns the SvmName field value if set, zero value otherwise.
+func (o *StorageNetAppInitiatorGroup) GetSvmName() string {
+	if o == nil || o.SvmName == nil {
+		var ret string
+		return ret
+	}
+	return *o.SvmName
+}
+
+// GetSvmNameOk returns a tuple with the SvmName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageNetAppInitiatorGroup) GetSvmNameOk() (*string, bool) {
+	if o == nil || o.SvmName == nil {
+		return nil, false
+	}
+	return o.SvmName, true
+}
+
+// HasSvmName returns a boolean if a field has been set.
+func (o *StorageNetAppInitiatorGroup) HasSvmName() bool {
+	if o != nil && o.SvmName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSvmName gets a reference to the given string and assigns it to the SvmName field.
+func (o *StorageNetAppInitiatorGroup) SetSvmName(v string) {
+	o.SvmName = &v
+}
+
 // GetUuid returns the Uuid field value if set, zero value otherwise.
 func (o *StorageNetAppInitiatorGroup) GetUuid() string {
 	if o == nil || o.Uuid == nil {
@@ -220,6 +254,9 @@ func (o StorageNetAppInitiatorGroup) MarshalJSON() ([]byte, error) {
 	if o.Protocol != nil {
 		toSerialize["Protocol"] = o.Protocol
 	}
+	if o.SvmName != nil {
+		toSerialize["SvmName"] = o.SvmName
+	}
 	if o.Uuid != nil {
 		toSerialize["Uuid"] = o.Uuid
 	}
@@ -242,6 +279,8 @@ func (o *StorageNetAppInitiatorGroup) UnmarshalJSON(bytes []byte) (err error) {
 		ObjectType string `json:"ObjectType"`
 		// Initiator group protocol. * `FCP` - Fibre channel initiator type which contains WWN of an HBA on the host. * `iSCSI` - An iSCSI initiator type used by the host. * `mixed` - For systems using both FC and iSCSI connections to the same LUN, create two igroups, one for FC and one for iSCSI. Then map the LUN to both igroups.
 		Protocol *string `json:"Protocol,omitempty"`
+		// The storage virtual machine name for the initiator group.
+		SvmName *string `json:"SvmName,omitempty"`
 		// Universally unique identifier of the LUN.
 		Uuid   *string                             `json:"Uuid,omitempty"`
 		Tenant *StorageNetAppStorageVmRelationship `json:"Tenant,omitempty"`
@@ -255,6 +294,7 @@ func (o *StorageNetAppInitiatorGroup) UnmarshalJSON(bytes []byte) (err error) {
 		varStorageNetAppInitiatorGroup.ClassId = varStorageNetAppInitiatorGroupWithoutEmbeddedStruct.ClassId
 		varStorageNetAppInitiatorGroup.ObjectType = varStorageNetAppInitiatorGroupWithoutEmbeddedStruct.ObjectType
 		varStorageNetAppInitiatorGroup.Protocol = varStorageNetAppInitiatorGroupWithoutEmbeddedStruct.Protocol
+		varStorageNetAppInitiatorGroup.SvmName = varStorageNetAppInitiatorGroupWithoutEmbeddedStruct.SvmName
 		varStorageNetAppInitiatorGroup.Uuid = varStorageNetAppInitiatorGroupWithoutEmbeddedStruct.Uuid
 		varStorageNetAppInitiatorGroup.Tenant = varStorageNetAppInitiatorGroupWithoutEmbeddedStruct.Tenant
 		*o = StorageNetAppInitiatorGroup(varStorageNetAppInitiatorGroup)
@@ -277,6 +317,7 @@ func (o *StorageNetAppInitiatorGroup) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Protocol")
+		delete(additionalProperties, "SvmName")
 		delete(additionalProperties, "Uuid")
 		delete(additionalProperties, "Tenant")
 

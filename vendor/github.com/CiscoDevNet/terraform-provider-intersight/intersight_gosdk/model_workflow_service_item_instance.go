@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-10371
+API version: 1.0.11-11765
 Contact: intersight@cisco.com
 */
 
@@ -26,16 +26,25 @@ type WorkflowServiceItemInstance struct {
 	ObjectType string `json:"ObjectType"`
 	// The description for this service item instance.
 	Description *string `json:"Description,omitempty"`
+	// A user friendly short name to identify the resource. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ) or an underscore (_).
+	Label *string `json:"Label,omitempty"`
 	// Last status of the service item instance which will be reverted when an ongoing service item action instance is aborted. * `NotCreated` - The service item is not yet created and it is in a draft mode. A service item instance can be deleted in this state. * `InProgress` - An action is in progress and until that action has reached a final state, another action cannot be started. * `Failed` - The last action on the service item instance failed and corrective measures need to be taken to bring the service item instance back to valid state. * `Okay` - The last action on the service item instance completed and the service item instance is in Okay state. * `Decommissioned` - The service item is decommissioned and can be safely deleted. A service item instance in any other state after it has been created cannot be deleted until it has been decommissioned.
 	LastStatus *string `json:"LastStatus,omitempty"`
-	// A name of the service item instance. Name of the service item instance must be unique within a type of Service item definition.
+	// A name of the service item instance. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.) or an underscore (_).
 	Name *string `json:"Name,omitempty"`
+	// Lifecycle state of service item instance. * `Creating` - The service item is not yet created and creation action is in progress. * `Created` - The service item is created. * `Decommissioning` - The service item is not yet decommissioned and decommission action is in progress. * `Decommissioned` - The service item is decommisioned. * `Deleting` - The service item is not yet deleted and deletion action is in progress. * `Deleted` - The service item is deleted. * `Failed` - The service item action is failed to perform the operation.
+	ResourcelifecycleStatus *string `json:"ResourcelifecycleStatus,omitempty"`
 	// Status of the service item instance which controls the actions that can be performed on this instance. * `NotCreated` - The service item is not yet created and it is in a draft mode. A service item instance can be deleted in this state. * `InProgress` - An action is in progress and until that action has reached a final state, another action cannot be started. * `Failed` - The last action on the service item instance failed and corrective measures need to be taken to bring the service item instance back to valid state. * `Okay` - The last action on the service item instance completed and the service item instance is in Okay state. * `Decommissioned` - The service item is decommissioned and can be safely deleted. A service item instance in any other state after it has been created cannot be deleted until it has been decommissioned.
 	Status *string `json:"Status,omitempty"`
 	// The user identifier which indicates the user that started this workflow.
-	UserId                *string                                    `json:"UserId,omitempty"`
-	Organization          *OrganizationOrganizationRelationship      `json:"Organization,omitempty"`
-	ServiceItemDefinition *WorkflowServiceItemDefinitionRelationship `json:"ServiceItemDefinition,omitempty"`
+	UserIdOrEmail *string `json:"UserIdOrEmail,omitempty"`
+	// An array of relationships to workflowCatalogServiceRequest resources.
+	CatalogServiceRequest []WorkflowCatalogServiceRequestRelationship `json:"CatalogServiceRequest,omitempty"`
+	Idp                   *IamIdpRelationship                         `json:"Idp,omitempty"`
+	IdpReference          *IamIdpReferenceRelationship                `json:"IdpReference,omitempty"`
+	Organization          *OrganizationOrganizationRelationship       `json:"Organization,omitempty"`
+	ServiceItemDefinition *WorkflowServiceItemDefinitionRelationship  `json:"ServiceItemDefinition,omitempty"`
+	User                  *IamUserRelationship                        `json:"User,omitempty"`
 	AdditionalProperties  map[string]interface{}
 }
 
@@ -144,6 +153,38 @@ func (o *WorkflowServiceItemInstance) SetDescription(v string) {
 	o.Description = &v
 }
 
+// GetLabel returns the Label field value if set, zero value otherwise.
+func (o *WorkflowServiceItemInstance) GetLabel() string {
+	if o == nil || o.Label == nil {
+		var ret string
+		return ret
+	}
+	return *o.Label
+}
+
+// GetLabelOk returns a tuple with the Label field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowServiceItemInstance) GetLabelOk() (*string, bool) {
+	if o == nil || o.Label == nil {
+		return nil, false
+	}
+	return o.Label, true
+}
+
+// HasLabel returns a boolean if a field has been set.
+func (o *WorkflowServiceItemInstance) HasLabel() bool {
+	if o != nil && o.Label != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLabel gets a reference to the given string and assigns it to the Label field.
+func (o *WorkflowServiceItemInstance) SetLabel(v string) {
+	o.Label = &v
+}
+
 // GetLastStatus returns the LastStatus field value if set, zero value otherwise.
 func (o *WorkflowServiceItemInstance) GetLastStatus() string {
 	if o == nil || o.LastStatus == nil {
@@ -208,6 +249,38 @@ func (o *WorkflowServiceItemInstance) SetName(v string) {
 	o.Name = &v
 }
 
+// GetResourcelifecycleStatus returns the ResourcelifecycleStatus field value if set, zero value otherwise.
+func (o *WorkflowServiceItemInstance) GetResourcelifecycleStatus() string {
+	if o == nil || o.ResourcelifecycleStatus == nil {
+		var ret string
+		return ret
+	}
+	return *o.ResourcelifecycleStatus
+}
+
+// GetResourcelifecycleStatusOk returns a tuple with the ResourcelifecycleStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowServiceItemInstance) GetResourcelifecycleStatusOk() (*string, bool) {
+	if o == nil || o.ResourcelifecycleStatus == nil {
+		return nil, false
+	}
+	return o.ResourcelifecycleStatus, true
+}
+
+// HasResourcelifecycleStatus returns a boolean if a field has been set.
+func (o *WorkflowServiceItemInstance) HasResourcelifecycleStatus() bool {
+	if o != nil && o.ResourcelifecycleStatus != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetResourcelifecycleStatus gets a reference to the given string and assigns it to the ResourcelifecycleStatus field.
+func (o *WorkflowServiceItemInstance) SetResourcelifecycleStatus(v string) {
+	o.ResourcelifecycleStatus = &v
+}
+
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *WorkflowServiceItemInstance) GetStatus() string {
 	if o == nil || o.Status == nil {
@@ -240,36 +313,133 @@ func (o *WorkflowServiceItemInstance) SetStatus(v string) {
 	o.Status = &v
 }
 
-// GetUserId returns the UserId field value if set, zero value otherwise.
-func (o *WorkflowServiceItemInstance) GetUserId() string {
-	if o == nil || o.UserId == nil {
+// GetUserIdOrEmail returns the UserIdOrEmail field value if set, zero value otherwise.
+func (o *WorkflowServiceItemInstance) GetUserIdOrEmail() string {
+	if o == nil || o.UserIdOrEmail == nil {
 		var ret string
 		return ret
 	}
-	return *o.UserId
+	return *o.UserIdOrEmail
 }
 
-// GetUserIdOk returns a tuple with the UserId field value if set, nil otherwise
+// GetUserIdOrEmailOk returns a tuple with the UserIdOrEmail field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WorkflowServiceItemInstance) GetUserIdOk() (*string, bool) {
-	if o == nil || o.UserId == nil {
+func (o *WorkflowServiceItemInstance) GetUserIdOrEmailOk() (*string, bool) {
+	if o == nil || o.UserIdOrEmail == nil {
 		return nil, false
 	}
-	return o.UserId, true
+	return o.UserIdOrEmail, true
 }
 
-// HasUserId returns a boolean if a field has been set.
-func (o *WorkflowServiceItemInstance) HasUserId() bool {
-	if o != nil && o.UserId != nil {
+// HasUserIdOrEmail returns a boolean if a field has been set.
+func (o *WorkflowServiceItemInstance) HasUserIdOrEmail() bool {
+	if o != nil && o.UserIdOrEmail != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetUserId gets a reference to the given string and assigns it to the UserId field.
-func (o *WorkflowServiceItemInstance) SetUserId(v string) {
-	o.UserId = &v
+// SetUserIdOrEmail gets a reference to the given string and assigns it to the UserIdOrEmail field.
+func (o *WorkflowServiceItemInstance) SetUserIdOrEmail(v string) {
+	o.UserIdOrEmail = &v
+}
+
+// GetCatalogServiceRequest returns the CatalogServiceRequest field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *WorkflowServiceItemInstance) GetCatalogServiceRequest() []WorkflowCatalogServiceRequestRelationship {
+	if o == nil {
+		var ret []WorkflowCatalogServiceRequestRelationship
+		return ret
+	}
+	return o.CatalogServiceRequest
+}
+
+// GetCatalogServiceRequestOk returns a tuple with the CatalogServiceRequest field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *WorkflowServiceItemInstance) GetCatalogServiceRequestOk() ([]WorkflowCatalogServiceRequestRelationship, bool) {
+	if o == nil || o.CatalogServiceRequest == nil {
+		return nil, false
+	}
+	return o.CatalogServiceRequest, true
+}
+
+// HasCatalogServiceRequest returns a boolean if a field has been set.
+func (o *WorkflowServiceItemInstance) HasCatalogServiceRequest() bool {
+	if o != nil && o.CatalogServiceRequest != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCatalogServiceRequest gets a reference to the given []WorkflowCatalogServiceRequestRelationship and assigns it to the CatalogServiceRequest field.
+func (o *WorkflowServiceItemInstance) SetCatalogServiceRequest(v []WorkflowCatalogServiceRequestRelationship) {
+	o.CatalogServiceRequest = v
+}
+
+// GetIdp returns the Idp field value if set, zero value otherwise.
+func (o *WorkflowServiceItemInstance) GetIdp() IamIdpRelationship {
+	if o == nil || o.Idp == nil {
+		var ret IamIdpRelationship
+		return ret
+	}
+	return *o.Idp
+}
+
+// GetIdpOk returns a tuple with the Idp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowServiceItemInstance) GetIdpOk() (*IamIdpRelationship, bool) {
+	if o == nil || o.Idp == nil {
+		return nil, false
+	}
+	return o.Idp, true
+}
+
+// HasIdp returns a boolean if a field has been set.
+func (o *WorkflowServiceItemInstance) HasIdp() bool {
+	if o != nil && o.Idp != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIdp gets a reference to the given IamIdpRelationship and assigns it to the Idp field.
+func (o *WorkflowServiceItemInstance) SetIdp(v IamIdpRelationship) {
+	o.Idp = &v
+}
+
+// GetIdpReference returns the IdpReference field value if set, zero value otherwise.
+func (o *WorkflowServiceItemInstance) GetIdpReference() IamIdpReferenceRelationship {
+	if o == nil || o.IdpReference == nil {
+		var ret IamIdpReferenceRelationship
+		return ret
+	}
+	return *o.IdpReference
+}
+
+// GetIdpReferenceOk returns a tuple with the IdpReference field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowServiceItemInstance) GetIdpReferenceOk() (*IamIdpReferenceRelationship, bool) {
+	if o == nil || o.IdpReference == nil {
+		return nil, false
+	}
+	return o.IdpReference, true
+}
+
+// HasIdpReference returns a boolean if a field has been set.
+func (o *WorkflowServiceItemInstance) HasIdpReference() bool {
+	if o != nil && o.IdpReference != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIdpReference gets a reference to the given IamIdpReferenceRelationship and assigns it to the IdpReference field.
+func (o *WorkflowServiceItemInstance) SetIdpReference(v IamIdpReferenceRelationship) {
+	o.IdpReference = &v
 }
 
 // GetOrganization returns the Organization field value if set, zero value otherwise.
@@ -336,6 +506,38 @@ func (o *WorkflowServiceItemInstance) SetServiceItemDefinition(v WorkflowService
 	o.ServiceItemDefinition = &v
 }
 
+// GetUser returns the User field value if set, zero value otherwise.
+func (o *WorkflowServiceItemInstance) GetUser() IamUserRelationship {
+	if o == nil || o.User == nil {
+		var ret IamUserRelationship
+		return ret
+	}
+	return *o.User
+}
+
+// GetUserOk returns a tuple with the User field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowServiceItemInstance) GetUserOk() (*IamUserRelationship, bool) {
+	if o == nil || o.User == nil {
+		return nil, false
+	}
+	return o.User, true
+}
+
+// HasUser returns a boolean if a field has been set.
+func (o *WorkflowServiceItemInstance) HasUser() bool {
+	if o != nil && o.User != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUser gets a reference to the given IamUserRelationship and assigns it to the User field.
+func (o *WorkflowServiceItemInstance) SetUser(v IamUserRelationship) {
+	o.User = &v
+}
+
 func (o WorkflowServiceItemInstance) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
@@ -355,23 +557,41 @@ func (o WorkflowServiceItemInstance) MarshalJSON() ([]byte, error) {
 	if o.Description != nil {
 		toSerialize["Description"] = o.Description
 	}
+	if o.Label != nil {
+		toSerialize["Label"] = o.Label
+	}
 	if o.LastStatus != nil {
 		toSerialize["LastStatus"] = o.LastStatus
 	}
 	if o.Name != nil {
 		toSerialize["Name"] = o.Name
 	}
+	if o.ResourcelifecycleStatus != nil {
+		toSerialize["ResourcelifecycleStatus"] = o.ResourcelifecycleStatus
+	}
 	if o.Status != nil {
 		toSerialize["Status"] = o.Status
 	}
-	if o.UserId != nil {
-		toSerialize["UserId"] = o.UserId
+	if o.UserIdOrEmail != nil {
+		toSerialize["UserIdOrEmail"] = o.UserIdOrEmail
+	}
+	if o.CatalogServiceRequest != nil {
+		toSerialize["CatalogServiceRequest"] = o.CatalogServiceRequest
+	}
+	if o.Idp != nil {
+		toSerialize["Idp"] = o.Idp
+	}
+	if o.IdpReference != nil {
+		toSerialize["IdpReference"] = o.IdpReference
 	}
 	if o.Organization != nil {
 		toSerialize["Organization"] = o.Organization
 	}
 	if o.ServiceItemDefinition != nil {
 		toSerialize["ServiceItemDefinition"] = o.ServiceItemDefinition
+	}
+	if o.User != nil {
+		toSerialize["User"] = o.User
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -389,16 +609,25 @@ func (o *WorkflowServiceItemInstance) UnmarshalJSON(bytes []byte) (err error) {
 		ObjectType string `json:"ObjectType"`
 		// The description for this service item instance.
 		Description *string `json:"Description,omitempty"`
+		// A user friendly short name to identify the resource. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ) or an underscore (_).
+		Label *string `json:"Label,omitempty"`
 		// Last status of the service item instance which will be reverted when an ongoing service item action instance is aborted. * `NotCreated` - The service item is not yet created and it is in a draft mode. A service item instance can be deleted in this state. * `InProgress` - An action is in progress and until that action has reached a final state, another action cannot be started. * `Failed` - The last action on the service item instance failed and corrective measures need to be taken to bring the service item instance back to valid state. * `Okay` - The last action on the service item instance completed and the service item instance is in Okay state. * `Decommissioned` - The service item is decommissioned and can be safely deleted. A service item instance in any other state after it has been created cannot be deleted until it has been decommissioned.
 		LastStatus *string `json:"LastStatus,omitempty"`
-		// A name of the service item instance. Name of the service item instance must be unique within a type of Service item definition.
+		// A name of the service item instance. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.) or an underscore (_).
 		Name *string `json:"Name,omitempty"`
+		// Lifecycle state of service item instance. * `Creating` - The service item is not yet created and creation action is in progress. * `Created` - The service item is created. * `Decommissioning` - The service item is not yet decommissioned and decommission action is in progress. * `Decommissioned` - The service item is decommisioned. * `Deleting` - The service item is not yet deleted and deletion action is in progress. * `Deleted` - The service item is deleted. * `Failed` - The service item action is failed to perform the operation.
+		ResourcelifecycleStatus *string `json:"ResourcelifecycleStatus,omitempty"`
 		// Status of the service item instance which controls the actions that can be performed on this instance. * `NotCreated` - The service item is not yet created and it is in a draft mode. A service item instance can be deleted in this state. * `InProgress` - An action is in progress and until that action has reached a final state, another action cannot be started. * `Failed` - The last action on the service item instance failed and corrective measures need to be taken to bring the service item instance back to valid state. * `Okay` - The last action on the service item instance completed and the service item instance is in Okay state. * `Decommissioned` - The service item is decommissioned and can be safely deleted. A service item instance in any other state after it has been created cannot be deleted until it has been decommissioned.
 		Status *string `json:"Status,omitempty"`
 		// The user identifier which indicates the user that started this workflow.
-		UserId                *string                                    `json:"UserId,omitempty"`
-		Organization          *OrganizationOrganizationRelationship      `json:"Organization,omitempty"`
-		ServiceItemDefinition *WorkflowServiceItemDefinitionRelationship `json:"ServiceItemDefinition,omitempty"`
+		UserIdOrEmail *string `json:"UserIdOrEmail,omitempty"`
+		// An array of relationships to workflowCatalogServiceRequest resources.
+		CatalogServiceRequest []WorkflowCatalogServiceRequestRelationship `json:"CatalogServiceRequest,omitempty"`
+		Idp                   *IamIdpRelationship                         `json:"Idp,omitempty"`
+		IdpReference          *IamIdpReferenceRelationship                `json:"IdpReference,omitempty"`
+		Organization          *OrganizationOrganizationRelationship       `json:"Organization,omitempty"`
+		ServiceItemDefinition *WorkflowServiceItemDefinitionRelationship  `json:"ServiceItemDefinition,omitempty"`
+		User                  *IamUserRelationship                        `json:"User,omitempty"`
 	}
 
 	varWorkflowServiceItemInstanceWithoutEmbeddedStruct := WorkflowServiceItemInstanceWithoutEmbeddedStruct{}
@@ -409,12 +638,18 @@ func (o *WorkflowServiceItemInstance) UnmarshalJSON(bytes []byte) (err error) {
 		varWorkflowServiceItemInstance.ClassId = varWorkflowServiceItemInstanceWithoutEmbeddedStruct.ClassId
 		varWorkflowServiceItemInstance.ObjectType = varWorkflowServiceItemInstanceWithoutEmbeddedStruct.ObjectType
 		varWorkflowServiceItemInstance.Description = varWorkflowServiceItemInstanceWithoutEmbeddedStruct.Description
+		varWorkflowServiceItemInstance.Label = varWorkflowServiceItemInstanceWithoutEmbeddedStruct.Label
 		varWorkflowServiceItemInstance.LastStatus = varWorkflowServiceItemInstanceWithoutEmbeddedStruct.LastStatus
 		varWorkflowServiceItemInstance.Name = varWorkflowServiceItemInstanceWithoutEmbeddedStruct.Name
+		varWorkflowServiceItemInstance.ResourcelifecycleStatus = varWorkflowServiceItemInstanceWithoutEmbeddedStruct.ResourcelifecycleStatus
 		varWorkflowServiceItemInstance.Status = varWorkflowServiceItemInstanceWithoutEmbeddedStruct.Status
-		varWorkflowServiceItemInstance.UserId = varWorkflowServiceItemInstanceWithoutEmbeddedStruct.UserId
+		varWorkflowServiceItemInstance.UserIdOrEmail = varWorkflowServiceItemInstanceWithoutEmbeddedStruct.UserIdOrEmail
+		varWorkflowServiceItemInstance.CatalogServiceRequest = varWorkflowServiceItemInstanceWithoutEmbeddedStruct.CatalogServiceRequest
+		varWorkflowServiceItemInstance.Idp = varWorkflowServiceItemInstanceWithoutEmbeddedStruct.Idp
+		varWorkflowServiceItemInstance.IdpReference = varWorkflowServiceItemInstanceWithoutEmbeddedStruct.IdpReference
 		varWorkflowServiceItemInstance.Organization = varWorkflowServiceItemInstanceWithoutEmbeddedStruct.Organization
 		varWorkflowServiceItemInstance.ServiceItemDefinition = varWorkflowServiceItemInstanceWithoutEmbeddedStruct.ServiceItemDefinition
+		varWorkflowServiceItemInstance.User = varWorkflowServiceItemInstanceWithoutEmbeddedStruct.User
 		*o = WorkflowServiceItemInstance(varWorkflowServiceItemInstance)
 	} else {
 		return err
@@ -435,12 +670,18 @@ func (o *WorkflowServiceItemInstance) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Description")
+		delete(additionalProperties, "Label")
 		delete(additionalProperties, "LastStatus")
 		delete(additionalProperties, "Name")
+		delete(additionalProperties, "ResourcelifecycleStatus")
 		delete(additionalProperties, "Status")
-		delete(additionalProperties, "UserId")
+		delete(additionalProperties, "UserIdOrEmail")
+		delete(additionalProperties, "CatalogServiceRequest")
+		delete(additionalProperties, "Idp")
+		delete(additionalProperties, "IdpReference")
 		delete(additionalProperties, "Organization")
 		delete(additionalProperties, "ServiceItemDefinition")
+		delete(additionalProperties, "User")
 
 		// remove fields from embedded structs
 		reflectMoBaseMo := reflect.ValueOf(o.MoBaseMo)

@@ -19,7 +19,7 @@ The following arguments can be used to get data of already created objects in In
 * `description`:(string) The description of the given API. 
 * `display_label`:(string) The display label of the given API. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
-* `method`:(string) The method type for the given API.* `GET` - Method type which indicates it is a GET API call* `POST` - Method type which indicates it is a POST API call* `PUT` - Method type which indicates it is a PUT API call* `PATCH` - Method type which indicates it is a PATCH API call* `DELETE` - Method type which indicates it is a DELETE API call 
+* `method`:(string) The method type for the given API.* `GET` - Method type which indicates it is a GET API call.* `POST` - Method type which indicates it is a POST API call.* `PUT` - Method type which indicates it is a PUT API call.* `PATCH` - Method type which indicates it is a PATCH API call.* `DELETE` - Method type which indicates it is a DELETE API call. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) The description of the given API. 

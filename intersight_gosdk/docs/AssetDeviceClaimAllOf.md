@@ -6,7 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "asset.DeviceClaim"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "asset.DeviceClaim"]
-**DeviceUpdates** | Pointer to [**[]AssetConnectionControlMessage**](AssetConnectionControlMessage.md) |  | [optional] 
 **SecurityToken** | Pointer to **string** | Obtained from the device connector management UI or API (REST endpoint &#39;/connector/SecurityTokens&#39;). | [optional] 
 **SerialNumber** | Pointer to **string** | Obtained from the device connector management UI or API (REST endpoint &#39;/connector/DeviceIdentifiers&#39;). | [optional] 
 **Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
@@ -72,41 +71,6 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
-### GetDeviceUpdates
-
-`func (o *AssetDeviceClaimAllOf) GetDeviceUpdates() []AssetConnectionControlMessage`
-
-GetDeviceUpdates returns the DeviceUpdates field if non-nil, zero value otherwise.
-
-### GetDeviceUpdatesOk
-
-`func (o *AssetDeviceClaimAllOf) GetDeviceUpdatesOk() (*[]AssetConnectionControlMessage, bool)`
-
-GetDeviceUpdatesOk returns a tuple with the DeviceUpdates field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDeviceUpdates
-
-`func (o *AssetDeviceClaimAllOf) SetDeviceUpdates(v []AssetConnectionControlMessage)`
-
-SetDeviceUpdates sets DeviceUpdates field to given value.
-
-### HasDeviceUpdates
-
-`func (o *AssetDeviceClaimAllOf) HasDeviceUpdates() bool`
-
-HasDeviceUpdates returns a boolean if a field has been set.
-
-### SetDeviceUpdatesNil
-
-`func (o *AssetDeviceClaimAllOf) SetDeviceUpdatesNil(b bool)`
-
- SetDeviceUpdatesNil sets the value for DeviceUpdates to be an explicit nil
-
-### UnsetDeviceUpdates
-`func (o *AssetDeviceClaimAllOf) UnsetDeviceUpdates()`
-
-UnsetDeviceUpdates ensures that no value is present for DeviceUpdates, not even an explicit nil
 ### GetSecurityToken
 
 `func (o *AssetDeviceClaimAllOf) GetSecurityToken() string`

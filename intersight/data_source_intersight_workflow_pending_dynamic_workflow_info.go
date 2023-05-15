@@ -262,6 +262,11 @@ func getWorkflowPendingDynamicWorkflowInfoSchema() map[string]*schema.Schema {
 							},
 						},
 					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 						Type:        schema.TypeString,
@@ -457,11 +462,6 @@ func getWorkflowPendingDynamicWorkflowInfoSchema() map[string]*schema.Schema {
 								},
 							},
 						},
-					},
-					"workflow_meta_name": {
-						Description: "The name of workflowMeta of the workflow running.",
-						Type:        schema.TypeString,
-						Optional:    true,
 					},
 					"workflow_subtype": {
 						Description: "The subtype of the workflow.",
@@ -1005,24 +1005,6 @@ func dataSourceWorkflowPendingDynamicWorkflowInfoRead(c context.Context, d *sche
 					if len(x) > 0 {
 						o.SetTargetCtxList(x)
 					}
-				}
-			}
-			if v, ok := l["workflow_meta_name"]; ok {
-				{
-					x := (v.(string))
-					o.SetWorkflowMetaName(x)
-				}
-			}
-			if v, ok := l["workflow_subtype"]; ok {
-				{
-					x := (v.(string))
-					o.SetWorkflowSubtype(x)
-				}
-			}
-			if v, ok := l["workflow_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetWorkflowType(x)
 				}
 			}
 			p = append(p, *o)

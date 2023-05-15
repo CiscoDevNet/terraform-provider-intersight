@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **ApiPathObjectIdentifier** | Pointer to [**MoMoRef**](MoMoRef.md) |  | [optional] 
 **Description** | Pointer to **string** | A detailed description of the API. | [optional] 
 **DisplayLabel** | Pointer to **string** | Display name of the selected API endpoint. | [optional] 
-**Method** | Pointer to **string** | Method Type of the selected API. * &#x60;GET&#x60; - Method type which indicates it is a GET API call * &#x60;POST&#x60; - Method type which indicates it is a POST API call * &#x60;PUT&#x60; - Method type which indicates it is a PUT API call * &#x60;PATCH&#x60; - Method type which indicates it is a PATCH API call * &#x60;DELETE&#x60; - Method type which indicates it is a DELETE API call | [optional] [default to "GET"]
+**Method** | Pointer to **string** | Method Type of the selected API. * &#x60;GET&#x60; - Method type which indicates it is a GET API call. * &#x60;POST&#x60; - Method type which indicates it is a POST API call. * &#x60;PUT&#x60; - Method type which indicates it is a PUT API call. * &#x60;PATCH&#x60; - Method type which indicates it is a PATCH API call. * &#x60;DELETE&#x60; - Method type which indicates it is a DELETE API call. | [optional] [default to "GET"]
 **Name** | Pointer to **string** | Name of the selected API endpoint. | [optional] 
 **Path** | Pointer to **string** | API Path of the selected API endpoint. | [optional] 
 **ValidationError** | Pointer to **string** | Validation error messages will be captured by this property. | [optional] [readonly] 

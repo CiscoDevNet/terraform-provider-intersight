@@ -463,7 +463,7 @@ func getHyperflexNodeSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"node_status": {
-			Description: "The operational status of the HyperFlex node.\n* `Unknown` - The default operational status of a HyperFlex node.\n* `Invalid` - The status of the node cannot be determined by the storage platform.\n* `Ready` - The platform node has been acknowledged by the cluster.\n* `Unpublished` - The node is not yet added to the storage cluster.\n* `Deleted` - The node has been removed from the cluster.\n* `Blocked` - The node is blocked from being added to the cluster.\n* `Blacklisted` - The deprecated value for 'Blocked'. It is included to maintain backwards compatibility with clusters running a HyperFlex Data Platform version older than 5.0(1a).\n* `Allowed` - The node is allowd to be added to the cluster.\n* `Whitelisted` - The deprecated value for 'Allowed'. It is included to maintain backwards compatibility with clusters running a HyperFlex Data Platform version older than 5.0(1a).\n* `InMaintenance` - The node is in maintenance mode. It has been temporarily relinquished from the cluster to allow for maintenance operations such as software upgrades.\n* `Online` - The node is participating in the storage cluster and is available for storage operations.\n* `Offline` - The node is part of the storage cluster, but is not available for storage operations.",
+			Description: "The operational status of the HyperFlex node.\n* `Unknown` - The default operational status of a HyperFlex node.\n* `Invalid` - The status of the node cannot be determined by the storage platform.\n* `Ready` - The platform node has been acknowledged by the cluster.\n* `Unpublished` - The node is not yet added to the storage cluster.\n* `Deleted` - The node has been removed from the cluster.\n* `Blocked` - The node is blocked from being added to the cluster.\n* `Blacklisted` - The deprecated value for 'Blocked'. It is included to maintain backwards compatibility with clusters running a HyperFlex Data Platform version older than 5.0(1a).\n* `Allowed` - The node is allowed to be added to the cluster.\n* `Whitelisted` - The deprecated value for 'Allowed'. It is included to maintain backwards compatibility with clusters running a HyperFlex Data Platform version older than 5.0(1a).\n* `InMaintenance` - The node is in maintenance mode. It has been temporarily relinquished from the cluster to allow for maintenance operations such as software upgrades.\n* `Online` - The node is participating in the storage cluster and is available for storage operations.\n* `Offline` - The node is part of the storage cluster, but is not available for storage operations.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -683,6 +683,11 @@ func getHyperflexNodeSchema() map[string]*schema.Schema {
 								},
 							},
 						},
+					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",

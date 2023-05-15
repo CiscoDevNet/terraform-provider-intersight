@@ -92,6 +92,13 @@ func resourceCertificatemanagementPolicy() *schema.Resource {
 							Optional:         true,
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
+						"cert_type": {
+							Description:  "Certificate Type for the certificate management.\n* `None` - Set certificate on the selected end point .\n* `KMIPClient` - Set KMIP certificate on the selected end point.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"None", "KMIPClient"}, false),
+							Optional:     true,
+							Default:      "None",
+						},
 						"certificate": {
 							Description: "Certificate that is used for verifying the authorization.",
 							Type:        schema.TypeList,
@@ -694,6 +701,17 @@ func resourceCertificatemanagementPolicy() *schema.Resource {
 								},
 							},
 						},
+						"marked_for_deletion": {
+							Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
@@ -809,6 +827,12 @@ func resourceCertificatemanagementPolicyCreate(c context.Context, d *schema.Reso
 					if err == nil && x1 != nil {
 						o.AdditionalProperties = x1.(map[string]interface{})
 					}
+				}
+			}
+			if v, ok := l["cert_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetCertType(x)
 				}
 			}
 			if v, ok := l["certificate"]; ok {
@@ -1186,6 +1210,12 @@ func resourceCertificatemanagementPolicyUpdate(c context.Context, d *schema.Reso
 					if err == nil && x1 != nil {
 						o.AdditionalProperties = x1.(map[string]interface{})
 					}
+				}
+			}
+			if v, ok := l["cert_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetCertType(x)
 				}
 			}
 			if v, ok := l["certificate"]; ok {

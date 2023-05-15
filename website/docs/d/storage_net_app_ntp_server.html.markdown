@@ -17,6 +17,7 @@ The following arguments can be used to get data of already created objects in In
 * `account_moid`:(string) The Account ID for this managed object. 
 * `authentication_enabled`:(bool) Indicates that NTP symmetric authentication is enabled. 
 * `authentication_key_id`:(string) NTP symmetric authentication key identifier or index number (ID). 
+* `cluster_uuid`:(string) Unique identity of the device. 
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `mod_time`:(string) The time when this managed object was last modified. 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-10371
+API version: 1.0.11-11765
 Contact: intersight@cisco.com
 */
 
@@ -51,7 +51,9 @@ type ComputePhysicalSummary struct {
 	// The universally unique hardware identity of the server provided by the manufacturer.
 	HardwareUuid *string `json:"HardwareUuid,omitempty"`
 	// The IPv4 address configured on the management interface of the Integrated Management Controller.
-	Ipv4Address    *string            `json:"Ipv4Address,omitempty"`
+	Ipv4Address *string `json:"Ipv4Address,omitempty"`
+	// This field indicates the compute status of the catalog values for the associated component or hardware.
+	IsUpgraded     *bool              `json:"IsUpgraded,omitempty"`
 	KvmIpAddresses []ComputeIpAddress `json:"KvmIpAddresses,omitempty"`
 	// The KVM server state of the server.
 	KvmServerStateEnabled *bool `json:"KvmServerStateEnabled,omitempty"`
@@ -65,7 +67,7 @@ type ComputePhysicalSummary struct {
 	MemorySpeed *string `json:"MemorySpeed,omitempty"`
 	// Management address of the server.
 	MgmtIpAddress *string `json:"MgmtIpAddress,omitempty"`
-	// This field identifies the model of the given component.
+	// This field displays the model number of the associated component or hardware.
 	Model *string `json:"Model,omitempty"`
 	// The name of the UCS Fabric Interconnect cluster or Cisco Integrated Management Controller (CIMC). When this server is attached to a UCS Fabric Interconnect, the value of this property is the name of the UCS Fabric Interconnect along with chassis/server Id. When this server configured in standalone mode, the value of this property is the name of the Cisco Integrated Management Controller. when this server is configired in IMM mode, the value of this property contains model and chassis/server Id.
 	Name *string `json:"Name,omitempty"`
@@ -94,15 +96,15 @@ type ComputePhysicalSummary struct {
 	Personality *string `json:"Personality,omitempty"`
 	// The platform type of the registered device - whether managed by UCSM or operating in standalone mode.
 	PlatformType *string `json:"PlatformType,omitempty"`
-	// This field identifies the presence (equipped) or absence of the given component.
+	// This field indicates the presence (equipped) or absence (absent) of the associated component or hardware.
 	Presence *string `json:"Presence,omitempty"`
-	// This field identifies the revision of the given component.
+	// This field displays the revised version of the associated component or hardware (if any).
 	Revision *string `json:"Revision,omitempty"`
 	// The Relative Name uniquely identifies an object within a given context.
 	Rn *string `json:"Rn,omitempty"`
 	// The mode of the server that determines it is scaled.
 	ScaledMode *string `json:"ScaledMode,omitempty"`
-	// This field identifies the serial of the given component.
+	// This field displays the serial number of the associated component or hardware.
 	Serial *string `json:"Serial,omitempty"`
 	// RackUnit ID that uniquely identifies the server.
 	ServerId *int64 `json:"ServerId,omitempty"`
@@ -122,7 +124,7 @@ type ComputePhysicalSummary struct {
 	UserLabel *string `json:"UserLabel,omitempty"`
 	// The universally unique identity of the server.
 	Uuid *string `json:"Uuid,omitempty"`
-	// This field identifies the vendor of the given component.
+	// This field displays the vendor information of the associated component or hardware.
 	Vendor               *string                              `json:"Vendor,omitempty"`
 	EquipmentChassis     *EquipmentChassisRelationship        `json:"EquipmentChassis,omitempty"`
 	InventoryDeviceInfo  *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
@@ -663,6 +665,38 @@ func (o *ComputePhysicalSummary) HasIpv4Address() bool {
 // SetIpv4Address gets a reference to the given string and assigns it to the Ipv4Address field.
 func (o *ComputePhysicalSummary) SetIpv4Address(v string) {
 	o.Ipv4Address = &v
+}
+
+// GetIsUpgraded returns the IsUpgraded field value if set, zero value otherwise.
+func (o *ComputePhysicalSummary) GetIsUpgraded() bool {
+	if o == nil || o.IsUpgraded == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsUpgraded
+}
+
+// GetIsUpgradedOk returns a tuple with the IsUpgraded field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ComputePhysicalSummary) GetIsUpgradedOk() (*bool, bool) {
+	if o == nil || o.IsUpgraded == nil {
+		return nil, false
+	}
+	return o.IsUpgraded, true
+}
+
+// HasIsUpgraded returns a boolean if a field has been set.
+func (o *ComputePhysicalSummary) HasIsUpgraded() bool {
+	if o != nil && o.IsUpgraded != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsUpgraded gets a reference to the given bool and assigns it to the IsUpgraded field.
+func (o *ComputePhysicalSummary) SetIsUpgraded(v bool) {
+	o.IsUpgraded = &v
 }
 
 // GetKvmIpAddresses returns the KvmIpAddresses field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -2005,6 +2039,9 @@ func (o ComputePhysicalSummary) MarshalJSON() ([]byte, error) {
 	if o.Ipv4Address != nil {
 		toSerialize["Ipv4Address"] = o.Ipv4Address
 	}
+	if o.IsUpgraded != nil {
+		toSerialize["IsUpgraded"] = o.IsUpgraded
+	}
 	if o.KvmIpAddresses != nil {
 		toSerialize["KvmIpAddresses"] = o.KvmIpAddresses
 	}
@@ -2166,7 +2203,9 @@ func (o *ComputePhysicalSummary) UnmarshalJSON(bytes []byte) (err error) {
 		// The universally unique hardware identity of the server provided by the manufacturer.
 		HardwareUuid *string `json:"HardwareUuid,omitempty"`
 		// The IPv4 address configured on the management interface of the Integrated Management Controller.
-		Ipv4Address    *string            `json:"Ipv4Address,omitempty"`
+		Ipv4Address *string `json:"Ipv4Address,omitempty"`
+		// This field indicates the compute status of the catalog values for the associated component or hardware.
+		IsUpgraded     *bool              `json:"IsUpgraded,omitempty"`
 		KvmIpAddresses []ComputeIpAddress `json:"KvmIpAddresses,omitempty"`
 		// The KVM server state of the server.
 		KvmServerStateEnabled *bool `json:"KvmServerStateEnabled,omitempty"`
@@ -2180,7 +2219,7 @@ func (o *ComputePhysicalSummary) UnmarshalJSON(bytes []byte) (err error) {
 		MemorySpeed *string `json:"MemorySpeed,omitempty"`
 		// Management address of the server.
 		MgmtIpAddress *string `json:"MgmtIpAddress,omitempty"`
-		// This field identifies the model of the given component.
+		// This field displays the model number of the associated component or hardware.
 		Model *string `json:"Model,omitempty"`
 		// The name of the UCS Fabric Interconnect cluster or Cisco Integrated Management Controller (CIMC). When this server is attached to a UCS Fabric Interconnect, the value of this property is the name of the UCS Fabric Interconnect along with chassis/server Id. When this server configured in standalone mode, the value of this property is the name of the Cisco Integrated Management Controller. when this server is configired in IMM mode, the value of this property contains model and chassis/server Id.
 		Name *string `json:"Name,omitempty"`
@@ -2209,15 +2248,15 @@ func (o *ComputePhysicalSummary) UnmarshalJSON(bytes []byte) (err error) {
 		Personality *string `json:"Personality,omitempty"`
 		// The platform type of the registered device - whether managed by UCSM or operating in standalone mode.
 		PlatformType *string `json:"PlatformType,omitempty"`
-		// This field identifies the presence (equipped) or absence of the given component.
+		// This field indicates the presence (equipped) or absence (absent) of the associated component or hardware.
 		Presence *string `json:"Presence,omitempty"`
-		// This field identifies the revision of the given component.
+		// This field displays the revised version of the associated component or hardware (if any).
 		Revision *string `json:"Revision,omitempty"`
 		// The Relative Name uniquely identifies an object within a given context.
 		Rn *string `json:"Rn,omitempty"`
 		// The mode of the server that determines it is scaled.
 		ScaledMode *string `json:"ScaledMode,omitempty"`
-		// This field identifies the serial of the given component.
+		// This field displays the serial number of the associated component or hardware.
 		Serial *string `json:"Serial,omitempty"`
 		// RackUnit ID that uniquely identifies the server.
 		ServerId *int64 `json:"ServerId,omitempty"`
@@ -2237,7 +2276,7 @@ func (o *ComputePhysicalSummary) UnmarshalJSON(bytes []byte) (err error) {
 		UserLabel *string `json:"UserLabel,omitempty"`
 		// The universally unique identity of the server.
 		Uuid *string `json:"Uuid,omitempty"`
-		// This field identifies the vendor of the given component.
+		// This field displays the vendor information of the associated component or hardware.
 		Vendor              *string                              `json:"Vendor,omitempty"`
 		EquipmentChassis    *EquipmentChassisRelationship        `json:"EquipmentChassis,omitempty"`
 		InventoryDeviceInfo *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
@@ -2265,6 +2304,7 @@ func (o *ComputePhysicalSummary) UnmarshalJSON(bytes []byte) (err error) {
 		varComputePhysicalSummary.Firmware = varComputePhysicalSummaryWithoutEmbeddedStruct.Firmware
 		varComputePhysicalSummary.HardwareUuid = varComputePhysicalSummaryWithoutEmbeddedStruct.HardwareUuid
 		varComputePhysicalSummary.Ipv4Address = varComputePhysicalSummaryWithoutEmbeddedStruct.Ipv4Address
+		varComputePhysicalSummary.IsUpgraded = varComputePhysicalSummaryWithoutEmbeddedStruct.IsUpgraded
 		varComputePhysicalSummary.KvmIpAddresses = varComputePhysicalSummaryWithoutEmbeddedStruct.KvmIpAddresses
 		varComputePhysicalSummary.KvmServerStateEnabled = varComputePhysicalSummaryWithoutEmbeddedStruct.KvmServerStateEnabled
 		varComputePhysicalSummary.KvmVendor = varComputePhysicalSummaryWithoutEmbeddedStruct.KvmVendor
@@ -2338,6 +2378,7 @@ func (o *ComputePhysicalSummary) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "Firmware")
 		delete(additionalProperties, "HardwareUuid")
 		delete(additionalProperties, "Ipv4Address")
+		delete(additionalProperties, "IsUpgraded")
 		delete(additionalProperties, "KvmIpAddresses")
 		delete(additionalProperties, "KvmServerStateEnabled")
 		delete(additionalProperties, "KvmVendor")

@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.TaskRetryInfo"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.TaskRetryInfo"]
-**Status** | Pointer to **string** | Status of the retried task. | [optional] 
-**TaskInstId** | Pointer to **string** | Retry instance will get a unique instance id. | [optional] 
+**Status** | Pointer to **string** | Status of the retried task. | [optional] [readonly] 
+**TaskInstId** | Pointer to **string** | Retry instance will get a unique instance id. | [optional] [readonly] 
 
 ## Methods
 

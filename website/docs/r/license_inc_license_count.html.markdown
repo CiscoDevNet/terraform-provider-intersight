@@ -41,8 +41,10 @@ This complex property has following sub-properties:
 * `premier100_gfx_count`:(int)(ReadOnly) The total number of devices claimed in the premier 100G fixed tier Intersight Nexus Cloud. 
 * `premier10_gfx_count`:(int)(ReadOnly) The total number of devices claimed in the premier 10G fixed tier Intersight Nexus Cloud. 
 * `premier1_gfx_count`:(int)(ReadOnly) The total number of devices claimed in the premier 1G fixed tier Intersight Nexus Cloud. 
+* `premier_centralized_mod8_slot_count`:(int)(ReadOnly) The total number of devices claimed in the CentralizedMod8Slot premier tier Intersight Nexus Cloud. 
 * `premier_d2_ops_fixed_count`:(int)(ReadOnly) The total number of devices claimed in the D2Ops Fixed premier tier Intersight Nexus Cloud. 
 * `premier_d2_ops_mod_count`:(int)(ReadOnly) The total number of devices claimed in the D2Ops modular premier tier Intersight Nexus Cloud. 
+* `premier_distributed_mod8_slot_count`:(int)(ReadOnly) The total number of devices claimed in the DistributedMod8Slot premier tier Intersight Nexus Cloud. 
 * `premier_mod4_slot_count`:(int)(ReadOnly) The total number of devices claimed in the modular 4 slot premier tier Intersight Nexus Cloud. 
 * `premier_mod8_slot_count`:(int)(ReadOnly) The total number of devices claimed in the modular 8 slot premier tier Intersight Nexus Cloud. 
 * `shared_scope`:(string)(ReadOnly) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
@@ -57,6 +59,7 @@ This complex property has following sub-properties:
     + `moid`:(string) The Moid of the referenced REST resource. 
     + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
     + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+  + `marked_for_deletion`:(bool)(ReadOnly) The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `ref_mo`:(HashMap) -(ReadOnly) A reference to the original Managed Object. 
 This complex property has following sub-properties:

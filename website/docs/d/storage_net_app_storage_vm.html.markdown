@@ -20,6 +20,7 @@ The following arguments can be used to get data of already created objects in In
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `fcp_enabled`:(bool) Status for Fibre Channel Protocol ( FCP ) allowed to run on Vservers. 
 * `ipspace`:(string) IPspace name. IPspaces are distinct IP address spaces in which storage virtual machines (SVMs) reside. 
+* `is_protected`:(string) Specifies whether the Storage VM is a SnapMirror source Storage VM, using SnapMirror to protect its data. 
 * `iscsi_enabled`:(bool) Status for iSCSI protocol allowed to run on Vservers. 
 * `key`:(string) Unique identifier of VServer across data center. 
 * `mod_time`:(string) The time when this managed object was last modified. 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-10371
+API version: 1.0.11-11765
 Contact: intersight@cisco.com
 */
 
@@ -36,6 +36,8 @@ type CapabilitySwitchCapabilityAllOf struct {
 	MaxPorts *int64 `json:"MaxPorts,omitempty"`
 	// Maximum allowed physical slots on this switch.
 	MaxSlots *int64 `json:"MaxSlots,omitempty"`
+	// Minimum firmware version supported for breakout ports on this switch.
+	MinVersionWithBreakoutSupport *string `json:"MinVersionWithBreakoutSupport,omitempty"`
 	// Minimum firmware version supported for locator leds on this switch.
 	MinVersionWithLocatorLedSupport *string                               `json:"MinVersionWithLocatorLedSupport,omitempty"`
 	NetworkLimits                   NullableCapabilitySwitchNetworkLimits `json:"NetworkLimits,omitempty"`
@@ -49,11 +51,12 @@ type CapabilitySwitchCapabilityAllOf struct {
 	PortsSupportingServerRole       []CapabilityPortRange                 `json:"PortsSupportingServerRole,omitempty"`
 	ReservedVsans                   []CapabilityPortRange                 `json:"ReservedVsans,omitempty"`
 	// Sereno Adaptor with Netflow support on this switch.
-	SerenoNetflowSupported    *bool                                 `json:"SerenoNetflowSupported,omitempty"`
-	StorageLimits             NullableCapabilitySwitchStorageLimits `json:"StorageLimits,omitempty"`
-	SwitchingModeCapabilities []CapabilitySwitchingModeCapability   `json:"SwitchingModeCapabilities,omitempty"`
-	SystemLimits              NullableCapabilitySwitchSystemLimits  `json:"SystemLimits,omitempty"`
-	UnifiedPorts              []CapabilityPortRange                 `json:"UnifiedPorts,omitempty"`
+	SerenoNetflowSupported        *bool                                 `json:"SerenoNetflowSupported,omitempty"`
+	ServerRoleSupportedOnBreakout []string                              `json:"ServerRoleSupportedOnBreakout,omitempty"`
+	StorageLimits                 NullableCapabilitySwitchStorageLimits `json:"StorageLimits,omitempty"`
+	SwitchingModeCapabilities     []CapabilitySwitchingModeCapability   `json:"SwitchingModeCapabilities,omitempty"`
+	SystemLimits                  NullableCapabilitySwitchSystemLimits  `json:"SystemLimits,omitempty"`
+	UnifiedPorts                  []CapabilityPortRange                 `json:"UnifiedPorts,omitempty"`
 	// The Slider rule for Unified ports on this switch.
 	UnifiedRule          *string `json:"UnifiedRule,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -387,6 +390,38 @@ func (o *CapabilitySwitchCapabilityAllOf) HasMaxSlots() bool {
 // SetMaxSlots gets a reference to the given int64 and assigns it to the MaxSlots field.
 func (o *CapabilitySwitchCapabilityAllOf) SetMaxSlots(v int64) {
 	o.MaxSlots = &v
+}
+
+// GetMinVersionWithBreakoutSupport returns the MinVersionWithBreakoutSupport field value if set, zero value otherwise.
+func (o *CapabilitySwitchCapabilityAllOf) GetMinVersionWithBreakoutSupport() string {
+	if o == nil || o.MinVersionWithBreakoutSupport == nil {
+		var ret string
+		return ret
+	}
+	return *o.MinVersionWithBreakoutSupport
+}
+
+// GetMinVersionWithBreakoutSupportOk returns a tuple with the MinVersionWithBreakoutSupport field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CapabilitySwitchCapabilityAllOf) GetMinVersionWithBreakoutSupportOk() (*string, bool) {
+	if o == nil || o.MinVersionWithBreakoutSupport == nil {
+		return nil, false
+	}
+	return o.MinVersionWithBreakoutSupport, true
+}
+
+// HasMinVersionWithBreakoutSupport returns a boolean if a field has been set.
+func (o *CapabilitySwitchCapabilityAllOf) HasMinVersionWithBreakoutSupport() bool {
+	if o != nil && o.MinVersionWithBreakoutSupport != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMinVersionWithBreakoutSupport gets a reference to the given string and assigns it to the MinVersionWithBreakoutSupport field.
+func (o *CapabilitySwitchCapabilityAllOf) SetMinVersionWithBreakoutSupport(v string) {
+	o.MinVersionWithBreakoutSupport = &v
 }
 
 // GetMinVersionWithLocatorLedSupport returns the MinVersionWithLocatorLedSupport field value if set, zero value otherwise.
@@ -793,6 +828,39 @@ func (o *CapabilitySwitchCapabilityAllOf) SetSerenoNetflowSupported(v bool) {
 	o.SerenoNetflowSupported = &v
 }
 
+// GetServerRoleSupportedOnBreakout returns the ServerRoleSupportedOnBreakout field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CapabilitySwitchCapabilityAllOf) GetServerRoleSupportedOnBreakout() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+	return o.ServerRoleSupportedOnBreakout
+}
+
+// GetServerRoleSupportedOnBreakoutOk returns a tuple with the ServerRoleSupportedOnBreakout field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CapabilitySwitchCapabilityAllOf) GetServerRoleSupportedOnBreakoutOk() ([]string, bool) {
+	if o == nil || o.ServerRoleSupportedOnBreakout == nil {
+		return nil, false
+	}
+	return o.ServerRoleSupportedOnBreakout, true
+}
+
+// HasServerRoleSupportedOnBreakout returns a boolean if a field has been set.
+func (o *CapabilitySwitchCapabilityAllOf) HasServerRoleSupportedOnBreakout() bool {
+	if o != nil && o.ServerRoleSupportedOnBreakout != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetServerRoleSupportedOnBreakout gets a reference to the given []string and assigns it to the ServerRoleSupportedOnBreakout field.
+func (o *CapabilitySwitchCapabilityAllOf) SetServerRoleSupportedOnBreakout(v []string) {
+	o.ServerRoleSupportedOnBreakout = v
+}
+
 // GetStorageLimits returns the StorageLimits field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CapabilitySwitchCapabilityAllOf) GetStorageLimits() CapabilitySwitchStorageLimits {
 	if o == nil || o.StorageLimits.Get() == nil {
@@ -1009,6 +1077,9 @@ func (o CapabilitySwitchCapabilityAllOf) MarshalJSON() ([]byte, error) {
 	if o.MaxSlots != nil {
 		toSerialize["MaxSlots"] = o.MaxSlots
 	}
+	if o.MinVersionWithBreakoutSupport != nil {
+		toSerialize["MinVersionWithBreakoutSupport"] = o.MinVersionWithBreakoutSupport
+	}
 	if o.MinVersionWithLocatorLedSupport != nil {
 		toSerialize["MinVersionWithLocatorLedSupport"] = o.MinVersionWithLocatorLedSupport
 	}
@@ -1044,6 +1115,9 @@ func (o CapabilitySwitchCapabilityAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.SerenoNetflowSupported != nil {
 		toSerialize["SerenoNetflowSupported"] = o.SerenoNetflowSupported
+	}
+	if o.ServerRoleSupportedOnBreakout != nil {
+		toSerialize["ServerRoleSupportedOnBreakout"] = o.ServerRoleSupportedOnBreakout
 	}
 	if o.StorageLimits.IsSet() {
 		toSerialize["StorageLimits"] = o.StorageLimits.Get()
@@ -1088,6 +1162,7 @@ func (o *CapabilitySwitchCapabilityAllOf) UnmarshalJSON(bytes []byte) (err error
 		delete(additionalProperties, "LocatorBeaconSupported")
 		delete(additionalProperties, "MaxPorts")
 		delete(additionalProperties, "MaxSlots")
+		delete(additionalProperties, "MinVersionWithBreakoutSupport")
 		delete(additionalProperties, "MinVersionWithLocatorLedSupport")
 		delete(additionalProperties, "NetworkLimits")
 		delete(additionalProperties, "PortsSupporting100gSpeed")
@@ -1100,6 +1175,7 @@ func (o *CapabilitySwitchCapabilityAllOf) UnmarshalJSON(bytes []byte) (err error
 		delete(additionalProperties, "PortsSupportingServerRole")
 		delete(additionalProperties, "ReservedVsans")
 		delete(additionalProperties, "SerenoNetflowSupported")
+		delete(additionalProperties, "ServerRoleSupportedOnBreakout")
 		delete(additionalProperties, "StorageLimits")
 		delete(additionalProperties, "SwitchingModeCapabilities")
 		delete(additionalProperties, "SystemLimits")

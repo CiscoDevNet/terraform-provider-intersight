@@ -99,102 +99,7 @@ func getWorkflowServiceItemDefinitionSchema() map[string]*schema.Schema {
 				},
 			},
 		},
-		"catalog": {
-			Description: "A reference to a workflowCatalog resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"moid": {
-						Description: "The Moid of the referenced REST resource.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the remote type referred by this relationship.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"selector": {
-						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"class_id": {
-			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"create_time": {
-			Description: "The time when this managed object was created.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"cvd_id": {
-			Description: "The Cisco Validated Design (CVD) Identifier that this service item provides.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"delete_instance_on_decommission": {
-			Description: "The flag to indicate that service item instance will be deleted after the completion of decommission action.",
-			Type:        schema.TypeBool,
-			Optional:    true,
-		},
-		"description": {
-			Description: "The description for this service item which provides information on what are the pre-requisites to deploy the service item and what features are supported on the service item.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"domain_group_moid": {
-			Description: "The DomainGroup ID for this managed object.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"label": {
-			Description: "A user friendly short name to identify the service item. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ) or an underscore (_).",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"license_entitlement": {
-			Description: "License entitlement required to run this service item.\n* `Base` - Base as a License type. It is default license type.\n* `Essential` - Essential as a License type.\n* `Standard` - Standard as a License type.\n* `Advantage` - Advantage as a License type.\n* `Premier` - Premier as a License type.\n* `IWO-Essential` - IWO-Essential as a License type.\n* `IWO-Advantage` - IWO-Advantage as a License type.\n* `IWO-Premier` - IWO-Premier as a License type.\n* `IKS-Advantage` - IKS-Advantage as a License type.\n* `INC-Premier-1GFixed` - Premier 1G Fixed license tier for Intersight Nexus Cloud.\n* `INC-Premier-10GFixed` - Premier 10G Fixed license tier for Intersight Nexus Cloud.\n* `INC-Premier-100GFixed` - Premier 100G Fixed license tier for Intersight Nexus Cloud.\n* `INC-Premier-Mod4Slot` - Premier Modular 4 slot license tier for Intersight Nexus Cloud.\n* `INC-Premier-Mod8Slot` - Premier Modular 8 slot license tier for Intersight Nexus Cloud.\n* `INC-Premier-D2OpsFixed` - Premier D2Ops fixed license tier for Intersight Nexus Cloud.\n* `INC-Premier-D2OpsMod` - Premier D2Ops modular license tier for Intersight Nexus Cloud.\n* `IntersightTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode Intersight tiers.\n* `IWOTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode IKS tiers.\n* `IKSTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode IWO tiers.\n* `INCTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode Nexus tiers.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"mod_time": {
-			Description: "The time when this managed object was last modified.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"moid": {
-			Description: "The unique identifier of this Managed Object instance.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"name": {
-			Description: "The name for this service item definition. You can have multiple versions of the service item with the same name. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:) or an underscore (_).",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"object_type": {
-			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"output_definition": {
+		"attribute_definition": {
 			Type:     schema.TypeList,
 			Optional: true,
 			Elem: &schema.Resource{
@@ -317,6 +222,101 @@ func getWorkflowServiceItemDefinitionSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"catalog": {
+			Description: "A reference to a workflowCatalog resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"class_id": {
+			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"create_time": {
+			Description: "The time when this managed object was created.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"cvd_id": {
+			Description: "The Cisco Validated Design (CVD) Identifier that this service item provides.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"delete_instance_on_decommission": {
+			Description: "The flag to indicate that service item instance will be deleted after the completion of decommission action.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"description": {
+			Description: "The description for this service item which provides information on what are the pre-requisites to deploy the service item and what features are supported on the service item.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"domain_group_moid": {
+			Description: "The DomainGroup ID for this managed object.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"label": {
+			Description: "A user friendly short name to identify the service item. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ) or an underscore (_).",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"license_entitlement": {
+			Description: "License entitlement required to run this service item.\n* `Base` - Base as a License type. It is default license type.\n* `Essential` - Essential as a License type.\n* `Standard` - Standard as a License type.\n* `Advantage` - Advantage as a License type.\n* `Premier` - Premier as a License type.\n* `IWO-Essential` - IWO-Essential as a License type.\n* `IWO-Advantage` - IWO-Advantage as a License type.\n* `IWO-Premier` - IWO-Premier as a License type.\n* `IKS-Advantage` - IKS-Advantage as a License type.\n* `INC-Premier-1GFixed` - Premier 1G Fixed license tier for Intersight Nexus Cloud.\n* `INC-Premier-10GFixed` - Premier 10G Fixed license tier for Intersight Nexus Cloud.\n* `INC-Premier-100GFixed` - Premier 100G Fixed license tier for Intersight Nexus Cloud.\n* `INC-Premier-Mod4Slot` - Premier Modular 4 slot license tier for Intersight Nexus Cloud.\n* `INC-Premier-Mod8Slot` - Premier Modular 8 slot license tier for Intersight Nexus Cloud.\n* `INC-Premier-D2OpsFixed` - Premier D2Ops fixed license tier for Intersight Nexus Cloud.\n* `INC-Premier-D2OpsMod` - Premier D2Ops modular license tier for Intersight Nexus Cloud.\n* `INC-Premier-CentralizedMod8Slot` - Premier modular license tier of switch type CentralizedMod8Slot for Intersight Nexus Cloud.\n* `INC-Premier-DistributedMod8Slot` - Premier modular license tier of switch type DistributedMod8Slot for Intersight Nexus Cloud.\n* `IntersightTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode Intersight tiers.\n* `IWOTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode IKS tiers.\n* `IKSTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode IWO tiers.\n* `INCTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode Nexus tiers.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"mod_time": {
+			Description: "The time when this managed object was last modified.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"moid": {
+			Description: "The unique identifier of this Managed Object instance.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"name": {
+			Description: "The name for this service item definition. You can have multiple versions of the service item with the same name. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:) or an underscore (_).",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"object_type": {
+			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"owners": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -391,8 +391,23 @@ func getWorkflowServiceItemDefinitionSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"publish_status": {
+			Description: "Publish status of the service item.\n* `NotPublished` - A state of the service item or catalog item which is not yet published.\n* `Published` - A state denoting that the service item or catalog item is published.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"shared_scope": {
 			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"status": {
+			Description: "State of service item considering the state of underlying service item actions definitions.\n* `Okay` - Deployment and other post-deployment actions are in valid state.\n* `Critical` - Deployment action is not in valid state.\n* `Warning` - Deployment action is in valid state, and one or more post-deployment actions are not in valid state.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"support_status": {
+			Description: "The service item can be marked as deprecated, supported or beta, the support status indicates that. When a new service item is introduced, it can be marked beta to indicate this is experimental and later moved to Supported status. When Service item is deprecated, it cannot be instantiated and used for a Catalog Item design.\n* `Supported` - The definition is a supported version and there will be no changes to the mandatory inputs or outputs.\n* `Beta` - The definition is a Beta version and this version can under go changes until the version is marked supported.\n* `Deprecated` - The version of definition is deprecated and typically there will be a higher version of the same definition that has been added.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -415,6 +430,84 @@ func getWorkflowServiceItemDefinitionSchema() map[string]*schema.Schema {
 						Description: "The string representation of a tag value.",
 						Type:        schema.TypeString,
 						Optional:    true,
+					},
+				},
+			},
+		},
+		"user_id_or_email": {
+			Description: "The user identifier who created or updated the service item definition.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"validation_information": {
+			Description: "The current validation state and associated validation errors when state is invalid.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"state": {
+						Description: "The current validation state of this workflow. The possible states are Valid, Invalid, NotValidated (default).\n* `NotValidated` - The state when workflow definition has not been validated.\n* `Valid` - The state when workflow definition is valid.\n* `Invalid` - The state when workflow definition is invalid.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"validation_error": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"error_log": {
+									Description: "Description of the error.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"field": {
+									Description: "When populated this refers to the input or output field within the workflow or task.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"task_name": {
+									Description: "The task name on which the error is found, when empty the error applies to the top level workflow.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"transition_name": {
+									Description: "When populated this refers to the transition connection that has a problem. When this field has value OnSuccess it means the transition connection OnSuccess for the task has an issue.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
 					},
 				},
 			},
@@ -473,6 +566,11 @@ func getWorkflowServiceItemDefinitionSchema() map[string]*schema.Schema {
 								},
 							},
 						},
+					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -653,110 +751,7 @@ func dataSourceWorkflowServiceItemDefinitionRead(c context.Context, d *schema.Re
 		o.SetAncestors(x)
 	}
 
-	if v, ok := d.GetOk("catalog"); ok {
-		p := make([]models.WorkflowCatalogRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.MoMoRef{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsWorkflowCatalogRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetCatalog(x)
-		}
-	}
-
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
-		o.SetCreateTime(x)
-	}
-
-	if v, ok := d.GetOk("cvd_id"); ok {
-		x := (v.(string))
-		o.SetCvdId(x)
-	}
-
-	if v, ok := d.GetOkExists("delete_instance_on_decommission"); ok {
-		x := (v.(bool))
-		o.SetDeleteInstanceOnDecommission(x)
-	}
-
-	if v, ok := d.GetOk("description"); ok {
-		x := (v.(string))
-		o.SetDescription(x)
-	}
-
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-
-	if v, ok := d.GetOk("label"); ok {
-		x := (v.(string))
-		o.SetLabel(x)
-	}
-
-	if v, ok := d.GetOk("license_entitlement"); ok {
-		x := (v.(string))
-		o.SetLicenseEntitlement(x)
-	}
-
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
-		o.SetModTime(x)
-	}
-
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-
-	if v, ok := d.GetOk("name"); ok {
-		x := (v.(string))
-		o.SetName(x)
-	}
-
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-
-	if v, ok := d.GetOk("output_definition"); ok {
+	if v, ok := d.GetOk("attribute_definition"); ok {
 		x := make([]models.WorkflowBaseDataType, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -909,7 +904,110 @@ func dataSourceWorkflowServiceItemDefinitionRead(c context.Context, d *schema.Re
 			}
 			x = append(x, *o)
 		}
-		o.SetOutputDefinition(x)
+		o.SetAttributeDefinition(x)
+	}
+
+	if v, ok := d.GetOk("catalog"); ok {
+		p := make([]models.WorkflowCatalogRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsWorkflowCatalogRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetCatalog(x)
+		}
+	}
+
+	if v, ok := d.GetOk("class_id"); ok {
+		x := (v.(string))
+		o.SetClassId(x)
+	}
+
+	if v, ok := d.GetOk("create_time"); ok {
+		x, _ := time.Parse(time.RFC1123, v.(string))
+		o.SetCreateTime(x)
+	}
+
+	if v, ok := d.GetOk("cvd_id"); ok {
+		x := (v.(string))
+		o.SetCvdId(x)
+	}
+
+	if v, ok := d.GetOkExists("delete_instance_on_decommission"); ok {
+		x := (v.(bool))
+		o.SetDeleteInstanceOnDecommission(x)
+	}
+
+	if v, ok := d.GetOk("description"); ok {
+		x := (v.(string))
+		o.SetDescription(x)
+	}
+
+	if v, ok := d.GetOk("domain_group_moid"); ok {
+		x := (v.(string))
+		o.SetDomainGroupMoid(x)
+	}
+
+	if v, ok := d.GetOk("label"); ok {
+		x := (v.(string))
+		o.SetLabel(x)
+	}
+
+	if v, ok := d.GetOk("license_entitlement"); ok {
+		x := (v.(string))
+		o.SetLicenseEntitlement(x)
+	}
+
+	if v, ok := d.GetOk("mod_time"); ok {
+		x, _ := time.Parse(time.RFC1123, v.(string))
+		o.SetModTime(x)
+	}
+
+	if v, ok := d.GetOk("moid"); ok {
+		x := (v.(string))
+		o.SetMoid(x)
+	}
+
+	if v, ok := d.GetOk("name"); ok {
+		x := (v.(string))
+		o.SetName(x)
+	}
+
+	if v, ok := d.GetOk("object_type"); ok {
+		x := (v.(string))
+		o.SetObjectType(x)
 	}
 
 	if v, ok := d.GetOk("owners"); ok {
@@ -1006,9 +1104,24 @@ func dataSourceWorkflowServiceItemDefinitionRead(c context.Context, d *schema.Re
 		o.SetPermissionResources(x)
 	}
 
+	if v, ok := d.GetOk("publish_status"); ok {
+		x := (v.(string))
+		o.SetPublishStatus(x)
+	}
+
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
+	}
+
+	if v, ok := d.GetOk("status"); ok {
+		x := (v.(string))
+		o.SetStatus(x)
+	}
+
+	if v, ok := d.GetOk("support_status"); ok {
+		x := (v.(string))
+		o.SetSupportStatus(x)
 	}
 
 	if v, ok := d.GetOk("tags"); ok {
@@ -1042,6 +1155,73 @@ func dataSourceWorkflowServiceItemDefinitionRead(c context.Context, d *schema.Re
 			x = append(x, *o)
 		}
 		o.SetTags(x)
+	}
+
+	if v, ok := d.GetOk("user_id_or_email"); ok {
+		x := (v.(string))
+		o.SetUserIdOrEmail(x)
+	}
+
+	if v, ok := d.GetOk("validation_information"); ok {
+		p := make([]models.WorkflowValidationInformation, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.WorkflowValidationInformation{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("workflow.ValidationInformation")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["validation_error"]; ok {
+				{
+					x := make([]models.WorkflowValidationError, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewWorkflowValidationErrorWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("workflow.ValidationError")
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetValidationError(x)
+					}
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetValidationInformation(x)
+		}
 	}
 
 	if v, ok := d.GetOkExists("nr_version"); ok {
@@ -1166,6 +1346,8 @@ func dataSourceWorkflowServiceItemDefinitionRead(c context.Context, d *schema.Re
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 
+				temp["attribute_definition"] = flattenListWorkflowBaseDataType(s.GetAttributeDefinition(), d)
+
 				temp["catalog"] = flattenMapWorkflowCatalogRelationship(s.GetCatalog(), d)
 				temp["class_id"] = (s.GetClassId())
 
@@ -1181,16 +1363,20 @@ func dataSourceWorkflowServiceItemDefinitionRead(c context.Context, d *schema.Re
 				temp["moid"] = (s.GetMoid())
 				temp["name"] = (s.GetName())
 				temp["object_type"] = (s.GetObjectType())
-
-				temp["output_definition"] = flattenListWorkflowBaseDataType(s.GetOutputDefinition(), d)
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["publish_status"] = (s.GetPublishStatus())
 				temp["shared_scope"] = (s.GetSharedScope())
+				temp["status"] = (s.GetStatus())
+				temp["support_status"] = (s.GetSupportStatus())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["user_id_or_email"] = (s.GetUserIdOrEmail())
+
+				temp["validation_information"] = flattenMapWorkflowValidationInformation(s.GetValidationInformation(), d)
 				temp["nr_version"] = (s.GetVersion())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)

@@ -17,6 +17,7 @@ The following arguments can be used to get data of already created objects in In
 * `account_moid`:(string) The Account ID for this managed object. 
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
+* `is_asdv4_alarm_dismissed`:(bool) The state of the alarm dismissal for the 'IsAsdDialogDismissed' alarm. 
 * `is_password_set`:(bool) Indicates whether the value of the 'password' property has been set. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 

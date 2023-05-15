@@ -242,6 +242,11 @@ func getEquipmentFexSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"is_upgraded": {
+			Description: "This field indicates the compute status of the catalog values for the associated component or hardware.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"locator_led": {
 			Description: "A reference to a equipmentLocatorLed resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -318,7 +323,7 @@ func getEquipmentFexSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"model": {
-			Description: "This field identifies the model of the given component.",
+			Description: "This field displays the model number of the associated component or hardware.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -501,7 +506,7 @@ func getEquipmentFexSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"presence": {
-			Description: "This field identifies the presence (equipped) or absence of the given component.",
+			Description: "This field indicates the presence (equipped) or absence (absent) of the associated component or hardware.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -615,7 +620,7 @@ func getEquipmentFexSchema() map[string]*schema.Schema {
 			},
 		},
 		"revision": {
-			Description: "This field identifies the revision of the given component.",
+			Description: "This field displays the revised version of the associated component or hardware (if any).",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -625,7 +630,7 @@ func getEquipmentFexSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"serial": {
-			Description: "This field identifies the serial of the given component.",
+			Description: "This field displays the serial number of the associated component or hardware.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -663,7 +668,7 @@ func getEquipmentFexSchema() map[string]*schema.Schema {
 			},
 		},
 		"vendor": {
-			Description: "This field identifies the vendor of the given component.",
+			Description: "This field displays the vendor information of the associated component or hardware.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -721,6 +726,11 @@ func getEquipmentFexSchema() map[string]*schema.Schema {
 								},
 							},
 						},
+					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -1067,6 +1077,11 @@ func dataSourceEquipmentFexRead(c context.Context, d *schema.ResourceData, meta 
 			x = append(x, models.MoMoRefAsEquipmentIoCardRelationship(o))
 		}
 		o.SetIoms(x)
+	}
+
+	if v, ok := d.GetOkExists("is_upgraded"); ok {
+		x := (v.(bool))
+		o.SetIsUpgraded(x)
 	}
 
 	if v, ok := d.GetOk("locator_led"); ok {
@@ -1723,6 +1738,7 @@ func dataSourceEquipmentFexRead(c context.Context, d *schema.ResourceData, meta 
 				temp["inventory_device_info"] = flattenMapInventoryDeviceInfoRelationship(s.GetInventoryDeviceInfo(), d)
 
 				temp["ioms"] = flattenListEquipmentIoCardRelationship(s.GetIoms(), d)
+				temp["is_upgraded"] = (s.GetIsUpgraded())
 
 				temp["locator_led"] = flattenMapEquipmentLocatorLedRelationship(s.GetLocatorLed(), d)
 

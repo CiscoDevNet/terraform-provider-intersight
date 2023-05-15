@@ -31,26 +31,27 @@ The following arguments can be used to get data of already created objects in In
 * `drive_security`:(string) The driveSecurity state of the Virtual drive. 
 * `drive_state`:(string) The state of the Virtual drive. 
 * `io_policy`:(string) The Input/Output Policy defined on the Virtual drive. 
+* `is_upgraded`:(bool) This field indicates the compute status of the catalog values for the associated component or hardware. 
 * `mod_time`:(string) The time when this managed object was last modified. 
-* `model`:(string) This field identifies the model of the given component. 
+* `model`:(string) This field displays the model number of the associated component or hardware. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) The name of the Virtual drive. 
 * `num_blocks`:(string) Number of Blocks on the Physical Disk. 
 * `oper_state`:(string) The current operational state of Virtual drive. 
 * `operability`:(string) The current operability state of Virtual drive. 
 * `physical_block_size`:(string) The block size of the the virtual drive. 
-* `presence`:(string) This field identifies the presence (equipped) or absence of the given component. 
+* `presence`:(string) This field indicates the presence (equipped) or absence (absent) of the associated component or hardware. 
 * `read_policy`:(string) The read-ahead cache mode of the virtual drive. 
-* `revision`:(string) This field identifies the revision of the given component. 
+* `revision`:(string) This field displays the revised version of the associated component or hardware (if any). 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
 * `security_flags`:(string) The security flags set for this virtual drive. 
-* `serial`:(string) This field identifies the serial of the given component. 
+* `serial`:(string) This field displays the serial number of the associated component or hardware. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `size`:(string) The size of the virtual drive in MB. 
 * `strip_size`:(string) The strip size is the portion of a stripe that resides on a single drive in the drive group, this is measured in KB. 
 * `type`:(string) The raid type of the virtual drive. 
 * `uuid`:(string) The uuid of the virtual drive. 
-* `vendor`:(string) This field identifies the vendor of the given component. 
+* `vendor`:(string) This field displays the vendor information of the associated component or hardware. 
 * `vendor_uuid`:(string) The UUID value of the vendor. 
 * `virtual_drive_id`:(string) The identifier for this Virtual drive. 
  

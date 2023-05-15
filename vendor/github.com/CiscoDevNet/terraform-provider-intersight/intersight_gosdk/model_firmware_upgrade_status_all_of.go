@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-10371
+API version: 1.0.11-11765
 Contact: intersight@cisco.com
 */
 
@@ -38,10 +38,14 @@ type FirmwareUpgradeStatusAllOf struct {
 	// Pending reason for the upgrade waiting. * `none` - Upgrade pending reason is none. * `pending for next reboot` - Upgrade pending reason is pending for next reboot.
 	PendingType *string `json:"PendingType,omitempty"`
 	// The error message from the endpoint during the SD card download.
-	SdCardDownloadError  *string                           `json:"SdCardDownloadError,omitempty"`
-	Upgrade              *FirmwareUpgradeBaseRelationship  `json:"Upgrade,omitempty"`
-	Workflow             *WorkflowWorkflowInfoRelationship `json:"Workflow,omitempty"`
-	AdditionalProperties map[string]interface{}
+	SdCardDownloadError *string `json:"SdCardDownloadError,omitempty"`
+	// CIMC firmware version of the server prior to the upgrade.
+	SourceFirmwareVersion *string `json:"SourceFirmwareVersion,omitempty"`
+	// CIMC firmware version of the server post the upgrade.
+	TargetFirmwareVersion *string                           `json:"TargetFirmwareVersion,omitempty"`
+	Upgrade               *FirmwareUpgradeBaseRelationship  `json:"Upgrade,omitempty"`
+	Workflow              *WorkflowWorkflowInfoRelationship `json:"Workflow,omitempty"`
+	AdditionalProperties  map[string]interface{}
 }
 
 type _FirmwareUpgradeStatusAllOf FirmwareUpgradeStatusAllOf
@@ -417,6 +421,70 @@ func (o *FirmwareUpgradeStatusAllOf) SetSdCardDownloadError(v string) {
 	o.SdCardDownloadError = &v
 }
 
+// GetSourceFirmwareVersion returns the SourceFirmwareVersion field value if set, zero value otherwise.
+func (o *FirmwareUpgradeStatusAllOf) GetSourceFirmwareVersion() string {
+	if o == nil || o.SourceFirmwareVersion == nil {
+		var ret string
+		return ret
+	}
+	return *o.SourceFirmwareVersion
+}
+
+// GetSourceFirmwareVersionOk returns a tuple with the SourceFirmwareVersion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FirmwareUpgradeStatusAllOf) GetSourceFirmwareVersionOk() (*string, bool) {
+	if o == nil || o.SourceFirmwareVersion == nil {
+		return nil, false
+	}
+	return o.SourceFirmwareVersion, true
+}
+
+// HasSourceFirmwareVersion returns a boolean if a field has been set.
+func (o *FirmwareUpgradeStatusAllOf) HasSourceFirmwareVersion() bool {
+	if o != nil && o.SourceFirmwareVersion != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSourceFirmwareVersion gets a reference to the given string and assigns it to the SourceFirmwareVersion field.
+func (o *FirmwareUpgradeStatusAllOf) SetSourceFirmwareVersion(v string) {
+	o.SourceFirmwareVersion = &v
+}
+
+// GetTargetFirmwareVersion returns the TargetFirmwareVersion field value if set, zero value otherwise.
+func (o *FirmwareUpgradeStatusAllOf) GetTargetFirmwareVersion() string {
+	if o == nil || o.TargetFirmwareVersion == nil {
+		var ret string
+		return ret
+	}
+	return *o.TargetFirmwareVersion
+}
+
+// GetTargetFirmwareVersionOk returns a tuple with the TargetFirmwareVersion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FirmwareUpgradeStatusAllOf) GetTargetFirmwareVersionOk() (*string, bool) {
+	if o == nil || o.TargetFirmwareVersion == nil {
+		return nil, false
+	}
+	return o.TargetFirmwareVersion, true
+}
+
+// HasTargetFirmwareVersion returns a boolean if a field has been set.
+func (o *FirmwareUpgradeStatusAllOf) HasTargetFirmwareVersion() bool {
+	if o != nil && o.TargetFirmwareVersion != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTargetFirmwareVersion gets a reference to the given string and assigns it to the TargetFirmwareVersion field.
+func (o *FirmwareUpgradeStatusAllOf) SetTargetFirmwareVersion(v string) {
+	o.TargetFirmwareVersion = &v
+}
+
 // GetUpgrade returns the Upgrade field value if set, zero value otherwise.
 func (o *FirmwareUpgradeStatusAllOf) GetUpgrade() FirmwareUpgradeBaseRelationship {
 	if o == nil || o.Upgrade == nil {
@@ -516,6 +584,12 @@ func (o FirmwareUpgradeStatusAllOf) MarshalJSON() ([]byte, error) {
 	if o.SdCardDownloadError != nil {
 		toSerialize["SdCardDownloadError"] = o.SdCardDownloadError
 	}
+	if o.SourceFirmwareVersion != nil {
+		toSerialize["SourceFirmwareVersion"] = o.SourceFirmwareVersion
+	}
+	if o.TargetFirmwareVersion != nil {
+		toSerialize["TargetFirmwareVersion"] = o.TargetFirmwareVersion
+	}
 	if o.Upgrade != nil {
 		toSerialize["Upgrade"] = o.Upgrade
 	}
@@ -551,6 +625,8 @@ func (o *FirmwareUpgradeStatusAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "Overallstatus")
 		delete(additionalProperties, "PendingType")
 		delete(additionalProperties, "SdCardDownloadError")
+		delete(additionalProperties, "SourceFirmwareVersion")
+		delete(additionalProperties, "TargetFirmwareVersion")
 		delete(additionalProperties, "Upgrade")
 		delete(additionalProperties, "Workflow")
 		o.AdditionalProperties = additionalProperties

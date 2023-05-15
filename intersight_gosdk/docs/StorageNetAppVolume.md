@@ -9,12 +9,14 @@ Name | Type | Description | Notes
 **AutosizeMode** | Pointer to **string** | The autosize mode for NetApp Volume. Modes can be off or grow or grow_shrink. * &#x60;off&#x60; - The volume will not grow or shrink in size in response to the amount of used space. * &#x60;grow&#x60; - The volume will automatically grow when used space in the volume is above the grow threshold. * &#x60;grow_shrink&#x60; - The volume will grow or shrink in size in response to the amount of used space. | [optional] [readonly] [default to "off"]
 **AvgPerformanceMetrics** | Pointer to [**StorageNetAppPerformanceMetricsAverage**](StorageNetAppPerformanceMetricsAverage.md) |  | [optional] 
 **ExportPolicyName** | Pointer to **string** | The name of the Export Policy. | [optional] [readonly] 
-**Key** | Pointer to **string** | Unique identifier of NetApp Volume across data center. | [optional] [readonly] 
+**Key** | Pointer to **string** | Unique identifier of a NetApp Volume across data center. | [optional] [readonly] 
 **SnapshotPolicyName** | Pointer to **string** | The name of the Snapshot Policy. | [optional] [readonly] 
 **SnapshotPolicyUuid** | Pointer to **string** | The UUID of the Snapshot Policy. | [optional] [readonly] 
 **SnapshotReservePercent** | Pointer to **int64** | The space that has been set aside as a reserve for Snapshot copy usage represented as a percent. | [optional] [readonly] 
 **SnapshotUsed** | Pointer to **float64** | The total space used by Snapshot copies in the volume represented in bytes. | [optional] [readonly] 
 **State** | Pointer to **string** | The current state of a NetApp volume. * &#x60;offline&#x60; - Read and write access to the volume is not allowed. * &#x60;online&#x60; - Read and write access to the volume is allowed. * &#x60;error&#x60; - Storage volume state of error type. * &#x60;mixed&#x60; - The constituents of a FlexGroup volume are not all in the same state. | [optional] [readonly] [default to "offline"]
+**Style** | Pointer to **string** | The style of the volume (FlexGroup or FlexVol). | [optional] [readonly] 
+**SvmName** | Pointer to **string** | The storage virtual machine name for the volume. | [optional] [readonly] 
 **Type** | Pointer to **string** | NetApp volume type. The volume type can be Read-write, Data-protection, or Load-sharing. * &#x60;data-protection&#x60; - Prevents modification of the data on the Volume. * &#x60;read-write&#x60; - Data on the Volume can be modified. * &#x60;load-sharing&#x60; - The volume type is Load Sharing DP. | [optional] [readonly] [default to "data-protection"]
 **Uuid** | Pointer to **string** | Universally unique identifier of a NetApp Volume. | [optional] [readonly] 
 **Array** | Pointer to [**StorageNetAppClusterRelationship**](StorageNetAppClusterRelationship.md) |  | [optional] 
@@ -305,6 +307,56 @@ SetState sets State field to given value.
 `func (o *StorageNetAppVolume) HasState() bool`
 
 HasState returns a boolean if a field has been set.
+
+### GetStyle
+
+`func (o *StorageNetAppVolume) GetStyle() string`
+
+GetStyle returns the Style field if non-nil, zero value otherwise.
+
+### GetStyleOk
+
+`func (o *StorageNetAppVolume) GetStyleOk() (*string, bool)`
+
+GetStyleOk returns a tuple with the Style field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStyle
+
+`func (o *StorageNetAppVolume) SetStyle(v string)`
+
+SetStyle sets Style field to given value.
+
+### HasStyle
+
+`func (o *StorageNetAppVolume) HasStyle() bool`
+
+HasStyle returns a boolean if a field has been set.
+
+### GetSvmName
+
+`func (o *StorageNetAppVolume) GetSvmName() string`
+
+GetSvmName returns the SvmName field if non-nil, zero value otherwise.
+
+### GetSvmNameOk
+
+`func (o *StorageNetAppVolume) GetSvmNameOk() (*string, bool)`
+
+GetSvmNameOk returns a tuple with the SvmName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSvmName
+
+`func (o *StorageNetAppVolume) SetSvmName(v string)`
+
+SetSvmName sets SvmName field to given value.
+
+### HasSvmName
+
+`func (o *StorageNetAppVolume) HasSvmName() bool`
+
+HasSvmName returns a boolean if a field has been set.
 
 ### GetType
 

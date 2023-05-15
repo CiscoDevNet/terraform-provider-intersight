@@ -6,19 +6,21 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.ServiceItemActionDefinition"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.ServiceItemActionDefinition"]
+**ActionProperties** | Pointer to [**NullableWorkflowServiceItemActionProperties**](WorkflowServiceItemActionProperties.md) |  | [optional] 
 **ActionType** | Pointer to **string** | Type of actionDefinition which decides on how to trigger the action. * &#x60;External&#x60; - External actions definition can be triggered by enduser to perform actions on the service item. Once action is completed successfully (eg. create/deploy), user cannot re-trigger that action again. * &#x60;Internal&#x60; - Internal action definition is used to trigger periodic actions on the service item instance. * &#x60;Repetitive&#x60; - Repetitive action definition is an external action that can be triggered by enduser to perform repetitive actions (eg. Edit/Update/Perform health check) on the created service item. | [optional] [default to "External"]
 **AllowedInstanceStates** | Pointer to **[]string** |  | [optional] 
+**AttributeParameters** | Pointer to **interface{}** | The mappings from workflows in the action definition to the service item attribute definition. Any output from core or post-core workflow can be mapped to service item attribute definition. The attribute can be referred using the name of the workflow definition and the attribute name in the following format &#39;${&lt;ServiceItemActionWorkflowDefinition.Name&gt;.output.&lt;outputName&gt;&#39;. | [optional] 
 **CoreWorkflows** | Pointer to [**[]WorkflowServiceItemActionWorkflowDefinition**](WorkflowServiceItemActionWorkflowDefinition.md) |  | [optional] 
 **Description** | Pointer to **string** | The description for this action which provides information on what are the pre-requisites to use this action on the service item and what features are supported by this action. | [optional] 
 **InputDefinition** | Pointer to [**[]WorkflowBaseDataType**](WorkflowBaseDataType.md) |  | [optional] 
 **Label** | Pointer to **string** | A user friendly short name to identify the action. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ) or an underscore (_). | [optional] 
 **Name** | Pointer to **string** | The name for this action definition. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:) or an underscore (_). Name of the action must be unique within a service item definition. | [optional] 
-**OutputParameters** | Pointer to **interface{}** | The output mappings from workflows in the action definition to the service item output definition. Any output from core or post-core workflow can be mapped to service item output definition. The output can be referred using the name of the workflow definition and the output name in the following format &#39;${&lt;ServiceItemActionWorkflowDefinition.Name&gt;.output.&lt;outputName&gt;&#39;. | [optional] 
 **Periodicity** | Pointer to **int64** | Value in seconds to specify the periodicity of the workflows. A zero value indicate the workflow will not execute periodically. A non-zero value indicate, the workflow will be executed periodically with this periodicity. | [optional] 
 **PostCoreWorkflows** | Pointer to [**[]WorkflowServiceItemActionWorkflowDefinition**](WorkflowServiceItemActionWorkflowDefinition.md) |  | [optional] 
 **PreCoreWorkflows** | Pointer to [**[]WorkflowServiceItemActionWorkflowDefinition**](WorkflowServiceItemActionWorkflowDefinition.md) |  | [optional] 
 **RestrictOnPrivateAppliance** | Pointer to **bool** | The flag to indicate that action is restricted on a Private Virtual Appliance. | [optional] [default to false]
 **StopWorkflows** | Pointer to [**[]WorkflowServiceItemActionWorkflowDefinition**](WorkflowServiceItemActionWorkflowDefinition.md) |  | [optional] 
+**UserIdOrEmail** | Pointer to **string** | The user identifier who created or updated the service item action definition. | [optional] [readonly] 
 **ValidationInformation** | Pointer to [**NullableWorkflowValidationInformation**](WorkflowValidationInformation.md) |  | [optional] 
 **ValidationWorkflows** | Pointer to [**[]WorkflowServiceItemActionWorkflowDefinition**](WorkflowServiceItemActionWorkflowDefinition.md) |  | [optional] 
 **AssociatedRoles** | Pointer to [**[]IamRoleRelationship**](IamRoleRelationship.md) | An array of relationships to iamRole resources. | [optional] 
@@ -84,6 +86,41 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetActionProperties
+
+`func (o *WorkflowServiceItemActionDefinition) GetActionProperties() WorkflowServiceItemActionProperties`
+
+GetActionProperties returns the ActionProperties field if non-nil, zero value otherwise.
+
+### GetActionPropertiesOk
+
+`func (o *WorkflowServiceItemActionDefinition) GetActionPropertiesOk() (*WorkflowServiceItemActionProperties, bool)`
+
+GetActionPropertiesOk returns a tuple with the ActionProperties field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetActionProperties
+
+`func (o *WorkflowServiceItemActionDefinition) SetActionProperties(v WorkflowServiceItemActionProperties)`
+
+SetActionProperties sets ActionProperties field to given value.
+
+### HasActionProperties
+
+`func (o *WorkflowServiceItemActionDefinition) HasActionProperties() bool`
+
+HasActionProperties returns a boolean if a field has been set.
+
+### SetActionPropertiesNil
+
+`func (o *WorkflowServiceItemActionDefinition) SetActionPropertiesNil(b bool)`
+
+ SetActionPropertiesNil sets the value for ActionProperties to be an explicit nil
+
+### UnsetActionProperties
+`func (o *WorkflowServiceItemActionDefinition) UnsetActionProperties()`
+
+UnsetActionProperties ensures that no value is present for ActionProperties, not even an explicit nil
 ### GetActionType
 
 `func (o *WorkflowServiceItemActionDefinition) GetActionType() string`
@@ -144,6 +181,41 @@ HasAllowedInstanceStates returns a boolean if a field has been set.
 `func (o *WorkflowServiceItemActionDefinition) UnsetAllowedInstanceStates()`
 
 UnsetAllowedInstanceStates ensures that no value is present for AllowedInstanceStates, not even an explicit nil
+### GetAttributeParameters
+
+`func (o *WorkflowServiceItemActionDefinition) GetAttributeParameters() interface{}`
+
+GetAttributeParameters returns the AttributeParameters field if non-nil, zero value otherwise.
+
+### GetAttributeParametersOk
+
+`func (o *WorkflowServiceItemActionDefinition) GetAttributeParametersOk() (*interface{}, bool)`
+
+GetAttributeParametersOk returns a tuple with the AttributeParameters field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAttributeParameters
+
+`func (o *WorkflowServiceItemActionDefinition) SetAttributeParameters(v interface{})`
+
+SetAttributeParameters sets AttributeParameters field to given value.
+
+### HasAttributeParameters
+
+`func (o *WorkflowServiceItemActionDefinition) HasAttributeParameters() bool`
+
+HasAttributeParameters returns a boolean if a field has been set.
+
+### SetAttributeParametersNil
+
+`func (o *WorkflowServiceItemActionDefinition) SetAttributeParametersNil(b bool)`
+
+ SetAttributeParametersNil sets the value for AttributeParameters to be an explicit nil
+
+### UnsetAttributeParameters
+`func (o *WorkflowServiceItemActionDefinition) UnsetAttributeParameters()`
+
+UnsetAttributeParameters ensures that no value is present for AttributeParameters, not even an explicit nil
 ### GetCoreWorkflows
 
 `func (o *WorkflowServiceItemActionDefinition) GetCoreWorkflows() []WorkflowServiceItemActionWorkflowDefinition`
@@ -289,41 +361,6 @@ SetName sets Name field to given value.
 
 HasName returns a boolean if a field has been set.
 
-### GetOutputParameters
-
-`func (o *WorkflowServiceItemActionDefinition) GetOutputParameters() interface{}`
-
-GetOutputParameters returns the OutputParameters field if non-nil, zero value otherwise.
-
-### GetOutputParametersOk
-
-`func (o *WorkflowServiceItemActionDefinition) GetOutputParametersOk() (*interface{}, bool)`
-
-GetOutputParametersOk returns a tuple with the OutputParameters field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOutputParameters
-
-`func (o *WorkflowServiceItemActionDefinition) SetOutputParameters(v interface{})`
-
-SetOutputParameters sets OutputParameters field to given value.
-
-### HasOutputParameters
-
-`func (o *WorkflowServiceItemActionDefinition) HasOutputParameters() bool`
-
-HasOutputParameters returns a boolean if a field has been set.
-
-### SetOutputParametersNil
-
-`func (o *WorkflowServiceItemActionDefinition) SetOutputParametersNil(b bool)`
-
- SetOutputParametersNil sets the value for OutputParameters to be an explicit nil
-
-### UnsetOutputParameters
-`func (o *WorkflowServiceItemActionDefinition) UnsetOutputParameters()`
-
-UnsetOutputParameters ensures that no value is present for OutputParameters, not even an explicit nil
 ### GetPeriodicity
 
 `func (o *WorkflowServiceItemActionDefinition) GetPeriodicity() int64`
@@ -479,6 +516,31 @@ HasStopWorkflows returns a boolean if a field has been set.
 `func (o *WorkflowServiceItemActionDefinition) UnsetStopWorkflows()`
 
 UnsetStopWorkflows ensures that no value is present for StopWorkflows, not even an explicit nil
+### GetUserIdOrEmail
+
+`func (o *WorkflowServiceItemActionDefinition) GetUserIdOrEmail() string`
+
+GetUserIdOrEmail returns the UserIdOrEmail field if non-nil, zero value otherwise.
+
+### GetUserIdOrEmailOk
+
+`func (o *WorkflowServiceItemActionDefinition) GetUserIdOrEmailOk() (*string, bool)`
+
+GetUserIdOrEmailOk returns a tuple with the UserIdOrEmail field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserIdOrEmail
+
+`func (o *WorkflowServiceItemActionDefinition) SetUserIdOrEmail(v string)`
+
+SetUserIdOrEmail sets UserIdOrEmail field to given value.
+
+### HasUserIdOrEmail
+
+`func (o *WorkflowServiceItemActionDefinition) HasUserIdOrEmail() bool`
+
+HasUserIdOrEmail returns a boolean if a field has been set.
+
 ### GetValidationInformation
 
 `func (o *WorkflowServiceItemActionDefinition) GetValidationInformation() WorkflowValidationInformation`

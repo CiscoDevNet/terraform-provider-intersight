@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **Comment** | Pointer to **string** | A descriptive text comment for the CIFS server. | [optional] [readonly] 
 **Enabled** | Pointer to **string** | Indicates that the CIFS service is administratively enabled. | [optional] [readonly] 
 **ServerName** | Pointer to **string** | Name of the NetApp CIFS server. | [optional] [readonly] 
+**SvmName** | Pointer to **string** | The storage virtual machine name for the CIFS service. | [optional] [readonly] 
 **SvmUuid** | Pointer to **string** | Unique identifier for the NetApp Storage Virtual Machine. | [optional] [readonly] 
 **Tenant** | Pointer to [**StorageNetAppStorageVmRelationship**](StorageNetAppStorageVmRelationship.md) |  | [optional] 
 
@@ -197,6 +198,31 @@ SetServerName sets ServerName field to given value.
 `func (o *StorageNetAppCifsService) HasServerName() bool`
 
 HasServerName returns a boolean if a field has been set.
+
+### GetSvmName
+
+`func (o *StorageNetAppCifsService) GetSvmName() string`
+
+GetSvmName returns the SvmName field if non-nil, zero value otherwise.
+
+### GetSvmNameOk
+
+`func (o *StorageNetAppCifsService) GetSvmNameOk() (*string, bool)`
+
+GetSvmNameOk returns a tuple with the SvmName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSvmName
+
+`func (o *StorageNetAppCifsService) SetSvmName(v string)`
+
+SetSvmName sets SvmName field to given value.
+
+### HasSvmName
+
+`func (o *StorageNetAppCifsService) HasSvmName() bool`
+
+HasSvmName returns a boolean if a field has been set.
 
 ### GetSvmUuid
 

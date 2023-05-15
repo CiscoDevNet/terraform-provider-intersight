@@ -234,6 +234,11 @@ func getStorageNetAppQtreeSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"svm_name": {
+			Description: "The storage virtual machine name for the qtree.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -342,6 +347,11 @@ func getStorageNetAppQtreeSchema() map[string]*schema.Schema {
 							},
 						},
 					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 						Type:        schema.TypeString,
@@ -399,6 +409,11 @@ func getStorageNetAppQtreeSchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"volume_name": {
+			Description: "The parent volume name for the qtree.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"volume_uuid": {
 			Description: "NetApp Volume uuid, unique identifier for the NetApp volume.",
@@ -683,6 +698,11 @@ func dataSourceStorageNetAppQtreeRead(c context.Context, d *schema.ResourceData,
 		}
 	}
 
+	if v, ok := d.GetOk("svm_name"); ok {
+		x := (v.(string))
+		o.SetSvmName(x)
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -833,6 +853,11 @@ func dataSourceStorageNetAppQtreeRead(c context.Context, d *schema.ResourceData,
 		}
 	}
 
+	if v, ok := d.GetOk("volume_name"); ok {
+		x := (v.(string))
+		o.SetVolumeName(x)
+	}
+
 	if v, ok := d.GetOk("volume_uuid"); ok {
 		x := (v.(string))
 		o.SetVolumeUuid(x)
@@ -899,12 +924,14 @@ func dataSourceStorageNetAppQtreeRead(c context.Context, d *schema.ResourceData,
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["storage_container"] = flattenMapStorageNetAppVolumeRelationship(s.GetStorageContainer(), d)
+				temp["svm_name"] = (s.GetSvmName())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 
 				temp["tenant"] = flattenMapStorageNetAppStorageVmRelationship(s.GetTenant(), d)
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
+				temp["volume_name"] = (s.GetVolumeName())
 				temp["volume_uuid"] = (s.GetVolumeUuid())
 				storageNetAppQtreeResults = append(storageNetAppQtreeResults, temp)
 			}

@@ -11,6 +11,8 @@ Name | Type | Description | Notes
 **Enabled** | Pointer to **string** | IP interface is enabled or not. | [optional] [readonly] 
 **HomeNode** | Pointer to **string** | Name of home node of IP interface. | [optional] [readonly] 
 **HomePort** | Pointer to **string** | Name of home port of IP interface. | [optional] [readonly] 
+**InterfaceIsHome** | Pointer to **string** | Reports whether the IP interface is home or has failed over to its HA peer. | [optional] [readonly] 
+**InterfaceState** | Pointer to **string** | The state of the IP interface. * &#x60;Down&#x60; - The state is set to down if the interface is not enabled. * &#x60;Up&#x60; - The state is set to up if the interface is enabled. | [optional] [readonly] [default to "Down"]
 **IpAddress** | Pointer to **string** | The IP address of interface. | [optional] [readonly] 
 **IpFamily** | Pointer to **string** | IP address family of interface. * &#x60;IPv4&#x60; - IP address family type is IPv4. * &#x60;IPv6&#x60; - IP address family type is IP6. | [optional] [readonly] [default to "IPv4"]
 **Ipspace** | Pointer to **string** | The name of the IPspace of the IP interface. | [optional] [readonly] 
@@ -22,6 +24,7 @@ Name | Type | Description | Notes
 **ServicePolicyUuid** | Pointer to **string** | Service policy UUID of IP interface. | [optional] [readonly] 
 **Services** | Pointer to **[]string** |  | [optional] 
 **State** | Pointer to **string** | The state of the IP interface. * &#x60;down&#x60; - An inactive port is listed as Down. * &#x60;up&#x60; - An active port is listed as Up. * &#x60;present&#x60; - An active port is listed as present. | [optional] [readonly] [default to "down"]
+**SvmName** | Pointer to **string** | The storage virtual machine name for the interface. | [optional] [readonly] 
 **Uuid** | Pointer to **string** | Uuid of NetApp IP Interface. | [optional] [readonly] 
 
 ## Methods
@@ -207,6 +210,56 @@ SetHomePort sets HomePort field to given value.
 `func (o *StorageNetAppBaseIpInterfaceAllOf) HasHomePort() bool`
 
 HasHomePort returns a boolean if a field has been set.
+
+### GetInterfaceIsHome
+
+`func (o *StorageNetAppBaseIpInterfaceAllOf) GetInterfaceIsHome() string`
+
+GetInterfaceIsHome returns the InterfaceIsHome field if non-nil, zero value otherwise.
+
+### GetInterfaceIsHomeOk
+
+`func (o *StorageNetAppBaseIpInterfaceAllOf) GetInterfaceIsHomeOk() (*string, bool)`
+
+GetInterfaceIsHomeOk returns a tuple with the InterfaceIsHome field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInterfaceIsHome
+
+`func (o *StorageNetAppBaseIpInterfaceAllOf) SetInterfaceIsHome(v string)`
+
+SetInterfaceIsHome sets InterfaceIsHome field to given value.
+
+### HasInterfaceIsHome
+
+`func (o *StorageNetAppBaseIpInterfaceAllOf) HasInterfaceIsHome() bool`
+
+HasInterfaceIsHome returns a boolean if a field has been set.
+
+### GetInterfaceState
+
+`func (o *StorageNetAppBaseIpInterfaceAllOf) GetInterfaceState() string`
+
+GetInterfaceState returns the InterfaceState field if non-nil, zero value otherwise.
+
+### GetInterfaceStateOk
+
+`func (o *StorageNetAppBaseIpInterfaceAllOf) GetInterfaceStateOk() (*string, bool)`
+
+GetInterfaceStateOk returns a tuple with the InterfaceState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInterfaceState
+
+`func (o *StorageNetAppBaseIpInterfaceAllOf) SetInterfaceState(v string)`
+
+SetInterfaceState sets InterfaceState field to given value.
+
+### HasInterfaceState
+
+`func (o *StorageNetAppBaseIpInterfaceAllOf) HasInterfaceState() bool`
+
+HasInterfaceState returns a boolean if a field has been set.
 
 ### GetIpAddress
 
@@ -492,6 +545,31 @@ SetState sets State field to given value.
 `func (o *StorageNetAppBaseIpInterfaceAllOf) HasState() bool`
 
 HasState returns a boolean if a field has been set.
+
+### GetSvmName
+
+`func (o *StorageNetAppBaseIpInterfaceAllOf) GetSvmName() string`
+
+GetSvmName returns the SvmName field if non-nil, zero value otherwise.
+
+### GetSvmNameOk
+
+`func (o *StorageNetAppBaseIpInterfaceAllOf) GetSvmNameOk() (*string, bool)`
+
+GetSvmNameOk returns a tuple with the SvmName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSvmName
+
+`func (o *StorageNetAppBaseIpInterfaceAllOf) SetSvmName(v string)`
+
+SetSvmName sets SvmName field to given value.
+
+### HasSvmName
+
+`func (o *StorageNetAppBaseIpInterfaceAllOf) HasSvmName() bool`
+
+HasSvmName returns a boolean if a field has been set.
 
 ### GetUuid
 

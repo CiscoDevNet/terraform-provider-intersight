@@ -86,7 +86,7 @@ func getIpmioverlanPolicySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"encryption_key": {
-			Description: "The encryption key to use for IPMI communication. It should have an even number of hexadecimal characters and not exceed 40 characters.",
+			Description: "The encryption key to use for IPMI communication. It should have an even number of hexadecimal characters and not exceed 40 characters. Use “00” to disable encryption key use. This configuration is supported by all standalone rack servers. FI-attached rack servers with firmware at minimum of 4.2.3a support this configuration. FI-attached blade servers do not support an encryption key. IPMI commands using this key should append zeroes to the key to achieve a length of 40 characters.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -225,7 +225,7 @@ func getIpmioverlanPolicySchema() map[string]*schema.Schema {
 			},
 		},
 		"privilege": {
-			Description: "The highest privilege level that can be assigned to an IPMI session on a server.\n* `admin` - Privilege to perform all actions available through IPMI.\n* `user` - Privilege to perform some functions through IPMI but restriction on performing administrative tasks.\n* `read-only` - Privilege to view information throught IPMI but restriction on making any changes.",
+			Description: "The highest privilege level that can be assigned to an IPMI session on a server. This configuration is supported by all standalone rack servers. FI-attached rack servers with firmware at minimum of 4.2.3a support this configuration. FI-attached blade servers do not support privilege level. Privilege level will be ignored for unsupported servers.\n* `admin` - Privilege to perform all actions available through IPMI.\n* `user` - Privilege to perform some functions through IPMI but restriction on performing administrative tasks.\n* `read-only` - Privilege to view information throught IPMI but restriction on making any changes.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -340,6 +340,11 @@ func getIpmioverlanPolicySchema() map[string]*schema.Schema {
 								},
 							},
 						},
+					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",

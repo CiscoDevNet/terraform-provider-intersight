@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-10371
+API version: 1.0.11-11765
 Contact: intersight@cisco.com
 */
 
@@ -19,7 +19,7 @@ import (
 
 // FirmwareFirmwareSummary Update inventory that contains the details for the firmware running on each component in the compute.Physical object.
 type FirmwareFirmwareSummary struct {
-	MoBaseMo
+	PolicyAbstractPolicyInventory
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
@@ -28,6 +28,7 @@ type FirmwareFirmwareSummary struct {
 	BundleVersion         *string                      `json:"BundleVersion,omitempty"`
 	ComponentsFwInventory []FirmwareFirmwareInventory  `json:"ComponentsFwInventory,omitempty"`
 	Server                *ComputePhysicalRelationship `json:"Server,omitempty"`
+	TargetMo              *MoBaseMoRelationship        `json:"TargetMo,omitempty"`
 	AdditionalProperties  map[string]interface{}
 }
 
@@ -201,15 +202,47 @@ func (o *FirmwareFirmwareSummary) SetServer(v ComputePhysicalRelationship) {
 	o.Server = &v
 }
 
+// GetTargetMo returns the TargetMo field value if set, zero value otherwise.
+func (o *FirmwareFirmwareSummary) GetTargetMo() MoBaseMoRelationship {
+	if o == nil || o.TargetMo == nil {
+		var ret MoBaseMoRelationship
+		return ret
+	}
+	return *o.TargetMo
+}
+
+// GetTargetMoOk returns a tuple with the TargetMo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FirmwareFirmwareSummary) GetTargetMoOk() (*MoBaseMoRelationship, bool) {
+	if o == nil || o.TargetMo == nil {
+		return nil, false
+	}
+	return o.TargetMo, true
+}
+
+// HasTargetMo returns a boolean if a field has been set.
+func (o *FirmwareFirmwareSummary) HasTargetMo() bool {
+	if o != nil && o.TargetMo != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTargetMo gets a reference to the given MoBaseMoRelationship and assigns it to the TargetMo field.
+func (o *FirmwareFirmwareSummary) SetTargetMo(v MoBaseMoRelationship) {
+	o.TargetMo = &v
+}
+
 func (o FirmwareFirmwareSummary) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
-	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+	serializedPolicyAbstractPolicyInventory, errPolicyAbstractPolicyInventory := json.Marshal(o.PolicyAbstractPolicyInventory)
+	if errPolicyAbstractPolicyInventory != nil {
+		return []byte{}, errPolicyAbstractPolicyInventory
 	}
-	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
-	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+	errPolicyAbstractPolicyInventory = json.Unmarshal([]byte(serializedPolicyAbstractPolicyInventory), &toSerialize)
+	if errPolicyAbstractPolicyInventory != nil {
+		return []byte{}, errPolicyAbstractPolicyInventory
 	}
 	if true {
 		toSerialize["ClassId"] = o.ClassId
@@ -225,6 +258,9 @@ func (o FirmwareFirmwareSummary) MarshalJSON() ([]byte, error) {
 	}
 	if o.Server != nil {
 		toSerialize["Server"] = o.Server
+	}
+	if o.TargetMo != nil {
+		toSerialize["TargetMo"] = o.TargetMo
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -244,6 +280,7 @@ func (o *FirmwareFirmwareSummary) UnmarshalJSON(bytes []byte) (err error) {
 		BundleVersion         *string                      `json:"BundleVersion,omitempty"`
 		ComponentsFwInventory []FirmwareFirmwareInventory  `json:"ComponentsFwInventory,omitempty"`
 		Server                *ComputePhysicalRelationship `json:"Server,omitempty"`
+		TargetMo              *MoBaseMoRelationship        `json:"TargetMo,omitempty"`
 	}
 
 	varFirmwareFirmwareSummaryWithoutEmbeddedStruct := FirmwareFirmwareSummaryWithoutEmbeddedStruct{}
@@ -256,6 +293,7 @@ func (o *FirmwareFirmwareSummary) UnmarshalJSON(bytes []byte) (err error) {
 		varFirmwareFirmwareSummary.BundleVersion = varFirmwareFirmwareSummaryWithoutEmbeddedStruct.BundleVersion
 		varFirmwareFirmwareSummary.ComponentsFwInventory = varFirmwareFirmwareSummaryWithoutEmbeddedStruct.ComponentsFwInventory
 		varFirmwareFirmwareSummary.Server = varFirmwareFirmwareSummaryWithoutEmbeddedStruct.Server
+		varFirmwareFirmwareSummary.TargetMo = varFirmwareFirmwareSummaryWithoutEmbeddedStruct.TargetMo
 		*o = FirmwareFirmwareSummary(varFirmwareFirmwareSummary)
 	} else {
 		return err
@@ -265,7 +303,7 @@ func (o *FirmwareFirmwareSummary) UnmarshalJSON(bytes []byte) (err error) {
 
 	err = json.Unmarshal(bytes, &varFirmwareFirmwareSummary)
 	if err == nil {
-		o.MoBaseMo = varFirmwareFirmwareSummary.MoBaseMo
+		o.PolicyAbstractPolicyInventory = varFirmwareFirmwareSummary.PolicyAbstractPolicyInventory
 	} else {
 		return err
 	}
@@ -278,11 +316,12 @@ func (o *FirmwareFirmwareSummary) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "BundleVersion")
 		delete(additionalProperties, "ComponentsFwInventory")
 		delete(additionalProperties, "Server")
+		delete(additionalProperties, "TargetMo")
 
 		// remove fields from embedded structs
-		reflectMoBaseMo := reflect.ValueOf(o.MoBaseMo)
-		for i := 0; i < reflectMoBaseMo.Type().NumField(); i++ {
-			t := reflectMoBaseMo.Type().Field(i)
+		reflectPolicyAbstractPolicyInventory := reflect.ValueOf(o.PolicyAbstractPolicyInventory)
+		for i := 0; i < reflectPolicyAbstractPolicyInventory.Type().NumField(); i++ {
+			t := reflectPolicyAbstractPolicyInventory.Type().Field(i)
 
 			if jsonTag := t.Tag.Get("json"); jsonTag != "" {
 				fieldName := ""

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-10371
+API version: 1.0.11-11765
 Contact: intersight@cisco.com
 */
 
@@ -74,9 +74,11 @@ type NetworkElementSummary struct {
 	InbandVlan *int64 `json:"InbandVlan,omitempty"`
 	// IP version 4 address is saved in this property.
 	Ipv4Address *string `json:"Ipv4Address,omitempty"`
+	// This field indicates the compute status of the catalog values for the associated component or hardware.
+	IsUpgraded *bool `json:"IsUpgraded,omitempty"`
 	// The management mode of the fabric interconnect. * `IntersightStandalone` - Intersight Standalone mode of operation. * `UCSM` - Unified Computing System Manager mode of operation. * `Intersight` - Intersight managed mode of operation.
 	ManagementMode *string `json:"ManagementMode,omitempty"`
-	// This field identifies the model of the given component.
+	// This field displays the model number of the associated component or hardware.
 	Model *string `json:"Model,omitempty"`
 	// Name of the ElementSummary object is saved in this property.
 	Name *string `json:"Name,omitempty"`
@@ -120,13 +122,13 @@ type NetworkElementSummary struct {
 	OutOfBandMac *string `json:"OutOfBandMac,omitempty"`
 	// Part number of the switch.
 	PartNumber *string `json:"PartNumber,omitempty"`
-	// This field identifies the presence (equipped) or absence of the given component.
+	// This field indicates the presence (equipped) or absence (absent) of the associated component or hardware.
 	Presence *string `json:"Presence,omitempty"`
-	// This field identifies the revision of the given component.
+	// This field displays the revised version of the associated component or hardware (if any).
 	Revision *string `json:"Revision,omitempty"`
 	// The Relative Name uniquely identifies an object within a given context.
 	Rn *string `json:"Rn,omitempty"`
-	// This field identifies the serial of the given component.
+	// This field displays the serial number of the associated component or hardware.
 	Serial *string `json:"Serial,omitempty"`
 	// The source object type of this view MO.
 	SourceObjectType *string `json:"SourceObjectType,omitempty"`
@@ -142,7 +144,7 @@ type NetworkElementSummary struct {
 	Thermal *string `json:"Thermal,omitempty"`
 	// Total available memory on this switch platform.
 	TotalMemory *int64 `json:"TotalMemory,omitempty"`
-	// This field identifies the vendor of the given component.
+	// This field displays the vendor information of the associated component or hardware.
 	Vendor *string `json:"Vendor,omitempty"`
 	// Version holds the firmware version related information.
 	Version              *string                              `json:"Version,omitempty"`
@@ -1009,6 +1011,38 @@ func (o *NetworkElementSummary) HasIpv4Address() bool {
 // SetIpv4Address gets a reference to the given string and assigns it to the Ipv4Address field.
 func (o *NetworkElementSummary) SetIpv4Address(v string) {
 	o.Ipv4Address = &v
+}
+
+// GetIsUpgraded returns the IsUpgraded field value if set, zero value otherwise.
+func (o *NetworkElementSummary) GetIsUpgraded() bool {
+	if o == nil || o.IsUpgraded == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsUpgraded
+}
+
+// GetIsUpgradedOk returns a tuple with the IsUpgraded field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkElementSummary) GetIsUpgradedOk() (*bool, bool) {
+	if o == nil || o.IsUpgraded == nil {
+		return nil, false
+	}
+	return o.IsUpgraded, true
+}
+
+// HasIsUpgraded returns a boolean if a field has been set.
+func (o *NetworkElementSummary) HasIsUpgraded() bool {
+	if o != nil && o.IsUpgraded != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsUpgraded gets a reference to the given bool and assigns it to the IsUpgraded field.
+func (o *NetworkElementSummary) SetIsUpgraded(v bool) {
+	o.IsUpgraded = &v
 }
 
 // GetManagementMode returns the ManagementMode field value if set, zero value otherwise.
@@ -2283,6 +2317,9 @@ func (o NetworkElementSummary) MarshalJSON() ([]byte, error) {
 	if o.Ipv4Address != nil {
 		toSerialize["Ipv4Address"] = o.Ipv4Address
 	}
+	if o.IsUpgraded != nil {
+		toSerialize["IsUpgraded"] = o.IsUpgraded
+	}
 	if o.ManagementMode != nil {
 		toSerialize["ManagementMode"] = o.ManagementMode
 	}
@@ -2458,9 +2495,11 @@ func (o *NetworkElementSummary) UnmarshalJSON(bytes []byte) (err error) {
 		InbandVlan *int64 `json:"InbandVlan,omitempty"`
 		// IP version 4 address is saved in this property.
 		Ipv4Address *string `json:"Ipv4Address,omitempty"`
+		// This field indicates the compute status of the catalog values for the associated component or hardware.
+		IsUpgraded *bool `json:"IsUpgraded,omitempty"`
 		// The management mode of the fabric interconnect. * `IntersightStandalone` - Intersight Standalone mode of operation. * `UCSM` - Unified Computing System Manager mode of operation. * `Intersight` - Intersight managed mode of operation.
 		ManagementMode *string `json:"ManagementMode,omitempty"`
-		// This field identifies the model of the given component.
+		// This field displays the model number of the associated component or hardware.
 		Model *string `json:"Model,omitempty"`
 		// Name of the ElementSummary object is saved in this property.
 		Name *string `json:"Name,omitempty"`
@@ -2504,13 +2543,13 @@ func (o *NetworkElementSummary) UnmarshalJSON(bytes []byte) (err error) {
 		OutOfBandMac *string `json:"OutOfBandMac,omitempty"`
 		// Part number of the switch.
 		PartNumber *string `json:"PartNumber,omitempty"`
-		// This field identifies the presence (equipped) or absence of the given component.
+		// This field indicates the presence (equipped) or absence (absent) of the associated component or hardware.
 		Presence *string `json:"Presence,omitempty"`
-		// This field identifies the revision of the given component.
+		// This field displays the revised version of the associated component or hardware (if any).
 		Revision *string `json:"Revision,omitempty"`
 		// The Relative Name uniquely identifies an object within a given context.
 		Rn *string `json:"Rn,omitempty"`
-		// This field identifies the serial of the given component.
+		// This field displays the serial number of the associated component or hardware.
 		Serial *string `json:"Serial,omitempty"`
 		// The source object type of this view MO.
 		SourceObjectType *string `json:"SourceObjectType,omitempty"`
@@ -2526,7 +2565,7 @@ func (o *NetworkElementSummary) UnmarshalJSON(bytes []byte) (err error) {
 		Thermal *string `json:"Thermal,omitempty"`
 		// Total available memory on this switch platform.
 		TotalMemory *int64 `json:"TotalMemory,omitempty"`
-		// This field identifies the vendor of the given component.
+		// This field displays the vendor information of the associated component or hardware.
 		Vendor *string `json:"Vendor,omitempty"`
 		// Version holds the firmware version related information.
 		Version          *string                              `json:"Version,omitempty"`
@@ -2564,6 +2603,7 @@ func (o *NetworkElementSummary) UnmarshalJSON(bytes []byte) (err error) {
 		varNetworkElementSummary.InbandIpMask = varNetworkElementSummaryWithoutEmbeddedStruct.InbandIpMask
 		varNetworkElementSummary.InbandVlan = varNetworkElementSummaryWithoutEmbeddedStruct.InbandVlan
 		varNetworkElementSummary.Ipv4Address = varNetworkElementSummaryWithoutEmbeddedStruct.Ipv4Address
+		varNetworkElementSummary.IsUpgraded = varNetworkElementSummaryWithoutEmbeddedStruct.IsUpgraded
 		varNetworkElementSummary.ManagementMode = varNetworkElementSummaryWithoutEmbeddedStruct.ManagementMode
 		varNetworkElementSummary.Model = varNetworkElementSummaryWithoutEmbeddedStruct.Model
 		varNetworkElementSummary.Name = varNetworkElementSummaryWithoutEmbeddedStruct.Name
@@ -2644,6 +2684,7 @@ func (o *NetworkElementSummary) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "InbandIpMask")
 		delete(additionalProperties, "InbandVlan")
 		delete(additionalProperties, "Ipv4Address")
+		delete(additionalProperties, "IsUpgraded")
 		delete(additionalProperties, "ManagementMode")
 		delete(additionalProperties, "Model")
 		delete(additionalProperties, "Name")

@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **DnsDomains** | Pointer to **[]string** |  | [optional] 
 **FcpEnabled** | Pointer to **bool** | Status for Fibre Channel Protocol ( FCP ) allowed to run on Vservers. | [optional] [readonly] 
 **Ipspace** | Pointer to **string** | IPspace name. IPspaces are distinct IP address spaces in which storage virtual machines (SVMs) reside. | [optional] [readonly] 
+**IsProtected** | Pointer to **string** | Specifies whether the Storage VM is a SnapMirror source Storage VM, using SnapMirror to protect its data. | [optional] [readonly] 
 **IscsiEnabled** | Pointer to **bool** | Status for iSCSI protocol allowed to run on Vservers. | [optional] [readonly] 
 **Key** | Pointer to **string** | Unique identifier of VServer across data center. | [optional] [readonly] 
 **NameServers** | Pointer to **[]string** |  | [optional] 
@@ -250,6 +251,31 @@ SetIpspace sets Ipspace field to given value.
 `func (o *StorageNetAppStorageVm) HasIpspace() bool`
 
 HasIpspace returns a boolean if a field has been set.
+
+### GetIsProtected
+
+`func (o *StorageNetAppStorageVm) GetIsProtected() string`
+
+GetIsProtected returns the IsProtected field if non-nil, zero value otherwise.
+
+### GetIsProtectedOk
+
+`func (o *StorageNetAppStorageVm) GetIsProtectedOk() (*string, bool)`
+
+GetIsProtectedOk returns a tuple with the IsProtected field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsProtected
+
+`func (o *StorageNetAppStorageVm) SetIsProtected(v string)`
+
+SetIsProtected sets IsProtected field to given value.
+
+### HasIsProtected
+
+`func (o *StorageNetAppStorageVm) HasIsProtected() bool`
+
+HasIsProtected returns a boolean if a field has been set.
 
 ### GetIscsiEnabled
 

@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | The name of software which was downloaded. | [optional] [readonly] 
 **Product** | Pointer to **string** | The product type of the downloaded software. | [optional] 
 **Timestamp** | Pointer to **time.Time** | The download time of the software image. | [optional] [readonly] 
+**UserIdOrEmail** | Pointer to **string** | The email id of the user who initiated the software download. | [optional] [readonly] 
 **Version** | Pointer to **string** | The version of software which was downloaded. | [optional] [readonly] 
 **Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 **Image** | Pointer to [**FirmwareBaseDistributableRelationship**](FirmwareBaseDistributableRelationship.md) |  | [optional] 
@@ -146,6 +147,31 @@ SetTimestamp sets Timestamp field to given value.
 `func (o *SoftwareDownloadHistory) HasTimestamp() bool`
 
 HasTimestamp returns a boolean if a field has been set.
+
+### GetUserIdOrEmail
+
+`func (o *SoftwareDownloadHistory) GetUserIdOrEmail() string`
+
+GetUserIdOrEmail returns the UserIdOrEmail field if non-nil, zero value otherwise.
+
+### GetUserIdOrEmailOk
+
+`func (o *SoftwareDownloadHistory) GetUserIdOrEmailOk() (*string, bool)`
+
+GetUserIdOrEmailOk returns a tuple with the UserIdOrEmail field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserIdOrEmail
+
+`func (o *SoftwareDownloadHistory) SetUserIdOrEmail(v string)`
+
+SetUserIdOrEmail sets UserIdOrEmail field to given value.
+
+### HasUserIdOrEmail
+
+`func (o *SoftwareDownloadHistory) HasUserIdOrEmail() bool`
+
+HasUserIdOrEmail returns a boolean if a field has been set.
 
 ### GetVersion
 

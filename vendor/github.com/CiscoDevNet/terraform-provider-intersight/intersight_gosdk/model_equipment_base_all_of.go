@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-10371
+API version: 1.0.11-11765
 Contact: intersight@cisco.com
 */
 
@@ -21,15 +21,17 @@ type EquipmentBaseAllOf struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 	ObjectType string `json:"ObjectType"`
-	// This field identifies the model of the given component.
+	// This field indicates the compute status of the catalog values for the associated component or hardware.
+	IsUpgraded *bool `json:"IsUpgraded,omitempty"`
+	// This field displays the model number of the associated component or hardware.
 	Model *string `json:"Model,omitempty"`
-	// This field identifies the presence (equipped) or absence of the given component.
+	// This field indicates the presence (equipped) or absence (absent) of the associated component or hardware.
 	Presence *string `json:"Presence,omitempty"`
-	// This field identifies the revision of the given component.
+	// This field displays the revised version of the associated component or hardware (if any).
 	Revision *string `json:"Revision,omitempty"`
-	// This field identifies the serial of the given component.
+	// This field displays the serial number of the associated component or hardware.
 	Serial *string `json:"Serial,omitempty"`
-	// This field identifies the vendor of the given component.
+	// This field displays the vendor information of the associated component or hardware.
 	Vendor               *string                   `json:"Vendor,omitempty"`
 	PreviousFru          *EquipmentFruRelationship `json:"PreviousFru,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -102,6 +104,38 @@ func (o *EquipmentBaseAllOf) GetObjectTypeOk() (*string, bool) {
 // SetObjectType sets field value
 func (o *EquipmentBaseAllOf) SetObjectType(v string) {
 	o.ObjectType = v
+}
+
+// GetIsUpgraded returns the IsUpgraded field value if set, zero value otherwise.
+func (o *EquipmentBaseAllOf) GetIsUpgraded() bool {
+	if o == nil || o.IsUpgraded == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsUpgraded
+}
+
+// GetIsUpgradedOk returns a tuple with the IsUpgraded field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EquipmentBaseAllOf) GetIsUpgradedOk() (*bool, bool) {
+	if o == nil || o.IsUpgraded == nil {
+		return nil, false
+	}
+	return o.IsUpgraded, true
+}
+
+// HasIsUpgraded returns a boolean if a field has been set.
+func (o *EquipmentBaseAllOf) HasIsUpgraded() bool {
+	if o != nil && o.IsUpgraded != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsUpgraded gets a reference to the given bool and assigns it to the IsUpgraded field.
+func (o *EquipmentBaseAllOf) SetIsUpgraded(v bool) {
+	o.IsUpgraded = &v
 }
 
 // GetModel returns the Model field value if set, zero value otherwise.
@@ -304,6 +338,9 @@ func (o EquipmentBaseAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.IsUpgraded != nil {
+		toSerialize["IsUpgraded"] = o.IsUpgraded
+	}
 	if o.Model != nil {
 		toSerialize["Model"] = o.Model
 	}
@@ -342,6 +379,7 @@ func (o *EquipmentBaseAllOf) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "IsUpgraded")
 		delete(additionalProperties, "Model")
 		delete(additionalProperties, "Presence")
 		delete(additionalProperties, "Revision")

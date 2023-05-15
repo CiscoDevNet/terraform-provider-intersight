@@ -20,7 +20,7 @@ The following arguments can be used to get data of already created objects in In
 * `description`:(string) User provided description about the file. Cisco provided description for image inventoried from a Cisco repository. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `download_count`:(int) The number of times this file has been downloaded from the local repository. It is used by the repository monitoring process to determine the files that are to be evicted from the cache. 
-* `feature_source`:(string) The name of the feature to which the uploaded file belongs.* `System` - This indicates system initiated file uploads.* `OpenAPIImport` - This indicates an OpenAPI file upload. 
+* `feature_source`:(string) The name of the feature to which the uploaded file belongs.* `System` - This indicates system initiated file uploads.* `OpenAPIImport` - This indicates an OpenAPI file upload.* `PartnerIntegrationImport` - This indicates a Partner-Integration Appliance user file uploads. 
 * `file_location`:(string) The file location of the distributable. 
 * `guid`:(string) The unique identifier for an image in a Cisco repository. 
 * `image_category`:(string) The category into which the distributable falls into according to the supported platform series. For e.g.; C-Series/B-Series/Infrastructure. 

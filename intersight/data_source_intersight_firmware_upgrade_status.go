@@ -259,6 +259,11 @@ func getFirmwareUpgradeStatusSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"source_firmware_version": {
+			Description: "CIMC firmware version of the server prior to the upgrade.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -281,6 +286,11 @@ func getFirmwareUpgradeStatusSchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"target_firmware_version": {
+			Description: "CIMC firmware version of the server post the upgrade.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"upgrade": {
 			Description: "A reference to a firmwareUpgradeBase resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -366,6 +376,11 @@ func getFirmwareUpgradeStatusSchema() map[string]*schema.Schema {
 								},
 							},
 						},
+					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -762,6 +777,11 @@ func dataSourceFirmwareUpgradeStatusRead(c context.Context, d *schema.ResourceDa
 		o.SetSharedScope(x)
 	}
 
+	if v, ok := d.GetOk("source_firmware_version"); ok {
+		x := (v.(string))
+		o.SetSourceFirmwareVersion(x)
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -793,6 +813,11 @@ func dataSourceFirmwareUpgradeStatusRead(c context.Context, d *schema.ResourceDa
 			x = append(x, *o)
 		}
 		o.SetTags(x)
+	}
+
+	if v, ok := d.GetOk("target_firmware_version"); ok {
+		x := (v.(string))
+		o.SetTargetFirmwareVersion(x)
 	}
 
 	if v, ok := d.GetOk("upgrade"); ok {
@@ -1022,8 +1047,10 @@ func dataSourceFirmwareUpgradeStatusRead(c context.Context, d *schema.ResourceDa
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["sd_card_download_error"] = (s.GetSdCardDownloadError())
 				temp["shared_scope"] = (s.GetSharedScope())
+				temp["source_firmware_version"] = (s.GetSourceFirmwareVersion())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["target_firmware_version"] = (s.GetTargetFirmwareVersion())
 
 				temp["upgrade"] = flattenMapFirmwareUpgradeBaseRelationship(s.GetUpgrade(), d)
 

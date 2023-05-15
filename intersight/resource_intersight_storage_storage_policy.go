@@ -96,7 +96,7 @@ func resourceStorageStoragePolicy() *schema.Resource {
 					return
 				}},
 			"default_drive_mode": {
-				Description:  "Unconfigured drives at the time of deployment will move to the selected state. Newly inserted drives will move to the selected state. Select Unconfigured Good option to retain the existing configuration. Select JBOD to move the unconfigured drives to JBOD state. Select RAID0 to create a RAID0 virtual drive on each of the unconfigured drives. If JBOD is selected, unconfigured drives will move to JBOD state on host reboot. If JBOD is selected, 'Use JBOD for Virtual Drive creation' must be disabled. Unused Disks State should be 'No Change' if Default Drive Mode is set to JBOD or RAID 0. This setting is applicable only to selected set of controllers on FI attached servers.\n* `UnconfiguredGood` - Newly inserted drives or on reboot, drives will remain the same state.\n* `Jbod` - Newly inserted drives or on reboot, drives will automatically move to JBOD state if drive state was UnconfiguredGood.\n* `RAID0` - Newly inserted drives or on reboot, virtual drives will be created, respective drives will move to Online state.",
+				Description:  "All unconfigured drives (non-user configured drives) will move to the selected state on deployment. Newly inserted drives will move to the selected state. Select Unconfigured Good option to retain the existing configuration. Select JBOD to move the unconfigured drives to JBOD state. Select RAID0 to create a RAID0 virtual drive on each of the unconfigured drives. If JBOD is selected, unconfigured drives will move to JBOD state on host reboot. This setting is applicable only to selected set of controllers on FI attached servers.\n* `UnconfiguredGood` - Newly inserted drives or on reboot, drives will remain the same state.\n* `Jbod` - Newly inserted drives or on reboot, drives will automatically move to JBOD state if drive state was UnconfiguredGood.\n* `RAID0` - Newly inserted drives or on reboot, virtual drives will be created, respective drives will move to Online state.",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"UnconfiguredGood", "Jbod", "RAID0"}, false),
 				Optional:     true,
@@ -519,6 +519,12 @@ func resourceStorageStoragePolicy() *schema.Resource {
 					},
 				},
 			},
+			"secure_jbods": {
+				Description:  "JBOD drives specified in this slot range will be encrypted. Allowed value is a comma or hyphen separated number range. Sample format is 1, 3 or 4-6, 8.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^((\\d+\\-\\d+)|(\\d+))(,((\\d+\\-\\d+)|(\\d+)))*$"), ""),
+				Optional:     true,
+			},
 			"shared_scope": {
 				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 				Type:        schema.TypeString,
@@ -558,14 +564,14 @@ func resourceStorageStoragePolicy() *schema.Resource {
 				},
 			},
 			"unused_disks_state": {
-				Description:  "State to which disks, not used in this policy, are to be moved. NoChange will not change the drive state.\n* `NoChange` - Drive state will not be modified by Storage Policy.\n* `UnconfiguredGood` - Unconfigured good state -ready to be added in a RAID group.\n* `Jbod` - JBOD state where the disks start showing up to Host OS.",
+				Description:  "State to which drives, not used in this policy, are to be moved. NoChange will not change the drive state. No Change must be selected if Default Drive State is set to JBOD or RAID0.\n* `NoChange` - Drive state will not be modified by Storage Policy.\n* `UnconfiguredGood` - Unconfigured good state -ready to be added in a RAID group.\n* `Jbod` - JBOD state where the disks start showing up to Host OS.",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"NoChange", "UnconfiguredGood", "Jbod"}, false),
 				Optional:     true,
 				Default:      "NoChange",
 			},
 			"use_jbod_for_vd_creation": {
-				Description: "Disks in JBOD State are used to create virtual drives.",
+				Description: "Disks in JBOD State are used to create virtual drives. This setting must be disabled if Default Drive State is set to JBOD.",
 				Type:        schema.TypeBool,
 				Optional:    true,
 			},
@@ -627,6 +633,17 @@ func resourceStorageStoragePolicy() *schema.Resource {
 								},
 							},
 						},
+						"marked_for_deletion": {
+							Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
@@ -1032,6 +1049,11 @@ func resourceStorageStoragePolicyCreate(c context.Context, d *schema.ResourceDat
 		}
 	}
 
+	if v, ok := d.GetOk("secure_jbods"); ok {
+		x := (v.(string))
+		o.SetSecureJbods(x)
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -1215,6 +1237,10 @@ func resourceStorageStoragePolicyRead(c context.Context, d *schema.ResourceData,
 
 	if err := d.Set("raid0_drive", flattenMapStorageR0Drive(s.GetRaid0Drive(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Raid0Drive in StorageStoragePolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("secure_jbods", (s.GetSecureJbods())); err != nil {
+		return diag.Errorf("error occurred while setting property SecureJbods in StorageStoragePolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("shared_scope", (s.GetSharedScope())); err != nil {
@@ -1566,6 +1592,12 @@ func resourceStorageStoragePolicyUpdate(c context.Context, d *schema.ResourceDat
 			x := p[0]
 			o.SetRaid0Drive(x)
 		}
+	}
+
+	if d.HasChange("secure_jbods") {
+		v := d.Get("secure_jbods")
+		x := (v.(string))
+		o.SetSecureJbods(x)
 	}
 
 	if d.HasChange("tags") {

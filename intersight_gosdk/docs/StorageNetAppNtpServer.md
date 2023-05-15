@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.NetAppNtpServer"]
 **AuthenticationEnabled** | Pointer to **bool** | Indicates that NTP symmetric authentication is enabled. | [optional] [readonly] 
 **AuthenticationKeyId** | Pointer to **string** | NTP symmetric authentication key identifier or index number (ID). | [optional] [readonly] 
+**ClusterUuid** | Pointer to **string** | Unique identity of the device. | [optional] [readonly] 
 **Server** | Pointer to **string** | NTP server host name, IPv4, or IPv6 address. | [optional] [readonly] 
 **Version** | Pointer to **string** | NTP protocol version for server. Valid versions are 3, 4, or auto. * &#x60;none&#x60; - Default unknown NTP protocol version. * &#x60;3&#x60; - NTP protocol version is 3. * &#x60;4&#x60; - NTP protocol version is 4. * &#x60;auto&#x60; - NTP protocol version is auto. | [optional] [readonly] [default to "none"]
 **Array** | Pointer to [**StorageNetAppClusterRelationship**](StorageNetAppClusterRelationship.md) |  | [optional] 
@@ -120,6 +121,31 @@ SetAuthenticationKeyId sets AuthenticationKeyId field to given value.
 `func (o *StorageNetAppNtpServer) HasAuthenticationKeyId() bool`
 
 HasAuthenticationKeyId returns a boolean if a field has been set.
+
+### GetClusterUuid
+
+`func (o *StorageNetAppNtpServer) GetClusterUuid() string`
+
+GetClusterUuid returns the ClusterUuid field if non-nil, zero value otherwise.
+
+### GetClusterUuidOk
+
+`func (o *StorageNetAppNtpServer) GetClusterUuidOk() (*string, bool)`
+
+GetClusterUuidOk returns a tuple with the ClusterUuid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClusterUuid
+
+`func (o *StorageNetAppNtpServer) SetClusterUuid(v string)`
+
+SetClusterUuid sets ClusterUuid field to given value.
+
+### HasClusterUuid
+
+`func (o *StorageNetAppNtpServer) HasClusterUuid() bool`
+
+HasClusterUuid returns a boolean if a field has been set.
 
 ### GetServer
 

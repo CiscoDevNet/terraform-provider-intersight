@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-10371
+API version: 1.0.11-11765
 Contact: intersight@cisco.com
 */
 
@@ -36,9 +36,14 @@ type StorageNetAppEthernetPort struct {
 	Name                   *string                               `json:"Name,omitempty"`
 	NetAppEthernetPortLag  NullableStorageNetAppEthernetPortLag  `json:"NetAppEthernetPortLag,omitempty"`
 	NetAppEthernetPortVlan NullableStorageNetAppEthernetPortVlan `json:"NetAppEthernetPortVlan,omitempty"`
+	// The node name for the port.
+	NodeName *string `json:"NodeName,omitempty"`
+	// State of the port available in storage array. * `Down` - An inactive port is listed as Down. * `Up` - An active port is listed as Up. * `Degraded` - An active port that is Up but unhealthy.
+	PortState *string `json:"PortState,omitempty"`
 	// Operational speed of port measured.
 	Speed *int64 `json:"Speed,omitempty"`
 	// State of the port available in storage array. * `down` - An inactive port is listed as Down. * `up` - An active port is listed as Up. * `present` - An active port is listed as present.
+	// Deprecated
 	State *string `json:"State,omitempty"`
 	// Type of the port available in storage array. * `LAG` - Storage port of type lag. * `physical` - LIFs can be configured directly on physical ports. * `VLAN` - A logical port that receives and sends VLAN-tagged (IEEE 802.1Q standard) traffic. VLAN port characteristics include the VLAN ID for the port.
 	Type *string `json:"Type,omitempty"`
@@ -369,6 +374,70 @@ func (o *StorageNetAppEthernetPort) UnsetNetAppEthernetPortVlan() {
 	o.NetAppEthernetPortVlan.Unset()
 }
 
+// GetNodeName returns the NodeName field value if set, zero value otherwise.
+func (o *StorageNetAppEthernetPort) GetNodeName() string {
+	if o == nil || o.NodeName == nil {
+		var ret string
+		return ret
+	}
+	return *o.NodeName
+}
+
+// GetNodeNameOk returns a tuple with the NodeName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageNetAppEthernetPort) GetNodeNameOk() (*string, bool) {
+	if o == nil || o.NodeName == nil {
+		return nil, false
+	}
+	return o.NodeName, true
+}
+
+// HasNodeName returns a boolean if a field has been set.
+func (o *StorageNetAppEthernetPort) HasNodeName() bool {
+	if o != nil && o.NodeName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNodeName gets a reference to the given string and assigns it to the NodeName field.
+func (o *StorageNetAppEthernetPort) SetNodeName(v string) {
+	o.NodeName = &v
+}
+
+// GetPortState returns the PortState field value if set, zero value otherwise.
+func (o *StorageNetAppEthernetPort) GetPortState() string {
+	if o == nil || o.PortState == nil {
+		var ret string
+		return ret
+	}
+	return *o.PortState
+}
+
+// GetPortStateOk returns a tuple with the PortState field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageNetAppEthernetPort) GetPortStateOk() (*string, bool) {
+	if o == nil || o.PortState == nil {
+		return nil, false
+	}
+	return o.PortState, true
+}
+
+// HasPortState returns a boolean if a field has been set.
+func (o *StorageNetAppEthernetPort) HasPortState() bool {
+	if o != nil && o.PortState != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPortState gets a reference to the given string and assigns it to the PortState field.
+func (o *StorageNetAppEthernetPort) SetPortState(v string) {
+	o.PortState = &v
+}
+
 // GetSpeed returns the Speed field value if set, zero value otherwise.
 func (o *StorageNetAppEthernetPort) GetSpeed() int64 {
 	if o == nil || o.Speed == nil {
@@ -402,6 +471,7 @@ func (o *StorageNetAppEthernetPort) SetSpeed(v int64) {
 }
 
 // GetState returns the State field value if set, zero value otherwise.
+// Deprecated
 func (o *StorageNetAppEthernetPort) GetState() string {
 	if o == nil || o.State == nil {
 		var ret string
@@ -412,6 +482,7 @@ func (o *StorageNetAppEthernetPort) GetState() string {
 
 // GetStateOk returns a tuple with the State field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *StorageNetAppEthernetPort) GetStateOk() (*string, bool) {
 	if o == nil || o.State == nil {
 		return nil, false
@@ -429,6 +500,7 @@ func (o *StorageNetAppEthernetPort) HasState() bool {
 }
 
 // SetState gets a reference to the given string and assigns it to the State field.
+// Deprecated
 func (o *StorageNetAppEthernetPort) SetState(v string) {
 	o.State = &v
 }
@@ -599,6 +671,12 @@ func (o StorageNetAppEthernetPort) MarshalJSON() ([]byte, error) {
 	if o.NetAppEthernetPortVlan.IsSet() {
 		toSerialize["NetAppEthernetPortVlan"] = o.NetAppEthernetPortVlan.Get()
 	}
+	if o.NodeName != nil {
+		toSerialize["NodeName"] = o.NodeName
+	}
+	if o.PortState != nil {
+		toSerialize["PortState"] = o.PortState
+	}
 	if o.Speed != nil {
 		toSerialize["Speed"] = o.Speed
 	}
@@ -643,9 +721,14 @@ func (o *StorageNetAppEthernetPort) UnmarshalJSON(bytes []byte) (err error) {
 		Name                   *string                               `json:"Name,omitempty"`
 		NetAppEthernetPortLag  NullableStorageNetAppEthernetPortLag  `json:"NetAppEthernetPortLag,omitempty"`
 		NetAppEthernetPortVlan NullableStorageNetAppEthernetPortVlan `json:"NetAppEthernetPortVlan,omitempty"`
+		// The node name for the port.
+		NodeName *string `json:"NodeName,omitempty"`
+		// State of the port available in storage array. * `Down` - An inactive port is listed as Down. * `Up` - An active port is listed as Up. * `Degraded` - An active port that is Up but unhealthy.
+		PortState *string `json:"PortState,omitempty"`
 		// Operational speed of port measured.
 		Speed *int64 `json:"Speed,omitempty"`
 		// State of the port available in storage array. * `down` - An inactive port is listed as Down. * `up` - An active port is listed as Up. * `present` - An active port is listed as present.
+		// Deprecated
 		State *string `json:"State,omitempty"`
 		// Type of the port available in storage array. * `LAG` - Storage port of type lag. * `physical` - LIFs can be configured directly on physical ports. * `VLAN` - A logical port that receives and sends VLAN-tagged (IEEE 802.1Q standard) traffic. VLAN port characteristics include the VLAN ID for the port.
 		Type *string `json:"Type,omitempty"`
@@ -670,6 +753,8 @@ func (o *StorageNetAppEthernetPort) UnmarshalJSON(bytes []byte) (err error) {
 		varStorageNetAppEthernetPort.Name = varStorageNetAppEthernetPortWithoutEmbeddedStruct.Name
 		varStorageNetAppEthernetPort.NetAppEthernetPortLag = varStorageNetAppEthernetPortWithoutEmbeddedStruct.NetAppEthernetPortLag
 		varStorageNetAppEthernetPort.NetAppEthernetPortVlan = varStorageNetAppEthernetPortWithoutEmbeddedStruct.NetAppEthernetPortVlan
+		varStorageNetAppEthernetPort.NodeName = varStorageNetAppEthernetPortWithoutEmbeddedStruct.NodeName
+		varStorageNetAppEthernetPort.PortState = varStorageNetAppEthernetPortWithoutEmbeddedStruct.PortState
 		varStorageNetAppEthernetPort.Speed = varStorageNetAppEthernetPortWithoutEmbeddedStruct.Speed
 		varStorageNetAppEthernetPort.State = varStorageNetAppEthernetPortWithoutEmbeddedStruct.State
 		varStorageNetAppEthernetPort.Type = varStorageNetAppEthernetPortWithoutEmbeddedStruct.Type
@@ -702,6 +787,8 @@ func (o *StorageNetAppEthernetPort) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "NetAppEthernetPortLag")
 		delete(additionalProperties, "NetAppEthernetPortVlan")
+		delete(additionalProperties, "NodeName")
+		delete(additionalProperties, "PortState")
 		delete(additionalProperties, "Speed")
 		delete(additionalProperties, "State")
 		delete(additionalProperties, "Type")

@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **Health** | Pointer to **bool** | The health of the NetApp Node. | [optional] [readonly] 
 **HighAvailability** | Pointer to [**NullableStorageNetAppHighAvailability**](StorageNetAppHighAvailability.md) |  | [optional] 
 **Key** | Pointer to **string** | Unique identifier of NetApp Node across data center. | [optional] [readonly] 
+**State** | Pointer to **string** | The state of the NetApp Node. | [optional] [readonly] 
 **Systemid** | Pointer to **string** | The system id of the NetApp Node. | [optional] [readonly] 
 **Uuid** | Pointer to **string** | Universally unique identifier of NetApp Node. | [optional] [readonly] 
 **Array** | Pointer to [**StorageNetAppClusterRelationship**](StorageNetAppClusterRelationship.md) |  | [optional] 
@@ -209,6 +210,31 @@ SetKey sets Key field to given value.
 `func (o *StorageNetAppNodeAllOf) HasKey() bool`
 
 HasKey returns a boolean if a field has been set.
+
+### GetState
+
+`func (o *StorageNetAppNodeAllOf) GetState() string`
+
+GetState returns the State field if non-nil, zero value otherwise.
+
+### GetStateOk
+
+`func (o *StorageNetAppNodeAllOf) GetStateOk() (*string, bool)`
+
+GetStateOk returns a tuple with the State field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetState
+
+`func (o *StorageNetAppNodeAllOf) SetState(v string)`
+
+SetState sets State field to given value.
+
+### HasState
+
+`func (o *StorageNetAppNodeAllOf) HasState() bool`
+
+HasState returns a boolean if a field has been set.
 
 ### GetSystemid
 

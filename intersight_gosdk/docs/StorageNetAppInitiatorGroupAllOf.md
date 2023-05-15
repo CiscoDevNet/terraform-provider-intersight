@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.NetAppInitiatorGroup"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.NetAppInitiatorGroup"]
 **Protocol** | Pointer to **string** | Initiator group protocol. * &#x60;FCP&#x60; - Fibre channel initiator type which contains WWN of an HBA on the host. * &#x60;iSCSI&#x60; - An iSCSI initiator type used by the host. * &#x60;mixed&#x60; - For systems using both FC and iSCSI connections to the same LUN, create two igroups, one for FC and one for iSCSI. Then map the LUN to both igroups. | [optional] [readonly] [default to "FCP"]
+**SvmName** | Pointer to **string** | The storage virtual machine name for the initiator group. | [optional] [readonly] 
 **Uuid** | Pointer to **string** | Universally unique identifier of the LUN. | [optional] [readonly] 
 **Tenant** | Pointer to [**StorageNetAppStorageVmRelationship**](StorageNetAppStorageVmRelationship.md) |  | [optional] 
 
@@ -93,6 +94,31 @@ SetProtocol sets Protocol field to given value.
 `func (o *StorageNetAppInitiatorGroupAllOf) HasProtocol() bool`
 
 HasProtocol returns a boolean if a field has been set.
+
+### GetSvmName
+
+`func (o *StorageNetAppInitiatorGroupAllOf) GetSvmName() string`
+
+GetSvmName returns the SvmName field if non-nil, zero value otherwise.
+
+### GetSvmNameOk
+
+`func (o *StorageNetAppInitiatorGroupAllOf) GetSvmNameOk() (*string, bool)`
+
+GetSvmNameOk returns a tuple with the SvmName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSvmName
+
+`func (o *StorageNetAppInitiatorGroupAllOf) SetSvmName(v string)`
+
+SetSvmName sets SvmName field to given value.
+
+### HasSvmName
+
+`func (o *StorageNetAppInitiatorGroupAllOf) HasSvmName() bool`
+
+HasSvmName returns a boolean if a field has been set.
 
 ### GetUuid
 

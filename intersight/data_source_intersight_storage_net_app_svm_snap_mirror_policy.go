@@ -184,6 +184,11 @@ func getStorageNetAppSvmSnapMirrorPolicySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"svm_name": {
+			Description: "The storage virtual machine name for the policy.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"sync_type": {
 			Description: "SnapMirror policy sync_type is either sync, strict_sync, or automated_failover. Property is applicable only to the policies of type \"sync\".",
 			Type:        schema.TypeString,
@@ -316,6 +321,11 @@ func getStorageNetAppSvmSnapMirrorPolicySchema() map[string]*schema.Schema {
 								},
 							},
 						},
+					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -595,6 +605,11 @@ func dataSourceStorageNetAppSvmSnapMirrorPolicyRead(c context.Context, d *schema
 		o.SetSharedScope(x)
 	}
 
+	if v, ok := d.GetOk("svm_name"); ok {
+		x := (v.(string))
+		o.SetSvmName(x)
+	}
+
 	if v, ok := d.GetOk("sync_type"); ok {
 		x := (v.(string))
 		o.SetSyncType(x)
@@ -826,6 +841,7 @@ func dataSourceStorageNetAppSvmSnapMirrorPolicyRead(c context.Context, d *schema
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["scope"] = (s.GetScope())
 				temp["shared_scope"] = (s.GetSharedScope())
+				temp["svm_name"] = (s.GetSvmName())
 				temp["sync_type"] = (s.GetSyncType())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)

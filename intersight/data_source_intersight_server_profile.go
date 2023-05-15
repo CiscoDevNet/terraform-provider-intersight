@@ -257,6 +257,11 @@ func getServerProfileSchema() map[string]*schema.Schema {
 									Type:        schema.TypeString,
 									Optional:    true,
 								},
+								"config_state_summary": {
+									Description: "Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, InConsistent, Validating, Configuring, Failed, Activating, UnConfiguring.\n* `None` - The default state is none.\n* `Not-assigned` - Server is not assigned to the profile.\n* `Assigned` - Server is assigned to the profile and the configurations are not yet deployed.\n* `Preparing` - Preparing to deploy the configuration.\n* `Validating` - Profile validation in progress.\n* `Configuring` - Profile deploy operation is in progress.\n* `UnConfiguring` - Server is unassigned and config cleanup is in progress.\n* `Analyzing` - Profile changes are being analyzed.\n* `Activating` - Configuration is being activated at the endpoint.\n* `Inconsistent` - Profile is inconsistent with the endpoint configuration.\n* `Associated` - The profile configuration has been applied to the endpoint and no inconsistencies have been detected.\n* `Failed` - The last action on the profile has failed.\n* `Not-complete` - Config import operation on the profile is not complete.\n* `Waiting-for-resource` - Waiting for the resource to be allocated for the profile.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
 								"config_type": {
 									Description: "The type of configuration running on the profile. Since profile deployments can configure multiple different settings, configType indicates which type of configuration is currently in progress.",
 									Type:        schema.TypeString,
@@ -272,6 +277,11 @@ func getServerProfileSchema() map[string]*schema.Schema {
 									Type:        schema.TypeString,
 									Optional:    true,
 								},
+								"inconsistency_reason": {
+									Type:     schema.TypeList,
+									Optional: true,
+									Elem: &schema.Schema{
+										Type: schema.TypeString}},
 								"object_type": {
 									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 									Type:        schema.TypeString,
@@ -359,6 +369,44 @@ func getServerProfileSchema() map[string]*schema.Schema {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"policy_disruptions": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"disruptions": {
+									Type:     schema.TypeList,
+									Optional: true,
+									Elem: &schema.Schema{
+										Type: schema.TypeString}},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"policy_name": {
+									Description: "Name of the policy that, when modified, causes the disruption.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"policy_pending_action": {
+									Description: "Name of the action which is pending on this policy. Example, if policy is not yet activated we mark this field as not-activated. Currently we support two actions, not-deployed and not-activated.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
 				},
 			},
 		},
@@ -384,6 +432,11 @@ func getServerProfileSchema() map[string]*schema.Schema {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"config_state_summary": {
+						Description: "Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, InConsistent, Validating, Configuring, Failed, Activating, UnConfiguring.\n* `None` - The default state is none.\n* `Not-assigned` - Server is not assigned to the profile.\n* `Assigned` - Server is assigned to the profile and the configurations are not yet deployed.\n* `Preparing` - Preparing to deploy the configuration.\n* `Validating` - Profile validation in progress.\n* `Configuring` - Profile deploy operation is in progress.\n* `UnConfiguring` - Server is unassigned and config cleanup is in progress.\n* `Analyzing` - Profile changes are being analyzed.\n* `Activating` - Configuration is being activated at the endpoint.\n* `Inconsistent` - Profile is inconsistent with the endpoint configuration.\n* `Associated` - The profile configuration has been applied to the endpoint and no inconsistencies have been detected.\n* `Failed` - The last action on the profile has failed.\n* `Not-complete` - Config import operation on the profile is not complete.\n* `Waiting-for-resource` - Waiting for the resource to be allocated for the profile.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 					"config_type": {
 						Description: "The type of configuration running on the profile. Since profile deployments can configure multiple different settings, configType indicates which type of configuration is currently in progress.",
 						Type:        schema.TypeString,
@@ -399,6 +452,11 @@ func getServerProfileSchema() map[string]*schema.Schema {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"inconsistency_reason": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 						Type:        schema.TypeString,
@@ -767,8 +825,41 @@ func getServerProfileSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"scheduled_actions": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"action": {
+						Description: "Name of the action to be performed on the profile.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"proceed_on_reboot": {
+						Description: "ProceedOnReboot can be used to acknowledge server reboot while triggering deploy/activate.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"server_assignment_mode": {
-			Description: "Source of the server assigned to the server profile. Values can be Static, Pool or None. Static is used if a server is attached directly to server profile. Pool is used if a resource pool is attached to server profile. None is used if no server or resource pool is attached to server profile.\n* `None` - No server is assigned to the server profile.\n* `Static` - Server is directly assigned to server profile using assign server.\n* `Pool` - Server is assigned from a resource pool.",
+			Description: "Source of the server assigned to the Server Profile. Values can be Static, Pool or None. Static is used if a server is attached directly to a Server Profile. Pool is used if a resource pool is attached to a Server Profile. None is used if no server or resource pool is attached to a Server Profile. Slot or Serial pre-assignment is also considered to be None as it is different form of Assign Later.\n* `None` - No server is assigned to the server profile.\n* `Static` - Server is directly assigned to server profile using assign server.\n* `Pool` - Server is assigned from a resource pool.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -802,6 +893,51 @@ func getServerProfileSchema() map[string]*schema.Schema {
 					"selector": {
 						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"server_pre_assign_by_serial": {
+			Description: "Serial number of the server that would be assigned to this pre-assigned Server Profile. It can be any string that adheres to the following constraints:\nIt should start and end with an alphanumeric character.\nIt cannot be more than 20 characters.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"server_pre_assign_by_slot": {
+			Description: "Server profile is pre-assigned to a server using slot.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"chassis_id": {
+						Description: "Chassis-id of the slot that would be assigned to this pre-assigned server profile.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"domain_name": {
+						Description: "Domain name of the Fabric Interconnect to which the chassis is or to be connected. It can be any string that adheres to the following constraints:\nIt should start and end with an alphanumeric character.\nIt can have underscores and hyphens.\nIt cannot be more than 30 characters.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"slot_id": {
+						Description: "Slot-id of the server that would be assigned to this pre-assigned server profile.",
+						Type:        schema.TypeInt,
 						Optional:    true,
 					},
 				},
@@ -1014,6 +1150,11 @@ func getServerProfileSchema() map[string]*schema.Schema {
 								},
 							},
 						},
+					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -1450,6 +1591,63 @@ func dataSourceServerProfileRead(c context.Context, d *schema.ResourceData, meta
 					o.SetObjectType(x)
 				}
 			}
+			if v, ok := l["policy_disruptions"]; ok {
+				{
+					x := make([]models.PolicyConfigChangeDisruptionDetailType, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewPolicyConfigChangeDisruptionDetailTypeWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("policy.ConfigChangeDisruptionDetailType")
+						if v, ok := l["disruptions"]; ok {
+							{
+								x := make([]string, 0)
+								y := reflect.ValueOf(v)
+								for i := 0; i < y.Len(); i++ {
+									if y.Index(i).Interface() != nil {
+										x = append(x, y.Index(i).Interface().(string))
+									}
+								}
+								if len(x) > 0 {
+									o.SetDisruptions(x)
+								}
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["policy_name"]; ok {
+							{
+								x := (v.(string))
+								o.SetPolicyName(x)
+							}
+						}
+						if v, ok := l["policy_pending_action"]; ok {
+							{
+								x := (v.(string))
+								o.SetPolicyPendingAction(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetPolicyDisruptions(x)
+					}
+				}
+			}
 			p = append(p, *o)
 		}
 		if len(p) > 0 {
@@ -1485,6 +1683,20 @@ func dataSourceServerProfileRead(c context.Context, d *schema.ResourceData, meta
 				{
 					x := (v.(string))
 					o.SetErrorState(x)
+				}
+			}
+			if v, ok := l["inconsistency_reason"]; ok {
+				{
+					x := make([]string, 0)
+					y := reflect.ValueOf(v)
+					for i := 0; i < y.Len(); i++ {
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
+					}
+					if len(x) > 0 {
+						o.SetInconsistencyReason(x)
+					}
 				}
 			}
 			if v, ok := l["object_type"]; ok {
@@ -1926,6 +2138,46 @@ func dataSourceServerProfileRead(c context.Context, d *schema.ResourceData, meta
 		o.SetRunningWorkflows(x)
 	}
 
+	if v, ok := d.GetOk("scheduled_actions"); ok {
+		x := make([]models.PolicyScheduledAction, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.PolicyScheduledAction{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["action"]; ok {
+				{
+					x := (v.(string))
+					o.SetAction(x)
+				}
+			}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("policy.ScheduledAction")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["proceed_on_reboot"]; ok {
+				{
+					x := (v.(bool))
+					o.SetProceedOnReboot(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetScheduledActions(x)
+	}
+
 	if v, ok := d.GetOk("server_assignment_mode"); ok {
 		x := (v.(string))
 		o.SetServerAssignmentMode(x)
@@ -1971,6 +2223,60 @@ func dataSourceServerProfileRead(c context.Context, d *schema.ResourceData, meta
 		if len(p) > 0 {
 			x := p[0]
 			o.SetServerPool(x)
+		}
+	}
+
+	if v, ok := d.GetOk("server_pre_assign_by_serial"); ok {
+		x := (v.(string))
+		o.SetServerPreAssignBySerial(x)
+	}
+
+	if v, ok := d.GetOk("server_pre_assign_by_slot"); ok {
+		p := make([]models.ServerServerAssignTypeSlot, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.ServerServerAssignTypeSlot{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			if v, ok := l["chassis_id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetChassisId(x)
+				}
+			}
+			o.SetClassId("server.ServerAssignTypeSlot")
+			if v, ok := l["domain_name"]; ok {
+				{
+					x := (v.(string))
+					o.SetDomainName(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["slot_id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetSlotId(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetServerPreAssignBySlot(x)
 		}
 	}
 
@@ -2326,9 +2632,14 @@ func dataSourceServerProfileRead(c context.Context, d *schema.ResourceData, meta
 				temp["resource_lease"] = flattenMapResourcepoolLeaseRelationship(s.GetResourceLease(), d)
 
 				temp["running_workflows"] = flattenListWorkflowWorkflowInfoRelationship(s.GetRunningWorkflows(), d)
+
+				temp["scheduled_actions"] = flattenListPolicyScheduledAction(s.GetScheduledActions(), d)
 				temp["server_assignment_mode"] = (s.GetServerAssignmentMode())
 
 				temp["server_pool"] = flattenMapResourcepoolPoolRelationship(s.GetServerPool(), d)
+				temp["server_pre_assign_by_serial"] = (s.GetServerPreAssignBySerial())
+
+				temp["server_pre_assign_by_slot"] = flattenMapServerServerAssignTypeSlot(s.GetServerPreAssignBySlot(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["src_template"] = flattenMapPolicyAbstractProfileRelationship(s.GetSrcTemplate(), d)

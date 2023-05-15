@@ -268,9 +268,9 @@ func resourceVnicFcAdapterPolicy() *schema.Resource {
 				Default:      512,
 			},
 			"lun_count": {
-				Description:  "The maximum number of LUNs that the Fibre Channel driver will export or show. The maximum number of LUNs is usually controlled by the operating system running on the server.",
+				Description:  "The maximum number of LUNs that the Fibre Channel driver will export or show. The maximum number of LUNs is usually controlled by the operating system running on the server. Lun Count value can exceed 1024 only for vHBA of type 'FC Initiator' and on servers having supported firmware version.",
 				Type:         schema.TypeInt,
-				ValidateFunc: validation.IntBetween(1, 1024),
+				ValidateFunc: validation.IntBetween(1, 4096),
 				Optional:     true,
 				Default:      1024,
 			},
@@ -722,6 +722,17 @@ func resourceVnicFcAdapterPolicy() *schema.Resource {
 								},
 							},
 						},
+						"marked_for_deletion": {
+							Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,

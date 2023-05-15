@@ -8,9 +8,8 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.WorkflowCtx"]
 **InitiatorCtx** | Pointer to [**NullableWorkflowInitiatorContext**](WorkflowInitiatorContext.md) |  | [optional] 
 **TargetCtxList** | Pointer to [**[]WorkflowTargetContext**](WorkflowTargetContext.md) |  | [optional] 
-**WorkflowMetaName** | Pointer to **string** | The name of workflowMeta of the workflow running. | [optional] 
-**WorkflowSubtype** | Pointer to **string** | The subtype of the workflow. | [optional] 
-**WorkflowType** | Pointer to **string** | Type of the workflow being started. This can be any string for client services to distinguish workflow by type. | [optional] 
+**WorkflowSubtype** | Pointer to **string** | The subtype of the workflow. | [optional] [readonly] 
+**WorkflowType** | Pointer to **string** | Type of the workflow being started. This can be any string for client services to distinguish workflow by type. | [optional] [readonly] 
 
 ## Methods
 
@@ -141,31 +140,6 @@ HasTargetCtxList returns a boolean if a field has been set.
 `func (o *WorkflowWorkflowCtx) UnsetTargetCtxList()`
 
 UnsetTargetCtxList ensures that no value is present for TargetCtxList, not even an explicit nil
-### GetWorkflowMetaName
-
-`func (o *WorkflowWorkflowCtx) GetWorkflowMetaName() string`
-
-GetWorkflowMetaName returns the WorkflowMetaName field if non-nil, zero value otherwise.
-
-### GetWorkflowMetaNameOk
-
-`func (o *WorkflowWorkflowCtx) GetWorkflowMetaNameOk() (*string, bool)`
-
-GetWorkflowMetaNameOk returns a tuple with the WorkflowMetaName field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetWorkflowMetaName
-
-`func (o *WorkflowWorkflowCtx) SetWorkflowMetaName(v string)`
-
-SetWorkflowMetaName sets WorkflowMetaName field to given value.
-
-### HasWorkflowMetaName
-
-`func (o *WorkflowWorkflowCtx) HasWorkflowMetaName() bool`
-
-HasWorkflowMetaName returns a boolean if a field has been set.
-
 ### GetWorkflowSubtype
 
 `func (o *WorkflowWorkflowCtx) GetWorkflowSubtype() string`

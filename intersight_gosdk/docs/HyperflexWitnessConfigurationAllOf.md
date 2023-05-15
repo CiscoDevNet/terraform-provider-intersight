@@ -6,12 +6,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.WitnessConfiguration"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.WitnessConfiguration"]
-**ConnectionError** | Pointer to **string** | The detailed connection error to the external witness. Empty if status is connected. | [optional] 
-**CustomWitnessEnabled** | Pointer to **bool** | Custom witness has been configured by user. | [optional] 
-**Fingerprint** | Pointer to **string** | The fingerprint of the witness server, identifies the revision of the witness servers database. Only applicable if custom witness has been enabled in the cluster, otherwise value is always empty. | [optional] 
-**Status** | Pointer to **string** | Status of the devices connection to the witness. Device will report status as either &#39;Connected&#39; or &#39;NotConnected&#39;. | [optional] 
-**Version** | Pointer to **string** | The version of the custom witness server. Only applicable if custom witness has been enabled in the cluster, otherwise value is always empty. | [optional] 
-**WitnessUrl** | Pointer to **string** | URL of the witness endpoint, including IP/host and path. Only applicable if custom witness has been enabled in the cluster, otherwise value is always empty. | [optional] 
+**ConnectionError** | Pointer to **string** | The detailed connection error to the external witness. Empty if status is connected. | [optional] [readonly] 
+**CustomWitnessEnabled** | Pointer to **bool** | Custom witness has been configured by user. | [optional] [readonly] 
+**Fingerprint** | Pointer to **string** | The fingerprint of the witness server, identifies the revision of the witness servers database. Only applicable if custom witness has been enabled in the cluster, otherwise value is always empty. | [optional] [readonly] 
+**Status** | Pointer to **string** | Status of the devices connection to the witness. Device will report status as either &#39;Connected&#39; or &#39;NotConnected&#39;. | [optional] [readonly] 
+**Version** | Pointer to **string** | The version of the custom witness server. Only applicable if custom witness has been enabled in the cluster, otherwise value is always empty. | [optional] [readonly] 
+**WitnessUrl** | Pointer to **string** | URL of the witness endpoint, including IP/host and path. Only applicable if custom witness has been enabled in the cluster, otherwise value is always empty. | [optional] [readonly] 
 **Cluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
 
 ## Methods

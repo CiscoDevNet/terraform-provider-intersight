@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **Count** | Pointer to **string** | Count value for the loop, this can be a static value defined as a constant at design time or can be a dynamic value defined as an expression that will evaluate to an integer value at execution time. Dynamic values for count must be specified as a template. For example, if a loop must run for a count which matches the length of a workflow input called StringArray, then the count must be specified using a template &#39;{{ len .global.workflow.input.StringArray }}&#39;. The count must be less than or equal to 100. If count is given as a dynamic value, and during execution time if count evaluates to be a value greater than 100, then the loop task will fail. | [optional] 
 **LoopStartTask** | Pointer to **string** | Start task where the list of tasks will be executed multiple times based on the count or condition value. | [optional] 
+**OnFailure** | Pointer to **string** | This specifies the name of the next task to run if all iterations of the loop task do not succeed. The unique name given to the task instance within the workflow must be provided here. In a graph model, denotes an edge to another Task Node. | [optional] 
 **OnSuccess** | Pointer to **string** | This specifies the name of the next task to run if all iterations of the loop task succeeds. The unique name given to the task instance within the workflow must be provided here. In a graph model, denotes an edge to another Task Node. | [optional] 
 
 ## Methods
@@ -118,6 +119,31 @@ SetLoopStartTask sets LoopStartTask field to given value.
 `func (o *WorkflowAbstractLoopTask) HasLoopStartTask() bool`
 
 HasLoopStartTask returns a boolean if a field has been set.
+
+### GetOnFailure
+
+`func (o *WorkflowAbstractLoopTask) GetOnFailure() string`
+
+GetOnFailure returns the OnFailure field if non-nil, zero value otherwise.
+
+### GetOnFailureOk
+
+`func (o *WorkflowAbstractLoopTask) GetOnFailureOk() (*string, bool)`
+
+GetOnFailureOk returns a tuple with the OnFailure field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOnFailure
+
+`func (o *WorkflowAbstractLoopTask) SetOnFailure(v string)`
+
+SetOnFailure sets OnFailure field to given value.
+
+### HasOnFailure
+
+`func (o *WorkflowAbstractLoopTask) HasOnFailure() bool`
+
+HasOnFailure returns a boolean if a field has been set.
 
 ### GetOnSuccess
 

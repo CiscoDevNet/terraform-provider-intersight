@@ -214,6 +214,11 @@ func getLicenseIncLicenseCountSchema() map[string]*schema.Schema {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"premier_centralized_mod8_slot_count": {
+			Description: "The total number of devices claimed in the CentralizedMod8Slot premier tier Intersight Nexus Cloud.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"premier_d2_ops_fixed_count": {
 			Description: "The total number of devices claimed in the D2Ops Fixed premier tier Intersight Nexus Cloud.",
 			Type:        schema.TypeInt,
@@ -221,6 +226,11 @@ func getLicenseIncLicenseCountSchema() map[string]*schema.Schema {
 		},
 		"premier_d2_ops_mod_count": {
 			Description: "The total number of devices claimed in the D2Ops modular premier tier Intersight Nexus Cloud.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"premier_distributed_mod8_slot_count": {
+			Description: "The total number of devices claimed in the DistributedMod8Slot premier tier Intersight Nexus Cloud.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
@@ -311,6 +321,11 @@ func getLicenseIncLicenseCountSchema() map[string]*schema.Schema {
 								},
 							},
 						},
+					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -628,6 +643,11 @@ func dataSourceLicenseIncLicenseCountRead(c context.Context, d *schema.ResourceD
 		o.SetPremier1GfxCount(x)
 	}
 
+	if v, ok := d.GetOkExists("premier_centralized_mod8_slot_count"); ok {
+		x := int64(v.(int))
+		o.SetPremierCentralizedMod8SlotCount(x)
+	}
+
 	if v, ok := d.GetOkExists("premier_d2_ops_fixed_count"); ok {
 		x := int64(v.(int))
 		o.SetPremierD2OpsFixedCount(x)
@@ -636,6 +656,11 @@ func dataSourceLicenseIncLicenseCountRead(c context.Context, d *schema.ResourceD
 	if v, ok := d.GetOkExists("premier_d2_ops_mod_count"); ok {
 		x := int64(v.(int))
 		o.SetPremierD2OpsModCount(x)
+	}
+
+	if v, ok := d.GetOkExists("premier_distributed_mod8_slot_count"); ok {
+		x := int64(v.(int))
+		o.SetPremierDistributedMod8SlotCount(x)
 	}
 
 	if v, ok := d.GetOkExists("premier_mod4_slot_count"); ok {
@@ -817,8 +842,10 @@ func dataSourceLicenseIncLicenseCountRead(c context.Context, d *schema.ResourceD
 				temp["premier100_gfx_count"] = (s.GetPremier100GfxCount())
 				temp["premier10_gfx_count"] = (s.GetPremier10GfxCount())
 				temp["premier1_gfx_count"] = (s.GetPremier1GfxCount())
+				temp["premier_centralized_mod8_slot_count"] = (s.GetPremierCentralizedMod8SlotCount())
 				temp["premier_d2_ops_fixed_count"] = (s.GetPremierD2OpsFixedCount())
 				temp["premier_d2_ops_mod_count"] = (s.GetPremierD2OpsModCount())
+				temp["premier_distributed_mod8_slot_count"] = (s.GetPremierDistributedMod8SlotCount())
 				temp["premier_mod4_slot_count"] = (s.GetPremierMod4SlotCount())
 				temp["premier_mod8_slot_count"] = (s.GetPremierMod8SlotCount())
 				temp["shared_scope"] = (s.GetSharedScope())

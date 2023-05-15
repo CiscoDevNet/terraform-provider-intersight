@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "mo.VersionContext"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "mo.VersionContext"]
 **InterestedMos** | Pointer to [**[]MoMoRef**](MoMoRef.md) |  | [optional] 
+**MarkedForDeletion** | Pointer to **bool** | The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy. | [optional] [readonly] [default to false]
 **RefMo** | Pointer to [**MoMoRef**](MoMoRef.md) |  | [optional] 
 **Timestamp** | Pointer to **time.Time** | The time this versioned Managed Object was created. | [optional] [readonly] 
 **Version** | Pointer to **string** | The version of the Managed Object, e.g. an incrementing number or a hash id. | [optional] [readonly] 
@@ -106,6 +107,31 @@ HasInterestedMos returns a boolean if a field has been set.
 `func (o *MoVersionContext) UnsetInterestedMos()`
 
 UnsetInterestedMos ensures that no value is present for InterestedMos, not even an explicit nil
+### GetMarkedForDeletion
+
+`func (o *MoVersionContext) GetMarkedForDeletion() bool`
+
+GetMarkedForDeletion returns the MarkedForDeletion field if non-nil, zero value otherwise.
+
+### GetMarkedForDeletionOk
+
+`func (o *MoVersionContext) GetMarkedForDeletionOk() (*bool, bool)`
+
+GetMarkedForDeletionOk returns a tuple with the MarkedForDeletion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMarkedForDeletion
+
+`func (o *MoVersionContext) SetMarkedForDeletion(v bool)`
+
+SetMarkedForDeletion sets MarkedForDeletion field to given value.
+
+### HasMarkedForDeletion
+
+`func (o *MoVersionContext) HasMarkedForDeletion() bool`
+
+HasMarkedForDeletion returns a boolean if a field has been set.
+
 ### GetRefMo
 
 `func (o *MoVersionContext) GetRefMo() MoMoRef`

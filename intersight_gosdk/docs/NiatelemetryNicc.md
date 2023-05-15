@@ -6,6 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "niatelemetry.Nicc"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "niatelemetry.Nicc"]
+**ConfigIssues** | Pointer to **string** | Configuration issues depicts the failures for NICC managed package upgrade on APIC. | [optional] 
+**NiccState** | Pointer to **string** | NICC state. NiccState checks the current operational state of NICC app on APIC. | [optional] 
+**NiccStateLastUpdateTs** | Pointer to **string** | NICC state last updated timestamp. It indicates the last updated timestamp for operational state of NICC app. | [optional] 
 **NiccVersion** | Pointer to **string** | NICC version. NiccVersion is used to check compatibility with Nexus Cloud features. | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
@@ -67,6 +70,81 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetConfigIssues
+
+`func (o *NiatelemetryNicc) GetConfigIssues() string`
+
+GetConfigIssues returns the ConfigIssues field if non-nil, zero value otherwise.
+
+### GetConfigIssuesOk
+
+`func (o *NiatelemetryNicc) GetConfigIssuesOk() (*string, bool)`
+
+GetConfigIssuesOk returns a tuple with the ConfigIssues field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConfigIssues
+
+`func (o *NiatelemetryNicc) SetConfigIssues(v string)`
+
+SetConfigIssues sets ConfigIssues field to given value.
+
+### HasConfigIssues
+
+`func (o *NiatelemetryNicc) HasConfigIssues() bool`
+
+HasConfigIssues returns a boolean if a field has been set.
+
+### GetNiccState
+
+`func (o *NiatelemetryNicc) GetNiccState() string`
+
+GetNiccState returns the NiccState field if non-nil, zero value otherwise.
+
+### GetNiccStateOk
+
+`func (o *NiatelemetryNicc) GetNiccStateOk() (*string, bool)`
+
+GetNiccStateOk returns a tuple with the NiccState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNiccState
+
+`func (o *NiatelemetryNicc) SetNiccState(v string)`
+
+SetNiccState sets NiccState field to given value.
+
+### HasNiccState
+
+`func (o *NiatelemetryNicc) HasNiccState() bool`
+
+HasNiccState returns a boolean if a field has been set.
+
+### GetNiccStateLastUpdateTs
+
+`func (o *NiatelemetryNicc) GetNiccStateLastUpdateTs() string`
+
+GetNiccStateLastUpdateTs returns the NiccStateLastUpdateTs field if non-nil, zero value otherwise.
+
+### GetNiccStateLastUpdateTsOk
+
+`func (o *NiatelemetryNicc) GetNiccStateLastUpdateTsOk() (*string, bool)`
+
+GetNiccStateLastUpdateTsOk returns a tuple with the NiccStateLastUpdateTs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNiccStateLastUpdateTs
+
+`func (o *NiatelemetryNicc) SetNiccStateLastUpdateTs(v string)`
+
+SetNiccStateLastUpdateTs sets NiccStateLastUpdateTs field to given value.
+
+### HasNiccStateLastUpdateTs
+
+`func (o *NiatelemetryNicc) HasNiccStateLastUpdateTs() bool`
+
+HasNiccStateLastUpdateTs returns a boolean if a field has been set.
 
 ### GetNiccVersion
 

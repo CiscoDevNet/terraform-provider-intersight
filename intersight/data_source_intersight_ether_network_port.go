@@ -350,7 +350,7 @@ func getEtherNetworkPortSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"speed": {
-			Description: "Network Port Speed of IO card or fabric extender.",
+			Description: "Network Port operational speed of IO card or fabric extender.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -431,6 +431,11 @@ func getEtherNetworkPortSchema() map[string]*schema.Schema {
 								},
 							},
 						},
+					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",

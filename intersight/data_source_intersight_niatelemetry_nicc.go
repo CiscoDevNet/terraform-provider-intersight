@@ -65,6 +65,11 @@ func getNiatelemetryNiccSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"config_issues": {
+			Description: "Configuration issues depicts the failures for NICC managed package upgrade on APIC.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"create_time": {
 			Description: "The time when this managed object was created.",
 			Type:        schema.TypeString,
@@ -82,6 +87,16 @@ func getNiatelemetryNiccSchema() map[string]*schema.Schema {
 		},
 		"moid": {
 			Description: "The unique identifier of this Managed Object instance.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"nicc_state": {
+			Description: "NICC state. NiccState checks the current operational state of NICC app on APIC.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"nicc_state_last_update_ts": {
+			Description: "NICC state last updated timestamp. It indicates the last updated timestamp for operational state of NICC app.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -282,6 +297,11 @@ func getNiatelemetryNiccSchema() map[string]*schema.Schema {
 							},
 						},
 					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 						Type:        schema.TypeString,
@@ -421,6 +441,11 @@ func dataSourceNiatelemetryNiccRead(c context.Context, d *schema.ResourceData, m
 		o.SetClassId(x)
 	}
 
+	if v, ok := d.GetOk("config_issues"); ok {
+		x := (v.(string))
+		o.SetConfigIssues(x)
+	}
+
 	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
@@ -439,6 +464,16 @@ func dataSourceNiatelemetryNiccRead(c context.Context, d *schema.ResourceData, m
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
+	}
+
+	if v, ok := d.GetOk("nicc_state"); ok {
+		x := (v.(string))
+		o.SetNiccState(x)
+	}
+
+	if v, ok := d.GetOk("nicc_state_last_update_ts"); ok {
+		x := (v.(string))
+		o.SetNiccStateLastUpdateTs(x)
 	}
 
 	if v, ok := d.GetOk("nicc_version"); ok {
@@ -740,12 +775,15 @@ func dataSourceNiatelemetryNiccRead(c context.Context, d *schema.ResourceData, m
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["class_id"] = (s.GetClassId())
+				temp["config_issues"] = (s.GetConfigIssues())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
+				temp["nicc_state"] = (s.GetNiccState())
+				temp["nicc_state_last_update_ts"] = (s.GetNiccStateLastUpdateTs())
 				temp["nicc_version"] = (s.GetNiccVersion())
 				temp["object_type"] = (s.GetObjectType())
 				temp["owners"] = (s.GetOwners())

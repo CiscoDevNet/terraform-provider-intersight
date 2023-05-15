@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-10371
+API version: 1.0.11-11765
 Contact: intersight@cisco.com
 */
 
@@ -34,6 +34,10 @@ type StorageNetAppBaseIpInterface struct {
 	HomeNode *string `json:"HomeNode,omitempty"`
 	// Name of home port of IP interface.
 	HomePort *string `json:"HomePort,omitempty"`
+	// Reports whether the IP interface is home or has failed over to its HA peer.
+	InterfaceIsHome *string `json:"InterfaceIsHome,omitempty"`
+	// The state of the IP interface. * `Down` - The state is set to down if the interface is not enabled. * `Up` - The state is set to up if the interface is enabled.
+	InterfaceState *string `json:"InterfaceState,omitempty"`
 	// The IP address of interface.
 	IpAddress *string `json:"IpAddress,omitempty"`
 	// IP address family of interface. * `IPv4` - IP address family type is IPv4. * `IPv6` - IP address family type is IP6.
@@ -41,6 +45,7 @@ type StorageNetAppBaseIpInterface struct {
 	// The name of the IPspace of the IP interface.
 	Ipspace *string `json:"Ipspace,omitempty"`
 	// Reports whether the IP interface is home or has failed over to its HA peer.
+	// Deprecated
 	IsHome *bool `json:"IsHome,omitempty"`
 	// Defines where an interface may failover, [ home_port_only, default, home_node_only, sfo_partners_only, broadcast_domain_only ].
 	LocationFailover *string `json:"LocationFailover,omitempty"`
@@ -54,7 +59,10 @@ type StorageNetAppBaseIpInterface struct {
 	ServicePolicyUuid *string  `json:"ServicePolicyUuid,omitempty"`
 	Services          []string `json:"Services,omitempty"`
 	// The state of the IP interface. * `down` - An inactive port is listed as Down. * `up` - An active port is listed as Up. * `present` - An active port is listed as present.
+	// Deprecated
 	State *string `json:"State,omitempty"`
+	// The storage virtual machine name for the interface.
+	SvmName *string `json:"SvmName,omitempty"`
 	// Uuid of NetApp IP Interface.
 	Uuid                 *string `json:"Uuid,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -289,6 +297,70 @@ func (o *StorageNetAppBaseIpInterface) SetHomePort(v string) {
 	o.HomePort = &v
 }
 
+// GetInterfaceIsHome returns the InterfaceIsHome field value if set, zero value otherwise.
+func (o *StorageNetAppBaseIpInterface) GetInterfaceIsHome() string {
+	if o == nil || o.InterfaceIsHome == nil {
+		var ret string
+		return ret
+	}
+	return *o.InterfaceIsHome
+}
+
+// GetInterfaceIsHomeOk returns a tuple with the InterfaceIsHome field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageNetAppBaseIpInterface) GetInterfaceIsHomeOk() (*string, bool) {
+	if o == nil || o.InterfaceIsHome == nil {
+		return nil, false
+	}
+	return o.InterfaceIsHome, true
+}
+
+// HasInterfaceIsHome returns a boolean if a field has been set.
+func (o *StorageNetAppBaseIpInterface) HasInterfaceIsHome() bool {
+	if o != nil && o.InterfaceIsHome != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetInterfaceIsHome gets a reference to the given string and assigns it to the InterfaceIsHome field.
+func (o *StorageNetAppBaseIpInterface) SetInterfaceIsHome(v string) {
+	o.InterfaceIsHome = &v
+}
+
+// GetInterfaceState returns the InterfaceState field value if set, zero value otherwise.
+func (o *StorageNetAppBaseIpInterface) GetInterfaceState() string {
+	if o == nil || o.InterfaceState == nil {
+		var ret string
+		return ret
+	}
+	return *o.InterfaceState
+}
+
+// GetInterfaceStateOk returns a tuple with the InterfaceState field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageNetAppBaseIpInterface) GetInterfaceStateOk() (*string, bool) {
+	if o == nil || o.InterfaceState == nil {
+		return nil, false
+	}
+	return o.InterfaceState, true
+}
+
+// HasInterfaceState returns a boolean if a field has been set.
+func (o *StorageNetAppBaseIpInterface) HasInterfaceState() bool {
+	if o != nil && o.InterfaceState != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetInterfaceState gets a reference to the given string and assigns it to the InterfaceState field.
+func (o *StorageNetAppBaseIpInterface) SetInterfaceState(v string) {
+	o.InterfaceState = &v
+}
+
 // GetIpAddress returns the IpAddress field value if set, zero value otherwise.
 func (o *StorageNetAppBaseIpInterface) GetIpAddress() string {
 	if o == nil || o.IpAddress == nil {
@@ -386,6 +458,7 @@ func (o *StorageNetAppBaseIpInterface) SetIpspace(v string) {
 }
 
 // GetIsHome returns the IsHome field value if set, zero value otherwise.
+// Deprecated
 func (o *StorageNetAppBaseIpInterface) GetIsHome() bool {
 	if o == nil || o.IsHome == nil {
 		var ret bool
@@ -396,6 +469,7 @@ func (o *StorageNetAppBaseIpInterface) GetIsHome() bool {
 
 // GetIsHomeOk returns a tuple with the IsHome field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *StorageNetAppBaseIpInterface) GetIsHomeOk() (*bool, bool) {
 	if o == nil || o.IsHome == nil {
 		return nil, false
@@ -413,6 +487,7 @@ func (o *StorageNetAppBaseIpInterface) HasIsHome() bool {
 }
 
 // SetIsHome gets a reference to the given bool and assigns it to the IsHome field.
+// Deprecated
 func (o *StorageNetAppBaseIpInterface) SetIsHome(v bool) {
 	o.IsHome = &v
 }
@@ -611,6 +686,7 @@ func (o *StorageNetAppBaseIpInterface) SetServices(v []string) {
 }
 
 // GetState returns the State field value if set, zero value otherwise.
+// Deprecated
 func (o *StorageNetAppBaseIpInterface) GetState() string {
 	if o == nil || o.State == nil {
 		var ret string
@@ -621,6 +697,7 @@ func (o *StorageNetAppBaseIpInterface) GetState() string {
 
 // GetStateOk returns a tuple with the State field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *StorageNetAppBaseIpInterface) GetStateOk() (*string, bool) {
 	if o == nil || o.State == nil {
 		return nil, false
@@ -638,8 +715,41 @@ func (o *StorageNetAppBaseIpInterface) HasState() bool {
 }
 
 // SetState gets a reference to the given string and assigns it to the State field.
+// Deprecated
 func (o *StorageNetAppBaseIpInterface) SetState(v string) {
 	o.State = &v
+}
+
+// GetSvmName returns the SvmName field value if set, zero value otherwise.
+func (o *StorageNetAppBaseIpInterface) GetSvmName() string {
+	if o == nil || o.SvmName == nil {
+		var ret string
+		return ret
+	}
+	return *o.SvmName
+}
+
+// GetSvmNameOk returns a tuple with the SvmName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageNetAppBaseIpInterface) GetSvmNameOk() (*string, bool) {
+	if o == nil || o.SvmName == nil {
+		return nil, false
+	}
+	return o.SvmName, true
+}
+
+// HasSvmName returns a boolean if a field has been set.
+func (o *StorageNetAppBaseIpInterface) HasSvmName() bool {
+	if o != nil && o.SvmName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSvmName gets a reference to the given string and assigns it to the SvmName field.
+func (o *StorageNetAppBaseIpInterface) SetSvmName(v string) {
+	o.SvmName = &v
 }
 
 // GetUuid returns the Uuid field value if set, zero value otherwise.
@@ -705,6 +815,12 @@ func (o StorageNetAppBaseIpInterface) MarshalJSON() ([]byte, error) {
 	if o.HomePort != nil {
 		toSerialize["HomePort"] = o.HomePort
 	}
+	if o.InterfaceIsHome != nil {
+		toSerialize["InterfaceIsHome"] = o.InterfaceIsHome
+	}
+	if o.InterfaceState != nil {
+		toSerialize["InterfaceState"] = o.InterfaceState
+	}
 	if o.IpAddress != nil {
 		toSerialize["IpAddress"] = o.IpAddress
 	}
@@ -738,6 +854,9 @@ func (o StorageNetAppBaseIpInterface) MarshalJSON() ([]byte, error) {
 	if o.State != nil {
 		toSerialize["State"] = o.State
 	}
+	if o.SvmName != nil {
+		toSerialize["SvmName"] = o.SvmName
+	}
 	if o.Uuid != nil {
 		toSerialize["Uuid"] = o.Uuid
 	}
@@ -765,6 +884,10 @@ func (o *StorageNetAppBaseIpInterface) UnmarshalJSON(bytes []byte) (err error) {
 		HomeNode *string `json:"HomeNode,omitempty"`
 		// Name of home port of IP interface.
 		HomePort *string `json:"HomePort,omitempty"`
+		// Reports whether the IP interface is home or has failed over to its HA peer.
+		InterfaceIsHome *string `json:"InterfaceIsHome,omitempty"`
+		// The state of the IP interface. * `Down` - The state is set to down if the interface is not enabled. * `Up` - The state is set to up if the interface is enabled.
+		InterfaceState *string `json:"InterfaceState,omitempty"`
 		// The IP address of interface.
 		IpAddress *string `json:"IpAddress,omitempty"`
 		// IP address family of interface. * `IPv4` - IP address family type is IPv4. * `IPv6` - IP address family type is IP6.
@@ -772,6 +895,7 @@ func (o *StorageNetAppBaseIpInterface) UnmarshalJSON(bytes []byte) (err error) {
 		// The name of the IPspace of the IP interface.
 		Ipspace *string `json:"Ipspace,omitempty"`
 		// Reports whether the IP interface is home or has failed over to its HA peer.
+		// Deprecated
 		IsHome *bool `json:"IsHome,omitempty"`
 		// Defines where an interface may failover, [ home_port_only, default, home_node_only, sfo_partners_only, broadcast_domain_only ].
 		LocationFailover *string `json:"LocationFailover,omitempty"`
@@ -785,7 +909,10 @@ func (o *StorageNetAppBaseIpInterface) UnmarshalJSON(bytes []byte) (err error) {
 		ServicePolicyUuid *string  `json:"ServicePolicyUuid,omitempty"`
 		Services          []string `json:"Services,omitempty"`
 		// The state of the IP interface. * `down` - An inactive port is listed as Down. * `up` - An active port is listed as Up. * `present` - An active port is listed as present.
+		// Deprecated
 		State *string `json:"State,omitempty"`
+		// The storage virtual machine name for the interface.
+		SvmName *string `json:"SvmName,omitempty"`
 		// Uuid of NetApp IP Interface.
 		Uuid *string `json:"Uuid,omitempty"`
 	}
@@ -802,6 +929,8 @@ func (o *StorageNetAppBaseIpInterface) UnmarshalJSON(bytes []byte) (err error) {
 		varStorageNetAppBaseIpInterface.Enabled = varStorageNetAppBaseIpInterfaceWithoutEmbeddedStruct.Enabled
 		varStorageNetAppBaseIpInterface.HomeNode = varStorageNetAppBaseIpInterfaceWithoutEmbeddedStruct.HomeNode
 		varStorageNetAppBaseIpInterface.HomePort = varStorageNetAppBaseIpInterfaceWithoutEmbeddedStruct.HomePort
+		varStorageNetAppBaseIpInterface.InterfaceIsHome = varStorageNetAppBaseIpInterfaceWithoutEmbeddedStruct.InterfaceIsHome
+		varStorageNetAppBaseIpInterface.InterfaceState = varStorageNetAppBaseIpInterfaceWithoutEmbeddedStruct.InterfaceState
 		varStorageNetAppBaseIpInterface.IpAddress = varStorageNetAppBaseIpInterfaceWithoutEmbeddedStruct.IpAddress
 		varStorageNetAppBaseIpInterface.IpFamily = varStorageNetAppBaseIpInterfaceWithoutEmbeddedStruct.IpFamily
 		varStorageNetAppBaseIpInterface.Ipspace = varStorageNetAppBaseIpInterfaceWithoutEmbeddedStruct.Ipspace
@@ -813,6 +942,7 @@ func (o *StorageNetAppBaseIpInterface) UnmarshalJSON(bytes []byte) (err error) {
 		varStorageNetAppBaseIpInterface.ServicePolicyUuid = varStorageNetAppBaseIpInterfaceWithoutEmbeddedStruct.ServicePolicyUuid
 		varStorageNetAppBaseIpInterface.Services = varStorageNetAppBaseIpInterfaceWithoutEmbeddedStruct.Services
 		varStorageNetAppBaseIpInterface.State = varStorageNetAppBaseIpInterfaceWithoutEmbeddedStruct.State
+		varStorageNetAppBaseIpInterface.SvmName = varStorageNetAppBaseIpInterfaceWithoutEmbeddedStruct.SvmName
 		varStorageNetAppBaseIpInterface.Uuid = varStorageNetAppBaseIpInterfaceWithoutEmbeddedStruct.Uuid
 		*o = StorageNetAppBaseIpInterface(varStorageNetAppBaseIpInterface)
 	} else {
@@ -838,6 +968,8 @@ func (o *StorageNetAppBaseIpInterface) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "Enabled")
 		delete(additionalProperties, "HomeNode")
 		delete(additionalProperties, "HomePort")
+		delete(additionalProperties, "InterfaceIsHome")
+		delete(additionalProperties, "InterfaceState")
 		delete(additionalProperties, "IpAddress")
 		delete(additionalProperties, "IpFamily")
 		delete(additionalProperties, "Ipspace")
@@ -849,6 +981,7 @@ func (o *StorageNetAppBaseIpInterface) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ServicePolicyUuid")
 		delete(additionalProperties, "Services")
 		delete(additionalProperties, "State")
+		delete(additionalProperties, "SvmName")
 		delete(additionalProperties, "Uuid")
 
 		// remove fields from embedded structs

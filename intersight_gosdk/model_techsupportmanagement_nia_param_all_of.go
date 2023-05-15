@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-10371
+API version: 1.0.11-11765
 Contact: intersight@cisco.com
 */
 
@@ -21,12 +21,16 @@ type TechsupportmanagementNiaParamAllOf struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// CollectionClass specifies which app to collect ND techsupport from - infra/NDI/NDO/NDFC. * `1` - Collect infra logs for Nexus Dashboard TACASSIST. * `2` - Collect logs for Nexus Dashboard Insights app through NDTACASSIST. * `3` - Collect logs for Nexus Dashboard Orchestrator app through NDTACASSIST. * `4` - Collect logs for Nexus Dashboard Fabric Controller app through NDTACASSIST. * `5` - Collect logs for Nexus Data Broker app through NDTACASSIST. * `6` - Collect logs for Nexus Data Broker Orchestrator app through NDTACASSIST.
+	CollectionClass *int32 `json:"CollectionClass,omitempty"`
 	// CollectionLevel controls the size / depth of the tech support files collected. * `1` - Use cached data in the returned collection. * `2` - Use current data in the returned collection.
 	CollectionLevel *int32 `json:"CollectionLevel,omitempty"`
 	// Filename specifies an individual filename to collect from the endpoint.
 	Filename *string `json:"Filename,omitempty"`
 	// ForceFresh controls whether to return pre-collected files or force the collection of new files.
-	ForceFresh           *bool    `json:"ForceFresh,omitempty"`
+	ForceFresh *bool `json:"ForceFresh,omitempty"`
+	// Number of days for which to collect techsupport.
+	Period               *int64   `json:"Period,omitempty"`
 	Pids                 []string `json:"Pids,omitempty"`
 	SerialNumbers        []string `json:"SerialNumbers,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -42,8 +46,12 @@ func NewTechsupportmanagementNiaParamAllOf(classId string, objectType string) *T
 	this := TechsupportmanagementNiaParamAllOf{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var collectionClass int32 = 1
+	this.CollectionClass = &collectionClass
 	var collectionLevel int32 = 1
 	this.CollectionLevel = &collectionLevel
+	var period int64 = 2
+	this.Period = &period
 	return &this
 }
 
@@ -56,8 +64,12 @@ func NewTechsupportmanagementNiaParamAllOfWithDefaults() *TechsupportmanagementN
 	this.ClassId = classId
 	var objectType string = "techsupportmanagement.NiaParam"
 	this.ObjectType = objectType
+	var collectionClass int32 = 1
+	this.CollectionClass = &collectionClass
 	var collectionLevel int32 = 1
 	this.CollectionLevel = &collectionLevel
+	var period int64 = 2
+	this.Period = &period
 	return &this
 }
 
@@ -107,6 +119,38 @@ func (o *TechsupportmanagementNiaParamAllOf) GetObjectTypeOk() (*string, bool) {
 // SetObjectType sets field value
 func (o *TechsupportmanagementNiaParamAllOf) SetObjectType(v string) {
 	o.ObjectType = v
+}
+
+// GetCollectionClass returns the CollectionClass field value if set, zero value otherwise.
+func (o *TechsupportmanagementNiaParamAllOf) GetCollectionClass() int32 {
+	if o == nil || o.CollectionClass == nil {
+		var ret int32
+		return ret
+	}
+	return *o.CollectionClass
+}
+
+// GetCollectionClassOk returns a tuple with the CollectionClass field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TechsupportmanagementNiaParamAllOf) GetCollectionClassOk() (*int32, bool) {
+	if o == nil || o.CollectionClass == nil {
+		return nil, false
+	}
+	return o.CollectionClass, true
+}
+
+// HasCollectionClass returns a boolean if a field has been set.
+func (o *TechsupportmanagementNiaParamAllOf) HasCollectionClass() bool {
+	if o != nil && o.CollectionClass != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCollectionClass gets a reference to the given int32 and assigns it to the CollectionClass field.
+func (o *TechsupportmanagementNiaParamAllOf) SetCollectionClass(v int32) {
+	o.CollectionClass = &v
 }
 
 // GetCollectionLevel returns the CollectionLevel field value if set, zero value otherwise.
@@ -205,6 +249,38 @@ func (o *TechsupportmanagementNiaParamAllOf) SetForceFresh(v bool) {
 	o.ForceFresh = &v
 }
 
+// GetPeriod returns the Period field value if set, zero value otherwise.
+func (o *TechsupportmanagementNiaParamAllOf) GetPeriod() int64 {
+	if o == nil || o.Period == nil {
+		var ret int64
+		return ret
+	}
+	return *o.Period
+}
+
+// GetPeriodOk returns a tuple with the Period field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TechsupportmanagementNiaParamAllOf) GetPeriodOk() (*int64, bool) {
+	if o == nil || o.Period == nil {
+		return nil, false
+	}
+	return o.Period, true
+}
+
+// HasPeriod returns a boolean if a field has been set.
+func (o *TechsupportmanagementNiaParamAllOf) HasPeriod() bool {
+	if o != nil && o.Period != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPeriod gets a reference to the given int64 and assigns it to the Period field.
+func (o *TechsupportmanagementNiaParamAllOf) SetPeriod(v int64) {
+	o.Period = &v
+}
+
 // GetPids returns the Pids field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TechsupportmanagementNiaParamAllOf) GetPids() []string {
 	if o == nil {
@@ -279,6 +355,9 @@ func (o TechsupportmanagementNiaParamAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.CollectionClass != nil {
+		toSerialize["CollectionClass"] = o.CollectionClass
+	}
 	if o.CollectionLevel != nil {
 		toSerialize["CollectionLevel"] = o.CollectionLevel
 	}
@@ -287,6 +366,9 @@ func (o TechsupportmanagementNiaParamAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.ForceFresh != nil {
 		toSerialize["ForceFresh"] = o.ForceFresh
+	}
+	if o.Period != nil {
+		toSerialize["Period"] = o.Period
 	}
 	if o.Pids != nil {
 		toSerialize["Pids"] = o.Pids
@@ -314,9 +396,11 @@ func (o *TechsupportmanagementNiaParamAllOf) UnmarshalJSON(bytes []byte) (err er
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "CollectionClass")
 		delete(additionalProperties, "CollectionLevel")
 		delete(additionalProperties, "Filename")
 		delete(additionalProperties, "ForceFresh")
+		delete(additionalProperties, "Period")
 		delete(additionalProperties, "Pids")
 		delete(additionalProperties, "SerialNumbers")
 		o.AdditionalProperties = additionalProperties

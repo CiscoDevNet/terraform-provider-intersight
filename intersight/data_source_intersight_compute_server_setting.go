@@ -82,6 +82,11 @@ func getComputeServerSettingSchema() map[string]*schema.Schema {
 						Optional:         true,
 						DiffSuppressFunc: SuppressDiffAdditionProps,
 					},
+					"cert_type": {
+						Description: "Certificate Type for the certificate management.\n* `None` - Set certificate on the selected end point .\n* `KMIPClient` - Set KMIP certificate on the selected end point.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 					"certificate": {
 						Description: "Certificate that is used for verifying the authorization.",
 						Type:        schema.TypeList,
@@ -275,8 +280,18 @@ func getComputeServerSettingSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"clear_sel": {
+			Description: "Clear system event log on a server.\n* `Ready` - Clear system event log operation is allowed on the server in this state.\n* `Clear` - Trigger a clear system event log operation on a server.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"cmos_reset": {
 			Description: "The allowed actions on the CMOS Reset.\n* `Ready` - CMOS Reset operation is allowed to be done on the server in this state.\n* `Pending` - The identifier to state that the previous CMOS Reset operation on this server has not completed due to a pending power cycle. CMOS Reset operation cannot be done on the server when in this state.\n* `Reset` - The value that the UI/API needs to provide to trigger a CMOS Reset operation on a server.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"collect_sel": {
+			Description: "Collect system event log from a server.\n* `Ready` - Collect system event log operation is allowed on the server in this state.\n* `Collect` - Trigger a collect system event log operation on a server.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -718,7 +733,7 @@ func getComputeServerSettingSchema() map[string]*schema.Schema {
 						DiffSuppressFunc: SuppressDiffAdditionProps,
 					},
 					"admin_action": {
-						Description: "Administrative actions that can be performed on the Storage Controller.\n* `None` - No action on the selected Storage Controller.\n* `Import` - Import Foreign config action on the selected Storage Controller.\n* `Clear` - Clear Foreign config action on the selected Storage Controller.\n* `ClearConfig` - Clear Config action on the selected Storage Controller.",
+						Description: "Administrative actions that can be performed on the Storage Controller.\n* `None` - No action on the selected Storage Controller.\n* `Import` - Import Foreign config action on the selected Storage Controller.\n* `Clear` - Clear Foreign config action on the selected Storage Controller.\n* `ClearConfig` - Clear Config action on the selected Storage Controller.\n* `ModifySecurity` - Modify Security on the selected Storage Controller.\n* `DisableSecurity` - Disable Security on the selected Storage Controller.\n* `UnlockDrives` - Set Unlock action state on the selected Storage Controller.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -732,9 +747,19 @@ func getComputeServerSettingSchema() map[string]*schema.Schema {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"encryption_key": {
+						Description: "EncryptionKey of the Storage Controller.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"remote_mode": {
+						Description: "RemoteMode on the Storage Controller.",
+						Type:        schema.TypeBool,
 						Optional:    true,
 					},
 				},
@@ -753,7 +778,7 @@ func getComputeServerSettingSchema() map[string]*schema.Schema {
 						DiffSuppressFunc: SuppressDiffAdditionProps,
 					},
 					"admin_action": {
-						Description: "Administrative actions that can be performed on the Storage Physical Drives.\n* `None` - No action on the selected Storage Physical Drives.\n* `SetJbod` - Set Jbod action state on the selected Storage Physical Drives.\n* `SetUnconfiguredGood` - Set Unconfigured Good action state on the selected Storage Physical Drives.",
+						Description: "Administrative actions that can be performed on the Storage Physical Drives.\n* `None` - No action on the selected Storage Physical Drives.\n* `SetJbod` - Set Jbod action state on the selected Storage Physical Drives.\n* `SetUnconfiguredGood` - Set Unconfigured Good action state on the selected Storage Physical Drives.\n* `Erase` - Set Erase action state on the selected Storage Controller.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -767,6 +792,11 @@ func getComputeServerSettingSchema() map[string]*schema.Schema {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"drive_slots": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 						Type:        schema.TypeString,
@@ -949,6 +979,11 @@ func getComputeServerSettingSchema() map[string]*schema.Schema {
 							},
 						},
 					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 						Type:        schema.TypeString,
@@ -1109,6 +1144,12 @@ func dataSourceComputeServerSettingRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
+			if v, ok := l["cert_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetCertType(x)
+				}
+			}
 			if v, ok := l["certificate"]; ok {
 				{
 					p := make([]models.X509Certificate, 0, 1)
@@ -1179,9 +1220,19 @@ func dataSourceComputeServerSettingRead(c context.Context, d *schema.ResourceDat
 		o.SetClassId(x)
 	}
 
+	if v, ok := d.GetOk("clear_sel"); ok {
+		x := (v.(string))
+		o.SetClearSel(x)
+	}
+
 	if v, ok := d.GetOk("cmos_reset"); ok {
 		x := (v.(string))
 		o.SetCmosReset(x)
+	}
+
+	if v, ok := d.GetOk("collect_sel"); ok {
+		x := (v.(string))
+		o.SetCollectSel(x)
 	}
 
 	if v, ok := d.GetOk("config_state"); ok {
@@ -1718,10 +1769,22 @@ func dataSourceComputeServerSettingRead(c context.Context, d *schema.ResourceDat
 					o.SetControllerId(x)
 				}
 			}
+			if v, ok := l["encryption_key"]; ok {
+				{
+					x := (v.(string))
+					o.SetEncryptionKey(x)
+				}
+			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["remote_mode"]; ok {
+				{
+					x := (v.(bool))
+					o.SetRemoteMode(x)
 				}
 			}
 			p = append(p, *o)
@@ -1759,6 +1822,20 @@ func dataSourceComputeServerSettingRead(c context.Context, d *schema.ResourceDat
 				{
 					x := (v.(string))
 					o.SetControllerId(x)
+				}
+			}
+			if v, ok := l["drive_slots"]; ok {
+				{
+					x := make([]string, 0)
+					y := reflect.ValueOf(v)
+					for i := 0; i < y.Len(); i++ {
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
+					}
+					if len(x) > 0 {
+						o.SetDriveSlots(x)
+					}
 				}
 			}
 			if v, ok := l["object_type"]; ok {
@@ -2053,7 +2130,9 @@ func dataSourceComputeServerSettingRead(c context.Context, d *schema.ResourceDat
 
 				temp["certificates_action"] = flattenMapCertificatemanagementCertificateBase(s.GetCertificatesAction(), d)
 				temp["class_id"] = (s.GetClassId())
+				temp["clear_sel"] = (s.GetClearSel())
 				temp["cmos_reset"] = (s.GetCmosReset())
+				temp["collect_sel"] = (s.GetCollectSel())
 				temp["config_state"] = (s.GetConfigState())
 
 				temp["create_time"] = (s.GetCreateTime()).String()

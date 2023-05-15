@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "softwarerepository.Authorization"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "softwarerepository.Authorization"]
+**IsAsdv4AlarmDismissed** | Pointer to **bool** | The state of the alarm dismissal for the &#39;IsAsdDialogDismissed&#39; alarm. | [optional] [readonly] 
 **IsPasswordSet** | Pointer to **bool** | Indicates whether the value of the &#39;password&#39; property has been set. | [optional] [readonly] [default to false]
 **Password** | Pointer to **string** | The password that will be used by Intersight to create OAuth2 tokens for interacting with the external repository, on the user account&#39;s behalf. | [optional] 
 **RepositoryType** | Pointer to **string** | The external repository for which this authorization has been provided. The only supported repository today is cisco.com. * &#x60;Cisco&#x60; - External repository hosted on cisco.com. * &#x60;IntersightCloud&#x60; - Repository hosted by the Intersight Cloud. * &#x60;LocalMachine&#x60; - The file is available on the local client machine. Used as an upload source type. * &#x60;NetworkShare&#x60; - External repository in the customer datacenter. This will typically be a file server. | [optional] [default to "Cisco"]
@@ -70,6 +71,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetIsAsdv4AlarmDismissed
+
+`func (o *SoftwarerepositoryAuthorization) GetIsAsdv4AlarmDismissed() bool`
+
+GetIsAsdv4AlarmDismissed returns the IsAsdv4AlarmDismissed field if non-nil, zero value otherwise.
+
+### GetIsAsdv4AlarmDismissedOk
+
+`func (o *SoftwarerepositoryAuthorization) GetIsAsdv4AlarmDismissedOk() (*bool, bool)`
+
+GetIsAsdv4AlarmDismissedOk returns a tuple with the IsAsdv4AlarmDismissed field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsAsdv4AlarmDismissed
+
+`func (o *SoftwarerepositoryAuthorization) SetIsAsdv4AlarmDismissed(v bool)`
+
+SetIsAsdv4AlarmDismissed sets IsAsdv4AlarmDismissed field to given value.
+
+### HasIsAsdv4AlarmDismissed
+
+`func (o *SoftwarerepositoryAuthorization) HasIsAsdv4AlarmDismissed() bool`
+
+HasIsAsdv4AlarmDismissed returns a boolean if a field has been set.
 
 ### GetIsPasswordSet
 

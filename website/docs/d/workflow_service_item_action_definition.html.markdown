@@ -26,4 +26,5 @@ The following arguments can be used to get data of already created objects in In
 * `periodicity`:(int) Value in seconds to specify the periodicity of the workflows. A zero value indicate the workflow will not execute periodically. A non-zero value indicate, the workflow will be executed periodically with this periodicity. 
 * `restrict_on_private_appliance`:(bool) The flag to indicate that action is restricted on a Private Virtual Appliance. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
+* `user_id_or_email`:(string) The user identifier who created or updated the service item action definition. 
  

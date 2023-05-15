@@ -11,7 +11,9 @@ Name | Type | Description | Notes
 **IsPmcDeployedSecurePassphraseSet** | Pointer to **bool** | Indicates whether the value of the &#39;pmcDeployedSecurePassphrase&#39; property has been set. | [optional] [readonly] [default to false]
 **PmcDeployedSecurePassphrase** | Pointer to **string** | Secure passphrase that is already deployed on all the Persistent Memory Modules on the server. This deployed passphrase is required during deploy of server profile if secure passphrase is changed or security is disabled in the attached persistent memory policy. | [optional] 
 **ReservationReferences** | Pointer to [**[]PoolReservationReference**](PoolReservationReference.md) |  | [optional] 
-**ServerAssignmentMode** | Pointer to **string** | Source of the server assigned to the server profile. Values can be Static, Pool or None. Static is used if a server is attached directly to server profile. Pool is used if a resource pool is attached to server profile. None is used if no server or resource pool is attached to server profile. * &#x60;None&#x60; - No server is assigned to the server profile. * &#x60;Static&#x60; - Server is directly assigned to server profile using assign server. * &#x60;Pool&#x60; - Server is assigned from a resource pool. | [optional] [default to "None"]
+**ServerAssignmentMode** | Pointer to **string** | Source of the server assigned to the Server Profile. Values can be Static, Pool or None. Static is used if a server is attached directly to a Server Profile. Pool is used if a resource pool is attached to a Server Profile. None is used if no server or resource pool is attached to a Server Profile. Slot or Serial pre-assignment is also considered to be None as it is different form of Assign Later. * &#x60;None&#x60; - No server is assigned to the server profile. * &#x60;Static&#x60; - Server is directly assigned to server profile using assign server. * &#x60;Pool&#x60; - Server is assigned from a resource pool. | [optional] [default to "None"]
+**ServerPreAssignBySerial** | Pointer to **string** | Serial number of the server that would be assigned to this pre-assigned Server Profile. It can be any string that adheres to the following constraints: It should start and end with an alphanumeric character. It cannot be more than 20 characters. | [optional] 
+**ServerPreAssignBySlot** | Pointer to [**NullableServerServerAssignTypeSlot**](ServerServerAssignTypeSlot.md) |  | [optional] 
 **StaticUuidAddress** | Pointer to **string** | The UUID address for the server must include UUID prefix xxxxxxxx-xxxx-xxxx along with the UUID suffix of format xxxx-xxxxxxxxxxxx. | [optional] 
 **Uuid** | Pointer to **string** | The UUID address that is assigned to the server based on the UUID pool. | [optional] [readonly] 
 **AssignedServer** | Pointer to [**ComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
@@ -264,6 +266,66 @@ SetServerAssignmentMode sets ServerAssignmentMode field to given value.
 
 HasServerAssignmentMode returns a boolean if a field has been set.
 
+### GetServerPreAssignBySerial
+
+`func (o *ServerProfileAllOf) GetServerPreAssignBySerial() string`
+
+GetServerPreAssignBySerial returns the ServerPreAssignBySerial field if non-nil, zero value otherwise.
+
+### GetServerPreAssignBySerialOk
+
+`func (o *ServerProfileAllOf) GetServerPreAssignBySerialOk() (*string, bool)`
+
+GetServerPreAssignBySerialOk returns a tuple with the ServerPreAssignBySerial field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetServerPreAssignBySerial
+
+`func (o *ServerProfileAllOf) SetServerPreAssignBySerial(v string)`
+
+SetServerPreAssignBySerial sets ServerPreAssignBySerial field to given value.
+
+### HasServerPreAssignBySerial
+
+`func (o *ServerProfileAllOf) HasServerPreAssignBySerial() bool`
+
+HasServerPreAssignBySerial returns a boolean if a field has been set.
+
+### GetServerPreAssignBySlot
+
+`func (o *ServerProfileAllOf) GetServerPreAssignBySlot() ServerServerAssignTypeSlot`
+
+GetServerPreAssignBySlot returns the ServerPreAssignBySlot field if non-nil, zero value otherwise.
+
+### GetServerPreAssignBySlotOk
+
+`func (o *ServerProfileAllOf) GetServerPreAssignBySlotOk() (*ServerServerAssignTypeSlot, bool)`
+
+GetServerPreAssignBySlotOk returns a tuple with the ServerPreAssignBySlot field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetServerPreAssignBySlot
+
+`func (o *ServerProfileAllOf) SetServerPreAssignBySlot(v ServerServerAssignTypeSlot)`
+
+SetServerPreAssignBySlot sets ServerPreAssignBySlot field to given value.
+
+### HasServerPreAssignBySlot
+
+`func (o *ServerProfileAllOf) HasServerPreAssignBySlot() bool`
+
+HasServerPreAssignBySlot returns a boolean if a field has been set.
+
+### SetServerPreAssignBySlotNil
+
+`func (o *ServerProfileAllOf) SetServerPreAssignBySlotNil(b bool)`
+
+ SetServerPreAssignBySlotNil sets the value for ServerPreAssignBySlot to be an explicit nil
+
+### UnsetServerPreAssignBySlot
+`func (o *ServerProfileAllOf) UnsetServerPreAssignBySlot()`
+
+UnsetServerPreAssignBySlot ensures that no value is present for ServerPreAssignBySlot, not even an explicit nil
 ### GetStaticUuidAddress
 
 `func (o *ServerProfileAllOf) GetStaticUuidAddress() string`

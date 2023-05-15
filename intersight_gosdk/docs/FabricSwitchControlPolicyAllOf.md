@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **EthernetSwitchingMode** | Pointer to **string** | Enable or Disable Ethernet End Host Switching Mode. * &#x60;end-host&#x60; - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer. * &#x60;switch&#x60; - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode. | [optional] [default to "end-host"]
 **FcSwitchingMode** | Pointer to **string** | Enable or Disable FC End Host Switching Mode. * &#x60;end-host&#x60; - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer. * &#x60;switch&#x60; - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode. | [optional] [default to "end-host"]
 **MacAgingSettings** | Pointer to [**NullableFabricMacAgingSettings**](FabricMacAgingSettings.md) |  | [optional] 
+**ReservedVlanStartId** | Pointer to **int64** | The starting ID for VLANs reserved for internal use within the Fabric Interconnect. This VLAN ID is the starting ID of  a contiguous block of 128 VLANs that cannot be configured for user data.  This range of VLANs cannot be configured in  VLAN policy. If this property is not configured, VLAN range 3915 - 4042 is reserved for internal use by default. | [optional] [default to 3915]
 **UdldSettings** | Pointer to [**NullableFabricUdldGlobalSettings**](FabricUdldGlobalSettings.md) |  | [optional] 
 **VlanPortOptimizationEnabled** | Pointer to **bool** | To enable or disable the VLAN port count optimization. | [optional] [default to false]
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
@@ -158,6 +159,31 @@ HasMacAgingSettings returns a boolean if a field has been set.
 `func (o *FabricSwitchControlPolicyAllOf) UnsetMacAgingSettings()`
 
 UnsetMacAgingSettings ensures that no value is present for MacAgingSettings, not even an explicit nil
+### GetReservedVlanStartId
+
+`func (o *FabricSwitchControlPolicyAllOf) GetReservedVlanStartId() int64`
+
+GetReservedVlanStartId returns the ReservedVlanStartId field if non-nil, zero value otherwise.
+
+### GetReservedVlanStartIdOk
+
+`func (o *FabricSwitchControlPolicyAllOf) GetReservedVlanStartIdOk() (*int64, bool)`
+
+GetReservedVlanStartIdOk returns a tuple with the ReservedVlanStartId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReservedVlanStartId
+
+`func (o *FabricSwitchControlPolicyAllOf) SetReservedVlanStartId(v int64)`
+
+SetReservedVlanStartId sets ReservedVlanStartId field to given value.
+
+### HasReservedVlanStartId
+
+`func (o *FabricSwitchControlPolicyAllOf) HasReservedVlanStartId() bool`
+
+HasReservedVlanStartId returns a boolean if a field has been set.
+
 ### GetUdldSettings
 
 `func (o *FabricSwitchControlPolicyAllOf) GetUdldSettings() FabricUdldGlobalSettings`

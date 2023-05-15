@@ -30,6 +30,7 @@ The following arguments can be used to get data of already created objects in In
 * `is_learn_cycle_requested`:(bool) This indicates learn cycle request of the battery backup unit of the storage controller. 
 * `is_learn_cycle_transparent`:(bool) This indicates the learn cycle transparent for the battery backup unit of the storage controller. 
 * `is_temperature_high`:(bool) This indicates the temperature is high for the battery backup unit of the storage controller. 
+* `is_upgraded`:(bool) This field indicates the compute status of the catalog values for the associated component or hardware. 
 * `is_voltage_low`:(bool) This indicates the voltage is Low for the battery backup unit of the storage controller. 
 * `learn_cycle_progress_end_time_stamp`:(string) This refers to learn cycle progress end time of the battery backup unit of the storage controller. 
 * `learn_cycle_progress_start_time_stamp`:(string) This refers to learn cycle progress start time of the battery backup unit of the storage controller. 
@@ -37,20 +38,20 @@ The following arguments can be used to get data of already created objects in In
 * `learn_mode`:(string) This refers to the learn mode of the battery backup unit of the storage controller. 
 * `manufacturing_date`:(string) This refers to the manufacture date of the battery backup unit of the storage controller. 
 * `mod_time`:(string) The time when this managed object was last modified. 
-* `model`:(string) This field identifies the model of the given component. 
+* `model`:(string) This field displays the model number of the associated component or hardware. 
 * `module_version`:(string) This refers to the current module version of the battery backup unit of the storage controller. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `next_learn_cycle_time_stamp`:(string) This refers to next learn cycle timestamp of the battery backup unit of the storage controller. 
 * `pack_energy_in_joules`:(string) This holds the pack energy (in joules) of the battery backup unit of the storage controller. 
-* `presence`:(string) This field identifies the presence (equipped) or absence of the given component. 
+* `presence`:(string) This field indicates the presence (equipped) or absence (absent) of the associated component or hardware. 
 * `remaining_pool_space_in_percent`:(int) This holds the remaining pool space (in percent) of the battery backup unit of the storage controller. 
-* `revision`:(string) This field identifies the revision of the given component. 
+* `revision`:(string) This field displays the revised version of the associated component or hardware (if any). 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
-* `serial`:(string) This field identifies the serial of the given component. 
+* `serial`:(string) This field displays the serial number of the associated component or hardware. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `status`:(string) This holds the current status of the battery backup unit of the storage controller. 
 * `temperature_in_cel`:(int) This holds the temperature (in Celsius) of the battery backup unit of the storage controller. 
 * `type`:(string) This refers to the type of the battery backup unit of the storage controller. 
-* `vendor`:(string) This field identifies the vendor of the given component. 
+* `vendor`:(string) This field displays the vendor information of the associated component or hardware. 
 * `voltage_in_volts`:(string) This holds the volatage (in Volts) of the battery backup unit of the storage controller. 
  

@@ -441,6 +441,11 @@ func getIamAccountSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"regions": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"resource_limits": {
 			Description: "A reference to a iamResourceLimits resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -662,6 +667,11 @@ func getIamAccountSchema() map[string]*schema.Schema {
 								},
 							},
 						},
+					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -1246,6 +1256,17 @@ func dataSourceIamAccountRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetPrivileges(x)
 	}
 
+	if v, ok := d.GetOk("regions"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetRegions(x)
+	}
+
 	if v, ok := d.GetOk("resource_limits"); ok {
 		p := make([]models.IamResourceLimitsRelationship, 0, 1)
 		s := v.([]interface{})
@@ -1601,6 +1622,7 @@ func dataSourceIamAccountRead(c context.Context, d *schema.ResourceData, meta in
 				temp["privilege_sets"] = flattenListIamPrivilegeSetRelationship(s.GetPrivilegeSets(), d)
 
 				temp["privileges"] = flattenListIamPrivilegeRelationship(s.GetPrivileges(), d)
+				temp["regions"] = (s.GetRegions())
 
 				temp["resource_limits"] = flattenMapIamResourceLimitsRelationship(s.GetResourceLimits(), d)
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-10371
+API version: 1.0.11-11765
 Contact: intersight@cisco.com
 */
 
@@ -24,6 +24,8 @@ type StorageNetAppFcPort struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// The node name for the port.
+	NodeName *string `json:"NodeName,omitempty"`
 	// Status of storage array port.
 	PortStatus *string `json:"PortStatus,omitempty"`
 	// The configured speed of the FC port in gigabits per second.
@@ -111,6 +113,38 @@ func (o *StorageNetAppFcPort) GetObjectTypeOk() (*string, bool) {
 // SetObjectType sets field value
 func (o *StorageNetAppFcPort) SetObjectType(v string) {
 	o.ObjectType = v
+}
+
+// GetNodeName returns the NodeName field value if set, zero value otherwise.
+func (o *StorageNetAppFcPort) GetNodeName() string {
+	if o == nil || o.NodeName == nil {
+		var ret string
+		return ret
+	}
+	return *o.NodeName
+}
+
+// GetNodeNameOk returns a tuple with the NodeName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageNetAppFcPort) GetNodeNameOk() (*string, bool) {
+	if o == nil || o.NodeName == nil {
+		return nil, false
+	}
+	return o.NodeName, true
+}
+
+// HasNodeName returns a boolean if a field has been set.
+func (o *StorageNetAppFcPort) HasNodeName() bool {
+	if o != nil && o.NodeName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNodeName gets a reference to the given string and assigns it to the NodeName field.
+func (o *StorageNetAppFcPort) SetNodeName(v string) {
+	o.NodeName = &v
 }
 
 // GetPortStatus returns the PortStatus field value if set, zero value otherwise.
@@ -354,6 +388,9 @@ func (o StorageNetAppFcPort) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.NodeName != nil {
+		toSerialize["NodeName"] = o.NodeName
+	}
 	if o.PortStatus != nil {
 		toSerialize["PortStatus"] = o.PortStatus
 	}
@@ -389,6 +426,8 @@ func (o *StorageNetAppFcPort) UnmarshalJSON(bytes []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
+		// The node name for the port.
+		NodeName *string `json:"NodeName,omitempty"`
 		// Status of storage array port.
 		PortStatus *string `json:"PortStatus,omitempty"`
 		// The configured speed of the FC port in gigabits per second.
@@ -411,6 +450,7 @@ func (o *StorageNetAppFcPort) UnmarshalJSON(bytes []byte) (err error) {
 		varStorageNetAppFcPort := _StorageNetAppFcPort{}
 		varStorageNetAppFcPort.ClassId = varStorageNetAppFcPortWithoutEmbeddedStruct.ClassId
 		varStorageNetAppFcPort.ObjectType = varStorageNetAppFcPortWithoutEmbeddedStruct.ObjectType
+		varStorageNetAppFcPort.NodeName = varStorageNetAppFcPortWithoutEmbeddedStruct.NodeName
 		varStorageNetAppFcPort.PortStatus = varStorageNetAppFcPortWithoutEmbeddedStruct.PortStatus
 		varStorageNetAppFcPort.SpeedConfigured = varStorageNetAppFcPortWithoutEmbeddedStruct.SpeedConfigured
 		varStorageNetAppFcPort.SpeedMaximum = varStorageNetAppFcPortWithoutEmbeddedStruct.SpeedMaximum
@@ -437,6 +477,7 @@ func (o *StorageNetAppFcPort) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "NodeName")
 		delete(additionalProperties, "PortStatus")
 		delete(additionalProperties, "SpeedConfigured")
 		delete(additionalProperties, "SpeedMaximum")

@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **Firmware** | Pointer to **string** | The firmware version of the Cisco Integrated Management Controller (CIMC) for this server. | [optional] [readonly] 
 **HardwareUuid** | Pointer to **string** | The universally unique hardware identity of the server provided by the manufacturer. | [optional] [readonly] 
 **Ipv4Address** | Pointer to **string** | The IPv4 address configured on the management interface of the Integrated Management Controller. | [optional] [readonly] 
+**IsUpgraded** | Pointer to **bool** | This field indicates the compute status of the catalog values for the associated component or hardware. | [optional] [readonly] [default to false]
 **KvmIpAddresses** | Pointer to [**[]ComputeIpAddress**](ComputeIpAddress.md) |  | [optional] 
 **KvmServerStateEnabled** | Pointer to **bool** | The KVM server state of the server. | [optional] [readonly] 
 **KvmVendor** | Pointer to **string** | The KVM Vendor for the server. | [optional] [readonly] 
@@ -27,7 +28,7 @@ Name | Type | Description | Notes
 **ManagementMode** | Pointer to **string** | The management mode of the server. * &#x60;IntersightStandalone&#x60; - Intersight Standalone mode of operation. * &#x60;UCSM&#x60; - Unified Computing System Manager mode of operation. * &#x60;Intersight&#x60; - Intersight managed mode of operation. | [optional] [readonly] [default to "IntersightStandalone"]
 **MemorySpeed** | Pointer to **string** | The maximum memory speed in MHz available on the server. | [optional] [readonly] 
 **MgmtIpAddress** | Pointer to **string** | Management address of the server. | [optional] [readonly] 
-**Model** | Pointer to **string** | This field identifies the model of the given component. | [optional] [readonly] 
+**Model** | Pointer to **string** | This field displays the model number of the associated component or hardware. | [optional] [readonly] 
 **Name** | Pointer to **string** | The name of the UCS Fabric Interconnect cluster or Cisco Integrated Management Controller (CIMC). When this server is attached to a UCS Fabric Interconnect, the value of this property is the name of the UCS Fabric Interconnect along with chassis/server Id. When this server configured in standalone mode, the value of this property is the name of the Cisco Integrated Management Controller. when this server is configired in IMM mode, the value of this property contains model and chassis/server Id. | [optional] [readonly] 
 **NumAdaptors** | Pointer to **int64** | The total number of network adapters present on the server. | [optional] [readonly] 
 **NumCpuCores** | Pointer to **int64** | The total number of CPU cores present on the server. | [optional] [readonly] 
@@ -42,11 +43,11 @@ Name | Type | Description | Notes
 **Operability** | Pointer to **string** | The operability of the server. | [optional] [readonly] 
 **Personality** | Pointer to **string** | The Rack unit software Personality. | [optional] [readonly] 
 **PlatformType** | Pointer to **string** | The platform type of the registered device - whether managed by UCSM or operating in standalone mode. | [optional] [readonly] 
-**Presence** | Pointer to **string** | This field identifies the presence (equipped) or absence of the given component. | [optional] [readonly] 
-**Revision** | Pointer to **string** | This field identifies the revision of the given component. | [optional] [readonly] 
+**Presence** | Pointer to **string** | This field indicates the presence (equipped) or absence (absent) of the associated component or hardware. | [optional] [readonly] 
+**Revision** | Pointer to **string** | This field displays the revised version of the associated component or hardware (if any). | [optional] [readonly] 
 **Rn** | Pointer to **string** | The Relative Name uniquely identifies an object within a given context. | [optional] [readonly] 
 **ScaledMode** | Pointer to **string** | The mode of the server that determines it is scaled. | [optional] [readonly] 
-**Serial** | Pointer to **string** | This field identifies the serial of the given component. | [optional] [readonly] 
+**Serial** | Pointer to **string** | This field displays the serial number of the associated component or hardware. | [optional] [readonly] 
 **ServerId** | Pointer to **int64** | RackUnit ID that uniquely identifies the server. | [optional] [readonly] 
 **ServiceProfile** | Pointer to **string** | The distinguished name of the service profile to which the server is associated to. It is applicable only for servers which are managed via UCSM. | [optional] [readonly] 
 **SlotId** | Pointer to **int64** | The slot number in the chassis that the blade is discovered in. | [optional] [readonly] 
@@ -56,7 +57,7 @@ Name | Type | Description | Notes
 **TunneledKvm** | Pointer to **bool** | The Tunneled vKVM status of the server. | [optional] [readonly] 
 **UserLabel** | Pointer to **string** | The user defined label assigned to the server. | [optional] [readonly] 
 **Uuid** | Pointer to **string** | The universally unique identity of the server. | [optional] [readonly] 
-**Vendor** | Pointer to **string** | This field identifies the vendor of the given component. | [optional] [readonly] 
+**Vendor** | Pointer to **string** | This field displays the vendor information of the associated component or hardware. | [optional] [readonly] 
 **EquipmentChassis** | Pointer to [**EquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
@@ -479,6 +480,31 @@ SetIpv4Address sets Ipv4Address field to given value.
 `func (o *ComputePhysicalSummary) HasIpv4Address() bool`
 
 HasIpv4Address returns a boolean if a field has been set.
+
+### GetIsUpgraded
+
+`func (o *ComputePhysicalSummary) GetIsUpgraded() bool`
+
+GetIsUpgraded returns the IsUpgraded field if non-nil, zero value otherwise.
+
+### GetIsUpgradedOk
+
+`func (o *ComputePhysicalSummary) GetIsUpgradedOk() (*bool, bool)`
+
+GetIsUpgradedOk returns a tuple with the IsUpgraded field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsUpgraded
+
+`func (o *ComputePhysicalSummary) SetIsUpgraded(v bool)`
+
+SetIsUpgraded sets IsUpgraded field to given value.
+
+### HasIsUpgraded
+
+`func (o *ComputePhysicalSummary) HasIsUpgraded() bool`
+
+HasIsUpgraded returns a boolean if a field has been set.
 
 ### GetKvmIpAddresses
 

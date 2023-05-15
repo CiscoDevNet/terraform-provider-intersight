@@ -13,6 +13,8 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | Name of the port available in storage array. | [optional] [readonly] 
 **NetAppEthernetPortLag** | Pointer to [**NullableStorageNetAppEthernetPortLag**](StorageNetAppEthernetPortLag.md) |  | [optional] 
 **NetAppEthernetPortVlan** | Pointer to [**NullableStorageNetAppEthernetPortVlan**](StorageNetAppEthernetPortVlan.md) |  | [optional] 
+**NodeName** | Pointer to **string** | The node name for the port. | [optional] [readonly] 
+**PortState** | Pointer to **string** | State of the port available in storage array. * &#x60;Down&#x60; - An inactive port is listed as Down. * &#x60;Up&#x60; - An active port is listed as Up. * &#x60;Degraded&#x60; - An active port that is Up but unhealthy. | [optional] [readonly] [default to "Down"]
 **Speed** | Pointer to **int64** | Operational speed of port measured. | [optional] [readonly] 
 **State** | Pointer to **string** | State of the port available in storage array. * &#x60;down&#x60; - An inactive port is listed as Down. * &#x60;up&#x60; - An active port is listed as Up. * &#x60;present&#x60; - An active port is listed as present. | [optional] [readonly] [default to "down"]
 **Type** | Pointer to **string** | Type of the port available in storage array. * &#x60;LAG&#x60; - Storage port of type lag. * &#x60;physical&#x60; - LIFs can be configured directly on physical ports. * &#x60;VLAN&#x60; - A logical port that receives and sends VLAN-tagged (IEEE 802.1Q standard) traffic. VLAN port characteristics include the VLAN ID for the port. | [optional] [readonly] [default to "LAG"]
@@ -274,6 +276,56 @@ HasNetAppEthernetPortVlan returns a boolean if a field has been set.
 `func (o *StorageNetAppEthernetPort) UnsetNetAppEthernetPortVlan()`
 
 UnsetNetAppEthernetPortVlan ensures that no value is present for NetAppEthernetPortVlan, not even an explicit nil
+### GetNodeName
+
+`func (o *StorageNetAppEthernetPort) GetNodeName() string`
+
+GetNodeName returns the NodeName field if non-nil, zero value otherwise.
+
+### GetNodeNameOk
+
+`func (o *StorageNetAppEthernetPort) GetNodeNameOk() (*string, bool)`
+
+GetNodeNameOk returns a tuple with the NodeName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNodeName
+
+`func (o *StorageNetAppEthernetPort) SetNodeName(v string)`
+
+SetNodeName sets NodeName field to given value.
+
+### HasNodeName
+
+`func (o *StorageNetAppEthernetPort) HasNodeName() bool`
+
+HasNodeName returns a boolean if a field has been set.
+
+### GetPortState
+
+`func (o *StorageNetAppEthernetPort) GetPortState() string`
+
+GetPortState returns the PortState field if non-nil, zero value otherwise.
+
+### GetPortStateOk
+
+`func (o *StorageNetAppEthernetPort) GetPortStateOk() (*string, bool)`
+
+GetPortStateOk returns a tuple with the PortState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPortState
+
+`func (o *StorageNetAppEthernetPort) SetPortState(v string)`
+
+SetPortState sets PortState field to given value.
+
+### HasPortState
+
+`func (o *StorageNetAppEthernetPort) HasPortState() bool`
+
+HasPortState returns a boolean if a field has been set.
+
 ### GetSpeed
 
 `func (o *StorageNetAppEthernetPort) GetSpeed() int64`

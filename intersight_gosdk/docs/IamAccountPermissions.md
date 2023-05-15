@@ -8,7 +8,9 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.AccountPermissions"]
 **AccountIdentifier** | Pointer to **string** | MOID of the account which a user can select after authentication. | [optional] [readonly] 
 **AccountName** | Pointer to **string** | Name of the account which a user can select after authentication. | [optional] [readonly] 
+**AccountPermissionTags** | Pointer to [**[]IamAccountTags**](IamAccountTags.md) |  | [optional] 
 **AccountStatus** | Pointer to **string** | Status of the account. Account remains inactive until a device is claimed to the account. | [optional] [readonly] 
+**HomeRegion** | Pointer to **string** | Region where account belongs. | [optional] [readonly] 
 **Permissions** | Pointer to [**[]IamPermissionReference**](IamPermissionReference.md) |  | [optional] 
 
 ## Methods
@@ -120,6 +122,41 @@ SetAccountName sets AccountName field to given value.
 
 HasAccountName returns a boolean if a field has been set.
 
+### GetAccountPermissionTags
+
+`func (o *IamAccountPermissions) GetAccountPermissionTags() []IamAccountTags`
+
+GetAccountPermissionTags returns the AccountPermissionTags field if non-nil, zero value otherwise.
+
+### GetAccountPermissionTagsOk
+
+`func (o *IamAccountPermissions) GetAccountPermissionTagsOk() (*[]IamAccountTags, bool)`
+
+GetAccountPermissionTagsOk returns a tuple with the AccountPermissionTags field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccountPermissionTags
+
+`func (o *IamAccountPermissions) SetAccountPermissionTags(v []IamAccountTags)`
+
+SetAccountPermissionTags sets AccountPermissionTags field to given value.
+
+### HasAccountPermissionTags
+
+`func (o *IamAccountPermissions) HasAccountPermissionTags() bool`
+
+HasAccountPermissionTags returns a boolean if a field has been set.
+
+### SetAccountPermissionTagsNil
+
+`func (o *IamAccountPermissions) SetAccountPermissionTagsNil(b bool)`
+
+ SetAccountPermissionTagsNil sets the value for AccountPermissionTags to be an explicit nil
+
+### UnsetAccountPermissionTags
+`func (o *IamAccountPermissions) UnsetAccountPermissionTags()`
+
+UnsetAccountPermissionTags ensures that no value is present for AccountPermissionTags, not even an explicit nil
 ### GetAccountStatus
 
 `func (o *IamAccountPermissions) GetAccountStatus() string`
@@ -144,6 +181,31 @@ SetAccountStatus sets AccountStatus field to given value.
 `func (o *IamAccountPermissions) HasAccountStatus() bool`
 
 HasAccountStatus returns a boolean if a field has been set.
+
+### GetHomeRegion
+
+`func (o *IamAccountPermissions) GetHomeRegion() string`
+
+GetHomeRegion returns the HomeRegion field if non-nil, zero value otherwise.
+
+### GetHomeRegionOk
+
+`func (o *IamAccountPermissions) GetHomeRegionOk() (*string, bool)`
+
+GetHomeRegionOk returns a tuple with the HomeRegion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHomeRegion
+
+`func (o *IamAccountPermissions) SetHomeRegion(v string)`
+
+SetHomeRegion sets HomeRegion field to given value.
+
+### HasHomeRegion
+
+`func (o *IamAccountPermissions) HasHomeRegion() bool`
+
+HasHomeRegion returns a boolean if a field has been set.
 
 ### GetPermissions
 

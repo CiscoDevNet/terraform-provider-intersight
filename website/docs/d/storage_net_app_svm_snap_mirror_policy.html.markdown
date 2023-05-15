@@ -23,6 +23,7 @@ The following arguments can be used to get data of already created objects in In
 * `name`:(string) Name of the NetApp SnapMirror policy. 
 * `scope`:(string) Identifies whether the SnapMirror policy is owned by the storage virtual machine or the cluster. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
+* `svm_name`:(string) The storage virtual machine name for the policy. 
 * `sync_type`:(string) SnapMirror policy sync_type is either sync, strict_sync, or automated_failover. Property is applicable only to the policies of type \ sync\ . 
 * `transfer_schedule_name`:(string) Name of the schedule used to update asynchronous relationships. 
 * `transfer_schedule_uuid`:(string) Uuid of the schedule used to update asynchronous relationships. 

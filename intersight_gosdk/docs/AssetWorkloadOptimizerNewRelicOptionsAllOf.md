@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "asset.WorkloadOptimizerNewRelicOptions"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "asset.WorkloadOptimizerNewRelicOptions"]
 **AccountId** | Pointer to **string** | Your NewRelic account id. | [optional] 
+**CollectVmMetrics** | Pointer to **bool** | Overwrite Hypervisor or Cloud Provider Virtual Machine metrics with data from the target. | [optional] 
 **Region** | Pointer to **string** | The region associated with the NewRelic account. * &#x60;US&#x60; - The United States (US) region. * &#x60;EU&#x60; - The European Union (EU) region. | [optional] [default to "US"]
 
 ## Methods
@@ -92,6 +93,31 @@ SetAccountId sets AccountId field to given value.
 `func (o *AssetWorkloadOptimizerNewRelicOptionsAllOf) HasAccountId() bool`
 
 HasAccountId returns a boolean if a field has been set.
+
+### GetCollectVmMetrics
+
+`func (o *AssetWorkloadOptimizerNewRelicOptionsAllOf) GetCollectVmMetrics() bool`
+
+GetCollectVmMetrics returns the CollectVmMetrics field if non-nil, zero value otherwise.
+
+### GetCollectVmMetricsOk
+
+`func (o *AssetWorkloadOptimizerNewRelicOptionsAllOf) GetCollectVmMetricsOk() (*bool, bool)`
+
+GetCollectVmMetricsOk returns a tuple with the CollectVmMetrics field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCollectVmMetrics
+
+`func (o *AssetWorkloadOptimizerNewRelicOptionsAllOf) SetCollectVmMetrics(v bool)`
+
+SetCollectVmMetrics sets CollectVmMetrics field to given value.
+
+### HasCollectVmMetrics
+
+`func (o *AssetWorkloadOptimizerNewRelicOptionsAllOf) HasCollectVmMetrics() bool`
+
+HasCollectVmMetrics returns a boolean if a field has been set.
 
 ### GetRegion
 

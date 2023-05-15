@@ -175,6 +175,11 @@ func getStorageBatteryBackupUnitSchema() map[string]*schema.Schema {
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
+		"is_upgraded": {
+			Description: "This field indicates the compute status of the catalog values for the associated component or hardware.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"is_voltage_low": {
 			Description: "This indicates the voltage is Low for the battery backup unit of the storage controller.",
 			Type:        schema.TypeBool,
@@ -211,7 +216,7 @@ func getStorageBatteryBackupUnitSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"model": {
-			Description: "This field identifies the model of the given component.",
+			Description: "This field displays the model number of the associated component or hardware.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -315,7 +320,7 @@ func getStorageBatteryBackupUnitSchema() map[string]*schema.Schema {
 			},
 		},
 		"presence": {
-			Description: "This field identifies the presence (equipped) or absence of the given component.",
+			Description: "This field indicates the presence (equipped) or absence (absent) of the associated component or hardware.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -395,7 +400,7 @@ func getStorageBatteryBackupUnitSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"revision": {
-			Description: "This field identifies the revision of the given component.",
+			Description: "This field displays the revised version of the associated component or hardware (if any).",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -405,7 +410,7 @@ func getStorageBatteryBackupUnitSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"serial": {
-			Description: "This field identifies the serial of the given component.",
+			Description: "This field displays the serial number of the associated component or hardware.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -488,7 +493,7 @@ func getStorageBatteryBackupUnitSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"vendor": {
-			Description: "This field identifies the vendor of the given component.",
+			Description: "This field displays the vendor information of the associated component or hardware.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -541,6 +546,11 @@ func getStorageBatteryBackupUnitSchema() map[string]*schema.Schema {
 								},
 							},
 						},
+					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -802,6 +812,11 @@ func dataSourceStorageBatteryBackupUnitRead(c context.Context, d *schema.Resourc
 	if v, ok := d.GetOkExists("is_temperature_high"); ok {
 		x := (v.(bool))
 		o.SetIsTemperatureHigh(x)
+	}
+
+	if v, ok := d.GetOkExists("is_upgraded"); ok {
+		x := (v.(bool))
+		o.SetIsUpgraded(x)
 	}
 
 	if v, ok := d.GetOkExists("is_voltage_low"); ok {
@@ -1312,6 +1327,7 @@ func dataSourceStorageBatteryBackupUnitRead(c context.Context, d *schema.Resourc
 				temp["is_learn_cycle_requested"] = (s.GetIsLearnCycleRequested())
 				temp["is_learn_cycle_transparent"] = (s.GetIsLearnCycleTransparent())
 				temp["is_temperature_high"] = (s.GetIsTemperatureHigh())
+				temp["is_upgraded"] = (s.GetIsUpgraded())
 				temp["is_voltage_low"] = (s.GetIsVoltageLow())
 				temp["learn_cycle_progress_end_time_stamp"] = (s.GetLearnCycleProgressEndTimeStamp())
 				temp["learn_cycle_progress_start_time_stamp"] = (s.GetLearnCycleProgressStartTimeStamp())

@@ -6,8 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "compute.StorageControllerOperation"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "compute.StorageControllerOperation"]
-**AdminAction** | Pointer to **string** | Administrative actions that can be performed on the Storage Controller. * &#x60;None&#x60; - No action on the selected Storage Controller. * &#x60;Import&#x60; - Import Foreign config action on the selected Storage Controller. * &#x60;Clear&#x60; - Clear Foreign config action on the selected Storage Controller. * &#x60;ClearConfig&#x60; - Clear Config action on the selected Storage Controller. | [optional] [default to "None"]
+**AdminAction** | Pointer to **string** | Administrative actions that can be performed on the Storage Controller. * &#x60;None&#x60; - No action on the selected Storage Controller. * &#x60;Import&#x60; - Import Foreign config action on the selected Storage Controller. * &#x60;Clear&#x60; - Clear Foreign config action on the selected Storage Controller. * &#x60;ClearConfig&#x60; - Clear Config action on the selected Storage Controller. * &#x60;ModifySecurity&#x60; - Modify Security on the selected Storage Controller. * &#x60;DisableSecurity&#x60; - Disable Security on the selected Storage Controller. * &#x60;UnlockDrives&#x60; - Set Unlock action state on the selected Storage Controller. | [optional] [default to "None"]
 **ControllerId** | Pointer to **string** | Storage Controller Id of the server. | [optional] 
+**EncryptionKey** | Pointer to **string** | EncryptionKey of the Storage Controller. | [optional] 
+**RemoteMode** | Pointer to **bool** | RemoteMode on the Storage Controller. | [optional] 
 
 ## Methods
 
@@ -117,6 +119,56 @@ SetControllerId sets ControllerId field to given value.
 `func (o *ComputeStorageControllerOperationAllOf) HasControllerId() bool`
 
 HasControllerId returns a boolean if a field has been set.
+
+### GetEncryptionKey
+
+`func (o *ComputeStorageControllerOperationAllOf) GetEncryptionKey() string`
+
+GetEncryptionKey returns the EncryptionKey field if non-nil, zero value otherwise.
+
+### GetEncryptionKeyOk
+
+`func (o *ComputeStorageControllerOperationAllOf) GetEncryptionKeyOk() (*string, bool)`
+
+GetEncryptionKeyOk returns a tuple with the EncryptionKey field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEncryptionKey
+
+`func (o *ComputeStorageControllerOperationAllOf) SetEncryptionKey(v string)`
+
+SetEncryptionKey sets EncryptionKey field to given value.
+
+### HasEncryptionKey
+
+`func (o *ComputeStorageControllerOperationAllOf) HasEncryptionKey() bool`
+
+HasEncryptionKey returns a boolean if a field has been set.
+
+### GetRemoteMode
+
+`func (o *ComputeStorageControllerOperationAllOf) GetRemoteMode() bool`
+
+GetRemoteMode returns the RemoteMode field if non-nil, zero value otherwise.
+
+### GetRemoteModeOk
+
+`func (o *ComputeStorageControllerOperationAllOf) GetRemoteModeOk() (*bool, bool)`
+
+GetRemoteModeOk returns a tuple with the RemoteMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRemoteMode
+
+`func (o *ComputeStorageControllerOperationAllOf) SetRemoteMode(v bool)`
+
+SetRemoteMode sets RemoteMode field to given value.
+
+### HasRemoteMode
+
+`func (o *ComputeStorageControllerOperationAllOf) HasRemoteMode() bool`
+
+HasRemoteMode returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

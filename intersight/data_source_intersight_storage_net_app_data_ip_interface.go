@@ -169,6 +169,16 @@ func getStorageNetAppDataIpInterfaceSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"interface_is_home": {
+			Description: "Reports whether the IP interface is home or has failed over to its HA peer.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"interface_state": {
+			Description: "The state of the IP interface.\n* `Down` - The state is set to down if the interface is not enabled.\n* `Up` - The state is set to up if the interface is enabled.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"ip_address": {
 			Description: "The IP address of interface.",
 			Type:        schema.TypeString,
@@ -353,6 +363,11 @@ func getStorageNetAppDataIpInterfaceSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"svm_name": {
+			Description: "The storage virtual machine name for the interface.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -465,6 +480,11 @@ func getStorageNetAppDataIpInterfaceSchema() map[string]*schema.Schema {
 								},
 							},
 						},
+					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -723,6 +743,16 @@ func dataSourceStorageNetAppDataIpInterfaceRead(c context.Context, d *schema.Res
 		o.SetHomePort(x)
 	}
 
+	if v, ok := d.GetOk("interface_is_home"); ok {
+		x := (v.(string))
+		o.SetInterfaceIsHome(x)
+	}
+
+	if v, ok := d.GetOk("interface_state"); ok {
+		x := (v.(string))
+		o.SetInterfaceState(x)
+	}
+
 	if v, ok := d.GetOk("ip_address"); ok {
 		x := (v.(string))
 		o.SetIpAddress(x)
@@ -941,6 +971,11 @@ func dataSourceStorageNetAppDataIpInterfaceRead(c context.Context, d *schema.Res
 		o.SetState(x)
 	}
 
+	if v, ok := d.GetOk("svm_name"); ok {
+		x := (v.(string))
+		o.SetSvmName(x)
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -1148,6 +1183,8 @@ func dataSourceStorageNetAppDataIpInterfaceRead(c context.Context, d *schema.Res
 				temp["events"] = flattenListStorageNetAppDataIpInterfaceEventRelationship(s.GetEvents(), d)
 				temp["home_node"] = (s.GetHomeNode())
 				temp["home_port"] = (s.GetHomePort())
+				temp["interface_is_home"] = (s.GetInterfaceIsHome())
+				temp["interface_state"] = (s.GetInterfaceState())
 				temp["ip_address"] = (s.GetIpAddress())
 				temp["ip_family"] = (s.GetIpFamily())
 				temp["ipspace"] = (s.GetIpspace())
@@ -1171,6 +1208,7 @@ func dataSourceStorageNetAppDataIpInterfaceRead(c context.Context, d *schema.Res
 				temp["services"] = (s.GetServices())
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["state"] = (s.GetState())
+				temp["svm_name"] = (s.GetSvmName())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 

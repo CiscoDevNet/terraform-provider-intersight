@@ -12,6 +12,8 @@ Name | Type | Description | Notes
 **Permission** | Pointer to **string** | Identifies the UNIX permissions for the qtree. | [optional] [readonly] 
 **QtreeId** | Pointer to **int64** | NetApp Qtree ID, unique within the qtree&#39;s volume. | [optional] [readonly] 
 **SecurityStyle** | Pointer to **string** | Identifies the security style for the qtree, it determines how access to the qtree is controlled. * &#x60;UNIX&#x60; - Security style for UNIX uid, gid and mode bits. * &#x60;NTFS&#x60; - Security style for CIFS ACLs. * &#x60;Mixed&#x60; - Security style for NFS and CIFS access. | [optional] [readonly] [default to "UNIX"]
+**SvmName** | Pointer to **string** | The storage virtual machine name for the qtree. | [optional] [readonly] 
+**VolumeName** | Pointer to **string** | The parent volume name for the qtree. | [optional] [readonly] 
 **VolumeUuid** | Pointer to **string** | NetApp Volume uuid, unique identifier for the NetApp volume. | [optional] [readonly] 
 **StorageContainer** | Pointer to [**StorageNetAppVolumeRelationship**](StorageNetAppVolumeRelationship.md) |  | [optional] 
 **Tenant** | Pointer to [**StorageNetAppStorageVmRelationship**](StorageNetAppStorageVmRelationship.md) |  | [optional] 
@@ -224,6 +226,56 @@ SetSecurityStyle sets SecurityStyle field to given value.
 `func (o *StorageNetAppQtree) HasSecurityStyle() bool`
 
 HasSecurityStyle returns a boolean if a field has been set.
+
+### GetSvmName
+
+`func (o *StorageNetAppQtree) GetSvmName() string`
+
+GetSvmName returns the SvmName field if non-nil, zero value otherwise.
+
+### GetSvmNameOk
+
+`func (o *StorageNetAppQtree) GetSvmNameOk() (*string, bool)`
+
+GetSvmNameOk returns a tuple with the SvmName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSvmName
+
+`func (o *StorageNetAppQtree) SetSvmName(v string)`
+
+SetSvmName sets SvmName field to given value.
+
+### HasSvmName
+
+`func (o *StorageNetAppQtree) HasSvmName() bool`
+
+HasSvmName returns a boolean if a field has been set.
+
+### GetVolumeName
+
+`func (o *StorageNetAppQtree) GetVolumeName() string`
+
+GetVolumeName returns the VolumeName field if non-nil, zero value otherwise.
+
+### GetVolumeNameOk
+
+`func (o *StorageNetAppQtree) GetVolumeNameOk() (*string, bool)`
+
+GetVolumeNameOk returns a tuple with the VolumeName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVolumeName
+
+`func (o *StorageNetAppQtree) SetVolumeName(v string)`
+
+SetVolumeName sets VolumeName field to given value.
+
+### HasVolumeName
+
+`func (o *StorageNetAppQtree) HasVolumeName() bool`
+
+HasVolumeName returns a boolean if a field has been set.
 
 ### GetVolumeUuid
 

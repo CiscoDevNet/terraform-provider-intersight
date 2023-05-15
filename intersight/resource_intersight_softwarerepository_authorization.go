@@ -145,6 +145,17 @@ func resourceSoftwarerepositoryAuthorization() *schema.Resource {
 					}
 					return
 				}},
+			"is_asdv4_alarm_dismissed": {
+				Description: "The state of the alarm dismissal for the 'IsAsdDialogDismissed' alarm.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"is_password_set": {
 				Description: "Indicates whether the value of the 'password' property has been set.",
 				Type:        schema.TypeBool,
@@ -380,6 +391,17 @@ func resourceSoftwarerepositoryAuthorization() *schema.Resource {
 								},
 							},
 						},
+						"marked_for_deletion": {
+							Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
@@ -601,6 +623,10 @@ func resourceSoftwarerepositoryAuthorizationRead(c context.Context, d *schema.Re
 
 	if err := d.Set("domain_group_moid", (s.GetDomainGroupMoid())); err != nil {
 		return diag.Errorf("error occurred while setting property DomainGroupMoid in SoftwarerepositoryAuthorization object: %s", err.Error())
+	}
+
+	if err := d.Set("is_asdv4_alarm_dismissed", (s.GetIsAsdv4AlarmDismissed())); err != nil {
+		return diag.Errorf("error occurred while setting property IsAsdv4AlarmDismissed in SoftwarerepositoryAuthorization object: %s", err.Error())
 	}
 
 	if err := d.Set("is_password_set", (s.GetIsPasswordSet())); err != nil {

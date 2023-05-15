@@ -21,20 +21,21 @@ The following arguments can be used to get data of already created objects in In
 * `discovery`:(string) This field identifies the discovery state of SIOM. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
+* `is_upgraded`:(bool) This field indicates the compute status of the catalog values for the associated component or hardware. 
 * `mac_of_shared_iom_aside`:(string) This field identifies the MAC of IOM-A side. 
 * `mac_of_shared_iom_bside`:(string) This field identifies the MAC of IOM-B side. 
 * `mod_time`:(string) The time when this managed object was last modified. 
-* `model`:(string) This field identifies the model of the given component. 
+* `model`:(string) This field displays the model number of the associated component or hardware. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `oper_state`:(string) This field identifies the SIOM operational state. 
 * `part_number`:(string) This field identifies the Part Number for this SIOM Unit. 
-* `presence`:(string) This field identifies the presence (equipped) or absence of the given component. 
+* `presence`:(string) This field indicates the presence (equipped) or absence (absent) of the associated component or hardware. 
 * `reachability`:(string) This field identifies the reachability to FI-A and B side. 
-* `revision`:(string) This field identifies the revision of the given component. 
+* `revision`:(string) This field displays the revised version of the associated component or hardware (if any). 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
-* `serial`:(string) This field identifies the serial of the given component. 
+* `serial`:(string) This field displays the serial number of the associated component or hardware. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `usr_lbl`:(string) User label configured for the SIOM. 
-* `vendor`:(string) This field identifies the vendor of the given component. 
+* `vendor`:(string) This field displays the vendor information of the associated component or hardware. 
 * `vid`:(string) This field identifies the vendor id for this SIOM Unit. 
  

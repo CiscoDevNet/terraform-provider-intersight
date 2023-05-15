@@ -110,6 +110,11 @@ func getSoftwarerepositoryAuthorizationSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"is_asdv4_alarm_dismissed": {
+			Description: "The state of the alarm dismissal for the 'IsAsdDialogDismissed' alarm.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"is_password_set": {
 			Description: "Indicates whether the value of the 'password' property has been set.",
 			Type:        schema.TypeBool,
@@ -296,6 +301,11 @@ func getSoftwarerepositoryAuthorizationSchema() map[string]*schema.Schema {
 								},
 							},
 						},
+					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -487,6 +497,11 @@ func dataSourceSoftwarerepositoryAuthorizationRead(c context.Context, d *schema.
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
+	}
+
+	if v, ok := d.GetOkExists("is_asdv4_alarm_dismissed"); ok {
+		x := (v.(bool))
+		o.SetIsAsdv4AlarmDismissed(x)
 	}
 
 	if v, ok := d.GetOkExists("is_password_set"); ok {
@@ -775,6 +790,7 @@ func dataSourceSoftwarerepositoryAuthorizationRead(c context.Context, d *schema.
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["is_asdv4_alarm_dismissed"] = (s.GetIsAsdv4AlarmDismissed())
 				temp["is_password_set"] = (s.GetIsPasswordSet())
 
 				temp["mod_time"] = (s.GetModTime()).String()

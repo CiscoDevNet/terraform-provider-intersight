@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **DiskShelfModel** | Pointer to **string** | NetApp base disk shelf model. | [optional] [readonly] 
 **DiskShelfName** | Pointer to **string** | NetApp base disk shelf name. | [optional] [readonly] 
 **DiskType** | Pointer to **string** | The type of the NetApp disk. * &#x60;Unknown&#x60; - Default unknown disk type. * &#x60;SSDNVM&#x60; - Solid state disk with Non-Volatile Memory Express protocol enabled. * &#x60;ATA&#x60; - Advanced Technology Attachment is a type of disk drive that integrates the drive controller directly on the drive itself. * &#x60;FCAL&#x60; - For the FC-AL disk connection type, disk shelves are connected to the controller in a loop. * &#x60;BSAS&#x60; - Bridged SAS-SATA disks with added hardware to enable them to be plugged into a SAS-connected storage shelf. * &#x60;FSAS&#x60; - Near Line SAS. NL-SAS drives are enterprise SATA drives with a SAS interface, head, media, and rotational speed of traditional enterprise-class SATA drives with the fully capable SAS interface typical for classic SAS drives. * &#x60;LUN&#x60; - Logical Unit Number refers to a logical disk. * &#x60;SAS&#x60; - Storage disk with serial attached SCSI. * &#x60;MSATA&#x60; - SATA disk in multi-disk carrier storage shelf. * &#x60;SSD&#x60; - Storage disk with Solid state disk. * &#x60;VMDISK&#x60; - Virtual machine Data Disk. | [optional] [readonly] [default to "Unknown"]
+**NodeName** | Pointer to **string** | The node name for the disk. | [optional] [readonly] 
 **State** | Pointer to **string** | Current state of the NetApp disk. * &#x60;Present&#x60; - Storage disk state type is present. * &#x60;Copy&#x60; - Storage disk state type is copy. * &#x60;Broken&#x60; - Storage disk state type is broken. * &#x60;Maintenance&#x60; - Storage disk state type is maintenance. * &#x60;Partner&#x60; - Storage disk state type is partner. * &#x60;Pending&#x60; - Storage disk state type is pending. * &#x60;Reconstructing&#x60; - Storage disk state type is reconstructing. * &#x60;Removed&#x60; - Storage disk state type is removed. * &#x60;Spare&#x60; - Storage disk state type is spare. * &#x60;Unfail&#x60; - Storage disk state type is unfail. * &#x60;Zeroing&#x60; - Storage disk state type is zeroing. | [optional] [readonly] [default to "Present"]
 **Uuid** | Pointer to **string** | Universally unique identifier of the NetApp Disk. | [optional] [readonly] 
 **Array** | Pointer to [**StorageNetAppClusterRelationship**](StorageNetAppClusterRelationship.md) |  | [optional] 
@@ -305,6 +306,31 @@ SetDiskType sets DiskType field to given value.
 `func (o *StorageNetAppBaseDisk) HasDiskType() bool`
 
 HasDiskType returns a boolean if a field has been set.
+
+### GetNodeName
+
+`func (o *StorageNetAppBaseDisk) GetNodeName() string`
+
+GetNodeName returns the NodeName field if non-nil, zero value otherwise.
+
+### GetNodeNameOk
+
+`func (o *StorageNetAppBaseDisk) GetNodeNameOk() (*string, bool)`
+
+GetNodeNameOk returns a tuple with the NodeName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNodeName
+
+`func (o *StorageNetAppBaseDisk) SetNodeName(v string)`
+
+SetNodeName sets NodeName field to given value.
+
+### HasNodeName
+
+`func (o *StorageNetAppBaseDisk) HasNodeName() bool`
+
+HasNodeName returns a boolean if a field has been set.
 
 ### GetState
 

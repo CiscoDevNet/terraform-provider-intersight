@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-10371
+API version: 1.0.11-11765
 Contact: intersight@cisco.com
 */
 
@@ -26,8 +26,12 @@ type ComputeServerSettingAllOf struct {
 	// User configured power state of the server. * `Policy` - Power state is set to the default value in the policy. * `PowerOn` - Power state of the server is set to On. * `PowerOff` - Power state is the server set to Off. * `PowerCycle` - Power state the server is reset. * `HardReset` - Power state the server is hard reset. * `Shutdown` - Operating system on the server is shut down. * `Reboot` - Power state of IMC is rebooted.
 	AdminPowerState    *string                                      `json:"AdminPowerState,omitempty"`
 	CertificatesAction NullableCertificatemanagementCertificateBase `json:"CertificatesAction,omitempty"`
+	// Clear system event log on a server. * `Ready` - Clear system event log operation is allowed on the server in this state. * `Clear` - Trigger a clear system event log operation on a server.
+	ClearSel *string `json:"ClearSel,omitempty"`
 	// The allowed actions on the CMOS Reset. * `Ready` - CMOS Reset operation is allowed to be done on the server in this state. * `Pending` - The identifier to state that the previous CMOS Reset operation on this server has not completed due to a pending power cycle. CMOS Reset operation cannot be done on the server when in this state. * `Reset` - The value that the UI/API needs to provide to trigger a CMOS Reset operation on a server.
 	CmosReset *string `json:"CmosReset,omitempty"`
+	// Collect system event log from a server. * `Ready` - Collect system event log operation is allowed on the server in this state. * `Collect` - Trigger a collect system event log operation on a server.
+	CollectSel *string `json:"CollectSel,omitempty"`
 	// The configured state of these settings in the target server. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the settings are applied successfully in the target server. Applying - This state denotes that the settings are being applied in the target server. Failed - This state denotes that the settings could not be applied in the target server. * `Applied` - User configured settings are in applied state. * `Applying` - User settings are being applied on the target server. * `Scheduled` - User configured settings are scheduled to be applied. * `Failed` - User configured settings could not be applied.
 	ConfigState *string `json:"ConfigState,omitempty"`
 	// The allowed actions on the Front Panel Lock. * `Unlock` - Front Panel of the server is set to Unlocked state. * `Lock` - Front Panel of the server is set to Locked state.
@@ -69,8 +73,12 @@ func NewComputeServerSettingAllOf(classId string, objectType string) *ComputeSer
 	this.AdminLocatorLedState = &adminLocatorLedState
 	var adminPowerState string = "Policy"
 	this.AdminPowerState = &adminPowerState
+	var clearSel string = "Ready"
+	this.ClearSel = &clearSel
 	var cmosReset string = "Ready"
 	this.CmosReset = &cmosReset
+	var collectSel string = "Ready"
+	this.CollectSel = &collectSel
 	var frontPanelLockState string = "Unlock"
 	this.FrontPanelLockState = &frontPanelLockState
 	var kvmReset string = "Ready"
@@ -95,8 +103,12 @@ func NewComputeServerSettingAllOfWithDefaults() *ComputeServerSettingAllOf {
 	this.AdminLocatorLedState = &adminLocatorLedState
 	var adminPowerState string = "Policy"
 	this.AdminPowerState = &adminPowerState
+	var clearSel string = "Ready"
+	this.ClearSel = &clearSel
 	var cmosReset string = "Ready"
 	this.CmosReset = &cmosReset
+	var collectSel string = "Ready"
+	this.CollectSel = &collectSel
 	var frontPanelLockState string = "Unlock"
 	this.FrontPanelLockState = &frontPanelLockState
 	var kvmReset string = "Ready"
@@ -263,6 +275,38 @@ func (o *ComputeServerSettingAllOf) UnsetCertificatesAction() {
 	o.CertificatesAction.Unset()
 }
 
+// GetClearSel returns the ClearSel field value if set, zero value otherwise.
+func (o *ComputeServerSettingAllOf) GetClearSel() string {
+	if o == nil || o.ClearSel == nil {
+		var ret string
+		return ret
+	}
+	return *o.ClearSel
+}
+
+// GetClearSelOk returns a tuple with the ClearSel field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ComputeServerSettingAllOf) GetClearSelOk() (*string, bool) {
+	if o == nil || o.ClearSel == nil {
+		return nil, false
+	}
+	return o.ClearSel, true
+}
+
+// HasClearSel returns a boolean if a field has been set.
+func (o *ComputeServerSettingAllOf) HasClearSel() bool {
+	if o != nil && o.ClearSel != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetClearSel gets a reference to the given string and assigns it to the ClearSel field.
+func (o *ComputeServerSettingAllOf) SetClearSel(v string) {
+	o.ClearSel = &v
+}
+
 // GetCmosReset returns the CmosReset field value if set, zero value otherwise.
 func (o *ComputeServerSettingAllOf) GetCmosReset() string {
 	if o == nil || o.CmosReset == nil {
@@ -293,6 +337,38 @@ func (o *ComputeServerSettingAllOf) HasCmosReset() bool {
 // SetCmosReset gets a reference to the given string and assigns it to the CmosReset field.
 func (o *ComputeServerSettingAllOf) SetCmosReset(v string) {
 	o.CmosReset = &v
+}
+
+// GetCollectSel returns the CollectSel field value if set, zero value otherwise.
+func (o *ComputeServerSettingAllOf) GetCollectSel() string {
+	if o == nil || o.CollectSel == nil {
+		var ret string
+		return ret
+	}
+	return *o.CollectSel
+}
+
+// GetCollectSelOk returns a tuple with the CollectSel field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ComputeServerSettingAllOf) GetCollectSelOk() (*string, bool) {
+	if o == nil || o.CollectSel == nil {
+		return nil, false
+	}
+	return o.CollectSel, true
+}
+
+// HasCollectSel returns a boolean if a field has been set.
+func (o *ComputeServerSettingAllOf) HasCollectSel() bool {
+	if o != nil && o.CollectSel != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCollectSel gets a reference to the given string and assigns it to the CollectSel field.
+func (o *ComputeServerSettingAllOf) SetCollectSel(v string) {
+	o.CollectSel = &v
 }
 
 // GetConfigState returns the ConfigState field value if set, zero value otherwise.
@@ -912,8 +988,14 @@ func (o ComputeServerSettingAllOf) MarshalJSON() ([]byte, error) {
 	if o.CertificatesAction.IsSet() {
 		toSerialize["CertificatesAction"] = o.CertificatesAction.Get()
 	}
+	if o.ClearSel != nil {
+		toSerialize["ClearSel"] = o.ClearSel
+	}
 	if o.CmosReset != nil {
 		toSerialize["CmosReset"] = o.CmosReset
+	}
+	if o.CollectSel != nil {
+		toSerialize["CollectSel"] = o.CollectSel
 	}
 	if o.ConfigState != nil {
 		toSerialize["ConfigState"] = o.ConfigState
@@ -989,7 +1071,9 @@ func (o *ComputeServerSettingAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "AdminLocatorLedState")
 		delete(additionalProperties, "AdminPowerState")
 		delete(additionalProperties, "CertificatesAction")
+		delete(additionalProperties, "ClearSel")
 		delete(additionalProperties, "CmosReset")
+		delete(additionalProperties, "CollectSel")
 		delete(additionalProperties, "ConfigState")
 		delete(additionalProperties, "FrontPanelLockState")
 		delete(additionalProperties, "KvmReset")

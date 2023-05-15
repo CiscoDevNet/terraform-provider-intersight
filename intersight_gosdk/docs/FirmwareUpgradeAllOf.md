@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "firmware.Upgrade"]
 **ExcludeComponentList** | Pointer to **[]string** |  | [optional] 
 **ExcludeComponentPidList** | Pointer to [**NullableFirmwareExcludeComponentPidListType**](FirmwareExcludeComponentPidListType.md) |  | [optional] 
+**UpgradeTriggerMethod** | Pointer to **string** | The source that triggered the upgrade. Either via profile or traditional way. * &#x60;none&#x60; - Upgrade is invoked within the service. * &#x60;profileTrigger&#x60; - Upgrade is invoked from a profile deployment. | [optional] [default to "none"]
 **Device** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 **Server** | Pointer to [**ComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
 
@@ -140,6 +141,31 @@ HasExcludeComponentPidList returns a boolean if a field has been set.
 `func (o *FirmwareUpgradeAllOf) UnsetExcludeComponentPidList()`
 
 UnsetExcludeComponentPidList ensures that no value is present for ExcludeComponentPidList, not even an explicit nil
+### GetUpgradeTriggerMethod
+
+`func (o *FirmwareUpgradeAllOf) GetUpgradeTriggerMethod() string`
+
+GetUpgradeTriggerMethod returns the UpgradeTriggerMethod field if non-nil, zero value otherwise.
+
+### GetUpgradeTriggerMethodOk
+
+`func (o *FirmwareUpgradeAllOf) GetUpgradeTriggerMethodOk() (*string, bool)`
+
+GetUpgradeTriggerMethodOk returns a tuple with the UpgradeTriggerMethod field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUpgradeTriggerMethod
+
+`func (o *FirmwareUpgradeAllOf) SetUpgradeTriggerMethod(v string)`
+
+SetUpgradeTriggerMethod sets UpgradeTriggerMethod field to given value.
+
+### HasUpgradeTriggerMethod
+
+`func (o *FirmwareUpgradeAllOf) HasUpgradeTriggerMethod() bool`
+
+HasUpgradeTriggerMethod returns a boolean if a field has been set.
+
 ### GetDevice
 
 `func (o *FirmwareUpgradeAllOf) GetDevice() AssetDeviceRegistrationRelationship`

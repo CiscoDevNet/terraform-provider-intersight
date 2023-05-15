@@ -86,7 +86,7 @@ func getOpenapiApiMethodMetaSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"method": {
-			Description: "The method type for the given API.\n* `GET` - Method type which indicates it is a GET API call\n* `POST` - Method type which indicates it is a POST API call\n* `PUT` - Method type which indicates it is a PUT API call\n* `PATCH` - Method type which indicates it is a PATCH API call\n* `DELETE` - Method type which indicates it is a DELETE API call",
+			Description: "The method type for the given API.\n* `GET` - Method type which indicates it is a GET API call.\n* `POST` - Method type which indicates it is a POST API call.\n* `PUT` - Method type which indicates it is a PUT API call.\n* `PATCH` - Method type which indicates it is a PATCH API call.\n* `DELETE` - Method type which indicates it is a DELETE API call.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -301,6 +301,11 @@ func getOpenapiApiMethodMetaSchema() map[string]*schema.Schema {
 								},
 							},
 						},
+					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
