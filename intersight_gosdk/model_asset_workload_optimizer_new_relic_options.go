@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-10371
+API version: 1.0.11-11765
 Contact: intersight@cisco.com
 */
 
@@ -26,6 +26,8 @@ type AssetWorkloadOptimizerNewRelicOptions struct {
 	ObjectType string `json:"ObjectType"`
 	// Your NewRelic account id.
 	AccountId *string `json:"AccountId,omitempty"`
+	// Overwrite Hypervisor or Cloud Provider Virtual Machine metrics with data from the target.
+	CollectVmMetrics *bool `json:"CollectVmMetrics,omitempty"`
 	// The region associated with the NewRelic account. * `US` - The United States (US) region. * `EU` - The European Union (EU) region.
 	Region               *string `json:"Region,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -140,6 +142,38 @@ func (o *AssetWorkloadOptimizerNewRelicOptions) SetAccountId(v string) {
 	o.AccountId = &v
 }
 
+// GetCollectVmMetrics returns the CollectVmMetrics field value if set, zero value otherwise.
+func (o *AssetWorkloadOptimizerNewRelicOptions) GetCollectVmMetrics() bool {
+	if o == nil || o.CollectVmMetrics == nil {
+		var ret bool
+		return ret
+	}
+	return *o.CollectVmMetrics
+}
+
+// GetCollectVmMetricsOk returns a tuple with the CollectVmMetrics field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssetWorkloadOptimizerNewRelicOptions) GetCollectVmMetricsOk() (*bool, bool) {
+	if o == nil || o.CollectVmMetrics == nil {
+		return nil, false
+	}
+	return o.CollectVmMetrics, true
+}
+
+// HasCollectVmMetrics returns a boolean if a field has been set.
+func (o *AssetWorkloadOptimizerNewRelicOptions) HasCollectVmMetrics() bool {
+	if o != nil && o.CollectVmMetrics != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCollectVmMetrics gets a reference to the given bool and assigns it to the CollectVmMetrics field.
+func (o *AssetWorkloadOptimizerNewRelicOptions) SetCollectVmMetrics(v bool) {
+	o.CollectVmMetrics = &v
+}
+
 // GetRegion returns the Region field value if set, zero value otherwise.
 func (o *AssetWorkloadOptimizerNewRelicOptions) GetRegion() string {
 	if o == nil || o.Region == nil {
@@ -191,6 +225,9 @@ func (o AssetWorkloadOptimizerNewRelicOptions) MarshalJSON() ([]byte, error) {
 	if o.AccountId != nil {
 		toSerialize["AccountId"] = o.AccountId
 	}
+	if o.CollectVmMetrics != nil {
+		toSerialize["CollectVmMetrics"] = o.CollectVmMetrics
+	}
 	if o.Region != nil {
 		toSerialize["Region"] = o.Region
 	}
@@ -210,6 +247,8 @@ func (o *AssetWorkloadOptimizerNewRelicOptions) UnmarshalJSON(bytes []byte) (err
 		ObjectType string `json:"ObjectType"`
 		// Your NewRelic account id.
 		AccountId *string `json:"AccountId,omitempty"`
+		// Overwrite Hypervisor or Cloud Provider Virtual Machine metrics with data from the target.
+		CollectVmMetrics *bool `json:"CollectVmMetrics,omitempty"`
 		// The region associated with the NewRelic account. * `US` - The United States (US) region. * `EU` - The European Union (EU) region.
 		Region *string `json:"Region,omitempty"`
 	}
@@ -222,6 +261,7 @@ func (o *AssetWorkloadOptimizerNewRelicOptions) UnmarshalJSON(bytes []byte) (err
 		varAssetWorkloadOptimizerNewRelicOptions.ClassId = varAssetWorkloadOptimizerNewRelicOptionsWithoutEmbeddedStruct.ClassId
 		varAssetWorkloadOptimizerNewRelicOptions.ObjectType = varAssetWorkloadOptimizerNewRelicOptionsWithoutEmbeddedStruct.ObjectType
 		varAssetWorkloadOptimizerNewRelicOptions.AccountId = varAssetWorkloadOptimizerNewRelicOptionsWithoutEmbeddedStruct.AccountId
+		varAssetWorkloadOptimizerNewRelicOptions.CollectVmMetrics = varAssetWorkloadOptimizerNewRelicOptionsWithoutEmbeddedStruct.CollectVmMetrics
 		varAssetWorkloadOptimizerNewRelicOptions.Region = varAssetWorkloadOptimizerNewRelicOptionsWithoutEmbeddedStruct.Region
 		*o = AssetWorkloadOptimizerNewRelicOptions(varAssetWorkloadOptimizerNewRelicOptions)
 	} else {
@@ -243,6 +283,7 @@ func (o *AssetWorkloadOptimizerNewRelicOptions) UnmarshalJSON(bytes []byte) (err
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AccountId")
+		delete(additionalProperties, "CollectVmMetrics")
 		delete(additionalProperties, "Region")
 
 		// remove fields from embedded structs

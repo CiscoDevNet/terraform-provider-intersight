@@ -7,9 +7,11 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "policy.ConfigContext"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "policy.ConfigContext"]
 **ConfigState** | Pointer to **string** | Indicates a profile&#39;s configuration deploying state. Values -- Assigned, Not-assigned, Associated, Pending-changes, Out-of-sync, Validating, Configuring, Failed. | [optional] [readonly] 
+**ConfigStateSummary** | Pointer to **string** | Indicates a profile&#39;s configuration deploying state. Values -- Assigned, Not-assigned, Associated, InConsistent, Validating, Configuring, Failed, Activating, UnConfiguring. * &#x60;None&#x60; - The default state is none. * &#x60;Not-assigned&#x60; - Server is not assigned to the profile. * &#x60;Assigned&#x60; - Server is assigned to the profile and the configurations are not yet deployed. * &#x60;Preparing&#x60; - Preparing to deploy the configuration. * &#x60;Validating&#x60; - Profile validation in progress. * &#x60;Configuring&#x60; - Profile deploy operation is in progress. * &#x60;UnConfiguring&#x60; - Server is unassigned and config cleanup is in progress. * &#x60;Analyzing&#x60; - Profile changes are being analyzed. * &#x60;Activating&#x60; - Configuration is being activated at the endpoint. * &#x60;Inconsistent&#x60; - Profile is inconsistent with the endpoint configuration. * &#x60;Associated&#x60; - The profile configuration has been applied to the endpoint and no inconsistencies have been detected. * &#x60;Failed&#x60; - The last action on the profile has failed. * &#x60;Not-complete&#x60; - Config import operation on the profile is not complete. * &#x60;Waiting-for-resource&#x60; - Waiting for the resource to be allocated for the profile. | [optional] [readonly] [default to "None"]
 **ConfigType** | Pointer to **string** | The type of configuration running on the profile. Since profile deployments can configure multiple different settings, configType indicates which type of configuration is currently in progress. | [optional] [readonly] 
 **ControlAction** | Pointer to **string** | System action to trigger the appropriate workflow. Values -- No_op, ConfigChange, Deploy, Unbind. | [optional] 
 **ErrorState** | Pointer to **string** | Indicates a profile&#39;s error state. Values -- Validation-error (Static validation error), Pre-config-error (Runtime validation error), Config-error (Runtime configuration error). | [optional] 
+**InconsistencyReason** | Pointer to **[]string** |  | [optional] 
 **OperState** | Pointer to **string** | Combined state (configState, and operational state of the associated physical resource) to indicate the current state of the profile. Values -- n/a, Power-off, Pending-changes, Configuring, Ok, Failed. | [optional] [readonly] 
 
 ## Methods
@@ -96,6 +98,31 @@ SetConfigState sets ConfigState field to given value.
 
 HasConfigState returns a boolean if a field has been set.
 
+### GetConfigStateSummary
+
+`func (o *PolicyConfigContext) GetConfigStateSummary() string`
+
+GetConfigStateSummary returns the ConfigStateSummary field if non-nil, zero value otherwise.
+
+### GetConfigStateSummaryOk
+
+`func (o *PolicyConfigContext) GetConfigStateSummaryOk() (*string, bool)`
+
+GetConfigStateSummaryOk returns a tuple with the ConfigStateSummary field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConfigStateSummary
+
+`func (o *PolicyConfigContext) SetConfigStateSummary(v string)`
+
+SetConfigStateSummary sets ConfigStateSummary field to given value.
+
+### HasConfigStateSummary
+
+`func (o *PolicyConfigContext) HasConfigStateSummary() bool`
+
+HasConfigStateSummary returns a boolean if a field has been set.
+
 ### GetConfigType
 
 `func (o *PolicyConfigContext) GetConfigType() string`
@@ -171,6 +198,41 @@ SetErrorState sets ErrorState field to given value.
 
 HasErrorState returns a boolean if a field has been set.
 
+### GetInconsistencyReason
+
+`func (o *PolicyConfigContext) GetInconsistencyReason() []string`
+
+GetInconsistencyReason returns the InconsistencyReason field if non-nil, zero value otherwise.
+
+### GetInconsistencyReasonOk
+
+`func (o *PolicyConfigContext) GetInconsistencyReasonOk() (*[]string, bool)`
+
+GetInconsistencyReasonOk returns a tuple with the InconsistencyReason field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInconsistencyReason
+
+`func (o *PolicyConfigContext) SetInconsistencyReason(v []string)`
+
+SetInconsistencyReason sets InconsistencyReason field to given value.
+
+### HasInconsistencyReason
+
+`func (o *PolicyConfigContext) HasInconsistencyReason() bool`
+
+HasInconsistencyReason returns a boolean if a field has been set.
+
+### SetInconsistencyReasonNil
+
+`func (o *PolicyConfigContext) SetInconsistencyReasonNil(b bool)`
+
+ SetInconsistencyReasonNil sets the value for InconsistencyReason to be an explicit nil
+
+### UnsetInconsistencyReason
+`func (o *PolicyConfigContext) UnsetInconsistencyReason()`
+
+UnsetInconsistencyReason ensures that no value is present for InconsistencyReason, not even an explicit nil
 ### GetOperState
 
 `func (o *PolicyConfigContext) GetOperState() string`

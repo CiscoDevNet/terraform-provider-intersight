@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **PeerDn** | Pointer to **string** | Peer DN for network host port of fabric extender. | [optional] 
 **PortId** | Pointer to **int64** | Switch physical port identifier. | [optional] 
 **SlotId** | Pointer to **int64** | Switch expansion slot module identifier. | [optional] 
-**Speed** | Pointer to **string** | Network Port Speed of IO card or fabric extender. | [optional] [readonly] 
+**Speed** | Pointer to **string** | Network Port operational speed of IO card or fabric extender. | [optional] [readonly] 
 **SwitchId** | Pointer to **string** | Switch Identifier that is local to a cluster. | [optional] 
 **EquipmentIoCardBase** | Pointer to [**EquipmentIoCardBaseRelationship**](EquipmentIoCardBaseRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 

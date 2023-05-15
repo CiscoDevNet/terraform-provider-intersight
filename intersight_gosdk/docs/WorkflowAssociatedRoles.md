@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.AssociatedRoles"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.AssociatedRoles"]
 **Moid** | Pointer to **string** | Stores the identifier of the task definition for which the required roles are cached in the workflow definition. In the case of sub workflow tasks, this property stores the identifier of the workflow that is wrapped in the sub workflow task. | [optional] [readonly] 
+**RequiredPrivilegeNames** | Pointer to **[]string** |  | [optional] 
 **Roles** | Pointer to **[]string** |  | [optional] 
 **TaskNames** | Pointer to **[]string** |  | [optional] 
 **WorkflowRoles** | Pointer to [**[]WorkflowAssociatedRoles**](WorkflowAssociatedRoles.md) |  | [optional] 
@@ -95,6 +96,41 @@ SetMoid sets Moid field to given value.
 
 HasMoid returns a boolean if a field has been set.
 
+### GetRequiredPrivilegeNames
+
+`func (o *WorkflowAssociatedRoles) GetRequiredPrivilegeNames() []string`
+
+GetRequiredPrivilegeNames returns the RequiredPrivilegeNames field if non-nil, zero value otherwise.
+
+### GetRequiredPrivilegeNamesOk
+
+`func (o *WorkflowAssociatedRoles) GetRequiredPrivilegeNamesOk() (*[]string, bool)`
+
+GetRequiredPrivilegeNamesOk returns a tuple with the RequiredPrivilegeNames field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequiredPrivilegeNames
+
+`func (o *WorkflowAssociatedRoles) SetRequiredPrivilegeNames(v []string)`
+
+SetRequiredPrivilegeNames sets RequiredPrivilegeNames field to given value.
+
+### HasRequiredPrivilegeNames
+
+`func (o *WorkflowAssociatedRoles) HasRequiredPrivilegeNames() bool`
+
+HasRequiredPrivilegeNames returns a boolean if a field has been set.
+
+### SetRequiredPrivilegeNamesNil
+
+`func (o *WorkflowAssociatedRoles) SetRequiredPrivilegeNamesNil(b bool)`
+
+ SetRequiredPrivilegeNamesNil sets the value for RequiredPrivilegeNames to be an explicit nil
+
+### UnsetRequiredPrivilegeNames
+`func (o *WorkflowAssociatedRoles) UnsetRequiredPrivilegeNames()`
+
+UnsetRequiredPrivilegeNames ensures that no value is present for RequiredPrivilegeNames, not even an explicit nil
 ### GetRoles
 
 `func (o *WorkflowAssociatedRoles) GetRoles() []string`

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-10371
+API version: 1.0.11-11765
 Contact: intersight@cisco.com
 */
 
@@ -22,7 +22,8 @@ type WorkflowServiceItemDefinitionAllOf struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// Service item definition can declare that only one instance can be allowed within the customer account.
-	AllowMultipleServiceItemInstances *bool `json:"AllowMultipleServiceItemInstances,omitempty"`
+	AllowMultipleServiceItemInstances *bool                  `json:"AllowMultipleServiceItemInstances,omitempty"`
+	AttributeDefinition               []WorkflowBaseDataType `json:"AttributeDefinition,omitempty"`
 	// The Cisco Validated Design (CVD) Identifier that this service item provides.
 	CvdId *string `json:"CvdId,omitempty"`
 	// The flag to indicate that service item instance will be deleted after the completion of decommission action.
@@ -31,11 +32,19 @@ type WorkflowServiceItemDefinitionAllOf struct {
 	Description *string `json:"Description,omitempty"`
 	// A user friendly short name to identify the service item. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ) or an underscore (_).
 	Label *string `json:"Label,omitempty"`
-	// License entitlement required to run this service item. * `Base` - Base as a License type. It is default license type. * `Essential` - Essential as a License type. * `Standard` - Standard as a License type. * `Advantage` - Advantage as a License type. * `Premier` - Premier as a License type. * `IWO-Essential` - IWO-Essential as a License type. * `IWO-Advantage` - IWO-Advantage as a License type. * `IWO-Premier` - IWO-Premier as a License type. * `IKS-Advantage` - IKS-Advantage as a License type. * `INC-Premier-1GFixed` - Premier 1G Fixed license tier for Intersight Nexus Cloud. * `INC-Premier-10GFixed` - Premier 10G Fixed license tier for Intersight Nexus Cloud. * `INC-Premier-100GFixed` - Premier 100G Fixed license tier for Intersight Nexus Cloud. * `INC-Premier-Mod4Slot` - Premier Modular 4 slot license tier for Intersight Nexus Cloud. * `INC-Premier-Mod8Slot` - Premier Modular 8 slot license tier for Intersight Nexus Cloud. * `INC-Premier-D2OpsFixed` - Premier D2Ops fixed license tier for Intersight Nexus Cloud. * `INC-Premier-D2OpsMod` - Premier D2Ops modular license tier for Intersight Nexus Cloud. * `IntersightTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode Intersight tiers. * `IWOTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode IKS tiers. * `IKSTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode IWO tiers. * `INCTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode Nexus tiers.
+	// License entitlement required to run this service item. * `Base` - Base as a License type. It is default license type. * `Essential` - Essential as a License type. * `Standard` - Standard as a License type. * `Advantage` - Advantage as a License type. * `Premier` - Premier as a License type. * `IWO-Essential` - IWO-Essential as a License type. * `IWO-Advantage` - IWO-Advantage as a License type. * `IWO-Premier` - IWO-Premier as a License type. * `IKS-Advantage` - IKS-Advantage as a License type. * `INC-Premier-1GFixed` - Premier 1G Fixed license tier for Intersight Nexus Cloud. * `INC-Premier-10GFixed` - Premier 10G Fixed license tier for Intersight Nexus Cloud. * `INC-Premier-100GFixed` - Premier 100G Fixed license tier for Intersight Nexus Cloud. * `INC-Premier-Mod4Slot` - Premier Modular 4 slot license tier for Intersight Nexus Cloud. * `INC-Premier-Mod8Slot` - Premier Modular 8 slot license tier for Intersight Nexus Cloud. * `INC-Premier-D2OpsFixed` - Premier D2Ops fixed license tier for Intersight Nexus Cloud. * `INC-Premier-D2OpsMod` - Premier D2Ops modular license tier for Intersight Nexus Cloud. * `INC-Premier-CentralizedMod8Slot` - Premier modular license tier of switch type CentralizedMod8Slot for Intersight Nexus Cloud. * `INC-Premier-DistributedMod8Slot` - Premier modular license tier of switch type DistributedMod8Slot for Intersight Nexus Cloud. * `IntersightTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode Intersight tiers. * `IWOTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode IKS tiers. * `IKSTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode IWO tiers. * `INCTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode Nexus tiers.
 	LicenseEntitlement *string `json:"LicenseEntitlement,omitempty"`
 	// The name for this service item definition. You can have multiple versions of the service item with the same name. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:) or an underscore (_).
-	Name             *string                `json:"Name,omitempty"`
-	OutputDefinition []WorkflowBaseDataType `json:"OutputDefinition,omitempty"`
+	Name *string `json:"Name,omitempty"`
+	// Publish status of the service item. * `NotPublished` - A state of the service item or catalog item which is not yet published. * `Published` - A state denoting that the service item or catalog item is published.
+	PublishStatus *string `json:"PublishStatus,omitempty"`
+	// State of service item considering the state of underlying service item actions definitions. * `Okay` - Deployment and other post-deployment actions are in valid state. * `Critical` - Deployment action is not in valid state. * `Warning` - Deployment action is in valid state, and one or more post-deployment actions are not in valid state.
+	Status *string `json:"Status,omitempty"`
+	// The service item can be marked as deprecated, supported or beta, the support status indicates that. When a new service item is introduced, it can be marked beta to indicate this is experimental and later moved to Supported status. When Service item is deprecated, it cannot be instantiated and used for a Catalog Item design. * `Supported` - The definition is a supported version and there will be no changes to the mandatory inputs or outputs. * `Beta` - The definition is a Beta version and this version can under go changes until the version is marked supported. * `Deprecated` - The version of definition is deprecated and typically there will be a higher version of the same definition that has been added.
+	SupportStatus *string `json:"SupportStatus,omitempty"`
+	// The user identifier who created or updated the service item definition.
+	UserIdOrEmail         *string                               `json:"UserIdOrEmail,omitempty"`
+	ValidationInformation NullableWorkflowValidationInformation `json:"ValidationInformation,omitempty"`
 	// The version of the service item to support multiple versions.
 	Version *int64 `json:"Version,omitempty"`
 	// An array of relationships to workflowServiceItemActionDefinition resources.
@@ -58,6 +67,10 @@ func NewWorkflowServiceItemDefinitionAllOf(classId string, objectType string) *W
 	this.AllowMultipleServiceItemInstances = &allowMultipleServiceItemInstances
 	var deleteInstanceOnDecommission bool = false
 	this.DeleteInstanceOnDecommission = &deleteInstanceOnDecommission
+	var publishStatus string = "NotPublished"
+	this.PublishStatus = &publishStatus
+	var supportStatus string = "Supported"
+	this.SupportStatus = &supportStatus
 	var version int64 = 1
 	this.Version = &version
 	return &this
@@ -76,6 +89,10 @@ func NewWorkflowServiceItemDefinitionAllOfWithDefaults() *WorkflowServiceItemDef
 	this.AllowMultipleServiceItemInstances = &allowMultipleServiceItemInstances
 	var deleteInstanceOnDecommission bool = false
 	this.DeleteInstanceOnDecommission = &deleteInstanceOnDecommission
+	var publishStatus string = "NotPublished"
+	this.PublishStatus = &publishStatus
+	var supportStatus string = "Supported"
+	this.SupportStatus = &supportStatus
 	var version int64 = 1
 	this.Version = &version
 	return &this
@@ -159,6 +176,39 @@ func (o *WorkflowServiceItemDefinitionAllOf) HasAllowMultipleServiceItemInstance
 // SetAllowMultipleServiceItemInstances gets a reference to the given bool and assigns it to the AllowMultipleServiceItemInstances field.
 func (o *WorkflowServiceItemDefinitionAllOf) SetAllowMultipleServiceItemInstances(v bool) {
 	o.AllowMultipleServiceItemInstances = &v
+}
+
+// GetAttributeDefinition returns the AttributeDefinition field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *WorkflowServiceItemDefinitionAllOf) GetAttributeDefinition() []WorkflowBaseDataType {
+	if o == nil {
+		var ret []WorkflowBaseDataType
+		return ret
+	}
+	return o.AttributeDefinition
+}
+
+// GetAttributeDefinitionOk returns a tuple with the AttributeDefinition field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *WorkflowServiceItemDefinitionAllOf) GetAttributeDefinitionOk() ([]WorkflowBaseDataType, bool) {
+	if o == nil || o.AttributeDefinition == nil {
+		return nil, false
+	}
+	return o.AttributeDefinition, true
+}
+
+// HasAttributeDefinition returns a boolean if a field has been set.
+func (o *WorkflowServiceItemDefinitionAllOf) HasAttributeDefinition() bool {
+	if o != nil && o.AttributeDefinition != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAttributeDefinition gets a reference to the given []WorkflowBaseDataType and assigns it to the AttributeDefinition field.
+func (o *WorkflowServiceItemDefinitionAllOf) SetAttributeDefinition(v []WorkflowBaseDataType) {
+	o.AttributeDefinition = v
 }
 
 // GetCvdId returns the CvdId field value if set, zero value otherwise.
@@ -353,37 +403,175 @@ func (o *WorkflowServiceItemDefinitionAllOf) SetName(v string) {
 	o.Name = &v
 }
 
-// GetOutputDefinition returns the OutputDefinition field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *WorkflowServiceItemDefinitionAllOf) GetOutputDefinition() []WorkflowBaseDataType {
-	if o == nil {
-		var ret []WorkflowBaseDataType
+// GetPublishStatus returns the PublishStatus field value if set, zero value otherwise.
+func (o *WorkflowServiceItemDefinitionAllOf) GetPublishStatus() string {
+	if o == nil || o.PublishStatus == nil {
+		var ret string
 		return ret
 	}
-	return o.OutputDefinition
+	return *o.PublishStatus
 }
 
-// GetOutputDefinitionOk returns a tuple with the OutputDefinition field value if set, nil otherwise
+// GetPublishStatusOk returns a tuple with the PublishStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *WorkflowServiceItemDefinitionAllOf) GetOutputDefinitionOk() ([]WorkflowBaseDataType, bool) {
-	if o == nil || o.OutputDefinition == nil {
+func (o *WorkflowServiceItemDefinitionAllOf) GetPublishStatusOk() (*string, bool) {
+	if o == nil || o.PublishStatus == nil {
 		return nil, false
 	}
-	return o.OutputDefinition, true
+	return o.PublishStatus, true
 }
 
-// HasOutputDefinition returns a boolean if a field has been set.
-func (o *WorkflowServiceItemDefinitionAllOf) HasOutputDefinition() bool {
-	if o != nil && o.OutputDefinition != nil {
+// HasPublishStatus returns a boolean if a field has been set.
+func (o *WorkflowServiceItemDefinitionAllOf) HasPublishStatus() bool {
+	if o != nil && o.PublishStatus != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetOutputDefinition gets a reference to the given []WorkflowBaseDataType and assigns it to the OutputDefinition field.
-func (o *WorkflowServiceItemDefinitionAllOf) SetOutputDefinition(v []WorkflowBaseDataType) {
-	o.OutputDefinition = v
+// SetPublishStatus gets a reference to the given string and assigns it to the PublishStatus field.
+func (o *WorkflowServiceItemDefinitionAllOf) SetPublishStatus(v string) {
+	o.PublishStatus = &v
+}
+
+// GetStatus returns the Status field value if set, zero value otherwise.
+func (o *WorkflowServiceItemDefinitionAllOf) GetStatus() string {
+	if o == nil || o.Status == nil {
+		var ret string
+		return ret
+	}
+	return *o.Status
+}
+
+// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowServiceItemDefinitionAllOf) GetStatusOk() (*string, bool) {
+	if o == nil || o.Status == nil {
+		return nil, false
+	}
+	return o.Status, true
+}
+
+// HasStatus returns a boolean if a field has been set.
+func (o *WorkflowServiceItemDefinitionAllOf) HasStatus() bool {
+	if o != nil && o.Status != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStatus gets a reference to the given string and assigns it to the Status field.
+func (o *WorkflowServiceItemDefinitionAllOf) SetStatus(v string) {
+	o.Status = &v
+}
+
+// GetSupportStatus returns the SupportStatus field value if set, zero value otherwise.
+func (o *WorkflowServiceItemDefinitionAllOf) GetSupportStatus() string {
+	if o == nil || o.SupportStatus == nil {
+		var ret string
+		return ret
+	}
+	return *o.SupportStatus
+}
+
+// GetSupportStatusOk returns a tuple with the SupportStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowServiceItemDefinitionAllOf) GetSupportStatusOk() (*string, bool) {
+	if o == nil || o.SupportStatus == nil {
+		return nil, false
+	}
+	return o.SupportStatus, true
+}
+
+// HasSupportStatus returns a boolean if a field has been set.
+func (o *WorkflowServiceItemDefinitionAllOf) HasSupportStatus() bool {
+	if o != nil && o.SupportStatus != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSupportStatus gets a reference to the given string and assigns it to the SupportStatus field.
+func (o *WorkflowServiceItemDefinitionAllOf) SetSupportStatus(v string) {
+	o.SupportStatus = &v
+}
+
+// GetUserIdOrEmail returns the UserIdOrEmail field value if set, zero value otherwise.
+func (o *WorkflowServiceItemDefinitionAllOf) GetUserIdOrEmail() string {
+	if o == nil || o.UserIdOrEmail == nil {
+		var ret string
+		return ret
+	}
+	return *o.UserIdOrEmail
+}
+
+// GetUserIdOrEmailOk returns a tuple with the UserIdOrEmail field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowServiceItemDefinitionAllOf) GetUserIdOrEmailOk() (*string, bool) {
+	if o == nil || o.UserIdOrEmail == nil {
+		return nil, false
+	}
+	return o.UserIdOrEmail, true
+}
+
+// HasUserIdOrEmail returns a boolean if a field has been set.
+func (o *WorkflowServiceItemDefinitionAllOf) HasUserIdOrEmail() bool {
+	if o != nil && o.UserIdOrEmail != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUserIdOrEmail gets a reference to the given string and assigns it to the UserIdOrEmail field.
+func (o *WorkflowServiceItemDefinitionAllOf) SetUserIdOrEmail(v string) {
+	o.UserIdOrEmail = &v
+}
+
+// GetValidationInformation returns the ValidationInformation field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *WorkflowServiceItemDefinitionAllOf) GetValidationInformation() WorkflowValidationInformation {
+	if o == nil || o.ValidationInformation.Get() == nil {
+		var ret WorkflowValidationInformation
+		return ret
+	}
+	return *o.ValidationInformation.Get()
+}
+
+// GetValidationInformationOk returns a tuple with the ValidationInformation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *WorkflowServiceItemDefinitionAllOf) GetValidationInformationOk() (*WorkflowValidationInformation, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ValidationInformation.Get(), o.ValidationInformation.IsSet()
+}
+
+// HasValidationInformation returns a boolean if a field has been set.
+func (o *WorkflowServiceItemDefinitionAllOf) HasValidationInformation() bool {
+	if o != nil && o.ValidationInformation.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetValidationInformation gets a reference to the given NullableWorkflowValidationInformation and assigns it to the ValidationInformation field.
+func (o *WorkflowServiceItemDefinitionAllOf) SetValidationInformation(v WorkflowValidationInformation) {
+	o.ValidationInformation.Set(&v)
+}
+
+// SetValidationInformationNil sets the value for ValidationInformation to be an explicit nil
+func (o *WorkflowServiceItemDefinitionAllOf) SetValidationInformationNil() {
+	o.ValidationInformation.Set(nil)
+}
+
+// UnsetValidationInformation ensures that no value is present for ValidationInformation, not even an explicit nil
+func (o *WorkflowServiceItemDefinitionAllOf) UnsetValidationInformation() {
+	o.ValidationInformation.Unset()
 }
 
 // GetVersion returns the Version field value if set, zero value otherwise.
@@ -494,6 +682,9 @@ func (o WorkflowServiceItemDefinitionAllOf) MarshalJSON() ([]byte, error) {
 	if o.AllowMultipleServiceItemInstances != nil {
 		toSerialize["AllowMultipleServiceItemInstances"] = o.AllowMultipleServiceItemInstances
 	}
+	if o.AttributeDefinition != nil {
+		toSerialize["AttributeDefinition"] = o.AttributeDefinition
+	}
 	if o.CvdId != nil {
 		toSerialize["CvdId"] = o.CvdId
 	}
@@ -512,8 +703,20 @@ func (o WorkflowServiceItemDefinitionAllOf) MarshalJSON() ([]byte, error) {
 	if o.Name != nil {
 		toSerialize["Name"] = o.Name
 	}
-	if o.OutputDefinition != nil {
-		toSerialize["OutputDefinition"] = o.OutputDefinition
+	if o.PublishStatus != nil {
+		toSerialize["PublishStatus"] = o.PublishStatus
+	}
+	if o.Status != nil {
+		toSerialize["Status"] = o.Status
+	}
+	if o.SupportStatus != nil {
+		toSerialize["SupportStatus"] = o.SupportStatus
+	}
+	if o.UserIdOrEmail != nil {
+		toSerialize["UserIdOrEmail"] = o.UserIdOrEmail
+	}
+	if o.ValidationInformation.IsSet() {
+		toSerialize["ValidationInformation"] = o.ValidationInformation.Get()
 	}
 	if o.Version != nil {
 		toSerialize["Version"] = o.Version
@@ -545,13 +748,18 @@ func (o *WorkflowServiceItemDefinitionAllOf) UnmarshalJSON(bytes []byte) (err er
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AllowMultipleServiceItemInstances")
+		delete(additionalProperties, "AttributeDefinition")
 		delete(additionalProperties, "CvdId")
 		delete(additionalProperties, "DeleteInstanceOnDecommission")
 		delete(additionalProperties, "Description")
 		delete(additionalProperties, "Label")
 		delete(additionalProperties, "LicenseEntitlement")
 		delete(additionalProperties, "Name")
-		delete(additionalProperties, "OutputDefinition")
+		delete(additionalProperties, "PublishStatus")
+		delete(additionalProperties, "Status")
+		delete(additionalProperties, "SupportStatus")
+		delete(additionalProperties, "UserIdOrEmail")
+		delete(additionalProperties, "ValidationInformation")
 		delete(additionalProperties, "Version")
 		delete(additionalProperties, "ActionDefinitions")
 		delete(additionalProperties, "Catalog")

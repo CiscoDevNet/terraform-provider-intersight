@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "policy.ConfigChange"]
 **Changes** | Pointer to **[]string** |  | [optional] 
 **Disruptions** | Pointer to **[]string** |  | [optional] 
+**PolicyDisruptions** | Pointer to [**[]PolicyConfigChangeDisruptionDetailType**](PolicyConfigChangeDisruptionDetailType.md) |  | [optional] 
 
 ## Methods
 
@@ -138,6 +139,41 @@ HasDisruptions returns a boolean if a field has been set.
 `func (o *PolicyConfigChange) UnsetDisruptions()`
 
 UnsetDisruptions ensures that no value is present for Disruptions, not even an explicit nil
+### GetPolicyDisruptions
+
+`func (o *PolicyConfigChange) GetPolicyDisruptions() []PolicyConfigChangeDisruptionDetailType`
+
+GetPolicyDisruptions returns the PolicyDisruptions field if non-nil, zero value otherwise.
+
+### GetPolicyDisruptionsOk
+
+`func (o *PolicyConfigChange) GetPolicyDisruptionsOk() (*[]PolicyConfigChangeDisruptionDetailType, bool)`
+
+GetPolicyDisruptionsOk returns a tuple with the PolicyDisruptions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPolicyDisruptions
+
+`func (o *PolicyConfigChange) SetPolicyDisruptions(v []PolicyConfigChangeDisruptionDetailType)`
+
+SetPolicyDisruptions sets PolicyDisruptions field to given value.
+
+### HasPolicyDisruptions
+
+`func (o *PolicyConfigChange) HasPolicyDisruptions() bool`
+
+HasPolicyDisruptions returns a boolean if a field has been set.
+
+### SetPolicyDisruptionsNil
+
+`func (o *PolicyConfigChange) SetPolicyDisruptionsNil(b bool)`
+
+ SetPolicyDisruptionsNil sets the value for PolicyDisruptions to be an explicit nil
+
+### UnsetPolicyDisruptions
+`func (o *PolicyConfigChange) UnsetPolicyDisruptions()`
+
+UnsetPolicyDisruptions ensures that no value is present for PolicyDisruptions, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -248,6 +248,11 @@ func getStorageNetAppStorageVmSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"is_protected": {
+			Description: "Specifies whether the Storage VM is a SnapMirror source Storage VM, using SnapMirror to protect its data.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"iscsi_enabled": {
 			Description: "Status for iSCSI protocol allowed to run on Vservers.",
 			Type:        schema.TypeBool,
@@ -459,6 +464,11 @@ func getStorageNetAppStorageVmSchema() map[string]*schema.Schema {
 								},
 							},
 						},
+					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -800,6 +810,11 @@ func dataSourceStorageNetAppStorageVmRead(c context.Context, d *schema.ResourceD
 		o.SetIpspace(x)
 	}
 
+	if v, ok := d.GetOk("is_protected"); ok {
+		x := (v.(string))
+		o.SetIsProtected(x)
+	}
+
 	if v, ok := d.GetOkExists("iscsi_enabled"); ok {
 		x := (v.(bool))
 		o.SetIscsiEnabled(x)
@@ -1128,6 +1143,7 @@ func dataSourceStorageNetAppStorageVmRead(c context.Context, d *schema.ResourceD
 				temp["events"] = flattenListStorageNetAppSvmEventRelationship(s.GetEvents(), d)
 				temp["fcp_enabled"] = (s.GetFcpEnabled())
 				temp["ipspace"] = (s.GetIpspace())
+				temp["is_protected"] = (s.GetIsProtected())
 				temp["iscsi_enabled"] = (s.GetIscsiEnabled())
 				temp["key"] = (s.GetKey())
 

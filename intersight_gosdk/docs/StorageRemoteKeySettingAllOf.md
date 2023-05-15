@@ -6,13 +6,11 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.RemoteKeySetting"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.RemoteKeySetting"]
-**IsPasswordSet** | Pointer to **bool** | Indicates whether the value of the &#39;password&#39; property has been set. | [optional] [readonly] [default to false]
-**Password** | Pointer to **string** | The password for the KMIP server login. | [optional] 
-**Port** | Pointer to **int64** | The port to which the KMIP client should connect. | [optional] [default to 5696]
-**PrimaryServer** | Pointer to **string** | The IP address of the primary KMIP server. It could be an IPv4 address, an IPv6 address, or a hostname. Hostnames are valid only when Inband is configured for the CIMC address. | [optional] 
-**SecondaryServer** | Pointer to **string** | The IP address of the secondary KMIP server. It could be an IPv4 address, an IPv6 address, or a hostname. Hostnames are valid only when Inband is configured for the CIMC address. | [optional] 
+**AuthCredentials** | Pointer to [**NullableStorageKmipAuthCredentials**](StorageKmipAuthCredentials.md) |  | [optional] 
+**IsExistingKeySet** | Pointer to **bool** | Indicates whether the value of the &#39;existingKey&#39; property has been set. | [optional] [readonly] [default to false]
+**PrimaryServer** | Pointer to [**NullableStorageKmipServer**](StorageKmipServer.md) |  | [optional] 
+**SecondaryServer** | Pointer to [**NullableStorageKmipServer**](StorageKmipServer.md) |  | [optional] 
 **ServerCertificate** | Pointer to **string** | The certificate/ public key of the KMIP server. It is required for initiating secure communication with the server. | [optional] 
-**Username** | Pointer to **string** | The user name for the KMIP server login. | [optional] 
 
 ## Methods
 
@@ -73,97 +71,82 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
-### GetIsPasswordSet
+### GetAuthCredentials
 
-`func (o *StorageRemoteKeySettingAllOf) GetIsPasswordSet() bool`
+`func (o *StorageRemoteKeySettingAllOf) GetAuthCredentials() StorageKmipAuthCredentials`
 
-GetIsPasswordSet returns the IsPasswordSet field if non-nil, zero value otherwise.
+GetAuthCredentials returns the AuthCredentials field if non-nil, zero value otherwise.
 
-### GetIsPasswordSetOk
+### GetAuthCredentialsOk
 
-`func (o *StorageRemoteKeySettingAllOf) GetIsPasswordSetOk() (*bool, bool)`
+`func (o *StorageRemoteKeySettingAllOf) GetAuthCredentialsOk() (*StorageKmipAuthCredentials, bool)`
 
-GetIsPasswordSetOk returns a tuple with the IsPasswordSet field if it's non-nil, zero value otherwise
+GetAuthCredentialsOk returns a tuple with the AuthCredentials field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetIsPasswordSet
+### SetAuthCredentials
 
-`func (o *StorageRemoteKeySettingAllOf) SetIsPasswordSet(v bool)`
+`func (o *StorageRemoteKeySettingAllOf) SetAuthCredentials(v StorageKmipAuthCredentials)`
 
-SetIsPasswordSet sets IsPasswordSet field to given value.
+SetAuthCredentials sets AuthCredentials field to given value.
 
-### HasIsPasswordSet
+### HasAuthCredentials
 
-`func (o *StorageRemoteKeySettingAllOf) HasIsPasswordSet() bool`
+`func (o *StorageRemoteKeySettingAllOf) HasAuthCredentials() bool`
 
-HasIsPasswordSet returns a boolean if a field has been set.
+HasAuthCredentials returns a boolean if a field has been set.
 
-### GetPassword
+### SetAuthCredentialsNil
 
-`func (o *StorageRemoteKeySettingAllOf) GetPassword() string`
+`func (o *StorageRemoteKeySettingAllOf) SetAuthCredentialsNil(b bool)`
 
-GetPassword returns the Password field if non-nil, zero value otherwise.
+ SetAuthCredentialsNil sets the value for AuthCredentials to be an explicit nil
 
-### GetPasswordOk
+### UnsetAuthCredentials
+`func (o *StorageRemoteKeySettingAllOf) UnsetAuthCredentials()`
 
-`func (o *StorageRemoteKeySettingAllOf) GetPasswordOk() (*string, bool)`
+UnsetAuthCredentials ensures that no value is present for AuthCredentials, not even an explicit nil
+### GetIsExistingKeySet
 
-GetPasswordOk returns a tuple with the Password field if it's non-nil, zero value otherwise
+`func (o *StorageRemoteKeySettingAllOf) GetIsExistingKeySet() bool`
+
+GetIsExistingKeySet returns the IsExistingKeySet field if non-nil, zero value otherwise.
+
+### GetIsExistingKeySetOk
+
+`func (o *StorageRemoteKeySettingAllOf) GetIsExistingKeySetOk() (*bool, bool)`
+
+GetIsExistingKeySetOk returns a tuple with the IsExistingKeySet field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetPassword
+### SetIsExistingKeySet
 
-`func (o *StorageRemoteKeySettingAllOf) SetPassword(v string)`
+`func (o *StorageRemoteKeySettingAllOf) SetIsExistingKeySet(v bool)`
 
-SetPassword sets Password field to given value.
+SetIsExistingKeySet sets IsExistingKeySet field to given value.
 
-### HasPassword
+### HasIsExistingKeySet
 
-`func (o *StorageRemoteKeySettingAllOf) HasPassword() bool`
+`func (o *StorageRemoteKeySettingAllOf) HasIsExistingKeySet() bool`
 
-HasPassword returns a boolean if a field has been set.
-
-### GetPort
-
-`func (o *StorageRemoteKeySettingAllOf) GetPort() int64`
-
-GetPort returns the Port field if non-nil, zero value otherwise.
-
-### GetPortOk
-
-`func (o *StorageRemoteKeySettingAllOf) GetPortOk() (*int64, bool)`
-
-GetPortOk returns a tuple with the Port field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPort
-
-`func (o *StorageRemoteKeySettingAllOf) SetPort(v int64)`
-
-SetPort sets Port field to given value.
-
-### HasPort
-
-`func (o *StorageRemoteKeySettingAllOf) HasPort() bool`
-
-HasPort returns a boolean if a field has been set.
+HasIsExistingKeySet returns a boolean if a field has been set.
 
 ### GetPrimaryServer
 
-`func (o *StorageRemoteKeySettingAllOf) GetPrimaryServer() string`
+`func (o *StorageRemoteKeySettingAllOf) GetPrimaryServer() StorageKmipServer`
 
 GetPrimaryServer returns the PrimaryServer field if non-nil, zero value otherwise.
 
 ### GetPrimaryServerOk
 
-`func (o *StorageRemoteKeySettingAllOf) GetPrimaryServerOk() (*string, bool)`
+`func (o *StorageRemoteKeySettingAllOf) GetPrimaryServerOk() (*StorageKmipServer, bool)`
 
 GetPrimaryServerOk returns a tuple with the PrimaryServer field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPrimaryServer
 
-`func (o *StorageRemoteKeySettingAllOf) SetPrimaryServer(v string)`
+`func (o *StorageRemoteKeySettingAllOf) SetPrimaryServer(v StorageKmipServer)`
 
 SetPrimaryServer sets PrimaryServer field to given value.
 
@@ -173,22 +156,32 @@ SetPrimaryServer sets PrimaryServer field to given value.
 
 HasPrimaryServer returns a boolean if a field has been set.
 
+### SetPrimaryServerNil
+
+`func (o *StorageRemoteKeySettingAllOf) SetPrimaryServerNil(b bool)`
+
+ SetPrimaryServerNil sets the value for PrimaryServer to be an explicit nil
+
+### UnsetPrimaryServer
+`func (o *StorageRemoteKeySettingAllOf) UnsetPrimaryServer()`
+
+UnsetPrimaryServer ensures that no value is present for PrimaryServer, not even an explicit nil
 ### GetSecondaryServer
 
-`func (o *StorageRemoteKeySettingAllOf) GetSecondaryServer() string`
+`func (o *StorageRemoteKeySettingAllOf) GetSecondaryServer() StorageKmipServer`
 
 GetSecondaryServer returns the SecondaryServer field if non-nil, zero value otherwise.
 
 ### GetSecondaryServerOk
 
-`func (o *StorageRemoteKeySettingAllOf) GetSecondaryServerOk() (*string, bool)`
+`func (o *StorageRemoteKeySettingAllOf) GetSecondaryServerOk() (*StorageKmipServer, bool)`
 
 GetSecondaryServerOk returns a tuple with the SecondaryServer field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSecondaryServer
 
-`func (o *StorageRemoteKeySettingAllOf) SetSecondaryServer(v string)`
+`func (o *StorageRemoteKeySettingAllOf) SetSecondaryServer(v StorageKmipServer)`
 
 SetSecondaryServer sets SecondaryServer field to given value.
 
@@ -198,6 +191,16 @@ SetSecondaryServer sets SecondaryServer field to given value.
 
 HasSecondaryServer returns a boolean if a field has been set.
 
+### SetSecondaryServerNil
+
+`func (o *StorageRemoteKeySettingAllOf) SetSecondaryServerNil(b bool)`
+
+ SetSecondaryServerNil sets the value for SecondaryServer to be an explicit nil
+
+### UnsetSecondaryServer
+`func (o *StorageRemoteKeySettingAllOf) UnsetSecondaryServer()`
+
+UnsetSecondaryServer ensures that no value is present for SecondaryServer, not even an explicit nil
 ### GetServerCertificate
 
 `func (o *StorageRemoteKeySettingAllOf) GetServerCertificate() string`
@@ -222,31 +225,6 @@ SetServerCertificate sets ServerCertificate field to given value.
 `func (o *StorageRemoteKeySettingAllOf) HasServerCertificate() bool`
 
 HasServerCertificate returns a boolean if a field has been set.
-
-### GetUsername
-
-`func (o *StorageRemoteKeySettingAllOf) GetUsername() string`
-
-GetUsername returns the Username field if non-nil, zero value otherwise.
-
-### GetUsernameOk
-
-`func (o *StorageRemoteKeySettingAllOf) GetUsernameOk() (*string, bool)`
-
-GetUsernameOk returns a tuple with the Username field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUsername
-
-`func (o *StorageRemoteKeySettingAllOf) SetUsername(v string)`
-
-SetUsername sets Username field to given value.
-
-### HasUsername
-
-`func (o *StorageRemoteKeySettingAllOf) HasUsername() bool`
-
-HasUsername returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

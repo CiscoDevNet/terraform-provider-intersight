@@ -250,9 +250,9 @@ func resourceFirmwareSwitchUpgrade() *schema.Resource {
 							ForceNew:    true,
 						},
 						"upgradeoption": {
-							Description:  "Option to control the upgrade, e.g., sd_upgrade_mount_only - download the image into sd and upgrade wait for the server on-next boot.\n* `sd_upgrade_mount_only` - Direct upgrade SD upgrade mount only.\n* `sd_download_only` - Direct upgrade SD download only.\n* `sd_upgrade_only` - Direct upgrade SD upgrade only.\n* `sd_upgrade_full` - Direct upgrade SD upgrade full.\n* `download_only` - Direct upgrade image download only.\n* `upgrade_full` - The upgrade downloads or mounts the image, and reboots immediately for an upgrade.\n* `upgrade_mount_only` - The upgrade downloads or mounts the image. The upgrade happens in next reboot.\n* `chassis_upgrade_full` - Direct upgrade chassis upgrade full.",
+							Description:  "Option to control the upgrade, e.g., sd_upgrade_mount_only - download the image into sd and upgrade wait for the server on-next boot.\n* `sd_upgrade_mount_only` - Direct upgrade SD upgrade mount only.\n* `sd_download_only` - Direct upgrade SD download only.\n* `sd_upgrade_only` - Direct upgrade SD upgrade only.\n* `sd_upgrade_full` - Direct upgrade SD upgrade full.\n* `download_only` - Direct upgrade image download only.\n* `upgrade_full` - The upgrade downloads or mounts the image, and reboots immediately for an upgrade.\n* `upgrade_mount_only` - The upgrade downloads or mounts the image. The upgrade happens in next reboot.\n* `chassis_upgrade_full` - Direct upgrade chassis upgrade full.\n* `monitor_only` - Direct upgrade monitor progress only.\n* `validate_only` - Validate whether a component is ready for ugprade.",
 							Type:         schema.TypeString,
-							ValidateFunc: validation.StringInSlice([]string{"sd_upgrade_mount_only", "sd_download_only", "sd_upgrade_only", "sd_upgrade_full", "download_only", "upgrade_full", "upgrade_mount_only", "chassis_upgrade_full"}, false),
+							ValidateFunc: validation.StringInSlice([]string{"sd_upgrade_mount_only", "sd_download_only", "sd_upgrade_only", "sd_upgrade_full", "download_only", "upgrade_full", "upgrade_mount_only", "chassis_upgrade_full", "monitor_only", "validate_only"}, false),
 							Optional:     true,
 							Default:      "sd_upgrade_mount_only",
 							ForceNew:     true,
@@ -1086,6 +1086,18 @@ func resourceFirmwareSwitchUpgrade() *schema.Resource {
 								},
 							},
 							ForceNew: true,
+						},
+						"marked_for_deletion": {
+							Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}, ForceNew: true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",

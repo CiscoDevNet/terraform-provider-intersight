@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Action** | Pointer to **string** | User initiated action. Each profile type has its own supported actions. For HyperFlex cluster profile, the supported actions are -- Validate, Deploy, Continue, Retry, Abort, Unassign For server profile, the support actions are -- Deploy, Unassign. | [optional] [default to "No-op"]
 **ActionParams** | Pointer to [**[]PolicyActionParam**](PolicyActionParam.md) |  | [optional] 
 **ConfigContext** | Pointer to [**NullablePolicyConfigContext**](PolicyConfigContext.md) |  | [optional] 
+**ScheduledActions** | Pointer to [**[]PolicyScheduledAction**](PolicyScheduledAction.md) |  | [optional] 
 **PolicyBucket** | Pointer to [**[]PolicyAbstractPolicyRelationship**](PolicyAbstractPolicyRelationship.md) | An array of relationships to policyAbstractPolicy resources. | [optional] 
 
 ## Methods
@@ -165,6 +166,41 @@ HasConfigContext returns a boolean if a field has been set.
 `func (o *PolicyAbstractConfigProfile) UnsetConfigContext()`
 
 UnsetConfigContext ensures that no value is present for ConfigContext, not even an explicit nil
+### GetScheduledActions
+
+`func (o *PolicyAbstractConfigProfile) GetScheduledActions() []PolicyScheduledAction`
+
+GetScheduledActions returns the ScheduledActions field if non-nil, zero value otherwise.
+
+### GetScheduledActionsOk
+
+`func (o *PolicyAbstractConfigProfile) GetScheduledActionsOk() (*[]PolicyScheduledAction, bool)`
+
+GetScheduledActionsOk returns a tuple with the ScheduledActions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScheduledActions
+
+`func (o *PolicyAbstractConfigProfile) SetScheduledActions(v []PolicyScheduledAction)`
+
+SetScheduledActions sets ScheduledActions field to given value.
+
+### HasScheduledActions
+
+`func (o *PolicyAbstractConfigProfile) HasScheduledActions() bool`
+
+HasScheduledActions returns a boolean if a field has been set.
+
+### SetScheduledActionsNil
+
+`func (o *PolicyAbstractConfigProfile) SetScheduledActionsNil(b bool)`
+
+ SetScheduledActionsNil sets the value for ScheduledActions to be an explicit nil
+
+### UnsetScheduledActions
+`func (o *PolicyAbstractConfigProfile) UnsetScheduledActions()`
+
+UnsetScheduledActions ensures that no value is present for ScheduledActions, not even an explicit nil
 ### GetPolicyBucket
 
 `func (o *PolicyAbstractConfigProfile) GetPolicyBucket() []PolicyAbstractPolicyRelationship`

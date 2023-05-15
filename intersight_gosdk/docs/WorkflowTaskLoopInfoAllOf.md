@@ -6,10 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.TaskLoopInfo"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.TaskLoopInfo"]
-**Iteration** | Pointer to **int64** | This specifies the count of iteration for the specific task executed inside the loop. | [optional] 
-**LoopTaskLabel** | Pointer to **string** | Label of the loop task inside which this task is executed. | [optional] 
-**LoopTaskName** | Pointer to **string** | Name of the loop task inside which this task is executed. | [optional] 
-**LoopType** | Pointer to **string** | This specifies the type of loop, Serial or Parallel. * &#x60;None&#x60; - The enum specifies the option as None which implies this is not a Loop type and this is the default value for loop type. * &#x60;Parallel&#x60; - The enum specifies the option as Parallel where the loop task type is parallel loop. * &#x60;Serial&#x60; - The enum specifies the option as Serial where the loop task type is serial loop. | [optional] [default to "None"]
+**Iteration** | Pointer to **int64** | This specifies the count of iteration for the specific task executed inside the loop. | [optional] [readonly] 
+**LoopTaskLabel** | Pointer to **string** | Label of the loop task inside which this task is executed. | [optional] [readonly] 
+**LoopTaskName** | Pointer to **string** | Name of the loop task inside which this task is executed. | [optional] [readonly] 
+**LoopType** | Pointer to **string** | This specifies the type of loop, Serial or Parallel. * &#x60;None&#x60; - The enum specifies the option as None which implies this is not a Loop type and this is the default value for loop type. * &#x60;Parallel&#x60; - The enum specifies the option as Parallel where the loop task type is parallel loop. * &#x60;Serial&#x60; - The enum specifies the option as Serial where the loop task type is serial loop. | [optional] [readonly] [default to "None"]
 
 ## Methods
 

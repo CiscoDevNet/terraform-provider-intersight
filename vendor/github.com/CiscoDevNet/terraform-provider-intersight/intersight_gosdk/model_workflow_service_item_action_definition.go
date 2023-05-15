@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-10371
+API version: 1.0.11-11765
 Contact: intersight@cisco.com
 */
 
@@ -23,11 +23,14 @@ type WorkflowServiceItemActionDefinition struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType string `json:"ObjectType"`
+	ObjectType       string                                      `json:"ObjectType"`
+	ActionProperties NullableWorkflowServiceItemActionProperties `json:"ActionProperties,omitempty"`
 	// Type of actionDefinition which decides on how to trigger the action. * `External` - External actions definition can be triggered by enduser to perform actions on the service item. Once action is completed successfully (eg. create/deploy), user cannot re-trigger that action again. * `Internal` - Internal action definition is used to trigger periodic actions on the service item instance. * `Repetitive` - Repetitive action definition is an external action that can be triggered by enduser to perform repetitive actions (eg. Edit/Update/Perform health check) on the created service item.
-	ActionType            *string                                       `json:"ActionType,omitempty"`
-	AllowedInstanceStates []string                                      `json:"AllowedInstanceStates,omitempty"`
-	CoreWorkflows         []WorkflowServiceItemActionWorkflowDefinition `json:"CoreWorkflows,omitempty"`
+	ActionType            *string  `json:"ActionType,omitempty"`
+	AllowedInstanceStates []string `json:"AllowedInstanceStates,omitempty"`
+	// The mappings from workflows in the action definition to the service item attribute definition. Any output from core or post-core workflow can be mapped to service item attribute definition. The attribute can be referred using the name of the workflow definition and the attribute name in the following format '${<ServiceItemActionWorkflowDefinition.Name>.output.<outputName>'.
+	AttributeParameters interface{}                                   `json:"AttributeParameters,omitempty"`
+	CoreWorkflows       []WorkflowServiceItemActionWorkflowDefinition `json:"CoreWorkflows,omitempty"`
 	// The description for this action which provides information on what are the pre-requisites to use this action on the service item and what features are supported by this action.
 	Description     *string                `json:"Description,omitempty"`
 	InputDefinition []WorkflowBaseDataType `json:"InputDefinition,omitempty"`
@@ -35,8 +38,6 @@ type WorkflowServiceItemActionDefinition struct {
 	Label *string `json:"Label,omitempty"`
 	// The name for this action definition. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:) or an underscore (_). Name of the action must be unique within a service item definition.
 	Name *string `json:"Name,omitempty"`
-	// The output mappings from workflows in the action definition to the service item output definition. Any output from core or post-core workflow can be mapped to service item output definition. The output can be referred using the name of the workflow definition and the output name in the following format '${<ServiceItemActionWorkflowDefinition.Name>.output.<outputName>'.
-	OutputParameters interface{} `json:"OutputParameters,omitempty"`
 	// Value in seconds to specify the periodicity of the workflows. A zero value indicate the workflow will not execute periodically. A non-zero value indicate, the workflow will be executed periodically with this periodicity.
 	Periodicity       *int64                                        `json:"Periodicity,omitempty"`
 	PostCoreWorkflows []WorkflowServiceItemActionWorkflowDefinition `json:"PostCoreWorkflows,omitempty"`
@@ -44,8 +45,10 @@ type WorkflowServiceItemActionDefinition struct {
 	// The flag to indicate that action is restricted on a Private Virtual Appliance.
 	RestrictOnPrivateAppliance *bool                                         `json:"RestrictOnPrivateAppliance,omitempty"`
 	StopWorkflows              []WorkflowServiceItemActionWorkflowDefinition `json:"StopWorkflows,omitempty"`
-	ValidationInformation      NullableWorkflowValidationInformation         `json:"ValidationInformation,omitempty"`
-	ValidationWorkflows        []WorkflowServiceItemActionWorkflowDefinition `json:"ValidationWorkflows,omitempty"`
+	// The user identifier who created or updated the service item action definition.
+	UserIdOrEmail         *string                                       `json:"UserIdOrEmail,omitempty"`
+	ValidationInformation NullableWorkflowValidationInformation         `json:"ValidationInformation,omitempty"`
+	ValidationWorkflows   []WorkflowServiceItemActionWorkflowDefinition `json:"ValidationWorkflows,omitempty"`
 	// An array of relationships to iamRole resources.
 	AssociatedRoles       []IamRoleRelationship                      `json:"AssociatedRoles,omitempty"`
 	ServiceItemDefinition *WorkflowServiceItemDefinitionRelationship `json:"ServiceItemDefinition,omitempty"`
@@ -134,6 +137,49 @@ func (o *WorkflowServiceItemActionDefinition) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
+// GetActionProperties returns the ActionProperties field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *WorkflowServiceItemActionDefinition) GetActionProperties() WorkflowServiceItemActionProperties {
+	if o == nil || o.ActionProperties.Get() == nil {
+		var ret WorkflowServiceItemActionProperties
+		return ret
+	}
+	return *o.ActionProperties.Get()
+}
+
+// GetActionPropertiesOk returns a tuple with the ActionProperties field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *WorkflowServiceItemActionDefinition) GetActionPropertiesOk() (*WorkflowServiceItemActionProperties, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ActionProperties.Get(), o.ActionProperties.IsSet()
+}
+
+// HasActionProperties returns a boolean if a field has been set.
+func (o *WorkflowServiceItemActionDefinition) HasActionProperties() bool {
+	if o != nil && o.ActionProperties.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetActionProperties gets a reference to the given NullableWorkflowServiceItemActionProperties and assigns it to the ActionProperties field.
+func (o *WorkflowServiceItemActionDefinition) SetActionProperties(v WorkflowServiceItemActionProperties) {
+	o.ActionProperties.Set(&v)
+}
+
+// SetActionPropertiesNil sets the value for ActionProperties to be an explicit nil
+func (o *WorkflowServiceItemActionDefinition) SetActionPropertiesNil() {
+	o.ActionProperties.Set(nil)
+}
+
+// UnsetActionProperties ensures that no value is present for ActionProperties, not even an explicit nil
+func (o *WorkflowServiceItemActionDefinition) UnsetActionProperties() {
+	o.ActionProperties.Unset()
+}
+
 // GetActionType returns the ActionType field value if set, zero value otherwise.
 func (o *WorkflowServiceItemActionDefinition) GetActionType() string {
 	if o == nil || o.ActionType == nil {
@@ -197,6 +243,39 @@ func (o *WorkflowServiceItemActionDefinition) HasAllowedInstanceStates() bool {
 // SetAllowedInstanceStates gets a reference to the given []string and assigns it to the AllowedInstanceStates field.
 func (o *WorkflowServiceItemActionDefinition) SetAllowedInstanceStates(v []string) {
 	o.AllowedInstanceStates = v
+}
+
+// GetAttributeParameters returns the AttributeParameters field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *WorkflowServiceItemActionDefinition) GetAttributeParameters() interface{} {
+	if o == nil {
+		var ret interface{}
+		return ret
+	}
+	return o.AttributeParameters
+}
+
+// GetAttributeParametersOk returns a tuple with the AttributeParameters field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *WorkflowServiceItemActionDefinition) GetAttributeParametersOk() (*interface{}, bool) {
+	if o == nil || o.AttributeParameters == nil {
+		return nil, false
+	}
+	return &o.AttributeParameters, true
+}
+
+// HasAttributeParameters returns a boolean if a field has been set.
+func (o *WorkflowServiceItemActionDefinition) HasAttributeParameters() bool {
+	if o != nil && o.AttributeParameters != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAttributeParameters gets a reference to the given interface{} and assigns it to the AttributeParameters field.
+func (o *WorkflowServiceItemActionDefinition) SetAttributeParameters(v interface{}) {
+	o.AttributeParameters = v
 }
 
 // GetCoreWorkflows returns the CoreWorkflows field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -361,39 +440,6 @@ func (o *WorkflowServiceItemActionDefinition) SetName(v string) {
 	o.Name = &v
 }
 
-// GetOutputParameters returns the OutputParameters field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *WorkflowServiceItemActionDefinition) GetOutputParameters() interface{} {
-	if o == nil {
-		var ret interface{}
-		return ret
-	}
-	return o.OutputParameters
-}
-
-// GetOutputParametersOk returns a tuple with the OutputParameters field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *WorkflowServiceItemActionDefinition) GetOutputParametersOk() (*interface{}, bool) {
-	if o == nil || o.OutputParameters == nil {
-		return nil, false
-	}
-	return &o.OutputParameters, true
-}
-
-// HasOutputParameters returns a boolean if a field has been set.
-func (o *WorkflowServiceItemActionDefinition) HasOutputParameters() bool {
-	if o != nil && o.OutputParameters != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetOutputParameters gets a reference to the given interface{} and assigns it to the OutputParameters field.
-func (o *WorkflowServiceItemActionDefinition) SetOutputParameters(v interface{}) {
-	o.OutputParameters = v
-}
-
 // GetPeriodicity returns the Periodicity field value if set, zero value otherwise.
 func (o *WorkflowServiceItemActionDefinition) GetPeriodicity() int64 {
 	if o == nil || o.Periodicity == nil {
@@ -555,6 +601,38 @@ func (o *WorkflowServiceItemActionDefinition) HasStopWorkflows() bool {
 // SetStopWorkflows gets a reference to the given []WorkflowServiceItemActionWorkflowDefinition and assigns it to the StopWorkflows field.
 func (o *WorkflowServiceItemActionDefinition) SetStopWorkflows(v []WorkflowServiceItemActionWorkflowDefinition) {
 	o.StopWorkflows = v
+}
+
+// GetUserIdOrEmail returns the UserIdOrEmail field value if set, zero value otherwise.
+func (o *WorkflowServiceItemActionDefinition) GetUserIdOrEmail() string {
+	if o == nil || o.UserIdOrEmail == nil {
+		var ret string
+		return ret
+	}
+	return *o.UserIdOrEmail
+}
+
+// GetUserIdOrEmailOk returns a tuple with the UserIdOrEmail field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowServiceItemActionDefinition) GetUserIdOrEmailOk() (*string, bool) {
+	if o == nil || o.UserIdOrEmail == nil {
+		return nil, false
+	}
+	return o.UserIdOrEmail, true
+}
+
+// HasUserIdOrEmail returns a boolean if a field has been set.
+func (o *WorkflowServiceItemActionDefinition) HasUserIdOrEmail() bool {
+	if o != nil && o.UserIdOrEmail != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUserIdOrEmail gets a reference to the given string and assigns it to the UserIdOrEmail field.
+func (o *WorkflowServiceItemActionDefinition) SetUserIdOrEmail(v string) {
+	o.UserIdOrEmail = &v
 }
 
 // GetValidationInformation returns the ValidationInformation field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -746,11 +824,17 @@ func (o WorkflowServiceItemActionDefinition) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.ActionProperties.IsSet() {
+		toSerialize["ActionProperties"] = o.ActionProperties.Get()
+	}
 	if o.ActionType != nil {
 		toSerialize["ActionType"] = o.ActionType
 	}
 	if o.AllowedInstanceStates != nil {
 		toSerialize["AllowedInstanceStates"] = o.AllowedInstanceStates
+	}
+	if o.AttributeParameters != nil {
+		toSerialize["AttributeParameters"] = o.AttributeParameters
 	}
 	if o.CoreWorkflows != nil {
 		toSerialize["CoreWorkflows"] = o.CoreWorkflows
@@ -767,9 +851,6 @@ func (o WorkflowServiceItemActionDefinition) MarshalJSON() ([]byte, error) {
 	if o.Name != nil {
 		toSerialize["Name"] = o.Name
 	}
-	if o.OutputParameters != nil {
-		toSerialize["OutputParameters"] = o.OutputParameters
-	}
 	if o.Periodicity != nil {
 		toSerialize["Periodicity"] = o.Periodicity
 	}
@@ -784,6 +865,9 @@ func (o WorkflowServiceItemActionDefinition) MarshalJSON() ([]byte, error) {
 	}
 	if o.StopWorkflows != nil {
 		toSerialize["StopWorkflows"] = o.StopWorkflows
+	}
+	if o.UserIdOrEmail != nil {
+		toSerialize["UserIdOrEmail"] = o.UserIdOrEmail
 	}
 	if o.ValidationInformation.IsSet() {
 		toSerialize["ValidationInformation"] = o.ValidationInformation.Get()
@@ -813,11 +897,14 @@ func (o *WorkflowServiceItemActionDefinition) UnmarshalJSON(bytes []byte) (err e
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType string `json:"ObjectType"`
+		ObjectType       string                                      `json:"ObjectType"`
+		ActionProperties NullableWorkflowServiceItemActionProperties `json:"ActionProperties,omitempty"`
 		// Type of actionDefinition which decides on how to trigger the action. * `External` - External actions definition can be triggered by enduser to perform actions on the service item. Once action is completed successfully (eg. create/deploy), user cannot re-trigger that action again. * `Internal` - Internal action definition is used to trigger periodic actions on the service item instance. * `Repetitive` - Repetitive action definition is an external action that can be triggered by enduser to perform repetitive actions (eg. Edit/Update/Perform health check) on the created service item.
-		ActionType            *string                                       `json:"ActionType,omitempty"`
-		AllowedInstanceStates []string                                      `json:"AllowedInstanceStates,omitempty"`
-		CoreWorkflows         []WorkflowServiceItemActionWorkflowDefinition `json:"CoreWorkflows,omitempty"`
+		ActionType            *string  `json:"ActionType,omitempty"`
+		AllowedInstanceStates []string `json:"AllowedInstanceStates,omitempty"`
+		// The mappings from workflows in the action definition to the service item attribute definition. Any output from core or post-core workflow can be mapped to service item attribute definition. The attribute can be referred using the name of the workflow definition and the attribute name in the following format '${<ServiceItemActionWorkflowDefinition.Name>.output.<outputName>'.
+		AttributeParameters interface{}                                   `json:"AttributeParameters,omitempty"`
+		CoreWorkflows       []WorkflowServiceItemActionWorkflowDefinition `json:"CoreWorkflows,omitempty"`
 		// The description for this action which provides information on what are the pre-requisites to use this action on the service item and what features are supported by this action.
 		Description     *string                `json:"Description,omitempty"`
 		InputDefinition []WorkflowBaseDataType `json:"InputDefinition,omitempty"`
@@ -825,8 +912,6 @@ func (o *WorkflowServiceItemActionDefinition) UnmarshalJSON(bytes []byte) (err e
 		Label *string `json:"Label,omitempty"`
 		// The name for this action definition. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:) or an underscore (_). Name of the action must be unique within a service item definition.
 		Name *string `json:"Name,omitempty"`
-		// The output mappings from workflows in the action definition to the service item output definition. Any output from core or post-core workflow can be mapped to service item output definition. The output can be referred using the name of the workflow definition and the output name in the following format '${<ServiceItemActionWorkflowDefinition.Name>.output.<outputName>'.
-		OutputParameters interface{} `json:"OutputParameters,omitempty"`
 		// Value in seconds to specify the periodicity of the workflows. A zero value indicate the workflow will not execute periodically. A non-zero value indicate, the workflow will be executed periodically with this periodicity.
 		Periodicity       *int64                                        `json:"Periodicity,omitempty"`
 		PostCoreWorkflows []WorkflowServiceItemActionWorkflowDefinition `json:"PostCoreWorkflows,omitempty"`
@@ -834,8 +919,10 @@ func (o *WorkflowServiceItemActionDefinition) UnmarshalJSON(bytes []byte) (err e
 		// The flag to indicate that action is restricted on a Private Virtual Appliance.
 		RestrictOnPrivateAppliance *bool                                         `json:"RestrictOnPrivateAppliance,omitempty"`
 		StopWorkflows              []WorkflowServiceItemActionWorkflowDefinition `json:"StopWorkflows,omitempty"`
-		ValidationInformation      NullableWorkflowValidationInformation         `json:"ValidationInformation,omitempty"`
-		ValidationWorkflows        []WorkflowServiceItemActionWorkflowDefinition `json:"ValidationWorkflows,omitempty"`
+		// The user identifier who created or updated the service item action definition.
+		UserIdOrEmail         *string                                       `json:"UserIdOrEmail,omitempty"`
+		ValidationInformation NullableWorkflowValidationInformation         `json:"ValidationInformation,omitempty"`
+		ValidationWorkflows   []WorkflowServiceItemActionWorkflowDefinition `json:"ValidationWorkflows,omitempty"`
 		// An array of relationships to iamRole resources.
 		AssociatedRoles       []IamRoleRelationship                      `json:"AssociatedRoles,omitempty"`
 		ServiceItemDefinition *WorkflowServiceItemDefinitionRelationship `json:"ServiceItemDefinition,omitempty"`
@@ -849,19 +936,21 @@ func (o *WorkflowServiceItemActionDefinition) UnmarshalJSON(bytes []byte) (err e
 		varWorkflowServiceItemActionDefinition := _WorkflowServiceItemActionDefinition{}
 		varWorkflowServiceItemActionDefinition.ClassId = varWorkflowServiceItemActionDefinitionWithoutEmbeddedStruct.ClassId
 		varWorkflowServiceItemActionDefinition.ObjectType = varWorkflowServiceItemActionDefinitionWithoutEmbeddedStruct.ObjectType
+		varWorkflowServiceItemActionDefinition.ActionProperties = varWorkflowServiceItemActionDefinitionWithoutEmbeddedStruct.ActionProperties
 		varWorkflowServiceItemActionDefinition.ActionType = varWorkflowServiceItemActionDefinitionWithoutEmbeddedStruct.ActionType
 		varWorkflowServiceItemActionDefinition.AllowedInstanceStates = varWorkflowServiceItemActionDefinitionWithoutEmbeddedStruct.AllowedInstanceStates
+		varWorkflowServiceItemActionDefinition.AttributeParameters = varWorkflowServiceItemActionDefinitionWithoutEmbeddedStruct.AttributeParameters
 		varWorkflowServiceItemActionDefinition.CoreWorkflows = varWorkflowServiceItemActionDefinitionWithoutEmbeddedStruct.CoreWorkflows
 		varWorkflowServiceItemActionDefinition.Description = varWorkflowServiceItemActionDefinitionWithoutEmbeddedStruct.Description
 		varWorkflowServiceItemActionDefinition.InputDefinition = varWorkflowServiceItemActionDefinitionWithoutEmbeddedStruct.InputDefinition
 		varWorkflowServiceItemActionDefinition.Label = varWorkflowServiceItemActionDefinitionWithoutEmbeddedStruct.Label
 		varWorkflowServiceItemActionDefinition.Name = varWorkflowServiceItemActionDefinitionWithoutEmbeddedStruct.Name
-		varWorkflowServiceItemActionDefinition.OutputParameters = varWorkflowServiceItemActionDefinitionWithoutEmbeddedStruct.OutputParameters
 		varWorkflowServiceItemActionDefinition.Periodicity = varWorkflowServiceItemActionDefinitionWithoutEmbeddedStruct.Periodicity
 		varWorkflowServiceItemActionDefinition.PostCoreWorkflows = varWorkflowServiceItemActionDefinitionWithoutEmbeddedStruct.PostCoreWorkflows
 		varWorkflowServiceItemActionDefinition.PreCoreWorkflows = varWorkflowServiceItemActionDefinitionWithoutEmbeddedStruct.PreCoreWorkflows
 		varWorkflowServiceItemActionDefinition.RestrictOnPrivateAppliance = varWorkflowServiceItemActionDefinitionWithoutEmbeddedStruct.RestrictOnPrivateAppliance
 		varWorkflowServiceItemActionDefinition.StopWorkflows = varWorkflowServiceItemActionDefinitionWithoutEmbeddedStruct.StopWorkflows
+		varWorkflowServiceItemActionDefinition.UserIdOrEmail = varWorkflowServiceItemActionDefinitionWithoutEmbeddedStruct.UserIdOrEmail
 		varWorkflowServiceItemActionDefinition.ValidationInformation = varWorkflowServiceItemActionDefinitionWithoutEmbeddedStruct.ValidationInformation
 		varWorkflowServiceItemActionDefinition.ValidationWorkflows = varWorkflowServiceItemActionDefinitionWithoutEmbeddedStruct.ValidationWorkflows
 		varWorkflowServiceItemActionDefinition.AssociatedRoles = varWorkflowServiceItemActionDefinitionWithoutEmbeddedStruct.AssociatedRoles
@@ -886,19 +975,21 @@ func (o *WorkflowServiceItemActionDefinition) UnmarshalJSON(bytes []byte) (err e
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "ActionProperties")
 		delete(additionalProperties, "ActionType")
 		delete(additionalProperties, "AllowedInstanceStates")
+		delete(additionalProperties, "AttributeParameters")
 		delete(additionalProperties, "CoreWorkflows")
 		delete(additionalProperties, "Description")
 		delete(additionalProperties, "InputDefinition")
 		delete(additionalProperties, "Label")
 		delete(additionalProperties, "Name")
-		delete(additionalProperties, "OutputParameters")
 		delete(additionalProperties, "Periodicity")
 		delete(additionalProperties, "PostCoreWorkflows")
 		delete(additionalProperties, "PreCoreWorkflows")
 		delete(additionalProperties, "RestrictOnPrivateAppliance")
 		delete(additionalProperties, "StopWorkflows")
+		delete(additionalProperties, "UserIdOrEmail")
 		delete(additionalProperties, "ValidationInformation")
 		delete(additionalProperties, "ValidationWorkflows")
 		delete(additionalProperties, "AssociatedRoles")

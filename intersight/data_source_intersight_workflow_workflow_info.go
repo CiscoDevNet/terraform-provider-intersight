@@ -57,7 +57,7 @@ func getWorkflowWorkflowInfoSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"action": {
-			Description: "The action of the workflow such as start, cancel, retry, pause.\n* `None` - No action is set, this is the default value for action field.\n* `Create` - Create a new instance of the workflow but it does not start the execution of the workflow. Use the Start action to start execution of the workflow.\n* `Start` - Start a new execution of the workflow.\n* `Pause` - Pause the workflow, this can only be issued on workflows that are in running state.\n* `Resume` - Resume the workflow which was previously paused through pause action on the workflow.\n* `Retry` - Retry the workflow that has previously reached a final state and has the retryable property set to true. A running or waiting workflow cannot be retried. If the property retryFromTaskName is also passed along with this action, the workflow will be started from that specific task, otherwise the workflow will be restarted from the first task.  The task name in retryFromTaskName must be one of the tasks that completed or failed in the previous run. It is not possible to retry a workflow from a task which wasn't run in the previous iteration.\n* `RetryFailed` - Retry the workflow that has failed. A running or waiting workflow or a workflow that completed successfully cannot be retried. Only the tasks that failed in the previous run will be retried and the rest of workflow will be run. This action does not restart the workflow and also does not support retrying from a specific task.\n* `Cancel` - Cancel the workflow that is in running or waiting state.",
+			Description: "The action of the workflow such as start, cancel, retry, pause.\n* `None` - No action is set, this is the default value for action field.\n* `Create` - Create a new instance of the workflow but it does not start the execution of the workflow. Use the Start action to start execution of the workflow.\n* `Start` - Start a new execution of the workflow.\n* `Pause` - Pause the workflow, this can only be issued on workflows that are in running state. A workflow can be paused for a maximum of 180 days, after 180 days the workflow will be terminated by the system.\n* `Resume` - Resume the workflow which was previously paused through pause action on the workflow.\n* `Rerun` - Rerun the workflow that has previously reached a failed state. The workflow is run from the beginning using inputs from previous execution. Completed and currently running workflows cannot be rerun. Workflows do not have to be marked for retry to use this action.\n* `Retry` - This action has been deprecated. Please use RetryFailed, Rerun or RetryFromTask action. Retry the workflow that has previously reached a final state and has the retryable property set to true. A running or waiting workflow cannot be retried. If the property retryFromTaskName is also passed along with this action, the workflow will be started from that specific task, otherwise the workflow will be restarted from the first task.  The task name in retryFromTaskName must be one of the tasks that completed or failed in the previous run. It is not possible to retry a workflow from a task which wasn't run in the previous iteration.\n* `RetryFailed` - Retry the workflow that has failed. A running or waiting workflow or a workflow that completed successfully cannot be retried. Only the tasks that failed in the previous run will be retried and the rest of workflow will be run. This action does not restart the workflow and also does not support retrying from a specific task.\n* `RetryFromTask` - Retry the workflow that has previously reached a failed state and has the retryable property set to true. A running or waiting workflow cannot be retried. RetryFromTaskName must be passed along with this action, and the workflow will be started from that specific task. The task name in RetryFromTaskName must be one of the tasks that was executed in the previous attempt. It is not possible to retry a workflow from a task that wasn't run in the previous execution attempt.\n* `Cancel` - Cancel the workflow that is in running or waiting state.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -141,7 +141,7 @@ func getWorkflowWorkflowInfoSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"cleanup_time": {
-			Description: "The time when the workflow info will be removed from database.",
+			Description: "The time when the workflow info will be removed from the database. When WorkflowInfo is created, cleanup time will be set to 181 days. As the workflow progresses through different states the cleanup time can be updated. A cleanup time of 0 means the workflow is not scheduled for cleanup. An active workflow that continues to schedule & run tasks can run for any amount of time and there is no upper bound for such workflows. Workflows that are not actively running, say in Paused or Waiting states will be removed after 181 days.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -186,7 +186,7 @@ func getWorkflowWorkflowInfoSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"last_action": {
-			Description: "The last action that was issued on the workflow is saved in this field.\n* `None` - No action is set, this is the default value for action field.\n* `Create` - Create a new instance of the workflow but it does not start the execution of the workflow. Use the Start action to start execution of the workflow.\n* `Start` - Start a new execution of the workflow.\n* `Pause` - Pause the workflow, this can only be issued on workflows that are in running state.\n* `Resume` - Resume the workflow which was previously paused through pause action on the workflow.\n* `Retry` - Retry the workflow that has previously reached a final state and has the retryable property set to true. A running or waiting workflow cannot be retried. If the property retryFromTaskName is also passed along with this action, the workflow will be started from that specific task, otherwise the workflow will be restarted from the first task.  The task name in retryFromTaskName must be one of the tasks that completed or failed in the previous run. It is not possible to retry a workflow from a task which wasn't run in the previous iteration.\n* `RetryFailed` - Retry the workflow that has failed. A running or waiting workflow or a workflow that completed successfully cannot be retried. Only the tasks that failed in the previous run will be retried and the rest of workflow will be run. This action does not restart the workflow and also does not support retrying from a specific task.\n* `Cancel` - Cancel the workflow that is in running or waiting state.",
+			Description: "The last action that was issued on the workflow is saved in this field.\n* `None` - No action is set, this is the default value for action field.\n* `Create` - Create a new instance of the workflow but it does not start the execution of the workflow. Use the Start action to start execution of the workflow.\n* `Start` - Start a new execution of the workflow.\n* `Pause` - Pause the workflow, this can only be issued on workflows that are in running state. A workflow can be paused for a maximum of 180 days, after 180 days the workflow will be terminated by the system.\n* `Resume` - Resume the workflow which was previously paused through pause action on the workflow.\n* `Rerun` - Rerun the workflow that has previously reached a failed state. The workflow is run from the beginning using inputs from previous execution. Completed and currently running workflows cannot be rerun. Workflows do not have to be marked for retry to use this action.\n* `Retry` - This action has been deprecated. Please use RetryFailed, Rerun or RetryFromTask action. Retry the workflow that has previously reached a final state and has the retryable property set to true. A running or waiting workflow cannot be retried. If the property retryFromTaskName is also passed along with this action, the workflow will be started from that specific task, otherwise the workflow will be restarted from the first task.  The task name in retryFromTaskName must be one of the tasks that completed or failed in the previous run. It is not possible to retry a workflow from a task which wasn't run in the previous iteration.\n* `RetryFailed` - Retry the workflow that has failed. A running or waiting workflow or a workflow that completed successfully cannot be retried. Only the tasks that failed in the previous run will be retried and the rest of workflow will be run. This action does not restart the workflow and also does not support retrying from a specific task.\n* `RetryFromTask` - Retry the workflow that has previously reached a failed state and has the retryable property set to true. A running or waiting workflow cannot be retried. RetryFromTaskName must be passed along with this action, and the workflow will be started from that specific task. The task name in RetryFromTaskName must be one of the tasks that was executed in the previous attempt. It is not possible to retry a workflow from a task that wasn't run in the previous execution attempt.\n* `Cancel` - Cancel the workflow that is in running or waiting state.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -222,11 +222,6 @@ func getWorkflowWorkflowInfoSchema() map[string]*schema.Schema {
 					},
 				},
 			},
-		},
-		"meta_version": {
-			Description: "Version of the workflow metadata for which this workflow execution was started.",
-			Type:        schema.TypeInt,
-			Optional:    true,
 		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
@@ -563,7 +558,7 @@ func getWorkflowWorkflowInfoSchema() map[string]*schema.Schema {
 			},
 		},
 		"retry_from_task_name": {
-			Description: "This field is applicable when Retry action is issued for a workflow which is in 'final' state. When this field is not specified, the workflow will be retried from the start i.e., the first task. When this field is specified then the workflow will be retried from the specified task. This field should specify the task name which is the unique name of the task within the workflow. The task name must be one of the tasks that completed or failed in the previous run. It is not possible to retry a workflow from a task which wasn't run in the previous iteration.",
+			Description: "This field is required when RetryFromTask action is issued for a workflow that is in a 'final' state. The workflow will be retried from the specified task. This field must specify a task name which is the unique name of the task within the workflow. The task name must be one of the tasks that were completed or failed in the previous run. It is not possible to retry a workflow from a task that wasn't run in the previous execution attempt.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -723,6 +718,11 @@ func getWorkflowWorkflowInfoSchema() map[string]*schema.Schema {
 								},
 							},
 						},
+					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -887,11 +887,6 @@ func getWorkflowWorkflowInfoSchema() map[string]*schema.Schema {
 							},
 						},
 					},
-					"workflow_meta_name": {
-						Description: "The name of workflowMeta of the workflow running.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
 					"workflow_subtype": {
 						Description: "The subtype of the workflow.",
 						Type:        schema.TypeString,
@@ -939,11 +934,6 @@ func getWorkflowWorkflowInfoSchema() map[string]*schema.Schema {
 					},
 				},
 			},
-		},
-		"workflow_meta_type": {
-			Description: "The type of workflow meta. Derived from the workflow meta that is used to launch this workflow instance.\n* `SystemDefined` - System defined workflow definition.\n* `UserDefined` - User defined workflow definition.\n* `Dynamic` - Dynamically defined workflow definition.",
-			Type:        schema.TypeString,
-			Optional:    true,
 		},
 	}
 	return schemaMap
@@ -1198,11 +1188,6 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 			x = append(x, *o)
 		}
 		o.SetMessage(x)
-	}
-
-	if v, ok := d.GetOkExists("meta_version"); ok {
-		x := int64(v.(int))
-		o.SetMetaVersion(x)
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
@@ -1858,24 +1843,6 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			if v, ok := l["workflow_meta_name"]; ok {
-				{
-					x := (v.(string))
-					o.SetWorkflowMetaName(x)
-				}
-			}
-			if v, ok := l["workflow_subtype"]; ok {
-				{
-					x := (v.(string))
-					o.SetWorkflowSubtype(x)
-				}
-			}
-			if v, ok := l["workflow_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetWorkflowType(x)
-				}
-			}
 			p = append(p, *o)
 		}
 		if len(p) > 0 {
@@ -1925,11 +1892,6 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 			x := p[0]
 			o.SetWorkflowDefinition(x)
 		}
-	}
-
-	if v, ok := d.GetOk("workflow_meta_type"); ok {
-		x := (v.(string))
-		o.SetWorkflowMetaType(x)
 	}
 
 	data, err := o.MarshalJSON()
@@ -1992,7 +1954,6 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 				temp["last_action"] = (s.GetLastAction())
 
 				temp["message"] = flattenListWorkflowMessage(s.GetMessage(), d)
-				temp["meta_version"] = (s.GetMetaVersion())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
@@ -2039,7 +2000,6 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 				temp["workflow_ctx"] = flattenMapWorkflowWorkflowCtx(s.GetWorkflowCtx(), d)
 
 				temp["workflow_definition"] = flattenMapWorkflowWorkflowDefinitionRelationship(s.GetWorkflowDefinition(), d)
-				temp["workflow_meta_type"] = (s.GetWorkflowMetaType())
 				workflowWorkflowInfoResults = append(workflowWorkflowInfoResults, temp)
 			}
 		}

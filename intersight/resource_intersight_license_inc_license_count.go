@@ -289,6 +289,17 @@ func resourceLicenseIncLicenseCount() *schema.Resource {
 					}
 					return
 				}},
+			"premier_centralized_mod8_slot_count": {
+				Description: "The total number of devices claimed in the CentralizedMod8Slot premier tier Intersight Nexus Cloud.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"premier_d2_ops_fixed_count": {
 				Description: "The total number of devices claimed in the D2Ops Fixed premier tier Intersight Nexus Cloud.",
 				Type:        schema.TypeInt,
@@ -302,6 +313,17 @@ func resourceLicenseIncLicenseCount() *schema.Resource {
 				}},
 			"premier_d2_ops_mod_count": {
 				Description: "The total number of devices claimed in the D2Ops modular premier tier Intersight Nexus Cloud.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
+			"premier_distributed_mod8_slot_count": {
+				Description: "The total number of devices claimed in the DistributedMod8Slot premier tier Intersight Nexus Cloud.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 				Computed:    true,
@@ -429,6 +451,17 @@ func resourceLicenseIncLicenseCount() *schema.Resource {
 								},
 							},
 						},
+						"marked_for_deletion": {
+							Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
@@ -715,12 +748,20 @@ func resourceLicenseIncLicenseCountRead(c context.Context, d *schema.ResourceDat
 		return diag.Errorf("error occurred while setting property Premier1GfxCount in LicenseIncLicenseCount object: %s", err.Error())
 	}
 
+	if err := d.Set("premier_centralized_mod8_slot_count", (s.GetPremierCentralizedMod8SlotCount())); err != nil {
+		return diag.Errorf("error occurred while setting property PremierCentralizedMod8SlotCount in LicenseIncLicenseCount object: %s", err.Error())
+	}
+
 	if err := d.Set("premier_d2_ops_fixed_count", (s.GetPremierD2OpsFixedCount())); err != nil {
 		return diag.Errorf("error occurred while setting property PremierD2OpsFixedCount in LicenseIncLicenseCount object: %s", err.Error())
 	}
 
 	if err := d.Set("premier_d2_ops_mod_count", (s.GetPremierD2OpsModCount())); err != nil {
 		return diag.Errorf("error occurred while setting property PremierD2OpsModCount in LicenseIncLicenseCount object: %s", err.Error())
+	}
+
+	if err := d.Set("premier_distributed_mod8_slot_count", (s.GetPremierDistributedMod8SlotCount())); err != nil {
+		return diag.Errorf("error occurred while setting property PremierDistributedMod8SlotCount in LicenseIncLicenseCount object: %s", err.Error())
 	}
 
 	if err := d.Set("premier_mod4_slot_count", (s.GetPremierMod4SlotCount())); err != nil {

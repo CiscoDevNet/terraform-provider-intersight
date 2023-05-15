@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-10371
+API version: 1.0.11-11765
 Contact: intersight@cisco.com
 */
 
@@ -17,27 +17,20 @@ import (
 	"strings"
 )
 
-// StorageRemoteKeySetting Models the remote key configurarion required for disks encryptions. KMIP is the only remote key protocol supported in the policy.
+// StorageRemoteKeySetting Models the remote key configuration required for disk encryption.
 type StorageRemoteKeySetting struct {
 	MoBaseComplexType
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType string `json:"ObjectType"`
-	// Indicates whether the value of the 'password' property has been set.
-	IsPasswordSet *bool `json:"IsPasswordSet,omitempty"`
-	// The password for the KMIP server login.
-	Password *string `json:"Password,omitempty"`
-	// The port to which the KMIP client should connect.
-	Port *int64 `json:"Port,omitempty"`
-	// The IP address of the primary KMIP server. It could be an IPv4 address, an IPv6 address, or a hostname. Hostnames are valid only when Inband is configured for the CIMC address.
-	PrimaryServer *string `json:"PrimaryServer,omitempty"`
-	// The IP address of the secondary KMIP server. It could be an IPv4 address, an IPv6 address, or a hostname. Hostnames are valid only when Inband is configured for the CIMC address.
-	SecondaryServer *string `json:"SecondaryServer,omitempty"`
+	ObjectType      string                             `json:"ObjectType"`
+	AuthCredentials NullableStorageKmipAuthCredentials `json:"AuthCredentials,omitempty"`
+	// Indicates whether the value of the 'existingKey' property has been set.
+	IsExistingKeySet *bool                     `json:"IsExistingKeySet,omitempty"`
+	PrimaryServer    NullableStorageKmipServer `json:"PrimaryServer,omitempty"`
+	SecondaryServer  NullableStorageKmipServer `json:"SecondaryServer,omitempty"`
 	// The certificate/ public key of the KMIP server. It is required for initiating secure communication with the server.
-	ServerCertificate *string `json:"ServerCertificate,omitempty"`
-	// The user name for the KMIP server login.
-	Username             *string `json:"Username,omitempty"`
+	ServerCertificate    *string `json:"ServerCertificate,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -51,8 +44,6 @@ func NewStorageRemoteKeySetting(classId string, objectType string) *StorageRemot
 	this := StorageRemoteKeySetting{}
 	this.ClassId = classId
 	this.ObjectType = objectType
-	var port int64 = 5696
-	this.Port = &port
 	return &this
 }
 
@@ -65,8 +56,6 @@ func NewStorageRemoteKeySettingWithDefaults() *StorageRemoteKeySetting {
 	this.ClassId = classId
 	var objectType string = "storage.RemoteKeySetting"
 	this.ObjectType = objectType
-	var port int64 = 5696
-	this.Port = &port
 	return &this
 }
 
@@ -118,164 +107,165 @@ func (o *StorageRemoteKeySetting) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
-// GetIsPasswordSet returns the IsPasswordSet field value if set, zero value otherwise.
-func (o *StorageRemoteKeySetting) GetIsPasswordSet() bool {
-	if o == nil || o.IsPasswordSet == nil {
+// GetAuthCredentials returns the AuthCredentials field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *StorageRemoteKeySetting) GetAuthCredentials() StorageKmipAuthCredentials {
+	if o == nil || o.AuthCredentials.Get() == nil {
+		var ret StorageKmipAuthCredentials
+		return ret
+	}
+	return *o.AuthCredentials.Get()
+}
+
+// GetAuthCredentialsOk returns a tuple with the AuthCredentials field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *StorageRemoteKeySetting) GetAuthCredentialsOk() (*StorageKmipAuthCredentials, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AuthCredentials.Get(), o.AuthCredentials.IsSet()
+}
+
+// HasAuthCredentials returns a boolean if a field has been set.
+func (o *StorageRemoteKeySetting) HasAuthCredentials() bool {
+	if o != nil && o.AuthCredentials.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAuthCredentials gets a reference to the given NullableStorageKmipAuthCredentials and assigns it to the AuthCredentials field.
+func (o *StorageRemoteKeySetting) SetAuthCredentials(v StorageKmipAuthCredentials) {
+	o.AuthCredentials.Set(&v)
+}
+
+// SetAuthCredentialsNil sets the value for AuthCredentials to be an explicit nil
+func (o *StorageRemoteKeySetting) SetAuthCredentialsNil() {
+	o.AuthCredentials.Set(nil)
+}
+
+// UnsetAuthCredentials ensures that no value is present for AuthCredentials, not even an explicit nil
+func (o *StorageRemoteKeySetting) UnsetAuthCredentials() {
+	o.AuthCredentials.Unset()
+}
+
+// GetIsExistingKeySet returns the IsExistingKeySet field value if set, zero value otherwise.
+func (o *StorageRemoteKeySetting) GetIsExistingKeySet() bool {
+	if o == nil || o.IsExistingKeySet == nil {
 		var ret bool
 		return ret
 	}
-	return *o.IsPasswordSet
+	return *o.IsExistingKeySet
 }
 
-// GetIsPasswordSetOk returns a tuple with the IsPasswordSet field value if set, nil otherwise
+// GetIsExistingKeySetOk returns a tuple with the IsExistingKeySet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *StorageRemoteKeySetting) GetIsPasswordSetOk() (*bool, bool) {
-	if o == nil || o.IsPasswordSet == nil {
+func (o *StorageRemoteKeySetting) GetIsExistingKeySetOk() (*bool, bool) {
+	if o == nil || o.IsExistingKeySet == nil {
 		return nil, false
 	}
-	return o.IsPasswordSet, true
+	return o.IsExistingKeySet, true
 }
 
-// HasIsPasswordSet returns a boolean if a field has been set.
-func (o *StorageRemoteKeySetting) HasIsPasswordSet() bool {
-	if o != nil && o.IsPasswordSet != nil {
+// HasIsExistingKeySet returns a boolean if a field has been set.
+func (o *StorageRemoteKeySetting) HasIsExistingKeySet() bool {
+	if o != nil && o.IsExistingKeySet != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetIsPasswordSet gets a reference to the given bool and assigns it to the IsPasswordSet field.
-func (o *StorageRemoteKeySetting) SetIsPasswordSet(v bool) {
-	o.IsPasswordSet = &v
+// SetIsExistingKeySet gets a reference to the given bool and assigns it to the IsExistingKeySet field.
+func (o *StorageRemoteKeySetting) SetIsExistingKeySet(v bool) {
+	o.IsExistingKeySet = &v
 }
 
-// GetPassword returns the Password field value if set, zero value otherwise.
-func (o *StorageRemoteKeySetting) GetPassword() string {
-	if o == nil || o.Password == nil {
-		var ret string
+// GetPrimaryServer returns the PrimaryServer field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *StorageRemoteKeySetting) GetPrimaryServer() StorageKmipServer {
+	if o == nil || o.PrimaryServer.Get() == nil {
+		var ret StorageKmipServer
 		return ret
 	}
-	return *o.Password
-}
-
-// GetPasswordOk returns a tuple with the Password field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *StorageRemoteKeySetting) GetPasswordOk() (*string, bool) {
-	if o == nil || o.Password == nil {
-		return nil, false
-	}
-	return o.Password, true
-}
-
-// HasPassword returns a boolean if a field has been set.
-func (o *StorageRemoteKeySetting) HasPassword() bool {
-	if o != nil && o.Password != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetPassword gets a reference to the given string and assigns it to the Password field.
-func (o *StorageRemoteKeySetting) SetPassword(v string) {
-	o.Password = &v
-}
-
-// GetPort returns the Port field value if set, zero value otherwise.
-func (o *StorageRemoteKeySetting) GetPort() int64 {
-	if o == nil || o.Port == nil {
-		var ret int64
-		return ret
-	}
-	return *o.Port
-}
-
-// GetPortOk returns a tuple with the Port field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *StorageRemoteKeySetting) GetPortOk() (*int64, bool) {
-	if o == nil || o.Port == nil {
-		return nil, false
-	}
-	return o.Port, true
-}
-
-// HasPort returns a boolean if a field has been set.
-func (o *StorageRemoteKeySetting) HasPort() bool {
-	if o != nil && o.Port != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetPort gets a reference to the given int64 and assigns it to the Port field.
-func (o *StorageRemoteKeySetting) SetPort(v int64) {
-	o.Port = &v
-}
-
-// GetPrimaryServer returns the PrimaryServer field value if set, zero value otherwise.
-func (o *StorageRemoteKeySetting) GetPrimaryServer() string {
-	if o == nil || o.PrimaryServer == nil {
-		var ret string
-		return ret
-	}
-	return *o.PrimaryServer
+	return *o.PrimaryServer.Get()
 }
 
 // GetPrimaryServerOk returns a tuple with the PrimaryServer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *StorageRemoteKeySetting) GetPrimaryServerOk() (*string, bool) {
-	if o == nil || o.PrimaryServer == nil {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *StorageRemoteKeySetting) GetPrimaryServerOk() (*StorageKmipServer, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PrimaryServer, true
+	return o.PrimaryServer.Get(), o.PrimaryServer.IsSet()
 }
 
 // HasPrimaryServer returns a boolean if a field has been set.
 func (o *StorageRemoteKeySetting) HasPrimaryServer() bool {
-	if o != nil && o.PrimaryServer != nil {
+	if o != nil && o.PrimaryServer.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPrimaryServer gets a reference to the given string and assigns it to the PrimaryServer field.
-func (o *StorageRemoteKeySetting) SetPrimaryServer(v string) {
-	o.PrimaryServer = &v
+// SetPrimaryServer gets a reference to the given NullableStorageKmipServer and assigns it to the PrimaryServer field.
+func (o *StorageRemoteKeySetting) SetPrimaryServer(v StorageKmipServer) {
+	o.PrimaryServer.Set(&v)
 }
 
-// GetSecondaryServer returns the SecondaryServer field value if set, zero value otherwise.
-func (o *StorageRemoteKeySetting) GetSecondaryServer() string {
-	if o == nil || o.SecondaryServer == nil {
-		var ret string
+// SetPrimaryServerNil sets the value for PrimaryServer to be an explicit nil
+func (o *StorageRemoteKeySetting) SetPrimaryServerNil() {
+	o.PrimaryServer.Set(nil)
+}
+
+// UnsetPrimaryServer ensures that no value is present for PrimaryServer, not even an explicit nil
+func (o *StorageRemoteKeySetting) UnsetPrimaryServer() {
+	o.PrimaryServer.Unset()
+}
+
+// GetSecondaryServer returns the SecondaryServer field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *StorageRemoteKeySetting) GetSecondaryServer() StorageKmipServer {
+	if o == nil || o.SecondaryServer.Get() == nil {
+		var ret StorageKmipServer
 		return ret
 	}
-	return *o.SecondaryServer
+	return *o.SecondaryServer.Get()
 }
 
 // GetSecondaryServerOk returns a tuple with the SecondaryServer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *StorageRemoteKeySetting) GetSecondaryServerOk() (*string, bool) {
-	if o == nil || o.SecondaryServer == nil {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *StorageRemoteKeySetting) GetSecondaryServerOk() (*StorageKmipServer, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SecondaryServer, true
+	return o.SecondaryServer.Get(), o.SecondaryServer.IsSet()
 }
 
 // HasSecondaryServer returns a boolean if a field has been set.
 func (o *StorageRemoteKeySetting) HasSecondaryServer() bool {
-	if o != nil && o.SecondaryServer != nil {
+	if o != nil && o.SecondaryServer.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSecondaryServer gets a reference to the given string and assigns it to the SecondaryServer field.
-func (o *StorageRemoteKeySetting) SetSecondaryServer(v string) {
-	o.SecondaryServer = &v
+// SetSecondaryServer gets a reference to the given NullableStorageKmipServer and assigns it to the SecondaryServer field.
+func (o *StorageRemoteKeySetting) SetSecondaryServer(v StorageKmipServer) {
+	o.SecondaryServer.Set(&v)
+}
+
+// SetSecondaryServerNil sets the value for SecondaryServer to be an explicit nil
+func (o *StorageRemoteKeySetting) SetSecondaryServerNil() {
+	o.SecondaryServer.Set(nil)
+}
+
+// UnsetSecondaryServer ensures that no value is present for SecondaryServer, not even an explicit nil
+func (o *StorageRemoteKeySetting) UnsetSecondaryServer() {
+	o.SecondaryServer.Unset()
 }
 
 // GetServerCertificate returns the ServerCertificate field value if set, zero value otherwise.
@@ -310,38 +300,6 @@ func (o *StorageRemoteKeySetting) SetServerCertificate(v string) {
 	o.ServerCertificate = &v
 }
 
-// GetUsername returns the Username field value if set, zero value otherwise.
-func (o *StorageRemoteKeySetting) GetUsername() string {
-	if o == nil || o.Username == nil {
-		var ret string
-		return ret
-	}
-	return *o.Username
-}
-
-// GetUsernameOk returns a tuple with the Username field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *StorageRemoteKeySetting) GetUsernameOk() (*string, bool) {
-	if o == nil || o.Username == nil {
-		return nil, false
-	}
-	return o.Username, true
-}
-
-// HasUsername returns a boolean if a field has been set.
-func (o *StorageRemoteKeySetting) HasUsername() bool {
-	if o != nil && o.Username != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetUsername gets a reference to the given string and assigns it to the Username field.
-func (o *StorageRemoteKeySetting) SetUsername(v string) {
-	o.Username = &v
-}
-
 func (o StorageRemoteKeySetting) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
@@ -358,26 +316,20 @@ func (o StorageRemoteKeySetting) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
-	if o.IsPasswordSet != nil {
-		toSerialize["IsPasswordSet"] = o.IsPasswordSet
+	if o.AuthCredentials.IsSet() {
+		toSerialize["AuthCredentials"] = o.AuthCredentials.Get()
 	}
-	if o.Password != nil {
-		toSerialize["Password"] = o.Password
+	if o.IsExistingKeySet != nil {
+		toSerialize["IsExistingKeySet"] = o.IsExistingKeySet
 	}
-	if o.Port != nil {
-		toSerialize["Port"] = o.Port
+	if o.PrimaryServer.IsSet() {
+		toSerialize["PrimaryServer"] = o.PrimaryServer.Get()
 	}
-	if o.PrimaryServer != nil {
-		toSerialize["PrimaryServer"] = o.PrimaryServer
-	}
-	if o.SecondaryServer != nil {
-		toSerialize["SecondaryServer"] = o.SecondaryServer
+	if o.SecondaryServer.IsSet() {
+		toSerialize["SecondaryServer"] = o.SecondaryServer.Get()
 	}
 	if o.ServerCertificate != nil {
 		toSerialize["ServerCertificate"] = o.ServerCertificate
-	}
-	if o.Username != nil {
-		toSerialize["Username"] = o.Username
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -392,21 +344,14 @@ func (o *StorageRemoteKeySetting) UnmarshalJSON(bytes []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType string `json:"ObjectType"`
-		// Indicates whether the value of the 'password' property has been set.
-		IsPasswordSet *bool `json:"IsPasswordSet,omitempty"`
-		// The password for the KMIP server login.
-		Password *string `json:"Password,omitempty"`
-		// The port to which the KMIP client should connect.
-		Port *int64 `json:"Port,omitempty"`
-		// The IP address of the primary KMIP server. It could be an IPv4 address, an IPv6 address, or a hostname. Hostnames are valid only when Inband is configured for the CIMC address.
-		PrimaryServer *string `json:"PrimaryServer,omitempty"`
-		// The IP address of the secondary KMIP server. It could be an IPv4 address, an IPv6 address, or a hostname. Hostnames are valid only when Inband is configured for the CIMC address.
-		SecondaryServer *string `json:"SecondaryServer,omitempty"`
+		ObjectType      string                             `json:"ObjectType"`
+		AuthCredentials NullableStorageKmipAuthCredentials `json:"AuthCredentials,omitempty"`
+		// Indicates whether the value of the 'existingKey' property has been set.
+		IsExistingKeySet *bool                     `json:"IsExistingKeySet,omitempty"`
+		PrimaryServer    NullableStorageKmipServer `json:"PrimaryServer,omitempty"`
+		SecondaryServer  NullableStorageKmipServer `json:"SecondaryServer,omitempty"`
 		// The certificate/ public key of the KMIP server. It is required for initiating secure communication with the server.
 		ServerCertificate *string `json:"ServerCertificate,omitempty"`
-		// The user name for the KMIP server login.
-		Username *string `json:"Username,omitempty"`
 	}
 
 	varStorageRemoteKeySettingWithoutEmbeddedStruct := StorageRemoteKeySettingWithoutEmbeddedStruct{}
@@ -416,13 +361,11 @@ func (o *StorageRemoteKeySetting) UnmarshalJSON(bytes []byte) (err error) {
 		varStorageRemoteKeySetting := _StorageRemoteKeySetting{}
 		varStorageRemoteKeySetting.ClassId = varStorageRemoteKeySettingWithoutEmbeddedStruct.ClassId
 		varStorageRemoteKeySetting.ObjectType = varStorageRemoteKeySettingWithoutEmbeddedStruct.ObjectType
-		varStorageRemoteKeySetting.IsPasswordSet = varStorageRemoteKeySettingWithoutEmbeddedStruct.IsPasswordSet
-		varStorageRemoteKeySetting.Password = varStorageRemoteKeySettingWithoutEmbeddedStruct.Password
-		varStorageRemoteKeySetting.Port = varStorageRemoteKeySettingWithoutEmbeddedStruct.Port
+		varStorageRemoteKeySetting.AuthCredentials = varStorageRemoteKeySettingWithoutEmbeddedStruct.AuthCredentials
+		varStorageRemoteKeySetting.IsExistingKeySet = varStorageRemoteKeySettingWithoutEmbeddedStruct.IsExistingKeySet
 		varStorageRemoteKeySetting.PrimaryServer = varStorageRemoteKeySettingWithoutEmbeddedStruct.PrimaryServer
 		varStorageRemoteKeySetting.SecondaryServer = varStorageRemoteKeySettingWithoutEmbeddedStruct.SecondaryServer
 		varStorageRemoteKeySetting.ServerCertificate = varStorageRemoteKeySettingWithoutEmbeddedStruct.ServerCertificate
-		varStorageRemoteKeySetting.Username = varStorageRemoteKeySettingWithoutEmbeddedStruct.Username
 		*o = StorageRemoteKeySetting(varStorageRemoteKeySetting)
 	} else {
 		return err
@@ -442,13 +385,11 @@ func (o *StorageRemoteKeySetting) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
-		delete(additionalProperties, "IsPasswordSet")
-		delete(additionalProperties, "Password")
-		delete(additionalProperties, "Port")
+		delete(additionalProperties, "AuthCredentials")
+		delete(additionalProperties, "IsExistingKeySet")
 		delete(additionalProperties, "PrimaryServer")
 		delete(additionalProperties, "SecondaryServer")
 		delete(additionalProperties, "ServerCertificate")
-		delete(additionalProperties, "Username")
 
 		// remove fields from embedded structs
 		reflectMoBaseComplexType := reflect.ValueOf(o.MoBaseComplexType)

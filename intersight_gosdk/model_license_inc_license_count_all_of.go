@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-10371
+API version: 1.0.11-11765
 Contact: intersight@cisco.com
 */
 
@@ -27,10 +27,14 @@ type LicenseIncLicenseCountAllOf struct {
 	Premier10GfxCount *int64 `json:"Premier10GfxCount,omitempty"`
 	// The total number of devices claimed in the premier 1G fixed tier Intersight Nexus Cloud.
 	Premier1GfxCount *int64 `json:"Premier1GfxCount,omitempty"`
+	// The total number of devices claimed in the CentralizedMod8Slot premier tier Intersight Nexus Cloud.
+	PremierCentralizedMod8SlotCount *int64 `json:"PremierCentralizedMod8SlotCount,omitempty"`
 	// The total number of devices claimed in the D2Ops Fixed premier tier Intersight Nexus Cloud.
 	PremierD2OpsFixedCount *int64 `json:"PremierD2OpsFixedCount,omitempty"`
 	// The total number of devices claimed in the D2Ops modular premier tier Intersight Nexus Cloud.
 	PremierD2OpsModCount *int64 `json:"PremierD2OpsModCount,omitempty"`
+	// The total number of devices claimed in the DistributedMod8Slot premier tier Intersight Nexus Cloud.
+	PremierDistributedMod8SlotCount *int64 `json:"PremierDistributedMod8SlotCount,omitempty"`
 	// The total number of devices claimed in the modular 4 slot premier tier Intersight Nexus Cloud.
 	PremierMod4SlotCount *int64 `json:"PremierMod4SlotCount,omitempty"`
 	// The total number of devices claimed in the modular 8 slot premier tier Intersight Nexus Cloud.
@@ -208,6 +212,38 @@ func (o *LicenseIncLicenseCountAllOf) SetPremier1GfxCount(v int64) {
 	o.Premier1GfxCount = &v
 }
 
+// GetPremierCentralizedMod8SlotCount returns the PremierCentralizedMod8SlotCount field value if set, zero value otherwise.
+func (o *LicenseIncLicenseCountAllOf) GetPremierCentralizedMod8SlotCount() int64 {
+	if o == nil || o.PremierCentralizedMod8SlotCount == nil {
+		var ret int64
+		return ret
+	}
+	return *o.PremierCentralizedMod8SlotCount
+}
+
+// GetPremierCentralizedMod8SlotCountOk returns a tuple with the PremierCentralizedMod8SlotCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LicenseIncLicenseCountAllOf) GetPremierCentralizedMod8SlotCountOk() (*int64, bool) {
+	if o == nil || o.PremierCentralizedMod8SlotCount == nil {
+		return nil, false
+	}
+	return o.PremierCentralizedMod8SlotCount, true
+}
+
+// HasPremierCentralizedMod8SlotCount returns a boolean if a field has been set.
+func (o *LicenseIncLicenseCountAllOf) HasPremierCentralizedMod8SlotCount() bool {
+	if o != nil && o.PremierCentralizedMod8SlotCount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPremierCentralizedMod8SlotCount gets a reference to the given int64 and assigns it to the PremierCentralizedMod8SlotCount field.
+func (o *LicenseIncLicenseCountAllOf) SetPremierCentralizedMod8SlotCount(v int64) {
+	o.PremierCentralizedMod8SlotCount = &v
+}
+
 // GetPremierD2OpsFixedCount returns the PremierD2OpsFixedCount field value if set, zero value otherwise.
 func (o *LicenseIncLicenseCountAllOf) GetPremierD2OpsFixedCount() int64 {
 	if o == nil || o.PremierD2OpsFixedCount == nil {
@@ -270,6 +306,38 @@ func (o *LicenseIncLicenseCountAllOf) HasPremierD2OpsModCount() bool {
 // SetPremierD2OpsModCount gets a reference to the given int64 and assigns it to the PremierD2OpsModCount field.
 func (o *LicenseIncLicenseCountAllOf) SetPremierD2OpsModCount(v int64) {
 	o.PremierD2OpsModCount = &v
+}
+
+// GetPremierDistributedMod8SlotCount returns the PremierDistributedMod8SlotCount field value if set, zero value otherwise.
+func (o *LicenseIncLicenseCountAllOf) GetPremierDistributedMod8SlotCount() int64 {
+	if o == nil || o.PremierDistributedMod8SlotCount == nil {
+		var ret int64
+		return ret
+	}
+	return *o.PremierDistributedMod8SlotCount
+}
+
+// GetPremierDistributedMod8SlotCountOk returns a tuple with the PremierDistributedMod8SlotCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LicenseIncLicenseCountAllOf) GetPremierDistributedMod8SlotCountOk() (*int64, bool) {
+	if o == nil || o.PremierDistributedMod8SlotCount == nil {
+		return nil, false
+	}
+	return o.PremierDistributedMod8SlotCount, true
+}
+
+// HasPremierDistributedMod8SlotCount returns a boolean if a field has been set.
+func (o *LicenseIncLicenseCountAllOf) HasPremierDistributedMod8SlotCount() bool {
+	if o != nil && o.PremierDistributedMod8SlotCount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPremierDistributedMod8SlotCount gets a reference to the given int64 and assigns it to the PremierDistributedMod8SlotCount field.
+func (o *LicenseIncLicenseCountAllOf) SetPremierDistributedMod8SlotCount(v int64) {
+	o.PremierDistributedMod8SlotCount = &v
 }
 
 // GetPremierMod4SlotCount returns the PremierMod4SlotCount field value if set, zero value otherwise.
@@ -385,11 +453,17 @@ func (o LicenseIncLicenseCountAllOf) MarshalJSON() ([]byte, error) {
 	if o.Premier1GfxCount != nil {
 		toSerialize["Premier1GfxCount"] = o.Premier1GfxCount
 	}
+	if o.PremierCentralizedMod8SlotCount != nil {
+		toSerialize["PremierCentralizedMod8SlotCount"] = o.PremierCentralizedMod8SlotCount
+	}
 	if o.PremierD2OpsFixedCount != nil {
 		toSerialize["PremierD2OpsFixedCount"] = o.PremierD2OpsFixedCount
 	}
 	if o.PremierD2OpsModCount != nil {
 		toSerialize["PremierD2OpsModCount"] = o.PremierD2OpsModCount
+	}
+	if o.PremierDistributedMod8SlotCount != nil {
+		toSerialize["PremierDistributedMod8SlotCount"] = o.PremierDistributedMod8SlotCount
 	}
 	if o.PremierMod4SlotCount != nil {
 		toSerialize["PremierMod4SlotCount"] = o.PremierMod4SlotCount
@@ -423,8 +497,10 @@ func (o *LicenseIncLicenseCountAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "Premier100GfxCount")
 		delete(additionalProperties, "Premier10GfxCount")
 		delete(additionalProperties, "Premier1GfxCount")
+		delete(additionalProperties, "PremierCentralizedMod8SlotCount")
 		delete(additionalProperties, "PremierD2OpsFixedCount")
 		delete(additionalProperties, "PremierD2OpsModCount")
+		delete(additionalProperties, "PremierDistributedMod8SlotCount")
 		delete(additionalProperties, "PremierMod4SlotCount")
 		delete(additionalProperties, "PremierMod8SlotCount")
 		delete(additionalProperties, "AccountLicenseData")

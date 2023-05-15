@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | Name of the NetApp CIFS share. | [optional] [readonly] 
 **NetAppCifsAcl** | Pointer to [**[]StorageNetAppCifsAcl**](StorageNetAppCifsAcl.md) |  | [optional] 
 **Path** | Pointer to **string** | The fully-qualified pathname in the owning SVM namespace that is shared through the share. | [optional] [readonly] 
+**SvmName** | Pointer to **string** | The storage virtual machine name for the CIFS share. | [optional] [readonly] 
 **SvmUuid** | Pointer to **string** | Unique identifier for the NetApp Storage Virtual Machine. | [optional] [readonly] 
 **StorageContainer** | Pointer to [**StorageNetAppVolumeRelationship**](StorageNetAppVolumeRelationship.md) |  | [optional] 
 **Tenant** | Pointer to [**StorageNetAppStorageVmRelationship**](StorageNetAppStorageVmRelationship.md) |  | [optional] 
@@ -234,6 +235,31 @@ SetPath sets Path field to given value.
 `func (o *StorageNetAppCifsShareAllOf) HasPath() bool`
 
 HasPath returns a boolean if a field has been set.
+
+### GetSvmName
+
+`func (o *StorageNetAppCifsShareAllOf) GetSvmName() string`
+
+GetSvmName returns the SvmName field if non-nil, zero value otherwise.
+
+### GetSvmNameOk
+
+`func (o *StorageNetAppCifsShareAllOf) GetSvmNameOk() (*string, bool)`
+
+GetSvmNameOk returns a tuple with the SvmName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSvmName
+
+`func (o *StorageNetAppCifsShareAllOf) SetSvmName(v string)`
+
+SetSvmName sets SvmName field to given value.
+
+### HasSvmName
+
+`func (o *StorageNetAppCifsShareAllOf) HasSvmName() bool`
+
+HasSvmName returns a boolean if a field has been set.
 
 ### GetSvmUuid
 

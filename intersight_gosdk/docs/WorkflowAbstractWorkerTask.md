@@ -10,7 +10,6 @@ Name | Type | Description | Notes
 **OnFailure** | Pointer to **string** | This specifies the name of the next task to run if Task fails.  This is the unique name given to the task instance within the workflow. In a graph model, denotes an edge to another Task Node. | [optional] 
 **OnSuccess** | Pointer to **string** | This specifies the name of the next task to run if Task succeeds.  This is the unique name given to the task instance within the workflow. In a graph model, denotes an edge to another Task Node. | [optional] 
 **RollbackDisabled** | Pointer to **bool** | The task is disabled/enabled for rollback operation in this workflow if the task has rollback support. | [optional] [default to false]
-**UseDefault** | Pointer to **bool** | UseDefault when set to true, means the default version of the task or workflow will be used at the time of execution. When this property is set then version for task or subworkflow cannot be set. When workflow is created or updated the default version of task or subworkflow will be used for validation, but when the workflow is executed the default version that that time will be used for validation and subsequent execution. | [optional] [default to false]
 **VariableParameters** | Pointer to **interface{}** | JSON formatted key-value pairs that perform variable update at the end of the task execution. Mapping for variables can be provided as either static values, direct mapping or advanced mapping using templates. The direct mapping can be specified as &#39;${Source.&lt; input | output | variable&gt;.&lt;JSONPath&gt;}&#39;. &#39;Source&#39; can be either workflow or the name of the current or an earlier task within the workflow. You can map the variable to either a workflow input, a task output or another variable. Golang template syntax is supported for advanced mapping. A simple flattened example is \&quot;VariableParameters\&quot;:{ \&quot;var1\&quot;:\&quot;${task1.output.output1}\&quot;, \&quot;var2\&quot;:\&quot;{{ Itoa .global.workflow.variable.varInt}}\&quot; } where variable var1 is mapped directly to output1 of task1 and variable var2 is using a template to convert another variable varInt to string and assign that value. | [optional] 
 
 ## Methods
@@ -181,31 +180,6 @@ SetRollbackDisabled sets RollbackDisabled field to given value.
 `func (o *WorkflowAbstractWorkerTask) HasRollbackDisabled() bool`
 
 HasRollbackDisabled returns a boolean if a field has been set.
-
-### GetUseDefault
-
-`func (o *WorkflowAbstractWorkerTask) GetUseDefault() bool`
-
-GetUseDefault returns the UseDefault field if non-nil, zero value otherwise.
-
-### GetUseDefaultOk
-
-`func (o *WorkflowAbstractWorkerTask) GetUseDefaultOk() (*bool, bool)`
-
-GetUseDefaultOk returns a tuple with the UseDefault field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUseDefault
-
-`func (o *WorkflowAbstractWorkerTask) SetUseDefault(v bool)`
-
-SetUseDefault sets UseDefault field to given value.
-
-### HasUseDefault
-
-`func (o *WorkflowAbstractWorkerTask) HasUseDefault() bool`
-
-HasUseDefault returns a boolean if a field has been set.
 
 ### GetVariableParameters
 

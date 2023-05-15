@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **IdpSessionExpiration** | Pointer to **string** | SAML SessionNotOnOrAfter attribute sent by IdP in the assertion. IdP uses this to control for how long SP session maybe. SP does not issue SLO if the session is not valid. | [optional] [readonly] 
 **IdpSessionIndex** | Pointer to **string** | SAML SessionIndex attribute sent by IdP in the assertion. This has to be sent back to IdP in LogoutRequest. | [optional] [readonly] 
 **IsIdpInitiatedSso** | Pointer to **bool** | Sign-in is SP-Intitiated or IdP-Intitiated. | [optional] [readonly] 
+**IsPartialAccountsListed** | Pointer to **bool** | Select Account Page shows partial list of accounts when processing data from some regions fails. | [optional] [readonly] 
 **SubjectName** | Pointer to **string** | SAML Subject NameID attribute sent by IdP in the assertion. This has to be sent back to IdP in LogoutRequest. | [optional] [readonly] 
 
 ## Methods
@@ -170,6 +171,31 @@ SetIsIdpInitiatedSso sets IsIdpInitiatedSso field to given value.
 `func (o *IamSsoSessionAttributesAllOf) HasIsIdpInitiatedSso() bool`
 
 HasIsIdpInitiatedSso returns a boolean if a field has been set.
+
+### GetIsPartialAccountsListed
+
+`func (o *IamSsoSessionAttributesAllOf) GetIsPartialAccountsListed() bool`
+
+GetIsPartialAccountsListed returns the IsPartialAccountsListed field if non-nil, zero value otherwise.
+
+### GetIsPartialAccountsListedOk
+
+`func (o *IamSsoSessionAttributesAllOf) GetIsPartialAccountsListedOk() (*bool, bool)`
+
+GetIsPartialAccountsListedOk returns a tuple with the IsPartialAccountsListed field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsPartialAccountsListed
+
+`func (o *IamSsoSessionAttributesAllOf) SetIsPartialAccountsListed(v bool)`
+
+SetIsPartialAccountsListed sets IsPartialAccountsListed field to given value.
+
+### HasIsPartialAccountsListed
+
+`func (o *IamSsoSessionAttributesAllOf) HasIsPartialAccountsListed() bool`
+
+HasIsPartialAccountsListed returns a boolean if a field has been set.
 
 ### GetSubjectName
 

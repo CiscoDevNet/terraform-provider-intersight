@@ -23,5 +23,6 @@ The following arguments can be used to get data of already created objects in In
 * `product`:(string) The product type of the downloaded software. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `timestamp`:(string) The download time of the software image. 
+* `user_id_or_email`:(string) The email id of the user who initiated the software download. 
 * `nr_version`:(string) The version of software which was downloaded. 
  

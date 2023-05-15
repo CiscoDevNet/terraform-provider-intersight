@@ -160,6 +160,11 @@ func getKubernetesNodeGroupProfileSchema() map[string]*schema.Schema {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"config_state_summary": {
+						Description: "Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, InConsistent, Validating, Configuring, Failed, Activating, UnConfiguring.\n* `None` - The default state is none.\n* `Not-assigned` - Server is not assigned to the profile.\n* `Assigned` - Server is assigned to the profile and the configurations are not yet deployed.\n* `Preparing` - Preparing to deploy the configuration.\n* `Validating` - Profile validation in progress.\n* `Configuring` - Profile deploy operation is in progress.\n* `UnConfiguring` - Server is unassigned and config cleanup is in progress.\n* `Analyzing` - Profile changes are being analyzed.\n* `Activating` - Configuration is being activated at the endpoint.\n* `Inconsistent` - Profile is inconsistent with the endpoint configuration.\n* `Associated` - The profile configuration has been applied to the endpoint and no inconsistencies have been detected.\n* `Failed` - The last action on the profile has failed.\n* `Not-complete` - Config import operation on the profile is not complete.\n* `Waiting-for-resource` - Waiting for the resource to be allocated for the profile.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 					"config_type": {
 						Description: "The type of configuration running on the profile. Since profile deployments can configure multiple different settings, configType indicates which type of configuration is currently in progress.",
 						Type:        schema.TypeString,
@@ -175,6 +180,11 @@ func getKubernetesNodeGroupProfileSchema() map[string]*schema.Schema {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"inconsistency_reason": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 						Type:        schema.TypeString,
@@ -565,6 +575,39 @@ func getKubernetesNodeGroupProfileSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"scheduled_actions": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"action": {
+						Description: "Name of the action to be performed on the profile.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"proceed_on_reboot": {
+						Description: "ProceedOnReboot can be used to acknowledge server reboot while triggering deploy/activate.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"shared_scope": {
 			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 			Type:        schema.TypeString,
@@ -720,6 +763,11 @@ func getKubernetesNodeGroupProfileSchema() map[string]*schema.Schema {
 								},
 							},
 						},
+					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -975,6 +1023,20 @@ func dataSourceKubernetesNodeGroupProfileRead(c context.Context, d *schema.Resou
 				{
 					x := (v.(string))
 					o.SetErrorState(x)
+				}
+			}
+			if v, ok := l["inconsistency_reason"]; ok {
+				{
+					x := make([]string, 0)
+					y := reflect.ValueOf(v)
+					for i := 0; i < y.Len(); i++ {
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
+					}
+					if len(x) > 0 {
+						o.SetInconsistencyReason(x)
+					}
 				}
 			}
 			if v, ok := l["object_type"]; ok {
@@ -1437,6 +1499,46 @@ func dataSourceKubernetesNodeGroupProfileRead(c context.Context, d *schema.Resou
 		o.SetPolicyBucket(x)
 	}
 
+	if v, ok := d.GetOk("scheduled_actions"); ok {
+		x := make([]models.PolicyScheduledAction, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.PolicyScheduledAction{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["action"]; ok {
+				{
+					x := (v.(string))
+					o.SetAction(x)
+				}
+			}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("policy.ScheduledAction")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["proceed_on_reboot"]; ok {
+				{
+					x := (v.(bool))
+					o.SetProceedOnReboot(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetScheduledActions(x)
+	}
+
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
@@ -1723,6 +1825,8 @@ func dataSourceKubernetesNodeGroupProfileRead(c context.Context, d *schema.Resou
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 
 				temp["policy_bucket"] = flattenListPolicyAbstractPolicyRelationship(s.GetPolicyBucket(), d)
+
+				temp["scheduled_actions"] = flattenListPolicyScheduledAction(s.GetScheduledActions(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["src_template"] = flattenMapPolicyAbstractProfileRelationship(s.GetSrcTemplate(), d)

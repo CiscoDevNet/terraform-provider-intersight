@@ -7,12 +7,18 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.ServiceItemInstance"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.ServiceItemInstance"]
 **Description** | Pointer to **string** | The description for this service item instance. | [optional] 
+**Label** | Pointer to **string** | A user friendly short name to identify the resource. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ) or an underscore (_). | [optional] 
 **LastStatus** | Pointer to **string** | Last status of the service item instance which will be reverted when an ongoing service item action instance is aborted. * &#x60;NotCreated&#x60; - The service item is not yet created and it is in a draft mode. A service item instance can be deleted in this state. * &#x60;InProgress&#x60; - An action is in progress and until that action has reached a final state, another action cannot be started. * &#x60;Failed&#x60; - The last action on the service item instance failed and corrective measures need to be taken to bring the service item instance back to valid state. * &#x60;Okay&#x60; - The last action on the service item instance completed and the service item instance is in Okay state. * &#x60;Decommissioned&#x60; - The service item is decommissioned and can be safely deleted. A service item instance in any other state after it has been created cannot be deleted until it has been decommissioned. | [optional] [readonly] [default to "NotCreated"]
-**Name** | Pointer to **string** | A name of the service item instance. Name of the service item instance must be unique within a type of Service item definition. | [optional] 
+**Name** | Pointer to **string** | A name of the service item instance. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.) or an underscore (_). | [optional] 
+**ResourcelifecycleStatus** | Pointer to **string** | Lifecycle state of service item instance. * &#x60;Creating&#x60; - The service item is not yet created and creation action is in progress. * &#x60;Created&#x60; - The service item is created. * &#x60;Decommissioning&#x60; - The service item is not yet decommissioned and decommission action is in progress. * &#x60;Decommissioned&#x60; - The service item is decommisioned. * &#x60;Deleting&#x60; - The service item is not yet deleted and deletion action is in progress. * &#x60;Deleted&#x60; - The service item is deleted. * &#x60;Failed&#x60; - The service item action is failed to perform the operation. | [optional] [readonly] [default to "Creating"]
 **Status** | Pointer to **string** | Status of the service item instance which controls the actions that can be performed on this instance. * &#x60;NotCreated&#x60; - The service item is not yet created and it is in a draft mode. A service item instance can be deleted in this state. * &#x60;InProgress&#x60; - An action is in progress and until that action has reached a final state, another action cannot be started. * &#x60;Failed&#x60; - The last action on the service item instance failed and corrective measures need to be taken to bring the service item instance back to valid state. * &#x60;Okay&#x60; - The last action on the service item instance completed and the service item instance is in Okay state. * &#x60;Decommissioned&#x60; - The service item is decommissioned and can be safely deleted. A service item instance in any other state after it has been created cannot be deleted until it has been decommissioned. | [optional] [readonly] [default to "NotCreated"]
-**UserId** | Pointer to **string** | The user identifier which indicates the user that started this workflow. | [optional] [readonly] 
+**UserIdOrEmail** | Pointer to **string** | The user identifier which indicates the user that started this workflow. | [optional] [readonly] 
+**CatalogServiceRequest** | Pointer to [**[]WorkflowCatalogServiceRequestRelationship**](WorkflowCatalogServiceRequestRelationship.md) | An array of relationships to workflowCatalogServiceRequest resources. | [optional] [readonly] 
+**Idp** | Pointer to [**IamIdpRelationship**](IamIdpRelationship.md) |  | [optional] 
+**IdpReference** | Pointer to [**IamIdpReferenceRelationship**](IamIdpReferenceRelationship.md) |  | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 **ServiceItemDefinition** | Pointer to [**WorkflowServiceItemDefinitionRelationship**](WorkflowServiceItemDefinitionRelationship.md) |  | [optional] 
+**User** | Pointer to [**IamUserRelationship**](IamUserRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -98,6 +104,31 @@ SetDescription sets Description field to given value.
 
 HasDescription returns a boolean if a field has been set.
 
+### GetLabel
+
+`func (o *WorkflowServiceItemInstance) GetLabel() string`
+
+GetLabel returns the Label field if non-nil, zero value otherwise.
+
+### GetLabelOk
+
+`func (o *WorkflowServiceItemInstance) GetLabelOk() (*string, bool)`
+
+GetLabelOk returns a tuple with the Label field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLabel
+
+`func (o *WorkflowServiceItemInstance) SetLabel(v string)`
+
+SetLabel sets Label field to given value.
+
+### HasLabel
+
+`func (o *WorkflowServiceItemInstance) HasLabel() bool`
+
+HasLabel returns a boolean if a field has been set.
+
 ### GetLastStatus
 
 `func (o *WorkflowServiceItemInstance) GetLastStatus() string`
@@ -148,6 +179,31 @@ SetName sets Name field to given value.
 
 HasName returns a boolean if a field has been set.
 
+### GetResourcelifecycleStatus
+
+`func (o *WorkflowServiceItemInstance) GetResourcelifecycleStatus() string`
+
+GetResourcelifecycleStatus returns the ResourcelifecycleStatus field if non-nil, zero value otherwise.
+
+### GetResourcelifecycleStatusOk
+
+`func (o *WorkflowServiceItemInstance) GetResourcelifecycleStatusOk() (*string, bool)`
+
+GetResourcelifecycleStatusOk returns a tuple with the ResourcelifecycleStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResourcelifecycleStatus
+
+`func (o *WorkflowServiceItemInstance) SetResourcelifecycleStatus(v string)`
+
+SetResourcelifecycleStatus sets ResourcelifecycleStatus field to given value.
+
+### HasResourcelifecycleStatus
+
+`func (o *WorkflowServiceItemInstance) HasResourcelifecycleStatus() bool`
+
+HasResourcelifecycleStatus returns a boolean if a field has been set.
+
 ### GetStatus
 
 `func (o *WorkflowServiceItemInstance) GetStatus() string`
@@ -173,30 +229,115 @@ SetStatus sets Status field to given value.
 
 HasStatus returns a boolean if a field has been set.
 
-### GetUserId
+### GetUserIdOrEmail
 
-`func (o *WorkflowServiceItemInstance) GetUserId() string`
+`func (o *WorkflowServiceItemInstance) GetUserIdOrEmail() string`
 
-GetUserId returns the UserId field if non-nil, zero value otherwise.
+GetUserIdOrEmail returns the UserIdOrEmail field if non-nil, zero value otherwise.
 
-### GetUserIdOk
+### GetUserIdOrEmailOk
 
-`func (o *WorkflowServiceItemInstance) GetUserIdOk() (*string, bool)`
+`func (o *WorkflowServiceItemInstance) GetUserIdOrEmailOk() (*string, bool)`
 
-GetUserIdOk returns a tuple with the UserId field if it's non-nil, zero value otherwise
+GetUserIdOrEmailOk returns a tuple with the UserIdOrEmail field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetUserId
+### SetUserIdOrEmail
 
-`func (o *WorkflowServiceItemInstance) SetUserId(v string)`
+`func (o *WorkflowServiceItemInstance) SetUserIdOrEmail(v string)`
 
-SetUserId sets UserId field to given value.
+SetUserIdOrEmail sets UserIdOrEmail field to given value.
 
-### HasUserId
+### HasUserIdOrEmail
 
-`func (o *WorkflowServiceItemInstance) HasUserId() bool`
+`func (o *WorkflowServiceItemInstance) HasUserIdOrEmail() bool`
 
-HasUserId returns a boolean if a field has been set.
+HasUserIdOrEmail returns a boolean if a field has been set.
+
+### GetCatalogServiceRequest
+
+`func (o *WorkflowServiceItemInstance) GetCatalogServiceRequest() []WorkflowCatalogServiceRequestRelationship`
+
+GetCatalogServiceRequest returns the CatalogServiceRequest field if non-nil, zero value otherwise.
+
+### GetCatalogServiceRequestOk
+
+`func (o *WorkflowServiceItemInstance) GetCatalogServiceRequestOk() (*[]WorkflowCatalogServiceRequestRelationship, bool)`
+
+GetCatalogServiceRequestOk returns a tuple with the CatalogServiceRequest field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCatalogServiceRequest
+
+`func (o *WorkflowServiceItemInstance) SetCatalogServiceRequest(v []WorkflowCatalogServiceRequestRelationship)`
+
+SetCatalogServiceRequest sets CatalogServiceRequest field to given value.
+
+### HasCatalogServiceRequest
+
+`func (o *WorkflowServiceItemInstance) HasCatalogServiceRequest() bool`
+
+HasCatalogServiceRequest returns a boolean if a field has been set.
+
+### SetCatalogServiceRequestNil
+
+`func (o *WorkflowServiceItemInstance) SetCatalogServiceRequestNil(b bool)`
+
+ SetCatalogServiceRequestNil sets the value for CatalogServiceRequest to be an explicit nil
+
+### UnsetCatalogServiceRequest
+`func (o *WorkflowServiceItemInstance) UnsetCatalogServiceRequest()`
+
+UnsetCatalogServiceRequest ensures that no value is present for CatalogServiceRequest, not even an explicit nil
+### GetIdp
+
+`func (o *WorkflowServiceItemInstance) GetIdp() IamIdpRelationship`
+
+GetIdp returns the Idp field if non-nil, zero value otherwise.
+
+### GetIdpOk
+
+`func (o *WorkflowServiceItemInstance) GetIdpOk() (*IamIdpRelationship, bool)`
+
+GetIdpOk returns a tuple with the Idp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIdp
+
+`func (o *WorkflowServiceItemInstance) SetIdp(v IamIdpRelationship)`
+
+SetIdp sets Idp field to given value.
+
+### HasIdp
+
+`func (o *WorkflowServiceItemInstance) HasIdp() bool`
+
+HasIdp returns a boolean if a field has been set.
+
+### GetIdpReference
+
+`func (o *WorkflowServiceItemInstance) GetIdpReference() IamIdpReferenceRelationship`
+
+GetIdpReference returns the IdpReference field if non-nil, zero value otherwise.
+
+### GetIdpReferenceOk
+
+`func (o *WorkflowServiceItemInstance) GetIdpReferenceOk() (*IamIdpReferenceRelationship, bool)`
+
+GetIdpReferenceOk returns a tuple with the IdpReference field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIdpReference
+
+`func (o *WorkflowServiceItemInstance) SetIdpReference(v IamIdpReferenceRelationship)`
+
+SetIdpReference sets IdpReference field to given value.
+
+### HasIdpReference
+
+`func (o *WorkflowServiceItemInstance) HasIdpReference() bool`
+
+HasIdpReference returns a boolean if a field has been set.
 
 ### GetOrganization
 
@@ -247,6 +388,31 @@ SetServiceItemDefinition sets ServiceItemDefinition field to given value.
 `func (o *WorkflowServiceItemInstance) HasServiceItemDefinition() bool`
 
 HasServiceItemDefinition returns a boolean if a field has been set.
+
+### GetUser
+
+`func (o *WorkflowServiceItemInstance) GetUser() IamUserRelationship`
+
+GetUser returns the User field if non-nil, zero value otherwise.
+
+### GetUserOk
+
+`func (o *WorkflowServiceItemInstance) GetUserOk() (*IamUserRelationship, bool)`
+
+GetUserOk returns a tuple with the User field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUser
+
+`func (o *WorkflowServiceItemInstance) SetUser(v IamUserRelationship)`
+
+SetUser sets User field to given value.
+
+### HasUser
+
+`func (o *WorkflowServiceItemInstance) HasUser() bool`
+
+HasUser returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

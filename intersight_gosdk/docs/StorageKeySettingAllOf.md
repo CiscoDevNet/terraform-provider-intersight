@@ -6,8 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.KeySetting"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.KeySetting"]
-**KeyType** | Pointer to **string** | Method to be used for fetching the encryption key. * &#x60;None&#x60; - Drive encryption not configured. * &#x60;Manual&#x60; - Drive encryption using manual key. * &#x60;Kmip&#x60; - Remote encryption using KMIP. | [optional] [default to "None"]
-**ManualKey** | Pointer to [**NullableStorageLocalKeySetting**](StorageLocalKeySetting.md) |  | [optional] 
 **RemoteKey** | Pointer to [**NullableStorageRemoteKeySetting**](StorageRemoteKeySetting.md) |  | [optional] 
 
 ## Methods
@@ -69,66 +67,6 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
-### GetKeyType
-
-`func (o *StorageKeySettingAllOf) GetKeyType() string`
-
-GetKeyType returns the KeyType field if non-nil, zero value otherwise.
-
-### GetKeyTypeOk
-
-`func (o *StorageKeySettingAllOf) GetKeyTypeOk() (*string, bool)`
-
-GetKeyTypeOk returns a tuple with the KeyType field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetKeyType
-
-`func (o *StorageKeySettingAllOf) SetKeyType(v string)`
-
-SetKeyType sets KeyType field to given value.
-
-### HasKeyType
-
-`func (o *StorageKeySettingAllOf) HasKeyType() bool`
-
-HasKeyType returns a boolean if a field has been set.
-
-### GetManualKey
-
-`func (o *StorageKeySettingAllOf) GetManualKey() StorageLocalKeySetting`
-
-GetManualKey returns the ManualKey field if non-nil, zero value otherwise.
-
-### GetManualKeyOk
-
-`func (o *StorageKeySettingAllOf) GetManualKeyOk() (*StorageLocalKeySetting, bool)`
-
-GetManualKeyOk returns a tuple with the ManualKey field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetManualKey
-
-`func (o *StorageKeySettingAllOf) SetManualKey(v StorageLocalKeySetting)`
-
-SetManualKey sets ManualKey field to given value.
-
-### HasManualKey
-
-`func (o *StorageKeySettingAllOf) HasManualKey() bool`
-
-HasManualKey returns a boolean if a field has been set.
-
-### SetManualKeyNil
-
-`func (o *StorageKeySettingAllOf) SetManualKeyNil(b bool)`
-
- SetManualKeyNil sets the value for ManualKey to be an explicit nil
-
-### UnsetManualKey
-`func (o *StorageKeySettingAllOf) UnsetManualKey()`
-
-UnsetManualKey ensures that no value is present for ManualKey, not even an explicit nil
 ### GetRemoteKey
 
 `func (o *StorageKeySettingAllOf) GetRemoteKey() StorageRemoteKeySetting`

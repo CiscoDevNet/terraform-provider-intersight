@@ -130,7 +130,7 @@ func getBiosSystemBootOrderSchema() map[string]*schema.Schema {
 			},
 		},
 		"boot_mode": {
-			Description: "The BIOS boot mode. UEFI uses the GUID Partition Table (GPT) whereas Legacy mode uses the Master Boot Record (MBR) partitioning scheme.\n* `Legacy` - Legacy mode refers to the traditional process of booting from BIOS. Legacy mode uses the Master Boot Record (MBR) to locate the bootloader.\n* `Uefi` - UEFI mode uses the GUID Partition Table (GPT) to locate EFI Service Partitions to boot from.",
+			Description: "The BIOS boot mode. UEFI uses the GUID Partition Table (GPT) whereas Legacy mode uses the MBR partitioning scheme.\n* `Legacy` - Legacy mode refers to the traditional process of booting from BIOS. Legacy mode uses the MBR to locate the bootloader.\n* `Uefi` - UEFI mode uses the GUID Partition Table (GPT) to locate EFI Service Partitions to boot from.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -360,6 +360,11 @@ func getBiosSystemBootOrderSchema() map[string]*schema.Schema {
 								},
 							},
 						},
+					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",

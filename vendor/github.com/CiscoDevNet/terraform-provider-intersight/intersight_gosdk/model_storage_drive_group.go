@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-10371
+API version: 1.0.11-11765
 Contact: intersight@cisco.com
 */
 
@@ -30,6 +30,8 @@ type StorageDriveGroup struct {
 	Name *string `json:"Name,omitempty"`
 	// The supported RAID level for the disk group. * `Raid0` - RAID 0 Stripe Raid Level. * `Raid1` - RAID 1 Mirror Raid Level. * `Raid5` - RAID 5 Mirror Raid Level. * `Raid6` - RAID 6 Mirror Raid Level. * `Raid10` - RAID 10 Mirror Raid Level. * `Raid50` - RAID 50 Mirror Raid Level. * `Raid60` - RAID 60 Mirror Raid Level.
 	RaidLevel *string `json:"RaidLevel,omitempty"`
+	// Enables/disables the drive encryption on all the drives used in this policy. This flag just enables the drive security and only after remote key setting configured, the actual encryption will be done.
+	SecureDriveGroup *bool `json:"SecureDriveGroup,omitempty"`
 	// Type of drive selection to be used for this drive group. * `0` - Drives are selected manually by the user. * `1` - Drives are selected automatically based on the RAID and virtual drive configuration.
 	Type                 *int32                             `json:"Type,omitempty"`
 	VirtualDrives        []StorageVirtualDriveConfiguration `json:"VirtualDrives,omitempty"`
@@ -264,6 +266,38 @@ func (o *StorageDriveGroup) SetRaidLevel(v string) {
 	o.RaidLevel = &v
 }
 
+// GetSecureDriveGroup returns the SecureDriveGroup field value if set, zero value otherwise.
+func (o *StorageDriveGroup) GetSecureDriveGroup() bool {
+	if o == nil || o.SecureDriveGroup == nil {
+		var ret bool
+		return ret
+	}
+	return *o.SecureDriveGroup
+}
+
+// GetSecureDriveGroupOk returns a tuple with the SecureDriveGroup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageDriveGroup) GetSecureDriveGroupOk() (*bool, bool) {
+	if o == nil || o.SecureDriveGroup == nil {
+		return nil, false
+	}
+	return o.SecureDriveGroup, true
+}
+
+// HasSecureDriveGroup returns a boolean if a field has been set.
+func (o *StorageDriveGroup) HasSecureDriveGroup() bool {
+	if o != nil && o.SecureDriveGroup != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSecureDriveGroup gets a reference to the given bool and assigns it to the SecureDriveGroup field.
+func (o *StorageDriveGroup) SetSecureDriveGroup(v bool) {
+	o.SecureDriveGroup = &v
+}
+
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *StorageDriveGroup) GetType() int32 {
 	if o == nil || o.Type == nil {
@@ -389,6 +423,9 @@ func (o StorageDriveGroup) MarshalJSON() ([]byte, error) {
 	if o.RaidLevel != nil {
 		toSerialize["RaidLevel"] = o.RaidLevel
 	}
+	if o.SecureDriveGroup != nil {
+		toSerialize["SecureDriveGroup"] = o.SecureDriveGroup
+	}
 	if o.Type != nil {
 		toSerialize["Type"] = o.Type
 	}
@@ -418,6 +455,8 @@ func (o *StorageDriveGroup) UnmarshalJSON(bytes []byte) (err error) {
 		Name *string `json:"Name,omitempty"`
 		// The supported RAID level for the disk group. * `Raid0` - RAID 0 Stripe Raid Level. * `Raid1` - RAID 1 Mirror Raid Level. * `Raid5` - RAID 5 Mirror Raid Level. * `Raid6` - RAID 6 Mirror Raid Level. * `Raid10` - RAID 10 Mirror Raid Level. * `Raid50` - RAID 50 Mirror Raid Level. * `Raid60` - RAID 60 Mirror Raid Level.
 		RaidLevel *string `json:"RaidLevel,omitempty"`
+		// Enables/disables the drive encryption on all the drives used in this policy. This flag just enables the drive security and only after remote key setting configured, the actual encryption will be done.
+		SecureDriveGroup *bool `json:"SecureDriveGroup,omitempty"`
 		// Type of drive selection to be used for this drive group. * `0` - Drives are selected manually by the user. * `1` - Drives are selected automatically based on the RAID and virtual drive configuration.
 		Type          *int32                             `json:"Type,omitempty"`
 		VirtualDrives []StorageVirtualDriveConfiguration `json:"VirtualDrives,omitempty"`
@@ -435,6 +474,7 @@ func (o *StorageDriveGroup) UnmarshalJSON(bytes []byte) (err error) {
 		varStorageDriveGroup.ManualDriveGroup = varStorageDriveGroupWithoutEmbeddedStruct.ManualDriveGroup
 		varStorageDriveGroup.Name = varStorageDriveGroupWithoutEmbeddedStruct.Name
 		varStorageDriveGroup.RaidLevel = varStorageDriveGroupWithoutEmbeddedStruct.RaidLevel
+		varStorageDriveGroup.SecureDriveGroup = varStorageDriveGroupWithoutEmbeddedStruct.SecureDriveGroup
 		varStorageDriveGroup.Type = varStorageDriveGroupWithoutEmbeddedStruct.Type
 		varStorageDriveGroup.VirtualDrives = varStorageDriveGroupWithoutEmbeddedStruct.VirtualDrives
 		varStorageDriveGroup.StoragePolicy = varStorageDriveGroupWithoutEmbeddedStruct.StoragePolicy
@@ -461,6 +501,7 @@ func (o *StorageDriveGroup) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ManualDriveGroup")
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "RaidLevel")
+		delete(additionalProperties, "SecureDriveGroup")
 		delete(additionalProperties, "Type")
 		delete(additionalProperties, "VirtualDrives")
 		delete(additionalProperties, "StoragePolicy")

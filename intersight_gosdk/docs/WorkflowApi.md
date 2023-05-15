@@ -6,6 +6,8 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateWorkflowAnsibleBatchExecutor**](WorkflowApi.md#CreateWorkflowAnsibleBatchExecutor) | **Post** /api/v1/workflow/AnsibleBatchExecutors | Create a &#39;workflow.AnsibleBatchExecutor&#39; resource.
 [**CreateWorkflowBatchApiExecutor**](WorkflowApi.md#CreateWorkflowBatchApiExecutor) | **Post** /api/v1/workflow/BatchApiExecutors | Create a &#39;workflow.BatchApiExecutor&#39; resource.
+[**CreateWorkflowCatalogItemDefinition**](WorkflowApi.md#CreateWorkflowCatalogItemDefinition) | **Post** /api/v1/workflow/CatalogItemDefinitions | Create a &#39;workflow.CatalogItemDefinition&#39; resource.
+[**CreateWorkflowCatalogServiceRequest**](WorkflowApi.md#CreateWorkflowCatalogServiceRequest) | **Post** /api/v1/workflow/CatalogServiceRequests | Create a &#39;workflow.CatalogServiceRequest&#39; resource.
 [**CreateWorkflowCustomDataTypeDefinition**](WorkflowApi.md#CreateWorkflowCustomDataTypeDefinition) | **Post** /api/v1/workflow/CustomDataTypeDefinitions | Create a &#39;workflow.CustomDataTypeDefinition&#39; resource.
 [**CreateWorkflowErrorResponseHandler**](WorkflowApi.md#CreateWorkflowErrorResponseHandler) | **Post** /api/v1/workflow/ErrorResponseHandlers | Create a &#39;workflow.ErrorResponseHandler&#39; resource.
 [**CreateWorkflowPowerShellBatchApiExecutor**](WorkflowApi.md#CreateWorkflowPowerShellBatchApiExecutor) | **Post** /api/v1/workflow/PowerShellBatchApiExecutors | Create a &#39;workflow.PowerShellBatchApiExecutor&#39; resource.
@@ -16,18 +18,16 @@ Method | HTTP request | Description
 [**CreateWorkflowServiceItemHealthCheckDefinition**](WorkflowApi.md#CreateWorkflowServiceItemHealthCheckDefinition) | **Post** /api/v1/workflow/ServiceItemHealthCheckDefinitions | Create a &#39;workflow.ServiceItemHealthCheckDefinition&#39; resource.
 [**CreateWorkflowServiceItemInstance**](WorkflowApi.md#CreateWorkflowServiceItemInstance) | **Post** /api/v1/workflow/ServiceItemInstances | Create a &#39;workflow.ServiceItemInstance&#39; resource.
 [**CreateWorkflowServiceItemOutput**](WorkflowApi.md#CreateWorkflowServiceItemOutput) | **Post** /api/v1/workflow/ServiceItemOutputs | Create a &#39;workflow.ServiceItemOutput&#39; resource.
-[**CreateWorkflowSolutionActionDefinition**](WorkflowApi.md#CreateWorkflowSolutionActionDefinition) | **Post** /api/v1/workflow/SolutionActionDefinitions | Create a &#39;workflow.SolutionActionDefinition&#39; resource.
-[**CreateWorkflowSolutionDefinition**](WorkflowApi.md#CreateWorkflowSolutionDefinition) | **Post** /api/v1/workflow/SolutionDefinitions | Create a &#39;workflow.SolutionDefinition&#39; resource.
 [**CreateWorkflowSshBatchExecutor**](WorkflowApi.md#CreateWorkflowSshBatchExecutor) | **Post** /api/v1/workflow/SshBatchExecutors | Create a &#39;workflow.SshBatchExecutor&#39; resource.
 [**CreateWorkflowTaskDefinition**](WorkflowApi.md#CreateWorkflowTaskDefinition) | **Post** /api/v1/workflow/TaskDefinitions | Create a &#39;workflow.TaskDefinition&#39; resource.
-[**CreateWorkflowTaskNotification**](WorkflowApi.md#CreateWorkflowTaskNotification) | **Post** /api/v1/workflow/TaskNotifications | Create a &#39;workflow.TaskNotification&#39; resource.
 [**CreateWorkflowTemplateEvaluation**](WorkflowApi.md#CreateWorkflowTemplateEvaluation) | **Post** /api/v1/workflow/TemplateEvaluations | Create a &#39;workflow.TemplateEvaluation&#39; resource.
 [**CreateWorkflowTemplateParser**](WorkflowApi.md#CreateWorkflowTemplateParser) | **Post** /api/v1/workflow/TemplateParsers | Create a &#39;workflow.TemplateParser&#39; resource.
 [**CreateWorkflowWorkflowDefinition**](WorkflowApi.md#CreateWorkflowWorkflowDefinition) | **Post** /api/v1/workflow/WorkflowDefinitions | Create a &#39;workflow.WorkflowDefinition&#39; resource.
 [**CreateWorkflowWorkflowInfo**](WorkflowApi.md#CreateWorkflowWorkflowInfo) | **Post** /api/v1/workflow/WorkflowInfos | Create a &#39;workflow.WorkflowInfo&#39; resource.
-[**CreateWorkflowWorkflowNotification**](WorkflowApi.md#CreateWorkflowWorkflowNotification) | **Post** /api/v1/workflow/WorkflowNotifications | Create a &#39;workflow.WorkflowNotification&#39; resource.
 [**DeleteWorkflowAnsibleBatchExecutor**](WorkflowApi.md#DeleteWorkflowAnsibleBatchExecutor) | **Delete** /api/v1/workflow/AnsibleBatchExecutors/{Moid} | Delete a &#39;workflow.AnsibleBatchExecutor&#39; resource.
 [**DeleteWorkflowBatchApiExecutor**](WorkflowApi.md#DeleteWorkflowBatchApiExecutor) | **Delete** /api/v1/workflow/BatchApiExecutors/{Moid} | Delete a &#39;workflow.BatchApiExecutor&#39; resource.
+[**DeleteWorkflowCatalogItemDefinition**](WorkflowApi.md#DeleteWorkflowCatalogItemDefinition) | **Delete** /api/v1/workflow/CatalogItemDefinitions/{Moid} | Delete a &#39;workflow.CatalogItemDefinition&#39; resource.
+[**DeleteWorkflowCatalogServiceRequest**](WorkflowApi.md#DeleteWorkflowCatalogServiceRequest) | **Delete** /api/v1/workflow/CatalogServiceRequests/{Moid} | Delete a &#39;workflow.CatalogServiceRequest&#39; resource.
 [**DeleteWorkflowCustomDataTypeDefinition**](WorkflowApi.md#DeleteWorkflowCustomDataTypeDefinition) | **Delete** /api/v1/workflow/CustomDataTypeDefinitions/{Moid} | Delete a &#39;workflow.CustomDataTypeDefinition&#39; resource.
 [**DeleteWorkflowErrorResponseHandler**](WorkflowApi.md#DeleteWorkflowErrorResponseHandler) | **Delete** /api/v1/workflow/ErrorResponseHandlers/{Moid} | Delete a &#39;workflow.ErrorResponseHandler&#39; resource.
 [**DeleteWorkflowPowerShellBatchApiExecutor**](WorkflowApi.md#DeleteWorkflowPowerShellBatchApiExecutor) | **Delete** /api/v1/workflow/PowerShellBatchApiExecutors/{Moid} | Delete a &#39;workflow.PowerShellBatchApiExecutor&#39; resource.
@@ -38,8 +38,6 @@ Method | HTTP request | Description
 [**DeleteWorkflowServiceItemHealthCheckDefinition**](WorkflowApi.md#DeleteWorkflowServiceItemHealthCheckDefinition) | **Delete** /api/v1/workflow/ServiceItemHealthCheckDefinitions/{Moid} | Delete a &#39;workflow.ServiceItemHealthCheckDefinition&#39; resource.
 [**DeleteWorkflowServiceItemInstance**](WorkflowApi.md#DeleteWorkflowServiceItemInstance) | **Delete** /api/v1/workflow/ServiceItemInstances/{Moid} | Delete a &#39;workflow.ServiceItemInstance&#39; resource.
 [**DeleteWorkflowServiceItemOutput**](WorkflowApi.md#DeleteWorkflowServiceItemOutput) | **Delete** /api/v1/workflow/ServiceItemOutputs/{Moid} | Delete a &#39;workflow.ServiceItemOutput&#39; resource.
-[**DeleteWorkflowSolutionActionDefinition**](WorkflowApi.md#DeleteWorkflowSolutionActionDefinition) | **Delete** /api/v1/workflow/SolutionActionDefinitions/{Moid} | Delete a &#39;workflow.SolutionActionDefinition&#39; resource.
-[**DeleteWorkflowSolutionDefinition**](WorkflowApi.md#DeleteWorkflowSolutionDefinition) | **Delete** /api/v1/workflow/SolutionDefinitions/{Moid} | Delete a &#39;workflow.SolutionDefinition&#39; resource.
 [**DeleteWorkflowSshBatchExecutor**](WorkflowApi.md#DeleteWorkflowSshBatchExecutor) | **Delete** /api/v1/workflow/SshBatchExecutors/{Moid} | Delete a &#39;workflow.SshBatchExecutor&#39; resource.
 [**DeleteWorkflowTaskDefinition**](WorkflowApi.md#DeleteWorkflowTaskDefinition) | **Delete** /api/v1/workflow/TaskDefinitions/{Moid} | Delete a &#39;workflow.TaskDefinition&#39; resource.
 [**DeleteWorkflowWorkflowDefinition**](WorkflowApi.md#DeleteWorkflowWorkflowDefinition) | **Delete** /api/v1/workflow/WorkflowDefinitions/{Moid} | Delete a &#39;workflow.WorkflowDefinition&#39; resource.
@@ -48,12 +46,12 @@ Method | HTTP request | Description
 [**GetWorkflowAnsibleBatchExecutorList**](WorkflowApi.md#GetWorkflowAnsibleBatchExecutorList) | **Get** /api/v1/workflow/AnsibleBatchExecutors | Read a &#39;workflow.AnsibleBatchExecutor&#39; resource.
 [**GetWorkflowBatchApiExecutorByMoid**](WorkflowApi.md#GetWorkflowBatchApiExecutorByMoid) | **Get** /api/v1/workflow/BatchApiExecutors/{Moid} | Read a &#39;workflow.BatchApiExecutor&#39; resource.
 [**GetWorkflowBatchApiExecutorList**](WorkflowApi.md#GetWorkflowBatchApiExecutorList) | **Get** /api/v1/workflow/BatchApiExecutors | Read a &#39;workflow.BatchApiExecutor&#39; resource.
-[**GetWorkflowBuildTaskMetaByMoid**](WorkflowApi.md#GetWorkflowBuildTaskMetaByMoid) | **Get** /api/v1/workflow/BuildTaskMeta/{Moid} | Read a &#39;workflow.BuildTaskMeta&#39; resource.
-[**GetWorkflowBuildTaskMetaList**](WorkflowApi.md#GetWorkflowBuildTaskMetaList) | **Get** /api/v1/workflow/BuildTaskMeta | Read a &#39;workflow.BuildTaskMeta&#39; resource.
-[**GetWorkflowBuildTaskMetaOwnerByMoid**](WorkflowApi.md#GetWorkflowBuildTaskMetaOwnerByMoid) | **Get** /api/v1/workflow/BuildTaskMetaOwners/{Moid} | Read a &#39;workflow.BuildTaskMetaOwner&#39; resource.
-[**GetWorkflowBuildTaskMetaOwnerList**](WorkflowApi.md#GetWorkflowBuildTaskMetaOwnerList) | **Get** /api/v1/workflow/BuildTaskMetaOwners | Read a &#39;workflow.BuildTaskMetaOwner&#39; resource.
 [**GetWorkflowCatalogByMoid**](WorkflowApi.md#GetWorkflowCatalogByMoid) | **Get** /api/v1/workflow/Catalogs/{Moid} | Read a &#39;workflow.Catalog&#39; resource.
+[**GetWorkflowCatalogItemDefinitionByMoid**](WorkflowApi.md#GetWorkflowCatalogItemDefinitionByMoid) | **Get** /api/v1/workflow/CatalogItemDefinitions/{Moid} | Read a &#39;workflow.CatalogItemDefinition&#39; resource.
+[**GetWorkflowCatalogItemDefinitionList**](WorkflowApi.md#GetWorkflowCatalogItemDefinitionList) | **Get** /api/v1/workflow/CatalogItemDefinitions | Read a &#39;workflow.CatalogItemDefinition&#39; resource.
 [**GetWorkflowCatalogList**](WorkflowApi.md#GetWorkflowCatalogList) | **Get** /api/v1/workflow/Catalogs | Read a &#39;workflow.Catalog&#39; resource.
+[**GetWorkflowCatalogServiceRequestByMoid**](WorkflowApi.md#GetWorkflowCatalogServiceRequestByMoid) | **Get** /api/v1/workflow/CatalogServiceRequests/{Moid} | Read a &#39;workflow.CatalogServiceRequest&#39; resource.
+[**GetWorkflowCatalogServiceRequestList**](WorkflowApi.md#GetWorkflowCatalogServiceRequestList) | **Get** /api/v1/workflow/CatalogServiceRequests | Read a &#39;workflow.CatalogServiceRequest&#39; resource.
 [**GetWorkflowCustomDataTypeDefinitionByMoid**](WorkflowApi.md#GetWorkflowCustomDataTypeDefinitionByMoid) | **Get** /api/v1/workflow/CustomDataTypeDefinitions/{Moid} | Read a &#39;workflow.CustomDataTypeDefinition&#39; resource.
 [**GetWorkflowCustomDataTypeDefinitionList**](WorkflowApi.md#GetWorkflowCustomDataTypeDefinitionList) | **Get** /api/v1/workflow/CustomDataTypeDefinitions | Read a &#39;workflow.CustomDataTypeDefinition&#39; resource.
 [**GetWorkflowErrorResponseHandlerByMoid**](WorkflowApi.md#GetWorkflowErrorResponseHandlerByMoid) | **Get** /api/v1/workflow/ErrorResponseHandlers/{Moid} | Read a &#39;workflow.ErrorResponseHandler&#39; resource.
@@ -68,6 +66,8 @@ Method | HTTP request | Description
 [**GetWorkflowServiceItemActionDefinitionList**](WorkflowApi.md#GetWorkflowServiceItemActionDefinitionList) | **Get** /api/v1/workflow/ServiceItemActionDefinitions | Read a &#39;workflow.ServiceItemActionDefinition&#39; resource.
 [**GetWorkflowServiceItemActionInstanceByMoid**](WorkflowApi.md#GetWorkflowServiceItemActionInstanceByMoid) | **Get** /api/v1/workflow/ServiceItemActionInstances/{Moid} | Read a &#39;workflow.ServiceItemActionInstance&#39; resource.
 [**GetWorkflowServiceItemActionInstanceList**](WorkflowApi.md#GetWorkflowServiceItemActionInstanceList) | **Get** /api/v1/workflow/ServiceItemActionInstances | Read a &#39;workflow.ServiceItemActionInstance&#39; resource.
+[**GetWorkflowServiceItemAttributeByMoid**](WorkflowApi.md#GetWorkflowServiceItemAttributeByMoid) | **Get** /api/v1/workflow/ServiceItemAttributes/{Moid} | Read a &#39;workflow.ServiceItemAttribute&#39; resource.
+[**GetWorkflowServiceItemAttributeList**](WorkflowApi.md#GetWorkflowServiceItemAttributeList) | **Get** /api/v1/workflow/ServiceItemAttributes | Read a &#39;workflow.ServiceItemAttribute&#39; resource.
 [**GetWorkflowServiceItemDefinitionByMoid**](WorkflowApi.md#GetWorkflowServiceItemDefinitionByMoid) | **Get** /api/v1/workflow/ServiceItemDefinitions/{Moid} | Read a &#39;workflow.ServiceItemDefinition&#39; resource.
 [**GetWorkflowServiceItemDefinitionList**](WorkflowApi.md#GetWorkflowServiceItemDefinitionList) | **Get** /api/v1/workflow/ServiceItemDefinitions | Read a &#39;workflow.ServiceItemDefinition&#39; resource.
 [**GetWorkflowServiceItemHealthCheckDefinitionByMoid**](WorkflowApi.md#GetWorkflowServiceItemHealthCheckDefinitionByMoid) | **Get** /api/v1/workflow/ServiceItemHealthCheckDefinitions/{Moid} | Read a &#39;workflow.ServiceItemHealthCheckDefinition&#39; resource.
@@ -78,16 +78,6 @@ Method | HTTP request | Description
 [**GetWorkflowServiceItemInstanceList**](WorkflowApi.md#GetWorkflowServiceItemInstanceList) | **Get** /api/v1/workflow/ServiceItemInstances | Read a &#39;workflow.ServiceItemInstance&#39; resource.
 [**GetWorkflowServiceItemOutputByMoid**](WorkflowApi.md#GetWorkflowServiceItemOutputByMoid) | **Get** /api/v1/workflow/ServiceItemOutputs/{Moid} | Read a &#39;workflow.ServiceItemOutput&#39; resource.
 [**GetWorkflowServiceItemOutputList**](WorkflowApi.md#GetWorkflowServiceItemOutputList) | **Get** /api/v1/workflow/ServiceItemOutputs | Read a &#39;workflow.ServiceItemOutput&#39; resource.
-[**GetWorkflowSolutionActionDefinitionByMoid**](WorkflowApi.md#GetWorkflowSolutionActionDefinitionByMoid) | **Get** /api/v1/workflow/SolutionActionDefinitions/{Moid} | Read a &#39;workflow.SolutionActionDefinition&#39; resource.
-[**GetWorkflowSolutionActionDefinitionList**](WorkflowApi.md#GetWorkflowSolutionActionDefinitionList) | **Get** /api/v1/workflow/SolutionActionDefinitions | Read a &#39;workflow.SolutionActionDefinition&#39; resource.
-[**GetWorkflowSolutionActionInstanceByMoid**](WorkflowApi.md#GetWorkflowSolutionActionInstanceByMoid) | **Get** /api/v1/workflow/SolutionActionInstances/{Moid} | Read a &#39;workflow.SolutionActionInstance&#39; resource.
-[**GetWorkflowSolutionActionInstanceList**](WorkflowApi.md#GetWorkflowSolutionActionInstanceList) | **Get** /api/v1/workflow/SolutionActionInstances | Read a &#39;workflow.SolutionActionInstance&#39; resource.
-[**GetWorkflowSolutionDefinitionByMoid**](WorkflowApi.md#GetWorkflowSolutionDefinitionByMoid) | **Get** /api/v1/workflow/SolutionDefinitions/{Moid} | Read a &#39;workflow.SolutionDefinition&#39; resource.
-[**GetWorkflowSolutionDefinitionList**](WorkflowApi.md#GetWorkflowSolutionDefinitionList) | **Get** /api/v1/workflow/SolutionDefinitions | Read a &#39;workflow.SolutionDefinition&#39; resource.
-[**GetWorkflowSolutionInstanceByMoid**](WorkflowApi.md#GetWorkflowSolutionInstanceByMoid) | **Get** /api/v1/workflow/SolutionInstances/{Moid} | Read a &#39;workflow.SolutionInstance&#39; resource.
-[**GetWorkflowSolutionInstanceList**](WorkflowApi.md#GetWorkflowSolutionInstanceList) | **Get** /api/v1/workflow/SolutionInstances | Read a &#39;workflow.SolutionInstance&#39; resource.
-[**GetWorkflowSolutionOutputByMoid**](WorkflowApi.md#GetWorkflowSolutionOutputByMoid) | **Get** /api/v1/workflow/SolutionOutputs/{Moid} | Read a &#39;workflow.SolutionOutput&#39; resource.
-[**GetWorkflowSolutionOutputList**](WorkflowApi.md#GetWorkflowSolutionOutputList) | **Get** /api/v1/workflow/SolutionOutputs | Read a &#39;workflow.SolutionOutput&#39; resource.
 [**GetWorkflowSshBatchExecutorByMoid**](WorkflowApi.md#GetWorkflowSshBatchExecutorByMoid) | **Get** /api/v1/workflow/SshBatchExecutors/{Moid} | Read a &#39;workflow.SshBatchExecutor&#39; resource.
 [**GetWorkflowSshBatchExecutorList**](WorkflowApi.md#GetWorkflowSshBatchExecutorList) | **Get** /api/v1/workflow/SshBatchExecutors | Read a &#39;workflow.SshBatchExecutor&#39; resource.
 [**GetWorkflowTaskDebugLogByMoid**](WorkflowApi.md#GetWorkflowTaskDebugLogByMoid) | **Get** /api/v1/workflow/TaskDebugLogs/{Moid} | Read a &#39;workflow.TaskDebugLog&#39; resource.
@@ -110,6 +100,8 @@ Method | HTTP request | Description
 [**GetWorkflowWorkflowMetadataList**](WorkflowApi.md#GetWorkflowWorkflowMetadataList) | **Get** /api/v1/workflow/WorkflowMetadata | Read a &#39;workflow.WorkflowMetadata&#39; resource.
 [**PatchWorkflowAnsibleBatchExecutor**](WorkflowApi.md#PatchWorkflowAnsibleBatchExecutor) | **Patch** /api/v1/workflow/AnsibleBatchExecutors/{Moid} | Update a &#39;workflow.AnsibleBatchExecutor&#39; resource.
 [**PatchWorkflowBatchApiExecutor**](WorkflowApi.md#PatchWorkflowBatchApiExecutor) | **Patch** /api/v1/workflow/BatchApiExecutors/{Moid} | Update a &#39;workflow.BatchApiExecutor&#39; resource.
+[**PatchWorkflowCatalogItemDefinition**](WorkflowApi.md#PatchWorkflowCatalogItemDefinition) | **Patch** /api/v1/workflow/CatalogItemDefinitions/{Moid} | Update a &#39;workflow.CatalogItemDefinition&#39; resource.
+[**PatchWorkflowCatalogServiceRequest**](WorkflowApi.md#PatchWorkflowCatalogServiceRequest) | **Patch** /api/v1/workflow/CatalogServiceRequests/{Moid} | Update a &#39;workflow.CatalogServiceRequest&#39; resource.
 [**PatchWorkflowCustomDataTypeDefinition**](WorkflowApi.md#PatchWorkflowCustomDataTypeDefinition) | **Patch** /api/v1/workflow/CustomDataTypeDefinitions/{Moid} | Update a &#39;workflow.CustomDataTypeDefinition&#39; resource.
 [**PatchWorkflowErrorResponseHandler**](WorkflowApi.md#PatchWorkflowErrorResponseHandler) | **Patch** /api/v1/workflow/ErrorResponseHandlers/{Moid} | Update a &#39;workflow.ErrorResponseHandler&#39; resource.
 [**PatchWorkflowPowerShellBatchApiExecutor**](WorkflowApi.md#PatchWorkflowPowerShellBatchApiExecutor) | **Patch** /api/v1/workflow/PowerShellBatchApiExecutors/{Moid} | Update a &#39;workflow.PowerShellBatchApiExecutor&#39; resource.
@@ -120,8 +112,6 @@ Method | HTTP request | Description
 [**PatchWorkflowServiceItemHealthCheckDefinition**](WorkflowApi.md#PatchWorkflowServiceItemHealthCheckDefinition) | **Patch** /api/v1/workflow/ServiceItemHealthCheckDefinitions/{Moid} | Update a &#39;workflow.ServiceItemHealthCheckDefinition&#39; resource.
 [**PatchWorkflowServiceItemInstance**](WorkflowApi.md#PatchWorkflowServiceItemInstance) | **Patch** /api/v1/workflow/ServiceItemInstances/{Moid} | Update a &#39;workflow.ServiceItemInstance&#39; resource.
 [**PatchWorkflowServiceItemOutput**](WorkflowApi.md#PatchWorkflowServiceItemOutput) | **Patch** /api/v1/workflow/ServiceItemOutputs/{Moid} | Update a &#39;workflow.ServiceItemOutput&#39; resource.
-[**PatchWorkflowSolutionActionDefinition**](WorkflowApi.md#PatchWorkflowSolutionActionDefinition) | **Patch** /api/v1/workflow/SolutionActionDefinitions/{Moid} | Update a &#39;workflow.SolutionActionDefinition&#39; resource.
-[**PatchWorkflowSolutionDefinition**](WorkflowApi.md#PatchWorkflowSolutionDefinition) | **Patch** /api/v1/workflow/SolutionDefinitions/{Moid} | Update a &#39;workflow.SolutionDefinition&#39; resource.
 [**PatchWorkflowSshBatchExecutor**](WorkflowApi.md#PatchWorkflowSshBatchExecutor) | **Patch** /api/v1/workflow/SshBatchExecutors/{Moid} | Update a &#39;workflow.SshBatchExecutor&#39; resource.
 [**PatchWorkflowTaskDefinition**](WorkflowApi.md#PatchWorkflowTaskDefinition) | **Patch** /api/v1/workflow/TaskDefinitions/{Moid} | Update a &#39;workflow.TaskDefinition&#39; resource.
 [**PatchWorkflowTaskInfo**](WorkflowApi.md#PatchWorkflowTaskInfo) | **Patch** /api/v1/workflow/TaskInfos/{Moid} | Update a &#39;workflow.TaskInfo&#39; resource.
@@ -129,6 +119,8 @@ Method | HTTP request | Description
 [**PatchWorkflowWorkflowInfo**](WorkflowApi.md#PatchWorkflowWorkflowInfo) | **Patch** /api/v1/workflow/WorkflowInfos/{Moid} | Update a &#39;workflow.WorkflowInfo&#39; resource.
 [**UpdateWorkflowAnsibleBatchExecutor**](WorkflowApi.md#UpdateWorkflowAnsibleBatchExecutor) | **Post** /api/v1/workflow/AnsibleBatchExecutors/{Moid} | Update a &#39;workflow.AnsibleBatchExecutor&#39; resource.
 [**UpdateWorkflowBatchApiExecutor**](WorkflowApi.md#UpdateWorkflowBatchApiExecutor) | **Post** /api/v1/workflow/BatchApiExecutors/{Moid} | Update a &#39;workflow.BatchApiExecutor&#39; resource.
+[**UpdateWorkflowCatalogItemDefinition**](WorkflowApi.md#UpdateWorkflowCatalogItemDefinition) | **Post** /api/v1/workflow/CatalogItemDefinitions/{Moid} | Update a &#39;workflow.CatalogItemDefinition&#39; resource.
+[**UpdateWorkflowCatalogServiceRequest**](WorkflowApi.md#UpdateWorkflowCatalogServiceRequest) | **Post** /api/v1/workflow/CatalogServiceRequests/{Moid} | Update a &#39;workflow.CatalogServiceRequest&#39; resource.
 [**UpdateWorkflowCustomDataTypeDefinition**](WorkflowApi.md#UpdateWorkflowCustomDataTypeDefinition) | **Post** /api/v1/workflow/CustomDataTypeDefinitions/{Moid} | Update a &#39;workflow.CustomDataTypeDefinition&#39; resource.
 [**UpdateWorkflowErrorResponseHandler**](WorkflowApi.md#UpdateWorkflowErrorResponseHandler) | **Post** /api/v1/workflow/ErrorResponseHandlers/{Moid} | Update a &#39;workflow.ErrorResponseHandler&#39; resource.
 [**UpdateWorkflowPowerShellBatchApiExecutor**](WorkflowApi.md#UpdateWorkflowPowerShellBatchApiExecutor) | **Post** /api/v1/workflow/PowerShellBatchApiExecutors/{Moid} | Update a &#39;workflow.PowerShellBatchApiExecutor&#39; resource.
@@ -139,8 +131,6 @@ Method | HTTP request | Description
 [**UpdateWorkflowServiceItemHealthCheckDefinition**](WorkflowApi.md#UpdateWorkflowServiceItemHealthCheckDefinition) | **Post** /api/v1/workflow/ServiceItemHealthCheckDefinitions/{Moid} | Update a &#39;workflow.ServiceItemHealthCheckDefinition&#39; resource.
 [**UpdateWorkflowServiceItemInstance**](WorkflowApi.md#UpdateWorkflowServiceItemInstance) | **Post** /api/v1/workflow/ServiceItemInstances/{Moid} | Update a &#39;workflow.ServiceItemInstance&#39; resource.
 [**UpdateWorkflowServiceItemOutput**](WorkflowApi.md#UpdateWorkflowServiceItemOutput) | **Post** /api/v1/workflow/ServiceItemOutputs/{Moid} | Update a &#39;workflow.ServiceItemOutput&#39; resource.
-[**UpdateWorkflowSolutionActionDefinition**](WorkflowApi.md#UpdateWorkflowSolutionActionDefinition) | **Post** /api/v1/workflow/SolutionActionDefinitions/{Moid} | Update a &#39;workflow.SolutionActionDefinition&#39; resource.
-[**UpdateWorkflowSolutionDefinition**](WorkflowApi.md#UpdateWorkflowSolutionDefinition) | **Post** /api/v1/workflow/SolutionDefinitions/{Moid} | Update a &#39;workflow.SolutionDefinition&#39; resource.
 [**UpdateWorkflowSshBatchExecutor**](WorkflowApi.md#UpdateWorkflowSshBatchExecutor) | **Post** /api/v1/workflow/SshBatchExecutors/{Moid} | Update a &#39;workflow.SshBatchExecutor&#39; resource.
 [**UpdateWorkflowTaskDefinition**](WorkflowApi.md#UpdateWorkflowTaskDefinition) | **Post** /api/v1/workflow/TaskDefinitions/{Moid} | Update a &#39;workflow.TaskDefinition&#39; resource.
 [**UpdateWorkflowTaskInfo**](WorkflowApi.md#UpdateWorkflowTaskInfo) | **Post** /api/v1/workflow/TaskInfos/{Moid} | Update a &#39;workflow.TaskInfo&#39; resource.
@@ -270,6 +260,142 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**WorkflowBatchApiExecutor**](WorkflowBatchApiExecutor.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateWorkflowCatalogItemDefinition
+
+> WorkflowCatalogItemDefinition CreateWorkflowCatalogItemDefinition(ctx).WorkflowCatalogItemDefinition(workflowCatalogItemDefinition).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+
+Create a 'workflow.CatalogItemDefinition' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    workflowCatalogItemDefinition := *openapiclient.NewWorkflowCatalogItemDefinition("ClassId_example", "ObjectType_example") // WorkflowCatalogItemDefinition | The 'workflow.CatalogItemDefinition' resource to create.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+    ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.WorkflowApi.CreateWorkflowCatalogItemDefinition(context.Background()).WorkflowCatalogItemDefinition(workflowCatalogItemDefinition).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.CreateWorkflowCatalogItemDefinition``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateWorkflowCatalogItemDefinition`: WorkflowCatalogItemDefinition
+    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.CreateWorkflowCatalogItemDefinition`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateWorkflowCatalogItemDefinitionRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **workflowCatalogItemDefinition** | [**WorkflowCatalogItemDefinition**](WorkflowCatalogItemDefinition.md) | The &#39;workflow.CatalogItemDefinition&#39; resource to create. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+ **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
+
+### Return type
+
+[**WorkflowCatalogItemDefinition**](WorkflowCatalogItemDefinition.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateWorkflowCatalogServiceRequest
+
+> WorkflowCatalogServiceRequest CreateWorkflowCatalogServiceRequest(ctx).WorkflowCatalogServiceRequest(workflowCatalogServiceRequest).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+
+Create a 'workflow.CatalogServiceRequest' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    workflowCatalogServiceRequest := *openapiclient.NewWorkflowCatalogServiceRequest("ClassId_example", "ObjectType_example") // WorkflowCatalogServiceRequest | The 'workflow.CatalogServiceRequest' resource to create.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+    ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.WorkflowApi.CreateWorkflowCatalogServiceRequest(context.Background()).WorkflowCatalogServiceRequest(workflowCatalogServiceRequest).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.CreateWorkflowCatalogServiceRequest``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateWorkflowCatalogServiceRequest`: WorkflowCatalogServiceRequest
+    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.CreateWorkflowCatalogServiceRequest`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateWorkflowCatalogServiceRequestRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **workflowCatalogServiceRequest** | [**WorkflowCatalogServiceRequest**](WorkflowCatalogServiceRequest.md) | The &#39;workflow.CatalogServiceRequest&#39; resource to create. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+ **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
+
+### Return type
+
+[**WorkflowCatalogServiceRequest**](WorkflowCatalogServiceRequest.md)
 
 ### Authorization
 
@@ -965,142 +1091,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## CreateWorkflowSolutionActionDefinition
-
-> WorkflowSolutionActionDefinition CreateWorkflowSolutionActionDefinition(ctx).WorkflowSolutionActionDefinition(workflowSolutionActionDefinition).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-
-Create a 'workflow.SolutionActionDefinition' resource.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    workflowSolutionActionDefinition := *openapiclient.NewWorkflowSolutionActionDefinition("ClassId_example", "ObjectType_example") // WorkflowSolutionActionDefinition | The 'workflow.SolutionActionDefinition' resource to create.
-    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-    ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WorkflowApi.CreateWorkflowSolutionActionDefinition(context.Background()).WorkflowSolutionActionDefinition(workflowSolutionActionDefinition).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.CreateWorkflowSolutionActionDefinition``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `CreateWorkflowSolutionActionDefinition`: WorkflowSolutionActionDefinition
-    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.CreateWorkflowSolutionActionDefinition`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreateWorkflowSolutionActionDefinitionRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **workflowSolutionActionDefinition** | [**WorkflowSolutionActionDefinition**](WorkflowSolutionActionDefinition.md) | The &#39;workflow.SolutionActionDefinition&#39; resource to create. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
- **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
-
-### Return type
-
-[**WorkflowSolutionActionDefinition**](WorkflowSolutionActionDefinition.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## CreateWorkflowSolutionDefinition
-
-> WorkflowSolutionDefinition CreateWorkflowSolutionDefinition(ctx).WorkflowSolutionDefinition(workflowSolutionDefinition).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-
-Create a 'workflow.SolutionDefinition' resource.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    workflowSolutionDefinition := *openapiclient.NewWorkflowSolutionDefinition("ClassId_example", "ObjectType_example") // WorkflowSolutionDefinition | The 'workflow.SolutionDefinition' resource to create.
-    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-    ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WorkflowApi.CreateWorkflowSolutionDefinition(context.Background()).WorkflowSolutionDefinition(workflowSolutionDefinition).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.CreateWorkflowSolutionDefinition``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `CreateWorkflowSolutionDefinition`: WorkflowSolutionDefinition
-    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.CreateWorkflowSolutionDefinition`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreateWorkflowSolutionDefinitionRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **workflowSolutionDefinition** | [**WorkflowSolutionDefinition**](WorkflowSolutionDefinition.md) | The &#39;workflow.SolutionDefinition&#39; resource to create. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
- **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
-
-### Return type
-
-[**WorkflowSolutionDefinition**](WorkflowSolutionDefinition.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## CreateWorkflowSshBatchExecutor
 
 > WorkflowSshBatchExecutor CreateWorkflowSshBatchExecutor(ctx).WorkflowSshBatchExecutor(workflowSshBatchExecutor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
@@ -1222,74 +1212,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**WorkflowTaskDefinition**](WorkflowTaskDefinition.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## CreateWorkflowTaskNotification
-
-> WorkflowTaskNotification CreateWorkflowTaskNotification(ctx).WorkflowTaskNotification(workflowTaskNotification).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-
-Create a 'workflow.TaskNotification' resource.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    workflowTaskNotification := *openapiclient.NewWorkflowTaskNotification("ClassId_example", "ObjectType_example") // WorkflowTaskNotification | The 'workflow.TaskNotification' resource to create.
-    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-    ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WorkflowApi.CreateWorkflowTaskNotification(context.Background()).WorkflowTaskNotification(workflowTaskNotification).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.CreateWorkflowTaskNotification``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `CreateWorkflowTaskNotification`: WorkflowTaskNotification
-    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.CreateWorkflowTaskNotification`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreateWorkflowTaskNotificationRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **workflowTaskNotification** | [**WorkflowTaskNotification**](WorkflowTaskNotification.md) | The &#39;workflow.TaskNotification&#39; resource to create. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
- **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
-
-### Return type
-
-[**WorkflowTaskNotification**](WorkflowTaskNotification.md)
 
 ### Authorization
 
@@ -1577,74 +1499,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## CreateWorkflowWorkflowNotification
-
-> WorkflowWorkflowNotification CreateWorkflowWorkflowNotification(ctx).WorkflowWorkflowNotification(workflowWorkflowNotification).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-
-Create a 'workflow.WorkflowNotification' resource.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    workflowWorkflowNotification := *openapiclient.NewWorkflowWorkflowNotification("ClassId_example", "ObjectType_example") // WorkflowWorkflowNotification | The 'workflow.WorkflowNotification' resource to create.
-    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-    ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WorkflowApi.CreateWorkflowWorkflowNotification(context.Background()).WorkflowWorkflowNotification(workflowWorkflowNotification).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.CreateWorkflowWorkflowNotification``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `CreateWorkflowWorkflowNotification`: WorkflowWorkflowNotification
-    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.CreateWorkflowWorkflowNotification`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreateWorkflowWorkflowNotificationRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **workflowWorkflowNotification** | [**WorkflowWorkflowNotification**](WorkflowWorkflowNotification.md) | The &#39;workflow.WorkflowNotification&#39; resource to create. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
- **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
-
-### Return type
-
-[**WorkflowWorkflowNotification**](WorkflowWorkflowNotification.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## DeleteWorkflowAnsibleBatchExecutor
 
 > DeleteWorkflowAnsibleBatchExecutor(ctx, moid).Execute()
@@ -1753,6 +1607,138 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteWorkflowBatchApiExecutorRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteWorkflowCatalogItemDefinition
+
+> DeleteWorkflowCatalogItemDefinition(ctx, moid).Execute()
+
+Delete a 'workflow.CatalogItemDefinition' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.WorkflowApi.DeleteWorkflowCatalogItemDefinition(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.DeleteWorkflowCatalogItemDefinition``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteWorkflowCatalogItemDefinitionRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteWorkflowCatalogServiceRequest
+
+> DeleteWorkflowCatalogServiceRequest(ctx, moid).Execute()
+
+Delete a 'workflow.CatalogServiceRequest' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.WorkflowApi.DeleteWorkflowCatalogServiceRequest(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.DeleteWorkflowCatalogServiceRequest``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteWorkflowCatalogServiceRequestRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -2437,138 +2423,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## DeleteWorkflowSolutionActionDefinition
-
-> DeleteWorkflowSolutionActionDefinition(ctx, moid).Execute()
-
-Delete a 'workflow.SolutionActionDefinition' resource.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WorkflowApi.DeleteWorkflowSolutionActionDefinition(context.Background(), moid).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.DeleteWorkflowSolutionActionDefinition``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDeleteWorkflowSolutionActionDefinitionRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## DeleteWorkflowSolutionDefinition
-
-> DeleteWorkflowSolutionDefinition(ctx, moid).Execute()
-
-Delete a 'workflow.SolutionDefinition' resource.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WorkflowApi.DeleteWorkflowSolutionDefinition(context.Background(), moid).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.DeleteWorkflowSolutionDefinition``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDeleteWorkflowSolutionDefinitionRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## DeleteWorkflowSshBatchExecutor
 
 > DeleteWorkflowSshBatchExecutor(ctx, moid).Execute()
@@ -3137,310 +2991,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetWorkflowBuildTaskMetaByMoid
-
-> WorkflowBuildTaskMeta GetWorkflowBuildTaskMetaByMoid(ctx, moid).Execute()
-
-Read a 'workflow.BuildTaskMeta' resource.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WorkflowApi.GetWorkflowBuildTaskMetaByMoid(context.Background(), moid).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.GetWorkflowBuildTaskMetaByMoid``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetWorkflowBuildTaskMetaByMoid`: WorkflowBuildTaskMeta
-    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.GetWorkflowBuildTaskMetaByMoid`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetWorkflowBuildTaskMetaByMoidRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**WorkflowBuildTaskMeta**](WorkflowBuildTaskMeta.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetWorkflowBuildTaskMetaList
-
-> WorkflowBuildTaskMetaResponse GetWorkflowBuildTaskMetaList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-
-Read a 'workflow.BuildTaskMeta' resource.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
-    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
-    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
-    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
-    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
-    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
-    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
-    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
-    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
-    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
-    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WorkflowApi.GetWorkflowBuildTaskMetaList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.GetWorkflowBuildTaskMetaList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetWorkflowBuildTaskMetaList`: WorkflowBuildTaskMetaResponse
-    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.GetWorkflowBuildTaskMetaList`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetWorkflowBuildTaskMetaListRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
- **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
- **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
- **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
- **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
- **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
- **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
- **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
- **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
- **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
- **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
-
-### Return type
-
-[**WorkflowBuildTaskMetaResponse**](WorkflowBuildTaskMetaResponse.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetWorkflowBuildTaskMetaOwnerByMoid
-
-> WorkflowBuildTaskMetaOwner GetWorkflowBuildTaskMetaOwnerByMoid(ctx, moid).Execute()
-
-Read a 'workflow.BuildTaskMetaOwner' resource.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WorkflowApi.GetWorkflowBuildTaskMetaOwnerByMoid(context.Background(), moid).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.GetWorkflowBuildTaskMetaOwnerByMoid``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetWorkflowBuildTaskMetaOwnerByMoid`: WorkflowBuildTaskMetaOwner
-    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.GetWorkflowBuildTaskMetaOwnerByMoid`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetWorkflowBuildTaskMetaOwnerByMoidRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**WorkflowBuildTaskMetaOwner**](WorkflowBuildTaskMetaOwner.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetWorkflowBuildTaskMetaOwnerList
-
-> WorkflowBuildTaskMetaOwnerResponse GetWorkflowBuildTaskMetaOwnerList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-
-Read a 'workflow.BuildTaskMetaOwner' resource.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
-    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
-    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
-    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
-    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
-    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
-    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
-    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
-    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
-    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
-    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WorkflowApi.GetWorkflowBuildTaskMetaOwnerList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.GetWorkflowBuildTaskMetaOwnerList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetWorkflowBuildTaskMetaOwnerList`: WorkflowBuildTaskMetaOwnerResponse
-    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.GetWorkflowBuildTaskMetaOwnerList`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetWorkflowBuildTaskMetaOwnerListRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
- **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
- **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
- **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
- **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
- **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
- **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
- **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
- **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
- **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
- **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
-
-### Return type
-
-[**WorkflowBuildTaskMetaOwnerResponse**](WorkflowBuildTaskMetaOwnerResponse.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## GetWorkflowCatalogByMoid
 
 > WorkflowCatalog GetWorkflowCatalogByMoid(ctx, moid).Execute()
@@ -3494,6 +3044,158 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**WorkflowCatalog**](WorkflowCatalog.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetWorkflowCatalogItemDefinitionByMoid
+
+> WorkflowCatalogItemDefinition GetWorkflowCatalogItemDefinitionByMoid(ctx, moid).Execute()
+
+Read a 'workflow.CatalogItemDefinition' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.WorkflowApi.GetWorkflowCatalogItemDefinitionByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.GetWorkflowCatalogItemDefinitionByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetWorkflowCatalogItemDefinitionByMoid`: WorkflowCatalogItemDefinition
+    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.GetWorkflowCatalogItemDefinitionByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetWorkflowCatalogItemDefinitionByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**WorkflowCatalogItemDefinition**](WorkflowCatalogItemDefinition.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetWorkflowCatalogItemDefinitionList
+
+> WorkflowCatalogItemDefinitionResponse GetWorkflowCatalogItemDefinitionList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'workflow.CatalogItemDefinition' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.WorkflowApi.GetWorkflowCatalogItemDefinitionList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.GetWorkflowCatalogItemDefinitionList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetWorkflowCatalogItemDefinitionList`: WorkflowCatalogItemDefinitionResponse
+    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.GetWorkflowCatalogItemDefinitionList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetWorkflowCatalogItemDefinitionListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**WorkflowCatalogItemDefinitionResponse**](WorkflowCatalogItemDefinitionResponse.md)
 
 ### Authorization
 
@@ -3578,6 +3280,158 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**WorkflowCatalogResponse**](WorkflowCatalogResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetWorkflowCatalogServiceRequestByMoid
+
+> WorkflowCatalogServiceRequest GetWorkflowCatalogServiceRequestByMoid(ctx, moid).Execute()
+
+Read a 'workflow.CatalogServiceRequest' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.WorkflowApi.GetWorkflowCatalogServiceRequestByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.GetWorkflowCatalogServiceRequestByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetWorkflowCatalogServiceRequestByMoid`: WorkflowCatalogServiceRequest
+    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.GetWorkflowCatalogServiceRequestByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetWorkflowCatalogServiceRequestByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**WorkflowCatalogServiceRequest**](WorkflowCatalogServiceRequest.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetWorkflowCatalogServiceRequestList
+
+> WorkflowCatalogServiceRequestResponse GetWorkflowCatalogServiceRequestList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'workflow.CatalogServiceRequest' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.WorkflowApi.GetWorkflowCatalogServiceRequestList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.GetWorkflowCatalogServiceRequestList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetWorkflowCatalogServiceRequestList`: WorkflowCatalogServiceRequestResponse
+    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.GetWorkflowCatalogServiceRequestList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetWorkflowCatalogServiceRequestListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**WorkflowCatalogServiceRequestResponse**](WorkflowCatalogServiceRequestResponse.md)
 
 ### Authorization
 
@@ -4657,6 +4511,158 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetWorkflowServiceItemAttributeByMoid
+
+> WorkflowServiceItemAttribute GetWorkflowServiceItemAttributeByMoid(ctx, moid).Execute()
+
+Read a 'workflow.ServiceItemAttribute' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.WorkflowApi.GetWorkflowServiceItemAttributeByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.GetWorkflowServiceItemAttributeByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetWorkflowServiceItemAttributeByMoid`: WorkflowServiceItemAttribute
+    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.GetWorkflowServiceItemAttributeByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetWorkflowServiceItemAttributeByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**WorkflowServiceItemAttribute**](WorkflowServiceItemAttribute.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetWorkflowServiceItemAttributeList
+
+> WorkflowServiceItemAttributeResponse GetWorkflowServiceItemAttributeList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'workflow.ServiceItemAttribute' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.WorkflowApi.GetWorkflowServiceItemAttributeList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.GetWorkflowServiceItemAttributeList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetWorkflowServiceItemAttributeList`: WorkflowServiceItemAttributeResponse
+    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.GetWorkflowServiceItemAttributeList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetWorkflowServiceItemAttributeListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**WorkflowServiceItemAttributeResponse**](WorkflowServiceItemAttributeResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetWorkflowServiceItemDefinitionByMoid
 
 > WorkflowServiceItemDefinition GetWorkflowServiceItemDefinitionByMoid(ctx, moid).Execute()
@@ -5402,766 +5408,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**WorkflowServiceItemOutputResponse**](WorkflowServiceItemOutputResponse.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetWorkflowSolutionActionDefinitionByMoid
-
-> WorkflowSolutionActionDefinition GetWorkflowSolutionActionDefinitionByMoid(ctx, moid).Execute()
-
-Read a 'workflow.SolutionActionDefinition' resource.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WorkflowApi.GetWorkflowSolutionActionDefinitionByMoid(context.Background(), moid).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.GetWorkflowSolutionActionDefinitionByMoid``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetWorkflowSolutionActionDefinitionByMoid`: WorkflowSolutionActionDefinition
-    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.GetWorkflowSolutionActionDefinitionByMoid`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetWorkflowSolutionActionDefinitionByMoidRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**WorkflowSolutionActionDefinition**](WorkflowSolutionActionDefinition.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetWorkflowSolutionActionDefinitionList
-
-> WorkflowSolutionActionDefinitionResponse GetWorkflowSolutionActionDefinitionList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-
-Read a 'workflow.SolutionActionDefinition' resource.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
-    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
-    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
-    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
-    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
-    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
-    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
-    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
-    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
-    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
-    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WorkflowApi.GetWorkflowSolutionActionDefinitionList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.GetWorkflowSolutionActionDefinitionList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetWorkflowSolutionActionDefinitionList`: WorkflowSolutionActionDefinitionResponse
-    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.GetWorkflowSolutionActionDefinitionList`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetWorkflowSolutionActionDefinitionListRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
- **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
- **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
- **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
- **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
- **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
- **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
- **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
- **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
- **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
- **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
-
-### Return type
-
-[**WorkflowSolutionActionDefinitionResponse**](WorkflowSolutionActionDefinitionResponse.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetWorkflowSolutionActionInstanceByMoid
-
-> WorkflowSolutionActionInstance GetWorkflowSolutionActionInstanceByMoid(ctx, moid).Execute()
-
-Read a 'workflow.SolutionActionInstance' resource.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WorkflowApi.GetWorkflowSolutionActionInstanceByMoid(context.Background(), moid).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.GetWorkflowSolutionActionInstanceByMoid``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetWorkflowSolutionActionInstanceByMoid`: WorkflowSolutionActionInstance
-    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.GetWorkflowSolutionActionInstanceByMoid`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetWorkflowSolutionActionInstanceByMoidRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**WorkflowSolutionActionInstance**](WorkflowSolutionActionInstance.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetWorkflowSolutionActionInstanceList
-
-> WorkflowSolutionActionInstanceResponse GetWorkflowSolutionActionInstanceList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-
-Read a 'workflow.SolutionActionInstance' resource.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
-    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
-    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
-    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
-    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
-    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
-    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
-    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
-    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
-    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
-    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WorkflowApi.GetWorkflowSolutionActionInstanceList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.GetWorkflowSolutionActionInstanceList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetWorkflowSolutionActionInstanceList`: WorkflowSolutionActionInstanceResponse
-    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.GetWorkflowSolutionActionInstanceList`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetWorkflowSolutionActionInstanceListRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
- **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
- **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
- **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
- **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
- **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
- **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
- **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
- **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
- **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
- **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
-
-### Return type
-
-[**WorkflowSolutionActionInstanceResponse**](WorkflowSolutionActionInstanceResponse.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetWorkflowSolutionDefinitionByMoid
-
-> WorkflowSolutionDefinition GetWorkflowSolutionDefinitionByMoid(ctx, moid).Execute()
-
-Read a 'workflow.SolutionDefinition' resource.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WorkflowApi.GetWorkflowSolutionDefinitionByMoid(context.Background(), moid).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.GetWorkflowSolutionDefinitionByMoid``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetWorkflowSolutionDefinitionByMoid`: WorkflowSolutionDefinition
-    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.GetWorkflowSolutionDefinitionByMoid`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetWorkflowSolutionDefinitionByMoidRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**WorkflowSolutionDefinition**](WorkflowSolutionDefinition.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetWorkflowSolutionDefinitionList
-
-> WorkflowSolutionDefinitionResponse GetWorkflowSolutionDefinitionList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-
-Read a 'workflow.SolutionDefinition' resource.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
-    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
-    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
-    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
-    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
-    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
-    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
-    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
-    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
-    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
-    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WorkflowApi.GetWorkflowSolutionDefinitionList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.GetWorkflowSolutionDefinitionList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetWorkflowSolutionDefinitionList`: WorkflowSolutionDefinitionResponse
-    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.GetWorkflowSolutionDefinitionList`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetWorkflowSolutionDefinitionListRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
- **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
- **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
- **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
- **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
- **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
- **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
- **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
- **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
- **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
- **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
-
-### Return type
-
-[**WorkflowSolutionDefinitionResponse**](WorkflowSolutionDefinitionResponse.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetWorkflowSolutionInstanceByMoid
-
-> WorkflowSolutionInstance GetWorkflowSolutionInstanceByMoid(ctx, moid).Execute()
-
-Read a 'workflow.SolutionInstance' resource.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WorkflowApi.GetWorkflowSolutionInstanceByMoid(context.Background(), moid).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.GetWorkflowSolutionInstanceByMoid``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetWorkflowSolutionInstanceByMoid`: WorkflowSolutionInstance
-    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.GetWorkflowSolutionInstanceByMoid`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetWorkflowSolutionInstanceByMoidRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**WorkflowSolutionInstance**](WorkflowSolutionInstance.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetWorkflowSolutionInstanceList
-
-> WorkflowSolutionInstanceResponse GetWorkflowSolutionInstanceList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-
-Read a 'workflow.SolutionInstance' resource.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
-    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
-    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
-    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
-    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
-    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
-    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
-    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
-    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
-    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
-    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WorkflowApi.GetWorkflowSolutionInstanceList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.GetWorkflowSolutionInstanceList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetWorkflowSolutionInstanceList`: WorkflowSolutionInstanceResponse
-    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.GetWorkflowSolutionInstanceList`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetWorkflowSolutionInstanceListRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
- **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
- **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
- **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
- **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
- **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
- **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
- **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
- **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
- **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
- **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
-
-### Return type
-
-[**WorkflowSolutionInstanceResponse**](WorkflowSolutionInstanceResponse.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetWorkflowSolutionOutputByMoid
-
-> WorkflowSolutionOutput GetWorkflowSolutionOutputByMoid(ctx, moid).Execute()
-
-Read a 'workflow.SolutionOutput' resource.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WorkflowApi.GetWorkflowSolutionOutputByMoid(context.Background(), moid).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.GetWorkflowSolutionOutputByMoid``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetWorkflowSolutionOutputByMoid`: WorkflowSolutionOutput
-    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.GetWorkflowSolutionOutputByMoid`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetWorkflowSolutionOutputByMoidRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**WorkflowSolutionOutput**](WorkflowSolutionOutput.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetWorkflowSolutionOutputList
-
-> WorkflowSolutionOutputResponse GetWorkflowSolutionOutputList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-
-Read a 'workflow.SolutionOutput' resource.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
-    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
-    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
-    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
-    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
-    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
-    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
-    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
-    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
-    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
-    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WorkflowApi.GetWorkflowSolutionOutputList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.GetWorkflowSolutionOutputList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetWorkflowSolutionOutputList`: WorkflowSolutionOutputResponse
-    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.GetWorkflowSolutionOutputList`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetWorkflowSolutionOutputListRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
- **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
- **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
- **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
- **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
- **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
- **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
- **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
- **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
- **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
- **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
-
-### Return type
-
-[**WorkflowSolutionOutputResponse**](WorkflowSolutionOutputResponse.md)
 
 ### Authorization
 
@@ -7841,6 +7087,150 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## PatchWorkflowCatalogItemDefinition
+
+> WorkflowCatalogItemDefinition PatchWorkflowCatalogItemDefinition(ctx, moid).WorkflowCatalogItemDefinition(workflowCatalogItemDefinition).IfMatch(ifMatch).Execute()
+
+Update a 'workflow.CatalogItemDefinition' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    workflowCatalogItemDefinition := *openapiclient.NewWorkflowCatalogItemDefinition("ClassId_example", "ObjectType_example") // WorkflowCatalogItemDefinition | The 'workflow.CatalogItemDefinition' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.WorkflowApi.PatchWorkflowCatalogItemDefinition(context.Background(), moid).WorkflowCatalogItemDefinition(workflowCatalogItemDefinition).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.PatchWorkflowCatalogItemDefinition``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchWorkflowCatalogItemDefinition`: WorkflowCatalogItemDefinition
+    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.PatchWorkflowCatalogItemDefinition`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchWorkflowCatalogItemDefinitionRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **workflowCatalogItemDefinition** | [**WorkflowCatalogItemDefinition**](WorkflowCatalogItemDefinition.md) | The &#39;workflow.CatalogItemDefinition&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**WorkflowCatalogItemDefinition**](WorkflowCatalogItemDefinition.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PatchWorkflowCatalogServiceRequest
+
+> WorkflowCatalogServiceRequest PatchWorkflowCatalogServiceRequest(ctx, moid).WorkflowCatalogServiceRequest(workflowCatalogServiceRequest).IfMatch(ifMatch).Execute()
+
+Update a 'workflow.CatalogServiceRequest' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    workflowCatalogServiceRequest := *openapiclient.NewWorkflowCatalogServiceRequest("ClassId_example", "ObjectType_example") // WorkflowCatalogServiceRequest | The 'workflow.CatalogServiceRequest' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.WorkflowApi.PatchWorkflowCatalogServiceRequest(context.Background(), moid).WorkflowCatalogServiceRequest(workflowCatalogServiceRequest).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.PatchWorkflowCatalogServiceRequest``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchWorkflowCatalogServiceRequest`: WorkflowCatalogServiceRequest
+    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.PatchWorkflowCatalogServiceRequest`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchWorkflowCatalogServiceRequestRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **workflowCatalogServiceRequest** | [**WorkflowCatalogServiceRequest**](WorkflowCatalogServiceRequest.md) | The &#39;workflow.CatalogServiceRequest&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**WorkflowCatalogServiceRequest**](WorkflowCatalogServiceRequest.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## PatchWorkflowCustomDataTypeDefinition
 
 > WorkflowCustomDataTypeDefinition PatchWorkflowCustomDataTypeDefinition(ctx, moid).WorkflowCustomDataTypeDefinition(workflowCustomDataTypeDefinition).IfMatch(ifMatch).Execute()
@@ -8561,150 +7951,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## PatchWorkflowSolutionActionDefinition
-
-> WorkflowSolutionActionDefinition PatchWorkflowSolutionActionDefinition(ctx, moid).WorkflowSolutionActionDefinition(workflowSolutionActionDefinition).IfMatch(ifMatch).Execute()
-
-Update a 'workflow.SolutionActionDefinition' resource.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    workflowSolutionActionDefinition := *openapiclient.NewWorkflowSolutionActionDefinition("ClassId_example", "ObjectType_example") // WorkflowSolutionActionDefinition | The 'workflow.SolutionActionDefinition' resource to update.
-    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WorkflowApi.PatchWorkflowSolutionActionDefinition(context.Background(), moid).WorkflowSolutionActionDefinition(workflowSolutionActionDefinition).IfMatch(ifMatch).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.PatchWorkflowSolutionActionDefinition``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `PatchWorkflowSolutionActionDefinition`: WorkflowSolutionActionDefinition
-    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.PatchWorkflowSolutionActionDefinition`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiPatchWorkflowSolutionActionDefinitionRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **workflowSolutionActionDefinition** | [**WorkflowSolutionActionDefinition**](WorkflowSolutionActionDefinition.md) | The &#39;workflow.SolutionActionDefinition&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**WorkflowSolutionActionDefinition**](WorkflowSolutionActionDefinition.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## PatchWorkflowSolutionDefinition
-
-> WorkflowSolutionDefinition PatchWorkflowSolutionDefinition(ctx, moid).WorkflowSolutionDefinition(workflowSolutionDefinition).IfMatch(ifMatch).Execute()
-
-Update a 'workflow.SolutionDefinition' resource.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    workflowSolutionDefinition := *openapiclient.NewWorkflowSolutionDefinition("ClassId_example", "ObjectType_example") // WorkflowSolutionDefinition | The 'workflow.SolutionDefinition' resource to update.
-    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WorkflowApi.PatchWorkflowSolutionDefinition(context.Background(), moid).WorkflowSolutionDefinition(workflowSolutionDefinition).IfMatch(ifMatch).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.PatchWorkflowSolutionDefinition``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `PatchWorkflowSolutionDefinition`: WorkflowSolutionDefinition
-    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.PatchWorkflowSolutionDefinition`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiPatchWorkflowSolutionDefinitionRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **workflowSolutionDefinition** | [**WorkflowSolutionDefinition**](WorkflowSolutionDefinition.md) | The &#39;workflow.SolutionDefinition&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**WorkflowSolutionDefinition**](WorkflowSolutionDefinition.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## PatchWorkflowSshBatchExecutor
 
 > WorkflowSshBatchExecutor PatchWorkflowSshBatchExecutor(ctx, moid).WorkflowSshBatchExecutor(workflowSshBatchExecutor).IfMatch(ifMatch).Execute()
@@ -9194,6 +8440,150 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**WorkflowBatchApiExecutor**](WorkflowBatchApiExecutor.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateWorkflowCatalogItemDefinition
+
+> WorkflowCatalogItemDefinition UpdateWorkflowCatalogItemDefinition(ctx, moid).WorkflowCatalogItemDefinition(workflowCatalogItemDefinition).IfMatch(ifMatch).Execute()
+
+Update a 'workflow.CatalogItemDefinition' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    workflowCatalogItemDefinition := *openapiclient.NewWorkflowCatalogItemDefinition("ClassId_example", "ObjectType_example") // WorkflowCatalogItemDefinition | The 'workflow.CatalogItemDefinition' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.WorkflowApi.UpdateWorkflowCatalogItemDefinition(context.Background(), moid).WorkflowCatalogItemDefinition(workflowCatalogItemDefinition).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.UpdateWorkflowCatalogItemDefinition``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateWorkflowCatalogItemDefinition`: WorkflowCatalogItemDefinition
+    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.UpdateWorkflowCatalogItemDefinition`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateWorkflowCatalogItemDefinitionRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **workflowCatalogItemDefinition** | [**WorkflowCatalogItemDefinition**](WorkflowCatalogItemDefinition.md) | The &#39;workflow.CatalogItemDefinition&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**WorkflowCatalogItemDefinition**](WorkflowCatalogItemDefinition.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateWorkflowCatalogServiceRequest
+
+> WorkflowCatalogServiceRequest UpdateWorkflowCatalogServiceRequest(ctx, moid).WorkflowCatalogServiceRequest(workflowCatalogServiceRequest).IfMatch(ifMatch).Execute()
+
+Update a 'workflow.CatalogServiceRequest' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    workflowCatalogServiceRequest := *openapiclient.NewWorkflowCatalogServiceRequest("ClassId_example", "ObjectType_example") // WorkflowCatalogServiceRequest | The 'workflow.CatalogServiceRequest' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.WorkflowApi.UpdateWorkflowCatalogServiceRequest(context.Background(), moid).WorkflowCatalogServiceRequest(workflowCatalogServiceRequest).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.UpdateWorkflowCatalogServiceRequest``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateWorkflowCatalogServiceRequest`: WorkflowCatalogServiceRequest
+    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.UpdateWorkflowCatalogServiceRequest`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateWorkflowCatalogServiceRequestRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **workflowCatalogServiceRequest** | [**WorkflowCatalogServiceRequest**](WorkflowCatalogServiceRequest.md) | The &#39;workflow.CatalogServiceRequest&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**WorkflowCatalogServiceRequest**](WorkflowCatalogServiceRequest.md)
 
 ### Authorization
 
@@ -9914,150 +9304,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**WorkflowServiceItemOutput**](WorkflowServiceItemOutput.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## UpdateWorkflowSolutionActionDefinition
-
-> WorkflowSolutionActionDefinition UpdateWorkflowSolutionActionDefinition(ctx, moid).WorkflowSolutionActionDefinition(workflowSolutionActionDefinition).IfMatch(ifMatch).Execute()
-
-Update a 'workflow.SolutionActionDefinition' resource.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    workflowSolutionActionDefinition := *openapiclient.NewWorkflowSolutionActionDefinition("ClassId_example", "ObjectType_example") // WorkflowSolutionActionDefinition | The 'workflow.SolutionActionDefinition' resource to update.
-    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WorkflowApi.UpdateWorkflowSolutionActionDefinition(context.Background(), moid).WorkflowSolutionActionDefinition(workflowSolutionActionDefinition).IfMatch(ifMatch).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.UpdateWorkflowSolutionActionDefinition``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UpdateWorkflowSolutionActionDefinition`: WorkflowSolutionActionDefinition
-    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.UpdateWorkflowSolutionActionDefinition`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpdateWorkflowSolutionActionDefinitionRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **workflowSolutionActionDefinition** | [**WorkflowSolutionActionDefinition**](WorkflowSolutionActionDefinition.md) | The &#39;workflow.SolutionActionDefinition&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**WorkflowSolutionActionDefinition**](WorkflowSolutionActionDefinition.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## UpdateWorkflowSolutionDefinition
-
-> WorkflowSolutionDefinition UpdateWorkflowSolutionDefinition(ctx, moid).WorkflowSolutionDefinition(workflowSolutionDefinition).IfMatch(ifMatch).Execute()
-
-Update a 'workflow.SolutionDefinition' resource.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    workflowSolutionDefinition := *openapiclient.NewWorkflowSolutionDefinition("ClassId_example", "ObjectType_example") // WorkflowSolutionDefinition | The 'workflow.SolutionDefinition' resource to update.
-    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WorkflowApi.UpdateWorkflowSolutionDefinition(context.Background(), moid).WorkflowSolutionDefinition(workflowSolutionDefinition).IfMatch(ifMatch).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.UpdateWorkflowSolutionDefinition``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UpdateWorkflowSolutionDefinition`: WorkflowSolutionDefinition
-    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.UpdateWorkflowSolutionDefinition`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpdateWorkflowSolutionDefinitionRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **workflowSolutionDefinition** | [**WorkflowSolutionDefinition**](WorkflowSolutionDefinition.md) | The &#39;workflow.SolutionDefinition&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**WorkflowSolutionDefinition**](WorkflowSolutionDefinition.md)
 
 ### Authorization
 

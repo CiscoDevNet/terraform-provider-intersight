@@ -150,6 +150,11 @@ func getStorageNetAppAggregateSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"cloud_storage": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"create_time": {
 			Description: "The time when this managed object was created.",
 			Type:        schema.TypeString,
@@ -158,6 +163,11 @@ func getStorageNetAppAggregateSchema() map[string]*schema.Schema {
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"efficiency_ratio": {
+			Description: "Data reduction ratio (logical_used / used).",
+			Type:        schema.TypeFloat,
 			Optional:    true,
 		},
 		"events": {
@@ -211,6 +221,11 @@ func getStorageNetAppAggregateSchema() map[string]*schema.Schema {
 		},
 		"name": {
 			Description: "Human readable name of the pool, limited to 64 characters.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"node_name": {
+			Description: "The node name for the aggregate.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -402,7 +417,7 @@ func getStorageNetAppAggregateSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"uuid": {
-			Description: "Uuid of  NetApp Aggregate.",
+			Description: "Uuid of NetApp Aggregate.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -455,6 +470,11 @@ func getStorageNetAppAggregateSchema() map[string]*schema.Schema {
 								},
 							},
 						},
+					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -674,6 +694,17 @@ func dataSourceStorageNetAppAggregateRead(c context.Context, d *schema.ResourceD
 		o.SetClassId(x)
 	}
 
+	if v, ok := d.GetOk("cloud_storage"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetCloudStorage(x)
+	}
+
 	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
@@ -682,6 +713,11 @@ func dataSourceStorageNetAppAggregateRead(c context.Context, d *schema.ResourceD
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
+	}
+
+	if v, ok := d.GetOk("efficiency_ratio"); ok {
+		x := float32(v.(float64))
+		o.SetEfficiencyRatio(x)
 	}
 
 	if v, ok := d.GetOk("events"); ok {
@@ -742,6 +778,11 @@ func dataSourceStorageNetAppAggregateRead(c context.Context, d *schema.ResourceD
 	if v, ok := d.GetOk("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
+	}
+
+	if v, ok := d.GetOk("node_name"); ok {
+		x := (v.(string))
+		o.SetNodeName(x)
 	}
 
 	if v, ok := d.GetOk("object_type"); ok {
@@ -1066,9 +1107,11 @@ func dataSourceStorageNetAppAggregateRead(c context.Context, d *schema.ResourceD
 
 				temp["avg_performance_metrics"] = flattenMapStorageNetAppPerformanceMetricsAverage(s.GetAvgPerformanceMetrics(), d)
 				temp["class_id"] = (s.GetClassId())
+				temp["cloud_storage"] = (s.GetCloudStorage())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["efficiency_ratio"] = (s.GetEfficiencyRatio())
 
 				temp["events"] = flattenListStorageNetAppAggregateEventRelationship(s.GetEvents(), d)
 				temp["key"] = (s.GetKey())
@@ -1076,6 +1119,7 @@ func dataSourceStorageNetAppAggregateRead(c context.Context, d *schema.ResourceD
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
 				temp["name"] = (s.GetName())
+				temp["node_name"] = (s.GetNodeName())
 				temp["object_type"] = (s.GetObjectType())
 				temp["owners"] = (s.GetOwners())
 

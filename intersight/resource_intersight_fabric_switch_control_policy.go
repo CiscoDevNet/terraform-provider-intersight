@@ -366,6 +366,13 @@ func resourceFabricSwitchControlPolicy() *schema.Resource {
 					},
 				},
 			},
+			"reserved_vlan_start_id": {
+				Description:  "The starting ID for VLANs reserved for internal use within the Fabric Interconnect. This VLAN ID is the starting ID of \na contiguous block of 128 VLANs that cannot be configured for user data.  This range of VLANs cannot be configured in \nVLAN policy.\nIf this property is not configured, VLAN range 3915 - 4042 is reserved for internal use by default.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(2, 3915),
+				Optional:     true,
+				Default:      3915,
+			},
 			"shared_scope": {
 				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 				Type:        schema.TypeString,
@@ -505,6 +512,17 @@ func resourceFabricSwitchControlPolicy() *schema.Resource {
 								},
 							},
 						},
+						"marked_for_deletion": {
+							Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
@@ -769,6 +787,11 @@ func resourceFabricSwitchControlPolicyCreate(c context.Context, d *schema.Resour
 		}
 	}
 
+	if v, ok := d.GetOkExists("reserved_vlan_start_id"); ok {
+		x := int64(v.(int))
+		o.SetReservedVlanStartId(x)
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -961,6 +984,10 @@ func resourceFabricSwitchControlPolicyRead(c context.Context, d *schema.Resource
 
 	if err := d.Set("profiles", flattenListFabricSwitchProfileRelationship(s.GetProfiles(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Profiles in FabricSwitchControlPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("reserved_vlan_start_id", (s.GetReservedVlanStartId())); err != nil {
+		return diag.Errorf("error occurred while setting property ReservedVlanStartId in FabricSwitchControlPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("shared_scope", (s.GetSharedScope())); err != nil {
@@ -1165,6 +1192,12 @@ func resourceFabricSwitchControlPolicyUpdate(c context.Context, d *schema.Resour
 			x = append(x, models.MoMoRefAsFabricSwitchProfileRelationship(o))
 		}
 		o.SetProfiles(x)
+	}
+
+	if d.HasChange("reserved_vlan_start_id") {
+		v := d.Get("reserved_vlan_start_id")
+		x := int64(v.(int))
+		o.SetReservedVlanStartId(x)
 	}
 
 	if d.HasChange("tags") {

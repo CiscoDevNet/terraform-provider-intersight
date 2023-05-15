@@ -66,7 +66,7 @@ This complex property has following sub-properties:
     + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
   + `description`:(string) A detailed description of the API. 
   + `display_label`:(string) Display name of the selected API endpoint. 
-  + `method`:(string) Method Type of the selected API.* `GET` - Method type which indicates it is a GET API call* `POST` - Method type which indicates it is a POST API call* `PUT` - Method type which indicates it is a PUT API call* `PATCH` - Method type which indicates it is a PATCH API call* `DELETE` - Method type which indicates it is a DELETE API call 
+  + `method`:(string) Method Type of the selected API.* `GET` - Method type which indicates it is a GET API call.* `POST` - Method type which indicates it is a POST API call.* `PUT` - Method type which indicates it is a PUT API call.* `PATCH` - Method type which indicates it is a PATCH API call.* `DELETE` - Method type which indicates it is a DELETE API call. 
   + `name`:(string) Name of the selected API endpoint. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `path`:(string) API Path of the selected API endpoint. 
@@ -78,7 +78,7 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `status`:(string)(ReadOnly) Depicts the status of the task creation request.* `none` - Indicates the default status* `InProgress` - Request has been picked up for generating tasks from the OpenAPI Specification file* `Completed` - All the tasks from the request have been created* `Failed` - There were failures in generating one or more tasks in the request 
+* `status`:(string)(ReadOnly) Depicts the status of the task creation request.* `none` - Indicates the default status.* `InProgress` - Request has been picked up for generating tasks from the OpenAPI Specification file.* `Completed` - All the tasks from the request have been created.* `Failed` - There were failures in generating one or more tasks in the request. 
 * `tags`:(Array)
 This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
@@ -97,6 +97,7 @@ This complex property has following sub-properties:
     + `moid`:(string) The Moid of the referenced REST resource. 
     + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
     + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+  + `marked_for_deletion`:(bool)(ReadOnly) The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `ref_mo`:(HashMap) -(ReadOnly) A reference to the original Managed Object. 
 This complex property has following sub-properties:

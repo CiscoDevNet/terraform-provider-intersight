@@ -110,6 +110,11 @@ func getStorageNetAppNtpServerSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"cluster_uuid": {
+			Description: "Unique identity of the device.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"create_time": {
 			Description: "The time when this managed object was created.",
 			Type:        schema.TypeString,
@@ -296,6 +301,11 @@ func getStorageNetAppNtpServerSchema() map[string]*schema.Schema {
 								},
 							},
 						},
+					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -487,6 +497,11 @@ func dataSourceStorageNetAppNtpServerRead(c context.Context, d *schema.ResourceD
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
+	}
+
+	if v, ok := d.GetOk("cluster_uuid"); ok {
+		x := (v.(string))
+		o.SetClusterUuid(x)
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
@@ -774,6 +789,7 @@ func dataSourceStorageNetAppNtpServerRead(c context.Context, d *schema.ResourceD
 				temp["authentication_enabled"] = (s.GetAuthenticationEnabled())
 				temp["authentication_key_id"] = (s.GetAuthenticationKeyId())
 				temp["class_id"] = (s.GetClassId())
+				temp["cluster_uuid"] = (s.GetClusterUuid())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())

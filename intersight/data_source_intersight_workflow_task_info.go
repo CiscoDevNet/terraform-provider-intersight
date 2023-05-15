@@ -532,6 +532,11 @@ func getWorkflowTaskInfoSchema() map[string]*schema.Schema {
 							},
 						},
 					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 						Type:        schema.TypeString,
@@ -1125,18 +1130,6 @@ func dataSourceWorkflowTaskInfoRead(c context.Context, d *schema.ResourceData, m
 					o.SetObjectType(x)
 				}
 			}
-			if v, ok := l["status"]; ok {
-				{
-					x := (v.(string))
-					o.SetStatus(x)
-				}
-			}
-			if v, ok := l["task_inst_id"]; ok {
-				{
-					x := (v.(string))
-					o.SetTaskInstId(x)
-				}
-			}
 			x = append(x, *o)
 		}
 		o.SetTaskInstIdList(x)
@@ -1159,30 +1152,6 @@ func dataSourceWorkflowTaskInfoRead(c context.Context, d *schema.ResourceData, m
 				}
 			}
 			o.SetClassId("workflow.TaskLoopInfo")
-			if v, ok := l["iteration"]; ok {
-				{
-					x := int64(v.(int))
-					o.SetIteration(x)
-				}
-			}
-			if v, ok := l["loop_task_label"]; ok {
-				{
-					x := (v.(string))
-					o.SetLoopTaskLabel(x)
-				}
-			}
-			if v, ok := l["loop_task_name"]; ok {
-				{
-					x := (v.(string))
-					o.SetLoopTaskName(x)
-				}
-			}
-			if v, ok := l["loop_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetLoopType(x)
-				}
-			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))

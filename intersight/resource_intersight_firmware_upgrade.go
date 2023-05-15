@@ -224,9 +224,9 @@ func resourceFirmwareUpgrade() *schema.Resource {
 							Optional:    true,
 						},
 						"upgradeoption": {
-							Description:  "Option to control the upgrade, e.g., sd_upgrade_mount_only - download the image into sd and upgrade wait for the server on-next boot.\n* `sd_upgrade_mount_only` - Direct upgrade SD upgrade mount only.\n* `sd_download_only` - Direct upgrade SD download only.\n* `sd_upgrade_only` - Direct upgrade SD upgrade only.\n* `sd_upgrade_full` - Direct upgrade SD upgrade full.\n* `download_only` - Direct upgrade image download only.\n* `upgrade_full` - The upgrade downloads or mounts the image, and reboots immediately for an upgrade.\n* `upgrade_mount_only` - The upgrade downloads or mounts the image. The upgrade happens in next reboot.\n* `chassis_upgrade_full` - Direct upgrade chassis upgrade full.",
+							Description:  "Option to control the upgrade, e.g., sd_upgrade_mount_only - download the image into sd and upgrade wait for the server on-next boot.\n* `sd_upgrade_mount_only` - Direct upgrade SD upgrade mount only.\n* `sd_download_only` - Direct upgrade SD download only.\n* `sd_upgrade_only` - Direct upgrade SD upgrade only.\n* `sd_upgrade_full` - Direct upgrade SD upgrade full.\n* `download_only` - Direct upgrade image download only.\n* `upgrade_full` - The upgrade downloads or mounts the image, and reboots immediately for an upgrade.\n* `upgrade_mount_only` - The upgrade downloads or mounts the image. The upgrade happens in next reboot.\n* `chassis_upgrade_full` - Direct upgrade chassis upgrade full.\n* `monitor_only` - Direct upgrade monitor progress only.\n* `validate_only` - Validate whether a component is ready for ugprade.",
 							Type:         schema.TypeString,
-							ValidateFunc: validation.StringInSlice([]string{"sd_upgrade_mount_only", "sd_download_only", "sd_upgrade_only", "sd_upgrade_full", "download_only", "upgrade_full", "upgrade_mount_only", "chassis_upgrade_full"}, false),
+							ValidateFunc: validation.StringInSlice([]string{"sd_upgrade_mount_only", "sd_download_only", "sd_upgrade_only", "sd_upgrade_full", "download_only", "upgrade_full", "upgrade_mount_only", "chassis_upgrade_full", "monitor_only", "validate_only"}, false),
 							Optional:     true,
 							Default:      "sd_upgrade_mount_only",
 						},
@@ -950,6 +950,13 @@ func resourceFirmwareUpgrade() *schema.Resource {
 					},
 				},
 			},
+			"upgrade_trigger_method": {
+				Description:  "The source that triggered the upgrade. Either via profile or traditional way.\n* `none` - Upgrade is invoked within the service.\n* `profileTrigger` - Upgrade is invoked from a profile deployment.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"none", "profileTrigger"}, false),
+				Optional:     true,
+				Default:      "none",
+			},
 			"upgrade_type": {
 				Description:  "Desired upgrade mode to choose either direct download based upgrade or network share upgrade.\n* `direct_upgrade` - Upgrade mode is direct download.\n* `network_upgrade` - Upgrade mode is network upgrade.",
 				Type:         schema.TypeString,
@@ -1016,6 +1023,17 @@ func resourceFirmwareUpgrade() *schema.Resource {
 								},
 							},
 						},
+						"marked_for_deletion": {
+							Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
@@ -1689,6 +1707,11 @@ func resourceFirmwareUpgradeCreate(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
+	if v, ok := d.GetOk("upgrade_trigger_method"); ok {
+		x := (v.(string))
+		o.SetUpgradeTriggerMethod(x)
+	}
+
 	if v, ok := d.GetOk("upgrade_type"); ok {
 		x := (v.(string))
 		o.SetUpgradeType(x)
@@ -1835,6 +1858,10 @@ func resourceFirmwareUpgradeRead(c context.Context, d *schema.ResourceData, meta
 
 	if err := d.Set("upgrade_status", flattenMapFirmwareUpgradeStatusRelationship(s.GetUpgradeStatus(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property UpgradeStatus in FirmwareUpgrade object: %s", err.Error())
+	}
+
+	if err := d.Set("upgrade_trigger_method", (s.GetUpgradeTriggerMethod())); err != nil {
+		return diag.Errorf("error occurred while setting property UpgradeTriggerMethod in FirmwareUpgrade object: %s", err.Error())
 	}
 
 	if err := d.Set("upgrade_type", (s.GetUpgradeType())); err != nil {
@@ -2444,6 +2471,12 @@ func resourceFirmwareUpgradeUpdate(c context.Context, d *schema.ResourceData, me
 			x = append(x, *o)
 		}
 		o.SetTags(x)
+	}
+
+	if d.HasChange("upgrade_trigger_method") {
+		v := d.Get("upgrade_trigger_method")
+		x := (v.(string))
+		o.SetUpgradeTriggerMethod(x)
 	}
 
 	if d.HasChange("upgrade_type") {

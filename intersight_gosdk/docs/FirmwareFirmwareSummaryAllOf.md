@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **BundleVersion** | Pointer to **string** | Version details at the bundle level for the each of server. | [optional] 
 **ComponentsFwInventory** | Pointer to [**[]FirmwareFirmwareInventory**](FirmwareFirmwareInventory.md) |  | [optional] 
 **Server** | Pointer to [**ComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
+**TargetMo** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -153,6 +154,31 @@ SetServer sets Server field to given value.
 `func (o *FirmwareFirmwareSummaryAllOf) HasServer() bool`
 
 HasServer returns a boolean if a field has been set.
+
+### GetTargetMo
+
+`func (o *FirmwareFirmwareSummaryAllOf) GetTargetMo() MoBaseMoRelationship`
+
+GetTargetMo returns the TargetMo field if non-nil, zero value otherwise.
+
+### GetTargetMoOk
+
+`func (o *FirmwareFirmwareSummaryAllOf) GetTargetMoOk() (*MoBaseMoRelationship, bool)`
+
+GetTargetMoOk returns a tuple with the TargetMo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTargetMo
+
+`func (o *FirmwareFirmwareSummaryAllOf) SetTargetMo(v MoBaseMoRelationship)`
+
+SetTargetMo sets TargetMo field to given value.
+
+### HasTargetMo
+
+`func (o *FirmwareFirmwareSummaryAllOf) HasTargetMo() bool`
+
+HasTargetMo returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

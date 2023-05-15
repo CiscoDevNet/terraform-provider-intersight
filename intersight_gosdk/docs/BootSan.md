@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "boot.San"]
 **Bootloader** | Pointer to [**NullableBootBootloader**](BootBootloader.md) |  | [optional] 
 **InterfaceName** | Pointer to **string** | The name of the underlying vHBA interface to be used by the SAN boot device. | [optional] 
-**Lun** | Pointer to **int64** | The Logical Unit Number (LUN) of the device. | [optional] [default to 0]
+**Lun** | Pointer to **int64** | The Logical Unit Number (LUN) of the device. For SAN boot configuration to be deployed on a server with 1300 family of Cisco VIC adapters, the recommendation is for the boot LUN to be numbered as 0 to ensure that LUN is mounted as the first disk from which the server boots. | [optional] [default to 0]
 **Slot** | Pointer to **string** | Slot ID of the device. Supported values are ( 1 - 255, \&quot;MLOM\&quot;, \&quot;L1\&quot;, \&quot;L2\&quot; ). | [optional] 
 **Wwpn** | Pointer to **string** | The WWPN Address of the underlying fibre channel interface used by the SAN boot device. Value must be in hexadecimal format xx:xx:xx:xx:xx:xx:xx:xx. | [optional] 
 

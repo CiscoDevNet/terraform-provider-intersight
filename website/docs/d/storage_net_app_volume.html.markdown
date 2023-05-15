@@ -20,7 +20,7 @@ The following arguments can be used to get data of already created objects in In
 * `created_time`:(string) Storage container's creation time. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `export_policy_name`:(string) The name of the Export Policy. 
-* `key`:(string) Unique identifier of NetApp Volume across data center. 
+* `key`:(string) Unique identifier of a NetApp Volume across data center. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the storage container. 
@@ -30,6 +30,8 @@ The following arguments can be used to get data of already created objects in In
 * `snapshot_reserve_percent`:(int) The space that has been set aside as a reserve for Snapshot copy usage represented as a percent. 
 * `snapshot_used`:(float) The total space used by Snapshot copies in the volume represented in bytes. 
 * `state`:(string) The current state of a NetApp volume.* `offline` - Read and write access to the volume is not allowed.* `online` - Read and write access to the volume is allowed.* `error` - Storage volume state of error type.* `mixed` - The constituents of a FlexGroup volume are not all in the same state. 
+* `style`:(string) The style of the volume (FlexGroup or FlexVol). 
+* `svm_name`:(string) The storage virtual machine name for the volume. 
 * `type`:(string) NetApp volume type. The volume type can be Read-write, Data-protection, or Load-sharing.* `data-protection` - Prevents modification of the data on the Volume.* `read-write` - Data on the Volume can be modified.* `load-sharing` - The volume type is Load Sharing DP. 
 * `uuid`:(string) Universally unique identifier of a NetApp Volume. 
  

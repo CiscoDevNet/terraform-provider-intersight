@@ -70,6 +70,11 @@ func getCertificatemanagementPolicyInventorySchema() map[string]*schema.Schema {
 						Optional:         true,
 						DiffSuppressFunc: SuppressDiffAdditionProps,
 					},
+					"cert_type": {
+						Description: "Certificate Type for the certificate management.\n* `None` - Set certificate on the selected end point .\n* `KMIPClient` - Set KMIP certificate on the selected end point.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 					"certificate": {
 						Description: "Certificate that is used for verifying the authorization.",
 						Type:        schema.TypeList,
@@ -490,6 +495,11 @@ func getCertificatemanagementPolicyInventorySchema() map[string]*schema.Schema {
 							},
 						},
 					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 						Type:        schema.TypeString,
@@ -638,6 +648,12 @@ func dataSourceCertificatemanagementPolicyInventoryRead(c context.Context, d *sc
 					if err == nil && x1 != nil {
 						o.AdditionalProperties = x1.(map[string]interface{})
 					}
+				}
+			}
+			if v, ok := l["cert_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetCertType(x)
 				}
 			}
 			if v, ok := l["certificate"]; ok {

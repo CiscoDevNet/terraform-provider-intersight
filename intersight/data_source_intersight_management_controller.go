@@ -107,6 +107,11 @@ func getManagementControllerSchema() map[string]*schema.Schema {
 						Optional:         true,
 						DiffSuppressFunc: SuppressDiffAdditionProps,
 					},
+					"cert_type": {
+						Description: "Certificate Type for the certificate management.\n* `None` - Set certificate on the selected end point .\n* `KMIPClient` - Set KMIP certificate on the selected end point.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 					"certificate": {
 						Description: "Certificate that is used for verifying the authorization.",
 						Type:        schema.TypeList,
@@ -530,6 +535,211 @@ func getManagementControllerSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"kmip_client_certificate": {
+			Description: "KMIP Client Certificate to be used in inventory.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"cert_type": {
+						Description: "Certificate Type for the certificate management.\n* `None` - Set certificate on the selected end point .\n* `KMIPClient` - Set KMIP certificate on the selected end point.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"certificate": {
+						Description: "Certificate that is used for verifying the authorization.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"issuer": {
+									Description: "The X.509 distinguished name of the issuer of this certificate.",
+									Type:        schema.TypeList,
+									MaxItems:    1,
+									Optional:    true,
+									Elem: &schema.Resource{
+										Schema: map[string]*schema.Schema{
+											"additional_properties": {
+												Type:             schema.TypeString,
+												Optional:         true,
+												DiffSuppressFunc: SuppressDiffAdditionProps,
+											},
+											"class_id": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"common_name": {
+												Description: "A required component that identifies a person or an object.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"country": {
+												Type:     schema.TypeList,
+												Optional: true,
+												Elem: &schema.Schema{
+													Type: schema.TypeString}},
+											"locality": {
+												Type:     schema.TypeList,
+												Optional: true,
+												Elem: &schema.Schema{
+													Type: schema.TypeString}},
+											"object_type": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"organization": {
+												Type:     schema.TypeList,
+												Optional: true,
+												Elem: &schema.Schema{
+													Type: schema.TypeString}},
+											"organizational_unit": {
+												Type:     schema.TypeList,
+												Optional: true,
+												Elem: &schema.Schema{
+													Type: schema.TypeString}},
+											"state": {
+												Type:     schema.TypeList,
+												Optional: true,
+												Elem: &schema.Schema{
+													Type: schema.TypeString}},
+										},
+									},
+								},
+								"not_after": {
+									Description: "The date on which the certificate's validity period ends.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"not_before": {
+									Description: "The date on which the certificate's validity period begins.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"pem_certificate": {
+									Description: "The base64 encoded certificate in PEM format.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"sha256_fingerprint": {
+									Description: "The computed SHA-256 fingerprint of the certificate. Equivalent to 'openssl x509 -fingerprint -sha256'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"signature_algorithm": {
+									Description: "Signature algorithm, as specified in [RFC 5280](https://tools.ietf.org/html/rfc5280).",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"subject": {
+									Description: "The X.509 distinguished name of the subject of this certificate.",
+									Type:        schema.TypeList,
+									MaxItems:    1,
+									Optional:    true,
+									Elem: &schema.Resource{
+										Schema: map[string]*schema.Schema{
+											"additional_properties": {
+												Type:             schema.TypeString,
+												Optional:         true,
+												DiffSuppressFunc: SuppressDiffAdditionProps,
+											},
+											"class_id": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"common_name": {
+												Description: "A required component that identifies a person or an object.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"country": {
+												Type:     schema.TypeList,
+												Optional: true,
+												Elem: &schema.Schema{
+													Type: schema.TypeString}},
+											"locality": {
+												Type:     schema.TypeList,
+												Optional: true,
+												Elem: &schema.Schema{
+													Type: schema.TypeString}},
+											"object_type": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"organization": {
+												Type:     schema.TypeList,
+												Optional: true,
+												Elem: &schema.Schema{
+													Type: schema.TypeString}},
+											"organizational_unit": {
+												Type:     schema.TypeList,
+												Optional: true,
+												Elem: &schema.Schema{
+													Type: schema.TypeString}},
+											"state": {
+												Type:     schema.TypeList,
+												Optional: true,
+												Elem: &schema.Schema{
+													Type: schema.TypeString}},
+										},
+									},
+								},
+							},
+						},
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"enabled": {
+						Description: "Enable/Disable the certificate in Certificate Management policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"is_privatekey_set": {
+						Description: "Indicates whether the value of the 'privatekey' property has been set.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"privatekey": {
+						Description: "Private Key which is used to validate the certificate.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"management_interfaces": {
 			Description: "An array of relationships to managementInterface resources.",
 			Type:        schema.TypeList,
@@ -920,6 +1130,11 @@ func getManagementControllerSchema() map[string]*schema.Schema {
 							},
 						},
 					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 						Type:        schema.TypeString,
@@ -1111,6 +1326,12 @@ func dataSourceManagementControllerRead(c context.Context, d *schema.ResourceDat
 					if err == nil && x1 != nil {
 						o.AdditionalProperties = x1.(map[string]interface{})
 					}
+				}
+			}
+			if v, ok := l["cert_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetCertType(x)
 				}
 			}
 			if v, ok := l["certificate"]; ok {
@@ -1458,6 +1679,93 @@ func dataSourceManagementControllerRead(c context.Context, d *schema.ResourceDat
 		if len(p) > 0 {
 			x := p[0]
 			o.SetInventoryDeviceInfo(x)
+		}
+	}
+
+	if v, ok := d.GetOk("kmip_client_certificate"); ok {
+		p := make([]models.CertificatemanagementImc, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.CertificatemanagementImc{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			if v, ok := l["cert_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetCertType(x)
+				}
+			}
+			if v, ok := l["certificate"]; ok {
+				{
+					p := make([]models.X509Certificate, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewX509CertificateWithDefaults()
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("x509.Certificate")
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["pem_certificate"]; ok {
+							{
+								x := (v.(string))
+								o.SetPemCertificate(x)
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetCertificate(x)
+					}
+				}
+			}
+			o.SetClassId("certificatemanagement.Imc")
+			if v, ok := l["enabled"]; ok {
+				{
+					x := (v.(bool))
+					o.SetEnabled(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["privatekey"]; ok {
+				{
+					x := (v.(string))
+					o.SetPrivatekey(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetKmipClientCertificate(x)
 		}
 	}
 
@@ -2010,6 +2318,8 @@ func dataSourceManagementControllerRead(c context.Context, d *schema.ResourceDat
 				temp["equipment_system_io_controller"] = flattenMapEquipmentSystemIoControllerRelationship(s.GetEquipmentSystemIoController(), d)
 
 				temp["inventory_device_info"] = flattenMapInventoryDeviceInfoRelationship(s.GetInventoryDeviceInfo(), d)
+
+				temp["kmip_client_certificate"] = flattenMapCertificatemanagementImc(s.GetKmipClientCertificate(), d)
 
 				temp["management_interfaces"] = flattenListManagementInterfaceRelationship(s.GetManagementInterfaces(), d)
 

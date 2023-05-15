@@ -461,7 +461,7 @@ func resourceOpenapiTaskGenerationRequest() *schema.Resource {
 							Optional:    true,
 						},
 						"method": {
-							Description:  "Method Type of the selected API.\n* `GET` - Method type which indicates it is a GET API call\n* `POST` - Method type which indicates it is a POST API call\n* `PUT` - Method type which indicates it is a PUT API call\n* `PATCH` - Method type which indicates it is a PATCH API call\n* `DELETE` - Method type which indicates it is a DELETE API call",
+							Description:  "Method Type of the selected API.\n* `GET` - Method type which indicates it is a GET API call.\n* `POST` - Method type which indicates it is a POST API call.\n* `PUT` - Method type which indicates it is a PUT API call.\n* `PATCH` - Method type which indicates it is a PATCH API call.\n* `DELETE` - Method type which indicates it is a DELETE API call.",
 							Type:         schema.TypeString,
 							ValidateFunc: validation.StringInSlice([]string{"GET", "POST", "PUT", "PATCH", "DELETE"}, false),
 							Optional:     true,
@@ -560,7 +560,7 @@ func resourceOpenapiTaskGenerationRequest() *schema.Resource {
 				},
 			},
 			"status": {
-				Description: "Depicts the status of the task creation request.\n* `none` - Indicates the default status\n* `InProgress` - Request has been picked up for generating tasks from the OpenAPI Specification file\n* `Completed` - All the tasks from the request have been created\n* `Failed` - There were failures in generating one or more tasks in the request",
+				Description: "Depicts the status of the task creation request.\n* `none` - Indicates the default status.\n* `InProgress` - Request has been picked up for generating tasks from the OpenAPI Specification file.\n* `Completed` - All the tasks from the request have been created.\n* `Failed` - There were failures in generating one or more tasks in the request.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -702,6 +702,17 @@ func resourceOpenapiTaskGenerationRequest() *schema.Resource {
 								},
 							},
 						},
+						"marked_for_deletion": {
+							Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,

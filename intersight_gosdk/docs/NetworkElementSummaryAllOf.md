@@ -30,8 +30,9 @@ Name | Type | Description | Notes
 **InbandIpMask** | Pointer to **string** | The network mask of the network Element inband management interface. | [optional] [readonly] 
 **InbandVlan** | Pointer to **int64** | The VLAN ID of the network Element inband management interface. | [optional] [readonly] 
 **Ipv4Address** | Pointer to **string** | IP version 4 address is saved in this property. | [optional] [readonly] 
+**IsUpgraded** | Pointer to **bool** | This field indicates the compute status of the catalog values for the associated component or hardware. | [optional] [readonly] [default to false]
 **ManagementMode** | Pointer to **string** | The management mode of the fabric interconnect. * &#x60;IntersightStandalone&#x60; - Intersight Standalone mode of operation. * &#x60;UCSM&#x60; - Unified Computing System Manager mode of operation. * &#x60;Intersight&#x60; - Intersight managed mode of operation. | [optional] [readonly] [default to "IntersightStandalone"]
-**Model** | Pointer to **string** | This field identifies the model of the given component. | [optional] [readonly] 
+**Model** | Pointer to **string** | This field displays the model number of the associated component or hardware. | [optional] [readonly] 
 **Name** | Pointer to **string** | Name of the ElementSummary object is saved in this property. | [optional] [readonly] 
 **NumEtherPorts** | Pointer to **int64** | Total number of Ethernet ports. | [optional] [readonly] 
 **NumEtherPortsConfigured** | Pointer to **int64** | Total number of configured Ethernet ports. | [optional] [readonly] 
@@ -53,10 +54,10 @@ Name | Type | Description | Notes
 **OutOfBandIpv6Prefix** | Pointer to **string** | The network mask of the network Element out-of-band management interface. | [optional] [readonly] 
 **OutOfBandMac** | Pointer to **string** | The MAC address of the network Element out-of-band management interface. | [optional] [readonly] 
 **PartNumber** | Pointer to **string** | Part number of the switch. | [optional] [readonly] 
-**Presence** | Pointer to **string** | This field identifies the presence (equipped) or absence of the given component. | [optional] [readonly] 
-**Revision** | Pointer to **string** | This field identifies the revision of the given component. | [optional] [readonly] 
+**Presence** | Pointer to **string** | This field indicates the presence (equipped) or absence (absent) of the associated component or hardware. | [optional] [readonly] 
+**Revision** | Pointer to **string** | This field displays the revised version of the associated component or hardware (if any). | [optional] [readonly] 
 **Rn** | Pointer to **string** | The Relative Name uniquely identifies an object within a given context. | [optional] [readonly] 
-**Serial** | Pointer to **string** | This field identifies the serial of the given component. | [optional] [readonly] 
+**Serial** | Pointer to **string** | This field displays the serial number of the associated component or hardware. | [optional] [readonly] 
 **SourceObjectType** | Pointer to **string** | The source object type of this view MO. | [optional] [readonly] 
 **Status** | Pointer to **string** | The status of the switch. | [optional] [readonly] 
 **SwitchId** | Pointer to **string** | The Switch Id of the network Element. | [optional] [readonly] 
@@ -64,7 +65,7 @@ Name | Type | Description | Notes
 **SystemUpTime** | Pointer to **string** | System up time of the switch. | [optional] [readonly] 
 **Thermal** | Pointer to **string** | The Thermal status of the fabric interconnect. * &#x60;unknown&#x60; - The default state of the sensor (in case no data is received). * &#x60;ok&#x60; - State of the sensor indicating the sensor&#39;s temperature range is okay. * &#x60;upper-non-recoverable&#x60; - State of the sensor indicating that the temperature is extremely high above normal range. * &#x60;upper-critical&#x60; - State of the sensor indicating that the temperature is above normal range. * &#x60;upper-non-critical&#x60; - State of the sensor indicating that the temperature is a little above the normal range. * &#x60;lower-non-critical&#x60; - State of the sensor indicating that the temperature is a little below the normal range. * &#x60;lower-critical&#x60; - State of the sensor indicating that the temperature is below normal range. * &#x60;lower-non-recoverable&#x60; - State of the sensor indicating that the temperature is extremely below normal range. | [optional] [readonly] [default to "unknown"]
 **TotalMemory** | Pointer to **int64** | Total available memory on this switch platform. | [optional] [readonly] 
-**Vendor** | Pointer to **string** | This field identifies the vendor of the given component. | [optional] [readonly] 
+**Vendor** | Pointer to **string** | This field displays the vendor information of the associated component or hardware. | [optional] [readonly] 
 **Version** | Pointer to **string** | Version holds the firmware version related information. | [optional] [readonly] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
@@ -736,6 +737,31 @@ SetIpv4Address sets Ipv4Address field to given value.
 `func (o *NetworkElementSummaryAllOf) HasIpv4Address() bool`
 
 HasIpv4Address returns a boolean if a field has been set.
+
+### GetIsUpgraded
+
+`func (o *NetworkElementSummaryAllOf) GetIsUpgraded() bool`
+
+GetIsUpgraded returns the IsUpgraded field if non-nil, zero value otherwise.
+
+### GetIsUpgradedOk
+
+`func (o *NetworkElementSummaryAllOf) GetIsUpgradedOk() (*bool, bool)`
+
+GetIsUpgradedOk returns a tuple with the IsUpgraded field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsUpgraded
+
+`func (o *NetworkElementSummaryAllOf) SetIsUpgraded(v bool)`
+
+SetIsUpgraded sets IsUpgraded field to given value.
+
+### HasIsUpgraded
+
+`func (o *NetworkElementSummaryAllOf) HasIsUpgraded() bool`
+
+HasIsUpgraded returns a boolean if a field has been set.
 
 ### GetManagementMode
 

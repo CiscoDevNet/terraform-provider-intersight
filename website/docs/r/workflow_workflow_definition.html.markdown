@@ -98,6 +98,8 @@ This complex property has following sub-properties:
   + `additional_properties`:(JSON as string) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [workflow.ArrayDataType](#workflowArrayDataType)
 [workflow.CustomDataType](#workflowCustomDataType)
 [workflow.DynamicTemplateParserDataType](#workflowDynamicTemplateParserDataType)
+[workflow.MoInventoryDataType](#workflowMoInventoryDataType)
+[workflow.MoReferenceAutoDataType](#workflowMoReferenceAutoDataType)
 [workflow.MoReferenceDataType](#workflowMoReferenceDataType)
 [workflow.PrimitiveDataType](#workflowPrimitiveDataType)
 [workflow.TargetDataType](#workflowTargetDataType)
@@ -128,7 +130,7 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `value`:(string) The controlling parameter will be evaluated against this 'value'. 
 * `label`:(string) A user friendly short name to identify the workflow. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), forward slash (/), or an underscore (_). 
-* `license_entitlement`:(string)(ReadOnly) License entitlement required to run this workflow. It is calculated based on the highest license requirement of all its tasks.* `Base` - Base as a License type. It is default license type.* `Essential` - Essential as a License type.* `Standard` - Standard as a License type.* `Advantage` - Advantage as a License type.* `Premier` - Premier as a License type.* `IWO-Essential` - IWO-Essential as a License type.* `IWO-Advantage` - IWO-Advantage as a License type.* `IWO-Premier` - IWO-Premier as a License type.* `IKS-Advantage` - IKS-Advantage as a License type.* `INC-Premier-1GFixed` - Premier 1G Fixed license tier for Intersight Nexus Cloud.* `INC-Premier-10GFixed` - Premier 10G Fixed license tier for Intersight Nexus Cloud.* `INC-Premier-100GFixed` - Premier 100G Fixed license tier for Intersight Nexus Cloud.* `INC-Premier-Mod4Slot` - Premier Modular 4 slot license tier for Intersight Nexus Cloud.* `INC-Premier-Mod8Slot` - Premier Modular 8 slot license tier for Intersight Nexus Cloud.* `INC-Premier-D2OpsFixed` - Premier D2Ops fixed license tier for Intersight Nexus Cloud.* `INC-Premier-D2OpsMod` - Premier D2Ops modular license tier for Intersight Nexus Cloud.* `IntersightTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode Intersight tiers.* `IWOTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode IKS tiers.* `IKSTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode IWO tiers.* `INCTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode Nexus tiers. 
+* `license_entitlement`:(string)(ReadOnly) License entitlement required to run this workflow. It is calculated based on the highest license requirement of all its tasks.* `Base` - Base as a License type. It is default license type.* `Essential` - Essential as a License type.* `Standard` - Standard as a License type.* `Advantage` - Advantage as a License type.* `Premier` - Premier as a License type.* `IWO-Essential` - IWO-Essential as a License type.* `IWO-Advantage` - IWO-Advantage as a License type.* `IWO-Premier` - IWO-Premier as a License type.* `IKS-Advantage` - IKS-Advantage as a License type.* `INC-Premier-1GFixed` - Premier 1G Fixed license tier for Intersight Nexus Cloud.* `INC-Premier-10GFixed` - Premier 10G Fixed license tier for Intersight Nexus Cloud.* `INC-Premier-100GFixed` - Premier 100G Fixed license tier for Intersight Nexus Cloud.* `INC-Premier-Mod4Slot` - Premier Modular 4 slot license tier for Intersight Nexus Cloud.* `INC-Premier-Mod8Slot` - Premier Modular 8 slot license tier for Intersight Nexus Cloud.* `INC-Premier-D2OpsFixed` - Premier D2Ops fixed license tier for Intersight Nexus Cloud.* `INC-Premier-D2OpsMod` - Premier D2Ops modular license tier for Intersight Nexus Cloud.* `INC-Premier-CentralizedMod8Slot` - Premier modular license tier of switch type CentralizedMod8Slot for Intersight Nexus Cloud.* `INC-Premier-DistributedMod8Slot` - Premier modular license tier of switch type DistributedMod8Slot for Intersight Nexus Cloud.* `IntersightTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode Intersight tiers.* `IWOTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode IKS tiers.* `IKSTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode IWO tiers.* `INCTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode Nexus tiers. 
 * `max_task_count`:(int)(ReadOnly) The maximum number of tasks that can be executed on this workflow. 
 * `max_worker_task_count`:(int)(ReadOnly) The maximum number of external (worker) tasks that can be executed on this workflow. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
@@ -139,6 +141,8 @@ This complex property has following sub-properties:
   + `additional_properties`:(JSON as string) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [workflow.ArrayDataType](#workflowArrayDataType)
 [workflow.CustomDataType](#workflowCustomDataType)
 [workflow.DynamicTemplateParserDataType](#workflowDynamicTemplateParserDataType)
+[workflow.MoInventoryDataType](#workflowMoInventoryDataType)
+[workflow.MoReferenceAutoDataType](#workflowMoReferenceAutoDataType)
 [workflow.MoReferenceDataType](#workflowMoReferenceDataType)
 [workflow.PrimitiveDataType](#workflowPrimitiveDataType)
 [workflow.TargetDataType](#workflowTargetDataType)
@@ -176,9 +180,9 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
   + `cloneable`:(bool)(ReadOnly) When set to false workflow is not cloneable. It is set to true only if Workflow is not internal and it does not have any internal tasks. 
   + `enable_debug`:(bool) Enabling this flag will capture request and response details as debug logs for tasks that are using workflow.BatchApi for implementation. For other tasks in the workflow which are not based on workflow.BatchApi logs will not be generated. 
-  + `external_meta`:(bool) When set to false the workflow is owned by the system and used for internal services. Such workflows cannot be directly used by external entities. 
+  + `external_meta`:(bool)(ReadOnly) When set to false the workflow is owned by the system and used for internal services. Such workflows cannot be directly used by external entities. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `retryable`:(bool) When true, this workflow can be retried if has not been modified for more than a period of 2 weeks. 
+  + `retryable`:(bool) When set to true, the failed workflow executions from this workflow definition can be retried for up to 2 weeks since the last modification time. After two weeks of inactivity on the workflow execution, the option to retry the failed workflow will be disabled. 
   + `rollback_on_cancel`:(bool) When set to true, the changes are automatically rolled back if the workflow execution is canceled. 
   + `rollback_on_failure`:(bool) When set to true, the changes are automatically rolled back if the workflow fails to execute. 
   + `support_status`:(string) Supported status of the definition.* `Supported` - The definition is a supported version and there will be no changes to the mandatory inputs or outputs.* `Beta` - The definition is a Beta version and this version can under go changes until the version is marked supported.* `Deprecated` - The version of definition is deprecated and typically there will be a higher version of the same definition that has been added. 
@@ -228,6 +232,8 @@ This complex property has following sub-properties:
   + `additional_properties`:(JSON as string) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [workflow.ArrayDataType](#workflowArrayDataType)
 [workflow.CustomDataType](#workflowCustomDataType)
 [workflow.DynamicTemplateParserDataType](#workflowDynamicTemplateParserDataType)
+[workflow.MoInventoryDataType](#workflowMoInventoryDataType)
+[workflow.MoReferenceAutoDataType](#workflowMoReferenceAutoDataType)
 [workflow.MoReferenceDataType](#workflowMoReferenceDataType)
 [workflow.PrimitiveDataType](#workflowPrimitiveDataType)
 [workflow.TargetDataType](#workflowTargetDataType)
@@ -256,6 +262,7 @@ This complex property has following sub-properties:
     + `moid`:(string) The Moid of the referenced REST resource. 
     + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
     + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+  + `marked_for_deletion`:(bool)(ReadOnly) The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `ref_mo`:(HashMap) -(ReadOnly) A reference to the original Managed Object. 
 This complex property has following sub-properties:
@@ -301,6 +308,30 @@ Data type to fetch a generic template from given selector and parse it using an 
 * `is_template_secure`:(bool) When set to true, the template is marked as secure and the content is encrypted and stored. 
 * `template_type`:(string) Template type decides on the API to be used to fetch the placeholders present inside the template.* `OsInstall` - This refers to the OS configuration template MO. 
 
+### [workflow.MoInventoryDataType](#argument-reference)
+The data type to represent the selected properties of an Intersight managed object. This data type is used only in Service items to define the schema of resources and their attributes.
+* `properties`:(Array)
+This complex property has following sub-properties:
+  + `attributes`:
+                (Array of schema.TypeString) -
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `reference_object_type`:(string) ObjectType for which the attributes need to be collected. 
+  + `reference_type`:(string) Defines how the reference to the shadow resource is done. Base case is via an Moid, but reference via a selector is also possible.* `Moid` - The reference to the original resource is via an Moid.* `Selector` - The reference to the original resource is via a selector query. This can potentially lead to tracking data for multiple resources. 
+
+### [workflow.MoReferenceAutoDataType](#argument-reference)
+The data type to capture an Intersight managed object reference that is automatically selected by the system based on a given selection criteria.
+* `properties`:(Array)
+This complex property has following sub-properties:
+  + `display_attributes`:
+                (Array of schema.TypeString) -
+  + `filters`:
+                (Array of schema.TypeString) -
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `order_by`:(string) Determines  properties that are used to sort the collection of resources. 
+  + `rule`:(HashMap) - The rule can be obtained directly from a Resource Selection Criteria or provided as inline resource filter conditions. 
+This complex property has following sub-properties:
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+
 ### [workflow.MoReferenceDataType](#argument-reference)
 Data type to capture an Intersight Managed object reference.
 * `properties`:(Array)
@@ -397,6 +428,30 @@ Data type to fetch a generic template from given selector and parse it using an 
 * `is_template_secure`:(bool) When set to true, the template is marked as secure and the content is encrypted and stored. 
 * `template_type`:(string) Template type decides on the API to be used to fetch the placeholders present inside the template.* `OsInstall` - This refers to the OS configuration template MO. 
 
+### [workflow.MoInventoryDataType](#argument-reference)
+The data type to represent the selected properties of an Intersight managed object. This data type is used only in Service items to define the schema of resources and their attributes.
+* `properties`:(Array)
+This complex property has following sub-properties:
+  + `attributes`:
+                (Array of schema.TypeString) -
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `reference_object_type`:(string) ObjectType for which the attributes need to be collected. 
+  + `reference_type`:(string) Defines how the reference to the shadow resource is done. Base case is via an Moid, but reference via a selector is also possible.* `Moid` - The reference to the original resource is via an Moid.* `Selector` - The reference to the original resource is via a selector query. This can potentially lead to tracking data for multiple resources. 
+
+### [workflow.MoReferenceAutoDataType](#argument-reference)
+The data type to capture an Intersight managed object reference that is automatically selected by the system based on a given selection criteria.
+* `properties`:(Array)
+This complex property has following sub-properties:
+  + `display_attributes`:
+                (Array of schema.TypeString) -
+  + `filters`:
+                (Array of schema.TypeString) -
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `order_by`:(string) Determines  properties that are used to sort the collection of resources. 
+  + `rule`:(HashMap) - The rule can be obtained directly from a Resource Selection Criteria or provided as inline resource filter conditions. 
+This complex property has following sub-properties:
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+
 ### [workflow.MoReferenceDataType](#argument-reference)
 Data type to capture an Intersight Managed object reference.
 * `properties`:(Array)
@@ -492,6 +547,30 @@ This complex property has following sub-properties:
 Data type to fetch a generic template from given selector and parse it using an api to give an array of secure and non-secure keys for form generation. URL used to fetch the template object is based on the templateType. Final input passed to the workflow using this data type is a JSON containing {'Template':'<template string value>', 'Keys':[{'<key1>':'<val 1>'}], 'SecureKeys':[{'<key2>':'<val2>'}]}.
 * `is_template_secure`:(bool) When set to true, the template is marked as secure and the content is encrypted and stored. 
 * `template_type`:(string) Template type decides on the API to be used to fetch the placeholders present inside the template.* `OsInstall` - This refers to the OS configuration template MO. 
+
+### [workflow.MoInventoryDataType](#argument-reference)
+The data type to represent the selected properties of an Intersight managed object. This data type is used only in Service items to define the schema of resources and their attributes.
+* `properties`:(Array)
+This complex property has following sub-properties:
+  + `attributes`:
+                (Array of schema.TypeString) -
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `reference_object_type`:(string) ObjectType for which the attributes need to be collected. 
+  + `reference_type`:(string) Defines how the reference to the shadow resource is done. Base case is via an Moid, but reference via a selector is also possible.* `Moid` - The reference to the original resource is via an Moid.* `Selector` - The reference to the original resource is via a selector query. This can potentially lead to tracking data for multiple resources. 
+
+### [workflow.MoReferenceAutoDataType](#argument-reference)
+The data type to capture an Intersight managed object reference that is automatically selected by the system based on a given selection criteria.
+* `properties`:(Array)
+This complex property has following sub-properties:
+  + `display_attributes`:
+                (Array of schema.TypeString) -
+  + `filters`:
+                (Array of schema.TypeString) -
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `order_by`:(string) Determines  properties that are used to sort the collection of resources. 
+  + `rule`:(HashMap) - The rule can be obtained directly from a Resource Selection Criteria or provided as inline resource filter conditions. 
+This complex property has following sub-properties:
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 
 ### [workflow.MoReferenceDataType](#argument-reference)
 Data type to capture an Intersight Managed object reference.
@@ -599,6 +678,7 @@ A Parallel Loop is a control task that runs one task or one sub-workflow multipl
 * `nr_count`:(string) Count value for the loop, this can be a static value defined as a constant at design time or can be a dynamic value defined as an expression that will evaluate to an integer value at execution time. Dynamic values for count must be specified as a template. For example, if a loop must run for a count which matches the length of a workflow input called StringArray, then the count must be specified using a template '{{ len .global.workflow.input.StringArray }}'. The count must be less than or equal to 100. If count is given as a dynamic value, and during execution time if count evaluates to be a value greater than 100, then the loop task will fail. 
 * `loop_start_task`:(string) Start task where the list of tasks will be executed multiple times based on the count or condition value. 
 * `number_of_batches`:(int) When tasks are run in parallel and the count is large, the actual number of task run in parallel can be controlled by this property. If count is 100 and numberOfBatches is 5 then 20 tasks are run in parallel 5 times. Parallel batch size must be less than the count. In cases where count is dynamic and depends on input given during workflow execution, if that count is less than batch then empty batches might get created which do not have any tasks under them. 
+* `on_failure`:(string) This specifies the name of the next task to run if all iterations of the loop task do not succeed. The unique name given to the task instance within the workflow must be provided here. In a graph model, denotes an edge to another Task Node. 
 * `on_success`:(string) This specifies the name of the next task to run if all iterations of the loop task succeeds. The unique name given to the task instance within the workflow must be provided here. In a graph model, denotes an edge to another Task Node. 
 * `parallel`:(bool) This field is deprecated. Always set to true for parallel loop. 
 
@@ -607,6 +687,7 @@ A Serial Loop is a control task that runs one or more worker tasks multiple time
 * `condition`:(string) Condition expression which will be evaluated and when expression is true the tasks under loop will be executed. 
 * `nr_count`:(string) Count value for the loop, this can be a static value defined as a constant at design time or can be a dynamic value defined as an expression that will evaluate to an integer value at execution time. Dynamic values for count must be specified as a template. For example, if a loop must run for a count which matches the length of a workflow input called StringArray, then the count must be specified using a template '{{ len .global.workflow.input.StringArray }}'. The count must be less than or equal to 100. If count is given as a dynamic value, and during execution time if count evaluates to be a value greater than 100, then the loop task will fail. 
 * `loop_start_task`:(string) Start task where the list of tasks will be executed multiple times based on the count or condition value. 
+* `on_failure`:(string) This specifies the name of the next task to run if all iterations of the loop task do not succeed. The unique name given to the task instance within the workflow must be provided here. In a graph model, denotes an edge to another Task Node. 
 * `on_success`:(string) This specifies the name of the next task to run if all iterations of the loop task succeeds. The unique name given to the task instance within the workflow must be provided here. In a graph model, denotes an edge to another Task Node. 
 
 ### [workflow.StartTask](#argument-reference)
@@ -620,7 +701,6 @@ A SubWorkflowTask is used to include another workflow as a task within this work
 * `on_failure`:(string) This specifies the name of the next task to run if Task fails.  This is the unique name given to the task instance within the workflow. In a graph model, denotes an edge to another Task Node. 
 * `on_success`:(string) This specifies the name of the next task to run if Task succeeds.  This is the unique name given to the task instance within the workflow. In a graph model, denotes an edge to another Task Node. 
 * `rollback_disabled`:(bool) The task is disabled/enabled for rollback operation in this workflow if the task has rollback support. 
-* `use_default`:(bool) UseDefault when set to true, means the default version of the task or workflow will be used at the time of execution. When this property is set then version for task or subworkflow cannot be set. When workflow is created or updated the default version of task or subworkflow will be used for validation, but when the workflow is executed the default version that that time will be used for validation and subsequent execution. 
 * `variable_parameters`:(JSON as string) JSON formatted key-value pairs that perform variable update at the end of the task execution. Mapping for variables can be provided as either static values, direct mapping or advanced mapping using templates. The direct mapping can be specified as '${Source.< input | output | variable>.<JSONPath>}'. 'Source' can be either workflow or the name of the current or an earlier task within the workflow. You can map the variable to either a workflow input, a task output or another variable. Golang template syntax is supported for advanced mapping. A simple flattened example is \ VariableParameters\ :{ \ var1\ :\ ${task1.output.output1}\ , \ var2\ :\ {{ Itoa .global.workflow.variable.varInt}}\  } where variable var1 is mapped directly to output1 of task1 and variable var2 is using a template to convert another variable varInt to string and assign that value. 
 * `nr_version`:(int) The workflow definition version to use as subworkflow. When no version is specified then the default version of the workflow at the time of creating or updating this workflow is used. 
 * `workflow_definition_id`:(string)(ReadOnly) The resolved referenced workflow definition managed object. 
@@ -642,7 +722,6 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `task_status`:(string) Task status for the wait task when this prompt option is selected.* `Scheduled` - The enum represents the status when task is in scheduled state.* `InProgress` - The enum represents the status when task is in-progress state.* `NoOp` - The enum represents the status when task is a noop.* `Timeout` - The enum represents the status when task has timed out.* `Completed` - The enum represents the status when task has completed.* `Failed` - The enum represents the status when task has failed. 
 * `rollback_disabled`:(bool) The task is disabled/enabled for rollback operation in this workflow if the task has rollback support. 
-* `use_default`:(bool) UseDefault when set to true, means the default version of the task or workflow will be used at the time of execution. When this property is set then version for task or subworkflow cannot be set. When workflow is created or updated the default version of task or subworkflow will be used for validation, but when the workflow is executed the default version that that time will be used for validation and subsequent execution. 
 * `variable_parameters`:(JSON as string) JSON formatted key-value pairs that perform variable update at the end of the task execution. Mapping for variables can be provided as either static values, direct mapping or advanced mapping using templates. The direct mapping can be specified as '${Source.< input | output | variable>.<JSONPath>}'. 'Source' can be either workflow or the name of the current or an earlier task within the workflow. You can map the variable to either a workflow input, a task output or another variable. Golang template syntax is supported for advanced mapping. A simple flattened example is \ VariableParameters\ :{ \ var1\ :\ ${task1.output.output1}\ , \ var2\ :\ {{ Itoa .global.workflow.variable.varInt}}\  } where variable var1 is mapped directly to output1 of task1 and variable var2 is using a template to convert another variable varInt to string and assign that value. 
 
 ### [workflow.WorkerTask](#argument-reference)
@@ -654,7 +733,6 @@ A WorkerTask is a simple task and the smallest granularity of work that can be d
 * `rollback_disabled`:(bool) The task is disabled/enabled for rollback operation in this workflow if the task has rollback support. 
 * `task_definition_id`:(string)(ReadOnly) The resolved referenced task definition managed object. 
 * `task_definition_name`:(string) The qualified name of task that should be executed. 
-* `use_default`:(bool) UseDefault when set to true, means the default version of the task or workflow will be used at the time of execution. When this property is set then version for task or subworkflow cannot be set. When workflow is created or updated the default version of task or subworkflow will be used for validation, but when the workflow is executed the default version that that time will be used for validation and subsequent execution. 
 * `variable_parameters`:(JSON as string) JSON formatted key-value pairs that perform variable update at the end of the task execution. Mapping for variables can be provided as either static values, direct mapping or advanced mapping using templates. The direct mapping can be specified as '${Source.< input | output | variable>.<JSONPath>}'. 'Source' can be either workflow or the name of the current or an earlier task within the workflow. You can map the variable to either a workflow input, a task output or another variable. Golang template syntax is supported for advanced mapping. A simple flattened example is \ VariableParameters\ :{ \ var1\ :\ ${task1.output.output1}\ , \ var2\ :\ {{ Itoa .global.workflow.variable.varInt}}\  } where variable var1 is mapped directly to output1 of task1 and variable var2 is using a template to convert another variable varInt to string and assign that value. 
 * `nr_version`:(int) The task definition version to use in this workflow. When no version is specified then the default version of the task at the time of creating or updating this workflow is used. 
   

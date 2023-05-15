@@ -7,13 +7,18 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.ServiceItemDefinition"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.ServiceItemDefinition"]
 **AllowMultipleServiceItemInstances** | Pointer to **bool** | Service item definition can declare that only one instance can be allowed within the customer account. | [optional] [default to true]
+**AttributeDefinition** | Pointer to [**[]WorkflowBaseDataType**](WorkflowBaseDataType.md) |  | [optional] 
 **CvdId** | Pointer to **string** | The Cisco Validated Design (CVD) Identifier that this service item provides. | [optional] 
 **DeleteInstanceOnDecommission** | Pointer to **bool** | The flag to indicate that service item instance will be deleted after the completion of decommission action. | [optional] [default to false]
 **Description** | Pointer to **string** | The description for this service item which provides information on what are the pre-requisites to deploy the service item and what features are supported on the service item. | [optional] 
 **Label** | Pointer to **string** | A user friendly short name to identify the service item. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ) or an underscore (_). | [optional] 
-**LicenseEntitlement** | Pointer to **string** | License entitlement required to run this service item. * &#x60;Base&#x60; - Base as a License type. It is default license type. * &#x60;Essential&#x60; - Essential as a License type. * &#x60;Standard&#x60; - Standard as a License type. * &#x60;Advantage&#x60; - Advantage as a License type. * &#x60;Premier&#x60; - Premier as a License type. * &#x60;IWO-Essential&#x60; - IWO-Essential as a License type. * &#x60;IWO-Advantage&#x60; - IWO-Advantage as a License type. * &#x60;IWO-Premier&#x60; - IWO-Premier as a License type. * &#x60;IKS-Advantage&#x60; - IKS-Advantage as a License type. * &#x60;INC-Premier-1GFixed&#x60; - Premier 1G Fixed license tier for Intersight Nexus Cloud. * &#x60;INC-Premier-10GFixed&#x60; - Premier 10G Fixed license tier for Intersight Nexus Cloud. * &#x60;INC-Premier-100GFixed&#x60; - Premier 100G Fixed license tier for Intersight Nexus Cloud. * &#x60;INC-Premier-Mod4Slot&#x60; - Premier Modular 4 slot license tier for Intersight Nexus Cloud. * &#x60;INC-Premier-Mod8Slot&#x60; - Premier Modular 8 slot license tier for Intersight Nexus Cloud. * &#x60;INC-Premier-D2OpsFixed&#x60; - Premier D2Ops fixed license tier for Intersight Nexus Cloud. * &#x60;INC-Premier-D2OpsMod&#x60; - Premier D2Ops modular license tier for Intersight Nexus Cloud. * &#x60;IntersightTrial&#x60; - Virtual dummy license type to indicate trial. Used for UI display of trial mode Intersight tiers. * &#x60;IWOTrial&#x60; - Virtual dummy license type to indicate trial. Used for UI display of trial mode IKS tiers. * &#x60;IKSTrial&#x60; - Virtual dummy license type to indicate trial. Used for UI display of trial mode IWO tiers. * &#x60;INCTrial&#x60; - Virtual dummy license type to indicate trial. Used for UI display of trial mode Nexus tiers. | [optional] [readonly] [default to "Base"]
+**LicenseEntitlement** | Pointer to **string** | License entitlement required to run this service item. * &#x60;Base&#x60; - Base as a License type. It is default license type. * &#x60;Essential&#x60; - Essential as a License type. * &#x60;Standard&#x60; - Standard as a License type. * &#x60;Advantage&#x60; - Advantage as a License type. * &#x60;Premier&#x60; - Premier as a License type. * &#x60;IWO-Essential&#x60; - IWO-Essential as a License type. * &#x60;IWO-Advantage&#x60; - IWO-Advantage as a License type. * &#x60;IWO-Premier&#x60; - IWO-Premier as a License type. * &#x60;IKS-Advantage&#x60; - IKS-Advantage as a License type. * &#x60;INC-Premier-1GFixed&#x60; - Premier 1G Fixed license tier for Intersight Nexus Cloud. * &#x60;INC-Premier-10GFixed&#x60; - Premier 10G Fixed license tier for Intersight Nexus Cloud. * &#x60;INC-Premier-100GFixed&#x60; - Premier 100G Fixed license tier for Intersight Nexus Cloud. * &#x60;INC-Premier-Mod4Slot&#x60; - Premier Modular 4 slot license tier for Intersight Nexus Cloud. * &#x60;INC-Premier-Mod8Slot&#x60; - Premier Modular 8 slot license tier for Intersight Nexus Cloud. * &#x60;INC-Premier-D2OpsFixed&#x60; - Premier D2Ops fixed license tier for Intersight Nexus Cloud. * &#x60;INC-Premier-D2OpsMod&#x60; - Premier D2Ops modular license tier for Intersight Nexus Cloud. * &#x60;INC-Premier-CentralizedMod8Slot&#x60; - Premier modular license tier of switch type CentralizedMod8Slot for Intersight Nexus Cloud. * &#x60;INC-Premier-DistributedMod8Slot&#x60; - Premier modular license tier of switch type DistributedMod8Slot for Intersight Nexus Cloud. * &#x60;IntersightTrial&#x60; - Virtual dummy license type to indicate trial. Used for UI display of trial mode Intersight tiers. * &#x60;IWOTrial&#x60; - Virtual dummy license type to indicate trial. Used for UI display of trial mode IKS tiers. * &#x60;IKSTrial&#x60; - Virtual dummy license type to indicate trial. Used for UI display of trial mode IWO tiers. * &#x60;INCTrial&#x60; - Virtual dummy license type to indicate trial. Used for UI display of trial mode Nexus tiers. | [optional] [readonly] [default to "Base"]
 **Name** | Pointer to **string** | The name for this service item definition. You can have multiple versions of the service item with the same name. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:) or an underscore (_). | [optional] 
-**OutputDefinition** | Pointer to [**[]WorkflowBaseDataType**](WorkflowBaseDataType.md) |  | [optional] 
+**PublishStatus** | Pointer to **string** | Publish status of the service item. * &#x60;NotPublished&#x60; - A state of the service item or catalog item which is not yet published. * &#x60;Published&#x60; - A state denoting that the service item or catalog item is published. | [optional] [default to "NotPublished"]
+**Status** | Pointer to **string** | State of service item considering the state of underlying service item actions definitions. * &#x60;Okay&#x60; - Deployment and other post-deployment actions are in valid state. * &#x60;Critical&#x60; - Deployment action is not in valid state. * &#x60;Warning&#x60; - Deployment action is in valid state, and one or more post-deployment actions are not in valid state. | [optional] [readonly] [default to "Okay"]
+**SupportStatus** | Pointer to **string** | The service item can be marked as deprecated, supported or beta, the support status indicates that. When a new service item is introduced, it can be marked beta to indicate this is experimental and later moved to Supported status. When Service item is deprecated, it cannot be instantiated and used for a Catalog Item design. * &#x60;Supported&#x60; - The definition is a supported version and there will be no changes to the mandatory inputs or outputs. * &#x60;Beta&#x60; - The definition is a Beta version and this version can under go changes until the version is marked supported. * &#x60;Deprecated&#x60; - The version of definition is deprecated and typically there will be a higher version of the same definition that has been added. | [optional] [default to "Supported"]
+**UserIdOrEmail** | Pointer to **string** | The user identifier who created or updated the service item definition. | [optional] [readonly] 
+**ValidationInformation** | Pointer to [**NullableWorkflowValidationInformation**](WorkflowValidationInformation.md) |  | [optional] 
 **Version** | Pointer to **int64** | The version of the service item to support multiple versions. | [optional] [default to 1]
 **ActionDefinitions** | Pointer to [**[]WorkflowServiceItemActionDefinitionRelationship**](WorkflowServiceItemActionDefinitionRelationship.md) | An array of relationships to workflowServiceItemActionDefinition resources. | [optional] 
 **Catalog** | Pointer to [**WorkflowCatalogRelationship**](WorkflowCatalogRelationship.md) |  | [optional] 
@@ -102,6 +107,41 @@ SetAllowMultipleServiceItemInstances sets AllowMultipleServiceItemInstances fiel
 
 HasAllowMultipleServiceItemInstances returns a boolean if a field has been set.
 
+### GetAttributeDefinition
+
+`func (o *WorkflowServiceItemDefinitionAllOf) GetAttributeDefinition() []WorkflowBaseDataType`
+
+GetAttributeDefinition returns the AttributeDefinition field if non-nil, zero value otherwise.
+
+### GetAttributeDefinitionOk
+
+`func (o *WorkflowServiceItemDefinitionAllOf) GetAttributeDefinitionOk() (*[]WorkflowBaseDataType, bool)`
+
+GetAttributeDefinitionOk returns a tuple with the AttributeDefinition field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAttributeDefinition
+
+`func (o *WorkflowServiceItemDefinitionAllOf) SetAttributeDefinition(v []WorkflowBaseDataType)`
+
+SetAttributeDefinition sets AttributeDefinition field to given value.
+
+### HasAttributeDefinition
+
+`func (o *WorkflowServiceItemDefinitionAllOf) HasAttributeDefinition() bool`
+
+HasAttributeDefinition returns a boolean if a field has been set.
+
+### SetAttributeDefinitionNil
+
+`func (o *WorkflowServiceItemDefinitionAllOf) SetAttributeDefinitionNil(b bool)`
+
+ SetAttributeDefinitionNil sets the value for AttributeDefinition to be an explicit nil
+
+### UnsetAttributeDefinition
+`func (o *WorkflowServiceItemDefinitionAllOf) UnsetAttributeDefinition()`
+
+UnsetAttributeDefinition ensures that no value is present for AttributeDefinition, not even an explicit nil
 ### GetCvdId
 
 `func (o *WorkflowServiceItemDefinitionAllOf) GetCvdId() string`
@@ -252,41 +292,141 @@ SetName sets Name field to given value.
 
 HasName returns a boolean if a field has been set.
 
-### GetOutputDefinition
+### GetPublishStatus
 
-`func (o *WorkflowServiceItemDefinitionAllOf) GetOutputDefinition() []WorkflowBaseDataType`
+`func (o *WorkflowServiceItemDefinitionAllOf) GetPublishStatus() string`
 
-GetOutputDefinition returns the OutputDefinition field if non-nil, zero value otherwise.
+GetPublishStatus returns the PublishStatus field if non-nil, zero value otherwise.
 
-### GetOutputDefinitionOk
+### GetPublishStatusOk
 
-`func (o *WorkflowServiceItemDefinitionAllOf) GetOutputDefinitionOk() (*[]WorkflowBaseDataType, bool)`
+`func (o *WorkflowServiceItemDefinitionAllOf) GetPublishStatusOk() (*string, bool)`
 
-GetOutputDefinitionOk returns a tuple with the OutputDefinition field if it's non-nil, zero value otherwise
+GetPublishStatusOk returns a tuple with the PublishStatus field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetOutputDefinition
+### SetPublishStatus
 
-`func (o *WorkflowServiceItemDefinitionAllOf) SetOutputDefinition(v []WorkflowBaseDataType)`
+`func (o *WorkflowServiceItemDefinitionAllOf) SetPublishStatus(v string)`
 
-SetOutputDefinition sets OutputDefinition field to given value.
+SetPublishStatus sets PublishStatus field to given value.
 
-### HasOutputDefinition
+### HasPublishStatus
 
-`func (o *WorkflowServiceItemDefinitionAllOf) HasOutputDefinition() bool`
+`func (o *WorkflowServiceItemDefinitionAllOf) HasPublishStatus() bool`
 
-HasOutputDefinition returns a boolean if a field has been set.
+HasPublishStatus returns a boolean if a field has been set.
 
-### SetOutputDefinitionNil
+### GetStatus
 
-`func (o *WorkflowServiceItemDefinitionAllOf) SetOutputDefinitionNil(b bool)`
+`func (o *WorkflowServiceItemDefinitionAllOf) GetStatus() string`
 
- SetOutputDefinitionNil sets the value for OutputDefinition to be an explicit nil
+GetStatus returns the Status field if non-nil, zero value otherwise.
 
-### UnsetOutputDefinition
-`func (o *WorkflowServiceItemDefinitionAllOf) UnsetOutputDefinition()`
+### GetStatusOk
 
-UnsetOutputDefinition ensures that no value is present for OutputDefinition, not even an explicit nil
+`func (o *WorkflowServiceItemDefinitionAllOf) GetStatusOk() (*string, bool)`
+
+GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStatus
+
+`func (o *WorkflowServiceItemDefinitionAllOf) SetStatus(v string)`
+
+SetStatus sets Status field to given value.
+
+### HasStatus
+
+`func (o *WorkflowServiceItemDefinitionAllOf) HasStatus() bool`
+
+HasStatus returns a boolean if a field has been set.
+
+### GetSupportStatus
+
+`func (o *WorkflowServiceItemDefinitionAllOf) GetSupportStatus() string`
+
+GetSupportStatus returns the SupportStatus field if non-nil, zero value otherwise.
+
+### GetSupportStatusOk
+
+`func (o *WorkflowServiceItemDefinitionAllOf) GetSupportStatusOk() (*string, bool)`
+
+GetSupportStatusOk returns a tuple with the SupportStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSupportStatus
+
+`func (o *WorkflowServiceItemDefinitionAllOf) SetSupportStatus(v string)`
+
+SetSupportStatus sets SupportStatus field to given value.
+
+### HasSupportStatus
+
+`func (o *WorkflowServiceItemDefinitionAllOf) HasSupportStatus() bool`
+
+HasSupportStatus returns a boolean if a field has been set.
+
+### GetUserIdOrEmail
+
+`func (o *WorkflowServiceItemDefinitionAllOf) GetUserIdOrEmail() string`
+
+GetUserIdOrEmail returns the UserIdOrEmail field if non-nil, zero value otherwise.
+
+### GetUserIdOrEmailOk
+
+`func (o *WorkflowServiceItemDefinitionAllOf) GetUserIdOrEmailOk() (*string, bool)`
+
+GetUserIdOrEmailOk returns a tuple with the UserIdOrEmail field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserIdOrEmail
+
+`func (o *WorkflowServiceItemDefinitionAllOf) SetUserIdOrEmail(v string)`
+
+SetUserIdOrEmail sets UserIdOrEmail field to given value.
+
+### HasUserIdOrEmail
+
+`func (o *WorkflowServiceItemDefinitionAllOf) HasUserIdOrEmail() bool`
+
+HasUserIdOrEmail returns a boolean if a field has been set.
+
+### GetValidationInformation
+
+`func (o *WorkflowServiceItemDefinitionAllOf) GetValidationInformation() WorkflowValidationInformation`
+
+GetValidationInformation returns the ValidationInformation field if non-nil, zero value otherwise.
+
+### GetValidationInformationOk
+
+`func (o *WorkflowServiceItemDefinitionAllOf) GetValidationInformationOk() (*WorkflowValidationInformation, bool)`
+
+GetValidationInformationOk returns a tuple with the ValidationInformation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetValidationInformation
+
+`func (o *WorkflowServiceItemDefinitionAllOf) SetValidationInformation(v WorkflowValidationInformation)`
+
+SetValidationInformation sets ValidationInformation field to given value.
+
+### HasValidationInformation
+
+`func (o *WorkflowServiceItemDefinitionAllOf) HasValidationInformation() bool`
+
+HasValidationInformation returns a boolean if a field has been set.
+
+### SetValidationInformationNil
+
+`func (o *WorkflowServiceItemDefinitionAllOf) SetValidationInformationNil(b bool)`
+
+ SetValidationInformationNil sets the value for ValidationInformation to be an explicit nil
+
+### UnsetValidationInformation
+`func (o *WorkflowServiceItemDefinitionAllOf) UnsetValidationInformation()`
+
+UnsetValidationInformation ensures that no value is present for ValidationInformation, not even an explicit nil
 ### GetVersion
 
 `func (o *WorkflowServiceItemDefinitionAllOf) GetVersion() int64`

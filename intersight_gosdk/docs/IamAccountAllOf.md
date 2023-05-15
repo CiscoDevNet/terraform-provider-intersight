@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.Account"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.Account"]
 **Name** | Pointer to **string** | Name of the Intersight account. By default, name is same as the MoID of the account. | [optional] 
+**Regions** | Pointer to **[]string** |  | [optional] 
 **Status** | Pointer to **string** | Status of the account. To activate the Intersight account, claim a device to the account. | [optional] [readonly] 
 **AppRegistrations** | Pointer to [**[]IamAppRegistrationRelationship**](IamAppRegistrationRelationship.md) | An array of relationships to iamAppRegistration resources. | [optional] [readonly] 
 **DomainGroups** | Pointer to [**[]IamDomainGroupRelationship**](IamDomainGroupRelationship.md) | An array of relationships to iamDomainGroup resources. | [optional] [readonly] 
@@ -105,6 +106,41 @@ SetName sets Name field to given value.
 
 HasName returns a boolean if a field has been set.
 
+### GetRegions
+
+`func (o *IamAccountAllOf) GetRegions() []string`
+
+GetRegions returns the Regions field if non-nil, zero value otherwise.
+
+### GetRegionsOk
+
+`func (o *IamAccountAllOf) GetRegionsOk() (*[]string, bool)`
+
+GetRegionsOk returns a tuple with the Regions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRegions
+
+`func (o *IamAccountAllOf) SetRegions(v []string)`
+
+SetRegions sets Regions field to given value.
+
+### HasRegions
+
+`func (o *IamAccountAllOf) HasRegions() bool`
+
+HasRegions returns a boolean if a field has been set.
+
+### SetRegionsNil
+
+`func (o *IamAccountAllOf) SetRegionsNil(b bool)`
+
+ SetRegionsNil sets the value for Regions to be an explicit nil
+
+### UnsetRegions
+`func (o *IamAccountAllOf) UnsetRegions()`
+
+UnsetRegions ensures that no value is present for Regions, not even an explicit nil
 ### GetStatus
 
 `func (o *IamAccountAllOf) GetStatus() string`

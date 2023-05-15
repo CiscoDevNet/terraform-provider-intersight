@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | [default to "certificatemanagement.Imc"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | [default to "certificatemanagement.Imc"]
+**CertType** | Pointer to **string** | Certificate Type for the certificate management. * &#x60;None&#x60; - Set certificate on the selected end point . * &#x60;KMIPClient&#x60; - Set KMIP certificate on the selected end point. | [optional] [default to "None"]
 **Certificate** | Pointer to [**NullableX509Certificate**](X509Certificate.md) |  | [optional] 
 **Enabled** | Pointer to **bool** | Enable/Disable the certificate in Certificate Management policy. | [optional] [default to true]
 **IsPrivatekeySet** | Pointer to **bool** | Indicates whether the value of the &#39;privatekey&#39; property has been set. | [optional] [readonly] [default to false]
@@ -69,6 +70,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetCertType
+
+`func (o *CertificatemanagementCertificateBaseAllOf) GetCertType() string`
+
+GetCertType returns the CertType field if non-nil, zero value otherwise.
+
+### GetCertTypeOk
+
+`func (o *CertificatemanagementCertificateBaseAllOf) GetCertTypeOk() (*string, bool)`
+
+GetCertTypeOk returns a tuple with the CertType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCertType
+
+`func (o *CertificatemanagementCertificateBaseAllOf) SetCertType(v string)`
+
+SetCertType sets CertType field to given value.
+
+### HasCertType
+
+`func (o *CertificatemanagementCertificateBaseAllOf) HasCertType() bool`
+
+HasCertType returns a boolean if a field has been set.
 
 ### GetCertificate
 

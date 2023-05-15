@@ -215,13 +215,18 @@ func getStorageVirtualDriveSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"is_upgraded": {
+			Description: "This field indicates the compute status of the catalog values for the associated component or hardware.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"model": {
-			Description: "This field identifies the model of the given component.",
+			Description: "This field displays the model number of the associated component or hardware.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -369,7 +374,7 @@ func getStorageVirtualDriveSchema() map[string]*schema.Schema {
 			},
 		},
 		"presence": {
-			Description: "This field identifies the presence (equipped) or absence of the given component.",
+			Description: "This field indicates the presence (equipped) or absence (absent) of the associated component or hardware.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -449,7 +454,7 @@ func getStorageVirtualDriveSchema() map[string]*schema.Schema {
 			},
 		},
 		"revision": {
-			Description: "This field identifies the revision of the given component.",
+			Description: "This field displays the revised version of the associated component or hardware (if any).",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -464,7 +469,7 @@ func getStorageVirtualDriveSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"serial": {
-			Description: "This field identifies the serial of the given component.",
+			Description: "This field displays the serial number of the associated component or hardware.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -621,7 +626,7 @@ func getStorageVirtualDriveSchema() map[string]*schema.Schema {
 			},
 		},
 		"vendor": {
-			Description: "This field identifies the vendor of the given component.",
+			Description: "This field displays the vendor information of the associated component or hardware.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -679,6 +684,11 @@ func getStorageVirtualDriveSchema() map[string]*schema.Schema {
 								},
 							},
 						},
+					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -1023,6 +1033,11 @@ func dataSourceStorageVirtualDriveRead(c context.Context, d *schema.ResourceData
 	if v, ok := d.GetOk("io_policy"); ok {
 		x := (v.(string))
 		o.SetIoPolicy(x)
+	}
+
+	if v, ok := d.GetOkExists("is_upgraded"); ok {
+		x := (v.(bool))
+		o.SetIsUpgraded(x)
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
@@ -1697,6 +1712,7 @@ func dataSourceStorageVirtualDriveRead(c context.Context, d *schema.ResourceData
 
 				temp["inventory_device_info"] = flattenMapInventoryDeviceInfoRelationship(s.GetInventoryDeviceInfo(), d)
 				temp["io_policy"] = (s.GetIoPolicy())
+				temp["is_upgraded"] = (s.GetIsUpgraded())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["model"] = (s.GetModel())

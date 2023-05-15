@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "openapi.ApiMethodMeta"]
 **Description** | Pointer to **string** | The description of the given API. | [optional] [readonly] 
 **DisplayLabel** | Pointer to **string** | The display label of the given API. | [optional] [readonly] 
-**Method** | Pointer to **string** | The method type for the given API. * &#x60;GET&#x60; - Method type which indicates it is a GET API call * &#x60;POST&#x60; - Method type which indicates it is a POST API call * &#x60;PUT&#x60; - Method type which indicates it is a PUT API call * &#x60;PATCH&#x60; - Method type which indicates it is a PATCH API call * &#x60;DELETE&#x60; - Method type which indicates it is a DELETE API call | [optional] [readonly] [default to "GET"]
+**Method** | Pointer to **string** | The method type for the given API. * &#x60;GET&#x60; - Method type which indicates it is a GET API call. * &#x60;POST&#x60; - Method type which indicates it is a POST API call. * &#x60;PUT&#x60; - Method type which indicates it is a PUT API call. * &#x60;PATCH&#x60; - Method type which indicates it is a PATCH API call. * &#x60;DELETE&#x60; - Method type which indicates it is a DELETE API call. | [optional] [readonly] [default to "GET"]
 **Name** | Pointer to **string** | The description of the given API. | [optional] [readonly] 
 **Path** | Pointer to **string** | Path of the selected API endpoint. | [optional] [readonly] 
 **Source** | Pointer to [**OpenapiProcessFileRelationship**](OpenapiProcessFileRelationship.md) |  | [optional] 

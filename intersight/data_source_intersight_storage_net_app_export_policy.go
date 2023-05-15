@@ -277,6 +277,11 @@ func getStorageNetAppExportPolicySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"svm_name": {
+			Description: "The storage virtual machine name for the export policy.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -389,6 +394,11 @@ func getStorageNetAppExportPolicySchema() map[string]*schema.Schema {
 								},
 							},
 						},
+					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -809,6 +819,11 @@ func dataSourceStorageNetAppExportPolicyRead(c context.Context, d *schema.Resour
 		o.SetSharedScope(x)
 	}
 
+	if v, ok := d.GetOk("svm_name"); ok {
+		x := (v.(string))
+		o.SetSvmName(x)
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -1024,6 +1039,7 @@ func dataSourceStorageNetAppExportPolicyRead(c context.Context, d *schema.Resour
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["policy_id"] = (s.GetPolicyId())
 				temp["shared_scope"] = (s.GetSharedScope())
+				temp["svm_name"] = (s.GetSvmName())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 

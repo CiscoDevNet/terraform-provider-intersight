@@ -6,9 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
-**ConfigStage** | Pointer to **string** | The current running stage of the configuration or workflow. | [optional] 
-**ConfigState** | Pointer to **string** | Indicates overall configuration state for applying the configuration to the end point. Values  -- Ok, Ok-with-warning, Errored. | [optional] 
-**ValidationState** | Pointer to **string** | Indicates overall state for logical model validation. Values  -- Ok, Ok-with-warning, Errored. | [optional] 
+**AppliedPolicies** | Pointer to [**[]PolicyPolicyStatus**](PolicyPolicyStatus.md) |  | [optional] 
+**ConfigStage** | Pointer to **string** | The current running stage of the configuration or workflow. | [optional] [readonly] 
+**ConfigState** | Pointer to **string** | Indicates overall configuration state for applying the configuration to the end point. Values  -- Ok, Ok-with-warning, Errored. | [optional] [readonly] 
+**ValidationState** | Pointer to **string** | Indicates overall state for logical model validation. Values  -- Ok, Ok-with-warning, Errored. | [optional] [readonly] 
 
 ## Methods
 
@@ -69,6 +70,41 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetAppliedPolicies
+
+`func (o *PolicyAbstractConfigResult) GetAppliedPolicies() []PolicyPolicyStatus`
+
+GetAppliedPolicies returns the AppliedPolicies field if non-nil, zero value otherwise.
+
+### GetAppliedPoliciesOk
+
+`func (o *PolicyAbstractConfigResult) GetAppliedPoliciesOk() (*[]PolicyPolicyStatus, bool)`
+
+GetAppliedPoliciesOk returns a tuple with the AppliedPolicies field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAppliedPolicies
+
+`func (o *PolicyAbstractConfigResult) SetAppliedPolicies(v []PolicyPolicyStatus)`
+
+SetAppliedPolicies sets AppliedPolicies field to given value.
+
+### HasAppliedPolicies
+
+`func (o *PolicyAbstractConfigResult) HasAppliedPolicies() bool`
+
+HasAppliedPolicies returns a boolean if a field has been set.
+
+### SetAppliedPoliciesNil
+
+`func (o *PolicyAbstractConfigResult) SetAppliedPoliciesNil(b bool)`
+
+ SetAppliedPoliciesNil sets the value for AppliedPolicies to be an explicit nil
+
+### UnsetAppliedPolicies
+`func (o *PolicyAbstractConfigResult) UnsetAppliedPolicies()`
+
+UnsetAppliedPolicies ensures that no value is present for AppliedPolicies, not even an explicit nil
 ### GetConfigStage
 
 `func (o *PolicyAbstractConfigResult) GetConfigStage() string`

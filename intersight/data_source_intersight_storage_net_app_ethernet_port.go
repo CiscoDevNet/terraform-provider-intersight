@@ -360,6 +360,11 @@ func getStorageNetAppEthernetPortSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"node_name": {
+			Description: "The node name for the port.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"object_type": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 			Type:        schema.TypeString,
@@ -438,6 +443,11 @@ func getStorageNetAppEthernetPortSchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"port_state": {
+			Description: "State of the port available in storage array.\n* `Down` - An inactive port is listed as Down.\n* `Up` - An active port is listed as Up.\n* `Degraded` - An active port that is Up but unhealthy.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"shared_scope": {
 			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
@@ -536,6 +546,11 @@ func getStorageNetAppEthernetPortSchema() map[string]*schema.Schema {
 								},
 							},
 						},
+					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -928,6 +943,11 @@ func dataSourceStorageNetAppEthernetPortRead(c context.Context, d *schema.Resour
 		}
 	}
 
+	if v, ok := d.GetOk("node_name"); ok {
+		x := (v.(string))
+		o.SetNodeName(x)
+	}
+
 	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
@@ -1025,6 +1045,11 @@ func dataSourceStorageNetAppEthernetPortRead(c context.Context, d *schema.Resour
 			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
 		}
 		o.SetPermissionResources(x)
+	}
+
+	if v, ok := d.GetOk("port_state"); ok {
+		x := (v.(string))
+		o.SetPortState(x)
 	}
 
 	if v, ok := d.GetOk("shared_scope"); ok {
@@ -1218,12 +1243,14 @@ func dataSourceStorageNetAppEthernetPortRead(c context.Context, d *schema.Resour
 				temp["net_app_ethernet_port_lag"] = flattenMapStorageNetAppEthernetPortLag(s.GetNetAppEthernetPortLag(), d)
 
 				temp["net_app_ethernet_port_vlan"] = flattenMapStorageNetAppEthernetPortVlan(s.GetNetAppEthernetPortVlan(), d)
+				temp["node_name"] = (s.GetNodeName())
 				temp["object_type"] = (s.GetObjectType())
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["port_state"] = (s.GetPortState())
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["speed"] = (s.GetSpeed())
 				temp["state"] = (s.GetState())

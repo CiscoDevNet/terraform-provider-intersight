@@ -178,7 +178,7 @@ func getFirmwareUpgradeSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"upgradeoption": {
-						Description: "Option to control the upgrade, e.g., sd_upgrade_mount_only - download the image into sd and upgrade wait for the server on-next boot.\n* `sd_upgrade_mount_only` - Direct upgrade SD upgrade mount only.\n* `sd_download_only` - Direct upgrade SD download only.\n* `sd_upgrade_only` - Direct upgrade SD upgrade only.\n* `sd_upgrade_full` - Direct upgrade SD upgrade full.\n* `download_only` - Direct upgrade image download only.\n* `upgrade_full` - The upgrade downloads or mounts the image, and reboots immediately for an upgrade.\n* `upgrade_mount_only` - The upgrade downloads or mounts the image. The upgrade happens in next reboot.\n* `chassis_upgrade_full` - Direct upgrade chassis upgrade full.",
+						Description: "Option to control the upgrade, e.g., sd_upgrade_mount_only - download the image into sd and upgrade wait for the server on-next boot.\n* `sd_upgrade_mount_only` - Direct upgrade SD upgrade mount only.\n* `sd_download_only` - Direct upgrade SD download only.\n* `sd_upgrade_only` - Direct upgrade SD upgrade only.\n* `sd_upgrade_full` - Direct upgrade SD upgrade full.\n* `download_only` - Direct upgrade image download only.\n* `upgrade_full` - The upgrade downloads or mounts the image, and reboots immediately for an upgrade.\n* `upgrade_mount_only` - The upgrade downloads or mounts the image. The upgrade happens in next reboot.\n* `chassis_upgrade_full` - Direct upgrade chassis upgrade full.\n* `monitor_only` - Direct upgrade monitor progress only.\n* `validate_only` - Validate whether a component is ready for ugprade.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -747,6 +747,11 @@ func getFirmwareUpgradeSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"upgrade_trigger_method": {
+			Description: "The source that triggered the upgrade. Either via profile or traditional way.\n* `none` - Upgrade is invoked within the service.\n* `profileTrigger` - Upgrade is invoked from a profile deployment.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"upgrade_type": {
 			Description: "Desired upgrade mode to choose either direct download based upgrade or network share upgrade.\n* `direct_upgrade` - Upgrade mode is direct download.\n* `network_upgrade` - Upgrade mode is network upgrade.",
 			Type:        schema.TypeString,
@@ -801,6 +806,11 @@ func getFirmwareUpgradeSchema() map[string]*schema.Schema {
 								},
 							},
 						},
+					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -1753,6 +1763,11 @@ func dataSourceFirmwareUpgradeRead(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
+	if v, ok := d.GetOk("upgrade_trigger_method"); ok {
+		x := (v.(string))
+		o.SetUpgradeTriggerMethod(x)
+	}
+
 	if v, ok := d.GetOk("upgrade_type"); ok {
 		x := (v.(string))
 		o.SetUpgradeType(x)
@@ -1910,6 +1925,7 @@ func dataSourceFirmwareUpgradeRead(c context.Context, d *schema.ResourceData, me
 				temp["upgrade_impact"] = flattenMapFirmwareUpgradeImpactStatusRelationship(s.GetUpgradeImpact(), d)
 
 				temp["upgrade_status"] = flattenMapFirmwareUpgradeStatusRelationship(s.GetUpgradeStatus(), d)
+				temp["upgrade_trigger_method"] = (s.GetUpgradeTriggerMethod())
 				temp["upgrade_type"] = (s.GetUpgradeType())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)

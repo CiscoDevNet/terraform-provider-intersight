@@ -219,6 +219,7 @@ Method | HTTP request | Description
 [**PatchHyperflexClusterReplicationNetworkPolicy**](HyperflexApi.md#PatchHyperflexClusterReplicationNetworkPolicy) | **Patch** /api/v1/hyperflex/ClusterReplicationNetworkPolicies/{Moid} | Update a &#39;hyperflex.ClusterReplicationNetworkPolicy&#39; resource.
 [**PatchHyperflexClusterReplicationNetworkPolicyDeployment**](HyperflexApi.md#PatchHyperflexClusterReplicationNetworkPolicyDeployment) | **Patch** /api/v1/hyperflex/ClusterReplicationNetworkPolicyDeployments/{Moid} | Update a &#39;hyperflex.ClusterReplicationNetworkPolicyDeployment&#39; resource.
 [**PatchHyperflexClusterStoragePolicy**](HyperflexApi.md#PatchHyperflexClusterStoragePolicy) | **Patch** /api/v1/hyperflex/ClusterStoragePolicies/{Moid} | Update a &#39;hyperflex.ClusterStoragePolicy&#39; resource.
+[**PatchHyperflexDrive**](HyperflexApi.md#PatchHyperflexDrive) | **Patch** /api/v1/hyperflex/Drives/{Moid} | Update a &#39;hyperflex.Drive&#39; resource.
 [**PatchHyperflexExtFcStoragePolicy**](HyperflexApi.md#PatchHyperflexExtFcStoragePolicy) | **Patch** /api/v1/hyperflex/ExtFcStoragePolicies/{Moid} | Update a &#39;hyperflex.ExtFcStoragePolicy&#39; resource.
 [**PatchHyperflexExtIscsiStoragePolicy**](HyperflexApi.md#PatchHyperflexExtIscsiStoragePolicy) | **Patch** /api/v1/hyperflex/ExtIscsiStoragePolicies/{Moid} | Update a &#39;hyperflex.ExtIscsiStoragePolicy&#39; resource.
 [**PatchHyperflexFeatureLimitExternal**](HyperflexApi.md#PatchHyperflexFeatureLimitExternal) | **Patch** /api/v1/hyperflex/FeatureLimitExternals/{Moid} | Update a &#39;hyperflex.FeatureLimitExternal&#39; resource.
@@ -261,6 +262,7 @@ Method | HTTP request | Description
 [**UpdateHyperflexClusterReplicationNetworkPolicy**](HyperflexApi.md#UpdateHyperflexClusterReplicationNetworkPolicy) | **Post** /api/v1/hyperflex/ClusterReplicationNetworkPolicies/{Moid} | Update a &#39;hyperflex.ClusterReplicationNetworkPolicy&#39; resource.
 [**UpdateHyperflexClusterReplicationNetworkPolicyDeployment**](HyperflexApi.md#UpdateHyperflexClusterReplicationNetworkPolicyDeployment) | **Post** /api/v1/hyperflex/ClusterReplicationNetworkPolicyDeployments/{Moid} | Update a &#39;hyperflex.ClusterReplicationNetworkPolicyDeployment&#39; resource.
 [**UpdateHyperflexClusterStoragePolicy**](HyperflexApi.md#UpdateHyperflexClusterStoragePolicy) | **Post** /api/v1/hyperflex/ClusterStoragePolicies/{Moid} | Update a &#39;hyperflex.ClusterStoragePolicy&#39; resource.
+[**UpdateHyperflexDrive**](HyperflexApi.md#UpdateHyperflexDrive) | **Post** /api/v1/hyperflex/Drives/{Moid} | Update a &#39;hyperflex.Drive&#39; resource.
 [**UpdateHyperflexExtFcStoragePolicy**](HyperflexApi.md#UpdateHyperflexExtFcStoragePolicy) | **Post** /api/v1/hyperflex/ExtFcStoragePolicies/{Moid} | Update a &#39;hyperflex.ExtFcStoragePolicy&#39; resource.
 [**UpdateHyperflexExtIscsiStoragePolicy**](HyperflexApi.md#UpdateHyperflexExtIscsiStoragePolicy) | **Post** /api/v1/hyperflex/ExtIscsiStoragePolicies/{Moid} | Update a &#39;hyperflex.ExtIscsiStoragePolicy&#39; resource.
 [**UpdateHyperflexFeatureLimitExternal**](HyperflexApi.md#UpdateHyperflexFeatureLimitExternal) | **Post** /api/v1/hyperflex/FeatureLimitExternals/{Moid} | Update a &#39;hyperflex.FeatureLimitExternal&#39; resource.
@@ -15921,6 +15923,78 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## PatchHyperflexDrive
+
+> HyperflexDrive PatchHyperflexDrive(ctx, moid).HyperflexDrive(hyperflexDrive).IfMatch(ifMatch).Execute()
+
+Update a 'hyperflex.Drive' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    hyperflexDrive := *openapiclient.NewHyperflexDrive("ClassId_example", "ObjectType_example") // HyperflexDrive | The 'hyperflex.Drive' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.HyperflexApi.PatchHyperflexDrive(context.Background(), moid).HyperflexDrive(hyperflexDrive).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.PatchHyperflexDrive``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchHyperflexDrive`: HyperflexDrive
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.PatchHyperflexDrive`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchHyperflexDriveRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **hyperflexDrive** | [**HyperflexDrive**](HyperflexDrive.md) | The &#39;hyperflex.Drive&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**HyperflexDrive**](HyperflexDrive.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## PatchHyperflexExtFcStoragePolicy
 
 > HyperflexExtFcStoragePolicy PatchHyperflexExtFcStoragePolicy(ctx, moid).HyperflexExtFcStoragePolicy(hyperflexExtFcStoragePolicy).IfMatch(ifMatch).Execute()
@@ -18930,6 +19004,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**HyperflexClusterStoragePolicy**](HyperflexClusterStoragePolicy.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateHyperflexDrive
+
+> HyperflexDrive UpdateHyperflexDrive(ctx, moid).HyperflexDrive(hyperflexDrive).IfMatch(ifMatch).Execute()
+
+Update a 'hyperflex.Drive' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    hyperflexDrive := *openapiclient.NewHyperflexDrive("ClassId_example", "ObjectType_example") // HyperflexDrive | The 'hyperflex.Drive' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.HyperflexApi.UpdateHyperflexDrive(context.Background(), moid).HyperflexDrive(hyperflexDrive).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.UpdateHyperflexDrive``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateHyperflexDrive`: HyperflexDrive
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.UpdateHyperflexDrive`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateHyperflexDriveRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **hyperflexDrive** | [**HyperflexDrive**](HyperflexDrive.md) | The &#39;hyperflex.Drive&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**HyperflexDrive**](HyperflexDrive.md)
 
 ### Authorization
 

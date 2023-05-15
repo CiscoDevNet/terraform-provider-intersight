@@ -60,6 +60,40 @@ func getWorkflowServiceItemInstanceSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"catalog_service_request": {
+			Description: "An array of relationships to workflowCatalogServiceRequest resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 			Type:        schema.TypeString,
@@ -80,6 +114,81 @@ func getWorkflowServiceItemInstanceSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"idp": {
+			Description: "A reference to a iamIdp resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"idp_reference": {
+			Description: "A reference to a iamIdpReference resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"label": {
+			Description: "A user friendly short name to identify the resource. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ) or an underscore (_).",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"last_status": {
 			Description: "Last status of the service item instance which will be reverted when an ongoing service item action instance is aborted.\n* `NotCreated` - The service item is not yet created and it is in a draft mode. A service item instance can be deleted in this state.\n* `InProgress` - An action is in progress and until that action has reached a final state, another action cannot be started.\n* `Failed` - The last action on the service item instance failed and corrective measures need to be taken to bring the service item instance back to valid state.\n* `Okay` - The last action on the service item instance completed and the service item instance is in Okay state.\n* `Decommissioned` - The service item is decommissioned and can be safely deleted. A service item instance in any other state after it has been created cannot be deleted until it has been decommissioned.",
 			Type:        schema.TypeString,
@@ -96,7 +205,7 @@ func getWorkflowServiceItemInstanceSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"name": {
-			Description: "A name of the service item instance. Name of the service item instance must be unique within a type of Service item definition.",
+			Description: "A name of the service item instance. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.) or an underscore (_).",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -214,6 +323,11 @@ func getWorkflowServiceItemInstanceSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"resourcelifecycle_status": {
+			Description: "Lifecycle state of service item instance.\n* `Creating` - The service item is not yet created and creation action is in progress.\n* `Created` - The service item is created.\n* `Decommissioning` - The service item is not yet decommissioned and decommission action is in progress.\n* `Decommissioned` - The service item is decommisioned.\n* `Deleting` - The service item is not yet deleted and deletion action is in progress.\n* `Deleted` - The service item is deleted.\n* `Failed` - The service item action is failed to perform the operation.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"service_item_definition": {
 			Description: "A reference to a workflowServiceItemDefinition resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -282,7 +396,42 @@ func getWorkflowServiceItemInstanceSchema() map[string]*schema.Schema {
 				},
 			},
 		},
-		"user_id": {
+		"user": {
+			Description: "A reference to a iamUser resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"user_id_or_email": {
 			Description: "The user identifier which indicates the user that started this workflow.",
 			Type:        schema.TypeString,
 			Optional:    true,
@@ -336,6 +485,11 @@ func getWorkflowServiceItemInstanceSchema() map[string]*schema.Schema {
 								},
 							},
 						},
+					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -471,6 +625,46 @@ func dataSourceWorkflowServiceItemInstanceRead(c context.Context, d *schema.Reso
 		o.SetAncestors(x)
 	}
 
+	if v, ok := d.GetOk("catalog_service_request"); ok {
+		x := make([]models.WorkflowCatalogServiceRequestRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsWorkflowCatalogServiceRequestRelationship(o))
+		}
+		o.SetCatalogServiceRequest(x)
+	}
+
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
@@ -489,6 +683,97 @@ func dataSourceWorkflowServiceItemInstanceRead(c context.Context, d *schema.Reso
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
+	}
+
+	if v, ok := d.GetOk("idp"); ok {
+		p := make([]models.IamIdpRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsIamIdpRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetIdp(x)
+		}
+	}
+
+	if v, ok := d.GetOk("idp_reference"); ok {
+		p := make([]models.IamIdpReferenceRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsIamIdpReferenceRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetIdpReference(x)
+		}
+	}
+
+	if v, ok := d.GetOk("label"); ok {
+		x := (v.(string))
+		o.SetLabel(x)
 	}
 
 	if v, ok := d.GetOk("last_status"); ok {
@@ -653,6 +938,11 @@ func dataSourceWorkflowServiceItemInstanceRead(c context.Context, d *schema.Reso
 		o.SetPermissionResources(x)
 	}
 
+	if v, ok := d.GetOk("resourcelifecycle_status"); ok {
+		x := (v.(string))
+		o.SetResourcelifecycleStatus(x)
+	}
+
 	if v, ok := d.GetOk("service_item_definition"); ok {
 		p := make([]models.WorkflowServiceItemDefinitionRelationship, 0, 1)
 		s := v.([]interface{})
@@ -739,9 +1029,52 @@ func dataSourceWorkflowServiceItemInstanceRead(c context.Context, d *schema.Reso
 		o.SetTags(x)
 	}
 
-	if v, ok := d.GetOk("user_id"); ok {
+	if v, ok := d.GetOk("user"); ok {
+		p := make([]models.IamUserRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsIamUserRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetUser(x)
+		}
+	}
+
+	if v, ok := d.GetOk("user_id_or_email"); ok {
 		x := (v.(string))
-		o.SetUserId(x)
+		o.SetUserIdOrEmail(x)
 	}
 
 	if v, ok := d.GetOk("version_context"); ok {
@@ -857,11 +1190,18 @@ func dataSourceWorkflowServiceItemInstanceRead(c context.Context, d *schema.Reso
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
+
+				temp["catalog_service_request"] = flattenListWorkflowCatalogServiceRequestRelationship(s.GetCatalogServiceRequest(), d)
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+
+				temp["idp"] = flattenMapIamIdpRelationship(s.GetIdp(), d)
+
+				temp["idp_reference"] = flattenMapIamIdpReferenceRelationship(s.GetIdpReference(), d)
+				temp["label"] = (s.GetLabel())
 				temp["last_status"] = (s.GetLastStatus())
 
 				temp["mod_time"] = (s.GetModTime()).String()
@@ -875,13 +1215,16 @@ func dataSourceWorkflowServiceItemInstanceRead(c context.Context, d *schema.Reso
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["resourcelifecycle_status"] = (s.GetResourcelifecycleStatus())
 
 				temp["service_item_definition"] = flattenMapWorkflowServiceItemDefinitionRelationship(s.GetServiceItemDefinition(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["status"] = (s.GetStatus())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
-				temp["user_id"] = (s.GetUserId())
+
+				temp["user"] = flattenMapIamUserRelationship(s.GetUser(), d)
+				temp["user_id_or_email"] = (s.GetUserIdOrEmail())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				workflowServiceItemInstanceResults = append(workflowServiceItemInstanceResults, temp)

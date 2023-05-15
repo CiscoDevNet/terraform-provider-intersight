@@ -6,11 +6,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
-**Model** | Pointer to **string** | This field identifies the model of the given component. | [optional] [readonly] 
-**Presence** | Pointer to **string** | This field identifies the presence (equipped) or absence of the given component. | [optional] [readonly] 
-**Revision** | Pointer to **string** | This field identifies the revision of the given component. | [optional] [readonly] 
-**Serial** | Pointer to **string** | This field identifies the serial of the given component. | [optional] [readonly] 
-**Vendor** | Pointer to **string** | This field identifies the vendor of the given component. | [optional] [readonly] 
+**IsUpgraded** | Pointer to **bool** | This field indicates the compute status of the catalog values for the associated component or hardware. | [optional] [readonly] [default to false]
+**Model** | Pointer to **string** | This field displays the model number of the associated component or hardware. | [optional] [readonly] 
+**Presence** | Pointer to **string** | This field indicates the presence (equipped) or absence (absent) of the associated component or hardware. | [optional] [readonly] 
+**Revision** | Pointer to **string** | This field displays the revised version of the associated component or hardware (if any). | [optional] [readonly] 
+**Serial** | Pointer to **string** | This field displays the serial number of the associated component or hardware. | [optional] [readonly] 
+**Vendor** | Pointer to **string** | This field displays the vendor information of the associated component or hardware. | [optional] [readonly] 
 **PreviousFru** | Pointer to [**EquipmentFruRelationship**](EquipmentFruRelationship.md) |  | [optional] 
 
 ## Methods
@@ -71,6 +72,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetIsUpgraded
+
+`func (o *EquipmentBaseAllOf) GetIsUpgraded() bool`
+
+GetIsUpgraded returns the IsUpgraded field if non-nil, zero value otherwise.
+
+### GetIsUpgradedOk
+
+`func (o *EquipmentBaseAllOf) GetIsUpgradedOk() (*bool, bool)`
+
+GetIsUpgradedOk returns a tuple with the IsUpgraded field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsUpgraded
+
+`func (o *EquipmentBaseAllOf) SetIsUpgraded(v bool)`
+
+SetIsUpgraded sets IsUpgraded field to given value.
+
+### HasIsUpgraded
+
+`func (o *EquipmentBaseAllOf) HasIsUpgraded() bool`
+
+HasIsUpgraded returns a boolean if a field has been set.
 
 ### GetModel
 

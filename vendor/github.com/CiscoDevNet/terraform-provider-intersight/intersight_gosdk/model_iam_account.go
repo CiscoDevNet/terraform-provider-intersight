@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-10371
+API version: 1.0.11-11765
 Contact: intersight@cisco.com
 */
 
@@ -25,7 +25,8 @@ type IamAccount struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// Name of the Intersight account. By default, name is same as the MoID of the account.
-	Name *string `json:"Name,omitempty"`
+	Name    *string  `json:"Name,omitempty"`
+	Regions []string `json:"Regions,omitempty"`
 	// Status of the account. To activate the Intersight account, claim a device to the account.
 	Status *string `json:"Status,omitempty"`
 	// An array of relationships to iamAppRegistration resources.
@@ -155,6 +156,39 @@ func (o *IamAccount) HasName() bool {
 // SetName gets a reference to the given string and assigns it to the Name field.
 func (o *IamAccount) SetName(v string) {
 	o.Name = &v
+}
+
+// GetRegions returns the Regions field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *IamAccount) GetRegions() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+	return o.Regions
+}
+
+// GetRegionsOk returns a tuple with the Regions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *IamAccount) GetRegionsOk() ([]string, bool) {
+	if o == nil || o.Regions == nil {
+		return nil, false
+	}
+	return o.Regions, true
+}
+
+// HasRegions returns a boolean if a field has been set.
+func (o *IamAccount) HasRegions() bool {
+	if o != nil && o.Regions != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRegions gets a reference to the given []string and assigns it to the Regions field.
+func (o *IamAccount) SetRegions(v []string) {
+	o.Regions = v
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
@@ -601,6 +635,9 @@ func (o IamAccount) MarshalJSON() ([]byte, error) {
 	if o.Name != nil {
 		toSerialize["Name"] = o.Name
 	}
+	if o.Regions != nil {
+		toSerialize["Regions"] = o.Regions
+	}
 	if o.Status != nil {
 		toSerialize["Status"] = o.Status
 	}
@@ -655,7 +692,8 @@ func (o *IamAccount) UnmarshalJSON(bytes []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// Name of the Intersight account. By default, name is same as the MoID of the account.
-		Name *string `json:"Name,omitempty"`
+		Name    *string  `json:"Name,omitempty"`
+		Regions []string `json:"Regions,omitempty"`
 		// Status of the account. To activate the Intersight account, claim a device to the account.
 		Status *string `json:"Status,omitempty"`
 		// An array of relationships to iamAppRegistration resources.
@@ -689,6 +727,7 @@ func (o *IamAccount) UnmarshalJSON(bytes []byte) (err error) {
 		varIamAccount.ClassId = varIamAccountWithoutEmbeddedStruct.ClassId
 		varIamAccount.ObjectType = varIamAccountWithoutEmbeddedStruct.ObjectType
 		varIamAccount.Name = varIamAccountWithoutEmbeddedStruct.Name
+		varIamAccount.Regions = varIamAccountWithoutEmbeddedStruct.Regions
 		varIamAccount.Status = varIamAccountWithoutEmbeddedStruct.Status
 		varIamAccount.AppRegistrations = varIamAccountWithoutEmbeddedStruct.AppRegistrations
 		varIamAccount.DomainGroups = varIamAccountWithoutEmbeddedStruct.DomainGroups
@@ -722,6 +761,7 @@ func (o *IamAccount) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Name")
+		delete(additionalProperties, "Regions")
 		delete(additionalProperties, "Status")
 		delete(additionalProperties, "AppRegistrations")
 		delete(additionalProperties, "DomainGroups")

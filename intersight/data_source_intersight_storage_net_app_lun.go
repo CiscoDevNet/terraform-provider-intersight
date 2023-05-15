@@ -145,6 +145,11 @@ func getStorageNetAppLunSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"container_state": {
+			Description: "The state of the volume and aggregate that contain the LUN. LUNs are only available when their containers are available.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"create_time": {
 			Description: "The time when this managed object was created.",
 			Type:        schema.TypeString,
@@ -229,7 +234,7 @@ func getStorageNetAppLunSchema() map[string]*schema.Schema {
 			},
 		},
 		"key": {
-			Description: "Unique identifier of Lun across data center.",
+			Description: "Unique identifier of LUN across data center.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -452,6 +457,11 @@ func getStorageNetAppLunSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"svm_name": {
+			Description: "The storage virtual machine name for the lun.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -530,6 +540,11 @@ func getStorageNetAppLunSchema() map[string]*schema.Schema {
 							},
 						},
 					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 						Type:        schema.TypeString,
@@ -587,6 +602,11 @@ func getStorageNetAppLunSchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"volume_name": {
+			Description: "The parent volume name for the lun.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 	}
 	return schemaMap
@@ -741,6 +761,11 @@ func dataSourceStorageNetAppLunRead(c context.Context, d *schema.ResourceData, m
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
+	}
+
+	if v, ok := d.GetOk("container_state"); ok {
+		x := (v.(string))
+		o.SetContainerState(x)
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
@@ -1071,6 +1096,11 @@ func dataSourceStorageNetAppLunRead(c context.Context, d *schema.ResourceData, m
 		}
 	}
 
+	if v, ok := d.GetOk("svm_name"); ok {
+		x := (v.(string))
+		o.SetSvmName(x)
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -1183,6 +1213,11 @@ func dataSourceStorageNetAppLunRead(c context.Context, d *schema.ResourceData, m
 		}
 	}
 
+	if v, ok := d.GetOk("volume_name"); ok {
+		x := (v.(string))
+		o.SetVolumeName(x)
+	}
+
 	data, err := o.MarshalJSON()
 	if err != nil {
 		return diag.Errorf("json marshal of StorageNetAppLun object failed with error : %s", err.Error())
@@ -1227,6 +1262,7 @@ func dataSourceStorageNetAppLunRead(c context.Context, d *schema.ResourceData, m
 
 				temp["avg_performance_metrics"] = flattenMapStorageNetAppPerformanceMetricsAverage(s.GetAvgPerformanceMetrics(), d)
 				temp["class_id"] = (s.GetClassId())
+				temp["container_state"] = (s.GetContainerState())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["description"] = (s.GetDescription())
@@ -1258,11 +1294,13 @@ func dataSourceStorageNetAppLunRead(c context.Context, d *schema.ResourceData, m
 				temp["storage_container"] = flattenMapStorageNetAppVolumeRelationship(s.GetStorageContainer(), d)
 
 				temp["storage_utilization"] = flattenMapStorageBaseCapacity(s.GetStorageUtilization(), d)
+				temp["svm_name"] = (s.GetSvmName())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["uuid"] = (s.GetUuid())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
+				temp["volume_name"] = (s.GetVolumeName())
 				storageNetAppLunResults = append(storageNetAppLunResults, temp)
 			}
 		}

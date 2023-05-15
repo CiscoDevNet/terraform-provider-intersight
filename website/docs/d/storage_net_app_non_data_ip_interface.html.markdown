@@ -22,6 +22,8 @@ The following arguments can be used to get data of already created objects in In
 * `enabled`:(string) IP interface is enabled or not. 
 * `home_node`:(string) Name of home node of IP interface. 
 * `home_port`:(string) Name of home port of IP interface. 
+* `interface_is_home`:(string) Reports whether the IP interface is home or has failed over to its HA peer. 
+* `interface_state`:(string) The state of the IP interface.* `Down` - The state is set to down if the interface is not enabled.* `Up` - The state is set to up if the interface is enabled. 
 * `ip_address`:(string) The IP address of interface. 
 * `ip_family`:(string) IP address family of interface.* `IPv4` - IP address family type is IPv4.* `IPv6` - IP address family type is IP6. 
 * `ipspace`:(string) The name of the IPspace of the IP interface. 
@@ -35,5 +37,6 @@ The following arguments can be used to get data of already created objects in In
 * `service_policy_uuid`:(string) Service policy UUID of IP interface. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `state`:(string) The state of the IP interface.* `down` - An inactive port is listed as Down.* `up` - An active port is listed as Up.* `present` - An active port is listed as present. 
+* `svm_name`:(string) The storage virtual machine name for the interface. 
 * `uuid`:(string) Uuid of NetApp IP Interface. 
  

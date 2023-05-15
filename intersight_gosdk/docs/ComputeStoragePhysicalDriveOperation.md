@@ -6,8 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "compute.StoragePhysicalDriveOperation"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "compute.StoragePhysicalDriveOperation"]
-**AdminAction** | Pointer to **string** | Administrative actions that can be performed on the Storage Physical Drives. * &#x60;None&#x60; - No action on the selected Storage Physical Drives. * &#x60;SetJbod&#x60; - Set Jbod action state on the selected Storage Physical Drives. * &#x60;SetUnconfiguredGood&#x60; - Set Unconfigured Good action state on the selected Storage Physical Drives. | [optional] [default to "None"]
+**AdminAction** | Pointer to **string** | Administrative actions that can be performed on the Storage Physical Drives. * &#x60;None&#x60; - No action on the selected Storage Physical Drives. * &#x60;SetJbod&#x60; - Set Jbod action state on the selected Storage Physical Drives. * &#x60;SetUnconfiguredGood&#x60; - Set Unconfigured Good action state on the selected Storage Physical Drives. * &#x60;Erase&#x60; - Set Erase action state on the selected Storage Controller. | [optional] [default to "None"]
 **ControllerId** | Pointer to **string** | Storage Controller Id of the storage Physical Drives of the server. | [optional] 
+**DriveSlots** | Pointer to **[]string** |  | [optional] 
 **PhysicalDrives** | Pointer to [**[]ComputeStoragePhysicalDrive**](ComputeStoragePhysicalDrive.md) |  | [optional] 
 
 ## Methods
@@ -119,6 +120,41 @@ SetControllerId sets ControllerId field to given value.
 
 HasControllerId returns a boolean if a field has been set.
 
+### GetDriveSlots
+
+`func (o *ComputeStoragePhysicalDriveOperation) GetDriveSlots() []string`
+
+GetDriveSlots returns the DriveSlots field if non-nil, zero value otherwise.
+
+### GetDriveSlotsOk
+
+`func (o *ComputeStoragePhysicalDriveOperation) GetDriveSlotsOk() (*[]string, bool)`
+
+GetDriveSlotsOk returns a tuple with the DriveSlots field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDriveSlots
+
+`func (o *ComputeStoragePhysicalDriveOperation) SetDriveSlots(v []string)`
+
+SetDriveSlots sets DriveSlots field to given value.
+
+### HasDriveSlots
+
+`func (o *ComputeStoragePhysicalDriveOperation) HasDriveSlots() bool`
+
+HasDriveSlots returns a boolean if a field has been set.
+
+### SetDriveSlotsNil
+
+`func (o *ComputeStoragePhysicalDriveOperation) SetDriveSlotsNil(b bool)`
+
+ SetDriveSlotsNil sets the value for DriveSlots to be an explicit nil
+
+### UnsetDriveSlots
+`func (o *ComputeStoragePhysicalDriveOperation) UnsetDriveSlots()`
+
+UnsetDriveSlots ensures that no value is present for DriveSlots, not even an explicit nil
 ### GetPhysicalDrives
 
 `func (o *ComputeStoragePhysicalDriveOperation) GetPhysicalDrives() []ComputeStoragePhysicalDrive`

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-10371
+API version: 1.0.11-11765
 Contact: intersight@cisco.com
 */
 
@@ -33,6 +33,10 @@ type StorageNetAppQtreeAllOf struct {
 	QtreeId *int64 `json:"QtreeId,omitempty"`
 	// Identifies the security style for the qtree, it determines how access to the qtree is controlled. * `UNIX` - Security style for UNIX uid, gid and mode bits. * `NTFS` - Security style for CIFS ACLs. * `Mixed` - Security style for NFS and CIFS access.
 	SecurityStyle *string `json:"SecurityStyle,omitempty"`
+	// The storage virtual machine name for the qtree.
+	SvmName *string `json:"SvmName,omitempty"`
+	// The parent volume name for the qtree.
+	VolumeName *string `json:"VolumeName,omitempty"`
 	// NetApp Volume uuid, unique identifier for the NetApp volume.
 	VolumeUuid           *string                             `json:"VolumeUuid,omitempty"`
 	StorageContainer     *StorageNetAppVolumeRelationship    `json:"StorageContainer,omitempty"`
@@ -305,6 +309,70 @@ func (o *StorageNetAppQtreeAllOf) SetSecurityStyle(v string) {
 	o.SecurityStyle = &v
 }
 
+// GetSvmName returns the SvmName field value if set, zero value otherwise.
+func (o *StorageNetAppQtreeAllOf) GetSvmName() string {
+	if o == nil || o.SvmName == nil {
+		var ret string
+		return ret
+	}
+	return *o.SvmName
+}
+
+// GetSvmNameOk returns a tuple with the SvmName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageNetAppQtreeAllOf) GetSvmNameOk() (*string, bool) {
+	if o == nil || o.SvmName == nil {
+		return nil, false
+	}
+	return o.SvmName, true
+}
+
+// HasSvmName returns a boolean if a field has been set.
+func (o *StorageNetAppQtreeAllOf) HasSvmName() bool {
+	if o != nil && o.SvmName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSvmName gets a reference to the given string and assigns it to the SvmName field.
+func (o *StorageNetAppQtreeAllOf) SetSvmName(v string) {
+	o.SvmName = &v
+}
+
+// GetVolumeName returns the VolumeName field value if set, zero value otherwise.
+func (o *StorageNetAppQtreeAllOf) GetVolumeName() string {
+	if o == nil || o.VolumeName == nil {
+		var ret string
+		return ret
+	}
+	return *o.VolumeName
+}
+
+// GetVolumeNameOk returns a tuple with the VolumeName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageNetAppQtreeAllOf) GetVolumeNameOk() (*string, bool) {
+	if o == nil || o.VolumeName == nil {
+		return nil, false
+	}
+	return o.VolumeName, true
+}
+
+// HasVolumeName returns a boolean if a field has been set.
+func (o *StorageNetAppQtreeAllOf) HasVolumeName() bool {
+	if o != nil && o.VolumeName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetVolumeName gets a reference to the given string and assigns it to the VolumeName field.
+func (o *StorageNetAppQtreeAllOf) SetVolumeName(v string) {
+	o.VolumeName = &v
+}
+
 // GetVolumeUuid returns the VolumeUuid field value if set, zero value otherwise.
 func (o *StorageNetAppQtreeAllOf) GetVolumeUuid() string {
 	if o == nil || o.VolumeUuid == nil {
@@ -427,6 +495,12 @@ func (o StorageNetAppQtreeAllOf) MarshalJSON() ([]byte, error) {
 	if o.SecurityStyle != nil {
 		toSerialize["SecurityStyle"] = o.SecurityStyle
 	}
+	if o.SvmName != nil {
+		toSerialize["SvmName"] = o.SvmName
+	}
+	if o.VolumeName != nil {
+		toSerialize["VolumeName"] = o.VolumeName
+	}
 	if o.VolumeUuid != nil {
 		toSerialize["VolumeUuid"] = o.VolumeUuid
 	}
@@ -462,6 +536,8 @@ func (o *StorageNetAppQtreeAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "Permission")
 		delete(additionalProperties, "QtreeId")
 		delete(additionalProperties, "SecurityStyle")
+		delete(additionalProperties, "SvmName")
+		delete(additionalProperties, "VolumeName")
 		delete(additionalProperties, "VolumeUuid")
 		delete(additionalProperties, "StorageContainer")
 		delete(additionalProperties, "Tenant")

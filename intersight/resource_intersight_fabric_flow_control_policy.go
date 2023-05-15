@@ -271,7 +271,7 @@ func resourceFabricFlowControlPolicy() *schema.Resource {
 				},
 			},
 			"priority_flow_control_mode": {
-				Description:  "Configure PFC on a per-port basis to enable the no-drop behavior for the CoS as defined by the active network qos policy.\n* `auto` - Enables the no-drop CoS values to be advertised by the DCBXP and negotiated with the peer.A successful negotiation enables PFC on the no-drop CoS.Any failures because of a mismatch in the capability of peers causes the PFC not to be enabled.\n* `on` - Enables PFC on the local port regardless of the capability of the peers.\n* `off` - Disable PFC on the local port regardless of the capability of the peers.",
+				Description:  "Configure the Priority Flow Control (PFC) for each port to enable the no-drop behavior for the CoS defined by the System QoS Policy and an Ethernet QoS policy. If Auto and On is selected for PFC, the Receive and Send link level flow control will be Off.\n* `auto` - Enables the no-drop CoS values to be advertised by the DCBXP and negotiated with the peer.A successful negotiation enables PFC on the no-drop CoS.Any failures because of a mismatch in the capability of peers causes the PFC not to be enabled.\n* `on` - Enables PFC on the local port regardless of the capability of the peers.\n* `off` - Disable PFC on the local port regardless of the capability of the peers.",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"auto", "on", "off"}, false),
 				Optional:     true,
@@ -387,6 +387,17 @@ func resourceFabricFlowControlPolicy() *schema.Resource {
 								},
 							},
 						},
+						"marked_for_deletion": {
+							Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,

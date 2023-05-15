@@ -267,6 +267,11 @@ func getStorageNetAppCifsShareSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"svm_name": {
+			Description: "The storage virtual machine name for the CIFS share.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"svm_uuid": {
 			Description: "Unique identifier for the NetApp Storage Virtual Machine.",
 			Type:        schema.TypeString,
@@ -379,6 +384,11 @@ func getStorageNetAppCifsShareSchema() map[string]*schema.Schema {
 								},
 							},
 						},
+					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -739,6 +749,11 @@ func dataSourceStorageNetAppCifsShareRead(c context.Context, d *schema.ResourceD
 		}
 	}
 
+	if v, ok := d.GetOk("svm_name"); ok {
+		x := (v.(string))
+		o.SetSvmName(x)
+	}
+
 	if v, ok := d.GetOk("svm_uuid"); ok {
 		x := (v.(string))
 		o.SetSvmUuid(x)
@@ -956,6 +971,7 @@ func dataSourceStorageNetAppCifsShareRead(c context.Context, d *schema.ResourceD
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["storage_container"] = flattenMapStorageNetAppVolumeRelationship(s.GetStorageContainer(), d)
+				temp["svm_name"] = (s.GetSvmName())
 				temp["svm_uuid"] = (s.GetSvmUuid())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)

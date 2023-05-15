@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **ClusterUuid** | Pointer to **string** | Unique identity of the device. | [optional] [readonly] 
 **NetAppExportPolicyRule** | Pointer to [**[]StorageNetAppExportPolicyRule**](StorageNetAppExportPolicyRule.md) |  | [optional] 
 **PolicyId** | Pointer to **int64** | ID for the Export Policy. | [optional] [readonly] 
+**SvmName** | Pointer to **string** | The storage virtual machine name for the export policy. | [optional] [readonly] 
 **Array** | Pointer to [**StorageNetAppClusterRelationship**](StorageNetAppClusterRelationship.md) |  | [optional] 
 **Tenant** | Pointer to [**StorageNetAppStorageVmRelationship**](StorageNetAppStorageVmRelationship.md) |  | [optional] 
 
@@ -155,6 +156,31 @@ SetPolicyId sets PolicyId field to given value.
 `func (o *StorageNetAppExportPolicy) HasPolicyId() bool`
 
 HasPolicyId returns a boolean if a field has been set.
+
+### GetSvmName
+
+`func (o *StorageNetAppExportPolicy) GetSvmName() string`
+
+GetSvmName returns the SvmName field if non-nil, zero value otherwise.
+
+### GetSvmNameOk
+
+`func (o *StorageNetAppExportPolicy) GetSvmNameOk() (*string, bool)`
+
+GetSvmNameOk returns a tuple with the SvmName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSvmName
+
+`func (o *StorageNetAppExportPolicy) SetSvmName(v string)`
+
+SetSvmName sets SvmName field to given value.
+
+### HasSvmName
+
+`func (o *StorageNetAppExportPolicy) HasSvmName() bool`
+
+HasSvmName returns a boolean if a field has been set.
 
 ### GetArray
 

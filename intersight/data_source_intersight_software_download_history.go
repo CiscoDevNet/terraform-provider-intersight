@@ -277,6 +277,11 @@ func getSoftwareDownloadHistorySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"user_id_or_email": {
+			Description: "The email id of the user who initiated the software download.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"nr_version": {
 			Description: "The version of software which was downloaded.",
 			Type:        schema.TypeString,
@@ -331,6 +336,11 @@ func getSoftwareDownloadHistorySchema() map[string]*schema.Schema {
 								},
 							},
 						},
+					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -729,6 +739,11 @@ func dataSourceSoftwareDownloadHistoryRead(c context.Context, d *schema.Resource
 		o.SetTimestamp(x)
 	}
 
+	if v, ok := d.GetOk("user_id_or_email"); ok {
+		x := (v.(string))
+		o.SetUserIdOrEmail(x)
+	}
+
 	if v, ok := d.GetOk("nr_version"); ok {
 		x := (v.(string))
 		o.SetVersion(x)
@@ -871,6 +886,7 @@ func dataSourceSoftwareDownloadHistoryRead(c context.Context, d *schema.Resource
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 
 				temp["timestamp"] = (s.GetTimestamp()).String()
+				temp["user_id_or_email"] = (s.GetUserIdOrEmail())
 				temp["nr_version"] = (s.GetVersion())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)

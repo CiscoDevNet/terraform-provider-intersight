@@ -287,6 +287,11 @@ func getStorageDriveGroupSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"secure_drive_group": {
+			Description: "Enables/disables the drive encryption on all the drives used in this policy. This flag just enables the drive security and only after remote key setting configured, the actual encryption will be done.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"shared_scope": {
 			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 			Type:        schema.TypeString,
@@ -404,6 +409,11 @@ func getStorageDriveGroupSchema() map[string]*schema.Schema {
 								},
 							},
 						},
+					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -907,6 +917,11 @@ func dataSourceStorageDriveGroupRead(c context.Context, d *schema.ResourceData, 
 		o.SetRaidLevel(x)
 	}
 
+	if v, ok := d.GetOkExists("secure_drive_group"); ok {
+		x := (v.(bool))
+		o.SetSecureDriveGroup(x)
+	}
+
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
@@ -1239,6 +1254,7 @@ func dataSourceStorageDriveGroupRead(c context.Context, d *schema.ResourceData, 
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["raid_level"] = (s.GetRaidLevel())
+				temp["secure_drive_group"] = (s.GetSecureDriveGroup())
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["storage_policy"] = flattenMapStorageStoragePolicyRelationship(s.GetStoragePolicy(), d)

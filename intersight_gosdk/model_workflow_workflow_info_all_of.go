@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-10371
+API version: 1.0.11-11765
 Contact: intersight@cisco.com
 */
 
@@ -22,9 +22,9 @@ type WorkflowWorkflowInfoAllOf struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
-	// The action of the workflow such as start, cancel, retry, pause. * `None` - No action is set, this is the default value for action field. * `Create` - Create a new instance of the workflow but it does not start the execution of the workflow. Use the Start action to start execution of the workflow. * `Start` - Start a new execution of the workflow. * `Pause` - Pause the workflow, this can only be issued on workflows that are in running state. * `Resume` - Resume the workflow which was previously paused through pause action on the workflow. * `Retry` - Retry the workflow that has previously reached a final state and has the retryable property set to true. A running or waiting workflow cannot be retried. If the property retryFromTaskName is also passed along with this action, the workflow will be started from that specific task, otherwise the workflow will be restarted from the first task.  The task name in retryFromTaskName must be one of the tasks that completed or failed in the previous run. It is not possible to retry a workflow from a task which wasn't run in the previous iteration. * `RetryFailed` - Retry the workflow that has failed. A running or waiting workflow or a workflow that completed successfully cannot be retried. Only the tasks that failed in the previous run will be retried and the rest of workflow will be run. This action does not restart the workflow and also does not support retrying from a specific task. * `Cancel` - Cancel the workflow that is in running or waiting state.
+	// The action of the workflow such as start, cancel, retry, pause. * `None` - No action is set, this is the default value for action field. * `Create` - Create a new instance of the workflow but it does not start the execution of the workflow. Use the Start action to start execution of the workflow. * `Start` - Start a new execution of the workflow. * `Pause` - Pause the workflow, this can only be issued on workflows that are in running state. A workflow can be paused for a maximum of 180 days, after 180 days the workflow will be terminated by the system. * `Resume` - Resume the workflow which was previously paused through pause action on the workflow. * `Rerun` - Rerun the workflow that has previously reached a failed state. The workflow is run from the beginning using inputs from previous execution. Completed and currently running workflows cannot be rerun. Workflows do not have to be marked for retry to use this action. * `Retry` - This action has been deprecated. Please use RetryFailed, Rerun or RetryFromTask action. Retry the workflow that has previously reached a final state and has the retryable property set to true. A running or waiting workflow cannot be retried. If the property retryFromTaskName is also passed along with this action, the workflow will be started from that specific task, otherwise the workflow will be restarted from the first task.  The task name in retryFromTaskName must be one of the tasks that completed or failed in the previous run. It is not possible to retry a workflow from a task which wasn't run in the previous iteration. * `RetryFailed` - Retry the workflow that has failed. A running or waiting workflow or a workflow that completed successfully cannot be retried. Only the tasks that failed in the previous run will be retried and the rest of workflow will be run. This action does not restart the workflow and also does not support retrying from a specific task. * `RetryFromTask` - Retry the workflow that has previously reached a failed state and has the retryable property set to true. A running or waiting workflow cannot be retried. RetryFromTaskName must be passed along with this action, and the workflow will be started from that specific task. The task name in RetryFromTaskName must be one of the tasks that was executed in the previous attempt. It is not possible to retry a workflow from a task that wasn't run in the previous execution attempt. * `Cancel` - Cancel the workflow that is in running or waiting state.
 	Action *string `json:"Action,omitempty"`
-	// The time when the workflow info will be removed from database.
+	// The time when the workflow info will be removed from the database. When WorkflowInfo is created, cleanup time will be set to 181 days. As the workflow progresses through different states the cleanup time can be updated. A cleanup time of 0 means the workflow is not scheduled for cleanup. An active workflow that continues to schedule & run tasks can run for any amount of time and there is no upper bound for such workflows. Workflows that are not actively running, say in Paused or Waiting states will be removed after 181 days.
 	CleanupTime *time.Time `json:"CleanupTime,omitempty"`
 	// The email address of the user who started this workflow.
 	Email *string `json:"Email,omitempty"`
@@ -38,11 +38,9 @@ type WorkflowWorkflowInfoAllOf struct {
 	InstId *string `json:"InstId,omitempty"`
 	// Denotes if this workflow is internal and should be hidden from user view of running workflows.
 	Internal *bool `json:"Internal,omitempty"`
-	// The last action that was issued on the workflow is saved in this field. * `None` - No action is set, this is the default value for action field. * `Create` - Create a new instance of the workflow but it does not start the execution of the workflow. Use the Start action to start execution of the workflow. * `Start` - Start a new execution of the workflow. * `Pause` - Pause the workflow, this can only be issued on workflows that are in running state. * `Resume` - Resume the workflow which was previously paused through pause action on the workflow. * `Retry` - Retry the workflow that has previously reached a final state and has the retryable property set to true. A running or waiting workflow cannot be retried. If the property retryFromTaskName is also passed along with this action, the workflow will be started from that specific task, otherwise the workflow will be restarted from the first task.  The task name in retryFromTaskName must be one of the tasks that completed or failed in the previous run. It is not possible to retry a workflow from a task which wasn't run in the previous iteration. * `RetryFailed` - Retry the workflow that has failed. A running or waiting workflow or a workflow that completed successfully cannot be retried. Only the tasks that failed in the previous run will be retried and the rest of workflow will be run. This action does not restart the workflow and also does not support retrying from a specific task. * `Cancel` - Cancel the workflow that is in running or waiting state.
+	// The last action that was issued on the workflow is saved in this field. * `None` - No action is set, this is the default value for action field. * `Create` - Create a new instance of the workflow but it does not start the execution of the workflow. Use the Start action to start execution of the workflow. * `Start` - Start a new execution of the workflow. * `Pause` - Pause the workflow, this can only be issued on workflows that are in running state. A workflow can be paused for a maximum of 180 days, after 180 days the workflow will be terminated by the system. * `Resume` - Resume the workflow which was previously paused through pause action on the workflow. * `Rerun` - Rerun the workflow that has previously reached a failed state. The workflow is run from the beginning using inputs from previous execution. Completed and currently running workflows cannot be rerun. Workflows do not have to be marked for retry to use this action. * `Retry` - This action has been deprecated. Please use RetryFailed, Rerun or RetryFromTask action. Retry the workflow that has previously reached a final state and has the retryable property set to true. A running or waiting workflow cannot be retried. If the property retryFromTaskName is also passed along with this action, the workflow will be started from that specific task, otherwise the workflow will be restarted from the first task.  The task name in retryFromTaskName must be one of the tasks that completed or failed in the previous run. It is not possible to retry a workflow from a task which wasn't run in the previous iteration. * `RetryFailed` - Retry the workflow that has failed. A running or waiting workflow or a workflow that completed successfully cannot be retried. Only the tasks that failed in the previous run will be retried and the rest of workflow will be run. This action does not restart the workflow and also does not support retrying from a specific task. * `RetryFromTask` - Retry the workflow that has previously reached a failed state and has the retryable property set to true. A running or waiting workflow cannot be retried. RetryFromTaskName must be passed along with this action, and the workflow will be started from that specific task. The task name in RetryFromTaskName must be one of the tasks that was executed in the previous attempt. It is not possible to retry a workflow from a task that wasn't run in the previous execution attempt. * `Cancel` - Cancel the workflow that is in running or waiting state.
 	LastAction *string           `json:"LastAction,omitempty"`
 	Message    []WorkflowMessage `json:"Message,omitempty"`
-	// Version of the workflow metadata for which this workflow execution was started.
-	MetaVersion *int64 `json:"MetaVersion,omitempty"`
 	// A name of the workflow execution instance.
 	Name *string `json:"Name,omitempty"`
 	// The output generated at the end of the workflow execution.
@@ -52,7 +50,7 @@ type WorkflowWorkflowInfoAllOf struct {
 	// The progress of a workflow is calculated based on the total number of tasks in the workflow and the number of tasks completed. A task is considered as completed if the task status is either \"NO_OP\" or \"COMPLETED\". If the task status is \"SKIP_TO_FAIL\", the workflow will be terminated and the progress of the workflow will be set to 100.
 	Progress   *float32                               `json:"Progress,omitempty"`
 	Properties NullableWorkflowWorkflowInfoProperties `json:"Properties,omitempty"`
-	// This field is applicable when Retry action is issued for a workflow which is in 'final' state. When this field is not specified, the workflow will be retried from the start i.e., the first task. When this field is specified then the workflow will be retried from the specified task. This field should specify the task name which is the unique name of the task within the workflow. The task name must be one of the tasks that completed or failed in the previous run. It is not possible to retry a workflow from a task which wasn't run in the previous iteration.
+	// This field is required when RetryFromTask action is issued for a workflow that is in a 'final' state. The workflow will be retried from the specified task. This field must specify a task name which is the unique name of the task within the workflow. The task name must be one of the tasks that were completed or failed in the previous run. It is not possible to retry a workflow from a task that wasn't run in the previous execution attempt.
 	RetryFromTaskName *string `json:"RetryFromTaskName,omitempty"`
 	// The source microservice name which is the owner of this workflow.
 	Src *string `json:"Src,omitempty"`
@@ -73,10 +71,8 @@ type WorkflowWorkflowInfoAllOf struct {
 	// All the generated variables for the workflow. During workflow execution, the variables will be updated as per the variableParameters specified after each task execution.
 	Variable interface{} `json:"Variable,omitempty"`
 	// Denotes the reason workflow is in waiting status. * `None` - Wait reason is none, which indicates there is no reason for the waiting state. * `GatherTasks` - Wait reason is gathering tasks, which indicates the workflow is in this state in order to gather tasks. * `Duplicate` - Wait reason is duplicate, which indicates the workflow is a duplicate of current running workflow. * `RateLimit` - Wait reason is rate limit, which indicates the workflow is rate limited by account/instance level throttling threshold. * `WaitTask` - Wait reason when there are one or more wait tasks in the workflow which are yet to receive a task status update. * `PendingRetryFailed` - Wait reason when the workflow is pending a RetryFailed action. * `WaitingToStart` - Workflow is waiting to start on workflow engine.
-	WaitReason  *string                     `json:"WaitReason,omitempty"`
-	WorkflowCtx NullableWorkflowWorkflowCtx `json:"WorkflowCtx,omitempty"`
-	// The type of workflow meta. Derived from the workflow meta that is used to launch this workflow instance. * `SystemDefined` - System defined workflow definition. * `UserDefined` - User defined workflow definition. * `Dynamic` - Dynamically defined workflow definition.
-	WorkflowMetaType           *string                                         `json:"WorkflowMetaType,omitempty"`
+	WaitReason                 *string                                         `json:"WaitReason,omitempty"`
+	WorkflowCtx                NullableWorkflowWorkflowCtx                     `json:"WorkflowCtx,omitempty"`
 	Account                    *IamAccountRelationship                         `json:"Account,omitempty"`
 	AssociatedObject           *MoBaseMoRelationship                           `json:"AssociatedObject,omitempty"`
 	Organization               *OrganizationOrganizationRelationship           `json:"Organization,omitempty"`
@@ -494,38 +490,6 @@ func (o *WorkflowWorkflowInfoAllOf) HasMessage() bool {
 // SetMessage gets a reference to the given []WorkflowMessage and assigns it to the Message field.
 func (o *WorkflowWorkflowInfoAllOf) SetMessage(v []WorkflowMessage) {
 	o.Message = v
-}
-
-// GetMetaVersion returns the MetaVersion field value if set, zero value otherwise.
-func (o *WorkflowWorkflowInfoAllOf) GetMetaVersion() int64 {
-	if o == nil || o.MetaVersion == nil {
-		var ret int64
-		return ret
-	}
-	return *o.MetaVersion
-}
-
-// GetMetaVersionOk returns a tuple with the MetaVersion field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *WorkflowWorkflowInfoAllOf) GetMetaVersionOk() (*int64, bool) {
-	if o == nil || o.MetaVersion == nil {
-		return nil, false
-	}
-	return o.MetaVersion, true
-}
-
-// HasMetaVersion returns a boolean if a field has been set.
-func (o *WorkflowWorkflowInfoAllOf) HasMetaVersion() bool {
-	if o != nil && o.MetaVersion != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetMetaVersion gets a reference to the given int64 and assigns it to the MetaVersion field.
-func (o *WorkflowWorkflowInfoAllOf) SetMetaVersion(v int64) {
-	o.MetaVersion = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -1096,38 +1060,6 @@ func (o *WorkflowWorkflowInfoAllOf) UnsetWorkflowCtx() {
 	o.WorkflowCtx.Unset()
 }
 
-// GetWorkflowMetaType returns the WorkflowMetaType field value if set, zero value otherwise.
-func (o *WorkflowWorkflowInfoAllOf) GetWorkflowMetaType() string {
-	if o == nil || o.WorkflowMetaType == nil {
-		var ret string
-		return ret
-	}
-	return *o.WorkflowMetaType
-}
-
-// GetWorkflowMetaTypeOk returns a tuple with the WorkflowMetaType field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *WorkflowWorkflowInfoAllOf) GetWorkflowMetaTypeOk() (*string, bool) {
-	if o == nil || o.WorkflowMetaType == nil {
-		return nil, false
-	}
-	return o.WorkflowMetaType, true
-}
-
-// HasWorkflowMetaType returns a boolean if a field has been set.
-func (o *WorkflowWorkflowInfoAllOf) HasWorkflowMetaType() bool {
-	if o != nil && o.WorkflowMetaType != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetWorkflowMetaType gets a reference to the given string and assigns it to the WorkflowMetaType field.
-func (o *WorkflowWorkflowInfoAllOf) SetWorkflowMetaType(v string) {
-	o.WorkflowMetaType = &v
-}
-
 // GetAccount returns the Account field value if set, zero value otherwise.
 func (o *WorkflowWorkflowInfoAllOf) GetAccount() IamAccountRelationship {
 	if o == nil || o.Account == nil {
@@ -1423,9 +1355,6 @@ func (o WorkflowWorkflowInfoAllOf) MarshalJSON() ([]byte, error) {
 	if o.Message != nil {
 		toSerialize["Message"] = o.Message
 	}
-	if o.MetaVersion != nil {
-		toSerialize["MetaVersion"] = o.MetaVersion
-	}
 	if o.Name != nil {
 		toSerialize["Name"] = o.Name
 	}
@@ -1476,9 +1405,6 @@ func (o WorkflowWorkflowInfoAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.WorkflowCtx.IsSet() {
 		toSerialize["WorkflowCtx"] = o.WorkflowCtx.Get()
-	}
-	if o.WorkflowMetaType != nil {
-		toSerialize["WorkflowMetaType"] = o.WorkflowMetaType
 	}
 	if o.Account != nil {
 		toSerialize["Account"] = o.Account
@@ -1534,7 +1460,6 @@ func (o *WorkflowWorkflowInfoAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "Internal")
 		delete(additionalProperties, "LastAction")
 		delete(additionalProperties, "Message")
-		delete(additionalProperties, "MetaVersion")
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "Output")
 		delete(additionalProperties, "PauseReason")
@@ -1552,7 +1477,6 @@ func (o *WorkflowWorkflowInfoAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "Variable")
 		delete(additionalProperties, "WaitReason")
 		delete(additionalProperties, "WorkflowCtx")
-		delete(additionalProperties, "WorkflowMetaType")
 		delete(additionalProperties, "Account")
 		delete(additionalProperties, "AssociatedObject")
 		delete(additionalProperties, "Organization")

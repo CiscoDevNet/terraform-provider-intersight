@@ -164,6 +164,11 @@ func getStorageNetAppFcPortSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"node_name": {
+			Description: "The node name for the port.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"object_type": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 			Type:        schema.TypeString,
@@ -360,6 +365,11 @@ func getStorageNetAppFcPortSchema() map[string]*schema.Schema {
 								},
 							},
 						},
+					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -626,6 +636,11 @@ func dataSourceStorageNetAppFcPortRead(c context.Context, d *schema.ResourceData
 	if v, ok := d.GetOk("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
+	}
+
+	if v, ok := d.GetOk("node_name"); ok {
+		x := (v.(string))
+		o.SetNodeName(x)
 	}
 
 	if v, ok := d.GetOk("object_type"); ok {
@@ -946,6 +961,7 @@ func dataSourceStorageNetAppFcPortRead(c context.Context, d *schema.ResourceData
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
 				temp["name"] = (s.GetName())
+				temp["node_name"] = (s.GetNodeName())
 				temp["object_type"] = (s.GetObjectType())
 				temp["owners"] = (s.GetOwners())
 

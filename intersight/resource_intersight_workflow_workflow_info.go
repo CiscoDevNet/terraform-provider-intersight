@@ -76,9 +76,9 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 					return
 				}},
 			"action": {
-				Description:  "The action of the workflow such as start, cancel, retry, pause.\n* `None` - No action is set, this is the default value for action field.\n* `Create` - Create a new instance of the workflow but it does not start the execution of the workflow. Use the Start action to start execution of the workflow.\n* `Start` - Start a new execution of the workflow.\n* `Pause` - Pause the workflow, this can only be issued on workflows that are in running state.\n* `Resume` - Resume the workflow which was previously paused through pause action on the workflow.\n* `Retry` - Retry the workflow that has previously reached a final state and has the retryable property set to true. A running or waiting workflow cannot be retried. If the property retryFromTaskName is also passed along with this action, the workflow will be started from that specific task, otherwise the workflow will be restarted from the first task.  The task name in retryFromTaskName must be one of the tasks that completed or failed in the previous run. It is not possible to retry a workflow from a task which wasn't run in the previous iteration.\n* `RetryFailed` - Retry the workflow that has failed. A running or waiting workflow or a workflow that completed successfully cannot be retried. Only the tasks that failed in the previous run will be retried and the rest of workflow will be run. This action does not restart the workflow and also does not support retrying from a specific task.\n* `Cancel` - Cancel the workflow that is in running or waiting state.",
+				Description:  "The action of the workflow such as start, cancel, retry, pause.\n* `None` - No action is set, this is the default value for action field.\n* `Create` - Create a new instance of the workflow but it does not start the execution of the workflow. Use the Start action to start execution of the workflow.\n* `Start` - Start a new execution of the workflow.\n* `Pause` - Pause the workflow, this can only be issued on workflows that are in running state. A workflow can be paused for a maximum of 180 days, after 180 days the workflow will be terminated by the system.\n* `Resume` - Resume the workflow which was previously paused through pause action on the workflow.\n* `Rerun` - Rerun the workflow that has previously reached a failed state. The workflow is run from the beginning using inputs from previous execution. Completed and currently running workflows cannot be rerun. Workflows do not have to be marked for retry to use this action.\n* `Retry` - This action has been deprecated. Please use RetryFailed, Rerun or RetryFromTask action. Retry the workflow that has previously reached a final state and has the retryable property set to true. A running or waiting workflow cannot be retried. If the property retryFromTaskName is also passed along with this action, the workflow will be started from that specific task, otherwise the workflow will be restarted from the first task.  The task name in retryFromTaskName must be one of the tasks that completed or failed in the previous run. It is not possible to retry a workflow from a task which wasn't run in the previous iteration.\n* `RetryFailed` - Retry the workflow that has failed. A running or waiting workflow or a workflow that completed successfully cannot be retried. Only the tasks that failed in the previous run will be retried and the rest of workflow will be run. This action does not restart the workflow and also does not support retrying from a specific task.\n* `RetryFromTask` - Retry the workflow that has previously reached a failed state and has the retryable property set to true. A running or waiting workflow cannot be retried. RetryFromTaskName must be passed along with this action, and the workflow will be started from that specific task. The task name in RetryFromTaskName must be one of the tasks that was executed in the previous attempt. It is not possible to retry a workflow from a task that wasn't run in the previous execution attempt.\n* `Cancel` - Cancel the workflow that is in running or waiting state.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"None", "Create", "Start", "Pause", "Resume", "Retry", "RetryFailed", "Cancel"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"None", "Create", "Start", "Pause", "Resume", "Rerun", "Retry", "RetryFailed", "RetryFromTask", "Cancel"}, false),
 				Optional:     true,
 				Default:      "None",
 			},
@@ -174,7 +174,7 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 				Default:     "workflow.WorkflowInfo",
 			},
 			"cleanup_time": {
-				Description: "The time when the workflow info will be removed from database.",
+				Description: "The time when the workflow info will be removed from the database. When WorkflowInfo is created, cleanup time will be set to 181 days. As the workflow progresses through different states the cleanup time can be updated. A cleanup time of 0 means the workflow is not scheduled for cleanup. An active workflow that continues to schedule & run tasks can run for any amount of time and there is no upper bound for such workflows. Workflows that are not actively running, say in Paused or Waiting states will be removed after 181 days.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -256,10 +256,15 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 				Description: "Denotes if this workflow is internal and should be hidden from user view of running workflows.",
 				Type:        schema.TypeBool,
 				Optional:    true,
-				ForceNew:    true,
-			},
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"last_action": {
-				Description: "The last action that was issued on the workflow is saved in this field.\n* `None` - No action is set, this is the default value for action field.\n* `Create` - Create a new instance of the workflow but it does not start the execution of the workflow. Use the Start action to start execution of the workflow.\n* `Start` - Start a new execution of the workflow.\n* `Pause` - Pause the workflow, this can only be issued on workflows that are in running state.\n* `Resume` - Resume the workflow which was previously paused through pause action on the workflow.\n* `Retry` - Retry the workflow that has previously reached a final state and has the retryable property set to true. A running or waiting workflow cannot be retried. If the property retryFromTaskName is also passed along with this action, the workflow will be started from that specific task, otherwise the workflow will be restarted from the first task.  The task name in retryFromTaskName must be one of the tasks that completed or failed in the previous run. It is not possible to retry a workflow from a task which wasn't run in the previous iteration.\n* `RetryFailed` - Retry the workflow that has failed. A running or waiting workflow or a workflow that completed successfully cannot be retried. Only the tasks that failed in the previous run will be retried and the rest of workflow will be run. This action does not restart the workflow and also does not support retrying from a specific task.\n* `Cancel` - Cancel the workflow that is in running or waiting state.",
+				Description: "The last action that was issued on the workflow is saved in this field.\n* `None` - No action is set, this is the default value for action field.\n* `Create` - Create a new instance of the workflow but it does not start the execution of the workflow. Use the Start action to start execution of the workflow.\n* `Start` - Start a new execution of the workflow.\n* `Pause` - Pause the workflow, this can only be issued on workflows that are in running state. A workflow can be paused for a maximum of 180 days, after 180 days the workflow will be terminated by the system.\n* `Resume` - Resume the workflow which was previously paused through pause action on the workflow.\n* `Rerun` - Rerun the workflow that has previously reached a failed state. The workflow is run from the beginning using inputs from previous execution. Completed and currently running workflows cannot be rerun. Workflows do not have to be marked for retry to use this action.\n* `Retry` - This action has been deprecated. Please use RetryFailed, Rerun or RetryFromTask action. Retry the workflow that has previously reached a final state and has the retryable property set to true. A running or waiting workflow cannot be retried. If the property retryFromTaskName is also passed along with this action, the workflow will be started from that specific task, otherwise the workflow will be restarted from the first task.  The task name in retryFromTaskName must be one of the tasks that completed or failed in the previous run. It is not possible to retry a workflow from a task which wasn't run in the previous iteration.\n* `RetryFailed` - Retry the workflow that has failed. A running or waiting workflow or a workflow that completed successfully cannot be retried. Only the tasks that failed in the previous run will be retried and the rest of workflow will be run. This action does not restart the workflow and also does not support retrying from a specific task.\n* `RetryFromTask` - Retry the workflow that has previously reached a failed state and has the retryable property set to true. A running or waiting workflow cannot be retried. RetryFromTaskName must be passed along with this action, and the workflow will be started from that specific task. The task name in RetryFromTaskName must be one of the tasks that was executed in the previous attempt. It is not possible to retry a workflow from a task that wasn't run in the previous execution attempt.\n* `Cancel` - Cancel the workflow that is in running or waiting state.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -317,12 +322,6 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 							}},
 					},
 				},
-			},
-			"meta_version": {
-				Description: "Version of the workflow metadata for which this workflow execution was started.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-				ForceNew:    true,
 			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
@@ -511,8 +510,8 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
-				Computed:    true,
 				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
@@ -760,7 +759,7 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 				},
 			},
 			"retry_from_task_name": {
-				Description: "This field is applicable when Retry action is issued for a workflow which is in 'final' state. When this field is not specified, the workflow will be retried from the start i.e., the first task. When this field is specified then the workflow will be retried from the specified task. This field should specify the task name which is the unique name of the task within the workflow. The task name must be one of the tasks that completed or failed in the previous run. It is not possible to retry a workflow from a task which wasn't run in the previous iteration.",
+				Description: "This field is required when RetryFromTask action is issued for a workflow that is in a 'final' state. The workflow will be retried from the specified task. This field must specify a task name which is the unique name of the task within the workflow. The task name must be one of the tasks that were completed or failed in the previous run. It is not possible to retry a workflow from a task that wasn't run in the previous execution attempt.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -995,6 +994,17 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 								},
 							},
 						},
+						"marked_for_deletion": {
+							Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
@@ -1218,21 +1228,28 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 								},
 							},
 						},
-						"workflow_meta_name": {
-							Description: "The name of workflowMeta of the workflow running.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
 						"workflow_subtype": {
 							Description: "The subtype of the workflow.",
 							Type:        schema.TypeString,
 							Optional:    true,
-						},
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 						"workflow_type": {
 							Description: "Type of the workflow being started. This can be any string for client services to distinguish workflow by type.",
 							Type:        schema.TypeString,
 							Optional:    true,
-						},
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 					},
 				},
 				ForceNew: true,
@@ -1278,17 +1295,6 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 				},
 				ForceNew: true,
 			},
-			"workflow_meta_type": {
-				Description: "The type of workflow meta. Derived from the workflow meta that is used to launch this workflow instance.\n* `SystemDefined` - System defined workflow definition.\n* `UserDefined` - User defined workflow definition.\n* `Dynamic` - Dynamically defined workflow definition.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
-				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
-					if val != nil {
-						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
-					}
-					return
-				}},
 		},
 	}
 }
@@ -1415,11 +1421,6 @@ func resourceWorkflowWorkflowInfoCreate(c context.Context, d *schema.ResourceDat
 		}
 	}
 
-	if v, ok := d.GetOkExists("internal"); ok {
-		x := (v.(bool))
-		o.SetInternal(x)
-	}
-
 	if v, ok := d.GetOk("message"); ok {
 		x := make([]models.WorkflowMessage, 0)
 		s := v.([]interface{})
@@ -1448,11 +1449,6 @@ func resourceWorkflowWorkflowInfoCreate(c context.Context, d *schema.ResourceDat
 		if len(x) > 0 {
 			o.SetMessage(x)
 		}
-	}
-
-	if v, ok := d.GetOkExists("meta_version"); ok {
-		x := int64(v.(int))
-		o.SetMetaVersion(x)
 	}
 
 	if v, ok := d.GetOk("moid"); ok {
@@ -1507,6 +1503,49 @@ func resourceWorkflowWorkflowInfoCreate(c context.Context, d *schema.ResourceDat
 		if len(p) > 0 {
 			x := p[0]
 			o.SetOrganization(x)
+		}
+	}
+
+	if v, ok := d.GetOk("pending_dynamic_workflow_info"); ok {
+		p := make([]models.WorkflowPendingDynamicWorkflowInfoRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewMoMoRefWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsWorkflowPendingDynamicWorkflowInfoRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetPendingDynamicWorkflowInfo(x)
 		}
 	}
 
@@ -1702,24 +1741,6 @@ func resourceWorkflowWorkflowInfoCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			if v, ok := l["workflow_meta_name"]; ok {
-				{
-					x := (v.(string))
-					o.SetWorkflowMetaName(x)
-				}
-			}
-			if v, ok := l["workflow_subtype"]; ok {
-				{
-					x := (v.(string))
-					o.SetWorkflowSubtype(x)
-				}
-			}
-			if v, ok := l["workflow_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetWorkflowType(x)
-				}
-			}
 			p = append(p, *o)
 		}
 		if len(p) > 0 {
@@ -1878,10 +1899,6 @@ func resourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceData,
 		return diag.Errorf("error occurred while setting property Message in WorkflowWorkflowInfo object: %s", err.Error())
 	}
 
-	if err := d.Set("meta_version", (s.GetMetaVersion())); err != nil {
-		return diag.Errorf("error occurred while setting property MetaVersion in WorkflowWorkflowInfo object: %s", err.Error())
-	}
-
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {
 		return diag.Errorf("error occurred while setting property ModTime in WorkflowWorkflowInfo object: %s", err.Error())
 	}
@@ -2008,10 +2025,6 @@ func resourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceData,
 
 	if err := d.Set("workflow_definition", flattenMapWorkflowWorkflowDefinitionRelationship(s.GetWorkflowDefinition(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property WorkflowDefinition in WorkflowWorkflowInfo object: %s", err.Error())
-	}
-
-	if err := d.Set("workflow_meta_type", (s.GetWorkflowMetaType())); err != nil {
-		return diag.Errorf("error occurred while setting property WorkflowMetaType in WorkflowWorkflowInfo object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
@@ -2147,12 +2160,6 @@ func resourceWorkflowWorkflowInfoUpdate(c context.Context, d *schema.ResourceDat
 		}
 	}
 
-	if d.HasChange("internal") {
-		v := d.Get("internal")
-		x := (v.(bool))
-		o.SetInternal(x)
-	}
-
 	if d.HasChange("message") {
 		v := d.Get("message")
 		x := make([]models.WorkflowMessage, 0)
@@ -2180,12 +2187,6 @@ func resourceWorkflowWorkflowInfoUpdate(c context.Context, d *schema.ResourceDat
 			x = append(x, *o)
 		}
 		o.SetMessage(x)
-	}
-
-	if d.HasChange("meta_version") {
-		v := d.Get("meta_version")
-		x := int64(v.(int))
-		o.SetMetaVersion(x)
 	}
 
 	if d.HasChange("moid") {
@@ -2243,6 +2244,50 @@ func resourceWorkflowWorkflowInfoUpdate(c context.Context, d *schema.ResourceDat
 		if len(p) > 0 {
 			x := p[0]
 			o.SetOrganization(x)
+		}
+	}
+
+	if d.HasChange("pending_dynamic_workflow_info") {
+		v := d.Get("pending_dynamic_workflow_info")
+		p := make([]models.WorkflowPendingDynamicWorkflowInfoRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsWorkflowPendingDynamicWorkflowInfoRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetPendingDynamicWorkflowInfo(x)
 		}
 	}
 
@@ -2439,24 +2484,6 @@ func resourceWorkflowWorkflowInfoUpdate(c context.Context, d *schema.ResourceDat
 					if len(x) > 0 {
 						o.SetTargetCtxList(x)
 					}
-				}
-			}
-			if v, ok := l["workflow_meta_name"]; ok {
-				{
-					x := (v.(string))
-					o.SetWorkflowMetaName(x)
-				}
-			}
-			if v, ok := l["workflow_subtype"]; ok {
-				{
-					x := (v.(string))
-					o.SetWorkflowSubtype(x)
-				}
-			}
-			if v, ok := l["workflow_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetWorkflowType(x)
 				}
 			}
 			p = append(p, *o)

@@ -6,14 +6,15 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "capability.SwitchCapability"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "capability.SwitchCapability"]
-**DefaultFcoeVlan** | Pointer to **int64** | Default Fcoe VLAN associated with this switch. | [optional] 
-**DynamicVifsSupported** | Pointer to **bool** | Dynamic VIFs support on this switch. | [optional] 
-**FanModulesSupported** | Pointer to **bool** | Fan Modules support on this switch. | [optional] 
+**DefaultFcoeVlan** | Pointer to **int64** | Default Fcoe VLAN associated with this switch. | [optional] [readonly] 
+**DynamicVifsSupported** | Pointer to **bool** | Dynamic VIFs support on this switch. | [optional] [readonly] 
+**FanModulesSupported** | Pointer to **bool** | Fan Modules support on this switch. | [optional] [readonly] 
 **FcEndHostModeReservedVsans** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
-**FcUplinkPortsAutoNegotiationSupported** | Pointer to **bool** | Fc Uplink ports auto negotiation speed support on this switch. | [optional] 
-**LocatorBeaconSupported** | Pointer to **bool** | Locator Beacon LED support on this switch. | [optional] 
-**MaxPorts** | Pointer to **int64** | Maximum allowed physical ports on this switch. | [optional] 
-**MaxSlots** | Pointer to **int64** | Maximum allowed physical slots on this switch. | [optional] 
+**FcUplinkPortsAutoNegotiationSupported** | Pointer to **bool** | Fc Uplink ports auto negotiation speed support on this switch. | [optional] [readonly] 
+**LocatorBeaconSupported** | Pointer to **bool** | Locator Beacon LED support on this switch. | [optional] [readonly] 
+**MaxPorts** | Pointer to **int64** | Maximum allowed physical ports on this switch. | [optional] [readonly] 
+**MaxSlots** | Pointer to **int64** | Maximum allowed physical slots on this switch. | [optional] [readonly] 
+**MinVersionWithBreakoutSupport** | Pointer to **string** | Minimum firmware version supported for breakout ports on this switch. | [optional] [readonly] 
 **MinVersionWithLocatorLedSupport** | Pointer to **string** | Minimum firmware version supported for locator leds on this switch. | [optional] [readonly] 
 **NetworkLimits** | Pointer to [**NullableCapabilitySwitchNetworkLimits**](CapabilitySwitchNetworkLimits.md) |  | [optional] 
 **PortsSupporting100gSpeed** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
@@ -25,12 +26,13 @@ Name | Type | Description | Notes
 **PortsSupportingFcoe** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
 **PortsSupportingServerRole** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
 **ReservedVsans** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
-**SerenoNetflowSupported** | Pointer to **bool** | Sereno Adaptor with Netflow support on this switch. | [optional] 
+**SerenoNetflowSupported** | Pointer to **bool** | Sereno Adaptor with Netflow support on this switch. | [optional] [readonly] 
+**ServerRoleSupportedOnBreakout** | Pointer to **[]string** |  | [optional] 
 **StorageLimits** | Pointer to [**NullableCapabilitySwitchStorageLimits**](CapabilitySwitchStorageLimits.md) |  | [optional] 
 **SwitchingModeCapabilities** | Pointer to [**[]CapabilitySwitchingModeCapability**](CapabilitySwitchingModeCapability.md) |  | [optional] 
 **SystemLimits** | Pointer to [**NullableCapabilitySwitchSystemLimits**](CapabilitySwitchSystemLimits.md) |  | [optional] 
 **UnifiedPorts** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
-**UnifiedRule** | Pointer to **string** | The Slider rule for Unified ports on this switch. | [optional] 
+**UnifiedRule** | Pointer to **string** | The Slider rule for Unified ports on this switch. | [optional] [readonly] 
 
 ## Methods
 
@@ -300,6 +302,31 @@ SetMaxSlots sets MaxSlots field to given value.
 `func (o *CapabilitySwitchCapabilityAllOf) HasMaxSlots() bool`
 
 HasMaxSlots returns a boolean if a field has been set.
+
+### GetMinVersionWithBreakoutSupport
+
+`func (o *CapabilitySwitchCapabilityAllOf) GetMinVersionWithBreakoutSupport() string`
+
+GetMinVersionWithBreakoutSupport returns the MinVersionWithBreakoutSupport field if non-nil, zero value otherwise.
+
+### GetMinVersionWithBreakoutSupportOk
+
+`func (o *CapabilitySwitchCapabilityAllOf) GetMinVersionWithBreakoutSupportOk() (*string, bool)`
+
+GetMinVersionWithBreakoutSupportOk returns a tuple with the MinVersionWithBreakoutSupport field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMinVersionWithBreakoutSupport
+
+`func (o *CapabilitySwitchCapabilityAllOf) SetMinVersionWithBreakoutSupport(v string)`
+
+SetMinVersionWithBreakoutSupport sets MinVersionWithBreakoutSupport field to given value.
+
+### HasMinVersionWithBreakoutSupport
+
+`func (o *CapabilitySwitchCapabilityAllOf) HasMinVersionWithBreakoutSupport() bool`
+
+HasMinVersionWithBreakoutSupport returns a boolean if a field has been set.
 
 ### GetMinVersionWithLocatorLedSupport
 
@@ -701,6 +728,41 @@ SetSerenoNetflowSupported sets SerenoNetflowSupported field to given value.
 
 HasSerenoNetflowSupported returns a boolean if a field has been set.
 
+### GetServerRoleSupportedOnBreakout
+
+`func (o *CapabilitySwitchCapabilityAllOf) GetServerRoleSupportedOnBreakout() []string`
+
+GetServerRoleSupportedOnBreakout returns the ServerRoleSupportedOnBreakout field if non-nil, zero value otherwise.
+
+### GetServerRoleSupportedOnBreakoutOk
+
+`func (o *CapabilitySwitchCapabilityAllOf) GetServerRoleSupportedOnBreakoutOk() (*[]string, bool)`
+
+GetServerRoleSupportedOnBreakoutOk returns a tuple with the ServerRoleSupportedOnBreakout field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetServerRoleSupportedOnBreakout
+
+`func (o *CapabilitySwitchCapabilityAllOf) SetServerRoleSupportedOnBreakout(v []string)`
+
+SetServerRoleSupportedOnBreakout sets ServerRoleSupportedOnBreakout field to given value.
+
+### HasServerRoleSupportedOnBreakout
+
+`func (o *CapabilitySwitchCapabilityAllOf) HasServerRoleSupportedOnBreakout() bool`
+
+HasServerRoleSupportedOnBreakout returns a boolean if a field has been set.
+
+### SetServerRoleSupportedOnBreakoutNil
+
+`func (o *CapabilitySwitchCapabilityAllOf) SetServerRoleSupportedOnBreakoutNil(b bool)`
+
+ SetServerRoleSupportedOnBreakoutNil sets the value for ServerRoleSupportedOnBreakout to be an explicit nil
+
+### UnsetServerRoleSupportedOnBreakout
+`func (o *CapabilitySwitchCapabilityAllOf) UnsetServerRoleSupportedOnBreakout()`
+
+UnsetServerRoleSupportedOnBreakout ensures that no value is present for ServerRoleSupportedOnBreakout, not even an explicit nil
 ### GetStorageLimits
 
 `func (o *CapabilitySwitchCapabilityAllOf) GetStorageLimits() CapabilitySwitchStorageLimits`

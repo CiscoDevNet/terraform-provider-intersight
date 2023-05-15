@@ -28,10 +28,11 @@ The following arguments can be used to get data of already created objects in In
 * `foreign_config_present`:(bool) Storage controller has detected disks in foreign config. 
 * `hw_revision`:(string) The hardware revision of controller. 
 * `interface_type`:(string) Interface types are Sas, Sata, PCH. 
+* `is_upgraded`:(bool) This field indicates the compute status of the catalog values for the associated component or hardware. 
 * `max_volumes_supported`:(int) Maximum virtual drives that can be created on this Storage Controller. 
 * `memory_correctable_errors`:(int) The number of memory correctable errors reported by the Storage Controller. 
 * `mod_time`:(string) The time when this managed object was last modified. 
-* `model`:(string) This field identifies the model of the given component. 
+* `model`:(string) This field displays the model number of the associated component or hardware. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the Storage Controller. 
 * `oob_interface_supported`:(string) The CIMC support for out-of-band configuration of controller. 
@@ -41,18 +42,18 @@ The following arguments can be used to get data of already created objects in In
 * `pci_slot`:(string) The pci slot name for the controller. 
 * `persistent_cache_size`:(int) The portion of the cache memory that is persistent, measured in MiB. 
 * `pinned_cache_state`:(int) The pinned cache state of the Storage Controller. 
-* `presence`:(string) This field identifies the presence (equipped) or absence of the given component. 
+* `presence`:(string) This field indicates the presence (equipped) or absence (absent) of the associated component or hardware. 
 * `raid_support`:(string) The RAID levels supported by controller. 
 * `rebuild_rate`:(string) Logical volume or RAID rebuild rate of Storage Controller. 
 * `rebuild_rate_percent`:(int) Logical volume or RAID rebuild rate of Storage Controller. 
-* `revision`:(string) This field identifies the revision of the given component. 
+* `revision`:(string) This field displays the revised version of the associated component or hardware (if any). 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
 * `self_encrypt_enabled`:(string) Storage controller disk self encryption state. 
-* `serial`:(string) This field identifies the serial of the given component. 
+* `serial`:(string) This field displays the serial number of the associated component or hardware. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `sub_oem_id`:(string) The Sub OEM identifier of the Storage Controller. 
 * `supported_strip_sizes`:(string) The strip sizes in KiB supported by the Storage Controller. 
 * `total_cache_size`:(int) The total configured cache memory, measured in MiB. 
 * `type`:(string) Controller types are Raid, FlexFlash. 
-* `vendor`:(string) This field identifies the vendor of the given component. 
+* `vendor`:(string) This field displays the vendor information of the associated component or hardware. 
  

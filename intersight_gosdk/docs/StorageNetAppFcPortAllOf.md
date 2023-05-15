@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.NetAppFcPort"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.NetAppFcPort"]
+**NodeName** | Pointer to **string** | The node name for the port. | [optional] [readonly] 
 **PortStatus** | Pointer to **string** | Status of storage array port. | [optional] [readonly] 
 **SpeedConfigured** | Pointer to **string** | The configured speed of the FC port in gigabits per second. | [optional] [readonly] 
 **SpeedMaximum** | Pointer to **string** | The maximum speed supported by the FC port in gigabits per second. | [optional] [readonly] 
@@ -72,6 +73,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetNodeName
+
+`func (o *StorageNetAppFcPortAllOf) GetNodeName() string`
+
+GetNodeName returns the NodeName field if non-nil, zero value otherwise.
+
+### GetNodeNameOk
+
+`func (o *StorageNetAppFcPortAllOf) GetNodeNameOk() (*string, bool)`
+
+GetNodeNameOk returns a tuple with the NodeName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNodeName
+
+`func (o *StorageNetAppFcPortAllOf) SetNodeName(v string)`
+
+SetNodeName sets NodeName field to given value.
+
+### HasNodeName
+
+`func (o *StorageNetAppFcPortAllOf) HasNodeName() bool`
+
+HasNodeName returns a boolean if a field has been set.
 
 ### GetPortStatus
 

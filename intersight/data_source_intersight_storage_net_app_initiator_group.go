@@ -282,6 +282,11 @@ func getStorageNetAppInitiatorGroupSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"svm_name": {
+			Description: "The storage virtual machine name for the initiator group.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -394,6 +399,11 @@ func getStorageNetAppInitiatorGroupSchema() map[string]*schema.Schema {
 								},
 							},
 						},
+					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -737,6 +747,11 @@ func dataSourceStorageNetAppInitiatorGroupRead(c context.Context, d *schema.Reso
 		}
 	}
 
+	if v, ok := d.GetOk("svm_name"); ok {
+		x := (v.(string))
+		o.SetSvmName(x)
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -953,6 +968,7 @@ func dataSourceStorageNetAppInitiatorGroupRead(c context.Context, d *schema.Reso
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["storage_utilization"] = flattenMapStorageBaseCapacity(s.GetStorageUtilization(), d)
+				temp["svm_name"] = (s.GetSvmName())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 

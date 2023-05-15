@@ -268,13 +268,18 @@ func getStorageNetAppBaseDiskSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"is_upgraded": {
+			Description: "This field indicates the compute status of the catalog values for the associated component or hardware.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"model": {
-			Description: "This field identifies the model of the given component.",
+			Description: "This field displays the model number of the associated component or hardware.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -285,6 +290,11 @@ func getStorageNetAppBaseDiskSchema() map[string]*schema.Schema {
 		},
 		"name": {
 			Description: "Disk name available in storage array.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"node_name": {
+			Description: "The node name for the disk.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -373,7 +383,7 @@ func getStorageNetAppBaseDiskSchema() map[string]*schema.Schema {
 			},
 		},
 		"presence": {
-			Description: "This field identifies the presence (equipped) or absence of the given component.",
+			Description: "This field indicates the presence (equipped) or absence (absent) of the associated component or hardware.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -418,7 +428,7 @@ func getStorageNetAppBaseDiskSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"revision": {
-			Description: "This field identifies the revision of the given component.",
+			Description: "This field displays the revised version of the associated component or hardware (if any).",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -428,7 +438,7 @@ func getStorageNetAppBaseDiskSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"serial": {
-			Description: "This field identifies the serial of the given component.",
+			Description: "This field displays the serial number of the associated component or hardware.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -536,7 +546,7 @@ func getStorageNetAppBaseDiskSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"vendor": {
-			Description: "This field identifies the vendor of the given component.",
+			Description: "This field displays the vendor information of the associated component or hardware.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -594,6 +604,11 @@ func getStorageNetAppBaseDiskSchema() map[string]*schema.Schema {
 								},
 							},
 						},
+					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -965,6 +980,11 @@ func dataSourceStorageNetAppBaseDiskRead(c context.Context, d *schema.ResourceDa
 		o.SetEvents(x)
 	}
 
+	if v, ok := d.GetOkExists("is_upgraded"); ok {
+		x := (v.(bool))
+		o.SetIsUpgraded(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
@@ -983,6 +1003,11 @@ func dataSourceStorageNetAppBaseDiskRead(c context.Context, d *schema.ResourceDa
 	if v, ok := d.GetOk("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
+	}
+
+	if v, ok := d.GetOk("node_name"); ok {
+		x := (v.(string))
+		o.SetNodeName(x)
 	}
 
 	if v, ok := d.GetOk("object_type"); ok {
@@ -1397,11 +1422,13 @@ func dataSourceStorageNetAppBaseDiskRead(c context.Context, d *schema.ResourceDa
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
 				temp["events"] = flattenListStorageNetAppDiskEventRelationship(s.GetEvents(), d)
+				temp["is_upgraded"] = (s.GetIsUpgraded())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["model"] = (s.GetModel())
 				temp["moid"] = (s.GetMoid())
 				temp["name"] = (s.GetName())
+				temp["node_name"] = (s.GetNodeName())
 				temp["object_type"] = (s.GetObjectType())
 				temp["owners"] = (s.GetOwners())
 

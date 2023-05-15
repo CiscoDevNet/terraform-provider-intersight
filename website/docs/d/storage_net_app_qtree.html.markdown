@@ -26,5 +26,7 @@ The following arguments can be used to get data of already created objects in In
 * `qtree_id`:(int) NetApp Qtree ID, unique within the qtree's volume. 
 * `security_style`:(string) Identifies the security style for the qtree, it determines how access to the qtree is controlled.* `UNIX` - Security style for UNIX uid, gid and mode bits.* `NTFS` - Security style for CIFS ACLs.* `Mixed` - Security style for NFS and CIFS access. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
+* `svm_name`:(string) The storage virtual machine name for the qtree. 
+* `volume_name`:(string) The parent volume name for the qtree. 
 * `volume_uuid`:(string) NetApp Volume uuid, unique identifier for the NetApp volume. 
  

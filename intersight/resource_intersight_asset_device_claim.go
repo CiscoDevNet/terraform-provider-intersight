@@ -197,105 +197,6 @@ func resourceAssetDeviceClaim() *schema.Resource {
 				},
 				ForceNew: true,
 			},
-			"device_updates": {
-				Type:       schema.TypeList,
-				Optional:   true,
-				ConfigMode: schema.SchemaConfigModeAttr,
-				Computed:   true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"account": {
-							Description: "The account id to which the device belongs.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							ForceNew:    true,
-						},
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-							ForceNew:         true,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "asset.ConnectionControlMessage",
-							ForceNew:    true,
-						},
-						"connector_version": {
-							Description: "The version of the device connector currently running on the platform. Deprecated by newer connectors that will report this directly to the device connector gateway in a websocket header, but included to continue to support older versions which report any version change after connect.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							ForceNew:    true,
-						},
-						"device_id": {
-							Description: "The Moid of the device under change. Used to route the message to a device's connection.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							ForceNew:    true,
-						},
-						"domain_group": {
-							Description: "The domain group id to which the device belongs.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
-								if val != nil {
-									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
-								}
-								return
-							}, ForceNew: true,
-						},
-						"evict": {
-							Description: "Flag to force any open connections to be evicted. Used in case device has been deleted or blacklisted.",
-							Type:        schema.TypeBool,
-							Optional:    true,
-							ForceNew:    true,
-						},
-						"internal_connection_id": {
-							Description: "Uniquely identifies a specific connection this control message is addressed to. Each connection to the gateway is associated with a unique connection id, which is used to identify the connection across any number of connection or connection attempts from the same device endpoint. When an evict message is published from device service to the gateway it may be tagged to a specific connection using this field.\ne.g. The device re-connects to Intersight before the previous connection has received a close or timeout, in which case we may send an evict specifically to the previous connection, with the new connection ignoring the message.\nIf empty, the control message will be processed by any connections associated with the deviceId.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
-								if val != nil {
-									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
-								}
-								return
-							}, ForceNew: true,
-						},
-						"leadership": {
-							Description:  "The current leadership of a device cluster member.\n* `Unknown` - The node is unable to complete election or determine the current state. If the device has been registered before and the node has access to the current credentials, it will establish a connection to Intersight with limited capabilities that can be used to debug the HA failure from Intersight.\n* `Primary` - The node has been elected as the primary and will establish a connection to the Intersight service and accept all message types enabled for a primary node. There can only be one primary node in a given cluster, while the underlying platform may be active. If it is active, only one connector will assume the primary role.\n* `Secondary` - The node has been elected as a secondary node in the cluster. The device connector will establish a connection to the Intersight service with limited capabilities. E.g. file upload will be enabled, but requests to the underlying platform management will be disabled.",
-							Type:         schema.TypeString,
-							ValidateFunc: validation.StringInSlice([]string{"Unknown", "Primary", "Secondary"}, false),
-							Optional:     true,
-							Default:      "Unknown",
-							ForceNew:     true,
-						},
-						"new_identity": {
-							Description: "The new identity assigned to a device on ownership change (claim/unclaim).",
-							Type:        schema.TypeString,
-							Optional:    true,
-							ForceNew:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "asset.ConnectionControlMessage",
-							ForceNew:    true,
-						},
-						"partition": {
-							Description: "The partition the device was last connected to, used to address the control message to the device connector gateway instance holding the devices connection.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							ForceNew:    true,
-						},
-					},
-				},
-				ForceNew: true,
-			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
 				Type:        schema.TypeString,
@@ -601,6 +502,18 @@ func resourceAssetDeviceClaim() *schema.Resource {
 							},
 							ForceNew: true,
 						},
+						"marked_for_deletion": {
+							Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}, ForceNew: true,
+						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
@@ -714,78 +627,6 @@ func resourceAssetDeviceClaimCreate(c context.Context, d *schema.ResourceData, m
 	}
 
 	o.SetClassId("asset.DeviceClaim")
-
-	if v, ok := d.GetOk("device_updates"); ok {
-		x := make([]models.AssetConnectionControlMessage, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := models.NewAssetConnectionControlMessageWithDefaults()
-			l := s[i].(map[string]interface{})
-			if v, ok := l["account"]; ok {
-				{
-					x := (v.(string))
-					o.SetAccount(x)
-				}
-			}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("asset.ConnectionControlMessage")
-			if v, ok := l["connector_version"]; ok {
-				{
-					x := (v.(string))
-					o.SetConnectorVersion(x)
-				}
-			}
-			if v, ok := l["device_id"]; ok {
-				{
-					x := (v.(string))
-					o.SetDeviceId(x)
-				}
-			}
-			if v, ok := l["evict"]; ok {
-				{
-					x := (v.(bool))
-					o.SetEvict(x)
-				}
-			}
-			if v, ok := l["leadership"]; ok {
-				{
-					x := (v.(string))
-					o.SetLeadership(x)
-				}
-			}
-			if v, ok := l["new_identity"]; ok {
-				{
-					x := (v.(string))
-					o.SetNewIdentity(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["partition"]; ok {
-				{
-					x := int64(v.(int))
-					o.SetPartition(x)
-				}
-			}
-			x = append(x, *o)
-		}
-		if len(x) > 0 {
-			o.SetDeviceUpdates(x)
-		}
-	}
 
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))

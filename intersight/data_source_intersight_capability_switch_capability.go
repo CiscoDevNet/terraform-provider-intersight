@@ -153,6 +153,11 @@ func getCapabilitySwitchCapabilitySchema() map[string]*schema.Schema {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"min_version_with_breakout_support": {
+			Description: "Minimum firmware version supported for breakout ports on this switch.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"min_version_with_locator_led_support": {
 			Description: "Minimum firmware version supported for locator leds on this switch.",
 			Type:        schema.TypeString,
@@ -749,6 +754,11 @@ func getCapabilitySwitchCapabilitySchema() map[string]*schema.Schema {
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
+		"server_role_supported_on_breakout": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"shared_scope": {
 			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 			Type:        schema.TypeString,
@@ -1003,6 +1013,11 @@ func getCapabilitySwitchCapabilitySchema() map[string]*schema.Schema {
 							},
 						},
 					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 						Type:        schema.TypeString,
@@ -1242,6 +1257,11 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 	if v, ok := d.GetOkExists("max_slots"); ok {
 		x := int64(v.(int))
 		o.SetMaxSlots(x)
+	}
+
+	if v, ok := d.GetOk("min_version_with_breakout_support"); ok {
+		x := (v.(string))
+		o.SetMinVersionWithBreakoutSupport(x)
 	}
 
 	if v, ok := d.GetOk("min_version_with_locator_led_support"); ok {
@@ -1962,6 +1982,17 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 		o.SetSerenoNetflowSupported(x)
 	}
 
+	if v, ok := d.GetOk("server_role_supported_on_breakout"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetServerRoleSupportedOnBreakout(x)
+	}
+
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
@@ -2343,6 +2374,7 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 				temp["locator_beacon_supported"] = (s.GetLocatorBeaconSupported())
 				temp["max_ports"] = (s.GetMaxPorts())
 				temp["max_slots"] = (s.GetMaxSlots())
+				temp["min_version_with_breakout_support"] = (s.GetMinVersionWithBreakoutSupport())
 				temp["min_version_with_locator_led_support"] = (s.GetMinVersionWithLocatorLedSupport())
 
 				temp["mod_time"] = (s.GetModTime()).String()
@@ -2376,6 +2408,7 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 
 				temp["reserved_vsans"] = flattenListCapabilityPortRange(s.GetReservedVsans(), d)
 				temp["sereno_netflow_supported"] = (s.GetSerenoNetflowSupported())
+				temp["server_role_supported_on_breakout"] = (s.GetServerRoleSupportedOnBreakout())
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["sku"] = (s.GetSku())
 

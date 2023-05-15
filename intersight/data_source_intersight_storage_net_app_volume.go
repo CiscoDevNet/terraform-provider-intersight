@@ -239,7 +239,7 @@ func getStorageNetAppVolumeSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"key": {
-			Description: "Unique identifier of NetApp Volume across data center.",
+			Description: "Unique identifier of a NetApp Volume across data center.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -417,6 +417,16 @@ func getStorageNetAppVolumeSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"style": {
+			Description: "The style of the volume (FlexGroup or FlexVol).",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"svm_name": {
+			Description: "The storage virtual machine name for the volume.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -534,6 +544,11 @@ func getStorageNetAppVolumeSchema() map[string]*schema.Schema {
 								},
 							},
 						},
+					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -1033,6 +1048,16 @@ func dataSourceStorageNetAppVolumeRead(c context.Context, d *schema.ResourceData
 		}
 	}
 
+	if v, ok := d.GetOk("style"); ok {
+		x := (v.(string))
+		o.SetStyle(x)
+	}
+
+	if v, ok := d.GetOk("svm_name"); ok {
+		x := (v.(string))
+		o.SetSvmName(x)
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -1267,6 +1292,8 @@ func dataSourceStorageNetAppVolumeRead(c context.Context, d *schema.ResourceData
 				temp["state"] = (s.GetState())
 
 				temp["storage_utilization"] = flattenMapStorageBaseCapacity(s.GetStorageUtilization(), d)
+				temp["style"] = (s.GetStyle())
+				temp["svm_name"] = (s.GetSvmName())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 

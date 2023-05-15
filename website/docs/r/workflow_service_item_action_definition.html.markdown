@@ -12,6 +12,11 @@ Definition to capture the details needed to execute an action on the service ite
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 
+* `action_properties`:(HashMap) - Action properties for the service item. 
+This complex property has following sub-properties:
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `operation_type`:(string) Type of action operation to be executed on the service item.* `PostDeployment` - This represents the post-deployment actions for the resources created or defined through the deployment action. There can be more than one post-deployment operations associated with a service item.* `Deployment` - This represents the deploy action, for the service item action definition. This operation type is used to create or define resources that is managed by the service item. There can only be one Service Item Action Definition that can be marked with the operation type as Deployment and this is a mandatory operation type. All valid Service Items must have one and only one operation type marked as type Deployment.* `Decommission` - This represents the decommission action, used to decommission the created resources. All valid Service Items must have one and only one operation type marked as type Decommission. Once a decommission action is run on a Service Item, no further operations are allowed on that Service Item. 
+  + `stop_on_failure`:(bool) When true, the action on the service item will be stopped when it reaches a failure by either calling the configured stop workflow or by calling the rollback workflow. By default value is set to true. 
 * `action_type`:(string) Type of actionDefinition which decides on how to trigger the action.* `External` - External actions definition can be triggered by enduser to perform actions on the service item. Once action is completed successfully (eg. create/deploy), user cannot re-trigger that action again.* `Internal` - Internal action definition is used to trigger periodic actions on the service item instance.* `Repetitive` - Repetitive action definition is an external action that can be triggered by enduser to perform repetitive actions (eg. Edit/Update/Perform health check) on the created service item. 
 * `allowed_instance_states`:
                 (Array of schema.TypeString) -
@@ -25,6 +30,7 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `attribute_parameters`:(JSON as string) The mappings from workflows in the action definition to the service item attribute definition. Any output from core or post-core workflow can be mapped to service item attribute definition. The attribute can be referred using the name of the workflow definition and the attribute name in the following format '${<ServiceItemActionWorkflowDefinition.Name>.output.<outputName>'. 
 * `core_workflows`:(Array)
 This complex property has following sub-properties:
   + `catalog_moid`:(string) Specify the catalog moid that this workflow belongs. When catalog moid is not specified then the catalog of the service item is used first and if no workflow can be found in that catalog, then the shared catalog from Intersight is used. 
@@ -34,6 +40,11 @@ This complex property has following sub-properties:
   + `name`:(string) The name of the workflow, this name must be unique across all the workflow definition used within the action definitions. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `nr_version`:(int) The workflow definition version to use as subworkflow. When no version is specified then the default version of the workflow at the time of creating or updating this workflow is used. 
+  + `workflow_definition`:(HashMap) -(ReadOnly) The moid of the workflow definition. 
+This complex property has following sub-properties:
+    + `moid`:(string) The Moid of the referenced REST resource. 
+    + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+    + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
   + `workflow_definition_name`:(string) The qualified name of workflow that should be executed. 
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `description`:(string) The description for this action which provides information on what are the pre-requisites to use this action on the service item and what features are supported by this action. 
@@ -43,6 +54,8 @@ This complex property has following sub-properties:
   + `additional_properties`:(JSON as string) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [workflow.ArrayDataType](#workflowArrayDataType)
 [workflow.CustomDataType](#workflowCustomDataType)
 [workflow.DynamicTemplateParserDataType](#workflowDynamicTemplateParserDataType)
+[workflow.MoInventoryDataType](#workflowMoInventoryDataType)
+[workflow.MoReferenceAutoDataType](#workflowMoReferenceAutoDataType)
 [workflow.MoReferenceDataType](#workflowMoReferenceDataType)
 [workflow.PrimitiveDataType](#workflowPrimitiveDataType)
 [workflow.TargetDataType](#workflowTargetDataType)
@@ -67,7 +80,6 @@ This complex property has following sub-properties:
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) The name for this action definition. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:) or an underscore (_). Name of the action must be unique within a service item definition. 
-* `output_parameters`:(JSON as string) The output mappings from workflows in the action definition to the service item output definition. Any output from core or post-core workflow can be mapped to service item output definition. The output can be referred using the name of the workflow definition and the output name in the following format '${<ServiceItemActionWorkflowDefinition.Name>.output.<outputName>'. 
 * `owners`:
                 (Array of schema.TypeString) -(ReadOnly)
 * `parent`:(HashMap) -(ReadOnly) A reference to a moBaseMo resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
@@ -90,6 +102,11 @@ This complex property has following sub-properties:
   + `name`:(string) The name of the workflow, this name must be unique across all the workflow definition used within the action definitions. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `nr_version`:(int) The workflow definition version to use as subworkflow. When no version is specified then the default version of the workflow at the time of creating or updating this workflow is used. 
+  + `workflow_definition`:(HashMap) -(ReadOnly) The moid of the workflow definition. 
+This complex property has following sub-properties:
+    + `moid`:(string) The Moid of the referenced REST resource. 
+    + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+    + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
   + `workflow_definition_name`:(string) The qualified name of workflow that should be executed. 
 * `pre_core_workflows`:(Array)
 This complex property has following sub-properties:
@@ -100,6 +117,11 @@ This complex property has following sub-properties:
   + `name`:(string) The name of the workflow, this name must be unique across all the workflow definition used within the action definitions. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `nr_version`:(int) The workflow definition version to use as subworkflow. When no version is specified then the default version of the workflow at the time of creating or updating this workflow is used. 
+  + `workflow_definition`:(HashMap) -(ReadOnly) The moid of the workflow definition. 
+This complex property has following sub-properties:
+    + `moid`:(string) The Moid of the referenced REST resource. 
+    + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+    + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
   + `workflow_definition_name`:(string) The qualified name of workflow that should be executed. 
 * `restrict_on_private_appliance`:(bool) The flag to indicate that action is restricted on a Private Virtual Appliance. 
 * `service_item_definition`:(HashMap) - A reference to a workflowServiceItemDefinition resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
@@ -117,11 +139,17 @@ This complex property has following sub-properties:
   + `name`:(string) The name of the workflow, this name must be unique across all the workflow definition used within the action definitions. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `nr_version`:(int) The workflow definition version to use as subworkflow. When no version is specified then the default version of the workflow at the time of creating or updating this workflow is used. 
+  + `workflow_definition`:(HashMap) -(ReadOnly) The moid of the workflow definition. 
+This complex property has following sub-properties:
+    + `moid`:(string) The Moid of the referenced REST resource. 
+    + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+    + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
   + `workflow_definition_name`:(string) The qualified name of workflow that should be executed. 
 * `tags`:(Array)
 This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
+* `user_id_or_email`:(string)(ReadOnly) The user identifier who created or updated the service item action definition. 
 * `validation_information`:(HashMap) -(ReadOnly) The current validation state and associated validation errors when state is invalid. 
 This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
@@ -142,6 +170,11 @@ This complex property has following sub-properties:
   + `name`:(string) The name of the workflow, this name must be unique across all the workflow definition used within the action definitions. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `nr_version`:(int) The workflow definition version to use as subworkflow. When no version is specified then the default version of the workflow at the time of creating or updating this workflow is used. 
+  + `workflow_definition`:(HashMap) -(ReadOnly) The moid of the workflow definition. 
+This complex property has following sub-properties:
+    + `moid`:(string) The Moid of the referenced REST resource. 
+    + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+    + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
   + `workflow_definition_name`:(string) The qualified name of workflow that should be executed. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
 This complex property has following sub-properties:
@@ -150,6 +183,7 @@ This complex property has following sub-properties:
     + `moid`:(string) The Moid of the referenced REST resource. 
     + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
     + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+  + `marked_for_deletion`:(bool)(ReadOnly) The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `ref_mo`:(HashMap) -(ReadOnly) A reference to the original Managed Object. 
 This complex property has following sub-properties:
@@ -194,6 +228,30 @@ This complex property has following sub-properties:
 Data type to fetch a generic template from given selector and parse it using an api to give an array of secure and non-secure keys for form generation. URL used to fetch the template object is based on the templateType. Final input passed to the workflow using this data type is a JSON containing {'Template':'<template string value>', 'Keys':[{'<key1>':'<val 1>'}], 'SecureKeys':[{'<key2>':'<val2>'}]}.
 * `is_template_secure`:(bool) When set to true, the template is marked as secure and the content is encrypted and stored. 
 * `template_type`:(string) Template type decides on the API to be used to fetch the placeholders present inside the template.* `OsInstall` - This refers to the OS configuration template MO. 
+
+### [workflow.MoInventoryDataType](#argument-reference)
+The data type to represent the selected properties of an Intersight managed object. This data type is used only in Service items to define the schema of resources and their attributes.
+* `properties`:(Array)
+This complex property has following sub-properties:
+  + `attributes`:
+                (Array of schema.TypeString) -
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `reference_object_type`:(string) ObjectType for which the attributes need to be collected. 
+  + `reference_type`:(string) Defines how the reference to the shadow resource is done. Base case is via an Moid, but reference via a selector is also possible.* `Moid` - The reference to the original resource is via an Moid.* `Selector` - The reference to the original resource is via a selector query. This can potentially lead to tracking data for multiple resources. 
+
+### [workflow.MoReferenceAutoDataType](#argument-reference)
+The data type to capture an Intersight managed object reference that is automatically selected by the system based on a given selection criteria.
+* `properties`:(Array)
+This complex property has following sub-properties:
+  + `display_attributes`:
+                (Array of schema.TypeString) -
+  + `filters`:
+                (Array of schema.TypeString) -
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `order_by`:(string) Determines  properties that are used to sort the collection of resources. 
+  + `rule`:(HashMap) - The rule can be obtained directly from a Resource Selection Criteria or provided as inline resource filter conditions. 
+This complex property has following sub-properties:
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 
 ### [workflow.MoReferenceDataType](#argument-reference)
 Data type to capture an Intersight Managed object reference.

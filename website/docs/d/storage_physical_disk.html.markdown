@@ -35,12 +35,13 @@ The following arguments can be used to get data of already created objects in In
 * `fde_capable`:(string) Full-Disk Encryption capability parameter of the physical disk. 
 * `hot_spare_type`:(string) Type of hotspare configured on the physical disk. 
 * `indicator_led`:(string) Status of the locator LED corresponding to the physical disk. 
+* `is_upgraded`:(bool) This field indicates the compute status of the catalog values for the associated component or hardware. 
 * `link_speed`:(string) The speed of the link between the drive and the controller. 
 * `link_state`:(string) The current link state of the physical disk. 
 * `maximum_operating_temperature`:(int) Maximum operating temperature of drive in Celsius. 
 * `media_error_count`:(int) Media error count on the physical disk. 
 * `mod_time`:(string) The time when this managed object was last modified. 
-* `model`:(string) This field identifies the model of the given component. 
+* `model`:(string) This field displays the model number of the associated component or hardware. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Detailed name of the physical disk. 
 * `non_coerced_size_bytes`:(int) Physical disk non-coerced size in bytes. 
@@ -59,22 +60,22 @@ The following arguments can be used to get data of already created objects in In
 * `power_on_hours_percentage`:(int) Percentage of life used based on five year life span of Cisco supported drives. 
 * `predicted_media_life_left_percent`:(int) Predicted physical disk life left in percentage. 
 * `predictive_failure_count`:(int) Error count on the physical disk. 
-* `presence`:(string) This field identifies the presence (equipped) or absence of the given component. 
+* `presence`:(string) This field indicates the presence (equipped) or absence (absent) of the associated component or hardware. 
 * `protocol`:(string) This field identifies the disk protocol used for communication. 
 * `raw_size`:(string) The raw size of the physical disk in MB. 
 * `read_error_count_threshold`:(int) The number of read errors that are permitted while accessing the drive/card. 
 * `read_io_error_count`:(int) Number of IO Errors that occured while reading data from the disk. 
-* `revision`:(string) This field identifies the revision of the given component. 
+* `revision`:(string) This field displays the revised version of the associated component or hardware (if any). 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
 * `secured`:(string) This field identifies whether the disk is encrypted. 
-* `serial`:(string) This field identifies the serial of the given component. 
+* `serial`:(string) This field displays the serial number of the associated component or hardware. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `size`:(string) The size of the physical disk in MB. 
 * `thermal`:(string) Thermal state of the physical disk. 
 * `threshold_operating_temperature`:(int) Rated threshold operating temperature in Celsius. 
 * `type`:(string) This field identifies the type of the physical disk. 
 * `variant_type`:(string) The variant type of the physical disk. 
-* `vendor`:(string) This field identifies the vendor of the given component. 
+* `vendor`:(string) This field displays the vendor information of the associated component or hardware. 
 * `wear_status_in_days`:(int) The number of days an SSD has gone through with the write cycles. 
 * `write_error_count_threshold`:(int) The number of write errors that are permitted while accessing the drive/card. 
 * `write_io_error_count`:(int) Number of IO Errors that occured while writing data to the disk. 

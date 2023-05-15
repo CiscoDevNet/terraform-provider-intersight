@@ -288,6 +288,11 @@ func getFabricSwitchControlPolicySchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"reserved_vlan_start_id": {
+			Description: "The starting ID for VLANs reserved for internal use within the Fabric Interconnect. This VLAN ID is the starting ID of \na contiguous block of 128 VLANs that cannot be configured for user data.  This range of VLANs cannot be configured in \nVLAN policy.\nIf this property is not configured, VLAN range 3915 - 4042 is reserved for internal use by default.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"shared_scope": {
 			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 			Type:        schema.TypeString,
@@ -400,6 +405,11 @@ func getFabricSwitchControlPolicySchema() map[string]*schema.Schema {
 								},
 							},
 						},
+					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -810,6 +820,11 @@ func dataSourceFabricSwitchControlPolicyRead(c context.Context, d *schema.Resour
 		o.SetProfiles(x)
 	}
 
+	if v, ok := d.GetOkExists("reserved_vlan_start_id"); ok {
+		x := int64(v.(int))
+		o.SetReservedVlanStartId(x)
+	}
+
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
@@ -1032,6 +1047,7 @@ func dataSourceFabricSwitchControlPolicyRead(c context.Context, d *schema.Resour
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 
 				temp["profiles"] = flattenListFabricSwitchProfileRelationship(s.GetProfiles(), d)
+				temp["reserved_vlan_start_id"] = (s.GetReservedVlanStartId())
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)

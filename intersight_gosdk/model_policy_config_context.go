@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-10371
+API version: 1.0.11-11765
 Contact: intersight@cisco.com
 */
 
@@ -26,12 +26,15 @@ type PolicyConfigContext struct {
 	ObjectType string `json:"ObjectType"`
 	// Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, Pending-changes, Out-of-sync, Validating, Configuring, Failed.
 	ConfigState *string `json:"ConfigState,omitempty"`
+	// Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, InConsistent, Validating, Configuring, Failed, Activating, UnConfiguring. * `None` - The default state is none. * `Not-assigned` - Server is not assigned to the profile. * `Assigned` - Server is assigned to the profile and the configurations are not yet deployed. * `Preparing` - Preparing to deploy the configuration. * `Validating` - Profile validation in progress. * `Configuring` - Profile deploy operation is in progress. * `UnConfiguring` - Server is unassigned and config cleanup is in progress. * `Analyzing` - Profile changes are being analyzed. * `Activating` - Configuration is being activated at the endpoint. * `Inconsistent` - Profile is inconsistent with the endpoint configuration. * `Associated` - The profile configuration has been applied to the endpoint and no inconsistencies have been detected. * `Failed` - The last action on the profile has failed. * `Not-complete` - Config import operation on the profile is not complete. * `Waiting-for-resource` - Waiting for the resource to be allocated for the profile.
+	ConfigStateSummary *string `json:"ConfigStateSummary,omitempty"`
 	// The type of configuration running on the profile. Since profile deployments can configure multiple different settings, configType indicates which type of configuration is currently in progress.
 	ConfigType *string `json:"ConfigType,omitempty"`
 	// System action to trigger the appropriate workflow. Values -- No_op, ConfigChange, Deploy, Unbind.
 	ControlAction *string `json:"ControlAction,omitempty"`
 	// Indicates a profile's error state. Values -- Validation-error (Static validation error), Pre-config-error (Runtime validation error), Config-error (Runtime configuration error).
-	ErrorState *string `json:"ErrorState,omitempty"`
+	ErrorState          *string  `json:"ErrorState,omitempty"`
+	InconsistencyReason []string `json:"InconsistencyReason,omitempty"`
 	// Combined state (configState, and operational state of the associated physical resource) to indicate the current state of the profile. Values -- n/a, Power-off, Pending-changes, Configuring, Ok, Failed.
 	OperState            *string `json:"OperState,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -142,6 +145,38 @@ func (o *PolicyConfigContext) SetConfigState(v string) {
 	o.ConfigState = &v
 }
 
+// GetConfigStateSummary returns the ConfigStateSummary field value if set, zero value otherwise.
+func (o *PolicyConfigContext) GetConfigStateSummary() string {
+	if o == nil || o.ConfigStateSummary == nil {
+		var ret string
+		return ret
+	}
+	return *o.ConfigStateSummary
+}
+
+// GetConfigStateSummaryOk returns a tuple with the ConfigStateSummary field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PolicyConfigContext) GetConfigStateSummaryOk() (*string, bool) {
+	if o == nil || o.ConfigStateSummary == nil {
+		return nil, false
+	}
+	return o.ConfigStateSummary, true
+}
+
+// HasConfigStateSummary returns a boolean if a field has been set.
+func (o *PolicyConfigContext) HasConfigStateSummary() bool {
+	if o != nil && o.ConfigStateSummary != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetConfigStateSummary gets a reference to the given string and assigns it to the ConfigStateSummary field.
+func (o *PolicyConfigContext) SetConfigStateSummary(v string) {
+	o.ConfigStateSummary = &v
+}
+
 // GetConfigType returns the ConfigType field value if set, zero value otherwise.
 func (o *PolicyConfigContext) GetConfigType() string {
 	if o == nil || o.ConfigType == nil {
@@ -238,6 +273,39 @@ func (o *PolicyConfigContext) SetErrorState(v string) {
 	o.ErrorState = &v
 }
 
+// GetInconsistencyReason returns the InconsistencyReason field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PolicyConfigContext) GetInconsistencyReason() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+	return o.InconsistencyReason
+}
+
+// GetInconsistencyReasonOk returns a tuple with the InconsistencyReason field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PolicyConfigContext) GetInconsistencyReasonOk() ([]string, bool) {
+	if o == nil || o.InconsistencyReason == nil {
+		return nil, false
+	}
+	return o.InconsistencyReason, true
+}
+
+// HasInconsistencyReason returns a boolean if a field has been set.
+func (o *PolicyConfigContext) HasInconsistencyReason() bool {
+	if o != nil && o.InconsistencyReason != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetInconsistencyReason gets a reference to the given []string and assigns it to the InconsistencyReason field.
+func (o *PolicyConfigContext) SetInconsistencyReason(v []string) {
+	o.InconsistencyReason = v
+}
+
 // GetOperState returns the OperState field value if set, zero value otherwise.
 func (o *PolicyConfigContext) GetOperState() string {
 	if o == nil || o.OperState == nil {
@@ -289,6 +357,9 @@ func (o PolicyConfigContext) MarshalJSON() ([]byte, error) {
 	if o.ConfigState != nil {
 		toSerialize["ConfigState"] = o.ConfigState
 	}
+	if o.ConfigStateSummary != nil {
+		toSerialize["ConfigStateSummary"] = o.ConfigStateSummary
+	}
 	if o.ConfigType != nil {
 		toSerialize["ConfigType"] = o.ConfigType
 	}
@@ -297,6 +368,9 @@ func (o PolicyConfigContext) MarshalJSON() ([]byte, error) {
 	}
 	if o.ErrorState != nil {
 		toSerialize["ErrorState"] = o.ErrorState
+	}
+	if o.InconsistencyReason != nil {
+		toSerialize["InconsistencyReason"] = o.InconsistencyReason
 	}
 	if o.OperState != nil {
 		toSerialize["OperState"] = o.OperState
@@ -317,12 +391,15 @@ func (o *PolicyConfigContext) UnmarshalJSON(bytes []byte) (err error) {
 		ObjectType string `json:"ObjectType"`
 		// Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, Pending-changes, Out-of-sync, Validating, Configuring, Failed.
 		ConfigState *string `json:"ConfigState,omitempty"`
+		// Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, InConsistent, Validating, Configuring, Failed, Activating, UnConfiguring. * `None` - The default state is none. * `Not-assigned` - Server is not assigned to the profile. * `Assigned` - Server is assigned to the profile and the configurations are not yet deployed. * `Preparing` - Preparing to deploy the configuration. * `Validating` - Profile validation in progress. * `Configuring` - Profile deploy operation is in progress. * `UnConfiguring` - Server is unassigned and config cleanup is in progress. * `Analyzing` - Profile changes are being analyzed. * `Activating` - Configuration is being activated at the endpoint. * `Inconsistent` - Profile is inconsistent with the endpoint configuration. * `Associated` - The profile configuration has been applied to the endpoint and no inconsistencies have been detected. * `Failed` - The last action on the profile has failed. * `Not-complete` - Config import operation on the profile is not complete. * `Waiting-for-resource` - Waiting for the resource to be allocated for the profile.
+		ConfigStateSummary *string `json:"ConfigStateSummary,omitempty"`
 		// The type of configuration running on the profile. Since profile deployments can configure multiple different settings, configType indicates which type of configuration is currently in progress.
 		ConfigType *string `json:"ConfigType,omitempty"`
 		// System action to trigger the appropriate workflow. Values -- No_op, ConfigChange, Deploy, Unbind.
 		ControlAction *string `json:"ControlAction,omitempty"`
 		// Indicates a profile's error state. Values -- Validation-error (Static validation error), Pre-config-error (Runtime validation error), Config-error (Runtime configuration error).
-		ErrorState *string `json:"ErrorState,omitempty"`
+		ErrorState          *string  `json:"ErrorState,omitempty"`
+		InconsistencyReason []string `json:"InconsistencyReason,omitempty"`
 		// Combined state (configState, and operational state of the associated physical resource) to indicate the current state of the profile. Values -- n/a, Power-off, Pending-changes, Configuring, Ok, Failed.
 		OperState *string `json:"OperState,omitempty"`
 	}
@@ -335,9 +412,11 @@ func (o *PolicyConfigContext) UnmarshalJSON(bytes []byte) (err error) {
 		varPolicyConfigContext.ClassId = varPolicyConfigContextWithoutEmbeddedStruct.ClassId
 		varPolicyConfigContext.ObjectType = varPolicyConfigContextWithoutEmbeddedStruct.ObjectType
 		varPolicyConfigContext.ConfigState = varPolicyConfigContextWithoutEmbeddedStruct.ConfigState
+		varPolicyConfigContext.ConfigStateSummary = varPolicyConfigContextWithoutEmbeddedStruct.ConfigStateSummary
 		varPolicyConfigContext.ConfigType = varPolicyConfigContextWithoutEmbeddedStruct.ConfigType
 		varPolicyConfigContext.ControlAction = varPolicyConfigContextWithoutEmbeddedStruct.ControlAction
 		varPolicyConfigContext.ErrorState = varPolicyConfigContextWithoutEmbeddedStruct.ErrorState
+		varPolicyConfigContext.InconsistencyReason = varPolicyConfigContextWithoutEmbeddedStruct.InconsistencyReason
 		varPolicyConfigContext.OperState = varPolicyConfigContextWithoutEmbeddedStruct.OperState
 		*o = PolicyConfigContext(varPolicyConfigContext)
 	} else {
@@ -359,9 +438,11 @@ func (o *PolicyConfigContext) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ConfigState")
+		delete(additionalProperties, "ConfigStateSummary")
 		delete(additionalProperties, "ConfigType")
 		delete(additionalProperties, "ControlAction")
 		delete(additionalProperties, "ErrorState")
+		delete(additionalProperties, "InconsistencyReason")
 		delete(additionalProperties, "OperState")
 
 		// remove fields from embedded structs

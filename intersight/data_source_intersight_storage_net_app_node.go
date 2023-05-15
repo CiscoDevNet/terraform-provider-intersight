@@ -264,6 +264,11 @@ func getStorageNetAppNodeSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"is_upgraded": {
+			Description: "This field indicates the compute status of the catalog values for the associated component or hardware.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"key": {
 			Description: "Unique identifier of NetApp Node across data center.",
 			Type:        schema.TypeString,
@@ -275,7 +280,7 @@ func getStorageNetAppNodeSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"model": {
-			Description: "This field identifies the model of the given component.",
+			Description: "This field displays the model number of the associated component or hardware.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -374,7 +379,7 @@ func getStorageNetAppNodeSchema() map[string]*schema.Schema {
 			},
 		},
 		"presence": {
-			Description: "This field identifies the presence (equipped) or absence of the given component.",
+			Description: "This field indicates the presence (equipped) or absence (absent) of the associated component or hardware.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -414,7 +419,7 @@ func getStorageNetAppNodeSchema() map[string]*schema.Schema {
 			},
 		},
 		"revision": {
-			Description: "This field identifies the revision of the given component.",
+			Description: "This field displays the revised version of the associated component or hardware (if any).",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -424,12 +429,17 @@ func getStorageNetAppNodeSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"serial": {
-			Description: "This field identifies the serial of the given component.",
+			Description: "This field displays the serial number of the associated component or hardware.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"shared_scope": {
 			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"state": {
+			Description: "The state of the NetApp Node.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -472,7 +482,7 @@ func getStorageNetAppNodeSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"vendor": {
-			Description: "This field identifies the vendor of the given component.",
+			Description: "This field displays the vendor information of the associated component or hardware.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -530,6 +540,11 @@ func getStorageNetAppNodeSchema() map[string]*schema.Schema {
 								},
 							},
 						},
+					},
+					"marked_for_deletion": {
+						Description: "The flag to indicate if snapshot is marked for deletion or not. If flag is set then snapshot will be removed after the successful deployment of the policy.",
+						Type:        schema.TypeBool,
+						Optional:    true,
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -845,6 +860,11 @@ func dataSourceStorageNetAppNodeRead(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
+	if v, ok := d.GetOkExists("is_upgraded"); ok {
+		x := (v.(bool))
+		o.SetIsUpgraded(x)
+	}
+
 	if v, ok := d.GetOk("key"); ok {
 		x := (v.(string))
 		o.SetKey(x)
@@ -1042,6 +1062,11 @@ func dataSourceStorageNetAppNodeRead(c context.Context, d *schema.ResourceData, 
 		o.SetSharedScope(x)
 	}
 
+	if v, ok := d.GetOk("state"); ok {
+		x := (v.(string))
+		o.SetState(x)
+	}
+
 	if v, ok := d.GetOk("status"); ok {
 		x := (v.(string))
 		o.SetStatus(x)
@@ -1229,6 +1254,7 @@ func dataSourceStorageNetAppNodeRead(c context.Context, d *schema.ResourceData, 
 				temp["health"] = (s.GetHealth())
 
 				temp["high_availability"] = flattenMapStorageNetAppHighAvailability(s.GetHighAvailability(), d)
+				temp["is_upgraded"] = (s.GetIsUpgraded())
 				temp["key"] = (s.GetKey())
 
 				temp["mod_time"] = (s.GetModTime()).String()
@@ -1249,6 +1275,7 @@ func dataSourceStorageNetAppNodeRead(c context.Context, d *schema.ResourceData, 
 				temp["rn"] = (s.GetRn())
 				temp["serial"] = (s.GetSerial())
 				temp["shared_scope"] = (s.GetSharedScope())
+				temp["state"] = (s.GetState())
 				temp["status"] = (s.GetStatus())
 				temp["systemid"] = (s.GetSystemid())
 

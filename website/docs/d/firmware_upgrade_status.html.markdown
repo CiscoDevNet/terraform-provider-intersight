@@ -32,4 +32,6 @@ The following arguments can be used to get data of already created objects in In
 * `pending_type`:(string) Pending reason for the upgrade waiting.* `none` - Upgrade pending reason is none.* `pending for next reboot` - Upgrade pending reason is pending for next reboot. 
 * `sd_card_download_error`:(string) The error message from the endpoint during the SD card download. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
+* `source_firmware_version`:(string) CIMC firmware version of the server prior to the upgrade. 
+* `target_firmware_version`:(string) CIMC firmware version of the server post the upgrade. 
  

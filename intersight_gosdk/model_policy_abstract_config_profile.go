@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-10371
+API version: 1.0.11-11765
 Contact: intersight@cisco.com
 */
 
@@ -25,9 +25,10 @@ type PolicyAbstractConfigProfile struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 	ObjectType string `json:"ObjectType"`
 	// User initiated action. Each profile type has its own supported actions. For HyperFlex cluster profile, the supported actions are -- Validate, Deploy, Continue, Retry, Abort, Unassign For server profile, the support actions are -- Deploy, Unassign.
-	Action        *string                     `json:"Action,omitempty"`
-	ActionParams  []PolicyActionParam         `json:"ActionParams,omitempty"`
-	ConfigContext NullablePolicyConfigContext `json:"ConfigContext,omitempty"`
+	Action           *string                     `json:"Action,omitempty"`
+	ActionParams     []PolicyActionParam         `json:"ActionParams,omitempty"`
+	ConfigContext    NullablePolicyConfigContext `json:"ConfigContext,omitempty"`
+	ScheduledActions []PolicyScheduledAction     `json:"ScheduledActions,omitempty"`
 	// An array of relationships to policyAbstractPolicy resources.
 	PolicyBucket         []PolicyAbstractPolicyRelationship `json:"PolicyBucket,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -216,6 +217,39 @@ func (o *PolicyAbstractConfigProfile) UnsetConfigContext() {
 	o.ConfigContext.Unset()
 }
 
+// GetScheduledActions returns the ScheduledActions field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PolicyAbstractConfigProfile) GetScheduledActions() []PolicyScheduledAction {
+	if o == nil {
+		var ret []PolicyScheduledAction
+		return ret
+	}
+	return o.ScheduledActions
+}
+
+// GetScheduledActionsOk returns a tuple with the ScheduledActions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PolicyAbstractConfigProfile) GetScheduledActionsOk() ([]PolicyScheduledAction, bool) {
+	if o == nil || o.ScheduledActions == nil {
+		return nil, false
+	}
+	return o.ScheduledActions, true
+}
+
+// HasScheduledActions returns a boolean if a field has been set.
+func (o *PolicyAbstractConfigProfile) HasScheduledActions() bool {
+	if o != nil && o.ScheduledActions != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetScheduledActions gets a reference to the given []PolicyScheduledAction and assigns it to the ScheduledActions field.
+func (o *PolicyAbstractConfigProfile) SetScheduledActions(v []PolicyScheduledAction) {
+	o.ScheduledActions = v
+}
+
 // GetPolicyBucket returns the PolicyBucket field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PolicyAbstractConfigProfile) GetPolicyBucket() []PolicyAbstractPolicyRelationship {
 	if o == nil {
@@ -274,6 +308,9 @@ func (o PolicyAbstractConfigProfile) MarshalJSON() ([]byte, error) {
 	if o.ConfigContext.IsSet() {
 		toSerialize["ConfigContext"] = o.ConfigContext.Get()
 	}
+	if o.ScheduledActions != nil {
+		toSerialize["ScheduledActions"] = o.ScheduledActions
+	}
 	if o.PolicyBucket != nil {
 		toSerialize["PolicyBucket"] = o.PolicyBucket
 	}
@@ -292,9 +329,10 @@ func (o *PolicyAbstractConfigProfile) UnmarshalJSON(bytes []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ObjectType string `json:"ObjectType"`
 		// User initiated action. Each profile type has its own supported actions. For HyperFlex cluster profile, the supported actions are -- Validate, Deploy, Continue, Retry, Abort, Unassign For server profile, the support actions are -- Deploy, Unassign.
-		Action        *string                     `json:"Action,omitempty"`
-		ActionParams  []PolicyActionParam         `json:"ActionParams,omitempty"`
-		ConfigContext NullablePolicyConfigContext `json:"ConfigContext,omitempty"`
+		Action           *string                     `json:"Action,omitempty"`
+		ActionParams     []PolicyActionParam         `json:"ActionParams,omitempty"`
+		ConfigContext    NullablePolicyConfigContext `json:"ConfigContext,omitempty"`
+		ScheduledActions []PolicyScheduledAction     `json:"ScheduledActions,omitempty"`
 		// An array of relationships to policyAbstractPolicy resources.
 		PolicyBucket []PolicyAbstractPolicyRelationship `json:"PolicyBucket,omitempty"`
 	}
@@ -309,6 +347,7 @@ func (o *PolicyAbstractConfigProfile) UnmarshalJSON(bytes []byte) (err error) {
 		varPolicyAbstractConfigProfile.Action = varPolicyAbstractConfigProfileWithoutEmbeddedStruct.Action
 		varPolicyAbstractConfigProfile.ActionParams = varPolicyAbstractConfigProfileWithoutEmbeddedStruct.ActionParams
 		varPolicyAbstractConfigProfile.ConfigContext = varPolicyAbstractConfigProfileWithoutEmbeddedStruct.ConfigContext
+		varPolicyAbstractConfigProfile.ScheduledActions = varPolicyAbstractConfigProfileWithoutEmbeddedStruct.ScheduledActions
 		varPolicyAbstractConfigProfile.PolicyBucket = varPolicyAbstractConfigProfileWithoutEmbeddedStruct.PolicyBucket
 		*o = PolicyAbstractConfigProfile(varPolicyAbstractConfigProfile)
 	} else {
@@ -332,6 +371,7 @@ func (o *PolicyAbstractConfigProfile) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "Action")
 		delete(additionalProperties, "ActionParams")
 		delete(additionalProperties, "ConfigContext")
+		delete(additionalProperties, "ScheduledActions")
 		delete(additionalProperties, "PolicyBucket")
 
 		// remove fields from embedded structs

@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **ManualDriveGroup** | Pointer to [**NullableStorageManualDriveGroup**](StorageManualDriveGroup.md) |  | [optional] 
 **Name** | Pointer to **string** | The name of the drive group. The name can be between 1 and 64 alphanumeric characters. Spaces or any special characters other than - (hyphen), _ (underscore), : (colon), and . (period) are not allowed. | [optional] 
 **RaidLevel** | Pointer to **string** | The supported RAID level for the disk group. * &#x60;Raid0&#x60; - RAID 0 Stripe Raid Level. * &#x60;Raid1&#x60; - RAID 1 Mirror Raid Level. * &#x60;Raid5&#x60; - RAID 5 Mirror Raid Level. * &#x60;Raid6&#x60; - RAID 6 Mirror Raid Level. * &#x60;Raid10&#x60; - RAID 10 Mirror Raid Level. * &#x60;Raid50&#x60; - RAID 50 Mirror Raid Level. * &#x60;Raid60&#x60; - RAID 60 Mirror Raid Level. | [optional] [default to "Raid0"]
+**SecureDriveGroup** | Pointer to **bool** | Enables/disables the drive encryption on all the drives used in this policy. This flag just enables the drive security and only after remote key setting configured, the actual encryption will be done. | [optional] 
 **Type** | Pointer to **int32** | Type of drive selection to be used for this drive group. * &#x60;0&#x60; - Drives are selected manually by the user. * &#x60;1&#x60; - Drives are selected automatically based on the RAID and virtual drive configuration. | [optional] [readonly] [default to 0]
 **VirtualDrives** | Pointer to [**[]StorageVirtualDriveConfiguration**](StorageVirtualDriveConfiguration.md) |  | [optional] 
 **StoragePolicy** | Pointer to [**StorageStoragePolicyRelationship**](StorageStoragePolicyRelationship.md) |  | [optional] 
@@ -192,6 +193,31 @@ SetRaidLevel sets RaidLevel field to given value.
 `func (o *StorageDriveGroup) HasRaidLevel() bool`
 
 HasRaidLevel returns a boolean if a field has been set.
+
+### GetSecureDriveGroup
+
+`func (o *StorageDriveGroup) GetSecureDriveGroup() bool`
+
+GetSecureDriveGroup returns the SecureDriveGroup field if non-nil, zero value otherwise.
+
+### GetSecureDriveGroupOk
+
+`func (o *StorageDriveGroup) GetSecureDriveGroupOk() (*bool, bool)`
+
+GetSecureDriveGroupOk returns a tuple with the SecureDriveGroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSecureDriveGroup
+
+`func (o *StorageDriveGroup) SetSecureDriveGroup(v bool)`
+
+SetSecureDriveGroup sets SecureDriveGroup field to given value.
+
+### HasSecureDriveGroup
+
+`func (o *StorageDriveGroup) HasSecureDriveGroup() bool`
+
+HasSecureDriveGroup returns a boolean if a field has been set.
 
 ### GetType
 
