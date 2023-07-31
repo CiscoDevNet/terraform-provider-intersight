@@ -10,7 +10,6 @@ resource "intersight_certificatemanagement_policy" "certificate1" {
             pem_certificate = var.pem_certificate
         }
         enabled = true
-        privatekey = var.privatekey
     }
 }
 
