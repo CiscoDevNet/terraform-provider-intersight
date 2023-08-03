@@ -11,6 +11,7 @@ resource "intersight_certificatemanagement_policy" "certificate1" {
             object_type = "x509.Certificate"
         }
         enabled = true
+        privatekey = var.privatekey
         object_type = "certificatemanagement.Imc"
     }
 }
