@@ -6,12 +6,12 @@ resource "intersight_hyperflex_ext_iscsi_storage_policy" "hyperflex_ext_iscsi_st
   exta_traffic {
     name        = "exta_traffic1"
     vlan_id     = 100
-    object_type = "replication.NamedVsan"
+    object_type = "hyperflex.NamedVsan"
   }
   extb_traffic {
     name        = "extb_traffic1"
     vlan_id     = 200
-    object_type = "replication.NamedVsan"
+    object_type = "hyperflex.NamedVsan"
   }
   organization {
     object_type = "organization.Organization"
